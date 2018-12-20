@@ -6,7 +6,6 @@ import yaml from "js-yaml";
 
 interface GenerateArguments extends Arguments {
   env: string;
-  output: string;
   components: string[];
   require: string[];
 }
@@ -21,12 +20,6 @@ export const generateCommand: CommandModule = {
         describe: "Choose the environment to apply.",
         required: true,
         type: "string"
-      })
-      .option("output", {
-        alias: "o",
-        describe: "Set output format",
-        choices: ["yaml", "json"],
-        default: "yaml"
       })
       .option("require", {
         alias: "r",
@@ -68,24 +61,15 @@ export const generateCommand: CommandModule = {
 
     const list = components
       .map(c => require(join(componentDir, c)))
-      .map(data => data.default || data)
-      .reduce((acc, data) => acc.concat(data), [])
-      .map((data: any) =>
-        typeof data.toJSON === "function" ? data.toJSON() : data
-      );
+      .map(data => {
+        if (data.__esModule) data = data.default;
+        if (typeof data === "function") return data();
+        return data;
+      })
+      .reduce((acc, data) => acc.concat(data), []);
 
-    const { stdout } = process;
-
-    switch (args.output) {
-      case "yaml":
-        for (const item of list) {
-          stdout.write("---\n" + yaml.safeDump(item));
-        }
-        break;
-
-      case "json":
-        stdout.write(JSON.stringify(list, null, "  "));
-        break;
+    for (const item of list) {
+      process.stdout.write("---\n" + yaml.safeDump(item));
     }
   }
 };
