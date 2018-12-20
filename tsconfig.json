@@ -15,7 +15,8 @@
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "outDir": "dist",
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "declaration": true
   },
   "exclude": ["node_modules"]
 }
