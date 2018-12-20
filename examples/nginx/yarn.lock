@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-kubernetes-models@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/kubernetes-models/-/kubernetes-models-0.1.0.tgz#8da1d2976bd731d174b11394a594ace06a8047c0"
-  integrity sha512-g0+kU4I1FGwQdlJjyO5/zlxDZWCq1JnZbLkMP24brGAW00J13ujDc4Dr3xgCHHSq6aanbF95chsD3HBSpYsZ/w==
+kubernetes-models@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/kubernetes-models/-/kubernetes-models-0.2.0.tgz#d0bf3017102434b068cdbeb7ae625dc69ab1f6e1"
+  integrity sha512-GvgBKUsZEPd4AJNqEvUp0Rzw49Q1uArakNz4OuhG5B69rVameUTChRCfD4Oyxv0NrruvC5CD+bvKjLTlI4qjuQ==
   dependencies:
     tslib "^1.9.3"
 

@@ -1,6 +1,6 @@
 {
   "private": true,
   "dependencies": {
-    "kubernetes-models": "^0.1.0"
+    "kubernetes-models": "^0.2.0"
   }
 }
