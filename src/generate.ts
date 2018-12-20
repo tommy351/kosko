@@ -8,6 +8,7 @@ interface GenerateArguments extends Arguments {
   env: string;
   output: string;
   components: string[];
+  require: string[];
 }
 
 export const generateCommand: CommandModule = {
@@ -30,7 +31,8 @@ export const generateCommand: CommandModule = {
       .option("require", {
         alias: "r",
         describe: "Require modules",
-        type: "array"
+        type: "array",
+        default: []
       })
       .positional("components", {
         describe:
@@ -56,8 +58,17 @@ export const generateCommand: CommandModule = {
       components = await readDir(componentDir);
     }
 
+    global.kosko = {
+      env: require(join(envDir, args.env))
+    };
+
+    for (const id of args.require) {
+      require(id);
+    }
+
     const list = components
       .map(c => require(join(componentDir, c)))
+      .map(data => data.default || data)
       .reduce((acc, data) => acc.concat(data), [])
       .map((data: any) =>
         typeof data.toJSON === "function" ? data.toJSON() : data

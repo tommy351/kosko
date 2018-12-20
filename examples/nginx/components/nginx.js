@@ -7,7 +7,7 @@ module.exports = new Deployment({
     name: "nginx"
   },
   spec: {
-    replicas: 1,
+    replicas: kosko.env.replicas,
     selector: {
       matchLabels: labels
     },
