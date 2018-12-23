@@ -1,7 +1,7 @@
 import { CommandModule, Argv, Arguments } from "yargs";
 import { join } from "path";
-import { readDir, stat } from "./utils/fs";
-import { logger } from "./utils/log";
+import { readDir, stat } from "../utils/fs";
+import { logger } from "../utils/log";
 import yaml from "js-yaml";
 
 interface GenerateArguments extends Arguments {

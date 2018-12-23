@@ -1,8 +1,8 @@
 import { CommandModule, Argv, Arguments } from "yargs";
 import { resolve } from "path";
 import fs from "fs";
-import { exists } from "./utils/fs";
-import { logger } from "./utils/log";
+import { exists } from "../utils/fs";
+import { logger } from "../utils/log";
 
 interface InitArguments extends Arguments {
   force?: boolean;
