@@ -1,47 +1,79 @@
-import { CommandModule, Argv, Arguments } from "yargs";
-import { resolve } from "path";
 import fs from "fs";
+import { resolve, join } from "path";
+import { Argv, CommandModule } from "yargs";
+import { File, writeFiles } from "../templates";
 import { exists } from "../utils/fs";
-import { logger } from "../utils/log";
+import { GlobalArguments, newContext } from "./base";
+import { COMPONENT_DIR, ENVIRONMENT_DIR, Context } from "../context";
 
-interface InitArguments extends Arguments {
+interface InitArguments extends GlobalArguments {
   force?: boolean;
   path?: string;
 }
 
+async function initHandler({ cwd, logger }: Context, args: InitArguments) {
+  const path = args.path ? resolve(args.path) : cwd;
+  logger.info("Initialize in path", path);
+
+  if (await exists(path, fs.constants.W_OK)) {
+    if (!args.force) {
+      return logger.error(
+        "Already initialized. Use --force to overwrite existing files."
+      );
+    }
+  }
+
+  await writeFiles(path, files, {
+    afterWritten(filePath) {
+      logger.success("File is written", filePath);
+    }
+  });
+
+  logger.success(`Everything is set up now.`);
+}
+
+function prettyJSON(data: any) {
+  return JSON.stringify(data, null, "  ");
+}
+
+const files: File[] = [
+  {
+    path: "package.json",
+    content: prettyJSON({
+      private: true,
+      dependencies: {
+        "kubernetes-models": "^0.2.1",
+        "require-dir": "^1.2.0"
+      }
+    })
+  },
+  {
+    path: join(COMPONENT_DIR, ".gitkeep"),
+    content: ""
+  },
+  {
+    path: join(ENVIRONMENT_DIR, "index.js"),
+    content: "module.exports = require('./' + kosko.env);"
+  }
+];
+
 export const initCommand: CommandModule = {
   command: "init [path]",
-  describe: "Initialize data for kosko in a directory.",
+  describe: "Initialize data for kosko",
   builder(argv: Argv) {
     return argv
       .option("force", {
         alias: "f",
-        describe: "Generate files even if the directory exists.",
+        describe: "Generate files even if the directory exists",
         type: "boolean"
       })
       .positional("path", {
         type: "string",
         describe:
-          "Specify the path to initialize, otherwise it will be the current directory."
+          "Specify the path to initialize, otherwise it will be the current directory"
       });
   },
   async handler(args: InitArguments) {
-    const path = args.path ? resolve(args.path) : process.cwd();
-    logger.info("Initialize in path", path);
-
-    if (await exists(path, fs.constants.W_OK)) {
-      if (!args.force && args.path) {
-        logger.error(
-          "Already initialized. Use --force to force the initialization."
-        );
-        return;
-      }
-    }
-
-    // TODO: Write some files
-
-    logger.success(
-      `Everything is set up now. Go to read docs or try "kosko generate".`
-    );
+    await initHandler(newContext(args), args);
   }
 };

@@ -1,13 +1,15 @@
 const { Deployment } = require("kubernetes-models/api/apps/v1");
+const { Service } = require("kubernetes-models/api/core/v1");
+const params = require("../environments").components.nginx;
 
 const labels = { app: "nginx" };
 
-module.exports = new Deployment({
+const deployment = new Deployment({
   metadata: {
     name: "nginx"
   },
   spec: {
-    replicas: kosko.env.replicas,
+    replicas: params.replicas,
     selector: {
       matchLabels: labels
     },
@@ -25,3 +27,19 @@ module.exports = new Deployment({
     }
   }
 });
+
+const service = new Service({
+  metadata: {
+    name: "nginx"
+  },
+  spec: {
+    selector: labels,
+    ports: [
+      {
+        port: 80
+      }
+    ]
+  }
+});
+
+module.exports = [deployment, service];

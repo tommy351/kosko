@@ -1,23 +1,100 @@
-import { CommandModule, Argv, Arguments } from "yargs";
-import { join } from "path";
-import { readDir, stat } from "../utils/fs";
-import { logger } from "../utils/log";
 import yaml from "js-yaml";
+import { join } from "path";
+import { Argv, CommandModule } from "yargs";
+import { readDir } from "../utils/fs";
+import { GlobalArguments, newContext } from "./base";
+import { COMPONENT_DIR, Context } from "../context";
+import { requireDefault } from "../utils/require";
+import { Writable } from "stream";
 
-interface GenerateArguments extends Arguments {
+interface GenerateArguments extends GlobalArguments {
   env: string;
   components: string[];
   require: string[];
+  output: string;
+}
+
+export async function generateHandler(
+  { cwd, logger }: Context,
+  args: GenerateArguments
+) {
+  const componentDir = join(cwd, COMPONENT_DIR);
+  const components = args.components || (await loadComponentList(componentDir));
+
+  global.kosko = {
+    env: args.env
+  };
+
+  logger.debug("Set global environment to", args.env);
+
+  for (const id of args.require) {
+    logger.debug("Require external modules", id);
+    require(id);
+  }
+
+  let list = [];
+
+  for (const id of components) {
+    const path = join(componentDir, id);
+
+    logger.debug("Load the component", path);
+
+    const mod = requireDefault(path);
+
+    if (typeof mod === "function") {
+      list.push(await mod());
+    } else {
+      list.push(mod);
+    }
+  }
+
+  list = flatten(list);
+
+  const writer = process.stdout;
+
+  switch (args.output) {
+    case "yaml":
+      printYAML(writer, list);
+      break;
+
+    case "json":
+      printJSON(writer, list);
+      break;
+  }
+}
+
+async function loadComponentList(path: string) {
+  return await readDir(path);
+}
+
+function flatten(arr: any[]) {
+  return arr.reduce((acc, item) => acc.concat(item), []);
+}
+
+function printYAML(writer: Writable, data: any[]) {
+  for (const item of data) {
+    writer.write("---\n" + yaml.safeDump(item));
+  }
+}
+
+function printJSON(writer: Writable, data: any[]) {
+  const json = {
+    apiVersion: "v1",
+    kind: "List",
+    items: data
+  };
+
+  writer.write(JSON.stringify(json, null, "  "));
 }
 
 export const generateCommand: CommandModule = {
   command: "generate [components..]",
-  describe: "Generate Kubernetes resources from components and environments.",
+  describe: "Generate Kubernetes resources",
   builder(argv: Argv) {
     return argv
       .option("env", {
         alias: "e",
-        describe: "Choose the environment to apply.",
+        describe: "Specify the environment",
         required: true,
         type: "string"
       })
@@ -27,59 +104,19 @@ export const generateCommand: CommandModule = {
         type: "array",
         default: []
       })
+      .option("output", {
+        alias: "o",
+        describe: "Set output format",
+        choices: ["yaml", "json"],
+        default: "yaml"
+      })
       .positional("components", {
         describe:
-          "Specify components to output, otherwise all components will be generated.",
+          "Specify components to output, otherwise all components will be generated",
         type: "string"
       });
   },
   async handler(args: GenerateArguments) {
-    const rootDir = process.cwd();
-    const componentDir = join(rootDir, "components");
-    const envDir = join(rootDir, "environments");
-    let components = args.components;
-
-    if (!components.length) {
-      if (!(await checkDirectory(componentDir))) {
-        logger.error(
-          `"components" folder does not exist or is not a directory`,
-          componentDir
-        );
-        return;
-      }
-
-      components = await readDir(componentDir);
-    }
-
-    global.kosko = {
-      env: require(join(envDir, args.env))
-    };
-
-    for (const id of args.require) {
-      require(id);
-    }
-
-    const list = components
-      .map(c => require(join(componentDir, c)))
-      .map(data => {
-        if (data.__esModule) data = data.default;
-        if (typeof data === "function") return data();
-        return data;
-      })
-      .reduce((acc, data) => acc.concat(data), []);
-
-    for (const item of list) {
-      process.stdout.write("---\n" + yaml.safeDump(item));
-    }
+    await generateHandler(newContext(args), args);
   }
 };
-
-async function checkDirectory(path: string) {
-  try {
-    const stats = await stat(path);
-    return stats.isDirectory();
-  } catch (err) {
-    if (err.code !== "ENOENT") throw err;
-    return false;
-  }
-}

@@ -1,6 +1,7 @@
 {
   "private": true,
   "dependencies": {
-    "kubernetes-models": "^0.2.1"
+    "kubernetes-models": "^0.2.1",
+    "require-dir": "^1.2.0"
   }
 }
