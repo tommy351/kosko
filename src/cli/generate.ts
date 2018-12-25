@@ -1,11 +1,14 @@
+import glob from "glob";
 import yaml from "js-yaml";
 import { join } from "path";
+import { Writable } from "stream";
+import { promisify } from "util";
 import { Argv, CommandModule } from "yargs";
-import { readDir } from "../utils/fs";
-import { GlobalArguments, newContext } from "./base";
 import { COMPONENT_DIR, Context } from "../context";
 import { requireDefault } from "../utils/require";
-import { Writable } from "stream";
+import { GlobalArguments, newContext } from "./base";
+
+const globAsync = promisify(glob);
 
 interface GenerateArguments extends GlobalArguments {
   env: string;
@@ -14,12 +17,23 @@ interface GenerateArguments extends GlobalArguments {
   output: string;
 }
 
+type Printer = (writer: Writable, data: any) => void;
+
+const printerMap: { [key: string]: Printer } = {
+  yaml: printYAML,
+  json: printJSON
+};
+
 export async function generateHandler(
   { cwd, logger }: Context,
   args: GenerateArguments
 ) {
   const componentDir = join(cwd, COMPONENT_DIR);
-  const components = args.components || (await loadComponentList(componentDir));
+  const components = await listComponents(componentDir, args.components);
+
+  if (!components.length) {
+    return logger.error("No components");
+  }
 
   global.kosko = {
     env: args.env
@@ -32,7 +46,7 @@ export async function generateHandler(
     require(id);
   }
 
-  let list = [];
+  const list = [];
 
   for (const id of components) {
     const path = join(componentDir, id);
@@ -48,41 +62,43 @@ export async function generateHandler(
     }
   }
 
-  list = flatten(list);
-
-  const writer = process.stdout;
-
-  switch (args.output) {
-    case "yaml":
-      printYAML(writer, list);
-      break;
-
-    case "json":
-      printJSON(writer, list);
-      break;
-  }
-}
-
-async function loadComponentList(path: string) {
-  return await readDir(path);
+  printerMap[args.output](process.stdout, flatten(list));
 }
 
 function flatten(arr: any[]) {
   return arr.reduce((acc, item) => acc.concat(item), []);
 }
 
-function printYAML(writer: Writable, data: any[]) {
-  for (const item of data) {
-    writer.write("---\n" + yaml.safeDump(item));
+async function listComponents(base: string, patterns: string[]) {
+  const paths = await Promise.all(
+    patterns.map(pattern => globAsync(pattern, { cwd: base }))
+  );
+
+  return flatten(paths);
+}
+
+function printYAML(writer: Writable, data: any) {
+  const options = { noRefs: true };
+
+  if (Array.isArray(data)) {
+    for (const item of data) {
+      writer.write("---\n" + yaml.safeDump(item, options));
+    }
+  } else {
+    writer.write(yaml.safeDump(data, options));
   }
 }
 
-function printJSON(writer: Writable, data: any[]) {
-  const json = {
-    apiVersion: "v1",
-    kind: "List",
-    items: data
-  };
+function printJSON(writer: Writable, data: any) {
+  let json = data;
+
+  if (Array.isArray(data)) {
+    json = {
+      apiVersion: "v1",
+      kind: "List",
+      items: data
+    };
+  }
 
   writer.write(JSON.stringify(json, null, "  "));
 }
@@ -113,7 +129,8 @@ export const generateCommand: CommandModule = {
       .positional("components", {
         describe:
           "Specify components to output, otherwise all components will be generated",
-        type: "string"
+        type: "string",
+        default: "*"
       });
   },
   async handler(args: GenerateArguments) {
