@@ -1,6 +1,7 @@
 import chalk, { Chalk } from "chalk";
 import figures from "figures";
 import { Writable } from "stream";
+import stringWidth from "string-width";
 import { format } from "util";
 import { nop } from "./nop";
 
@@ -41,7 +42,7 @@ const levelOptions: LevelOptions[] = [
 ];
 
 const maxLevelLength = Math.max(
-  ...levelOptions.map(getPrefix).map(s => s.length)
+  ...levelOptions.map(getPrefix).map(stringWidth)
 );
 
 function getPrefix(opt: LevelOptions) {

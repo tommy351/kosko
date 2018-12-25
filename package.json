@@ -16,6 +16,7 @@
     "js-yaml": "^3.12.0",
     "mkdirp": "^0.5.1",
     "require-dir": "^1.2.0",
+    "string-width": "^3.0.0",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
@@ -25,6 +26,7 @@
     "@types/mkdirp": "^0.5.2",
     "@types/node": "^10.12.15",
     "@types/require-dir": "^1.0.0",
+    "@types/string-width": "^2.0.0",
     "@types/yargs": "^12.0.1",
     "prettier": "^1.15.3",
     "ts-node": "^7.0.1",
