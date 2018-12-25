@@ -71,7 +71,9 @@ function flatten(arr: any[]) {
 
 async function listComponents(base: string, patterns: string[]) {
   const paths = await Promise.all(
-    patterns.map(pattern => globAsync(pattern, { cwd: base }))
+    patterns.map(pattern =>
+      glob.hasMagic(pattern) ? globAsync(pattern, { cwd: base }) : [pattern]
+    )
   );
 
   return flatten(paths);
