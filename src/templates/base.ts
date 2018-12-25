@@ -1,5 +1,6 @@
-import { mkdirs, writeFile, exists } from "../utils/fs";
+import makeDir from "make-dir";
 import { dirname, join } from "path";
+import { exists, writeFile } from "../utils/fs";
 import { nop } from "../utils/nop";
 
 export interface File {
@@ -37,7 +38,7 @@ export async function writeFiles(
       if (!overwrite) continue;
     }
 
-    await mkdirs(dirname(filePath));
+    await makeDir(dirname(filePath));
     await writeFile(filePath, file.content);
     await afterWritten(filePath, file);
   }
