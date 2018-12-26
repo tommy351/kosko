@@ -1,0 +1,18 @@
+language: node_js
+
+node_js:
+  - lts/*
+  - node
+
+cache: npm
+
+install:
+  - npm ci
+
+before_script:
+  - npm run bootstrap
+
+script:
+  - npm run lint
+  - npm test -- --coverage
+  - npm run build
