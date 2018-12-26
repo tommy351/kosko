@@ -1,3 +1,5 @@
+"use strict";
+
 const spawn = require("cross-spawn");
 const globby = require("globby");
 const { dirname } = require("path");

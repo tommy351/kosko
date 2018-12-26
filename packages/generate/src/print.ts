@@ -1,6 +1,6 @@
+import yaml from "js-yaml";
 import { Writable } from "stream";
 import { Result } from "./base";
-import yaml from "js-yaml";
 
 export enum PrintFormat {
   YAML = "yaml",

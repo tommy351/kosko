@@ -12,7 +12,9 @@
     "tslib": "^1.9.3"
   },
   "devDependencies": {
+    "@types/bl": "^2.1.0",
     "@types/debug": "^0.0.31",
-    "@types/js-yaml": "^3.11.4"
+    "@types/js-yaml": "^3.11.4",
+    "bl": "^2.1.2"
   }
 }
