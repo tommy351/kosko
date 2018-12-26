@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2015",
+    "target": "es2017",
     "module": "commonjs",
     "noImplicitAny": true,
     "noImplicitReturns": true,
@@ -12,11 +12,10 @@
     "suppressImplicitAnyIndexErrors": false,
     "alwaysStrict": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
-    "outDir": "dist",
+    "experimentalDecorators": true,
     "noUnusedLocals": true,
+    "composite": true,
     "declaration": true
-  },
-  "exclude": ["node_modules", "dist"]
+  }
 }
