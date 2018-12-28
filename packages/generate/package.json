@@ -8,6 +8,9 @@
   "files": [
     "/dist/"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "debug": "^4.1.1",
     "fast-glob": "^2.2.4",
