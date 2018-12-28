@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "@types/debug": "^0.0.31",
-    "@types/make-dir": "^1.0.3"
+    "@types/make-dir": "^1.0.3",
+    "tmp-promise": "^1.0.5"
   }
 }
