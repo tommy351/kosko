@@ -1,6 +1,6 @@
 {
   "name": "@kosko/template-environment",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "repository": "https://github.com/tommy351/kosko",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
@@ -15,6 +15,6 @@
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@kosko/template": "^0.0.1"
+    "@kosko/template": "^0.1.0"
   }
 }
