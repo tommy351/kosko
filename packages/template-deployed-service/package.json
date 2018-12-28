@@ -1,0 +1,14 @@
+{
+  "name": "@kosko/template-deployed-service",
+  "version": "0.0.1",
+  "repository": "https://github.com/tommy351/kosko",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "main": "dist",
+  "dependencies": {
+    "tslib": "^1.9.3"
+  },
+  "devDependencies": {
+    "@kosko/template": "^0.0.1"
+  }
+}

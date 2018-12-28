@@ -1,0 +1,105 @@
+import { Template } from "@kosko/template";
+import { join } from "path";
+
+interface Options {
+  name: string;
+  image: string;
+  type: string;
+  servicePort: number;
+  containerPort: number;
+  replicas: number;
+}
+
+export const template: Template<Options> = {
+  options: {
+    name: {
+      type: "string",
+      description: "name of deployment and service",
+      required: true
+    },
+    image: {
+      type: "string",
+      description: "container image",
+      required: true
+    },
+    type: {
+      type: "string",
+      description: "service type",
+      default: "ClusterIP"
+    },
+    servicePort: {
+      type: "number",
+      description: "service port",
+      default: 80
+    },
+    containerPort: {
+      type: "number",
+      description: "container port",
+      default: 80
+    },
+    replicas: {
+      type: "number",
+      description: "number of replicas",
+      default: 1
+    }
+  },
+  async generate({ name, image, type, servicePort, containerPort, replicas }) {
+    return {
+      files: [
+        {
+          path: join("components", name + ".js"),
+          content: `"use strict";
+
+const { Deployment } = require("kubernetes-models/api/apps/v1");
+const { Service } = require("kubernetes-models/api/core/v1");
+
+const metadata = { name: "${name}" };
+const labels = { app: "${name}" };
+
+const deployment = new Deployment({
+  metadata,
+  spec: {
+    replicas: ${replicas},
+    selector: {
+      matchLabels: labels
+    },
+    template: {
+      metadata: {
+        labels
+      },
+      spec: {
+        containers: [
+          {
+            image: "${image}",
+            name: "${name}",
+            ports: [{
+              containerPort: ${containerPort}
+            }]
+          }
+        ]
+      }
+    }
+  }
+});
+
+const service = new Service({
+  metadata,
+  spec: {
+    selector: labels,
+    type: "${type}",
+    ports: [
+      {
+        port: ${servicePort},
+        targetPort: ${containerPort}
+      }
+    ]
+  }
+});
+
+module.exports = [deployment, service];
+`
+        }
+      ]
+    };
+  }
+};

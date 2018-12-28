@@ -5,7 +5,9 @@ interface Options {
   name: string;
 }
 
-export const INDEX_SCRIPT = `const requireDir = require("require-dir");
+export const INDEX_SCRIPT = `"use strict";
+
+const requireDir = require("require-dir");
 
 exports.globals = {};
 
