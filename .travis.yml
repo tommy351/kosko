@@ -14,5 +14,5 @@ before_script:
 
 script:
   - npm run lint
-  - npm test -- --coverage
   - npm run build
+  - npm test -- --coverage
