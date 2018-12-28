@@ -5,6 +5,9 @@
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "main": "dist",
+  "files": [
+    "/dist/"
+  ],
   "dependencies": {
     "tslib": "^1.9.3"
   },
