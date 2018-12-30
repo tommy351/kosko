@@ -1,15 +1,22 @@
-import { flags } from "@oclif/command";
-import { join } from "path";
-import { RootCommand, RootFlags } from "../root";
-import { makeExamples } from "../example";
-import writePkg from "write-pkg";
-import makeDir from "make-dir";
+import Debug from "debug";
 import fs from "fs";
+import makeDir from "make-dir";
+import { join, resolve } from "path";
 import { promisify } from "util";
+import writePkg from "write-pkg";
+import { BaseOptions, baseOptions, getCWD } from "../base";
+import { help } from "../cli/help";
+import { parse, ParseError } from "../cli/parse";
+import { Command, OptionType } from "../cli/types";
 
+const debug = Debug("kosko:init");
 const writeFile = promisify(fs.writeFile);
 
-export interface InitFlags extends RootFlags {
+function exists(path: string) {
+  return new Promise(res => fs.exists(path, res));
+}
+
+export interface InitOptions extends BaseOptions {
   force?: boolean;
 }
 
@@ -17,41 +24,38 @@ export interface InitArgs {
   path?: string;
 }
 
-export default class InitCommand extends RootCommand<InitFlags, InitArgs> {
-  public static description = "initialize data for kosko";
-
-  public static flags = {
-    ...RootCommand.flags,
-    force: flags.boolean({
-      char: "f",
-      description: "overwrite existing files"
-    })
-  };
-
-  public static args = [
-    {
-      name: "path",
-      description: "path to initialize, default to the current directory"
+export const initCmd: Command<InitOptions> = {
+  usage: "kosko init [path]",
+  description: "Initialize data for kosko.",
+  options: {
+    ...baseOptions,
+    force: {
+      type: OptionType.Boolean,
+      description: "Overwrite existing files."
     }
-  ];
+  },
+  args: [{ name: "path", description: "Path to initialize." }],
+  async exec(ctx, argv) {
+    const { args, options, errors } = parse<InitOptions, InitArgs>(argv, this);
 
-  public static examples = makeExamples([
-    { description: "Initialize in the current directory", command: "init" },
-    {
-      description: "Initialize in the specified folder",
-      command: "init ./folder"
+    if (options.help) {
+      return help(this);
     }
-  ]);
 
-  public async run() {
-    const path = this.args.path ? join(this.cwd, this.args.path) : this.cwd;
-    this.log("Initialize in path:", path);
+    if (errors.length) {
+      throw new ParseError(errors);
+    }
+
+    const cwd = getCWD(options);
+    const path = args.path ? resolve(cwd, args.path) : cwd;
+    ctx.logger.log("Initialize in", path);
 
     const exist = await exists(path);
 
-    if (exist && !this.flags.force) {
-      this.error("Already exists. Use --force to overwrite existing files.");
-      return;
+    if (exist && !options.force) {
+      throw new Error(
+        "Already exists. Use --force to overwrite existing files."
+      );
     }
 
     const componentDir = join(path, "components");
@@ -59,18 +63,18 @@ export default class InitCommand extends RootCommand<InitFlags, InitArgs> {
     const templateDir = join(path, "templates");
 
     for (const dir of [componentDir, envDir, templateDir]) {
-      this.debug("creating directory", dir);
+      debug("Creating directory", dir);
       await makeDir(dir);
     }
 
-    this.debug("writing env index");
+    debug("Writing env index");
 
     await writeFile(
       join(envDir, "index.js"),
       'module.exports = require("./" + kosko.env);'
     );
 
-    this.debug("updating package.json");
+    debug("Updating package.json");
 
     await writePkg(join(path, "package.json"), {
       dependencies: {
@@ -79,10 +83,6 @@ export default class InitCommand extends RootCommand<InitFlags, InitArgs> {
       }
     });
 
-    this.log("Everything is set up.");
+    ctx.logger.log("Everything is set up.");
   }
-}
-
-function exists(path: string) {
-  return new Promise(resolve => fs.exists(path, resolve));
-}
+};

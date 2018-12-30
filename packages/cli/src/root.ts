@@ -1,43 +1,35 @@
-import { Command, flags } from "@oclif/command";
-import { Output } from "@oclif/parser";
-import { format } from "util";
-import { resolve } from "path";
+import { baseOptions, BaseOptions } from "./base";
+import { help } from "./cli/help";
+import { parse } from "./cli/parse";
+import { Command } from "./cli/types";
+import { unparse } from "./cli/unparse";
+import * as commands from "./commands";
 
-export interface RootFlags {
-  cwd: string;
+export interface RootArgs {
+  command: string;
 }
 
-export abstract class RootCommand<
-  Flags extends RootFlags = RootFlags,
-  Args = { [key: string]: any }
-> extends Command {
-  public static flags = {
-    cwd: flags.string({
-      description: "current working directory"
-    })
-  };
+export const rootCmd: Command<BaseOptions> = {
+  usage: "kosko <command>",
+  description: "kosko generates Kubernetes resources from JavaScript.",
+  options: baseOptions,
+  args: [
+    { name: "command", description: "Command to execute.", required: true }
+  ],
+  commands,
+  exec(ctx, argv) {
+    const { args, detail } = parse<BaseOptions, RootArgs>(argv, this, {
+      "halt-at-non-option": true
+    } as any);
 
-  protected parserOutput!: Output<Flags, Args>;
+    if (args.command) {
+      const cmd = this.commands![args.command];
 
-  public async init() {
-    this.parserOutput = this.parse<Flags, Args>(this.ctor);
-    return super.init();
+      if (cmd) {
+        return cmd.exec(ctx, unparse(detail).slice(1));
+      }
+    }
+
+    return help(this);
   }
-
-  public log(message?: string, ...args: any[]) {
-    // Print log to stderr
-    process.stderr.write(format(message, ...args) + "\n");
-  }
-
-  protected get flags(): Flags {
-    return this.parserOutput.flags;
-  }
-
-  protected get args(): Args {
-    return this.parserOutput.args;
-  }
-
-  protected get cwd(): string {
-    return this.flags.cwd ? resolve(this.flags.cwd) : process.cwd();
-  }
-}
+};

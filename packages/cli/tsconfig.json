@@ -1,9 +1,8 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "../../tsconfig.build.json",
   "compilerOptions": {
     "rootDir": "src",
-    "outDir": "dist",
-    "esModuleInterop": true
+    "outDir": "dist"
   },
   "references": [{ "path": "../generate" }, { "path": "../template" }]
 }

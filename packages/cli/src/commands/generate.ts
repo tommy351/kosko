@@ -1,88 +1,81 @@
-import { flags } from "@oclif/command";
-import { RootCommand, RootFlags } from "../root";
 import { generate, print, PrintFormat } from "@kosko/generate";
-import { makeExamples } from "../example";
+import Debug from "debug";
+import { BaseOptions, baseOptions, getCWD } from "../base";
+import { help } from "../cli/help";
+import { parse, ParseError } from "../cli/parse";
+import { Command, OptionType } from "../cli/types";
 
-export interface GenerateFlags extends RootFlags {
+const debug = Debug("kosko:generate");
+
+export interface GenerateOptions extends BaseOptions {
   env: string;
   output: PrintFormat;
-  require?: string[];
+  require: string[];
 }
 
-export default class GenerateCommand extends RootCommand<GenerateFlags> {
-  public static description = "generate Kubernetes resources";
-  public static strict = false;
-
-  public static flags = {
-    ...RootCommand.flags,
-    env: flags.string({
-      char: "e",
-      description: "environment",
+export const generateCmd: Command<GenerateOptions> = {
+  usage: "kosko generate [components...]",
+  description: "Generate Kubernetes resources.",
+  options: {
+    ...baseOptions,
+    env: {
+      type: OptionType.String,
+      description: "Environment name.",
+      alias: "e",
       required: true
-    }),
-    output: flags.string({
-      char: "o",
-      description: "output format",
+    },
+    output: {
+      type: OptionType.String,
+      description: "Output format.",
+      alias: "o",
       options: Object.values(PrintFormat),
       default: PrintFormat.YAML
-    }),
-    require: flags.string({
-      char: "r",
-      description: "require modules",
-      multiple: true
-    })
-  };
-
-  public static args = [
-    {
-      name: "components",
-      description: "components to generate"
-    }
-  ];
-
-  public static examples = makeExamples([
-    { description: "Generate all components", command: "generate --env dev" },
-    {
-      description: "Specify components by their name",
-      command: "generate --env dev foo bar"
     },
-    {
-      description: "You can also use glob syntax here",
-      command: "generate --env dev server_*"
-    },
-    {
-      description: "Require ts-node to use TypeScript",
-      command: "generate --env dev --require ts-node/register"
+    require: {
+      type: OptionType.Array,
+      description: "Require modules.",
+      alias: "r"
     }
-  ]);
+  },
+  args: [{ name: "components", description: "Components to generate." }],
+  async exec(ctx, argv) {
+    const { options, detail, errors } = parse<GenerateOptions, {}>(argv, this);
+    const cwd = getCWD(options);
 
-  public async run() {
+    if (options.help) {
+      return help(this);
+    }
+
+    if (errors.length) {
+      throw new ParseError(errors);
+    }
+
     // Require external modules
-    if (this.flags.require) {
-      for (const id of this.flags.require) {
-        this.debug("require external module", id);
+    if (options.require) {
+      for (const id of options.require) {
+        debug("Require external module", id);
         require(id);
       }
     }
 
     // Set global env
     global.kosko = {
-      env: this.flags.env
+      env: options.env
     };
-    this.debug("set global env as", this.flags.env);
+    debug("Set global env as", options.env);
 
     // Read components from raw parser output to support multiple arguments
-    const components = this.parserOutput.argv;
+    const components = detail.argv._;
 
     // Generate resources
     const result = await generate({
-      path: this.cwd,
+      path: cwd,
       components: components.length ? components : ["*"]
     });
 
     print(result, {
-      format: this.flags.output,
+      format: options.output,
       writer: process.stdout
     });
   }
-}
+};

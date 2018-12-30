@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
-require("../dist")
-  .run()
-  .catch(require("@oclif/errors/handle"));
+const cli = require("../dist");
+
+cli.run().catch(cli.handleError);
+
+// .catch(require("@oclif/errors/handle"));

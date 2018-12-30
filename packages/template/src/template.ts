@@ -5,13 +5,11 @@ export interface Template<T> {
 }
 
 export interface Option<T> {
-  type?: "string" | "boolean" | "number";
+  type?: "string" | "boolean" | "number" | "array";
   default?: T | (() => T | undefined);
   description?: string;
-  multiple?: boolean;
   options?: string[];
   required?: boolean;
-  parse?(input: string): T;
 }
 
 export interface Result {

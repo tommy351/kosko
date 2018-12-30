@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`success should create index.js in environments folder 1`] = `"module.exports = require(\\"./\\" + kosko.env);"`;
+
+exports[`success should create package.json 1`] = `
+"{
+	\\"dependencies\\": {
+		\\"kubernetes-models\\": \\"^0.2.1\\",
+		\\"require-dir\\": \\"^1.2.0\\"
+	}
+}
+"
+`;

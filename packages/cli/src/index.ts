@@ -1,23 +1,9 @@
-import { Main } from "@oclif/command";
+import { rootCmd } from "./root";
+import { Logger } from "./cli/logger";
 
-class MainCommand extends Main {
-  protected _helpOverride() {
-    const [id, ...argv] = this.argv;
-    const c = this.config.findCommand(id);
-
-    if (c) {
-      const command = c.load() as any;
-
-      // Override from subcommand
-      if (typeof command.helpOverride === "function") {
-        return command.helpOverride(argv);
-      }
-    }
-
-    return super._helpOverride();
-  }
-}
+export { handleError } from "./cli/error";
 
 export async function run(argv: string[] = process.argv.slice(2)) {
-  return MainCommand.run(argv);
+  const logger = new Logger(process.stderr);
+  return rootCmd.exec({ logger }, argv);
 }

@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`args should print the arguments 1`] = `
+"Arguments:
+  bazz  desc of bazz
+  foo   desc of foo
+"
+`;
+
+exports[`commands should print the commands 1`] = `
+"Commands:
+  bazz  desc of bazz
+  foo   desc of foo
+"
+`;
+
+exports[`options should print the options 1`] = `
+"Options:
+  --arr array              desc of arr
+  --bool                   desc of bool
+  --count                  desc of count
+  --num number             desc of num
+  --str string             desc of str
+  --unknown                some unknown option
+  -m, --more, --morealias  more aliases
+  -o, --onealias           one alias
+"
+`;
+
+exports[`options with groups should print the options 1`] = `
+"Global Options:
+  --help     show help
+  --version  show version
+
+Options:
+  --foo  foo
+
+Hidden Options:
+  --bar  bar
+"
+`;
+
+exports[`put all together should print the options 1`] = `
+"Usage: foo
+
+desc foo desc
+
+Arguments:
+  baz  arg bar
+
+Commands:
+  bar  subcommand bar
+
+Options:
+  --foo  option foo
+"
+`;

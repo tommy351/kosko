@@ -8,6 +8,8 @@
   "scripts": {
     "lint": "tslint --project .",
     "build": "node scripts/build.js",
+    "clean": "npm run build -- --clean",
+    "watch": "npm run build -- --watch",
     "bootstrap": "lerna bootstrap",
     "test": "jest"
   },
