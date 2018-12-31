@@ -5,6 +5,7 @@ import { help } from "../cli/help";
 import { parse, ParseError } from "../cli/parse";
 import { Command } from "../cli/types";
 import { unparse } from "../cli/unparse";
+import resolve from "../utils/resolve";
 
 const debug = Debug("kosko:new");
 
@@ -50,12 +51,18 @@ export const newCmd: Command<BaseOptions> = {
   args: [
     { name: "template", description: "Template to apply.", required: true }
   ],
-  exec(ctx, argv) {
-    const { args, options, detail } = parse<BaseOptions, NewArgs>(argv, this);
+  async exec(ctx, argv) {
+    const { args, options, detail } = parse<BaseOptions, NewArgs>(argv, this, {
+      "halt-at-non-option": true
+    } as any);
 
     if (args.template) {
       const cwd = getCWD(options);
-      const path = require.resolve(args.template, { paths: [cwd] });
+      const extensions = Object.keys(require.extensions);
+      const path = await resolve(args.template, {
+        basedir: cwd,
+        extensions: extensions.length ? extensions : [".js"]
+      });
       debug("Template path", path);
 
       const template = require(path);
