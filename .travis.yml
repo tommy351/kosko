@@ -16,3 +16,7 @@ script:
   - npm run lint
   - npm run build
   - npm test -- --coverage
+
+after_success:
+  - npm install codecov -g
+  - codecov
