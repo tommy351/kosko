@@ -1,0 +1,14 @@
+build: off
+version: "{build}"
+
+environment:
+  nodejs_version: "10"
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - npm ci
+  - npm run bootstrap -- --ci
+
+test_script:
+  - npm run build
+  - npm test
