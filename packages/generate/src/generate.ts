@@ -2,6 +2,7 @@ import glob from "fast-glob";
 import { join } from "path";
 import Debug from "debug";
 import { Result } from "./base";
+import requireExtensions from "./requireExtensions";
 
 const debug = Debug("kosko:generate");
 
@@ -14,7 +15,7 @@ export async function generate(options: GenerateOptions): Promise<Result> {
   const componentDir = join(options.path, "components");
   debug("find components in", componentDir);
 
-  const extensions = Object.keys(require.extensions)
+  const extensions = Object.keys(requireExtensions)
     .map(ext => ext.substring(1))
     .join(",");
   const suffix = `?(.{${extensions}})`;
@@ -36,7 +37,10 @@ export async function generate(options: GenerateOptions): Promise<Result> {
     const mod = [].concat(await getComponentValue(path));
 
     for (const data of mod) {
-      result.resources.push({ path, data });
+      result.resources.push({
+        path: require.resolve(path),
+        data
+      });
     }
   }
 
