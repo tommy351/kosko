@@ -1,5 +1,6 @@
 import { generate, print, PrintFormat } from "@kosko/generate";
 import Debug from "debug";
+import { join } from "path";
 import { BaseOptions, baseOptions, getCWD } from "../base";
 import { help } from "../cli/help";
 import { parse, ParseError } from "../cli/parse";
@@ -69,7 +70,7 @@ export const generateCmd: Command<GenerateOptions> = {
 
     // Generate resources
     const result = await generate({
-      path: cwd,
+      path: join(cwd, "components"),
       components: components.length ? components : ["*"]
     });
 

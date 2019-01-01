@@ -1,10 +1,11 @@
+import { generate, print, PrintFormat } from "@kosko/generate";
 import BufferList from "bl";
+import { join } from "path";
 import { help } from "../../cli/help";
 import { Logger } from "../../cli/logger";
+import { ParseError } from "../../cli/parse";
 import { Context } from "../../cli/types";
 import { generateCmd } from "../generate";
-import { ParseError } from "../../cli/parse";
-import { generate, print, PrintFormat } from "@kosko/generate";
 
 jest.mock("../../cli/help");
 jest.mock("@kosko/generate");
@@ -44,7 +45,7 @@ describe("when components is not set", () => {
     await generateCmd.exec(ctx, ["--env", "foo"]);
     expect(generate).toHaveBeenCalledTimes(1);
     expect(generate).toHaveBeenCalledWith({
-      path: process.cwd(),
+      path: join(process.cwd(), "components"),
       components: ["*"]
     });
   });
@@ -55,7 +56,7 @@ describe("when components is set", () => {
     await generateCmd.exec(ctx, ["--env", "foo", "bar/*", "*.js"]);
     expect(generate).toHaveBeenCalledTimes(1);
     expect(generate).toHaveBeenCalledWith({
-      path: process.cwd(),
+      path: join(process.cwd(), "components"),
       components: ["bar/*", "*.js"]
     });
   });
