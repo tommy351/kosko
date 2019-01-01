@@ -1,6 +1,7 @@
 {
   "name": "@kosko/template-environment",
   "version": "0.1.2",
+  "description": "Create a new environment.",
   "repository": "https://github.com/tommy351/kosko",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
@@ -8,8 +9,14 @@
   "files": [
     "/dist/"
   ],
+  "keywords": [
+    "kosko"
+  ],
   "publishConfig": {
     "access": "public"
+  },
+  "engines": {
+    "node": ">= 6.9.0"
   },
   "dependencies": {
     "tslib": "^1.9.3"

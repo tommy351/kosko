@@ -1,6 +1,7 @@
 {
   "name": "@kosko/cli",
   "version": "0.2.4",
+  "description": "Write Kubernetes resources in JavaScript.",
   "repository": "https://github.com/tommy351/kosko",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
@@ -10,8 +11,15 @@
     "/bin/",
     "/dist/"
   ],
+  "keywords": [
+    "kubernetes",
+    "kosko"
+  ],
   "publishConfig": {
     "access": "public"
+  },
+  "engines": {
+    "node": ">= 6.9.0"
   },
   "dependencies": {
     "@kosko/generate": "^0.2.2",

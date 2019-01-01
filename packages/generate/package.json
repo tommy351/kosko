@@ -1,6 +1,7 @@
 {
   "name": "@kosko/generate",
   "version": "0.2.2",
+  "description": "Find and print components in a kosko app directory.",
   "repository": "https://github.com/tommy351/kosko",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
@@ -8,8 +9,14 @@
   "files": [
     "/dist/"
   ],
+  "keywords": [
+    "kosko"
+  ],
   "publishConfig": {
     "access": "public"
+  },
+  "engines": {
+    "node": ">= 6.9.0"
   },
   "dependencies": {
     "@kosko/require": "^0.1.1",
