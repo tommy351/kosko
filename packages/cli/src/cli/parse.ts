@@ -78,7 +78,7 @@ function validateBaseOption(
   }
 
   if (Array.isArray(option.options)) {
-    if (!option.options.includes(value)) {
+    if (!~option.options.indexOf(value)) {
       return { error: `Must be one of [${option.options.join(", ")}]` };
     }
   }

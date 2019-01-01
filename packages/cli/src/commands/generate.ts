@@ -29,7 +29,7 @@ export const generateCmd: Command<GenerateOptions> = {
       type: OptionType.String,
       description: "Output format.",
       alias: "o",
-      options: Object.values(PrintFormat),
+      options: Object.keys(PrintFormat).map(key => PrintFormat[key as any]),
       default: PrintFormat.YAML
     },
     require: {

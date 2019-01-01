@@ -46,7 +46,7 @@ function filterAliases(
       filtered = filtered.concat(detail.aliases[key]);
     }
 
-    if (!filtered.includes(key)) {
+    if (!~filtered.indexOf(key)) {
       output[key] = args[key];
     }
   }
