@@ -35,7 +35,18 @@ describe("args", () => {
     cmd = {
       args: [
         { name: "foo", description: "desc of foo" },
-        { name: "bazz", description: "desc of bazz" }
+        { name: "required", description: "this is required", required: true },
+        {
+          name: "default",
+          description: "with default value",
+          default: "foobar"
+        },
+        {
+          name: "rad",
+          description: "this is required with default",
+          required: true,
+          default: "what"
+        }
       ]
     };
   });
@@ -72,7 +83,14 @@ describe("options", () => {
         unknown: { description: "some unknown option" },
         onealias: { alias: "o", description: "one alias" },
         morealias: { alias: ["m", "more"], description: "more aliases" },
-        camelCase: { description: "camel case" }
+        camelCase: { description: "camel case" },
+        required: { description: "this is required" },
+        default: { description: "with default value", default: "foobar" },
+        rad: {
+          description: "this is required and with default",
+          required: true,
+          default: "what"
+        }
       }
     };
   });

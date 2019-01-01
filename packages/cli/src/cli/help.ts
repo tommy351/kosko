@@ -1,7 +1,8 @@
 import groupBy from "lodash.groupby";
 import kebabCase from "lodash.kebabcase";
 import { Writable } from "stream";
-import { CommandMeta, Option, OptionType } from "./types";
+import stringWidth from "string-width";
+import { CommandMeta, Option, OptionType, BaseOption } from "./types";
 
 interface Entry {
   key: string;
@@ -20,16 +21,25 @@ function getOptionKey(opt: OptionWithName) {
     .sort((a, b) => a.length - b.length)
     .join(", ");
 
-  switch (opt.type) {
-    case OptionType.Boolean:
-    case OptionType.Count:
-      break;
-
-    default:
-      if (opt.type) key += ` ${opt.type}`;
+  if (opt.type && opt.type !== OptionType.Boolean) {
+    key += ` ${opt.type}`;
   }
 
   return key;
+}
+
+function getOptionDescription(opt: BaseOption) {
+  let desc = opt.description || "";
+
+  if (opt.required) {
+    desc += ` [required]`;
+  }
+
+  if (opt.default) {
+    desc += ` (default "${opt.default}")`;
+  }
+
+  return desc;
 }
 
 class Help {
@@ -79,7 +89,10 @@ class Help {
 
     await this.printEntries(
       "Arguments:",
-      args.map(arg => ({ key: arg.name, description: arg.description || "" }))
+      args.map(arg => ({
+        key: arg.name,
+        description: getOptionDescription(arg)
+      }))
     );
   }
 
@@ -114,7 +127,7 @@ class Help {
       `${group}:`,
       options.map(opt => ({
         key: getOptionKey(opt),
-        description: opt.description || ""
+        description: getOptionDescription(opt)
       }))
     );
   }
@@ -130,7 +143,7 @@ class Help {
 
     await this.printHeader(header);
 
-    const keySize = Math.max(...entries.map(e => e.key.length));
+    const keySize = Math.max(...entries.map(e => stringWidth(e.key)));
 
     entries.sort((a, b) => {
       if (a.key > b.key) return 1;
@@ -139,7 +152,7 @@ class Help {
     });
 
     for (const entry of entries) {
-      const pad = Array(keySize - entry.key.length)
+      const pad = Array(keySize - stringWidth(entry.key))
         .fill(" ")
         .join("");
 

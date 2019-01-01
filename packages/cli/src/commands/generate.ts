@@ -21,7 +21,7 @@ export const generateCmd: Command<GenerateOptions> = {
     ...baseOptions,
     env: {
       type: OptionType.String,
-      description: "Environment name.",
+      description: "Name of environment.",
       alias: "e",
       required: true
     },

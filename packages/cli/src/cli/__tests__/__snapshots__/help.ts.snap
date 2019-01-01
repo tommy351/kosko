@@ -2,8 +2,10 @@
 
 exports[`args should print the arguments 1`] = `
 "Arguments:
-  bazz  desc of bazz
-  foo   desc of foo
+  default   with default value (default \\"foobar\\")
+  foo       desc of foo
+  rad       this is required with default [required] (default \\"what\\")
+  required  this is required [required]
 "
 `;
 
@@ -19,8 +21,11 @@ exports[`options should print the options 1`] = `
   --arr array              desc of arr
   --bool                   desc of bool
   --camel-case             camel case
-  --count                  desc of count
+  --count count            desc of count
+  --default                with default value (default \\"foobar\\")
   --num number             desc of num
+  --rad                    this is required and with default [required] (default \\"what\\")
+  --required               this is required
   --str string             desc of str
   --unknown                some unknown option
   -m, --more, --morealias  more aliases

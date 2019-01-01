@@ -46,7 +46,7 @@ function buildTemplateCommand(
 
 export const newCmd: Command<BaseOptions> = {
   usage: "kosko new <template>",
-  description: "Create files based on templates",
+  description: "Create files based on the specified template.",
   options: baseOptions,
   args: [
     { name: "template", description: "Template to apply.", required: true }

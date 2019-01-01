@@ -26,15 +26,22 @@ export interface InitArgs {
 
 export const initCmd: Command<InitOptions> = {
   usage: "kosko init [path]",
-  description: "Initialize data for kosko.",
+  description: "Set up a new kosko directory.",
   options: {
     ...baseOptions,
     force: {
       type: OptionType.Boolean,
+      alias: "-f",
       description: "Overwrite existing files."
     }
   },
-  args: [{ name: "path", description: "Path to initialize." }],
+  args: [
+    {
+      name: "path",
+      description:
+        "Path to initialize. Default to the current working directory."
+    }
+  ],
   async exec(ctx, argv) {
     const { args, options, errors } = parse<InitOptions, InitArgs>(argv, this);
 
