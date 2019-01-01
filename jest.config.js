@@ -2,7 +2,7 @@
 
 module.exports = {
   preset: "ts-jest",
-  roots: ["<rootDir>/packages"],
+  roots: ["<rootDir>/packages", "<rootDir>/integration"],
   collectCoverageFrom: ["packages/*/src/**/*.ts"],
   testEnvironment: "node",
   setupTestFrameworkScriptFile: "jest-extended",
