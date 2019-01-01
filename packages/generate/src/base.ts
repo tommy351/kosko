@@ -1,8 +1,8 @@
 export interface Result {
-  resources: Resource[];
+  manifests: Manifest[];
 }
 
-export interface Resource {
+export interface Manifest {
   path: string;
   data: any;
 }

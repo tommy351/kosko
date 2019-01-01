@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/tommy351/kosko.svg?branch=master)](https://travis-ci.org/tommy351/kosko) [![Build status](https://ci.appveyor.com/api/projects/status/db26i79eyxp8tjxj/branch/master?svg=true)](https://ci.appveyor.com/project/tommy351/kosko/branch/master) [![codecov](https://codecov.io/gh/tommy351/kosko/branch/master/graph/badge.svg)](https://codecov.io/gh/tommy351/kosko)
 
-Write Kubernetes resources in JavaScript.
+Write Kubernetes manifests in JavaScript.
 
-kosko is inspired by [ksonnet] but use JavaScript instead of [jsonnet] so it's much easier to learn and use. Unlike [ksonnet], kosko doesn't touch Kubernetes clusters and doesn't support [Helm] neither. It's focus on building and organizing Kubernetes resources in JavaScript.
+kosko is inspired by [ksonnet] but use JavaScript instead of [jsonnet] so it's much easier to learn and use. Unlike [ksonnet], kosko doesn't touch Kubernetes clusters and doesn't support [Helm] neither. It's focus on building and organizing Kubernetes manifests in JavaScript.
 
 ## Installation
 
@@ -68,9 +68,9 @@ kosko new @kosko/template-deployed-service --name nginx --image nginx
 
 This template creates a new file named `nginx.js` in `components` folder.
 
-### Generate Kubernetes Resources
+### Generate Kubernetes Manifests
 
-Run `kosko generate` to print Kubernetes resources in the console.
+Run `kosko generate` to print Kubernetes manifests in the console.
 
 ```sh
 kosko generate --env dev

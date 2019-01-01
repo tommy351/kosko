@@ -55,7 +55,7 @@ describe("given the wildcard pattern", () => {
 
     test("should load the one in the components folder", () => {
       expect(result).toEqual({
-        resources: [
+        manifests: [
           {
             path: join(tmpDir.path, "foo.js"),
             data: { foo: "bar" }
@@ -77,7 +77,7 @@ describe("given the wildcard pattern", () => {
 
     test("should load the one in the components folder", () => {
       expect(result).toEqual({
-        resources: [
+        manifests: [
           {
             path: join(tmpDir.path, "foo", "index.js"),
             data: { foo: "bar" }
@@ -101,7 +101,7 @@ exports.default = {foo: "bar"};`
 
     test("should return the default", () => {
       expect(result).toEqual({
-        resources: [
+        manifests: [
           {
             path: join(tmpDir.path, "foo.js"),
             data: { foo: "bar" }
@@ -123,7 +123,7 @@ exports.default = {foo: "bar"};`
 
     test("should return the return value of the function", () => {
       expect(result).toEqual({
-        resources: [
+        manifests: [
           {
             path: join(tmpDir.path, "foo.js"),
             data: { foo: "bar" }
@@ -145,7 +145,7 @@ exports.default = {foo: "bar"};`
 
     test("should return the resolved value of the promise", () => {
       expect(result).toEqual({
-        resources: [
+        manifests: [
           {
             path: join(tmpDir.path, "foo.js"),
             data: { foo: "bar" }
@@ -171,7 +171,7 @@ describe("given a pattern without an extension", () => {
 
     test("should load the one matching the pattern", () => {
       expect(result).toEqual({
-        resources: [
+        manifests: [
           {
             path: join(tmpDir.path, "foo.js"),
             data: { foo: "bar" }
@@ -188,7 +188,7 @@ describe("given a pattern without an extension", () => {
 
     test("should load the one matching the pattern", () => {
       expect(result).toEqual({
-        resources: [
+        manifests: [
           {
             path: join(tmpDir.path, "foo.json"),
             data: { foo: "bar" }
@@ -213,7 +213,7 @@ describe("given multiple patterns", () => {
     });
 
     test("should load files matching the pattern", () => {
-      expect(result.resources).toIncludeAllMembers([
+      expect(result.manifests).toIncludeAllMembers([
         {
           path: join(tmpDir.path, "a.js"),
           data: { value: "a" }

@@ -27,7 +27,7 @@ export async function generate(options: GenerateOptions): Promise<Result> {
   debug("found components", components);
 
   const result: Result = {
-    resources: []
+    manifests: []
   };
 
   for (const id of components) {
@@ -35,7 +35,7 @@ export async function generate(options: GenerateOptions): Promise<Result> {
     const mod = [].concat(await getComponentValue(path));
 
     for (const data of mod) {
-      result.resources.push({
+      result.manifests.push({
         path: require.resolve(path),
         data
       });

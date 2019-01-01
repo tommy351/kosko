@@ -16,7 +16,7 @@ export interface GenerateOptions extends BaseOptions {
 
 export const generateCmd: Command<GenerateOptions> = {
   usage: "kosko generate [components...]",
-  description: "Generate Kubernetes resources.",
+  description: "Generate Kubernetes manifests.",
   options: {
     ...baseOptions,
     env: {
@@ -68,7 +68,7 @@ export const generateCmd: Command<GenerateOptions> = {
     // Read components from raw parser output to support multiple arguments
     const components = detail.argv._;
 
-    // Generate resources
+    // Generate manifests
     const result = await generate({
       path: join(cwd, "components"),
       components: components.length ? components : ["*"]

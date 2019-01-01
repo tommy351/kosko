@@ -11,7 +11,7 @@ export interface RootArgs {
 
 export const rootCmd: Command<BaseOptions> = {
   usage: "kosko <command>",
-  description: "kosko generates Kubernetes resources from JavaScript.",
+  description: "kosko generates Kubernetes manifests from JavaScript.",
   options: baseOptions,
   args: [
     { name: "command", description: "Command to execute.", required: true }

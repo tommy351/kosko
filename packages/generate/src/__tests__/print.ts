@@ -15,9 +15,9 @@ beforeEach(() => {
   });
 });
 
-describe("when no resources", () => {
+describe("when no manifests", () => {
   beforeAll(() => {
-    result = { resources: [] };
+    result = { manifests: [] };
     options = { format: PrintFormat.YAML };
   });
 
@@ -31,12 +31,12 @@ describe("when format = YAML", () => {
     options = { format: PrintFormat.YAML };
   });
 
-  describe("and only one resource", () => {
+  describe("and only one manifest", () => {
     const data = { foo: "bar" };
 
     beforeAll(() => {
       result = {
-        resources: [{ path: "", data }]
+        manifests: [{ path: "", data }]
       };
     });
 
@@ -45,12 +45,12 @@ describe("when format = YAML", () => {
     });
   });
 
-  describe("and multiple resources", () => {
+  describe("and multiple manifests", () => {
     const data = [{ foo: "bar" }, { bar: "boo" }, { boo: "baz" }];
 
     beforeAll(() => {
       result = {
-        resources: data.map(x => ({ path: "", data: x }))
+        manifests: data.map(x => ({ path: "", data: x }))
       };
     });
 
@@ -65,11 +65,11 @@ describe("when format = JSON", () => {
     options = { format: PrintFormat.JSON };
   });
 
-  describe("and only one resource", () => {
+  describe("and only one manifest", () => {
     const data = { foo: "bar" };
 
     beforeAll(() => {
-      result = { resources: [{ path: "", data }] };
+      result = { manifests: [{ path: "", data }] };
     });
 
     it("should write JSON", () => {
@@ -77,11 +77,11 @@ describe("when format = JSON", () => {
     });
   });
 
-  describe("and multiple resources", () => {
+  describe("and multiple manifests", () => {
     const data = [{ foo: "bar" }, { bar: "boo" }, { boo: "baz" }];
 
     beforeAll(() => {
-      result = { resources: data.map(x => ({ path: "", data: x })) };
+      result = { manifests: data.map(x => ({ path: "", data: x })) };
     });
 
     it("should write JSON wrapped with List", () => {
