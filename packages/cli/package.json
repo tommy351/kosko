@@ -1,6 +1,6 @@
 {
   "name": "@kosko/cli",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "repository": "https://github.com/tommy351/kosko",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
