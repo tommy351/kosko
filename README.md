@@ -1,10 +1,14 @@
 # kosko
 
-[![Build Status](https://travis-ci.org/tommy351/kosko.svg?branch=master)](https://travis-ci.org/tommy351/kosko)
+[![Build Status](https://travis-ci.org/tommy351/kosko.svg?branch=master)](https://travis-ci.org/tommy351/kosko) [![Build status](https://ci.appveyor.com/api/projects/status/db26i79eyxp8tjxj/branch/master?svg=true)](https://ci.appveyor.com/project/tommy351/kosko/branch/master) [![codecov](https://codecov.io/gh/tommy351/kosko/branch/master/graph/badge.svg)](https://codecov.io/gh/tommy351/kosko)
 
-Write Kubernetes resources in JavaScript. The structure is heavily inspired by [ksonnet](https://ksonnet.io/).
+Write Kubernetes resources in JavaScript.
 
-## Install
+kosko is inspired by [ksonnet] but use JavaScript instead of [jsonnet] so it's much easier to learn and use. Unlike [ksonnet], kosko doesn't touch Kubernetes clusters and doesn't support [Helm] neither. It's focus on building and organizing Kubernetes resources in JavaScript.
+
+## Installation
+
+Install kosko globally with npm.
 
 ```sh
 npm install -g @kosko/cli
@@ -12,38 +16,94 @@ npm install -g @kosko/cli
 
 ## Getting Started
 
-Use `kosko init` to initialize a basic folder structure for kosko.
+### Setup
+
+First, run `kosko init` to set up a new kosko directory and `npm install` to install dependencies.
 
 ```sh
 kosko init example
+cd example
 npm install
 ```
 
-```
+`kosko init` generates the following directories and files in the specified path.
+
+```sh
+.
 ├── components
 ├── environments
 │   └── index.js
-├── node_modules
-└── package.json
+├── package.json
+└── templates
 ```
 
-Create a new environment with `kosko new` command and `@kosko/template-environment` template.
+### Create a Environment
+
+Install `@kosko/template-environment` and run `kosko new` to create a new environment.
 
 ```sh
 npm install @kosko/template-environment
 kosko new @kosko/template-environment --name dev
 ```
 
+This template creates a new folder named `dev` in `environments` folder with an `index.js` in the folder. You can specify global variables in `index.js` and component variables in other JavaScript files.
+
+```sh
+.
+└── environments
+    ├── dev          # Folder for environment variables
+    │   ├── foo.js   # Component variables
+    │   └── index.js # Global variables
+    └── index.js
+```
+
+### Create a Component
+
+Install `@kosko/template-deployed-service` and run `kosko new` to create a new component.
+
+```sh
+npm install @kosko/template-deployed-service
+kosko new @kosko/template-deployed-service --name nginx --image nginx
+```
+
+This template creates a new file named `nginx.js` in `components` folder.
+
+### Generate Kubernetes Resources
+
+Run `kosko generate` to print Kubernetes resources in the console.
+
+```sh
+kosko generate --env dev
+```
+
+Pipe the output to kubectl to apply to a cluster.
+
+```sh
+kosko generate --env dev | kubectl apply -f -
+```
+
+### More Examples
+
 See [examples](examples) folder for more examples.
 
-## Commands
+## Packages
 
-### init
+### Core
 
-### generate
+- [@kosko/cli](packages/cli) - CLI.
+- [@kosko/generate](packages/generate) - Find and print components.
+- [@kosko/require](packages/require) - Import and resolve modules.
+- [@kosko/template](packages/template) - Utilities for templates.
 
-### new
+### Templates
+
+- [@kosko/template-deployed-service](packages/template-deployed-service) - Create a new component including a deployment and a service.
+- [@kosko/template-environment](packages/template-environment) - Create a new environment.
 
 ## License
 
 MIT
+
+[ksonnet]: https://ksonnet.io/
+[jsonnet]: https://jsonnet.org/
+[helm]: https://helm.sh/

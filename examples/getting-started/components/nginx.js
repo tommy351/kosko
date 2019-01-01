@@ -1,15 +1,15 @@
+"use strict";
+
 const { Deployment } = require("kubernetes-models/api/apps/v1");
 const { Service } = require("kubernetes-models/api/core/v1");
-const params = require("../environments").components.nginx;
 
+const metadata = { name: "nginx" };
 const labels = { app: "nginx" };
 
 const deployment = new Deployment({
-  metadata: {
-    name: "nginx"
-  },
+  metadata,
   spec: {
-    replicas: params.replicas,
+    replicas: 1,
     selector: {
       matchLabels: labels
     },
@@ -20,7 +20,11 @@ const deployment = new Deployment({
       spec: {
         containers: [
           {
-            image: "nginx"
+            image: "nginx",
+            name: "nginx",
+            ports: [{
+              containerPort: 80
+            }]
           }
         ]
       }
@@ -29,14 +33,14 @@ const deployment = new Deployment({
 });
 
 const service = new Service({
-  metadata: {
-    name: "nginx"
-  },
+  metadata,
   spec: {
     selector: labels,
+    type: "ClusterIP",
     ports: [
       {
-        port: 80
+        port: 80,
+        targetPort: 80
       }
     ]
   }
