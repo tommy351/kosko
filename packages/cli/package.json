@@ -1,6 +1,6 @@
 {
   "name": "@kosko/cli",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "repository": "https://github.com/tommy351/kosko",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
@@ -14,7 +14,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@kosko/generate": "^0.1.1",
+    "@kosko/generate": "^0.2.0",
     "@kosko/template": "^0.2.0",
     "clean-stack": "^2.0.0",
     "dargs": "^6.0.0",
