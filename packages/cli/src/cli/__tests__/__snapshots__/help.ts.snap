@@ -18,6 +18,7 @@ exports[`options should print the options 1`] = `
 "Options:
   --arr array              desc of arr
   --bool                   desc of bool
+  --camel-case             camel case
   --count                  desc of count
   --num number             desc of num
   --str string             desc of str

@@ -71,7 +71,8 @@ describe("options", () => {
         num: { type: OptionType.Number, description: "desc of num" },
         unknown: { description: "some unknown option" },
         onealias: { alias: "o", description: "one alias" },
-        morealias: { alias: ["m", "more"], description: "more aliases" }
+        morealias: { alias: ["m", "more"], description: "more aliases" },
+        camelCase: { description: "camel case" }
       }
     };
   });

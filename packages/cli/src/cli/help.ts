@@ -1,6 +1,7 @@
 import groupBy from "lodash.groupby";
+import kebabCase from "lodash.kebabcase";
 import { Writable } from "stream";
-import { Option, OptionType, CommandMeta } from "./types";
+import { CommandMeta, Option, OptionType } from "./types";
 
 interface Entry {
   key: string;
@@ -14,6 +15,7 @@ interface OptionWithName extends Option {
 function getOptionKey(opt: OptionWithName) {
   let key = [opt.name]
     .concat(opt.alias || [])
+    .map(kebabCase)
     .map(x => (x.length > 1 ? `--${x}` : `-${x}`))
     .sort((a, b) => a.length - b.length)
     .join(", ");
