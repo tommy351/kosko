@@ -1,6 +1,6 @@
 {
   "name": "@kosko/template-deployed-service",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Create a new component including a deployment and a service.",
   "repository": "https://github.com/tommy351/kosko",
   "author": "Tommy Chen <tommy351@gmail.com>",
@@ -22,6 +22,6 @@
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@kosko/template": "^0.2.1"
+    "@kosko/template": "^0.2.2"
   }
 }
