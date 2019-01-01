@@ -1,3 +1,4 @@
+import { requireDefault, resolve } from "@kosko/require";
 import { writeFiles } from "@kosko/template";
 import BufferList from "bl";
 import { baseOptions } from "../../base";
@@ -5,32 +6,14 @@ import { help } from "../../cli/help";
 import { Logger } from "../../cli/logger";
 import { ParseError } from "../../cli/parse";
 import { Context } from "../../cli/types";
-import resolve from "../../utils/resolve";
 import { newCmd } from "../new";
 
 const resolveMock = resolve as jest.Mock;
+const requireMock = requireDefault as jest.Mock;
 
 jest.mock("../../cli/help");
-jest.mock("../../utils/resolve");
+jest.mock("@kosko/require");
 jest.mock("@kosko/template");
-
-jest.mock(
-  "fake-template",
-  () => ({
-    description: "This is a fake template.",
-    options: {
-      foo: { type: "string", description: "option foo" },
-      bar: { type: "number", description: "option bar", required: true }
-    },
-    generate: async ({ foo, bar }: any) => ({
-      files: [
-        { path: "foo", content: `${foo}` },
-        { path: "bar", content: `${bar}` }
-      ]
-    })
-  }),
-  { virtual: true }
-);
 
 const bl = new BufferList();
 const ctx: Context = { logger: new Logger(bl) };
@@ -61,6 +44,19 @@ describe("when template is set", () => {
   describe("and module exists", () => {
     beforeEach(() => {
       resolveMock.mockResolvedValueOnce("fake-template");
+      requireMock.mockReturnValueOnce({
+        description: "This is a fake template.",
+        options: {
+          foo: { type: "string", description: "option foo" },
+          bar: { type: "number", description: "option bar", required: true }
+        },
+        generate: async ({ foo, bar }: any) => ({
+          files: [
+            { path: "foo", content: `${foo}` },
+            { path: "bar", content: `${bar}` }
+          ]
+        })
+      });
     });
 
     describe("and options.help is true", () => {

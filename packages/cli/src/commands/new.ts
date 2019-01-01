@@ -1,3 +1,4 @@
+import { requireDefault, resolve } from "@kosko/require";
 import { Template, writeFiles } from "@kosko/template";
 import Debug from "debug";
 import { baseOptions, BaseOptions, getCWD } from "../base";
@@ -5,7 +6,6 @@ import { help } from "../cli/help";
 import { parse, ParseError } from "../cli/parse";
 import { Command } from "../cli/types";
 import { unparse } from "../cli/unparse";
-import resolve from "../utils/resolve";
 
 const debug = Debug("kosko:new");
 
@@ -65,7 +65,7 @@ export const newCmd: Command<BaseOptions> = {
       });
       debug("Template path", path);
 
-      const template = require(path);
+      const template = requireDefault(path);
       const cmd = buildTemplateCommand(args.template, template);
       return cmd.exec(ctx, unparse(detail).slice(1));
     }

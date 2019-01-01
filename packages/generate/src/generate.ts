@@ -1,6 +1,7 @@
+import { requireDefault } from "@kosko/require";
+import Debug from "debug";
 import glob from "fast-glob";
 import { join } from "path";
-import Debug from "debug";
 import { Result } from "./base";
 import requireExtensions from "./requireExtensions";
 
@@ -42,11 +43,6 @@ export async function generate(options: GenerateOptions): Promise<Result> {
   }
 
   return result;
-}
-
-function requireDefault(id: string) {
-  const mod = require(id);
-  return mod.__esModule ? mod.default : mod;
 }
 
 async function getComponentValue(id: string) {

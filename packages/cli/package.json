@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@kosko/generate": "^0.2.0",
+    "@kosko/require": "^0.0.1",
     "@kosko/template": "^0.2.0",
     "clean-stack": "^2.0.0",
     "dargs": "^6.0.0",

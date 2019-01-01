@@ -12,6 +12,7 @@
     "access": "public"
   },
   "dependencies": {
+    "@kosko/require": "^0.0.1",
     "debug": "^4.1.1",
     "fast-glob": "^2.2.4",
     "js-yaml": "^3.12.0",

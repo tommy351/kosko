@@ -1,0 +1,20 @@
+{
+  "name": "@kosko/require",
+  "version": "0.0.1",
+  "repository": "https://github.com/tommy351/kosko",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "main": "dist",
+  "files": [
+    "/dist/"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "resolve": "^1.9.0"
+  },
+  "devDependencies": {
+    "@types/resolve": "^0.0.8"
+  }
+}
