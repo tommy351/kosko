@@ -22,10 +22,11 @@ exports.components = requireDir(".", {
 `;
 
 export const template: Template<Options> = {
+  description: "Create a new environment.",
   options: {
     name: {
       type: "string",
-      description: "environment name",
+      description: "Environment name",
       required: true
     }
   },

@@ -11,35 +11,36 @@ interface Options {
 }
 
 export const template: Template<Options> = {
+  description: "Create a new component including a deployment and a service.",
   options: {
     name: {
       type: "string",
-      description: "name of deployment and service",
+      description: "Name of deployment and service.",
       required: true
     },
     image: {
       type: "string",
-      description: "container image",
+      description: "Container image.",
       required: true
     },
     type: {
       type: "string",
-      description: "service type",
+      description: "Service type.",
       default: "ClusterIP"
     },
     servicePort: {
       type: "number",
-      description: "service port",
+      description: "Service port.",
       default: 80
     },
     containerPort: {
       type: "number",
-      description: "container port",
+      description: "Container port.",
       default: 80
     },
     replicas: {
       type: "number",
-      description: "number of replicas",
+      description: "Number of replicas.",
       default: 1
     }
   },
