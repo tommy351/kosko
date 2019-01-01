@@ -2,7 +2,11 @@
   "name": "@kosko/template-deployed-service",
   "version": "0.1.3",
   "description": "Create a new component including a deployment and a service.",
-  "repository": "https://github.com/tommy351/kosko",
+  "homepage": "https://github.com/tommy351/kosko",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kosko.git"
+  },
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "main": "dist",

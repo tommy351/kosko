@@ -2,7 +2,11 @@
   "name": "@kosko/generate",
   "version": "0.3.0",
   "description": "Find and print components in a kosko app directory.",
-  "repository": "https://github.com/tommy351/kosko",
+  "homepage": "https://github.com/tommy351/kosko",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kosko.git"
+  },
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "main": "dist",

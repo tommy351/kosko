@@ -2,7 +2,11 @@
   "name": "@kosko/cli",
   "version": "0.2.5",
   "description": "Write Kubernetes manifests in JavaScript.",
-  "repository": "https://github.com/tommy351/kosko",
+  "homepage": "https://github.com/tommy351/kosko",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kosko.git"
+  },
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "bin": "bin/kosko.js",
