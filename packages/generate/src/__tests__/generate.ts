@@ -48,19 +48,16 @@ describe("given the wildcard pattern", () => {
     components = ["*"];
   });
 
-  describe("and one files in the components folder and the other outside", () => {
+  describe("and one file", () => {
     beforeAll(() => {
-      tmpFiles = [
-        { path: "foo.js", content: "module.exports = {}" },
-        { path: "components/foo.js", content: "module.exports = {foo: 'bar'}" }
-      ];
+      tmpFiles = [{ path: "foo.js", content: "module.exports = {foo: 'bar'}" }];
     });
 
     test("should load the one in the components folder", () => {
       expect(result).toEqual({
         resources: [
           {
-            path: join(tmpDir.path, "components", "foo.js"),
+            path: join(tmpDir.path, "foo.js"),
             data: { foo: "bar" }
           }
         ]
@@ -68,11 +65,11 @@ describe("given the wildcard pattern", () => {
     });
   });
 
-  describe("and a folder in the components folder", () => {
+  describe("and one folder", () => {
     beforeAll(() => {
       tmpFiles = [
         {
-          path: "components/foo/index.js",
+          path: "foo/index.js",
           content: "module.exports = {foo: 'bar'}"
         }
       ];
@@ -82,7 +79,7 @@ describe("given the wildcard pattern", () => {
       expect(result).toEqual({
         resources: [
           {
-            path: join(tmpDir.path, "components", "foo", "index.js"),
+            path: join(tmpDir.path, "foo", "index.js"),
             data: { foo: "bar" }
           }
         ]
@@ -94,7 +91,7 @@ describe("given the wildcard pattern", () => {
     beforeAll(() => {
       tmpFiles = [
         {
-          path: "components/foo.js",
+          path: "foo.js",
           content: `
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {foo: "bar"};`
@@ -106,7 +103,7 @@ exports.default = {foo: "bar"};`
       expect(result).toEqual({
         resources: [
           {
-            path: join(tmpDir.path, "components", "foo.js"),
+            path: join(tmpDir.path, "foo.js"),
             data: { foo: "bar" }
           }
         ]
@@ -118,7 +115,7 @@ exports.default = {foo: "bar"};`
     beforeAll(() => {
       tmpFiles = [
         {
-          path: "components/foo.js",
+          path: "foo.js",
           content: 'module.exports = () => ({ foo: "bar" })'
         }
       ];
@@ -128,7 +125,7 @@ exports.default = {foo: "bar"};`
       expect(result).toEqual({
         resources: [
           {
-            path: join(tmpDir.path, "components", "foo.js"),
+            path: join(tmpDir.path, "foo.js"),
             data: { foo: "bar" }
           }
         ]
@@ -140,7 +137,7 @@ exports.default = {foo: "bar"};`
     beforeAll(() => {
       tmpFiles = [
         {
-          path: "components/foo.js",
+          path: "foo.js",
           content: 'module.exports = () => Promise.resolve({ foo: "bar" })'
         }
       ];
@@ -150,7 +147,7 @@ exports.default = {foo: "bar"};`
       expect(result).toEqual({
         resources: [
           {
-            path: join(tmpDir.path, "components", "foo.js"),
+            path: join(tmpDir.path, "foo.js"),
             data: { foo: "bar" }
           }
         ]
@@ -167,8 +164,8 @@ describe("given a pattern without an extension", () => {
   describe("and two JS files", () => {
     beforeAll(() => {
       tmpFiles = [
-        { path: "components/foo.js", content: "module.exports = {foo: 'bar'}" },
-        { path: "components/bar.js", content: "module.exports = {}" }
+        { path: "foo.js", content: "module.exports = {foo: 'bar'}" },
+        { path: "bar.js", content: "module.exports = {}" }
       ];
     });
 
@@ -176,7 +173,7 @@ describe("given a pattern without an extension", () => {
       expect(result).toEqual({
         resources: [
           {
-            path: join(tmpDir.path, "components", "foo.js"),
+            path: join(tmpDir.path, "foo.js"),
             data: { foo: "bar" }
           }
         ]
@@ -186,14 +183,14 @@ describe("given a pattern without an extension", () => {
 
   describe("and one JSON file", () => {
     beforeAll(() => {
-      tmpFiles = [{ path: "components/foo.json", content: `{"foo": "bar"}` }];
+      tmpFiles = [{ path: "foo.json", content: `{"foo": "bar"}` }];
     });
 
     test("should load the one matching the pattern", () => {
       expect(result).toEqual({
         resources: [
           {
-            path: join(tmpDir.path, "components", "foo.json"),
+            path: join(tmpDir.path, "foo.json"),
             data: { foo: "bar" }
           }
         ]
@@ -210,7 +207,7 @@ describe("given multiple patterns", () => {
   describe("and three files", () => {
     beforeAll(() => {
       tmpFiles = ["a", "b", "c"].map(x => ({
-        path: `components/${x}.js`,
+        path: `${x}.js`,
         content: `module.exports = {value: '${x}'}`
       }));
     });
@@ -218,11 +215,11 @@ describe("given multiple patterns", () => {
     test("should load files matching the pattern", () => {
       expect(result.resources).toIncludeAllMembers([
         {
-          path: join(tmpDir.path, "components", "a.js"),
+          path: join(tmpDir.path, "a.js"),
           data: { value: "a" }
         },
         {
-          path: join(tmpDir.path, "components", "b.js"),
+          path: join(tmpDir.path, "b.js"),
           data: { value: "b" }
         }
       ]);

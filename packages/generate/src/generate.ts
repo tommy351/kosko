@@ -12,9 +12,6 @@ export interface GenerateOptions {
 }
 
 export async function generate(options: GenerateOptions): Promise<Result> {
-  const componentDir = join(options.path, "components");
-  debug("find components in", componentDir);
-
   const extensions = Object.keys(requireExtensions)
     .map(ext => ext.substring(1))
     .join(",");
@@ -23,7 +20,7 @@ export async function generate(options: GenerateOptions): Promise<Result> {
   debug("glob patterns", patterns);
 
   const components = await glob<string>(patterns, {
-    cwd: componentDir,
+    cwd: options.path,
     onlyFiles: false
   });
   debug("found components", components);
@@ -33,7 +30,7 @@ export async function generate(options: GenerateOptions): Promise<Result> {
   };
 
   for (const id of components) {
-    const path = join(componentDir, id);
+    const path = join(options.path, id);
     const mod = [].concat(await getComponentValue(path));
 
     for (const data of mod) {
