@@ -16,6 +16,10 @@ describe("when output is not set", () => {
     args = ["generate", "--env", "dev"];
   });
 
+  test("should return status code 0", () => {
+    expect(result.code).toEqual(0);
+  });
+
   test("should output YAML", () => {
     expect(result.stdout).toMatchSnapshot();
   });
@@ -24,6 +28,10 @@ describe("when output is not set", () => {
 describe("when output = json", () => {
   beforeAll(() => {
     args = ["generate", "--env", "dev", "--output", "json"];
+  });
+
+  test("should return status code 0", () => {
+    expect(result.code).toEqual(0);
   });
 
   test("should output JSON", () => {

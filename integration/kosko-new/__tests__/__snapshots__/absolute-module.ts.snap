@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should create files based on templates 1`] = `
+"\\"use strict\\";
+
+const requireDir = require(\\"require-dir\\");
+
+exports.globals = {};
+
+exports.components = requireDir(\\".\\", {
+  mapValue: function(value) {
+    return {
+      ...exports.globals,
+      ...(value.default || value)
+    };
+  }
+});
+"
+`;

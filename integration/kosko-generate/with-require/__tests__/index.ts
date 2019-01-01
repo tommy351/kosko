@@ -16,6 +16,10 @@ describe("given require = ts-node/register", () => {
     args = ["generate", "--env", "dev", "--require", "ts-node/register"];
   });
 
+  test("should return status code 0", () => {
+    expect(result.code).toEqual(0);
+  });
+
   test("should import ts files", () => {
     expect(result.stdout).toMatchSnapshot();
   });
