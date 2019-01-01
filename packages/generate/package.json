@@ -1,6 +1,6 @@
 {
   "name": "@kosko/generate",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "repository": "https://github.com/tommy351/kosko",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
@@ -12,7 +12,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@kosko/require": "^0.0.1",
+    "@kosko/require": "^0.1.0",
     "debug": "^4.1.1",
     "fast-glob": "^2.2.4",
     "js-yaml": "^3.12.0",
