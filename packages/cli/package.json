@@ -9,7 +9,9 @@
   },
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
-  "bin": "bin/kosko.js",
+  "bin": {
+    "kosko": "bin/kosko.js"
+  },
   "main": "dist",
   "files": [
     "/bin/",
