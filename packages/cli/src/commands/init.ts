@@ -2,12 +2,10 @@ import Debug from "debug";
 import fs from "fs";
 import makeDir from "make-dir";
 import { join, resolve } from "path";
-import { promisify } from "util";
 import writePkg from "write-pkg";
 import { RootArguments, Command, getLogger } from "../cli/command";
 
 const debug = Debug("kosko:init");
-const writeFile = promisify(fs.writeFile);
 
 function exists(path: string) {
   return new Promise(res => fs.exists(path, res));
@@ -44,21 +42,11 @@ export const initCmd: Command<InitArguments> = {
       );
     }
 
-    const componentDir = join(path, "components");
-    const envDir = join(path, "environments");
-    const templateDir = join(path, "templates");
-
-    for (const dir of [componentDir, envDir, templateDir]) {
+    for (const name of ["components", "environments", "templates"]) {
+      const dir = join(path, name);
       debug("Creating directory", dir);
       await makeDir(dir);
     }
-
-    debug("Writing env index");
-
-    await writeFile(
-      join(envDir, "index.js"),
-      'module.exports = require("./" + kosko.env);'
-    );
 
     debug("Updating package.json");
 

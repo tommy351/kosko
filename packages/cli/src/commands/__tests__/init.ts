@@ -80,8 +80,5 @@ describe("success", () => {
 
   test("should create templates folder", () => assertDir("templates"));
 
-  test("should create index.js in environments folder", () =>
-    assertFile("environments", "index.js"));
-
   test("should create package.json", () => assertFile("package.json"));
 });
