@@ -10,7 +10,11 @@
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "main": "dist",
+  "bin": {
+    "kosko-template-environment": "bin/run.js"
+  },
   "files": [
+    "/bin/",
     "/dist/"
   ],
   "keywords": [
@@ -23,9 +27,7 @@
     "node": ">= 6.9.0"
   },
   "dependencies": {
+    "@kosko/template": "^0.2.4",
     "tslib": "^1.9.3"
-  },
-  "devDependencies": {
-    "@kosko/template": "^0.2.4"
   }
 }
