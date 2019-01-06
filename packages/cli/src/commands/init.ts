@@ -64,8 +64,8 @@ export const initCmd: Command<InitArguments> = {
 
     await writePkg(join(path, "package.json"), {
       dependencies: {
-        "kubernetes-models": "^0.2.1",
-        "require-dir": "^1.2.0"
+        "@kosko/env": "^0.1.0",
+        "kubernetes-models": "^0.2.1"
       }
     });
 
