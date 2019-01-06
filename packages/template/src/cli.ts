@@ -25,7 +25,13 @@ export async function run(
   }
 
   for (const key of Object.keys(options)) {
-    cmd.option(key, options[key]);
+    const opt = options[key];
+
+    cmd.option(key, opt);
+
+    if (opt.options && opt.options.length) {
+      cmd.choices(key, opt.options);
+    }
   }
 
   try {
