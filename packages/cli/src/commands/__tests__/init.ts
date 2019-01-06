@@ -3,6 +3,7 @@ import { join } from "path";
 import { Signale } from "signale";
 import tmp from "tmp-promise";
 import { promisify } from "util";
+import writePkg from "write-pkg";
 import { setLogger } from "../../cli/command";
 import { initCmd } from "../init";
 
@@ -32,6 +33,26 @@ describe("when the target exists", () => {
   test("should proceed with --force flag", async () => {
     const args = setLogger({ path: tmpDir.path, force: true } as any, logger);
     await initCmd.handler(args);
+  });
+
+  describe("when package.json exists", () => {
+    let pkgPath: string;
+
+    beforeEach(async () => {
+      pkgPath = join(tmpDir.path, "package.json");
+
+      await writePkg(pkgPath, {
+        name: "foo",
+        version: "1.2.3"
+      });
+    });
+
+    test("should update package.json", async () => {
+      const args = setLogger({ path: tmpDir.path, force: true } as any, logger);
+      await initCmd.handler(args);
+      const content = await readFile(pkgPath, "utf8");
+      expect(content).toMatchSnapshot();
+    });
   });
 });
 

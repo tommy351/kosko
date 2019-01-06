@@ -2,13 +2,31 @@ import Debug from "debug";
 import fs from "fs";
 import makeDir from "make-dir";
 import { join, resolve } from "path";
+import { promisify } from "util";
 import writePkg from "write-pkg";
-import { RootArguments, Command, getLogger } from "../cli/command";
+import { Command, getLogger, RootArguments } from "../cli/command";
 
 const debug = Debug("kosko:init");
 
+const readFile = promisify(fs.readFile);
+
 function exists(path: string) {
   return new Promise(res => fs.exists(path, res));
+}
+
+async function updatePkg(path: string, data: any) {
+  let base: any = {};
+
+  try {
+    base = JSON.parse(await readFile(path, "utf8"));
+  } catch (err) {
+    if (err.code !== "ENOENT") throw err;
+  }
+
+  await writePkg(path, {
+    ...base,
+    ...data
+  });
 }
 
 export interface InitArguments extends RootArguments {
@@ -50,7 +68,7 @@ export const initCmd: Command<InitArguments> = {
 
     debug("Updating package.json");
 
-    await writePkg(join(path, "package.json"), {
+    await updatePkg(join(path, "package.json"), {
       dependencies: {
         "@kosko/env": "^0.1.0",
         "kubernetes-models": "^0.2.1"
