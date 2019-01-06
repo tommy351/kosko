@@ -27,7 +27,7 @@ export const generateCmd: Command<GenerateArguments> = {
         type: "string",
         describe: "Output format",
         default: PrintFormat.YAML,
-        options: Object.keys(PrintFormat).map(key => PrintFormat[key as any]),
+        choices: Object.keys(PrintFormat).map(key => PrintFormat[key as any]),
         alias: "o"
       })
       .option("require", {

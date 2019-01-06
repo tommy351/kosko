@@ -56,6 +56,62 @@ exports[`when output = json should output JSON 1`] = `
 }"
 `;
 
+exports[`when output = yaml should output YAML 1`] = `
+"---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+spec:
+  selector:
+    app: nginx
+  ports:
+    - port: 80"
+`;
+
+exports[`when output is invalid should print the error 1`] = `
+"kosko generate [components..]
+
+Generate Kubernetes manifests
+
+Positionals:
+  components  Components to generate                      [array] [default: \\"*\\"]
+
+Global Options:
+  --cwd      Path of working directory                   [string] [default: CWD]
+  --silent   Disable log output                       [boolean] [default: false]
+  --help     Show help                                                 [boolean]
+  --version  Show version number                                       [boolean]
+
+Options:
+  --env, -e      Name of environment                         [string] [required]
+  --output, -o   Output format
+                            [string] [choices: \\"yaml\\", \\"json\\"] [default: \\"yaml\\"]
+  --require, -r  Require modules                           [array] [default: []]
+
+Invalid values:
+  Argument: output, Given: \\"foo\\", Choices: \\"yaml\\", \\"json\\"
+"
+`;
+
 exports[`when output is not set should output YAML 1`] = `
 "---
 apiVersion: apps/v1
