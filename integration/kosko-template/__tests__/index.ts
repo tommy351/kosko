@@ -11,6 +11,7 @@ const readFile = promisify(fs.readFile);
 
 let args: string[];
 let result: execa.ExecaReturns;
+let options: execa.Options;
 let tmpDir: tmp.DirectoryResult;
 
 beforeEach(async () => {
@@ -27,8 +28,8 @@ beforeEach(async () => {
   );
 
   result = await execa(dst, args, {
-    cwd: tmpDir.path,
-    reject: false
+    ...options,
+    cwd: tmpDir.path
   });
 });
 
@@ -46,6 +47,7 @@ async function assertFiles(cwd: string) {
 describe("given args --help", () => {
   beforeAll(() => {
     args = ["--help"];
+    options = {};
   });
 
   test("should return status code 0", () => {
@@ -60,6 +62,7 @@ describe("given args --help", () => {
 describe("when required arg is not given", () => {
   beforeAll(() => {
     args = [];
+    options = { reject: false };
   });
 
   test("should return status code 1", () => {
@@ -74,6 +77,7 @@ describe("when required arg is not given", () => {
 describe("when cwd is not set", () => {
   beforeAll(() => {
     args = ["--foo", "bar", "--bar", "46.93"];
+    options = {};
   });
 
   test("should return status code 0", () => {
@@ -91,6 +95,7 @@ describe("when cwd is set", () => {
   beforeAll(() => {
     cwd = join(tmpDir.path, "foo");
     args = ["--foo", "bar", "--bar", "46.93", "--cwd", cwd];
+    options = {};
   });
 
   test("should return status code 0", () => {

@@ -1,9 +1,16 @@
-import { Command, RootArguments } from "../cli/command";
+import { Environment } from "@kosko/env";
 import { generate, print, PrintFormat } from "@kosko/generate";
+import { requireDefault, resolve } from "@kosko/require";
 import Debug from "debug";
 import { join } from "path";
+import { Command, RootArguments } from "../cli/command";
 
 const debug = Debug("kosko:generate");
+
+async function importEnv(cwd: string): Promise<Environment> {
+  const path = await resolve("@kosko/env", { basedir: cwd });
+  return requireDefault(path);
+}
 
 export interface GenerateArguments extends RootArguments {
   env: string;
@@ -50,11 +57,10 @@ export const generateCmd: Command<GenerateArguments> = {
       }
     }
 
-    // Set global env
-    global.kosko = {
-      env: args.env
-    };
-    debug("Set global env as", args.env);
+    // Set env
+    const env = await importEnv(args.cwd);
+    env.env = args.env;
+    debug("Set env as", args.env);
 
     // Read components from raw parser output to support multiple arguments
     const components = args.components || [];

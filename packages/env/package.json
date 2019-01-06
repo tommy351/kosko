@@ -1,0 +1,33 @@
+{
+  "name": "@kosko/env",
+  "version": "0.0.1",
+  "description": "Manage environemnts in kosko",
+  "homepage": "https://github.com/tommy351/kosko",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kosko.git"
+  },
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "main": "dist",
+  "files": [
+    "/dist/"
+  ],
+  "keywords": [
+    "kosko"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">= 6.9.0"
+  },
+  "dependencies": {
+    "@kosko/require": "^0.1.5",
+    "pkg-dir": "^3.0.0",
+    "tslib": "^1.9.3"
+  },
+  "devDependencies": {
+    "@types/pkg-dir": "^2.0.0"
+  }
+}

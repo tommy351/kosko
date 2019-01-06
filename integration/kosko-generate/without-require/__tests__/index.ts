@@ -4,17 +4,19 @@ import { runCLI } from "../../../run";
 
 let args: string[];
 let result: execa.ExecaReturns;
+let options: execa.Options;
 
 beforeEach(async () => {
   result = await runCLI(args, {
-    cwd: dirname(__dirname),
-    reject: false
+    ...options,
+    cwd: dirname(__dirname)
   });
 });
 
 describe("when output is not set", () => {
   beforeAll(() => {
     args = ["generate", "--env", "dev"];
+    options = {};
   });
 
   test("should return status code 0", () => {
@@ -29,6 +31,7 @@ describe("when output is not set", () => {
 describe("when output = yaml", () => {
   beforeAll(() => {
     args = ["generate", "--env", "dev", "--output", "yaml"];
+    options = {};
   });
 
   test("should return status code 0", () => {
@@ -43,6 +46,7 @@ describe("when output = yaml", () => {
 describe("when output = json", () => {
   beforeAll(() => {
     args = ["generate", "--env", "dev", "--output", "json"];
+    options = {};
   });
 
   test("should return status code 0", () => {
@@ -57,6 +61,7 @@ describe("when output = json", () => {
 describe("when output is invalid", () => {
   beforeAll(() => {
     args = ["generate", "--env", "dev", "--output", "foo"];
+    options = { reject: false };
   });
 
   test("should return status code 1", () => {
