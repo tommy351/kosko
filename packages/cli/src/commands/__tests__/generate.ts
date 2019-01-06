@@ -1,85 +1,47 @@
 import { generate, print, PrintFormat } from "@kosko/generate";
-import BufferList from "bl";
 import { join } from "path";
-import { help } from "../../cli/help";
-import { Logger } from "../../cli/logger";
-import { ParseError } from "../../cli/parse";
-import { Context } from "../../cli/types";
+import { Signale } from "signale";
+import { setLogger } from "../../cli/command";
 import { generateCmd } from "../generate";
 
-jest.mock("../../cli/help");
 jest.mock("@kosko/generate");
 
-const bl = new BufferList();
-const ctx: Context = { logger: new Logger(bl) };
+const logger = new Signale({ disabled: true });
 
-beforeEach(() => jest.resetAllMocks());
+beforeEach(async () => {
+  jest.resetAllMocks();
 
-describe("when options.help is true", () => {
-  test("should show help", async () => {
-    await generateCmd.exec(ctx, ["--help"]);
-    expect(help).toHaveBeenCalledWith(generateCmd);
-    expect(help).toHaveBeenCalledTimes(1);
+  const args = setLogger(
+    {
+      env: "foo",
+      cwd: process.cwd(),
+      components: ["*"],
+      output: PrintFormat.YAML
+    } as any,
+    logger
+  );
+
+  await generateCmd.handler(args);
+});
+
+test("should call generate once", () => {
+  expect(generate).toHaveBeenCalledTimes(1);
+});
+
+test("should call generate with args", () => {
+  expect(generate).toHaveBeenCalledWith({
+    path: join(process.cwd(), "components"),
+    components: ["*"]
   });
 });
 
-describe("when options.env is not set", () => {
-  test("should throw ParseError", async () => {
-    await expect(generateCmd.exec(ctx, [])).rejects.toThrowError(ParseError);
-  });
+test("should call print once", () => {
+  expect(print).toHaveBeenCalledTimes(1);
 });
 
-describe("when options.require is set", () => {
-  //
-});
-
-describe("when options.env is set", () => {
-  test("should set global.kosko.env", async () => {
-    await generateCmd.exec(ctx, ["--env", "foo"]);
-    expect(global.kosko.env).toEqual("foo");
-  });
-});
-
-describe("when components is not set", () => {
-  test("should use default pattern", async () => {
-    await generateCmd.exec(ctx, ["--env", "foo"]);
-    expect(generate).toHaveBeenCalledTimes(1);
-    expect(generate).toHaveBeenCalledWith({
-      path: join(process.cwd(), "components"),
-      components: ["*"]
-    });
-  });
-});
-
-describe("when components is set", () => {
-  test("should use default pattern", async () => {
-    await generateCmd.exec(ctx, ["--env", "foo", "bar/*", "*.js"]);
-    expect(generate).toHaveBeenCalledTimes(1);
-    expect(generate).toHaveBeenCalledWith({
-      path: join(process.cwd(), "components"),
-      components: ["bar/*", "*.js"]
-    });
-  });
-});
-
-describe("when options.output is not set", () => {
-  test("should output YAML", async () => {
-    await generateCmd.exec(ctx, ["--env", "foo"]);
-    expect(print).toHaveBeenCalledTimes(1);
-    expect(print).toHaveBeenCalledWith(undefined, {
-      format: PrintFormat.YAML,
-      writer: process.stdout
-    });
-  });
-});
-
-describe("when options.output is set", () => {
-  test("should output YAML", async () => {
-    await generateCmd.exec(ctx, ["--env", "foo", "--output", "json"]);
-    expect(print).toHaveBeenCalledTimes(1);
-    expect(print).toHaveBeenCalledWith(undefined, {
-      format: PrintFormat.JSON,
-      writer: process.stdout
-    });
+test("should call print with args", () => {
+  expect(print).toHaveBeenCalledWith(undefined, {
+    format: PrintFormat.YAML,
+    writer: process.stdout
   });
 });

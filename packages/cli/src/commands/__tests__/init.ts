@@ -1,77 +1,65 @@
-import BufferList from "bl";
 import fs from "fs";
 import { join } from "path";
-import tmpPromise from "tmp-promise";
+import { Signale } from "signale";
+import tmp from "tmp-promise";
 import { promisify } from "util";
-import { help } from "../../cli/help";
-import { Logger } from "../../cli/logger";
-import { Context } from "../../cli/types";
+import { setLogger } from "../../cli/command";
 import { initCmd } from "../init";
 
 const readFile = promisify(fs.readFile);
 const stat = promisify(fs.stat);
 
-jest.mock("../../cli/help");
-
-const bl = new BufferList();
-const ctx: Context = { logger: new Logger(bl) };
+const logger = new Signale({ disabled: true });
 
 beforeEach(() => jest.resetAllMocks());
 
-describe("when options.help is true", () => {
-  test("should show help", async () => {
-    await initCmd.exec(ctx, ["--help"]);
-    expect(help).toHaveBeenCalledWith(initCmd);
-    expect(help).toHaveBeenCalledTimes(1);
-  });
-});
-
-describe("when argv parse failed", () => {
-  // because it can't be failed
-});
-
 describe("when the target exists", () => {
-  let tmpDir: tmpPromise.DirectoryResult;
+  let tmpDir: tmp.DirectoryResult;
 
   beforeEach(async () => {
-    tmpDir = await tmpPromise.dir({ unsafeCleanup: true });
+    tmpDir = await tmp.dir({ unsafeCleanup: true });
   });
 
   afterEach(() => tmpDir.cleanup());
 
   test("should throw an error", async () => {
-    await expect(initCmd.exec(ctx, [tmpDir.path])).rejects.toThrow(
+    const args = setLogger({ path: tmpDir.path } as any, logger);
+    await expect(initCmd.handler(args)).rejects.toThrow(
       "Already exists. Use --force to overwrite existing files."
     );
   });
 
   test("should proceed with --force flag", async () => {
-    await initCmd.exec(ctx, [tmpDir.path, "--force"]);
+    const args = setLogger({ path: tmpDir.path, force: true } as any, logger);
+    await initCmd.handler(args);
   });
 });
 
 describe("when path is not specified", () => {
-  let tmpDir: tmpPromise.DirectoryResult;
+  let tmpDir: tmp.DirectoryResult;
 
   beforeEach(async () => {
-    tmpDir = await tmpPromise.dir({ unsafeCleanup: true });
+    tmpDir = await tmp.dir({ unsafeCleanup: true });
   });
 
   afterEach(() => tmpDir.cleanup());
 
   test("should use cwd instead", async () => {
-    await initCmd.exec(ctx, ["--cwd", tmpDir.path, "--force"]);
+    const args = setLogger({ cwd: tmpDir.path, force: true } as any, logger);
+    await initCmd.handler(args);
   });
 });
 
 describe("success", () => {
-  let tmpDir: tmpPromise.DirectoryResult;
+  let tmpDir: tmp.DirectoryResult;
   let path: string;
 
   beforeAll(async () => {
-    tmpDir = await tmpPromise.dir({ unsafeCleanup: true });
+    tmpDir = await tmp.dir({ unsafeCleanup: true });
     path = join(tmpDir.path, "target");
-    await initCmd.exec(ctx, [path]);
+
+    const args = setLogger({ path } as any, logger);
+    await initCmd.handler(args);
   });
 
   afterAll(() => tmpDir.cleanup());

@@ -4,9 +4,5 @@
     "rootDir": "src",
     "outDir": "dist"
   },
-  "references": [
-    { "path": "../generate" },
-    { "path": "../template" },
-    { "path": "../require" }
-  ]
+  "references": [{ "path": "../generate" }]
 }
