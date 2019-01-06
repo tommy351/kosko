@@ -1,4 +1,5 @@
 import cleanStack from "clean-stack";
+import exit from "exit";
 
 export class CLIError extends Error {
   public readonly name = "CLIError";
@@ -19,14 +20,16 @@ export function handleError(err: Error) {
   let code = 1;
   let msg = err.message;
 
+  if (err.stack) {
+    msg = cleanStack(err.stack);
+  }
+
   if (err instanceof CLIError) {
     if (err.output) msg = err.output;
-    if (err.code) code = err.code;
-  } else if (err.stack) {
-    msg = cleanStack(err.stack);
+    if (err.code != null) code = err.code;
   }
 
   // tslint:disable-next-line:no-console
   console.error(msg);
-  process.exit(code);
+  exit(code);
 }
