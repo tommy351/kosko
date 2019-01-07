@@ -3,6 +3,8 @@ import { Signale } from "signale";
 import { Argv } from "yargs";
 import { getLogger, parse, setLogger, wrapHandler } from "../command";
 
+jest.mock("signale");
+
 // tslint:disable-next-line:no-var-requires
 const yargs = require("yargs/yargs");
 
@@ -92,6 +94,10 @@ describe("parse", () => {
         test("should set logger", () => {
           expect(logger).toBeInstanceOf(Signale);
         });
+
+        test("should set stream of logger to stderr", () => {
+          expect(Signale).toHaveBeenCalledWith({ stream: process.stderr });
+        });
       });
 
       describe("when subcommand rejected", () => {
@@ -103,6 +109,20 @@ describe("parse", () => {
 
         test("should reject", async () => {
           await expect(parse(input, ["foo"])).rejects.toThrow(err);
+        });
+      });
+
+      describe("given --silent option", () => {
+        beforeEach(async () => {
+          handler.mockResolvedValueOnce({});
+          await parse(input, ["foo", "--silent"]);
+        });
+
+        test("should disable logger", () => {
+          expect(Signale).toHaveBeenCalledWith({
+            stream: process.stderr,
+            disabled: true
+          });
         });
       });
     });
