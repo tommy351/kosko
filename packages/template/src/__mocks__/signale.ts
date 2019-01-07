@@ -1,3 +1,6 @@
 import { Signale } from "signale";
 
-export = new Signale({ disabled: true });
+const logger = new Signale({ disabled: true });
+(logger as any).Signale = Signale;
+
+export = logger;
