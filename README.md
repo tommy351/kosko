@@ -29,10 +29,8 @@ npm install
 `kosko init` generates the following directories and files in the specified path.
 
 ```sh
-.
 ├── components
 ├── environments
-│   └── index.js
 ├── package.json
 └── templates
 ```
@@ -42,19 +40,16 @@ npm install
 Install `@kosko/template-environment` and run `kosko new` to create a new environment.
 
 ```sh
-npm install @kosko/template-environment
-kosko new @kosko/template-environment --name dev
+npx @kosko/template-environment --name dev
 ```
 
 This template creates a new folder named `dev` in `environments` folder with an `index.js` in the folder. You can specify global variables in `index.js` and component variables in other JavaScript files.
 
 ```sh
-.
-└── environments
-    ├── dev          # Folder for environment variables
-    │   ├── foo.js   # Component variables
-    │   └── index.js # Global variables
-    └── index.js
+environments
+└── dev
+    ├── foo.js   # Component variables
+    └── index.js # Global variables
 ```
 
 ### Create a Component
@@ -62,8 +57,7 @@ This template creates a new folder named `dev` in `environments` folder with an 
 Install `@kosko/template-deployed-service` and run `kosko new` to create a new component.
 
 ```sh
-npm install @kosko/template-deployed-service
-kosko new @kosko/template-deployed-service --name nginx --image nginx
+npx @kosko/template-deployed-service --name nginx --image nginx
 ```
 
 This template creates a new file named `nginx.js` in `components` folder.
