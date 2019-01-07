@@ -1,0 +1,32 @@
+{
+  "name": "kosko",
+  "version": "0.0.1",
+  "description": "Write Kubernetes manifests in JavaScript.",
+  "homepage": "https://github.com/tommy351/kosko",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kosko.git"
+  },
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "bin": {
+    "kosko": "bin/kosko.js"
+  },
+  "files": [
+    "/bin/"
+  ],
+  "keywords": [
+    "kubernetes",
+    "kosko"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">= 6.9.0"
+  },
+  "dependencies": {
+    "@kosko/cli": "^0.3.0",
+    "import-local": "^2.0.0"
+  }
+}
