@@ -11,7 +11,7 @@
   "license": "MIT",
   "main": "dist",
   "bin": {
-    "kosko-template-environment": "bin/run.js"
+    "template-environment": "bin/run.js"
   },
   "files": [
     "/bin/",
