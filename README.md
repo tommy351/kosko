@@ -11,7 +11,7 @@ kosko is inspired by [ksonnet] but use JavaScript instead of [jsonnet] so it's m
 Install kosko globally with npm.
 
 ```sh
-npm install -g @kosko/cli
+npm install -g kosko
 ```
 
 ## Getting Started
