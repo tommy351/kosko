@@ -5,6 +5,8 @@ import fs from "fs";
 import { promisify } from "util";
 import { join } from "path";
 
+jest.mock("signale");
+
 const readFile = promisify(fs.readFile);
 
 let tmpDir: tmpPromise.DirectoryResult;

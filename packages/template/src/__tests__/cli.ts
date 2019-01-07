@@ -4,6 +4,8 @@ import { Template } from "../template";
 import { writeFiles } from "../write";
 import { join } from "path";
 
+jest.mock("signale");
+
 jest.spyOn(console, "error").mockImplementation(() => {
   // do nothing
 });
