@@ -1,7 +1,7 @@
 {
   "name": "@kosko/env",
   "version": "0.0.1",
-  "description": "Manage environemnts in kosko",
+  "description": "Manage environemnts in kosko.",
   "homepage": "https://github.com/tommy351/kosko",
   "repository": {
     "type": "git",

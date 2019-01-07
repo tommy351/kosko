@@ -91,6 +91,7 @@ See [examples](examples) folder for more examples.
 ### Core
 
 - [@kosko/cli](packages/cli) - CLI.
+- [@kosko/env](packages/env) - Manage environemnts in kosko.
 - [@kosko/generate](packages/generate) - Find and print components.
 - [@kosko/require](packages/require) - Import and resolve modules.
 - [@kosko/template](packages/template) - Utilities for templates.
