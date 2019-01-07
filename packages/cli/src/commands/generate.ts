@@ -9,6 +9,7 @@ const debug = Debug("kosko:generate");
 
 async function importEnv(cwd: string): Promise<Environment> {
   const path = await resolve("@kosko/env", { basedir: cwd });
+  debug("Importing @kosko/env from", path);
   return requireDefault(path);
 }
 

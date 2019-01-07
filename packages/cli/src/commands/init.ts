@@ -18,11 +18,13 @@ async function updatePkg(path: string, data: any) {
   let base: any = {};
 
   try {
+    debug("Reading existing package.json from", path);
     base = JSON.parse(await readFile(path, "utf8"));
   } catch (err) {
     if (err.code !== "ENOENT") throw err;
   }
 
+  debug("Writing package.json at", path);
   await writePkg(path, {
     ...base,
     ...data
@@ -65,8 +67,6 @@ export const initCmd: Command<InitArguments> = {
       debug("Creating directory", dir);
       await makeDir(dir);
     }
-
-    debug("Updating package.json");
 
     await updatePkg(join(path, "package.json"), {
       dependencies: {
