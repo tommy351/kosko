@@ -47,7 +47,11 @@ export const generateCmd: Command<GenerateArguments> = {
       .positional("components", {
         describe: "Components to generate",
         default: "*"
-      });
+      })
+      .example("$0 generate --env dev", "Generate all components")
+      .example("$0 generate --env dev foo bar", "Specifiy components")
+      .example("$0 generate --env dev foo_*", "Use glob syntax")
+      .example("$0 generate -r ts-node/register", "Require external modules");
   },
   async handler(args) {
     // Require external modules

@@ -47,7 +47,9 @@ export const initCmd: Command<InitArguments> = {
         default: false,
         alias: "f"
       })
-      .positional("path", { type: "string", describe: "Path to initialize" });
+      .positional("path", { type: "string", describe: "Path to initialize" })
+      .example("$0 init", "Initialize in current directory")
+      .example("$0 init example", "Initialize in specified directory");
   },
   async handler(args) {
     const logger = getLogger(args);

@@ -107,6 +107,12 @@ Options:
                             [string] [choices: \\"yaml\\", \\"json\\"] [default: \\"yaml\\"]
   --require, -r  Require modules                           [array] [default: []]
 
+Examples:
+  kosko generate --env dev            Generate all components
+  kosko generate --env dev foo bar    Specifiy components
+  kosko generate --env dev foo_*      Use glob syntax
+  kosko generate -r ts-node/register  Require external modules
+
 Invalid values:
   Argument: output, Given: \\"foo\\", Choices: \\"yaml\\", \\"json\\"
 "
