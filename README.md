@@ -1,6 +1,6 @@
 # kosko
 
-[![Build Status](https://travis-ci.org/tommy351/kosko.svg?branch=master)](https://travis-ci.org/tommy351/kosko) [![Build status](https://ci.appveyor.com/api/projects/status/db26i79eyxp8tjxj/branch/master?svg=true)](https://ci.appveyor.com/project/tommy351/kosko/branch/master) [![codecov](https://codecov.io/gh/tommy351/kosko/branch/master/graph/badge.svg)](https://codecov.io/gh/tommy351/kosko)
+[![](https://img.shields.io/npm/v/kosko.svg)](https://www.npmjs.com/package/kosko) [![Build Status](https://travis-ci.org/tommy351/kosko.svg?branch=master)](https://travis-ci.org/tommy351/kosko) [![Build status](https://ci.appveyor.com/api/projects/status/db26i79eyxp8tjxj/branch/master?svg=true)](https://ci.appveyor.com/project/tommy351/kosko/branch/master) [![codecov](https://codecov.io/gh/tommy351/kosko/branch/master/graph/badge.svg)](https://codecov.io/gh/tommy351/kosko)
 
 Write Kubernetes manifests in JavaScript.
 
