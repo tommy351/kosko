@@ -1,6 +1,7 @@
 import env from "@kosko/env";
 import { generate, print, PrintFormat } from "@kosko/generate";
 import fs from "fs";
+import makeDir from "make-dir";
 import { join } from "path";
 import pkgDir from "pkg-dir";
 import { Signale } from "signale";
@@ -8,9 +9,10 @@ import symlinkDir from "symlink-dir";
 import tmp from "tmp-promise";
 import { promisify } from "util";
 import { setLogger } from "../../cli/command";
-import { generateCmd, GenerateArguments } from "../generate";
+import { GenerateArguments, generateCmd } from "../generate";
 
 const writeFile = promisify(fs.writeFile);
+const access = promisify(fs.access);
 
 jest.mock("@kosko/generate");
 jest.mock("@kosko/env");
@@ -18,6 +20,10 @@ jest.mock("@kosko/env");
 const logger = new Signale({ disabled: true });
 let args: Partial<GenerateArguments>;
 let tmpDir: tmp.DirectoryResult;
+
+function newContext() {
+  return setLogger({ cwd: tmpDir.path, ...args } as any, logger);
+}
 
 beforeEach(async () => {
   jest.resetAllMocks();
@@ -29,9 +35,6 @@ beforeEach(async () => {
     join(root!, "packages", "env"),
     join(tmpDir.path, "node_modules", "@kosko", "env")
   );
-
-  const ctx = setLogger({ cwd: tmpDir.path, ...args } as any, logger);
-  await generateCmd.handler(ctx);
 });
 
 afterEach(() => tmpDir.cleanup());
@@ -39,6 +42,10 @@ afterEach(() => tmpDir.cleanup());
 describe("given components and output", () => {
   beforeAll(() => {
     args = { components: ["*"], output: PrintFormat.YAML };
+  });
+
+  beforeEach(async () => {
+    await generateCmd.handler(newContext());
   });
 
   test("should call generate once", () => {
@@ -76,6 +83,45 @@ describe("given components and output", () => {
 
     test("should set env", () => {
       expect(env.env).toEqual("foo");
+    });
+  });
+});
+
+describe("given require", () => {
+  beforeAll(async () => {
+    args.require = ["fake-mod1", "fake-mod2"];
+  });
+
+  async function createFakeModule(id: string) {
+    const dir = join(tmpDir.path, "node_modules", id);
+    await makeDir(dir);
+    await writeFile(
+      join(dir, "index.js"),
+      `require('fs').writeFileSync('${join(tmpDir.path, id)}', '');`
+    );
+  }
+
+  describe("when module exists", () => {
+    beforeEach(async () => {
+      for (const id of args.require || []) {
+        await createFakeModule(id);
+      }
+
+      await generateCmd.handler(newContext());
+    });
+
+    test("should require all modules", async () => {
+      for (const id of args.require!) {
+        await access(join(tmpDir.path, id));
+      }
+    });
+  });
+
+  describe("when module does not exist", () => {
+    test("should require all modules", async () => {
+      await expect(generateCmd.handler(newContext())).rejects.toThrow(
+        /Cannot find module/
+      );
     });
   });
 });

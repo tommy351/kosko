@@ -7,10 +7,15 @@ import { Command, RootArguments } from "../cli/command";
 
 const debug = Debug("kosko:generate");
 
-async function importEnv(cwd: string): Promise<Environment> {
-  const path = await resolve("@kosko/env", { basedir: cwd });
-  debug("Importing @kosko/env from", path);
+async function localRequire(id: string, cwd: string) {
+  debug("Finding module %s in %s", id, cwd);
+  const path = await resolve(id, { basedir: cwd });
+  debug("Importing %s from %s", id, path);
   return requireDefault(path);
+}
+
+async function importEnv(cwd: string): Promise<Environment> {
+  return localRequire("@kosko/env", cwd);
 }
 
 export interface GenerateArguments extends RootArguments {
@@ -57,8 +62,7 @@ export const generateCmd: Command<GenerateArguments> = {
     // Require external modules
     if (args.require) {
       for (const id of args.require) {
-        debug("Require external module", id);
-        require(id);
+        await localRequire(id, args.cwd);
       }
     }
 
