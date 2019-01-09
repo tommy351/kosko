@@ -6,7 +6,7 @@ import { promisify } from "util";
 import writePkg from "write-pkg";
 import { Command, getLogger, RootArguments } from "../cli/command";
 
-const debug = Debug("kosko:init");
+const debug = Debug("kosko:cli:init");
 
 const readFile = promisify(fs.readFile);
 

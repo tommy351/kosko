@@ -5,7 +5,7 @@ import Debug from "debug";
 import { join } from "path";
 import { Command, RootArguments } from "../cli/command";
 
-const debug = Debug("kosko:generate");
+const debug = Debug("kosko:cli:generate");
 
 async function localRequire(id: string, cwd: string) {
   debug("Finding module %s in %s", id, cwd);

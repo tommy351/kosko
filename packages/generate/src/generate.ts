@@ -43,13 +43,13 @@ export async function generate(options: GenerateOptions): Promise<Result> {
     .join(",");
   const suffix = `?(.{${extensions}})`;
   const patterns = options.components.map(x => x + suffix);
-  debug("glob patterns", patterns);
+  debug("Component patterns", patterns);
 
   const components = await glob<string>(patterns, {
     cwd: options.path,
     onlyFiles: false
   });
-  debug("found components", components);
+  debug("Found components", components);
 
   const result: Result = {
     manifests: []
