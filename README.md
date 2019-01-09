@@ -35,23 +35,6 @@ npm install
 └── templates
 ```
 
-### Create an Environment
-
-Create a new component with `@kosko/template-environment` template.
-
-```sh
-npx @kosko/template-environment --name dev
-```
-
-This template creates a new folder named `dev` in `environments` folder with an `index.js` in the folder. You can specify global variables in `index.js` and component variables in other JavaScript files.
-
-```sh
-environments
-└── dev
-    ├── foo.js   # Component variables
-    └── index.js # Global variables
-```
-
 ### Create a Component
 
 Create a new component with `@kosko/template-deployed-service` template.
@@ -67,13 +50,13 @@ This template creates a new file named `nginx.js` in `components` folder.
 Run `kosko generate` to print Kubernetes manifests in the console.
 
 ```sh
-kosko generate --env dev
+kosko generate
 ```
 
 Pipe the output to kubectl to apply to a cluster.
 
 ```sh
-kosko generate --env dev | kubectl apply -f -
+kosko generate | kubectl apply -f -
 ```
 
 ## Documentation
