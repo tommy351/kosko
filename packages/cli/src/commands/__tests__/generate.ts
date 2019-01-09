@@ -8,7 +8,7 @@ import symlinkDir from "symlink-dir";
 import tmp from "tmp-promise";
 import { promisify } from "util";
 import { setLogger } from "../../cli/command";
-import { generateCmd } from "../generate";
+import { generateCmd, GenerateArguments } from "../generate";
 
 const writeFile = promisify(fs.writeFile);
 
@@ -16,6 +16,7 @@ jest.mock("@kosko/generate");
 jest.mock("@kosko/env");
 
 const logger = new Signale({ disabled: true });
+let args: Partial<GenerateArguments>;
 let tmpDir: tmp.DirectoryResult;
 
 beforeEach(async () => {
@@ -29,43 +30,52 @@ beforeEach(async () => {
     join(tmpDir.path, "node_modules", "@kosko", "env")
   );
 
-  const args = setLogger(
-    {
-      env: "foo",
-      cwd: tmpDir.path,
-      components: ["*"],
-      output: PrintFormat.YAML
-    } as any,
-    logger
-  );
-
-  await generateCmd.handler(args);
+  const ctx = setLogger({ cwd: tmpDir.path, ...args } as any, logger);
+  await generateCmd.handler(ctx);
 });
 
 afterEach(() => tmpDir.cleanup());
 
-test("should call generate once", () => {
-  expect(generate).toHaveBeenCalledTimes(1);
-});
-
-test("should call generate with args", () => {
-  expect(generate).toHaveBeenCalledWith({
-    path: join(tmpDir.path, "components"),
-    components: ["*"]
+describe("given components and output", () => {
+  beforeAll(() => {
+    args = { components: ["*"], output: PrintFormat.YAML };
   });
-});
 
-test("should call print once", () => {
-  expect(print).toHaveBeenCalledTimes(1);
-});
-
-test("should call print with args", () => {
-  expect(print).toHaveBeenCalledWith(undefined, {
-    format: PrintFormat.YAML,
-    writer: process.stdout
+  test("should call generate once", () => {
+    expect(generate).toHaveBeenCalledTimes(1);
   });
-});
 
-test("should set env", () => {
-  expect(env.env).toEqual("foo");
+  test("should call generate with args", () => {
+    expect(generate).toHaveBeenCalledWith({
+      path: join(tmpDir.path, "components"),
+      components: ["*"]
+    });
+  });
+
+  test("should call print once", () => {
+    expect(print).toHaveBeenCalledTimes(1);
+  });
+
+  test("should call print with args", () => {
+    expect(print).toHaveBeenCalledWith(undefined, {
+      format: PrintFormat.YAML,
+      writer: process.stdout
+    });
+  });
+
+  describe("without env", () => {
+    test("should not set env", () => {
+      expect(env.env).toBeUndefined();
+    });
+  });
+
+  describe("with env", () => {
+    beforeAll(() => {
+      args.env = "foo";
+    });
+
+    test("should set env", () => {
+      expect(env.env).toEqual("foo");
+    });
+  });
 });

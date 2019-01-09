@@ -14,7 +14,7 @@ async function importEnv(cwd: string): Promise<Environment> {
 }
 
 export interface GenerateArguments extends RootArguments {
-  env: string;
+  env?: string;
   output: PrintFormat;
   require?: string[];
   components?: string[];
@@ -28,7 +28,6 @@ export const generateCmd: Command<GenerateArguments> = {
       .option("env", {
         type: "string",
         describe: "Name of environment",
-        required: true,
         alias: "e"
       })
       .option("output", {
@@ -48,9 +47,10 @@ export const generateCmd: Command<GenerateArguments> = {
         describe: "Components to generate",
         default: "*"
       })
-      .example("$0 generate --env dev", "Generate all components")
-      .example("$0 generate --env dev foo bar", "Specifiy components")
-      .example("$0 generate --env dev foo_*", "Use glob syntax")
+      .example("$0 generate", "Generate all components")
+      .example("$0 generate foo bar", "Specify components")
+      .example("$0 generate foo_*", "Use glob syntax")
+      .example("$0 generate --env foo", "Set environment")
       .example("$0 generate -r ts-node/register", "Require external modules");
   },
   async handler(args) {
@@ -63,9 +63,11 @@ export const generateCmd: Command<GenerateArguments> = {
     }
 
     // Set env
-    const env = await importEnv(args.cwd);
-    env.env = args.env;
-    debug("Set env as", args.env);
+    if (args.env) {
+      const env = await importEnv(args.cwd);
+      env.env = args.env;
+      debug("Set env as", args.env);
+    }
 
     // Read components from raw parser output to support multiple arguments
     const components = args.components || [];

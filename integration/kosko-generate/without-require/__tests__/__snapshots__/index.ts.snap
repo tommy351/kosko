@@ -102,15 +102,16 @@ Global Options:
   --version  Show version number                                       [boolean]
 
 Options:
-  --env, -e      Name of environment                         [string] [required]
+  --env, -e      Name of environment                                    [string]
   --output, -o   Output format
                             [string] [choices: \\"yaml\\", \\"json\\"] [default: \\"yaml\\"]
   --require, -r  Require modules                           [array] [default: []]
 
 Examples:
-  kosko generate --env dev            Generate all components
-  kosko generate --env dev foo bar    Specifiy components
-  kosko generate --env dev foo_*      Use glob syntax
+  kosko generate                      Generate all components
+  kosko generate foo bar              Specify components
+  kosko generate foo_*                Use glob syntax
+  kosko generate --env foo            Set environment
   kosko generate -r ts-node/register  Require external modules
 
 Invalid values:

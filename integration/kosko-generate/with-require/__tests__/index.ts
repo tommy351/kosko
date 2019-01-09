@@ -13,7 +13,7 @@ beforeEach(async () => {
 
 describe("given require = ts-node/register", () => {
   beforeAll(() => {
-    args = ["generate", "--env", "dev", "--require", "ts-node/register"];
+    args = ["generate", "--require", "ts-node/register"];
   });
 
   test("should return status code 0", () => {
