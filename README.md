@@ -35,9 +35,9 @@ npm install
 └── templates
 ```
 
-### Create a Environment
+### Create an Environment
 
-Install `@kosko/template-environment` and run `kosko new` to create a new environment.
+Create a new component with `@kosko/template-environment` template.
 
 ```sh
 npx @kosko/template-environment --name dev
@@ -54,7 +54,7 @@ environments
 
 ### Create a Component
 
-Install `@kosko/template-deployed-service` and run `kosko new` to create a new component.
+Create a new component with `@kosko/template-deployed-service` template.
 
 ```sh
 npx @kosko/template-deployed-service --name nginx --image nginx
@@ -76,9 +76,14 @@ Pipe the output to kubectl to apply to a cluster.
 kosko generate --env dev | kubectl apply -f -
 ```
 
-### More Examples
+## Documentation
 
-See [examples](examples) folder for more examples.
+- [Component](docs/component.md)
+- [Environment](docs/environment.md)
+
+## Examples
+
+- [Getting Started](examples/getting-started)
 
 ## Packages
 
