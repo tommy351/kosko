@@ -1,10 +1,14 @@
 import { join } from "path";
 import { requireDefault } from "@kosko/require";
+import Debug from "debug";
+
+const debug = Debug("kosko:env");
 
 function tryRequire(id: string) {
   try {
     return requireDefault(id);
   } catch {
+    debug("Module not found:", id);
     return {};
   }
 }
