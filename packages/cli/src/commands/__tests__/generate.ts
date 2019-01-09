@@ -84,6 +84,10 @@ describe("given components and output", () => {
     test("should set env", () => {
       expect(env.env).toEqual("foo");
     });
+
+    test("should set cwd", () => {
+      expect(env.cwd).toEqual(tmpDir.path);
+    });
   });
 });
 

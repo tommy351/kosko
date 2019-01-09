@@ -69,6 +69,7 @@ export const generateCmd: Command<GenerateArguments> = {
     // Set env
     if (args.env) {
       const env = await importEnv(args.cwd);
+      env.cwd = args.cwd;
       env.env = args.env;
       debug("Set env as", args.env);
     }
