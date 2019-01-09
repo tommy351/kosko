@@ -97,7 +97,7 @@ describe("given require", () => {
     await makeDir(dir);
     await writeFile(
       join(dir, "index.js"),
-      `require('fs').writeFileSync('${join(tmpDir.path, id)}', '');`
+      `require('fs').writeFileSync(__dirname + '/../../${id}', '');`
     );
   }
 
