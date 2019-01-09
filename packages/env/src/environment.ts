@@ -1,10 +1,5 @@
-import pkgDir from "pkg-dir";
 import { join } from "path";
 import { requireDefault } from "@kosko/require";
-
-const ROOT = Symbol("root");
-const ENV = Symbol("env");
-const ENV_DIR = Symbol("envDir");
 
 function tryRequire(id: string) {
   try {
@@ -15,31 +10,9 @@ function tryRequire(id: string) {
 }
 
 export class Environment {
-  // Path to the folder containing `package.json`.
-  private readonly [ROOT]: string | null;
+  public env: string | undefined;
 
-  // Current environment.
-  private [ENV]: string | undefined;
-
-  // Path to environments folder.
-  private [ENV_DIR]: string | undefined;
-
-  constructor(cwd?: string) {
-    this[ROOT] = pkgDir.sync(cwd);
-  }
-
-  public get env(): string {
-    return this[ENV] || "";
-  }
-
-  public set env(env: string) {
-    const root = this[ROOT];
-    this[ENV] = env;
-
-    if (root) {
-      this[ENV_DIR] = join(root, "environments", env);
-    }
-  }
+  constructor(public cwd: string = process.cwd()) {}
 
   /**
    * Returns global variables.
@@ -47,9 +20,8 @@ export class Environment {
    * If env is not set or require failed, returns an empty object.
    */
   public global() {
-    const envDir = this[ENV_DIR];
+    const envDir = this.getEnvDir();
     if (!envDir) return {};
-
     return tryRequire(envDir);
   }
 
@@ -61,12 +33,16 @@ export class Environment {
    * @param name Component name
    */
   public component(name: string) {
-    const envDir = this[ENV_DIR];
+    const envDir = this.getEnvDir();
     if (!envDir) return {};
 
     return {
       ...this.global(),
       ...tryRequire(join(envDir, name))
     };
+  }
+
+  private getEnvDir() {
+    return this.env && join(this.cwd, "environments", this.env);
   }
 }
