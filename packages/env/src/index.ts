@@ -1,6 +1,6 @@
 import { Environment } from "./environment";
 
-export default new Environment();
+export default new Environment(process.cwd());
 export { Environment };
 
 // HACK: Export default to module.exports and maintain types above.

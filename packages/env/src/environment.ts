@@ -16,7 +16,7 @@ function tryRequire(id: string) {
 export class Environment {
   public env: string | undefined;
 
-  constructor(public cwd: string = process.cwd()) {}
+  constructor(public cwd: string) {}
 
   /**
    * Returns global variables.
