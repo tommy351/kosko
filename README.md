@@ -70,6 +70,7 @@ kosko generate | kubectl apply -f -
 - [Environment](examples/environment)
 - [Using TypeScript](examples/typescript)
 - [Using Babel](examples/babel)
+- [Run Programmatically](examples/run-programmatically)
 
 ## Packages
 
