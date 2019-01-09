@@ -37,6 +37,11 @@ export class Environment {
     }
   }
 
+  /**
+   * Returns global variables.
+   *
+   * If env is not set or require failed, returns an empty object.
+   */
   public global() {
     const envDir = this[ENV_DIR];
     if (!envDir) return {};
@@ -44,6 +49,12 @@ export class Environment {
     return tryRequire(envDir);
   }
 
+  /**
+   * Returns component variables merge with global variables.
+   *
+   * If env is not set or require failed, returns an empty object.
+   * @param name component name
+   */
   public component(name: string) {
     const envDir = this[ENV_DIR];
     if (!envDir) return {};
