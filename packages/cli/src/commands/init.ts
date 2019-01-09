@@ -3,15 +3,29 @@ import fs from "fs";
 import makeDir from "make-dir";
 import { join, resolve } from "path";
 import { promisify } from "util";
-import writePkg from "write-pkg";
 import { Command, getLogger, RootArguments } from "../cli/command";
 
 const debug = Debug("kosko:cli:init");
 
 const readFile = promisify(fs.readFile);
+const writeFile = promisify(fs.writeFile);
 
 function exists(path: string) {
   return new Promise(res => fs.exists(path, res));
+}
+
+export function writeJSON(path: string, data: any) {
+  return writeFile(path, JSON.stringify(data, null, "  "));
+}
+
+function sortKeys(data: any) {
+  const result: any = {};
+
+  for (const key of Object.keys(data).sort()) {
+    result[key] = data[key];
+  }
+
+  return result;
 }
 
 async function updatePkg(path: string, data: any) {
@@ -25,9 +39,13 @@ async function updatePkg(path: string, data: any) {
   }
 
   debug("Writing package.json at", path);
-  await writePkg(path, {
+  await writeJSON(path, {
     ...base,
-    ...data
+    ...data,
+    dependencies: sortKeys({
+      ...base.dependencies,
+      ...data.dependencies
+    })
   });
 }
 

@@ -3,9 +3,8 @@ import { join } from "path";
 import { Signale } from "signale";
 import tmp from "tmp-promise";
 import { promisify } from "util";
-import writePkg from "write-pkg";
 import { setLogger } from "../../cli/command";
-import { initCmd } from "../init";
+import { initCmd, writeJSON } from "../init";
 
 const readFile = promisify(fs.readFile);
 const stat = promisify(fs.stat);
@@ -41,9 +40,12 @@ describe("when the target exists", () => {
     beforeEach(async () => {
       pkgPath = join(tmpDir.path, "package.json");
 
-      await writePkg(pkgPath, {
+      await writeJSON(pkgPath, {
         name: "foo",
-        version: "1.2.3"
+        version: "1.2.3",
+        dependencies: {
+          debug: "3.2.1"
+        }
       });
     });
 
