@@ -67,6 +67,7 @@ kosko generate | kubectl apply -f -
 ## Examples
 
 - [Getting Started](examples/getting-started)
+- [Environment](examples/environment)
 - [Using TypeScript](examples/typescript)
 - [Using Babel](examples/babel)
 
