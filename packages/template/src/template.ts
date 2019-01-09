@@ -17,6 +17,13 @@ export interface Result {
 }
 
 export interface File {
+  /**
+   * Destination path of a file.
+   */
   path: string;
+
+  /**
+   * File content.
+   */
   content: string;
 }

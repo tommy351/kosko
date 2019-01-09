@@ -44,6 +44,12 @@ const arrPrinters: PrinterMap<any[]> = {
   }
 };
 
+/**
+ * Print result to a stream.
+ *
+ * @param result
+ * @param options
+ */
 export function print(result: Result, { format, writer }: PrintOptions) {
   const data = result.manifests.map(manifest => manifest.data);
   if (!data.length) return;

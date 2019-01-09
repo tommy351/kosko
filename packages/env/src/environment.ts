@@ -15,9 +15,13 @@ function tryRequire(id: string) {
 }
 
 export class Environment {
+  // Path to the folder containing `package.json`.
   private readonly [ROOT]: string | null;
 
+  // Current environment.
   private [ENV]: string | undefined;
+
+  // Path to environments folder.
   private [ENV_DIR]: string | undefined;
 
   constructor(cwd?: string) {
@@ -53,7 +57,8 @@ export class Environment {
    * Returns component variables merge with global variables.
    *
    * If env is not set or require failed, returns an empty object.
-   * @param name component name
+   *
+   * @param name Component name
    */
   public component(name: string) {
     const envDir = this[ENV_DIR];

@@ -5,6 +5,12 @@ import yargs from "yargs";
 import { Template } from "./template";
 import { writeFiles } from "./write";
 
+/**
+ * Parse command line arguments and generate files with a template.
+ *
+ * @param template Template
+ * @param argv Command line arguments
+ */
 export async function run(
   template: Template<any>,
   argv: string[] = process.argv.slice(2)

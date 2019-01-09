@@ -7,6 +7,12 @@ import { File } from "./template";
 
 const writeFile = promisify(fs.writeFile);
 
+/**
+ * Write files to the specified path.
+ *
+ * @param path Destination path
+ * @param files Files to write
+ */
 export async function writeFiles(path: string, files: File[]) {
   for (const file of files) {
     const filePath = join(path, file.path);

@@ -8,10 +8,35 @@ import requireExtensions from "./requireExtensions";
 const debug = Debug("kosko:generate");
 
 export interface GenerateOptions {
+  /**
+   * Path of the component folder.
+   */
   path: string;
+
+  /**
+   * Patterns of component names.
+   */
   components: string[];
 }
 
+/**
+ * Finds components with glob patterns in the specified path and returns exported values
+ * from each components.
+ *
+ * Extension names is optional in `options.components` because it's appended
+ * automatically. (e.g. `foo` => `foo?(.{js,json})`)
+ *
+ * Extensions are from `require.extensions`. You can require `ts-node/register`
+ * to add support for `.ts` extension.
+ *
+ * A component can export:
+ *  - Object
+ *  - Array
+ *  - Function
+ *  - Async function.
+ *
+ * @param options
+ */
 export async function generate(options: GenerateOptions): Promise<Result> {
   const extensions = Object.keys(requireExtensions)
     .map(ext => ext.substring(1))
