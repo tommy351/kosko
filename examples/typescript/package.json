@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@kosko/env": "^0.1.0",
+    "kubernetes-models": "^0.2.3"
+  },
+  "devDependencies": {
+    "ts-node": "^7.0.1"
+  }
+}

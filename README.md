@@ -84,6 +84,7 @@ kosko generate --env dev | kubectl apply -f -
 ## Examples
 
 - [Getting Started](examples/getting-started)
+- [Using with TypeScript](examples/typescript)
 
 ## Packages
 
