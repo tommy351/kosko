@@ -1,7 +1,7 @@
-# Using TypeScript
+# Using Babel
 
 Run `kosko generate` with `--require/-r` option.
 
 ```sh
-kosko generate -r ts-node/register
+kosko generate -r @babel/register
 ```
