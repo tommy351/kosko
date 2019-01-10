@@ -1,15 +1,27 @@
 import execa from "execa";
-import { dirname } from "path";
+import { dirname, join } from "path";
 import { runCLI } from "../../../run";
+import symlinkDir from "symlink-dir";
+import pkgDir from "pkg-dir";
+
+const testDir = dirname(__dirname);
 
 let args: string[];
 let result: execa.ExecaReturns;
 let options: execa.Options;
 
+beforeAll(async () => {
+  const root = await pkgDir();
+  await symlinkDir(
+    join(root!, "packages", "env"),
+    join(testDir, "node_modules", "@kosko", "env")
+  );
+});
+
 beforeEach(async () => {
   result = await runCLI(args, {
     ...options,
-    cwd: dirname(__dirname)
+    cwd: testDir
   });
 });
 
