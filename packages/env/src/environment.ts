@@ -7,9 +7,13 @@ const debug = Debug("kosko:env");
 function tryRequire(id: string) {
   try {
     return requireDefault(id);
-  } catch {
-    debug("Module not found:", id);
-    return {};
+  } catch (err) {
+    if (err.code === "MODULE_NOT_FOUND") {
+      debug("Module not found:", id);
+      return {};
+    }
+
+    throw err;
   }
 }
 

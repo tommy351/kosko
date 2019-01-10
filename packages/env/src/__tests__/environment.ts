@@ -74,6 +74,16 @@ describe("when env is set", () => {
       });
     });
   });
+
+  describe("and it throws an error", () => {
+    beforeEach(() => {
+      env.env = "error";
+    });
+
+    test("should throw the error", () => {
+      expect(() => env.global()).toThrow();
+    });
+  });
 });
 
 describe("when env is unset", () => {
