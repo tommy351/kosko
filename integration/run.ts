@@ -2,11 +2,13 @@ import execa from "execa";
 import pkgDir from "pkg-dir";
 import { join } from "path";
 
-export async function runCLI(args: string[], options?: execa.Options) {
+export async function runCLI(args: string[], options: execa.Options = {}) {
   const root = await pkgDir();
-  return execa(
-    join(root!, "packages", "cli", "bin", "kosko.js"),
-    args,
-    options
-  );
+  return execa(join(root!, "packages", "cli", "bin", "kosko.js"), args, {
+    ...options,
+    env: {
+      LC_ALL: "en_US",
+      ...options.env
+    }
+  });
 }
