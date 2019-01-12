@@ -33,7 +33,6 @@
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@types/ajv": "^1.0.0",
     "@types/cosmiconfig": "^5.0.3",
     "@types/debug": "^0.0.31",
     "typescript-json-schema": "^0.34.0"
