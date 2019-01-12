@@ -28,6 +28,7 @@
     "node": ">= 6.9.0"
   },
   "dependencies": {
+    "@kosko/config": "^0.0.1",
     "@kosko/generate": "^0.3.5",
     "@kosko/require": "^0.1.6",
     "clean-stack": "^2.0.0",
