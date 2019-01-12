@@ -11,7 +11,7 @@
   "license": "MIT",
   "scripts": {
     "lint": "tslint --project .",
-    "build": "node scripts/build.js",
+    "build": "lerna run build && node scripts/build.js",
     "clean": "npm run build -- --clean",
     "watch": "npm run build -- --watch",
     "bootstrap": "lerna bootstrap",
