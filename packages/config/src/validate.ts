@@ -1,9 +1,6 @@
 import Ajv, { ErrorObject } from "ajv";
 
-const ajv = new Ajv({ schemaId: "auto" });
-
-// tslint:disable-next-line:no-var-requires
-ajv.addMetaSchema(require("ajv/lib/refs/json-schema-draft-04.json"));
+const ajv = new Ajv();
 
 // tslint:disable-next-line:no-var-requires
 const ajvValidate = ajv.compile(require("../assets/schema.json"));

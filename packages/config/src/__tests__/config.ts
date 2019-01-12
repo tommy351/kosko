@@ -1,11 +1,6 @@
-import {
-  searchConfig,
-  Config,
-  loadConfig,
-  EnvironmentConfig,
-  getConfig
-} from "../config";
 import { join } from "path";
+import { getConfig, loadConfig, searchConfig } from "../config";
+import { Config, EnvironmentConfig } from "../types";
 import { ValidationError } from "../validate";
 
 const fixturePath = join(__dirname, "..", "__fixtures__");

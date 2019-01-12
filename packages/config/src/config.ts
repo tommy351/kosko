@@ -1,18 +1,10 @@
 import cosmiconfig, { CosmiconfigResult } from "cosmiconfig";
 import Debug from "debug";
+import { Config, EnvironmentConfig } from "./types";
 import { validate } from "./validate";
 
 const explorer = cosmiconfig("kosko");
 const debug = Debug("kosko:config");
-
-export interface EnvironmentConfig {
-  require?: ReadonlyArray<string>;
-  components?: ReadonlyArray<string>;
-}
-
-export interface Config extends EnvironmentConfig {
-  environments?: { [key: string]: EnvironmentConfig };
-}
 
 function validateResult(result: CosmiconfigResult): Config {
   if (!result) return {};

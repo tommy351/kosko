@@ -1,32 +1,44 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "type": "object",
-  "definitions": {
-    "stringArray": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "environmentConfig": {
-      "type": "object",
-      "properties": {
-        "require": {
-          "$ref": "#/definitions/stringArray"
-        },
-        "components": {
-          "$ref": "#/definitions/stringArray"
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "EnvironmentConfig": {
+            "properties": {
+                "components": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "require": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
         }
-      }
-    }
-  },
-  "allOf": [{ "$ref": "#/definitions/environmentConfig" }],
-  "properties": {
-    "environments": {
-      "type": "object",
-      "additionalProperties": {
-        "$ref": "#/definitions/environmentConfig"
-      }
-    }
-  }
+    },
+    "properties": {
+        "components": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "environments": {
+            "additionalProperties": {
+                "$ref": "#/definitions/EnvironmentConfig"
+            },
+            "type": "object"
+        },
+        "require": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
 }
+

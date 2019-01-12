@@ -9,6 +9,9 @@
   },
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "generate": "typescript-json-schema src/types.ts Config -o assets/schema.json"
+  },
   "main": "dist",
   "files": [
     "/assets/",
@@ -32,6 +35,7 @@
   "devDependencies": {
     "@types/ajv": "^1.0.0",
     "@types/cosmiconfig": "^5.0.3",
-    "@types/debug": "^0.0.31"
+    "@types/debug": "^0.0.31",
+    "typescript-json-schema": "^0.34.0"
   }
 }
