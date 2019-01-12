@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "definitions": {
+    "stringArray": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "environmentConfig": {
+      "type": "object",
+      "properties": {
+        "require": {
+          "$ref": "#/definitions/stringArray"
+        },
+        "components": {
+          "$ref": "#/definitions/stringArray"
+        }
+      }
+    }
+  },
+  "allOf": [{ "$ref": "#/definitions/environmentConfig" }],
+  "properties": {
+    "environments": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/environmentConfig"
+      }
+    }
+  }
+}

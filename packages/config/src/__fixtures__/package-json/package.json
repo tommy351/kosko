@@ -1,0 +1,11 @@
+{
+  "kosko": {
+    "require": [
+      "a"
+    ],
+    "components": [
+      "b",
+      "c"
+    ]
+  }
+}

@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`loadConfig when file exists should load the config 1`] = `
+Object {
+  "components": Array [
+    "b",
+    "c",
+  ],
+  "environments": Object {
+    "dev": Object {
+      "components": Array [
+        "f",
+        "g",
+      ],
+      "require": Array [
+        "d",
+        "e",
+      ],
+    },
+    "prod": Object {
+      "components": Array [
+        "i",
+        "j",
+      ],
+      "require": Array [
+        "h",
+      ],
+    },
+  },
+  "require": Array [
+    "a",
+  ],
+}
+`;
+
+exports[`searchConfig succeed when config is at .koskorc should load the config 1`] = `
+Object {
+  "components": Array [
+    "b",
+    "c",
+  ],
+  "environments": Object {
+    "dev": Object {
+      "components": Array [
+        "f",
+        "g",
+      ],
+      "require": Array [
+        "d",
+        "e",
+      ],
+    },
+    "prod": Object {
+      "components": Array [
+        "i",
+        "j",
+      ],
+      "require": Array [
+        "h",
+      ],
+    },
+  },
+  "require": Array [
+    "a",
+  ],
+}
+`;
+
+exports[`searchConfig succeed when config is in package.json should load the config 1`] = `
+Object {
+  "components": Array [
+    "b",
+    "c",
+  ],
+  "require": Array [
+    "a",
+  ],
+}
+`;
