@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`given config file should apply configs 1`] = `
+"apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: a"
+`;

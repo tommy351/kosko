@@ -1,3 +1,9 @@
+import {
+  Config,
+  EnvironmentConfig,
+  getConfig,
+  searchConfig
+} from "@kosko/config";
 import { Environment } from "@kosko/env";
 import { generate, print, PrintFormat } from "@kosko/generate";
 import { requireDefault, resolve } from "@kosko/require";
@@ -16,6 +22,23 @@ async function localRequire(id: string, cwd: string) {
 
 async function importEnv(cwd: string): Promise<Environment> {
   return localRequire("@kosko/env", cwd);
+}
+
+function flatten<T>(...arrays: Array<ReadonlyArray<T> | undefined>): T[] {
+  return arrays.reduce((acc = [], item = []) => acc.concat(item), []) as T[];
+}
+
+function resolveConfig(
+  base: Config,
+  args: GenerateArguments
+): EnvironmentConfig {
+  const config = args.env ? getConfig(base, args.env) : base;
+  const components = flatten(config.components, args.components);
+
+  return {
+    components: components.length ? components : ["*"],
+    require: flatten(config.require, args.require)
+  };
 }
 
 export interface GenerateArguments extends RootArguments {
@@ -49,8 +72,7 @@ export const generateCmd: Command<GenerateArguments> = {
         alias: "r"
       })
       .positional("components", {
-        describe: "Components to generate",
-        default: "*"
+        describe: "Components to generate"
       })
       .example("$0 generate", "Generate all components")
       .example("$0 generate foo bar", "Specify components")
@@ -59,12 +81,8 @@ export const generateCmd: Command<GenerateArguments> = {
       .example("$0 generate -r ts-node/register", "Require external modules");
   },
   async handler(args) {
-    // Require external modules
-    if (args.require) {
-      for (const id of args.require) {
-        await localRequire(id, args.cwd);
-      }
-    }
+    // Load config
+    const config = resolveConfig(await searchConfig(args.cwd), args);
 
     // Set env
     if (args.env) {
@@ -74,8 +92,15 @@ export const generateCmd: Command<GenerateArguments> = {
       debug("Set env as", args.env);
     }
 
+    // Require external modules
+    if (config.require) {
+      for (const id of config.require) {
+        await localRequire(id, args.cwd);
+      }
+    }
+
     // Read components from raw parser output to support multiple arguments
-    const components = args.components || [];
+    const components = config.components || [];
 
     // Generate manifests
     const result = await generate({

@@ -2,7 +2,7 @@ import { requireDefault } from "@kosko/require";
 import Debug from "debug";
 import glob from "fast-glob";
 import { join } from "path";
-import { Result } from "./base";
+import { Result, Manifest } from "./base";
 import requireExtensions from "./requireExtensions";
 
 const debug = Debug("kosko:generate");
@@ -16,7 +16,7 @@ export interface GenerateOptions {
   /**
    * Patterns of component names.
    */
-  components: string[];
+  components: ReadonlyArray<string>;
 }
 
 /**
@@ -51,23 +51,21 @@ export async function generate(options: GenerateOptions): Promise<Result> {
   });
   debug("Found components", components);
 
-  const result: Result = {
-    manifests: []
-  };
+  const manifests: Manifest[] = [];
 
   for (const id of components) {
     const path = join(options.path, id);
     const mod = [].concat(await getComponentValue(path));
 
     for (const data of mod) {
-      result.manifests.push({
+      manifests.push({
         path: require.resolve(path),
         data
       });
     }
   }
 
-  return result;
+  return { manifests };
 }
 
 async function getComponentValue(id: string) {

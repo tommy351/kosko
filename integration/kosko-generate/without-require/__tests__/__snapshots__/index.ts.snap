@@ -93,7 +93,7 @@ exports[`when output is invalid should print the error 1`] = `
 Generate Kubernetes manifests
 
 Positionals:
-  components  Components to generate                      [array] [default: \\"*\\"]
+  components  Components to generate                       [array] [default: []]
 
 Global Options:
   --cwd      Path of working directory                   [string] [default: CWD]

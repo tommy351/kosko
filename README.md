@@ -63,6 +63,7 @@ kosko generate | kubectl apply -f -
 
 - [Component](docs/component.md)
 - [Environment](docs/environment.md)
+- [Configuration](docs/configuration.md)
 
 ## Examples
 
@@ -77,6 +78,7 @@ kosko generate | kubectl apply -f -
 ### Core
 
 - [@kosko/cli](packages/cli) - CLI.
+- [@kosko/config](packages/config) - Load kosko configuration.
 - [@kosko/env](packages/env) - Manage environemnts in kosko.
 - [@kosko/generate](packages/generate) - Find and print components.
 - [@kosko/require](packages/require) - Import and resolve modules.
