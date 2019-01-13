@@ -1,0 +1,10 @@
+require = ["a"]
+components = ["b", "c"]
+
+[environments.dev]
+require = ["d", "e"]
+components = ["f", "g"]
+
+[environments.prod]
+require = ["h"]
+components = ["i", "j"]

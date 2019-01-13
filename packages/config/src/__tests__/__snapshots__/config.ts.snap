@@ -16,6 +16,8 @@ Object {
         "d",
         "e",
       ],
+      Symbol(type): Symbol(table),
+      Symbol(declared): true,
     },
     "prod": Object {
       "components": Array [
@@ -25,15 +27,21 @@ Object {
       "require": Array [
         "h",
       ],
+      Symbol(type): Symbol(table),
+      Symbol(declared): true,
     },
+    Symbol(type): Symbol(table),
+    Symbol(declared): false,
   },
   "require": Array [
     "a",
   ],
+  Symbol(type): Symbol(table),
+  Symbol(declared): false,
 }
 `;
 
-exports[`searchConfig succeed when config is at .koskorc should load the config 1`] = `
+exports[`searchConfig succeed when config is at kosko.toml should load the config 1`] = `
 Object {
   "components": Array [
     "b",
@@ -49,6 +57,8 @@ Object {
         "d",
         "e",
       ],
+      Symbol(type): Symbol(table),
+      Symbol(declared): true,
     },
     "prod": Object {
       "components": Array [
@@ -58,22 +68,16 @@ Object {
       "require": Array [
         "h",
       ],
+      Symbol(type): Symbol(table),
+      Symbol(declared): true,
     },
+    Symbol(type): Symbol(table),
+    Symbol(declared): false,
   },
   "require": Array [
     "a",
   ],
-}
-`;
-
-exports[`searchConfig succeed when config is in package.json should load the config 1`] = `
-Object {
-  "components": Array [
-    "b",
-    "c",
-  ],
-  "require": Array [
-    "a",
-  ],
+  Symbol(type): Symbol(table),
+  Symbol(declared): false,
 }
 `;

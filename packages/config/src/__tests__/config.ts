@@ -8,7 +8,7 @@ const fixturePath = join(__dirname, "..", "__fixtures__");
 describe("loadConfig", () => {
   describe("when file exists", () => {
     test("should load the config", async () => {
-      const config = await loadConfig(join(fixturePath, "rc", ".koskorc"));
+      const config = await loadConfig(join(fixturePath, "toml", "kosko.toml"));
       expect(config).toMatchSnapshot();
     });
   });
@@ -24,7 +24,7 @@ describe("loadConfig", () => {
   describe("when config is invalid", () => {
     test("should throw ValidationError", async () => {
       await expect(
-        loadConfig(join(fixturePath, "invalid", ".koskorc"))
+        loadConfig(join(fixturePath, "invalid", "kosko.toml"))
       ).rejects.toThrow(ValidationError);
     });
   });
@@ -39,19 +39,9 @@ describe("searchConfig", () => {
       config = await searchConfig(cwd);
     });
 
-    describe("when config is at .koskorc", () => {
+    describe("when config is at kosko.toml", () => {
       beforeAll(() => {
-        cwd = join(fixturePath, "rc");
-      });
-
-      test("should load the config", () => {
-        expect(config).toMatchSnapshot();
-      });
-    });
-
-    describe("when config is in package.json", () => {
-      beforeAll(() => {
-        cwd = join(fixturePath, "package-json");
+        cwd = join(fixturePath, "toml");
       });
 
       test("should load the config", () => {

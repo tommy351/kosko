@@ -14,6 +14,12 @@ function formatErrors(errors: ErrorObject[]): string {
   return errors.map(err => `${err.dataPath} ${err.message}`).join(", ");
 }
 
+/**
+ * Validates data with kosko configuration schema. It throws a ValidationError
+ * when validation failed.
+ *
+ * @param data
+ */
 export function validate(data: any) {
   const valid = ajvValidate(data);
   if (valid) return;

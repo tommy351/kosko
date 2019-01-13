@@ -1,36 +1,55 @@
-import cosmiconfig, { CosmiconfigResult } from "cosmiconfig";
+import toml from "@iarna/toml";
 import Debug from "debug";
+import fs from "fs";
+import { join } from "path";
+import { promisify } from "util";
 import { Config, EnvironmentConfig } from "./types";
 import { validate } from "./validate";
 
-const explorer = cosmiconfig("kosko");
 const debug = Debug("kosko:config");
+const readFile = promisify(fs.readFile);
 
-function validateResult(result: CosmiconfigResult): Config {
-  if (!result) return {};
-
-  const { filepath, config } = result;
-
-  debug("Found config at", filepath);
-
-  if (!config) return {};
-
-  validate(config);
-  return config;
-}
-
+/**
+ * Parses and validates a config file from the specified path.
+ *
+ * @param path Path of the config file.
+ */
 export async function loadConfig(path: string): Promise<Config> {
-  return validateResult(await explorer.load(path));
+  const content = await readFile(path, "utf8");
+  const data = await toml.parse.async(content);
+
+  debug("Found config at", path);
+  validate(data);
+  return data;
 }
 
-export async function searchConfig(cwd?: string): Promise<Config> {
-  return validateResult(await explorer.search(cwd));
+/**
+ * Searchs config files in the specified directory. Returns an empty object when
+ * config files does not exist in the directory.
+ *
+ * @param cwd Path of the working directory.
+ */
+export async function searchConfig(
+  cwd: string = process.cwd()
+): Promise<Config> {
+  try {
+    return await loadConfig(join(cwd, "kosko.toml"));
+  } catch (err) {
+    if (err.code !== "ENOENT") throw err;
+    return {};
+  }
 }
 
 function flatten<T>(...arrays: Array<ReadonlyArray<T> | undefined>): T[] {
   return arrays.reduce((acc = [], item = []) => acc.concat(item), []) as T[];
 }
 
+/**
+ * Returns environment configs merged with global configs.
+ *
+ * @param config Config object.
+ * @param env Environment name.
+ */
 export function getConfig(config: Config, env: string): EnvironmentConfig {
   const { environments = {} } = config;
   const envConfig = environments[env] || {};

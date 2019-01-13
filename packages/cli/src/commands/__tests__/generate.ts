@@ -1,3 +1,4 @@
+import toml from "@iarna/toml";
 import { Config } from "@kosko/config";
 import env from "@kosko/env";
 import { generate, print, PrintFormat } from "@kosko/generate";
@@ -46,10 +47,10 @@ beforeEach(async () => {
   const root = await pkgDir();
   tmpDir = await tmp.dir({ unsafeCleanup: true });
 
-  // Write package.json
+  // Write kosko.tmol
   await writeFile(
-    join(tmpDir.path, "package.json"),
-    JSON.stringify({ kosko: config }, null, "  ")
+    join(tmpDir.path, "kosko.toml"),
+    toml.stringify(config as any)
   );
 
   // Install @kosko/env in the temp folder

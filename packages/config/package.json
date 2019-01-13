@@ -27,12 +27,11 @@
     "node": ">= 6.9.0"
   },
   "dependencies": {
-    "cosmiconfig": "^5.0.7",
+    "@iarna/toml": "^2.2.1",
     "debug": "^4.1.1",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@types/cosmiconfig": "^5.0.3",
     "@types/debug": "^0.0.31",
     "ajv": "^6.6.2",
     "ajv-cli": "^3.0.0",
