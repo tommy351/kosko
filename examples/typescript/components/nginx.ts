@@ -1,5 +1,8 @@
 import { Deployment } from "kubernetes-models/api/apps/v1";
 import { Service } from "kubernetes-models/api/core/v1";
+import env from "@kosko/env";
+
+const params = env.component("nginx");
 
 const metadata = { name: "nginx" };
 const labels = { app: "nginx" };
@@ -7,7 +10,7 @@ const labels = { app: "nginx" };
 const deployment = new Deployment({
   metadata,
   spec: {
-    replicas: 1,
+    replicas: params.replicas,
     selector: {
       matchLabels: labels
     },
@@ -18,13 +21,9 @@ const deployment = new Deployment({
       spec: {
         containers: [
           {
-            image: "nginx",
+            image: params.imageRegistry + "nginx",
             name: "nginx",
-            ports: [
-              {
-                containerPort: 80
-              }
-            ]
+            ports: [{ containerPort: 80 }]
           }
         ]
       }
