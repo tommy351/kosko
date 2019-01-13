@@ -1,7 +1,7 @@
 # Using Babel
 
-Run `kosko generate` with `--require/-r` option.
+Add `@babel/register` to `require` in `kosko.toml`.
 
-```sh
-kosko generate -r @babel/register
+```toml
+require = ["@babel/register"]
 ```

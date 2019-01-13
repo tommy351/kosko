@@ -1,7 +1,7 @@
 # Using TypeScript
 
-Run `kosko generate` with `--require/-r` option.
+Add `ts-node/register` to `require` in `kosko.toml`.
 
-```sh
-kosko generate -r ts-node/register
+```toml
+require = ["ts-node/register"]
 ```
