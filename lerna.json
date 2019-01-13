@@ -3,7 +3,7 @@
   "version": "independent",
   "command": {
     "publish": {
-      "allowBranch": "master"
+      "allowBranch": "release"
     }
   },
   "ignoreChanges": [
