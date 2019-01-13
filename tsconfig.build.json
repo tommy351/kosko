@@ -1,5 +1,10 @@
 {
   "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "sourceMap": true
+  },
   "exclude": [
     "**/__tests__/**",
     "**/__fixtures__/**",
