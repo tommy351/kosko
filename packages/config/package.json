@@ -1,7 +1,7 @@
 {
   "name": "@kosko/config",
   "version": "0.0.1",
-  "description": "Load project configuration.",
+  "description": "Load kosko configuration.",
   "homepage": "https://github.com/tommy351/kosko",
   "repository": {
     "type": "git",
