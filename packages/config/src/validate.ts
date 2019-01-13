@@ -4,6 +4,8 @@ import { ErrorObject } from "ajv";
 const ajvValidate = require("../dist/ajv-validate");
 
 export class ValidationError extends Error {
+  public readonly name = "ValidationError";
+
   constructor(public readonly errors: ErrorObject[]) {
     super(formatErrors(errors));
   }

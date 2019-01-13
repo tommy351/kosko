@@ -32,11 +32,15 @@ export async function loadConfig(path: string): Promise<Config> {
 export async function searchConfig(
   cwd: string = process.cwd()
 ): Promise<Config> {
+  const path = join(cwd, "kosko.toml");
+
   try {
-    return await loadConfig(join(cwd, "kosko.toml"));
+    return await loadConfig(path);
   } catch (err) {
-    if (err.code !== "ENOENT") throw err;
-    return {};
+    if (err.code === "ENOENT") return {};
+
+    debug("Config load failed", err);
+    throw err;
   }
 }
 
