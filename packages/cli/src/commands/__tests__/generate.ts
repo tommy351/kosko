@@ -54,10 +54,10 @@ beforeEach(async () => {
   const root = await pkgDir();
   tmpDir = await tmp.dir({ unsafeCleanup: true });
 
-  // Write kosko.tmol
+  // Write kosko.toml
   await writeFile(
     join(tmpDir.path, "kosko.toml"),
-    toml.stringify(config as any)
+    toml.stringify(config as toml.JsonMap)
   );
 
   // Install @kosko/env in the temp folder

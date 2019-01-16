@@ -18,7 +18,7 @@ function tryRequire(id: string) {
 }
 
 export class Environment {
-  public env: string | undefined;
+  public env?: string;
 
   constructor(public cwd: string) {}
 
