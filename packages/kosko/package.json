@@ -1,6 +1,6 @@
 {
   "name": "kosko",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Write Kubernetes manifests in JavaScript.",
   "homepage": "https://github.com/tommy351/kosko",
   "repository": {
@@ -26,7 +26,7 @@
     "node": ">= 6.9.0"
   },
   "dependencies": {
-    "@kosko/cli": "^0.4.0",
+    "@kosko/cli": "^0.5.0",
     "import-local": "^2.0.0"
   }
 }
