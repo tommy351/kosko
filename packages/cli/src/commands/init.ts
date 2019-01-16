@@ -10,6 +10,8 @@ const debug = Debug("kosko:cli:init");
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
 
+const DEFAULT_CONFIG = `components = ["*"]`;
+
 function exists(path: string) {
   return new Promise(res => fs.exists(path, res));
 }
@@ -94,6 +96,10 @@ export const initCmd: Command<InitArguments> = {
         "kubernetes-models": "^0.2.1"
       }
     });
+
+    const configPath = join(path, "kosko.toml");
+    debug("Writing config", configPath);
+    await writeFile(configPath, DEFAULT_CONFIG);
 
     logger.success("Everything is set up");
   }

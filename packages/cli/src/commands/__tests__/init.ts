@@ -104,4 +104,6 @@ describe("success", () => {
   test("should create templates folder", () => assertDir("templates"));
 
   test("should create package.json", () => assertFile("package.json"));
+
+  test("should create kosko.toml", () => assertFile("kosko.toml"));
 });
