@@ -54,7 +54,10 @@ function flatten<T>(...arrays: Array<ReadonlyArray<T> | undefined>): T[] {
  * @param config Config object.
  * @param env Environment name.
  */
-export function getConfig(config: Config, env: string): EnvironmentConfig {
+export function getConfig(
+  config: Config,
+  env: string
+): Required<EnvironmentConfig> {
   const { environments = {} } = config;
   const envConfig = environments[env] || {};
 
