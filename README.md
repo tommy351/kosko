@@ -31,6 +31,7 @@ npm install
 ```sh
 ├── components
 ├── environments
+├── kosko.toml
 ├── package.json
 └── templates
 ```

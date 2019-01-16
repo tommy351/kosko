@@ -23,7 +23,7 @@ components = ["f"]
 
 ### Global Configs
 
-Global configs are always applied. `--require/-r` arguments are merged with configs. Components in arguments overrides configs.
+Global configs are always applied. `--require/-r` arguments are merged with configs. Components in arguments override configs.
 
 ### Environment Configs
 
