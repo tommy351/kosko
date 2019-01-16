@@ -24,9 +24,7 @@ describe("when the target exists", () => {
 
   test("should throw an error", async () => {
     const args = setLogger({ path: tmpDir.path } as any, logger);
-    await expect(initCmd.handler(args)).rejects.toThrow(
-      "Already exists. Use --force to overwrite existing files."
-    );
+    await expect(initCmd.handler(args)).rejects.toThrow("Already exists");
   });
 
   test("should proceed with --force flag", async () => {

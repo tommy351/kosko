@@ -93,7 +93,8 @@ exports[`when output is invalid should print the error 1`] = `
 Generate Kubernetes manifests
 
 Positionals:
-  components  Components to generate                       [array] [default: []]
+  components  Components to generate. This overrides components set in config
+              file.                                        [array] [default: []]
 
 Global Options:
   --cwd      Path of working directory                   [string] [default: CWD]
@@ -105,10 +106,11 @@ Options:
   --env, -e      Name of environment                                    [string]
   --output, -o   Output format
                             [string] [choices: \\"yaml\\", \\"json\\"] [default: \\"yaml\\"]
-  --require, -r  Require modules                           [array] [default: []]
+  --require, -r  Require modules. Modules set in config file will also be
+                 required.                                 [array] [default: []]
 
 Examples:
-  kosko generate                      Generate all components
+  kosko generate                      Generate components
   kosko generate foo bar              Specify components
   kosko generate foo_*                Use glob syntax
   kosko generate --env foo            Set environment
