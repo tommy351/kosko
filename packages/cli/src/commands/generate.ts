@@ -7,11 +7,12 @@ import {
 import { Environment } from "@kosko/env";
 import { generate, print, PrintFormat } from "@kosko/generate";
 import { requireDefault, resolve } from "@kosko/require";
-import Debug from "debug";
 import { join } from "path";
 import { Command, RootArguments } from "../cli/command";
+import Debug from "../cli/debug";
+import { CLIError } from "../cli/error";
 
-const debug = Debug("kosko:cli:generate");
+const debug = Debug.extend("generate");
 
 async function localRequire(id: string, cwd: string) {
   debug("Finding module %s in %s", id, cwd);
@@ -24,20 +25,18 @@ async function importEnv(cwd: string): Promise<Environment> {
   return localRequire("@kosko/env", cwd);
 }
 
-function flatten<T>(...arrays: Array<ReadonlyArray<T> | undefined>): T[] {
-  return arrays.reduce((acc = [], item = []) => acc.concat(item), []) as T[];
-}
-
 function resolveConfig(
   base: Config,
   args: GenerateArguments
-): EnvironmentConfig {
-  const config = args.env ? getConfig(base, args.env) : base;
-  const components = flatten(config.components, args.components);
+): Required<EnvironmentConfig> {
+  const { components = [], require = [] } = args.env
+    ? getConfig(base, args.env)
+    : base;
 
   return {
-    components: components.length ? components : ["*"],
-    require: flatten(config.require, args.require)
+    components:
+      args.components && args.components.length ? args.components : components,
+    require: [...require, ...(args.require || [])]
   };
 }
 
@@ -67,14 +66,16 @@ export const generateCmd: Command<GenerateArguments> = {
       })
       .option("require", {
         type: "array",
-        describe: "Require modules",
+        describe:
+          "Require modules. Modules set in config file will also be required.",
         default: [],
         alias: "r"
       })
       .positional("components", {
-        describe: "Components to generate"
+        describe:
+          "Components to generate. This overrides components set in config file."
       })
-      .example("$0 generate", "Generate all components")
+      .example("$0 generate", "Generate components")
       .example("$0 generate foo bar", "Specify components")
       .example("$0 generate foo_*", "Use glob syntax")
       .example("$0 generate --env foo", "Set environment")
@@ -83,6 +84,13 @@ export const generateCmd: Command<GenerateArguments> = {
   async handler(args) {
     // Load config
     const config = resolveConfig(await searchConfig(args.cwd), args);
+
+    if (!config.components.length) {
+      throw new CLIError("No components are given", {
+        output:
+          "No components are given. Set components in a config file or in arguments."
+      });
+    }
 
     // Set env
     if (args.env) {
@@ -93,20 +101,21 @@ export const generateCmd: Command<GenerateArguments> = {
     }
 
     // Require external modules
-    if (config.require) {
-      for (const id of config.require) {
-        await localRequire(id, args.cwd);
-      }
+    for (const id of config.require) {
+      await localRequire(id, args.cwd);
     }
-
-    // Read components from raw parser output to support multiple arguments
-    const components = config.components || [];
 
     // Generate manifests
     const result = await generate({
       path: join(args.cwd, "components"),
-      components
+      components: config.components
     });
+
+    if (!result.manifests.length) {
+      throw new CLIError("No manifests are exported from components", {
+        output: `No manifests are exported from components. Make sure there are exported manifests in components.`
+      });
+    }
 
     print(result, {
       format: args.output,

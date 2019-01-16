@@ -23,22 +23,10 @@ components = ["f"]
 
 ### Global Configs
 
-Global configs are always applied. You can still specify additional arguments when running `kosko generate`. Configs and arguments are merged. For example:
-
-```js
-// kosko generate x y --require z
-require = ["a", "z"];
-components = ["b", "x", "y"];
-```
+Global configs are always applied. `--require/-r` arguments are merged with configs. Components in arguments overrides configs.
 
 ### Environment Configs
 
-Environment configs are applied when environment (`--env/-e`) is specified. For example:
-
-```js
-// kosko generate x y --require z --env dev
-require = ["a", "c", "z"];
-components = ["b", "d", "x", "y"];
-```
+Environment configs are applied when environment (`--env/-e`) is specified.
 
 [toml]: https://github.com/toml-lang/toml

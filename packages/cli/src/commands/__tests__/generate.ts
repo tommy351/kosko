@@ -1,7 +1,7 @@
 import toml from "@iarna/toml";
 import { Config } from "@kosko/config";
 import env from "@kosko/env";
-import { generate, print, PrintFormat } from "@kosko/generate";
+import { generate, print, PrintFormat, Result } from "@kosko/generate";
 import fs from "fs";
 import makeDir from "make-dir";
 import { join } from "path";
@@ -14,7 +14,7 @@ import { setLogger } from "../../cli/command";
 import { GenerateArguments, generateCmd } from "../generate";
 
 const writeFile = promisify(fs.writeFile);
-const readDir = promisify(fs.readdir);
+const readFile = promisify(fs.readFile);
 
 jest.mock("@kosko/generate");
 jest.mock("@kosko/env");
@@ -23,18 +23,25 @@ const logger = new Signale({ disabled: true });
 let config: Config;
 let args: Partial<GenerateArguments>;
 let tmpDir: tmp.DirectoryResult;
-
-function newContext() {
-  return setLogger({ cwd: tmpDir.path, ...args } as any, logger);
-}
+let result: Result;
 
 async function createFakeModule(id: string) {
   const dir = join(tmpDir.path, "node_modules", id);
   await makeDir(dir);
   await writeFile(
     join(dir, "index.js"),
-    `require('fs').writeFileSync(__dirname + '/../../${id}', '');`
+    `require('fs').appendFileSync(__dirname + '/../../fakeModules', '${id},');`
   );
+}
+
+async function getLoadedFakeModules() {
+  const content = await readFile(join(tmpDir.path, "fakeModules"), "utf8");
+  return content.split(",").filter(Boolean);
+}
+
+async function execute() {
+  const ctx = setLogger({ cwd: tmpDir.path, ...args } as any, logger);
+  await generateCmd.handler(ctx);
 }
 
 beforeEach(async () => {
@@ -58,39 +65,64 @@ beforeEach(async () => {
     join(root!, "packages", "env"),
     join(tmpDir.path, "node_modules", "@kosko", "env")
   );
+
+  // Mock result
+  (generate as jest.Mock).mockResolvedValueOnce(result);
 });
 
 afterEach(() => tmpDir.cleanup());
 
-describe("given output", () => {
+describe("without components", () => {
   beforeAll(() => {
-    args = { output: PrintFormat.YAML };
+    args = {};
     config = {};
   });
 
+  test("should throw an error", async () => {
+    await expect(execute()).rejects.toThrow("No components are given");
+  });
+});
+
+describe("with components in config", () => {
+  beforeAll(() => {
+    args = {};
+    config = {
+      components: ["a", "b"],
+      require: ["fake1", "fake2"],
+      environments: {
+        dev: {
+          components: ["c", "d"],
+          require: ["fake3", "fake4"]
+        }
+      }
+    };
+    result = {
+      manifests: [{ path: "", data: {} }]
+    };
+  });
+
   beforeEach(async () => {
-    await generateCmd.handler(newContext());
+    const modules = [
+      ...(args.require || []),
+      ...config.require!,
+      ...config.environments!.dev.require!
+    ];
+
+    for (const id of modules) {
+      await createFakeModule(id);
+    }
+
+    await execute();
   });
 
   test("should call generate once", () => {
     expect(generate).toHaveBeenCalledTimes(1);
   });
 
-  test("should call generate with default components", () => {
+  test("should call generate with given components", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
-      components: ["*"]
-    });
-  });
-
-  test("should call print once", () => {
-    expect(print).toHaveBeenCalledTimes(1);
-  });
-
-  test("should call print with args", () => {
-    expect(print).toHaveBeenCalledWith(undefined, {
-      format: PrintFormat.YAML,
-      writer: process.stdout
+      components: ["a", "b"]
     });
   });
 
@@ -98,170 +130,105 @@ describe("given output", () => {
     expect(env.env).toBeUndefined();
   });
 
-  describe("and env", () => {
+  test("should require modules in config", async () => {
+    expect(await getLoadedFakeModules()).toEqual(config.require);
+  });
+
+  describe("given output", () => {
     beforeAll(() => {
-      args.env = "foo";
+      args.output = PrintFormat.YAML;
+    });
+
+    test("should call print once", () => {
+      expect(print).toHaveBeenCalledTimes(1);
+    });
+
+    test("should call print with given format", () => {
+      expect(print).toHaveBeenCalledWith(result, {
+        format: PrintFormat.YAML,
+        writer: process.stdout
+      });
+    });
+  });
+
+  describe("given env", () => {
+    beforeAll(() => {
+      args.env = "dev";
+    });
+
+    test("should add environment specific components", () => {
+      expect(generate).toHaveBeenCalledWith({
+        path: join(tmpDir.path, "components"),
+        components: ["a", "b", "c", "d"]
+      });
     });
 
     test("should set env", () => {
-      expect(env.env).toEqual("foo");
+      expect(env.env).toEqual("dev");
     });
 
     test("should set cwd", () => {
       expect(env.cwd).toEqual(tmpDir.path);
     });
-  });
-});
 
-describe("given components", () => {
-  beforeAll(() => {
-    args = { components: ["a", "b"] };
-    config = {};
-  });
-
-  beforeEach(async () => {
-    await generateCmd.handler(newContext());
-  });
-
-  test("should generate with components from args", () => {
-    expect(generate).toHaveBeenCalledWith({
-      path: join(tmpDir.path, "components"),
-      components: ["a", "b"]
-    });
-  });
-
-  describe("and config", () => {
-    beforeAll(() => {
-      config = {
-        components: ["c", "d"],
-        environments: {
-          dev: {
-            components: ["e", "f"]
-          }
-        }
-      };
-    });
-
-    test("should add components in global config", () => {
-      expect(generate).toHaveBeenCalledWith({
-        path: join(tmpDir.path, "components"),
-        components: ["c", "d", "a", "b"]
-      });
-    });
-
-    describe("and env", () => {
-      beforeAll(() => {
-        args.env = "dev";
-      });
-
-      test("should add components in env config", () => {
-        expect(generate).toHaveBeenCalledWith({
-          path: join(tmpDir.path, "components"),
-          components: ["c", "d", "e", "f", "a", "b"]
-        });
-      });
-    });
-  });
-});
-
-describe("given require", () => {
-  beforeAll(async () => {
-    args = {
-      require: ["fake-mod1", "fake-mod2"]
-    };
-    config = {};
-  });
-
-  describe("when module exists", () => {
-    let files: string[];
-
-    beforeEach(async () => {
-      for (const id of args.require || []) {
-        await createFakeModule(id);
-      }
-
-      await generateCmd.handler(newContext());
-      files = await readDir(tmpDir.path);
-    });
-
-    test("should require modules in args", () => {
-      expect(files).toEqual(expect.arrayContaining(args.require!));
-    });
-  });
-
-  describe("when module does not exist", () => {
-    test("should require all modules", async () => {
-      await expect(generateCmd.handler(newContext())).rejects.toThrow(
-        /Cannot find module/
-      );
-    });
-  });
-
-  describe("and config", () => {
-    let files: string[];
-
-    beforeAll(() => {
-      config = {
-        require: ["fake-mod3", "fake-mod4"],
-        environments: {
-          dev: {
-            require: ["fake-mod5", "fake-mod6"]
-          }
-        }
-      };
-    });
-
-    beforeEach(async () => {
-      const modules = [
-        ...args.require!,
+    test("should also require modules in env config", async () => {
+      expect(await getLoadedFakeModules()).toEqual([
         ...config.require!,
         ...config.environments!.dev.require!
-      ];
+      ]);
+    });
+  });
 
-      for (const id of modules) {
-        await createFakeModule(id);
-      }
-
-      await generateCmd.handler(newContext());
-      files = await readDir(tmpDir.path);
+  describe("given require in arguments", () => {
+    beforeAll(() => {
+      args.require = ["fake5", "fake6"];
+      args.env = undefined;
     });
 
-    test("should require modules in args", () => {
-      expect(files).toEqual(expect.arrayContaining(args.require!));
+    test("should also require modules in arguments", async () => {
+      expect(await getLoadedFakeModules()).toEqual([
+        ...config.require!,
+        ...args.require!
+      ]);
     });
 
-    test("should require modules in global config", () => {
-      expect(files).toEqual(
-        expect.arrayContaining(config.require! as string[])
-      );
-    });
-
-    test("should not require modules in env config", () => {
-      expect(files).not.toEqual(
-        expect.arrayContaining(config.environments!.dev.require! as string[])
-      );
-    });
-
-    describe("and env", () => {
+    describe("with env", () => {
       beforeAll(() => {
         args.env = "dev";
       });
 
-      test("should require modules in args", () => {
-        expect(files).toEqual(expect.arrayContaining(args.require!));
-      });
-
-      test("should require modules in global config", () => {
-        expect(files).toEqual(
-          expect.arrayContaining(config.require! as string[])
-        );
-      });
-
-      test("should require modules in env config", () => {
-        expect(files).toEqual(
-          expect.arrayContaining(config.environments!.dev.require! as string[])
-        );
+      test("should also require modules in arguments", async () => {
+        expect(await getLoadedFakeModules()).toEqual([
+          ...config.require!,
+          ...config.environments!.dev.require!,
+          ...args.require!
+        ]);
       });
     });
+  });
+
+  describe("override components in arguments", () => {
+    beforeAll(() => {
+      args.components = ["e", "f"];
+    });
+
+    test("should call generate with given components", () => {
+      expect(generate).toHaveBeenCalledWith({
+        path: join(tmpDir.path, "components"),
+        components: ["e", "f"]
+      });
+    });
+  });
+});
+
+describe("when no manifests are exported", () => {
+  beforeAll(() => {
+    args = {};
+    config = { components: ["*"] };
+    result = { manifests: [] };
+  });
+
+  test("should throw an error", async () => {
+    await expect(execute()).rejects.toThrow("No manifests are exported");
   });
 });

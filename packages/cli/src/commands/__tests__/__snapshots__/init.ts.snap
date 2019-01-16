@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`success should create kosko.toml 1`] = `"components = [\\"*\\"]"`;
+
 exports[`success should create package.json 1`] = `
 "{
   \\"dependencies\\": {
