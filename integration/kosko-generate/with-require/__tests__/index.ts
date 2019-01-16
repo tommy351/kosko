@@ -2,25 +2,18 @@ import execa from "execa";
 import { dirname } from "path";
 import { runCLI } from "../../../run";
 
-let args: string[];
 let result: execa.ExecaReturns;
 
 beforeEach(async () => {
-  result = await runCLI(args, {
+  result = await runCLI(["generate"], {
     cwd: dirname(__dirname)
   });
 });
 
-describe("given require = ts-node/register", () => {
-  beforeAll(() => {
-    args = ["generate"];
-  });
+test("should return status code 0", () => {
+  expect(result.code).toEqual(0);
+});
 
-  test("should return status code 0", () => {
-    expect(result.code).toEqual(0);
-  });
-
-  test("should import ts files", () => {
-    expect(result.stdout).toMatchSnapshot();
-  });
+test("should import ts files", () => {
+  expect(result.stdout).toMatchSnapshot();
 });

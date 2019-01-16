@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`given require = ts-node/register should import ts files 1`] = `
+exports[`should import ts files 1`] = `
 "---
 apiVersion: apps/v1
 kind: Deployment
