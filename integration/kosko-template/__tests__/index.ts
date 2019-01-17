@@ -1,10 +1,11 @@
 import execa from "execa";
-import { join } from "path";
-import tmp from "tmp-promise";
 import fs from "fs";
-import { promisify } from "util";
-import symlinkDir from "symlink-dir";
+import { join } from "path";
 import pkgDir from "pkg-dir";
+import symlinkDir from "symlink-dir";
+import tempDir from "temp-dir";
+import tmp from "tmp-promise";
+import { promisify } from "util";
 
 const copyFile = promisify(fs.copyFile);
 const readFile = promisify(fs.readFile);
@@ -16,7 +17,7 @@ let tmpDir: tmp.DirectoryResult;
 
 beforeEach(async () => {
   const root = await pkgDir();
-  tmpDir = await tmp.dir({ unsafeCleanup: true });
+  tmpDir = await tmp.dir({ dir: tempDir, unsafeCleanup: true });
 
   const src = join(__dirname, "..", "bin.js");
   const dst = join(tmpDir.path, "bin.js");
@@ -29,7 +30,10 @@ beforeEach(async () => {
 
   result = await execa(dst, args, {
     ...options,
-    cwd: tmpDir.path
+    cwd: tmpDir.path,
+    env: {
+      LC_ALL: "en_US"
+    }
   });
 });
 

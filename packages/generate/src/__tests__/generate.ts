@@ -1,11 +1,12 @@
 /// <reference types="jest-extended"/>
 import { generate } from "../generate";
-import tmpPromise from "tmp-promise";
+import tmp from "tmp-promise";
 import { Result } from "../base";
 import fs from "fs";
 import { promisify } from "util";
 import makeDir from "make-dir";
 import { join, dirname } from "path";
+import tempDir from "temp-dir";
 
 const writeFile = promisify(fs.writeFile);
 
@@ -19,13 +20,13 @@ interface File {
   content: string;
 }
 
-let tmpDir: tmpPromise.DirectoryResult;
+let tmpDir: tmp.DirectoryResult;
 let tmpFiles: File[];
 let components: string[];
 let result: Result;
 
 beforeEach(async () => {
-  tmpDir = await tmpPromise.dir({ unsafeCleanup: true });
+  tmpDir = await tmp.dir({ dir: tempDir, unsafeCleanup: true });
 
   for (const file of tmpFiles) {
     const path = join(tmpDir.path, file.path);

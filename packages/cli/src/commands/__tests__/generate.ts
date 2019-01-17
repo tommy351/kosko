@@ -8,6 +8,7 @@ import { join } from "path";
 import pkgDir from "pkg-dir";
 import { Signale } from "signale";
 import symlinkDir from "symlink-dir";
+import tempDir from "temp-dir";
 import tmp from "tmp-promise";
 import { promisify } from "util";
 import { setLogger } from "../../cli/command";
@@ -52,7 +53,7 @@ beforeEach(async () => {
   env.env = undefined;
 
   const root = await pkgDir();
-  tmpDir = await tmp.dir({ unsafeCleanup: true });
+  tmpDir = await tmp.dir({ dir: tempDir, unsafeCleanup: true });
 
   // Write kosko.toml
   await writeFile(

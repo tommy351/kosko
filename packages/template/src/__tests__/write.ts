@@ -1,15 +1,16 @@
-import tmpPromise from "tmp-promise";
-import { writeFiles } from "../write";
-import { File } from "../template";
 import fs from "fs";
-import { promisify } from "util";
 import { join } from "path";
+import tempDir from "temp-dir";
+import tmp from "tmp-promise";
+import { promisify } from "util";
+import { File } from "../template";
+import { writeFiles } from "../write";
 
 jest.mock("signale");
 
 const readFile = promisify(fs.readFile);
 
-let tmpDir: tmpPromise.DirectoryResult;
+let tmpDir: tmp.DirectoryResult;
 let files: File[];
 
 function readTmpFile(path: string) {
@@ -17,7 +18,7 @@ function readTmpFile(path: string) {
 }
 
 beforeEach(async () => {
-  tmpDir = await tmpPromise.dir({ unsafeCleanup: true });
+  tmpDir = await tmp.dir({ dir: tempDir, unsafeCleanup: true });
   await writeFiles(tmpDir.path, files);
 });
 

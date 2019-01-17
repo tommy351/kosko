@@ -1,6 +1,7 @@
 import fs from "fs";
 import { join } from "path";
 import { Signale } from "signale";
+import tempDir from "temp-dir";
 import tmp from "tmp-promise";
 import { promisify } from "util";
 import { setLogger } from "../../cli/command";
@@ -17,7 +18,7 @@ describe("when the target exists", () => {
   let tmpDir: tmp.DirectoryResult;
 
   beforeEach(async () => {
-    tmpDir = await tmp.dir({ unsafeCleanup: true });
+    tmpDir = await tmp.dir({ dir: tempDir, unsafeCleanup: true });
   });
 
   afterEach(() => tmpDir.cleanup());

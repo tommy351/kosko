@@ -5,8 +5,11 @@ import { getLogger, parse, setLogger, wrapHandler } from "../command";
 
 jest.mock("signale");
 
-// tslint:disable-next-line:no-var-requires
-const yargs = require("yargs/yargs");
+function newYargs(): Argv {
+  return jest
+    .requireActual("yargs/yargs")()
+    .detectLocale(false);
+}
 
 describe("getLogger", () => {
   describe("when logger is set", () => {
@@ -39,7 +42,7 @@ describe("parse", () => {
   describe("when parse failed", () => {
     describe("and err is defined", () => {
       test("should throw an error", async () => {
-        await expect(parse(yargs().demandCommand(), [])).rejects.toThrow(
+        await expect(parse(newYargs().demandCommand(), [])).rejects.toThrow(
           "Not enough non-option arguments: got 0, need at least 1"
         );
       });
@@ -48,7 +51,7 @@ describe("parse", () => {
     describe("and err is undefined", () => {
       test("should throw an error", async () => {
         await expect(
-          parse(yargs().demandCommand(), ["--help"])
+          parse(newYargs().demandCommand(), ["--help"])
         ).rejects.toThrow("CLI error");
       });
     });
@@ -61,7 +64,7 @@ describe("parse", () => {
 
       beforeEach(() => {
         handler = jest.fn();
-        input = yargs().command({
+        input = newYargs().command({
           command: "foo",
           handler: wrapHandler(handler)
         });
@@ -129,7 +132,7 @@ describe("parse", () => {
 
     describe("without subcommand", () => {
       test("should resolve", async () => {
-        await parse(yargs(), []);
+        await parse(newYargs(), []);
       });
     });
   });
