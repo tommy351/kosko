@@ -95,6 +95,12 @@ describe("with components in config", () => {
           components: ["c", "d"],
           require: ["fake3", "fake4"]
         }
+      },
+      paths: {
+        environment: {
+          global: "foo",
+          component: "bar"
+        }
       }
     };
     result = {
@@ -170,6 +176,14 @@ describe("with components in config", () => {
 
     test("should set cwd", () => {
       expect(env.cwd).toEqual(tmpDir.path);
+    });
+
+    test("should set global path", () => {
+      expect(env.paths.global).toEqual(config.paths!.environment!.global);
+    });
+
+    test("should set component path", () => {
+      expect(env.paths.component).toEqual(config.paths!.environment!.component);
     });
 
     test("should also require modules in env config", async () => {
