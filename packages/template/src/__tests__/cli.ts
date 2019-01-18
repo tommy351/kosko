@@ -16,7 +16,7 @@ jest.mock("../write.ts");
 beforeEach(() => jest.resetAllMocks());
 
 describe("when generate resolved", () => {
-  const template: Template<any> = {
+  const template: Template<{ foo: string; bar: number }> = {
     description: "This is a fake template.",
     options: {
       foo: { type: "string", description: "option foo" },

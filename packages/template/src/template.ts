@@ -1,37 +1,31 @@
-import { Options } from "yargs";
+import yargs from "yargs";
 
 export interface Template<T> {
   description?: string;
-  options?: { [P in keyof T]: InferredOptions };
+  options?: { [P in keyof T]: Options<T[P], T> };
   generate(options: T): Promise<Result>;
 }
 
-type DefaultValue<T> = T | (() => T | undefined);
+type OptionKeyRefs<T> =
+  | T
+  | ReadonlyArray<T>
+  | { [key: string]: T | ReadonlyArray<T> };
 
-type TypelessOptions = Pick<
-  Options,
-  Exclude<
-    keyof Options,
-    "type" | "array" | "boolean" | "count" | "number" | "string"
-  >
->;
-
-interface TypedOptions<T> extends TypelessOptions {
+type Options<T, O> = yargs.Options & {
   coerce?: (arg: any) => T;
-  default?: DefaultValue<T>;
-}
-
-type InferredOptions =
-  | { type: "string" } & TypedOptions<string>
-  | { string: true } & TypedOptions<string>
-  | { type: "number" } & TypedOptions<number>
-  | { number: true } & TypedOptions<number>
-  | { type: "array" } & TypedOptions<string[]>
-  | { array: true } & TypedOptions<string[]>
-  | { type: "count" } & TypedOptions<number>
-  | { count: true } & TypedOptions<number>
-  | { type: "boolean" } & TypedOptions<boolean>
-  | { boolean: true } & TypedOptions<boolean>;
+  choices?: ReadonlyArray<T>;
+  default?: T | (() => T | undefined);
+  conflicts?: OptionKeyRefs<keyof O>;
+  implies?: OptionKeyRefs<keyof O>;
+} & (T extends string
+    ? ({ type: "string" } | { string: true })
+    : T extends number
+    ? ({ type: "number" | "count" } | { number: true } | { count: true })
+    : T extends boolean
+    ? ({ type: "boolean" } | { boolean: true })
+    : T extends any[]
+    ? ({ type: "array" } | { array: true })
+    : {});
 
 export interface Result {
   files: ReadonlyArray<File>;
