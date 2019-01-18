@@ -8,3 +8,7 @@ components = ["f", "g"]
 [environments.prod]
 require = ["h"]
 components = ["i", "j"]
+
+[paths.environment]
+global = "k"
+component = "l"

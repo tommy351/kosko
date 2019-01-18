@@ -7,5 +7,17 @@ export interface EnvironmentConfig {
 
 export interface Config extends EnvironmentConfig {
   /** Environment configs. */
-  readonly environments?: { [key: string]: EnvironmentConfig };
+  readonly environments?: {
+    readonly [key: string]: EnvironmentConfig;
+  };
+
+  /** Customize paths. */
+  readonly paths?: {
+    readonly environment?: {
+      /** Path to global environment files. */
+      readonly global?: string;
+      /** Path to component environment files. */
+      readonly component?: string;
+    };
+  };
 }
