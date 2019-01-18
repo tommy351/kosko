@@ -1,1 +1,1 @@
-module.exports = { bar: "baz" };
+module.exports = { bar: __filename };
