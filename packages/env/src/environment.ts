@@ -3,6 +3,7 @@ import { requireDefault } from "@kosko/require";
 import Debug from "debug";
 
 const debug = Debug("kosko:env");
+const rTemplate = /#\{(\w+)\}/g;
 
 function tryRequire(id: string) {
   try {
@@ -17,8 +18,17 @@ function tryRequire(id: string) {
   }
 }
 
+export interface Paths {
+  global: string;
+  component: string;
+}
+
 export class Environment {
   public env?: string;
+  public paths: Paths = {
+    global: "environments/#{environment}",
+    component: "environments/#{environment}/#{component}"
+  };
 
   constructor(public cwd: string) {}
 
@@ -28,29 +38,35 @@ export class Environment {
    * If env is not set or require failed, returns an empty object.
    */
   public global() {
-    const envDir = this.getEnvDir();
-    if (!envDir) return {};
-    return tryRequire(envDir);
+    return this.require(this.paths.global);
   }
 
   /**
-   * Returns component variables merge with global variables.
+   * Returns component variables merged with global variables.
    *
    * If env is not set or require failed, returns an empty object.
    *
    * @param name Component name
    */
   public component(name: string) {
-    const envDir = this.getEnvDir();
-    if (!envDir) return {};
-
     return {
       ...this.global(),
-      ...tryRequire(join(envDir, name))
+      ...this.require(this.paths.component, name)
     };
   }
 
-  private getEnvDir() {
-    return this.env && join(this.cwd, "environments", this.env);
+  private require(template: string, component?: string) {
+    if (!this.env) return {};
+
+    const data: any = {
+      environment: this.env,
+      component
+    };
+
+    const path = template.replace(rTemplate, (s, key) => {
+      return data[key];
+    });
+
+    return tryRequire(join(this.cwd, path));
   }
 }

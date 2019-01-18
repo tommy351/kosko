@@ -33,6 +33,16 @@ Object {
     Symbol(type): Symbol(table),
     Symbol(declared): false,
   },
+  "paths": Object {
+    "environment": Object {
+      "component": "l",
+      "global": "k",
+      Symbol(type): Symbol(table),
+      Symbol(declared): true,
+    },
+    Symbol(type): Symbol(table),
+    Symbol(declared): false,
+  },
   "require": Array [
     "a",
   ],
@@ -68,6 +78,16 @@ Object {
       "require": Array [
         "h",
       ],
+      Symbol(type): Symbol(table),
+      Symbol(declared): true,
+    },
+    Symbol(type): Symbol(table),
+    Symbol(declared): false,
+  },
+  "paths": Object {
+    "environment": Object {
+      "component": "l",
+      "global": "k",
       Symbol(type): Symbol(table),
       Symbol(declared): true,
     },

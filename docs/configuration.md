@@ -19,6 +19,10 @@ components = ["d"]
 [environments.prod]
 require = ["e"]
 components = ["f"]
+
+[paths.environment]
+global = "environments/#{environment}"
+component = "environments/#{environment}/#{component}"
 ```
 
 ### Global Configs
@@ -28,5 +32,9 @@ Global configs are always applied. `--require/-r` arguments are merged with conf
 ### Environment Configs
 
 Environment configs are applied when environment (`--env/-e`) is specified.
+
+### Paths
+
+By default, kosko finds environment files in `environments` folder. You can override it by setting `paths.environment`.
 
 [toml]: https://github.com/toml-lang/toml

@@ -84,6 +84,36 @@ describe("when env is set", () => {
       expect(() => env.global()).toThrow();
     });
   });
+
+  describe("with custom paths", () => {
+    beforeEach(() => {
+      env.env = "dev";
+    });
+
+    describe("global", () => {
+      beforeEach(() => {
+        env.paths.global = "foo/#{environment}";
+      });
+
+      test("should load from custom path", () => {
+        expect(env.global()).toEqual(
+          require(join(fixturePath, "foo", env.env!))
+        );
+      });
+    });
+
+    describe("component", () => {
+      beforeEach(() => {
+        env.paths.component = "foo/#{component}/#{environment}";
+      });
+
+      test("should load from custom path", () => {
+        expect(env.component("bar")).toEqual(
+          require(join(fixturePath, "foo", "bar", env.env!))
+        );
+      });
+    });
+  });
 });
 
 describe("when env is unset", () => {
