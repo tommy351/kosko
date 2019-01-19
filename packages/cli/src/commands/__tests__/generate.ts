@@ -90,6 +90,7 @@ describe("with components in config", () => {
     config = {
       components: ["a", "b"],
       require: ["fake1", "fake2"],
+      extensions: ["x", "y", "z"],
       environments: {
         dev: {
           components: ["c", "d"],
@@ -129,7 +130,8 @@ describe("with components in config", () => {
   test("should call generate with given components", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
-      components: ["a", "b"]
+      components: ["a", "b"],
+      extensions: ["x", "y", "z"]
     });
   });
 
@@ -166,7 +168,8 @@ describe("with components in config", () => {
     test("should add environment specific components", () => {
       expect(generate).toHaveBeenCalledWith({
         path: join(tmpDir.path, "components"),
-        components: ["a", "b", "c", "d"]
+        components: ["a", "b", "c", "d"],
+        extensions: ["x", "y", "z"]
       });
     });
 
@@ -230,7 +233,8 @@ describe("with components in config", () => {
     test("should call generate with given components", () => {
       expect(generate).toHaveBeenCalledWith({
         path: join(tmpDir.path, "components"),
-        components: ["e", "f"]
+        components: ["e", "f"],
+        extensions: ["x", "y", "z"]
       });
     });
   });

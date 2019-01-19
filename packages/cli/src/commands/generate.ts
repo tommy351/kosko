@@ -84,7 +84,10 @@ export const generateCmd: Command<GenerateArguments> = {
   async handler(args) {
     // Load config
     const globalConfig = await searchConfig(args.cwd);
-    const config = resolveConfig(globalConfig, args);
+    const config = {
+      ...globalConfig,
+      ...resolveConfig(globalConfig, args)
+    };
 
     if (!config.components.length) {
       throw new CLIError("No components are given", {
@@ -100,8 +103,8 @@ export const generateCmd: Command<GenerateArguments> = {
       env.cwd = args.cwd;
       env.env = args.env;
 
-      if (globalConfig.paths && globalConfig.paths.environment) {
-        const paths = globalConfig.paths.environment;
+      if (config.paths && config.paths.environment) {
+        const paths = config.paths.environment;
         if (paths.global) env.paths.global = paths.global;
         if (paths.component) env.paths.component = paths.component;
       }
@@ -117,7 +120,8 @@ export const generateCmd: Command<GenerateArguments> = {
     // Generate manifests
     const result = await generate({
       path: join(args.cwd, "components"),
-      components: config.components
+      components: config.components,
+      extensions: config.extensions
     });
 
     if (!result.manifests.length) {
