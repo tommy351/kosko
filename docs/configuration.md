@@ -10,6 +10,7 @@ The following is a full example of a configuration file. Config files must be wr
 # Global configs
 require = ["a"]
 components = ["b"]
+extensions = ["js", "json"]
 
 # Environment configs
 [environments.dev]
@@ -32,6 +33,10 @@ Global configs are always applied. `--require/-r` arguments are merged with conf
 ### Environment Configs
 
 Environment configs are applied when environment (`--env/-e`) is specified.
+
+### Extensions
+
+File extensions of components. It's inferred from [`require.extensions`](https://nodejs.org/api/modules.html) by default. You don't have to set it manually.
 
 ### Paths
 

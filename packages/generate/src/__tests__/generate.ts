@@ -1,5 +1,5 @@
 /// <reference types="jest-extended"/>
-import { generate } from "../generate";
+import { generate, GenerateOptions } from "../generate";
 import tmp from "tmp-promise";
 import { Result } from "../base";
 import fs from "fs";
@@ -7,13 +7,11 @@ import { promisify } from "util";
 import makeDir from "make-dir";
 import { join, dirname } from "path";
 import tempDir from "temp-dir";
+import { getExtensions } from "../extensions";
 
 const writeFile = promisify(fs.writeFile);
 
-jest.mock("../requireExtensions.ts", () => ({
-  ".js": {},
-  ".json": {}
-}));
+jest.mock("../extensions.ts");
 
 interface File {
   path: string;
@@ -22,7 +20,7 @@ interface File {
 
 let tmpDir: tmp.DirectoryResult;
 let tmpFiles: File[];
-let components: string[];
+let options: Pick<GenerateOptions, Exclude<keyof GenerateOptions, "path">>;
 let result: Result;
 
 beforeEach(async () => {
@@ -34,9 +32,11 @@ beforeEach(async () => {
     await writeFile(path, file.content);
   }
 
+  (getExtensions as jest.Mock).mockImplementation(() => ["js", "json"]);
+
   result = await generate({
-    path: tmpDir.path,
-    components
+    ...options,
+    path: tmpDir.path
   });
 });
 
@@ -46,7 +46,9 @@ afterEach(async () => {
 
 describe("given the wildcard pattern", () => {
   beforeAll(() => {
-    components = ["*"];
+    options = {
+      components: ["*"]
+    };
   });
 
   describe("and one file", () => {
@@ -159,7 +161,9 @@ exports.default = {foo: "bar"};`
 
 describe("given a pattern without an extension", () => {
   beforeAll(() => {
-    components = ["foo"];
+    options = {
+      components: ["foo"]
+    };
   });
 
   describe("and two JS files", () => {
@@ -202,7 +206,9 @@ describe("given a pattern without an extension", () => {
 
 describe("given multiple patterns", () => {
   beforeAll(() => {
-    components = ["a*", "b*"];
+    options = {
+      components: ["a*", "b*"]
+    };
   });
 
   describe("and three files", () => {
@@ -225,5 +231,33 @@ describe("given multiple patterns", () => {
         }
       ]);
     });
+  });
+});
+
+describe("given extensions", () => {
+  beforeAll(() => {
+    options = {
+      components: ["*"],
+      extensions: ["foo", "bar"]
+    };
+
+    tmpFiles = [
+      { path: "a.foo", content: "module.exports = {foo: 'a'}" },
+      { path: "b.bar", content: "module.exports = {bar: 'b'}" },
+      { path: "c.js", content: "module.exports = {}" }
+    ];
+  });
+
+  test("should load files with the given extensions", () => {
+    expect(result.manifests).toIncludeAllMembers([
+      {
+        path: join(tmpDir.path, "a.foo"),
+        data: { foo: "a" }
+      },
+      {
+        path: join(tmpDir.path, "b.bar"),
+        data: { bar: "b" }
+      }
+    ]);
   });
 });

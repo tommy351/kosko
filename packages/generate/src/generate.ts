@@ -3,7 +3,7 @@ import Debug from "debug";
 import glob from "fast-glob";
 import { join } from "path";
 import { Result, Manifest } from "./base";
-import requireExtensions from "./requireExtensions";
+import { getExtensions } from "./extensions";
 
 const debug = Debug("kosko:generate");
 
@@ -17,6 +17,11 @@ export interface GenerateOptions {
    * Patterns of component names.
    */
   components: ReadonlyArray<string>;
+
+  /**
+   * File extensions of components.
+   */
+  extensions?: ReadonlyArray<string>;
 }
 
 /**
@@ -38,9 +43,7 @@ export interface GenerateOptions {
  * @param options
  */
 export async function generate(options: GenerateOptions): Promise<Result> {
-  const extensions = Object.keys(requireExtensions)
-    .map(ext => ext.substring(1))
-    .join(",");
+  const extensions = (options.extensions || getExtensions()).join(",");
   const suffix = `?(.{${extensions}})`;
   const patterns = options.components.map(x => x + suffix);
   debug("Component patterns", patterns);
