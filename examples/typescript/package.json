@@ -4,6 +4,7 @@
     "kubernetes-models": "^0.2.3"
   },
   "devDependencies": {
-    "ts-node": "^7.0.1"
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.4"
   }
 }
