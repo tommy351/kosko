@@ -15,7 +15,9 @@
     "clean": "npm run build -- --clean",
     "watch": "npm run build -- --watch",
     "bootstrap": "lerna bootstrap",
-    "test": "jest"
+    "test": "npm-run-all test:*",
+    "test:unit": "jest",
+    "test:integration": "jest --config integration/jest.config.js"
   },
   "husky": {
     "hooks": {
@@ -48,6 +50,7 @@
     "kubernetes-models": "^0.2.2",
     "lerna": "^3.6.0",
     "lint-staged": "^8.1.0",
+    "npm-run-all": "^4.1.5",
     "pkg-dir": "^3.0.0",
     "prettier": "^1.15.3",
     "symlink-dir": "^2.0.2",
