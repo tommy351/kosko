@@ -7,7 +7,7 @@ environment:
 install:
   - ps: Install-Product node $env:nodejs_version
   - npm ci
-  - npm run bootstrap -- --ci
+  - npm run bootstrap
 
 test_script:
   - npm run build
