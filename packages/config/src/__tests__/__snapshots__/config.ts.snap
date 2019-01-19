@@ -33,6 +33,10 @@ Object {
     Symbol(type): Symbol(table),
     Symbol(declared): false,
   },
+  "extensions": Array [
+    "js",
+    "json",
+  ],
   "paths": Object {
     "environment": Object {
       "component": "l",
@@ -84,6 +88,10 @@ Object {
     Symbol(type): Symbol(table),
     Symbol(declared): false,
   },
+  "extensions": Array [
+    "js",
+    "json",
+  ],
   "paths": Object {
     "environment": Object {
       "component": "l",

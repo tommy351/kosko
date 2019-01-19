@@ -1,5 +1,6 @@
 require = ["a"]
 components = ["b", "c"]
+extensions = ["js", "json"]
 
 [environments.dev]
 require = ["d", "e"]

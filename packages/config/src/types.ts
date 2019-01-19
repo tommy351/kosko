@@ -20,4 +20,7 @@ export interface Config extends EnvironmentConfig {
       readonly component?: string;
     };
   };
+
+  /** File extensions of components. */
+  readonly extensions?: ReadonlyArray<string>;
 }
