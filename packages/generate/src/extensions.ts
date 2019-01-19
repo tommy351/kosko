@@ -1,3 +1,5 @@
+import requireExtensions from "./requireExtensions";
+
 export function getExtensions() {
-  return Object.keys(require.extensions).map(ext => ext.substring(1));
+  return Object.keys(requireExtensions).map(ext => ext.substring(1));
 }
