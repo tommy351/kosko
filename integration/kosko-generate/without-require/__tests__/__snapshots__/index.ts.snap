@@ -104,14 +104,14 @@ Global Options:
 
 Options:
   --env, -e      Name of environment                                    [string]
-  --output, -o   Output format
-                            [string] [choices: \\"yaml\\", \\"json\\"] [default: \\"yaml\\"]
   --require, -r  Require modules. Modules set in config file will also be
                  required.                                 [array] [default: []]
-  --validate     Validate generated manifests          [boolean] [default: true]
+  --output, -o   Output format
+                            [string] [choices: \\"yaml\\", \\"json\\"] [default: \\"yaml\\"]
+  --validate     Validate components                   [boolean] [default: true]
 
 Examples:
-  kosko generate                      Generate components
+  kosko generate                      Generate manifests
   kosko generate foo bar              Specify components
   kosko generate foo_*                Use glob syntax
   kosko generate --env foo            Set environment

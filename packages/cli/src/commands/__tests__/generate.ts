@@ -240,7 +240,7 @@ describe("with components in config", () => {
   });
 });
 
-describe.only("when validate = true", () => {
+describe("when validate = true", () => {
   beforeAll(() => {
     args = { validate: true };
     config = { components: ["*"] };
