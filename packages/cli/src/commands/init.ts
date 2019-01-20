@@ -93,8 +93,8 @@ export const initCmd: Command<InitArguments> = {
 
     await updatePkg(join(path, "package.json"), {
       dependencies: {
-        "@kosko/env": "^0.3.0",
-        "kubernetes-models": "^0.2.1"
+        "@kosko/env": "^0.4.1",
+        "kubernetes-models": "^0.3.0"
       }
     });
 
