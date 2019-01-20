@@ -41,6 +41,9 @@ async function getLoadedFakeModules() {
 }
 
 async function execute() {
+  // Mock result
+  (generate as jest.Mock).mockResolvedValueOnce(result);
+
   const ctx = setLogger({ cwd: tmpDir.path, ...args } as any, logger);
   await generateCmd.handler(ctx);
 }
@@ -66,9 +69,6 @@ beforeEach(async () => {
     join(root!, "packages", "env"),
     join(tmpDir.path, "node_modules", "@kosko", "env")
   );
-
-  // Mock result
-  (generate as jest.Mock).mockResolvedValueOnce(result);
 });
 
 afterEach(() => tmpDir.cleanup());
@@ -236,6 +236,60 @@ describe("with components in config", () => {
         components: ["e", "f"],
         extensions: ["x", "y", "z"]
       });
+    });
+  });
+});
+
+describe.only("when validate = true", () => {
+  beforeAll(() => {
+    args = { validate: true };
+    config = { components: ["*"] };
+  });
+
+  describe("and manifest doesn't have validate method", () => {
+    beforeEach(() => {
+      result = {
+        manifests: [{ path: "", data: {} }]
+      };
+    });
+
+    test("should be ok", async () => {
+      await execute();
+    });
+  });
+
+  describe("and manifest validation passed", () => {
+    let validate: jest.Mock;
+
+    beforeEach(async () => {
+      validate = jest.fn();
+      result = {
+        manifests: [{ path: "", data: { validate } }]
+      };
+
+      await execute();
+    });
+
+    test("should call validate once", () => {
+      expect(validate).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe("and manifest validation failed", () => {
+    const err = new Error("validation error");
+    let validate: jest.Mock;
+
+    beforeEach(async () => {
+      validate = jest.fn().mockImplementation(() => {
+        throw err;
+      });
+      result = {
+        manifests: [{ path: "", data: { validate } }]
+      };
+    });
+
+    test("should throw an error", async () => {
+      await expect(execute()).rejects.toThrow(err);
     });
   });
 });

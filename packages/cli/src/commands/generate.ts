@@ -8,7 +8,7 @@ import { Environment } from "@kosko/env";
 import { generate, print, PrintFormat } from "@kosko/generate";
 import { requireDefault, resolve } from "@kosko/require";
 import { join } from "path";
-import { Command, RootArguments } from "../cli/command";
+import { Command, RootArguments, getLogger } from "../cli/command";
 import Debug from "../cli/debug";
 import { CLIError } from "../cli/error";
 
@@ -45,6 +45,7 @@ export interface GenerateArguments extends RootArguments {
   output: PrintFormat;
   require?: string[];
   components?: string[];
+  validate?: boolean;
 }
 
 export const generateCmd: Command<GenerateArguments> = {
@@ -71,6 +72,11 @@ export const generateCmd: Command<GenerateArguments> = {
         default: [],
         alias: "r"
       })
+      .option("validate", {
+        type: "boolean",
+        describe: "Validate generated manifests",
+        default: true
+      })
       .positional("components", {
         describe:
           "Components to generate. This overrides components set in config file."
@@ -82,6 +88,8 @@ export const generateCmd: Command<GenerateArguments> = {
       .example("$0 generate -r ts-node/register", "Require external modules");
   },
   async handler(args) {
+    const logger = getLogger(args);
+
     // Load config
     const globalConfig = await searchConfig(args.cwd);
     const config = {
@@ -128,6 +136,21 @@ export const generateCmd: Command<GenerateArguments> = {
       throw new CLIError("No manifests are exported from components", {
         output: `No manifests are exported from components. Make sure there are exported manifests in components.`
       });
+    }
+
+    if (args.validate) {
+      for (const manifest of result.manifests) {
+        if (manifest.data && typeof manifest.data.validate === "function") {
+          debug("Validating manifest", manifest.path);
+
+          try {
+            await manifest.data.validate();
+          } catch (err) {
+            logger.error("Validation failed", manifest.path);
+            throw err;
+          }
+        }
+      }
     }
 
     print(result, {

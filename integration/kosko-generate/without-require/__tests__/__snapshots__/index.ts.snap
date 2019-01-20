@@ -108,6 +108,7 @@ Options:
                             [string] [choices: \\"yaml\\", \\"json\\"] [default: \\"yaml\\"]
   --require, -r  Require modules. Modules set in config file will also be
                  required.                                 [array] [default: []]
+  --validate     Validate generated manifests          [boolean] [default: true]
 
 Examples:
   kosko generate                      Generate components
