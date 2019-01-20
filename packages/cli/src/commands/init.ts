@@ -61,6 +61,7 @@ export const initCmd: Command<InitArguments> = {
   command: "init [path]",
   describe: "Set up a new kosko directory",
   builder(argv) {
+    /* istanbul ignore next */
     return argv
       .option("force", {
         type: "boolean",
@@ -93,8 +94,8 @@ export const initCmd: Command<InitArguments> = {
 
     await updatePkg(join(path, "package.json"), {
       dependencies: {
-        "@kosko/env": "^0.3.0",
-        "kubernetes-models": "^0.2.1"
+        "@kosko/env": "^0.4.1",
+        "kubernetes-models": "^0.3.0"
       }
     });
 

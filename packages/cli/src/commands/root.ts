@@ -1,8 +1,9 @@
 import { isAbsolute, resolve } from "path";
 import yargs from "yargs";
-import { initCmd } from "./init";
-import { generateCmd } from "./generate";
 import { wrapCommand } from "../cli/command";
+import { generateCmd } from "./generate";
+import { initCmd } from "./init";
+import { validateCmd } from "./validate";
 
 export const rootCmd = yargs
   .scriptName("kosko")
@@ -26,4 +27,5 @@ export const rootCmd = yargs
   .group(["cwd", "silent", "help", "version"], "Global Options:")
   .command(wrapCommand(initCmd))
   .command(wrapCommand(generateCmd))
+  .command(wrapCommand(validateCmd))
   .demandCommand();
