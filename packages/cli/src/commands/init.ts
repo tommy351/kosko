@@ -61,6 +61,7 @@ export const initCmd: Command<InitArguments> = {
   command: "init [path]",
   describe: "Set up a new kosko directory",
   builder(argv) {
+    /* istanbul ignore next */
     return argv
       .option("force", {
         type: "boolean",

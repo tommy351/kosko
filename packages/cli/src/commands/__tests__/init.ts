@@ -5,12 +5,17 @@ import tempDir from "temp-dir";
 import tmp from "tmp-promise";
 import { promisify } from "util";
 import { setLogger } from "../../cli/command";
-import { initCmd, writeJSON } from "../init";
+import { initCmd, writeJSON, InitArguments } from "../init";
 
 const readFile = promisify(fs.readFile);
 const stat = promisify(fs.stat);
 
 const logger = new Signale({ disabled: true });
+
+async function execute(args: Partial<InitArguments>) {
+  const ctx = setLogger(args as any, logger);
+  await initCmd.handler(ctx);
+}
 
 beforeEach(() => jest.resetAllMocks());
 
@@ -24,8 +29,9 @@ describe("when the target exists", () => {
   afterEach(() => tmpDir.cleanup());
 
   test("should throw an error", async () => {
-    const args = setLogger({ path: tmpDir.path } as any, logger);
-    await expect(initCmd.handler(args)).rejects.toThrow("Already exists");
+    await expect(execute({ path: tmpDir.path })).rejects.toThrow(
+      "Already exists"
+    );
   });
 
   test("should proceed with --force flag", async () => {
@@ -46,11 +52,11 @@ describe("when the target exists", () => {
           debug: "3.2.1"
         }
       });
+
+      await execute({ path: tmpDir.path, force: true });
     });
 
     test("should update package.json", async () => {
-      const args = setLogger({ path: tmpDir.path, force: true } as any, logger);
-      await initCmd.handler(args);
       const content = await readFile(pkgPath, "utf8");
       expect(content).toMatchSnapshot();
     });
@@ -67,8 +73,7 @@ describe("when path is not specified", () => {
   afterEach(() => tmpDir.cleanup());
 
   test("should use cwd instead", async () => {
-    const args = setLogger({ cwd: tmpDir.path, force: true } as any, logger);
-    await initCmd.handler(args);
+    await execute({ cwd: tmpDir.path, force: true });
   });
 });
 
@@ -80,8 +85,7 @@ describe("success", () => {
     tmpDir = await tmp.dir({ unsafeCleanup: true });
     path = join(tmpDir.path, "target");
 
-    const args = setLogger({ path } as any, logger);
-    await initCmd.handler(args);
+    await execute({ path });
   });
 
   afterAll(() => tmpDir.cleanup());

@@ -11,6 +11,7 @@ export const validateCmd: Command<ValidateArguments> = {
   command: "validate [components..]",
   describe: "Validate components",
   builder(argv) {
+    /* istanbul ignore next */
     return generateBuilder(argv)
       .example("$0 validate", "Validate components")
       .example("$0 validate foo bar", "Specify components")

@@ -52,6 +52,7 @@ function resolveConfig(
   };
 }
 
+/* istanbul ignore next */
 export function generateBuilder(argv: Argv<RootArguments>) {
   return argv
     .option("env", {
@@ -66,7 +67,6 @@ export function generateBuilder(argv: Argv<RootArguments>) {
       default: [],
       alias: "r"
     })
-
     .positional("components", {
       describe:
         "Components to generate. This overrides components set in config file."
@@ -146,6 +146,7 @@ export const generateCmd: Command<GenerateArguments> = {
   command: "generate [components..]",
   describe: "Generate Kubernetes manifests",
   builder(argv) {
+    /* istanbul ignore next */
     return generateBuilder(argv)
       .option("output", {
         type: "string",
