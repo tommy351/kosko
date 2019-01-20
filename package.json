@@ -62,5 +62,8 @@
     "tslint-config-prettier": "^1.17.0",
     "tslint-plugin-prettier": "^2.0.1",
     "typescript": "^3.2.2"
+  },
+  "signale": {
+    "displayBadge": false
   }
 }
