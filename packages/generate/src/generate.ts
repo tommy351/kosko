@@ -4,6 +4,7 @@ import glob from "fast-glob";
 import { join } from "path";
 import { Result, Manifest } from "./base";
 import { getExtensions } from "./extensions";
+import { ValidationError } from "./error";
 
 const debug = Debug("kosko:generate");
 
@@ -22,6 +23,11 @@ export interface GenerateOptions {
    * File extensions of components.
    */
   extensions?: ReadonlyArray<string>;
+
+  /**
+   * Validate components.
+   */
+  validate?: boolean;
 }
 
 /**
@@ -60,9 +66,22 @@ export async function generate(options: GenerateOptions): Promise<Result> {
     const path = join(options.path, id);
     const mod = [].concat(await getComponentValue(path));
 
-    for (const data of mod) {
+    for (let i = 0; i < mod.length; i++) {
+      const data: any = mod[i];
+
+      if (options.validate) {
+        if (typeof data.validate === "function") {
+          try {
+            await data.validate();
+          } catch (err) {
+            throw new ValidationError(path, i, err);
+          }
+        }
+      }
+
       manifests.push({
         path: require.resolve(path),
+        index: i,
         data
       });
     }
