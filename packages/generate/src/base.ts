@@ -12,6 +12,11 @@ export interface Manifest {
   path: string;
 
   /**
+   * Source index of a manifest.
+   */
+  index: number;
+
+  /**
    * Manifest data.
    */
   data: any;

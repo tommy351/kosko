@@ -105,7 +105,7 @@ describe("with components in config", () => {
       }
     };
     result = {
-      manifests: [{ path: "", data: {} }]
+      manifests: [{ path: "", index: 0, data: {} }]
     };
   });
 
@@ -238,58 +238,18 @@ describe("with components in config", () => {
       });
     });
   });
-});
 
-describe("when validate = true", () => {
-  beforeAll(() => {
-    args = { validate: true };
-    config = { components: ["*"] };
-  });
-
-  describe("and manifest doesn't have validate method", () => {
-    beforeEach(() => {
-      result = {
-        manifests: [{ path: "", data: {} }]
-      };
+  describe("given validate = true", () => {
+    beforeAll(() => {
+      args.validate = true;
     });
 
-    test("should be ok", async () => {
-      await execute();
-    });
-  });
-
-  describe("and manifest validation passed", () => {
-    let validate: jest.Mock;
-
-    beforeEach(async () => {
-      validate = jest.fn();
-      result = {
-        manifests: [{ path: "", data: { validate } }]
-      };
-
-      await execute();
-    });
-
-    test("should call validate once", () => {
-      expect(validate).toHaveBeenCalledTimes(1);
-    });
-  });
-
-  describe("and manifest validation failed", () => {
-    const err = new Error("validation error");
-    let validate: jest.Mock;
-
-    beforeEach(async () => {
-      validate = jest.fn().mockImplementation(() => {
-        throw err;
-      });
-      result = {
-        manifests: [{ path: "", data: { validate } }]
-      };
-    });
-
-    test("should throw an error", async () => {
-      await expect(execute()).rejects.toThrow(err);
+    test("should call generate with validate = true", () => {
+      expect(generate).toHaveBeenCalledWith(
+        expect.objectContaining({
+          validate: true
+        })
+      );
     });
   });
 });

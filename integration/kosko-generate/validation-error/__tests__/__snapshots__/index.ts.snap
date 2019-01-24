@@ -7,15 +7,3 @@ metadata:
   name: foo
 spec: {}"
 `;
-
-exports[`when validate is not set should print the error 1`] = `
-"error                        Validation failed <PROJECT_ROOT>/integration/kosko-generate/validation-error/components/foo.js
-data.spec should have required property 'containers'
-"
-`;
-
-exports[`when validate is true should print the error 1`] = `
-"error                        Validation failed <PROJECT_ROOT>/integration/kosko-generate/validation-error/components/foo.js
-data.spec should have required property 'containers'
-"
-`;
