@@ -1,7 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should print the error 1`] = `
-"error                        Validation failed <PROJECT_ROOT>/integration/kosko-validate/failed/components/foo.js
-data.spec should have required property 'containers'
+"ValidationError: data.spec should have required property 'containers'
+Path: <PROJECT_ROOT>/integration/kosko-validate/failed/components/foo.js
+Index: 0
+    at Object.<anonymous> (<PROJECT_ROOT>/packages/generate/dist/generate.js:53:35)
+    at Generator.next (<anonymous>)
+    at fulfilled (<PROJECT_ROOT>/packages/generate/node_modules/tslib/tslib.js:104:62)
 "
 `;

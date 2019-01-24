@@ -9,7 +9,7 @@ import { generate, print, PrintFormat } from "@kosko/generate";
 import { requireDefault, resolve } from "@kosko/require";
 import { join } from "path";
 import { Argv } from "yargs";
-import { Command, Context, getLogger, RootArguments } from "../cli/command";
+import { Command, Context, RootArguments } from "../cli/command";
 import Debug from "../cli/debug";
 import { CLIError } from "../cli/error";
 
@@ -74,8 +74,6 @@ export function generateBuilder(argv: Argv<RootArguments>) {
 }
 
 export async function generateHandler(args: BaseGenerateArguments & Context) {
-  const logger = getLogger(args);
-
   // Load config
   const globalConfig = await searchConfig(args.cwd);
   const config = {
@@ -115,28 +113,14 @@ export async function generateHandler(args: BaseGenerateArguments & Context) {
   const result = await generate({
     path: join(args.cwd, "components"),
     components: config.components,
-    extensions: config.extensions
+    extensions: config.extensions,
+    validate: args.validate
   });
 
   if (!result.manifests.length) {
     throw new CLIError("No manifests are exported from components", {
       output: `No manifests are exported from components. Make sure there are exported manifests in components.`
     });
-  }
-
-  if (args.validate) {
-    for (const manifest of result.manifests) {
-      if (manifest.data && typeof manifest.data.validate === "function") {
-        debug("Validating manifest", manifest.path);
-
-        try {
-          await manifest.data.validate();
-        } catch (err) {
-          logger.error("Validation failed", manifest.path);
-          throw err;
-        }
-      }
-    }
   }
 
   return result;
