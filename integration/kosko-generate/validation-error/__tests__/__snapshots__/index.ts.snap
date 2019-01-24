@@ -7,23 +7,3 @@ metadata:
   name: foo
 spec: {}"
 `;
-
-exports[`when validate is not set should print the error 1`] = `
-"ValidationError: data.spec should have required property 'containers'
-Path: <PROJECT_ROOT>/integration/kosko-generate/validation-error/components/foo.js
-Index: 0
-    at Object.<anonymous> (<PROJECT_ROOT>/packages/generate/dist/generate.js:53:35)
-    at Generator.next (<anonymous>)
-    at fulfilled (<PROJECT_ROOT>/packages/generate/node_modules/tslib/tslib.js:104:62)
-"
-`;
-
-exports[`when validate is true should print the error 1`] = `
-"ValidationError: data.spec should have required property 'containers'
-Path: <PROJECT_ROOT>/integration/kosko-generate/validation-error/components/foo.js
-Index: 0
-    at Object.<anonymous> (<PROJECT_ROOT>/packages/generate/dist/generate.js:53:35)
-    at Generator.next (<anonymous>)
-    at fulfilled (<PROJECT_ROOT>/packages/generate/node_modules/tslib/tslib.js:104:62)
-"
-`;
