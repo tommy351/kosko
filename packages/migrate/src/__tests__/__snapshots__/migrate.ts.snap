@@ -1,0 +1,177 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`migrate given a CRD should match snapshot 1`] = `
+"\\"use strict\\";
+
+
+const virtualService = {
+  \\"apiVersion\\": \\"networking.istio.io/v1alpha3\\",
+  \\"kind\\": \\"VirtualService\\",
+  \\"metadata\\": {
+    \\"name\\": \\"details\\"
+  }
+};
+
+module.exports = [virtualService];
+"
+`;
+
+exports[`migrate given a List should match snapshot 1`] = `
+"\\"use strict\\";
+
+const { Deployment } = require(\\"kubernetes-models/api/apps/v1/Deployment\\");
+const { Service } = require(\\"kubernetes-models/api/core/v1/Service\\");
+
+const deployment = new Deployment({
+  \\"metadata\\": {
+    \\"name\\": \\"test-deployment\\"
+  },
+  \\"spec\\": {
+    \\"replicas\\": 2
+  }
+});
+
+const service = new Service({
+  \\"metadata\\": {
+    \\"name\\": \\"test-service\\"
+  },
+  \\"spec\\": {
+    \\"selector\\": {}
+  }
+});
+
+module.exports = [deployment, service];
+"
+`;
+
+exports[`migrate given a RBAC ClusterRoleBinding should match snapshot 1`] = `
+"\\"use strict\\";
+
+const { ClusterRoleBinding } = require(\\"kubernetes-models/api/rbac/v1/ClusterRoleBinding\\");
+
+const clusterRoleBinding = new ClusterRoleBinding({
+  \\"metadata\\": {
+    \\"name\\": \\"tiller\\"
+  }
+});
+
+module.exports = [clusterRoleBinding];
+"
+`;
+
+exports[`migrate given multiple manifests of different kinds should match snapshot 1`] = `
+"\\"use strict\\";
+
+const { Deployment } = require(\\"kubernetes-models/api/apps/v1/Deployment\\");
+const { Service } = require(\\"kubernetes-models/api/core/v1/Service\\");
+
+const deployment = new Deployment({
+  \\"metadata\\": {
+    \\"name\\": \\"test-deployment\\"
+  },
+  \\"spec\\": {
+    \\"replicas\\": 2
+  }
+});
+
+const service = new Service({
+  \\"metadata\\": {
+    \\"name\\": \\"test-service\\"
+  },
+  \\"spec\\": {
+    \\"selector\\": {}
+  }
+});
+
+module.exports = [deployment, service];
+"
+`;
+
+exports[`migrate given multiple manifests of same kind should match snapshot 1`] = `
+"\\"use strict\\";
+
+const { ConfigMap } = require(\\"kubernetes-models/api/core/v1/ConfigMap\\");
+
+const configMap = new ConfigMap({
+  \\"metadata\\": {
+    \\"name\\": \\"config-foo\\"
+  },
+  \\"data\\": {
+    \\"foo\\": \\"bar\\"
+  }
+});
+
+const configMap1 = new ConfigMap({
+  \\"metadata\\": {
+    \\"name\\": \\"config-bar\\"
+  },
+  \\"data\\": {
+    \\"bar\\": \\"baz\\"
+  }
+});
+
+module.exports = [configMap, configMap1];
+"
+`;
+
+exports[`migrate given no manifests should match snapshot 1`] = `
+"\\"use strict\\";
+
+
+module.exports = [];
+"
+`;
+
+exports[`migrate given single manifest should match snapshot 1`] = `
+"\\"use strict\\";
+
+const { Pod } = require(\\"kubernetes-models/api/core/v1/Pod\\");
+
+const pod = new Pod({
+  \\"metadata\\": {
+    \\"name\\": \\"test-pod\\"
+  },
+  \\"spec\\": {
+    \\"containers\\": []
+  }
+});
+
+module.exports = [pod];
+"
+`;
+
+exports[`migrateString given valid JSON should match snapshot 1`] = `
+"\\"use strict\\";
+
+const { Pod } = require(\\"kubernetes-models/api/core/v1/Pod\\");
+
+const pod = new Pod({
+  \\"metadata\\": {
+    \\"name\\": \\"test-pod\\"
+  },
+  \\"spec\\": {
+    \\"containers\\": []
+  }
+});
+
+module.exports = [pod];
+"
+`;
+
+exports[`migrateString given valid YAML should match snapshot 1`] = `
+"\\"use strict\\";
+
+const { Pod } = require(\\"kubernetes-models/api/core/v1/Pod\\");
+
+const pod = new Pod({
+  \\"metadata\\": {
+    \\"name\\": \\"test-pod\\"
+  },
+  \\"spec\\": {
+    \\"containers\\": []
+  }
+});
+
+module.exports = [pod];
+"
+`;
