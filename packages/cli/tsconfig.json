@@ -8,6 +8,7 @@
     { "path": "../generate" },
     { "path": "../require" },
     { "path": "../env" },
-    { "path": "../config" }
+    { "path": "../config" },
+    { "path": "../migrate" }
   ]
 }

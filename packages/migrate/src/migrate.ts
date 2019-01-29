@@ -60,6 +60,7 @@ function generateForList(
       if (!validateManifest(data)) {
         throw new Error("apiVersion and kind is required");
       }
+
       if (data.apiVersion === "v1" && data.kind === "List") {
         return generateForList(data.items);
       }

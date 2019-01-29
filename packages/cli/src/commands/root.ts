@@ -4,6 +4,7 @@ import { wrapCommand } from "../cli/command";
 import { generateCmd } from "./generate";
 import { initCmd } from "./init";
 import { validateCmd } from "./validate";
+import { migrateCmd } from "./migrate";
 
 export const rootCmd = yargs
   .scriptName("kosko")
@@ -28,4 +29,5 @@ export const rootCmd = yargs
   .command(wrapCommand(initCmd))
   .command(wrapCommand(generateCmd))
   .command(wrapCommand(validateCmd))
+  .command(wrapCommand(migrateCmd))
   .demandCommand();
