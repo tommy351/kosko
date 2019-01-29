@@ -1,11 +1,11 @@
-import { RootArguments, Command } from "../cli/command";
-import Debug from "../cli/debug";
-import getStdin from "get-stdin";
-import { join } from "path";
-import fs from "fs";
-import { promisify } from "util";
-import { print } from "../cli/print";
 import { migrateString } from "@kosko/migrate";
+import fs from "fs";
+import getStdin from "get-stdin";
+import { join, resolve } from "path";
+import { promisify } from "util";
+import { Command, RootArguments } from "../cli/command";
+import Debug from "../cli/debug";
+import { print } from "../cli/print";
 
 const debug = Debug.extend("migrate");
 const stat = promisify(fs.stat);
@@ -30,7 +30,14 @@ async function readFilesInDir(dir: string) {
 
 function concatFiles(arr: ReadonlyArray<string>): string {
   if (!arr.length) return "";
-  return "---\n" + arr.join("---\n");
+  let output = "";
+
+  for (const s of arr) {
+    if (!s.startsWith("---")) output += "---\n";
+    output += s + "\n";
+  }
+
+  return output;
 }
 
 function readFiles(
@@ -44,7 +51,7 @@ function readFiles(
         return getStdin();
       }
 
-      const path = join(cwd, file);
+      const path = resolve(cwd, file);
       const stats = await stat(path);
 
       return stats.isDirectory() ? readFilesInDir(path) : readFileString(path);
@@ -70,9 +77,8 @@ export const migrateCmd: Command<MigrateArguments> = {
     });
   },
   async handler(args) {
-    const content = migrateString(
-      concatFiles(await readFiles(args.cwd, args.filename))
-    );
+    const file = concatFiles(await readFiles(args.cwd, args.filename));
+    const content = migrateString(file);
 
     await print(content);
   }
