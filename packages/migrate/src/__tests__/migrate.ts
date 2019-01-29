@@ -1,61 +1,99 @@
-/// <reference types="jest-extended"/>
-import { migrate, migrateString } from "../migrate";
+import { migrate, migrateString, Manifest } from "../migrate";
 import { YAMLException } from "js-yaml";
+import { runInThisContext } from "vm";
+import Module from "module";
 
 describe("migrate", () => {
+  let data: ReadonlyArray<Manifest>;
+  let code: string;
+  let exported: any;
+
+  function execute() {
+    code = migrate(data);
+
+    const mod = new Module("");
+    const fn = runInThisContext(Module.wrap(code));
+    fn(mod.exports, require, mod, "", "");
+    exported = mod.exports;
+  }
+
   describe("given no manifests", () => {
-    test("should match snapshot", () => {
-      expect(migrate([])).toMatchSnapshot();
+    beforeAll(() => {
+      data = [];
+    });
+
+    beforeEach(execute);
+
+    test("should generate code", () => {
+      expect(code).toMatchSnapshot();
+    });
+
+    test("should export value", () => {
+      expect(exported).toMatchSnapshot();
     });
   });
 
   describe("given single manifest", () => {
-    test("should match snapshot", () => {
-      expect(
-        migrate([
-          {
-            apiVersion: "v1",
-            kind: "Pod",
-            metadata: { name: "test-pod" },
-            spec: {
-              containers: []
-            }
+    beforeAll(() => {
+      data = [
+        {
+          apiVersion: "v1",
+          kind: "Pod",
+          metadata: { name: "test-pod" },
+          spec: {
+            containers: []
           }
-        ])
-      ).toMatchSnapshot();
+        }
+      ];
+    });
+
+    beforeEach(execute);
+
+    test("should generate code", () => {
+      expect(code).toMatchSnapshot();
+    });
+
+    test("should export value", () => {
+      expect(exported).toMatchSnapshot();
     });
   });
 
   describe("given multiple manifests of different kinds", () => {
-    test("should match snapshot", () => {
-      expect(
-        migrate([
-          {
-            apiVersion: "apps/v1",
-            kind: "Deployment",
-            metadata: { name: "test-deployment" },
-            spec: {
-              replicas: 2
-            }
-          },
-          {
-            apiVersion: "v1",
-            kind: "Service",
-            metadata: { name: "test-service" },
-            spec: {
-              selector: {}
-            }
+    beforeAll(() => {
+      data = [
+        {
+          apiVersion: "apps/v1",
+          kind: "Deployment",
+          metadata: { name: "test-deployment" },
+          spec: {
+            replicas: 2
           }
-        ])
-      ).toMatchSnapshot();
+        },
+        {
+          apiVersion: "v1",
+          kind: "Service",
+          metadata: { name: "test-service" },
+          spec: {
+            selector: {}
+          }
+        }
+      ];
+    });
+
+    beforeEach(execute);
+
+    test("should generate code", () => {
+      expect(code).toMatchSnapshot();
+    });
+
+    test("should export value", () => {
+      expect(exported).toMatchSnapshot();
     });
   });
 
   describe("given multiple manifests of same kind", () => {
-    let result: string;
-
-    beforeEach(() => {
-      result = migrate([
+    beforeAll(() => {
+      data = [
         {
           apiVersion: "v1",
           kind: "ConfigMap",
@@ -76,80 +114,100 @@ describe("migrate", () => {
             bar: "baz"
           }
         }
-      ]);
+      ];
     });
 
-    test("should match snapshot", () => {
-      expect(result).toMatchSnapshot();
+    beforeEach(execute);
+
+    test("should generate code", () => {
+      expect(code).toMatchSnapshot();
     });
 
-    test("should not have duplicated names", () => {
-      expect(result).toIncludeRepeated("const configMap = new ConfigMap", 1);
-    });
-
-    test("should rename the second config map", () => {
-      expect(result).toInclude("const configMap1 = new ConfigMap");
+    test("should export value", () => {
+      expect(exported).toMatchSnapshot();
     });
   });
 
   describe("given a List", () => {
-    test("should match snapshot", () => {
-      expect(
-        migrate([
-          {
-            apiVersion: "v1",
-            kind: "List",
-            items: [
-              {
-                apiVersion: "apps/v1",
-                kind: "Deployment",
-                metadata: { name: "test-deployment" },
-                spec: {
-                  replicas: 2
-                }
-              },
-              {
-                apiVersion: "v1",
-                kind: "Service",
-                metadata: { name: "test-service" },
-                spec: {
-                  selector: {}
-                }
+    beforeAll(() => {
+      data = [
+        {
+          apiVersion: "v1",
+          kind: "List",
+          items: [
+            {
+              apiVersion: "apps/v1",
+              kind: "Deployment",
+              metadata: { name: "test-deployment" },
+              spec: {
+                replicas: 2
               }
-            ]
-          }
-        ])
-      ).toMatchSnapshot();
+            },
+            {
+              apiVersion: "v1",
+              kind: "Service",
+              metadata: { name: "test-service" },
+              spec: {
+                selector: {}
+              }
+            }
+          ]
+        }
+      ];
+    });
+
+    test("should generate code", () => {
+      expect(code).toMatchSnapshot();
+    });
+
+    test("should export value", () => {
+      expect(exported).toMatchSnapshot();
     });
   });
 
   describe("given a RBAC ClusterRoleBinding", () => {
-    test("should match snapshot", () => {
-      expect(
-        migrate([
-          {
-            apiVersion: "rbac.authorization.k8s.io/v1",
-            kind: "ClusterRoleBinding",
-            metadata: {
-              name: "tiller"
-            }
+    beforeAll(() => {
+      data = [
+        {
+          apiVersion: "rbac.authorization.k8s.io/v1",
+          kind: "ClusterRoleBinding",
+          metadata: {
+            name: "tiller"
           }
-        ])
-      ).toMatchSnapshot();
+        }
+      ];
+    });
+
+    beforeEach(execute);
+
+    test("should generate code", () => {
+      expect(code).toMatchSnapshot();
+    });
+
+    test("should export value", () => {
+      expect(exported).toMatchSnapshot();
     });
   });
 
   describe("given a CRD", () => {
-    test("should match snapshot", () => {
-      expect(
-        migrate([
-          {
-            apiVersion: "networking.istio.io/v1alpha3",
-            kind: "VirtualService",
-            metadata: { name: "details" }
-          }
-        ])
-      ).toMatchSnapshot();
+    beforeAll(() => {
+      data = [
+        {
+          apiVersion: "networking.istio.io/v1alpha3",
+          kind: "VirtualService",
+          metadata: { name: "details" }
+        }
+      ];
+    });
+
+    beforeEach(execute);
+
+    test("should generate code", () => {
+      expect(code).toMatchSnapshot();
+    });
+
+    test("should export value", () => {
+      expect(exported).toMatchSnapshot();
     });
   });
 
@@ -172,7 +230,7 @@ describe("migrate", () => {
 
 describe("migrateString", () => {
   describe("given valid YAML", () => {
-    test("should match snapshot", () => {
+    test("should generate code", () => {
       expect(
         migrateString(`---
 apiVersion: v1
@@ -187,7 +245,7 @@ spec:
   });
 
   describe("given valid JSON", () => {
-    test("should match snapshot", () => {
+    test("should generate code", () => {
       expect(
         migrateString(`{
 "apiVersion": "v1",
