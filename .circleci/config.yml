@@ -8,6 +8,9 @@ aliases:
       - node_modules
     key: npm-{{ checksum "package-lock.json" }}
 
+orbs:
+  codecov: codecov/codecov@1.0.3
+
 commands:
   pretest:
     steps:
@@ -28,9 +31,8 @@ commands:
             JEST_JUNIT_OUTPUT: reports/junit/results.xml
       - store_test_results:
           path: reports/junit
-      - store_artifacts:
-          path: coverage
-          prefix: coverage
+      - codecov/upload:
+          file: coverage/clover.xml
 
 jobs:
   lint:
@@ -87,7 +89,11 @@ jobs:
       - pretest
       - run:
           name: Integration tests
-          command: npm run test:integration -- --maxWorkers=2
+          command: npm run test:integration -- --maxWorkers=2 --reporters=default --reporters=jest-junit
+          environment:
+            JEST_JUNIT_OUTPUT: reports/junit/results.xml
+      - store_test_results:
+          path: reports/junit
 
 workflows:
   version: 2
