@@ -1,0 +1,36 @@
+{
+  "name": "@kosko/migrate",
+  "version": "0.0.1",
+  "description": "Migrate Kubernetes YAML into kosko components.",
+  "homepage": "https://github.com/tommy351/kosko",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kosko.git"
+  },
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "main": "dist",
+  "files": [
+    "/dist/"
+  ],
+  "keywords": [
+    "kosko"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">= 6.9.0"
+  },
+  "dependencies": {
+    "camelcase": "^5.0.0",
+    "js-yaml": "^3.12.1",
+    "kubernetes-models": "^0.4.0",
+    "tslib": "^1.9.3"
+  },
+  "devDependencies": {
+    "@types/camelcase": "^4.1.0",
+    "@types/js-yaml": "^3.12.0",
+    "is-plain-object": "^2.0.4"
+  }
+}

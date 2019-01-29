@@ -14,12 +14,11 @@ import { promisify } from "util";
 import { setLogger } from "../../cli/command";
 import { GenerateArguments, generateCmd } from "../generate";
 
-const writeFile = promisify(fs.writeFile);
-const readFile = promisify(fs.readFile);
-
 jest.mock("@kosko/generate");
 jest.mock("@kosko/env");
 
+const writeFile = promisify(fs.writeFile);
+const readFile = promisify(fs.readFile);
 const logger = new Signale({ disabled: true });
 let config: Config;
 let args: Partial<GenerateArguments>;

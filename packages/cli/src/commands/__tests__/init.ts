@@ -9,7 +9,6 @@ import { initCmd, writeJSON, InitArguments } from "../init";
 
 const readFile = promisify(fs.readFile);
 const stat = promisify(fs.stat);
-
 const logger = new Signale({ disabled: true });
 
 async function execute(args: Partial<InitArguments>) {
