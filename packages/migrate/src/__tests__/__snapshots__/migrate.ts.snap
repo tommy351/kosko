@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`migrate given a CRD should export value 1`] = `
+exports[`migrate given a CRD should export an array containing a CRD 1`] = `
 Array [
   Object {
     "apiVersion": "networking.istio.io/v1alpha3",
@@ -28,26 +28,26 @@ module.exports = [virtualService];
 "
 `;
 
-exports[`migrate given a List should export value 1`] = `
+exports[`migrate given a List should export an array containing items in the list 1`] = `
 Array [
   Object {
-    "apiVersion": "v1",
-    "data": Object {
-      "foo": "bar",
-    },
-    "kind": "ConfigMap",
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
     "metadata": Object {
-      "name": "config-foo",
+      "name": "test-deployment",
+    },
+    "spec": Object {
+      "replicas": 2,
     },
   },
   Object {
     "apiVersion": "v1",
-    "data": Object {
-      "bar": "baz",
-    },
-    "kind": "ConfigMap",
+    "kind": "Service",
     "metadata": Object {
-      "name": "config-bar",
+      "name": "test-service",
+    },
+    "spec": Object {
+      "selector": Object {},
     },
   },
 ]
@@ -56,31 +56,32 @@ Array [
 exports[`migrate given a List should generate code 1`] = `
 "\\"use strict\\";
 
-const { ConfigMap } = require(\\"kubernetes-models/api/core/v1/ConfigMap\\");
+const { Deployment } = require(\\"kubernetes-models/api/apps/v1/Deployment\\");
+const { Service } = require(\\"kubernetes-models/api/core/v1/Service\\");
 
-const configMap = new ConfigMap({
+const deployment = new Deployment({
   \\"metadata\\": {
-    \\"name\\": \\"config-foo\\"
+    \\"name\\": \\"test-deployment\\"
   },
-  \\"data\\": {
-    \\"foo\\": \\"bar\\"
+  \\"spec\\": {
+    \\"replicas\\": 2
   }
 });
 
-const configMap1 = new ConfigMap({
+const service = new Service({
   \\"metadata\\": {
-    \\"name\\": \\"config-bar\\"
+    \\"name\\": \\"test-service\\"
   },
-  \\"data\\": {
-    \\"bar\\": \\"baz\\"
+  \\"spec\\": {
+    \\"selector\\": {}
   }
 });
 
-module.exports = [configMap, configMap1];
+module.exports = [deployment, service];
 "
 `;
 
-exports[`migrate given a RBAC ClusterRoleBinding should export value 1`] = `
+exports[`migrate given a RBAC ClusterRoleBinding should export an array containing a ClusterRoleBinding 1`] = `
 Array [
   Object {
     "apiVersion": "rbac.authorization.k8s.io/v1",
@@ -107,7 +108,7 @@ module.exports = [clusterRoleBinding];
 "
 `;
 
-exports[`migrate given multiple manifests of different kinds should export value 1`] = `
+exports[`migrate given multiple manifests of different kinds should export an array containing a deployment and a service 1`] = `
 Array [
   Object {
     "apiVersion": "apps/v1",
@@ -160,7 +161,7 @@ module.exports = [deployment, service];
 "
 `;
 
-exports[`migrate given multiple manifests of same kind should export value 1`] = `
+exports[`migrate given multiple manifests of same kind should export an array containing three config maps 1`] = `
 Array [
   Object {
     "apiVersion": "v1",
@@ -180,6 +181,16 @@ Array [
     "kind": "ConfigMap",
     "metadata": Object {
       "name": "config-bar",
+    },
+  },
+  Object {
+    "apiVersion": "v1",
+    "data": Object {
+      "baz": "boo",
+    },
+    "kind": "ConfigMap",
+    "metadata": Object {
+      "name": "config-baz",
     },
   },
 ]
@@ -208,11 +219,18 @@ const configMap1 = new ConfigMap({
   }
 });
 
-module.exports = [configMap, configMap1];
+const configMap2 = new ConfigMap({
+  \\"metadata\\": {
+    \\"name\\": \\"config-baz\\"
+  },
+  \\"data\\": {
+    \\"baz\\": \\"boo\\"
+  }
+});
+
+module.exports = [configMap, configMap1, configMap2];
 "
 `;
-
-exports[`migrate given no manifests should export value 1`] = `Array []`;
 
 exports[`migrate given no manifests should generate code 1`] = `
 "\\"use strict\\";
@@ -222,7 +240,7 @@ module.exports = [];
 "
 `;
 
-exports[`migrate given single manifest should export value 1`] = `
+exports[`migrate given single manifest should export an array containing a pod 1`] = `
 Array [
   Object {
     "apiVersion": "v1",

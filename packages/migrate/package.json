@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@types/camelcase": "^4.1.0",
-    "@types/js-yaml": "^3.12.0"
+    "@types/js-yaml": "^3.12.0",
+    "is-plain-object": "^2.0.4"
   }
 }

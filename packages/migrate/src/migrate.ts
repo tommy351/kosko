@@ -1,5 +1,5 @@
-import yaml from "js-yaml";
 import camelcase from "camelcase";
+import yaml from "js-yaml";
 import { getImportPath } from "kubernetes-models/resolve";
 
 export interface Manifest {
@@ -77,10 +77,11 @@ function uniqComponentName(
 
   return components.map(component => {
     let name = component.name;
+    const idx = nameMap[name];
 
-    if (nameMap[name]) {
-      name += nameMap[name];
+    if (idx) {
       nameMap[name]++;
+      name += idx;
     } else {
       nameMap[name] = 1;
     }

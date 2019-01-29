@@ -1,7 +1,14 @@
-import { migrate, migrateString, Manifest } from "../migrate";
+/// <reference types="jest-extended"/>
+import isPlainObject from "is-plain-object";
 import { YAMLException } from "js-yaml";
-import { runInThisContext } from "vm";
+import { Deployment } from "kubernetes-models/api/apps/v1/Deployment";
+import { ConfigMap } from "kubernetes-models/api/core/v1/ConfigMap";
+import { Pod } from "kubernetes-models/api/core/v1/Pod";
+import { Service } from "kubernetes-models/api/core/v1/Service";
+import { ClusterRoleBinding } from "kubernetes-models/api/rbac/v1/ClusterRoleBinding";
 import Module from "module";
+import { runInThisContext } from "vm";
+import { Manifest, migrate, migrateString } from "../migrate";
 
 describe("migrate", () => {
   let data: ReadonlyArray<Manifest>;
@@ -28,8 +35,8 @@ describe("migrate", () => {
       expect(code).toMatchSnapshot();
     });
 
-    test("should export value", () => {
-      expect(exported).toMatchSnapshot();
+    test("should export an empty array", () => {
+      expect(exported).toBeArrayOfSize(0);
     });
   });
 
@@ -53,8 +60,12 @@ describe("migrate", () => {
       expect(code).toMatchSnapshot();
     });
 
-    test("should export value", () => {
+    test("should export an array containing a pod", () => {
       expect(exported).toMatchSnapshot();
+    });
+
+    test("should export a Pod instance", () => {
+      expect(exported[0]).toBeInstanceOf(Pod);
     });
   });
 
@@ -86,8 +97,16 @@ describe("migrate", () => {
       expect(code).toMatchSnapshot();
     });
 
-    test("should export value", () => {
+    test("should export an array containing a deployment and a service", () => {
       expect(exported).toMatchSnapshot();
+    });
+
+    test("should export a Deployment instance", () => {
+      expect(exported[0]).toBeInstanceOf(Deployment);
+    });
+
+    test("should export a Service instance", () => {
+      expect(exported[1]).toBeInstanceOf(Service);
     });
   });
 
@@ -113,6 +132,16 @@ describe("migrate", () => {
           data: {
             bar: "baz"
           }
+        },
+        {
+          apiVersion: "v1",
+          kind: "ConfigMap",
+          metadata: {
+            name: "config-baz"
+          },
+          data: {
+            baz: "boo"
+          }
         }
       ];
     });
@@ -123,8 +152,12 @@ describe("migrate", () => {
       expect(code).toMatchSnapshot();
     });
 
-    test("should export value", () => {
+    test("should export an array containing three config maps", () => {
       expect(exported).toMatchSnapshot();
+    });
+
+    test("should export ConfigMap instances", () => {
+      expect(exported).toSatisfyAll(x => x instanceof ConfigMap);
     });
   });
 
@@ -156,12 +189,22 @@ describe("migrate", () => {
       ];
     });
 
+    beforeEach(execute);
+
     test("should generate code", () => {
       expect(code).toMatchSnapshot();
     });
 
-    test("should export value", () => {
+    test("should export an array containing items in the list", () => {
       expect(exported).toMatchSnapshot();
+    });
+
+    test("should export a Deployment instance", () => {
+      expect(exported[0]).toBeInstanceOf(Deployment);
+    });
+
+    test("should export a Service instance", () => {
+      expect(exported[1]).toBeInstanceOf(Service);
     });
   });
 
@@ -184,8 +227,12 @@ describe("migrate", () => {
       expect(code).toMatchSnapshot();
     });
 
-    test("should export value", () => {
+    test("should export an array containing a ClusterRoleBinding", () => {
       expect(exported).toMatchSnapshot();
+    });
+
+    test("should export a ClusterRoleBinding instance", () => {
+      expect(exported[0]).toBeInstanceOf(ClusterRoleBinding);
     });
   });
 
@@ -206,8 +253,12 @@ describe("migrate", () => {
       expect(code).toMatchSnapshot();
     });
 
-    test("should export value", () => {
+    test("should export an array containing a CRD", () => {
       expect(exported).toMatchSnapshot();
+    });
+
+    test("should export a plain object", () => {
+      expect(exported).toSatisfyAll(isPlainObject);
     });
   });
 
