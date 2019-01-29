@@ -17,7 +17,8 @@
     "bootstrap": "lerna bootstrap",
     "test": "npm-run-all test:*",
     "test:unit": "jest",
-    "test:integration": "jest --config integration/jest.config.js"
+    "test:integration": "jest --config integration/jest.config.js",
+    "codecov": "codecov"
   },
   "husky": {
     "hooks": {
@@ -40,6 +41,7 @@
     "@types/pkg-dir": "^2.0.0",
     "@types/temp-dir": "^1.0.0",
     "@types/tmp": "0.0.33",
+    "codecov": "^3.1.0",
     "cross-spawn": "^6.0.5",
     "execa": "^1.0.0",
     "globby": "^8.0.1",

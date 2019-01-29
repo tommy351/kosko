@@ -8,9 +8,6 @@ aliases:
       - node_modules
     key: npm-{{ checksum "package-lock.json" }}
 
-orbs:
-  codecov: codecov/codecov@1.0.3
-
 commands:
   pretest:
     steps:
@@ -31,8 +28,9 @@ commands:
             JEST_JUNIT_OUTPUT: reports/junit/results.xml
       - store_test_results:
           path: reports/junit
-      - codecov/upload:
-          file: coverage/clover.xml
+      - run:
+          name: Upload coverage
+          command: npm run codecov
 
 jobs:
   lint:
