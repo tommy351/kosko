@@ -9,12 +9,28 @@ aliases:
     key: npm-{{ checksum "package-lock.json" }}
 
 commands:
+  pretest:
+    steps:
+      - run:
+          name: Bootstrap
+          command: npm run bootstrap
+      - run:
+          name: Build
+          command: npm run build
   test_unit:
     description: Run unit tests
     steps:
-      - run: npm run bootstrap
-      - run: npm run build
-      - run: npm run test:unit -- --coverage --maxWorkers=2
+      - pretest
+      - run:
+          name: Unit tests
+          command: npm run test:unit -- --coverage --maxWorkers=2 --reporters=default --reporters=jest-junit
+          environment:
+            JEST_JUNIT_OUTPUT: reports/junit/results.xml
+      - store_test_results:
+          path: reports/junit
+      - store_artifacts:
+          path: coverage
+          prefix: coverage
 
 jobs:
   lint:
@@ -26,7 +42,9 @@ jobs:
       - restore_cache: *restore_cache
       - run: npm ci
       - save_cache: *save_cache
-      - run: npm run lint
+      - run:
+          name: Lint
+          command: npm run lint
   test_node_8:
     working_directory: ~/kosko
     docker:
@@ -66,9 +84,10 @@ jobs:
       - restore_cache: *restore_cache
       - run: npm ci
       - save_cache: *save_cache
-      - run: npm run bootstrap
-      - run: npm run build
-      - run: npm run test:integration -- --maxWorkers=2
+      - pretest
+      - run:
+          name: Integration tests
+          command: npm run test:integration -- --maxWorkers=2
 
 workflows:
   version: 2
