@@ -35,7 +35,6 @@ commands:
 
 jobs:
   lint:
-    working_directory: ~/kosko
     docker:
       - image: circleci/node:10
     steps:
@@ -45,7 +44,6 @@ jobs:
           name: Lint
           command: npm run lint
   test_node_8:
-    working_directory: ~/kosko
     docker:
       - image: circleci/node:8
     steps:
@@ -53,7 +51,6 @@ jobs:
       - npm_install
       - test_unit
   test_node_10:
-    working_directory: ~/kosko
     docker:
       - image: circleci/node:10
     steps:
@@ -61,7 +58,6 @@ jobs:
       - npm_install
       - test_unit
   test_node_11:
-    working_directory: ~/kosko
     docker:
       - image: circleci/node:11
     steps:
@@ -69,7 +65,6 @@ jobs:
       - npm_install
       - test_unit
   test_integration:
-    working_directory: ~/kosko
     docker:
       - image: circleci/node:10
     steps:
