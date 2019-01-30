@@ -68,13 +68,16 @@ export const migrateCmd: Command<MigrateArguments> = {
   describe: "Migrate YAML into components",
   builder(argv) {
     /* istanbul ignore next */
-    return argv.option("filename", {
-      type: "string",
-      describe: "Files, directory or stdin to migrate",
-      required: true,
-      alias: "f",
-      array: true
-    });
+    return argv
+      .option("filename", {
+        type: "string",
+        describe: "File, directory to migrate",
+        required: true,
+        alias: "f",
+        array: true
+      })
+      .example("$0 migrate -f path/to/file", "Read from the path")
+      .example("$0 migrate -f -", "Read from stdin");
   },
   async handler(args) {
     const file = concatFiles(await readFiles(args.cwd, args.filename));

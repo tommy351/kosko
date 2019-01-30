@@ -1,0 +1,86 @@
+# @kosko/template
+
+## Write a Template
+
+A template helps you generate code easily so you don't have to build from scratch every time.
+
+### Generate a Component
+
+This example shows how to generate a component containing a horizontal pod autoscaler (HPA). You can see the result in [the example](../../examples/template-component).
+
+```js
+const { run } = require("@kosko/template");
+
+run({
+  description: "Create a new HPA",
+  options: {
+    deployment: {
+      type: "string",
+      description: "Deployment name",
+      required: true
+    },
+    minReplicas: {
+      type: "number",
+      description: "Minimum number of replicas",
+      default: 1
+    },
+    maxReplicas: {
+      type: "number",
+      description: "Maximum number of replicas",
+      required: true
+    },
+    cpu: {
+      type: "number",
+      description: "Target CPU utilization",
+      default: 70
+    }
+  },
+  async generate(args) {
+    return {
+      files: [
+        {
+          path: `components/${args.deployment}_hpa.js`,
+          content: `"use strict";
+
+const { HorizontalPodAutoscaler } = require("kubernetes-models/api/autoscaling/v1");
+
+module.exports = new HorizontalPodAutoscaler({
+  metadata: {
+    name: "${args.deployment}"
+  },
+  spec: {
+    scaleTargetRef: {
+      apiVersion: "apps/v1",
+      kind: "Deployment",
+      name: "${args.deployment}"
+    },
+    minReplicas: ${args.minReplicas},
+    maxReplicas: ${args.maxReplicas},
+    targetCPUUtilizationPercentage: ${args.cpu}
+  }
+});
+`
+        }
+      ]
+    };
+  }
+});
+```
+
+## API
+
+### `run`
+
+Parse command line arguments and generate files with a template.
+
+```js
+run(template: Template<any>, argv?: string[]): Promise<void>
+```
+
+### `writeFiles`
+
+Write files to the specified path.
+
+```js
+writeFiles(path: string, files: ReadonlyArray<File>): Promise<void>
+```

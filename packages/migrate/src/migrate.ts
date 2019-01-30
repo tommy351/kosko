@@ -114,6 +114,11 @@ function collectImports(
   }));
 }
 
+/**
+ * Migrate Kubernetes manifests into a kosko component.
+ *
+ * @param data Array of Kubernetes manifests
+ */
 export function migrate(data: ReadonlyArray<Manifest>): string {
   const components = uniqComponentName(generateForList(data));
   let output = `"use strict";\n\n`;
@@ -131,6 +136,11 @@ export function migrate(data: ReadonlyArray<Manifest>): string {
   return output;
 }
 
+/**
+ * Migrate Kubernetes YAML into a kosko component.
+ *
+ * @param input Kubernetes YAML string
+ */
 export function migrateString(input: string) {
   return migrate(yaml.safeLoadAll(input));
 }

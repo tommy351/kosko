@@ -4,7 +4,7 @@
 
 Write Kubernetes manifests in JavaScript.
 
-kosko is inspired by [ksonnet] but use JavaScript instead of [jsonnet] so it's much easier to learn and use. Unlike [ksonnet], kosko neither touchs Kubernetes clusters nor supports [Helm]. It's focus on building and organizing Kubernetes manifests in JavaScript.
+kosko is inspired by [ksonnet] but use JavaScript instead of [jsonnet] so you don't have to learn another language. Unlike [ksonnet], kosko neither touchs Kubernetes clusters nor supports [Helm]. It's focus on building and organizing Kubernetes manifests in JavaScript.
 
 ## Installation
 
@@ -62,9 +62,11 @@ kosko generate | kubectl apply -f -
 
 ## Documentation
 
-- [Component](docs/component.md)
-- [Environment](docs/environment.md)
-- [Configuration](docs/configuration.md)
+- [Component](packages/generate/README.md)
+- [Environment](packages/env/README.md)
+- [Template](packages/template/README.md)
+- [Configuration](packages/config/README.md)
+- [Commands](packages/cli/README.md)
 
 ## Examples
 
@@ -73,6 +75,7 @@ kosko generate | kubectl apply -f -
 - [Using TypeScript](examples/typescript)
 - [Using Babel](examples/babel)
 - [Run Programmatically](examples/run-programmatically)
+- [Create a Component with Template](examples/template-component)
 
 ## Packages
 
@@ -82,6 +85,7 @@ kosko generate | kubectl apply -f -
 - [@kosko/config](packages/config) - Load kosko configuration.
 - [@kosko/env](packages/env) - Manage environemnts in kosko.
 - [@kosko/generate](packages/generate) - Find and print components.
+- [@kosko/migrate](packages/migrate) - Migrate Kubernetes YAML into kosko components.
 - [@kosko/require](packages/require) - Import and resolve modules.
 - [@kosko/template](packages/template) - Utilities for templates.
 
@@ -89,6 +93,10 @@ kosko generate | kubectl apply -f -
 
 - [@kosko/template-deployed-service](packages/template-deployed-service) - Create a new component including a deployment and a service.
 - [@kosko/template-environment](packages/template-environment) - Create a new environment.
+
+### Related
+
+- [kubernetes-models-ts](https://github.com/tommy351/kubernetes-models-ts/) - Kubernetes models in TypeScript.
 
 ## License
 

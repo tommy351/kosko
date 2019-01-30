@@ -57,7 +57,7 @@ export function generateBuilder(argv: Argv<RootArguments>) {
   return argv
     .option("env", {
       type: "string",
-      describe: "Name of environment",
+      describe: "Environment name",
       alias: "e"
     })
     .option("require", {
@@ -146,7 +146,7 @@ export const generateCmd: Command<GenerateArguments> = {
       })
       .example("$0 generate", "Generate manifests")
       .example("$0 generate foo bar", "Specify components")
-      .example("$0 generate foo_*", "Use glob syntax")
+      .example("$0 generate foo_*", "Use glob pattern")
       .example("$0 generate --env foo", "Set environment")
       .example("$0 generate -r ts-node/register", "Require external modules");
   },

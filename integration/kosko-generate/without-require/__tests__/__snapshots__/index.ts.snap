@@ -103,7 +103,7 @@ Global Options:
   --version  Show version number                                       [boolean]
 
 Options:
-  --env, -e      Name of environment                                    [string]
+  --env, -e      Environment name                                       [string]
   --require, -r  Require modules. Modules set in config file will also be
                  required.                                 [array] [default: []]
   --output, -o   Output format
@@ -113,7 +113,7 @@ Options:
 Examples:
   kosko generate                      Generate manifests
   kosko generate foo bar              Specify components
-  kosko generate foo_*                Use glob syntax
+  kosko generate foo_*                Use glob pattern
   kosko generate --env foo            Set environment
   kosko generate -r ts-node/register  Require external modules
 

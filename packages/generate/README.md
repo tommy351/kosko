@@ -1,10 +1,8 @@
-# Component
-
-A component contains one or many Kubernetes manifests.
+# @kosko/generate
 
 ## Write a Component
 
-A component can be written in the following styles.
+A component contains one or many Kubernetes manifests. It can be written in the following styles.
 
 ### Single Manifest
 
@@ -43,4 +41,22 @@ const { Service } = require("kubernetes-models/api/core/v1");
 module.exports = async function() {
   return [new Deployment(), new Service()];
 };
+```
+
+## API
+
+### `generate`
+
+Finds components with glob patterns in the specified path and returns exported values from each components.
+
+```js
+generate(options: GenerateOptions): Promise<Result>
+```
+
+### `print`
+
+Print result to a stream.
+
+```js
+print(result: Result, options: PrintOptions): void
 ```
