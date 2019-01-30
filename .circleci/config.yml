@@ -1,14 +1,15 @@
 version: 2.1
 
-aliases:
-  - &restore_cache
-    key: npm-{{ checksum "package-lock.json" }}
-  - &save_cache
-    paths:
-      - node_modules
-    key: npm-{{ checksum "package-lock.json" }}
-
 commands:
+  npm_install:
+    steps:
+      - restore_cache:
+          key: npm-{{ checksum "package-lock.json" }}
+      - run: npm ci
+      - save_cache:
+          paths:
+            - node_modules
+          key: npm-{{ checksum "package-lock.json" }}
   pretest:
     steps:
       - run:
@@ -39,9 +40,7 @@ jobs:
       - image: circleci/node:10
     steps:
       - checkout
-      - restore_cache: *restore_cache
-      - run: npm ci
-      - save_cache: *save_cache
+      - npm_install
       - run:
           name: Lint
           command: npm run lint
@@ -51,9 +50,7 @@ jobs:
       - image: circleci/node:8
     steps:
       - checkout
-      - restore_cache: *restore_cache
-      - run: npm ci
-      - save_cache: *save_cache
+      - npm_install
       - test_unit
   test_node_10:
     working_directory: ~/kosko
@@ -61,9 +58,7 @@ jobs:
       - image: circleci/node:10
     steps:
       - checkout
-      - restore_cache: *restore_cache
-      - run: npm ci
-      - save_cache: *save_cache
+      - npm_install
       - test_unit
   test_node_11:
     working_directory: ~/kosko
@@ -71,9 +66,7 @@ jobs:
       - image: circleci/node:11
     steps:
       - checkout
-      - restore_cache: *restore_cache
-      - run: npm ci
-      - save_cache: *save_cache
+      - npm_install
       - test_unit
   test_integration:
     working_directory: ~/kosko
@@ -81,9 +74,7 @@ jobs:
       - image: circleci/node:10
     steps:
       - checkout
-      - restore_cache: *restore_cache
-      - run: npm ci
-      - save_cache: *save_cache
+      - npm_install
       - pretest
       - run:
           name: Integration tests
