@@ -12,7 +12,7 @@
   "scripts": {
     "lint": "tslint --project .",
     "build": "lerna run build && node scripts/build.js",
-    "clean": "npm run build -- --clean",
+    "clean": "node scripts/build.js --clean",
     "watch": "npm run build -- --watch",
     "bootstrap": "lerna bootstrap",
     "test": "npm-run-all test:*",
