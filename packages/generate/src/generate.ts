@@ -72,7 +72,7 @@ export async function generate(options: GenerateOptions): Promise<Result> {
       if (options.validate) {
         if (typeof data.validate === "function") {
           try {
-            debug("Validating manifest %d in %s", path);
+            debug("Validating manifest %d in %s", i, path);
             await data.validate();
           } catch (err) {
             throw new ValidationError(path, i, err);
