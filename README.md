@@ -76,6 +76,7 @@ kosko generate | kubectl apply -f -
 - [Using Babel](examples/babel)
 - [Run Programmatically](examples/run-programmatically)
 - [Create a Component with Template](examples/template-component)
+- [Alternative Folder Structure](examples/alternative-folder-structure)
 
 ## Packages
 
