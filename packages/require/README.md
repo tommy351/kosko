@@ -1,5 +1,7 @@
 # @kosko/require
 
+[Docs](https://github.com/tommy351/kosko)
+
 ## API
 
 ### `requireDefault`

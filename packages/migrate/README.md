@@ -1,5 +1,7 @@
 # @kosko/migrate
 
+[Docs](https://github.com/tommy351/kosko)
+
 ## API
 
 Migrate Kubernetes manifests into a kosko component.

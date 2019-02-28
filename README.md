@@ -6,6 +6,13 @@ Write Kubernetes manifests in JavaScript.
 
 kosko is inspired by [ksonnet] but use JavaScript instead of [jsonnet] so you don't have to learn another language. Unlike [ksonnet], kosko neither touchs Kubernetes clusters nor supports [Helm]. It's focus on building and organizing Kubernetes manifests in JavaScript.
 
+## Features
+
+- Use JavaScript or any languages compiled to JavaScript. (e.g. [TypeScript])
+- Manage multiple environments.
+- Validate against Kubernetes OpenAPI definitions.
+- Reuse variables and functions across components.
+
 ## Installation
 
 Install kosko globally with npm.
@@ -24,16 +31,6 @@ First, run `kosko init` to set up a new kosko directory and `npm install` to ins
 kosko init example
 cd example
 npm install
-```
-
-`kosko init` generates the following directories and files in the specified path.
-
-```sh
-├── components
-├── environments
-├── kosko.toml
-├── package.json
-└── templates
 ```
 
 ### Create a Component
@@ -62,11 +59,12 @@ kosko generate | kubectl apply -f -
 
 ## Documentation
 
-- [Component](packages/generate/README.md)
-- [Environment](packages/env/README.md)
-- [Template](packages/template/README.md)
-- [Configuration](packages/config/README.md)
-- [Commands](packages/cli/README.md)
+- [Overview](docs/overview.md)
+- [Components](docs/components.md)
+- [Environments](docs/environments.md)
+- [Templates](docs/templates.md)
+- [Commands](docs/commands.md)
+- [Configuration](docs/configuration.md)
 
 ## Examples
 
@@ -106,3 +104,4 @@ MIT
 [ksonnet]: https://ksonnet.io/
 [jsonnet]: https://jsonnet.org/
 [helm]: https://helm.sh/
+[typescript]: https://www.typescriptlang.org/
