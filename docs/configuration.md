@@ -2,7 +2,7 @@
 
 ## Example
 
-The following is the full example of `kosko.toml`. Config files must be written in [TOML]. All properties are optional.
+The following is the full example of `kosko.toml`. Config files must be written in [TOML](https://github.com/toml-lang/toml). All properties are optional.
 
 ```toml
 # Global configs
@@ -84,5 +84,3 @@ Specify the path to global environment file.
 ### `paths.environment.component`
 
 Specify the path to component environment file.
-
-[toml]: https://github.com/toml-lang/toml

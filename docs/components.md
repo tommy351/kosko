@@ -2,16 +2,14 @@
 
 ## Create Components
 
-Create components by using [templates](templates.md) or add files to `components` folder.
-
-A components can be a single JavaScript file.
+Create components by using [templates](templates.md) or add files to `components` folder. For example:
 
 ```sh
 components
 └── nginx.js
 ```
 
-Or you can separate manifests into files and export them in `index.js`.
+You can also split manifests into multiple files and export them in `index.js`.
 
 ```sh
 components

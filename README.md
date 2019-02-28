@@ -4,7 +4,7 @@
 
 Write Kubernetes manifests in JavaScript.
 
-kosko is inspired by [ksonnet] but use JavaScript instead of [jsonnet] so you don't have to learn another language. Unlike [ksonnet], kosko neither touchs Kubernetes clusters nor supports [Helm]. It's focus on building and organizing Kubernetes manifests in JavaScript.
+kosko is inspired by [ksonnet] but use JavaScript instead of [jsonnet]. Unlike [ksonnet], kosko neither touchs Kubernetes clusters nor supports [Helm]. It's focus on building and organizing Kubernetes manifests in JavaScript.
 
 ## Features
 

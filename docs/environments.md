@@ -2,7 +2,7 @@
 
 ## Create Environments
 
-You can create a new component by using `@kosko/template-environment` template.
+You can create a new component by using [`@kosko/template-environment`](../packages/template-environment) template.
 
 ```sh
 npx @kosko/template-environment --name dev

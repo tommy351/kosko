@@ -4,8 +4,6 @@
 
 A component is a collection of Kubernetes manifests including all resources needed for an application such as deployments, services, secrets, etc.
 
-More details:
-
 - [Writing Components](components.md)
 - [Migrating existing YAML](commands.md#migrate)
 
