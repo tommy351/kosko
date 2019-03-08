@@ -295,6 +295,22 @@ spec:
     });
   });
 
+  describe("given empty objects in YAML", () => {
+    test("should ignore them", () => {
+      expect(
+        migrateString(`---
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pod
+---
+---
+`)
+      ).toMatchSnapshot();
+    });
+  });
+
   describe("given valid JSON", () => {
     test("should generate code", () => {
       expect(

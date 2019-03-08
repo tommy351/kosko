@@ -273,6 +273,21 @@ module.exports = [pod];
 "
 `;
 
+exports[`migrateString given empty objects in YAML should ignore them 1`] = `
+"\\"use strict\\";
+
+const { Pod } = require(\\"kubernetes-models/api/core/v1/Pod\\");
+
+const pod = new Pod({
+  \\"metadata\\": {
+    \\"name\\": \\"test-pod\\"
+  }
+});
+
+module.exports = [pod];
+"
+`;
+
 exports[`migrateString given valid JSON should generate code 1`] = `
 "\\"use strict\\";
 
