@@ -1,6 +1,6 @@
 {
   "name": "@kosko/generate",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Find and print components in a kosko app directory.",
   "homepage": "https://github.com/tommy351/kosko",
   "repository": {
@@ -23,7 +23,7 @@
     "node": ">= 8"
   },
   "dependencies": {
-    "@kosko/require": "^0.1.8",
+    "@kosko/require": "^0.1.9",
     "debug": "^4.1.1",
     "fast-glob": "^2.2.6",
     "js-yaml": "^3.12.2",
