@@ -53,7 +53,9 @@ function resolveConfig(
 }
 
 /* istanbul ignore next */
-export function generateBuilder(argv: Argv<RootArguments>) {
+export function generateBuilder(
+  argv: Argv<RootArguments>
+): Argv<BaseGenerateArguments> {
   return argv
     .option("env", {
       type: "string",

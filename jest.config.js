@@ -5,6 +5,6 @@ module.exports = {
   roots: ["<rootDir>/packages"],
   collectCoverageFrom: ["packages/*/src/**/*.ts", "!packages/*/src/index.ts"],
   testEnvironment: "node",
-  setupTestFrameworkScriptFile: "jest-extended",
+  setupFilesAfterEnv: ["jest-extended"],
   snapshotSerializers: ["jest-serializer-path"]
 };

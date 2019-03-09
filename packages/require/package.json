@@ -23,7 +23,7 @@
     "node": ">= 6.9.0"
   },
   "dependencies": {
-    "resolve": "^1.9.0"
+    "resolve": "^1.10.0"
   },
   "devDependencies": {
     "@types/resolve": "^0.0.8"

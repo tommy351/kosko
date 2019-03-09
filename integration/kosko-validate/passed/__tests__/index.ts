@@ -17,5 +17,7 @@ test("should return status code 0", () => {
 });
 
 test("should print the message", () => {
-  expect(result.stderr).toMatchSnapshot();
+  expect(result.stderr).toEqual(
+    expect.stringContaining("Components are valid")
+  );
 });

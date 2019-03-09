@@ -16,8 +16,6 @@ Object {
         "d",
         "e",
       ],
-      Symbol(type): Symbol(table),
-      Symbol(declared): true,
     },
     "prod": Object {
       "components": Array [
@@ -27,11 +25,7 @@ Object {
       "require": Array [
         "h",
       ],
-      Symbol(type): Symbol(table),
-      Symbol(declared): true,
     },
-    Symbol(type): Symbol(table),
-    Symbol(declared): false,
   },
   "extensions": Array [
     "js",
@@ -41,17 +35,11 @@ Object {
     "environment": Object {
       "component": "l",
       "global": "k",
-      Symbol(type): Symbol(table),
-      Symbol(declared): true,
     },
-    Symbol(type): Symbol(table),
-    Symbol(declared): false,
   },
   "require": Array [
     "a",
   ],
-  Symbol(type): Symbol(table),
-  Symbol(declared): false,
 }
 `;
 
@@ -71,8 +59,6 @@ Object {
         "d",
         "e",
       ],
-      Symbol(type): Symbol(table),
-      Symbol(declared): true,
     },
     "prod": Object {
       "components": Array [
@@ -82,11 +68,7 @@ Object {
       "require": Array [
         "h",
       ],
-      Symbol(type): Symbol(table),
-      Symbol(declared): true,
     },
-    Symbol(type): Symbol(table),
-    Symbol(declared): false,
   },
   "extensions": Array [
     "js",
@@ -96,16 +78,10 @@ Object {
     "environment": Object {
       "component": "l",
       "global": "k",
-      Symbol(type): Symbol(table),
-      Symbol(declared): true,
     },
-    Symbol(type): Symbol(table),
-    Symbol(declared): false,
   },
   "require": Array [
     "a",
   ],
-  Symbol(type): Symbol(table),
-  Symbol(declared): false,
 }
 `;
