@@ -20,7 +20,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">= 6.9.0"
+    "node": ">= 8"
   },
   "dependencies": {
     "@kosko/require": "^0.1.8",

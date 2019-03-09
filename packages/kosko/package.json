@@ -23,7 +23,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">= 6.9.0"
+    "node": ">= 8"
   },
   "dependencies": {
     "@kosko/cli": "^0.8.2",

@@ -24,7 +24,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">= 6.9.0"
+    "node": ">= 8"
   },
   "dependencies": {
     "@kosko/template": "^0.3.7",
