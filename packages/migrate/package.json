@@ -25,7 +25,6 @@
   "dependencies": {
     "camelcase": "^5.0.0",
     "js-yaml": "^3.12.1",
-    "kubernetes-models": "^0.4.0",
     "tslib": "^1.9.3"
   },
   "devDependencies": {

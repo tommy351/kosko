@@ -1,7 +1,7 @@
 "use strict";
 
-const { Deployment } = require("kubernetes-models/api/apps/v1");
-const { Service } = require("kubernetes-models/api/core/v1");
+const { Deployment } = require("kubernetes-models/apps/v1");
+const { Service } = require("kubernetes-models/v1");
 
 const metadata = { name: "nginx" };
 const labels = { app: "nginx" };

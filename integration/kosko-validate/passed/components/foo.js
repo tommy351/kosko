@@ -1,4 +1,4 @@
-const { Pod } = require("kubernetes-models/api/core/v1");
+const { Pod } = require("kubernetes-models/v1");
 
 module.exports = new Pod({
   metadata: {

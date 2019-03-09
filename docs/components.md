@@ -26,7 +26,7 @@ Export manifests to `module.exports` in CommonJS modules or `export default` in 
 ### Single Manifest
 
 ```js
-const { Deployment } = require("kubernetes-models/api/apps/v1");
+const { Deployment } = require("kubernetes-models/apps/v1");
 
 module.exports = new Deployment();
 ```
@@ -34,8 +34,8 @@ module.exports = new Deployment();
 ### Multiple Manifests
 
 ```js
-const { Deployment } = require("kubernetes-models/api/apps/v1");
-const { Service } = require("kubernetes-models/api/core/v1");
+const { Deployment } = require("kubernetes-models/apps/v1");
+const { Service } = require("kubernetes-models/v1");
 
 module.exports = [new Deployment(), new Service()];
 ```
@@ -43,8 +43,8 @@ module.exports = [new Deployment(), new Service()];
 ### In a Function
 
 ```js
-const { Deployment } = require("kubernetes-models/api/apps/v1");
-const { Service } = require("kubernetes-models/api/core/v1");
+const { Deployment } = require("kubernetes-models/apps/v1");
+const { Service } = require("kubernetes-models/v1");
 
 module.exports = function() {
   return [new Deployment(), new Service()];
@@ -54,8 +54,8 @@ module.exports = function() {
 ### In a Async Function
 
 ```js
-const { Deployment } = require("kubernetes-models/api/apps/v1");
-const { Service } = require("kubernetes-models/api/core/v1");
+const { Deployment } = require("kubernetes-models/apps/v1");
+const { Service } = require("kubernetes-models/v1");
 
 module.exports = async function() {
   return [new Deployment(), new Service()];

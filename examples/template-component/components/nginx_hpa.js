@@ -1,6 +1,6 @@
 "use strict";
 
-const { HorizontalPodAutoscaler } = require("kubernetes-models/api/autoscaling/v1");
+const { HorizontalPodAutoscaler } = require("kubernetes-models/autoscaling/v1");
 
 module.exports = new HorizontalPodAutoscaler({
   metadata: {

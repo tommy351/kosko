@@ -1,6 +1,5 @@
 import camelcase from "camelcase";
 import yaml from "js-yaml";
-import { getImportPath } from "kubernetes-models/resolve";
 
 export interface Manifest {
   apiVersion: string;
@@ -23,12 +22,17 @@ function jsonStringify(data: any): string {
   return JSON.stringify(data, null, "  ");
 }
 
+function getGroup(apiVersion: string): string {
+  const arr = apiVersion.split("/");
+  return arr.length === 1 ? "" : arr[0];
+}
+
 function generateComponent(manifest: Manifest): Component {
   const { apiVersion, kind, ...data } = manifest;
   const name = camelcase(kind);
-  const importPath = getImportPath(apiVersion, kind);
+  const group = getGroup(apiVersion);
 
-  if (!importPath) {
+  if (group && group.includes(".") && !group.endsWith(".k8s.io")) {
     return {
       name,
       text: jsonStringify(manifest),
@@ -41,7 +45,7 @@ function generateComponent(manifest: Manifest): Component {
     text: `new ${kind}(${jsonStringify(data)})`,
     imports: [
       {
-        path: "kubernetes-models/" + importPath,
+        path: `kubernetes-models/${apiVersion}/${kind}`,
         names: [kind]
       }
     ]

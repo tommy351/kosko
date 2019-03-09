@@ -6,7 +6,7 @@ exports[`success should create package.json 1`] = `
 "{
   \\"dependencies\\": {
     \\"@kosko/env\\": \\"^0.4.1\\",
-    \\"kubernetes-models\\": \\"^0.3.3\\"
+    \\"kubernetes-models\\": \\"^0.5.0\\"
   }
 }"
 `;
@@ -18,7 +18,7 @@ exports[`when the target exists when package.json exists should update package.j
   \\"dependencies\\": {
     \\"@kosko/env\\": \\"^0.4.1\\",
     \\"debug\\": \\"3.2.1\\",
-    \\"kubernetes-models\\": \\"^0.3.3\\"
+    \\"kubernetes-models\\": \\"^0.5.0\\"
   }
 }"
 `;

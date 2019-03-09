@@ -56,8 +56,8 @@ Array [
 exports[`migrate given a List should generate code 1`] = `
 "\\"use strict\\";
 
-const { Deployment } = require(\\"kubernetes-models/api/apps/v1/Deployment\\");
-const { Service } = require(\\"kubernetes-models/api/core/v1/Service\\");
+const { Deployment } = require(\\"kubernetes-models/apps/v1/Deployment\\");
+const { Service } = require(\\"kubernetes-models/v1/Service\\");
 
 const deployment = new Deployment({
   \\"metadata\\": {
@@ -96,7 +96,7 @@ Array [
 exports[`migrate given a RBAC ClusterRoleBinding should generate code 1`] = `
 "\\"use strict\\";
 
-const { ClusterRoleBinding } = require(\\"kubernetes-models/api/rbac/v1/ClusterRoleBinding\\");
+const { ClusterRoleBinding } = require(\\"kubernetes-models/rbac.authorization.k8s.io/v1/ClusterRoleBinding\\");
 
 const clusterRoleBinding = new ClusterRoleBinding({
   \\"metadata\\": {
@@ -136,8 +136,8 @@ Array [
 exports[`migrate given multiple manifests of different kinds should generate code 1`] = `
 "\\"use strict\\";
 
-const { Deployment } = require(\\"kubernetes-models/api/apps/v1/Deployment\\");
-const { Service } = require(\\"kubernetes-models/api/core/v1/Service\\");
+const { Deployment } = require(\\"kubernetes-models/apps/v1/Deployment\\");
+const { Service } = require(\\"kubernetes-models/v1/Service\\");
 
 const deployment = new Deployment({
   \\"metadata\\": {
@@ -199,7 +199,7 @@ Array [
 exports[`migrate given multiple manifests of same kind should generate code 1`] = `
 "\\"use strict\\";
 
-const { ConfigMap } = require(\\"kubernetes-models/api/core/v1/ConfigMap\\");
+const { ConfigMap } = require(\\"kubernetes-models/v1/ConfigMap\\");
 
 const configMap = new ConfigMap({
   \\"metadata\\": {
@@ -258,7 +258,7 @@ Array [
 exports[`migrate given single manifest should generate code 1`] = `
 "\\"use strict\\";
 
-const { Pod } = require(\\"kubernetes-models/api/core/v1/Pod\\");
+const { Pod } = require(\\"kubernetes-models/v1/Pod\\");
 
 const pod = new Pod({
   \\"metadata\\": {
@@ -276,7 +276,7 @@ module.exports = [pod];
 exports[`migrateString given empty objects in YAML should ignore them 1`] = `
 "\\"use strict\\";
 
-const { Pod } = require(\\"kubernetes-models/api/core/v1/Pod\\");
+const { Pod } = require(\\"kubernetes-models/v1/Pod\\");
 
 const pod = new Pod({
   \\"metadata\\": {
@@ -291,7 +291,7 @@ module.exports = [pod];
 exports[`migrateString given valid JSON should generate code 1`] = `
 "\\"use strict\\";
 
-const { Pod } = require(\\"kubernetes-models/api/core/v1/Pod\\");
+const { Pod } = require(\\"kubernetes-models/v1/Pod\\");
 
 const pod = new Pod({
   \\"metadata\\": {
@@ -309,7 +309,7 @@ module.exports = [pod];
 exports[`migrateString given valid YAML should generate code 1`] = `
 "\\"use strict\\";
 
-const { Pod } = require(\\"kubernetes-models/api/core/v1/Pod\\");
+const { Pod } = require(\\"kubernetes-models/v1/Pod\\");
 
 const pod = new Pod({
   \\"metadata\\": {

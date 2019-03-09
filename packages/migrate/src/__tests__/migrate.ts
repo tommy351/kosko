@@ -1,10 +1,10 @@
 /// <reference types="jest-extended"/>
 import isPlainObject from "is-plain-object";
 import { YAMLException } from "js-yaml";
-import { Deployment } from "kubernetes-models/api/apps/v1/Deployment";
-import { ConfigMap } from "kubernetes-models/api/core/v1/ConfigMap";
-import { Pod } from "kubernetes-models/api/core/v1/Pod";
-import { Service } from "kubernetes-models/api/core/v1/Service";
+import { Deployment } from "kubernetes-models/apps/v1/Deployment";
+import { ConfigMap } from "kubernetes-models/v1/ConfigMap";
+import { Pod } from "kubernetes-models/v1/Pod";
+import { Service } from "kubernetes-models/v1/Service";
 import { ClusterRoleBinding } from "kubernetes-models/api/rbac/v1/ClusterRoleBinding";
 import Module from "module";
 import { runInThisContext } from "vm";
