@@ -13,7 +13,7 @@ const readFile = promisify(fs.readFile);
 let tmpDir: tmp.DirectoryResult;
 let files: File[];
 
-function readTmpFile(path: string) {
+function readTmpFile(path: string): Promise<string> {
   return readFile(join(tmpDir.path, path), "utf8");
 }
 

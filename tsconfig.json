@@ -3,18 +3,13 @@
     "target": "es2015",
     "module": "commonjs",
     "moduleResolution": "node",
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
     "preserveConstEnums": true,
     "strict": true,
     "strictNullChecks": true,
     "noEmitHelpers": true,
     "importHelpers": true,
-    "suppressImplicitAnyIndexErrors": false,
-    "alwaysStrict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "experimentalDecorators": true,
-    "noUnusedLocals": true
+    "experimentalDecorators": true
   }
 }

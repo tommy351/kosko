@@ -3,7 +3,7 @@ import { ValidationError } from "../error";
 let cause: Error;
 let err: ValidationError;
 
-function extractStack(stack: string) {
+function extractStack(stack: string): string {
   const pos = stack.search(/(?:\n {4}at .*)+/);
   return stack.substring(pos);
 }

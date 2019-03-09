@@ -5,7 +5,7 @@ import {
   searchConfig
 } from "@kosko/config";
 import { Environment } from "@kosko/env";
-import { generate, print, PrintFormat } from "@kosko/generate";
+import { generate, print, PrintFormat, Result } from "@kosko/generate";
 import { requireDefault, resolve } from "@kosko/require";
 import { join } from "path";
 import { Argv } from "yargs";
@@ -26,7 +26,7 @@ export interface GenerateArguments extends BaseGenerateArguments {
   output: PrintFormat;
 }
 
-async function localRequire(id: string, cwd: string) {
+async function localRequire(id: string, cwd: string): Promise<any> {
   debug("Finding module %s in %s", id, cwd);
   const path = await resolve(id, { basedir: cwd });
   debug("Importing %s from %s", id, path);
@@ -75,7 +75,9 @@ export function generateBuilder(
     });
 }
 
-export async function generateHandler(args: BaseGenerateArguments & Context) {
+export async function generateHandler(
+  args: BaseGenerateArguments & Context
+): Promise<Result> {
   // Load config
   const globalConfig = await searchConfig(args.cwd);
   const config = {

@@ -13,7 +13,10 @@ const writeFile = promisify(fs.writeFile);
  * @param path Destination path
  * @param files Files to write
  */
-export async function writeFiles(path: string, files: ReadonlyArray<File>) {
+export async function writeFiles(
+  path: string,
+  files: ReadonlyArray<File>
+): Promise<void> {
   for (const file of files) {
     const filePath = join(path, file.path);
 

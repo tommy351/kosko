@@ -30,6 +30,16 @@ export interface GenerateOptions {
   validate?: boolean;
 }
 
+async function getComponentValue(id: string): Promise<any> {
+  const mod = requireDefault(id);
+
+  if (typeof mod === "function") {
+    return await mod();
+  }
+
+  return mod;
+}
+
 /**
  * Finds components with glob patterns in the specified path and returns exported values
  * from each components.
@@ -89,14 +99,4 @@ export async function generate(options: GenerateOptions): Promise<Result> {
   }
 
   return { manifests };
-}
-
-async function getComponentValue(id: string) {
-  const mod = requireDefault(id);
-
-  if (typeof mod === "function") {
-    return await mod();
-  }
-
-  return mod;
 }

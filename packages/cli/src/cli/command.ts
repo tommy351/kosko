@@ -43,15 +43,6 @@ export function setLogger<T extends Context>(ctx: T, logger: Signale): T {
   };
 }
 
-export function wrapCommand<T extends RootArguments>(
-  cmd: Command<T>
-): RootCommandModule<T> {
-  return {
-    ...cmd,
-    handler: wrapHandler(cmd.handler)
-  } as any;
-}
-
 export function wrapHandler<T extends RootArguments>(
   handler: CommandHandler<T>
 ): CommandHandler<T> {
@@ -70,14 +61,16 @@ export function wrapHandler<T extends RootArguments>(
   };
 }
 
-export function parse(input: Argv, argv: string[]): Promise<void> {
-  return new Promise((resolve, reject) => {
-    const ctx: Context = { [RESOLVE]: resolve, [REJECT]: reject };
-    input.parse(argv, ctx, handleParse);
-  });
+export function wrapCommand<T extends RootArguments>(
+  cmd: Command<T>
+): RootCommandModule<T> {
+  return {
+    ...cmd,
+    handler: wrapHandler(cmd.handler)
+  } as any;
 }
 
-function handleParse(err: Error | undefined, args: any, output: string) {
+function handleParse(err: Error | undefined, args: any, output: string): void {
   const ctx = args as Context;
 
   if (err || output) {
@@ -88,4 +81,11 @@ function handleParse(err: Error | undefined, args: any, output: string) {
   if (!ctx[HANDLED]) {
     ctx[RESOLVE]();
   }
+}
+
+export function parse(input: Argv, argv: string[]): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const ctx: Context = { [RESOLVE]: resolve, [REJECT]: reject };
+    input.parse(argv, ctx, handleParse);
+  });
 }

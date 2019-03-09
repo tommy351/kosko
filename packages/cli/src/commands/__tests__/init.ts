@@ -11,7 +11,7 @@ const readFile = promisify(fs.readFile);
 const stat = promisify(fs.stat);
 const logger = new Signale({ disabled: true });
 
-async function execute(args: Partial<InitArguments>) {
+async function execute(args: Partial<InitArguments>): Promise<void> {
   const ctx = setLogger(args as any, logger);
   await initCmd.handler(ctx);
 }
@@ -89,12 +89,12 @@ describe("success", () => {
 
   afterAll(() => tmpDir.cleanup());
 
-  async function assertDir(...names: string[]) {
+  async function assertDir(...names: string[]): Promise<void> {
     const stats = await stat(join(path, ...names));
     expect(stats.isDirectory()).toBeTruthy();
   }
 
-  async function assertFile(...names: string[]) {
+  async function assertFile(...names: string[]): Promise<void> {
     const content = await readFile(join(path, ...names), "utf8");
     expect(content).toMatchSnapshot();
   }

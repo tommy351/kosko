@@ -1,7 +1,7 @@
 export class ValidationError extends Error {
   public readonly name = "ValidationError";
 
-  constructor(
+  public constructor(
     public readonly path: string,
     public readonly index: number,
     public readonly cause: Error

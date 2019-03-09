@@ -39,7 +39,7 @@ beforeEach(async () => {
 
 afterEach(() => tmpDir.cleanup());
 
-async function assertFiles(cwd: string) {
+async function assertFiles(cwd: string): Promise<void> {
   const paths = ["foo", "bar/baz"];
 
   for (const path of paths) {

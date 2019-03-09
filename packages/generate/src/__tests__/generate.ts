@@ -310,7 +310,7 @@ describe("given extensions", () => {
 });
 
 describe("given validate = true", () => {
-  function execute() {
+  function execute(): Promise<Result> {
     return generate({
       components: ["*"],
       path: tmpDir.path,

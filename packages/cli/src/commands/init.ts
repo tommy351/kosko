@@ -13,15 +13,15 @@ const writeFile = promisify(fs.writeFile);
 
 const DEFAULT_CONFIG = `components = ["*"]`;
 
-function exists(path: string) {
+function exists(path: string): Promise<boolean> {
   return new Promise(res => fs.exists(path, res));
 }
 
-export function writeJSON(path: string, data: any) {
+export function writeJSON(path: string, data: any): Promise<void> {
   return writeFile(path, JSON.stringify(data, null, "  "));
 }
 
-function sortKeys(data: any) {
+function sortKeys(data: any): any {
   const result: any = {};
 
   for (const key of Object.keys(data).sort()) {
@@ -31,7 +31,7 @@ function sortKeys(data: any) {
   return result;
 }
 
-async function updatePkg(path: string, data: any) {
+async function updatePkg(path: string, data: any): Promise<void> {
   let base: any = {};
 
   try {

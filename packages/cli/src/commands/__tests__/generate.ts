@@ -25,7 +25,7 @@ let args: Partial<GenerateArguments>;
 let tmpDir: tmp.DirectoryResult;
 let result: Result;
 
-async function createFakeModule(id: string) {
+async function createFakeModule(id: string): Promise<void> {
   const dir = join(tmpDir.path, "node_modules", id);
   await makeDir(dir);
   await writeFile(
@@ -34,12 +34,12 @@ async function createFakeModule(id: string) {
   );
 }
 
-async function getLoadedFakeModules() {
+async function getLoadedFakeModules(): Promise<ReadonlyArray<string>> {
   const content = await readFile(join(tmpDir.path, "fakeModules"), "utf8");
   return content.split(",").filter(Boolean);
 }
 
-async function execute() {
+async function execute(): Promise<void> {
   // Mock result
   (generate as jest.Mock).mockResolvedValueOnce(result);
 

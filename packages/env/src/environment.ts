@@ -5,7 +5,7 @@ import Debug from "debug";
 const debug = Debug("kosko:env");
 const rTemplate = /#\{(\w+)\}/g;
 
-function tryRequire(id: string) {
+function tryRequire(id: string): any {
   try {
     return requireDefault(id);
   } catch (err) {
@@ -30,14 +30,14 @@ export class Environment {
     component: "environments/#{environment}/#{component}"
   };
 
-  constructor(public cwd: string) {}
+  public constructor(public cwd: string) {}
 
   /**
    * Returns global variables.
    *
    * If env is not set or require failed, returns an empty object.
    */
-  public global() {
+  public global(): any {
     return this.require(this.paths.global);
   }
 
@@ -48,14 +48,14 @@ export class Environment {
    *
    * @param name Component name
    */
-  public component(name: string) {
+  public component(name: string): any {
     return {
       ...this.global(),
       ...this.require(this.paths.component, name)
     };
   }
 
-  private require(template: string, component?: string) {
+  private require(template: string, component?: string): any {
     if (!this.env) return {};
 
     const data: any = {

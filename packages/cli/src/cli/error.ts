@@ -7,7 +7,7 @@ export class CLIError extends Error {
   public readonly output?: string;
   public readonly code?: number;
 
-  constructor(
+  public constructor(
     msg: string,
     { output, code }: { output?: string; code?: number } = {}
   ) {
@@ -17,7 +17,7 @@ export class CLIError extends Error {
   }
 }
 
-export function formatError(err: Error) {
+export function formatError(err: Error): string {
   if (!err.stack) return err.message;
 
   const stack = cleanStack(err.stack, { pretty: true });
@@ -28,7 +28,7 @@ export function formatError(err: Error) {
   return stack.substring(0, pos) + chalk.gray(stack.substring(pos));
 }
 
-export function handleError(err: any) {
+export function handleError(err: any): void {
   let code = 1;
   let msg = err;
 

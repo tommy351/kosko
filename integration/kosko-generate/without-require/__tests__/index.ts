@@ -12,6 +12,7 @@ let options: execa.Options;
 
 beforeAll(async () => {
   const root = await pkgDir();
+
   await symlinkDir(
     join(root!, "packages", "env"),
     join(testDir, "node_modules", "@kosko", "env")

@@ -8,7 +8,7 @@ jest.mock("../generate");
 const logger = new Signale({ disabled: true });
 let args: Partial<ValidateArguments>;
 
-async function execute() {
+async function execute(): Promise<void> {
   const ctx = setLogger(args as any, logger);
   await validateCmd.handler(ctx);
 }

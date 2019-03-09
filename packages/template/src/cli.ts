@@ -14,7 +14,7 @@ import { writeFiles } from "./write";
 export async function run(
   template: Template<any>,
   argv: string[] = process.argv.slice(2)
-) {
+): Promise<void> {
   const cmd = yargs.option("cwd", {
     type: "string",
     describe: "Path of working directory",

@@ -15,7 +15,7 @@ describe("migrate", () => {
   let code: string;
   let exported: any;
 
-  function execute() {
+  function execute(): void {
     code = migrate(data);
 
     const mod = new Module("");
@@ -264,7 +264,7 @@ describe("migrate", () => {
 
   describe("when apiVersion does not exist", () => {
     test("should throw an error", () => {
-      expect(() => migrate([{} as any])).toThrowError(
+      expect(() => migrate([{} as any])).toThrow(
         "apiVersion and kind is required"
       );
     });
@@ -272,7 +272,7 @@ describe("migrate", () => {
 
   describe("when kind does not exist", () => {
     test("should throw an error", () => {
-      expect(() => migrate([{} as any])).toThrowError(
+      expect(() => migrate([{} as any])).toThrow(
         "apiVersion and kind is required"
       );
     });

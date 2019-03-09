@@ -12,22 +12,6 @@ const stat = promisify(fs.stat);
 const readFile = promisify(fs.readFile);
 const readDir = promisify(fs.readdir);
 
-function readFileString(path: string) {
-  debug("Reading file", path);
-  return readFile(path, "utf8");
-}
-
-async function readFilesInDir(dir: string) {
-  debug("Reading directory", dir);
-
-  const files = await readDir(dir);
-  const contents = await Promise.all(
-    files.map(file => readFileString(join(dir, file)))
-  );
-
-  return concatFiles(contents);
-}
-
 function concatFiles(arr: ReadonlyArray<string>): string {
   if (!arr.length) return "";
   let output = "";
@@ -38,6 +22,22 @@ function concatFiles(arr: ReadonlyArray<string>): string {
   }
 
   return output;
+}
+
+function readFileString(path: string): Promise<string> {
+  debug("Reading file", path);
+  return readFile(path, "utf8");
+}
+
+async function readFilesInDir(dir: string): Promise<string> {
+  debug("Reading directory", dir);
+
+  const files = await readDir(dir);
+  const contents = await Promise.all(
+    files.map(file => readFileString(join(dir, file)))
+  );
+
+  return concatFiles(contents);
 }
 
 function readFiles(

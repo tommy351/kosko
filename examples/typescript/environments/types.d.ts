@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as env from "@kosko/env";
 
 // Declare types for global environment variables

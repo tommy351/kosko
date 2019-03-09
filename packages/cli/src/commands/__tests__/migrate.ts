@@ -16,7 +16,7 @@ const readFile = promisify(fs.readFile);
 const fixturePath = join(__dirname, "..", "__fixtures__");
 const logger = new Signale({ disabled: true });
 
-async function execute(args: Partial<MigrateArguments>) {
+async function execute(args: Partial<MigrateArguments>): Promise<void> {
   const ctx = setLogger({ cwd: fixturePath, ...args } as any, logger);
   await migrateCmd.handler(ctx);
 }

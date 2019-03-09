@@ -145,7 +145,7 @@ export function migrate(data: ReadonlyArray<Manifest>): string {
  *
  * @param input Kubernetes YAML string
  */
-export function migrateString(input: string) {
+export function migrateString(input: string): string {
   const data = yaml
     .safeLoadAll(input)
     .filter(x => x != null && typeof x === "object");

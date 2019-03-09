@@ -15,11 +15,11 @@ export interface PrintOptions {
 type Printer<T> = (writer: Writable, data: T) => void;
 type PrinterMap<T> = { [key in PrintFormat]: Printer<T> };
 
-function stringifyYAML(data: any) {
+function stringifyYAML(data: any): string {
   return yaml.safeDump(data, { noRefs: true });
 }
 
-function stringifyJSON(data: any) {
+function stringifyJSON(data: any): string {
   return JSON.stringify(data, null, "  ");
 }
 
@@ -50,7 +50,7 @@ const arrPrinters: PrinterMap<any[]> = {
  * @param result
  * @param options
  */
-export function print(result: Result, { format, writer }: PrintOptions) {
+export function print(result: Result, { format, writer }: PrintOptions): void {
   const data = result.manifests.map(manifest => manifest.data);
   if (!data.length) return;
 
