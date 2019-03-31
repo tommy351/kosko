@@ -1,0 +1,260 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when filename is not given should print the error 1`] = `
+"kosko migrate
+
+Migrate YAML into components
+
+Global Options:
+  --cwd      Path of working directory                   [string] [default: CWD]
+  --silent   Disable log output                       [boolean] [default: false]
+  --help     Show help                                                 [boolean]
+  --version  Show version number                                       [boolean]
+
+Options:
+  --filename, -f  File, directory to migrate                 [string] [required]
+
+Examples:
+  kosko migrate -f path/to/file  Read from the path
+  kosko migrate -f -             Read from stdin
+
+Missing required argument: filename
+"
+`;
+
+exports[`when path is - should print the output 1`] = `
+"\\"use strict\\";
+
+const { Deployment } = require(\\"kubernetes-models/apps/v1/Deployment\\");
+
+const deployment = new Deployment({
+  \\"metadata\\": {
+    \\"name\\": \\"redis-master\\",
+    \\"labels\\": {
+      \\"app\\": \\"redis\\"
+    }
+  },
+  \\"spec\\": {
+    \\"selector\\": {
+      \\"matchLabels\\": {
+        \\"app\\": \\"redis\\",
+        \\"role\\": \\"master\\",
+        \\"tier\\": \\"backend\\"
+      }
+    },
+    \\"replicas\\": 1,
+    \\"template\\": {
+      \\"metadata\\": {
+        \\"labels\\": {
+          \\"app\\": \\"redis\\",
+          \\"role\\": \\"master\\",
+          \\"tier\\": \\"backend\\"
+        }
+      },
+      \\"spec\\": {
+        \\"containers\\": [
+          {
+            \\"name\\": \\"master\\",
+            \\"image\\": \\"k8s.gcr.io/redis:e2e\\",
+            \\"resources\\": {
+              \\"requests\\": {
+                \\"cpu\\": \\"100m\\",
+                \\"memory\\": \\"100Mi\\"
+              }
+            },
+            \\"ports\\": [
+              {
+                \\"containerPort\\": 6379
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+});
+
+module.exports = [deployment];"
+`;
+
+exports[`when path is a directory should print the output 1`] = `
+"\\"use strict\\";
+
+const { Deployment } = require(\\"kubernetes-models/apps/v1/Deployment\\");
+const { Service } = require(\\"kubernetes-models/v1/Service\\");
+
+const deployment = new Deployment({
+  \\"metadata\\": {
+    \\"name\\": \\"redis-master\\",
+    \\"labels\\": {
+      \\"app\\": \\"redis\\"
+    }
+  },
+  \\"spec\\": {
+    \\"selector\\": {
+      \\"matchLabels\\": {
+        \\"app\\": \\"redis\\",
+        \\"role\\": \\"master\\",
+        \\"tier\\": \\"backend\\"
+      }
+    },
+    \\"replicas\\": 1,
+    \\"template\\": {
+      \\"metadata\\": {
+        \\"labels\\": {
+          \\"app\\": \\"redis\\",
+          \\"role\\": \\"master\\",
+          \\"tier\\": \\"backend\\"
+        }
+      },
+      \\"spec\\": {
+        \\"containers\\": [
+          {
+            \\"name\\": \\"master\\",
+            \\"image\\": \\"k8s.gcr.io/redis:e2e\\",
+            \\"resources\\": {
+              \\"requests\\": {
+                \\"cpu\\": \\"100m\\",
+                \\"memory\\": \\"100Mi\\"
+              }
+            },
+            \\"ports\\": [
+              {
+                \\"containerPort\\": 6379
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+});
+
+const service = new Service({
+  \\"metadata\\": {
+    \\"name\\": \\"redis-master\\",
+    \\"labels\\": {
+      \\"app\\": \\"redis\\",
+      \\"role\\": \\"master\\",
+      \\"tier\\": \\"backend\\"
+    }
+  },
+  \\"spec\\": {
+    \\"ports\\": [
+      {
+        \\"port\\": 6379,
+        \\"targetPort\\": 6379
+      }
+    ],
+    \\"selector\\": {
+      \\"app\\": \\"redis\\",
+      \\"role\\": \\"master\\",
+      \\"tier\\": \\"backend\\"
+    }
+  }
+});
+
+const deployment1 = new Deployment({
+  \\"metadata\\": {
+    \\"name\\": \\"redis-master\\",
+    \\"labels\\": {
+      \\"app\\": \\"redis\\"
+    }
+  },
+  \\"spec\\": {
+    \\"selector\\": {
+      \\"matchLabels\\": {
+        \\"app\\": \\"redis\\",
+        \\"role\\": \\"master\\",
+        \\"tier\\": \\"backend\\"
+      }
+    },
+    \\"replicas\\": 1,
+    \\"template\\": {
+      \\"metadata\\": {
+        \\"labels\\": {
+          \\"app\\": \\"redis\\",
+          \\"role\\": \\"master\\",
+          \\"tier\\": \\"backend\\"
+        }
+      },
+      \\"spec\\": {
+        \\"containers\\": [
+          {
+            \\"name\\": \\"master\\",
+            \\"image\\": \\"k8s.gcr.io/redis:e2e\\",
+            \\"resources\\": {
+              \\"requests\\": {
+                \\"cpu\\": \\"100m\\",
+                \\"memory\\": \\"100Mi\\"
+              }
+            },
+            \\"ports\\": [
+              {
+                \\"containerPort\\": 6379
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+});
+
+module.exports = [deployment, service, deployment1];"
+`;
+
+exports[`when path is a file should print the output 1`] = `
+"\\"use strict\\";
+
+const { Deployment } = require(\\"kubernetes-models/apps/v1/Deployment\\");
+
+const deployment = new Deployment({
+  \\"metadata\\": {
+    \\"name\\": \\"redis-master\\",
+    \\"labels\\": {
+      \\"app\\": \\"redis\\"
+    }
+  },
+  \\"spec\\": {
+    \\"selector\\": {
+      \\"matchLabels\\": {
+        \\"app\\": \\"redis\\",
+        \\"role\\": \\"master\\",
+        \\"tier\\": \\"backend\\"
+      }
+    },
+    \\"replicas\\": 1,
+    \\"template\\": {
+      \\"metadata\\": {
+        \\"labels\\": {
+          \\"app\\": \\"redis\\",
+          \\"role\\": \\"master\\",
+          \\"tier\\": \\"backend\\"
+        }
+      },
+      \\"spec\\": {
+        \\"containers\\": [
+          {
+            \\"name\\": \\"master\\",
+            \\"image\\": \\"k8s.gcr.io/redis:e2e\\",
+            \\"resources\\": {
+              \\"requests\\": {
+                \\"cpu\\": \\"100m\\",
+                \\"memory\\": \\"100Mi\\"
+              }
+            },
+            \\"ports\\": [
+              {
+                \\"containerPort\\": 6379
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+});
+
+module.exports = [deployment];"
+`;
