@@ -59,8 +59,12 @@ function readFiles(
   );
 }
 
+function toArray<T>(input: T): T[] {
+  return Array.isArray(input) ? input : [input];
+}
+
 export interface MigrateArguments extends RootArguments {
-  filename: string[];
+  filename: any;
 }
 
 export const migrateCmd: Command<MigrateArguments> = {
@@ -68,19 +72,23 @@ export const migrateCmd: Command<MigrateArguments> = {
   describe: "Migrate YAML into components",
   builder(argv) {
     /* istanbul ignore next */
-    return argv
-      .option("filename", {
-        type: "string",
-        describe: "File, directory to migrate",
-        required: true,
-        alias: "f",
-        array: true
-      })
-      .example("$0 migrate -f path/to/file", "Read from the path")
-      .example("$0 migrate -f -", "Read from stdin");
+    return (
+      argv
+        // HACK: Don't set the type of filename option to "array" because yargs
+        // can't parse `migrate -f -` properly.
+        // Link: https://github.com/tommy351/kosko/issues/17
+        .option("filename", {
+          type: "string",
+          describe: "File, directory to migrate",
+          required: true,
+          alias: "f"
+        })
+        .example("$0 migrate -f path/to/file", "Read from the path")
+        .example("$0 migrate -f -", "Read from stdin")
+    );
   },
   async handler(args) {
-    const file = concatFiles(await readFiles(args.cwd, args.filename));
+    const file = concatFiles(await readFiles(args.cwd, toArray(args.filename)));
     const content = migrateString(file);
 
     await print(content);

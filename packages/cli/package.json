@@ -52,6 +52,6 @@
     "@types/exit": "^0.1.30",
     "@types/get-stdin": "^5.0.1",
     "@types/signale": "^1.2.1",
-    "@types/yargs": "^12.0.9"
+    "@types/yargs": "^12.0.10"
   }
 }
