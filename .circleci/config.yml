@@ -14,7 +14,7 @@ commands:
     steps:
       - run:
           name: Bootstrap
-          command: npm run bootstrap
+          command: npm run bootstrap -- --no-ci
       - run:
           name: Build
           command: npm run build
