@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { Environment } from "../environment";
 import { join } from "path";
+import { merge } from "../merge";
 
 const fixturePath = join(__dirname, "..", "__fixtures__");
 let env: Environment;
@@ -19,17 +21,15 @@ describe("when env is set", () => {
 
     describe("global", () => {
       test("shold return global vars", () => {
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
         expect(env.global()).toEqual(require(envPath));
       });
     });
 
     describe("component", () => {
       test("shold return global + component vars", () => {
-        expect(env.component("foo")).toEqual({
-          ...require(envPath),
-          ...require(join(envPath, "foo"))
-        });
+        expect(env.component("foo")).toEqual(
+          merge(require(envPath), require(join(envPath, "foo")))
+        );
       });
     });
   });
@@ -50,10 +50,9 @@ describe("when env is set", () => {
 
     describe("component", () => {
       test("shold return global + component vars", () => {
-        expect(env.component("foo")).toEqual({
-          ...require(envPath).default,
-          ...require(join(envPath, "foo")).default
-        });
+        expect(env.component("foo")).toEqual(
+          merge(require(envPath).default, require(join(envPath, "foo")).default)
+        );
       });
     });
   });
@@ -98,7 +97,6 @@ describe("when env is set", () => {
 
       test("should load from custom path", () => {
         expect(env.global()).toEqual(
-          // eslint-disable-next-line @typescript-eslint/no-var-requires
           require(join(fixturePath, "foo", env.env!))
         );
       });
@@ -111,7 +109,6 @@ describe("when env is set", () => {
 
       test("should load from custom path", () => {
         expect(env.component("bar")).toEqual(
-          // eslint-disable-next-line @typescript-eslint/no-var-requires
           require(join(fixturePath, "foo", "bar", env.env!))
         );
       });
