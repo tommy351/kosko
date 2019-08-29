@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`when validate is false should print the manifest 1`] = `
-"apiVersion: v1
-kind: Pod
-metadata:
+"metadata:
   name: foo
-spec: {}"
+spec: {}
+apiVersion: v1
+kind: Pod"
 `;

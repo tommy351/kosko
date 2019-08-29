@@ -2,7 +2,7 @@ import execa from "execa";
 import { dirname } from "path";
 import { runCLI } from "../../../run";
 
-let result: execa.ExecaReturns;
+let result: execa.ExecaReturnValue;
 
 beforeEach(async () => {
   result = await runCLI(["generate"], {
@@ -11,7 +11,7 @@ beforeEach(async () => {
 });
 
 test("should return status code 0", () => {
-  expect(result.code).toEqual(0);
+  expect(result.exitCode).toEqual(0);
 });
 
 test("should import ts files", () => {

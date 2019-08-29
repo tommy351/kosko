@@ -14,7 +14,7 @@ const writeFile = promisify(fs.writeFile);
 const DEFAULT_CONFIG = `components = ["*"]`;
 
 function exists(path: string): Promise<boolean> {
-  return new Promise(res => fs.exists(path, res));
+  return new Promise((res): void => fs.exists(path, res));
 }
 
 export function writeJSON(path: string, data: any): Promise<void> {

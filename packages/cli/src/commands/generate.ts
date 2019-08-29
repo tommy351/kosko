@@ -140,7 +140,7 @@ export const generateCmd: Command<GenerateArguments> = {
         type: "string",
         describe: "Output format",
         default: PrintFormat.YAML,
-        choices: Object.keys(PrintFormat).map(key => PrintFormat[key as any]),
+        choices: Object.keys(PrintFormat).map(key => (PrintFormat as any)[key]),
         alias: "o"
       })
       .option("validate", {

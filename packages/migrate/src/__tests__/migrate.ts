@@ -5,7 +5,7 @@ import { Deployment } from "kubernetes-models/apps/v1/Deployment";
 import { ConfigMap } from "kubernetes-models/v1/ConfigMap";
 import { Pod } from "kubernetes-models/v1/Pod";
 import { Service } from "kubernetes-models/v1/Service";
-import { ClusterRoleBinding } from "kubernetes-models/api/rbac/v1/ClusterRoleBinding";
+import { ClusterRoleBinding } from "kubernetes-models/rbac.authorization.k8s.io/v1/ClusterRoleBinding";
 import Module from "module";
 import { runInThisContext } from "vm";
 import { Manifest, migrate, migrateString } from "../migrate";

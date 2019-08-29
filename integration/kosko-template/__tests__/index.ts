@@ -11,7 +11,7 @@ const copyFile = promisify(fs.copyFile);
 const readFile = promisify(fs.readFile);
 
 let args: string[];
-let result: execa.ExecaReturns;
+let result: execa.ExecaReturnValue;
 let options: execa.Options;
 let tmpDir: tmp.DirectoryResult;
 
@@ -55,7 +55,7 @@ describe("given args --help", () => {
   });
 
   test("should return status code 0", () => {
-    expect(result.code).toEqual(0);
+    expect(result.exitCode).toEqual(0);
   });
 
   test("should print help", () => {
@@ -70,7 +70,7 @@ describe("when required arg is not given", () => {
   });
 
   test("should return status code 1", () => {
-    expect(result.code).toEqual(1);
+    expect(result.exitCode).toEqual(1);
   });
 
   test("should print error", () => {
@@ -85,7 +85,7 @@ describe("when cwd is not set", () => {
   });
 
   test("should return status code 0", () => {
-    expect(result.code).toEqual(0);
+    expect(result.exitCode).toEqual(0);
   });
 
   test("should write files to process.cwd", async () => {
@@ -103,7 +103,7 @@ describe("when cwd is set", () => {
   });
 
   test("should return status code 0", () => {
-    expect(result.code).toEqual(0);
+    expect(result.exitCode).toEqual(0);
   });
 
   test("should write files to specified path", async () => {

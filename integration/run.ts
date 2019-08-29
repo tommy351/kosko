@@ -5,7 +5,7 @@ import { join } from "path";
 export async function runCLI(
   args: string[],
   options: execa.Options = {}
-): Promise<execa.ExecaReturns> {
+): Promise<execa.ExecaReturnValue> {
   const root = await pkgDir();
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

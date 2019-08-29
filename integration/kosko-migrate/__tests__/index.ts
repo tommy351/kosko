@@ -8,7 +8,7 @@ const fixtureDir = join(__dirname, "..", "__fixtures__");
 const readFile = promisify(fs.readFile);
 
 let args: string[];
-let result: execa.ExecaReturns;
+let result: execa.ExecaReturnValue;
 let options: execa.Options;
 
 beforeEach(async () => {
@@ -25,7 +25,7 @@ describe("when filename is not given", () => {
   });
 
   test("should return status code 1", () => {
-    expect(result.code).toEqual(1);
+    expect(result.exitCode).toEqual(1);
   });
 
   test("should print the error", () => {
@@ -42,7 +42,7 @@ describe("when path is -", () => {
   });
 
   test("should return status code 0", () => {
-    expect(result.code).toEqual(0);
+    expect(result.exitCode).toEqual(0);
   });
 
   test("should print the output", () => {
@@ -57,7 +57,7 @@ describe("when path is a file", () => {
   });
 
   test("should return status code 0", () => {
-    expect(result.code).toEqual(0);
+    expect(result.exitCode).toEqual(0);
   });
 
   test("should print the output", () => {
@@ -72,7 +72,7 @@ describe("when path is a directory", () => {
   });
 
   test("should return status code 0", () => {
-    expect(result.code).toEqual(0);
+    expect(result.exitCode).toEqual(0);
   });
 
   test("should print the output", () => {

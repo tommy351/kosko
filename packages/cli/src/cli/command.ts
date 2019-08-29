@@ -46,7 +46,7 @@ export function setLogger<T extends Context>(ctx: T, logger: Signale): T {
 export function wrapHandler<T extends RootArguments>(
   handler: CommandHandler<T>
 ): CommandHandler<T> {
-  return async args => {
+  return async (args): Promise<void> => {
     const logger = new Signale({
       stream: process.stderr,
       disabled: args.silent
@@ -84,7 +84,7 @@ function handleParse(err: Error | undefined, args: any, output: string): void {
 }
 
 export function parse(input: Argv, argv: string[]): Promise<void> {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject): void => {
     const ctx: Context = { [RESOLVE]: resolve, [REJECT]: reject };
     input.parse(argv, ctx, handleParse);
   });

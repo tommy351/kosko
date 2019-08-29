@@ -5,7 +5,7 @@ import { runCLI } from "../../../run";
 const testDir = dirname(__dirname);
 
 let args: string[];
-let result: execa.ExecaReturns;
+let result: execa.ExecaReturnValue;
 let options: execa.Options;
 
 beforeEach(async () => {
@@ -22,7 +22,7 @@ describe("when validate is not set", () => {
   });
 
   test("should return status code 1", () => {
-    expect(result.code).toEqual(1);
+    expect(result.exitCode).toEqual(1);
   });
 
   test("should print the error", () => {
@@ -39,7 +39,7 @@ describe("when validate is true", () => {
   });
 
   test("should return status code 1", () => {
-    expect(result.code).toEqual(1);
+    expect(result.exitCode).toEqual(1);
   });
 
   test("should print the error", () => {
@@ -56,7 +56,7 @@ describe("when validate is false", () => {
   });
 
   test("should return status code 0", () => {
-    expect(result.code).toEqual(0);
+    expect(result.exitCode).toEqual(0);
   });
 
   test("should print the manifest", () => {

@@ -7,7 +7,7 @@ import pkgDir from "pkg-dir";
 const testDir = dirname(__dirname);
 
 let args: string[];
-let result: execa.ExecaReturns;
+let result: execa.ExecaReturnValue;
 let options: execa.Options;
 
 beforeAll(async () => {
@@ -33,7 +33,7 @@ describe("when output is not set", () => {
   });
 
   test("should return status code 0", () => {
-    expect(result.code).toEqual(0);
+    expect(result.exitCode).toEqual(0);
   });
 
   test("should output YAML", () => {
@@ -48,7 +48,7 @@ describe("when output = yaml", () => {
   });
 
   test("should return status code 0", () => {
-    expect(result.code).toEqual(0);
+    expect(result.exitCode).toEqual(0);
   });
 
   test("should output YAML", () => {
@@ -63,7 +63,7 @@ describe("when output = json", () => {
   });
 
   test("should return status code 0", () => {
-    expect(result.code).toEqual(0);
+    expect(result.exitCode).toEqual(0);
   });
 
   test("should output JSON", () => {
@@ -78,7 +78,7 @@ describe("when output is invalid", () => {
   });
 
   test("should return status code 1", () => {
-    expect(result.code).toEqual(1);
+    expect(result.exitCode).toEqual(1);
   });
 
   test("should print the error", () => {

@@ -29,6 +29,5 @@ Options:
   --foo      option foo                                                 [string]
   --bar      option bar                                      [number] [required]
 
-Missing required argument: bar
-"
+Missing required argument: bar"
 `;

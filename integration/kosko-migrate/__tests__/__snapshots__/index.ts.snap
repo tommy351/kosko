@@ -18,8 +18,7 @@ Examples:
   kosko migrate -f path/to/file  Read from the path
   kosko migrate -f -             Read from stdin
 
-Missing required argument: filename
-"
+Missing required argument: filename"
 `;
 
 exports[`when path is - should print the output 1`] = `

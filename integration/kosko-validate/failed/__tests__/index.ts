@@ -4,7 +4,7 @@ import { runCLI } from "../../../run";
 
 const testDir = dirname(__dirname);
 
-let result: execa.ExecaReturns;
+let result: execa.ExecaReturnValue;
 
 beforeEach(async () => {
   result = await runCLI(["validate"], {
@@ -14,7 +14,7 @@ beforeEach(async () => {
 });
 
 test("should return status code 1", () => {
-  expect(result.code).toEqual(1);
+  expect(result.exitCode).toEqual(1);
 });
 
 test("should print the error", () => {
