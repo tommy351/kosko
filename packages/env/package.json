@@ -25,7 +25,7 @@
   "dependencies": {
     "@kosko/require": "^0.1.9",
     "debug": "^4.1.1",
-    "tslib": "^1.9.3"
+    "tslib": "^1.10.0"
   },
   "devDependencies": {
     "@types/debug": "^4.1.2"

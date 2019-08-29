@@ -64,7 +64,7 @@ export async function generate(options: GenerateOptions): Promise<Result> {
   const patterns = options.components.map(x => x + suffix);
   debug("Component patterns", patterns);
 
-  const components = await glob<string>(patterns, {
+  const components = await glob(patterns, {
     cwd: options.path,
     onlyFiles: false
   });

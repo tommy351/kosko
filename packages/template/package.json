@@ -25,15 +25,15 @@
   "dependencies": {
     "debug": "^4.1.1",
     "exit": "^0.1.2",
-    "make-dir": "^2.1.0",
+    "make-dir": "^3.0.0",
     "signale": "^1.4.0",
-    "tslib": "^1.9.3",
-    "yargs": "^13.2.2"
+    "tslib": "^1.10.0",
+    "yargs": "^14.0.0"
   },
   "devDependencies": {
     "@types/debug": "^4.1.2",
     "@types/exit": "^0.1.30",
     "@types/signale": "^1.2.1",
-    "@types/yargs": "^12.0.9"
+    "@types/yargs": "^13.0.2"
   }
 }
