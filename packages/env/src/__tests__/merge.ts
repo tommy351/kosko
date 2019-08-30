@@ -57,3 +57,16 @@ describe("non-plain objects", () => {
     expect(actual).toEqual({ a: new Props({ foo: 3 }) });
   });
 });
+
+describe("rest parameters", () => {
+  it("should merge them all", () => {
+    const actual = merge({ a: 1 }, { b: 2 }, { c: 3 }, { d: 4 });
+
+    expect(actual).toEqual({
+      a: 1,
+      b: 2,
+      c: 3,
+      d: 4
+    });
+  });
+});
