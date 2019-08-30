@@ -25,6 +25,8 @@
   "dependencies": {
     "@kosko/require": "^0.1.9",
     "debug": "^4.1.1",
+    "deepmerge": "^4.0.0",
+    "is-plain-object": "^3.0.0",
     "tslib": "^1.10.0"
   },
   "devDependencies": {

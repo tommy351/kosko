@@ -1,6 +1,7 @@
 import { join } from "path";
 import { requireDefault } from "@kosko/require";
 import Debug from "debug";
+import { merge } from "./merge";
 
 const debug = Debug("kosko:env");
 const rTemplate = /#\{(\w+)\}/g;
@@ -49,10 +50,7 @@ export class Environment {
    * @param name Component name
    */
   public component(name: string): any {
-    return {
-      ...this.global(),
-      ...this.require(this.paths.component, name)
-    };
+    return merge(this.global(), this.require(this.paths.component, name));
   }
 
   private require(template: string, component?: string): any {
