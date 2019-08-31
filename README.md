@@ -65,6 +65,7 @@ kosko generate | kubectl apply -f -
 - [Templates](docs/templates.md)
 - [Commands](docs/commands.md)
 - [Configuration](docs/configuration.md)
+- [Contributing](CONTRIBUTING.md)
 
 ## Examples
 
