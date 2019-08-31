@@ -1,6 +1,6 @@
 # kosko
 
-[![](https://img.shields.io/npm/v/kosko.svg)](https://www.npmjs.com/package/kosko) [![CircleCI](https://circleci.com/gh/tommy351/kosko/tree/master.svg?style=svg)](https://circleci.com/gh/tommy351/kosko/tree/master) [![Build status](https://ci.appveyor.com/api/projects/status/db26i79eyxp8tjxj/branch/master?svg=true)](https://ci.appveyor.com/project/tommy351/kosko/branch/master) [![codecov](https://codecov.io/gh/tommy351/kosko/branch/master/graph/badge.svg)](https://codecov.io/gh/tommy351/kosko)
+[![](https://img.shields.io/npm/v/kosko.svg)](https://www.npmjs.com/package/kosko) [![CircleCI](https://circleci.com/gh/tommy351/kosko/tree/master.svg?style=svg)](https://circleci.com/gh/tommy351/kosko/tree/master) [![Build status](https://ci.appveyor.com/api/projects/status/db26i79eyxp8tjxj/branch/master?svg=true)](https://ci.appveyor.com/project/tommy351/kosko/branch/master) [![codecov](https://codecov.io/gh/tommy351/kosko/branch/master/graph/badge.svg)](https://codecov.io/gh/tommy351/kosko) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
 Write Kubernetes manifests in JavaScript.
 
