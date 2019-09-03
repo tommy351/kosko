@@ -24,14 +24,41 @@ export interface Paths {
   component: string;
 }
 
+/**
+ * Describes a step in the variables overriding chain.
+ * Each layer is applied to the previous layer and can override
+ * some of variables.
+ */
+export interface VariablesLayer {
+  /**
+   * Overrides variables for the specified component.
+   * If component name is not specified then overrides only
+   * global variables.
+   */
+  (target: Record<string, any>, componentName?: string): Record<string, any>;
+}
+
 export class Environment {
+  private variableLayers: VariablesLayer[];
+
   public env?: string;
   public paths: Paths = {
     global: "environments/#{environment}",
     component: "environments/#{environment}/#{component}"
   };
 
-  public constructor(public cwd: string) {}
+  public constructor(public cwd: string) {
+    const globalVariablesLayer: VariablesLayer = values =>
+      merge(values, this.require(this.paths.global));
+
+    const componentVariablesLayer: VariablesLayer = (values, componentName) =>
+      merge(
+        values,
+        componentName ? this.require(this.paths.component, componentName) : {}
+      );
+
+    this.variableLayers = [globalVariablesLayer, componentVariablesLayer];
+  }
 
   /**
    * Returns global variables.
@@ -39,7 +66,10 @@ export class Environment {
    * If env is not set or require failed, returns an empty object.
    */
   public global(): any {
-    return this.require(this.paths.global);
+    return this.variableLayers.reduce(
+      (target, applyLayer) => applyLayer(target),
+      {}
+    );
   }
 
   /**
@@ -50,7 +80,30 @@ export class Environment {
    * @param name Component name
    */
   public component(name: string): any {
-    return merge(this.global(), this.require(this.paths.component, name));
+    return this.variableLayers.reduce(
+      (target, applyLayer) => applyLayer(target, name),
+      {}
+    );
+  }
+
+  /**
+   * Adds a new variables layer.
+   *
+   * Each layer can override variables of the previous layer.
+   *
+   * @param layer Variables layer
+   */
+  public addVariablesLayer(layer: VariablesLayer): void {
+    this.variableLayers.push(layer);
+  }
+
+  /**
+   * Removes the existing variables layer.
+   *
+   * @param layer Variables layer
+   */
+  public removeVariablesLayer(layer: VariablesLayer): void {
+    this.variableLayers = this.variableLayers.filter(x => x !== layer);
   }
 
   private require(template: string, component?: string): any {

@@ -238,6 +238,16 @@ describe("with components in config", () => {
     });
   });
 
+  describe("given set in arguments", () => {
+    beforeAll(() => {
+      args.set = [{ key: "a", value: "b" }];
+    });
+
+    test("should add variables layer to the env", () => {
+      expect(env.addVariablesLayer).toHaveBeenCalledWith(expect.any(Function));
+    });
+  });
+
   describe("given validate = true", () => {
     beforeAll(() => {
       args.validate = true;

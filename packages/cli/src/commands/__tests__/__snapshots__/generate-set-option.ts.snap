@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CLI Variables Layer should fail on incorrect JSON path 1`] = `
+"Lexical error on line 1. Unrecognized text.
+$.phoneNumbers[?@.type=='home'].num
+---------------^"
+`;

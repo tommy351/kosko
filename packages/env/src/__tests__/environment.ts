@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { Environment } from "../environment";
+import { Environment, VariablesLayer } from "../environment";
 import { join } from "path";
 import { merge } from "../merge";
 
@@ -111,6 +111,43 @@ describe("when env is set", () => {
         expect(env.component("bar")).toEqual(
           require(join(fixturePath, "foo", "bar", env.env!))
         );
+      });
+    });
+  });
+
+  describe("with custom variables layer", () => {
+    let envPath: string;
+
+    const customVariablesLayer: VariablesLayer = (variables, componentName) => {
+      variables[componentName || "global"] = "overridden";
+      return variables;
+    };
+
+    beforeEach(() => {
+      env.env = "dev";
+      envPath = join(fixturePath, "environments", env.env);
+      env.addVariablesLayer(customVariablesLayer);
+    });
+
+    afterEach(() => {
+      env.removeVariablesLayer(customVariablesLayer);
+    })
+
+    describe("global", () => {
+      test("shold return global vars", () => {
+        expect(env.global()).toEqual({
+          ...require(envPath),
+          global: "overridden"
+        });
+      });
+    });
+
+    describe("component", () => {
+      test("shold return global + component vars", () => {
+        expect(env.component("foo")).toEqual({
+          ...merge(require(envPath), require(join(envPath, "foo"))),
+          foo: "overridden"
+        });
       });
     });
   });

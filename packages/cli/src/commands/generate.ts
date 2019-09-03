@@ -12,6 +12,11 @@ import { Argv } from "yargs";
 import { Command, Context, RootArguments } from "../cli/command";
 import Debug from "../cli/debug";
 import { CLIError } from "../cli/error";
+import {
+  SetOption,
+  parseSetOptions,
+  createCLIVariablesLayer
+} from "./generate-set-option";
 
 const debug = Debug.extend("generate");
 
@@ -20,6 +25,7 @@ export interface BaseGenerateArguments extends RootArguments {
   require?: string[];
   components?: string[];
   validate?: boolean;
+  set?: SetOption[];
 }
 
 export interface GenerateArguments extends BaseGenerateArguments {
@@ -69,6 +75,13 @@ export function generateBuilder(
       default: [],
       alias: "r"
     })
+    .option("set", {
+      type: "string",
+      describe:
+        "Set values on the command line KEY=VAL (can be used multiple times)",
+      alias: "s",
+      coerce: parseSetOptions
+    })
     .positional("components", {
       describe:
         "Components to generate. This overrides components set in config file."
@@ -106,6 +119,12 @@ export async function generateHandler(
     }
 
     debug("Set env as", args.env);
+  }
+
+  // Setup variable overrides
+  if (args.set && args.set.length > 0) {
+    const env = await importEnv(args.cwd);
+    env.addVariablesLayer(createCLIVariablesLayer(args.set));
   }
 
   // Require external modules
