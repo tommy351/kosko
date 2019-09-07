@@ -1,7 +1,7 @@
-import { Environment, Paths, VariablesLayer } from "./environment";
+import { Environment, Paths, Reducer } from "./environment";
 
 export default new Environment(process.cwd());
-export { Environment, Paths, VariablesLayer };
+export { Environment, Paths, Reducer };
 
 // HACK: Export default to module.exports and maintain types above.
 module.exports = Object.assign(exports.default, exports);

@@ -9,14 +9,10 @@ import { generate, print, PrintFormat, Result } from "@kosko/generate";
 import { requireDefault, resolve } from "@kosko/require";
 import { join } from "path";
 import { Argv } from "yargs";
-import { Command, Context, RootArguments } from "../cli/command";
-import Debug from "../cli/debug";
-import { CLIError } from "../cli/error";
-import {
-  SetOption,
-  parseSetOptions,
-  createCLIVariablesLayer
-} from "./generate-set-option";
+import { Command, Context, RootArguments } from "../../cli/command";
+import Debug from "../../cli/debug";
+import { CLIError } from "../../cli/error";
+import { SetOption, parseSetOptions, createCLIEnvReducer } from "./set-option";
 
 const debug = Debug.extend("generate");
 
@@ -124,7 +120,8 @@ export async function generateHandler(
   // Setup variable overrides
   if (args.set && args.set.length > 0) {
     const env = await importEnv(args.cwd);
-    env.addVariablesLayer(createCLIVariablesLayer(args.set));
+    const reducer = createCLIEnvReducer(args.set);
+    env.setReducers(r => r.concat(reducer));
   }
 
   // Require external modules

@@ -1,7 +1,7 @@
 import {
   parseSetOptions,
-  createCLIVariablesLayer
-} from "../generate-set-option";
+  createCLIEnvReducer
+} from "../../generate/set-option";
 
 describe("Set Argument parser should return correct value", () => {
   test("when one string argument is passed", () => {
@@ -73,6 +73,12 @@ describe("Set Argument parser should return correct value", () => {
       { key: "a", value: { b: 1 } }
     ]);
   });
+
+  test("when both key and value contains `=` characters", () => {
+    expect(parseSetOptions('someObj[?(@a=="b")].value[0]=a=1==2')).toEqual([
+      { key: 'someObj[?(@a=="b")].value[0]', value: "a=1==2" }
+    ]);
+  });
 });
 
 describe("Set Argument parser should throw an error", () => {
@@ -89,50 +95,50 @@ describe("Set Argument parser should throw an error", () => {
   });
 });
 
-describe("CLI Variables Layer", () => {
+describe("CLI Variables Env Reducer", () => {
   test("should override global variables", () => {
     const target = { key: 1 };
-    const layer = createCLIVariablesLayer([{ key: "key", value: "value" }]);
-    layer(target);
+    const reducer = createCLIEnvReducer([{ key: "key", value: "value" }]);
+    reducer.reduce(target);
     expect(target.key).toEqual("value");
   });
 
   test("should override component variables", () => {
     const target = { key: 1 };
-    const layer = createCLIVariablesLayer([
+    const reducer = createCLIEnvReducer([
       { key: "key", value: "value", componentName: "comp" }
     ]);
-    layer(target, "comp");
+    reducer.reduce(target, "comp");
     expect(target.key).toEqual("value");
   });
 
   test("should override global variables before the component variables", () => {
     const target = { key: 1 };
-    const layer = createCLIVariablesLayer([
+    const reducer = createCLIEnvReducer([
       { key: "key", value: "local", componentName: "comp" },
       { key: "key", value: "global" }
     ]);
-    layer(target, "comp");
+    reducer.reduce(target, "comp");
     expect(target.key).toEqual("local");
   });
 
   test("should override component variables after the global variables", () => {
     const target = { key: 1 };
-    const layer = createCLIVariablesLayer([
+    const reducer = createCLIEnvReducer([
       { key: "key", value: "global" },
       { key: "key", value: "local", componentName: "comp" }
     ]);
-    layer(target, "comp");
+    reducer.reduce(target, "comp");
     expect(target.key).toEqual("local");
   });
 
   test("should ignore component variables in the global context", () => {
     const target = { key: 1 };
-    const layer = createCLIVariablesLayer([
+    const reducer = createCLIEnvReducer([
       { key: "key", value: "global" },
       { key: "key", value: "local", componentName: "comp" }
     ]);
-    layer(target);
+    reducer.reduce(target);
     expect(target.key).toEqual("global");
   });
 
@@ -161,19 +167,19 @@ describe("CLI Variables Layer", () => {
         }
       ]
     };
-    const layer = createCLIVariablesLayer([
+    const reducer = createCLIEnvReducer([
       { key: "phoneNumbers[?(@.type=='home')].number", value: "newHomeNumber" }
     ]);
-    expect(layer(target)).toEqual(expected);
+    expect(reducer.reduce(target)).toEqual(expected);
   });
 
   test("should fail on incorrect JSON path", () => {
     const target = {
       key: 1
     };
-    const layer = createCLIVariablesLayer([
+    const reducer = createCLIEnvReducer([
       { key: "phoneNumbers[?@.type=='home'].number", value: "newHomeNumber" }
     ]);
-    expect(() => layer(target)).toThrowErrorMatchingSnapshot();
+    expect(() => reducer.reduce(target)).toThrowErrorMatchingSnapshot();
   });
 });

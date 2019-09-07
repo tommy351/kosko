@@ -1,6 +1,6 @@
-import { VariablesLayer } from "@kosko/env";
+import { Reducer } from "@kosko/env";
 import jp from "jsonpath";
-import { CLIError } from '../cli/error';
+import { CLIError } from "../../cli/error";
 
 /**
  * Contains a value to override a variable of the specified component
@@ -11,6 +11,9 @@ export interface SetOption {
   key: string;
   value: string;
 }
+
+// Splits strings like `something[a==b]=c` into `something[a==b]` and `c`
+const parseRegexp = /^(.*?[^=<>~])=([^=<>~].*?$)/;
 
 function parseSetOptionValue(value: string): any {
   try {
@@ -29,7 +32,6 @@ function parseKeyValuePair(s: unknown): SetOption {
     throw new Error(`The specified value "${s}" is not a string.`);
   }
 
-  const parseRegexp = /^(.*?[^=<>~])=([^=<>~].*?$)/;
   const matches = s.match(parseRegexp);
 
   if (matches == null || matches.length !== 3) {
@@ -47,7 +49,7 @@ function parseKeyValuePair(s: unknown): SetOption {
 /**
  * Parses arguments provided by `yargs-parser` into a list of key-value pairs
  * for components.
- * 
+ *
  * @param arg Arguments provided by `yargs-parser`.
  */
 export function parseSetOptions(arg: unknown): SetOption[] {
@@ -87,33 +89,38 @@ export function parseSetOptions(arg: unknown): SetOption[] {
 }
 
 /**
- * Creates a variables layer from the specified set arguments.
- * 
+ * Creates a reducer from the specified set arguments.
+ *
  * @param setOptions List of set arguments.
  */
-export function createCLIVariablesLayer(setOptions: SetOption[]): VariablesLayer {
+export function createCLIEnvReducer(setOptions: SetOption[]): Reducer {
   // reorder arguments to ensure that global overrides will be applied
   // before the component ones
   const argsOrdered = setOptions.sort((a, b) =>
     a.componentName === b.componentName ? 0 : a.componentName ? 1 : -1
   );
 
-  return (target: Record<string, any>, componentName?: string) => {
-    for (const variable of argsOrdered) {
-      const isGlobalVariable = !variable.componentName;
+  const reducer: Reducer = {
+    name: "cli",
+    reduce(target: Record<string, any>, componentName?: string) {
+      for (const variable of argsOrdered) {
+        const isGlobalVariable = !variable.componentName;
 
-      if (isGlobalVariable || variable.componentName === componentName) {
-        try {
-          jp.apply(target, "$." + variable.key, () => variable.value);
-        } catch (e) {
-          throw new CLIError(e.message, {
-            code: 1,
-            output: `Failed to override key "${variable.key}". ${e.message}`
-          });
+        if (isGlobalVariable || variable.componentName === componentName) {
+          try {
+            jp.apply(target, "$." + variable.key, () => variable.value);
+          } catch (e) {
+            throw new CLIError(e.message, {
+              code: 1,
+              output: `Failed to override key "${variable.key}". ${e.message}`
+            });
+          }
         }
       }
-    }
 
-    return target;
+      return target;
+    }
   };
+
+  return reducer;
 }

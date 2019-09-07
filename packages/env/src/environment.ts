@@ -26,20 +26,26 @@ export interface Paths {
 
 /**
  * Describes a step in the variables overriding chain.
- * Each layer is applied to the previous layer and can override
- * some of variables.
  */
-export interface VariablesLayer {
+export interface Reducer {
+  /**
+   * Name of the reducer.
+   */
+  name: string;
+
   /**
    * Overrides variables for the specified component.
    * If component name is not specified then overrides only
    * global variables.
    */
-  (target: Record<string, any>, componentName?: string): Record<string, any>;
+  reduce(
+    target: Record<string, any>,
+    componentName?: string
+  ): Record<string, any>;
 }
 
 export class Environment {
-  private variableLayers: VariablesLayer[];
+  private reducers: Reducer[] = [];
 
   public env?: string;
   public paths: Paths = {
@@ -48,16 +54,7 @@ export class Environment {
   };
 
   public constructor(public cwd: string) {
-    const globalVariablesLayer: VariablesLayer = values =>
-      merge(values, this.require(this.paths.global));
-
-    const componentVariablesLayer: VariablesLayer = (values, componentName) =>
-      merge(
-        values,
-        componentName ? this.require(this.paths.component, componentName) : {}
-      );
-
-    this.variableLayers = [globalVariablesLayer, componentVariablesLayer];
+    this.resetReducers();
   }
 
   /**
@@ -66,8 +63,8 @@ export class Environment {
    * If env is not set or require failed, returns an empty object.
    */
   public global(): any {
-    return this.variableLayers.reduce(
-      (target, applyLayer) => applyLayer(target),
+    return this.reducers.reduce(
+      (target, reducer) => reducer.reduce(target),
       {}
     );
   }
@@ -80,30 +77,54 @@ export class Environment {
    * @param name Component name
    */
   public component(name: string): any {
-    return this.variableLayers.reduce(
-      (target, applyLayer) => applyLayer(target, name),
+    return this.reducers.reduce(
+      (target, reducer) => reducer.reduce(target, name),
       {}
     );
   }
 
   /**
-   * Adds a new variables layer.
-   *
-   * Each layer can override variables of the previous layer.
-   *
-   * @param layer Variables layer
+   * Sets list of reducers using the specified callback function.
    */
-  public addVariablesLayer(layer: VariablesLayer): void {
-    this.variableLayers.push(layer);
+  public setReducers(callbackfn: (reducers: Reducer[]) => Reducer[]): void {
+    this.reducers = callbackfn([...this.reducers]);
   }
 
   /**
-   * Removes the existing variables layer.
-   *
-   * @param layer Variables layer
+   * Resets reducers to the defaults.
    */
-  public removeVariablesLayer(layer: VariablesLayer): void {
-    this.variableLayers = this.variableLayers.filter(x => x !== layer);
+  public resetReducers(): void {
+    this.setReducers(() => [
+      this.createGlobalReducer(),
+      this.createComponentReducer()
+    ]);
+  }
+
+  private createGlobalReducer(): Reducer {
+    const reducer: Reducer = {
+      name: "global",
+      reduce: values => merge(values, this.require(this.paths.global))
+    };
+
+    return reducer;
+  }
+
+  private createComponentReducer(): Reducer {
+    const reducer: Reducer = {
+      name: "component",
+      reduce: (values, componentName) => {
+        if (componentName) {
+          return merge(
+            values,
+            this.require(this.paths.component, componentName)
+          );
+        }
+
+        return values;
+      }
+    };
+    
+    return reducer;
   }
 
   private require(template: string, component?: string): any {
