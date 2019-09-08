@@ -165,6 +165,10 @@ kosko generate nginx_*
 
 Environment name.
 
+#### `--set, -s, --set.<component>, -s.<component>`
+
+Override global or component variables on the command line KEY=VAL (can be used multiple times). See decription of the generate command for more details.
+
 #### `--require, -r`
 
 Require external modules. Modules set in the config file will also be required.
