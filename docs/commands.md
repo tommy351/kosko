@@ -67,6 +67,46 @@ kosko generate nginx_*
 
 Environment name.
 
+#### `--set, -s`
+
+Override global environment variables on the command line KEY=VAL (can be used multiple times).
+
+[JSONPath Expressions](https://www.npmjs.com/package/jsonpath) are supported for keys, keys are prepdended with `$.` automatically.
+Value is converted to JSON object if it's possible; otherwise, it's handled as a string.
+
+```sh
+# Set multiple arguments
+kosko generate --set image.name=mysql --set image.tag=1.3.4
+
+# Override entire array
+kosko generate --set imagePullSecrets='[ { "name": "mySecret" } ]' 
+
+# Set name of the first item in the array
+kosko generate --set imagePullSecrets[0].name=mySecret 
+
+# Override value of item of the "secrets"
+# array that has "secretKey" in the "name" field
+kosko generate --set secrets[?(@.name=="secretKey")].value=secretValue
+
+# Disable deployment of the database, value is parsed as a boolean
+kosko generate --set mysql.enabled=false
+
+# Set myService to the "true" string, quotes must be escaped because of shell
+kosko generate --set myService=\'true\'
+
+# Set myService to the "true" string using quotes inside of the other quots
+kosko generate --set myService='"true"'
+```
+
+#### `--set.<component>, -s.<component>`
+
+Override variables of the specified component. Format is the same as in the `--set` argument. Component overrides are always applied after the global ones regardless of an order of arguments in the command line.
+
+```sh
+# Set mysql port to 3307 for all components and 3308 only for the "backend" component
+kosko generate --set.backend mysql.port=3308 --set mysql.port=3307
+```
+
 #### `--require, -r`
 
 Require external modules. Modules set in the config file will also be required.
