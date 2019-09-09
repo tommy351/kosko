@@ -38,6 +38,7 @@
     "exit": "^0.1.2",
     "get-stdin": "^7.0.0",
     "import-local": "^3.0.2",
+    "jsonpath": "^1.0.2",
     "make-dir": "^3.0.0",
     "signale": "^1.4.0",
     "tslib": "^1.10.0",
@@ -49,6 +50,7 @@
     "@types/chalk": "^2.2.0",
     "@types/debug": "^4.1.2",
     "@types/exit": "^0.1.30",
+    "@types/jsonpath": "^0.2.0",
     "@types/signale": "^1.2.1",
     "@types/yargs": "^13.0.2"
   }

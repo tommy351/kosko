@@ -9,9 +9,10 @@ import { generate, print, PrintFormat, Result } from "@kosko/generate";
 import { requireDefault, resolve } from "@kosko/require";
 import { join } from "path";
 import { Argv } from "yargs";
-import { Command, Context, RootArguments } from "../cli/command";
-import Debug from "../cli/debug";
-import { CLIError } from "../cli/error";
+import { Command, Context, RootArguments } from "../../cli/command";
+import Debug from "../../cli/debug";
+import { CLIError } from "../../cli/error";
+import { SetOption, parseSetOptions, createCLIEnvReducer } from "./set-option";
 
 const debug = Debug.extend("generate");
 
@@ -20,6 +21,7 @@ export interface BaseGenerateArguments extends RootArguments {
   require?: string[];
   components?: string[];
   validate?: boolean;
+  set?: SetOption[];
 }
 
 export interface GenerateArguments extends BaseGenerateArguments {
@@ -69,6 +71,13 @@ export function generateBuilder(
       default: [],
       alias: "r"
     })
+    .option("set", {
+      type: "string",
+      describe:
+        "Set values on the command line KEY=VAL (can be used multiple times)",
+      alias: "s",
+      coerce: parseSetOptions
+    })
     .positional("components", {
       describe:
         "Components to generate. This overrides components set in config file."
@@ -106,6 +115,13 @@ export async function generateHandler(
     }
 
     debug("Set env as", args.env);
+  }
+
+  // Setup variable overrides
+  if (args.set && args.set.length > 0) {
+    const env = await importEnv(args.cwd);
+    const reducer = createCLIEnvReducer(args.set);
+    env.setReducers(r => r.concat(reducer));
   }
 
   // Require external modules

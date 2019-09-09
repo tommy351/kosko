@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { Environment } from "../environment";
+import { Environment, Reducer } from "../environment";
 import { join } from "path";
 import { merge } from "../merge";
 
@@ -110,6 +110,79 @@ describe("when env is set", () => {
       test("should load from custom path", () => {
         expect(env.component("bar")).toEqual(
           require(join(fixturePath, "foo", "bar", env.env!))
+        );
+      });
+    });
+  });
+
+  describe("with additional reducers", () => {
+    let envPath: string;
+
+    const customReducer: Reducer = {
+      name: "custom",
+      reduce(variables, componentName) {
+        variables[componentName || "global"] = "overridden";
+        return variables;
+      }
+    };
+
+    beforeEach(() => {
+      env.env = "dev";
+      envPath = join(fixturePath, "environments", env.env);
+      env.setReducers(reducers => reducers.concat(customReducer));
+    });
+
+    afterEach(() => {
+      env.resetReducers();
+    });
+
+    describe("global", () => {
+      test("shold return global vars", () => {
+        expect(env.global()).toEqual({
+          ...require(envPath),
+          global: "overridden"
+        });
+      });
+    });
+
+    describe("component", () => {
+      test("shold return global + component vars", () => {
+        expect(env.component("foo")).toEqual({
+          ...merge(require(envPath), require(join(envPath, "foo"))),
+          foo: "overridden"
+        });
+      });
+    });
+  });
+
+  describe("with reducers reset", () => {
+    let envPath: string;
+
+    const customReducer: Reducer = {
+      name: "custom",
+      reduce(variables, componentName) {
+        variables[componentName || "global"] = "overridden";
+        return variables;
+      }
+    };
+
+    beforeEach(() => {
+      env.env = "dev";
+      envPath = join(fixturePath, "environments", env.env);
+      env.setReducers(reducers => reducers.concat(customReducer));
+      env.resetReducers();
+    });
+
+    describe("global", () => {
+      test("shold return only global vars", () => {
+        expect(env.global()).toEqual(require(envPath));
+      });
+    });
+
+    describe("component", () => {
+      test("shold return global + component vars", () => {
+        expect(env.component("foo")).toEqual(
+          merge(require(envPath), require(join(envPath, "foo")))
         );
       });
     });

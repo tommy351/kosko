@@ -6,7 +6,8 @@ const labels = { app: "nginx" };
 
 const deployment = new Deployment({
   metadata: {
-    name: "nginx"
+    name: "nginx",
+    ...params.metadata
   },
   spec: {
     replicas: params.replicas,
@@ -21,9 +22,10 @@ const deployment = new Deployment({
         containers: [
           {
             name: "nginx",
-            image: "nginx"
+            image: `${params.image.registry}/nginx`
           }
-        ]
+        ],
+        tolerations: params.tolerations
       }
     }
   }

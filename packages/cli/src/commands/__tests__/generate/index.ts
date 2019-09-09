@@ -11,8 +11,8 @@ import symlinkDir from "symlink-dir";
 import tempDir from "temp-dir";
 import tmp from "tmp-promise";
 import { promisify } from "util";
-import { setLogger } from "../../cli/command";
-import { GenerateArguments, generateCmd } from "../generate";
+import { setLogger } from "../../../cli/command";
+import { GenerateArguments, generateCmd } from "../../generate";
 
 jest.mock("@kosko/generate");
 jest.mock("@kosko/env");
@@ -235,6 +235,16 @@ describe("with components in config", () => {
         components: ["e", "f"],
         extensions: ["x", "y", "z"]
       });
+    });
+  });
+
+  describe("given set in arguments", () => {
+    beforeAll(() => {
+      args.set = [{ key: "a", value: "b" }];
+    });
+
+    test("should add reducer to the env", () => {
+      expect(env.setReducers).toHaveBeenCalledWith(expect.any(Function));
     });
   });
 
