@@ -2,9 +2,9 @@ import { join } from "path";
 import { requireDefault } from "@kosko/require";
 import Debug from "debug";
 import { merge } from "./merge";
+import { Paths, formatPath } from "./paths";
 
 const debug = Debug("kosko:env");
-const rTemplate = /#\{(\w+)\}/g;
 
 function tryRequire(id: string): any {
   try {
@@ -17,11 +17,6 @@ function tryRequire(id: string): any {
 
     throw err;
   }
-}
-
-export interface Paths {
-  global: string;
-  component: string;
 }
 
 /**
@@ -123,20 +118,16 @@ export class Environment {
         return values;
       }
     };
-    
+
     return reducer;
   }
 
   private require(template: string, component?: string): any {
     if (!this.env) return {};
 
-    const data: any = {
+    const path = formatPath(template, {
       environment: this.env,
       component
-    };
-
-    const path = template.replace(rTemplate, (s, key) => {
-      return data[key];
     });
 
     return tryRequire(join(this.cwd, path));
