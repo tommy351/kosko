@@ -26,7 +26,7 @@ commands:
           name: Unit tests
           command: npm run test:unit -- --coverage --maxWorkers=2 --reporters=default --reporters=jest-junit
           environment:
-            JEST_JUNIT_OUTPUT: reports/junit/results.xml
+            JEST_JUNIT_OUTPUT_DIR: reports/junit
       - store_test_results:
           path: reports/junit
       - run:
@@ -75,7 +75,7 @@ jobs:
           name: Integration tests
           command: npm run test:integration -- --maxWorkers=2 --reporters=default --reporters=jest-junit
           environment:
-            JEST_JUNIT_OUTPUT: reports/junit/results.xml
+            JEST_JUNIT_OUTPUT_DIR: reports/junit
       - store_test_results:
           path: reports/junit
 
