@@ -40,7 +40,7 @@ describe("when format = YAML", () => {
       };
     });
 
-    it("should write YAML", () => {
+    test("should write YAML", () => {
       expect(yaml.safeLoad(bl.toString())).toEqual(data);
     });
   });
@@ -54,7 +54,7 @@ describe("when format = YAML", () => {
       };
     });
 
-    it("should write YAML with delimiters", () => {
+    test("should write YAML with delimiters", () => {
       expect(yaml.safeLoadAll(bl.toString())).toEqual(data);
     });
   });
@@ -72,7 +72,7 @@ describe("when format = JSON", () => {
       result = { manifests: [{ path: "", index: 0, data }] };
     });
 
-    it("should write JSON", () => {
+    test("should write JSON", () => {
       expect(JSON.parse(bl.toString())).toEqual(data);
     });
   });
@@ -84,7 +84,7 @@ describe("when format = JSON", () => {
       result = { manifests: data.map(x => ({ path: "", index: 0, data: x })) };
     });
 
-    it("should write JSON wrapped with List", () => {
+    test("should write JSON wrapped with List", () => {
       expect(JSON.parse(bl.toString())).toEqual({
         apiVersion: "v1",
         kind: "List",

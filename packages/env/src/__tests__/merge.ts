@@ -1,7 +1,7 @@
 import { merge } from "../merge";
 
 describe("nested objects", () => {
-  it("should merge objects", () => {
+  test("should merge objects", () => {
     const actual = merge(
       {
         bar: 1,
@@ -29,7 +29,7 @@ describe("nested objects", () => {
 });
 
 describe("array", () => {
-  it("should override the value", () => {
+  test("should override the value", () => {
     const actual = merge({ a: [1] }, { a: [2] });
     expect(actual).toEqual({ a: [2] });
   });
@@ -44,7 +44,7 @@ describe("non-plain objects", () => {
     }
   }
 
-  it("should override the value", () => {
+  test("should override the value", () => {
     const actual = merge(
       {
         a: new Props({ foo: 1, bar: 2 })
@@ -59,7 +59,7 @@ describe("non-plain objects", () => {
 });
 
 describe("rest parameters", () => {
-  it("should merge them all", () => {
+  test("should merge them all", () => {
     const actual = merge({ a: 1 }, { b: 2 }, { c: 3 }, { d: 4 });
 
     expect(actual).toEqual({

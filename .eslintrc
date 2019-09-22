@@ -10,7 +10,14 @@
   ],
   "rules": {
     "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-parameter-properties": "off"
+    "@typescript-eslint/no-parameter-properties": "off",
+    "jest/consistent-test-it": [
+      "error",
+      {
+        "fn": "test",
+        "withinDescribe": "test"
+      }
+    ]
   },
   "env": {
     "es6": true,
