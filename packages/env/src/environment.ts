@@ -42,7 +42,7 @@ export interface Reducer {
 export class Environment {
   private reducers: Reducer[] = [];
 
-  public env?: string;
+  public env?: string | string[];
   public paths: Paths = {
     global: "environments/#{environment}",
     component: "environments/#{environment}/#{component}"
@@ -98,7 +98,7 @@ export class Environment {
   private createGlobalReducer(): Reducer {
     const reducer: Reducer = {
       name: "global",
-      reduce: values => merge(values, this.require(this.paths.global))
+      reduce: values => merge(values, ...this.requireAllEnvs(this.paths.global))
     };
 
     return reducer;
@@ -108,28 +108,30 @@ export class Environment {
     const reducer: Reducer = {
       name: "component",
       reduce: (values, componentName) => {
-        if (componentName) {
-          return merge(
-            values,
-            this.require(this.paths.component, componentName)
-          );
-        }
+        if (!componentName) return values;
 
-        return values;
+        return merge(
+          values,
+          ...this.requireAllEnvs(this.paths.component, componentName)
+        );
       }
     };
 
     return reducer;
   }
 
-  private require(template: string, component?: string): any {
-    if (!this.env) return {};
+  private requireAllEnvs(template: string, component?: string): any[] {
+    if (!this.env) return [];
 
-    const path = formatPath(template, {
-      environment: this.env,
-      component
+    const envs = Array.isArray(this.env) ? this.env : [this.env];
+
+    return envs.map(env => {
+      const path = formatPath(template, {
+        environment: env,
+        component
+      });
+
+      return tryRequire(join(this.cwd, path));
     });
-
-    return tryRequire(join(this.cwd, path));
   }
 }
