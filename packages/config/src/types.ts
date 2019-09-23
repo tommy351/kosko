@@ -23,4 +23,7 @@ export interface Config extends EnvironmentConfig {
 
   /** File extensions of components. */
   readonly extensions?: ReadonlyArray<string>;
+
+  /** Base environment. */
+  readonly baseEnvironment?: string;
 }
