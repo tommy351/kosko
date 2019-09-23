@@ -1,8 +1,6 @@
 import execa from "execa";
-import { dirname, join } from "path";
-import { runCLI } from "../../../run";
-import symlinkDir from "symlink-dir";
-import pkgDir from "pkg-dir";
+import { dirname } from "path";
+import { runCLI, installPackage } from "../../../run";
 
 const testDir = dirname(__dirname);
 
@@ -11,12 +9,7 @@ let result: execa.ExecaReturnValue;
 let options: execa.Options;
 
 beforeAll(async () => {
-  const root = await pkgDir();
-
-  await symlinkDir(
-    join(root!, "packages", "env"),
-    join(testDir, "node_modules", "@kosko", "env")
-  );
+  await installPackage(testDir, "env");
 });
 
 beforeEach(async () => {
@@ -105,7 +98,7 @@ describe("when key in the set argument is invalid", () => {
       "--env",
       "dev",
       "--set.nginx",
-      "tolerations[?@.key=='key2'].value=newValue",
+      "tolerations[?@.key=='key2'].value=newValue"
     ];
     options = { reject: false };
   });
@@ -126,7 +119,7 @@ describe("when value in the set argument is invalid", () => {
       "--env",
       "dev",
       "--set.nginx",
-      "image.registry nginx.io",
+      "image.registry nginx.io"
     ];
     options = { reject: false };
   });
@@ -142,13 +135,7 @@ describe("when value in the set argument is invalid", () => {
 
 describe("when nested value in the set argument is invalid", () => {
   beforeAll(() => {
-    args = [
-      "generate",
-      "--env",
-      "dev",
-      "--set.nginx",
-      "3",
-    ];
+    args = ["generate", "--env", "dev", "--set.nginx", "3"];
     options = { reject: false };
   });
 

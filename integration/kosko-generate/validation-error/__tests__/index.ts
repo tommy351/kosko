@@ -1,12 +1,16 @@
 import execa from "execa";
 import { dirname } from "path";
-import { runCLI } from "../../../run";
+import { runCLI, installPackage } from "../../../run";
 
 const testDir = dirname(__dirname);
 
 let args: string[];
 let result: execa.ExecaReturnValue;
 let options: execa.Options;
+
+beforeAll(async () => {
+  await installPackage(testDir, "env");
+});
 
 beforeEach(async () => {
   result = await runCLI(args, {
