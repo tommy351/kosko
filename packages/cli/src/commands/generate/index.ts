@@ -39,6 +39,40 @@ async function importEnv(cwd: string): Promise<Environment> {
   return localRequire("@kosko/env", cwd);
 }
 
+function excludeFalsyInArray<T>(input: (T | undefined | null)[]): T[] {
+  return input.filter(Boolean) as T[];
+}
+
+function pickEnvArray(envs: string[]): string | string[] | undefined {
+  if (envs.length > 1) return envs;
+  return envs[0];
+}
+
+async function setupEnv(
+  config: Config,
+  args: BaseGenerateArguments
+): Promise<Environment> {
+  const env = await importEnv(args.cwd);
+
+  env.cwd = args.cwd;
+  env.env = pickEnvArray(
+    excludeFalsyInArray([config.baseEnvironment, args.env])
+  );
+
+  if (config.paths && config.paths.environment) {
+    const paths = config.paths.environment;
+    if (paths.global) env.paths.global = paths.global;
+    if (paths.component) env.paths.component = paths.component;
+  }
+
+  if (args.set && args.set.length) {
+    const reducer = createCLIEnvReducer(args.set);
+    env.setReducers(reducers => [...reducers, reducer]);
+  }
+
+  return env;
+}
+
 function resolveConfig(
   base: Config,
   args: BaseGenerateArguments
@@ -53,7 +87,6 @@ function resolveConfig(
     require: [...require, ...(args.require || [])]
   };
 }
-
 /* istanbul ignore next */
 export function generateBuilder(
   argv: Argv<RootArguments>
@@ -101,28 +134,8 @@ export async function generateHandler(
     });
   }
 
-  // Set env
-  if (args.env) {
-    const env = await importEnv(args.cwd);
-
-    env.cwd = args.cwd;
-    env.env = args.env;
-
-    if (config.paths && config.paths.environment) {
-      const paths = config.paths.environment;
-      if (paths.global) env.paths.global = paths.global;
-      if (paths.component) env.paths.component = paths.component;
-    }
-
-    debug("Set env as", args.env);
-  }
-
-  // Setup variable overrides
-  if (args.set && args.set.length > 0) {
-    const env = await importEnv(args.cwd);
-    const reducer = createCLIEnvReducer(args.set);
-    env.setReducers(r => r.concat(reducer));
-  }
+  // Setup env
+  await setupEnv(config, args);
 
   // Require external modules
   for (const id of config.require) {

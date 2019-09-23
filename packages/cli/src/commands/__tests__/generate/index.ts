@@ -17,10 +17,12 @@ import { GenerateArguments, generateCmd } from "../../generate";
 jest.mock("@kosko/generate");
 jest.mock("@kosko/env");
 
+type DeepWriteable<T> = { -readonly [P in keyof T]: DeepWriteable<T[P]> };
+
 const writeFile = promisify(fs.writeFile);
 const readFile = promisify(fs.readFile);
 const logger = new Signale({ disabled: true });
-let config: Config;
+let config: DeepWriteable<Config>;
 let args: Partial<GenerateArguments>;
 let tmpDir: tmp.DirectoryResult;
 let result: Result;
@@ -50,9 +52,6 @@ async function execute(): Promise<void> {
 beforeEach(async () => {
   // Reset mocks
   jest.resetAllMocks();
-
-  // Reset env
-  env.env = undefined;
 
   const root = await pkgDir();
   tmpDir = await tmp.dir({ dir: tempDir, unsafeCleanup: true });
@@ -259,6 +258,32 @@ describe("with components in config", () => {
           validate: true
         })
       );
+    });
+  });
+
+  describe("given baseEnvironment", () => {
+    beforeAll(() => {
+      config.baseEnvironment = "base";
+    });
+
+    describe("and env is not set", () => {
+      beforeAll(() => {
+        args.env = undefined;
+      });
+
+      test("should set env to baseEnvironment", () => {
+        expect(env.env).toEqual("base");
+      });
+    });
+
+    describe("and env is set", () => {
+      beforeAll(() => {
+        args.env = "dev";
+      });
+
+      test("should set env to an array", () => {
+        expect(env.env).toEqual(["base", "dev"]);
+      });
     });
   });
 });
