@@ -2,6 +2,8 @@ require = ["a"]
 components = ["b", "c"]
 extensions = ["js", "json"]
 
+baseEnvironment = "m"
+
 [environments.dev]
 require = ["d", "e"]
 components = ["f", "g"]

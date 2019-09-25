@@ -1,11 +1,10 @@
 import execa from "execa";
 import fs from "fs";
 import { join } from "path";
-import pkgDir from "pkg-dir";
-import symlinkDir from "symlink-dir";
 import tempDir from "temp-dir";
 import tmp from "tmp-promise";
 import { promisify } from "util";
+import { installPackage } from "../../run";
 
 const copyFile = promisify(fs.copyFile);
 const readFile = promisify(fs.readFile);
@@ -16,17 +15,12 @@ let options: execa.Options;
 let tmpDir: tmp.DirectoryResult;
 
 beforeEach(async () => {
-  const root = await pkgDir();
   tmpDir = await tmp.dir({ dir: tempDir, unsafeCleanup: true });
 
   const src = join(__dirname, "..", "bin.js");
   const dst = join(tmpDir.path, "bin.js");
   await copyFile(src, dst);
-
-  await symlinkDir(
-    join(root!, "packages", "template"),
-    join(tmpDir.path, "node_modules", "@kosko", "template")
-  );
+  await installPackage(tmpDir.path, "template");
 
   result = await execa(dst, args, {
     ...options,

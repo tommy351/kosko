@@ -2,6 +2,7 @@
 
 exports[`loadConfig when file exists should load the config 1`] = `
 Object {
+  "baseEnvironment": "m",
   "components": Array [
     "b",
     "c",
@@ -45,6 +46,7 @@ Object {
 
 exports[`searchConfig succeed when config is at kosko.toml should load the config 1`] = `
 Object {
+  "baseEnvironment": "m",
   "components": Array [
     "b",
     "c",

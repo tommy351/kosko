@@ -97,7 +97,7 @@ describe("when env is set", () => {
 
       test("should load from custom path", () => {
         expect(env.global()).toEqual(
-          require(join(fixturePath, "foo", env.env!))
+          require(join(fixturePath, "foo", env.env as string))
         );
       });
     });
@@ -109,7 +109,7 @@ describe("when env is set", () => {
 
       test("should load from custom path", () => {
         expect(env.component("bar")).toEqual(
-          require(join(fixturePath, "foo", "bar", env.env!))
+          require(join(fixturePath, "foo", "bar", env.env as string))
         );
       });
     });
@@ -183,6 +183,56 @@ describe("when env is set", () => {
       test("shold return global + component vars", () => {
         expect(env.component("foo")).toEqual(
           merge(require(envPath), require(join(envPath, "foo")))
+        );
+      });
+    });
+  });
+});
+
+describe("when env is an array", () => {
+  describe("and is empty", () => {
+    beforeEach(() => {
+      env.env = [];
+    });
+
+    describe("global", () => {
+      test("should return empty object", () => {
+        expect(env.global()).toEqual({});
+      });
+    });
+
+    describe("component", () => {
+      test("should return empty object", () => {
+        expect(env.component("foo")).toEqual({});
+      });
+    });
+  });
+
+  describe("and is not empty", () => {
+    let envPath: string;
+
+    beforeEach(() => {
+      env.env = ["base", "dev"];
+      envPath = join(fixturePath, "environments");
+    });
+
+    describe("global", () => {
+      test("should merge global vars of specified envs", () => {
+        expect(env.global()).toEqual(
+          merge(require(join(envPath, "base")), require(join(envPath, "dev")))
+        );
+      });
+    });
+
+    describe("component", () => {
+      test("should merge global + component vars of specified envs", () => {
+        expect(env.component("foo")).toEqual(
+          merge(
+            require(join(envPath, "base")),
+            require(join(envPath, "dev")),
+            require(join(envPath, "base", "foo")),
+            require(join(envPath, "dev", "foo"))
+          )
         );
       });
     });
