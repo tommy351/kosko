@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@kosko/template": "^0.3.5",
-    "kubernetes-models": "^0.5.0"
+    "@kosko/template": "^0.3.9",
+    "kubernetes-models": "^0.7.2"
   }
 }

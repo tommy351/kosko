@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "@kosko/env": "^0.4.1",
-    "@kosko/generate": "^0.3.8",
-    "kubernetes-models": "^0.5.0"
+    "@kosko/env": "^0.5.0",
+    "@kosko/generate": "^0.4.5",
+    "kubernetes-models": "^0.7.2"
   }
 }
