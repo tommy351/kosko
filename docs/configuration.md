@@ -9,6 +9,7 @@ The following is the full example of `kosko.toml`. Config files must be written 
 require = ["a"]
 components = ["b"]
 extensions = ["js", "json"]
+baseEnvironment = "c"
 
 # Environment configs
 [environments.dev]
@@ -58,6 +59,10 @@ components = ["!foo", "!bar"]
 ### `extensions`
 
 Extension names of components. You don't have to set this option. It's detected automatically from [require.extensions](https://nodejs.org/api/modules.html#modules_require_extensions).
+
+### `baseEnvironment`
+
+Specify the base environment. You may define default or common variables in the base environment. The base environment can be used with or without `--env/e` option. When `--env/-e` option is set, variables in the base environment are overrided by the specified environment.
 
 ## Environment Configs
 

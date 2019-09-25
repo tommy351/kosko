@@ -47,6 +47,8 @@ module.exports = {
 
 ### Get Current Environment
 
+The `env` value can be a string, an array of strings or undefined.
+
 ```js
 require("@kosko/env").env === "dev";
 ```
