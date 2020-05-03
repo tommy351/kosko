@@ -17,7 +17,8 @@
     "bootstrap": "lerna bootstrap",
     "test": "npm-run-all test:*",
     "test:unit": "jest",
-    "test:integration": "jest --config integration/jest.config.js"
+    "test:integration": "jest --config integration/jest.config.js",
+    "typedoc": "typedoc"
   },
   "husky": {
     "hooks": {
@@ -31,6 +32,7 @@
     "node": ">= 8"
   },
   "devDependencies": {
+    "@strictsoftware/typedoc-plugin-monorepo": "^0.3.1",
     "@types/jest": "^25.2.1",
     "@types/node": "^13.13.4",
     "@types/pkg-dir": "^2.0.1",
@@ -60,6 +62,8 @@
     "tmp-promise": "^2.0.2",
     "ts-jest": "^25.4.0",
     "ts-node": "^8.10.0",
+    "typedoc": "^0.17.6",
+    "typedoc-neo-theme": "^1.0.8",
     "typescript": "~3.8.3"
   }
 }
