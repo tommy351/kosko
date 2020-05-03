@@ -16,15 +16,36 @@ module.exports = {
   ],
   out: "dist/typedoc",
   "external-modulemap": /packages\/([^/]+)\/.*/,
+  excludePrivate: true,
+  excludeNotExported: true,
   links: [
     {
       label: "GitHub",
       url: GITHUB_URL
     }
   ],
+  outline: [
+    {
+      Packages: {
+        "@kosko/cli": "cli",
+        "@kosko/config": "config",
+        "@kosko/env": "env",
+        "@kosko/generate": "generate",
+        "@kosko/migrate": "migrate"
+      },
+      Utilities: {
+        "@kosko/require": "require"
+      },
+      Template: {
+        "@kosko/template": "template",
+        "@kosko/template-deployed-service": "template_deployed_service",
+        "@kosko/template-environment": "template_environment"
+      }
+    }
+  ],
   source: [
     {
-      path: `${GITHUB_URL}/tree/master/`,
+      path: `${GITHUB_URL}/tree/${process.env.COMMIT_REF || "master"}/`,
       line: "L"
     }
   ],
