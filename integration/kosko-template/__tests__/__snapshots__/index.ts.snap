@@ -11,13 +11,19 @@ Options:
   --bar      option bar                                      [number] [required]"
 `;
 
-exports[`when cwd is not set should write files to process.cwd 1`] = `"bar"`;
+exports[`when cwd is not set should write files to process.cwd 1`] = `
+Array [
+  "bar",
+  "46.93",
+]
+`;
 
-exports[`when cwd is not set should write files to process.cwd 2`] = `"46.93"`;
-
-exports[`when cwd is set should write files to specified path 1`] = `"bar"`;
-
-exports[`when cwd is set should write files to specified path 2`] = `"46.93"`;
+exports[`when cwd is set should write files to specified path 1`] = `
+Array [
+  "bar",
+  "46.93",
+]
+`;
 
 exports[`when required arg is not given should print error 1`] = `
 "This is a fake template.

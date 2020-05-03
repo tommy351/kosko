@@ -55,9 +55,7 @@ describe("given cause with stack but without trace", () => {
 
   test("should add path and index to stack", () => {
     expect(err.stack).toStartWith(
-      `ValidationError: ${cause.message}\nPath: ${err.path}\nIndex: ${
-        err.index
-      }\n${cause.stack}`
+      `ValidationError: ${cause.message}\nPath: ${err.path}\nIndex: ${err.index}\n${cause.stack}`
     );
   });
 });

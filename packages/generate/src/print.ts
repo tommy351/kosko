@@ -51,7 +51,7 @@ const arrPrinters: PrinterMap<any[]> = {
  * @param options
  */
 export function print(result: Result, { format, writer }: PrintOptions): void {
-  const data = result.manifests.map(manifest => manifest.data);
+  const data = result.manifests.map((manifest) => manifest.data);
   if (!data.length) return;
 
   if (data.length > 1) {

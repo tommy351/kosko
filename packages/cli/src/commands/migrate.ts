@@ -34,7 +34,7 @@ async function readFilesInDir(dir: string): Promise<string> {
 
   const files = await readDir(dir);
   const contents = await Promise.all(
-    files.map(file => readFileString(join(dir, file)))
+    files.map((file) => readFileString(join(dir, file)))
   );
 
   return concatFiles(contents);
@@ -45,7 +45,7 @@ function readFiles(
   files: ReadonlyArray<string>
 ): Promise<ReadonlyArray<string>> {
   return Promise.all(
-    files.map(async file => {
+    files.map(async (file) => {
       if (file === "-") {
         debug("Reading from stdin");
         return getStdin();

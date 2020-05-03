@@ -50,7 +50,7 @@ describe("when format = YAML", () => {
 
     beforeAll(() => {
       result = {
-        manifests: data.map(x => ({ path: "", index: 0, data: x }))
+        manifests: data.map((x) => ({ path: "", index: 0, data: x }))
       };
     });
 
@@ -81,7 +81,9 @@ describe("when format = JSON", () => {
     const data = [{ foo: "bar" }, { bar: "boo" }, { boo: "baz" }];
 
     beforeAll(() => {
-      result = { manifests: data.map(x => ({ path: "", index: 0, data: x })) };
+      result = {
+        manifests: data.map((x) => ({ path: "", index: 0, data: x }))
+      };
     });
 
     test("should write JSON wrapped with List", () => {

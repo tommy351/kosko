@@ -6,9 +6,7 @@ import { getLogger, parse, setLogger, wrapHandler } from "../command";
 jest.mock("signale");
 
 function newYargs(): Argv {
-  return jest
-    .requireActual("yargs/yargs")()
-    .detectLocale(false);
+  return jest.requireActual("yargs/yargs")().detectLocale(false);
 }
 
 describe("getLogger", () => {
@@ -74,7 +72,7 @@ describe("parse", () => {
         let logger: Signale;
 
         beforeEach(async () => {
-          handler.mockImplementationOnce(async ctx => {
+          handler.mockImplementationOnce(async (ctx) => {
             logger = getLogger(ctx);
           });
 
@@ -132,7 +130,7 @@ describe("parse", () => {
 
     describe("without subcommand", () => {
       test("should resolve", async () => {
-        await parse(newYargs(), []);
+        await expect(parse(newYargs(), [])).toResolve();
       });
     });
   });

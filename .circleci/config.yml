@@ -1,15 +1,9 @@
 version: 2.1
 
+orbs:
+  node: circleci/node@2.0.3
+
 commands:
-  npm_install:
-    steps:
-      - restore_cache:
-          key: npm-{{ checksum "package-lock.json" }}
-      - run: npm ci
-      - save_cache:
-          paths:
-            - node_modules
-          key: npm-{{ checksum "package-lock.json" }}
   pretest:
     steps:
       - run:
@@ -18,9 +12,30 @@ commands:
       - run:
           name: Build
           command: npm run build
-  test_unit:
-    description: Run unit tests
+
+executors:
+  node:
+    docker:
+      - image: cimg/node:12.16
+
+jobs:
+  lint:
+    executor: node
     steps:
+      - checkout
+      - node/install-packages
+      - run:
+          name: Lint
+          command: npm run lint
+  unit-test:
+    parameters:
+      node-version:
+        type: string
+    docker:
+      - image: cimg/node:<< parameters.node-version >>
+    steps:
+      - checkout
+      - node/install-packages
       - pretest
       - run:
           name: Unit tests
@@ -32,44 +47,11 @@ commands:
       - run:
           name: Upload coverage
           command: npm run codecov
-
-jobs:
-  lint:
-    docker:
-      - image: circleci/node:10
+  integration-test:
+    executor: node
     steps:
       - checkout
-      - npm_install
-      - run:
-          name: Lint
-          command: npm run lint
-  test_node_8:
-    docker:
-      - image: circleci/node:8
-    steps:
-      - checkout
-      - npm_install
-      - test_unit
-  test_node_10:
-    docker:
-      - image: circleci/node:10
-    steps:
-      - checkout
-      - npm_install
-      - test_unit
-  test_node_12:
-    docker:
-      - image: circleci/node:12
-    steps:
-      - checkout
-      - npm_install
-      - test_unit
-  test_integration:
-    docker:
-      - image: circleci/node:10
-    steps:
-      - checkout
-      - npm_install
+      - node/install-packages
       - pretest
       - run:
           name: Integration tests
@@ -81,10 +63,15 @@ jobs:
 
 workflows:
   version: 2
-  build_and_test:
+  test:
     jobs:
       - lint
-      - test_node_8
-      - test_node_10
-      - test_node_12
-      - test_integration
+      - unit-test:
+          matrix:
+            parameters:
+              node-version: ["8.17", "10.20", "12.16"]
+          requires:
+            - lint
+      - integration-test:
+          requires:
+            - lint

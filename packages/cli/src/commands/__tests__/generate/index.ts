@@ -4,7 +4,7 @@ import env from "@kosko/env";
 import { generate, print, PrintFormat, Result } from "@kosko/generate";
 import fs from "fs";
 import makeDir from "make-dir";
-import { join } from "path";
+import { join, dirname } from "path";
 import pkgDir from "pkg-dir";
 import { Signale } from "signale";
 import symlinkDir from "symlink-dir";
@@ -63,10 +63,11 @@ beforeEach(async () => {
   );
 
   // Install @kosko/env in the temp folder
-  await symlinkDir(
-    join(root!, "packages", "env"),
-    join(tmpDir.path, "node_modules", "@kosko", "env")
-  );
+  const envSrc = join(root!, "packages", "env");
+  const envDest = join(tmpDir.path, "node_modules", "@kosko", "env");
+
+  await makeDir(dirname(envDest));
+  await symlinkDir(envSrc, envDest);
 });
 
 afterEach(() => tmpDir.cleanup());

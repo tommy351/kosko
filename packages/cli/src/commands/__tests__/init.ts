@@ -1,3 +1,4 @@
+/// <reference types="jest-extended"/>
 import fs from "fs";
 import { join } from "path";
 import { Signale } from "signale";
@@ -35,7 +36,7 @@ describe("when the target exists", () => {
 
   test("should proceed with --force flag", async () => {
     const args = setLogger({ path: tmpDir.path, force: true } as any, logger);
-    await initCmd.handler(args);
+    await expect(initCmd.handler(args)).toResolve();
   });
 
   describe("when package.json exists", () => {
@@ -72,7 +73,7 @@ describe("when path is not specified", () => {
   afterEach(() => tmpDir.cleanup());
 
   test("should use cwd instead", async () => {
-    await execute({ cwd: tmpDir.path, force: true });
+    await expect(execute({ cwd: tmpDir.path, force: true })).toResolve();
   });
 });
 
@@ -89,23 +90,32 @@ describe("success", () => {
 
   afterAll(() => tmpDir.cleanup());
 
-  async function assertDir(...names: string[]): Promise<void> {
+  async function isDirectory(...names: string[]): Promise<boolean> {
     const stats = await stat(join(path, ...names));
-    expect(stats.isDirectory()).toBeTruthy();
+    return stats.isDirectory();
   }
 
-  async function assertFile(...names: string[]): Promise<void> {
-    const content = await readFile(join(path, ...names), "utf8");
-    expect(content).toMatchSnapshot();
+  async function readFileContent(...names: string[]): Promise<string> {
+    return readFile(join(path, ...names), "utf8");
   }
 
-  test("should create components folder", () => assertDir("components"));
+  test("should create components folder", async () => {
+    await expect(isDirectory("components")).resolves.toBeTrue();
+  });
 
-  test("should create environments folder", () => assertDir("environments"));
+  test("should create environments folder", async () => {
+    await expect(isDirectory("environments")).resolves.toBeTrue();
+  });
 
-  test("should create templates folder", () => assertDir("templates"));
+  test("should create templates folder", async () => {
+    await expect(isDirectory("templates")).resolves.toBeTrue();
+  });
 
-  test("should create package.json", () => assertFile("package.json"));
+  test("should create package.json", async () => {
+    await expect(readFileContent("package.json")).resolves.toMatchSnapshot();
+  });
 
-  test("should create kosko.toml", () => assertFile("kosko.toml"));
+  test("should create kosko.toml", async () => {
+    await expect(readFileContent("kosko.toml")).resolves.toMatchSnapshot();
+  });
 });

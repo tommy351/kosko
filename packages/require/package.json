@@ -23,9 +23,9 @@
     "node": ">= 8"
   },
   "dependencies": {
-    "resolve": "^1.12.0"
+    "resolve": "^1.17.0"
   },
   "devDependencies": {
-    "@types/resolve": "^0.0.8"
+    "@types/resolve": "^1.14.0"
   }
 }

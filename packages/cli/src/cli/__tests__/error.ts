@@ -1,4 +1,3 @@
-// tslint:disable:no-console
 import chalk from "chalk";
 import cleanStack from "clean-stack";
 import exit from "exit";

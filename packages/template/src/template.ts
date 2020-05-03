@@ -18,13 +18,13 @@ type Options<T, O> = yargs.Options & {
   conflicts?: OptionKeyRefs<keyof O>;
   implies?: OptionKeyRefs<keyof O>;
 } & (T extends string
-    ? ({ type: "string" } | { string: true })
+    ? { type: "string" } | { string: true }
     : T extends number
-    ? ({ type: "number" | "count" } | { number: true } | { count: true })
+    ? { type: "number" | "count" } | { number: true } | { count: true }
     : T extends boolean
-    ? ({ type: "boolean" } | { boolean: true })
+    ? { type: "boolean" } | { boolean: true }
     : T extends any[]
-    ? ({ type: "array" } | { array: true })
+    ? { type: "array" } | { array: true }
     : {});
 
 export interface Result {
