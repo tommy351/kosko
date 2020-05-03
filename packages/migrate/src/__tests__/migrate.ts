@@ -157,7 +157,7 @@ describe("migrate", () => {
     });
 
     test("should export ConfigMap instances", () => {
-      expect(exported).toSatisfyAll(x => x instanceof ConfigMap);
+      expect(exported).toSatisfyAll((x) => x instanceof ConfigMap);
     });
   });
 

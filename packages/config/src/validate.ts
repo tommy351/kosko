@@ -5,7 +5,7 @@ const ajvValidate = require("../dist/ajv-validate");
 
 function formatErrors(errors: ErrorObject[]): string {
   if (!errors.length) return "No errors";
-  return errors.map(err => `${err.dataPath} ${err.message}`).join(", ");
+  return errors.map((err) => `${err.dataPath} ${err.message}`).join(", ");
 }
 
 export class ValidationError extends Error {

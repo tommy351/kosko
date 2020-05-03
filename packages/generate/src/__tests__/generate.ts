@@ -251,7 +251,7 @@ describe("given multiple patterns", () => {
 
   describe("and three files", () => {
     beforeAll(() => {
-      tmpFiles = ["a", "b", "c"].map(x => ({
+      tmpFiles = ["a", "b", "c"].map((x) => ({
         path: `${x}.js`,
         content: `module.exports = {value: '${x}'}`
       }));

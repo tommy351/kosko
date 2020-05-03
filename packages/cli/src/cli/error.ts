@@ -39,7 +39,6 @@ export function handleError(err: any): void {
     msg = formatError(err);
   }
 
-  // tslint:disable-next-line:no-console
   console.error(msg);
   exit(code);
 }

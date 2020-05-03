@@ -67,7 +67,7 @@ async function setupEnv(
 
   if (args.set && args.set.length) {
     const reducer = createCLIEnvReducer(args.set);
-    env.setReducers(reducers => [...reducers, reducer]);
+    env.setReducers((reducers) => [...reducers, reducer]);
   }
 
   return env;
@@ -169,7 +169,9 @@ export const generateCmd: Command<GenerateArguments> = {
         type: "string",
         describe: "Output format",
         default: PrintFormat.YAML,
-        choices: Object.keys(PrintFormat).map(key => (PrintFormat as any)[key]),
+        choices: Object.keys(PrintFormat).map(
+          (key) => (PrintFormat as any)[key]
+        ),
         alias: "o"
       })
       .option("validate", {

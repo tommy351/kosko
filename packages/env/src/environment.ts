@@ -98,7 +98,8 @@ export class Environment {
   private createGlobalReducer(): Reducer {
     const reducer: Reducer = {
       name: "global",
-      reduce: values => merge(values, ...this.requireAllEnvs(this.paths.global))
+      reduce: (values) =>
+        merge(values, ...this.requireAllEnvs(this.paths.global))
     };
 
     return reducer;
@@ -125,7 +126,7 @@ export class Environment {
 
     const envs = Array.isArray(this.env) ? this.env : [this.env];
 
-    return envs.map(env => {
+    return envs.map((env) => {
       const path = formatPath(template, {
         environment: env,
         component

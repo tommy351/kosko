@@ -22,9 +22,11 @@ const deployment = new Deployment({
           {
             image: "nginx",
             name: "nginx",
-            ports: [{
-              containerPort: 80
-            }]
+            ports: [
+              {
+                containerPort: 80
+              }
+            ]
           }
         ]
       }

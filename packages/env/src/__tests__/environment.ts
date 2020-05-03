@@ -129,7 +129,7 @@ describe("when env is set", () => {
     beforeEach(() => {
       env.env = "dev";
       envPath = join(fixturePath, "environments", env.env);
-      env.setReducers(reducers => reducers.concat(customReducer));
+      env.setReducers((reducers) => reducers.concat(customReducer));
     });
 
     afterEach(() => {
@@ -169,7 +169,7 @@ describe("when env is set", () => {
     beforeEach(() => {
       env.env = "dev";
       envPath = join(fixturePath, "environments", env.env);
-      env.setReducers(reducers => reducers.concat(customReducer));
+      env.setReducers((reducers) => reducers.concat(customReducer));
       env.resetReducers();
     });
 

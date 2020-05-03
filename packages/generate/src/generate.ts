@@ -61,7 +61,7 @@ async function getComponentValue(id: string): Promise<any> {
 export async function generate(options: GenerateOptions): Promise<Result> {
   const extensions = (options.extensions || getExtensions()).join(",");
   const suffix = `?(.{${extensions}})`;
-  const patterns = options.components.map(x => x + suffix);
+  const patterns = options.components.map((x) => x + suffix);
   debug("Component patterns", patterns);
 
   const components = await glob(patterns, {

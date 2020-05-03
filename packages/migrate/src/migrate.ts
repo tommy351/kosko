@@ -60,7 +60,7 @@ function generateForList(
   items: ReadonlyArray<unknown>
 ): ReadonlyArray<Component> {
   return items
-    .map(data => {
+    .map((data) => {
       if (!validateManifest(data)) {
         throw new Error("apiVersion and kind is required");
       }
@@ -79,7 +79,7 @@ function uniqComponentName(
 ): ReadonlyArray<Component> {
   const nameMap: { [key: string]: number } = {};
 
-  return components.map(component => {
+  return components.map((component) => {
     let name = component.name;
     const idx = nameMap[name];
 
@@ -112,7 +112,7 @@ function collectImports(
     }
   }
 
-  return Object.keys(importMap).map(path => ({
+  return Object.keys(importMap).map((path) => ({
     path,
     names: [...importMap[path].values()]
   }));
@@ -135,7 +135,9 @@ export function migrate(data: ReadonlyArray<Manifest>): string {
     output += `\nconst ${name} = ${text};\n`;
   }
 
-  output += `\nmodule.exports = [${components.map(c => c.name).join(", ")}];\n`;
+  output += `\nmodule.exports = [${components
+    .map((c) => c.name)
+    .join(", ")}];\n`;
 
   return output;
 }
@@ -148,7 +150,7 @@ export function migrate(data: ReadonlyArray<Manifest>): string {
 export function migrateString(input: string): string {
   const data = yaml
     .safeLoadAll(input)
-    .filter(x => x != null && typeof x === "object");
+    .filter((x) => x != null && typeof x === "object");
 
   return migrate(data);
 }

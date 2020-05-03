@@ -42,7 +42,6 @@ export async function run(
     await writeFiles(args.cwd, result.files);
     signale.success("%d files are generated", result.files.length);
   } catch (err) {
-    // tslint:disable-next-line:no-console
     console.error(err);
     exit(1);
     throw err;

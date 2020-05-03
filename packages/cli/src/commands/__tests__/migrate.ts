@@ -95,7 +95,7 @@ describe("given a directory", () => {
   test("should call print with result", async () => {
     const files = await readDir(fixturePath);
     const contents = await Promise.all(
-      files.map(file => readFile(join(fixturePath, file), "utf8"))
+      files.map((file) => readFile(join(fixturePath, file), "utf8"))
     );
     const expected = migrateString(contents.join("---\n"));
     expect(print).toHaveBeenCalledWith(expected);
@@ -115,7 +115,7 @@ describe("given multiple files", () => {
 
   test("should call print with result", async () => {
     const contents = await Promise.all(
-      ["only-deployment.yaml", "deployment-and-service.yaml"].map(file =>
+      ["only-deployment.yaml", "deployment-and-service.yaml"].map((file) =>
         readFile(join(fixturePath, file), "utf8")
       )
     );

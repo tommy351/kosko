@@ -55,9 +55,7 @@ export function wrapHandler<T extends RootArguments>(
     args[HANDLED] = true;
     args = setLogger(args, logger);
 
-    handler(args)
-      .then(args[RESOLVE])
-      .catch(args[REJECT]);
+    handler(args).then(args[RESOLVE]).catch(args[REJECT]);
   };
 }
 
