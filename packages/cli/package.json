@@ -51,6 +51,10 @@
     "@types/exit": "^0.1.30",
     "@types/jsonpath": "^0.2.0",
     "@types/signale": "^1.2.1",
-    "@types/yargs": "^15.0.4"
+    "@types/yargs": "^15.0.4",
+    "pkg-dir": "^4.2.0",
+    "symlink-dir": "^4.0.3",
+    "temp-dir": "^2.0.0",
+    "tmp-promise": "^2.0.2"
   }
 }

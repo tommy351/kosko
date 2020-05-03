@@ -34,7 +34,6 @@
     "@types/jest": "^25.2.1",
     "@types/node": "^13.13.4",
     "@types/pkg-dir": "^2.0.1",
-    "@types/temp-dir": "^2.0.2",
     "@types/tmp": "^0.2.0",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",

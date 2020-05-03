@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@types/js-yaml": "^3.12.1",
-    "is-plain-object": "^3.0.0"
+    "is-plain-object": "^3.0.0",
+    "kubernetes-models": "^0.8.0"
   }
 }
