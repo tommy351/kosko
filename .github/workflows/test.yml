@@ -40,6 +40,10 @@ jobs:
       - run: npm ci
       - run: npm run bootstrap
       - run: npm run build
+      # https://github.com/actions/virtual-environments/issues/712#issuecomment-613004302
+      - name: Set TEMP on Windows
+        run: echo "::set-env name=TEMP::$env:USERPROFILE\AppData\Local\Temp"
+        if: ${{ runner.os == 'Windows' }}
       - run: npm run test:unit -- --coverage
       - run: npm run test:integration
       - uses: codecov/codecov-action@v1
