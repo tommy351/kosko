@@ -1,0 +1,3 @@
+[build]
+command = 'npm run bootstrap && npm run typedoc'
+publish = 'dist/typedoc'
