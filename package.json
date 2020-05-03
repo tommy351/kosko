@@ -17,8 +17,7 @@
     "bootstrap": "lerna bootstrap",
     "test": "npm-run-all test:*",
     "test:unit": "jest",
-    "test:integration": "jest --config integration/jest.config.js",
-    "codecov": "codecov"
+    "test:integration": "jest --config integration/jest.config.js"
   },
   "husky": {
     "hooks": {
@@ -39,7 +38,6 @@
     "@types/tmp": "^0.2.0",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
-    "codecov": "^3.6.5",
     "cross-spawn": "^7.0.2",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.11.0",
@@ -50,7 +48,6 @@
     "husky": "^4.2.5",
     "jest": "^25.5.4",
     "jest-extended": "^0.11.5",
-    "jest-junit": "^10.0.0",
     "jest-serializer-path": "^0.1.15",
     "kubernetes-models": "^0.7.3",
     "lerna": "^3.20.2",
