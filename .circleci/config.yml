@@ -8,7 +8,7 @@ commands:
     steps:
       - run:
           name: Bootstrap
-          command: npm run bootstrap -- --no-ci
+          command: npm run bootstrap
       - run:
           name: Build
           command: npm run build

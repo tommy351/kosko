@@ -5,5 +5,4 @@ dist/
 /coverage/
 *.log
 /examples/*/package-lock.json
-/packages/*/package-lock.json
 *.tsbuildinfo
