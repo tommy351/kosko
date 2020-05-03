@@ -1,15 +1,9 @@
 version: 2.1
 
+orbs:
+  node: circleci/node@2.0.3
+
 commands:
-  npm_install:
-    steps:
-      - restore_cache:
-          key: npm-{{ checksum "package-lock.json" }}
-      - run: npm ci
-      - save_cache:
-          paths:
-            - node_modules
-          key: npm-{{ checksum "package-lock.json" }}
   pretest:
     steps:
       - run:
@@ -29,7 +23,7 @@ jobs:
     executor: node
     steps:
       - checkout
-      - npm_install
+      - node/install-packages
       - run:
           name: Lint
           command: npm run lint
@@ -41,7 +35,7 @@ jobs:
       - image: cimg/node:<< parameters.node-version >>
     steps:
       - checkout
-      - npm_install
+      - node/install-packages
       - pretest
       - run:
           name: Unit tests
@@ -57,7 +51,7 @@ jobs:
     executor: node
     steps:
       - checkout
-      - npm_install
+      - node/install-packages
       - pretest
       - run:
           name: Integration tests
