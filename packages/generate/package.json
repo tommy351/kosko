@@ -25,14 +25,14 @@
   "dependencies": {
     "@kosko/require": "^0.1.9",
     "debug": "^4.1.1",
-    "fast-glob": "^3.0.4",
-    "js-yaml": "^3.12.2",
+    "fast-glob": "^3.2.2",
+    "js-yaml": "^3.13.1",
     "tslib": "^1.10.0"
   },
   "devDependencies": {
     "@types/bl": "^2.1.0",
     "@types/debug": "^4.1.5",
-    "@types/js-yaml": "^3.12.0",
+    "@types/js-yaml": "^3.12.3",
     "bl": "^4.0.0",
     "make-dir": "^3.0.0"
   }
