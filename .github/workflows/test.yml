@@ -1,0 +1,51 @@
+name: Test
+on: [push]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - run: npm ci
+      - run: npm run bootstrap
+      - run: npm run lint
+  test:
+    runs-on: ${{ matrix.os }}
+    needs:
+      - lint
+    strategy:
+      matrix:
+        node-version: [8.x, 10.x, 12.x]
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - run: npm ci
+      - run: npm run bootstrap
+      - run: npm run build
+      # https://github.com/actions/virtual-environments/issues/712#issuecomment-613004302
+      - name: Set TEMP on Windows
+        run: echo "::set-env name=TEMP::$env:USERPROFILE\AppData\Local\Temp"
+        if: ${{ runner.os == 'Windows' }}
+      - run: npm run test:unit -- --coverage
+      - run: npm run test:integration
+      - uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
