@@ -1,5 +1,6 @@
 import execa from "execa";
 import { join, dirname } from "path";
+import makeDir from "make-dir";
 import symlinkDir from "symlink-dir";
 
 const root = dirname(__dirname);
@@ -21,8 +22,9 @@ export async function installPackage(
   path: string,
   name: string
 ): Promise<void> {
-  await symlinkDir(
-    join(root, "packages", name),
-    join(path, "node_modules", "@kosko", name)
-  );
+  const src = join(root, "packages", name);
+  const dest = join(path, "node_modules", "@kosko", name);
+
+  await makeDir(dirname(dest));
+  await symlinkDir(src, dest);
 }
