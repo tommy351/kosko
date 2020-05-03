@@ -33,13 +33,10 @@ beforeEach(async () => {
 
 afterEach(() => tmpDir.cleanup());
 
-async function assertFiles(cwd: string): Promise<void> {
-  const paths = ["foo", "bar/baz"];
-
-  for (const path of paths) {
-    const content = await readFile(join(cwd, path), "utf8");
-    expect(content).toMatchSnapshot();
-  }
+async function readFiles(cwd: string): Promise<string[]> {
+  return Promise.all(
+    ["foo", "bar/baz"].map((path) => readFile(join(cwd, path), "utf8"))
+  );
 }
 
 describe("given args --help", () => {
@@ -83,7 +80,7 @@ describe("when cwd is not set", () => {
   });
 
   test("should write files to process.cwd", async () => {
-    await assertFiles(tmpDir.path);
+    await expect(readFiles(tmpDir.path)).resolves.toMatchSnapshot();
   });
 });
 
@@ -101,6 +98,6 @@ describe("when cwd is set", () => {
   });
 
   test("should write files to specified path", async () => {
-    await assertFiles(cwd);
+    await expect(readFiles(cwd)).resolves.toMatchSnapshot();
   });
 });

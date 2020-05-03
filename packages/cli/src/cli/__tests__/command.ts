@@ -130,7 +130,7 @@ describe("parse", () => {
 
     describe("without subcommand", () => {
       test("should resolve", async () => {
-        await parse(newYargs(), []);
+        await expect(parse(newYargs(), [])).toResolve();
       });
     });
   });
