@@ -1,4 +1,7 @@
-# Writing Templates
+---
+id: templates
+title: Templates
+---
 
 ## Generate Components
 

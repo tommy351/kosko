@@ -1,0 +1,6 @@
+{
+  "docs": {
+    "Getting Started": ["overview", "components", "environments", "templates"],
+    "References": ["commands", "configuration"]
+  }
+}

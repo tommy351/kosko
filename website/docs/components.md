@@ -1,4 +1,7 @@
-# Components
+---
+id: components
+title: Components
+---
 
 ## Create Components
 
@@ -46,7 +49,7 @@ module.exports = [new Deployment(), new Service()];
 const { Deployment } = require("kubernetes-models/apps/v1");
 const { Service } = require("kubernetes-models/v1");
 
-module.exports = function() {
+module.exports = function () {
   return [new Deployment(), new Service()];
 };
 ```
@@ -57,7 +60,7 @@ module.exports = function() {
 const { Deployment } = require("kubernetes-models/apps/v1");
 const { Service } = require("kubernetes-models/v1");
 
-module.exports = async function() {
+module.exports = async function () {
   return [new Deployment(), new Service()];
 };
 ```

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-set -e
+set -euo pipefail
 
 npm run clean
 npm run build
-lerna publish
+npx lerna publish

@@ -1,4 +1,7 @@
-# Commands
+---
+id: commands
+title: Commands
+---
 
 ## Usage
 
@@ -79,10 +82,10 @@ Value is converted to JSON object if it's possible; otherwise, it's handled as a
 kosko generate --set image.name=mysql --set image.tag=1.3.4
 
 # Override entire array
-kosko generate --set imagePullSecrets='[ { "name": "mySecret" } ]' 
+kosko generate --set imagePullSecrets='[ { "name": "mySecret" } ]'
 
 # Set name of the first item in the array
-kosko generate --set imagePullSecrets[0].name=mySecret 
+kosko generate --set imagePullSecrets[0].name=mySecret
 
 # Override value of item of the "secrets"
 # array that has "secretKey" in the "name" field

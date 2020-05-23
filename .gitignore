@@ -6,3 +6,6 @@ dist/
 *.log
 /examples/*/package-lock.json
 *.tsbuildinfo
+/website/.docusaurus/
+/website/build/
+/website/.cache-loader/
