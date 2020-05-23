@@ -7,6 +7,7 @@ const REJECT = Symbol("reject");
 const HANDLED = Symbol("executed");
 const LOGGER = Symbol("logger");
 
+/** @internal */
 export interface Context {
   [RESOLVE]: (value?: any) => void;
   [REJECT]: (reason?: any) => void;
@@ -14,6 +15,7 @@ export interface Context {
   [HANDLED]?: boolean;
 }
 
+/** @internal */
 export interface RootArguments {
   cwd: string;
   silent: boolean;
@@ -22,6 +24,7 @@ export interface RootArguments {
 type CommandHandler<T> = (args: Arguments<T> & Context) => Promise<void>;
 type RootCommandModule<T> = CommandModule<RootArguments, T>;
 
+/** @internal */
 export interface Command<T>
   extends Pick<
     RootCommandModule<T>,
@@ -30,12 +33,14 @@ export interface Command<T>
   handler: CommandHandler<T>;
 }
 
+/** @internal */
 export function getLogger(ctx: Context): Signale {
   const logger = ctx[LOGGER];
   if (logger) return logger;
   throw new Error("Logger is not set in the context");
 }
 
+/** @internal */
 export function setLogger<T extends Context>(ctx: T, logger: Signale): T {
   return {
     ...ctx,
@@ -43,6 +48,7 @@ export function setLogger<T extends Context>(ctx: T, logger: Signale): T {
   };
 }
 
+/** @internal */
 export function wrapHandler<T extends RootArguments>(
   handler: CommandHandler<T>
 ): CommandHandler<T> {
@@ -59,6 +65,7 @@ export function wrapHandler<T extends RootArguments>(
   };
 }
 
+/** @internal */
 export function wrapCommand<T extends RootArguments>(
   cmd: Command<T>
 ): RootCommandModule<T> {
@@ -81,6 +88,7 @@ function handleParse(err: Error | undefined, args: any, output: string): void {
   }
 }
 
+/** @internal */
 export function parse(input: Argv, argv: string[]): Promise<void> {
   return new Promise((resolve, reject): void => {
     const ctx: Context = { [RESOLVE]: resolve, [REJECT]: reject };

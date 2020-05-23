@@ -42,7 +42,14 @@ export interface Reducer {
 export class Environment {
   private reducers: Reducer[] = [];
 
+  /**
+   * Current environment.
+   */
   public env?: string | string[];
+
+  /**
+   * Paths of environment files.
+   */
   public paths: Paths = {
     global: "environments/#{environment}",
     component: "environments/#{environment}/#{component}"

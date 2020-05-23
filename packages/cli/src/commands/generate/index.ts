@@ -16,6 +16,7 @@ import { SetOption, parseSetOptions, createCLIEnvReducer } from "./set-option";
 
 const debug = Debug.extend("generate");
 
+/** @internal */
 export interface BaseGenerateArguments extends RootArguments {
   env?: string;
   require?: string[];
@@ -24,6 +25,7 @@ export interface BaseGenerateArguments extends RootArguments {
   set?: SetOption[];
 }
 
+/** @internal */
 export interface GenerateArguments extends BaseGenerateArguments {
   output: PrintFormat;
 }
@@ -87,6 +89,8 @@ function resolveConfig(
     require: [...require, ...(args.require || [])]
   };
 }
+
+/** @internal */
 /* istanbul ignore next */
 export function generateBuilder(
   argv: Argv<RootArguments>
@@ -117,6 +121,7 @@ export function generateBuilder(
     });
 }
 
+/** @internal */
 export async function generateHandler(
   args: BaseGenerateArguments & Context
 ): Promise<Result> {
@@ -159,6 +164,7 @@ export async function generateHandler(
   return result;
 }
 
+/** @internal */
 export const generateCmd: Command<GenerateArguments> = {
   command: "generate [components..]",
   describe: "Generate Kubernetes manifests",
