@@ -1,6 +1,6 @@
 {
   "name": "@kosko/template-environment",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "description": "Create a new environment.",
   "homepage": "https://github.com/tommy351/kosko",
   "repository": {
@@ -27,7 +27,7 @@
     "node": ">= 8"
   },
   "dependencies": {
-    "@kosko/template": "^0.3.10",
+    "@kosko/template": "^0.3.11",
     "tslib": "^1.9.3"
   }
 }
