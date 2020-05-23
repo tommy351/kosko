@@ -10,7 +10,7 @@
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint . --ext .js,.ts",
+    "lint": "eslint . --ext .js,.ts,.jsx,.tsx",
     "build": "lerna run --ignore @kosko/website build && node scripts/build.js",
     "clean": "node scripts/build.js --clean",
     "watch": "npm run build -- --watch",
