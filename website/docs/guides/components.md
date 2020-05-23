@@ -7,14 +7,14 @@ title: Components
 
 Create components by using [templates](templates.md) or add files to `components` folder. For example:
 
-```sh
+```shell
 components
 └── nginx.js
 ```
 
 You can also split manifests into multiple files and export them in `index.js`.
 
-```sh
+```shell
 components
 └── nginx
     ├── deployment.js

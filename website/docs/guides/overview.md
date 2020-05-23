@@ -27,7 +27,7 @@ A template helps you generate code easily so you don't have to build from scratc
 
 The following is a basic folder structure of a kosko directory.
 
-```sh
+```shell
 .
 ├── components
 ├── environments
@@ -37,5 +37,15 @@ The following is a basic folder structure of a kosko directory.
 
 - `components` - Components folder.
 - `environments` - Environments folder.
-- `kosko.toml` - [Configuration](configuration.md) file.
+- `kosko.toml` - [Configuration](references/configuration.md) file.
 - `templates` - Templates folder.
+
+## Examples
+
+- [Getting Started](https://github.com/tommy351/kosko/tree/master/examples/getting-started)
+- [Environment](https://github.com/tommy351/kosko/tree/master/examples/environment)
+- [Using TypeScript](https://github.com/tommy351/kosko/tree/master/examples/typescript)
+- [Using Babel](https://github.com/tommy351/kosko/tree/master/examples/babel)
+- [Run Programmatically](https://github.com/tommy351/kosko/tree/master/examples/run-programmatically)
+- [Create a Component with Template](https://github.com/tommy351/kosko/tree/master/examples/template-component)
+- [Alternative Folder Structure](https://github.com/tommy351/kosko/tree/master/examples/alternative-folder-structure)

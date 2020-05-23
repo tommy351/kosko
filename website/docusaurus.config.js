@@ -17,7 +17,7 @@ module.exports = {
       title: "Kosko",
       links: [
         {
-          to: "docs/overview",
+          to: "docs/guides/getting-started",
           activeBasePath: "docs",
           label: "Docs",
           position: "left"
@@ -41,6 +41,9 @@ module.exports = {
     },
     googleAnalytics: {
       trackingID: "UA-4910098-13"
+    },
+    prism: {
+      additionalLanguages: ["toml"]
     }
   },
   themes: [

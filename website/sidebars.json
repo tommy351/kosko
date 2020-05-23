@@ -1,6 +1,12 @@
 {
   "docs": {
-    "Getting Started": ["overview", "components", "environments", "templates"],
-    "References": ["commands", "configuration"]
+    "Guides": [
+      "guides/getting-started",
+      "guides/overview",
+      "guides/components",
+      "guides/environments",
+      "guides/templates"
+    ],
+    "References": ["references/commands", "references/configuration"]
   }
 }
