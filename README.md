@@ -1,6 +1,6 @@
 # kosko
 
-[![](https://img.shields.io/npm/v/kosko.svg)](https://www.npmjs.com/package/kosko) ![Test](https://github.com/tommy351/kosko/workflows/Test/badge.svg) [![codecov](https://codecov.io/gh/tommy351/kosko/branch/master/graph/badge.svg)](https://codecov.io/gh/tommy351/kosko) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://prettier.io)
+[![](https://img.shields.io/npm/v/kosko.svg)](https://www.npmjs.com/package/kosko) ![Test](https://github.com/tommy351/kosko/workflows/Test/badge.svg) [![codecov](https://codecov.io/gh/tommy351/kosko/branch/master/graph/badge.svg)](https://codecov.io/gh/tommy351/kosko) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://prettier.io) [![Netlify Status](https://api.netlify.com/api/v1/badges/88dd3339-bd80-49bd-88cb-8081c312ae12/deploy-status)](https://app.netlify.com/sites/kosko/deploys)
 
 Write Kubernetes manifests in JavaScript.
 
@@ -59,22 +59,7 @@ kosko generate | kubectl apply -f -
 
 ## Documentation
 
-- [Overview](docs/overview.md)
-- [Components](docs/components.md)
-- [Environments](docs/environments.md)
-- [Templates](docs/templates.md)
-- [Commands](docs/commands.md)
-- [Configuration](docs/configuration.md)
-
-## Examples
-
-- [Getting Started](examples/getting-started)
-- [Environment](examples/environment)
-- [Using TypeScript](examples/typescript)
-- [Using Babel](examples/babel)
-- [Run Programmatically](examples/run-programmatically)
-- [Create a Component with Template](examples/template-component)
-- [Alternative Folder Structure](examples/alternative-folder-structure)
+Learn more on [the official site](https://kosko.dev).
 
 ## Packages
 

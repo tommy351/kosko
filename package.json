@@ -10,8 +10,8 @@
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint . --ext .js,.ts",
-    "build": "lerna run build && node scripts/build.js",
+    "lint": "eslint . --ext .js,.ts,.jsx,.tsx",
+    "build": "lerna run --ignore @kosko/website build && node scripts/build.js",
     "clean": "node scripts/build.js --clean",
     "watch": "npm run build -- --watch",
     "bootstrap": "lerna bootstrap",
@@ -26,13 +26,12 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts}": "eslint --fix"
+    "*.{js,ts,jsx,tsx}": "eslint --fix"
   },
   "engines": {
     "node": ">= 8"
   },
   "devDependencies": {
-    "@strictsoftware/typedoc-plugin-monorepo": "^0.3.1",
     "@types/jest": "^25.2.1",
     "@types/node": "^13.13.4",
     "@types/pkg-dir": "^2.0.1",
@@ -62,8 +61,11 @@
     "tmp-promise": "^2.0.2",
     "ts-jest": "^25.4.0",
     "ts-node": "^8.10.0",
-    "typedoc": "^0.17.6",
-    "typedoc-neo-theme": "^1.0.8",
+    "typedoc": "^0.16.7",
+    "typedoc-plugin-lerna-packages": "^0.3.0",
     "typescript": "~3.8.3"
+  },
+  "dependencies": {
+    "eslint-plugin-react": "^7.20.0"
   }
 }

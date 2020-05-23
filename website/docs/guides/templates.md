@@ -1,8 +1,11 @@
-# Writing Templates
+---
+id: templates
+title: Templates
+---
 
 ## Generate Components
 
-This example shows how to generate a component containing a horizontal pod autoscaler (HPA). You can see the result in [the example](../examples/template-component).
+This example shows how to generate a component containing a horizontal pod autoscaler (HPA). You can see the result in [the example](https://github.com/tommy351/kosko/tree/master/examples/template-component).
 
 ```js
 const { run } = require("@kosko/template");

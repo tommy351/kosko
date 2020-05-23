@@ -1,10 +1,13 @@
-# Environments
+---
+id: environments
+title: Environments
+---
 
 ## Create Environments
 
-You can create a new component by using [`@kosko/template-environment`](../packages/template-environment) template.
+You can create a new component by using [`@kosko/template-environment`](https://github.com/tommy351/kosko/tree/master/packages/template-environment) template.
 
-```sh
+```shell
 npx @kosko/template-environment --name dev
 ```
 
@@ -12,7 +15,7 @@ npx @kosko/template-environment --name dev
 
 The following is the folder structure of `environments` folder.
 
-```sh
+```shell
 environments
 ├── dev
 │   ├── index.js

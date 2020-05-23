@@ -5,8 +5,10 @@ import {
   generateHandler
 } from "./generate";
 
+/** @internal */
 export type ValidateArguments = BaseGenerateArguments;
 
+/** @internal */
 export const validateCmd: Command<ValidateArguments> = {
   command: "validate [components..]",
   describe: "Validate components",

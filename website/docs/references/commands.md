@@ -1,8 +1,11 @@
-# Commands
+---
+id: commands
+title: Commands
+---
 
 ## Usage
 
-```sh
+```shell
 kosko <command>
 ```
 
@@ -20,7 +23,7 @@ Disable log output.
 
 Set up a new kosko directory.
 
-```sh
+```shell
 kosko init [path]
 ```
 
@@ -40,7 +43,7 @@ Overwrite existing files.
 
 Generate Kubernetes manifests.
 
-```sh
+```shell
 kosko generate [components..]
 ```
 
@@ -48,9 +51,9 @@ kosko generate [components..]
 
 #### `components`
 
-Components to generate. It can be either a component's name or a [glob pattern](<https://en.wikipedia.org/wiki/Glob_(programming)>). This overrides components set in the config file.
+Components to generate. It can be either a component's name or a [glob pattern]). This overrides components set in the config file.
 
-```sh
+```shell
 # Generate components set in kosko.toml
 kosko generate
 
@@ -74,15 +77,15 @@ Override global environment variables on the command line KEY=VAL (can be used m
 [JSONPath Expressions](https://www.npmjs.com/package/jsonpath) are supported for keys, keys are prepdended with `$.` automatically.
 Value is converted to JSON object if it's possible; otherwise, it's handled as a string.
 
-```sh
+```shell
 # Set multiple arguments
 kosko generate --set image.name=mysql --set image.tag=1.3.4
 
 # Override entire array
-kosko generate --set imagePullSecrets='[ { "name": "mySecret" } ]' 
+kosko generate --set imagePullSecrets='[ { "name": "mySecret" } ]'
 
 # Set name of the first item in the array
-kosko generate --set imagePullSecrets[0].name=mySecret 
+kosko generate --set imagePullSecrets[0].name=mySecret
 
 # Override value of item of the "secrets"
 # array that has "secretKey" in the "name" field
@@ -102,7 +105,7 @@ kosko generate --set myService='"true"'
 
 Override variables of the specified component. Format is the same as in the `--set` argument. Component overrides are always applied after the global ones regardless of an order of arguments in the command line.
 
-```sh
+```shell
 # Set mysql port to 3307 for all components and 3308 only for the "backend" component
 kosko generate --set.backend mysql.port=3308 --set mysql.port=3307
 ```
@@ -111,7 +114,7 @@ kosko generate --set.backend mysql.port=3308 --set mysql.port=3307
 
 Require external modules. Modules set in the config file will also be required.
 
-```sh
+```shell
 # Using TypeScript
 kosko generate -r ts-node/register
 ```
@@ -126,7 +129,7 @@ Validate components. It is enabled by default. It can be disabled by setting `--
 
 ### Examples
 
-```sh
+```shell
 # Print components to console
 kosko generate
 
@@ -138,7 +141,7 @@ kosko generate | kubectl apply -f -
 
 Validate components.
 
-```sh
+```shell
 kosko validate [components..]
 ```
 
@@ -146,9 +149,9 @@ kosko validate [components..]
 
 #### `components`
 
-Components to generate. It can be either a component's name or a [glob pattern](<https://en.wikipedia.org/wiki/Glob_(programming)>). This overrides components set in the config file.
+Components to generate. It can be either a component's name or a [glob pattern]). This overrides components set in the config file.
 
-```sh
+```shell
 # Generate components set in kosko.toml
 kosko generate
 
@@ -173,7 +176,7 @@ Override global or component variables on the command line KEY=VAL (can be used 
 
 Require external modules. Modules set in the config file will also be required.
 
-```sh
+```shell
 # Using TypeScript
 kosko generate -r ts-node/register
 ```
@@ -182,7 +185,7 @@ kosko generate -r ts-node/register
 
 Migrate Kubernetes YAML into kosko components.
 
-```sh
+```shell
 kosko migrate
 ```
 
@@ -192,7 +195,7 @@ kosko migrate
 
 File, directory or stdin to migrate.
 
-```sh
+```shell
 # Read from a file or a directory
 kosko migrate -f path/to/file
 
@@ -202,6 +205,8 @@ kosko migrate -f -
 
 ### Examples
 
-```sh
+```shell
 kosko migrate -f nginx.yml > components/nginx.js
 ```
+
+[glob pattern]: https://en.wikipedia.org/wiki/Glob_(programming)

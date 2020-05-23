@@ -63,10 +63,12 @@ function toArray<T>(input: T): T[] {
   return Array.isArray(input) ? input : [input];
 }
 
+/** @internal */
 export interface MigrateArguments extends RootArguments {
   filename: any;
 }
 
+/** @internal */
 export const migrateCmd: Command<MigrateArguments> = {
   command: "migrate",
   describe: "Migrate YAML into components",

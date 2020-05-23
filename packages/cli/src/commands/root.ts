@@ -6,6 +6,7 @@ import { initCmd } from "./init";
 import { validateCmd } from "./validate";
 import { migrateCmd } from "./migrate";
 
+/** @internal */
 export const rootCmd = yargs
   .scriptName("kosko")
   .exitProcess(false)
