@@ -6,7 +6,7 @@ export interface Paths {
 }
 
 /** @internal */
-export function formatPath(path: string, data: any): string {
+export function formatPath(path: string, data: Record<string, string>): string {
   return path.replace(rTemplate, (s, key) => {
     return data[key];
   });

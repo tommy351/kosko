@@ -9,7 +9,7 @@ declare interface GlobalEnvironment {
 // Declare types for component environment variables
 declare interface ComponentEnvironment {
   // Fallback type of all other component variables which are not specified below
-  [key: string]: {};
+  [key: string]: unknown;
 
   // Specify types for each component
   nginx: {

@@ -1,5 +1,5 @@
 import deepMerge from "deepmerge";
-import isPlainObject from "is-plain-object";
+import { isPlainObject } from "is-plain-object";
 
 // https://stackoverflow.com/a/48769843
 type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (

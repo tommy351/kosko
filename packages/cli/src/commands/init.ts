@@ -18,7 +18,7 @@ function exists(path: string): Promise<boolean> {
 }
 
 /** @internal */
-export function writeJSON(path: string, data: any): Promise<void> {
+export function writeJSON(path: string, data: unknown): Promise<void> {
   return writeFile(path, JSON.stringify(data, null, "  "));
 }
 

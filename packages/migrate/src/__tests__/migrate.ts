@@ -1,5 +1,5 @@
 /// <reference types="jest-extended"/>
-import isPlainObject from "is-plain-object";
+import { isPlainObject } from "is-plain-object";
 import { YAMLException } from "js-yaml";
 import { Deployment } from "kubernetes-models/apps/v1/Deployment";
 import { ConfigMap } from "kubernetes-models/v1/ConfigMap";

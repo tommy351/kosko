@@ -25,7 +25,7 @@ type Options<T, O> = yargs.Options & {
     ? { type: "boolean" } | { boolean: true }
     : T extends any[]
     ? { type: "array" } | { array: true }
-    : {});
+    : unknown);
 
 export interface Result {
   files: ReadonlyArray<File>;

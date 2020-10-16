@@ -6,13 +6,13 @@ exports[`when filename is not given should print the error 1`] = `
 Migrate YAML into components
 
 Global Options:
-  --cwd      Path of working directory                   [string] [default: CWD]
-  --silent   Disable log output                       [boolean] [default: false]
-  --help     Show help                                                 [boolean]
-  --version  Show version number                                       [boolean]
+      --cwd      Path of working directory               [string] [default: CWD]
+      --silent   Disable log output                   [boolean] [default: false]
+      --help     Show help                                             [boolean]
+      --version  Show version number                                   [boolean]
 
 Options:
-  --filename, -f  File, directory to migrate                 [string] [required]
+  -f, --filename  File, directory to migrate                 [string] [required]
 
 Examples:
   kosko migrate -f path/to/file  Read from the path

@@ -29,7 +29,7 @@ export function formatError(err: Error): string {
   return stack.substring(0, pos) + chalk.gray(stack.substring(pos));
 }
 
-export function handleError(err: any): void {
+export function handleError(err: unknown): void {
   let code = 1;
   let msg = err;
 

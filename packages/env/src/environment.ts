@@ -136,7 +136,7 @@ export class Environment {
     return envs.map((env) => {
       const path = formatPath(template, {
         environment: env,
-        component
+        ...(component && { component })
       });
 
       return tryRequire(join(this.cwd, path));

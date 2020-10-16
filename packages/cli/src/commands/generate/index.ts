@@ -102,7 +102,8 @@ export function generateBuilder(
       alias: "e"
     })
     .option("require", {
-      type: "array",
+      type: "string",
+      array: true,
       describe:
         "Require modules. Modules set in config file will also be required.",
       default: [],
@@ -110,12 +111,16 @@ export function generateBuilder(
     })
     .option("set", {
       type: "string",
+      array: true,
       describe:
         "Set values on the command line KEY=VAL (can be used multiple times)",
       alias: "s",
-      coerce: parseSetOptions
+      coerce: parseSetOptions,
+      default: [] as SetOption[]
     })
     .positional("components", {
+      type: "string",
+      array: true,
       describe:
         "Components to generate. This overrides components set in config file."
     });

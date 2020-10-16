@@ -62,20 +62,20 @@ Positionals:
               file.                                        [array] [default: []]
 
 Global Options:
-  --cwd      Path of working directory                   [string] [default: CWD]
-  --silent   Disable log output                       [boolean] [default: false]
-  --help     Show help                                                 [boolean]
-  --version  Show version number                                       [boolean]
+      --cwd      Path of working directory               [string] [default: CWD]
+      --silent   Disable log output                   [boolean] [default: false]
+      --help     Show help                                             [boolean]
+      --version  Show version number                                   [boolean]
 
 Options:
-  --env, -e      Environment name                                       [string]
-  --require, -r  Require modules. Modules set in config file will also be
-                 required.                                 [array] [default: []]
-  --set, -s      Set values on the command line KEY=VAL (can be used multiple
-                 times)                                                 [string]
-  --output, -o   Output format
+  -e, --env       Environment name                                      [string]
+  -r, --require   Require modules. Modules set in config file will also be
+                  required.                                [array] [default: []]
+  -s, --set       Set values on the command line KEY=VAL (can be used multiple
+                  times)                                   [array] [default: []]
+  -o, --output    Output format
                             [string] [choices: \\"yaml\\", \\"json\\"] [default: \\"yaml\\"]
-  --validate     Validate components                   [boolean] [default: true]
+      --validate  Validate components                  [boolean] [default: true]
 
 Examples:
   kosko generate                      Generate manifests
@@ -93,6 +93,8 @@ exports[`when output = json should output JSON 1`] = `
   \\"kind\\": \\"List\\",
   \\"items\\": [
     {
+      \\"apiVersion\\": \\"apps/v1\\",
+      \\"kind\\": \\"Deployment\\",
       \\"metadata\\": {
         \\"name\\": \\"nginx\\",
         \\"labels\\": {
@@ -141,11 +143,11 @@ exports[`when output = json should output JSON 1`] = `
             ]
           }
         }
-      },
-      \\"apiVersion\\": \\"apps/v1\\",
-      \\"kind\\": \\"Deployment\\"
+      }
     },
     {
+      \\"apiVersion\\": \\"v1\\",
+      \\"kind\\": \\"Service\\",
       \\"metadata\\": {
         \\"name\\": \\"nginx\\"
       },
@@ -158,9 +160,7 @@ exports[`when output = json should output JSON 1`] = `
             \\"port\\": 80
           }
         ]
-      },
-      \\"apiVersion\\": \\"v1\\",
-      \\"kind\\": \\"Service\\"
+      }
     }
   ]
 }"
@@ -222,20 +222,20 @@ Positionals:
               file.                                        [array] [default: []]
 
 Global Options:
-  --cwd      Path of working directory                   [string] [default: CWD]
-  --silent   Disable log output                       [boolean] [default: false]
-  --help     Show help                                                 [boolean]
-  --version  Show version number                                       [boolean]
+      --cwd      Path of working directory               [string] [default: CWD]
+      --silent   Disable log output                   [boolean] [default: false]
+      --help     Show help                                             [boolean]
+      --version  Show version number                                   [boolean]
 
 Options:
-  --env, -e      Environment name                                       [string]
-  --require, -r  Require modules. Modules set in config file will also be
-                 required.                                 [array] [default: []]
-  --set, -s      Set values on the command line KEY=VAL (can be used multiple
-                 times)                                                 [string]
-  --output, -o   Output format
+  -e, --env       Environment name                                      [string]
+  -r, --require   Require modules. Modules set in config file will also be
+                  required.                                [array] [default: []]
+  -s, --set       Set values on the command line KEY=VAL (can be used multiple
+                  times)                                   [array] [default: []]
+  -o, --output    Output format
                             [string] [choices: \\"yaml\\", \\"json\\"] [default: \\"yaml\\"]
-  --validate     Validate components                   [boolean] [default: true]
+      --validate  Validate components                  [boolean] [default: true]
 
 Examples:
   kosko generate                      Generate manifests
@@ -304,20 +304,20 @@ Positionals:
               file.                                        [array] [default: []]
 
 Global Options:
-  --cwd      Path of working directory                   [string] [default: CWD]
-  --silent   Disable log output                       [boolean] [default: false]
-  --help     Show help                                                 [boolean]
-  --version  Show version number                                       [boolean]
+      --cwd      Path of working directory               [string] [default: CWD]
+      --silent   Disable log output                   [boolean] [default: false]
+      --help     Show help                                             [boolean]
+      --version  Show version number                                   [boolean]
 
 Options:
-  --env, -e      Environment name                                       [string]
-  --require, -r  Require modules. Modules set in config file will also be
-                 required.                                 [array] [default: []]
-  --set, -s      Set values on the command line KEY=VAL (can be used multiple
-                 times)                                                 [string]
-  --output, -o   Output format
+  -e, --env       Environment name                                      [string]
+  -r, --require   Require modules. Modules set in config file will also be
+                  required.                                [array] [default: []]
+  -s, --set       Set values on the command line KEY=VAL (can be used multiple
+                  times)                                   [array] [default: []]
+  -o, --output    Output format
                             [string] [choices: \\"yaml\\", \\"json\\"] [default: \\"yaml\\"]
-  --validate     Validate components                   [boolean] [default: true]
+      --validate  Validate components                  [boolean] [default: true]
 
 Examples:
   kosko generate                      Generate manifests

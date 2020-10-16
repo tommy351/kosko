@@ -22,7 +22,7 @@ ValidationError.prototype.name = "ValidationError";
  *
  * @param data
  */
-export function validate(data: any): void {
+export function validate(data: unknown): void {
   const valid = ajvValidate(data);
   if (valid) return;
 
