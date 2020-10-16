@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2015",
+    "target": "es2018",
     "module": "commonjs",
     "moduleResolution": "node",
     "preserveConstEnums": true,
@@ -11,6 +11,8 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "experimentalDecorators": true,
-    "stripInternal": true
+    "stripInternal": true,
+    "lib": ["es2018"],
+    "forceConsistentCasingInFileNames": true
   }
 }
