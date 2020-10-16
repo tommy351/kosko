@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 12.x
+          node-version: 14.x
       - name: Get npm cache directory
         id: npm-cache
         run: |
@@ -30,7 +30,7 @@ jobs:
       - lint
     strategy:
       matrix:
-        node-version: [8.x, 10.x, 12.x]
+        node-version: [10.x, 12.x, 14.x]
         os: [ubuntu-latest, windows-latest]
     steps:
       - uses: actions/checkout@v2

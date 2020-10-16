@@ -20,20 +20,20 @@
     "access": "public"
   },
   "engines": {
-    "node": ">= 8"
+    "node": ">=10"
   },
   "dependencies": {
     "exit": "^0.1.2",
-    "make-dir": "^3.0.0",
+    "make-dir": "^3.1.0",
     "signale": "^1.4.0",
-    "tslib": "^1.10.0",
-    "yargs": "^15.3.1"
+    "tslib": "^2.0.3",
+    "yargs": "^16.1.0"
   },
   "devDependencies": {
-    "@types/exit": "^0.1.30",
-    "@types/signale": "^1.2.1",
-    "@types/yargs": "^15.0.4",
+    "@types/exit": "^0.1.31",
+    "@types/signale": "^1.4.1",
+    "@types/yargs": "^15.0.8",
     "temp-dir": "^2.0.0",
-    "tmp-promise": "^2.0.2"
+    "tmp-promise": "^3.0.2"
   }
 }

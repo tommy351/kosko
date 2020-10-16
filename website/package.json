@@ -27,10 +27,10 @@
     "@docusaurus/plugin-sitemap": "^2.0.0-alpha.37",
     "@docusaurus/theme-classic": "^2.0.0-alpha.37",
     "classnames": "^2.2.6",
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "read-pkg": "^5.2.0",
     "resolve-pkg": "^2.0.0",
-    "styled-components": "^5.1.0"
+    "styled-components": "^5.2.0"
   }
 }

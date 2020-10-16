@@ -25,36 +25,36 @@
     "access": "public"
   },
   "engines": {
-    "node": ">= 8"
+    "node": ">=10"
   },
   "dependencies": {
     "@kosko/config": "^0.4.2",
     "@kosko/generate": "^0.4.7",
     "@kosko/migrate": "^0.1.5",
     "@kosko/require": "^0.1.11",
-    "chalk": "^3.0.0",
-    "clean-stack": "^2.2.0",
-    "debug": "^4.1.1",
+    "chalk": "^4.1.0",
+    "clean-stack": "^3.0.0",
+    "debug": "^4.2.0",
     "exit": "^0.1.2",
-    "get-stdin": "^7.0.0",
+    "get-stdin": "^8.0.0",
     "import-local": "^3.0.2",
     "jsonpath": "^1.0.2",
-    "make-dir": "^3.0.0",
+    "make-dir": "^3.1.0",
     "signale": "^1.4.0",
-    "tslib": "^1.10.0",
-    "yargs": "^15.3.1"
+    "tslib": "^2.0.3",
+    "yargs": "^16.1.0"
   },
   "devDependencies": {
-    "@iarna/toml": "^2.2.3",
+    "@iarna/toml": "^2.2.5",
     "@kosko/env": "^0.5.2",
-    "@types/debug": "^4.1.2",
-    "@types/exit": "^0.1.30",
+    "@types/debug": "^4.1.5",
+    "@types/exit": "^0.1.31",
     "@types/jsonpath": "^0.2.0",
-    "@types/signale": "^1.2.1",
-    "@types/yargs": "^15.0.4",
+    "@types/signale": "^1.4.1",
+    "@types/yargs": "^15.0.8",
     "pkg-dir": "^4.2.0",
-    "symlink-dir": "^4.0.3",
+    "symlink-dir": "^4.1.0",
     "temp-dir": "^2.0.0",
-    "tmp-promise": "^2.0.2"
+    "tmp-promise": "^3.0.2"
   }
 }

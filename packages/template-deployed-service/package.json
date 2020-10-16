@@ -24,10 +24,10 @@
     "access": "public"
   },
   "engines": {
-    "node": ">= 8"
+    "node": ">=10"
   },
   "dependencies": {
     "@kosko/template": "^0.3.11",
-    "tslib": "^1.9.3"
+    "tslib": "^2.0.3"
   }
 }
