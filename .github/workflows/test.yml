@@ -23,6 +23,7 @@ jobs:
             ${{ runner.os }}-node-
       - run: npm ci
       - run: npm run bootstrap
+      - run: npm run build
       - run: npm run lint
   test:
     runs-on: ${{ matrix.os }}

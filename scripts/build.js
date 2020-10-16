@@ -1,3 +1,4 @@
+/* eslint-disable node/no-unpublished-require */
 "use strict";
 
 const spawn = require("cross-spawn");

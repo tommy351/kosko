@@ -1,0 +1,13 @@
+{
+  "extends": "../.eslintrc",
+  "rules": {
+    "node/no-unpublished-require": "off",
+    "node/no-unpublished-import": "off",
+    "node/shebang": "off"
+  },
+  "settings": {
+    "node": {
+      "allowModules": ["@kosko/env", "@kosko/template"]
+    }
+  }
+}

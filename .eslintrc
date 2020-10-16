@@ -8,7 +8,8 @@
     "prettier",
     "prettier/@typescript-eslint",
     "plugin:prettier/recommended",
-    "plugin:jest/recommended"
+    "plugin:jest/recommended",
+    "plugin:node/recommended"
   ],
   "rules": {
     "@typescript-eslint/no-explicit-any": "off",
@@ -19,11 +20,30 @@
         "fn": "test",
         "withinDescribe": "test"
       }
+    ],
+    "node/no-unsupported-features/es-syntax": [
+      "error",
+      {
+        "ignores": [
+          "modules"
+        ]
+      }
     ]
   },
-  "env": {
-    "es6": true,
-    "node": true
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
+  "settings": {
+    "node": {
+      "tryExtensions": [
+        ".ts",
+        ".tsx",
+        ".js",
+        ".jsx",
+        ".json",
+        ".node"
+      ]
+    }
   },
   "overrides": [
     {

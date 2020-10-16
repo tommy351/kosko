@@ -14,6 +14,7 @@ const writeFile = promisify(fs.writeFile);
 const DEFAULT_CONFIG = `components = ["*"]`;
 
 function exists(path: string): Promise<boolean> {
+  // eslint-disable-next-line node/no-deprecated-api
   return new Promise((res): void => fs.exists(path, res));
 }
 

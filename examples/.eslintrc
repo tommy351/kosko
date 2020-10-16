@@ -1,0 +1,7 @@
+{
+  "extends": "../.eslintrc",
+  "rules": {
+    "node/no-missing-require": "off",
+    "node/no-missing-import": "off"
+  }
+}
