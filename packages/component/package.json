@@ -1,0 +1,30 @@
+{
+  "name": "@kosko/component",
+  "version": "0.0.0",
+  "description": "Create kosko components.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kosko.git"
+  },
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "main": "dist",
+  "files": [
+    "/dist/"
+  ],
+  "keywords": [
+    "kosko"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "dependencies": {
+    "js-yaml": "^3.14.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^3.12.5"
+  }
+}
