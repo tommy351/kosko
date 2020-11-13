@@ -54,7 +54,7 @@ beforeEach(async () => {
   jest.resetAllMocks();
 
   const root = await pkgDir();
-  tmpDir = await tmp.dir({ dir: tempDir, unsafeCleanup: true });
+  tmpDir = await tmp.dir({ tmpdir: tempDir, unsafeCleanup: true });
 
   // Write kosko.toml
   await writeFile(
@@ -104,7 +104,7 @@ describe("with components in config", () => {
       }
     };
     result = {
-      manifests: [{ path: "", index: 0, data: {} }]
+      manifests: [{ path: "", index: [0], data: {} }]
     };
   });
 

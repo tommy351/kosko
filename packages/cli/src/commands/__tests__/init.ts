@@ -23,7 +23,7 @@ describe("when the target exists", () => {
   let tmpDir: tmp.DirectoryResult;
 
   beforeEach(async () => {
-    tmpDir = await tmp.dir({ dir: tempDir, unsafeCleanup: true });
+    tmpDir = await tmp.dir({ tmpdir: tempDir, unsafeCleanup: true });
   });
 
   afterEach(() => tmpDir.cleanup());

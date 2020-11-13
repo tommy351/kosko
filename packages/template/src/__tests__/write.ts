@@ -18,7 +18,7 @@ function readTmpFile(path: string): Promise<string> {
 }
 
 beforeEach(async () => {
-  tmpDir = await tmp.dir({ dir: tempDir, unsafeCleanup: true });
+  tmpDir = await tmp.dir({ tmpdir: tempDir, unsafeCleanup: true });
   await writeFiles(tmpDir.path, files);
 });
 
