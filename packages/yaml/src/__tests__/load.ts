@@ -1,4 +1,4 @@
-import { loadFile, loadUrl } from "../load";
+import { loadFile, loadString, loadUrl } from "../load";
 import tmp from "tmp-promise";
 import tempDir from "temp-dir";
 import fs from "fs";
@@ -165,6 +165,19 @@ metadata:
     });
   });
 }
+
+describe("loadString", () => {
+  let content: string;
+
+  testLoad({
+    setup: async (input) => {
+      content = input;
+    },
+    load: () => {
+      return async () => loadString(content);
+    }
+  });
+});
 
 describe("loadFile", () => {
   let tmpDir: tmp.DirectoryResult;

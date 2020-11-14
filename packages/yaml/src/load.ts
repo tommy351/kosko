@@ -44,7 +44,10 @@ function getConstructor(res: ResourceKind): ManifestConstructor | undefined {
   }
 }
 
-function loadYAMLString(content: string): ReadonlyArray<Manifest> {
+/**
+ * Load a Kubernetes YAML file from a string.
+ */
+export function loadString(content: string): ReadonlyArray<Manifest> {
   const input = safeLoadAll(content).filter((x) => x != null);
   const manifests: Manifest[] = [];
 
@@ -76,7 +79,7 @@ export function loadFile(path: string) {
     const content = await readFile(path, "utf-8");
     debug("File loaded from: %s", path);
 
-    return loadYAMLString(content);
+    return loadString(content);
   };
 }
 
@@ -95,6 +98,6 @@ export function loadUrl(url: RequestInfo, init?: RequestInit) {
       throw new Error(`Failed to fetch YAML file from: ${url}`);
     }
 
-    return loadYAMLString(await res.text());
+    return loadString(await res.text());
   };
 }
