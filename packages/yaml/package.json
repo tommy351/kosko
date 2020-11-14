@@ -36,6 +36,6 @@
     "tmp-promise": "^3.0.2"
   },
   "peerDependencies": {
-    "kubernetes-models": "^1.0.0"
+    "kubernetes-models": ">=0.5.0"
   }
 }
