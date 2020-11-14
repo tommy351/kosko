@@ -26,7 +26,9 @@ describe("when the target exists", () => {
     tmpDir = await tmp.dir({ tmpdir: tempDir, unsafeCleanup: true });
   });
 
-  afterEach(() => tmpDir.cleanup());
+  afterEach(async () => {
+    await tmpDir.cleanup();
+  });
 
   test("should throw an error", async () => {
     await expect(execute({ path: tmpDir.path })).rejects.toThrow(

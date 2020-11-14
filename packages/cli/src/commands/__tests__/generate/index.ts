@@ -70,7 +70,9 @@ beforeEach(async () => {
   await symlinkDir(envSrc, envDest);
 });
 
-afterEach(() => tmpDir.cleanup());
+afterEach(async () => {
+  await tmpDir.cleanup();
+});
 
 describe("without components", () => {
   beforeAll(() => {

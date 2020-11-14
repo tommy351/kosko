@@ -35,7 +35,7 @@ beforeEach(async () => {
 });
 
 afterEach(async () => {
-  tmpDir.cleanup();
+  await tmpDir.cleanup();
 });
 
 describe("given the wildcard pattern", () => {

@@ -22,7 +22,9 @@ beforeEach(async () => {
   await writeFiles(tmpDir.path, files);
 });
 
-afterEach(() => tmpDir.cleanup());
+afterEach(async () => {
+  await tmpDir.cleanup();
+});
 
 describe("given files", () => {
   beforeAll(() => {

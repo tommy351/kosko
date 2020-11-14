@@ -31,7 +31,9 @@ beforeEach(async () => {
   });
 });
 
-afterEach(() => tmpDir.cleanup());
+afterEach(async () => {
+  await tmpDir.cleanup();
+});
 
 async function readFiles(cwd: string): Promise<string[]> {
   return Promise.all(
