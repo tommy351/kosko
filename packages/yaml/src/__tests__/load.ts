@@ -6,6 +6,7 @@ import { promisify } from "util";
 import { join } from "path";
 import fetch from "node-fetch";
 import type { FetchMockStatic } from "fetch-mock";
+import { Pod } from "kubernetes-models/v1/Pod";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 jest.mock("node-fetch", () => require("fetch-mock").sandbox());
@@ -39,13 +40,11 @@ metadata:
 `.trim();
     });
 
-    test("should returns an async function which returns an array of objects", async () => {
+    test("should return an async function which returns an array of objects", async () => {
       await expect(result()).resolves.toEqual([
-        {
-          apiVersion: "v1",
-          kind: "Pod",
+        new Pod({
           metadata: { name: "test-pod" }
-        }
+        })
       ]);
     });
   });
@@ -66,11 +65,9 @@ metadata:
 
     test("should filter nulls", async () => {
       await expect(result()).resolves.toEqual([
-        {
-          apiVersion: "v1",
-          kind: "Pod",
+        new Pod({
           metadata: { name: "test-pod" }
-        }
+        })
       ]);
     });
   });
@@ -144,6 +141,27 @@ metadata:
       await expect(result()).rejects.toThrowError(
         `apiVersion and kind are required: {"apiVersion":"v1","kind":""}`
       );
+    });
+  });
+
+  describe("given a custom resource", () => {
+    beforeAll(() => {
+      content = `
+apiVersion: example.local/v1
+kind: Foo
+metadata:
+  name: bar
+`.trim();
+    });
+
+    test("should return a plain object", async () => {
+      await expect(result()).resolves.toEqual([
+        {
+          apiVersion: "example.local/v1",
+          kind: "Foo",
+          metadata: { name: "bar" }
+        }
+      ]);
     });
   });
 }
