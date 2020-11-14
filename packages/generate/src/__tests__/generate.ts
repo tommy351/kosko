@@ -152,7 +152,7 @@ exports.default = {foo: "bar"};`
       ];
     });
 
-    test("should return the return value of the function", () => {
+    test("should return the function return value", () => {
       expect(result).toEqual({
         manifests: [
           {
@@ -175,7 +175,7 @@ exports.default = {foo: "bar"};`
       ];
     });
 
-    test("should return the resolved value of the promise", () => {
+    test("should return the promise resolved value", () => {
       expect(result).toEqual({
         manifests: [
           {
@@ -193,34 +193,30 @@ exports.default = {foo: "bar"};`
       tmpFiles = [
         {
           path: "foo.js",
-          content: "module.exports = [{a: 1}, [{b: 2}, {c: 3}], {d: 4}]"
+          content: `
+            module.exports = [
+              {a: 1},
+              [
+                {b: 2},
+                [{c: 3}, {d: 4}]
+              ],
+              {e: 5}
+            ];
+          `
         }
       ];
     });
 
     test("should return the flattened array", () => {
+      const path = join(tmpDir.path, "foo.js");
+
       expect(result).toEqual({
         manifests: [
-          {
-            path: join(tmpDir.path, "foo.js"),
-            index: [0],
-            data: { a: 1 }
-          },
-          {
-            path: join(tmpDir.path, "foo.js"),
-            index: [1, 0],
-            data: { b: 2 }
-          },
-          {
-            path: join(tmpDir.path, "foo.js"),
-            index: [1, 1],
-            data: { c: 3 }
-          },
-          {
-            path: join(tmpDir.path, "foo.js"),
-            index: [2],
-            data: { d: 4 }
-          }
+          { path, index: [0], data: { a: 1 } },
+          { path, index: [1, 0], data: { b: 2 } },
+          { path, index: [1, 1, 0], data: { c: 3 } },
+          { path, index: [1, 1, 1], data: { d: 4 } },
+          { path, index: [2], data: { e: 5 } }
         ]
       });
     });
@@ -231,62 +227,34 @@ exports.default = {foo: "bar"};`
       tmpFiles = [
         {
           path: "foo.js",
-          content: "module.exports = [{a: 1}, () => ({ b: 2 }), {c: 3}]"
+          content: `
+            module.exports = [
+              {a: 1},
+              // Returns an object
+              () => ({b: 2}),
+              // Returns an array
+              () => [{c: 3}, {d: 4}],
+              // Returns an promise
+              async () => ({e: 5}),
+              // Returns an promise returning an array
+              async () => [{f: 6}, {g: 7}]
+            ]`
         }
       ];
     });
 
     test("should return the flattened array", () => {
+      const path = join(tmpDir.path, "foo.js");
+
       expect(result).toEqual({
         manifests: [
-          {
-            path: join(tmpDir.path, "foo.js"),
-            index: [0],
-            data: { a: 1 }
-          },
-          {
-            path: join(tmpDir.path, "foo.js"),
-            index: [1],
-            data: { b: 2 }
-          },
-          {
-            path: join(tmpDir.path, "foo.js"),
-            index: [2],
-            data: { c: 3 }
-          }
-        ]
-      });
-    });
-  });
-
-  describe("when the script returns an array containing an async function", () => {
-    beforeAll(() => {
-      tmpFiles = [
-        {
-          path: "foo.js",
-          content: "module.exports = [{a: 1}, async () => ({ b: 2 }), {c: 3}]"
-        }
-      ];
-    });
-
-    test("should return the flattened array", () => {
-      expect(result).toEqual({
-        manifests: [
-          {
-            path: join(tmpDir.path, "foo.js"),
-            index: [0],
-            data: { a: 1 }
-          },
-          {
-            path: join(tmpDir.path, "foo.js"),
-            index: [1],
-            data: { b: 2 }
-          },
-          {
-            path: join(tmpDir.path, "foo.js"),
-            index: [2],
-            data: { c: 3 }
-          }
+          { path, index: [0], data: { a: 1 } },
+          { path, index: [1], data: { b: 2 } },
+          { path, index: [2, 0], data: { c: 3 } },
+          { path, index: [2, 1], data: { d: 4 } },
+          { path, index: [3], data: { e: 5 } },
+          { path, index: [4, 0], data: { f: 6 } },
+          { path, index: [4, 1], data: { g: 7 } }
         ]
       });
     });
