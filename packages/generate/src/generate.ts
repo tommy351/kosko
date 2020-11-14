@@ -3,8 +3,8 @@ import Debug from "debug";
 import glob from "fast-glob";
 import { join } from "path";
 import { Result, Manifest } from "./base";
-import { getExtensions } from "./extensions";
 import { ValidationError } from "./error";
+import { getExtensions } from "./extensions";
 
 const debug = Debug("kosko:generate");
 
@@ -30,7 +30,7 @@ export interface GenerateOptions {
   validate?: boolean;
 }
 
-async function getComponentValue(id: string): Promise<any> {
+async function getComponentValue(id: string): Promise<unknown> {
   const mod = requireDefault(id);
 
   if (typeof mod === "function") {
@@ -38,6 +38,58 @@ async function getComponentValue(id: string): Promise<any> {
   }
 
   return mod;
+}
+
+async function resolveComponent(
+  value: unknown,
+  options: {
+    validate?: boolean;
+    index: number[];
+    path: string;
+  }
+): Promise<ReadonlyArray<Manifest>> {
+  if (typeof value === "function") {
+    return resolveComponent(await value(), options);
+  }
+
+  if (Array.isArray(value)) {
+    const manifests: Manifest[] = [];
+
+    for (let i = 0; i < value.length; i++) {
+      const result = await resolveComponent(value[i], {
+        validate: options.validate,
+        index: [...options.index, i],
+        path: options.path
+      });
+
+      manifests.push(...result);
+    }
+
+    return manifests;
+  }
+
+  if (options.validate) {
+    if (typeof (value as any).validate === "function") {
+      try {
+        debug(
+          "Validating manifest %s in %s",
+          options.index.join("."),
+          options.path
+        );
+        await (value as any).validate();
+      } catch (err) {
+        throw new ValidationError(options.path, options.index, err);
+      }
+    }
+  }
+
+  const manifest: Manifest = {
+    path: require.resolve(options.path),
+    index: options.index,
+    data: value
+  };
+
+  return [manifest];
 }
 
 /**
@@ -64,38 +116,23 @@ export async function generate(options: GenerateOptions): Promise<Result> {
   const patterns = options.components.map((x) => x + suffix);
   debug("Component patterns", patterns);
 
-  const components = await glob(patterns, {
+  const ids = await glob(patterns, {
     cwd: options.path,
     onlyFiles: false
   });
-  debug("Found components", components);
+  debug("Found components", ids);
 
   const manifests: Manifest[] = [];
 
-  for (const id of components) {
+  for (const id of ids) {
     const path = join(options.path, id);
-    const mod = [].concat(await getComponentValue(path));
+    const components = await resolveComponent(await getComponentValue(path), {
+      validate: options.validate,
+      index: [],
+      path
+    });
 
-    for (let i = 0; i < mod.length; i++) {
-      const data: any = mod[i];
-
-      if (options.validate) {
-        if (typeof data.validate === "function") {
-          try {
-            debug("Validating manifest %d in %s", i, path);
-            await data.validate();
-          } catch (err) {
-            throw new ValidationError(path, i, err);
-          }
-        }
-      }
-
-      manifests.push({
-        path: require.resolve(path),
-        index: i,
-        data
-      });
-    }
+    manifests.push(...components);
   }
 
   return { manifests };

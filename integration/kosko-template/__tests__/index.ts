@@ -15,7 +15,7 @@ let options: execa.Options;
 let tmpDir: tmp.DirectoryResult;
 
 beforeEach(async () => {
-  tmpDir = await tmp.dir({ dir: tempDir, unsafeCleanup: true });
+  tmpDir = await tmp.dir({ tmpdir: tempDir, unsafeCleanup: true });
 
   const src = join(__dirname, "..", "bin.js");
   const dst = join(tmpDir.path, "bin.js");
@@ -31,7 +31,9 @@ beforeEach(async () => {
   });
 });
 
-afterEach(() => tmpDir.cleanup());
+afterEach(async () => {
+  await tmpDir.cleanup();
+});
 
 async function readFiles(cwd: string): Promise<string[]> {
   return Promise.all(

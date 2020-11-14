@@ -14,10 +14,10 @@ export interface Manifest {
   /**
    * Source index of a manifest.
    */
-  index: number;
+  index: number[];
 
   /**
    * Manifest data.
    */
-  data: any;
+  data: unknown;
 }

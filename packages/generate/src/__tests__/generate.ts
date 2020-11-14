@@ -23,7 +23,7 @@ let tmpDir: tmp.DirectoryResult;
 let tmpFiles: File[];
 
 beforeEach(async () => {
-  tmpDir = await tmp.dir({ dir: tempDir, unsafeCleanup: true });
+  tmpDir = await tmp.dir({ tmpdir: tempDir, unsafeCleanup: true });
 
   for (const file of tmpFiles) {
     const path = join(tmpDir.path, file.path);
@@ -35,7 +35,7 @@ beforeEach(async () => {
 });
 
 afterEach(async () => {
-  tmpDir.cleanup();
+  await tmpDir.cleanup();
 });
 
 describe("given the wildcard pattern", () => {
@@ -58,7 +58,7 @@ describe("given the wildcard pattern", () => {
         manifests: [
           {
             path: join(tmpDir.path, "foo.js"),
-            index: 0,
+            index: [],
             data: { foo: "bar" }
           }
         ]
@@ -81,7 +81,7 @@ describe("given the wildcard pattern", () => {
         manifests: [
           {
             path: join(tmpDir.path, "foo", "index.js"),
-            index: 0,
+            index: [],
             data: { foo: "bar" }
           }
         ]
@@ -106,7 +106,7 @@ exports.default = {foo: "bar"};`
         manifests: [
           {
             path: join(tmpDir.path, "foo.js"),
-            index: 0,
+            index: [],
             data: { foo: "bar" }
           }
         ]
@@ -124,17 +124,17 @@ exports.default = {foo: "bar"};`
       ];
     });
 
-    test("should return the return value of the function", () => {
+    test("should return the array", () => {
       expect(result).toEqual({
         manifests: [
           {
             path: join(tmpDir.path, "foo.js"),
-            index: 0,
+            index: [0],
             data: { foo: 1 }
           },
           {
             path: join(tmpDir.path, "foo.js"),
-            index: 1,
+            index: [1],
             data: { bar: 2 }
           }
         ]
@@ -152,12 +152,12 @@ exports.default = {foo: "bar"};`
       ];
     });
 
-    test("should return the return value of the function", () => {
+    test("should return the function return value", () => {
       expect(result).toEqual({
         manifests: [
           {
             path: join(tmpDir.path, "foo.js"),
-            index: 0,
+            index: [],
             data: { foo: "bar" }
           }
         ]
@@ -175,14 +175,86 @@ exports.default = {foo: "bar"};`
       ];
     });
 
-    test("should return the resolved value of the promise", () => {
+    test("should return the promise resolved value", () => {
       expect(result).toEqual({
         manifests: [
           {
             path: join(tmpDir.path, "foo.js"),
-            index: 0,
+            index: [],
             data: { foo: "bar" }
           }
+        ]
+      });
+    });
+  });
+
+  describe("when the script returns a nested array", () => {
+    beforeAll(() => {
+      tmpFiles = [
+        {
+          path: "foo.js",
+          content: `
+            module.exports = [
+              {a: 1},
+              [
+                {b: 2},
+                [{c: 3}, {d: 4}]
+              ],
+              {e: 5}
+            ];
+          `
+        }
+      ];
+    });
+
+    test("should return the flattened array", () => {
+      const path = join(tmpDir.path, "foo.js");
+
+      expect(result).toEqual({
+        manifests: [
+          { path, index: [0], data: { a: 1 } },
+          { path, index: [1, 0], data: { b: 2 } },
+          { path, index: [1, 1, 0], data: { c: 3 } },
+          { path, index: [1, 1, 1], data: { d: 4 } },
+          { path, index: [2], data: { e: 5 } }
+        ]
+      });
+    });
+  });
+
+  describe("when the script returns an array containing a function", () => {
+    beforeAll(() => {
+      tmpFiles = [
+        {
+          path: "foo.js",
+          content: `
+            module.exports = [
+              {a: 1},
+              // Returns an object
+              () => ({b: 2}),
+              // Returns an array
+              () => [{c: 3}, {d: 4}],
+              // Returns an promise
+              async () => ({e: 5}),
+              // Returns an promise returning an array
+              async () => [{f: 6}, {g: 7}]
+            ]`
+        }
+      ];
+    });
+
+    test("should return the flattened array", () => {
+      const path = join(tmpDir.path, "foo.js");
+
+      expect(result).toEqual({
+        manifests: [
+          { path, index: [0], data: { a: 1 } },
+          { path, index: [1], data: { b: 2 } },
+          { path, index: [2, 0], data: { c: 3 } },
+          { path, index: [2, 1], data: { d: 4 } },
+          { path, index: [3], data: { e: 5 } },
+          { path, index: [4, 0], data: { f: 6 } },
+          { path, index: [4, 1], data: { g: 7 } }
         ]
       });
     });
@@ -212,7 +284,7 @@ describe("given a pattern without an extension", () => {
         manifests: [
           {
             path: join(tmpDir.path, "foo.js"),
-            index: 0,
+            index: [],
             data: { foo: "bar" }
           }
         ]
@@ -230,7 +302,7 @@ describe("given a pattern without an extension", () => {
         manifests: [
           {
             path: join(tmpDir.path, "foo.json"),
-            index: 0,
+            index: [],
             data: { foo: "bar" }
           }
         ]
@@ -261,12 +333,12 @@ describe("given multiple patterns", () => {
       expect(result.manifests).toIncludeAllMembers([
         {
           path: join(tmpDir.path, "a.js"),
-          index: 0,
+          index: [],
           data: { value: "a" }
         },
         {
           path: join(tmpDir.path, "b.js"),
-          index: 0,
+          index: [],
           data: { value: "b" }
         }
       ]);
@@ -297,12 +369,12 @@ describe("given extensions", () => {
     expect(result.manifests).toIncludeAllMembers([
       {
         path: join(tmpDir.path, "a.foo"),
-        index: 0,
+        index: [],
         data: { foo: "a" }
       },
       {
         path: join(tmpDir.path, "b.bar"),
-        index: 0,
+        index: [],
         data: { bar: "b" }
       }
     ]);
@@ -328,7 +400,7 @@ describe("given validate = true", () => {
         manifests: [
           {
             path: join(tmpDir.path, "foo.js"),
-            index: 0,
+            index: [],
             data: {}
           }
         ]
@@ -348,7 +420,7 @@ describe("given validate = true", () => {
         manifests: [
           {
             path: join(tmpDir.path, "foo.js"),
-            index: 0,
+            index: [],
             data: { validate: 1 }
           }
         ]
@@ -376,7 +448,7 @@ module.exports = new Validator();
         manifests: [
           {
             path: join(tmpDir.path, "foo.js"),
-            index: 0,
+            index: [],
             data: { foo: 1 }
           }
         ]
@@ -420,7 +492,7 @@ module.exports = new Validator();
         manifests: [
           {
             path: join(tmpDir.path, "foo.js"),
-            index: 0,
+            index: [],
             data: { foo: 1 }
           }
         ]

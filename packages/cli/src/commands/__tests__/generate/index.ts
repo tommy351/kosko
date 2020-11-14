@@ -54,7 +54,7 @@ beforeEach(async () => {
   jest.resetAllMocks();
 
   const root = await pkgDir();
-  tmpDir = await tmp.dir({ dir: tempDir, unsafeCleanup: true });
+  tmpDir = await tmp.dir({ tmpdir: tempDir, unsafeCleanup: true });
 
   // Write kosko.toml
   await writeFile(
@@ -70,7 +70,9 @@ beforeEach(async () => {
   await symlinkDir(envSrc, envDest);
 });
 
-afterEach(() => tmpDir.cleanup());
+afterEach(async () => {
+  await tmpDir.cleanup();
+});
 
 describe("without components", () => {
   beforeAll(() => {
@@ -104,7 +106,7 @@ describe("with components in config", () => {
       }
     };
     result = {
-      manifests: [{ path: "", index: 0, data: {} }]
+      manifests: [{ path: "", index: [0], data: {} }]
     };
   });
 

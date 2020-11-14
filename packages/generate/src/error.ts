@@ -3,10 +3,10 @@ export class ValidationError extends Error {
 
   public constructor(
     public readonly path: string,
-    public readonly index: number,
+    public readonly index: number[],
     public readonly cause: Error
   ) {
-    super(`${cause.message} (path: ${path}, index: ${index})`);
+    super(`${cause.message} (path: ${path}, index: ${index.join(".")})`);
 
     // Regular expression is from: https://github.com/sindresorhus/extract-stack
     const stack = cause.stack || this.stack;
@@ -16,7 +16,7 @@ export class ValidationError extends Error {
 
     this.stack = `${this.name}: ${
       cause.message
-    }\nPath: ${path}\nIndex: ${index}${
+    }\nPath: ${path}\nIndex: ${index.join(".")}${
       ~pos ? stack.substring(pos) : "\n" + stack
     }`;
   }
