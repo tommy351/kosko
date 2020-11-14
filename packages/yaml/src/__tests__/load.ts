@@ -1,26 +1,32 @@
-import { loadFile } from "../load";
+import { loadFile, loadUrl } from "../load";
 import tmp from "tmp-promise";
 import tempDir from "temp-dir";
 import fs from "fs";
 import { promisify } from "util";
 import { join } from "path";
+import fetch from "node-fetch";
+import type { FetchMockStatic } from "fetch-mock";
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+jest.mock("node-fetch", () => require("fetch-mock").sandbox());
+
+const fetchMock = (fetch as unknown) as FetchMockStatic;
 const writeFile = promisify(fs.writeFile);
 
-describe("loadFile", () => {
-  let tmpDir: tmp.DirectoryResult;
+afterEach(() => {
+  fetchMock.reset();
+});
+
+function testLoad(options: {
+  setup: (content: string) => Promise<void>;
+  load: () => () => Promise<readonly unknown[]>;
+}) {
   let content: string;
-  let result: () => Promise<readonly unknown[]>;
+  let result: ReturnType<typeof options["load"]>;
 
   beforeEach(async () => {
-    tmpDir = await tmp.dir({ tmpdir: tempDir, unsafeCleanup: true });
-    const path = join(tmpDir.path, "test.yaml");
-    await writeFile(path, content);
-    result = loadFile(path);
-  });
-
-  afterEach(async () => {
-    await tmpDir.cleanup();
+    await options.setup(content);
+    result = options.load();
   });
 
   describe("given a valid Kubernetes object", () => {
@@ -138,6 +144,98 @@ metadata:
       await expect(result()).rejects.toThrowError(
         `apiVersion and kind are required: {"apiVersion":"v1","kind":""}`
       );
+    });
+  });
+}
+
+describe("loadFile", () => {
+  let tmpDir: tmp.DirectoryResult;
+  let path: string;
+
+  beforeEach(async () => {
+    tmpDir = await tmp.dir({ tmpdir: tempDir, unsafeCleanup: true });
+    path = join(tmpDir.path, "test.yaml");
+  });
+
+  afterEach(async () => {
+    await tmpDir.cleanup();
+  });
+
+  testLoad({
+    setup: (content) => writeFile(path, content),
+    load: () => loadFile(path)
+  });
+});
+
+describe("loadUrl", () => {
+  const url = "http://example.local/test.yaml";
+
+  describe("common tests", () => {
+    testLoad({
+      setup: async (content) => {
+        fetchMock.getOnce(url, content, {
+          sendAsJson: false
+        });
+      },
+      load: () => loadUrl(url)
+    });
+  });
+
+  describe("when server responds 404", () => {
+    beforeEach(() => {
+      fetchMock.getOnce(url, {
+        status: 404
+      });
+    });
+
+    test("should throw error", async () => {
+      await expect(loadUrl(url)()).rejects.toThrowError(
+        `Failed to fetch YAML file from: ${url}`
+      );
+    });
+  });
+
+  describe("customize headers", () => {
+    beforeEach(() => {
+      fetchMock.mock(
+        {
+          url,
+          headers: { Authorization: "token" },
+          method: "GET"
+        },
+        `{apiVersion: v1, kind: Pod}`,
+        {
+          sendAsJson: false
+        }
+      );
+    });
+
+    test("should set headers to fetch", async () => {
+      const result = loadUrl(url, {
+        headers: { Authorization: "token" }
+      });
+
+      await expect(result()).resolves.toEqual([
+        { apiVersion: "v1", kind: "Pod" }
+      ]);
+    });
+  });
+
+  describe("customize method", () => {
+    beforeEach(() => {
+      fetchMock.postOnce(url, `{apiVersion: v1, kind: Pod}`, {
+        sendAsJson: false
+      });
+    });
+
+    test("should set headers to fetch", async () => {
+      const result = loadUrl(url, {
+        method: "POST"
+      });
+
+      await expect(result()).resolves.toEqual([
+        { apiVersion: "v1", kind: "Pod" }
+      ]);
     });
   });
 });

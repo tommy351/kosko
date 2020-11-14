@@ -22,10 +22,13 @@
     "node": ">=10"
   },
   "dependencies": {
-    "js-yaml": "^3.14.0"
+    "js-yaml": "^3.14.0",
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {
     "@types/js-yaml": "^3.12.5",
+    "@types/node-fetch": "^2.5.7",
+    "fetch-mock": "^9.10.7",
     "temp-dir": "^2.0.0",
     "tmp-promise": "^3.0.2"
   }
