@@ -14,6 +14,11 @@ export interface ResourceKind {
 
 let moduleMap: Record<string, Record<string, ResourceModule>> = {};
 
+function getGroup(apiVersion: string): string {
+  const arr = apiVersion.split("/");
+  return arr.length === 1 ? "" : arr[0];
+}
+
 export function setResourceModule(
   res: ResourceKind,
   mod: ResourceModule
@@ -30,6 +35,11 @@ export function setResourceModule(
 
 function getKubernetesModels(res: ResourceKind): ResourceModule | undefined {
   const { apiVersion, kind } = res;
+  const group = getGroup(apiVersion);
+
+  if (group && group.includes(".") && !group.endsWith(".k8s.io")) {
+    return;
+  }
 
   try {
     const path = `kubernetes-models/${apiVersion}/${kind}`;

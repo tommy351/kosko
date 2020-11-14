@@ -1,6 +1,5 @@
 /// <reference types="jest-extended"/>
 import { isPlainObject } from "is-plain-object";
-import { YAMLException } from "js-yaml";
 import { Deployment } from "kubernetes-models/apps/v1/Deployment";
 import { ConfigMap } from "kubernetes-models/v1/ConfigMap";
 import { Pod } from "kubernetes-models/v1/Pod";
@@ -261,22 +260,6 @@ describe("migrate", () => {
       expect(exported).toSatisfyAll(isPlainObject);
     });
   });
-
-  describe("when apiVersion does not exist", () => {
-    test("should throw an error", () => {
-      expect(() => migrate([{} as any])).toThrow(
-        "apiVersion and kind is required"
-      );
-    });
-  });
-
-  describe("when kind does not exist", () => {
-    test("should throw an error", () => {
-      expect(() => migrate([{} as any])).toThrow(
-        "apiVersion and kind is required"
-      );
-    });
-  });
 });
 
 describe("migrateString", () => {
@@ -325,12 +308,6 @@ metadata:
 }
       }`)
       ).toMatchSnapshot();
-    });
-  });
-
-  describe("given invalid YAML", () => {
-    test("should throw an error", () => {
-      expect(() => migrateString("{")).toThrow(YAMLException);
     });
   });
 });

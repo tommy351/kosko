@@ -1,38 +1,30 @@
 import camelcase from "camelcase";
-import yaml from "js-yaml";
+import { Manifest, loadString, getResourceModule } from "@kosko/yaml";
 
-export interface Manifest {
-  apiVersion: string;
-  kind: string;
-  [key: string]: any;
-}
+export type { Manifest };
 
 interface Component {
-  name: string;
-  text: string;
-  imports: ReadonlyArray<Import>;
+  readonly name: string;
+  readonly text: string;
+  readonly imports: readonly Import[];
 }
 
 interface Import {
-  names: ReadonlyArray<string>;
-  path: string;
+  readonly names: readonly string[];
+  readonly path: string;
 }
 
-function jsonStringify(data: any): string {
+function jsonStringify(data: unknown): string {
   return JSON.stringify(data, null, "  ");
 }
 
-function getGroup(apiVersion: string): string {
-  const arr = apiVersion.split("/");
-  return arr.length === 1 ? "" : arr[0];
-}
-
 function generateComponent(manifest: Manifest): Component {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { apiVersion, kind, ...data } = manifest;
   const name = camelcase(kind);
-  const group = getGroup(apiVersion);
+  const mod = getResourceModule(manifest);
 
-  if (group && group.includes(".") && !group.endsWith(".k8s.io")) {
+  if (!mod) {
     return {
       name,
       text: jsonStringify(manifest),
@@ -42,31 +34,21 @@ function generateComponent(manifest: Manifest): Component {
 
   return {
     name,
-    text: `new ${kind}(${jsonStringify(data)})`,
+    text: `new ${mod.export}(${jsonStringify(data)})`,
     imports: [
       {
-        path: `kubernetes-models/${apiVersion}/${kind}`,
-        names: [kind]
+        path: mod.path,
+        names: [mod.export]
       }
     ]
   };
 }
 
-function validateManifest(data: any): data is Manifest {
-  return typeof data.apiVersion === "string" && typeof data.kind === "string";
-}
-
-function generateForList(
-  items: ReadonlyArray<unknown>
-): ReadonlyArray<Component> {
+function generateForList(items: readonly Manifest[]): readonly Component[] {
   return items
     .map((data) => {
-      if (!validateManifest(data)) {
-        throw new Error("apiVersion and kind is required");
-      }
-
       if (data.apiVersion === "v1" && data.kind === "List") {
-        return generateForList(data.items);
+        return generateForList(data.items as any);
       }
 
       return generateComponent(data);
@@ -75,8 +57,8 @@ function generateForList(
 }
 
 function uniqComponentName(
-  components: ReadonlyArray<Component>
-): ReadonlyArray<Component> {
+  components: readonly Component[]
+): readonly Component[] {
   const nameMap: { [key: string]: number } = {};
 
   return components.map((component) => {
@@ -97,9 +79,7 @@ function uniqComponentName(
   });
 }
 
-function collectImports(
-  components: ReadonlyArray<Component>
-): ReadonlyArray<Import> {
+function collectImports(components: readonly Component[]): readonly Import[] {
   const importMap: { [key: string]: Set<string> } = {};
 
   for (const component of components) {
@@ -123,7 +103,7 @@ function collectImports(
  *
  * @param data Array of Kubernetes manifests
  */
-export function migrate(data: ReadonlyArray<Manifest>): string {
+export function migrate(data: readonly Manifest[]): string {
   const components = uniqComponentName(generateForList(data));
   let output = `"use strict";\n\n`;
 
@@ -148,9 +128,5 @@ export function migrate(data: ReadonlyArray<Manifest>): string {
  * @param input Kubernetes YAML string
  */
 export function migrateString(input: string): string {
-  const data = yaml
-    .safeLoadAll(input)
-    .filter((x) => x != null && typeof x === "object");
-
-  return migrate(data);
+  return migrate(loadString(input));
 }
