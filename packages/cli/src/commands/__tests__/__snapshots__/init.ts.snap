@@ -5,8 +5,8 @@ exports[`success should create kosko.toml 1`] = `"components = [\\"*\\"]"`;
 exports[`success should create package.json 1`] = `
 "{
   \\"dependencies\\": {
-    \\"@kosko/env\\": \\"^0.4.1\\",
-    \\"kubernetes-models\\": \\"^0.5.0\\"
+    \\"@kosko/env\\": \\"^0.5.2\\",
+    \\"kubernetes-models\\": \\"^1.0.1\\"
   }
 }"
 `;
@@ -16,9 +16,9 @@ exports[`when the target exists when package.json exists should update package.j
   \\"name\\": \\"foo\\",
   \\"version\\": \\"1.2.3\\",
   \\"dependencies\\": {
-    \\"@kosko/env\\": \\"^0.4.1\\",
+    \\"@kosko/env\\": \\"^0.5.2\\",
     \\"debug\\": \\"3.2.1\\",
-    \\"kubernetes-models\\": \\"^0.5.0\\"
+    \\"kubernetes-models\\": \\"^1.0.1\\"
   }
 }"
 `;
