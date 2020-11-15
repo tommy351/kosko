@@ -4,4 +4,4 @@ set -euo pipefail
 
 npm run clean
 npm run build
-npx lerna publish --no-private
+npx lerna publish --no-private --conventional-commits "$@"
