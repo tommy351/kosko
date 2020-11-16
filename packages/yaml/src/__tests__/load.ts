@@ -201,6 +201,26 @@ metadata:
       ]);
     });
   });
+
+  describe("given a transform function returning null", () => {
+    beforeAll(() => {
+      content = `
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pod
+`.trim();
+      loadOptions = {
+        transform() {
+          return null;
+        }
+      };
+    });
+
+    test("should remove value from array", async () => {
+      await expect(result()).resolves.toEqual([]);
+    });
+  });
 }
 
 describe("loadString", () => {
