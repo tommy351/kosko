@@ -15,7 +15,7 @@ export interface Manifest extends ResourceKind {
 type ManifestConstructor = new (data: Manifest) => Manifest;
 
 export interface LoadOptions {
-  transform?(manifest: Manifest): Manifest;
+  transform?(manifest: Manifest): Manifest | null | undefined;
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -56,12 +56,27 @@ function getConstructor(res: ResourceKind): ManifestConstructor | undefined {
  * ### Transform manifests
  *
  * ```ts
- * import { loadString } from "@kosko/yaml";
- *
  * loadString('', {
  *   transform(manifest) {
  *     if (manifest.apiVersion === "apps/v1" && manifest.kind === "Deployment") {
  *       manifest.spec.replicas = 3;
+ *     }
+ *
+ *     return manifest;
+ *   }
+ * });
+ * ```
+ *
+ * ### Filter manifests
+ *
+ * Values are removed from array if `transform` function returns a falsy value,
+ * such as `null` or `undefined`.
+ *
+ * ```ts
+ * loadString('', {
+ *   transform(manifest) {
+ *     if (manifest.metadata.name === 'foo') {
+ *       return null;
  *     }
  *
  *     return manifest;
@@ -90,7 +105,9 @@ export function loadString(
     const Constructor = getConstructor(entry);
     const manifest = transform(Constructor ? new Constructor(entry) : entry);
 
-    manifests.push(manifest);
+    if (manifest) {
+      manifests.push(manifest);
+    }
   }
 
   return manifests;
