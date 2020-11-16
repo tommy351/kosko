@@ -78,7 +78,12 @@ async function resolveComponent(
         );
         await (value as any).validate();
       } catch (err) {
-        throw new ValidationError(options.path, options.index, err);
+        throw new ValidationError({
+          path: options.path,
+          index: options.index,
+          cause: err,
+          component: value
+        });
       }
     }
   }
