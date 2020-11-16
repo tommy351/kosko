@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.1](https://github.com/tommy351/kosko/compare/@kosko/yaml@0.1.0-alpha.0...@kosko/yaml@0.1.0-alpha.1) (2020-11-16)
+
+
+### Features
+
+* **yaml:** Filter manifests ([b53b5eb](https://github.com/tommy351/kosko/commit/b53b5eb0b2ec0f3da8ec1483923c54606634d9b2))
+
+
+
+
+
 # [0.1.0-alpha.0](https://github.com/tommy351/kosko/compare/@kosko/yaml@0.0.1-alpha.0...@kosko/yaml@0.1.0-alpha.0) (2020-11-16)
 
 
