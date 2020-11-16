@@ -9,10 +9,14 @@ const debug = Debug.extend("load");
 const readFile = promisify(fs.readFile);
 
 export interface Manifest extends ResourceKind {
-  [key: string]: unknown;
+  [key: string]: any;
 }
 
 type ManifestConstructor = new (data: Manifest) => Manifest;
+
+export interface LoadOptions {
+  transform?(manifest: Manifest): Manifest;
+}
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && !Array.isArray(value);
@@ -46,8 +50,29 @@ function getConstructor(res: ResourceKind): ManifestConstructor | undefined {
 
 /**
  * Load a Kubernetes YAML file from a string.
+ *
+ * ## Examples
+ *
+ * ### Transform manifests
+ *
+ * ```ts
+ * import { loadString } from "@kosko/yaml";
+ *
+ * loadString('', {
+ *   transform(manifest) {
+ *     if (manifest.apiVersion === "apps/v1" && manifest.kind === "Deployment") {
+ *       manifest.spec.replicas = 3;
+ *     }
+ *
+ *     return manifest;
+ *   }
+ * });
+ * ```
  */
-export function loadString(content: string): ReadonlyArray<Manifest> {
+export function loadString(
+  content: string,
+  { transform = (x) => x }: LoadOptions = {}
+): ReadonlyArray<Manifest> {
   const input = safeLoadAll(content).filter((x) => x != null);
   const manifests: Manifest[] = [];
 
@@ -63,7 +88,9 @@ export function loadString(content: string): ReadonlyArray<Manifest> {
     }
 
     const Constructor = getConstructor(entry);
-    manifests.push(Constructor ? new Constructor(entry) : entry);
+    const manifest = transform(Constructor ? new Constructor(entry) : entry);
+
+    manifests.push(manifest);
   }
 
   return manifests;
@@ -73,13 +100,14 @@ export function loadString(content: string): ReadonlyArray<Manifest> {
  * Load a Kubernetes YAML file from path.
  *
  * @param path Path to the Kubernetes YAML file.
+ * @param options
  */
-export function loadFile(path: string) {
+export function loadFile(path: string, options?: LoadOptions) {
   return async (): Promise<ReadonlyArray<Manifest>> => {
     const content = await readFile(path, "utf-8");
     debug("File loaded from: %s", path);
 
-    return loadString(content);
+    return loadString(content, options);
   };
 }
 
@@ -87,9 +115,14 @@ export function loadFile(path: string) {
  * Load a Kubernetes YAML file from url.
  *
  * @param url URL to the Kubernetes YAML file.
- * @param init [Options](https://github.com/node-fetch/node-fetch#options) for the HTTP(S) request.
+ * @param options [Options](https://github.com/node-fetch/node-fetch#options) for the HTTP(S) request.
  */
-export function loadUrl(url: RequestInfo, init?: RequestInit) {
+export function loadUrl(
+  url: RequestInfo,
+  options: LoadOptions & RequestInit = {}
+): () => Promise<ReadonlyArray<Manifest>> {
+  const { transform, ...init } = options;
+
   return async (): Promise<ReadonlyArray<Manifest>> => {
     const res = await fetch(url, init);
     debug(`Fetch "%s": status=%d`, url, res.status);
@@ -98,6 +131,6 @@ export function loadUrl(url: RequestInfo, init?: RequestInit) {
       throw new Error(`Failed to fetch YAML file from: ${url}`);
     }
 
-    return loadString(await res.text());
+    return loadString(await res.text(), { transform });
   };
 }

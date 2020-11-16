@@ -1,4 +1,4 @@
-import { loadFile, loadString, loadUrl } from "../load";
+import { loadFile, LoadOptions, loadString, loadUrl } from "../load";
 import tmp from "tmp-promise";
 import tempDir from "temp-dir";
 import fs from "fs";
@@ -20,14 +20,15 @@ afterEach(() => {
 
 function testLoad(options: {
   setup: (content: string) => Promise<void>;
-  load: () => () => Promise<readonly unknown[]>;
+  load: (options: LoadOptions) => () => Promise<readonly unknown[]>;
 }) {
   let content: string;
+  let loadOptions: LoadOptions;
   let result: ReturnType<typeof options["load"]>;
 
   beforeEach(async () => {
     await options.setup(content);
-    result = options.load();
+    result = options.load(loadOptions);
   });
 
   describe("given a valid Kubernetes object", () => {
@@ -38,6 +39,7 @@ kind: Pod
 metadata:
   name: test-pod
 `.trim();
+      loadOptions = {};
     });
 
     test("should return an async function which returns an array of objects", async () => {
@@ -61,6 +63,7 @@ metadata:
 ---
 ---
 `.trim();
+      loadOptions = {};
     });
 
     test("should filter nulls", async () => {
@@ -75,6 +78,7 @@ metadata:
   describe("given a non-object", () => {
     beforeAll(() => {
       content = `"foo"`;
+      loadOptions = {};
     });
 
     test("should throw an error", async () => {
@@ -87,6 +91,7 @@ metadata:
   describe("given an array", () => {
     beforeAll(() => {
       content = `[1]`;
+      loadOptions = {};
     });
 
     test("should throw an error", async () => {
@@ -99,6 +104,7 @@ metadata:
   describe("given an object without apiVersion", () => {
     beforeAll(() => {
       content = `foo: bar`;
+      loadOptions = {};
     });
 
     test("should throw an error", async () => {
@@ -111,6 +117,7 @@ metadata:
   describe("given an object with empty apiVersion", () => {
     beforeAll(() => {
       content = `apiVersion: ""`;
+      loadOptions = {};
     });
 
     test("should throw an error", async () => {
@@ -123,6 +130,7 @@ metadata:
   describe("given an object without kind", () => {
     beforeAll(() => {
       content = `apiVersion: v1`;
+      loadOptions = {};
     });
 
     test("should throw an error", async () => {
@@ -135,6 +143,7 @@ metadata:
   describe("given an object with empty kind", () => {
     beforeAll(() => {
       content = `{apiVersion: v1, kind: ""}`;
+      loadOptions = {};
     });
 
     test("should throw an error", async () => {
@@ -152,6 +161,7 @@ kind: Foo
 metadata:
   name: bar
 `.trim();
+      loadOptions = {};
     });
 
     test("should return a plain object", async () => {
@@ -164,6 +174,33 @@ metadata:
       ]);
     });
   });
+
+  describe("given a transform function", () => {
+    beforeAll(() => {
+      content = `
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pod
+`.trim();
+      loadOptions = {
+        transform(manifest) {
+          manifest.metadata.name = "abc";
+          return manifest;
+        }
+      };
+    });
+
+    test("should return the transformed object", async () => {
+      await expect(result()).resolves.toEqual([
+        new Pod({
+          metadata: {
+            name: "abc"
+          }
+        })
+      ]);
+    });
+  });
 }
 
 describe("loadString", () => {
@@ -173,8 +210,8 @@ describe("loadString", () => {
     setup: async (input) => {
       content = input;
     },
-    load: () => {
-      return async () => loadString(content);
+    load: (options) => {
+      return async () => loadString(content, options);
     }
   });
 });
@@ -194,7 +231,7 @@ describe("loadFile", () => {
 
   testLoad({
     setup: (content) => writeFile(path, content),
-    load: () => loadFile(path)
+    load: (options) => loadFile(path, options)
   });
 });
 
@@ -208,7 +245,7 @@ describe("loadUrl", () => {
           sendAsJson: false
         });
       },
-      load: () => loadUrl(url)
+      load: (options) => loadUrl(url, options)
     });
   });
 
