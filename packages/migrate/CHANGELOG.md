@@ -1,3 +1,16 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [1.0.0-alpha.1](https://github.com/tommy351/kosko/compare/@kosko/migrate@1.0.0-alpha.0...@kosko/migrate@1.0.0-alpha.1) (2020-11-16)
+
+**Note:** Version bump only for package @kosko/migrate
+
+
+
+
+
 # [1.0.0-alpha.0](https://github.com/tommy351/kosko/compare/@kosko/migrate@1.0.0-alpha.0...@kosko/migrate@1.0.0-alpha.0) (2020-11-15)
 
 
@@ -53,6 +66,3 @@
 
 * **cli:** Add migrate command ([f39f7ea](https://github.com/tommy351/kosko/commit/f39f7ea3c7f2d0629c17d379c4989aa3f4dd2ec4))
 * **migrate:** Add migrate package ([1b61d4d](https://github.com/tommy351/kosko/commit/1b61d4dfbde79bc6f3a1940abd5acbda4e1fbd98))
-
-
-

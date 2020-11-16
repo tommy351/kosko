@@ -1,3 +1,16 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [1.0.0-alpha.1](https://github.com/tommy351/kosko/compare/@kosko/config@1.0.0-alpha.0...@kosko/config@1.0.0-alpha.1) (2020-11-16)
+
+**Note:** Version bump only for package @kosko/config
+
+
+
+
+
 # [1.0.0-alpha.0](https://github.com/tommy351/kosko/compare/@kosko/config@1.0.0-alpha.0...@kosko/config@1.0.0-alpha.0) (2020-11-15)
 
 
@@ -75,6 +88,3 @@
 * **config:** Add package "config" ([a619988](https://github.com/tommy351/kosko/commit/a619988219a025cd89b80c24766af1b4e3770c10))
 * **config:** Precompile validation script ([32e896e](https://github.com/tommy351/kosko/commit/32e896e896541ee08a4a1657cb6004909c991742))
 * **config:** Use TOML for config syntax ([5b6ca6f](https://github.com/tommy351/kosko/commit/5b6ca6ff3c1d46d99f0decb5f4e4e4fd2e69308b))
-
-
-

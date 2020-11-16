@@ -1,3 +1,16 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [1.0.0-alpha.1](https://github.com/tommy351/kosko/compare/@kosko/require@1.0.0-alpha.0...@kosko/require@1.0.0-alpha.1) (2020-11-16)
+
+**Note:** Version bump only for package @kosko/require
+
+
+
+
+
 # [1.0.0-alpha.0](https://github.com/tommy351/kosko/compare/@kosko/require@1.0.0-alpha.0...@kosko/require@1.0.0-alpha.0) (2020-11-15)
 
 
@@ -71,6 +84,3 @@
 ### Features
 
 * **require:** New package "require" ([1e4832f](https://github.com/tommy351/kosko/commit/1e4832fca25d2aaf86b1f2260c8785614be4915e))
-
-
-
