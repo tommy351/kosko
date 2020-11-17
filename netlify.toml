@@ -1,3 +1,31 @@
 [build]
-command = 'npm run bootstrap && ./scripts/generate-website.sh'
-publish = 'website/build'
+  command = 'npm run bootstrap && ./scripts/generate-website.sh'
+  publish = 'website/build'
+
+[[redirects]]
+  from = "/docs/guides/getting-started"
+  to = "/docs/"
+
+[[redirects]]
+  from = "/docs/guides/overview"
+  to = "/docs/overview"
+
+[[redirects]]
+  from = "/docs/guides/components"
+  to = "/docs/components"
+
+[[redirects]]
+  from = "/docs/guides/environments"
+  to = "/docs/environments"
+
+[[redirects]]
+  from = "/docs/guides/templates"
+  to = "/docs/templates"
+
+[[redirects]]
+  from = "/docs/references/commands"
+  to = "/docs/commands"
+
+[[redirects]]
+  from = "/docs/references/configuration"
+  to = "/docs/configuration"
