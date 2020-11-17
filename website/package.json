@@ -1,11 +1,14 @@
 {
   "name": "@kosko/website",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
+    "docusaurus": "docusaurus",
     "start": "docusaurus start",
     "build": "docusaurus build",
-    "swizzle": "docusaurus swizzle"
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "serve": "docusaurus serve"
   },
   "browserslist": {
     "production": [
@@ -19,18 +22,22 @@
       "last 1 safari version"
     ]
   },
+  "dependencies": {
+    "@docusaurus/core": "2.0.0-alpha.66",
+    "@docusaurus/preset-classic": "2.0.0-alpha.66",
+    "@mdx-js/react": "^1.5.8",
+    "clsx": "^1.1.1",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
+  },
   "devDependencies": {
-    "@docusaurus/core": "^2.0.0-alpha.54",
-    "@docusaurus/plugin-content-docs": "^2.0.0-alpha.37",
-    "@docusaurus/plugin-content-pages": "^2.0.0-alpha.37",
-    "@docusaurus/plugin-google-analytics": "^2.0.0-alpha.37",
-    "@docusaurus/plugin-sitemap": "^2.0.0-alpha.37",
-    "@docusaurus/theme-classic": "^2.0.0-alpha.37",
-    "classnames": "^2.2.6",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
+    "@docusaurus/module-type-aliases": "2.0.0-alpha.66",
+    "@tsconfig/docusaurus": "^1.0.2",
+    "@types/react": "^16.9.56",
+    "@types/react-helmet": "^6.1.0",
+    "@types/react-router-dom": "^5.1.6",
     "read-pkg": "^5.2.0",
     "resolve-pkg": "^2.0.0",
-    "styled-components": "^5.2.0"
+    "typescript": "^4.0.5"
   }
 }

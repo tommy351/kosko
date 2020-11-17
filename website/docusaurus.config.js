@@ -9,24 +9,26 @@ module.exports = {
   tagline: "Write Kubernetes manifests in JavaScript.",
   url: "https://kosko.dev",
   baseUrl: "/",
-  favicon: "",
+  onBrokenLinks: "throw",
+  favicon: "img/favicon.ico",
   organizationName,
   projectName,
   themeConfig: {
     navbar: {
       title: "Kosko",
-      links: [
+      logo: {
+        alt: "My Site Logo",
+        src: "img/logo.svg"
+      },
+      items: [
         {
-          to: "docs/guides/getting-started",
+          to: "docs/",
           activeBasePath: "docs",
           label: "Docs",
           position: "left"
         },
-        {
-          href: "/api/",
-          label: "API",
-          position: "left"
-        },
+        { to: "blog", label: "Blog", position: "left" },
+        { href: "/api/", label: "API", position: "left" },
         {
           href: githubUrl,
           label: "GitHub",
@@ -39,30 +41,25 @@ module.exports = {
       links: [],
       copyright: `Copyright © ${new Date().getFullYear()} Tommy Chen. Built with Docusaurus.`
     },
-    googleAnalytics: {
-      trackingID: "UA-4910098-13"
-    },
     prism: {
       additionalLanguages: ["toml"]
     }
   },
-  themes: [
+  presets: [
     [
-      "@docusaurus/theme-classic",
+      "@docusaurus/preset-classic",
       {
-        customCss: require.resolve("./src/css/custom.css")
-      }
-    ]
-  ],
-  plugins: [
-    "@docusaurus/plugin-content-pages",
-    "@docusaurus/plugin-sitemap",
-    "@docusaurus/plugin-google-analytics",
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        editUrl: `${githubUrl}/edit/master/website/`,
-        sidebarPath: require.resolve("./sidebars.json")
+        docs: {
+          sidebarPath: require.resolve("./sidebars.js"),
+          editUrl: `${githubUrl}/edit/master/website/`
+        },
+        blog: {
+          showReadingTime: true,
+          editUrl: `${githubUrl}/edit/master/website/blog/`
+        },
+        theme: {
+          customCss: require.resolve("./src/css/custom.css")
+        }
       }
     ]
   ]

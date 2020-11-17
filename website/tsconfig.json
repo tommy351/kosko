@@ -1,0 +1,4 @@
+{
+  "extends": "./node_modules/@tsconfig/docusaurus/tsconfig.json",
+  "include": ["src/"]
+}

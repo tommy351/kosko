@@ -13,50 +13,6 @@ kosko is inspired by [ksonnet] but use JavaScript instead of [jsonnet]. Unlike [
 - Validate against Kubernetes OpenAPI definitions.
 - Reuse variables and functions across components.
 
-## Installation
-
-Install kosko globally with npm.
-
-```sh
-npm install -g kosko
-```
-
-## Getting Started
-
-### Setup
-
-First, run `kosko init` to set up a new kosko directory and `npm install` to install dependencies.
-
-```sh
-kosko init example
-cd example
-npm install
-```
-
-### Create a Component
-
-Create a new component with `@kosko/template-deployed-service` template.
-
-```sh
-npx @kosko/template-deployed-service --name nginx --image nginx
-```
-
-This template creates a new file named `nginx.js` in `components` folder.
-
-### Generate Kubernetes Manifests
-
-Run `kosko generate` to print Kubernetes manifests in the console.
-
-```sh
-kosko generate
-```
-
-Pipe the output to kubectl to apply to a cluster.
-
-```sh
-kosko generate | kubectl apply -f -
-```
-
 ## Documentation
 
 Learn more on [the official site](https://kosko.dev).
@@ -72,6 +28,7 @@ Learn more on [the official site](https://kosko.dev).
 - [@kosko/migrate](packages/migrate) - Migrate Kubernetes YAML into kosko components.
 - [@kosko/require](packages/require) - Import and resolve modules.
 - [@kosko/template](packages/template) - Utilities for templates.
+- [@kosko/yaml](packages/yaml) - Load Kubernetes YAML files in kosko.
 
 ### Templates
 

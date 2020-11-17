@@ -65,6 +65,24 @@ module.exports = async function () {
 };
 ```
 
+### Nested Manifests
+
+:::info
+This feature is added in v1.0.0.
+:::
+
+Arrays and functions in components are flattened. This is useful for reusing manifests across different components.
+
+```js
+const { Deployment } = require("kubernetes-models/apps/v1");
+const { Service } = require("kubernetes-models/v1");
+
+module.exports = [
+  [new Deployment(), new Service()],
+  async () => [new Deployment(), new Service()]
+];
+```
+
 ## Validate Manifests
 
 ### Built-in Validation
