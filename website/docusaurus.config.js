@@ -6,7 +6,7 @@ const githubUrl = `https://github.com/${organizationName}/${projectName}`;
 
 module.exports = {
   title: "Kosko",
-  tagline: "Write Kubernetes manifests in JavaScript.",
+  tagline: "Organize Kubernetes manifests in JavaScript.",
   url: "https://kosko.dev",
   baseUrl: "/",
   onBrokenLinks: "throw",
