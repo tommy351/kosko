@@ -1,6 +1,6 @@
 {
   "name": "@kosko/migrate",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Migrate Kubernetes YAML into kosko components.",
   "homepage": "https://kosko.dev",
   "repository": {
@@ -23,7 +23,7 @@
     "node": ">=10"
   },
   "dependencies": {
-    "@kosko/yaml": "^0.1.0",
+    "@kosko/yaml": "^0.1.1",
     "camelcase": "^6.1.0",
     "tslib": "^2.0.3"
   },

@@ -1,6 +1,6 @@
 {
   "name": "@kosko/config",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Load kosko configuration.",
   "homepage": "https://kosko.dev",
   "repository": {
