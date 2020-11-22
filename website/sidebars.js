@@ -9,7 +9,12 @@ module.exports = {
       "environments",
       "templates"
     ],
-    Guides: ["loading-kubernetes-yaml", "typescript-support"],
+    Guides: [
+      "loading-kubernetes-yaml",
+      "typescript-support",
+      "programmatic-usage",
+      "troubleshooting"
+    ],
     References: ["commands", "configuration"]
   }
 };
