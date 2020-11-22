@@ -2,6 +2,7 @@
   "name": "@kosko/yaml",
   "version": "0.1.0",
   "description": "Load Kubernetes YAML files in kosko.",
+  "homepage": "https://kosko.dev",
   "repository": {
     "type": "git",
     "url": "https://github.com/tommy351/kosko.git"
@@ -13,7 +14,9 @@
     "/dist/"
   ],
   "keywords": [
-    "kosko"
+    "kubernetes",
+    "kosko",
+    "yaml"
   ],
   "publishConfig": {
     "access": "public"
