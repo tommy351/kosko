@@ -7,9 +7,6 @@ title: Overview
 
 A component is a collection of Kubernetes manifests including all resources needed for an application such as deployments, services, secrets, etc.
 
-- [Writing Components](components.md)
-- [Loading Kubernetes YAML](loading-kubernetes-yaml.md)
-
 ## [Environments](environments.md)
 
 Environments are variables specific to different clusters. For example, you may have `dev` and `prod` environments for different clusters.

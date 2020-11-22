@@ -2,14 +2,14 @@
 
 module.exports = {
   docs: {
-    Guides: [
+    Introduction: [
       "getting-started",
       "overview",
       "components",
       "environments",
-      "templates",
-      "loading-kubernetes-yaml"
+      "templates"
     ],
+    Guides: ["loading-kubernetes-yaml", "typescript-support"],
     References: ["commands", "configuration"]
   }
 };

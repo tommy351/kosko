@@ -4,6 +4,12 @@ title: Getting Started
 slug: /
 ---
 
+:::note Examples
+
+- [Getting Started](https://github.com/tommy351/kosko/tree/master/examples/getting-started)
+
+:::
+
 ## Setup
 
 Run `kosko init` to set up a new kosko directory.

@@ -68,7 +68,7 @@ module.exports = async function () {
 ### Nested Manifests
 
 :::info
-This feature is added in v1.0.0.
+This feature is available since v1.0.0.
 :::
 
 Arrays and functions in components are flattened. This is useful for reusing manifests across different components.
