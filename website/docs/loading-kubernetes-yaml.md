@@ -22,7 +22,7 @@ npm install @kosko/yaml kubernetes-models
 ### Load from a File
 
 ```js
-const { loadFile, loadUrl, loadString } = require("@kosko/yaml");
+const { loadFile } = require("@kosko/yaml");
 
 loadFile("manifest.yaml");
 ```

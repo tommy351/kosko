@@ -6,7 +6,6 @@ title: TypeScript Support
 :::note Examples
 
 - [TypeScript](https://github.com/tommy351/kosko/tree/master/examples/typescript)
-- [Babel](https://github.com/tommy351/kosko/tree/master/examples/babel)
 
 :::
 
@@ -17,11 +16,7 @@ Kosko and [kubernetes-models](https://github.com/tommy351/kubernetes-models-ts) 
 To start using TypeScript, you have to either add [`require`](configuration.md#require) option in `kosko.toml`, or run Kosko with [`-r/--require`](commands.md#--require--r) option.
 
 ```toml title="kosko.toml"
-# TypeScript
 require = ["ts-node/register"]
-
-# Babel
-require = ["@babel/register"]
 ```
 
 ## Environment Types
