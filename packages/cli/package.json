@@ -1,6 +1,6 @@
 {
   "name": "@kosko/cli",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0",
   "description": "Write Kubernetes manifests in JavaScript.",
   "homepage": "https://github.com/tommy351/kosko",
   "repository": {
@@ -28,10 +28,10 @@
     "node": ">=10"
   },
   "dependencies": {
-    "@kosko/config": "^1.0.0-alpha.1",
-    "@kosko/generate": "^1.0.0-alpha.1",
-    "@kosko/migrate": "^1.0.0-alpha.2",
-    "@kosko/require": "^1.0.0-alpha.1",
+    "@kosko/config": "^1.0.0",
+    "@kosko/generate": "^1.0.0",
+    "@kosko/migrate": "^1.0.0",
+    "@kosko/require": "^1.0.0",
     "chalk": "^4.1.0",
     "clean-stack": "^3.0.0",
     "debug": "^4.2.0",
@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@iarna/toml": "^2.2.5",
-    "@kosko/env": "^1.0.0-alpha.1",
+    "@kosko/env": "^1.0.0",
     "@types/debug": "^4.1.5",
     "@types/exit": "^0.1.31",
     "@types/jsonpath": "^0.2.0",

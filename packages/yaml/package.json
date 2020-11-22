@@ -1,6 +1,6 @@
 {
   "name": "@kosko/yaml",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0",
   "description": "Load Kubernetes YAML files in kosko.",
   "repository": {
     "type": "git",

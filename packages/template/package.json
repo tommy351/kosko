@@ -1,6 +1,6 @@
 {
   "name": "@kosko/template",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0",
   "description": "Utilities for kosko templates.",
   "homepage": "https://github.com/tommy351/kosko",
   "repository": {
