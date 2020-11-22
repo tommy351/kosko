@@ -2,7 +2,7 @@
 
 This example contains one component and two environments. Add `--env/-e` option to specify the environment.
 
-```js
-kosko generate --env dev
-kosko generate --env prod
+```sh
+npx kosko generate --env dev
+npx kosko generate --env prod
 ```

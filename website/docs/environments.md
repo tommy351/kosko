@@ -3,6 +3,12 @@ id: environments
 title: Environments
 ---
 
+:::note Examples
+
+- [Environment](https://github.com/tommy351/kosko/tree/master/examples/environment)
+
+:::
+
 ## Create Environments
 
 You can create a new component by using [`@kosko/template-environment`](https://github.com/tommy351/kosko/tree/master/packages/template-environment) template.
@@ -74,4 +80,18 @@ require("@kosko/env").component("nginx") ===
     ...require("@kosko/env").global(),
     ...require("./environments/dev/nginx")
   };
+```
+
+## Specify Environments
+
+When running `kosko generate` or `kosko validate`, use [`-e,--env`](commands.md#--env--e) to specify environments.
+
+```shell
+npx kosko generate -e dev
+```
+
+You can also set [`baseEnvironment`](configuration.md#baseenvironment) as the default environment.
+
+```toml title="kosko.toml"
+baseEnvironment = "dev"
 ```

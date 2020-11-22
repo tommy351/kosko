@@ -1,0 +1,30 @@
+.features {
+  padding: 2rem 0;
+}
+
+.heroContainer {
+  text-align: center;
+}
+
+.heroTitle {
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+}
+
+.featureImage {
+  width: 60%;
+  max-height: 150px;
+  height: auto;
+  align-self: center;
+}
+
+.featureTitle {
+  font-size: var(--ifm-h3-font-size);
+  padding-top: 1rem;
+}

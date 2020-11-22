@@ -9,7 +9,8 @@ module.exports = {
     "integration/**/*",
     "**/__tests__/**",
     "**/__fixtures__/**",
-    "**/__mocks__/**"
+    "**/__mocks__/**",
+    "website/**/*"
   ],
   out: "website/build/api",
   excludePrivate: true,

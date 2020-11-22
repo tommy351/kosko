@@ -7,9 +7,6 @@ title: Overview
 
 A component is a collection of Kubernetes manifests including all resources needed for an application such as deployments, services, secrets, etc.
 
-- [Writing Components](components.md)
-- [Migrating existing YAML](commands.md#migrate)
-
 ## [Environments](environments.md)
 
 Environments are variables specific to different clusters. For example, you may have `dev` and `prod` environments for different clusters.
@@ -37,7 +34,7 @@ The following is a basic folder structure of a kosko directory.
 
 - `components` - Components folder.
 - `environments` - Environments folder.
-- `kosko.toml` - [Configuration](references/configuration.md) file.
+- `kosko.toml` - [Configuration](configuration.md) file.
 - `templates` - Templates folder.
 
 ## Examples

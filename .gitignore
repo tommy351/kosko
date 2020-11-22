@@ -9,3 +9,6 @@ dist/
 /website/.docusaurus/
 /website/build/
 /website/.cache-loader/
+
+# Local Netlify folder
+.netlify
