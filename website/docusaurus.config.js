@@ -46,6 +46,10 @@ module.exports = {
     },
     googleAnalytics: {
       trackingID: "UA-4910098-13"
+    },
+    algolia: {
+      apiKey: "23788e4b80d39b6c0cdea10cd50d3663",
+      indexName: "kosko"
     }
   },
   presets: [
