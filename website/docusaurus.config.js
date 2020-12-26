@@ -22,13 +22,18 @@ module.exports = {
       },
       items: [
         {
-          to: "docs/",
-          activeBasePath: "docs",
+          type: "doc",
           label: "Docs",
-          position: "left"
+          position: "left",
+          docId: "getting-started"
+        },
+        {
+          type: "doc",
+          label: "API",
+          position: "left",
+          docId: "api/globals"
         },
         { to: "blog", label: "Blog", position: "left" },
-        { href: "/api/", label: "API", position: "left" },
         {
           href: githubUrl,
           label: "GitHub",

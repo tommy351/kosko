@@ -1,6 +1,9 @@
 [build]
-  command = 'npm run bootstrap && ./scripts/generate-website.sh'
-  publish = 'website/build'
+  command = "npm run bootstrap && ./scripts/generate-website.sh"
+  publish = "website/build"
+
+[build.environment]
+  NODE_VERSION = "14"
 
 [[redirects]]
   from = "/docs/guides/getting-started"
@@ -29,3 +32,7 @@
 [[redirects]]
   from = "/docs/references/configuration"
   to = "/docs/configuration"
+
+[[redirects]]
+  from = "/api"
+  to = "/docs/api"
