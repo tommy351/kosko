@@ -29,3 +29,7 @@
 [[redirects]]
   from = "/docs/references/configuration"
   to = "/docs/configuration"
+
+[[redirects]]
+  from = "/api"
+  to = "/docs/api"
