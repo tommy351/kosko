@@ -47,7 +47,8 @@ module.exports = {
       copyright: `Copyright © ${new Date().getFullYear()} Tommy Chen. Built with Docusaurus.`
     },
     prism: {
-      additionalLanguages: ["toml"]
+      additionalLanguages: ["toml"],
+      theme: require("prism-react-renderer/themes/oceanicNext")
     },
     googleAnalytics: {
       trackingID: "UA-4910098-13"
@@ -70,9 +71,10 @@ module.exports = {
           editUrl: `${githubUrl}/edit/master/website/blog/`
         },
         theme: {
-          customCss: require.resolve("./src/css/custom.css")
+          customCss: require.resolve("./src/css/custom.scss")
         }
       }
     ]
-  ]
+  ],
+  plugins: ["docusaurus-plugin-sass"]
 };

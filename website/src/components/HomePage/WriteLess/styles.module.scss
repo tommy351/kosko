@@ -1,0 +1,25 @@
+.example {
+  display: grid;
+  gap: 1rem;
+  grid-template-areas:
+    "top top"
+    ". .";
+
+  @media (max-width: 768px) {
+    grid-template-areas:
+      "top"
+      "."
+      ".";
+  }
+}
+
+.topCodeBlock {
+  font-size: 1.5rem;
+  text-align: center;
+  grid-area: top;
+  overflow: hidden;
+}
+
+.codeBlock {
+  font-size: 0.875rem;
+}

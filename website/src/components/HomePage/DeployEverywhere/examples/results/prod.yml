@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  namespace: prod
+spec:
+  replicas: 15
+  template:
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:stable

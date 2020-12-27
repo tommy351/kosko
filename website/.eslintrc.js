@@ -8,12 +8,15 @@ module.exports = {
   extends: ["../.eslintrc", "plugin:react/recommended"],
   rules: {
     "@typescript-eslint/explicit-module-boundary-types": "off",
-    "node/no-unpublished-import": "off"
+    "node/no-unpublished-import": "off",
+    "react/prop-types": "off"
   },
   settings: {
     node: {
       allowModules: [
         "@theme/Layout",
+        "@theme/CodeBlock",
+        "@theme/hooks/usePrismTheme",
         "@docusaurus/Link",
         "@docusaurus/useDocusaurusContext",
         "@docusaurus/useBaseUrl"
