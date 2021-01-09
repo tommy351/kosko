@@ -22,8 +22,11 @@ This command will create a new folder named `example`, and generate a `package.j
 
 ```json title="package.json"
 {
-  "@kosko/env": "^0.5.2",
-  "kubernetes-models": "^1.0.1"
+  "dependencies": {
+    "@kosko/env": "^1.0.1",
+    "kosko": "^1.0.1",
+    "kubernetes-models": "^1.0.3"
+  }
 }
 ```
 
