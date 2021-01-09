@@ -1,0 +1,49 @@
+.codeWindow {
+  border-radius: var(--ifm-global-radius);
+  font-size: 0.875rem;
+  overflow: hidden;
+}
+
+.panes {
+  display: flex;
+  overflow: hidden;
+  height: 300px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    height: 400px;
+  }
+}
+
+.pane {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  @media (min-width: 768px) {
+    border-right: 1px solid rgba(#000, 0.4);
+
+    &:last-of-type {
+      border-right: none;
+    }
+  }
+}
+
+.tabs {
+  display: flex;
+  overflow: auto;
+  flex-shrink: 0;
+  background-color: rgba(#000, 0.25);
+}
+
+.tab {
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 0.75rem;
+  line-height: 1;
+}
+
+.tabActive {
+  background-color: rgba(#fff, 0.25);
+}

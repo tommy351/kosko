@@ -1,0 +1,32 @@
+.wrapper {
+  --vertical-padding: 2rem;
+
+  padding-top: var(--vertical-padding);
+  padding-bottom: var(--vertical-padding);
+}
+
+.title {
+  font-size: 2.25rem;
+  font-family: var(--title-font-family);
+  font-weight: 900;
+
+  strong {
+    color: var(--ifm-color-primary);
+    font-weight: inherit;
+  }
+}
+
+.description {
+  max-width: 40rem;
+  font-size: 1.125rem;
+
+  p {
+    &:last-of-type {
+      --ifm-paragraph-margin-bottom: 0;
+    }
+  }
+}
+
+.example {
+  padding-top: 2rem;
+}

@@ -1,0 +1,23 @@
+@import "vars";
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@900&display=swap");
+
+:root {
+  --ifm-color-primary: #{$color-primary};
+  --ifm-color-primary-dark: #{scale-color($color-primary, $lightness: -10%)};
+  --ifm-color-primary-darker: #{scale-color($color-primary, $lightness: -15%)};
+  --ifm-color-primary-darkest: #{scale-color($color-primary, $lightness: -30%)};
+  --ifm-color-primary-light: #{scale-color($color-primary, $lightness: 10%)};
+  --ifm-color-primary-lighter: #{scale-color($color-primary, $lightness: 15%)};
+  --ifm-color-primary-lightest: #{scale-color($color-primary, $lightness: 30%)};
+  --ifm-code-font-size: 95%;
+
+  --title-font-family: "Nunito Sans", sans-serif;
+}
+
+.docusaurus-highlight-code-line {
+  background-color: rgb(72, 77, 91);
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}

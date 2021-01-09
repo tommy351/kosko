@@ -1,0 +1,71 @@
+.codeBlockContainer {
+  border-radius: var(--ifm-global-radius);
+  overflow: hidden;
+  font-size: 0.875rem;
+}
+
+.codeBlock {
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.warningToken {
+  border-bottom: 2px dashed var(--ifm-color-danger);
+  position: relative;
+  display: inline-block;
+}
+
+.hintContainer {
+  position: absolute;
+  background-color: #222;
+  border: 1px solid #000;
+  top: 100%;
+  left: 0;
+  font-family: var(--ifm-font-family-base);
+  margin-top: 0.5rem;
+  z-index: 1;
+}
+
+.hintLine {
+  padding: 0.5rem;
+  border-bottom: 1px solid rgba(#fff, 0.2);
+  width: 30rem;
+  white-space: normal;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+}
+
+.monospace {
+  font-family: var(--ifm-font-family-monospace);
+}
+
+.problemContainer {
+  padding: 1em;
+  border-top: 1px solid rgba(#fff, 0.2);
+}
+
+.problem {
+  display: flex;
+  font-family: var(--ifm-font-family-monospace);
+}
+
+.problemIcon {
+  color: var(--ifm-color-danger);
+  display: inline-flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.problemDetail {
+  padding-left: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.problemReason {
+  padding-left: 0.5rem;
+  color: rgba(#fff, 0.5);
+}

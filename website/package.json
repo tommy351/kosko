@@ -10,6 +10,9 @@
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -27,17 +30,22 @@
     "@docusaurus/preset-classic": "2.0.0-alpha.66",
     "@mdx-js/react": "^1.5.8",
     "clsx": "^1.1.1",
+    "docusaurus-plugin-sass": "^0.1.11",
     "globby": "^11.0.1",
     "lodash": "^4.17.20",
+    "prism-react-renderer": "^1.1.1",
     "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "react-dom": "^16.8.4",
+    "react-icons": "^4.1.0"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "2.0.0-alpha.66",
     "@tsconfig/docusaurus": "^1.0.2",
+    "@types/lodash": "^4.14.167",
     "@types/react": "^16.9.56",
     "@types/react-helmet": "^6.1.0",
     "@types/react-router-dom": "^5.1.6",
+    "raw-loader": "^4.0.2",
     "read-pkg": "^5.2.0",
     "resolve-pkg": "^2.0.0",
     "typescript": "^4.0.5"

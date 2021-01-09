@@ -1,0 +1,53 @@
+.container {
+  --vertical-padding: 4rem;
+
+  padding-top: var(--vertical-padding);
+  padding-bottom: var(--vertical-padding);
+
+  @media (max-width: 768px) {
+    --vertical-padding: 2rem;
+  }
+}
+
+.title {
+  font-family: var(--title-font-family);
+  font-weight: 900;
+  font-size: 3rem;
+  margin: 0;
+  padding-bottom: 2rem;
+
+  strong {
+    color: var(--ifm-color-primary);
+    font-weight: inherit;
+  }
+}
+
+.actions {
+  --flex-item-gap: 0.75rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  margin: calc(var(--flex-item-gap) * -1);
+
+  > * {
+    margin: var(--flex-item-gap);
+  }
+}
+
+.install {
+  font-family: var(--ifm-font-family-monospace);
+  white-space: nowrap;
+  padding: var(--ifm-button-padding-vertical)
+    var(--ifm-button-padding-horizontal);
+  display: flex;
+  align-items: center;
+  background-color: var(--ifm-color-secondary);
+  border-radius: var(--ifm-button-border-radius);
+  color: var(--ifm-color-gray-900);
+
+  &::before {
+    content: "$";
+    padding-right: 0.75rem;
+    opacity: 0.5;
+  }
+}
