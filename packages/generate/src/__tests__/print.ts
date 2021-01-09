@@ -41,7 +41,7 @@ describe("when format = YAML", () => {
     });
 
     test("should write YAML", () => {
-      expect(yaml.safeLoad(bl.toString())).toEqual(data);
+      expect(yaml.load(bl.toString())).toEqual(data);
     });
   });
 
@@ -55,7 +55,7 @@ describe("when format = YAML", () => {
     });
 
     test("should write YAML with delimiters", () => {
-      expect(yaml.safeLoadAll(bl.toString())).toEqual(data);
+      expect(yaml.loadAll(bl.toString())).toEqual(data);
     });
   });
 });

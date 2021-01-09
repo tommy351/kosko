@@ -16,7 +16,7 @@ type Printer<T> = (writer: Writable, data: T) => void;
 type PrinterMap<T> = { [key in PrintFormat]: Printer<T> };
 
 function stringifyYAML(data: any): string {
-  return yaml.safeDump(data, { noRefs: true });
+  return yaml.dump(data, { noRefs: true });
 }
 
 function stringifyJSON(data: any): string {
