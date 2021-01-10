@@ -1,3 +1,4 @@
+/// <reference types="jest-extended"/>
 import execa from "execa";
 import { dirname } from "path";
 import { runCLI, installPackage } from "../../../run";

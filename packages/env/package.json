@@ -24,10 +24,10 @@
   },
   "dependencies": {
     "@kosko/require": "^1.0.1",
-    "debug": "^4.2.0",
+    "debug": "^4.3.1",
     "deepmerge": "^4.2.2",
     "is-plain-object": "^5.0.0",
-    "tslib": "^2.0.3"
+    "tslib": "^2.1.0"
   },
   "devDependencies": {
     "@types/debug": "^4.1.5"

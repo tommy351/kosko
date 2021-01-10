@@ -1,4 +1,4 @@
-import { safeLoadAll } from "js-yaml";
+import { loadAll } from "js-yaml";
 import fs from "fs";
 import { promisify } from "util";
 import fetch, { RequestInfo, RequestInit } from "node-fetch";
@@ -88,7 +88,7 @@ export function loadString(
   content: string,
   { transform = (x) => x }: LoadOptions = {}
 ): ReadonlyArray<Manifest> {
-  const input = safeLoadAll(content).filter((x) => x != null);
+  const input = loadAll(content).filter((x) => x != null);
   const manifests: Manifest[] = [];
 
   for (const entry of input) {

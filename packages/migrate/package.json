@@ -24,11 +24,11 @@
   },
   "dependencies": {
     "@kosko/yaml": "^0.1.1",
-    "camelcase": "^6.1.0",
-    "tslib": "^2.0.3"
+    "camelcase": "^6.2.0",
+    "tslib": "^2.1.0"
   },
   "devDependencies": {
     "is-plain-object": "^5.0.0",
-    "kubernetes-models": "^1.0.1"
+    "kubernetes-models": "^1.0.3"
   }
 }
