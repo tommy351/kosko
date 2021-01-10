@@ -1,6 +1,6 @@
 {
   "name": "@kosko/require",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Import and resolve modules.",
   "homepage": "https://kosko.dev",
   "repository": {

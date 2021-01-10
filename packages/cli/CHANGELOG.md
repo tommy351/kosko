@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/tommy351/kosko/compare/@kosko/cli@1.0.1...@kosko/cli@1.1.0) (2021-01-10)
+
+
+### Features
+
+* **cmd:** Update init dependencies ([0bd5b2d](https://github.com/tommy351/kosko/commit/0bd5b2df4e6a424f6a9d0e1452f693d6de31c348))
+
+
+
+
+
 ## [1.0.1](https://github.com/tommy351/kosko/compare/@kosko/cli@1.0.0...@kosko/cli@1.0.1) (2020-11-22)
 
 **Note:** Version bump only for package @kosko/cli
