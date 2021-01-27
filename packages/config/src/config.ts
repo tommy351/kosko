@@ -19,8 +19,7 @@ export async function loadConfig(path: string): Promise<Config> {
   const data = await toml.parse.async(content);
 
   debug("Found config at", path);
-  validate(data);
-  return data;
+  return validate(data);
 }
 
 /**

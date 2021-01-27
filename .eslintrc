@@ -24,9 +24,7 @@
     "node/no-unsupported-features/es-syntax": [
       "error",
       {
-        "ignores": [
-          "modules"
-        ]
+        "ignores": ["modules"]
       }
     ]
   },
@@ -35,14 +33,8 @@
   },
   "settings": {
     "node": {
-      "tryExtensions": [
-        ".ts",
-        ".tsx",
-        ".js",
-        ".jsx",
-        ".json",
-        ".node"
-      ]
+      "tryExtensions": [".ts", ".tsx", ".js", ".jsx", ".json", ".node"],
+      "allowModules": ["type-fest"]
     }
   },
   "overrides": [

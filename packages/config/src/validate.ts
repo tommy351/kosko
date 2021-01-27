@@ -1,15 +1,15 @@
-import { ErrorObject } from "ajv";
+import { validate as sValidate, Failure } from "superstruct";
+import { Config, configSchema } from "./types";
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const ajvValidate = require("../dist/ajv-validate");
-
-function formatErrors(errors: ErrorObject[]): string {
-  if (!errors.length) return "No errors";
-  return errors.map((err) => `${err.dataPath} ${err.message}`).join(", ");
+function formatErrors(failures: readonly Failure[]): string {
+  return [
+    'Config file "kosko.toml" is invalid.',
+    ...failures.map((f) => `- "${f.path.join(".")}": ${f.message}`)
+  ].join("\n");
 }
 
 export class ValidationError extends Error {
-  public constructor(public readonly errors: ErrorObject[]) {
+  constructor(public readonly errors: readonly Failure[]) {
     super(formatErrors(errors));
   }
 }
@@ -22,9 +22,12 @@ ValidationError.prototype.name = "ValidationError";
  *
  * @param data
  */
-export function validate(data: unknown): void {
-  const valid = ajvValidate(data);
-  if (valid) return;
+export function validate(data: unknown): Config {
+  const result = sValidate(data, configSchema);
 
-  throw new ValidationError(ajvValidate.errors || []);
+  if (result[0]) {
+    throw new ValidationError(result[0].failures());
+  }
+
+  return result[1];
 }

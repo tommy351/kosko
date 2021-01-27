@@ -1,29 +1,40 @@
-export interface EnvironmentConfig {
-  /** External modules to require. */
-  readonly require?: ReadonlyArray<string>;
-  /** Component patterns. */
-  readonly components?: ReadonlyArray<string>;
-}
+import {
+  array,
+  string,
+  object,
+  Infer,
+  assign,
+  optional,
+  record
+} from "superstruct";
+import { ReadonlyDeep } from "type-fest";
 
-export interface Config extends EnvironmentConfig {
-  /** Environment configs. */
-  readonly environments?: {
-    readonly [key: string]: EnvironmentConfig;
-  };
+export const environmentConfigSchema = object({
+  require: optional(array(string())),
+  components: optional(array(string()))
+});
 
-  /** Customize paths. */
-  readonly paths?: {
-    readonly environment?: {
-      /** Path to global environment files. */
-      readonly global?: string;
-      /** Path to component environment files. */
-      readonly component?: string;
-    };
-  };
+export type EnvironmentConfig = ReadonlyDeep<
+  Infer<typeof environmentConfigSchema>
+>;
 
-  /** File extensions of components. */
-  readonly extensions?: ReadonlyArray<string>;
+export const configSchema = assign(
+  environmentConfigSchema,
+  object({
+    environments: optional(record(string(), environmentConfigSchema)),
+    paths: optional(
+      object({
+        environment: optional(
+          object({
+            global: optional(string()),
+            component: optional(string())
+          })
+        )
+      })
+    ),
+    extensions: optional(array(string())),
+    baseEnvironment: optional(string())
+  })
+);
 
-  /** Base environment. */
-  readonly baseEnvironment?: string;
-}
+export type Config = ReadonlyDeep<Infer<typeof configSchema>>;
