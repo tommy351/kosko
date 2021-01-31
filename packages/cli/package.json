@@ -13,6 +13,7 @@
     "kosko": "bin/kosko.js"
   },
   "main": "dist",
+  "types": "dist/index.d.ts",
   "files": [
     "/bin/",
     "/dist/"
