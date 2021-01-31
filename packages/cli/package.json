@@ -1,6 +1,6 @@
 {
   "name": "@kosko/cli",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Organize Kubernetes manifests in JavaScript.",
   "homepage": "https://kosko.dev",
   "repository": {
@@ -29,10 +29,10 @@
     "node": ">=10"
   },
   "dependencies": {
-    "@kosko/config": "^1.0.2",
-    "@kosko/generate": "^1.0.2",
-    "@kosko/migrate": "^1.0.2",
-    "@kosko/require": "^1.0.2",
+    "@kosko/config": "^1.0.3",
+    "@kosko/generate": "^1.0.3",
+    "@kosko/migrate": "^1.0.3",
+    "@kosko/require": "^1.0.3",
     "chalk": "^4.1.0",
     "clean-stack": "^3.0.1",
     "debug": "^4.3.1",
@@ -47,7 +47,7 @@
   },
   "devDependencies": {
     "@iarna/toml": "^2.2.5",
-    "@kosko/env": "^1.0.2",
+    "@kosko/env": "^1.0.3",
     "@types/debug": "^4.1.5",
     "@types/exit": "^0.1.31",
     "@types/jsonpath": "^0.2.0",
