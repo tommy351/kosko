@@ -4,7 +4,6 @@ node_modules/
 dist/
 /coverage/
 *.log
-/examples/*/package-lock.json
 *.tsbuildinfo
 
 # Local Netlify folder
