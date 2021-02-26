@@ -31,7 +31,7 @@ module.exports = {
           type: "doc",
           label: "API",
           position: "left",
-          docId: "api/globals"
+          docId: "api/modules"
         },
         { to: "blog", label: "Blog", position: "left" },
         {

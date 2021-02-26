@@ -31,7 +31,7 @@ module.exports = {
     References: ["commands", "configuration"]
   },
   api: [
-    "api/globals",
+    "api/modules",
     ...Object.entries(apiDocGroups).map(([key, values]) => ({
       type: "category",
       label: startCase(key),

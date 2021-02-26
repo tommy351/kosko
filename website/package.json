@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "docusaurus start",
-    "build": "docusaurus build",
+    "start": "npm run typedoc && docusaurus start",
+    "build": "npm run typedoc && docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
-    "serve": "docusaurus serve"
+    "serve": "docusaurus serve",
+    "typedoc": "node scripts/typedoc.js"
   },
   "engines": {
     "node": ">=14"
@@ -45,9 +46,13 @@
     "@types/react": "^17.0.0",
     "@types/react-helmet": "^6.1.0",
     "@types/react-router-dom": "^5.1.7",
+    "del": "^5.1.0",
+    "docusaurus-plugin-typedoc": "^0.10.0",
     "raw-loader": "^4.0.2",
     "read-pkg": "^5.2.0",
     "resolve-pkg": "^2.0.0",
+    "typedoc": "^0.20.28",
+    "typedoc-plugin-markdown": "^3.5.0",
     "typescript": "^4.1.3"
   }
 }
