@@ -17,7 +17,6 @@ export class CLIError extends Error {
   }
 }
 
-/** @internal */
 export function formatError(err: Error): string {
   if (!err.stack) return err.message;
 

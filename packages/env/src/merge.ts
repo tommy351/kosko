@@ -8,7 +8,6 @@ type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (
   ? I
   : never;
 
-/** @internal */
 export function merge<T extends any[]>(
   ...data: T
 ): UnionToIntersection<T[number]> {

@@ -44,13 +44,11 @@ async function updatePkg(path: string, data: any): Promise<void> {
   );
 }
 
-/** @internal */
 export interface InitArguments extends RootArguments {
   force: boolean;
   path?: string;
 }
 
-/** @internal */
 export const initCmd: Command<InitArguments> = {
   command: "init [path]",
   describe: "Set up a new kosko directory",
