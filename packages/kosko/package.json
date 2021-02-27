@@ -1,6 +1,6 @@
 {
   "name": "kosko",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Organize Kubernetes manifests in JavaScript.",
   "homepage": "https://kosko.dev",
   "repository": {
@@ -26,7 +26,7 @@
     "node": ">=10"
   },
   "dependencies": {
-    "@kosko/cli": "^1.1.1",
+    "@kosko/cli": "^1.1.2",
     "import-local": "^3.0.2"
   }
 }
