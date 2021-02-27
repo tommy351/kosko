@@ -10,5 +10,7 @@ export { Environment, Reducer };
 export { Paths } from "./paths";
 
 // HACK: Export default to module.exports and maintain types above.
-module.exports = Object.assign(exports.default, exports);
-Object.defineProperty(module.exports, "__esModule", { value: true });
+if (typeof module !== "undefined") {
+  module.exports = Object.assign(exports.default, exports);
+  Object.defineProperty(module.exports, "__esModule", { value: true });
+}
