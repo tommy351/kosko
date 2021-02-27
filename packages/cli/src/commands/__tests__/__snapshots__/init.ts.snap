@@ -9,7 +9,8 @@ exports[`success should create package.json 1`] = `
     \\"kosko\\": \\"^1.0.1\\",
     \\"kubernetes-models\\": \\"^1.0.3\\"
   }
-}"
+}
+"
 `;
 
 exports[`when the target exists when package.json exists should update package.json 1`] = `
@@ -22,5 +23,6 @@ exports[`when the target exists when package.json exists should update package.j
     \\"kosko\\": \\"^1.0.1\\",
     \\"kubernetes-models\\": \\"^1.0.3\\"
   }
-}"
+}
+"
 `;

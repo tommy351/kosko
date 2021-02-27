@@ -1,13 +1,11 @@
 import toml from "@iarna/toml";
 import Debug from "debug";
-import fs from "fs";
+import { readFile } from "fs-extra";
 import { join } from "path";
-import { promisify } from "util";
 import { Config, EnvironmentConfig } from "./types";
 import { validate } from "./validate";
 
 const debug = Debug("kosko:config");
-const readFile = promisify(fs.readFile);
 
 /**
  * Parses and validates a config file from the specified path.

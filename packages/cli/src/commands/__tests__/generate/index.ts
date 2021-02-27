@@ -2,7 +2,7 @@ import toml from "@iarna/toml";
 import { Config } from "@kosko/config";
 import env from "@kosko/env";
 import { generate, print, PrintFormat, Result } from "@kosko/generate";
-import fs from "fs";
+import { writeFile, readFile } from "fs-extra";
 import makeDir from "make-dir";
 import { join, dirname } from "path";
 import pkgDir from "pkg-dir";
@@ -10,7 +10,6 @@ import { Signale } from "signale";
 import symlinkDir from "symlink-dir";
 import tempDir from "temp-dir";
 import tmp from "tmp-promise";
-import { promisify } from "util";
 import { setLogger } from "../../../cli/command";
 import { GenerateArguments, generateCmd } from "../../generate";
 
@@ -19,8 +18,6 @@ jest.mock("@kosko/env");
 
 type DeepWriteable<T> = { -readonly [P in keyof T]: DeepWriteable<T[P]> };
 
-const writeFile = promisify(fs.writeFile);
-const readFile = promisify(fs.readFile);
 const logger = new Signale({ disabled: true });
 let config: DeepWriteable<Config>;
 let args: Partial<GenerateArguments>;

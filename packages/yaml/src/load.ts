@@ -1,12 +1,10 @@
 import { loadAll } from "js-yaml";
-import fs from "fs";
-import { promisify } from "util";
+import { readFile } from "fs-extra";
 import fetch, { RequestInfo, RequestInit } from "node-fetch";
 import { getResourceModule, ResourceKind } from "./module";
 import Debug from "./debug";
 
 const debug = Debug.extend("load");
-const readFile = promisify(fs.readFile);
 
 export interface Manifest extends ResourceKind {
   [key: string]: any;

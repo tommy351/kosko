@@ -1,14 +1,11 @@
-import fs from "fs";
+import { readFile } from "fs-extra";
 import { join } from "path";
 import tempDir from "temp-dir";
 import tmp from "tmp-promise";
-import { promisify } from "util";
 import { File } from "../template";
 import { writeFiles } from "../write";
 
 jest.mock("signale");
-
-const readFile = promisify(fs.readFile);
 
 let tmpDir: tmp.DirectoryResult;
 let files: File[];

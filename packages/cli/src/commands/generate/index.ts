@@ -33,6 +33,11 @@ export interface GenerateArguments extends BaseGenerateArguments {
 async function localRequire(id: string, cwd: string): Promise<any> {
   debug("Finding module %s in %s", id, cwd);
   const path = await resolve(id, { basedir: cwd });
+
+  if (!path) {
+    throw new Error(`Cannot find module '${id}'`);
+  }
+
   debug("Importing %s from %s", id, path);
   return requireDefault(path);
 }

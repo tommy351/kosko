@@ -1,16 +1,12 @@
 import { migrateString } from "@kosko/migrate";
-import fs from "fs";
+import { stat, readFile, readdir } from "fs-extra";
 import getStdin from "get-stdin";
 import { join, resolve } from "path";
-import { promisify } from "util";
 import { Command, RootArguments } from "../cli/command";
 import Debug from "../cli/debug";
 import { print } from "../cli/print";
 
 const debug = Debug.extend("migrate");
-const stat = promisify(fs.stat);
-const readFile = promisify(fs.readFile);
-const readDir = promisify(fs.readdir);
 
 function concatFiles(arr: ReadonlyArray<string>): string {
   if (!arr.length) return "";
@@ -32,7 +28,7 @@ function readFileString(path: string): Promise<string> {
 async function readFilesInDir(dir: string): Promise<string> {
   debug("Reading directory", dir);
 
-  const files = await readDir(dir);
+  const files = await readdir(dir);
   const contents = await Promise.all(
     files.map((file) => readFileString(join(dir, file)))
   );

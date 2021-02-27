@@ -1,11 +1,8 @@
-import fs from "fs";
+import { writeFile } from "fs-extra";
 import makeDir from "make-dir";
 import { dirname, join } from "path";
 import signale from "signale";
-import { promisify } from "util";
 import { File } from "./template";
-
-const writeFile = promisify(fs.writeFile);
 
 /**
  * Write files to the specified path.

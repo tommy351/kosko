@@ -1,8 +1,7 @@
 import { loadFile, LoadOptions, loadString, loadUrl } from "../load";
 import tmp from "tmp-promise";
 import tempDir from "temp-dir";
-import fs from "fs";
-import { promisify } from "util";
+import { writeFile } from "fs-extra";
 import { join } from "path";
 import fetch from "node-fetch";
 import type { FetchMockStatic } from "fetch-mock";
@@ -12,7 +11,6 @@ import { Pod } from "kubernetes-models/v1/Pod";
 jest.mock("node-fetch", () => require("fetch-mock").sandbox());
 
 const fetchMock = (fetch as unknown) as FetchMockStatic;
-const writeFile = promisify(fs.writeFile);
 
 afterEach(() => {
   fetchMock.reset();

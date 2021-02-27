@@ -1,13 +1,9 @@
 import execa from "execa";
-import fs from "fs";
+import { copyFile, readFile } from "fs-extra";
 import { join } from "path";
 import tempDir from "temp-dir";
 import tmp from "tmp-promise";
-import { promisify } from "util";
 import { installPackage } from "../../run";
-
-const copyFile = promisify(fs.copyFile);
-const readFile = promisify(fs.readFile);
 
 let args: string[];
 let result: execa.ExecaReturnValue;

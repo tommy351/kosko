@@ -1,15 +1,12 @@
 /// <reference types="jest-extended"/>
-import fs from "fs";
+import { readFile, stat, writeJSON } from "fs-extra";
 import { join } from "path";
 import { Signale } from "signale";
 import tempDir from "temp-dir";
 import tmp from "tmp-promise";
-import { promisify } from "util";
 import { setLogger } from "../../cli/command";
-import { initCmd, writeJSON, InitArguments } from "../init";
+import { initCmd, InitArguments } from "../init";
 
-const readFile = promisify(fs.readFile);
-const stat = promisify(fs.stat);
 const logger = new Signale({ disabled: true });
 
 async function execute(args: Partial<InitArguments>): Promise<void> {
@@ -47,13 +44,17 @@ describe("when the target exists", () => {
     beforeEach(async () => {
       pkgPath = join(tmpDir.path, "package.json");
 
-      await writeJSON(pkgPath, {
-        name: "foo",
-        version: "1.2.3",
-        dependencies: {
-          debug: "3.2.1"
-        }
-      });
+      await writeJSON(
+        pkgPath,
+        {
+          name: "foo",
+          version: "1.2.3",
+          dependencies: {
+            debug: "3.2.1"
+          }
+        },
+        { spaces: 2 }
+      );
 
       await execute({ path: tmpDir.path, force: true });
     });

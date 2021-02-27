@@ -1,27 +1,13 @@
-import fs from "fs";
+import { readFile, writeFile, pathExists, writeJSON } from "fs-extra";
 import makeDir from "make-dir";
 import { join, resolve } from "path";
-import { promisify } from "util";
 import { Command, getLogger, RootArguments } from "../cli/command";
 import Debug from "../cli/debug";
 import { CLIError } from "../cli/error";
 
 const debug = Debug.extend("init");
 
-const readFile = promisify(fs.readFile);
-const writeFile = promisify(fs.writeFile);
-
 const DEFAULT_CONFIG = `components = ["*"]`;
-
-function exists(path: string): Promise<boolean> {
-  // eslint-disable-next-line node/no-deprecated-api
-  return new Promise((res): void => fs.exists(path, res));
-}
-
-/** @internal */
-export function writeJSON(path: string, data: unknown): Promise<void> {
-  return writeFile(path, JSON.stringify(data, null, "  "));
-}
 
 function sortKeys(data: any): any {
   const result: any = {};
@@ -44,14 +30,18 @@ async function updatePkg(path: string, data: any): Promise<void> {
   }
 
   debug("Writing package.json at", path);
-  await writeJSON(path, {
-    ...base,
-    ...data,
-    dependencies: sortKeys({
-      ...base.dependencies,
-      ...data.dependencies
-    })
-  });
+  await writeJSON(
+    path,
+    {
+      ...base,
+      ...data,
+      dependencies: sortKeys({
+        ...base.dependencies,
+        ...data.dependencies
+      })
+    },
+    { spaces: 2 }
+  );
 }
 
 /** @internal */
@@ -82,7 +72,7 @@ export const initCmd: Command<InitArguments> = {
     const path = args.path ? resolve(args.cwd, args.path) : args.cwd;
     logger.info("Initialize in", path);
 
-    const exist = await exists(path);
+    const exist = await pathExists(path);
 
     if (exist && !args.force) {
       throw new CLIError("Already exists", {

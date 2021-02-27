@@ -1,11 +1,9 @@
 import execa from "execa";
 import { runCLI } from "../../run";
 import { join } from "path";
-import fs from "fs";
-import { promisify } from "util";
+import { readFile } from "fs-extra";
 
 const fixtureDir = join(__dirname, "..", "__fixtures__");
-const readFile = promisify(fs.readFile);
 
 let args: string[];
 let result: execa.ExecaReturnValue;

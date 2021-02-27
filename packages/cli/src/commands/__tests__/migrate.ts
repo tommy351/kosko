@@ -1,9 +1,8 @@
 import { migrateString } from "@kosko/migrate";
-import fs from "fs";
+import { readdir, readFile } from "fs-extra";
 import getStdin from "get-stdin";
 import { join } from "path";
 import { Signale } from "signale";
-import { promisify } from "util";
 import { setLogger } from "../../cli/command";
 import { print } from "../../cli/print";
 import { MigrateArguments, migrateCmd } from "../migrate";
@@ -11,8 +10,6 @@ import { MigrateArguments, migrateCmd } from "../migrate";
 jest.mock("get-stdin");
 jest.mock("../../cli/print");
 
-const readDir = promisify(fs.readdir);
-const readFile = promisify(fs.readFile);
 const fixturePath = join(__dirname, "..", "__fixtures__");
 const logger = new Signale({ disabled: true });
 
@@ -93,7 +90,7 @@ describe("given a directory", () => {
   });
 
   test("should call print with result", async () => {
-    const files = await readDir(fixturePath);
+    const files = await readdir(fixturePath);
     const contents = await Promise.all(
       files.map((file) => readFile(join(fixturePath, file), "utf8"))
     );

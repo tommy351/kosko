@@ -2,15 +2,12 @@
 import { generate } from "../generate";
 import tmp from "tmp-promise";
 import { Result } from "../base";
-import fs from "fs";
-import { promisify } from "util";
+import { writeFile } from "fs-extra";
 import makeDir from "make-dir";
 import { join, dirname } from "path";
 import tempDir from "temp-dir";
 import { getExtensions } from "../extensions";
 import { ValidationError } from "../error";
-
-const writeFile = promisify(fs.writeFile);
 
 jest.mock("../extensions.ts");
 

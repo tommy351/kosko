@@ -26,6 +26,18 @@
       {
         "ignores": ["modules"]
       }
+    ],
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "util",
+            "importNames": ["promisify"],
+            "message": "Not exported by rollup-plugin-node-polyfills."
+          }
+        ]
+      }
     ]
   },
   "parserOptions": {
