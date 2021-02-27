@@ -1,3 +1,8 @@
+/**
+ * @packageDocumentation
+ * @module @kosko/cli
+ */
+
 import { parse } from "./cli/command";
 import { rootCmd } from "./commands/root";
 

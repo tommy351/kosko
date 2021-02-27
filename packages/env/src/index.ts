@@ -1,3 +1,8 @@
+/**
+ * @packageDocumentation
+ * @module @kosko/env
+ */
+
 import { Environment, Reducer } from "./environment";
 
 export default new Environment(process.cwd());

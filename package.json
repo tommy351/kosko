@@ -17,8 +17,7 @@
     "bootstrap": "lerna bootstrap",
     "test": "npm-run-all test:*",
     "test:unit": "jest",
-    "test:integration": "jest --config integration/jest.config.js",
-    "typedoc": "node scripts/typedoc.js"
+    "test:integration": "jest --config integration/jest.config.js"
   },
   "husky": {
     "hooks": {
@@ -40,7 +39,6 @@
     "@typescript-eslint/parser": "^4.12.0",
     "conventional-changelog-cli": "^2.1.1",
     "cross-spawn": "^7.0.3",
-    "del": "^6.0.0",
     "eslint": "^7.17.0",
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-jest": "^24.1.3",
@@ -65,9 +63,6 @@
     "tmp-promise": "^3.0.2",
     "ts-jest": "^26.4.4",
     "ts-node": "^9.1.1",
-    "typedoc": "0.19.2",
-    "typedoc-plugin-lerna-packages": "^0.3.1",
-    "typedoc-plugin-markdown": "3.1.1",
     "typescript": "^4.1.3"
   }
 }
