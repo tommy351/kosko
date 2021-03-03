@@ -9,12 +9,12 @@
   },
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "main": "index.cjs",
+  "module": "index.mjs",
+  "types": "index.d.ts",
   "exports": {
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.js"
+    "import": "./index.mjs",
+    "require": "./index.cjs"
   },
   "files": [
     "/dist/"

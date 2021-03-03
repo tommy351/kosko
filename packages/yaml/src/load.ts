@@ -1,8 +1,9 @@
 import { loadAll } from "js-yaml";
-import { readFile } from "fs-extra";
+import fs from "fs-extra";
 import fetch, { RequestInfo, RequestInit } from "node-fetch";
 import { getResourceModule, ResourceKind } from "./module";
 import Debug from "./debug";
+import { requireNamedExport } from "@kosko/require";
 
 const debug = Debug.extend("load");
 
@@ -29,8 +30,10 @@ function isManifest(value: Record<string, unknown>): value is Manifest {
   );
 }
 
-function getConstructor(res: ResourceKind): ManifestConstructor | undefined {
-  const mod = getResourceModule(res);
+async function getConstructor(
+  res: ResourceKind
+): Promise<ManifestConstructor | undefined> {
+  const mod = await getResourceModule(res);
 
   if (!mod) {
     debug("No resource modules for", res);
@@ -38,8 +41,7 @@ function getConstructor(res: ResourceKind): ManifestConstructor | undefined {
   }
 
   try {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    return require(mod.path)[mod.export];
+    return requireNamedExport(mod.path, mod.export) as any;
   } catch {
     debug("Failed to import the resource module", mod);
     return;
@@ -82,10 +84,10 @@ function getConstructor(res: ResourceKind): ManifestConstructor | undefined {
  * });
  * ```
  */
-export function loadString(
+export async function loadString(
   content: string,
   { transform = (x) => x }: LoadOptions = {}
-): ReadonlyArray<Manifest> {
+): Promise<readonly Manifest[]> {
   const input = loadAll(content).filter((x) => x != null);
   const manifests: Manifest[] = [];
 
@@ -100,7 +102,7 @@ export function loadString(
       );
     }
 
-    const Constructor = getConstructor(entry);
+    const Constructor = await getConstructor(entry);
     const manifest = transform(Constructor ? new Constructor(entry) : entry);
 
     if (manifest) {
@@ -118,8 +120,8 @@ export function loadString(
  * @param options
  */
 export function loadFile(path: string, options?: LoadOptions) {
-  return async (): Promise<ReadonlyArray<Manifest>> => {
-    const content = await readFile(path, "utf-8");
+  return async (): Promise<readonly Manifest[]> => {
+    const content = await fs.readFile(path, "utf-8");
     debug("File loaded from: %s", path);
 
     return loadString(content, options);
@@ -135,10 +137,10 @@ export function loadFile(path: string, options?: LoadOptions) {
 export function loadUrl(
   url: RequestInfo,
   options: LoadOptions & RequestInit = {}
-): () => Promise<ReadonlyArray<Manifest>> {
+): () => Promise<readonly Manifest[]> {
   const { transform, ...init } = options;
 
-  return async (): Promise<ReadonlyArray<Manifest>> => {
+  return async () => {
     const res = await fetch(url, init);
     debug(`Fetch "%s": status=%d`, url, res.status);
 

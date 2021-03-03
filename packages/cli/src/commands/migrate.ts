@@ -85,7 +85,7 @@ export const migrateCmd: Command<MigrateArguments> = {
   },
   async handler(args) {
     const file = concatFiles(await readFiles(args.cwd, toArray(args.filename)));
-    const content = migrateString(file);
+    const content = await migrateString(file);
 
     await print(content);
   }

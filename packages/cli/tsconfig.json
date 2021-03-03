@@ -6,7 +6,6 @@
   },
   "references": [
     { "path": "../generate" },
-    { "path": "../require" },
     { "path": "../env" },
     { "path": "../config" },
     { "path": "../migrate" }

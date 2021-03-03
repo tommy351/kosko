@@ -14,8 +14,8 @@ describe("migrate", () => {
   let code: string;
   let exported: any;
 
-  function execute(): void {
-    code = migrate(data);
+  async function execute(): Promise<void> {
+    code = await migrate(data);
 
     const mod = new Module("");
     const fn = runInThisContext(Module.wrap(code));
@@ -264,8 +264,8 @@ describe("migrate", () => {
 
 describe("migrateString", () => {
   describe("given valid YAML", () => {
-    test("should generate code", () => {
-      expect(
+    test("should generate code", async () => {
+      await expect(
         migrateString(`---
 apiVersion: v1
 kind: Pod
@@ -274,13 +274,13 @@ metadata:
 spec:
   containers: []
 `)
-      ).toMatchSnapshot();
+      ).resolves.toMatchSnapshot();
     });
   });
 
   describe("given empty objects in YAML", () => {
-    test("should ignore them", () => {
-      expect(
+    test("should ignore them", async () => {
+      await expect(
         migrateString(`---
 ---
 apiVersion: v1
@@ -290,13 +290,13 @@ metadata:
 ---
 ---
 `)
-      ).toMatchSnapshot();
+      ).resolves.toMatchSnapshot();
     });
   });
 
   describe("given valid JSON", () => {
-    test("should generate code", () => {
-      expect(
+    test("should generate code", async () => {
+      await expect(
         migrateString(`{
 "apiVersion": "v1",
 "kind": "Pod",
@@ -307,7 +307,7 @@ metadata:
   "containers": []
 }
       }`)
-      ).toMatchSnapshot();
+      ).resolves.toMatchSnapshot();
     });
   });
 });

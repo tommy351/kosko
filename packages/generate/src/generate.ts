@@ -31,7 +31,7 @@ export interface GenerateOptions {
 }
 
 async function getComponentValue(id: string): Promise<unknown> {
-  const mod = requireDefault(id);
+  const mod = await requireDefault(id);
 
   if (typeof mod === "function") {
     return await mod();

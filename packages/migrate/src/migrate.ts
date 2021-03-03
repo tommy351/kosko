@@ -18,11 +18,11 @@ function jsonStringify(data: unknown): string {
   return JSON.stringify(data, null, "  ");
 }
 
-function generateComponent(manifest: Manifest): Component {
+async function generateComponent(manifest: Manifest): Promise<Component> {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { apiVersion, kind, ...data } = manifest;
   const name = camelcase(kind);
-  const mod = getResourceModule(manifest);
+  const mod = await getResourceModule(manifest);
 
   if (!mod) {
     return {
@@ -44,16 +44,20 @@ function generateComponent(manifest: Manifest): Component {
   };
 }
 
-function generateForList(items: readonly Manifest[]): readonly Component[] {
-  return items
-    .map((data) => {
-      if (data.apiVersion === "v1" && data.kind === "List") {
-        return generateForList(data.items as any);
-      }
+async function generateForList(
+  items: readonly Manifest[]
+): Promise<readonly Component[]> {
+  const result: Component[] = [];
 
-      return generateComponent(data);
-    })
-    .reduce((acc: Component[], x) => acc.concat(x), []);
+  for (const data of items) {
+    if (data.apiVersion === "v1" && data.kind === "List") {
+      result.push(...(await generateForList(data.items as any)));
+    } else {
+      result.push(await generateComponent(data));
+    }
+  }
+
+  return result;
 }
 
 function uniqComponentName(
@@ -103,8 +107,8 @@ function collectImports(components: readonly Component[]): readonly Import[] {
  *
  * @param data Array of Kubernetes manifests
  */
-export function migrate(data: readonly Manifest[]): string {
-  const components = uniqComponentName(generateForList(data));
+export async function migrate(data: readonly Manifest[]): Promise<string> {
+  const components = uniqComponentName(await generateForList(data));
   let output = `"use strict";\n\n`;
 
   for (const { path, names } of collectImports(components)) {
@@ -127,6 +131,6 @@ export function migrate(data: readonly Manifest[]): string {
  *
  * @param input Kubernetes YAML string
  */
-export function migrateString(input: string): string {
-  return migrate(loadString(input));
+export async function migrateString(input: string): Promise<string> {
+  return migrate(await loadString(input));
 }

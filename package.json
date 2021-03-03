@@ -10,14 +10,15 @@
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint . --ext .js,.ts,.jsx,.tsx",
+    "lint": "eslint . --ext .js,.ts,.jsx,.tsx,.cjs.,mjs",
     "build": "tsc-multi",
-    "clean": "npm run build -- --clean",
+    "clean": "rm -rf packages/*/dist && npm run build -- --clean",
     "watch": "npm run build -- --watch",
     "bootstrap": "lerna bootstrap",
     "test": "npm-run-all test:*",
     "test:unit": "jest",
-    "test:integration": "jest --config integration/jest.config.js"
+    "test:integration": "jest --config integration/jest.config.js",
+    "test:esm": "ava integration/esm/**/__tests__/**/*"
   },
   "husky": {
     "hooks": {
@@ -25,7 +26,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx}": "eslint --fix"
+    "*.{js,ts,jsx,tsx,.cjs,.mjs}": "eslint --fix"
   },
   "engines": {
     "node": ">=10"
@@ -38,6 +39,7 @@
     "@types/tmp": "^0.2.0",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
     "@typescript-eslint/parser": "^4.12.0",
+    "ava": "^3.15.0",
     "conventional-changelog-cli": "^2.1.1",
     "eslint": "^7.17.0",
     "eslint-config-prettier": "^7.1.0",
@@ -51,7 +53,7 @@
     "jest": "^26.6.3",
     "jest-extended": "^0.11.5",
     "jest-serializer-path": "^0.1.15",
-    "kubernetes-models": "^1.0.3",
+    "kubernetes-models": "^1.5.2",
     "lerna": "^3.22.1",
     "lint-staged": "^10.5.3",
     "make-dir": "^3.1.0",
