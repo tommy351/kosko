@@ -29,3 +29,10 @@ export async function requireNamedExport(id, name) {
   const mod = await import(id);
   return mod[name];
 }
+
+/**
+ * @type {import('./index').getModuleExtensions}
+ */
+export function getModuleExtensions() {
+  return ["cjs", "mjs", "js"];
+}

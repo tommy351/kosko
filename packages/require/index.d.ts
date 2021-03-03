@@ -34,3 +34,8 @@ export function requireDefault(id: string): unknown;
  * info.
  */
 export function requireNamedExport(id: string, name: string): unknown;
+
+/**
+ * Returns registered module file extensions.
+ */
+export function getModuleExtensions(): string[];

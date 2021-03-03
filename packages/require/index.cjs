@@ -45,3 +45,14 @@ function requireNamedExport(id, name) {
 }
 
 exports.requireNamedExport = requireNamedExport;
+
+/**
+ * @type {import('./index').getModuleExtensions}
+ */
+function getModuleExtensions() {
+  // eslint-disable-next-line node/no-deprecated-api
+  const extensions = require.extensions;
+  return Object.keys(extensions).map((ext) => ext.substring(1));
+}
+
+exports.getModuleExtensions = getModuleExtensions;

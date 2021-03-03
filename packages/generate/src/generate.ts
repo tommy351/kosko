@@ -1,10 +1,9 @@
-import { requireDefault } from "@kosko/require";
+import { requireDefault, getModuleExtensions } from "@kosko/require";
 import Debug from "debug";
 import glob from "fast-glob";
 import { join } from "path";
 import { Result, Manifest } from "./base";
 import { ValidationError } from "./error";
-import { getExtensions } from "./extensions";
 
 const debug = Debug("kosko:generate");
 
@@ -116,7 +115,7 @@ async function resolveComponent(
  * @param options
  */
 export async function generate(options: GenerateOptions): Promise<Result> {
-  const extensions = (options.extensions || getExtensions()).join(",");
+  const extensions = (options.extensions || getModuleExtensions()).join(",");
   const suffix = `?(.{${extensions}})`;
   const patterns = options.components.map((x) => x + suffix);
   debug("Component patterns", patterns);
