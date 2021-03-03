@@ -9,7 +9,11 @@ const _resolve = require("resolve");
  */
 function resolve(id, { base } = {}) {
   return new Promise((resolve, reject) => {
-    _resolve(id, { basedir: dirname(base) }, (err, result) => {
+    const options = {};
+
+    if (base) options.basedir = dirname(base);
+
+    _resolve(id, options, (err, result) => {
       if (err) return reject(err);
       resolve(result);
     });
