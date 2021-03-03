@@ -1,4 +1,4 @@
-import { requireDefault, getModuleExtensions } from "@kosko/require";
+import { requireDefault, getModuleExtensions, resolve } from "@kosko/require";
 import Debug from "debug";
 import glob from "fast-glob";
 import { join } from "path";
@@ -87,8 +87,14 @@ async function resolveComponent(
     }
   }
 
+  const path = await resolve(options.path);
+
+  if (!path) {
+    throw new Error(`Cannot resolve module ${options.path}`);
+  }
+
   const manifest: Manifest = {
-    path: require.resolve(options.path),
+    path,
     index: options.index,
     data: value
   };

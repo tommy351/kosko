@@ -72,6 +72,19 @@
       "rules": {
         "@typescript-eslint/no-non-null-assertion": "off"
       }
+    },
+    {
+      "files": ["packages/**/*.ts"],
+      "excludedFiles": ["**/__tests__/**/*.ts"],
+      "rules": {
+        "no-restricted-globals": [
+          "error",
+          {
+            "name": "require",
+            "message": "Use @kosko/require instead."
+          }
+        ]
+      }
     }
   ]
 }
