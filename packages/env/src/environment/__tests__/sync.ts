@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { Environment, Reducer } from "../environment";
+import { SyncEnvironment } from "../sync";
 import { join } from "path";
-import { merge } from "../merge";
+import { merge } from "../../merge";
+import { Reducer } from "../../reduce";
 
-const fixturePath = join(__dirname, "..", "__fixtures__");
-let env: Environment;
+const fixturePath = join(__dirname, "..", "..", "__fixtures__");
+let env: SyncEnvironment;
 
 beforeEach(() => {
-  env = new Environment(fixturePath);
+  env = new SyncEnvironment(fixturePath);
 });
 
 describe("when env is set", () => {
@@ -28,7 +29,7 @@ describe("when env is set", () => {
     describe("component", () => {
       test("shold return global + component vars", () => {
         expect(env.component("foo")).toEqual(
-          merge(require(envPath), require(join(envPath, "foo")))
+          merge([require(envPath), require(join(envPath, "foo"))])
         );
       });
     });
@@ -51,7 +52,10 @@ describe("when env is set", () => {
     describe("component", () => {
       test("shold return global + component vars", () => {
         expect(env.component("foo")).toEqual(
-          merge(require(envPath).default, require(join(envPath, "foo")).default)
+          merge([
+            require(envPath).default,
+            require(join(envPath, "foo")).default
+          ])
         );
       });
     });
@@ -148,7 +152,7 @@ describe("when env is set", () => {
     describe("component", () => {
       test("shold return global + component vars", () => {
         expect(env.component("foo")).toEqual({
-          ...merge(require(envPath), require(join(envPath, "foo"))),
+          ...merge([require(envPath), require(join(envPath, "foo"))]),
           foo: "overridden"
         });
       });
@@ -182,7 +186,7 @@ describe("when env is set", () => {
     describe("component", () => {
       test("shold return global + component vars", () => {
         expect(env.component("foo")).toEqual(
-          merge(require(envPath), require(join(envPath, "foo")))
+          merge([require(envPath), require(join(envPath, "foo"))])
         );
       });
     });
@@ -219,7 +223,7 @@ describe("when env is an array", () => {
     describe("global", () => {
       test("should merge global vars of specified envs", () => {
         expect(env.global()).toEqual(
-          merge(require(join(envPath, "base")), require(join(envPath, "dev")))
+          merge([require(join(envPath, "base")), require(join(envPath, "dev"))])
         );
       });
     });
@@ -227,12 +231,12 @@ describe("when env is an array", () => {
     describe("component", () => {
       test("should merge global + component vars of specified envs", () => {
         expect(env.component("foo")).toEqual(
-          merge(
+          merge([
             require(join(envPath, "base")),
             require(join(envPath, "dev")),
             require(join(envPath, "base", "foo")),
             require(join(envPath, "dev", "foo"))
-          )
+          ])
         );
       });
     });

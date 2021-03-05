@@ -1,46 +1,9 @@
 import { join } from "path";
-import { requireDefault } from "@kosko/require";
-import Debug from "debug";
-import { merge } from "./merge";
-import { Paths, formatPath } from "./paths";
+import { formatPath, Paths } from "../paths";
+import { Reducer } from "../reduce";
 
-const debug = Debug("kosko:env");
-
-function tryRequire(id: string): any {
-  try {
-    return requireDefault(id);
-  } catch (err) {
-    if (err.code === "MODULE_NOT_FOUND") {
-      debug("Module not found:", id);
-      return {};
-    }
-
-    throw err;
-  }
-}
-
-/**
- * Describes a step in the variables overriding chain.
- */
-export interface Reducer {
-  /**
-   * Name of the reducer.
-   */
-  name: string;
-
-  /**
-   * Overrides variables for the specified component.
-   * If component name is not specified then overrides only
-   * global variables.
-   */
-  reduce(
-    target: Record<string, any>,
-    componentName?: string
-  ): Record<string, any>;
-}
-
-export class Environment {
-  private reducers: Reducer[] = [];
+export abstract class BaseEnvironment {
+  protected reducers: Reducer[] = [];
 
   /**
    * Current environment.
@@ -59,16 +22,17 @@ export class Environment {
     this.resetReducers();
   }
 
+  protected abstract execReducers(name?: string): any;
+  protected abstract mergeValues(values: any[]): any;
+  protected abstract requireModule(id: string): any;
+
   /**
    * Returns global variables.
    *
    * If env is not set or require failed, returns an empty object.
    */
   public global(): any {
-    return this.reducers.reduce(
-      (target, reducer) => reducer.reduce(target),
-      {}
-    );
+    return this.execReducers();
   }
 
   /**
@@ -79,10 +43,7 @@ export class Environment {
    * @param name Component name
    */
   public component(name: string): any {
-    return this.reducers.reduce(
-      (target, reducer) => reducer.reduce(target, name),
-      {}
-    );
+    return this.execReducers(name);
   }
 
   /**
@@ -106,7 +67,7 @@ export class Environment {
     const reducer: Reducer = {
       name: "global",
       reduce: (values) =>
-        merge(values, ...this.requireAllEnvs(this.paths.global))
+        this.mergeValues([values, ...this.requireAllEnvs(this.paths.global)])
     };
 
     return reducer;
@@ -118,10 +79,10 @@ export class Environment {
       reduce: (values, componentName) => {
         if (!componentName) return values;
 
-        return merge(
+        return this.mergeValues([
           values,
           ...this.requireAllEnvs(this.paths.component, componentName)
-        );
+        ]);
       }
     };
 
@@ -139,7 +100,7 @@ export class Environment {
         ...(component && { component })
       });
 
-      return tryRequire(join(this.cwd, path));
+      return this.requireModule(join(this.cwd, path));
     });
   }
 }
