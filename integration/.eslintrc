@@ -9,14 +9,5 @@
     "node": {
       "allowModules": ["@kosko/env", "@kosko/template"]
     }
-  },
-  "overrides": [
-    {
-      "files": ["esm/**/*"],
-      "rules": {
-        "jest/expect-expect": "off",
-        "jest/no-done-callback": "off"
-      }
-    }
-  ]
+  }
 }
