@@ -1,4 +1,4 @@
-import { readFile, writeFile, pathExists, writeJSON } from "fs-extra";
+import fs from "fs-extra";
 import makeDir from "make-dir";
 import { join, resolve } from "path";
 import { Command, getLogger, RootArguments } from "../cli/command";
@@ -24,13 +24,13 @@ async function updatePkg(path: string, data: any): Promise<void> {
 
   try {
     debug("Reading existing package.json from", path);
-    base = JSON.parse(await readFile(path, "utf8"));
+    base = JSON.parse(await fs.readFile(path, "utf8"));
   } catch (err) {
     if (err.code !== "ENOENT") throw err;
   }
 
   debug("Writing package.json at", path);
-  await writeJSON(
+  await fs.writeJSON(
     path,
     {
       ...base,
@@ -70,7 +70,7 @@ export const initCmd: Command<InitArguments> = {
     const path = args.path ? resolve(args.cwd, args.path) : args.cwd;
     logger.info("Initialize in", path);
 
-    const exist = await pathExists(path);
+    const exist = await fs.pathExists(path);
 
     if (exist && !args.force) {
       throw new CLIError("Already exists", {
@@ -94,7 +94,7 @@ export const initCmd: Command<InitArguments> = {
 
     const configPath = join(path, "kosko.toml");
     debug("Writing config", configPath);
-    await writeFile(configPath, DEFAULT_CONFIG);
+    await fs.writeFile(configPath, DEFAULT_CONFIG);
 
     logger.success(
       `We are almost there. Run "npm install" to finish the setup.`
