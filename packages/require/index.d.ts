@@ -1,16 +1,25 @@
+/**
+ * Imports a module from the specified path. This function supports both CommonJS
+ * and ECMAScript modules. When a CommonJS module is imported, its `module.export`
+ * is assigned to `default` in order to match the behavior of ECMAScript modules.
+ */
+export function importPath(path: string): Promise<any>;
+
+/**
+ * Imports a module from the specified path and returns its default export.
+ * This function is only compatible with CommonJS modules.
+ */
+export function requireDefault(path: string): any;
+
 export interface ResolveOptions {
   /**
-   * The absolute path to resolve from. If none is specified, the following
-   * values are used as default.
-   *
-   * - CommonJS: `__filename`
-   * - ES modules: `import.meta.url`
+   * The directory to resolve from.
    */
-  base?: string;
+  baseDir?: string;
 }
 
 /**
- * Resolves path to the specified module.
+ * Resolved path to the specified module.
  */
 export function resolve(
   id: string,
@@ -18,24 +27,12 @@ export function resolve(
 ): Promise<string | undefined>;
 
 /**
- * Imports a module from the specified path. Returns a `Promise` when used as a
- * ES module.
+ * Returned file extensions which can be handled by `require`.
+ *
+ * Example:
+ *
+ * ```js
+ * [".js", ".json", ".node"]
+ * ```
  */
-export function requireModule(id: string): unknown;
-
-/**
- * Imports the default export from the specified path. See `requireModule`
- * for more info.
- */
-export function requireDefault(id: string): unknown;
-
-/**
- * Import a named export from the specified path. See`requireModule` for more
- * info.
- */
-export function requireNamedExport(id: string, name: string): unknown;
-
-/**
- * Returns registered module file extensions.
- */
-export function getModuleExtensions(): string[];
+export function getRequireExtensions(): string[];

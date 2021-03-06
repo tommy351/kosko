@@ -9,16 +9,8 @@
   },
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
-  "main": "index.cjs",
-  "module": "index.mjs",
+  "main": "index.js",
   "types": "index.d.ts",
-  "exports": {
-    "import": "./index.mjs",
-    "require": "./index.cjs"
-  },
-  "files": [
-    "/dist/"
-  ],
   "keywords": [
     "kosko"
   ],
@@ -29,10 +21,6 @@
     "node": ">=10"
   },
   "dependencies": {
-    "resolve": "^1.19.0",
-    "tslib": "^2.1.0"
-  },
-  "devDependencies": {
-    "@types/resolve": "^1.17.1"
+    "resolve": "^1.19.0"
   }
 }

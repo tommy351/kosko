@@ -10,9 +10,10 @@ import { ValidationError } from "../error";
 
 jest.mock("@kosko/require", () => {
   const mod = jest.requireActual("@kosko/require");
+
   return {
     ...mod,
-    getModuleExtensions: () => ["js", "json"]
+    getRequireExtensions: () => [".js", ".json"]
   };
 });
 

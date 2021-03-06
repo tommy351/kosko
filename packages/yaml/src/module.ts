@@ -1,5 +1,5 @@
 import Debug from "./debug";
-import { requireNamedExport } from "@kosko/require";
+import { importPath } from "@kosko/require";
 
 const debug = Debug.extend("module");
 
@@ -46,7 +46,8 @@ async function getKubernetesModels(
 
   try {
     const path = `kubernetes-models/${apiVersion}/${kind}`;
-    const ctor = requireNamedExport(path, kind);
+    const mod = await importPath(path);
+    const ctor = mod[kind];
 
     if (ctor) {
       const mod: ResourceModule = { path, export: kind };

@@ -1,5 +1,5 @@
-import { requireDefault } from "@kosko/require";
 import debug from "../debug";
+import { importPath } from "@kosko/require";
 import { mergeAsync } from "../merge";
 import { reduceAsync } from "../reduce";
 import { BaseEnvironment } from "./base";
@@ -15,7 +15,7 @@ export class AsyncEnvironment extends BaseEnvironment {
 
   protected async requireModule(id: string): Promise<any> {
     try {
-      await requireDefault(id);
+      return await importPath(id);
     } catch (err) {
       if (err.code === "ERR_MODULE_NOT_FOUND") {
         debug("Module not found:", id);

@@ -3,7 +3,7 @@ import fs from "fs-extra";
 import fetch, { RequestInfo, RequestInit } from "node-fetch";
 import { getResourceModule, ResourceKind } from "./module";
 import Debug from "./debug";
-import { requireNamedExport } from "@kosko/require";
+import { importPath } from "@kosko/require";
 
 const debug = Debug.extend("load");
 
@@ -41,7 +41,8 @@ async function getConstructor(
   }
 
   try {
-    return requireNamedExport(mod.path, mod.export) as any;
+    const result = await importPath(mod.path);
+    return result[mod.export];
   } catch {
     debug("Failed to import the resource module", mod);
     return;

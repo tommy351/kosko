@@ -1,4 +1,4 @@
-import { requireDefault, getModuleExtensions, resolve } from "@kosko/require";
+import { importPath, resolve, getRequireExtensions } from "@kosko/require";
 import Debug from "debug";
 import glob from "fast-glob";
 import { join } from "path";
@@ -30,7 +30,7 @@ export interface GenerateOptions {
 }
 
 async function getComponentValue(id: string): Promise<unknown> {
-  const mod = await requireDefault(id);
+  const { default: mod } = await importPath(id);
 
   if (typeof mod === "function") {
     return await mod();
@@ -121,7 +121,9 @@ async function resolveComponent(
  * @param options
  */
 export async function generate(options: GenerateOptions): Promise<Result> {
-  const extensions = (options.extensions || getModuleExtensions()).join(",");
+  const extensions = (
+    options.extensions || getRequireExtensions().map((ext) => ext.substring(1))
+  ).join(",");
   const suffix = `?(.{${extensions}})`;
   const patterns = options.components.map((x) => x + suffix);
   debug("Component patterns", patterns);
