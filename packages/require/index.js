@@ -8,9 +8,7 @@ const _resolve = require("resolve");
 /** @type {Promise<boolean> | undefined} */
 let isESMSupportedCache;
 
-/**
- * @returns {Promise<boolean>}
- */
+/** @type {import('./index').isESMSupported} */
 async function isESMSupported() {
   if (process.env.ESM_IMPORT_DISABLED) return false;
 
@@ -28,6 +26,8 @@ async function isESMSupported() {
 
   return isESMSupportedCache;
 }
+
+exports.isESMSupported = isESMSupported;
 
 /** @type {import('./index').importPath} */
 async function importPath(path) {
@@ -58,17 +58,41 @@ function requireDefault(id) {
 
 exports.requireDefault = requireDefault;
 
-/** @type {import('./index').resolve} */
-function resolve(id, options = {}) {
+/**
+ * @param {string} id
+ * @param {import('resolve').AsyncOpts | undefined} options
+ * @returns {Promise<string | undefined>}
+ */
+function resolveAsync(id, options = {}) {
   return new Promise((resolve, reject) => {
-    _resolve(id, { basedir: options.baseDir }, (err, result) => {
+    _resolve(id, options, (err, result) => {
       if (err) return reject(err);
       resolve(result);
     });
   });
 }
 
+/** @type {import('./index').resolve} */
+function resolve(id, options = {}) {
+  return resolveAsync(id, { basedir: options.baseDir });
+}
+
 exports.resolve = resolve;
+
+/** @type {import('./index').resolveESM} */
+function resolveESM(id, options = {}) {
+  return resolveAsync(id, {
+    basedir: options.baseDir,
+    packageFilter(pkg) {
+      return {
+        ...pkg,
+        main: pkg.module || pkg.main
+      };
+    }
+  });
+}
+
+exports.resolveESM = resolveESM;
 
 /** @type {import('./index').getRequireExtensions} */
 function getRequireExtensions() {

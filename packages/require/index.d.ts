@@ -1,4 +1,11 @@
 /**
+ * Returns true if ECMAScript modules are supported in the current environment.
+ * If `ESM_IMPORT_DISABLED=true` environment variable is set, this function will
+ * always return `false`.
+ */
+export function isESMSupported(): Promise<boolean>;
+
+/**
  * Imports a module from the specified path. This function supports both CommonJS
  * and ECMAScript modules. When a CommonJS module is imported, its `module.export`
  * is assigned to `default` in order to match the behavior of ECMAScript modules.
@@ -22,6 +29,14 @@ export interface ResolveOptions {
  * Resolved path to the specified module.
  */
 export function resolve(
+  id: string,
+  options?: ResolveOptions
+): Promise<string | undefined>;
+
+/**
+ * Resolved path to the specified ECMAScript module.
+ */
+export function resolveESM(
   id: string,
   options?: ResolveOptions
 ): Promise<string | undefined>;

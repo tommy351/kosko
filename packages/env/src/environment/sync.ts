@@ -18,7 +18,7 @@ export class SyncEnvironment extends BaseEnvironment {
       return requireDefault(id);
     } catch (err) {
       if (err.code === "MODULE_NOT_FOUND") {
-        debug("Module not found:", id);
+        debug("Module not found: %s", id);
         return {};
       }
 

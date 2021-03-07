@@ -1,7 +1,4 @@
-import {
-  parseSetOptions,
-  createCLIEnvReducer
-} from "../../generate/set-option";
+import { parseSetOptions, createCLIEnvReducer } from "../set-option";
 
 describe("Set Argument parser should return correct value", () => {
   test("when one string argument is passed", () => {

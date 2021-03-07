@@ -11,7 +11,7 @@ import symlinkDir from "symlink-dir";
 import tempDir from "temp-dir";
 import tmp from "tmp-promise";
 import { setLogger } from "../../../cli/command";
-import { GenerateArguments, generateCmd } from "../../generate";
+import { GenerateArguments, generateCmd } from "../index";
 
 jest.mock("@kosko/generate");
 jest.mock("@kosko/env");
