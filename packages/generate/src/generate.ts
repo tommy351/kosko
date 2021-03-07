@@ -130,15 +130,9 @@ export async function generate(options: GenerateOptions): Promise<Result> {
   const manifests: Manifest[] = [];
 
   for (const id of ids) {
-    const fullId = join(options.path, id);
-    const path = await resolve(fullId, {
+    const path = await resolve(join(options.path, id), {
       extensions: extensions.map((ext) => `.${ext}`)
     });
-
-    if (!path) {
-      throw new Error(`Cannot resolve module "${fullId}"`);
-    }
-
     const components = await resolveComponent(await getComponentValue(path), {
       validate: options.validate,
       index: [],

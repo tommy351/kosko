@@ -31,20 +31,19 @@ export interface ResolveOptions {
 }
 
 /**
- * Resolved path to the specified module.
+ * Resolves path to the specified module. Throws `MODULE_NOT_FOUND` error when
+ * the given path can't be resolved to a module.
  */
-export function resolve(
-  id: string,
-  options?: ResolveOptions
-): Promise<string | undefined>;
+export function resolve(id: string, options?: ResolveOptions): Promise<string>;
 
 /**
- * Resolved path to the specified ECMAScript module.
+ * Resolves path to the specified module. Returns ECMAScript module path when
+ * available. See `resolve` for more info.
  */
 export function resolveESM(
   id: string,
   options?: ResolveOptions
-): Promise<string | undefined>;
+): Promise<string>;
 
 /**
  * Returned file extensions which can be handled by `require`.
