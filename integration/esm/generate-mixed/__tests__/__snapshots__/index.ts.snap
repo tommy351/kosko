@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should import CJS environment 1`] = `
+"---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cjs-pod
+  labels:
+    environment: dev
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: esm-pod
+  labels:
+    environment: dev"
+`;
