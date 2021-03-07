@@ -42,7 +42,7 @@ export class AsyncEnvironment extends BaseEnvironment {
       const mod = await importPath(path);
       return mod.default;
     } catch (err) {
-      if (err.code === "ERR_MODULE_NOT_FOUND") {
+      if (["ERR_MODULE_NOT_FOUND", "MODULE_NOT_FOUND"].includes(err.code)) {
         debug("Cannot import module: %s", path);
         return {};
       }

@@ -14,6 +14,8 @@ export class SyncEnvironment extends BaseEnvironment {
   }
 
   protected requireModule(id: string): any {
+    // The path doesn't need to be resolved before importing, because `require()`
+    // resolves the path automatically anyway.
     try {
       return requireDefault(id);
     } catch (err) {

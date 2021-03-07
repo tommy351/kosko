@@ -125,8 +125,10 @@ describe("when env is set", () => {
     const customReducer: Reducer = {
       name: "custom",
       reduce(variables, componentName) {
-        variables[componentName || "global"] = "overridden";
-        return variables;
+        return {
+          ...variables,
+          [componentName || "global"]: "overridden"
+        };
       }
     };
 
