@@ -7,7 +7,12 @@
   },
   "settings": {
     "node": {
-      "allowModules": ["@kosko/env", "@kosko/template", "@kosko/yaml"]
+      "allowModules": [
+        "@kosko/env",
+        "@kosko/generate",
+        "@kosko/template",
+        "@kosko/yaml"
+      ]
     }
   }
 }
