@@ -16,7 +16,7 @@
     "watch": "npm run build -- --watch",
     "bootstrap": "lerna bootstrap",
     "test": "npm-run-all test:*",
-    "test:unit": "ESM_IMPORT_DISABLED=true jest",
+    "test:unit": "cross-env ESM_IMPORT_DISABLED=true jest",
     "test:integration": "jest --config integration/jest.config.js"
   },
   "husky": {
@@ -39,6 +39,7 @@
     "@typescript-eslint/eslint-plugin": "^4.12.0",
     "@typescript-eslint/parser": "^4.12.0",
     "conventional-changelog-cli": "^2.1.1",
+    "cross-env": "^7.0.3",
     "eslint": "^7.17.0",
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-jest": "^24.1.3",
