@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 import { join } from "path";
 
 env.env = "dev";
-env.cwd = fileURLToPath(new URL("../generate-mjs", import.meta.url));
+env.cwd = fileURLToPath(new URL("./", import.meta.url));
 
 const result = await generate({
   path: join(env.cwd, "components"),
