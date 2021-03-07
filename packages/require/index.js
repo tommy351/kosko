@@ -74,7 +74,10 @@ function resolveAsync(id, options = {}) {
 
 /** @type {import('./index').resolve} */
 function resolve(id, options = {}) {
-  return resolveAsync(id, { basedir: options.baseDir });
+  return resolveAsync(id, {
+    basedir: options.baseDir,
+    extensions: options.extensions
+  });
 }
 
 exports.resolve = resolve;
@@ -83,6 +86,7 @@ exports.resolve = resolve;
 function resolveESM(id, options = {}) {
   return resolveAsync(id, {
     basedir: options.baseDir,
+    extensions: options.extensions,
     packageFilter(pkg) {
       return {
         ...pkg,
@@ -97,7 +101,7 @@ exports.resolveESM = resolveESM;
 /** @type {import('./index').getRequireExtensions} */
 function getRequireExtensions() {
   // eslint-disable-next-line node/no-deprecated-api
-  return Object.keys(require.extensions);
+  return [".cjs", ".mjs", ...Object.keys(require.extensions)];
 }
 
 exports.getRequireExtensions = getRequireExtensions;

@@ -1,3 +1,4 @@
+import { getRequireExtensions } from "@kosko/require";
 import { join } from "path";
 import { formatPath, Paths } from "../paths";
 import { Reducer } from "../reduce";
@@ -17,6 +18,13 @@ export abstract class BaseEnvironment {
     global: "environments/#{environment}",
     component: "environments/#{environment}/#{component}"
   };
+
+  /**
+   * File extensions of environments.
+   */
+  public extensions: string[] = getRequireExtensions().map((ext) =>
+    ext.substring(1)
+  );
 
   public constructor(public cwd: string) {
     this.resetReducers();

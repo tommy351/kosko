@@ -43,6 +43,8 @@ export async function setupEnv(
       excludeFalsyInArray([config.baseEnvironment, args.env])
     );
 
+    if (config.extensions) env.extensions = [...config.extensions];
+
     if (paths.global) env.paths.global = paths.global;
     if (paths.component) env.paths.component = paths.component;
 

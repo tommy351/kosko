@@ -16,12 +16,12 @@ export interface GenerateOptions {
   /**
    * Patterns of component names.
    */
-  components: ReadonlyArray<string>;
+  components: readonly string[];
 
   /**
    * File extensions of components.
    */
-  extensions?: ReadonlyArray<string>;
+  extensions?: readonly string[];
 
   /**
    * Validate components.
@@ -87,14 +87,8 @@ async function resolveComponent(
     }
   }
 
-  const path = await resolve(options.path);
-
-  if (!path) {
-    throw new Error(`Cannot resolve module ${options.path}`);
-  }
-
   const manifest: Manifest = {
-    path,
+    path: options.path,
     index: options.index,
     data: value
   };
@@ -121,10 +115,9 @@ async function resolveComponent(
  * @param options
  */
 export async function generate(options: GenerateOptions): Promise<Result> {
-  const extensions = (
-    options.extensions || getRequireExtensions().map((ext) => ext.substring(1))
-  ).join(",");
-  const suffix = `?(.{${extensions}})`;
+  const extensions =
+    options.extensions || getRequireExtensions().map((ext) => ext.substring(1));
+  const suffix = `?(.{${extensions.join(",")}})`;
   const patterns = options.components.map((x) => x + suffix);
   debug("Component patterns", patterns);
 
@@ -137,7 +130,15 @@ export async function generate(options: GenerateOptions): Promise<Result> {
   const manifests: Manifest[] = [];
 
   for (const id of ids) {
-    const path = join(options.path, id);
+    const fullId = join(options.path, id);
+    const path = await resolve(fullId, {
+      extensions: extensions.map((ext) => `.${ext}`)
+    });
+
+    if (!path) {
+      throw new Error(`Cannot resolve module "${fullId}"`);
+    }
+
     const components = await resolveComponent(await getComponentValue(path), {
       validate: options.validate,
       index: [],

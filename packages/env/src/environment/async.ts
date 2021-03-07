@@ -22,7 +22,9 @@ export class AsyncEnvironment extends BaseEnvironment {
     // - File: `./file` -> `./file.js`
     //
     // https://nodejs.org/api/esm.html#esm_mandatory_file_extensions
-    const path = await resolveESM(id);
+    const path = await resolveESM(id, {
+      extensions: this.extensions.map((ext) => `.${ext}`)
+    });
 
     if (!path) {
       debug("Module not found: %s", id);

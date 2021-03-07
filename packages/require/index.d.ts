@@ -23,6 +23,11 @@ export interface ResolveOptions {
    * The directory to resolve from.
    */
   baseDir?: string;
+
+  /**
+   * File extensions to resolve.
+   */
+  extensions?: readonly string[];
 }
 
 /**
@@ -44,10 +49,10 @@ export function resolveESM(
 /**
  * Returned file extensions which can be handled by `require`.
  *
- * Example:
+ * Default value:
  *
  * ```js
- * [".js", ".json", ".node"]
+ * [".cjs", ".mjs", ".js", ".json", ".node"]
  * ```
  */
 export function getRequireExtensions(): string[];
