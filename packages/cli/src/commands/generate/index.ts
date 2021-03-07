@@ -4,79 +4,17 @@ import {
   getConfig,
   searchConfig
 } from "@kosko/config";
-import { Environment } from "@kosko/env";
 import { generate, print, PrintFormat, Result } from "@kosko/generate";
-import { requireDefault, resolve } from "@kosko/require";
 import { join } from "path";
 import { Argv } from "yargs";
 import { Command, Context, RootArguments } from "../../cli/command";
-import Debug from "../../cli/debug";
 import { CLIError } from "../../cli/error";
-import { SetOption, parseSetOptions, createCLIEnvReducer } from "./set-option";
+import { SetOption, parseSetOptions } from "./set-option";
+import { localRequireDefault } from "./require";
+import { BaseGenerateArguments, GenerateArguments } from "./types";
+import { setupEnv } from "./env";
 
-const debug = Debug.extend("generate");
-
-export interface BaseGenerateArguments extends RootArguments {
-  env?: string;
-  require?: string[];
-  components?: string[];
-  validate?: boolean;
-  set?: SetOption[];
-}
-
-export interface GenerateArguments extends BaseGenerateArguments {
-  output: PrintFormat;
-}
-
-async function localRequire(id: string, cwd: string): Promise<any> {
-  debug("Finding module %s in %s", id, cwd);
-  const path = await resolve(id, { basedir: cwd });
-
-  if (!path) {
-    throw new Error(`Cannot find module '${id}'`);
-  }
-
-  debug("Importing %s from %s", id, path);
-  return requireDefault(path);
-}
-
-async function importEnv(cwd: string): Promise<Environment> {
-  return localRequire("@kosko/env", cwd);
-}
-
-function excludeFalsyInArray<T>(input: (T | undefined | null)[]): T[] {
-  return input.filter(Boolean) as T[];
-}
-
-function pickEnvArray(envs: string[]): string | string[] | undefined {
-  if (envs.length > 1) return envs;
-  return envs[0];
-}
-
-async function setupEnv(
-  config: Config,
-  args: BaseGenerateArguments
-): Promise<Environment> {
-  const env = await importEnv(args.cwd);
-
-  env.cwd = args.cwd;
-  env.env = pickEnvArray(
-    excludeFalsyInArray([config.baseEnvironment, args.env])
-  );
-
-  if (config.paths && config.paths.environment) {
-    const paths = config.paths.environment;
-    if (paths.global) env.paths.global = paths.global;
-    if (paths.component) env.paths.component = paths.component;
-  }
-
-  if (args.set && args.set.length) {
-    const reducer = createCLIEnvReducer(args.set);
-    env.setReducers((reducers) => [...reducers, reducer]);
-  }
-
-  return env;
-}
+export type { BaseGenerateArguments, GenerateArguments };
 
 function resolveConfig(
   base: Config,
@@ -150,7 +88,7 @@ export async function generateHandler(
 
   // Require external modules
   for (const id of config.require) {
-    await localRequire(id, args.cwd);
+    await localRequireDefault(id, args.cwd);
   }
 
   // Generate manifests

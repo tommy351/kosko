@@ -40,7 +40,7 @@ spec:
   });
 
   test("should call print with result", async () => {
-    const expected = migrateString(input);
+    const expected = await migrateString(input);
     expect(print).toHaveBeenCalledWith(expected);
   });
 });
@@ -55,7 +55,7 @@ describe("given a file", () => {
   });
 
   test("should call print with result", async () => {
-    const expected = migrateString(
+    const expected = await migrateString(
       await readFile(join(fixturePath, "only-deployment.yaml"), "utf8")
     );
 
@@ -75,7 +75,7 @@ describe("given an absolute path", () => {
   });
 
   test("should call print with result", async () => {
-    const expected = migrateString(await readFile(path, "utf8"));
+    const expected = await migrateString(await readFile(path, "utf8"));
     expect(print).toHaveBeenCalledWith(expected);
   });
 });
@@ -94,7 +94,7 @@ describe("given a directory", () => {
     const contents = await Promise.all(
       files.map((file) => readFile(join(fixturePath, file), "utf8"))
     );
-    const expected = migrateString(contents.join("---\n"));
+    const expected = await migrateString(contents.join("---\n"));
     expect(print).toHaveBeenCalledWith(expected);
   });
 });
@@ -116,7 +116,7 @@ describe("given multiple files", () => {
         readFile(join(fixturePath, file), "utf8")
       )
     );
-    const expected = migrateString("---\n" + contents.join("\n"));
+    const expected = await migrateString("---\n" + contents.join("\n"));
 
     expect(print).toHaveBeenCalledWith(expected);
   });

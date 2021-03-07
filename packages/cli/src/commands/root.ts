@@ -6,7 +6,7 @@ import { initCmd } from "./init";
 import { validateCmd } from "./validate";
 import { migrateCmd } from "./migrate";
 
-export const rootCmd = yargs
+export const rootCmd = yargs(process.argv.slice(2))
   .scriptName("kosko")
   .exitProcess(false)
   .option("cwd", {

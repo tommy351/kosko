@@ -229,7 +229,7 @@ describe("loadString", () => {
       content = input;
     },
     load: (options) => {
-      return async () => loadString(content, options);
+      return () => loadString(content, options);
     }
   });
 });

@@ -1,6 +1,6 @@
 import { Arguments, Argv, CommandModule } from "yargs";
 import { CLIError } from "./error";
-import { Signale } from "signale";
+import signale from "signale";
 
 const RESOLVE = Symbol("resolve");
 const REJECT = Symbol("reject");
@@ -10,7 +10,7 @@ const LOGGER = Symbol("logger");
 export interface Context {
   [RESOLVE]: (value?: any) => void;
   [REJECT]: (reason?: any) => void;
-  [LOGGER]?: Signale;
+  [LOGGER]?: signale.Signale;
   [HANDLED]?: boolean;
 }
 
@@ -30,13 +30,16 @@ export interface Command<T>
   handler: CommandHandler<T>;
 }
 
-export function getLogger(ctx: Context): Signale {
+export function getLogger(ctx: Context): signale.Signale {
   const logger = ctx[LOGGER];
   if (logger) return logger;
   throw new Error("Logger is not set in the context");
 }
 
-export function setLogger<T extends Context>(ctx: T, logger: Signale): T {
+export function setLogger<T extends Context>(
+  ctx: T,
+  logger: signale.Signale
+): T {
   return {
     ...ctx,
     [LOGGER]: logger
@@ -47,7 +50,7 @@ export function wrapHandler<T extends RootArguments>(
   handler: CommandHandler<T>
 ): CommandHandler<T> {
   return async (args): Promise<void> => {
-    const logger = new Signale({
+    const logger = new signale.Signale({
       stream: process.stderr,
       disabled: args.silent
     });

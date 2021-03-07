@@ -1,6 +1,6 @@
 import toml from "@iarna/toml";
 import Debug from "debug";
-import { readFile } from "fs-extra";
+import fs from "fs-extra";
 import { join } from "path";
 import { Config, EnvironmentConfig } from "./types";
 import { validate } from "./validate";
@@ -13,7 +13,7 @@ const debug = Debug("kosko:config");
  * @param path Path of the config file.
  */
 export async function loadConfig(path: string): Promise<Config> {
-  const content = await readFile(path, "utf8");
+  const content = await fs.readFile(path, "utf8");
   const data = await toml.parse.async(content);
 
   debug("Found config at", path);

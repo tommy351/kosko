@@ -10,10 +10,11 @@
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "module": "dist/index.esm.mjs",
   "types": "dist/index.d.ts",
+  "source": "src/index.ts",
   "exports": {
-    "import": "./dist/index.mjs",
+    "import": "./dist/index.esm.mjs",
     "require": "./dist/index.js"
   },
   "files": [

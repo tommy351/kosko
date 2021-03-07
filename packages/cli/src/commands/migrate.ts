@@ -1,5 +1,5 @@
 import { migrateString } from "@kosko/migrate";
-import { stat, readFile, readdir } from "fs-extra";
+import fs from "fs-extra";
 import getStdin from "get-stdin";
 import { join, resolve } from "path";
 import { Command, RootArguments } from "../cli/command";
@@ -22,13 +22,13 @@ function concatFiles(arr: ReadonlyArray<string>): string {
 
 function readFileString(path: string): Promise<string> {
   debug("Reading file", path);
-  return readFile(path, "utf8");
+  return fs.readFile(path, "utf8");
 }
 
 async function readFilesInDir(dir: string): Promise<string> {
   debug("Reading directory", dir);
 
-  const files = await readdir(dir);
+  const files = await fs.readdir(dir);
   const contents = await Promise.all(
     files.map((file) => readFileString(join(dir, file)))
   );
@@ -48,7 +48,7 @@ function readFiles(
       }
 
       const path = resolve(cwd, file);
-      const stats = await stat(path);
+      const stats = await fs.stat(path);
 
       return stats.isDirectory() ? readFilesInDir(path) : readFileString(path);
     })
@@ -85,7 +85,7 @@ export const migrateCmd: Command<MigrateArguments> = {
   },
   async handler(args) {
     const file = concatFiles(await readFiles(args.cwd, toArray(args.filename)));
-    const content = migrateString(file);
+    const content = await migrateString(file);
 
     await print(content);
   }

@@ -1,10 +1,9 @@
-import { requireDefault } from "@kosko/require";
+import { importPath, resolve, getRequireExtensions } from "@kosko/require";
 import Debug from "debug";
 import glob from "fast-glob";
 import { join } from "path";
 import { Result, Manifest } from "./base";
 import { ValidationError } from "./error";
-import { getExtensions } from "./extensions";
 
 const debug = Debug("kosko:generate");
 
@@ -17,12 +16,12 @@ export interface GenerateOptions {
   /**
    * Patterns of component names.
    */
-  components: ReadonlyArray<string>;
+  components: readonly string[];
 
   /**
    * File extensions of components.
    */
-  extensions?: ReadonlyArray<string>;
+  extensions?: readonly string[];
 
   /**
    * Validate components.
@@ -31,7 +30,7 @@ export interface GenerateOptions {
 }
 
 async function getComponentValue(id: string): Promise<unknown> {
-  const mod = requireDefault(id);
+  const { default: mod } = await importPath(id);
 
   if (typeof mod === "function") {
     return await mod();
@@ -89,7 +88,7 @@ async function resolveComponent(
   }
 
   const manifest: Manifest = {
-    path: require.resolve(options.path),
+    path: options.path,
     index: options.index,
     data: value
   };
@@ -116,8 +115,9 @@ async function resolveComponent(
  * @param options
  */
 export async function generate(options: GenerateOptions): Promise<Result> {
-  const extensions = (options.extensions || getExtensions()).join(",");
-  const suffix = `?(.{${extensions}})`;
+  const extensions =
+    options.extensions || getRequireExtensions().map((ext) => ext.substring(1));
+  const suffix = `?(.{${extensions.join(",")}})`;
   const patterns = options.components.map((x) => x + suffix);
   debug("Component patterns", patterns);
 
@@ -130,7 +130,9 @@ export async function generate(options: GenerateOptions): Promise<Result> {
   const manifests: Manifest[] = [];
 
   for (const id of ids) {
-    const path = join(options.path, id);
+    const path = await resolve(join(options.path, id), {
+      extensions: extensions.map((ext) => `.${ext}`)
+    });
     const components = await resolveComponent(await getComponentValue(path), {
       validate: options.validate,
       index: [],

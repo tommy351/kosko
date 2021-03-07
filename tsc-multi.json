@@ -1,7 +1,7 @@
 {
   "targets": [
-    { "extname": ".js", "module": "commonjs" },
-    { "extname": ".mjs", "module": "esnext" }
+    { "extname": ".mjs", "module": "esnext" },
+    { "extname": ".js", "module": "commonjs" }
   ],
   "projects": ["packages/*/tsconfig.json"]
 }

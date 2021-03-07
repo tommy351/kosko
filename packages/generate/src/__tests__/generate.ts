@@ -6,10 +6,16 @@ import { writeFile } from "fs-extra";
 import makeDir from "make-dir";
 import { join, dirname } from "path";
 import tempDir from "temp-dir";
-import { getExtensions } from "../extensions";
 import { ValidationError } from "../error";
 
-jest.mock("../extensions.ts");
+jest.mock("@kosko/require", () => {
+  const mod = jest.requireActual("@kosko/require");
+
+  return {
+    ...mod,
+    getRequireExtensions: () => [".js", ".json"]
+  };
+});
 
 interface File {
   path: string;
@@ -27,8 +33,6 @@ beforeEach(async () => {
     await makeDir(dirname(path));
     await writeFile(path, file.content);
   }
-
-  (getExtensions as jest.Mock).mockImplementation(() => ["js", "json"]);
 });
 
 afterEach(async () => {

@@ -1,4 +1,5 @@
 import Debug from "./debug";
+import { importPath } from "@kosko/require";
 
 const debug = Debug.extend("module");
 
@@ -33,7 +34,9 @@ export function setResourceModule(
   debug("Set resource module", res, mod);
 }
 
-function getKubernetesModels(res: ResourceKind): ResourceModule | undefined {
+async function getKubernetesModels(
+  res: ResourceKind
+): Promise<ResourceModule | undefined> {
   const { apiVersion, kind } = res;
   const group = getGroup(apiVersion);
 
@@ -43,9 +46,8 @@ function getKubernetesModels(res: ResourceKind): ResourceModule | undefined {
 
   try {
     const path = `kubernetes-models/${apiVersion}/${kind}`;
-
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const ctor = require(path)[kind];
+    const mod = await importPath(path);
+    const ctor = mod[kind];
 
     if (ctor) {
       const mod: ResourceModule = { path, export: kind };
@@ -57,10 +59,12 @@ function getKubernetesModels(res: ResourceKind): ResourceModule | undefined {
   }
 }
 
-export function getResourceModule(
+export async function getResourceModule(
   res: ResourceKind
-): ResourceModule | undefined {
-  return moduleMap[res.apiVersion]?.[res.kind] ?? getKubernetesModels(res);
+): Promise<ResourceModule | undefined> {
+  return (
+    moduleMap[res.apiVersion]?.[res.kind] ?? (await getKubernetesModels(res))
+  );
 }
 
 export function resetResourceModules(): void {

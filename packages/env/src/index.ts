@@ -3,11 +3,11 @@
  * @module @kosko/env
  */
 
-import { Environment, Reducer } from "./environment";
+export * from "./index.base";
 
-export default new Environment(process.cwd());
-export { Environment, Reducer };
-export { Paths } from "./paths";
+import { SyncEnvironment } from "./environment/sync";
+export default new SyncEnvironment(process.cwd());
+export { SyncEnvironment as Environment };
 
 // HACK: Export default to module.exports and maintain types above.
 if (typeof module !== "undefined") {

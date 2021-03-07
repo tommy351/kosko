@@ -1,7 +1,7 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "prettier", "jest"],
+  "plugins": ["@typescript-eslint", "prettier"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
@@ -24,7 +24,7 @@
     "node/no-unsupported-features/es-syntax": [
       "error",
       {
-        "ignores": ["modules"]
+        "ignores": ["modules", "dynamicImport"]
       }
     ],
     "no-restricted-imports": [
@@ -45,22 +45,45 @@
   },
   "settings": {
     "node": {
-      "tryExtensions": [".ts", ".tsx", ".js", ".jsx", ".json", ".node"],
+      "tryExtensions": [
+        ".ts",
+        ".tsx",
+        ".js",
+        ".jsx",
+        ".cjs",
+        ".mjs",
+        ".json",
+        ".node"
+      ],
       "allowModules": ["type-fest"]
     }
   },
   "overrides": [
     {
-      "files": ["*.{js,jsx}"],
+      "files": ["*.{js,jsx,cjs,mjs}"],
       "rules": {
         "@typescript-eslint/no-var-requires": "off",
-        "@typescript-eslint/explicit-function-return-type": "off"
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off"
       }
     },
     {
       "files": ["**/__tests__/**/*.ts"],
       "rules": {
         "@typescript-eslint/no-non-null-assertion": "off"
+      }
+    },
+    {
+      "files": ["packages/**/*.ts"],
+      "excludedFiles": ["**/__tests__/**/*.ts"],
+      "rules": {
+        "no-restricted-globals": [
+          "error",
+          {
+            "name": "require",
+            "message": "Use @kosko/require instead."
+          }
+        ]
       }
     }
   ]
