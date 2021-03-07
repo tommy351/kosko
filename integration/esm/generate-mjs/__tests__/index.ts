@@ -15,10 +15,6 @@ beforeEach(async () => {
   });
 });
 
-test("should return status code 0", () => {
-  expect(result.exitCode).toEqual(0);
-});
-
 test("should import ESM files", () => {
   expect(result.stdout).toMatchSnapshot();
 });
