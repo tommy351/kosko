@@ -2,16 +2,16 @@
 
 ## Getting Started
 
+Install [pnpm](https://pnpm.js.org/installation).
+
+```sh
+npm install -g pnpm
+```
+
 Download dependencies.
 
 ```sh
-npm install
-```
-
-Bootstrap subpackages.
-
-```sh
-npm run bootstrap
+pnpm install
 ```
 
 ## Developing
@@ -61,10 +61,6 @@ npm run lint
 ```
 
 ## Styleguides
-
-### Git Commit Messages
-
-Please follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0-beta.4/).
 
 ### Code Formatting
 
