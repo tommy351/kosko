@@ -3,4 +3,4 @@
 set -euo pipefail
 
 npm run build
-npx lerna run --scope @kosko/website build
+pnpm run build --filter @kosko/website

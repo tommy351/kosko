@@ -3,28 +3,30 @@ on:
   push:
   pull_request:
 
+env:
+  PNPM_CACHE_FOLDER: ~/.pnpm-store
+
 jobs:
   lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
           node-version: 14.x
-      - name: Get npm cache directory
-        id: npm-cache
-        run: |
-          echo "::set-output name=dir::$(npm config get cache)"
-      - uses: actions/cache@v1
+      - uses: actions/cache@v2
         with:
-          path: ${{ steps.npm-cache.outputs.dir }}
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          path: ${{ env.PNPM_CACHE_FOLDER }}
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-node-
-      - run: npm ci
-      - run: npm run bootstrap
-      - run: npm run build
-      - run: npm run lint
+            ${{ runner.os }}-pnpm-
+      - uses: pnpm/action-setup@v1.2.1
+        with:
+          version: 5.17.2
+      - run: pnpm config set store-dir ${{ env.PNPM_CACHE_FOLDER }}
+      - run: pnpm install
+      - run: pnpm run build
+      - run: pnpm run lint
   test:
     runs-on: ${{ matrix.os }}
     needs:
@@ -32,31 +34,30 @@ jobs:
     strategy:
       matrix:
         node-version: [10.x, 12.x, 14.x]
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-20.04, windows-latest]
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Get npm cache directory
-        id: npm-cache
-        run: |
-          echo "::set-output name=dir::$(npm config get cache)"
-      - uses: actions/cache@v1
+      - uses: actions/cache@v2
         with:
-          path: ${{ steps.npm-cache.outputs.dir }}
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          path: ${{ env.PNPM_CACHE_FOLDER }}
+          key: ${{ runner.os }}-pnpm-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-node-
-      - run: npm ci
-      - run: npm run bootstrap
-      - run: npm run build
+            ${{ runner.os }}-pnpm-${{ matrix.node-version }}-
+      - uses: pnpm/action-setup@v1.2.1
+        with:
+          version: 5.17.2
+      - run: pnpm config set store-dir ${{ env.PNPM_CACHE_FOLDER }}
+      - run: pnpm install
+      - run: pnpm run build
       # https://github.com/actions/virtual-environments/issues/712#issuecomment-613004302
       - name: Set TEMP on Windows
         run: echo "TEMP=$env:USERPROFILE\AppData\Local\Temp" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
         if: ${{ runner.os == 'Windows' }}
-      - run: npm run test:unit -- --coverage
-      - run: npm run test:integration
+      - run: pnpm run test:unit -- --coverage
+      - run: pnpm run test:integration
       - uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
