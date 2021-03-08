@@ -1,5 +1,11 @@
 # @kosko/cli
 
+## 1.2.2
+
+### Patch Changes
+
+- Update init package.json.
+
 ## 1.2.1
 
 ### Patch Changes

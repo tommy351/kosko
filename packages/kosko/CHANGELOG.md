@@ -1,5 +1,12 @@
 # kosko
 
+## 1.1.2
+
+### Patch Changes
+
+- Updated dependencies [undefined]
+  - @kosko/cli@1.2.2
+
 ## 1.1.1
 
 ### Patch Changes

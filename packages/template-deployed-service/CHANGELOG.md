@@ -1,5 +1,11 @@
 # @kosko/template-deployed-service
 
+## 1.0.6
+
+### Patch Changes
+
+- Update import path in template.
+
 ## 1.0.5
 
 ### Patch Changes
