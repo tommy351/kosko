@@ -1,5 +1,5 @@
-import { Deployment } from "kubernetes-models/apps/v1";
-import { Service } from "kubernetes-models/v1";
+import { Deployment } from "kubernetes-models/apps/v1/Deployment";
+import { Service } from "kubernetes-models/v1/Service";
 
 const metadata = { name: "nginx" };
 const labels = { app: "nginx" };
