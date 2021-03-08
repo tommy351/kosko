@@ -19,7 +19,7 @@ const { join } = require("path");
 
   // Print manifests to stdout
   print(result, {
-    format: PrintFormat.JSON,
+    format: PrintFormat.YAML,
     writer: process.stdout
   });
 })();

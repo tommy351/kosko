@@ -14,28 +14,45 @@ const apiDocIds = globby
 const apiDocGroups = groupBy(apiDocIds, (path) => path.split("/")[1]);
 
 module.exports = {
-  docs: {
-    Introduction: [
-      "getting-started",
-      "overview",
-      "components",
-      "environments",
-      "templates"
-    ],
-    Guides: [
-      "loading-kubernetes-yaml",
-      "typescript-support",
-      "programmatic-usage",
-      "troubleshooting"
-    ],
-    References: ["commands", "configuration"]
-  },
+  docs: [
+    {
+      type: "category",
+      label: "Introduction",
+      collapsed: false,
+      items: [
+        "getting-started",
+        "overview",
+        "components",
+        "environments",
+        "templates"
+      ]
+    },
+    {
+      type: "category",
+      label: "Guides",
+      collapsed: false,
+      items: [
+        "loading-kubernetes-yaml",
+        "typescript-support",
+        "ecmascript-modules",
+        "programmatic-usage",
+        "troubleshooting"
+      ]
+    },
+    {
+      type: "category",
+      label: "References",
+      collapsed: false,
+      items: ["commands", "configuration"]
+    }
+  ],
   api: [
     "api/modules",
     ...Object.entries(apiDocGroups).map(([key, values]) => ({
       type: "category",
       label: startCase(key),
-      items: values
+      items: values,
+      collapsed: key !== "modules"
     }))
   ]
 };

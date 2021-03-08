@@ -6,6 +6,7 @@ title: Programmatic Usage
 :::note Examples
 
 - [Run Programmatically](https://github.com/tommy351/kosko/tree/master/examples/run-programmatically)
+- [Run Programmatically (ESM)](https://github.com/tommy351/kosko/tree/master/examples/run-programmatically-esm)
 
 :::
 
@@ -31,7 +32,7 @@ const { join } = require("path");
 
   // Print manifests to stdout
   print(result, {
-    format: PrintFormat.JSON,
+    format: PrintFormat.YAML,
     writer: process.stdout
   });
 })();
