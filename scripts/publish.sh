@@ -5,3 +5,4 @@ set -euo pipefail
 pnpm run clean
 pnpm run build
 pnpx changeset publish
+git push --follow-tags
