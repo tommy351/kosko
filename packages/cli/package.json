@@ -35,10 +35,10 @@
     "node": ">=10"
   },
   "dependencies": {
-    "@kosko/config": "^1.0.4",
-    "@kosko/generate": "^1.0.4",
-    "@kosko/migrate": "^1.0.4",
-    "@kosko/require": "^1.0.4",
+    "@kosko/config": "workspace:*",
+    "@kosko/generate": "workspace:*",
+    "@kosko/migrate": "workspace:*",
+    "@kosko/require": "workspace:*",
     "chalk": "^4.1.0",
     "clean-stack": "^3.0.1",
     "debug": "^4.3.1",
@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "@iarna/toml": "^2.2.5",
-    "@kosko/env": "^1.0.4",
+    "@kosko/env": "workspace:*",
     "@types/debug": "^4.1.5",
     "@types/exit": "^0.1.31",
     "@types/fs-extra": "^9.0.7",

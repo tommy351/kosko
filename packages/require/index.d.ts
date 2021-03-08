@@ -46,7 +46,7 @@ export function resolveESM(
 ): Promise<string>;
 
 /**
- * Returned file extensions which can be handled by `require`.
+ * Returns file extensions which can be imported.
  *
  * Default value:
  *
