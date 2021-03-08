@@ -1,9 +1,11 @@
 [build]
-  command = "npm run bootstrap && ./scripts/generate-website.sh"
+  command = "npm install pnpm -g && pnpm install && ./scripts/generate-website.sh"
   publish = "website/build"
 
 [build.environment]
   NODE_VERSION = "14"
+  # Make Netlify skips automatic `npm install`
+  NPM_FLAGS="--prefix=/dev/null"
 
 [[redirects]]
   from = "/docs/guides/getting-started"
