@@ -23,9 +23,9 @@ This command will create a new folder named `example`, and generate a `package.j
 ```json title="package.json"
 {
   "dependencies": {
-    "@kosko/env": "^1.0.1",
-    "kosko": "^1.0.1",
-    "kubernetes-models": "^1.0.3"
+    "@kosko/env": "^1.1.0",
+    "kosko": "^1.1.0",
+    "kubernetes-models": "^1.5.2"
   }
 }
 ```
@@ -50,8 +50,8 @@ This template creates a new file named `nginx.js` in `components` folder.
 ```js title="components/nginx.js"
 "use strict";
 
-const { Deployment } = require("kubernetes-models/apps/v1");
-const { Service } = require("kubernetes-models/v1");
+const { Deployment } = require("kubernetes-models/apps/v1/Deployment");
+const { Service } = require("kubernetes-models/v1/Service");
 
 const metadata = { name: "nginx" };
 const labels = { app: "nginx" };
