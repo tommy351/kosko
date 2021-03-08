@@ -51,8 +51,8 @@ export const template: Template<Options> = {
           path: join("components", name + ".js"),
           content: `"use strict";
 
-const { Deployment } = require("kubernetes-models/apps/v1");
-const { Service } = require("kubernetes-models/v1");
+const { Deployment } = require("kubernetes-models/apps/v1/Deployment");
+const { Service } = require("kubernetes-models/v1/Service");
 
 const metadata = { name: "${name}" };
 const labels = { app: "${name}" };
