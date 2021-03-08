@@ -1,5 +1,18 @@
 # @kosko/yaml
 
+## 1.0.0
+
+### Major Changes
+
+- 7e59095: Add support for ECMAScript modules.
+
+  Breaking changes: `loadString`, `getResourceModule` functions return `Promise` now, because `import()` is asynchronous.
+
+### Patch Changes
+
+- Updated dependencies [7e59095]
+  - @kosko/require@2.0.0
+
 ## [0.1.4](https://github.com/tommy351/kosko/compare/@kosko/yaml@0.1.3...@kosko/yaml@0.1.4) (2021-02-27)
 
 **Note:** Version bump only for package @kosko/yaml

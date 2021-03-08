@@ -1,5 +1,20 @@
 # @kosko/cli
 
+## 1.2.0
+
+### Minor Changes
+
+- 7e59095: Add support for ECMAScript modules.
+
+### Patch Changes
+
+- Updated dependencies [7e59095]
+- Updated dependencies [7e59095]
+- Updated dependencies [7e59095]
+  - @kosko/require@2.0.0
+  - @kosko/generate@1.1.0
+  - @kosko/migrate@2.0.0
+
 ## [1.1.2](https://github.com/tommy351/kosko/compare/@kosko/cli@1.1.1...@kosko/cli@1.1.2) (2021-02-27)
 
 **Note:** Version bump only for package @kosko/cli

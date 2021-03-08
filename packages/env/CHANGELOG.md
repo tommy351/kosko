@@ -1,5 +1,30 @@
 # @kosko/env
 
+## 1.1.0
+
+### Minor Changes
+
+- 7e59095: Add support for ECMAScript modules. Noted that when you use `@kosko/env` as an ECMAScript module, it returns an `AsyncEnvironment` instead, so you **MUST** add `await` when using these two functions.
+
+  ```js
+  // Before
+  const env = require("@kosko/env");
+
+  env.global();
+  env.component("example");
+
+  // After
+  import env from "@kosko/env";
+
+  await env.global();
+  await env.component("example");
+  ```
+
+### Patch Changes
+
+- Updated dependencies [7e59095]
+  - @kosko/require@2.0.0
+
 ## [1.0.4](https://github.com/tommy351/kosko/compare/@kosko/env@1.0.3...@kosko/env@1.0.4) (2021-02-27)
 
 **Note:** Version bump only for package @kosko/env

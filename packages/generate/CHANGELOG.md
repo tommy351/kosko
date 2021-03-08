@@ -1,5 +1,16 @@
 # @kosko/generate
 
+## 1.1.0
+
+### Minor Changes
+
+- 7e59095: Add support for ECMAScript modules.
+
+### Patch Changes
+
+- Updated dependencies [7e59095]
+  - @kosko/require@2.0.0
+
 ## [1.0.4](https://github.com/tommy351/kosko/compare/@kosko/generate@1.0.3...@kosko/generate@1.0.4) (2021-02-27)
 
 **Note:** Version bump only for package @kosko/generate

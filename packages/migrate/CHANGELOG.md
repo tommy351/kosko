@@ -1,5 +1,16 @@
 # @kosko/migrate
 
+## 2.0.0
+
+### Major Changes
+
+- 7e59095: Breaking changes: `migrate` and `migrateString` are asynchronous now.
+
+### Patch Changes
+
+- Updated dependencies [7e59095]
+  - @kosko/yaml@1.0.0
+
 ## [1.0.4](https://github.com/tommy351/kosko/compare/@kosko/migrate@1.0.3...@kosko/migrate@1.0.4) (2021-02-27)
 
 **Note:** Version bump only for package @kosko/migrate

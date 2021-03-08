@@ -1,5 +1,22 @@
 # @kosko/require
 
+## 2.0.0
+
+### Major Changes
+
+- 7e59095: Add support for ECMAScript modules.
+
+  The following functions are added:
+
+  - `isESMSupported` - Return true if ECMAScript modules are supported in the current environment.
+  - `importPath` - Imports a module from the given path.
+  - `resolveESM` - Resolves path to the specified module. Returns ECMAScript module path when available.
+  - `getRequireExtensions` - Returns file extensions which can be imported.
+
+  Breaking changes:
+
+  - `resolve` does not allow `resolve.AsyncOpts` anymore. Only `ResolveOptions` is allowed instead.
+
 ## [1.0.4](https://github.com/tommy351/kosko/compare/@kosko/require@1.0.3...@kosko/require@1.0.4) (2021-02-27)
 
 **Note:** Version bump only for package @kosko/require
