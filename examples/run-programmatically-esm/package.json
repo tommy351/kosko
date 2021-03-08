@@ -1,0 +1,15 @@
+{
+  "name": "@kosko-example/run-programmatically-esm",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "@kosko/env": "workspace:*",
+    "@kosko/generate": "workspace:*",
+    "kosko": "workspace:*",
+    "kubernetes-models": "^1.0.1"
+  }
+}

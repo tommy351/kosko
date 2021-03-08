@@ -34,6 +34,7 @@ module.exports = {
       items: [
         "loading-kubernetes-yaml",
         "typescript-support",
+        "ecmascript-modules",
         "programmatic-usage",
         "troubleshooting"
       ]

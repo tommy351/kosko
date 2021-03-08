@@ -133,6 +133,17 @@ importers:
       '@kosko/generate': workspace:*
       kosko: workspace:*
       kubernetes-models: ^1.0.1
+  examples/run-programmatically-esm:
+    dependencies:
+      '@kosko/env': link:../../packages/env
+      '@kosko/generate': link:../../packages/generate
+      kosko: link:../../packages/kosko
+      kubernetes-models: 1.5.2
+    specifiers:
+      '@kosko/env': workspace:*
+      '@kosko/generate': workspace:*
+      kosko: workspace:*
+      kubernetes-models: ^1.0.1
   examples/template-component:
     dependencies:
       '@kosko/template': link:../../packages/template
