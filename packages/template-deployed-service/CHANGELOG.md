@@ -1,5 +1,11 @@
 # @kosko/template-deployed-service
 
+## 1.0.5
+
+### Patch Changes
+
+- Update import path in template.
+
 ## [1.0.4](https://github.com/tommy351/kosko/compare/@kosko/template-deployed-service@1.0.3...@kosko/template-deployed-service@1.0.4) (2021-02-27)
 
 **Note:** Version bump only for package @kosko/template-deployed-service
