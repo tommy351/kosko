@@ -4,7 +4,7 @@ on:
   pull_request:
 
 env:
-  PNPM_CACHE_FOLDER: ~/.pnpm-store
+  PNPM_CACHE_FOLDER: .pnpm-store
 
 jobs:
   lint:
