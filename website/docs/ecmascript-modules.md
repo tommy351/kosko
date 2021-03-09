@@ -12,7 +12,7 @@ title: ECMAScript Modules
 
 Kosko supports ECMAScript modules (ESM). You can write components and environments in native ESM files.
 
-Node.js v12 or above is required for ESM. However, Node.js v14.8.0 or above is recommended because [top-level await](https://nodejs.org/dist/latest-v14.x/docs/api/esm.html#esm_top_level_await) is unflag in this version.
+Node.js v12 or above is required for ESM. However, Node.js v14.8.0 or above is recommended because [top-level await](https://nodejs.org/dist/latest-v14.x/docs/api/esm.html#esm_top_level_await) is supported without flags in this version.
 
 ## Enabling
 

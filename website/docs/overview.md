@@ -44,5 +44,6 @@ The following is a basic folder structure of a kosko directory.
 - [Using TypeScript](https://github.com/tommy351/kosko/tree/master/examples/typescript)
 - [Using Babel](https://github.com/tommy351/kosko/tree/master/examples/babel)
 - [Run Programmatically](https://github.com/tommy351/kosko/tree/master/examples/run-programmatically)
+- [Run Programmatically (ESM)](https://github.com/tommy351/kosko/tree/master/examples/run-programmatically-esm)
 - [Create a Component with Template](https://github.com/tommy351/kosko/tree/master/examples/template-component)
 - [Alternative Folder Structure](https://github.com/tommy351/kosko/tree/master/examples/alternative-folder-structure)
