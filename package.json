@@ -31,6 +31,7 @@
     "node": ">=10"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^0.3.0",
     "@changesets/cli": "^2.14.1",
     "@types/fs-extra": "^9.0.7",
     "@types/jest": "^26.0.20",

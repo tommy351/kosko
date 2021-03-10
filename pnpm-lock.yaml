@@ -1,6 +1,7 @@
 importers:
   .:
     devDependencies:
+      '@changesets/changelog-github': 0.3.0
       '@changesets/cli': 2.14.1
       '@types/fs-extra': 9.0.8
       '@types/jest': 26.0.20
@@ -36,6 +37,7 @@ importers:
       tsc-multi: 0.3.1_typescript@4.2.3
       typescript: 4.2.3
     specifiers:
+      '@changesets/changelog-github': ^0.3.0
       '@changesets/cli': ^2.14.1
       '@types/fs-extra': ^9.0.7
       '@types/jest': ^26.0.20
@@ -1656,6 +1658,14 @@ packages:
     dev: true
     resolution:
       integrity: sha512-dMqe2L5Pn4UGTW89kOuuCuZD3pQFZj1Sxv92ZW4S98sXGsxcb2PdW+PeHbQ7tawkCYCOvzhXxAlN4OdF2DlDKQ==
+  /@changesets/changelog-github/0.3.0:
+    dependencies:
+      '@changesets/get-github-info': 0.5.0
+      '@changesets/types': 3.3.0
+      dotenv: 8.2.0
+    dev: true
+    resolution:
+      integrity: sha512-b+/QeTtJnn+s/rhZtS3dDg4tgNiiKmQlfZU7onLfFkn7HhINVoBsVSjWJh0fsVRv+OfKhSErv0i15/3kvyhTpg==
   /@changesets/cli/2.14.1:
     dependencies:
       '@babel/runtime': 7.13.9
@@ -1720,6 +1730,13 @@ packages:
     dev: true
     resolution:
       integrity: sha512-96NInEKpEZH8KvmXyh42PynXVAdq3kQ9VjAeswHtJ3umUCeTF42b/KVXaov+5P1RNnaUVtRuEwzs4syGuowDTw==
+  /@changesets/get-github-info/0.5.0:
+    dependencies:
+      dataloader: 1.4.0
+      node-fetch: 2.6.1
+    dev: true
+    resolution:
+      integrity: sha512-vm5VgHwrxkMkUjFyn3UVNKLbDp9YMHd3vMf1IyJoa/7B+6VpqmtAaXyDS0zBLfN5bhzVCHrRnj4GcZXXcqrFTw==
   /@changesets/get-release-plan/2.0.1:
     dependencies:
       '@babel/runtime': 7.13.9
@@ -5709,6 +5726,10 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-X5eWTSXO/BJmpdIKCRuKUgSCgAN0OwliVK3yPKbwIWU1Tdw5BRajxlzMidvh+gwko9AfQ9zIj52pzF91Q3YAvQ==
+  /dataloader/1.4.0:
+    dev: true
+    resolution:
+      integrity: sha512-68s5jYdlvasItOJnCuI2Q9s4q98g0pCyL3HrcKJu8KNugUl8ahgmZYg38ysLTgQjjXX3H8CJLkAvWrclWfcalw==
   /dateformat/3.0.3:
     dev: true
     resolution:
@@ -6117,6 +6138,12 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-QM8q3zDe58hqUqjraQOmzZ1LIH9SWQJTlEKCH4kJ2oQvLZk7RbQXvtDM2XEq3fwkV9CCvvH4LA0AV+ogFsBM2Q==
+  /dotenv/8.2.0:
+    dev: true
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
   /duplexer/0.1.2:
     dev: false
     resolution:
@@ -10410,7 +10437,6 @@ packages:
     resolution:
       integrity: sha512-Yt3384If5H6BYGVHiHwTL+99OzJKHhgp82S8/dktEK73T26BazdgZ4JZh92xSVtGNJvz9UbXdNAc5hcrXV42vw==
   /node-fetch/2.6.1:
-    dev: false
     engines:
       node: 4.x || >=6.0.0
     resolution:
