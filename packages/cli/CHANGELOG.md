@@ -1,5 +1,11 @@
 # @kosko/cli
 
+## 1.2.3
+
+### Patch Changes
+
+- ef48fc3: Fix ERR_PACKAGE_PATH_NOT_EXPORTED error.
+
 ## 1.2.2
 
 ### Patch Changes

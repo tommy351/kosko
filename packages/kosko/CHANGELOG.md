@@ -1,5 +1,12 @@
 # kosko
 
+## 1.1.3
+
+### Patch Changes
+
+- Updated dependencies [ef48fc3]
+  - @kosko/cli@1.2.3
+
 ## 1.1.2
 
 ### Patch Changes
