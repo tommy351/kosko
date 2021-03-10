@@ -27,11 +27,11 @@
     ]
   },
   "dependencies": {
-    "@docusaurus/core": "2.0.0-alpha.70",
-    "@docusaurus/preset-classic": "2.0.0-alpha.70",
+    "@docusaurus/core": "2.0.0-alpha.71",
+    "@docusaurus/preset-classic": "2.0.0-alpha.71",
     "@mdx-js/react": "^1.6.22",
     "clsx": "^1.1.1",
-    "docusaurus-plugin-sass": "^0.1.11",
+    "docusaurus-plugin-sass": "^0.1.12",
     "globby": "^11.0.2",
     "lodash": "^4.17.20",
     "prism-react-renderer": "^1.1.1",
@@ -40,14 +40,13 @@
     "react-icons": "^4.1.0"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "2.0.0-alpha.70",
+    "@docusaurus/module-type-aliases": "2.0.0-alpha.71",
     "@tsconfig/docusaurus": "^1.0.2",
     "@types/lodash": "^4.14.167",
     "@types/react": "^17.0.0",
     "@types/react-helmet": "^6.1.0",
     "@types/react-router-dom": "^5.1.7",
     "del": "^5.1.0",
-    "docusaurus-plugin-typedoc": "^0.10.0",
     "raw-loader": "^4.0.2",
     "read-pkg": "^5.2.0",
     "resolve-pkg": "^2.0.0",
