@@ -3,10 +3,7 @@
   "version": "1.0.0",
   "description": "Load Kubernetes YAML files in kosko.",
   "homepage": "https://kosko.dev",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tommy351/kosko.git"
-  },
+  "repository": "https://github.com/tommy351/kosko/tree/master/packages/yaml",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "main": "dist/index.js",

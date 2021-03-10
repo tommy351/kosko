@@ -3,10 +3,7 @@
   "version": "1.0.6",
   "description": "Create a new component including a deployment and a service.",
   "homepage": "https://kosko.dev",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tommy351/kosko.git"
-  },
+  "repository": "https://github.com/tommy351/kosko/tree/master/packages/template-deployed-service",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "main": "dist/index.js",

@@ -3,10 +3,7 @@
   "version": "1.2.3",
   "description": "Organize Kubernetes manifests in JavaScript.",
   "homepage": "https://kosko.dev",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tommy351/kosko.git"
-  },
+  "repository": "https://github.com/tommy351/kosko/tree/master/packages/cli",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "bin": {

@@ -3,10 +3,7 @@
   "version": "1.0.4",
   "description": "Create a new environment.",
   "homepage": "https://kosko.dev",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tommy351/kosko.git"
-  },
+  "repository": "https://github.com/tommy351/kosko/tree/master/packages/template-environment",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "main": "dist/index.js",
