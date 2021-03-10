@@ -17,8 +17,11 @@
   "types": "dist/index.d.ts",
   "source": "src/index.ts",
   "exports": {
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.js"
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./bin/kosko.js": "./bin/kosko.js"
   },
   "files": [
     "/bin/",

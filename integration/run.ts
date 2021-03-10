@@ -9,7 +9,7 @@ export async function runCLI(
   args: string[],
   options: execa.Options = {}
 ): Promise<execa.ExecaReturnValue> {
-  return execa(join(root, "packages", "cli", "bin", "kosko.js"), args, {
+  return execa(join(root, "packages", "kosko", "bin", "kosko.js"), args, {
     ...options,
     env: {
       LC_ALL: "en_US",
