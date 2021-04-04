@@ -50,8 +50,9 @@ module.exports = {
       additionalLanguages: ["toml"],
       theme: require("prism-react-renderer/themes/oceanicNext")
     },
-    googleAnalytics: {
-      trackingID: "UA-4910098-13"
+    gtag: {
+      trackingID: "G-2CPELJ4990",
+      anonymizeIP: true
     },
     algolia: {
       apiKey: "23788e4b80d39b6c0cdea10cd50d3663",
