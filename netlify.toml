@@ -1,5 +1,5 @@
 [build]
-  command = "npm install pnpm -g && pnpm install && ./scripts/generate-website.sh"
+  command = "npm install pnpm -g && pnpm install --frozen-lockfile && ./scripts/generate-website.sh"
   publish = "website/build"
 
 [build.environment]
