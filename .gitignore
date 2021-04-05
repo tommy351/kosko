@@ -8,3 +8,6 @@ dist/
 
 # Local Netlify folder
 .netlify
+
+# pnpm store dir on GitHub actions
+/.pnpm-store/
