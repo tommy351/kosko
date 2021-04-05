@@ -5,7 +5,9 @@ title: Loading Helm Chart
 
 Kosko supports loading manifests from Helm charts. You have to [install the Helm CLI](https://helm.sh/docs/intro/install/) before using this package.
 
-`@kosko/helm` uses [`helm template`](https://helm.sh/docs/helm/helm_template/) command to render Helm chart templates, then use `@kosko/yaml` to load YAML. You can see [loading Kubernetes YAML](loading-kubernetes-yaml.md) for more details about transforming manifests.
+`@kosko/helm` uses the [`helm template`](https://helm.sh/docs/helm/helm_template/) command to render Helm chart templates. Most options of `helm template` command are supported. See [API documentation](api/modules/_kosko_helm.md) for available options.
+
+Under the hood, `@kosko/helm` uses `@kosko/yaml` to load YAML, which means the `loadChart` function supports all options of the `loadString` function. See [loading Kubernetes YAML](loading-kubernetes-yaml.md) for more details.
 
 ## Installation
 
@@ -37,7 +39,7 @@ loadChart({
 });
 ```
 
-### Specify Name
+### Specify Release Name
 
 ```js
 const { loadChart } = require("@kosko/helm");
