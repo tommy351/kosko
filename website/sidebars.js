@@ -33,6 +33,7 @@ module.exports = {
       collapsed: false,
       items: [
         "loading-kubernetes-yaml",
+        "loading-helm-chart",
         "typescript-support",
         "ecmascript-modules",
         "programmatic-usage",
