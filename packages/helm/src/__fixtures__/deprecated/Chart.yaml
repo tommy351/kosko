@@ -1,0 +1,19 @@
+apiVersion: v1
+appVersion: 5.3.2
+deprecated: true
+description: DEPRECATED Web publishing platform for building blogs and websites.
+engine: gotpl
+home: http://www.wordpress.com/
+icon: https://bitnami.com/assets/stacks/wordpress/img/wordpress-stack-220x234.png
+keywords:
+  - wordpress
+  - cms
+  - blog
+  - http
+  - web
+  - application
+  - php
+name: wordpress
+sources:
+  - https://github.com/bitnami/bitnami-docker-wordpress
+version: 9.0.3
