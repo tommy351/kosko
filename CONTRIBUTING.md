@@ -14,6 +14,12 @@ Download dependencies.
 pnpm install
 ```
 
+Install [Helm](https://helm.sh/docs/intro/install/).
+
+```sh
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+```
+
 ## Developing
 
 Watch changes of TypeScript files and rebuild automatically.
