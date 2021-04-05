@@ -1,7 +1,7 @@
 import { LoadOptions, loadString, Manifest } from "@kosko/yaml";
-import execa from "execa";
 import tmp from "tmp-promise";
 import fs from "fs-extra";
+import { spawn } from "./spawn";
 
 function getArgName(name: string) {
   return `--${name}`;
@@ -207,7 +207,7 @@ export function loadChart({
     }
 
     try {
-      const { stdout } = await execa("helm", args);
+      const { stdout } = await spawn("helm", args);
 
       // Find the first `---` in order to skip deprecation warnings
       const index = stdout.indexOf("---\n");
