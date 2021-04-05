@@ -1,0 +1,41 @@
+{
+  "name": "@kosko/helm",
+  "version": "0.0.0",
+  "description": "Load Helm charts in kosko.",
+  "homepage": "https://kosko.dev",
+  "repository": "https://github.com/tommy351/kosko/tree/master/packages/helm",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "source": "src/index.ts",
+  "exports": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js"
+  },
+  "files": [
+    "/dist/"
+  ],
+  "keywords": [
+    "kubernetes",
+    "kosko",
+    "helm",
+    "chart"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "dependencies": {
+    "@kosko/yaml": "workspace:*",
+    "fs-extra": "^9.1.0",
+    "tmp-promise": "^3.0.2",
+    "tslib": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.10"
+  }
+}

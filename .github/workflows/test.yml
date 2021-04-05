@@ -6,6 +6,7 @@ on:
 env:
   PNPM_CACHE_FOLDER: .pnpm-store
   PNPM_VERSION: 5.17.2
+  HELM_VERSION: 3.5.3
 
 jobs:
   lint:
@@ -24,10 +25,14 @@ jobs:
       - uses: pnpm/action-setup@v1.2.1
         with:
           version: ${{ env.PNPM_VERSION }}
-      - run: pnpm config set store-dir ${{ env.PNPM_CACHE_FOLDER }}
-      - run: pnpm install
-      - run: pnpm run build
-      - run: pnpm run lint
+      - name: Set pnpm store dir
+        run: pnpm config set store-dir ${{ env.PNPM_CACHE_FOLDER }}
+      - name: Install dependencies
+        run: pnpm install
+      - name: Build packages
+        run: pnpm run build
+      - name: Lint files
+        run: pnpm run lint
   test:
     runs-on: ${{ matrix.os }}
     needs:
@@ -50,15 +55,29 @@ jobs:
       - uses: pnpm/action-setup@v1.2.1
         with:
           version: ${{ env.PNPM_VERSION }}
-      - run: pnpm config set store-dir ${{ env.PNPM_CACHE_FOLDER }}
-      - run: pnpm install
-      - run: pnpm run build
+      - name: Set pnpm store dir
+        run: pnpm config set store-dir ${{ env.PNPM_CACHE_FOLDER }}
+      - name: Install dependencies
+        run: pnpm install
+      - name: Build packages
+        run: pnpm run build
       # https://github.com/actions/virtual-environments/issues/712#issuecomment-613004302
       - name: Set TEMP on Windows
         run: echo "TEMP=$env:USERPROFILE\AppData\Local\Temp" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
         if: ${{ runner.os == 'Windows' }}
-      - run: pnpm run test:unit -- --coverage
-      - run: pnpm run test:integration
+      - name: Install Helm on Linux
+        run: curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash --version v${{ env.HELM_VERSION }}
+        if: ${{ runner.os != 'Windows' }}
+      - name: Install Helm on Windows
+        run: |
+          Invoke-WebRequest https://get.helm.sh/helm-v${{ env.HELM_VERSION }}-windows-amd64.zip -OutFile $env:TEMP\helm.zip
+          Expand-Archive $env:TEMP\helm.zip -DestinationPath $env:TEMP\helm
+          Move-Item -Path $env:TEMP\helm\windows-amd64\helm.exe -Destination C:\Windows\helm.exe
+        if: ${{ runner.os == 'Windows' }}
+      - name: Run unit tests
+        run: pnpm run test:unit -- --coverage
+      - name: Run integration tests
+        run: pnpm run test:integration
       - uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
