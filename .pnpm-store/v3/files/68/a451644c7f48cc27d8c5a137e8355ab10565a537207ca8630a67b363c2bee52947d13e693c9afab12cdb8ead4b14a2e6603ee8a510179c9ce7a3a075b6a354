@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ValidatingWebhookConfigurationList = exports.IoK8sApiAdmissionregistrationV1ValidatingWebhookConfigurationList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAdmissionregistrationV1ValidatingWebhookConfigurationList_1 = require("../_schemas/IoK8sApiAdmissionregistrationV1ValidatingWebhookConfigurationList.js");
+/**
+ * ValidatingWebhookConfigurationList is a list of ValidatingWebhookConfiguration.
+ */
+class IoK8sApiAdmissionregistrationV1ValidatingWebhookConfigurationList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAdmissionregistrationV1ValidatingWebhookConfigurationList.apiVersion,
+            kind: IoK8sApiAdmissionregistrationV1ValidatingWebhookConfigurationList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiAdmissionregistrationV1ValidatingWebhookConfigurationList = IoK8sApiAdmissionregistrationV1ValidatingWebhookConfigurationList;
+exports.ValidatingWebhookConfigurationList = IoK8sApiAdmissionregistrationV1ValidatingWebhookConfigurationList;
+IoK8sApiAdmissionregistrationV1ValidatingWebhookConfigurationList.apiVersion = "admissionregistration.k8s.io/v1";
+IoK8sApiAdmissionregistrationV1ValidatingWebhookConfigurationList.kind = "ValidatingWebhookConfigurationList";
+base_1.Model.setSchema(IoK8sApiAdmissionregistrationV1ValidatingWebhookConfigurationList, "io.k8s.api.admissionregistration.v1.ValidatingWebhookConfigurationList", IoK8sApiAdmissionregistrationV1ValidatingWebhookConfigurationList_1.addSchema);

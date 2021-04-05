@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1EndpointsList.mjs";
+/**
+ * EndpointsList is a list of endpoints.
+ */
+export class IoK8sApiCoreV1EndpointsList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1EndpointsList.apiVersion,
+            kind: IoK8sApiCoreV1EndpointsList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiCoreV1EndpointsList.apiVersion = "v1";
+IoK8sApiCoreV1EndpointsList.kind = "EndpointsList";
+Model.setSchema(IoK8sApiCoreV1EndpointsList, "io.k8s.api.core.v1.EndpointsList", addSchema);
+export { IoK8sApiCoreV1EndpointsList as EndpointsList };

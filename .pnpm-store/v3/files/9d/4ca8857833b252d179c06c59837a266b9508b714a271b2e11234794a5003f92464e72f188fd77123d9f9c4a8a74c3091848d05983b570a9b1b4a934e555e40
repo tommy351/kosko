@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Lease = exports.IoK8sApiCoordinationV1beta1Lease = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoordinationV1beta1Lease_1 = require("../_schemas/IoK8sApiCoordinationV1beta1Lease.js");
+/**
+ * Lease defines a lease concept.
+ */
+class IoK8sApiCoordinationV1beta1Lease extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoordinationV1beta1Lease.apiVersion,
+            kind: IoK8sApiCoordinationV1beta1Lease.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoordinationV1beta1Lease = IoK8sApiCoordinationV1beta1Lease;
+exports.Lease = IoK8sApiCoordinationV1beta1Lease;
+IoK8sApiCoordinationV1beta1Lease.apiVersion = "coordination.k8s.io/v1beta1";
+IoK8sApiCoordinationV1beta1Lease.kind = "Lease";
+base_1.Model.setSchema(IoK8sApiCoordinationV1beta1Lease, "io.k8s.api.coordination.v1beta1.Lease", IoK8sApiCoordinationV1beta1Lease_1.addSchema);

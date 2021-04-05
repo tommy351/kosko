@@ -1,0 +1,14 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiCoreV1LoadBalancerStatus } from "./IoK8sApiCoreV1LoadBalancerStatus.mjs";
+const schema = {
+    "properties": {
+        "loadBalancer": {
+            "$ref": "io.k8s.api.core.v1.LoadBalancerStatus#"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiCoreV1LoadBalancerStatus();
+    register("io.k8s.api.core.v1.ServiceStatus", schema);
+}

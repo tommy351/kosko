@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1LimitRange.mjs";
+/**
+ * LimitRange sets resource usage limits for each kind of resource in a Namespace.
+ */
+export class IoK8sApiCoreV1LimitRange extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1LimitRange.apiVersion,
+            kind: IoK8sApiCoreV1LimitRange.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiCoreV1LimitRange.apiVersion = "v1";
+IoK8sApiCoreV1LimitRange.kind = "LimitRange";
+Model.setSchema(IoK8sApiCoreV1LimitRange, "io.k8s.api.core.v1.LimitRange", addSchema);
+export { IoK8sApiCoreV1LimitRange as LimitRange };

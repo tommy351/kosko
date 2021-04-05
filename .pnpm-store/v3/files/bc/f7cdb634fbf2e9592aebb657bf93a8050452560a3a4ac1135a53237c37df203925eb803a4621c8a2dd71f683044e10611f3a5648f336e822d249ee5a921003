@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PolicyRule = exports.IoK8sApiRbacV1alpha1PolicyRule = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiRbacV1alpha1PolicyRule_1 = require("../_schemas/IoK8sApiRbacV1alpha1PolicyRule.js");
+/**
+ * PolicyRule holds information that describes a policy rule, but does not contain information about who the rule applies to or which namespace the rule applies to.
+ */
+class IoK8sApiRbacV1alpha1PolicyRule extends base_1.Model {
+}
+exports.IoK8sApiRbacV1alpha1PolicyRule = IoK8sApiRbacV1alpha1PolicyRule;
+exports.PolicyRule = IoK8sApiRbacV1alpha1PolicyRule;
+base_1.Model.setSchema(IoK8sApiRbacV1alpha1PolicyRule, "io.k8s.api.rbac.v1alpha1.PolicyRule", IoK8sApiRbacV1alpha1PolicyRule_1.addSchema);

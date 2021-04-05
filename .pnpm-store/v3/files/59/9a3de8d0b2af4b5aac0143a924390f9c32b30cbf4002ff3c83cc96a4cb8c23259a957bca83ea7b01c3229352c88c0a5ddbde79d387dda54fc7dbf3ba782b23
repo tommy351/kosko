@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiBatchV1beta1JobTemplateSpec.mjs";
+/**
+ * JobTemplateSpec describes the data a Job should have when created from a template
+ */
+export class IoK8sApiBatchV1beta1JobTemplateSpec extends Model {
+}
+Model.setSchema(IoK8sApiBatchV1beta1JobTemplateSpec, "io.k8s.api.batch.v1beta1.JobTemplateSpec", addSchema);
+export { IoK8sApiBatchV1beta1JobTemplateSpec as JobTemplateSpec };

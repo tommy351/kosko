@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RollingUpdateDeployment = exports.IoK8sApiAppsV1RollingUpdateDeployment = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAppsV1RollingUpdateDeployment_1 = require("../_schemas/IoK8sApiAppsV1RollingUpdateDeployment.js");
+/**
+ * Spec to control the desired behavior of rolling update.
+ */
+class IoK8sApiAppsV1RollingUpdateDeployment extends base_1.Model {
+}
+exports.IoK8sApiAppsV1RollingUpdateDeployment = IoK8sApiAppsV1RollingUpdateDeployment;
+exports.RollingUpdateDeployment = IoK8sApiAppsV1RollingUpdateDeployment;
+base_1.Model.setSchema(IoK8sApiAppsV1RollingUpdateDeployment, "io.k8s.api.apps.v1.RollingUpdateDeployment", IoK8sApiAppsV1RollingUpdateDeployment_1.addSchema);

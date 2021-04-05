@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAutoscalingV2beta1HorizontalPodAutoscalerList.mjs";
+/**
+ * HorizontalPodAutoscaler is a list of horizontal pod autoscaler objects.
+ */
+export class IoK8sApiAutoscalingV2beta1HorizontalPodAutoscalerList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAutoscalingV2beta1HorizontalPodAutoscalerList.apiVersion,
+            kind: IoK8sApiAutoscalingV2beta1HorizontalPodAutoscalerList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiAutoscalingV2beta1HorizontalPodAutoscalerList.apiVersion = "autoscaling/v2beta1";
+IoK8sApiAutoscalingV2beta1HorizontalPodAutoscalerList.kind = "HorizontalPodAutoscalerList";
+Model.setSchema(IoK8sApiAutoscalingV2beta1HorizontalPodAutoscalerList, "io.k8s.api.autoscaling.v2beta1.HorizontalPodAutoscalerList", addSchema);
+export { IoK8sApiAutoscalingV2beta1HorizontalPodAutoscalerList as HorizontalPodAutoscalerList };

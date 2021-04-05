@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1ScopedResourceSelectorRequirement_1 = require("./IoK8sApiCoreV1ScopedResourceSelectorRequirement.js");
+const schema = {
+    "properties": {
+        "matchExpressions": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.ScopedResourceSelectorRequirement#"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1ScopedResourceSelectorRequirement_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.ScopeSelector", schema);
+}
+exports.addSchema = addSchema;

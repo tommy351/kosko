@@ -1,0 +1,39 @@
+{
+    "name": "@types/js-yaml",
+    "version": "4.0.0",
+    "description": "TypeScript definitions for js-yaml",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Bart van der Schoor",
+            "url": "https://github.com/Bartvds",
+            "githubUsername": "Bartvds"
+        },
+        {
+            "name": "Sebastian Clausen",
+            "url": "https://github.com/sclausen",
+            "githubUsername": "sclausen"
+        },
+        {
+            "name": "ExE Boss",
+            "url": "https://github.com/ExE-Boss",
+            "githubUsername": "ExE-Boss"
+        },
+        {
+            "name": "Armaan Tobaccowalla",
+            "url": "https://github.com/ArmaanT",
+            "githubUsername": "ArmaanT"
+        }
+    ],
+    "main": "",
+    "types": "index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+        "directory": "types/js-yaml"
+    },
+    "scripts": {},
+    "dependencies": {},
+    "typesPublisherContentHash": "80fa54cee8b808d1d3878f38915a0a6ae63c3a9f66a20d6f26f1a9a342a23117",
+    "typeScriptVersion": "3.3"
+}

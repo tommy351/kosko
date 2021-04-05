@@ -1,0 +1,15 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "pathPrefix": {
+            "type": "string"
+        },
+        "readOnly": {
+            "type": "boolean"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.policy.v1beta1.AllowedHostPath", schema);
+}

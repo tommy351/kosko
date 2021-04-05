@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CSINodeList = exports.IoK8sApiStorageV1CSINodeList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiStorageV1CSINodeList_1 = require("../_schemas/IoK8sApiStorageV1CSINodeList.js");
+/**
+ * CSINodeList is a collection of CSINode objects.
+ */
+class IoK8sApiStorageV1CSINodeList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiStorageV1CSINodeList.apiVersion,
+            kind: IoK8sApiStorageV1CSINodeList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiStorageV1CSINodeList = IoK8sApiStorageV1CSINodeList;
+exports.CSINodeList = IoK8sApiStorageV1CSINodeList;
+IoK8sApiStorageV1CSINodeList.apiVersion = "storage.k8s.io/v1";
+IoK8sApiStorageV1CSINodeList.kind = "CSINodeList";
+base_1.Model.setSchema(IoK8sApiStorageV1CSINodeList, "io.k8s.api.storage.v1.CSINodeList", IoK8sApiStorageV1CSINodeList_1.addSchema);

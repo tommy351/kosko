@@ -1,0 +1,32 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiCoreV1SecretReference } from "./IoK8sApiCoreV1SecretReference.mjs";
+const schema = {
+    "properties": {
+        "driver": {
+            "type": "string"
+        },
+        "fsType": {
+            "type": "string"
+        },
+        "options": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "type": "object"
+        },
+        "readOnly": {
+            "type": "boolean"
+        },
+        "secretRef": {
+            "$ref": "io.k8s.api.core.v1.SecretReference#"
+        }
+    },
+    "required": [
+        "driver"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiCoreV1SecretReference();
+    register("io.k8s.api.core.v1.FlexPersistentVolumeSource", schema);
+}

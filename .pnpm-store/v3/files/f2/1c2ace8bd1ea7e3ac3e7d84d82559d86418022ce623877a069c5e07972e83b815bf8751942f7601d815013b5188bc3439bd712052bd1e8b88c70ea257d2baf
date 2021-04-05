@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAutoscalingV2beta2HorizontalPodAutoscaler.mjs";
+/**
+ * HorizontalPodAutoscaler is the configuration for a horizontal pod autoscaler, which automatically manages the replica count of any resource implementing the scale subresource based on the metrics specified.
+ */
+export class IoK8sApiAutoscalingV2beta2HorizontalPodAutoscaler extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAutoscalingV2beta2HorizontalPodAutoscaler.apiVersion,
+            kind: IoK8sApiAutoscalingV2beta2HorizontalPodAutoscaler.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiAutoscalingV2beta2HorizontalPodAutoscaler.apiVersion = "autoscaling/v2beta2";
+IoK8sApiAutoscalingV2beta2HorizontalPodAutoscaler.kind = "HorizontalPodAutoscaler";
+Model.setSchema(IoK8sApiAutoscalingV2beta2HorizontalPodAutoscaler, "io.k8s.api.autoscaling.v2beta2.HorizontalPodAutoscaler", addSchema);
+export { IoK8sApiAutoscalingV2beta2HorizontalPodAutoscaler as HorizontalPodAutoscaler };

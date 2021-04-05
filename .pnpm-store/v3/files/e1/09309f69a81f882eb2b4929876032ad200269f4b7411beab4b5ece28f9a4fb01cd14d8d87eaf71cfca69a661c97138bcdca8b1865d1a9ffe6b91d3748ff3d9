@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1Secret.mjs";
+/**
+ * Secret holds secret data of a certain type. The total bytes of the values in the Data field must be less than MaxSecretSize bytes.
+ */
+export class IoK8sApiCoreV1Secret extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1Secret.apiVersion,
+            kind: IoK8sApiCoreV1Secret.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiCoreV1Secret.apiVersion = "v1";
+IoK8sApiCoreV1Secret.kind = "Secret";
+Model.setSchema(IoK8sApiCoreV1Secret, "io.k8s.api.core.v1.Secret", addSchema);
+export { IoK8sApiCoreV1Secret as Secret };

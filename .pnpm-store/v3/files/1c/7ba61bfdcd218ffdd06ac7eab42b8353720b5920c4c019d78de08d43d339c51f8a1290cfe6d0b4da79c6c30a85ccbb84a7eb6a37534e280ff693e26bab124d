@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1ReplicationControllerStatus.mjs";
+/**
+ * ReplicationControllerStatus represents the current status of a replication controller.
+ */
+export class IoK8sApiCoreV1ReplicationControllerStatus extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1ReplicationControllerStatus, "io.k8s.api.core.v1.ReplicationControllerStatus", addSchema);
+export { IoK8sApiCoreV1ReplicationControllerStatus as ReplicationControllerStatus };

@@ -1,0 +1,25 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const schema = {
+    "properties": {
+        "directory": {
+            "type": "string"
+        },
+        "repository": {
+            "type": "string"
+        },
+        "revision": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "repository"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    validate_1.register("io.k8s.api.core.v1.GitRepoVolumeSource", schema);
+}
+exports.addSchema = addSchema;

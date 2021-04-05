@@ -1,0 +1,38 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApiResourceQuantity_1 = require("./IoK8sApimachineryPkgApiResourceQuantity.js");
+const IoK8sApiCoreV1PersistentVolumeClaimCondition_1 = require("./IoK8sApiCoreV1PersistentVolumeClaimCondition.js");
+const schema = {
+    "properties": {
+        "accessModes": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "capacity": {
+            "additionalProperties": {
+                "$ref": "io.k8s.apimachinery.pkg.api.resource.Quantity#"
+            },
+            "type": "object"
+        },
+        "conditions": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.PersistentVolumeClaimCondition#"
+            },
+            "type": "array"
+        },
+        "phase": {
+            "type": "string"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApimachineryPkgApiResourceQuantity_1.addSchema();
+    IoK8sApiCoreV1PersistentVolumeClaimCondition_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.PersistentVolumeClaimStatus", schema);
+}
+exports.addSchema = addSchema;

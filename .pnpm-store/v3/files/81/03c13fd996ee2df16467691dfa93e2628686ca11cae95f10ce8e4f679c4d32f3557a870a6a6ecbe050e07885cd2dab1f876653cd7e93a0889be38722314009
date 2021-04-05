@@ -1,0 +1,35 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiCoreV1LocalObjectReference } from "./IoK8sApiCoreV1LocalObjectReference.mjs";
+const schema = {
+    "properties": {
+        "monitors": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "path": {
+            "type": "string"
+        },
+        "readOnly": {
+            "type": "boolean"
+        },
+        "secretFile": {
+            "type": "string"
+        },
+        "secretRef": {
+            "$ref": "io.k8s.api.core.v1.LocalObjectReference#"
+        },
+        "user": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "monitors"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiCoreV1LocalObjectReference();
+    register("io.k8s.api.core.v1.CephFSVolumeSource", schema);
+}

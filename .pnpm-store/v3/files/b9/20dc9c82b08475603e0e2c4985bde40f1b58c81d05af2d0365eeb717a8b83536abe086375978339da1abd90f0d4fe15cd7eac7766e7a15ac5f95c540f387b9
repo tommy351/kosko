@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Sysctl = exports.IoK8sApiCoreV1Sysctl = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1Sysctl_1 = require("../_schemas/IoK8sApiCoreV1Sysctl.js");
+/**
+ * Sysctl defines a kernel parameter to be set
+ */
+class IoK8sApiCoreV1Sysctl extends base_1.Model {
+}
+exports.IoK8sApiCoreV1Sysctl = IoK8sApiCoreV1Sysctl;
+exports.Sysctl = IoK8sApiCoreV1Sysctl;
+base_1.Model.setSchema(IoK8sApiCoreV1Sysctl, "io.k8s.api.core.v1.Sysctl", IoK8sApiCoreV1Sysctl_1.addSchema);

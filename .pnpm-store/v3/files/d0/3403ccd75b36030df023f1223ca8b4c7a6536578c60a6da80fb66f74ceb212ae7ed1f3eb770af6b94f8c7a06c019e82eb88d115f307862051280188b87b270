@@ -1,0 +1,24 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.StorageClass = exports.IoK8sApiStorageV1StorageClass = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiStorageV1StorageClass_1 = require("../_schemas/IoK8sApiStorageV1StorageClass.js");
+/**
+ * StorageClass describes the parameters for a class of storage for which PersistentVolumes can be dynamically provisioned.
+ *
+ * StorageClasses are non-namespaced; the name of the storage class according to etcd is in ObjectMeta.Name.
+ */
+class IoK8sApiStorageV1StorageClass extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiStorageV1StorageClass.apiVersion,
+            kind: IoK8sApiStorageV1StorageClass.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiStorageV1StorageClass = IoK8sApiStorageV1StorageClass;
+exports.StorageClass = IoK8sApiStorageV1StorageClass;
+IoK8sApiStorageV1StorageClass.apiVersion = "storage.k8s.io/v1";
+IoK8sApiStorageV1StorageClass.kind = "StorageClass";
+base_1.Model.setSchema(IoK8sApiStorageV1StorageClass, "io.k8s.api.storage.v1.StorageClass", IoK8sApiStorageV1StorageClass_1.addSchema);

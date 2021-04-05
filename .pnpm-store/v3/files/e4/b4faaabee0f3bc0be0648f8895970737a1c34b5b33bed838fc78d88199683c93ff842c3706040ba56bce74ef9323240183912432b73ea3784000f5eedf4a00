@@ -1,0 +1,11 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1SecretEnvSource.mjs";
+/**
+ * SecretEnvSource selects a Secret to populate the environment variables with.
+ *
+ * The contents of the target Secret's Data field will represent the key-value pairs as environment variables.
+ */
+export class IoK8sApiCoreV1SecretEnvSource extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1SecretEnvSource, "io.k8s.api.core.v1.SecretEnvSource", addSchema);
+export { IoK8sApiCoreV1SecretEnvSource as SecretEnvSource };

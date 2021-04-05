@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiPolicyV1beta1FSGroupStrategyOptions.mjs";
+/**
+ * FSGroupStrategyOptions defines the strategy type and options used to create the strategy.
+ */
+export class IoK8sApiPolicyV1beta1FSGroupStrategyOptions extends Model {
+}
+Model.setSchema(IoK8sApiPolicyV1beta1FSGroupStrategyOptions, "io.k8s.api.policy.v1beta1.FSGroupStrategyOptions", addSchema);
+export { IoK8sApiPolicyV1beta1FSGroupStrategyOptions as FSGroupStrategyOptions };

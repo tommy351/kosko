@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiAutoscalingV2beta2HPAScalingRules_1 = require("./IoK8sApiAutoscalingV2beta2HPAScalingRules.js");
+const schema = {
+    "properties": {
+        "scaleDown": {
+            "$ref": "io.k8s.api.autoscaling.v2beta2.HPAScalingRules#"
+        },
+        "scaleUp": {
+            "$ref": "io.k8s.api.autoscaling.v2beta2.HPAScalingRules#"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiAutoscalingV2beta2HPAScalingRules_1.addSchema();
+    IoK8sApiAutoscalingV2beta2HPAScalingRules_1.addSchema();
+    validate_1.register("io.k8s.api.autoscaling.v2beta2.HorizontalPodAutoscalerBehavior", schema);
+}
+exports.addSchema = addSchema;

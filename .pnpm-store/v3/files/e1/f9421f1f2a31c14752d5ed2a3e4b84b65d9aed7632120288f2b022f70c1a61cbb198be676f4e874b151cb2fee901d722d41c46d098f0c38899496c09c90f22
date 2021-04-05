@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApimachineryPkgVersionInfo.mjs";
+/**
+ * Info contains versioning information. how we'll want to distribute that information.
+ */
+export class IoK8sApimachineryPkgVersionInfo extends Model {
+}
+Model.setSchema(IoK8sApimachineryPkgVersionInfo, "io.k8s.apimachinery.pkg.version.Info", addSchema);
+export { IoK8sApimachineryPkgVersionInfo as Info };

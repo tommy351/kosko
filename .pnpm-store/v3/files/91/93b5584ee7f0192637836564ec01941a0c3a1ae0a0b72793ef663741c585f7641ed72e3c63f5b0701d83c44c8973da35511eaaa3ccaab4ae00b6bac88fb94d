@@ -1,0 +1,15 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "type": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "type"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.flowcontrol.v1alpha1.FlowDistinguisherMethod", schema);
+}

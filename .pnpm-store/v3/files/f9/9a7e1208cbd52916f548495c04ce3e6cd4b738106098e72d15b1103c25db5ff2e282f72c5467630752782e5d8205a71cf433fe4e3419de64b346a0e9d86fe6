@@ -1,0 +1,26 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiCoreV1SecretReference } from "./IoK8sApiCoreV1SecretReference.mjs";
+const schema = {
+    "properties": {
+        "fsType": {
+            "type": "string"
+        },
+        "readOnly": {
+            "type": "boolean"
+        },
+        "secretRef": {
+            "$ref": "io.k8s.api.core.v1.SecretReference#"
+        },
+        "volumeID": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "volumeID"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiCoreV1SecretReference();
+    register("io.k8s.api.core.v1.CinderPersistentVolumeSource", schema);
+}

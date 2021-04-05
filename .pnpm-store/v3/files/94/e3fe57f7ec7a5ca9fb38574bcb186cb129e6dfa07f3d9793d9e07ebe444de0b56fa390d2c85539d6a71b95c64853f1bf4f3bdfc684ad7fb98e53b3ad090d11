@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NetworkPolicySpec = exports.IoK8sApiNetworkingV1NetworkPolicySpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiNetworkingV1NetworkPolicySpec_1 = require("../_schemas/IoK8sApiNetworkingV1NetworkPolicySpec.js");
+/**
+ * NetworkPolicySpec provides the specification of a NetworkPolicy
+ */
+class IoK8sApiNetworkingV1NetworkPolicySpec extends base_1.Model {
+}
+exports.IoK8sApiNetworkingV1NetworkPolicySpec = IoK8sApiNetworkingV1NetworkPolicySpec;
+exports.NetworkPolicySpec = IoK8sApiNetworkingV1NetworkPolicySpec;
+base_1.Model.setSchema(IoK8sApiNetworkingV1NetworkPolicySpec, "io.k8s.api.networking.v1.NetworkPolicySpec", IoK8sApiNetworkingV1NetworkPolicySpec_1.addSchema);

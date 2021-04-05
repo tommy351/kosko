@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ComponentStatusList = exports.IoK8sApiCoreV1ComponentStatusList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ComponentStatusList_1 = require("../_schemas/IoK8sApiCoreV1ComponentStatusList.js");
+/**
+ * Status of all the conditions for the component as a list of ComponentStatus objects. Deprecated: This API is deprecated in v1.19+
+ */
+class IoK8sApiCoreV1ComponentStatusList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1ComponentStatusList.apiVersion,
+            kind: IoK8sApiCoreV1ComponentStatusList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1ComponentStatusList = IoK8sApiCoreV1ComponentStatusList;
+exports.ComponentStatusList = IoK8sApiCoreV1ComponentStatusList;
+IoK8sApiCoreV1ComponentStatusList.apiVersion = "v1";
+IoK8sApiCoreV1ComponentStatusList.kind = "ComponentStatusList";
+base_1.Model.setSchema(IoK8sApiCoreV1ComponentStatusList, "io.k8s.api.core.v1.ComponentStatusList", IoK8sApiCoreV1ComponentStatusList_1.addSchema);

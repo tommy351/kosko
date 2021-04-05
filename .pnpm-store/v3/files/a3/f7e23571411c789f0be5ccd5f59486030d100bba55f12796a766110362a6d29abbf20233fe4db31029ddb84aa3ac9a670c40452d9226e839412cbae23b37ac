@@ -1,0 +1,36 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApimachineryPkgApisMetaV1ObjectMeta } from "./IoK8sApimachineryPkgApisMetaV1ObjectMeta.mjs";
+import { addSchema as IoK8sApiStorageV1beta1CSINodeSpec } from "./IoK8sApiStorageV1beta1CSINodeSpec.mjs";
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string",
+            "enum": [
+                "storage.k8s.io/v1beta1"
+            ]
+        },
+        "kind": {
+            "type": "string",
+            "enum": [
+                "CSINode"
+            ]
+        },
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta#"
+        },
+        "spec": {
+            "$ref": "io.k8s.api.storage.v1beta1.CSINodeSpec#"
+        }
+    },
+    "required": [
+        "spec",
+        "apiVersion",
+        "kind"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1ObjectMeta();
+    IoK8sApiStorageV1beta1CSINodeSpec();
+    register("io.k8s.api.storage.v1beta1.CSINode", schema);
+}

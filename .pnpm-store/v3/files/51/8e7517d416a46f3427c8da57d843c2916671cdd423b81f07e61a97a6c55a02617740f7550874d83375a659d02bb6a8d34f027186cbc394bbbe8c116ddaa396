@@ -1,0 +1,14 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiCoreV1DaemonEndpoint } from "./IoK8sApiCoreV1DaemonEndpoint.mjs";
+const schema = {
+    "properties": {
+        "kubeletEndpoint": {
+            "$ref": "io.k8s.api.core.v1.DaemonEndpoint#"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiCoreV1DaemonEndpoint();
+    register("io.k8s.api.core.v1.NodeDaemonEndpoints", schema);
+}

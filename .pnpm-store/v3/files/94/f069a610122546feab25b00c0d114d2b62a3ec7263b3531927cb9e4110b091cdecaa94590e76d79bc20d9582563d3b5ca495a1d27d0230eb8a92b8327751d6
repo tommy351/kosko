@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.EndpointAddress = exports.IoK8sApiCoreV1EndpointAddress = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1EndpointAddress_1 = require("../_schemas/IoK8sApiCoreV1EndpointAddress.js");
+/**
+ * EndpointAddress is a tuple that describes single IP address.
+ */
+class IoK8sApiCoreV1EndpointAddress extends base_1.Model {
+}
+exports.IoK8sApiCoreV1EndpointAddress = IoK8sApiCoreV1EndpointAddress;
+exports.EndpointAddress = IoK8sApiCoreV1EndpointAddress;
+base_1.Model.setSchema(IoK8sApiCoreV1EndpointAddress, "io.k8s.api.core.v1.EndpointAddress", IoK8sApiCoreV1EndpointAddress_1.addSchema);

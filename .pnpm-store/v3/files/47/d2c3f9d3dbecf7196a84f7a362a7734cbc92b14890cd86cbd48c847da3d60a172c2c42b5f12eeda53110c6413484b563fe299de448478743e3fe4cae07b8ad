@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiRbacV1alpha1Role.mjs";
+/**
+ * Role is a namespaced, logical grouping of PolicyRules that can be referenced as a unit by a RoleBinding. Deprecated in v1.17 in favor of rbac.authorization.k8s.io/v1 Role, and will no longer be served in v1.22.
+ */
+export class IoK8sApiRbacV1alpha1Role extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiRbacV1alpha1Role.apiVersion,
+            kind: IoK8sApiRbacV1alpha1Role.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiRbacV1alpha1Role.apiVersion = "rbac.authorization.k8s.io/v1alpha1";
+IoK8sApiRbacV1alpha1Role.kind = "Role";
+Model.setSchema(IoK8sApiRbacV1alpha1Role, "io.k8s.api.rbac.v1alpha1.Role", addSchema);
+export { IoK8sApiRbacV1alpha1Role as Role };

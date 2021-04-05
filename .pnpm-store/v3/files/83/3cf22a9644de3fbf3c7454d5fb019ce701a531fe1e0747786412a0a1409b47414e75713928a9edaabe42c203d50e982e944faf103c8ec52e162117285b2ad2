@@ -1,0 +1,17 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * VolumeNodeResources is a set of resource limits for scheduling of volumes.
+ */
+export interface IIoK8sApiStorageV1beta1VolumeNodeResources {
+    /**
+     * Maximum number of unique volumes managed by the CSI driver that can be used on a node. A volume that is both attached and mounted on a node is considered to be used once, not twice. The same rule applies for a unique volume that is shared among multiple pods on the same node. If this field is nil, then the supported number of volumes on this node is unbounded.
+     */
+    "count"?: number;
+}
+/**
+ * VolumeNodeResources is a set of resource limits for scheduling of volumes.
+ */
+export declare class IoK8sApiStorageV1beta1VolumeNodeResources extends Model<IIoK8sApiStorageV1beta1VolumeNodeResources> implements IIoK8sApiStorageV1beta1VolumeNodeResources {
+    "count"?: number;
+}
+export { IIoK8sApiStorageV1beta1VolumeNodeResources as IVolumeNodeResources, IoK8sApiStorageV1beta1VolumeNodeResources as VolumeNodeResources };

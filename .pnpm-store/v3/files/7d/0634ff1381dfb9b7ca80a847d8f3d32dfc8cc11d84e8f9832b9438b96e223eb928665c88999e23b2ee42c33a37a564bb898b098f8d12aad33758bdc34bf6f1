@@ -1,0 +1,43 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiNetworkingV1NetworkPolicyEgressRule_1 = require("./IoK8sApiNetworkingV1NetworkPolicyEgressRule.js");
+const IoK8sApiNetworkingV1NetworkPolicyIngressRule_1 = require("./IoK8sApiNetworkingV1NetworkPolicyIngressRule.js");
+const IoK8sApimachineryPkgApisMetaV1LabelSelector_1 = require("./IoK8sApimachineryPkgApisMetaV1LabelSelector.js");
+const schema = {
+    "properties": {
+        "egress": {
+            "items": {
+                "$ref": "io.k8s.api.networking.v1.NetworkPolicyEgressRule#"
+            },
+            "type": "array"
+        },
+        "ingress": {
+            "items": {
+                "$ref": "io.k8s.api.networking.v1.NetworkPolicyIngressRule#"
+            },
+            "type": "array"
+        },
+        "podSelector": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector#"
+        },
+        "policyTypes": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        }
+    },
+    "required": [
+        "podSelector"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiNetworkingV1NetworkPolicyEgressRule_1.addSchema();
+    IoK8sApiNetworkingV1NetworkPolicyIngressRule_1.addSchema();
+    IoK8sApimachineryPkgApisMetaV1LabelSelector_1.addSchema();
+    validate_1.register("io.k8s.api.networking.v1.NetworkPolicySpec", schema);
+}
+exports.addSchema = addSchema;

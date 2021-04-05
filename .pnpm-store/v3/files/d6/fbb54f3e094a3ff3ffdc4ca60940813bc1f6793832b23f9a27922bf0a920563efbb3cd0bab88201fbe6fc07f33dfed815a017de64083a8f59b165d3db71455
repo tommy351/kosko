@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.HTTPGetAction = exports.IoK8sApiCoreV1HTTPGetAction = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1HTTPGetAction_1 = require("../_schemas/IoK8sApiCoreV1HTTPGetAction.js");
+/**
+ * HTTPGetAction describes an action based on HTTP Get requests.
+ */
+class IoK8sApiCoreV1HTTPGetAction extends base_1.Model {
+}
+exports.IoK8sApiCoreV1HTTPGetAction = IoK8sApiCoreV1HTTPGetAction;
+exports.HTTPGetAction = IoK8sApiCoreV1HTTPGetAction;
+base_1.Model.setSchema(IoK8sApiCoreV1HTTPGetAction, "io.k8s.api.core.v1.HTTPGetAction", IoK8sApiCoreV1HTTPGetAction_1.addSchema);

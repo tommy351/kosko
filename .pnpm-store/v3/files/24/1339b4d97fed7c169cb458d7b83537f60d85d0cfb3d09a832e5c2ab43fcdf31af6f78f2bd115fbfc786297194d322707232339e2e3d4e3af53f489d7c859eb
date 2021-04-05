@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1QuobyteVolumeSource.mjs";
+/**
+ * Represents a Quobyte mount that lasts the lifetime of a pod. Quobyte volumes do not support ownership management or SELinux relabeling.
+ */
+export class IoK8sApiCoreV1QuobyteVolumeSource extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1QuobyteVolumeSource, "io.k8s.api.core.v1.QuobyteVolumeSource", addSchema);
+export { IoK8sApiCoreV1QuobyteVolumeSource as QuobyteVolumeSource };

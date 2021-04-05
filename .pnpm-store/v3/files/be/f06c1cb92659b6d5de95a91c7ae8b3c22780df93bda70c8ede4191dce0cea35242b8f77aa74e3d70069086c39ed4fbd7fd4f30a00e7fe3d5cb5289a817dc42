@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAppsV1StatefulSetUpdateStrategy.mjs";
+/**
+ * StatefulSetUpdateStrategy indicates the strategy that the StatefulSet controller will use to perform updates. It includes any additional parameters necessary to perform the update for the indicated strategy.
+ */
+export class IoK8sApiAppsV1StatefulSetUpdateStrategy extends Model {
+}
+Model.setSchema(IoK8sApiAppsV1StatefulSetUpdateStrategy, "io.k8s.api.apps.v1.StatefulSetUpdateStrategy", addSchema);
+export { IoK8sApiAppsV1StatefulSetUpdateStrategy as StatefulSetUpdateStrategy };

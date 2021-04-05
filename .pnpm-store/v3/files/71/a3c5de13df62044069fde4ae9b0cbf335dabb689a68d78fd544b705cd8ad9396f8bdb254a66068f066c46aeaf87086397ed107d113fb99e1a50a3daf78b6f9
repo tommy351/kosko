@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Binding = exports.IoK8sApiCoreV1Binding = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1Binding_1 = require("../_schemas/IoK8sApiCoreV1Binding.js");
+/**
+ * Binding ties one object to another; for example, a pod is bound to a node by a scheduler. Deprecated in 1.7, please use the bindings subresource of pods instead.
+ */
+class IoK8sApiCoreV1Binding extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1Binding.apiVersion,
+            kind: IoK8sApiCoreV1Binding.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1Binding = IoK8sApiCoreV1Binding;
+exports.Binding = IoK8sApiCoreV1Binding;
+IoK8sApiCoreV1Binding.apiVersion = "v1";
+IoK8sApiCoreV1Binding.kind = "Binding";
+base_1.Model.setSchema(IoK8sApiCoreV1Binding, "io.k8s.api.core.v1.Binding", IoK8sApiCoreV1Binding_1.addSchema);

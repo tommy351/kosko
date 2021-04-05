@@ -1,0 +1,44 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApisMetaV1ObjectMeta_1 = require("./IoK8sApimachineryPkgApisMetaV1ObjectMeta.js");
+const IoK8sApiAppsV1StatefulSetSpec_1 = require("./IoK8sApiAppsV1StatefulSetSpec.js");
+const IoK8sApiAppsV1StatefulSetStatus_1 = require("./IoK8sApiAppsV1StatefulSetStatus.js");
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string",
+            "enum": [
+                "apps/v1"
+            ]
+        },
+        "kind": {
+            "type": "string",
+            "enum": [
+                "StatefulSet"
+            ]
+        },
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta#"
+        },
+        "spec": {
+            "$ref": "io.k8s.api.apps.v1.StatefulSetSpec#"
+        },
+        "status": {
+            "$ref": "io.k8s.api.apps.v1.StatefulSetStatus#"
+        }
+    },
+    "type": "object",
+    "required": [
+        "apiVersion",
+        "kind"
+    ]
+};
+function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1ObjectMeta_1.addSchema();
+    IoK8sApiAppsV1StatefulSetSpec_1.addSchema();
+    IoK8sApiAppsV1StatefulSetStatus_1.addSchema();
+    validate_1.register("io.k8s.api.apps.v1.StatefulSet", schema);
+}
+exports.addSchema = addSchema;

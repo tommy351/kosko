@@ -1,0 +1,24 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCertificatesV1CertificateSigningRequest.mjs";
+/**
+ * CertificateSigningRequest objects provide a mechanism to obtain x509 certificates by submitting a certificate signing request, and having it asynchronously approved and issued.
+ *
+ * Kubelets use this API to obtain:
+ *  1. client certificates to authenticate to kube-apiserver (with the "kubernetes.io/kube-apiserver-client-kubelet" signerName).
+ *  2. serving certificates for TLS endpoints kube-apiserver can connect to securely (with the "kubernetes.io/kubelet-serving" signerName).
+ *
+ * This API can be used to request client certificates to authenticate to kube-apiserver (with the "kubernetes.io/kube-apiserver-client" signerName), or to obtain certificates from custom non-Kubernetes signers.
+ */
+export class IoK8sApiCertificatesV1CertificateSigningRequest extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCertificatesV1CertificateSigningRequest.apiVersion,
+            kind: IoK8sApiCertificatesV1CertificateSigningRequest.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiCertificatesV1CertificateSigningRequest.apiVersion = "certificates.k8s.io/v1";
+IoK8sApiCertificatesV1CertificateSigningRequest.kind = "CertificateSigningRequest";
+Model.setSchema(IoK8sApiCertificatesV1CertificateSigningRequest, "io.k8s.api.certificates.v1.CertificateSigningRequest", addSchema);
+export { IoK8sApiCertificatesV1CertificateSigningRequest as CertificateSigningRequest };

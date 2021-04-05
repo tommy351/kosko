@@ -1,0 +1,28 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1ExecAction_1 = require("./IoK8sApiCoreV1ExecAction.js");
+const IoK8sApiCoreV1HTTPGetAction_1 = require("./IoK8sApiCoreV1HTTPGetAction.js");
+const IoK8sApiCoreV1TCPSocketAction_1 = require("./IoK8sApiCoreV1TCPSocketAction.js");
+const schema = {
+    "properties": {
+        "exec": {
+            "$ref": "io.k8s.api.core.v1.ExecAction#"
+        },
+        "httpGet": {
+            "$ref": "io.k8s.api.core.v1.HTTPGetAction#"
+        },
+        "tcpSocket": {
+            "$ref": "io.k8s.api.core.v1.TCPSocketAction#"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1ExecAction_1.addSchema();
+    IoK8sApiCoreV1HTTPGetAction_1.addSchema();
+    IoK8sApiCoreV1TCPSocketAction_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.Handler", schema);
+}
+exports.addSchema = addSchema;

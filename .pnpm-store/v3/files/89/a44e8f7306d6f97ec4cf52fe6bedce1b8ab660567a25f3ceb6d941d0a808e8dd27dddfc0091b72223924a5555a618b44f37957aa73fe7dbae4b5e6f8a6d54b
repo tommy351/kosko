@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1PodSpec.mjs";
+/**
+ * PodSpec is a description of a pod.
+ */
+export class IoK8sApiCoreV1PodSpec extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1PodSpec, "io.k8s.api.core.v1.PodSpec", addSchema);
+export { IoK8sApiCoreV1PodSpec as PodSpec };

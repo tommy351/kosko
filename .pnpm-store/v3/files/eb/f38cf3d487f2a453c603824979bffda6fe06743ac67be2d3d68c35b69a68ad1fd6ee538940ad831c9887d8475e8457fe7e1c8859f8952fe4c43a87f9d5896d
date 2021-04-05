@@ -1,0 +1,2 @@
+import * as intstr from "./intstr/index.mjs";
+export { intstr };

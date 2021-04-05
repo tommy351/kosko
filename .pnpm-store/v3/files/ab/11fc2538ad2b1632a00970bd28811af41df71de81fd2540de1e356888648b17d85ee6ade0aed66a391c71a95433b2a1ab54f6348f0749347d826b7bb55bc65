@@ -1,0 +1,37 @@
+import { IIoK8sApiCoreV1ConfigMap } from "./IoK8sApiCoreV1ConfigMap";
+import { IIoK8sApimachineryPkgApisMetaV1ListMeta } from "./IoK8sApimachineryPkgApisMetaV1ListMeta";
+import { ModelData, Model } from "@kubernetes-models/base";
+/**
+ * ConfigMapList is a resource containing a list of ConfigMap objects.
+ */
+export interface IIoK8sApiCoreV1ConfigMapList {
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    "apiVersion": "v1";
+    /**
+     * Items is the list of ConfigMaps.
+     */
+    "items": Array<IIoK8sApiCoreV1ConfigMap>;
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    "kind": "ConfigMapList";
+    /**
+     * More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+}
+/**
+ * ConfigMapList is a resource containing a list of ConfigMap objects.
+ */
+export declare class IoK8sApiCoreV1ConfigMapList extends Model<IIoK8sApiCoreV1ConfigMapList> implements IIoK8sApiCoreV1ConfigMapList {
+    "apiVersion": IIoK8sApiCoreV1ConfigMapList["apiVersion"];
+    "items": Array<IIoK8sApiCoreV1ConfigMap>;
+    "kind": IIoK8sApiCoreV1ConfigMapList["kind"];
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+    static apiVersion: IIoK8sApiCoreV1ConfigMapList["apiVersion"];
+    static kind: IIoK8sApiCoreV1ConfigMapList["kind"];
+    constructor(data?: ModelData<IIoK8sApiCoreV1ConfigMapList>);
+}
+export { IIoK8sApiCoreV1ConfigMapList as IConfigMapList, IoK8sApiCoreV1ConfigMapList as ConfigMapList };

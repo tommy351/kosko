@@ -1,0 +1,12 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.
+ */
+export interface IIoK8sApimachineryPkgApisMetaV1Patch {
+}
+/**
+ * Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.
+ */
+export declare class IoK8sApimachineryPkgApisMetaV1Patch extends Model<IIoK8sApimachineryPkgApisMetaV1Patch> implements IIoK8sApimachineryPkgApisMetaV1Patch {
+}
+export { IIoK8sApimachineryPkgApisMetaV1Patch as IPatch, IoK8sApimachineryPkgApisMetaV1Patch as Patch };

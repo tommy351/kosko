@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.StatefulSetStatus = exports.IoK8sApiAppsV1StatefulSetStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAppsV1StatefulSetStatus_1 = require("../_schemas/IoK8sApiAppsV1StatefulSetStatus.js");
+/**
+ * StatefulSetStatus represents the current state of a StatefulSet.
+ */
+class IoK8sApiAppsV1StatefulSetStatus extends base_1.Model {
+}
+exports.IoK8sApiAppsV1StatefulSetStatus = IoK8sApiAppsV1StatefulSetStatus;
+exports.StatefulSetStatus = IoK8sApiAppsV1StatefulSetStatus;
+base_1.Model.setSchema(IoK8sApiAppsV1StatefulSetStatus, "io.k8s.api.apps.v1.StatefulSetStatus", IoK8sApiAppsV1StatefulSetStatus_1.addSchema);

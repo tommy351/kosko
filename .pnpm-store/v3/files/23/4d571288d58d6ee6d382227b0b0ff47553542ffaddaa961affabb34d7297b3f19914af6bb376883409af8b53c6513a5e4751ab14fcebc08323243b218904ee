@@ -1,0 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.apis = void 0;
+const tslib_1 = require("tslib");
+const apis = tslib_1.__importStar(require("./apis/index.js"));
+exports.apis = apis;

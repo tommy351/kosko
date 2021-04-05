@@ -1,0 +1,16 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "number": {
+            "format": "int32",
+            "type": "integer"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.networking.v1.ServiceBackendPort", schema);
+}

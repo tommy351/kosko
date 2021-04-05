@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.EndpointSlice = exports.IoK8sApiDiscoveryV1beta1EndpointSlice = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiDiscoveryV1beta1EndpointSlice_1 = require("../_schemas/IoK8sApiDiscoveryV1beta1EndpointSlice.js");
+/**
+ * EndpointSlice represents a subset of the endpoints that implement a service. For a given service there may be multiple EndpointSlice objects, selected by labels, which must be joined to produce the full set of endpoints.
+ */
+class IoK8sApiDiscoveryV1beta1EndpointSlice extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiDiscoveryV1beta1EndpointSlice.apiVersion,
+            kind: IoK8sApiDiscoveryV1beta1EndpointSlice.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiDiscoveryV1beta1EndpointSlice = IoK8sApiDiscoveryV1beta1EndpointSlice;
+exports.EndpointSlice = IoK8sApiDiscoveryV1beta1EndpointSlice;
+IoK8sApiDiscoveryV1beta1EndpointSlice.apiVersion = "discovery.k8s.io/v1beta1";
+IoK8sApiDiscoveryV1beta1EndpointSlice.kind = "EndpointSlice";
+base_1.Model.setSchema(IoK8sApiDiscoveryV1beta1EndpointSlice, "io.k8s.api.discovery.v1beta1.EndpointSlice", IoK8sApiDiscoveryV1beta1EndpointSlice_1.addSchema);

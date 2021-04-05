@@ -1,0 +1,43 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiBatchV2alpha1CronJob_1 = require("./IoK8sApiBatchV2alpha1CronJob.js");
+const IoK8sApimachineryPkgApisMetaV1ListMeta_1 = require("./IoK8sApimachineryPkgApisMetaV1ListMeta.js");
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string",
+            "enum": [
+                "batch/v2alpha1"
+            ]
+        },
+        "items": {
+            "items": {
+                "$ref": "io.k8s.api.batch.v2alpha1.CronJob#"
+            },
+            "type": "array"
+        },
+        "kind": {
+            "type": "string",
+            "enum": [
+                "CronJobList"
+            ]
+        },
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta#"
+        }
+    },
+    "required": [
+        "items",
+        "apiVersion",
+        "kind"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiBatchV2alpha1CronJob_1.addSchema();
+    IoK8sApimachineryPkgApisMetaV1ListMeta_1.addSchema();
+    validate_1.register("io.k8s.api.batch.v2alpha1.CronJobList", schema);
+}
+exports.addSchema = addSchema;

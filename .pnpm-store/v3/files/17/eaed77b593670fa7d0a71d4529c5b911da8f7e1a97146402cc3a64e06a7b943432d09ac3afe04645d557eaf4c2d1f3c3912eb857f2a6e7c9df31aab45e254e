@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.WatchEvent = exports.IoK8sApimachineryPkgApisMetaV1WatchEvent = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApimachineryPkgApisMetaV1WatchEvent_1 = require("../_schemas/IoK8sApimachineryPkgApisMetaV1WatchEvent.js");
+/**
+ * Event represents a single event to a watched resource.
+ */
+class IoK8sApimachineryPkgApisMetaV1WatchEvent extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApimachineryPkgApisMetaV1WatchEvent.apiVersion,
+            kind: IoK8sApimachineryPkgApisMetaV1WatchEvent.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApimachineryPkgApisMetaV1WatchEvent = IoK8sApimachineryPkgApisMetaV1WatchEvent;
+exports.WatchEvent = IoK8sApimachineryPkgApisMetaV1WatchEvent;
+IoK8sApimachineryPkgApisMetaV1WatchEvent.apiVersion = "v1";
+IoK8sApimachineryPkgApisMetaV1WatchEvent.kind = "WatchEvent";
+base_1.Model.setSchema(IoK8sApimachineryPkgApisMetaV1WatchEvent, "io.k8s.apimachinery.pkg.apis.meta.v1.WatchEvent", IoK8sApimachineryPkgApisMetaV1WatchEvent_1.addSchema);

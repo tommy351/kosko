@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAutoscalingV1Scale.mjs";
+/**
+ * Scale represents a scaling request for a resource.
+ */
+export class IoK8sApiAutoscalingV1Scale extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAutoscalingV1Scale.apiVersion,
+            kind: IoK8sApiAutoscalingV1Scale.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiAutoscalingV1Scale.apiVersion = "autoscaling/v1";
+IoK8sApiAutoscalingV1Scale.kind = "Scale";
+Model.setSchema(IoK8sApiAutoscalingV1Scale, "io.k8s.api.autoscaling.v1.Scale", addSchema);
+export { IoK8sApiAutoscalingV1Scale as Scale };

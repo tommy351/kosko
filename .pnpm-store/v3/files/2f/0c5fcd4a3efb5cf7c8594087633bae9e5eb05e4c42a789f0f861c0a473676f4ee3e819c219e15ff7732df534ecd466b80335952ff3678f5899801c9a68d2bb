@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.EnvVarSource = exports.IoK8sApiCoreV1EnvVarSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1EnvVarSource_1 = require("../_schemas/IoK8sApiCoreV1EnvVarSource.js");
+/**
+ * EnvVarSource represents a source for the value of an EnvVar.
+ */
+class IoK8sApiCoreV1EnvVarSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1EnvVarSource = IoK8sApiCoreV1EnvVarSource;
+exports.EnvVarSource = IoK8sApiCoreV1EnvVarSource;
+base_1.Model.setSchema(IoK8sApiCoreV1EnvVarSource, "io.k8s.api.core.v1.EnvVarSource", IoK8sApiCoreV1EnvVarSource_1.addSchema);

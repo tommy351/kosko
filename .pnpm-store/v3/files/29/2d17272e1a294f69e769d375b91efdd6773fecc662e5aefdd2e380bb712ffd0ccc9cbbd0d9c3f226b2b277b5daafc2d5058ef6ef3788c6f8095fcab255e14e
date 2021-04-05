@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.StatefulSetSpec = exports.IoK8sApiAppsV1StatefulSetSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAppsV1StatefulSetSpec_1 = require("../_schemas/IoK8sApiAppsV1StatefulSetSpec.js");
+/**
+ * A StatefulSetSpec is the specification of a StatefulSet.
+ */
+class IoK8sApiAppsV1StatefulSetSpec extends base_1.Model {
+}
+exports.IoK8sApiAppsV1StatefulSetSpec = IoK8sApiAppsV1StatefulSetSpec;
+exports.StatefulSetSpec = IoK8sApiAppsV1StatefulSetSpec;
+base_1.Model.setSchema(IoK8sApiAppsV1StatefulSetSpec, "io.k8s.api.apps.v1.StatefulSetSpec", IoK8sApiAppsV1StatefulSetSpec_1.addSchema);

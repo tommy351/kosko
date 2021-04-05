@@ -1,0 +1,56 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1Capabilities_1 = require("./IoK8sApiCoreV1Capabilities.js");
+const IoK8sApiCoreV1SELinuxOptions_1 = require("./IoK8sApiCoreV1SELinuxOptions.js");
+const IoK8sApiCoreV1SeccompProfile_1 = require("./IoK8sApiCoreV1SeccompProfile.js");
+const IoK8sApiCoreV1WindowsSecurityContextOptions_1 = require("./IoK8sApiCoreV1WindowsSecurityContextOptions.js");
+const schema = {
+    "properties": {
+        "allowPrivilegeEscalation": {
+            "type": "boolean"
+        },
+        "capabilities": {
+            "$ref": "io.k8s.api.core.v1.Capabilities#"
+        },
+        "privileged": {
+            "type": "boolean"
+        },
+        "procMount": {
+            "type": "string"
+        },
+        "readOnlyRootFilesystem": {
+            "type": "boolean"
+        },
+        "runAsGroup": {
+            "format": "int64",
+            "type": "integer"
+        },
+        "runAsNonRoot": {
+            "type": "boolean"
+        },
+        "runAsUser": {
+            "format": "int64",
+            "type": "integer"
+        },
+        "seLinuxOptions": {
+            "$ref": "io.k8s.api.core.v1.SELinuxOptions#"
+        },
+        "seccompProfile": {
+            "$ref": "io.k8s.api.core.v1.SeccompProfile#"
+        },
+        "windowsOptions": {
+            "$ref": "io.k8s.api.core.v1.WindowsSecurityContextOptions#"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1Capabilities_1.addSchema();
+    IoK8sApiCoreV1SELinuxOptions_1.addSchema();
+    IoK8sApiCoreV1SeccompProfile_1.addSchema();
+    IoK8sApiCoreV1WindowsSecurityContextOptions_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.SecurityContext", schema);
+}
+exports.addSchema = addSchema;

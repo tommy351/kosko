@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ResourceQuota = exports.IoK8sApiCoreV1ResourceQuota = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ResourceQuota_1 = require("../_schemas/IoK8sApiCoreV1ResourceQuota.js");
+/**
+ * ResourceQuota sets aggregate quota restrictions enforced per namespace
+ */
+class IoK8sApiCoreV1ResourceQuota extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1ResourceQuota.apiVersion,
+            kind: IoK8sApiCoreV1ResourceQuota.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1ResourceQuota = IoK8sApiCoreV1ResourceQuota;
+exports.ResourceQuota = IoK8sApiCoreV1ResourceQuota;
+IoK8sApiCoreV1ResourceQuota.apiVersion = "v1";
+IoK8sApiCoreV1ResourceQuota.kind = "ResourceQuota";
+base_1.Model.setSchema(IoK8sApiCoreV1ResourceQuota, "io.k8s.api.core.v1.ResourceQuota", IoK8sApiCoreV1ResourceQuota_1.addSchema);

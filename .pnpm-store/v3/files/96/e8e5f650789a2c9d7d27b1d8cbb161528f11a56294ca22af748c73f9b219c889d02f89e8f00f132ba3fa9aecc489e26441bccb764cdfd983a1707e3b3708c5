@@ -1,0 +1,44 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApisMetaV1ObjectMeta_1 = require("./IoK8sApimachineryPkgApisMetaV1ObjectMeta.js");
+const IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationSpec_1 = require("./IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationSpec.js");
+const IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationStatus_1 = require("./IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationStatus.js");
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string",
+            "enum": [
+                "flowcontrol.apiserver.k8s.io/v1alpha1"
+            ]
+        },
+        "kind": {
+            "type": "string",
+            "enum": [
+                "PriorityLevelConfiguration"
+            ]
+        },
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta#"
+        },
+        "spec": {
+            "$ref": "io.k8s.api.flowcontrol.v1alpha1.PriorityLevelConfigurationSpec#"
+        },
+        "status": {
+            "$ref": "io.k8s.api.flowcontrol.v1alpha1.PriorityLevelConfigurationStatus#"
+        }
+    },
+    "type": "object",
+    "required": [
+        "apiVersion",
+        "kind"
+    ]
+};
+function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1ObjectMeta_1.addSchema();
+    IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationSpec_1.addSchema();
+    IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationStatus_1.addSchema();
+    validate_1.register("io.k8s.api.flowcontrol.v1alpha1.PriorityLevelConfiguration", schema);
+}
+exports.addSchema = addSchema;

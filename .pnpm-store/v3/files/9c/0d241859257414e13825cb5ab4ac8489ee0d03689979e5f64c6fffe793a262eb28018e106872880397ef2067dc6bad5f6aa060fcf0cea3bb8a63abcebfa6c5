@@ -1,0 +1,2 @@
+export { Model } from "./model.mjs";
+//# sourceMappingURL=index.mjs.map

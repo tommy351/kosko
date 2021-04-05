@@ -1,0 +1,24 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiCoreV1ContainerStateRunning } from "./IoK8sApiCoreV1ContainerStateRunning.mjs";
+import { addSchema as IoK8sApiCoreV1ContainerStateTerminated } from "./IoK8sApiCoreV1ContainerStateTerminated.mjs";
+import { addSchema as IoK8sApiCoreV1ContainerStateWaiting } from "./IoK8sApiCoreV1ContainerStateWaiting.mjs";
+const schema = {
+    "properties": {
+        "running": {
+            "$ref": "io.k8s.api.core.v1.ContainerStateRunning#"
+        },
+        "terminated": {
+            "$ref": "io.k8s.api.core.v1.ContainerStateTerminated#"
+        },
+        "waiting": {
+            "$ref": "io.k8s.api.core.v1.ContainerStateWaiting#"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiCoreV1ContainerStateRunning();
+    IoK8sApiCoreV1ContainerStateTerminated();
+    IoK8sApiCoreV1ContainerStateWaiting();
+    register("io.k8s.api.core.v1.ContainerState", schema);
+}

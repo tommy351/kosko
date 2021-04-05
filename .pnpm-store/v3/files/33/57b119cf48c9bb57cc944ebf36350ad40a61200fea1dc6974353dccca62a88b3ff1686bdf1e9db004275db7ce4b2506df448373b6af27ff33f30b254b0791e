@@ -1,0 +1,29 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiCoreV1ObjectFieldSelector } from "./IoK8sApiCoreV1ObjectFieldSelector.mjs";
+import { addSchema as IoK8sApiCoreV1ResourceFieldSelector } from "./IoK8sApiCoreV1ResourceFieldSelector.mjs";
+const schema = {
+    "properties": {
+        "fieldRef": {
+            "$ref": "io.k8s.api.core.v1.ObjectFieldSelector#"
+        },
+        "mode": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "path": {
+            "type": "string"
+        },
+        "resourceFieldRef": {
+            "$ref": "io.k8s.api.core.v1.ResourceFieldSelector#"
+        }
+    },
+    "required": [
+        "path"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiCoreV1ObjectFieldSelector();
+    IoK8sApiCoreV1ResourceFieldSelector();
+    register("io.k8s.api.core.v1.DownwardAPIVolumeFile", schema);
+}

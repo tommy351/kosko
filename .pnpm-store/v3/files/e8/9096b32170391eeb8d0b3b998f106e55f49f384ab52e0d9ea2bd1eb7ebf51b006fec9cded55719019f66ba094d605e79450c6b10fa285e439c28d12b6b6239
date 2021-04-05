@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Subject = exports.IoK8sApiFlowcontrolV1alpha1Subject = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiFlowcontrolV1alpha1Subject_1 = require("../_schemas/IoK8sApiFlowcontrolV1alpha1Subject.js");
+/**
+ * Subject matches the originator of a request, as identified by the request authentication system. There are three ways of matching an originator; by user, group, or service account.
+ */
+class IoK8sApiFlowcontrolV1alpha1Subject extends base_1.Model {
+}
+exports.IoK8sApiFlowcontrolV1alpha1Subject = IoK8sApiFlowcontrolV1alpha1Subject;
+exports.Subject = IoK8sApiFlowcontrolV1alpha1Subject;
+base_1.Model.setSchema(IoK8sApiFlowcontrolV1alpha1Subject, "io.k8s.api.flowcontrol.v1alpha1.Subject", IoK8sApiFlowcontrolV1alpha1Subject_1.addSchema);

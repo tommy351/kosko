@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiNetworkingV1NetworkPolicy.mjs";
+/**
+ * NetworkPolicy describes what network traffic is allowed for a set of Pods
+ */
+export class IoK8sApiNetworkingV1NetworkPolicy extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiNetworkingV1NetworkPolicy.apiVersion,
+            kind: IoK8sApiNetworkingV1NetworkPolicy.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiNetworkingV1NetworkPolicy.apiVersion = "networking.k8s.io/v1";
+IoK8sApiNetworkingV1NetworkPolicy.kind = "NetworkPolicy";
+Model.setSchema(IoK8sApiNetworkingV1NetworkPolicy, "io.k8s.api.networking.v1.NetworkPolicy", addSchema);
+export { IoK8sApiNetworkingV1NetworkPolicy as NetworkPolicy };

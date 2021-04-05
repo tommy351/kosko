@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ExecAction = exports.IoK8sApiCoreV1ExecAction = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ExecAction_1 = require("../_schemas/IoK8sApiCoreV1ExecAction.js");
+/**
+ * ExecAction describes a "run in container" action.
+ */
+class IoK8sApiCoreV1ExecAction extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ExecAction = IoK8sApiCoreV1ExecAction;
+exports.ExecAction = IoK8sApiCoreV1ExecAction;
+base_1.Model.setSchema(IoK8sApiCoreV1ExecAction, "io.k8s.api.core.v1.ExecAction", IoK8sApiCoreV1ExecAction_1.addSchema);

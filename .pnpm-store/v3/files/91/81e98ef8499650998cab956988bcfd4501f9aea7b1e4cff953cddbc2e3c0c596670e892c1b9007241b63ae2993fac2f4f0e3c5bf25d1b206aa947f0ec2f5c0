@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.StorageClassList = exports.IoK8sApiStorageV1beta1StorageClassList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiStorageV1beta1StorageClassList_1 = require("../_schemas/IoK8sApiStorageV1beta1StorageClassList.js");
+/**
+ * StorageClassList is a collection of storage classes.
+ */
+class IoK8sApiStorageV1beta1StorageClassList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiStorageV1beta1StorageClassList.apiVersion,
+            kind: IoK8sApiStorageV1beta1StorageClassList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiStorageV1beta1StorageClassList = IoK8sApiStorageV1beta1StorageClassList;
+exports.StorageClassList = IoK8sApiStorageV1beta1StorageClassList;
+IoK8sApiStorageV1beta1StorageClassList.apiVersion = "storage.k8s.io/v1beta1";
+IoK8sApiStorageV1beta1StorageClassList.kind = "StorageClassList";
+base_1.Model.setSchema(IoK8sApiStorageV1beta1StorageClassList, "io.k8s.api.storage.v1beta1.StorageClassList", IoK8sApiStorageV1beta1StorageClassList_1.addSchema);

@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiRbacV1beta1RoleRef.mjs";
+/**
+ * RoleRef contains information that points to the role being used
+ */
+export class IoK8sApiRbacV1beta1RoleRef extends Model {
+}
+Model.setSchema(IoK8sApiRbacV1beta1RoleRef, "io.k8s.api.rbac.v1beta1.RoleRef", addSchema);
+export { IoK8sApiRbacV1beta1RoleRef as RoleRef };

@@ -1,0 +1,37 @@
+import { IIoK8sApiCoreV1PodTemplate } from "./IoK8sApiCoreV1PodTemplate";
+import { IIoK8sApimachineryPkgApisMetaV1ListMeta } from "./IoK8sApimachineryPkgApisMetaV1ListMeta";
+import { ModelData, Model } from "@kubernetes-models/base";
+/**
+ * PodTemplateList is a list of PodTemplates.
+ */
+export interface IIoK8sApiCoreV1PodTemplateList {
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    "apiVersion": "v1";
+    /**
+     * List of pod templates
+     */
+    "items": Array<IIoK8sApiCoreV1PodTemplate>;
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    "kind": "PodTemplateList";
+    /**
+     * Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+}
+/**
+ * PodTemplateList is a list of PodTemplates.
+ */
+export declare class IoK8sApiCoreV1PodTemplateList extends Model<IIoK8sApiCoreV1PodTemplateList> implements IIoK8sApiCoreV1PodTemplateList {
+    "apiVersion": IIoK8sApiCoreV1PodTemplateList["apiVersion"];
+    "items": Array<IIoK8sApiCoreV1PodTemplate>;
+    "kind": IIoK8sApiCoreV1PodTemplateList["kind"];
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+    static apiVersion: IIoK8sApiCoreV1PodTemplateList["apiVersion"];
+    static kind: IIoK8sApiCoreV1PodTemplateList["kind"];
+    constructor(data?: ModelData<IIoK8sApiCoreV1PodTemplateList>);
+}
+export { IIoK8sApiCoreV1PodTemplateList as IPodTemplateList, IoK8sApiCoreV1PodTemplateList as PodTemplateList };

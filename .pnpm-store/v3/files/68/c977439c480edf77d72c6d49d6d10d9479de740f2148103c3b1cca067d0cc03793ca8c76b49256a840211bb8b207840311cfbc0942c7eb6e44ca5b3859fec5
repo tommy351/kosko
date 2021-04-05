@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.HTTPIngressPath = exports.IoK8sApiExtensionsV1beta1HTTPIngressPath = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiExtensionsV1beta1HTTPIngressPath_1 = require("../_schemas/IoK8sApiExtensionsV1beta1HTTPIngressPath.js");
+/**
+ * HTTPIngressPath associates a path with a backend. Incoming urls matching the path are forwarded to the backend.
+ */
+class IoK8sApiExtensionsV1beta1HTTPIngressPath extends base_1.Model {
+}
+exports.IoK8sApiExtensionsV1beta1HTTPIngressPath = IoK8sApiExtensionsV1beta1HTTPIngressPath;
+exports.HTTPIngressPath = IoK8sApiExtensionsV1beta1HTTPIngressPath;
+base_1.Model.setSchema(IoK8sApiExtensionsV1beta1HTTPIngressPath, "io.k8s.api.extensions.v1beta1.HTTPIngressPath", IoK8sApiExtensionsV1beta1HTTPIngressPath_1.addSchema);

@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.JobList = exports.IoK8sApiBatchV1JobList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiBatchV1JobList_1 = require("../_schemas/IoK8sApiBatchV1JobList.js");
+/**
+ * JobList is a collection of jobs.
+ */
+class IoK8sApiBatchV1JobList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiBatchV1JobList.apiVersion,
+            kind: IoK8sApiBatchV1JobList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiBatchV1JobList = IoK8sApiBatchV1JobList;
+exports.JobList = IoK8sApiBatchV1JobList;
+IoK8sApiBatchV1JobList.apiVersion = "batch/v1";
+IoK8sApiBatchV1JobList.kind = "JobList";
+base_1.Model.setSchema(IoK8sApiBatchV1JobList, "io.k8s.api.batch.v1.JobList", IoK8sApiBatchV1JobList_1.addSchema);

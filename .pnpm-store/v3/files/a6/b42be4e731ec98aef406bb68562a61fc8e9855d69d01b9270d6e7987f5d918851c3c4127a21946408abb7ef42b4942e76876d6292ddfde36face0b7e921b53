@@ -1,0 +1,26 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const schema = {
+    "properties": {
+        "path": {
+            "type": "string"
+        },
+        "readOnly": {
+            "type": "boolean"
+        },
+        "server": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "server",
+        "path"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    validate_1.register("io.k8s.api.core.v1.NFSVolumeSource", schema);
+}
+exports.addSchema = addSchema;

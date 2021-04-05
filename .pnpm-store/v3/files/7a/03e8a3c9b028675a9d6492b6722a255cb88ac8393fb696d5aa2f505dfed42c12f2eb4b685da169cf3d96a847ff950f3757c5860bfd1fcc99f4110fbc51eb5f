@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.GlusterfsPersistentVolumeSource = exports.IoK8sApiCoreV1GlusterfsPersistentVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1GlusterfsPersistentVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1GlusterfsPersistentVolumeSource.js");
+/**
+ * Represents a Glusterfs mount that lasts the lifetime of a pod. Glusterfs volumes do not support ownership management or SELinux relabeling.
+ */
+class IoK8sApiCoreV1GlusterfsPersistentVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1GlusterfsPersistentVolumeSource = IoK8sApiCoreV1GlusterfsPersistentVolumeSource;
+exports.GlusterfsPersistentVolumeSource = IoK8sApiCoreV1GlusterfsPersistentVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1GlusterfsPersistentVolumeSource, "io.k8s.api.core.v1.GlusterfsPersistentVolumeSource", IoK8sApiCoreV1GlusterfsPersistentVolumeSource_1.addSchema);

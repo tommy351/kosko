@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.IngressTLS = exports.IoK8sApiNetworkingV1beta1IngressTLS = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiNetworkingV1beta1IngressTLS_1 = require("../_schemas/IoK8sApiNetworkingV1beta1IngressTLS.js");
+/**
+ * IngressTLS describes the transport layer security associated with an Ingress.
+ */
+class IoK8sApiNetworkingV1beta1IngressTLS extends base_1.Model {
+}
+exports.IoK8sApiNetworkingV1beta1IngressTLS = IoK8sApiNetworkingV1beta1IngressTLS;
+exports.IngressTLS = IoK8sApiNetworkingV1beta1IngressTLS;
+base_1.Model.setSchema(IoK8sApiNetworkingV1beta1IngressTLS, "io.k8s.api.networking.v1beta1.IngressTLS", IoK8sApiNetworkingV1beta1IngressTLS_1.addSchema);

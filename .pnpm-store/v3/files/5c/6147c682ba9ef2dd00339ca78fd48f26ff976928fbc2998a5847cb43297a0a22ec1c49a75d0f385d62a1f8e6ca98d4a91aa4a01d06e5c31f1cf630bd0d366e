@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CrossVersionObjectReference = exports.IoK8sApiAutoscalingV2beta2CrossVersionObjectReference = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAutoscalingV2beta2CrossVersionObjectReference_1 = require("../_schemas/IoK8sApiAutoscalingV2beta2CrossVersionObjectReference.js");
+/**
+ * CrossVersionObjectReference contains enough information to let you identify the referred resource.
+ */
+class IoK8sApiAutoscalingV2beta2CrossVersionObjectReference extends base_1.Model {
+}
+exports.IoK8sApiAutoscalingV2beta2CrossVersionObjectReference = IoK8sApiAutoscalingV2beta2CrossVersionObjectReference;
+exports.CrossVersionObjectReference = IoK8sApiAutoscalingV2beta2CrossVersionObjectReference;
+base_1.Model.setSchema(IoK8sApiAutoscalingV2beta2CrossVersionObjectReference, "io.k8s.api.autoscaling.v2beta2.CrossVersionObjectReference", IoK8sApiAutoscalingV2beta2CrossVersionObjectReference_1.addSchema);

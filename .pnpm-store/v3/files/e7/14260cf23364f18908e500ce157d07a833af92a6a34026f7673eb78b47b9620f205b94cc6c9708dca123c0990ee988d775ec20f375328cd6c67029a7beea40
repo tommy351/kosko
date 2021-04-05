@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LimitedPriorityLevelConfiguration = exports.IoK8sApiFlowcontrolV1alpha1LimitedPriorityLevelConfiguration = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiFlowcontrolV1alpha1LimitedPriorityLevelConfiguration_1 = require("../_schemas/IoK8sApiFlowcontrolV1alpha1LimitedPriorityLevelConfiguration.js");
+/**
+ * LimitedPriorityLevelConfiguration specifies how to handle requests that are subject to limits. It addresses two issues:
+ *  \* How are requests for this priority level limited?
+ *  \* What should be done with requests that exceed the limit?
+ */
+class IoK8sApiFlowcontrolV1alpha1LimitedPriorityLevelConfiguration extends base_1.Model {
+}
+exports.IoK8sApiFlowcontrolV1alpha1LimitedPriorityLevelConfiguration = IoK8sApiFlowcontrolV1alpha1LimitedPriorityLevelConfiguration;
+exports.LimitedPriorityLevelConfiguration = IoK8sApiFlowcontrolV1alpha1LimitedPriorityLevelConfiguration;
+base_1.Model.setSchema(IoK8sApiFlowcontrolV1alpha1LimitedPriorityLevelConfiguration, "io.k8s.api.flowcontrol.v1alpha1.LimitedPriorityLevelConfiguration", IoK8sApiFlowcontrolV1alpha1LimitedPriorityLevelConfiguration_1.addSchema);

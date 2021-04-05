@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1PodDNSConfigOption.mjs";
+/**
+ * PodDNSConfigOption defines DNS resolver options of a pod.
+ */
+export class IoK8sApiCoreV1PodDNSConfigOption extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1PodDNSConfigOption, "io.k8s.api.core.v1.PodDNSConfigOption", addSchema);
+export { IoK8sApiCoreV1PodDNSConfigOption as PodDNSConfigOption };

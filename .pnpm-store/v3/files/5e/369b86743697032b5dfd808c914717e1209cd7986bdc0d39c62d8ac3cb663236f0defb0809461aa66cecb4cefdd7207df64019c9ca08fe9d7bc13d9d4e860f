@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LimitRange = exports.IoK8sApiCoreV1LimitRange = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1LimitRange_1 = require("../_schemas/IoK8sApiCoreV1LimitRange.js");
+/**
+ * LimitRange sets resource usage limits for each kind of resource in a Namespace.
+ */
+class IoK8sApiCoreV1LimitRange extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1LimitRange.apiVersion,
+            kind: IoK8sApiCoreV1LimitRange.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1LimitRange = IoK8sApiCoreV1LimitRange;
+exports.LimitRange = IoK8sApiCoreV1LimitRange;
+IoK8sApiCoreV1LimitRange.apiVersion = "v1";
+IoK8sApiCoreV1LimitRange.kind = "LimitRange";
+base_1.Model.setSchema(IoK8sApiCoreV1LimitRange, "io.k8s.api.core.v1.LimitRange", IoK8sApiCoreV1LimitRange_1.addSchema);

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SecretReference = exports.IoK8sApiCoreV1SecretReference = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1SecretReference_1 = require("../_schemas/IoK8sApiCoreV1SecretReference.js");
+/**
+ * SecretReference represents a Secret Reference. It has enough information to retrieve secret in any namespace
+ */
+class IoK8sApiCoreV1SecretReference extends base_1.Model {
+}
+exports.IoK8sApiCoreV1SecretReference = IoK8sApiCoreV1SecretReference;
+exports.SecretReference = IoK8sApiCoreV1SecretReference;
+base_1.Model.setSchema(IoK8sApiCoreV1SecretReference, "io.k8s.api.core.v1.SecretReference", IoK8sApiCoreV1SecretReference_1.addSchema);

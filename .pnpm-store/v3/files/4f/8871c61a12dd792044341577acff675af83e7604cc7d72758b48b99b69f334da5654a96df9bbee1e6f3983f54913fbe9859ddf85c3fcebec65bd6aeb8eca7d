@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SelfSubjectAccessReview = exports.IoK8sApiAuthorizationV1beta1SelfSubjectAccessReview = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAuthorizationV1beta1SelfSubjectAccessReview_1 = require("../_schemas/IoK8sApiAuthorizationV1beta1SelfSubjectAccessReview.js");
+/**
+ * SelfSubjectAccessReview checks whether or the current user can perform an action.  Not filling in a spec.namespace means "in all namespaces".  Self is a special case, because users should always be able to check whether they can perform an action
+ */
+class IoK8sApiAuthorizationV1beta1SelfSubjectAccessReview extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAuthorizationV1beta1SelfSubjectAccessReview.apiVersion,
+            kind: IoK8sApiAuthorizationV1beta1SelfSubjectAccessReview.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiAuthorizationV1beta1SelfSubjectAccessReview = IoK8sApiAuthorizationV1beta1SelfSubjectAccessReview;
+exports.SelfSubjectAccessReview = IoK8sApiAuthorizationV1beta1SelfSubjectAccessReview;
+IoK8sApiAuthorizationV1beta1SelfSubjectAccessReview.apiVersion = "authorization.k8s.io/v1beta1";
+IoK8sApiAuthorizationV1beta1SelfSubjectAccessReview.kind = "SelfSubjectAccessReview";
+base_1.Model.setSchema(IoK8sApiAuthorizationV1beta1SelfSubjectAccessReview, "io.k8s.api.authorization.v1beta1.SelfSubjectAccessReview", IoK8sApiAuthorizationV1beta1SelfSubjectAccessReview_1.addSchema);

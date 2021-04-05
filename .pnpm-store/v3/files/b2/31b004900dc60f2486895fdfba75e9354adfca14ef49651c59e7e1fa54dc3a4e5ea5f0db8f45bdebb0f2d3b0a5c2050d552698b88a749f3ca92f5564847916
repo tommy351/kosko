@@ -1,0 +1,32 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+function createReporter(cwd, { sys, formatDiagnosticsWithColorAndContext }) {
+    const formatDiagnosticsHost = {
+        getCurrentDirectory: () => cwd,
+        getCanonicalFileName: (fileName) => fileName,
+        getNewLine: () => sys.newLine,
+    };
+    function reportDiagnostic(diagnostic) {
+        const output = formatDiagnosticsWithColorAndContext([diagnostic], formatDiagnosticsHost);
+        process.stderr.write(output);
+    }
+    function reportErrorSummary(errorCount) {
+        process.stderr.write(`Found ${errorCount} ${errorCount === 1 ? "error" : "errors"}.\n`);
+    }
+    function reportWatchStatus(diagnostic, newLine) {
+        const output = formatDiagnosticsWithColorAndContext([diagnostic], {
+            ...formatDiagnosticsHost,
+            getNewLine: () => newLine,
+        });
+        process.stderr.write(output);
+    }
+    return {
+        formatDiagnosticsHost,
+        reportDiagnostic,
+        reportSolutionBuilderStatus: reportDiagnostic,
+        reportErrorSummary,
+        reportWatchStatus,
+    };
+}
+exports.default = createReporter;
+//# sourceMappingURL=report.js.map

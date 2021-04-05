@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MetricIdentifier = exports.IoK8sApiAutoscalingV2beta2MetricIdentifier = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAutoscalingV2beta2MetricIdentifier_1 = require("../_schemas/IoK8sApiAutoscalingV2beta2MetricIdentifier.js");
+/**
+ * MetricIdentifier defines the name and optionally selector for a metric
+ */
+class IoK8sApiAutoscalingV2beta2MetricIdentifier extends base_1.Model {
+}
+exports.IoK8sApiAutoscalingV2beta2MetricIdentifier = IoK8sApiAutoscalingV2beta2MetricIdentifier;
+exports.MetricIdentifier = IoK8sApiAutoscalingV2beta2MetricIdentifier;
+base_1.Model.setSchema(IoK8sApiAutoscalingV2beta2MetricIdentifier, "io.k8s.api.autoscaling.v2beta2.MetricIdentifier", IoK8sApiAutoscalingV2beta2MetricIdentifier_1.addSchema);

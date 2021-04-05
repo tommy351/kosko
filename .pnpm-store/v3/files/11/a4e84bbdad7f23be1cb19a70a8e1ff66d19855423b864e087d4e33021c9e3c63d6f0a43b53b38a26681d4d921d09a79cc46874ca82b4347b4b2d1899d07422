@@ -1,0 +1,48 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApisMetaV1ObjectMeta_1 = require("./IoK8sApimachineryPkgApisMetaV1ObjectMeta.js");
+const IoK8sApiRbacV1alpha1RoleRef_1 = require("./IoK8sApiRbacV1alpha1RoleRef.js");
+const IoK8sApiRbacV1alpha1Subject_1 = require("./IoK8sApiRbacV1alpha1Subject.js");
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string",
+            "enum": [
+                "rbac.authorization.k8s.io/v1alpha1"
+            ]
+        },
+        "kind": {
+            "type": "string",
+            "enum": [
+                "RoleBinding"
+            ]
+        },
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta#"
+        },
+        "roleRef": {
+            "$ref": "io.k8s.api.rbac.v1alpha1.RoleRef#"
+        },
+        "subjects": {
+            "items": {
+                "$ref": "io.k8s.api.rbac.v1alpha1.Subject#"
+            },
+            "type": "array"
+        }
+    },
+    "required": [
+        "roleRef",
+        "apiVersion",
+        "kind"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1ObjectMeta_1.addSchema();
+    IoK8sApiRbacV1alpha1RoleRef_1.addSchema();
+    IoK8sApiRbacV1alpha1Subject_1.addSchema();
+    validate_1.register("io.k8s.api.rbac.v1alpha1.RoleBinding", schema);
+}
+exports.addSchema = addSchema;

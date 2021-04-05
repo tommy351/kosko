@@ -1,0 +1,37 @@
+import { IIoK8sApiEventsV1beta1Event } from "./IoK8sApiEventsV1beta1Event";
+import { IIoK8sApimachineryPkgApisMetaV1ListMeta } from "./IoK8sApimachineryPkgApisMetaV1ListMeta";
+import { ModelData, Model } from "@kubernetes-models/base";
+/**
+ * EventList is a list of Event objects.
+ */
+export interface IIoK8sApiEventsV1beta1EventList {
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    "apiVersion": "events.k8s.io/v1beta1";
+    /**
+     * items is a list of schema objects.
+     */
+    "items": Array<IIoK8sApiEventsV1beta1Event>;
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    "kind": "EventList";
+    /**
+     * Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+}
+/**
+ * EventList is a list of Event objects.
+ */
+export declare class IoK8sApiEventsV1beta1EventList extends Model<IIoK8sApiEventsV1beta1EventList> implements IIoK8sApiEventsV1beta1EventList {
+    "apiVersion": IIoK8sApiEventsV1beta1EventList["apiVersion"];
+    "items": Array<IIoK8sApiEventsV1beta1Event>;
+    "kind": IIoK8sApiEventsV1beta1EventList["kind"];
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+    static apiVersion: IIoK8sApiEventsV1beta1EventList["apiVersion"];
+    static kind: IIoK8sApiEventsV1beta1EventList["kind"];
+    constructor(data?: ModelData<IIoK8sApiEventsV1beta1EventList>);
+}
+export { IIoK8sApiEventsV1beta1EventList as IEventList, IoK8sApiEventsV1beta1EventList as EventList };

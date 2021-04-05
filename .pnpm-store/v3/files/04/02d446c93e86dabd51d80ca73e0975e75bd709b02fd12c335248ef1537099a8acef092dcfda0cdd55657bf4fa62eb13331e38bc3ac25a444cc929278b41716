@@ -1,0 +1,37 @@
+import { IIoK8sApiStorageV1CSINode } from "./IoK8sApiStorageV1CSINode";
+import { IIoK8sApimachineryPkgApisMetaV1ListMeta } from "./IoK8sApimachineryPkgApisMetaV1ListMeta";
+import { ModelData, Model } from "@kubernetes-models/base";
+/**
+ * CSINodeList is a collection of CSINode objects.
+ */
+export interface IIoK8sApiStorageV1CSINodeList {
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    "apiVersion": "storage.k8s.io/v1";
+    /**
+     * items is the list of CSINode
+     */
+    "items": Array<IIoK8sApiStorageV1CSINode>;
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    "kind": "CSINodeList";
+    /**
+     * Standard list metadata More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+}
+/**
+ * CSINodeList is a collection of CSINode objects.
+ */
+export declare class IoK8sApiStorageV1CSINodeList extends Model<IIoK8sApiStorageV1CSINodeList> implements IIoK8sApiStorageV1CSINodeList {
+    "apiVersion": IIoK8sApiStorageV1CSINodeList["apiVersion"];
+    "items": Array<IIoK8sApiStorageV1CSINode>;
+    "kind": IIoK8sApiStorageV1CSINodeList["kind"];
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+    static apiVersion: IIoK8sApiStorageV1CSINodeList["apiVersion"];
+    static kind: IIoK8sApiStorageV1CSINodeList["kind"];
+    constructor(data?: ModelData<IIoK8sApiStorageV1CSINodeList>);
+}
+export { IIoK8sApiStorageV1CSINodeList as ICSINodeList, IoK8sApiStorageV1CSINodeList as CSINodeList };

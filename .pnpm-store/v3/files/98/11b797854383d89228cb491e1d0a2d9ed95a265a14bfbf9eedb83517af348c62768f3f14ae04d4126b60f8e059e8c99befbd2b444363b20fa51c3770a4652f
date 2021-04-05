@@ -1,0 +1,27 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * PortworxVolumeSource represents a Portworx volume resource.
+ */
+export interface IIoK8sApiCoreV1PortworxVolumeSource {
+    /**
+     * FSType represents the filesystem type to mount Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs". Implicitly inferred to be "ext4" if unspecified.
+     */
+    "fsType"?: string;
+    /**
+     * Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.
+     */
+    "readOnly"?: boolean;
+    /**
+     * VolumeID uniquely identifies a Portworx volume
+     */
+    "volumeID": string;
+}
+/**
+ * PortworxVolumeSource represents a Portworx volume resource.
+ */
+export declare class IoK8sApiCoreV1PortworxVolumeSource extends Model<IIoK8sApiCoreV1PortworxVolumeSource> implements IIoK8sApiCoreV1PortworxVolumeSource {
+    "fsType"?: string;
+    "readOnly"?: boolean;
+    "volumeID": string;
+}
+export { IIoK8sApiCoreV1PortworxVolumeSource as IPortworxVolumeSource, IoK8sApiCoreV1PortworxVolumeSource as PortworxVolumeSource };

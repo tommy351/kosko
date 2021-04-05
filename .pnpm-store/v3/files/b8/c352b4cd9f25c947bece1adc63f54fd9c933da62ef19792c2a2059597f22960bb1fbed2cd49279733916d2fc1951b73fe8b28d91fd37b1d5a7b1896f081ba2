@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiPolicyV1beta1PodSecurityPolicy.mjs";
+/**
+ * PodSecurityPolicy governs the ability to make requests that affect the Security Context that will be applied to a pod and container.
+ */
+export class IoK8sApiPolicyV1beta1PodSecurityPolicy extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiPolicyV1beta1PodSecurityPolicy.apiVersion,
+            kind: IoK8sApiPolicyV1beta1PodSecurityPolicy.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiPolicyV1beta1PodSecurityPolicy.apiVersion = "policy/v1beta1";
+IoK8sApiPolicyV1beta1PodSecurityPolicy.kind = "PodSecurityPolicy";
+Model.setSchema(IoK8sApiPolicyV1beta1PodSecurityPolicy, "io.k8s.api.policy.v1beta1.PodSecurityPolicy", addSchema);
+export { IoK8sApiPolicyV1beta1PodSecurityPolicy as PodSecurityPolicy };

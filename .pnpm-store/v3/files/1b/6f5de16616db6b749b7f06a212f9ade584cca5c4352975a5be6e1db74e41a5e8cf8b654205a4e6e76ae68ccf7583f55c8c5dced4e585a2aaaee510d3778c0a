@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.WebhookClientConfig = exports.IoK8sApiextensionsApiserverPkgApisApiextensionsV1WebhookClientConfig = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiextensionsApiserverPkgApisApiextensionsV1WebhookClientConfig_1 = require("../_schemas/IoK8sApiextensionsApiserverPkgApisApiextensionsV1WebhookClientConfig.js");
+/**
+ * WebhookClientConfig contains the information to make a TLS connection with the webhook.
+ */
+class IoK8sApiextensionsApiserverPkgApisApiextensionsV1WebhookClientConfig extends base_1.Model {
+}
+exports.IoK8sApiextensionsApiserverPkgApisApiextensionsV1WebhookClientConfig = IoK8sApiextensionsApiserverPkgApisApiextensionsV1WebhookClientConfig;
+exports.WebhookClientConfig = IoK8sApiextensionsApiserverPkgApisApiextensionsV1WebhookClientConfig;
+base_1.Model.setSchema(IoK8sApiextensionsApiserverPkgApisApiextensionsV1WebhookClientConfig, "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.WebhookClientConfig", IoK8sApiextensionsApiserverPkgApisApiextensionsV1WebhookClientConfig_1.addSchema);

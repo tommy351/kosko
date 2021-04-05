@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiNetworkingV1NetworkPolicyPort.mjs";
+/**
+ * NetworkPolicyPort describes a port to allow traffic on
+ */
+export class IoK8sApiNetworkingV1NetworkPolicyPort extends Model {
+}
+Model.setSchema(IoK8sApiNetworkingV1NetworkPolicyPort, "io.k8s.api.networking.v1.NetworkPolicyPort", addSchema);
+export { IoK8sApiNetworkingV1NetworkPolicyPort as NetworkPolicyPort };

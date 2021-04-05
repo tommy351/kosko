@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiNetworkingV1IngressRule.mjs";
+/**
+ * IngressRule represents the rules mapping the paths under a specified host to the related backend services. Incoming requests are first evaluated for a host match, then routed to the backend associated with the matching IngressRuleValue.
+ */
+export class IoK8sApiNetworkingV1IngressRule extends Model {
+}
+Model.setSchema(IoK8sApiNetworkingV1IngressRule, "io.k8s.api.networking.v1.IngressRule", addSchema);
+export { IoK8sApiNetworkingV1IngressRule as IngressRule };

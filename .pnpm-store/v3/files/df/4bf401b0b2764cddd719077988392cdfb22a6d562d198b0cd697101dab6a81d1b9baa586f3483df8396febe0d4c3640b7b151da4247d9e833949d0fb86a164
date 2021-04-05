@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiRbacV1Subject.mjs";
+/**
+ * Subject contains a reference to the object or user identities a role binding applies to.  This can either hold a direct API object reference, or a value for non-objects such as user and group names.
+ */
+export class IoK8sApiRbacV1Subject extends Model {
+}
+Model.setSchema(IoK8sApiRbacV1Subject, "io.k8s.api.rbac.v1.Subject", addSchema);
+export { IoK8sApiRbacV1Subject as Subject };

@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1AttachedVolume.mjs";
+/**
+ * AttachedVolume describes a volume attached to a node
+ */
+export class IoK8sApiCoreV1AttachedVolume extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1AttachedVolume, "io.k8s.api.core.v1.AttachedVolume", addSchema);
+export { IoK8sApiCoreV1AttachedVolume as AttachedVolume };

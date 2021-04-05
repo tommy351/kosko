@@ -1,0 +1,30 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiStorageV1beta1VolumeError } from "./IoK8sApiStorageV1beta1VolumeError.mjs";
+const schema = {
+    "properties": {
+        "attachError": {
+            "$ref": "io.k8s.api.storage.v1beta1.VolumeError#"
+        },
+        "attached": {
+            "type": "boolean"
+        },
+        "attachmentMetadata": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "type": "object"
+        },
+        "detachError": {
+            "$ref": "io.k8s.api.storage.v1beta1.VolumeError#"
+        }
+    },
+    "required": [
+        "attached"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiStorageV1beta1VolumeError();
+    IoK8sApiStorageV1beta1VolumeError();
+    register("io.k8s.api.storage.v1beta1.VolumeAttachmentStatus", schema);
+}

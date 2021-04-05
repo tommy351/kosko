@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1ContainerPort.mjs";
+/**
+ * ContainerPort represents a network port in a single container.
+ */
+export class IoK8sApiCoreV1ContainerPort extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1ContainerPort, "io.k8s.api.core.v1.ContainerPort", addSchema);
+export { IoK8sApiCoreV1ContainerPort as ContainerPort };

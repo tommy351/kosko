@@ -1,0 +1,27 @@
+import { IIoK8sApiAutoscalingV2beta2CrossVersionObjectReference } from "./IoK8sApiAutoscalingV2beta2CrossVersionObjectReference";
+import { IIoK8sApiAutoscalingV2beta2MetricIdentifier } from "./IoK8sApiAutoscalingV2beta2MetricIdentifier";
+import { IIoK8sApiAutoscalingV2beta2MetricTarget } from "./IoK8sApiAutoscalingV2beta2MetricTarget";
+import { Model } from "@kubernetes-models/base";
+/**
+ * ObjectMetricSource indicates how to scale on a metric describing a kubernetes object (for example, hits-per-second on an Ingress object).
+ */
+export interface IIoK8sApiAutoscalingV2beta2ObjectMetricSource {
+    "describedObject": IIoK8sApiAutoscalingV2beta2CrossVersionObjectReference;
+    /**
+     * metric identifies the target metric by name and selector
+     */
+    "metric": IIoK8sApiAutoscalingV2beta2MetricIdentifier;
+    /**
+     * target specifies the target value for the given metric
+     */
+    "target": IIoK8sApiAutoscalingV2beta2MetricTarget;
+}
+/**
+ * ObjectMetricSource indicates how to scale on a metric describing a kubernetes object (for example, hits-per-second on an Ingress object).
+ */
+export declare class IoK8sApiAutoscalingV2beta2ObjectMetricSource extends Model<IIoK8sApiAutoscalingV2beta2ObjectMetricSource> implements IIoK8sApiAutoscalingV2beta2ObjectMetricSource {
+    "describedObject": IIoK8sApiAutoscalingV2beta2CrossVersionObjectReference;
+    "metric": IIoK8sApiAutoscalingV2beta2MetricIdentifier;
+    "target": IIoK8sApiAutoscalingV2beta2MetricTarget;
+}
+export { IIoK8sApiAutoscalingV2beta2ObjectMetricSource as IObjectMetricSource, IoK8sApiAutoscalingV2beta2ObjectMetricSource as ObjectMetricSource };

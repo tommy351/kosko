@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiFlowcontrolV1alpha1FlowSchemaStatus.mjs";
+/**
+ * FlowSchemaStatus represents the current state of a FlowSchema.
+ */
+export class IoK8sApiFlowcontrolV1alpha1FlowSchemaStatus extends Model {
+}
+Model.setSchema(IoK8sApiFlowcontrolV1alpha1FlowSchemaStatus, "io.k8s.api.flowcontrol.v1alpha1.FlowSchemaStatus", addSchema);
+export { IoK8sApiFlowcontrolV1alpha1FlowSchemaStatus as FlowSchemaStatus };

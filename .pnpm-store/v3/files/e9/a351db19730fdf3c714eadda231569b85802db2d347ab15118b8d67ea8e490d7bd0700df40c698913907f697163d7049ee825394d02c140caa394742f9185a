@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiRbacV1RoleList.mjs";
+/**
+ * RoleList is a collection of Roles
+ */
+export class IoK8sApiRbacV1RoleList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiRbacV1RoleList.apiVersion,
+            kind: IoK8sApiRbacV1RoleList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiRbacV1RoleList.apiVersion = "rbac.authorization.k8s.io/v1";
+IoK8sApiRbacV1RoleList.kind = "RoleList";
+Model.setSchema(IoK8sApiRbacV1RoleList, "io.k8s.api.rbac.v1.RoleList", addSchema);
+export { IoK8sApiRbacV1RoleList as RoleList };

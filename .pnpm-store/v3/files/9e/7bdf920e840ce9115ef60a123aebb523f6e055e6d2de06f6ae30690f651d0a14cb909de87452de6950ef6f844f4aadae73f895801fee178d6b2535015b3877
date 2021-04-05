@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DownwardAPIVolumeFile = exports.IoK8sApiCoreV1DownwardAPIVolumeFile = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1DownwardAPIVolumeFile_1 = require("../_schemas/IoK8sApiCoreV1DownwardAPIVolumeFile.js");
+/**
+ * DownwardAPIVolumeFile represents information to create the file containing the pod field
+ */
+class IoK8sApiCoreV1DownwardAPIVolumeFile extends base_1.Model {
+}
+exports.IoK8sApiCoreV1DownwardAPIVolumeFile = IoK8sApiCoreV1DownwardAPIVolumeFile;
+exports.DownwardAPIVolumeFile = IoK8sApiCoreV1DownwardAPIVolumeFile;
+base_1.Model.setSchema(IoK8sApiCoreV1DownwardAPIVolumeFile, "io.k8s.api.core.v1.DownwardAPIVolumeFile", IoK8sApiCoreV1DownwardAPIVolumeFile_1.addSchema);

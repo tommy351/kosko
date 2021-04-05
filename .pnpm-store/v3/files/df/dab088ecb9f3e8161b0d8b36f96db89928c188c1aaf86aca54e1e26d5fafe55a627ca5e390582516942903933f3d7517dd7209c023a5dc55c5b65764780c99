@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ConfigMapVolumeSource = exports.IoK8sApiCoreV1ConfigMapVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ConfigMapVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1ConfigMapVolumeSource.js");
+/**
+ * Adapts a ConfigMap into a volume.
+ *
+ * The contents of the target ConfigMap's Data field will be presented in a volume as files using the keys in the Data field as the file names, unless the items element is populated with specific mappings of keys to paths. ConfigMap volumes support ownership management and SELinux relabeling.
+ */
+class IoK8sApiCoreV1ConfigMapVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ConfigMapVolumeSource = IoK8sApiCoreV1ConfigMapVolumeSource;
+exports.ConfigMapVolumeSource = IoK8sApiCoreV1ConfigMapVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1ConfigMapVolumeSource, "io.k8s.api.core.v1.ConfigMapVolumeSource", IoK8sApiCoreV1ConfigMapVolumeSource_1.addSchema);

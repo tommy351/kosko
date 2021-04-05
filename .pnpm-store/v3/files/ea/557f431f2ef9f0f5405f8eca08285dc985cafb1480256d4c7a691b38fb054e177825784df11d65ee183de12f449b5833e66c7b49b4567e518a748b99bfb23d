@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SelfSubjectRulesReviewSpec = exports.IoK8sApiAuthorizationV1SelfSubjectRulesReviewSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAuthorizationV1SelfSubjectRulesReviewSpec_1 = require("../_schemas/IoK8sApiAuthorizationV1SelfSubjectRulesReviewSpec.js");
+class IoK8sApiAuthorizationV1SelfSubjectRulesReviewSpec extends base_1.Model {
+}
+exports.IoK8sApiAuthorizationV1SelfSubjectRulesReviewSpec = IoK8sApiAuthorizationV1SelfSubjectRulesReviewSpec;
+exports.SelfSubjectRulesReviewSpec = IoK8sApiAuthorizationV1SelfSubjectRulesReviewSpec;
+base_1.Model.setSchema(IoK8sApiAuthorizationV1SelfSubjectRulesReviewSpec, "io.k8s.api.authorization.v1.SelfSubjectRulesReviewSpec", IoK8sApiAuthorizationV1SelfSubjectRulesReviewSpec_1.addSchema);

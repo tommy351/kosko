@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1NamespaceList.mjs";
+/**
+ * NamespaceList is a list of Namespaces.
+ */
+export class IoK8sApiCoreV1NamespaceList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1NamespaceList.apiVersion,
+            kind: IoK8sApiCoreV1NamespaceList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiCoreV1NamespaceList.apiVersion = "v1";
+IoK8sApiCoreV1NamespaceList.kind = "NamespaceList";
+Model.setSchema(IoK8sApiCoreV1NamespaceList, "io.k8s.api.core.v1.NamespaceList", addSchema);
+export { IoK8sApiCoreV1NamespaceList as NamespaceList };

@@ -1,0 +1,22 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "continue": {
+            "type": "string"
+        },
+        "remainingItemCount": {
+            "format": "int64",
+            "type": "integer"
+        },
+        "resourceVersion": {
+            "type": "string"
+        },
+        "selfLink": {
+            "type": "string"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta", schema);
+}

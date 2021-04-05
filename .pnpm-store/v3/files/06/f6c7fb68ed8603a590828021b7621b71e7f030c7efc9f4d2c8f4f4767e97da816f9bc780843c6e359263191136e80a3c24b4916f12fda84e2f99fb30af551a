@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AllowedCSIDriver = exports.IoK8sApiPolicyV1beta1AllowedCSIDriver = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiPolicyV1beta1AllowedCSIDriver_1 = require("../_schemas/IoK8sApiPolicyV1beta1AllowedCSIDriver.js");
+/**
+ * AllowedCSIDriver represents a single inline CSI Driver that is allowed to be used.
+ */
+class IoK8sApiPolicyV1beta1AllowedCSIDriver extends base_1.Model {
+}
+exports.IoK8sApiPolicyV1beta1AllowedCSIDriver = IoK8sApiPolicyV1beta1AllowedCSIDriver;
+exports.AllowedCSIDriver = IoK8sApiPolicyV1beta1AllowedCSIDriver;
+base_1.Model.setSchema(IoK8sApiPolicyV1beta1AllowedCSIDriver, "io.k8s.api.policy.v1beta1.AllowedCSIDriver", IoK8sApiPolicyV1beta1AllowedCSIDriver_1.addSchema);

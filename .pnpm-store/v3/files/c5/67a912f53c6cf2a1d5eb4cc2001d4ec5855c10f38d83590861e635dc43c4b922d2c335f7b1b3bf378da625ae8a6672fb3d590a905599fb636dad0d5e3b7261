@@ -1,0 +1,29 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiStorageV1alpha1VolumeAttachmentSource_1 = require("./IoK8sApiStorageV1alpha1VolumeAttachmentSource.js");
+const schema = {
+    "properties": {
+        "attacher": {
+            "type": "string"
+        },
+        "nodeName": {
+            "type": "string"
+        },
+        "source": {
+            "$ref": "io.k8s.api.storage.v1alpha1.VolumeAttachmentSource#"
+        }
+    },
+    "required": [
+        "attacher",
+        "source",
+        "nodeName"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiStorageV1alpha1VolumeAttachmentSource_1.addSchema();
+    validate_1.register("io.k8s.api.storage.v1alpha1.VolumeAttachmentSpec", schema);
+}
+exports.addSchema = addSchema;

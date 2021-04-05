@@ -1,0 +1,12 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * JSONSchemaPropsOrBool represents JSONSchemaProps or a boolean value. Defaults to true for the boolean property.
+ */
+export interface IIoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrBool {
+}
+/**
+ * JSONSchemaPropsOrBool represents JSONSchemaProps or a boolean value. Defaults to true for the boolean property.
+ */
+export declare class IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrBool extends Model<IIoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrBool> implements IIoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrBool {
+}
+export { IIoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrBool as IJSONSchemaPropsOrBool, IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrBool as JSONSchemaPropsOrBool };

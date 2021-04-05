@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.IDRange = exports.IoK8sApiPolicyV1beta1IDRange = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiPolicyV1beta1IDRange_1 = require("../_schemas/IoK8sApiPolicyV1beta1IDRange.js");
+/**
+ * IDRange provides a min/max of an allowed range of IDs.
+ */
+class IoK8sApiPolicyV1beta1IDRange extends base_1.Model {
+}
+exports.IoK8sApiPolicyV1beta1IDRange = IoK8sApiPolicyV1beta1IDRange;
+exports.IDRange = IoK8sApiPolicyV1beta1IDRange;
+base_1.Model.setSchema(IoK8sApiPolicyV1beta1IDRange, "io.k8s.api.policy.v1beta1.IDRange", IoK8sApiPolicyV1beta1IDRange_1.addSchema);

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ResourcePolicyRule = exports.IoK8sApiFlowcontrolV1alpha1ResourcePolicyRule = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiFlowcontrolV1alpha1ResourcePolicyRule_1 = require("../_schemas/IoK8sApiFlowcontrolV1alpha1ResourcePolicyRule.js");
+/**
+ * ResourcePolicyRule is a predicate that matches some resource requests, testing the request's verb and the target resource. A ResourcePolicyRule matches a resource request if and only if: (a) at least one member of verbs matches the request, (b) at least one member of apiGroups matches the request, (c) at least one member of resources matches the request, and (d) least one member of namespaces matches the request.
+ */
+class IoK8sApiFlowcontrolV1alpha1ResourcePolicyRule extends base_1.Model {
+}
+exports.IoK8sApiFlowcontrolV1alpha1ResourcePolicyRule = IoK8sApiFlowcontrolV1alpha1ResourcePolicyRule;
+exports.ResourcePolicyRule = IoK8sApiFlowcontrolV1alpha1ResourcePolicyRule;
+base_1.Model.setSchema(IoK8sApiFlowcontrolV1alpha1ResourcePolicyRule, "io.k8s.api.flowcontrol.v1alpha1.ResourcePolicyRule", IoK8sApiFlowcontrolV1alpha1ResourcePolicyRule_1.addSchema);

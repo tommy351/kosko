@@ -1,0 +1,34 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiStorageV1beta1VolumeNodeResources_1 = require("./IoK8sApiStorageV1beta1VolumeNodeResources.js");
+const schema = {
+    "properties": {
+        "allocatable": {
+            "$ref": "io.k8s.api.storage.v1beta1.VolumeNodeResources#"
+        },
+        "name": {
+            "type": "string"
+        },
+        "nodeID": {
+            "type": "string"
+        },
+        "topologyKeys": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        }
+    },
+    "required": [
+        "name",
+        "nodeID"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiStorageV1beta1VolumeNodeResources_1.addSchema();
+    validate_1.register("io.k8s.api.storage.v1beta1.CSINodeDriver", schema);
+}
+exports.addSchema = addSchema;

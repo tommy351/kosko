@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAuthorizationV1beta1NonResourceRule.mjs";
+/**
+ * NonResourceRule holds information that describes a rule for the non-resource
+ */
+export class IoK8sApiAuthorizationV1beta1NonResourceRule extends Model {
+}
+Model.setSchema(IoK8sApiAuthorizationV1beta1NonResourceRule, "io.k8s.api.authorization.v1beta1.NonResourceRule", addSchema);
+export { IoK8sApiAuthorizationV1beta1NonResourceRule as NonResourceRule };

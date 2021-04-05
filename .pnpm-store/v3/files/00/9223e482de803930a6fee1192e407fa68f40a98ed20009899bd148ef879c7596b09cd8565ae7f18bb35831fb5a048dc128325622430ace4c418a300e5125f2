@@ -1,0 +1,29 @@
+import { IIoK8sApiCoreV1TypedLocalObjectReference } from "./IoK8sApiCoreV1TypedLocalObjectReference";
+import { IIoK8sApimachineryPkgUtilIntstrIntOrString } from "./IoK8sApimachineryPkgUtilIntstrIntOrString";
+import { Model } from "@kubernetes-models/base";
+/**
+ * IngressBackend describes all endpoints for a given service and port.
+ */
+export interface IIoK8sApiExtensionsV1beta1IngressBackend {
+    /**
+     * Resource is an ObjectRef to another Kubernetes resource in the namespace of the Ingress object. If resource is specified, serviceName and servicePort must not be specified.
+     */
+    "resource"?: IIoK8sApiCoreV1TypedLocalObjectReference;
+    /**
+     * Specifies the name of the referenced service.
+     */
+    "serviceName"?: string;
+    /**
+     * Specifies the port of the referenced service.
+     */
+    "servicePort"?: IIoK8sApimachineryPkgUtilIntstrIntOrString;
+}
+/**
+ * IngressBackend describes all endpoints for a given service and port.
+ */
+export declare class IoK8sApiExtensionsV1beta1IngressBackend extends Model<IIoK8sApiExtensionsV1beta1IngressBackend> implements IIoK8sApiExtensionsV1beta1IngressBackend {
+    "resource"?: IIoK8sApiCoreV1TypedLocalObjectReference;
+    "serviceName"?: string;
+    "servicePort"?: IIoK8sApimachineryPkgUtilIntstrIntOrString;
+}
+export { IIoK8sApiExtensionsV1beta1IngressBackend as IIngressBackend, IoK8sApiExtensionsV1beta1IngressBackend as IngressBackend };

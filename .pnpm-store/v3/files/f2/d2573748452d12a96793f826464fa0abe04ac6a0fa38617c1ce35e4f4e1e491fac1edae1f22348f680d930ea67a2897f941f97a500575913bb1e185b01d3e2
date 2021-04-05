@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.APIGroup = exports.IoK8sApimachineryPkgApisMetaV1APIGroup = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApimachineryPkgApisMetaV1APIGroup_1 = require("../_schemas/IoK8sApimachineryPkgApisMetaV1APIGroup.js");
+/**
+ * APIGroup contains the name, the supported versions, and the preferred version of a group.
+ */
+class IoK8sApimachineryPkgApisMetaV1APIGroup extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApimachineryPkgApisMetaV1APIGroup.apiVersion,
+            kind: IoK8sApimachineryPkgApisMetaV1APIGroup.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApimachineryPkgApisMetaV1APIGroup = IoK8sApimachineryPkgApisMetaV1APIGroup;
+exports.APIGroup = IoK8sApimachineryPkgApisMetaV1APIGroup;
+IoK8sApimachineryPkgApisMetaV1APIGroup.apiVersion = "v1";
+IoK8sApimachineryPkgApisMetaV1APIGroup.kind = "APIGroup";
+base_1.Model.setSchema(IoK8sApimachineryPkgApisMetaV1APIGroup, "io.k8s.apimachinery.pkg.apis.meta.v1.APIGroup", IoK8sApimachineryPkgApisMetaV1APIGroup_1.addSchema);

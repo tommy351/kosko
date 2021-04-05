@@ -1,0 +1,15 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCertificatesV1beta1CertificateSigningRequestList.mjs";
+export class IoK8sApiCertificatesV1beta1CertificateSigningRequestList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCertificatesV1beta1CertificateSigningRequestList.apiVersion,
+            kind: IoK8sApiCertificatesV1beta1CertificateSigningRequestList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiCertificatesV1beta1CertificateSigningRequestList.apiVersion = "certificates.k8s.io/v1beta1";
+IoK8sApiCertificatesV1beta1CertificateSigningRequestList.kind = "CertificateSigningRequestList";
+Model.setSchema(IoK8sApiCertificatesV1beta1CertificateSigningRequestList, "io.k8s.api.certificates.v1beta1.CertificateSigningRequestList", addSchema);
+export { IoK8sApiCertificatesV1beta1CertificateSigningRequestList as CertificateSigningRequestList };

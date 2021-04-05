@@ -1,0 +1,66 @@
+{
+    "name": "@types/fs-extra",
+    "version": "9.0.8",
+    "description": "TypeScript definitions for fs-extra",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Alan Agius",
+            "url": "https://github.com/alan-agius4",
+            "githubUsername": "alan-agius4"
+        },
+        {
+            "name": "midknight41",
+            "url": "https://github.com/midknight41",
+            "githubUsername": "midknight41"
+        },
+        {
+            "name": "Brendan Forster",
+            "url": "https://github.com/shiftkey",
+            "githubUsername": "shiftkey"
+        },
+        {
+            "name": "Mees van Dijk",
+            "url": "https://github.com/mees-",
+            "githubUsername": "mees-"
+        },
+        {
+            "name": "Justin Rockwood",
+            "url": "https://github.com/jrockwood",
+            "githubUsername": "jrockwood"
+        },
+        {
+            "name": "Sang Dang",
+            "url": "https://github.com/sangdth",
+            "githubUsername": "sangdth"
+        },
+        {
+            "name": "Florian Keller",
+            "url": "https://github.com/ffflorian",
+            "githubUsername": "ffflorian"
+        },
+        {
+            "name": "Piotr Błażejewicz",
+            "url": "https://github.com/peterblazejewicz",
+            "githubUsername": "peterblazejewicz"
+        },
+        {
+            "name": "Tiger Oakes",
+            "url": "https://github.com/NotWoods",
+            "githubUsername": "NotWoods"
+        }
+    ],
+    "main": "",
+    "types": "index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+        "directory": "types/fs-extra"
+    },
+    "scripts": {},
+    "dependencies": {
+        "@types/node": "*"
+    },
+    "typesPublisherContentHash": "a27b430262ed0213e70c840567e7f28107e8182ff4f58de54e7b2b9108e05940",
+    "typeScriptVersion": "3.9"
+}

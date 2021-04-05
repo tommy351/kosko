@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ContainerStateTerminated = exports.IoK8sApiCoreV1ContainerStateTerminated = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ContainerStateTerminated_1 = require("../_schemas/IoK8sApiCoreV1ContainerStateTerminated.js");
+/**
+ * ContainerStateTerminated is a terminated state of a container.
+ */
+class IoK8sApiCoreV1ContainerStateTerminated extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ContainerStateTerminated = IoK8sApiCoreV1ContainerStateTerminated;
+exports.ContainerStateTerminated = IoK8sApiCoreV1ContainerStateTerminated;
+base_1.Model.setSchema(IoK8sApiCoreV1ContainerStateTerminated, "io.k8s.api.core.v1.ContainerStateTerminated", IoK8sApiCoreV1ContainerStateTerminated_1.addSchema);

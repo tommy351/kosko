@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1NodeSelector.mjs";
+/**
+ * A node selector represents the union of the results of one or more label queries over a set of nodes; that is, it represents the OR of the selectors represented by the node selector terms.
+ */
+export class IoK8sApiCoreV1NodeSelector extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1NodeSelector, "io.k8s.api.core.v1.NodeSelector", addSchema);
+export { IoK8sApiCoreV1NodeSelector as NodeSelector };

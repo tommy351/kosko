@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ControllerRevisionList = exports.IoK8sApiAppsV1ControllerRevisionList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAppsV1ControllerRevisionList_1 = require("../_schemas/IoK8sApiAppsV1ControllerRevisionList.js");
+/**
+ * ControllerRevisionList is a resource containing a list of ControllerRevision objects.
+ */
+class IoK8sApiAppsV1ControllerRevisionList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAppsV1ControllerRevisionList.apiVersion,
+            kind: IoK8sApiAppsV1ControllerRevisionList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiAppsV1ControllerRevisionList = IoK8sApiAppsV1ControllerRevisionList;
+exports.ControllerRevisionList = IoK8sApiAppsV1ControllerRevisionList;
+IoK8sApiAppsV1ControllerRevisionList.apiVersion = "apps/v1";
+IoK8sApiAppsV1ControllerRevisionList.kind = "ControllerRevisionList";
+base_1.Model.setSchema(IoK8sApiAppsV1ControllerRevisionList, "io.k8s.api.apps.v1.ControllerRevisionList", IoK8sApiAppsV1ControllerRevisionList_1.addSchema);

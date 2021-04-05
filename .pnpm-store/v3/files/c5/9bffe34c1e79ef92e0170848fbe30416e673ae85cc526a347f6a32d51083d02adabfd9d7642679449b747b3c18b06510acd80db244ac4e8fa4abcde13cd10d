@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RoleList = exports.IoK8sApiRbacV1alpha1RoleList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiRbacV1alpha1RoleList_1 = require("../_schemas/IoK8sApiRbacV1alpha1RoleList.js");
+/**
+ * RoleList is a collection of Roles. Deprecated in v1.17 in favor of rbac.authorization.k8s.io/v1 RoleList, and will no longer be served in v1.22.
+ */
+class IoK8sApiRbacV1alpha1RoleList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiRbacV1alpha1RoleList.apiVersion,
+            kind: IoK8sApiRbacV1alpha1RoleList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiRbacV1alpha1RoleList = IoK8sApiRbacV1alpha1RoleList;
+exports.RoleList = IoK8sApiRbacV1alpha1RoleList;
+IoK8sApiRbacV1alpha1RoleList.apiVersion = "rbac.authorization.k8s.io/v1alpha1";
+IoK8sApiRbacV1alpha1RoleList.kind = "RoleList";
+base_1.Model.setSchema(IoK8sApiRbacV1alpha1RoleList, "io.k8s.api.rbac.v1alpha1.RoleList", IoK8sApiRbacV1alpha1RoleList_1.addSchema);

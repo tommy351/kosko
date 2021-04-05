@@ -1,0 +1,44 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApisMetaV1ObjectMeta_1 = require("./IoK8sApimachineryPkgApisMetaV1ObjectMeta.js");
+const IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerSpec_1 = require("./IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerSpec.js");
+const IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerStatus_1 = require("./IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerStatus.js");
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string",
+            "enum": [
+                "autoscaling/v2beta2"
+            ]
+        },
+        "kind": {
+            "type": "string",
+            "enum": [
+                "HorizontalPodAutoscaler"
+            ]
+        },
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta#"
+        },
+        "spec": {
+            "$ref": "io.k8s.api.autoscaling.v2beta2.HorizontalPodAutoscalerSpec#"
+        },
+        "status": {
+            "$ref": "io.k8s.api.autoscaling.v2beta2.HorizontalPodAutoscalerStatus#"
+        }
+    },
+    "type": "object",
+    "required": [
+        "apiVersion",
+        "kind"
+    ]
+};
+function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1ObjectMeta_1.addSchema();
+    IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerSpec_1.addSchema();
+    IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerStatus_1.addSchema();
+    validate_1.register("io.k8s.api.autoscaling.v2beta2.HorizontalPodAutoscaler", schema);
+}
+exports.addSchema = addSchema;

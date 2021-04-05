@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiPolicyV1beta1Eviction.mjs";
+/**
+ * Eviction evicts a pod from its node subject to certain policies and safety constraints. This is a subresource of Pod.  A request to cause such an eviction is created by POSTing to .../pods/<pod name>/evictions.
+ */
+export class IoK8sApiPolicyV1beta1Eviction extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiPolicyV1beta1Eviction.apiVersion,
+            kind: IoK8sApiPolicyV1beta1Eviction.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiPolicyV1beta1Eviction.apiVersion = "policy/v1beta1";
+IoK8sApiPolicyV1beta1Eviction.kind = "Eviction";
+Model.setSchema(IoK8sApiPolicyV1beta1Eviction, "io.k8s.api.policy.v1beta1.Eviction", addSchema);
+export { IoK8sApiPolicyV1beta1Eviction as Eviction };

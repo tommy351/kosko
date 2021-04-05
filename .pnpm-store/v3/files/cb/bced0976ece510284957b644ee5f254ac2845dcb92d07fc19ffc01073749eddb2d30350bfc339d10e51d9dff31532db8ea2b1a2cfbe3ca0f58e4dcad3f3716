@@ -1,0 +1,32 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApiResourceQuantity_1 = require("./IoK8sApimachineryPkgApiResourceQuantity.js");
+const IoK8sApiCoreV1ScopeSelector_1 = require("./IoK8sApiCoreV1ScopeSelector.js");
+const schema = {
+    "properties": {
+        "hard": {
+            "additionalProperties": {
+                "$ref": "io.k8s.apimachinery.pkg.api.resource.Quantity#"
+            },
+            "type": "object"
+        },
+        "scopeSelector": {
+            "$ref": "io.k8s.api.core.v1.ScopeSelector#"
+        },
+        "scopes": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApimachineryPkgApiResourceQuantity_1.addSchema();
+    IoK8sApiCoreV1ScopeSelector_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.ResourceQuotaSpec", schema);
+}
+exports.addSchema = addSchema;

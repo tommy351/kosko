@@ -1,0 +1,19 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CertificateSigningRequestList = exports.IoK8sApiCertificatesV1beta1CertificateSigningRequestList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCertificatesV1beta1CertificateSigningRequestList_1 = require("../_schemas/IoK8sApiCertificatesV1beta1CertificateSigningRequestList.js");
+class IoK8sApiCertificatesV1beta1CertificateSigningRequestList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCertificatesV1beta1CertificateSigningRequestList.apiVersion,
+            kind: IoK8sApiCertificatesV1beta1CertificateSigningRequestList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCertificatesV1beta1CertificateSigningRequestList = IoK8sApiCertificatesV1beta1CertificateSigningRequestList;
+exports.CertificateSigningRequestList = IoK8sApiCertificatesV1beta1CertificateSigningRequestList;
+IoK8sApiCertificatesV1beta1CertificateSigningRequestList.apiVersion = "certificates.k8s.io/v1beta1";
+IoK8sApiCertificatesV1beta1CertificateSigningRequestList.kind = "CertificateSigningRequestList";
+base_1.Model.setSchema(IoK8sApiCertificatesV1beta1CertificateSigningRequestList, "io.k8s.api.certificates.v1beta1.CertificateSigningRequestList", IoK8sApiCertificatesV1beta1CertificateSigningRequestList_1.addSchema);

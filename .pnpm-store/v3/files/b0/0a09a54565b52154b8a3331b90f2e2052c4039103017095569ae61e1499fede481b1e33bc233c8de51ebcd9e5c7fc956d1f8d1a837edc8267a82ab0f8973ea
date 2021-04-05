@@ -1,0 +1,45 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const schema = {
+    "properties": {
+        "apiGroups": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "clusterScope": {
+            "type": "boolean"
+        },
+        "namespaces": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "resources": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "verbs": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        }
+    },
+    "required": [
+        "verbs",
+        "apiGroups",
+        "resources"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    validate_1.register("io.k8s.api.flowcontrol.v1alpha1.ResourcePolicyRule", schema);
+}
+exports.addSchema = addSchema;

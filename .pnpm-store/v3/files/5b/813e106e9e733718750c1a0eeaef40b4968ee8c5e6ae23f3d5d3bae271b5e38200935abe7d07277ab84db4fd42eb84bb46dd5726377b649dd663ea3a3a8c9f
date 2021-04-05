@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NodeConfigSource = exports.IoK8sApiCoreV1NodeConfigSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1NodeConfigSource_1 = require("../_schemas/IoK8sApiCoreV1NodeConfigSource.js");
+/**
+ * NodeConfigSource specifies a source of node configuration. Exactly one subfield (excluding metadata) must be non-nil.
+ */
+class IoK8sApiCoreV1NodeConfigSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1NodeConfigSource = IoK8sApiCoreV1NodeConfigSource;
+exports.NodeConfigSource = IoK8sApiCoreV1NodeConfigSource;
+base_1.Model.setSchema(IoK8sApiCoreV1NodeConfigSource, "io.k8s.api.core.v1.NodeConfigSource", IoK8sApiCoreV1NodeConfigSource_1.addSchema);

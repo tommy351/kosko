@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.GroupSubject = exports.IoK8sApiFlowcontrolV1alpha1GroupSubject = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiFlowcontrolV1alpha1GroupSubject_1 = require("../_schemas/IoK8sApiFlowcontrolV1alpha1GroupSubject.js");
+/**
+ * GroupSubject holds detailed information for group-kind subject.
+ */
+class IoK8sApiFlowcontrolV1alpha1GroupSubject extends base_1.Model {
+}
+exports.IoK8sApiFlowcontrolV1alpha1GroupSubject = IoK8sApiFlowcontrolV1alpha1GroupSubject;
+exports.GroupSubject = IoK8sApiFlowcontrolV1alpha1GroupSubject;
+base_1.Model.setSchema(IoK8sApiFlowcontrolV1alpha1GroupSubject, "io.k8s.api.flowcontrol.v1alpha1.GroupSubject", IoK8sApiFlowcontrolV1alpha1GroupSubject_1.addSchema);

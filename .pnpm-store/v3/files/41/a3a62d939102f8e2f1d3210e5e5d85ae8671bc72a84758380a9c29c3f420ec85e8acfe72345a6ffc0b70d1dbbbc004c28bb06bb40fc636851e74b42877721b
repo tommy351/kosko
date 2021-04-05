@@ -1,0 +1,24 @@
+import { IIoK8sApimachineryPkgApisMetaV1ObjectMeta } from "./IoK8sApimachineryPkgApisMetaV1ObjectMeta";
+import { IIoK8sApiCoreV1PersistentVolumeClaimSpec } from "./IoK8sApiCoreV1PersistentVolumeClaimSpec";
+import { Model } from "@kubernetes-models/base";
+/**
+ * PersistentVolumeClaimTemplate is used to produce PersistentVolumeClaim objects as part of an EphemeralVolumeSource.
+ */
+export interface IIoK8sApiCoreV1PersistentVolumeClaimTemplate {
+    /**
+     * May contain labels and annotations that will be copied into the PVC when creating it. No other fields are allowed and will be rejected during validation.
+     */
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ObjectMeta;
+    /**
+     * The specification for the PersistentVolumeClaim. The entire content is copied unchanged into the PVC that gets created from this template. The same fields as in a PersistentVolumeClaim are also valid here.
+     */
+    "spec": IIoK8sApiCoreV1PersistentVolumeClaimSpec;
+}
+/**
+ * PersistentVolumeClaimTemplate is used to produce PersistentVolumeClaim objects as part of an EphemeralVolumeSource.
+ */
+export declare class IoK8sApiCoreV1PersistentVolumeClaimTemplate extends Model<IIoK8sApiCoreV1PersistentVolumeClaimTemplate> implements IIoK8sApiCoreV1PersistentVolumeClaimTemplate {
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ObjectMeta;
+    "spec": IIoK8sApiCoreV1PersistentVolumeClaimSpec;
+}
+export { IIoK8sApiCoreV1PersistentVolumeClaimTemplate as IPersistentVolumeClaimTemplate, IoK8sApiCoreV1PersistentVolumeClaimTemplate as PersistentVolumeClaimTemplate };

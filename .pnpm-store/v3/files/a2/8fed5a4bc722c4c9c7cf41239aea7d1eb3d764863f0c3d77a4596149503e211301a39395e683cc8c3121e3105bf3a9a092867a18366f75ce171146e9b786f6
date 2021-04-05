@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiFlowcontrolV1alpha1LimitResponse_1 = require("./IoK8sApiFlowcontrolV1alpha1LimitResponse.js");
+const schema = {
+    "properties": {
+        "assuredConcurrencyShares": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "limitResponse": {
+            "$ref": "io.k8s.api.flowcontrol.v1alpha1.LimitResponse#"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiFlowcontrolV1alpha1LimitResponse_1.addSchema();
+    validate_1.register("io.k8s.api.flowcontrol.v1alpha1.LimitedPriorityLevelConfiguration", schema);
+}
+exports.addSchema = addSchema;

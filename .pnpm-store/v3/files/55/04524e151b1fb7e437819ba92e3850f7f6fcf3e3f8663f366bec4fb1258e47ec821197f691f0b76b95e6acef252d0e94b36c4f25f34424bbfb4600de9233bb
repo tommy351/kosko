@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAuthenticationV1TokenRequestSpec.mjs";
+/**
+ * TokenRequestSpec contains client provided parameters of a token request.
+ */
+export class IoK8sApiAuthenticationV1TokenRequestSpec extends Model {
+}
+Model.setSchema(IoK8sApiAuthenticationV1TokenRequestSpec, "io.k8s.api.authentication.v1.TokenRequestSpec", addSchema);
+export { IoK8sApiAuthenticationV1TokenRequestSpec as TokenRequestSpec };

@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCertificatesV1CertificateSigningRequestCondition.mjs";
+/**
+ * CertificateSigningRequestCondition describes a condition of a CertificateSigningRequest object
+ */
+export class IoK8sApiCertificatesV1CertificateSigningRequestCondition extends Model {
+}
+Model.setSchema(IoK8sApiCertificatesV1CertificateSigningRequestCondition, "io.k8s.api.certificates.v1.CertificateSigningRequestCondition", addSchema);
+export { IoK8sApiCertificatesV1CertificateSigningRequestCondition as CertificateSigningRequestCondition };

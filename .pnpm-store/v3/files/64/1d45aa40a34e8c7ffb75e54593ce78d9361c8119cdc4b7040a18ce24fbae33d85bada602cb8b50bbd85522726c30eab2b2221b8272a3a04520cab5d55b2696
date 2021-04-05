@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ClientIPConfig = exports.IoK8sApiCoreV1ClientIPConfig = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ClientIPConfig_1 = require("../_schemas/IoK8sApiCoreV1ClientIPConfig.js");
+/**
+ * ClientIPConfig represents the configurations of Client IP based session affinity.
+ */
+class IoK8sApiCoreV1ClientIPConfig extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ClientIPConfig = IoK8sApiCoreV1ClientIPConfig;
+exports.ClientIPConfig = IoK8sApiCoreV1ClientIPConfig;
+base_1.Model.setSchema(IoK8sApiCoreV1ClientIPConfig, "io.k8s.api.core.v1.ClientIPConfig", IoK8sApiCoreV1ClientIPConfig_1.addSchema);

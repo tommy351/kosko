@@ -1,0 +1,33 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1ObjectFieldSelector_1 = require("./IoK8sApiCoreV1ObjectFieldSelector.js");
+const IoK8sApiCoreV1ResourceFieldSelector_1 = require("./IoK8sApiCoreV1ResourceFieldSelector.js");
+const schema = {
+    "properties": {
+        "fieldRef": {
+            "$ref": "io.k8s.api.core.v1.ObjectFieldSelector#"
+        },
+        "mode": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "path": {
+            "type": "string"
+        },
+        "resourceFieldRef": {
+            "$ref": "io.k8s.api.core.v1.ResourceFieldSelector#"
+        }
+    },
+    "required": [
+        "path"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1ObjectFieldSelector_1.addSchema();
+    IoK8sApiCoreV1ResourceFieldSelector_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.DownwardAPIVolumeFile", schema);
+}
+exports.addSchema = addSchema;

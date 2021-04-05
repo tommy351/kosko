@@ -1,0 +1,23 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApisMetaV1ObjectMeta_1 = require("./IoK8sApimachineryPkgApisMetaV1ObjectMeta.js");
+const IoK8sApiBatchV1JobSpec_1 = require("./IoK8sApiBatchV1JobSpec.js");
+const schema = {
+    "properties": {
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta#"
+        },
+        "spec": {
+            "$ref": "io.k8s.api.batch.v1.JobSpec#"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1ObjectMeta_1.addSchema();
+    IoK8sApiBatchV1JobSpec_1.addSchema();
+    validate_1.register("io.k8s.api.batch.v2alpha1.JobTemplateSpec", schema);
+}
+exports.addSchema = addSchema;

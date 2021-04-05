@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1Taint.mjs";
+/**
+ * The node this Taint is attached to has the "effect" on any pod that does not tolerate the Taint.
+ */
+export class IoK8sApiCoreV1Taint extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1Taint, "io.k8s.api.core.v1.Taint", addSchema);
+export { IoK8sApiCoreV1Taint as Taint };

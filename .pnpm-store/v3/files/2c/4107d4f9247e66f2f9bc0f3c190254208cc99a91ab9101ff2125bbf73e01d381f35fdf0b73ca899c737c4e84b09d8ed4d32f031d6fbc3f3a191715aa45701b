@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1ResourceFieldSelector.mjs";
+/**
+ * ResourceFieldSelector represents container resources (cpu, memory) and their output format
+ */
+export class IoK8sApiCoreV1ResourceFieldSelector extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1ResourceFieldSelector, "io.k8s.api.core.v1.ResourceFieldSelector", addSchema);
+export { IoK8sApiCoreV1ResourceFieldSelector as ResourceFieldSelector };

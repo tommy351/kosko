@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NetworkPolicyEgressRule = exports.IoK8sApiNetworkingV1NetworkPolicyEgressRule = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiNetworkingV1NetworkPolicyEgressRule_1 = require("../_schemas/IoK8sApiNetworkingV1NetworkPolicyEgressRule.js");
+/**
+ * NetworkPolicyEgressRule describes a particular set of traffic that is allowed out of pods matched by a NetworkPolicySpec's podSelector. The traffic must match both ports and to. This type is beta-level in 1.8
+ */
+class IoK8sApiNetworkingV1NetworkPolicyEgressRule extends base_1.Model {
+}
+exports.IoK8sApiNetworkingV1NetworkPolicyEgressRule = IoK8sApiNetworkingV1NetworkPolicyEgressRule;
+exports.NetworkPolicyEgressRule = IoK8sApiNetworkingV1NetworkPolicyEgressRule;
+base_1.Model.setSchema(IoK8sApiNetworkingV1NetworkPolicyEgressRule, "io.k8s.api.networking.v1.NetworkPolicyEgressRule", IoK8sApiNetworkingV1NetworkPolicyEgressRule_1.addSchema);

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DeploymentStrategy = exports.IoK8sApiAppsV1DeploymentStrategy = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAppsV1DeploymentStrategy_1 = require("../_schemas/IoK8sApiAppsV1DeploymentStrategy.js");
+/**
+ * DeploymentStrategy describes how to replace existing pods with new ones.
+ */
+class IoK8sApiAppsV1DeploymentStrategy extends base_1.Model {
+}
+exports.IoK8sApiAppsV1DeploymentStrategy = IoK8sApiAppsV1DeploymentStrategy;
+exports.DeploymentStrategy = IoK8sApiAppsV1DeploymentStrategy;
+base_1.Model.setSchema(IoK8sApiAppsV1DeploymentStrategy, "io.k8s.api.apps.v1.DeploymentStrategy", IoK8sApiAppsV1DeploymentStrategy_1.addSchema);

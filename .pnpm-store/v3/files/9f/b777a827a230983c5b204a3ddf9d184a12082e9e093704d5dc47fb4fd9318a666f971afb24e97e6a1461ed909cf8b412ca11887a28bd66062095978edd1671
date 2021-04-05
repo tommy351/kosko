@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CSINodeSpec = exports.IoK8sApiStorageV1beta1CSINodeSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiStorageV1beta1CSINodeSpec_1 = require("../_schemas/IoK8sApiStorageV1beta1CSINodeSpec.js");
+/**
+ * CSINodeSpec holds information about the specification of all CSI drivers installed on a node
+ */
+class IoK8sApiStorageV1beta1CSINodeSpec extends base_1.Model {
+}
+exports.IoK8sApiStorageV1beta1CSINodeSpec = IoK8sApiStorageV1beta1CSINodeSpec;
+exports.CSINodeSpec = IoK8sApiStorageV1beta1CSINodeSpec;
+base_1.Model.setSchema(IoK8sApiStorageV1beta1CSINodeSpec, "io.k8s.api.storage.v1beta1.CSINodeSpec", IoK8sApiStorageV1beta1CSINodeSpec_1.addSchema);

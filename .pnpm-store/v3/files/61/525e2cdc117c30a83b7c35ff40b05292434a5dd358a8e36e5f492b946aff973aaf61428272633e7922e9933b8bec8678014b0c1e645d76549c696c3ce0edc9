@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAuthenticationV1TokenReviewSpec.mjs";
+/**
+ * TokenReviewSpec is a description of the token authentication request.
+ */
+export class IoK8sApiAuthenticationV1TokenReviewSpec extends Model {
+}
+Model.setSchema(IoK8sApiAuthenticationV1TokenReviewSpec, "io.k8s.api.authentication.v1.TokenReviewSpec", addSchema);
+export { IoK8sApiAuthenticationV1TokenReviewSpec as TokenReviewSpec };

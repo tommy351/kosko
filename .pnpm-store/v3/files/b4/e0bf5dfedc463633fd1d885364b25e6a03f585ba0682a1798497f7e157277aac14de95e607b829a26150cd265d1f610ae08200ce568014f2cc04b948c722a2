@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1ProjectedVolumeSource.mjs";
+/**
+ * Represents a projected volume source
+ */
+export class IoK8sApiCoreV1ProjectedVolumeSource extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1ProjectedVolumeSource, "io.k8s.api.core.v1.ProjectedVolumeSource", addSchema);
+export { IoK8sApiCoreV1ProjectedVolumeSource as ProjectedVolumeSource };

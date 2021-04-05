@@ -1,0 +1,24 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgUtilIntstrIntOrString_1 = require("./IoK8sApimachineryPkgUtilIntstrIntOrString.js");
+const schema = {
+    "properties": {
+        "host": {
+            "type": "string"
+        },
+        "port": {
+            "$ref": "io.k8s.apimachinery.pkg.util.intstr.IntOrString#"
+        }
+    },
+    "required": [
+        "port"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApimachineryPkgUtilIntstrIntOrString_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.TCPSocketAction", schema);
+}
+exports.addSchema = addSchema;

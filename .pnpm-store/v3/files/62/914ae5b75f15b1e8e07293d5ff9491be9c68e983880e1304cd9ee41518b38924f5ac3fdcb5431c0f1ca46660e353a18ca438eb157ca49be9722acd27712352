@@ -1,0 +1,17 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiNetworkingV1HTTPIngressRuleValue } from "./IoK8sApiNetworkingV1HTTPIngressRuleValue.mjs";
+const schema = {
+    "properties": {
+        "host": {
+            "type": "string"
+        },
+        "http": {
+            "$ref": "io.k8s.api.networking.v1.HTTPIngressRuleValue#"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiNetworkingV1HTTPIngressRuleValue();
+    register("io.k8s.api.networking.v1.IngressRule", schema);
+}

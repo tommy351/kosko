@@ -1,0 +1,29 @@
+{
+    "name": "@types/bl",
+    "version": "2.1.0",
+    "description": "TypeScript definitions for BufferList",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Bart van der Schoor",
+            "url": "https://github.com/Bartvds",
+            "githubUsername": "Bartvds"
+        },
+        {
+            "name": "Francis Gulotta",
+            "url": "https://github.com/reconbot",
+            "githubUsername": "reconbot"
+        }
+    ],
+    "main": "",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git"
+    },
+    "scripts": {},
+    "dependencies": {
+        "@types/node": "*"
+    },
+    "typesPublisherContentHash": "9f6a7c39b7c2c8b392c8ee9415ea415573a72ff90886089c34441ee63ee51445",
+    "typeScriptVersion": "2.0"
+}

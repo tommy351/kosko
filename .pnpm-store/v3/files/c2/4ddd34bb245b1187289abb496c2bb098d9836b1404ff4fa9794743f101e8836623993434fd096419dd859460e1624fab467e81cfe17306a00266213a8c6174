@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NodeSelectorTerm = exports.IoK8sApiCoreV1NodeSelectorTerm = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1NodeSelectorTerm_1 = require("../_schemas/IoK8sApiCoreV1NodeSelectorTerm.js");
+/**
+ * A null or empty node selector term matches no objects. The requirements of them are ANDed. The TopologySelectorTerm type implements a subset of the NodeSelectorTerm.
+ */
+class IoK8sApiCoreV1NodeSelectorTerm extends base_1.Model {
+}
+exports.IoK8sApiCoreV1NodeSelectorTerm = IoK8sApiCoreV1NodeSelectorTerm;
+exports.NodeSelectorTerm = IoK8sApiCoreV1NodeSelectorTerm;
+base_1.Model.setSchema(IoK8sApiCoreV1NodeSelectorTerm, "io.k8s.api.core.v1.NodeSelectorTerm", IoK8sApiCoreV1NodeSelectorTerm_1.addSchema);

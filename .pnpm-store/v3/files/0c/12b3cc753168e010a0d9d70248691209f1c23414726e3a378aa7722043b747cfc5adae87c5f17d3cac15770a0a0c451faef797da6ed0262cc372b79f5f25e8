@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.VolumeAttachmentSpec = exports.IoK8sApiStorageV1VolumeAttachmentSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiStorageV1VolumeAttachmentSpec_1 = require("../_schemas/IoK8sApiStorageV1VolumeAttachmentSpec.js");
+/**
+ * VolumeAttachmentSpec is the specification of a VolumeAttachment request.
+ */
+class IoK8sApiStorageV1VolumeAttachmentSpec extends base_1.Model {
+}
+exports.IoK8sApiStorageV1VolumeAttachmentSpec = IoK8sApiStorageV1VolumeAttachmentSpec;
+exports.VolumeAttachmentSpec = IoK8sApiStorageV1VolumeAttachmentSpec;
+base_1.Model.setSchema(IoK8sApiStorageV1VolumeAttachmentSpec, "io.k8s.api.storage.v1.VolumeAttachmentSpec", IoK8sApiStorageV1VolumeAttachmentSpec_1.addSchema);

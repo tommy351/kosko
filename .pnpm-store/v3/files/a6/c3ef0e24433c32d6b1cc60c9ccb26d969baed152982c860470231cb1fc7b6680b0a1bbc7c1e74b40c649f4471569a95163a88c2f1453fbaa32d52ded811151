@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1ISCSIPersistentVolumeSource.mjs";
+/**
+ * ISCSIPersistentVolumeSource represents an ISCSI disk. ISCSI volumes can only be mounted as read/write once. ISCSI volumes support ownership management and SELinux relabeling.
+ */
+export class IoK8sApiCoreV1ISCSIPersistentVolumeSource extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1ISCSIPersistentVolumeSource, "io.k8s.api.core.v1.ISCSIPersistentVolumeSource", addSchema);
+export { IoK8sApiCoreV1ISCSIPersistentVolumeSource as ISCSIPersistentVolumeSource };

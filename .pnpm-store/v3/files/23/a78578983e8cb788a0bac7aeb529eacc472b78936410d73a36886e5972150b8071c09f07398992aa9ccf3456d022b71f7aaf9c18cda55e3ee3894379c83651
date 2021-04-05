@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.APIService = exports.IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIService = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIService_1 = require("../_schemas/IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIService.js");
+/**
+ * APIService represents a server for a particular GroupVersion. Name must be "version.group".
+ */
+class IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIService extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIService.apiVersion,
+            kind: IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIService.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIService = IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIService;
+exports.APIService = IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIService;
+IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIService.apiVersion = "apiregistration.k8s.io/v1beta1";
+IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIService.kind = "APIService";
+base_1.Model.setSchema(IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIService, "io.k8s.kube-aggregator.pkg.apis.apiregistration.v1beta1.APIService", IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIService_1.addSchema);

@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1NamespaceSpec.mjs";
+/**
+ * NamespaceSpec describes the attributes on a Namespace.
+ */
+export class IoK8sApiCoreV1NamespaceSpec extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1NamespaceSpec, "io.k8s.api.core.v1.NamespaceSpec", addSchema);
+export { IoK8sApiCoreV1NamespaceSpec as NamespaceSpec };

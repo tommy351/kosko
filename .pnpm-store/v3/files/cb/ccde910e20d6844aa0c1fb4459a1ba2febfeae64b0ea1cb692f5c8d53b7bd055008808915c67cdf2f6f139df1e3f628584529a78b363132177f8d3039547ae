@@ -1,0 +1,18 @@
+import { IIoK8sApimachineryPkgApisMetaV1Time } from "./IoK8sApimachineryPkgApisMetaV1Time";
+import { Model } from "@kubernetes-models/base";
+/**
+ * ContainerStateRunning is a running state of a container.
+ */
+export interface IIoK8sApiCoreV1ContainerStateRunning {
+    /**
+     * Time at which the container was last (re-)started
+     */
+    "startedAt"?: IIoK8sApimachineryPkgApisMetaV1Time;
+}
+/**
+ * ContainerStateRunning is a running state of a container.
+ */
+export declare class IoK8sApiCoreV1ContainerStateRunning extends Model<IIoK8sApiCoreV1ContainerStateRunning> implements IIoK8sApiCoreV1ContainerStateRunning {
+    "startedAt"?: IIoK8sApimachineryPkgApisMetaV1Time;
+}
+export { IIoK8sApiCoreV1ContainerStateRunning as IContainerStateRunning, IoK8sApiCoreV1ContainerStateRunning as ContainerStateRunning };

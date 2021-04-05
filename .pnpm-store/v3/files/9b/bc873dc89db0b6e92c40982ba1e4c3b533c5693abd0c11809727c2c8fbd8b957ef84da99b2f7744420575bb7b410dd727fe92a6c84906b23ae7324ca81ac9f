@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LocalVolumeSource = exports.IoK8sApiCoreV1LocalVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1LocalVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1LocalVolumeSource.js");
+/**
+ * Local represents directly-attached storage with node affinity (Beta feature)
+ */
+class IoK8sApiCoreV1LocalVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1LocalVolumeSource = IoK8sApiCoreV1LocalVolumeSource;
+exports.LocalVolumeSource = IoK8sApiCoreV1LocalVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1LocalVolumeSource, "io.k8s.api.core.v1.LocalVolumeSource", IoK8sApiCoreV1LocalVolumeSource_1.addSchema);

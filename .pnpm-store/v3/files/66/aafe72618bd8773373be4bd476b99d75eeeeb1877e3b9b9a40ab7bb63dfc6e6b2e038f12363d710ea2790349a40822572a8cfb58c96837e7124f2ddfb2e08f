@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1PersistentVolumeClaimCondition.mjs";
+/**
+ * PersistentVolumeClaimCondition contails details about state of pvc
+ */
+export class IoK8sApiCoreV1PersistentVolumeClaimCondition extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1PersistentVolumeClaimCondition, "io.k8s.api.core.v1.PersistentVolumeClaimCondition", addSchema);
+export { IoK8sApiCoreV1PersistentVolumeClaimCondition as PersistentVolumeClaimCondition };

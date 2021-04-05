@@ -1,0 +1,22 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApimachineryPkgApisMetaV1ObjectMeta } from "./IoK8sApimachineryPkgApisMetaV1ObjectMeta.mjs";
+import { addSchema as IoK8sApiCoreV1PersistentVolumeClaimSpec } from "./IoK8sApiCoreV1PersistentVolumeClaimSpec.mjs";
+const schema = {
+    "properties": {
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta#"
+        },
+        "spec": {
+            "$ref": "io.k8s.api.core.v1.PersistentVolumeClaimSpec#"
+        }
+    },
+    "required": [
+        "spec"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1ObjectMeta();
+    IoK8sApiCoreV1PersistentVolumeClaimSpec();
+    register("io.k8s.api.core.v1.PersistentVolumeClaimTemplate", schema);
+}

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.IPBlock = exports.IoK8sApiNetworkingV1IPBlock = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiNetworkingV1IPBlock_1 = require("../_schemas/IoK8sApiNetworkingV1IPBlock.js");
+/**
+ * IPBlock describes a particular CIDR (Ex. "192.168.1.1/24","2001:db9::/64") that is allowed to the pods matched by a NetworkPolicySpec's podSelector. The except entry describes CIDRs that should not be included within this rule.
+ */
+class IoK8sApiNetworkingV1IPBlock extends base_1.Model {
+}
+exports.IoK8sApiNetworkingV1IPBlock = IoK8sApiNetworkingV1IPBlock;
+exports.IPBlock = IoK8sApiNetworkingV1IPBlock;
+base_1.Model.setSchema(IoK8sApiNetworkingV1IPBlock, "io.k8s.api.networking.v1.IPBlock", IoK8sApiNetworkingV1IPBlock_1.addSchema);

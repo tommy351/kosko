@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.EndpointPort = exports.IoK8sApiDiscoveryV1beta1EndpointPort = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiDiscoveryV1beta1EndpointPort_1 = require("../_schemas/IoK8sApiDiscoveryV1beta1EndpointPort.js");
+/**
+ * EndpointPort represents a Port used by an EndpointSlice
+ */
+class IoK8sApiDiscoveryV1beta1EndpointPort extends base_1.Model {
+}
+exports.IoK8sApiDiscoveryV1beta1EndpointPort = IoK8sApiDiscoveryV1beta1EndpointPort;
+exports.EndpointPort = IoK8sApiDiscoveryV1beta1EndpointPort;
+base_1.Model.setSchema(IoK8sApiDiscoveryV1beta1EndpointPort, "io.k8s.api.discovery.v1beta1.EndpointPort", IoK8sApiDiscoveryV1beta1EndpointPort_1.addSchema);

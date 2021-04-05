@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1SecretKeySelector.mjs";
+/**
+ * SecretKeySelector selects a key of a Secret.
+ */
+export class IoK8sApiCoreV1SecretKeySelector extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1SecretKeySelector, "io.k8s.api.core.v1.SecretKeySelector", addSchema);
+export { IoK8sApiCoreV1SecretKeySelector as SecretKeySelector };

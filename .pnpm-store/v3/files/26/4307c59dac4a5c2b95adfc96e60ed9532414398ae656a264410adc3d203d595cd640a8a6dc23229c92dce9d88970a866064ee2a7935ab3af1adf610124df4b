@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LabelSelectorRequirement = exports.IoK8sApimachineryPkgApisMetaV1LabelSelectorRequirement = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApimachineryPkgApisMetaV1LabelSelectorRequirement_1 = require("../_schemas/IoK8sApimachineryPkgApisMetaV1LabelSelectorRequirement.js");
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
+ */
+class IoK8sApimachineryPkgApisMetaV1LabelSelectorRequirement extends base_1.Model {
+}
+exports.IoK8sApimachineryPkgApisMetaV1LabelSelectorRequirement = IoK8sApimachineryPkgApisMetaV1LabelSelectorRequirement;
+exports.LabelSelectorRequirement = IoK8sApimachineryPkgApisMetaV1LabelSelectorRequirement;
+base_1.Model.setSchema(IoK8sApimachineryPkgApisMetaV1LabelSelectorRequirement, "io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelectorRequirement", IoK8sApimachineryPkgApisMetaV1LabelSelectorRequirement_1.addSchema);

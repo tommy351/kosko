@@ -1,0 +1,37 @@
+import { IIoK8sApimachineryPkgApisMetaV1Time } from "./IoK8sApimachineryPkgApisMetaV1Time";
+import { Model } from "@kubernetes-models/base";
+/**
+ * PersistentVolumeClaimCondition contails details about state of pvc
+ */
+export interface IIoK8sApiCoreV1PersistentVolumeClaimCondition {
+    /**
+     * Last time we probed the condition.
+     */
+    "lastProbeTime"?: IIoK8sApimachineryPkgApisMetaV1Time;
+    /**
+     * Last time the condition transitioned from one status to another.
+     */
+    "lastTransitionTime"?: IIoK8sApimachineryPkgApisMetaV1Time;
+    /**
+     * Human-readable message indicating details about last transition.
+     */
+    "message"?: string;
+    /**
+     * Unique, this should be a short, machine understandable string that gives the reason for condition's last transition. If it reports "ResizeStarted" that means the underlying persistent volume is being resized.
+     */
+    "reason"?: string;
+    "status": string;
+    "type": string;
+}
+/**
+ * PersistentVolumeClaimCondition contails details about state of pvc
+ */
+export declare class IoK8sApiCoreV1PersistentVolumeClaimCondition extends Model<IIoK8sApiCoreV1PersistentVolumeClaimCondition> implements IIoK8sApiCoreV1PersistentVolumeClaimCondition {
+    "lastProbeTime"?: IIoK8sApimachineryPkgApisMetaV1Time;
+    "lastTransitionTime"?: IIoK8sApimachineryPkgApisMetaV1Time;
+    "message"?: string;
+    "reason"?: string;
+    "status": string;
+    "type": string;
+}
+export { IIoK8sApiCoreV1PersistentVolumeClaimCondition as IPersistentVolumeClaimCondition, IoK8sApiCoreV1PersistentVolumeClaimCondition as PersistentVolumeClaimCondition };

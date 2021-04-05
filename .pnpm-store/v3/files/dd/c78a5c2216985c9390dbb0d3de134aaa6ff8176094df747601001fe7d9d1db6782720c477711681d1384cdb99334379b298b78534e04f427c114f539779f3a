@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NodeCondition = exports.IoK8sApiCoreV1NodeCondition = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1NodeCondition_1 = require("../_schemas/IoK8sApiCoreV1NodeCondition.js");
+/**
+ * NodeCondition contains condition information for a node.
+ */
+class IoK8sApiCoreV1NodeCondition extends base_1.Model {
+}
+exports.IoK8sApiCoreV1NodeCondition = IoK8sApiCoreV1NodeCondition;
+exports.NodeCondition = IoK8sApiCoreV1NodeCondition;
+base_1.Model.setSchema(IoK8sApiCoreV1NodeCondition, "io.k8s.api.core.v1.NodeCondition", IoK8sApiCoreV1NodeCondition_1.addSchema);

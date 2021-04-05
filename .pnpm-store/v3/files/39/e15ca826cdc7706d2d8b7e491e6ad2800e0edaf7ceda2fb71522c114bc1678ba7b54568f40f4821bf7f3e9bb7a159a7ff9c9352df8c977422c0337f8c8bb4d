@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PodDisruptionBudgetSpec = exports.IoK8sApiPolicyV1beta1PodDisruptionBudgetSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiPolicyV1beta1PodDisruptionBudgetSpec_1 = require("../_schemas/IoK8sApiPolicyV1beta1PodDisruptionBudgetSpec.js");
+/**
+ * PodDisruptionBudgetSpec is a description of a PodDisruptionBudget.
+ */
+class IoK8sApiPolicyV1beta1PodDisruptionBudgetSpec extends base_1.Model {
+}
+exports.IoK8sApiPolicyV1beta1PodDisruptionBudgetSpec = IoK8sApiPolicyV1beta1PodDisruptionBudgetSpec;
+exports.PodDisruptionBudgetSpec = IoK8sApiPolicyV1beta1PodDisruptionBudgetSpec;
+base_1.Model.setSchema(IoK8sApiPolicyV1beta1PodDisruptionBudgetSpec, "io.k8s.api.policy.v1beta1.PodDisruptionBudgetSpec", IoK8sApiPolicyV1beta1PodDisruptionBudgetSpec_1.addSchema);

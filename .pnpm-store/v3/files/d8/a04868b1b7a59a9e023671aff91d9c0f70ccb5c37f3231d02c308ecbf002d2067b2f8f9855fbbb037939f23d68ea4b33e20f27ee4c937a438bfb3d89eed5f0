@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAutoscalingV2beta2ResourceMetricSource.mjs";
+/**
+ * ResourceMetricSource indicates how to scale on a resource metric known to Kubernetes, as specified in requests and limits, describing each pod in the current scale target (e.g. CPU or memory).  The values will be averaged together before being compared to the target.  Such metrics are built in to Kubernetes, and have special scaling options on top of those available to normal per-pod metrics using the "pods" source.  Only one "target" type should be set.
+ */
+export class IoK8sApiAutoscalingV2beta2ResourceMetricSource extends Model {
+}
+Model.setSchema(IoK8sApiAutoscalingV2beta2ResourceMetricSource, "io.k8s.api.autoscaling.v2beta2.ResourceMetricSource", addSchema);
+export { IoK8sApiAutoscalingV2beta2ResourceMetricSource as ResourceMetricSource };

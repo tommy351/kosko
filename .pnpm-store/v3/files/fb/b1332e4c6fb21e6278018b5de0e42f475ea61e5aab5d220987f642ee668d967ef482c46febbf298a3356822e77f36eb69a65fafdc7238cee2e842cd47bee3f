@@ -1,0 +1,17 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * ScaleSpec describes the attributes of a scale subresource.
+ */
+export interface IIoK8sApiAutoscalingV1ScaleSpec {
+    /**
+     * desired number of instances for the scaled object.
+     */
+    "replicas"?: number;
+}
+/**
+ * ScaleSpec describes the attributes of a scale subresource.
+ */
+export declare class IoK8sApiAutoscalingV1ScaleSpec extends Model<IIoK8sApiAutoscalingV1ScaleSpec> implements IIoK8sApiAutoscalingV1ScaleSpec {
+    "replicas"?: number;
+}
+export { IIoK8sApiAutoscalingV1ScaleSpec as IScaleSpec, IoK8sApiAutoscalingV1ScaleSpec as ScaleSpec };

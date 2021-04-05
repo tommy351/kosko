@@ -1,0 +1,39 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApisMetaV1ObjectMeta_1 = require("./IoK8sApimachineryPkgApisMetaV1ObjectMeta.js");
+const IoK8sApiSettingsV1alpha1PodPresetSpec_1 = require("./IoK8sApiSettingsV1alpha1PodPresetSpec.js");
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string",
+            "enum": [
+                "settings.k8s.io/v1alpha1"
+            ]
+        },
+        "kind": {
+            "type": "string",
+            "enum": [
+                "PodPreset"
+            ]
+        },
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta#"
+        },
+        "spec": {
+            "$ref": "io.k8s.api.settings.v1alpha1.PodPresetSpec#"
+        }
+    },
+    "type": "object",
+    "required": [
+        "apiVersion",
+        "kind"
+    ]
+};
+function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1ObjectMeta_1.addSchema();
+    IoK8sApiSettingsV1alpha1PodPresetSpec_1.addSchema();
+    validate_1.register("io.k8s.api.settings.v1alpha1.PodPreset", schema);
+}
+exports.addSchema = addSchema;

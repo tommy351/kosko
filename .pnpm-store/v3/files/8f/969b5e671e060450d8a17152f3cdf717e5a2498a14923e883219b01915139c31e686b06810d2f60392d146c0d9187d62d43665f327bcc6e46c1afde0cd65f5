@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.HostPortRange = exports.IoK8sApiPolicyV1beta1HostPortRange = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiPolicyV1beta1HostPortRange_1 = require("../_schemas/IoK8sApiPolicyV1beta1HostPortRange.js");
+/**
+ * HostPortRange defines a range of host ports that will be enabled by a policy for pods to use.  It requires both the start and end to be defined.
+ */
+class IoK8sApiPolicyV1beta1HostPortRange extends base_1.Model {
+}
+exports.IoK8sApiPolicyV1beta1HostPortRange = IoK8sApiPolicyV1beta1HostPortRange;
+exports.HostPortRange = IoK8sApiPolicyV1beta1HostPortRange;
+base_1.Model.setSchema(IoK8sApiPolicyV1beta1HostPortRange, "io.k8s.api.policy.v1beta1.HostPortRange", IoK8sApiPolicyV1beta1HostPortRange_1.addSchema);

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CronJobSpec = exports.IoK8sApiBatchV1beta1CronJobSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiBatchV1beta1CronJobSpec_1 = require("../_schemas/IoK8sApiBatchV1beta1CronJobSpec.js");
+/**
+ * CronJobSpec describes how the job execution will look like and when it will actually run.
+ */
+class IoK8sApiBatchV1beta1CronJobSpec extends base_1.Model {
+}
+exports.IoK8sApiBatchV1beta1CronJobSpec = IoK8sApiBatchV1beta1CronJobSpec;
+exports.CronJobSpec = IoK8sApiBatchV1beta1CronJobSpec;
+base_1.Model.setSchema(IoK8sApiBatchV1beta1CronJobSpec, "io.k8s.api.batch.v1beta1.CronJobSpec", IoK8sApiBatchV1beta1CronJobSpec_1.addSchema);

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ScopedResourceSelectorRequirement = exports.IoK8sApiCoreV1ScopedResourceSelectorRequirement = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ScopedResourceSelectorRequirement_1 = require("../_schemas/IoK8sApiCoreV1ScopedResourceSelectorRequirement.js");
+/**
+ * A scoped-resource selector requirement is a selector that contains values, a scope name, and an operator that relates the scope name and values.
+ */
+class IoK8sApiCoreV1ScopedResourceSelectorRequirement extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ScopedResourceSelectorRequirement = IoK8sApiCoreV1ScopedResourceSelectorRequirement;
+exports.ScopedResourceSelectorRequirement = IoK8sApiCoreV1ScopedResourceSelectorRequirement;
+base_1.Model.setSchema(IoK8sApiCoreV1ScopedResourceSelectorRequirement, "io.k8s.api.core.v1.ScopedResourceSelectorRequirement", IoK8sApiCoreV1ScopedResourceSelectorRequirement_1.addSchema);

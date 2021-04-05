@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1HostPathVolumeSource.mjs";
+/**
+ * Represents a host path mapped into a pod. Host path volumes do not support ownership management or SELinux relabeling.
+ */
+export class IoK8sApiCoreV1HostPathVolumeSource extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1HostPathVolumeSource, "io.k8s.api.core.v1.HostPathVolumeSource", addSchema);
+export { IoK8sApiCoreV1HostPathVolumeSource as HostPathVolumeSource };

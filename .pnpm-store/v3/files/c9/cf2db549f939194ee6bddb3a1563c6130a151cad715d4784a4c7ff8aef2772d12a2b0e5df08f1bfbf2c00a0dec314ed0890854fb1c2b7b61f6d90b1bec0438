@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PodDisruptionBudgetList = exports.IoK8sApiPolicyV1beta1PodDisruptionBudgetList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiPolicyV1beta1PodDisruptionBudgetList_1 = require("../_schemas/IoK8sApiPolicyV1beta1PodDisruptionBudgetList.js");
+/**
+ * PodDisruptionBudgetList is a collection of PodDisruptionBudgets.
+ */
+class IoK8sApiPolicyV1beta1PodDisruptionBudgetList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiPolicyV1beta1PodDisruptionBudgetList.apiVersion,
+            kind: IoK8sApiPolicyV1beta1PodDisruptionBudgetList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiPolicyV1beta1PodDisruptionBudgetList = IoK8sApiPolicyV1beta1PodDisruptionBudgetList;
+exports.PodDisruptionBudgetList = IoK8sApiPolicyV1beta1PodDisruptionBudgetList;
+IoK8sApiPolicyV1beta1PodDisruptionBudgetList.apiVersion = "policy/v1beta1";
+IoK8sApiPolicyV1beta1PodDisruptionBudgetList.kind = "PodDisruptionBudgetList";
+base_1.Model.setSchema(IoK8sApiPolicyV1beta1PodDisruptionBudgetList, "io.k8s.api.policy.v1beta1.PodDisruptionBudgetList", IoK8sApiPolicyV1beta1PodDisruptionBudgetList_1.addSchema);

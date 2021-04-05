@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SecretKeySelector = exports.IoK8sApiCoreV1SecretKeySelector = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1SecretKeySelector_1 = require("../_schemas/IoK8sApiCoreV1SecretKeySelector.js");
+/**
+ * SecretKeySelector selects a key of a Secret.
+ */
+class IoK8sApiCoreV1SecretKeySelector extends base_1.Model {
+}
+exports.IoK8sApiCoreV1SecretKeySelector = IoK8sApiCoreV1SecretKeySelector;
+exports.SecretKeySelector = IoK8sApiCoreV1SecretKeySelector;
+base_1.Model.setSchema(IoK8sApiCoreV1SecretKeySelector, "io.k8s.api.core.v1.SecretKeySelector", IoK8sApiCoreV1SecretKeySelector_1.addSchema);

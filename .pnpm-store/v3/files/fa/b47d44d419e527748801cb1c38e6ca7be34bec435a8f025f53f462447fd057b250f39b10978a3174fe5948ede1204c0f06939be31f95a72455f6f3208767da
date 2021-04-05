@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Capabilities = exports.IoK8sApiCoreV1Capabilities = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1Capabilities_1 = require("../_schemas/IoK8sApiCoreV1Capabilities.js");
+/**
+ * Adds and removes POSIX capabilities from running containers.
+ */
+class IoK8sApiCoreV1Capabilities extends base_1.Model {
+}
+exports.IoK8sApiCoreV1Capabilities = IoK8sApiCoreV1Capabilities;
+exports.Capabilities = IoK8sApiCoreV1Capabilities;
+base_1.Model.setSchema(IoK8sApiCoreV1Capabilities, "io.k8s.api.core.v1.Capabilities", IoK8sApiCoreV1Capabilities_1.addSchema);

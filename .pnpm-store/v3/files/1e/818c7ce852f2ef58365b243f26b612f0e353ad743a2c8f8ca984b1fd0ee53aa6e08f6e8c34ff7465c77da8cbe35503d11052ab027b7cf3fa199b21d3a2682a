@@ -1,0 +1,17 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * UserSubject holds detailed information for user-kind subject.
+ */
+export interface IIoK8sApiFlowcontrolV1alpha1UserSubject {
+    /**
+     * `name` is the username that matches, or "\*" to match all usernames. Required.
+     */
+    "name": string;
+}
+/**
+ * UserSubject holds detailed information for user-kind subject.
+ */
+export declare class IoK8sApiFlowcontrolV1alpha1UserSubject extends Model<IIoK8sApiFlowcontrolV1alpha1UserSubject> implements IIoK8sApiFlowcontrolV1alpha1UserSubject {
+    "name": string;
+}
+export { IIoK8sApiFlowcontrolV1alpha1UserSubject as IUserSubject, IoK8sApiFlowcontrolV1alpha1UserSubject as UserSubject };

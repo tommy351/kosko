@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAuthorizationV1beta1ResourceAttributes.mjs";
+/**
+ * ResourceAttributes includes the authorization attributes available for resource requests to the Authorizer interface
+ */
+export class IoK8sApiAuthorizationV1beta1ResourceAttributes extends Model {
+}
+Model.setSchema(IoK8sApiAuthorizationV1beta1ResourceAttributes, "io.k8s.api.authorization.v1beta1.ResourceAttributes", addSchema);
+export { IoK8sApiAuthorizationV1beta1ResourceAttributes as ResourceAttributes };

@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1PersistentVolumeClaim.mjs";
+/**
+ * PersistentVolumeClaim is a user's request for and claim to a persistent volume
+ */
+export class IoK8sApiCoreV1PersistentVolumeClaim extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1PersistentVolumeClaim.apiVersion,
+            kind: IoK8sApiCoreV1PersistentVolumeClaim.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiCoreV1PersistentVolumeClaim.apiVersion = "v1";
+IoK8sApiCoreV1PersistentVolumeClaim.kind = "PersistentVolumeClaim";
+Model.setSchema(IoK8sApiCoreV1PersistentVolumeClaim, "io.k8s.api.core.v1.PersistentVolumeClaim", addSchema);
+export { IoK8sApiCoreV1PersistentVolumeClaim as PersistentVolumeClaim };

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Preconditions = exports.IoK8sApimachineryPkgApisMetaV1Preconditions = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApimachineryPkgApisMetaV1Preconditions_1 = require("../_schemas/IoK8sApimachineryPkgApisMetaV1Preconditions.js");
+/**
+ * Preconditions must be fulfilled before an operation (update, delete, etc.) is carried out.
+ */
+class IoK8sApimachineryPkgApisMetaV1Preconditions extends base_1.Model {
+}
+exports.IoK8sApimachineryPkgApisMetaV1Preconditions = IoK8sApimachineryPkgApisMetaV1Preconditions;
+exports.Preconditions = IoK8sApimachineryPkgApisMetaV1Preconditions;
+base_1.Model.setSchema(IoK8sApimachineryPkgApisMetaV1Preconditions, "io.k8s.apimachinery.pkg.apis.meta.v1.Preconditions", IoK8sApimachineryPkgApisMetaV1Preconditions_1.addSchema);

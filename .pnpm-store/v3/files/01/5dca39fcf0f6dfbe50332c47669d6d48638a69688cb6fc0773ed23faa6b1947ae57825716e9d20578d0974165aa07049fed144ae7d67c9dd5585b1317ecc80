@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NodeSpec = exports.IoK8sApiCoreV1NodeSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1NodeSpec_1 = require("../_schemas/IoK8sApiCoreV1NodeSpec.js");
+/**
+ * NodeSpec describes the attributes that a node is created with.
+ */
+class IoK8sApiCoreV1NodeSpec extends base_1.Model {
+}
+exports.IoK8sApiCoreV1NodeSpec = IoK8sApiCoreV1NodeSpec;
+exports.NodeSpec = IoK8sApiCoreV1NodeSpec;
+base_1.Model.setSchema(IoK8sApiCoreV1NodeSpec, "io.k8s.api.core.v1.NodeSpec", IoK8sApiCoreV1NodeSpec_1.addSchema);

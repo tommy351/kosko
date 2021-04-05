@@ -1,0 +1,37 @@
+import { IIoK8sApiAppsV1ReplicaSet } from "./IoK8sApiAppsV1ReplicaSet";
+import { IIoK8sApimachineryPkgApisMetaV1ListMeta } from "./IoK8sApimachineryPkgApisMetaV1ListMeta";
+import { ModelData, Model } from "@kubernetes-models/base";
+/**
+ * ReplicaSetList is a collection of ReplicaSets.
+ */
+export interface IIoK8sApiAppsV1ReplicaSetList {
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    "apiVersion": "apps/v1";
+    /**
+     * List of ReplicaSets. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller
+     */
+    "items": Array<IIoK8sApiAppsV1ReplicaSet>;
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    "kind": "ReplicaSetList";
+    /**
+     * Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+}
+/**
+ * ReplicaSetList is a collection of ReplicaSets.
+ */
+export declare class IoK8sApiAppsV1ReplicaSetList extends Model<IIoK8sApiAppsV1ReplicaSetList> implements IIoK8sApiAppsV1ReplicaSetList {
+    "apiVersion": IIoK8sApiAppsV1ReplicaSetList["apiVersion"];
+    "items": Array<IIoK8sApiAppsV1ReplicaSet>;
+    "kind": IIoK8sApiAppsV1ReplicaSetList["kind"];
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+    static apiVersion: IIoK8sApiAppsV1ReplicaSetList["apiVersion"];
+    static kind: IIoK8sApiAppsV1ReplicaSetList["kind"];
+    constructor(data?: ModelData<IIoK8sApiAppsV1ReplicaSetList>);
+}
+export { IIoK8sApiAppsV1ReplicaSetList as IReplicaSetList, IoK8sApiAppsV1ReplicaSetList as ReplicaSetList };

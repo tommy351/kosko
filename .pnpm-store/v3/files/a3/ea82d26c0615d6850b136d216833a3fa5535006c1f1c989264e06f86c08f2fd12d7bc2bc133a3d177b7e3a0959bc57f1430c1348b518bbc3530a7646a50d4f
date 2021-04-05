@@ -1,0 +1,44 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApisMetaV1ObjectMeta_1 = require("./IoK8sApimachineryPkgApisMetaV1ObjectMeta.js");
+const IoK8sApiAutoscalingV1ScaleSpec_1 = require("./IoK8sApiAutoscalingV1ScaleSpec.js");
+const IoK8sApiAutoscalingV1ScaleStatus_1 = require("./IoK8sApiAutoscalingV1ScaleStatus.js");
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string",
+            "enum": [
+                "autoscaling/v1"
+            ]
+        },
+        "kind": {
+            "type": "string",
+            "enum": [
+                "Scale"
+            ]
+        },
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta#"
+        },
+        "spec": {
+            "$ref": "io.k8s.api.autoscaling.v1.ScaleSpec#"
+        },
+        "status": {
+            "$ref": "io.k8s.api.autoscaling.v1.ScaleStatus#"
+        }
+    },
+    "type": "object",
+    "required": [
+        "apiVersion",
+        "kind"
+    ]
+};
+function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1ObjectMeta_1.addSchema();
+    IoK8sApiAutoscalingV1ScaleSpec_1.addSchema();
+    IoK8sApiAutoscalingV1ScaleStatus_1.addSchema();
+    validate_1.register("io.k8s.api.autoscaling.v1.Scale", schema);
+}
+exports.addSchema = addSchema;

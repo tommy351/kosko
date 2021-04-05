@@ -1,0 +1,2 @@
+import * as apiextensions from "./apiextensions/index.mjs";
+export { apiextensions };

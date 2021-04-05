@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Volume = exports.IoK8sApiCoreV1Volume = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1Volume_1 = require("../_schemas/IoK8sApiCoreV1Volume.js");
+/**
+ * Volume represents a named volume in a pod that may be accessed by any container in the pod.
+ */
+class IoK8sApiCoreV1Volume extends base_1.Model {
+}
+exports.IoK8sApiCoreV1Volume = IoK8sApiCoreV1Volume;
+exports.Volume = IoK8sApiCoreV1Volume;
+base_1.Model.setSchema(IoK8sApiCoreV1Volume, "io.k8s.api.core.v1.Volume", IoK8sApiCoreV1Volume_1.addSchema);

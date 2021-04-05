@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1ReplicationControllerSpec.mjs";
+/**
+ * ReplicationControllerSpec is the specification of a replication controller.
+ */
+export class IoK8sApiCoreV1ReplicationControllerSpec extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1ReplicationControllerSpec, "io.k8s.api.core.v1.ReplicationControllerSpec", addSchema);
+export { IoK8sApiCoreV1ReplicationControllerSpec as ReplicationControllerSpec };

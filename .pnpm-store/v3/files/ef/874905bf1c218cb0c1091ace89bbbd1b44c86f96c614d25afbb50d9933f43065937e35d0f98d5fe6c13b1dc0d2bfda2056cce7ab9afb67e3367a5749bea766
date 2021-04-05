@@ -1,0 +1,37 @@
+import { IIoK8sApiCoreV1ComponentStatus } from "./IoK8sApiCoreV1ComponentStatus";
+import { IIoK8sApimachineryPkgApisMetaV1ListMeta } from "./IoK8sApimachineryPkgApisMetaV1ListMeta";
+import { ModelData, Model } from "@kubernetes-models/base";
+/**
+ * Status of all the conditions for the component as a list of ComponentStatus objects. Deprecated: This API is deprecated in v1.19+
+ */
+export interface IIoK8sApiCoreV1ComponentStatusList {
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    "apiVersion": "v1";
+    /**
+     * List of ComponentStatus objects.
+     */
+    "items": Array<IIoK8sApiCoreV1ComponentStatus>;
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    "kind": "ComponentStatusList";
+    /**
+     * Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+}
+/**
+ * Status of all the conditions for the component as a list of ComponentStatus objects. Deprecated: This API is deprecated in v1.19+
+ */
+export declare class IoK8sApiCoreV1ComponentStatusList extends Model<IIoK8sApiCoreV1ComponentStatusList> implements IIoK8sApiCoreV1ComponentStatusList {
+    "apiVersion": IIoK8sApiCoreV1ComponentStatusList["apiVersion"];
+    "items": Array<IIoK8sApiCoreV1ComponentStatus>;
+    "kind": IIoK8sApiCoreV1ComponentStatusList["kind"];
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+    static apiVersion: IIoK8sApiCoreV1ComponentStatusList["apiVersion"];
+    static kind: IIoK8sApiCoreV1ComponentStatusList["kind"];
+    constructor(data?: ModelData<IIoK8sApiCoreV1ComponentStatusList>);
+}
+export { IIoK8sApiCoreV1ComponentStatusList as IComponentStatusList, IoK8sApiCoreV1ComponentStatusList as ComponentStatusList };

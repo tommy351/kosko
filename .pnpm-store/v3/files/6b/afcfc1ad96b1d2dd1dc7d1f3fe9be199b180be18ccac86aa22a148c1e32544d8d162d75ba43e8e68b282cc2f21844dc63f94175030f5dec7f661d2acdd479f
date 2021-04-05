@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RuntimeClassList = exports.IoK8sApiNodeV1beta1RuntimeClassList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiNodeV1beta1RuntimeClassList_1 = require("../_schemas/IoK8sApiNodeV1beta1RuntimeClassList.js");
+/**
+ * RuntimeClassList is a list of RuntimeClass objects.
+ */
+class IoK8sApiNodeV1beta1RuntimeClassList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiNodeV1beta1RuntimeClassList.apiVersion,
+            kind: IoK8sApiNodeV1beta1RuntimeClassList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiNodeV1beta1RuntimeClassList = IoK8sApiNodeV1beta1RuntimeClassList;
+exports.RuntimeClassList = IoK8sApiNodeV1beta1RuntimeClassList;
+IoK8sApiNodeV1beta1RuntimeClassList.apiVersion = "node.k8s.io/v1beta1";
+IoK8sApiNodeV1beta1RuntimeClassList.kind = "RuntimeClassList";
+base_1.Model.setSchema(IoK8sApiNodeV1beta1RuntimeClassList, "io.k8s.api.node.v1beta1.RuntimeClassList", IoK8sApiNodeV1beta1RuntimeClassList_1.addSchema);

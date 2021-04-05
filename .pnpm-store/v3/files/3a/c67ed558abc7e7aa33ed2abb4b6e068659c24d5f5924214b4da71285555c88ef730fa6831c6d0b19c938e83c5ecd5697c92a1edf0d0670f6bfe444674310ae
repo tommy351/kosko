@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ConfigMapProjection = exports.IoK8sApiCoreV1ConfigMapProjection = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ConfigMapProjection_1 = require("../_schemas/IoK8sApiCoreV1ConfigMapProjection.js");
+/**
+ * Adapts a ConfigMap into a projected volume.
+ *
+ * The contents of the target ConfigMap's Data field will be presented in a projected volume as files using the keys in the Data field as the file names, unless the items element is populated with specific mappings of keys to paths. Note that this is identical to a configmap volume source without the default mode.
+ */
+class IoK8sApiCoreV1ConfigMapProjection extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ConfigMapProjection = IoK8sApiCoreV1ConfigMapProjection;
+exports.ConfigMapProjection = IoK8sApiCoreV1ConfigMapProjection;
+base_1.Model.setSchema(IoK8sApiCoreV1ConfigMapProjection, "io.k8s.api.core.v1.ConfigMapProjection", IoK8sApiCoreV1ConfigMapProjection_1.addSchema);

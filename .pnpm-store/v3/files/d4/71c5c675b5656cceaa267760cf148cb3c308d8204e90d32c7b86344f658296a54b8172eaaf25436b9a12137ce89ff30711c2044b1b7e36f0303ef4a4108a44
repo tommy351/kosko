@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NodeSystemInfo = exports.IoK8sApiCoreV1NodeSystemInfo = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1NodeSystemInfo_1 = require("../_schemas/IoK8sApiCoreV1NodeSystemInfo.js");
+/**
+ * NodeSystemInfo is a set of ids/uuids to uniquely identify the node.
+ */
+class IoK8sApiCoreV1NodeSystemInfo extends base_1.Model {
+}
+exports.IoK8sApiCoreV1NodeSystemInfo = IoK8sApiCoreV1NodeSystemInfo;
+exports.NodeSystemInfo = IoK8sApiCoreV1NodeSystemInfo;
+base_1.Model.setSchema(IoK8sApiCoreV1NodeSystemInfo, "io.k8s.api.core.v1.NodeSystemInfo", IoK8sApiCoreV1NodeSystemInfo_1.addSchema);

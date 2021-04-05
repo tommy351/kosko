@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1ResourceQuotaSpec.mjs";
+/**
+ * ResourceQuotaSpec defines the desired hard limits to enforce for Quota.
+ */
+export class IoK8sApiCoreV1ResourceQuotaSpec extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1ResourceQuotaSpec, "io.k8s.api.core.v1.ResourceQuotaSpec", addSchema);
+export { IoK8sApiCoreV1ResourceQuotaSpec as ResourceQuotaSpec };

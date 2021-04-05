@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DaemonSetUpdateStrategy = exports.IoK8sApiAppsV1DaemonSetUpdateStrategy = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAppsV1DaemonSetUpdateStrategy_1 = require("../_schemas/IoK8sApiAppsV1DaemonSetUpdateStrategy.js");
+/**
+ * DaemonSetUpdateStrategy is a struct used to control the update strategy for a DaemonSet.
+ */
+class IoK8sApiAppsV1DaemonSetUpdateStrategy extends base_1.Model {
+}
+exports.IoK8sApiAppsV1DaemonSetUpdateStrategy = IoK8sApiAppsV1DaemonSetUpdateStrategy;
+exports.DaemonSetUpdateStrategy = IoK8sApiAppsV1DaemonSetUpdateStrategy;
+base_1.Model.setSchema(IoK8sApiAppsV1DaemonSetUpdateStrategy, "io.k8s.api.apps.v1.DaemonSetUpdateStrategy", IoK8sApiAppsV1DaemonSetUpdateStrategy_1.addSchema);

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.HostPathVolumeSource = exports.IoK8sApiCoreV1HostPathVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1HostPathVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1HostPathVolumeSource.js");
+/**
+ * Represents a host path mapped into a pod. Host path volumes do not support ownership management or SELinux relabeling.
+ */
+class IoK8sApiCoreV1HostPathVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1HostPathVolumeSource = IoK8sApiCoreV1HostPathVolumeSource;
+exports.HostPathVolumeSource = IoK8sApiCoreV1HostPathVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1HostPathVolumeSource, "io.k8s.api.core.v1.HostPathVolumeSource", IoK8sApiCoreV1HostPathVolumeSource_1.addSchema);

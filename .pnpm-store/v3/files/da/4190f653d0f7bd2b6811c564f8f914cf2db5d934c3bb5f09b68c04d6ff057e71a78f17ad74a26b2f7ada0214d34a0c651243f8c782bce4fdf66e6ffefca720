@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FlowSchemaCondition = exports.IoK8sApiFlowcontrolV1alpha1FlowSchemaCondition = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiFlowcontrolV1alpha1FlowSchemaCondition_1 = require("../_schemas/IoK8sApiFlowcontrolV1alpha1FlowSchemaCondition.js");
+/**
+ * FlowSchemaCondition describes conditions for a FlowSchema.
+ */
+class IoK8sApiFlowcontrolV1alpha1FlowSchemaCondition extends base_1.Model {
+}
+exports.IoK8sApiFlowcontrolV1alpha1FlowSchemaCondition = IoK8sApiFlowcontrolV1alpha1FlowSchemaCondition;
+exports.FlowSchemaCondition = IoK8sApiFlowcontrolV1alpha1FlowSchemaCondition;
+base_1.Model.setSchema(IoK8sApiFlowcontrolV1alpha1FlowSchemaCondition, "io.k8s.api.flowcontrol.v1alpha1.FlowSchemaCondition", IoK8sApiFlowcontrolV1alpha1FlowSchemaCondition_1.addSchema);

@@ -1,0 +1,38 @@
+import { IIoK8sApimachineryPkgApisMetaV1Time } from "./IoK8sApimachineryPkgApisMetaV1Time";
+import { Model } from "@kubernetes-models/base";
+/**
+ * APIServiceCondition describes the state of an APIService at a particular point
+ */
+export interface IIoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceCondition {
+    /**
+     * Last time the condition transitioned from one status to another.
+     */
+    "lastTransitionTime"?: IIoK8sApimachineryPkgApisMetaV1Time;
+    /**
+     * Human-readable message indicating details about last transition.
+     */
+    "message"?: string;
+    /**
+     * Unique, one-word, CamelCase reason for the condition's last transition.
+     */
+    "reason"?: string;
+    /**
+     * Status is the status of the condition. Can be True, False, Unknown.
+     */
+    "status": string;
+    /**
+     * Type is the type of the condition.
+     */
+    "type": string;
+}
+/**
+ * APIServiceCondition describes the state of an APIService at a particular point
+ */
+export declare class IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceCondition extends Model<IIoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceCondition> implements IIoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceCondition {
+    "lastTransitionTime"?: IIoK8sApimachineryPkgApisMetaV1Time;
+    "message"?: string;
+    "reason"?: string;
+    "status": string;
+    "type": string;
+}
+export { IIoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceCondition as IAPIServiceCondition, IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceCondition as APIServiceCondition };

@@ -1,0 +1,5 @@
+export * from "../../../_definitions/IoK8sApiCertificatesV1CertificateSigningRequest.mjs";
+export * from "../../../_definitions/IoK8sApiCertificatesV1CertificateSigningRequestCondition.mjs";
+export * from "../../../_definitions/IoK8sApiCertificatesV1CertificateSigningRequestList.mjs";
+export * from "../../../_definitions/IoK8sApiCertificatesV1CertificateSigningRequestSpec.mjs";
+export * from "../../../_definitions/IoK8sApiCertificatesV1CertificateSigningRequestStatus.mjs";

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TopologySelectorLabelRequirement = exports.IoK8sApiCoreV1TopologySelectorLabelRequirement = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1TopologySelectorLabelRequirement_1 = require("../_schemas/IoK8sApiCoreV1TopologySelectorLabelRequirement.js");
+/**
+ * A topology selector requirement is a selector that matches given label. This is an alpha feature and may change in the future.
+ */
+class IoK8sApiCoreV1TopologySelectorLabelRequirement extends base_1.Model {
+}
+exports.IoK8sApiCoreV1TopologySelectorLabelRequirement = IoK8sApiCoreV1TopologySelectorLabelRequirement;
+exports.TopologySelectorLabelRequirement = IoK8sApiCoreV1TopologySelectorLabelRequirement;
+base_1.Model.setSchema(IoK8sApiCoreV1TopologySelectorLabelRequirement, "io.k8s.api.core.v1.TopologySelectorLabelRequirement", IoK8sApiCoreV1TopologySelectorLabelRequirement_1.addSchema);

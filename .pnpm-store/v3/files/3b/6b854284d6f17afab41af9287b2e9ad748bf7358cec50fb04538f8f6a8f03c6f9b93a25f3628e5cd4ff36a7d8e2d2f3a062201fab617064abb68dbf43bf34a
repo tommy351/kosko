@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Ingress = exports.IoK8sApiNetworkingV1Ingress = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiNetworkingV1Ingress_1 = require("../_schemas/IoK8sApiNetworkingV1Ingress.js");
+/**
+ * Ingress is a collection of rules that allow inbound connections to reach the endpoints defined by a backend. An Ingress can be configured to give services externally-reachable urls, load balance traffic, terminate SSL, offer name based virtual hosting etc.
+ */
+class IoK8sApiNetworkingV1Ingress extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiNetworkingV1Ingress.apiVersion,
+            kind: IoK8sApiNetworkingV1Ingress.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiNetworkingV1Ingress = IoK8sApiNetworkingV1Ingress;
+exports.Ingress = IoK8sApiNetworkingV1Ingress;
+IoK8sApiNetworkingV1Ingress.apiVersion = "networking.k8s.io/v1";
+IoK8sApiNetworkingV1Ingress.kind = "Ingress";
+base_1.Model.setSchema(IoK8sApiNetworkingV1Ingress, "io.k8s.api.networking.v1.Ingress", IoK8sApiNetworkingV1Ingress_1.addSchema);

@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ValidatingWebhookConfiguration = exports.IoK8sApiAdmissionregistrationV1beta1ValidatingWebhookConfiguration = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAdmissionregistrationV1beta1ValidatingWebhookConfiguration_1 = require("../_schemas/IoK8sApiAdmissionregistrationV1beta1ValidatingWebhookConfiguration.js");
+/**
+ * ValidatingWebhookConfiguration describes the configuration of and admission webhook that accept or reject and object without changing it. Deprecated in v1.16, planned for removal in v1.19. Use admissionregistration.k8s.io/v1 ValidatingWebhookConfiguration instead.
+ */
+class IoK8sApiAdmissionregistrationV1beta1ValidatingWebhookConfiguration extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAdmissionregistrationV1beta1ValidatingWebhookConfiguration.apiVersion,
+            kind: IoK8sApiAdmissionregistrationV1beta1ValidatingWebhookConfiguration.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiAdmissionregistrationV1beta1ValidatingWebhookConfiguration = IoK8sApiAdmissionregistrationV1beta1ValidatingWebhookConfiguration;
+exports.ValidatingWebhookConfiguration = IoK8sApiAdmissionregistrationV1beta1ValidatingWebhookConfiguration;
+IoK8sApiAdmissionregistrationV1beta1ValidatingWebhookConfiguration.apiVersion = "admissionregistration.k8s.io/v1beta1";
+IoK8sApiAdmissionregistrationV1beta1ValidatingWebhookConfiguration.kind = "ValidatingWebhookConfiguration";
+base_1.Model.setSchema(IoK8sApiAdmissionregistrationV1beta1ValidatingWebhookConfiguration, "io.k8s.api.admissionregistration.v1beta1.ValidatingWebhookConfiguration", IoK8sApiAdmissionregistrationV1beta1ValidatingWebhookConfiguration_1.addSchema);

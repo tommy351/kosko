@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiNetworkingV1beta1IngressList.mjs";
+/**
+ * IngressList is a collection of Ingress.
+ */
+export class IoK8sApiNetworkingV1beta1IngressList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiNetworkingV1beta1IngressList.apiVersion,
+            kind: IoK8sApiNetworkingV1beta1IngressList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiNetworkingV1beta1IngressList.apiVersion = "networking.k8s.io/v1beta1";
+IoK8sApiNetworkingV1beta1IngressList.kind = "IngressList";
+Model.setSchema(IoK8sApiNetworkingV1beta1IngressList, "io.k8s.api.networking.v1beta1.IngressList", addSchema);
+export { IoK8sApiNetworkingV1beta1IngressList as IngressList };

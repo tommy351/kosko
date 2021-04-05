@@ -1,0 +1,40 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiAuthorizationV1NonResourceRule_1 = require("./IoK8sApiAuthorizationV1NonResourceRule.js");
+const IoK8sApiAuthorizationV1ResourceRule_1 = require("./IoK8sApiAuthorizationV1ResourceRule.js");
+const schema = {
+    "properties": {
+        "evaluationError": {
+            "type": "string"
+        },
+        "incomplete": {
+            "type": "boolean"
+        },
+        "nonResourceRules": {
+            "items": {
+                "$ref": "io.k8s.api.authorization.v1.NonResourceRule#"
+            },
+            "type": "array"
+        },
+        "resourceRules": {
+            "items": {
+                "$ref": "io.k8s.api.authorization.v1.ResourceRule#"
+            },
+            "type": "array"
+        }
+    },
+    "required": [
+        "resourceRules",
+        "nonResourceRules",
+        "incomplete"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiAuthorizationV1NonResourceRule_1.addSchema();
+    IoK8sApiAuthorizationV1ResourceRule_1.addSchema();
+    validate_1.register("io.k8s.api.authorization.v1.SubjectRulesReviewStatus", schema);
+}
+exports.addSchema = addSchema;

@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1Namespace.mjs";
+/**
+ * Namespace provides a scope for Names. Use of multiple namespaces is optional.
+ */
+export class IoK8sApiCoreV1Namespace extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1Namespace.apiVersion,
+            kind: IoK8sApiCoreV1Namespace.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiCoreV1Namespace.apiVersion = "v1";
+IoK8sApiCoreV1Namespace.kind = "Namespace";
+Model.setSchema(IoK8sApiCoreV1Namespace, "io.k8s.api.core.v1.Namespace", addSchema);
+export { IoK8sApiCoreV1Namespace as Namespace };

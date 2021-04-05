@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1PodTemplate.mjs";
+/**
+ * PodTemplate describes a template for creating copies of a predefined pod.
+ */
+export class IoK8sApiCoreV1PodTemplate extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1PodTemplate.apiVersion,
+            kind: IoK8sApiCoreV1PodTemplate.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiCoreV1PodTemplate.apiVersion = "v1";
+IoK8sApiCoreV1PodTemplate.kind = "PodTemplate";
+Model.setSchema(IoK8sApiCoreV1PodTemplate, "io.k8s.api.core.v1.PodTemplate", addSchema);
+export { IoK8sApiCoreV1PodTemplate as PodTemplate };

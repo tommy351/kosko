@@ -1,0 +1,41 @@
+{
+    "name": "@types/signale",
+    "version": "1.4.1",
+    "description": "TypeScript definitions for signale",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Resi Respati",
+            "url": "https://github.com/resir014",
+            "githubUsername": "resir014"
+        },
+        {
+            "name": "Kingdaro",
+            "url": "https://github.com/kingdaro",
+            "githubUsername": "kingdaro"
+        },
+        {
+            "name": "Joydip Roy",
+            "url": "https://github.com/rjoydip",
+            "githubUsername": "rjoydip"
+        },
+        {
+            "name": "Simon Nußbaumer",
+            "url": "https://github.com/lookapanda",
+            "githubUsername": "lookapanda"
+        }
+    ],
+    "main": "",
+    "types": "index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+        "directory": "types/signale"
+    },
+    "scripts": {},
+    "dependencies": {
+        "@types/node": "*"
+    },
+    "typesPublisherContentHash": "5e613a380d804b46cc6bc8f68f2d3d1284b6310212e5e9bf2056f281112183f7",
+    "typeScriptVersion": "2.8"
+}

@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiStorageV1alpha1VolumeAttachmentList.mjs";
+/**
+ * VolumeAttachmentList is a collection of VolumeAttachment objects.
+ */
+export class IoK8sApiStorageV1alpha1VolumeAttachmentList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiStorageV1alpha1VolumeAttachmentList.apiVersion,
+            kind: IoK8sApiStorageV1alpha1VolumeAttachmentList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiStorageV1alpha1VolumeAttachmentList.apiVersion = "storage.k8s.io/v1alpha1";
+IoK8sApiStorageV1alpha1VolumeAttachmentList.kind = "VolumeAttachmentList";
+Model.setSchema(IoK8sApiStorageV1alpha1VolumeAttachmentList, "io.k8s.api.storage.v1alpha1.VolumeAttachmentList", addSchema);
+export { IoK8sApiStorageV1alpha1VolumeAttachmentList as VolumeAttachmentList };

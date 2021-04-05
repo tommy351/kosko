@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Pod = exports.IoK8sApiCoreV1Pod = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1Pod_1 = require("../_schemas/IoK8sApiCoreV1Pod.js");
+/**
+ * Pod is a collection of containers that can run on a host. This resource is created by clients and scheduled onto hosts.
+ */
+class IoK8sApiCoreV1Pod extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1Pod.apiVersion,
+            kind: IoK8sApiCoreV1Pod.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1Pod = IoK8sApiCoreV1Pod;
+exports.Pod = IoK8sApiCoreV1Pod;
+IoK8sApiCoreV1Pod.apiVersion = "v1";
+IoK8sApiCoreV1Pod.kind = "Pod";
+base_1.Model.setSchema(IoK8sApiCoreV1Pod, "io.k8s.api.core.v1.Pod", IoK8sApiCoreV1Pod_1.addSchema);

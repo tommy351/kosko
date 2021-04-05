@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CSIPersistentVolumeSource = exports.IoK8sApiCoreV1CSIPersistentVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1CSIPersistentVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1CSIPersistentVolumeSource.js");
+/**
+ * Represents storage that is managed by an external CSI volume driver (Beta feature)
+ */
+class IoK8sApiCoreV1CSIPersistentVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1CSIPersistentVolumeSource = IoK8sApiCoreV1CSIPersistentVolumeSource;
+exports.CSIPersistentVolumeSource = IoK8sApiCoreV1CSIPersistentVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1CSIPersistentVolumeSource, "io.k8s.api.core.v1.CSIPersistentVolumeSource", IoK8sApiCoreV1CSIPersistentVolumeSource_1.addSchema);

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.EnvFromSource = exports.IoK8sApiCoreV1EnvFromSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1EnvFromSource_1 = require("../_schemas/IoK8sApiCoreV1EnvFromSource.js");
+/**
+ * EnvFromSource represents the source of a set of ConfigMaps
+ */
+class IoK8sApiCoreV1EnvFromSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1EnvFromSource = IoK8sApiCoreV1EnvFromSource;
+exports.EnvFromSource = IoK8sApiCoreV1EnvFromSource;
+base_1.Model.setSchema(IoK8sApiCoreV1EnvFromSource, "io.k8s.api.core.v1.EnvFromSource", IoK8sApiCoreV1EnvFromSource_1.addSchema);

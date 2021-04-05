@@ -1,0 +1,43 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sKubeAggregatorPkgApisApiregistrationV1ServiceReference_1 = require("./IoK8sKubeAggregatorPkgApisApiregistrationV1ServiceReference.js");
+const schema = {
+    "properties": {
+        "caBundle": {
+            "format": "byte",
+            "type": "string"
+        },
+        "group": {
+            "type": "string"
+        },
+        "groupPriorityMinimum": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "insecureSkipTLSVerify": {
+            "type": "boolean"
+        },
+        "service": {
+            "$ref": "io.k8s.kube-aggregator.pkg.apis.apiregistration.v1.ServiceReference#"
+        },
+        "version": {
+            "type": "string"
+        },
+        "versionPriority": {
+            "format": "int32",
+            "type": "integer"
+        }
+    },
+    "required": [
+        "groupPriorityMinimum",
+        "versionPriority"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sKubeAggregatorPkgApisApiregistrationV1ServiceReference_1.addSchema();
+    validate_1.register("io.k8s.kube-aggregator.pkg.apis.apiregistration.v1.APIServiceSpec", schema);
+}
+exports.addSchema = addSchema;

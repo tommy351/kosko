@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PhotonPersistentDiskVolumeSource = exports.IoK8sApiCoreV1PhotonPersistentDiskVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1PhotonPersistentDiskVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1PhotonPersistentDiskVolumeSource.js");
+/**
+ * Represents a Photon Controller persistent disk resource.
+ */
+class IoK8sApiCoreV1PhotonPersistentDiskVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1PhotonPersistentDiskVolumeSource = IoK8sApiCoreV1PhotonPersistentDiskVolumeSource;
+exports.PhotonPersistentDiskVolumeSource = IoK8sApiCoreV1PhotonPersistentDiskVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1PhotonPersistentDiskVolumeSource, "io.k8s.api.core.v1.PhotonPersistentDiskVolumeSource", IoK8sApiCoreV1PhotonPersistentDiskVolumeSource_1.addSchema);

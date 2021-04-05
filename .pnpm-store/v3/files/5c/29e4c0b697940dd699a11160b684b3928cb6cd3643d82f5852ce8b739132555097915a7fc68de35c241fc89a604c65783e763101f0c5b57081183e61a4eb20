@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ServiceAccount = exports.IoK8sApiCoreV1ServiceAccount = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ServiceAccount_1 = require("../_schemas/IoK8sApiCoreV1ServiceAccount.js");
+/**
+ * ServiceAccount binds together: \* a name, understood by users, and perhaps by peripheral systems, for an identity \* a principal that can be authenticated and authorized \* a set of secrets
+ */
+class IoK8sApiCoreV1ServiceAccount extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1ServiceAccount.apiVersion,
+            kind: IoK8sApiCoreV1ServiceAccount.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1ServiceAccount = IoK8sApiCoreV1ServiceAccount;
+exports.ServiceAccount = IoK8sApiCoreV1ServiceAccount;
+IoK8sApiCoreV1ServiceAccount.apiVersion = "v1";
+IoK8sApiCoreV1ServiceAccount.kind = "ServiceAccount";
+base_1.Model.setSchema(IoK8sApiCoreV1ServiceAccount, "io.k8s.api.core.v1.ServiceAccount", IoK8sApiCoreV1ServiceAccount_1.addSchema);

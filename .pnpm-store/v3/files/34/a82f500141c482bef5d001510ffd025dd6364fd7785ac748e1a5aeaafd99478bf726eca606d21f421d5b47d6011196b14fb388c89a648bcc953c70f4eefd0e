@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiPolicyV1beta1HostPortRange.mjs";
+/**
+ * HostPortRange defines a range of host ports that will be enabled by a policy for pods to use.  It requires both the start and end to be defined.
+ */
+export class IoK8sApiPolicyV1beta1HostPortRange extends Model {
+}
+Model.setSchema(IoK8sApiPolicyV1beta1HostPortRange, "io.k8s.api.policy.v1beta1.HostPortRange", addSchema);
+export { IoK8sApiPolicyV1beta1HostPortRange as HostPortRange };

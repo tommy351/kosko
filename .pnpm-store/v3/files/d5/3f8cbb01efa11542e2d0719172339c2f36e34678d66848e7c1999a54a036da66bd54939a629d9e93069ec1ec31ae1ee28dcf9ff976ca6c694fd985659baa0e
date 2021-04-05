@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1JSONSchemaProps.mjs";
+/**
+ * JSONSchemaProps is a JSON-Schema following Specification Draft 4 (http://json-schema.org/).
+ */
+export class IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1JSONSchemaProps extends Model {
+}
+Model.setSchema(IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1JSONSchemaProps, "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1beta1.JSONSchemaProps", addSchema);
+export { IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1JSONSchemaProps as JSONSchemaProps };

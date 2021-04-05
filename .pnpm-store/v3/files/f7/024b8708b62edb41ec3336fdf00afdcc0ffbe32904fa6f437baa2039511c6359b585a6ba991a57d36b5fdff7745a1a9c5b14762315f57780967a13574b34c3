@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiFlowcontrolV1alpha1FlowSchema.mjs";
+/**
+ * FlowSchema defines the schema of a group of flows. Note that a flow is made up of a set of inbound API requests with similar attributes and is identified by a pair of strings: the name of the FlowSchema and a "flow distinguisher".
+ */
+export class IoK8sApiFlowcontrolV1alpha1FlowSchema extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiFlowcontrolV1alpha1FlowSchema.apiVersion,
+            kind: IoK8sApiFlowcontrolV1alpha1FlowSchema.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiFlowcontrolV1alpha1FlowSchema.apiVersion = "flowcontrol.apiserver.k8s.io/v1alpha1";
+IoK8sApiFlowcontrolV1alpha1FlowSchema.kind = "FlowSchema";
+Model.setSchema(IoK8sApiFlowcontrolV1alpha1FlowSchema, "io.k8s.api.flowcontrol.v1alpha1.FlowSchema", addSchema);
+export { IoK8sApiFlowcontrolV1alpha1FlowSchema as FlowSchema };

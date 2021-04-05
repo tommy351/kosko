@@ -1,0 +1,17 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiCoreV1TypedLocalObjectReference } from "./IoK8sApiCoreV1TypedLocalObjectReference.mjs";
+const schema = {
+    "properties": {
+        "controller": {
+            "type": "string"
+        },
+        "parameters": {
+            "$ref": "io.k8s.api.core.v1.TypedLocalObjectReference#"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiCoreV1TypedLocalObjectReference();
+    register("io.k8s.api.networking.v1.IngressClassSpec", schema);
+}

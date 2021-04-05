@@ -1,0 +1,37 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApisMetaV1StatusCause_1 = require("./IoK8sApimachineryPkgApisMetaV1StatusCause.js");
+const schema = {
+    "properties": {
+        "causes": {
+            "items": {
+                "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.StatusCause#"
+            },
+            "type": "array"
+        },
+        "group": {
+            "type": "string"
+        },
+        "kind": {
+            "type": "string"
+        },
+        "name": {
+            "type": "string"
+        },
+        "retryAfterSeconds": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "uid": {
+            "type": "string"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1StatusCause_1.addSchema();
+    validate_1.register("io.k8s.apimachinery.pkg.apis.meta.v1.StatusDetails", schema);
+}
+exports.addSchema = addSchema;

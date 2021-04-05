@@ -1,0 +1,37 @@
+import { IIoK8sApimachineryPkgApisMetaV1ObjectMeta } from "./IoK8sApimachineryPkgApisMetaV1ObjectMeta";
+import { IIoK8sApiStorageV1CSINodeSpec } from "./IoK8sApiStorageV1CSINodeSpec";
+import { ModelData, Model } from "@kubernetes-models/base";
+/**
+ * CSINode holds information about all CSI drivers installed on a node. CSI drivers do not need to create the CSINode object directly. As long as they use the node-driver-registrar sidecar container, the kubelet will automatically populate the CSINode object for the CSI driver as part of kubelet plugin registration. CSINode has the same name as a node. If the object is missing, it means either there are no CSI Drivers available on the node, or the Kubelet version is low enough that it doesn't create this object. CSINode has an OwnerReference that points to the corresponding node object.
+ */
+export interface IIoK8sApiStorageV1CSINode {
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    "apiVersion": "storage.k8s.io/v1";
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    "kind": "CSINode";
+    /**
+     * metadata.name must be the Kubernetes node name.
+     */
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ObjectMeta;
+    /**
+     * spec is the specification of CSINode
+     */
+    "spec": IIoK8sApiStorageV1CSINodeSpec;
+}
+/**
+ * CSINode holds information about all CSI drivers installed on a node. CSI drivers do not need to create the CSINode object directly. As long as they use the node-driver-registrar sidecar container, the kubelet will automatically populate the CSINode object for the CSI driver as part of kubelet plugin registration. CSINode has the same name as a node. If the object is missing, it means either there are no CSI Drivers available on the node, or the Kubelet version is low enough that it doesn't create this object. CSINode has an OwnerReference that points to the corresponding node object.
+ */
+export declare class IoK8sApiStorageV1CSINode extends Model<IIoK8sApiStorageV1CSINode> implements IIoK8sApiStorageV1CSINode {
+    "apiVersion": IIoK8sApiStorageV1CSINode["apiVersion"];
+    "kind": IIoK8sApiStorageV1CSINode["kind"];
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ObjectMeta;
+    "spec": IIoK8sApiStorageV1CSINodeSpec;
+    static apiVersion: IIoK8sApiStorageV1CSINode["apiVersion"];
+    static kind: IIoK8sApiStorageV1CSINode["kind"];
+    constructor(data?: ModelData<IIoK8sApiStorageV1CSINode>);
+}
+export { IIoK8sApiStorageV1CSINode as ICSINode, IoK8sApiStorageV1CSINode as CSINode };

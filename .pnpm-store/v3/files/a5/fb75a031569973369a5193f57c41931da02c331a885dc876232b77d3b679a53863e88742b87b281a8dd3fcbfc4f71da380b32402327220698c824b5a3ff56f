@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ServiceBackendPort = exports.IoK8sApiNetworkingV1ServiceBackendPort = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiNetworkingV1ServiceBackendPort_1 = require("../_schemas/IoK8sApiNetworkingV1ServiceBackendPort.js");
+/**
+ * ServiceBackendPort is the service port being referenced.
+ */
+class IoK8sApiNetworkingV1ServiceBackendPort extends base_1.Model {
+}
+exports.IoK8sApiNetworkingV1ServiceBackendPort = IoK8sApiNetworkingV1ServiceBackendPort;
+exports.ServiceBackendPort = IoK8sApiNetworkingV1ServiceBackendPort;
+base_1.Model.setSchema(IoK8sApiNetworkingV1ServiceBackendPort, "io.k8s.api.networking.v1.ServiceBackendPort", IoK8sApiNetworkingV1ServiceBackendPort_1.addSchema);

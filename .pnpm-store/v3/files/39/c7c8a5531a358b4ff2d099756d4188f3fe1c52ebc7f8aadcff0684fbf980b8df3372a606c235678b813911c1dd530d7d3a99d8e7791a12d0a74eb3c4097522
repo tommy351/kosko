@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SELinuxStrategyOptions = exports.IoK8sApiPolicyV1beta1SELinuxStrategyOptions = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiPolicyV1beta1SELinuxStrategyOptions_1 = require("../_schemas/IoK8sApiPolicyV1beta1SELinuxStrategyOptions.js");
+/**
+ * SELinuxStrategyOptions defines the strategy type and any options used to create the strategy.
+ */
+class IoK8sApiPolicyV1beta1SELinuxStrategyOptions extends base_1.Model {
+}
+exports.IoK8sApiPolicyV1beta1SELinuxStrategyOptions = IoK8sApiPolicyV1beta1SELinuxStrategyOptions;
+exports.SELinuxStrategyOptions = IoK8sApiPolicyV1beta1SELinuxStrategyOptions;
+base_1.Model.setSchema(IoK8sApiPolicyV1beta1SELinuxStrategyOptions, "io.k8s.api.policy.v1beta1.SELinuxStrategyOptions", IoK8sApiPolicyV1beta1SELinuxStrategyOptions_1.addSchema);

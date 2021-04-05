@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiStorageV1beta1CSINodeDriver.mjs";
+/**
+ * CSINodeDriver holds information about the specification of one CSI driver installed on a node
+ */
+export class IoK8sApiStorageV1beta1CSINodeDriver extends Model {
+}
+Model.setSchema(IoK8sApiStorageV1beta1CSINodeDriver, "io.k8s.api.storage.v1beta1.CSINodeDriver", addSchema);
+export { IoK8sApiStorageV1beta1CSINodeDriver as CSINodeDriver };

@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NamespaceList = exports.IoK8sApiCoreV1NamespaceList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1NamespaceList_1 = require("../_schemas/IoK8sApiCoreV1NamespaceList.js");
+/**
+ * NamespaceList is a list of Namespaces.
+ */
+class IoK8sApiCoreV1NamespaceList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1NamespaceList.apiVersion,
+            kind: IoK8sApiCoreV1NamespaceList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1NamespaceList = IoK8sApiCoreV1NamespaceList;
+exports.NamespaceList = IoK8sApiCoreV1NamespaceList;
+IoK8sApiCoreV1NamespaceList.apiVersion = "v1";
+IoK8sApiCoreV1NamespaceList.kind = "NamespaceList";
+base_1.Model.setSchema(IoK8sApiCoreV1NamespaceList, "io.k8s.api.core.v1.NamespaceList", IoK8sApiCoreV1NamespaceList_1.addSchema);

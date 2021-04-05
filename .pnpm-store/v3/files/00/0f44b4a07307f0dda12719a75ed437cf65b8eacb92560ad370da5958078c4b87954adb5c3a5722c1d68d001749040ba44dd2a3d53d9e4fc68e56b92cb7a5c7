@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1SessionAffinityConfig.mjs";
+/**
+ * SessionAffinityConfig represents the configurations of session affinity.
+ */
+export class IoK8sApiCoreV1SessionAffinityConfig extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1SessionAffinityConfig, "io.k8s.api.core.v1.SessionAffinityConfig", addSchema);
+export { IoK8sApiCoreV1SessionAffinityConfig as SessionAffinityConfig };

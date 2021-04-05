@@ -1,0 +1,29 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const schema = {
+    "properties": {
+        "error": {
+            "type": "string"
+        },
+        "message": {
+            "type": "string"
+        },
+        "status": {
+            "type": "string"
+        },
+        "type": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "type",
+        "status"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    validate_1.register("io.k8s.api.core.v1.ComponentCondition", schema);
+}
+exports.addSchema = addSchema;

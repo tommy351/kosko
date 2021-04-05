@@ -1,0 +1,18 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "fsType": {
+            "type": "string"
+        },
+        "path": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "path"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.core.v1.LocalVolumeSource", schema);
+}

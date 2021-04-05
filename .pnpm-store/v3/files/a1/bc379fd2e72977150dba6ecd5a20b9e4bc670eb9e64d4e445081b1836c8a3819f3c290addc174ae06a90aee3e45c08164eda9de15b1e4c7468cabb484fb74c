@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1ComponentStatus.mjs";
+/**
+ * ComponentStatus (and ComponentStatusList) holds the cluster validation info. Deprecated: This API is deprecated in v1.19+
+ */
+export class IoK8sApiCoreV1ComponentStatus extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1ComponentStatus.apiVersion,
+            kind: IoK8sApiCoreV1ComponentStatus.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiCoreV1ComponentStatus.apiVersion = "v1";
+IoK8sApiCoreV1ComponentStatus.kind = "ComponentStatus";
+Model.setSchema(IoK8sApiCoreV1ComponentStatus, "io.k8s.api.core.v1.ComponentStatus", addSchema);
+export { IoK8sApiCoreV1ComponentStatus as ComponentStatus };

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.APIServiceCondition = exports.IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceCondition = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceCondition_1 = require("../_schemas/IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceCondition.js");
+/**
+ * APIServiceCondition describes the state of an APIService at a particular point
+ */
+class IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceCondition extends base_1.Model {
+}
+exports.IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceCondition = IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceCondition;
+exports.APIServiceCondition = IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceCondition;
+base_1.Model.setSchema(IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceCondition, "io.k8s.kube-aggregator.pkg.apis.apiregistration.v1beta1.APIServiceCondition", IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceCondition_1.addSchema);

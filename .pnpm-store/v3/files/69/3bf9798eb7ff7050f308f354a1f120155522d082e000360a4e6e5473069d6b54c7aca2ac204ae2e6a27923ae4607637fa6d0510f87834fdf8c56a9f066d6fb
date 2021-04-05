@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1NamespaceCondition.mjs";
+/**
+ * NamespaceCondition contains details about state of namespace.
+ */
+export class IoK8sApiCoreV1NamespaceCondition extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1NamespaceCondition, "io.k8s.api.core.v1.NamespaceCondition", addSchema);
+export { IoK8sApiCoreV1NamespaceCondition as NamespaceCondition };

@@ -1,0 +1,30 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "group": {
+            "type": "string"
+        },
+        "name": {
+            "type": "string"
+        },
+        "namespace": {
+            "type": "string"
+        },
+        "resource": {
+            "type": "string"
+        },
+        "subresource": {
+            "type": "string"
+        },
+        "verb": {
+            "type": "string"
+        },
+        "version": {
+            "type": "string"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.authorization.v1beta1.ResourceAttributes", schema);
+}

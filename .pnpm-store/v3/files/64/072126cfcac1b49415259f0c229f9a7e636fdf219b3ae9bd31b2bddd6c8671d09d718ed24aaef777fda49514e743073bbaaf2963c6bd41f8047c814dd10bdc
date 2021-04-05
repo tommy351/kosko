@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1EnvVar.mjs";
+/**
+ * EnvVar represents an environment variable present in a Container.
+ */
+export class IoK8sApiCoreV1EnvVar extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1EnvVar, "io.k8s.api.core.v1.EnvVar", addSchema);
+export { IoK8sApiCoreV1EnvVar as EnvVar };

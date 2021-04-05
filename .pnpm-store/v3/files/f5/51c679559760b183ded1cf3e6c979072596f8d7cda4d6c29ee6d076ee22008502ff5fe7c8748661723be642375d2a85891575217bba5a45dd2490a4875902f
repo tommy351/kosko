@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAutoscalingV2beta1ResourceMetricStatus.mjs";
+/**
+ * ResourceMetricStatus indicates the current value of a resource metric known to Kubernetes, as specified in requests and limits, describing each pod in the current scale target (e.g. CPU or memory).  Such metrics are built in to Kubernetes, and have special scaling options on top of those available to normal per-pod metrics using the "pods" source.
+ */
+export class IoK8sApiAutoscalingV2beta1ResourceMetricStatus extends Model {
+}
+Model.setSchema(IoK8sApiAutoscalingV2beta1ResourceMetricStatus, "io.k8s.api.autoscaling.v2beta1.ResourceMetricStatus", addSchema);
+export { IoK8sApiAutoscalingV2beta1ResourceMetricStatus as ResourceMetricStatus };

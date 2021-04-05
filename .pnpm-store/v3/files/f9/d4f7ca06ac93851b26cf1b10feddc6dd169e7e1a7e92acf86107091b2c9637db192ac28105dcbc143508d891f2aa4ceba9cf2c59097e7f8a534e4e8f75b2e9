@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PersistentVolumeClaimList = exports.IoK8sApiCoreV1PersistentVolumeClaimList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1PersistentVolumeClaimList_1 = require("../_schemas/IoK8sApiCoreV1PersistentVolumeClaimList.js");
+/**
+ * PersistentVolumeClaimList is a list of PersistentVolumeClaim items.
+ */
+class IoK8sApiCoreV1PersistentVolumeClaimList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1PersistentVolumeClaimList.apiVersion,
+            kind: IoK8sApiCoreV1PersistentVolumeClaimList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1PersistentVolumeClaimList = IoK8sApiCoreV1PersistentVolumeClaimList;
+exports.PersistentVolumeClaimList = IoK8sApiCoreV1PersistentVolumeClaimList;
+IoK8sApiCoreV1PersistentVolumeClaimList.apiVersion = "v1";
+IoK8sApiCoreV1PersistentVolumeClaimList.kind = "PersistentVolumeClaimList";
+base_1.Model.setSchema(IoK8sApiCoreV1PersistentVolumeClaimList, "io.k8s.api.core.v1.PersistentVolumeClaimList", IoK8sApiCoreV1PersistentVolumeClaimList_1.addSchema);

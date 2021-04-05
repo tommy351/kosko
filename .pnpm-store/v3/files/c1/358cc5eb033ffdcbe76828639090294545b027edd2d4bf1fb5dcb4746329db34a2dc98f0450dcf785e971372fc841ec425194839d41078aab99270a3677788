@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1PreferredSchedulingTerm.mjs";
+/**
+ * An empty preferred scheduling term matches all objects with implicit weight 0 (i.e. it's a no-op). A null preferred scheduling term matches no objects (i.e. is also a no-op).
+ */
+export class IoK8sApiCoreV1PreferredSchedulingTerm extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1PreferredSchedulingTerm, "io.k8s.api.core.v1.PreferredSchedulingTerm", addSchema);
+export { IoK8sApiCoreV1PreferredSchedulingTerm as PreferredSchedulingTerm };

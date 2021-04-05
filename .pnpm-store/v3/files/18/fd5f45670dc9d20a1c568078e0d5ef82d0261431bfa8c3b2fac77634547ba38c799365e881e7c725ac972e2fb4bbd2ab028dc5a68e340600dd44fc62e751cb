@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ComponentStatus = exports.IoK8sApiCoreV1ComponentStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ComponentStatus_1 = require("../_schemas/IoK8sApiCoreV1ComponentStatus.js");
+/**
+ * ComponentStatus (and ComponentStatusList) holds the cluster validation info. Deprecated: This API is deprecated in v1.19+
+ */
+class IoK8sApiCoreV1ComponentStatus extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1ComponentStatus.apiVersion,
+            kind: IoK8sApiCoreV1ComponentStatus.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1ComponentStatus = IoK8sApiCoreV1ComponentStatus;
+exports.ComponentStatus = IoK8sApiCoreV1ComponentStatus;
+IoK8sApiCoreV1ComponentStatus.apiVersion = "v1";
+IoK8sApiCoreV1ComponentStatus.kind = "ComponentStatus";
+base_1.Model.setSchema(IoK8sApiCoreV1ComponentStatus, "io.k8s.api.core.v1.ComponentStatus", IoK8sApiCoreV1ComponentStatus_1.addSchema);

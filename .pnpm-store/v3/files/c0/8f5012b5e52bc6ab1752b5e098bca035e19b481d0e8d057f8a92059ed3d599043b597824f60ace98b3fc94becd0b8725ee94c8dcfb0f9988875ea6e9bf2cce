@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAdmissionregistrationV1beta1ValidatingWebhookConfigurationList.mjs";
+/**
+ * ValidatingWebhookConfigurationList is a list of ValidatingWebhookConfiguration.
+ */
+export class IoK8sApiAdmissionregistrationV1beta1ValidatingWebhookConfigurationList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAdmissionregistrationV1beta1ValidatingWebhookConfigurationList.apiVersion,
+            kind: IoK8sApiAdmissionregistrationV1beta1ValidatingWebhookConfigurationList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiAdmissionregistrationV1beta1ValidatingWebhookConfigurationList.apiVersion = "admissionregistration.k8s.io/v1beta1";
+IoK8sApiAdmissionregistrationV1beta1ValidatingWebhookConfigurationList.kind = "ValidatingWebhookConfigurationList";
+Model.setSchema(IoK8sApiAdmissionregistrationV1beta1ValidatingWebhookConfigurationList, "io.k8s.api.admissionregistration.v1beta1.ValidatingWebhookConfigurationList", addSchema);
+export { IoK8sApiAdmissionregistrationV1beta1ValidatingWebhookConfigurationList as ValidatingWebhookConfigurationList };

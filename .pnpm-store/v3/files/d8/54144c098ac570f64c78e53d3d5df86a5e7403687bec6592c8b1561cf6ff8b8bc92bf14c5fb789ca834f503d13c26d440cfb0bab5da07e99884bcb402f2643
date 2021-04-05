@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiFlowcontrolV1alpha1ServiceAccountSubject.mjs";
+/**
+ * ServiceAccountSubject holds detailed information for service-account-kind subject.
+ */
+export class IoK8sApiFlowcontrolV1alpha1ServiceAccountSubject extends Model {
+}
+Model.setSchema(IoK8sApiFlowcontrolV1alpha1ServiceAccountSubject, "io.k8s.api.flowcontrol.v1alpha1.ServiceAccountSubject", addSchema);
+export { IoK8sApiFlowcontrolV1alpha1ServiceAccountSubject as ServiceAccountSubject };

@@ -1,0 +1,29 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "containerPort": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "hostIP": {
+            "type": "string"
+        },
+        "hostPort": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "name": {
+            "type": "string"
+        },
+        "protocol": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "containerPort"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.core.v1.ContainerPort", schema);
+}

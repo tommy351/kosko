@@ -1,0 +1,43 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiNetworkingV1beta1Ingress_1 = require("./IoK8sApiNetworkingV1beta1Ingress.js");
+const IoK8sApimachineryPkgApisMetaV1ListMeta_1 = require("./IoK8sApimachineryPkgApisMetaV1ListMeta.js");
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string",
+            "enum": [
+                "networking.k8s.io/v1beta1"
+            ]
+        },
+        "items": {
+            "items": {
+                "$ref": "io.k8s.api.networking.v1beta1.Ingress#"
+            },
+            "type": "array"
+        },
+        "kind": {
+            "type": "string",
+            "enum": [
+                "IngressList"
+            ]
+        },
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta#"
+        }
+    },
+    "required": [
+        "items",
+        "apiVersion",
+        "kind"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiNetworkingV1beta1Ingress_1.addSchema();
+    IoK8sApimachineryPkgApisMetaV1ListMeta_1.addSchema();
+    validate_1.register("io.k8s.api.networking.v1beta1.IngressList", schema);
+}
+exports.addSchema = addSchema;

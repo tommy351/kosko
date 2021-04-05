@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1ConfigMapNodeConfigSource.mjs";
+/**
+ * ConfigMapNodeConfigSource contains the information to reference a ConfigMap as a config source for the Node.
+ */
+export class IoK8sApiCoreV1ConfigMapNodeConfigSource extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1ConfigMapNodeConfigSource, "io.k8s.api.core.v1.ConfigMapNodeConfigSource", addSchema);
+export { IoK8sApiCoreV1ConfigMapNodeConfigSource as ConfigMapNodeConfigSource };

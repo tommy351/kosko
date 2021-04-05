@@ -1,0 +1,34 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiAutoscalingV1CrossVersionObjectReference_1 = require("./IoK8sApiAutoscalingV1CrossVersionObjectReference.js");
+const schema = {
+    "properties": {
+        "maxReplicas": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "minReplicas": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "scaleTargetRef": {
+            "$ref": "io.k8s.api.autoscaling.v1.CrossVersionObjectReference#"
+        },
+        "targetCPUUtilizationPercentage": {
+            "format": "int32",
+            "type": "integer"
+        }
+    },
+    "required": [
+        "scaleTargetRef",
+        "maxReplicas"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiAutoscalingV1CrossVersionObjectReference_1.addSchema();
+    validate_1.register("io.k8s.api.autoscaling.v1.HorizontalPodAutoscalerSpec", schema);
+}
+exports.addSchema = addSchema;

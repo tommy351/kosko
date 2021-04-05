@@ -1,0 +1,37 @@
+import { IIoK8sApiCoreV1ServiceAccount } from "./IoK8sApiCoreV1ServiceAccount";
+import { IIoK8sApimachineryPkgApisMetaV1ListMeta } from "./IoK8sApimachineryPkgApisMetaV1ListMeta";
+import { ModelData, Model } from "@kubernetes-models/base";
+/**
+ * ServiceAccountList is a list of ServiceAccount objects
+ */
+export interface IIoK8sApiCoreV1ServiceAccountList {
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    "apiVersion": "v1";
+    /**
+     * List of ServiceAccounts. More info: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
+     */
+    "items": Array<IIoK8sApiCoreV1ServiceAccount>;
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    "kind": "ServiceAccountList";
+    /**
+     * Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+}
+/**
+ * ServiceAccountList is a list of ServiceAccount objects
+ */
+export declare class IoK8sApiCoreV1ServiceAccountList extends Model<IIoK8sApiCoreV1ServiceAccountList> implements IIoK8sApiCoreV1ServiceAccountList {
+    "apiVersion": IIoK8sApiCoreV1ServiceAccountList["apiVersion"];
+    "items": Array<IIoK8sApiCoreV1ServiceAccount>;
+    "kind": IIoK8sApiCoreV1ServiceAccountList["kind"];
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+    static apiVersion: IIoK8sApiCoreV1ServiceAccountList["apiVersion"];
+    static kind: IIoK8sApiCoreV1ServiceAccountList["kind"];
+    constructor(data?: ModelData<IIoK8sApiCoreV1ServiceAccountList>);
+}
+export { IIoK8sApiCoreV1ServiceAccountList as IServiceAccountList, IoK8sApiCoreV1ServiceAccountList as ServiceAccountList };

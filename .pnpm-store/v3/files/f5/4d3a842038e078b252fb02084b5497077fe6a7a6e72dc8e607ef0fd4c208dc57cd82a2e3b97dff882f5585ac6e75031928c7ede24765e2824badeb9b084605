@@ -1,0 +1,37 @@
+{
+  "name": "intl-locales-supported",
+  "version": "1.8.12",
+  "description": "Utility to help you polyfill the Node.js runtime when the Intl APIs are missing, or if the built-in Intl is missing locale data that you need.",
+  "main": "dist/index.js",
+  "module": "lib/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "lib",
+    "src"
+  ],
+  "author": "Eric Ferraiuolo <edf@ericf.me>",
+  "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/formatjs/formatjs.git"
+  },
+  "keywords": [
+    "i18n",
+    "intl",
+    "internationalization",
+    "localization",
+    "globalization"
+  ],
+  "bugs": {
+    "url": "https://github.com/formatjs/formatjs/issues"
+  },
+  "sideEffects": false,
+  "homepage": "https://github.com/formatjs/formatjs",
+  "scripts": {
+    "clean": "rimraf dist lib *.tsbuildinfo",
+    "build": "tsc && tsc -p tsconfig.esm.json",
+    "test": "cross-env TZ=UTC jest"
+  },
+  "gitHead": "3cd3324b6741a8314e8798b32ad4e2753143ea41"
+}

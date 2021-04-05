@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NonResourceRule = exports.IoK8sApiAuthorizationV1beta1NonResourceRule = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAuthorizationV1beta1NonResourceRule_1 = require("../_schemas/IoK8sApiAuthorizationV1beta1NonResourceRule.js");
+/**
+ * NonResourceRule holds information that describes a rule for the non-resource
+ */
+class IoK8sApiAuthorizationV1beta1NonResourceRule extends base_1.Model {
+}
+exports.IoK8sApiAuthorizationV1beta1NonResourceRule = IoK8sApiAuthorizationV1beta1NonResourceRule;
+exports.NonResourceRule = IoK8sApiAuthorizationV1beta1NonResourceRule;
+base_1.Model.setSchema(IoK8sApiAuthorizationV1beta1NonResourceRule, "io.k8s.api.authorization.v1beta1.NonResourceRule", IoK8sApiAuthorizationV1beta1NonResourceRule_1.addSchema);

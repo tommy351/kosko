@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Overhead = exports.IoK8sApiNodeV1alpha1Overhead = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiNodeV1alpha1Overhead_1 = require("../_schemas/IoK8sApiNodeV1alpha1Overhead.js");
+/**
+ * Overhead structure represents the resource overhead associated with running a pod.
+ */
+class IoK8sApiNodeV1alpha1Overhead extends base_1.Model {
+}
+exports.IoK8sApiNodeV1alpha1Overhead = IoK8sApiNodeV1alpha1Overhead;
+exports.Overhead = IoK8sApiNodeV1alpha1Overhead;
+base_1.Model.setSchema(IoK8sApiNodeV1alpha1Overhead, "io.k8s.api.node.v1alpha1.Overhead", IoK8sApiNodeV1alpha1Overhead_1.addSchema);

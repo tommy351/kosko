@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PersistentVolumeClaimStatus = exports.IoK8sApiCoreV1PersistentVolumeClaimStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1PersistentVolumeClaimStatus_1 = require("../_schemas/IoK8sApiCoreV1PersistentVolumeClaimStatus.js");
+/**
+ * PersistentVolumeClaimStatus is the current status of a persistent volume claim.
+ */
+class IoK8sApiCoreV1PersistentVolumeClaimStatus extends base_1.Model {
+}
+exports.IoK8sApiCoreV1PersistentVolumeClaimStatus = IoK8sApiCoreV1PersistentVolumeClaimStatus;
+exports.PersistentVolumeClaimStatus = IoK8sApiCoreV1PersistentVolumeClaimStatus;
+base_1.Model.setSchema(IoK8sApiCoreV1PersistentVolumeClaimStatus, "io.k8s.api.core.v1.PersistentVolumeClaimStatus", IoK8sApiCoreV1PersistentVolumeClaimStatus_1.addSchema);

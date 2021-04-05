@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AttachedVolume = exports.IoK8sApiCoreV1AttachedVolume = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1AttachedVolume_1 = require("../_schemas/IoK8sApiCoreV1AttachedVolume.js");
+/**
+ * AttachedVolume describes a volume attached to a node
+ */
+class IoK8sApiCoreV1AttachedVolume extends base_1.Model {
+}
+exports.IoK8sApiCoreV1AttachedVolume = IoK8sApiCoreV1AttachedVolume;
+exports.AttachedVolume = IoK8sApiCoreV1AttachedVolume;
+base_1.Model.setSchema(IoK8sApiCoreV1AttachedVolume, "io.k8s.api.core.v1.AttachedVolume", IoK8sApiCoreV1AttachedVolume_1.addSchema);

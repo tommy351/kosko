@@ -1,0 +1,25 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "endpoints": {
+            "type": "string"
+        },
+        "endpointsNamespace": {
+            "type": "string"
+        },
+        "path": {
+            "type": "string"
+        },
+        "readOnly": {
+            "type": "boolean"
+        }
+    },
+    "required": [
+        "endpoints",
+        "path"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.core.v1.GlusterfsPersistentVolumeSource", schema);
+}

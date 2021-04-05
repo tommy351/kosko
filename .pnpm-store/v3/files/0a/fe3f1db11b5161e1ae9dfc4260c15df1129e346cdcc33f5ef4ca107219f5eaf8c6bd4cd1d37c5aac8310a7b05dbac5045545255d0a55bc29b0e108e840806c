@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CustomResourceDefinitionNames = exports.IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1CustomResourceDefinitionNames = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1CustomResourceDefinitionNames_1 = require("../_schemas/IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1CustomResourceDefinitionNames.js");
+/**
+ * CustomResourceDefinitionNames indicates the names to serve this CustomResourceDefinition
+ */
+class IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1CustomResourceDefinitionNames extends base_1.Model {
+}
+exports.IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1CustomResourceDefinitionNames = IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1CustomResourceDefinitionNames;
+exports.CustomResourceDefinitionNames = IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1CustomResourceDefinitionNames;
+base_1.Model.setSchema(IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1CustomResourceDefinitionNames, "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1beta1.CustomResourceDefinitionNames", IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1CustomResourceDefinitionNames_1.addSchema);

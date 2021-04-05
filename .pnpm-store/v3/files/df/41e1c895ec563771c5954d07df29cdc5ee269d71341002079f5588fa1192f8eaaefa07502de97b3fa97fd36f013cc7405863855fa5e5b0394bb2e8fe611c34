@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NetworkPolicyPeer = exports.IoK8sApiNetworkingV1NetworkPolicyPeer = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiNetworkingV1NetworkPolicyPeer_1 = require("../_schemas/IoK8sApiNetworkingV1NetworkPolicyPeer.js");
+/**
+ * NetworkPolicyPeer describes a peer to allow traffic to/from. Only certain combinations of fields are allowed
+ */
+class IoK8sApiNetworkingV1NetworkPolicyPeer extends base_1.Model {
+}
+exports.IoK8sApiNetworkingV1NetworkPolicyPeer = IoK8sApiNetworkingV1NetworkPolicyPeer;
+exports.NetworkPolicyPeer = IoK8sApiNetworkingV1NetworkPolicyPeer;
+base_1.Model.setSchema(IoK8sApiNetworkingV1NetworkPolicyPeer, "io.k8s.api.networking.v1.NetworkPolicyPeer", IoK8sApiNetworkingV1NetworkPolicyPeer_1.addSchema);

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FlockerVolumeSource = exports.IoK8sApiCoreV1FlockerVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1FlockerVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1FlockerVolumeSource.js");
+/**
+ * Represents a Flocker volume mounted by the Flocker agent. One and only one of datasetName and datasetUUID should be set. Flocker volumes do not support ownership management or SELinux relabeling.
+ */
+class IoK8sApiCoreV1FlockerVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1FlockerVolumeSource = IoK8sApiCoreV1FlockerVolumeSource;
+exports.FlockerVolumeSource = IoK8sApiCoreV1FlockerVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1FlockerVolumeSource, "io.k8s.api.core.v1.FlockerVolumeSource", IoK8sApiCoreV1FlockerVolumeSource_1.addSchema);

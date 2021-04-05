@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAppsV1ControllerRevisionList.mjs";
+/**
+ * ControllerRevisionList is a resource containing a list of ControllerRevision objects.
+ */
+export class IoK8sApiAppsV1ControllerRevisionList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAppsV1ControllerRevisionList.apiVersion,
+            kind: IoK8sApiAppsV1ControllerRevisionList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiAppsV1ControllerRevisionList.apiVersion = "apps/v1";
+IoK8sApiAppsV1ControllerRevisionList.kind = "ControllerRevisionList";
+Model.setSchema(IoK8sApiAppsV1ControllerRevisionList, "io.k8s.api.apps.v1.ControllerRevisionList", addSchema);
+export { IoK8sApiAppsV1ControllerRevisionList as ControllerRevisionList };

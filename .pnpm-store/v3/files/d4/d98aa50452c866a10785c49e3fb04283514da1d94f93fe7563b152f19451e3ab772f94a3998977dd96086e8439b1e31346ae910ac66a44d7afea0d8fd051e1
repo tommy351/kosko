@@ -1,0 +1,56 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.createRewriteImportTransformer = void 0;
+const tslib_1 = require("tslib");
+const path_1 = require("path");
+const typescript_1 = tslib_1.__importDefault(require("typescript"));
+const utils_1 = require("../utils");
+const JS_EXT = ".js";
+function isRelativePath(path) {
+    return path.startsWith("./") || path.startsWith("../");
+}
+function createRewriteImportTransformer(options) {
+    function isDirectory(sourceFile, path) {
+        const sourcePath = sourceFile.fileName;
+        const fullPath = path_1.resolve(path_1.dirname(sourcePath), path);
+        return options.system.directoryExists(fullPath);
+    }
+    function updateModuleSpecifier(sourceFile, node) {
+        if (!typescript_1.default.isStringLiteral(node) || !isRelativePath(node.text))
+            return node;
+        if (isDirectory(sourceFile, node.text)) {
+            return typescript_1.default.factory.createStringLiteral(`${node.text}/index${options.extname}`);
+        }
+        const ext = path_1.extname(node.text);
+        const base = ext === JS_EXT ? utils_1.trimSuffix(node.text, JS_EXT) : node.text;
+        return typescript_1.default.factory.createStringLiteral(`${base}${options.extname}`);
+    }
+    return (ctx) => {
+        let sourceFile;
+        const visitor = (node) => {
+            if (typescript_1.default.isImportDeclaration(node)) {
+                return typescript_1.default.factory.createImportDeclaration(node.decorators, node.modifiers, node.importClause, updateModuleSpecifier(sourceFile, node.moduleSpecifier));
+            }
+            if (typescript_1.default.isExportDeclaration(node)) {
+                if (!node.moduleSpecifier)
+                    return node;
+                return typescript_1.default.factory.createExportDeclaration(node.decorators, node.modifiers, node.isTypeOnly, node.exportClause, updateModuleSpecifier(sourceFile, node.moduleSpecifier));
+            }
+            if (typescript_1.default.isCallExpression(node) &&
+                typescript_1.default.isIdentifier(node.expression) &&
+                node.expression.escapedText === "require") {
+                const [firstArg, ...restArgs] = node.arguments;
+                if (!firstArg)
+                    return node;
+                return typescript_1.default.factory.createCallExpression(node.expression, node.typeArguments, [updateModuleSpecifier(sourceFile, firstArg), ...restArgs]);
+            }
+            return typescript_1.default.visitEachChild(node, visitor, ctx);
+        };
+        return (file) => {
+            sourceFile = file;
+            return typescript_1.default.visitNode(file, visitor);
+        };
+    };
+}
+exports.createRewriteImportTransformer = createRewriteImportTransformer;
+//# sourceMappingURL=rewriteImport.js.map

@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAdmissionregistrationV1ValidatingWebhook.mjs";
+/**
+ * ValidatingWebhook describes an admission webhook and the resources and operations it applies to.
+ */
+export class IoK8sApiAdmissionregistrationV1ValidatingWebhook extends Model {
+}
+Model.setSchema(IoK8sApiAdmissionregistrationV1ValidatingWebhook, "io.k8s.api.admissionregistration.v1.ValidatingWebhook", addSchema);
+export { IoK8sApiAdmissionregistrationV1ValidatingWebhook as ValidatingWebhook };

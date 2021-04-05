@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LocalObjectReference = exports.IoK8sApiCoreV1LocalObjectReference = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1LocalObjectReference_1 = require("../_schemas/IoK8sApiCoreV1LocalObjectReference.js");
+/**
+ * LocalObjectReference contains enough information to let you locate the referenced object inside the same namespace.
+ */
+class IoK8sApiCoreV1LocalObjectReference extends base_1.Model {
+}
+exports.IoK8sApiCoreV1LocalObjectReference = IoK8sApiCoreV1LocalObjectReference;
+exports.LocalObjectReference = IoK8sApiCoreV1LocalObjectReference;
+base_1.Model.setSchema(IoK8sApiCoreV1LocalObjectReference, "io.k8s.api.core.v1.LocalObjectReference", IoK8sApiCoreV1LocalObjectReference_1.addSchema);

@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiNetworkingV1beta1IngressClass.mjs";
+/**
+ * IngressClass represents the class of the Ingress, referenced by the Ingress Spec. The `ingressclass.kubernetes.io/is-default-class` annotation can be used to indicate that an IngressClass should be considered default. When a single IngressClass resource has this annotation set to true, new Ingress resources without a class specified will be assigned this default class.
+ */
+export class IoK8sApiNetworkingV1beta1IngressClass extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiNetworkingV1beta1IngressClass.apiVersion,
+            kind: IoK8sApiNetworkingV1beta1IngressClass.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiNetworkingV1beta1IngressClass.apiVersion = "networking.k8s.io/v1beta1";
+IoK8sApiNetworkingV1beta1IngressClass.kind = "IngressClass";
+Model.setSchema(IoK8sApiNetworkingV1beta1IngressClass, "io.k8s.api.networking.v1beta1.IngressClass", addSchema);
+export { IoK8sApiNetworkingV1beta1IngressClass as IngressClass };

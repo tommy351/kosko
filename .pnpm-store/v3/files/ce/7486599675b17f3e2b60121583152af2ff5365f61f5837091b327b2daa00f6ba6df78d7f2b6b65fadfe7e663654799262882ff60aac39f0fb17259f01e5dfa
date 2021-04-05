@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LabelSelector = exports.IoK8sApimachineryPkgApisMetaV1LabelSelector = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApimachineryPkgApisMetaV1LabelSelector_1 = require("../_schemas/IoK8sApimachineryPkgApisMetaV1LabelSelector.js");
+/**
+ * A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.
+ */
+class IoK8sApimachineryPkgApisMetaV1LabelSelector extends base_1.Model {
+}
+exports.IoK8sApimachineryPkgApisMetaV1LabelSelector = IoK8sApimachineryPkgApisMetaV1LabelSelector;
+exports.LabelSelector = IoK8sApimachineryPkgApisMetaV1LabelSelector;
+base_1.Model.setSchema(IoK8sApimachineryPkgApisMetaV1LabelSelector, "io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector", IoK8sApimachineryPkgApisMetaV1LabelSelector_1.addSchema);

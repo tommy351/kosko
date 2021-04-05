@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAuthorizationV1SubjectAccessReviewStatus.mjs";
+/**
+ * SubjectAccessReviewStatus
+ */
+export class IoK8sApiAuthorizationV1SubjectAccessReviewStatus extends Model {
+}
+Model.setSchema(IoK8sApiAuthorizationV1SubjectAccessReviewStatus, "io.k8s.api.authorization.v1.SubjectAccessReviewStatus", addSchema);
+export { IoK8sApiAuthorizationV1SubjectAccessReviewStatus as SubjectAccessReviewStatus };

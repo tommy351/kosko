@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1ServicePort.mjs";
+/**
+ * ServicePort contains information on service's port.
+ */
+export class IoK8sApiCoreV1ServicePort extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1ServicePort, "io.k8s.api.core.v1.ServicePort", addSchema);
+export { IoK8sApiCoreV1ServicePort as ServicePort };

@@ -1,0 +1,23 @@
+import { IIoK8sApimachineryPkgUtilIntstrIntOrString } from "./IoK8sApimachineryPkgUtilIntstrIntOrString";
+import { Model } from "@kubernetes-models/base";
+/**
+ * NetworkPolicyPort describes a port to allow traffic on
+ */
+export interface IIoK8sApiNetworkingV1NetworkPolicyPort {
+    /**
+     * The port on the given protocol. This can either be a numerical or named port on a pod. If this field is not provided, this matches all port names and numbers.
+     */
+    "port"?: IIoK8sApimachineryPkgUtilIntstrIntOrString;
+    /**
+     * The protocol (TCP, UDP, or SCTP) which traffic must match. If not specified, this field defaults to TCP.
+     */
+    "protocol"?: string;
+}
+/**
+ * NetworkPolicyPort describes a port to allow traffic on
+ */
+export declare class IoK8sApiNetworkingV1NetworkPolicyPort extends Model<IIoK8sApiNetworkingV1NetworkPolicyPort> implements IIoK8sApiNetworkingV1NetworkPolicyPort {
+    "port"?: IIoK8sApimachineryPkgUtilIntstrIntOrString;
+    "protocol"?: string;
+}
+export { IIoK8sApiNetworkingV1NetworkPolicyPort as INetworkPolicyPort, IoK8sApiNetworkingV1NetworkPolicyPort as NetworkPolicyPort };

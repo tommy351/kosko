@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ObjectMetricSource = exports.IoK8sApiAutoscalingV2beta1ObjectMetricSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAutoscalingV2beta1ObjectMetricSource_1 = require("../_schemas/IoK8sApiAutoscalingV2beta1ObjectMetricSource.js");
+/**
+ * ObjectMetricSource indicates how to scale on a metric describing a kubernetes object (for example, hits-per-second on an Ingress object).
+ */
+class IoK8sApiAutoscalingV2beta1ObjectMetricSource extends base_1.Model {
+}
+exports.IoK8sApiAutoscalingV2beta1ObjectMetricSource = IoK8sApiAutoscalingV2beta1ObjectMetricSource;
+exports.ObjectMetricSource = IoK8sApiAutoscalingV2beta1ObjectMetricSource;
+base_1.Model.setSchema(IoK8sApiAutoscalingV2beta1ObjectMetricSource, "io.k8s.api.autoscaling.v2beta1.ObjectMetricSource", IoK8sApiAutoscalingV2beta1ObjectMetricSource_1.addSchema);

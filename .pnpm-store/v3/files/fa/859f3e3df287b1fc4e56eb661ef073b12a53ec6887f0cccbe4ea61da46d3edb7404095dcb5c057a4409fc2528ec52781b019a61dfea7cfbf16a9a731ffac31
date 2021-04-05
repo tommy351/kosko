@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiStorageV1VolumeError.mjs";
+/**
+ * VolumeError captures an error encountered during a volume operation.
+ */
+export class IoK8sApiStorageV1VolumeError extends Model {
+}
+Model.setSchema(IoK8sApiStorageV1VolumeError, "io.k8s.api.storage.v1.VolumeError", addSchema);
+export { IoK8sApiStorageV1VolumeError as VolumeError };

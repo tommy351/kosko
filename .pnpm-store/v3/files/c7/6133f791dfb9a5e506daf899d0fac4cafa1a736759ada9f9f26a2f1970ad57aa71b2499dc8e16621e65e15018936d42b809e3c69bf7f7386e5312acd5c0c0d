@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ResourceAttributes = exports.IoK8sApiAuthorizationV1beta1ResourceAttributes = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAuthorizationV1beta1ResourceAttributes_1 = require("../_schemas/IoK8sApiAuthorizationV1beta1ResourceAttributes.js");
+/**
+ * ResourceAttributes includes the authorization attributes available for resource requests to the Authorizer interface
+ */
+class IoK8sApiAuthorizationV1beta1ResourceAttributes extends base_1.Model {
+}
+exports.IoK8sApiAuthorizationV1beta1ResourceAttributes = IoK8sApiAuthorizationV1beta1ResourceAttributes;
+exports.ResourceAttributes = IoK8sApiAuthorizationV1beta1ResourceAttributes;
+base_1.Model.setSchema(IoK8sApiAuthorizationV1beta1ResourceAttributes, "io.k8s.api.authorization.v1beta1.ResourceAttributes", IoK8sApiAuthorizationV1beta1ResourceAttributes_1.addSchema);

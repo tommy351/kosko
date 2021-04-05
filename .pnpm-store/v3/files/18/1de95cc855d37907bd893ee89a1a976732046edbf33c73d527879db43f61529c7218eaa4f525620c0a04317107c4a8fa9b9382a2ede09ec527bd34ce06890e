@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SecretVolumeSource = exports.IoK8sApiCoreV1SecretVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1SecretVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1SecretVolumeSource.js");
+/**
+ * Adapts a Secret into a volume.
+ *
+ * The contents of the target Secret's Data field will be presented in a volume as files using the keys in the Data field as the file names. Secret volumes support ownership management and SELinux relabeling.
+ */
+class IoK8sApiCoreV1SecretVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1SecretVolumeSource = IoK8sApiCoreV1SecretVolumeSource;
+exports.SecretVolumeSource = IoK8sApiCoreV1SecretVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1SecretVolumeSource, "io.k8s.api.core.v1.SecretVolumeSource", IoK8sApiCoreV1SecretVolumeSource_1.addSchema);

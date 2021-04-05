@@ -1,0 +1,50 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const schema = {
+    "properties": {
+        "extra": {
+            "additionalProperties": {
+                "items": {
+                    "type": "string"
+                },
+                "type": "array"
+            },
+            "type": "object"
+        },
+        "groups": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "request": {
+            "format": "byte",
+            "type": "string"
+        },
+        "signerName": {
+            "type": "string"
+        },
+        "uid": {
+            "type": "string"
+        },
+        "usages": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "username": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "request"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    validate_1.register("io.k8s.api.certificates.v1beta1.CertificateSigningRequestSpec", schema);
+}
+exports.addSchema = addSchema;

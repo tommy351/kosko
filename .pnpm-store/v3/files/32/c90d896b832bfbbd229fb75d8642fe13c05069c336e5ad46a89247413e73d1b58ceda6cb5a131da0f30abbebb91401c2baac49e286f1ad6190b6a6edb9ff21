@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ServiceList = exports.IoK8sApiCoreV1ServiceList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ServiceList_1 = require("../_schemas/IoK8sApiCoreV1ServiceList.js");
+/**
+ * ServiceList holds a list of services.
+ */
+class IoK8sApiCoreV1ServiceList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1ServiceList.apiVersion,
+            kind: IoK8sApiCoreV1ServiceList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1ServiceList = IoK8sApiCoreV1ServiceList;
+exports.ServiceList = IoK8sApiCoreV1ServiceList;
+IoK8sApiCoreV1ServiceList.apiVersion = "v1";
+IoK8sApiCoreV1ServiceList.kind = "ServiceList";
+base_1.Model.setSchema(IoK8sApiCoreV1ServiceList, "io.k8s.api.core.v1.ServiceList", IoK8sApiCoreV1ServiceList_1.addSchema);

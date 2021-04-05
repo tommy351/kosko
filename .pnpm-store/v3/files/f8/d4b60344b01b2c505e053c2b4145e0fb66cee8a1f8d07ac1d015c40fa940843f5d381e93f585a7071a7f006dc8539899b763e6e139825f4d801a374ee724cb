@@ -1,0 +1,77 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1PodCondition_1 = require("./IoK8sApiCoreV1PodCondition.js");
+const IoK8sApiCoreV1ContainerStatus_1 = require("./IoK8sApiCoreV1ContainerStatus.js");
+const IoK8sApiCoreV1PodIP_1 = require("./IoK8sApiCoreV1PodIP.js");
+const IoK8sApimachineryPkgApisMetaV1Time_1 = require("./IoK8sApimachineryPkgApisMetaV1Time.js");
+const schema = {
+    "properties": {
+        "conditions": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.PodCondition#"
+            },
+            "type": "array"
+        },
+        "containerStatuses": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.ContainerStatus#"
+            },
+            "type": "array"
+        },
+        "ephemeralContainerStatuses": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.ContainerStatus#"
+            },
+            "type": "array"
+        },
+        "hostIP": {
+            "type": "string"
+        },
+        "initContainerStatuses": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.ContainerStatus#"
+            },
+            "type": "array"
+        },
+        "message": {
+            "type": "string"
+        },
+        "nominatedNodeName": {
+            "type": "string"
+        },
+        "phase": {
+            "type": "string"
+        },
+        "podIP": {
+            "type": "string"
+        },
+        "podIPs": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.PodIP#"
+            },
+            "type": "array"
+        },
+        "qosClass": {
+            "type": "string"
+        },
+        "reason": {
+            "type": "string"
+        },
+        "startTime": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.Time#"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1PodCondition_1.addSchema();
+    IoK8sApiCoreV1ContainerStatus_1.addSchema();
+    IoK8sApiCoreV1ContainerStatus_1.addSchema();
+    IoK8sApiCoreV1ContainerStatus_1.addSchema();
+    IoK8sApiCoreV1PodIP_1.addSchema();
+    IoK8sApimachineryPkgApisMetaV1Time_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.PodStatus", schema);
+}
+exports.addSchema = addSchema;

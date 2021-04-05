@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiRbacV1ClusterRoleBindingList.mjs";
+/**
+ * ClusterRoleBindingList is a collection of ClusterRoleBindings
+ */
+export class IoK8sApiRbacV1ClusterRoleBindingList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiRbacV1ClusterRoleBindingList.apiVersion,
+            kind: IoK8sApiRbacV1ClusterRoleBindingList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiRbacV1ClusterRoleBindingList.apiVersion = "rbac.authorization.k8s.io/v1";
+IoK8sApiRbacV1ClusterRoleBindingList.kind = "ClusterRoleBindingList";
+Model.setSchema(IoK8sApiRbacV1ClusterRoleBindingList, "io.k8s.api.rbac.v1.ClusterRoleBindingList", addSchema);
+export { IoK8sApiRbacV1ClusterRoleBindingList as ClusterRoleBindingList };

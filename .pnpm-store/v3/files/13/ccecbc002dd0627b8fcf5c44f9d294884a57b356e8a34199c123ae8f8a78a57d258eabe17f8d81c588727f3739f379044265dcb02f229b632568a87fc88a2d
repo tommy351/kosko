@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApimachineryPkgApisMetaV1LabelSelector.mjs";
+/**
+ * A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.
+ */
+export class IoK8sApimachineryPkgApisMetaV1LabelSelector extends Model {
+}
+Model.setSchema(IoK8sApimachineryPkgApisMetaV1LabelSelector, "io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector", addSchema);
+export { IoK8sApimachineryPkgApisMetaV1LabelSelector as LabelSelector };

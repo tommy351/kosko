@@ -1,0 +1,16 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * ExternalDocumentation allows referencing an external resource for extended documentation.
+ */
+export interface IIoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1ExternalDocumentation {
+    "description"?: string;
+    "url"?: string;
+}
+/**
+ * ExternalDocumentation allows referencing an external resource for extended documentation.
+ */
+export declare class IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1ExternalDocumentation extends Model<IIoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1ExternalDocumentation> implements IIoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1ExternalDocumentation {
+    "description"?: string;
+    "url"?: string;
+}
+export { IIoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1ExternalDocumentation as IExternalDocumentation, IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1ExternalDocumentation as ExternalDocumentation };

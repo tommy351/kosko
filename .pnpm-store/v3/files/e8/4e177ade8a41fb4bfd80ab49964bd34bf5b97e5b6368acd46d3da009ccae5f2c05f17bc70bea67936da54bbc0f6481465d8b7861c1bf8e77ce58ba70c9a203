@@ -1,0 +1,17 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiCoreV1ScopedResourceSelectorRequirement } from "./IoK8sApiCoreV1ScopedResourceSelectorRequirement.mjs";
+const schema = {
+    "properties": {
+        "matchExpressions": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.ScopedResourceSelectorRequirement#"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiCoreV1ScopedResourceSelectorRequirement();
+    register("io.k8s.api.core.v1.ScopeSelector", schema);
+}

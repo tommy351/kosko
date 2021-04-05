@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RBDPersistentVolumeSource = exports.IoK8sApiCoreV1RBDPersistentVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1RBDPersistentVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1RBDPersistentVolumeSource.js");
+/**
+ * Represents a Rados Block Device mount that lasts the lifetime of a pod. RBD volumes support ownership management and SELinux relabeling.
+ */
+class IoK8sApiCoreV1RBDPersistentVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1RBDPersistentVolumeSource = IoK8sApiCoreV1RBDPersistentVolumeSource;
+exports.RBDPersistentVolumeSource = IoK8sApiCoreV1RBDPersistentVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1RBDPersistentVolumeSource, "io.k8s.api.core.v1.RBDPersistentVolumeSource", IoK8sApiCoreV1RBDPersistentVolumeSource_1.addSchema);

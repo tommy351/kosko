@@ -1,0 +1,25 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const schema = {
+    "properties": {
+        "handSize": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "queueLengthLimit": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "queues": {
+            "format": "int32",
+            "type": "integer"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    validate_1.register("io.k8s.api.flowcontrol.v1alpha1.QueuingConfiguration", schema);
+}
+exports.addSchema = addSchema;

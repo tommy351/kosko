@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CertificateSigningRequestStatus = exports.IoK8sApiCertificatesV1CertificateSigningRequestStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCertificatesV1CertificateSigningRequestStatus_1 = require("../_schemas/IoK8sApiCertificatesV1CertificateSigningRequestStatus.js");
+/**
+ * CertificateSigningRequestStatus contains conditions used to indicate approved/denied/failed status of the request, and the issued certificate.
+ */
+class IoK8sApiCertificatesV1CertificateSigningRequestStatus extends base_1.Model {
+}
+exports.IoK8sApiCertificatesV1CertificateSigningRequestStatus = IoK8sApiCertificatesV1CertificateSigningRequestStatus;
+exports.CertificateSigningRequestStatus = IoK8sApiCertificatesV1CertificateSigningRequestStatus;
+base_1.Model.setSchema(IoK8sApiCertificatesV1CertificateSigningRequestStatus, "io.k8s.api.certificates.v1.CertificateSigningRequestStatus", IoK8sApiCertificatesV1CertificateSigningRequestStatus_1.addSchema);

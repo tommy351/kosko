@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PriorityLevelConfigurationList = exports.IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationList_1 = require("../_schemas/IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationList.js");
+/**
+ * PriorityLevelConfigurationList is a list of PriorityLevelConfiguration objects.
+ */
+class IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationList.apiVersion,
+            kind: IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationList = IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationList;
+exports.PriorityLevelConfigurationList = IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationList;
+IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationList.apiVersion = "flowcontrol.apiserver.k8s.io/v1alpha1";
+IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationList.kind = "PriorityLevelConfigurationList";
+base_1.Model.setSchema(IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationList, "io.k8s.api.flowcontrol.v1alpha1.PriorityLevelConfigurationList", IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationList_1.addSchema);

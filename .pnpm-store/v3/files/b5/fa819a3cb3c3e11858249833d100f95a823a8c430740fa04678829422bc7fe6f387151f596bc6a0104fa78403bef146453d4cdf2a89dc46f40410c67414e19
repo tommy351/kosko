@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAutoscalingV2beta2CrossVersionObjectReference.mjs";
+/**
+ * CrossVersionObjectReference contains enough information to let you identify the referred resource.
+ */
+export class IoK8sApiAutoscalingV2beta2CrossVersionObjectReference extends Model {
+}
+Model.setSchema(IoK8sApiAutoscalingV2beta2CrossVersionObjectReference, "io.k8s.api.autoscaling.v2beta2.CrossVersionObjectReference", addSchema);
+export { IoK8sApiAutoscalingV2beta2CrossVersionObjectReference as CrossVersionObjectReference };

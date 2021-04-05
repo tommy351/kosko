@@ -1,0 +1,43 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiAdmissionregistrationV1beta1ValidatingWebhookConfiguration_1 = require("./IoK8sApiAdmissionregistrationV1beta1ValidatingWebhookConfiguration.js");
+const IoK8sApimachineryPkgApisMetaV1ListMeta_1 = require("./IoK8sApimachineryPkgApisMetaV1ListMeta.js");
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string",
+            "enum": [
+                "admissionregistration.k8s.io/v1beta1"
+            ]
+        },
+        "items": {
+            "items": {
+                "$ref": "io.k8s.api.admissionregistration.v1beta1.ValidatingWebhookConfiguration#"
+            },
+            "type": "array"
+        },
+        "kind": {
+            "type": "string",
+            "enum": [
+                "ValidatingWebhookConfigurationList"
+            ]
+        },
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta#"
+        }
+    },
+    "required": [
+        "items",
+        "apiVersion",
+        "kind"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiAdmissionregistrationV1beta1ValidatingWebhookConfiguration_1.addSchema();
+    IoK8sApimachineryPkgApisMetaV1ListMeta_1.addSchema();
+    validate_1.register("io.k8s.api.admissionregistration.v1beta1.ValidatingWebhookConfigurationList", schema);
+}
+exports.addSchema = addSchema;

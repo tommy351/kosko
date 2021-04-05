@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ManagedFieldsEntry = exports.IoK8sApimachineryPkgApisMetaV1ManagedFieldsEntry = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApimachineryPkgApisMetaV1ManagedFieldsEntry_1 = require("../_schemas/IoK8sApimachineryPkgApisMetaV1ManagedFieldsEntry.js");
+/**
+ * ManagedFieldsEntry is a workflow-id, a FieldSet and the group version of the resource that the fieldset applies to.
+ */
+class IoK8sApimachineryPkgApisMetaV1ManagedFieldsEntry extends base_1.Model {
+}
+exports.IoK8sApimachineryPkgApisMetaV1ManagedFieldsEntry = IoK8sApimachineryPkgApisMetaV1ManagedFieldsEntry;
+exports.ManagedFieldsEntry = IoK8sApimachineryPkgApisMetaV1ManagedFieldsEntry;
+base_1.Model.setSchema(IoK8sApimachineryPkgApisMetaV1ManagedFieldsEntry, "io.k8s.apimachinery.pkg.apis.meta.v1.ManagedFieldsEntry", IoK8sApimachineryPkgApisMetaV1ManagedFieldsEntry_1.addSchema);

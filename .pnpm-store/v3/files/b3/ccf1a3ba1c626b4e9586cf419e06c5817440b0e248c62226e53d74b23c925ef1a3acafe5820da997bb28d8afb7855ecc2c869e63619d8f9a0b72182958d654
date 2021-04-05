@@ -1,0 +1,53 @@
+import Ajv from "ajv";
+// From: https://github.com/miguelmota/is-base64/blob/0702e189090921a2f11b4342f27906ff8c43d7ec/is-base64.js#L15
+const rBase64 = /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/;
+export const ajv = new Ajv({
+    extendRefs: "fail",
+    format: "full"
+});
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function register(id, schema) {
+    if (!ajv.getSchema(id)) {
+        ajv.addSchema(schema, id);
+    }
+}
+function intFormat(bits) {
+    const max = BigInt(2) ** BigInt(bits - 1) - BigInt(1);
+    const min = BigInt(-2) ** BigInt(bits - 1);
+    return {
+        validate(input) {
+            const n = BigInt(input);
+            return n >= min && n <= max;
+        },
+        compare(a, b) {
+            const diff = BigInt(a) - BigInt(b);
+            if (diff > 0)
+                return 1;
+            if (diff < 0)
+                return -1;
+            return 0;
+        },
+        type: "number"
+    };
+}
+ajv.addFormat("int32", intFormat(32));
+ajv.addFormat("int64", intFormat(64));
+ajv.addFormat("float", {
+    type: "number",
+    validate() {
+        return true;
+    }
+});
+ajv.addFormat("double", {
+    type: "number",
+    validate() {
+        return true;
+    }
+});
+ajv.addFormat("byte", {
+    type: "string",
+    validate(input) {
+        return rBase64.test(input);
+    }
+});
+//# sourceMappingURL=ajv.mjs.map

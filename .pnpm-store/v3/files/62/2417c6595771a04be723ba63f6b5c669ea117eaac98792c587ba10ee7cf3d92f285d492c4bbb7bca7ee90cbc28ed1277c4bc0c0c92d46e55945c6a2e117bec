@@ -1,0 +1,36 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1LocalObjectReference_1 = require("./IoK8sApiCoreV1LocalObjectReference.js");
+const schema = {
+    "properties": {
+        "driver": {
+            "type": "string"
+        },
+        "fsType": {
+            "type": "string"
+        },
+        "nodePublishSecretRef": {
+            "$ref": "io.k8s.api.core.v1.LocalObjectReference#"
+        },
+        "readOnly": {
+            "type": "boolean"
+        },
+        "volumeAttributes": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "type": "object"
+        }
+    },
+    "required": [
+        "driver"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1LocalObjectReference_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.CSIVolumeSource", schema);
+}
+exports.addSchema = addSchema;

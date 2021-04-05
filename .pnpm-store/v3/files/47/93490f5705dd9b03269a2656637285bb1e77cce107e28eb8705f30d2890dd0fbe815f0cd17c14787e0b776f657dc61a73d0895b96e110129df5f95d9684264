@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAutoscalingV2beta2ExternalMetricSource.mjs";
+/**
+ * ExternalMetricSource indicates how to scale on a metric not associated with any Kubernetes object (for example length of queue in cloud messaging service, or QPS from loadbalancer running outside of cluster).
+ */
+export class IoK8sApiAutoscalingV2beta2ExternalMetricSource extends Model {
+}
+Model.setSchema(IoK8sApiAutoscalingV2beta2ExternalMetricSource, "io.k8s.api.autoscaling.v2beta2.ExternalMetricSource", addSchema);
+export { IoK8sApiAutoscalingV2beta2ExternalMetricSource as ExternalMetricSource };

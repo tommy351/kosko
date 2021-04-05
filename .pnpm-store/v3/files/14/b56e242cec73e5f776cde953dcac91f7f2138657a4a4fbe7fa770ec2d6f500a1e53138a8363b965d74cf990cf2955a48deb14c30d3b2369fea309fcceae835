@@ -1,0 +1,21 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string"
+        },
+        "kind": {
+            "type": "string"
+        },
+        "name": {
+            "type": "string"
+        },
+        "uid": {
+            "type": "string"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.authentication.v1.BoundObjectReference", schema);
+}

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.VolumeAttachmentStatus = exports.IoK8sApiStorageV1alpha1VolumeAttachmentStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiStorageV1alpha1VolumeAttachmentStatus_1 = require("../_schemas/IoK8sApiStorageV1alpha1VolumeAttachmentStatus.js");
+/**
+ * VolumeAttachmentStatus is the status of a VolumeAttachment request.
+ */
+class IoK8sApiStorageV1alpha1VolumeAttachmentStatus extends base_1.Model {
+}
+exports.IoK8sApiStorageV1alpha1VolumeAttachmentStatus = IoK8sApiStorageV1alpha1VolumeAttachmentStatus;
+exports.VolumeAttachmentStatus = IoK8sApiStorageV1alpha1VolumeAttachmentStatus;
+base_1.Model.setSchema(IoK8sApiStorageV1alpha1VolumeAttachmentStatus, "io.k8s.api.storage.v1alpha1.VolumeAttachmentStatus", IoK8sApiStorageV1alpha1VolumeAttachmentStatus_1.addSchema);

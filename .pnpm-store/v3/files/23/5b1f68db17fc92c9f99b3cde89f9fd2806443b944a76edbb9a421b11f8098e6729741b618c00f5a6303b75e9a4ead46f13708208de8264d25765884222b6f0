@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1LimitRangeSpec.mjs";
+/**
+ * LimitRangeSpec defines a min/max usage limit for resources that match on kind.
+ */
+export class IoK8sApiCoreV1LimitRangeSpec extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1LimitRangeSpec, "io.k8s.api.core.v1.LimitRangeSpec", addSchema);
+export { IoK8sApiCoreV1LimitRangeSpec as LimitRangeSpec };

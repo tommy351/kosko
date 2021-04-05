@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const schema = {
+    "properties": {
+        "partition": {
+            "format": "int32",
+            "type": "integer"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    validate_1.register("io.k8s.api.apps.v1.RollingUpdateStatefulSetStrategy", schema);
+}
+exports.addSchema = addSchema;

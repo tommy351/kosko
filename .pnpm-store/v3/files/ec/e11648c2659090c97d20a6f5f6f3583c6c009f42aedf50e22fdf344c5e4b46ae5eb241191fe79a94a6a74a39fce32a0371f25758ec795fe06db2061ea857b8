@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiExtensionsV1beta1IngressStatus.mjs";
+/**
+ * IngressStatus describe the current state of the Ingress.
+ */
+export class IoK8sApiExtensionsV1beta1IngressStatus extends Model {
+}
+Model.setSchema(IoK8sApiExtensionsV1beta1IngressStatus, "io.k8s.api.extensions.v1beta1.IngressStatus", addSchema);
+export { IoK8sApiExtensionsV1beta1IngressStatus as IngressStatus };

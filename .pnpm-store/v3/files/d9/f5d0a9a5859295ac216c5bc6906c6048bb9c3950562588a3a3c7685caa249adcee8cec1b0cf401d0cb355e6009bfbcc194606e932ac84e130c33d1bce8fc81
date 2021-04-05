@@ -1,0 +1,5 @@
+export * from "../../../_definitions/IoK8sApiDiscoveryV1beta1Endpoint";
+export * from "../../../_definitions/IoK8sApiDiscoveryV1beta1EndpointConditions";
+export * from "../../../_definitions/IoK8sApiDiscoveryV1beta1EndpointPort";
+export * from "../../../_definitions/IoK8sApiDiscoveryV1beta1EndpointSlice";
+export * from "../../../_definitions/IoK8sApiDiscoveryV1beta1EndpointSliceList";

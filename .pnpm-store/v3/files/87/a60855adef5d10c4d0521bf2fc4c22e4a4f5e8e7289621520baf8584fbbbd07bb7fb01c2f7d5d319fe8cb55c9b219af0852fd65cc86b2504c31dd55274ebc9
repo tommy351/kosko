@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiBatchV1beta1CronJobList.mjs";
+/**
+ * CronJobList is a collection of cron jobs.
+ */
+export class IoK8sApiBatchV1beta1CronJobList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiBatchV1beta1CronJobList.apiVersion,
+            kind: IoK8sApiBatchV1beta1CronJobList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiBatchV1beta1CronJobList.apiVersion = "batch/v1beta1";
+IoK8sApiBatchV1beta1CronJobList.kind = "CronJobList";
+Model.setSchema(IoK8sApiBatchV1beta1CronJobList, "io.k8s.api.batch.v1beta1.CronJobList", addSchema);
+export { IoK8sApiBatchV1beta1CronJobList as CronJobList };

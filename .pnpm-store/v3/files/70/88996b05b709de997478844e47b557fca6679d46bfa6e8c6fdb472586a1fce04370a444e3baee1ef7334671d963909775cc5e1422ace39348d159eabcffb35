@@ -1,0 +1,43 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiSchedulingV1PriorityClass_1 = require("./IoK8sApiSchedulingV1PriorityClass.js");
+const IoK8sApimachineryPkgApisMetaV1ListMeta_1 = require("./IoK8sApimachineryPkgApisMetaV1ListMeta.js");
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string",
+            "enum": [
+                "scheduling.k8s.io/v1"
+            ]
+        },
+        "items": {
+            "items": {
+                "$ref": "io.k8s.api.scheduling.v1.PriorityClass#"
+            },
+            "type": "array"
+        },
+        "kind": {
+            "type": "string",
+            "enum": [
+                "PriorityClassList"
+            ]
+        },
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta#"
+        }
+    },
+    "required": [
+        "items",
+        "apiVersion",
+        "kind"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiSchedulingV1PriorityClass_1.addSchema();
+    IoK8sApimachineryPkgApisMetaV1ListMeta_1.addSchema();
+    validate_1.register("io.k8s.api.scheduling.v1.PriorityClassList", schema);
+}
+exports.addSchema = addSchema;

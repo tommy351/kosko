@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DeploymentSpec = exports.IoK8sApiAppsV1DeploymentSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAppsV1DeploymentSpec_1 = require("../_schemas/IoK8sApiAppsV1DeploymentSpec.js");
+/**
+ * DeploymentSpec is the specification of the desired behavior of the Deployment.
+ */
+class IoK8sApiAppsV1DeploymentSpec extends base_1.Model {
+}
+exports.IoK8sApiAppsV1DeploymentSpec = IoK8sApiAppsV1DeploymentSpec;
+exports.DeploymentSpec = IoK8sApiAppsV1DeploymentSpec;
+base_1.Model.setSchema(IoK8sApiAppsV1DeploymentSpec, "io.k8s.api.apps.v1.DeploymentSpec", IoK8sApiAppsV1DeploymentSpec_1.addSchema);

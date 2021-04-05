@@ -1,0 +1,18 @@
+import { IIoK8sApiCoreV1DaemonEndpoint } from "./IoK8sApiCoreV1DaemonEndpoint";
+import { Model } from "@kubernetes-models/base";
+/**
+ * NodeDaemonEndpoints lists ports opened by daemons running on the Node.
+ */
+export interface IIoK8sApiCoreV1NodeDaemonEndpoints {
+    /**
+     * Endpoint on which Kubelet is listening.
+     */
+    "kubeletEndpoint"?: IIoK8sApiCoreV1DaemonEndpoint;
+}
+/**
+ * NodeDaemonEndpoints lists ports opened by daemons running on the Node.
+ */
+export declare class IoK8sApiCoreV1NodeDaemonEndpoints extends Model<IIoK8sApiCoreV1NodeDaemonEndpoints> implements IIoK8sApiCoreV1NodeDaemonEndpoints {
+    "kubeletEndpoint"?: IIoK8sApiCoreV1DaemonEndpoint;
+}
+export { IIoK8sApiCoreV1NodeDaemonEndpoints as INodeDaemonEndpoints, IoK8sApiCoreV1NodeDaemonEndpoints as NodeDaemonEndpoints };

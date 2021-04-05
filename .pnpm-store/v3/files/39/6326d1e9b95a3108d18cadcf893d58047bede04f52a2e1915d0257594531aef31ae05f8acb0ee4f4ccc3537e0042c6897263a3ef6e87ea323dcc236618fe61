@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.EphemeralVolumeSource = exports.IoK8sApiCoreV1EphemeralVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1EphemeralVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1EphemeralVolumeSource.js");
+/**
+ * Represents an ephemeral volume that is handled by a normal storage driver.
+ */
+class IoK8sApiCoreV1EphemeralVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1EphemeralVolumeSource = IoK8sApiCoreV1EphemeralVolumeSource;
+exports.EphemeralVolumeSource = IoK8sApiCoreV1EphemeralVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1EphemeralVolumeSource, "io.k8s.api.core.v1.EphemeralVolumeSource", IoK8sApiCoreV1EphemeralVolumeSource_1.addSchema);

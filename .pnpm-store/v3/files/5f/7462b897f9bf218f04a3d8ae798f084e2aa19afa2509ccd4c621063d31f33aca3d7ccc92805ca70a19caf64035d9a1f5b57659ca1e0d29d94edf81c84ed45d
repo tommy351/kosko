@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAuthorizationV1SubjectAccessReviewSpec.mjs";
+/**
+ * SubjectAccessReviewSpec is a description of the access request.  Exactly one of ResourceAuthorizationAttributes and NonResourceAuthorizationAttributes must be set
+ */
+export class IoK8sApiAuthorizationV1SubjectAccessReviewSpec extends Model {
+}
+Model.setSchema(IoK8sApiAuthorizationV1SubjectAccessReviewSpec, "io.k8s.api.authorization.v1.SubjectAccessReviewSpec", addSchema);
+export { IoK8sApiAuthorizationV1SubjectAccessReviewSpec as SubjectAccessReviewSpec };

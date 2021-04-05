@@ -1,0 +1,6 @@
+import ts from "typescript";
+export interface RewriteImportTransformerOptions {
+    extname: string;
+    system: ts.System;
+}
+export declare function createRewriteImportTransformer(options: RewriteImportTransformerOptions): ts.TransformerFactory<ts.SourceFile>;

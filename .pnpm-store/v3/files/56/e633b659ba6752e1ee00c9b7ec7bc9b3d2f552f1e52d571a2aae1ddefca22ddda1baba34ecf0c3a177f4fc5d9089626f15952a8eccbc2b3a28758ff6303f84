@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Node = exports.IoK8sApiCoreV1Node = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1Node_1 = require("../_schemas/IoK8sApiCoreV1Node.js");
+/**
+ * Node is a worker node in Kubernetes. Each node will have a unique identifier in the cache (i.e. in etcd).
+ */
+class IoK8sApiCoreV1Node extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1Node.apiVersion,
+            kind: IoK8sApiCoreV1Node.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1Node = IoK8sApiCoreV1Node;
+exports.Node = IoK8sApiCoreV1Node;
+IoK8sApiCoreV1Node.apiVersion = "v1";
+IoK8sApiCoreV1Node.kind = "Node";
+base_1.Model.setSchema(IoK8sApiCoreV1Node, "io.k8s.api.core.v1.Node", IoK8sApiCoreV1Node_1.addSchema);

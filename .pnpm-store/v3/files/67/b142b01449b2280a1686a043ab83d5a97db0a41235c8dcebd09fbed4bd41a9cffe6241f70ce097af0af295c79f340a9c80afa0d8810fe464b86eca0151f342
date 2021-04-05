@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ResourceFieldSelector = exports.IoK8sApiCoreV1ResourceFieldSelector = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ResourceFieldSelector_1 = require("../_schemas/IoK8sApiCoreV1ResourceFieldSelector.js");
+/**
+ * ResourceFieldSelector represents container resources (cpu, memory) and their output format
+ */
+class IoK8sApiCoreV1ResourceFieldSelector extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ResourceFieldSelector = IoK8sApiCoreV1ResourceFieldSelector;
+exports.ResourceFieldSelector = IoK8sApiCoreV1ResourceFieldSelector;
+base_1.Model.setSchema(IoK8sApiCoreV1ResourceFieldSelector, "io.k8s.api.core.v1.ResourceFieldSelector", IoK8sApiCoreV1ResourceFieldSelector_1.addSchema);

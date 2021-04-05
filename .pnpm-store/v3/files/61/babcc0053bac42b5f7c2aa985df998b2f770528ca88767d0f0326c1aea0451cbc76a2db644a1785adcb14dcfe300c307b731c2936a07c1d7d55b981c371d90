@@ -1,0 +1,44 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiAppsV1ReplicaSetCondition_1 = require("./IoK8sApiAppsV1ReplicaSetCondition.js");
+const schema = {
+    "properties": {
+        "availableReplicas": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "conditions": {
+            "items": {
+                "$ref": "io.k8s.api.apps.v1.ReplicaSetCondition#"
+            },
+            "type": "array"
+        },
+        "fullyLabeledReplicas": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "observedGeneration": {
+            "format": "int64",
+            "type": "integer"
+        },
+        "readyReplicas": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "replicas": {
+            "format": "int32",
+            "type": "integer"
+        }
+    },
+    "required": [
+        "replicas"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiAppsV1ReplicaSetCondition_1.addSchema();
+    validate_1.register("io.k8s.api.apps.v1.ReplicaSetStatus", schema);
+}
+exports.addSchema = addSchema;

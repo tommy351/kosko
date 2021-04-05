@@ -1,0 +1,18 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiFlowcontrolV1alpha1LimitResponse } from "./IoK8sApiFlowcontrolV1alpha1LimitResponse.mjs";
+const schema = {
+    "properties": {
+        "assuredConcurrencyShares": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "limitResponse": {
+            "$ref": "io.k8s.api.flowcontrol.v1alpha1.LimitResponse#"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiFlowcontrolV1alpha1LimitResponse();
+    register("io.k8s.api.flowcontrol.v1alpha1.LimitedPriorityLevelConfiguration", schema);
+}

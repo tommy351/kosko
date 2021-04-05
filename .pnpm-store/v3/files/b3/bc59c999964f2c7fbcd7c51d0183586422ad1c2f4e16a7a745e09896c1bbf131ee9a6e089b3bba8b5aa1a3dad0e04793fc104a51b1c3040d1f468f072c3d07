@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CinderPersistentVolumeSource = exports.IoK8sApiCoreV1CinderPersistentVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1CinderPersistentVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1CinderPersistentVolumeSource.js");
+/**
+ * Represents a cinder volume resource in Openstack. A Cinder volume must exist before mounting to a container. The volume must also be in the same region as the kubelet. Cinder volumes support ownership management and SELinux relabeling.
+ */
+class IoK8sApiCoreV1CinderPersistentVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1CinderPersistentVolumeSource = IoK8sApiCoreV1CinderPersistentVolumeSource;
+exports.CinderPersistentVolumeSource = IoK8sApiCoreV1CinderPersistentVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1CinderPersistentVolumeSource, "io.k8s.api.core.v1.CinderPersistentVolumeSource", IoK8sApiCoreV1CinderPersistentVolumeSource_1.addSchema);

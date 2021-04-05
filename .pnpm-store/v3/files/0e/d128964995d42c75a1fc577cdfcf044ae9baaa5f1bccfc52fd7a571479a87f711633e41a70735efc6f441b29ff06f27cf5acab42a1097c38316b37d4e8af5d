@@ -1,0 +1,25 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.StatefulSet = exports.IoK8sApiAppsV1StatefulSet = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAppsV1StatefulSet_1 = require("../_schemas/IoK8sApiAppsV1StatefulSet.js");
+/**
+ * StatefulSet represents a set of pods with consistent identities. Identities are defined as:
+ *  - Network: A single stable DNS and hostname.
+ *  - Storage: As many VolumeClaims as requested.
+ * The StatefulSet guarantees that a given network identity will always map to the same storage identity.
+ */
+class IoK8sApiAppsV1StatefulSet extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAppsV1StatefulSet.apiVersion,
+            kind: IoK8sApiAppsV1StatefulSet.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiAppsV1StatefulSet = IoK8sApiAppsV1StatefulSet;
+exports.StatefulSet = IoK8sApiAppsV1StatefulSet;
+IoK8sApiAppsV1StatefulSet.apiVersion = "apps/v1";
+IoK8sApiAppsV1StatefulSet.kind = "StatefulSet";
+base_1.Model.setSchema(IoK8sApiAppsV1StatefulSet, "io.k8s.api.apps.v1.StatefulSet", IoK8sApiAppsV1StatefulSet_1.addSchema);

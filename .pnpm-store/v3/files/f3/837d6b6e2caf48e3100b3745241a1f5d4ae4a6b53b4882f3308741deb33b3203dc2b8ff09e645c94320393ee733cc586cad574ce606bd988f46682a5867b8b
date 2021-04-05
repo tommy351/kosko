@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAutoscalingV2beta2ExternalMetricStatus.mjs";
+/**
+ * ExternalMetricStatus indicates the current value of a global metric not associated with any Kubernetes object.
+ */
+export class IoK8sApiAutoscalingV2beta2ExternalMetricStatus extends Model {
+}
+Model.setSchema(IoK8sApiAutoscalingV2beta2ExternalMetricStatus, "io.k8s.api.autoscaling.v2beta2.ExternalMetricStatus", addSchema);
+export { IoK8sApiAutoscalingV2beta2ExternalMetricStatus as ExternalMetricStatus };

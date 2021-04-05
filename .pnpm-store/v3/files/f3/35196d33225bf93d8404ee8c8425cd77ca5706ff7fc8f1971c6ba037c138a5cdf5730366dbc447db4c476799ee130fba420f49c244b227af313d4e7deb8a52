@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.EventList = exports.IoK8sApiEventsV1EventList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiEventsV1EventList_1 = require("../_schemas/IoK8sApiEventsV1EventList.js");
+/**
+ * EventList is a list of Event objects.
+ */
+class IoK8sApiEventsV1EventList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiEventsV1EventList.apiVersion,
+            kind: IoK8sApiEventsV1EventList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiEventsV1EventList = IoK8sApiEventsV1EventList;
+exports.EventList = IoK8sApiEventsV1EventList;
+IoK8sApiEventsV1EventList.apiVersion = "events.k8s.io/v1";
+IoK8sApiEventsV1EventList.kind = "EventList";
+base_1.Model.setSchema(IoK8sApiEventsV1EventList, "io.k8s.api.events.v1.EventList", IoK8sApiEventsV1EventList_1.addSchema);

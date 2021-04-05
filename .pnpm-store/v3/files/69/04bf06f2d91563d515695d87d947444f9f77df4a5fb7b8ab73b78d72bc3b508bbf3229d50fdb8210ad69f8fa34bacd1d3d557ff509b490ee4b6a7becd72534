@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PersistentVolume = exports.IoK8sApiCoreV1PersistentVolume = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1PersistentVolume_1 = require("../_schemas/IoK8sApiCoreV1PersistentVolume.js");
+/**
+ * PersistentVolume (PV) is a storage resource provisioned by an administrator. It is analogous to a node. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes
+ */
+class IoK8sApiCoreV1PersistentVolume extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1PersistentVolume.apiVersion,
+            kind: IoK8sApiCoreV1PersistentVolume.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1PersistentVolume = IoK8sApiCoreV1PersistentVolume;
+exports.PersistentVolume = IoK8sApiCoreV1PersistentVolume;
+IoK8sApiCoreV1PersistentVolume.apiVersion = "v1";
+IoK8sApiCoreV1PersistentVolume.kind = "PersistentVolume";
+base_1.Model.setSchema(IoK8sApiCoreV1PersistentVolume, "io.k8s.api.core.v1.PersistentVolume", IoK8sApiCoreV1PersistentVolume_1.addSchema);

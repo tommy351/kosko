@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Scheduling = exports.IoK8sApiNodeV1alpha1Scheduling = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiNodeV1alpha1Scheduling_1 = require("../_schemas/IoK8sApiNodeV1alpha1Scheduling.js");
+/**
+ * Scheduling specifies the scheduling constraints for nodes supporting a RuntimeClass.
+ */
+class IoK8sApiNodeV1alpha1Scheduling extends base_1.Model {
+}
+exports.IoK8sApiNodeV1alpha1Scheduling = IoK8sApiNodeV1alpha1Scheduling;
+exports.Scheduling = IoK8sApiNodeV1alpha1Scheduling;
+base_1.Model.setSchema(IoK8sApiNodeV1alpha1Scheduling, "io.k8s.api.node.v1alpha1.Scheduling", IoK8sApiNodeV1alpha1Scheduling_1.addSchema);

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ExternalDocumentation = exports.IoK8sApiextensionsApiserverPkgApisApiextensionsV1ExternalDocumentation = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiextensionsApiserverPkgApisApiextensionsV1ExternalDocumentation_1 = require("../_schemas/IoK8sApiextensionsApiserverPkgApisApiextensionsV1ExternalDocumentation.js");
+/**
+ * ExternalDocumentation allows referencing an external resource for extended documentation.
+ */
+class IoK8sApiextensionsApiserverPkgApisApiextensionsV1ExternalDocumentation extends base_1.Model {
+}
+exports.IoK8sApiextensionsApiserverPkgApisApiextensionsV1ExternalDocumentation = IoK8sApiextensionsApiserverPkgApisApiextensionsV1ExternalDocumentation;
+exports.ExternalDocumentation = IoK8sApiextensionsApiserverPkgApisApiextensionsV1ExternalDocumentation;
+base_1.Model.setSchema(IoK8sApiextensionsApiserverPkgApisApiextensionsV1ExternalDocumentation, "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.ExternalDocumentation", IoK8sApiextensionsApiserverPkgApisApiextensionsV1ExternalDocumentation_1.addSchema);

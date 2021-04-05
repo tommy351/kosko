@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Namespace = exports.IoK8sApiCoreV1Namespace = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1Namespace_1 = require("../_schemas/IoK8sApiCoreV1Namespace.js");
+/**
+ * Namespace provides a scope for Names. Use of multiple namespaces is optional.
+ */
+class IoK8sApiCoreV1Namespace extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1Namespace.apiVersion,
+            kind: IoK8sApiCoreV1Namespace.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1Namespace = IoK8sApiCoreV1Namespace;
+exports.Namespace = IoK8sApiCoreV1Namespace;
+IoK8sApiCoreV1Namespace.apiVersion = "v1";
+IoK8sApiCoreV1Namespace.kind = "Namespace";
+base_1.Model.setSchema(IoK8sApiCoreV1Namespace, "io.k8s.api.core.v1.Namespace", IoK8sApiCoreV1Namespace_1.addSchema);

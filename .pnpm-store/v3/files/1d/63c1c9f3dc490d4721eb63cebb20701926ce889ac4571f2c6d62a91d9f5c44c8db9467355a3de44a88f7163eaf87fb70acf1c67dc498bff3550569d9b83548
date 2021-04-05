@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1PersistentVolumeClaimTemplate.mjs";
+/**
+ * PersistentVolumeClaimTemplate is used to produce PersistentVolumeClaim objects as part of an EphemeralVolumeSource.
+ */
+export class IoK8sApiCoreV1PersistentVolumeClaimTemplate extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1PersistentVolumeClaimTemplate, "io.k8s.api.core.v1.PersistentVolumeClaimTemplate", addSchema);
+export { IoK8sApiCoreV1PersistentVolumeClaimTemplate as PersistentVolumeClaimTemplate };

@@ -1,0 +1,38 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApimachineryPkgApisMetaV1Time } from "./IoK8sApimachineryPkgApisMetaV1Time.mjs";
+import { addSchema as IoK8sApiBatchV1JobCondition } from "./IoK8sApiBatchV1JobCondition.mjs";
+const schema = {
+    "properties": {
+        "active": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "completionTime": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.Time#"
+        },
+        "conditions": {
+            "items": {
+                "$ref": "io.k8s.api.batch.v1.JobCondition#"
+            },
+            "type": "array"
+        },
+        "failed": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "startTime": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.Time#"
+        },
+        "succeeded": {
+            "format": "int32",
+            "type": "integer"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1Time();
+    IoK8sApiBatchV1JobCondition();
+    IoK8sApimachineryPkgApisMetaV1Time();
+    register("io.k8s.api.batch.v1.JobStatus", schema);
+}

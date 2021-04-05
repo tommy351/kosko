@@ -1,0 +1,21 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "key": {
+            "type": "string"
+        },
+        "name": {
+            "type": "string"
+        },
+        "optional": {
+            "type": "boolean"
+        }
+    },
+    "required": [
+        "key"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.core.v1.SecretKeySelector", schema);
+}

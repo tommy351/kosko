@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1EventSource.mjs";
+/**
+ * EventSource contains information for an event.
+ */
+export class IoK8sApiCoreV1EventSource extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1EventSource, "io.k8s.api.core.v1.EventSource", addSchema);
+export { IoK8sApiCoreV1EventSource as EventSource };

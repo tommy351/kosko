@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Affinity = exports.IoK8sApiCoreV1Affinity = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1Affinity_1 = require("../_schemas/IoK8sApiCoreV1Affinity.js");
+/**
+ * Affinity is a group of affinity scheduling rules.
+ */
+class IoK8sApiCoreV1Affinity extends base_1.Model {
+}
+exports.IoK8sApiCoreV1Affinity = IoK8sApiCoreV1Affinity;
+exports.Affinity = IoK8sApiCoreV1Affinity;
+base_1.Model.setSchema(IoK8sApiCoreV1Affinity, "io.k8s.api.core.v1.Affinity", IoK8sApiCoreV1Affinity_1.addSchema);

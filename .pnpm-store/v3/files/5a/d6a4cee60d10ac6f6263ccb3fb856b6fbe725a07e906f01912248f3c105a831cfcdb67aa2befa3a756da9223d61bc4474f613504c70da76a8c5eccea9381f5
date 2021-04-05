@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiPolicyV1beta1RuntimeClassStrategyOptions.mjs";
+/**
+ * RuntimeClassStrategyOptions define the strategy that will dictate the allowable RuntimeClasses for a pod.
+ */
+export class IoK8sApiPolicyV1beta1RuntimeClassStrategyOptions extends Model {
+}
+Model.setSchema(IoK8sApiPolicyV1beta1RuntimeClassStrategyOptions, "io.k8s.api.policy.v1beta1.RuntimeClassStrategyOptions", addSchema);
+export { IoK8sApiPolicyV1beta1RuntimeClassStrategyOptions as RuntimeClassStrategyOptions };

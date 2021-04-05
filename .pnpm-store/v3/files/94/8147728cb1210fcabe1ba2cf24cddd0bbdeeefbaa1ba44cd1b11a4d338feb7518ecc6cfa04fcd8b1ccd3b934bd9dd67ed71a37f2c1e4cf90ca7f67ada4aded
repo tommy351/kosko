@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiFlowcontrolV1alpha1FlowDistinguisherMethod.mjs";
+/**
+ * FlowDistinguisherMethod specifies the method of a flow distinguisher.
+ */
+export class IoK8sApiFlowcontrolV1alpha1FlowDistinguisherMethod extends Model {
+}
+Model.setSchema(IoK8sApiFlowcontrolV1alpha1FlowDistinguisherMethod, "io.k8s.api.flowcontrol.v1alpha1.FlowDistinguisherMethod", addSchema);
+export { IoK8sApiFlowcontrolV1alpha1FlowDistinguisherMethod as FlowDistinguisherMethod };

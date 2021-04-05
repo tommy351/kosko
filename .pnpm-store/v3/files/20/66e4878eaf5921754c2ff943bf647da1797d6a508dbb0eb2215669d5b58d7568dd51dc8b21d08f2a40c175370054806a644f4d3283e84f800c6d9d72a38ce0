@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ComponentCondition = exports.IoK8sApiCoreV1ComponentCondition = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ComponentCondition_1 = require("../_schemas/IoK8sApiCoreV1ComponentCondition.js");
+/**
+ * Information about the condition of a component.
+ */
+class IoK8sApiCoreV1ComponentCondition extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ComponentCondition = IoK8sApiCoreV1ComponentCondition;
+exports.ComponentCondition = IoK8sApiCoreV1ComponentCondition;
+base_1.Model.setSchema(IoK8sApiCoreV1ComponentCondition, "io.k8s.api.core.v1.ComponentCondition", IoK8sApiCoreV1ComponentCondition_1.addSchema);

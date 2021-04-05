@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAuthenticationV1TokenReview.mjs";
+/**
+ * TokenReview attempts to authenticate a token to a known user. Note: TokenReview requests may be cached by the webhook token authenticator plugin in the kube-apiserver.
+ */
+export class IoK8sApiAuthenticationV1TokenReview extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAuthenticationV1TokenReview.apiVersion,
+            kind: IoK8sApiAuthenticationV1TokenReview.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiAuthenticationV1TokenReview.apiVersion = "authentication.k8s.io/v1";
+IoK8sApiAuthenticationV1TokenReview.kind = "TokenReview";
+Model.setSchema(IoK8sApiAuthenticationV1TokenReview, "io.k8s.api.authentication.v1.TokenReview", addSchema);
+export { IoK8sApiAuthenticationV1TokenReview as TokenReview };

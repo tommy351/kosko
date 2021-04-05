@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.VolumeNodeAffinity = exports.IoK8sApiCoreV1VolumeNodeAffinity = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1VolumeNodeAffinity_1 = require("../_schemas/IoK8sApiCoreV1VolumeNodeAffinity.js");
+/**
+ * VolumeNodeAffinity defines constraints that limit what nodes this volume can be accessed from.
+ */
+class IoK8sApiCoreV1VolumeNodeAffinity extends base_1.Model {
+}
+exports.IoK8sApiCoreV1VolumeNodeAffinity = IoK8sApiCoreV1VolumeNodeAffinity;
+exports.VolumeNodeAffinity = IoK8sApiCoreV1VolumeNodeAffinity;
+base_1.Model.setSchema(IoK8sApiCoreV1VolumeNodeAffinity, "io.k8s.api.core.v1.VolumeNodeAffinity", IoK8sApiCoreV1VolumeNodeAffinity_1.addSchema);

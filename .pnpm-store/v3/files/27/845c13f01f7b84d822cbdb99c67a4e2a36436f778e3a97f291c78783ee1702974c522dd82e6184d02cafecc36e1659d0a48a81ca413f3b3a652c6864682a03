@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApisMetaV1Time_1 = require("./IoK8sApimachineryPkgApisMetaV1Time.js");
+const schema = {
+    "properties": {
+        "message": {
+            "type": "string"
+        },
+        "time": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.Time#"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1Time_1.addSchema();
+    validate_1.register("io.k8s.api.storage.v1beta1.VolumeError", schema);
+}
+exports.addSchema = addSchema;

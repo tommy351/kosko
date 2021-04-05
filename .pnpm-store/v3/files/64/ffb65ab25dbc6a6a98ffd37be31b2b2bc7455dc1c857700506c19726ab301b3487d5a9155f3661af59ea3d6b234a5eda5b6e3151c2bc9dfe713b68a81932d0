@@ -1,0 +1,23 @@
+import { IIoK8sApiAppsV1RollingUpdateDeployment } from "./IoK8sApiAppsV1RollingUpdateDeployment";
+import { Model } from "@kubernetes-models/base";
+/**
+ * DeploymentStrategy describes how to replace existing pods with new ones.
+ */
+export interface IIoK8sApiAppsV1DeploymentStrategy {
+    /**
+     * Rolling update config params. Present only if DeploymentStrategyType = RollingUpdate.
+     */
+    "rollingUpdate"?: IIoK8sApiAppsV1RollingUpdateDeployment;
+    /**
+     * Type of deployment. Can be "Recreate" or "RollingUpdate". Default is RollingUpdate.
+     */
+    "type"?: string;
+}
+/**
+ * DeploymentStrategy describes how to replace existing pods with new ones.
+ */
+export declare class IoK8sApiAppsV1DeploymentStrategy extends Model<IIoK8sApiAppsV1DeploymentStrategy> implements IIoK8sApiAppsV1DeploymentStrategy {
+    "rollingUpdate"?: IIoK8sApiAppsV1RollingUpdateDeployment;
+    "type"?: string;
+}
+export { IIoK8sApiAppsV1DeploymentStrategy as IDeploymentStrategy, IoK8sApiAppsV1DeploymentStrategy as DeploymentStrategy };

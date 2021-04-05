@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FlowSchemaSpec = exports.IoK8sApiFlowcontrolV1alpha1FlowSchemaSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiFlowcontrolV1alpha1FlowSchemaSpec_1 = require("../_schemas/IoK8sApiFlowcontrolV1alpha1FlowSchemaSpec.js");
+/**
+ * FlowSchemaSpec describes how the FlowSchema's specification looks like.
+ */
+class IoK8sApiFlowcontrolV1alpha1FlowSchemaSpec extends base_1.Model {
+}
+exports.IoK8sApiFlowcontrolV1alpha1FlowSchemaSpec = IoK8sApiFlowcontrolV1alpha1FlowSchemaSpec;
+exports.FlowSchemaSpec = IoK8sApiFlowcontrolV1alpha1FlowSchemaSpec;
+base_1.Model.setSchema(IoK8sApiFlowcontrolV1alpha1FlowSchemaSpec, "io.k8s.api.flowcontrol.v1alpha1.FlowSchemaSpec", IoK8sApiFlowcontrolV1alpha1FlowSchemaSpec_1.addSchema);

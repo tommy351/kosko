@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DeleteOptions = exports.IoK8sApimachineryPkgApisMetaV1DeleteOptions = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApimachineryPkgApisMetaV1DeleteOptions_1 = require("../_schemas/IoK8sApimachineryPkgApisMetaV1DeleteOptions.js");
+/**
+ * DeleteOptions may be provided when deleting an API object.
+ */
+class IoK8sApimachineryPkgApisMetaV1DeleteOptions extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApimachineryPkgApisMetaV1DeleteOptions.apiVersion,
+            kind: IoK8sApimachineryPkgApisMetaV1DeleteOptions.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApimachineryPkgApisMetaV1DeleteOptions = IoK8sApimachineryPkgApisMetaV1DeleteOptions;
+exports.DeleteOptions = IoK8sApimachineryPkgApisMetaV1DeleteOptions;
+IoK8sApimachineryPkgApisMetaV1DeleteOptions.apiVersion = "v1";
+IoK8sApimachineryPkgApisMetaV1DeleteOptions.kind = "DeleteOptions";
+base_1.Model.setSchema(IoK8sApimachineryPkgApisMetaV1DeleteOptions, "io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions", IoK8sApimachineryPkgApisMetaV1DeleteOptions_1.addSchema);

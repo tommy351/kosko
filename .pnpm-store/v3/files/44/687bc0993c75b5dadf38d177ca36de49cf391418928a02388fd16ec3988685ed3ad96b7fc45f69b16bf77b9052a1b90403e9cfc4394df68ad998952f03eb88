@@ -1,0 +1,33 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1ConfigMapProjection_1 = require("./IoK8sApiCoreV1ConfigMapProjection.js");
+const IoK8sApiCoreV1DownwardAPIProjection_1 = require("./IoK8sApiCoreV1DownwardAPIProjection.js");
+const IoK8sApiCoreV1SecretProjection_1 = require("./IoK8sApiCoreV1SecretProjection.js");
+const IoK8sApiCoreV1ServiceAccountTokenProjection_1 = require("./IoK8sApiCoreV1ServiceAccountTokenProjection.js");
+const schema = {
+    "properties": {
+        "configMap": {
+            "$ref": "io.k8s.api.core.v1.ConfigMapProjection#"
+        },
+        "downwardAPI": {
+            "$ref": "io.k8s.api.core.v1.DownwardAPIProjection#"
+        },
+        "secret": {
+            "$ref": "io.k8s.api.core.v1.SecretProjection#"
+        },
+        "serviceAccountToken": {
+            "$ref": "io.k8s.api.core.v1.ServiceAccountTokenProjection#"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1ConfigMapProjection_1.addSchema();
+    IoK8sApiCoreV1DownwardAPIProjection_1.addSchema();
+    IoK8sApiCoreV1SecretProjection_1.addSchema();
+    IoK8sApiCoreV1ServiceAccountTokenProjection_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.VolumeProjection", schema);
+}
+exports.addSchema = addSchema;

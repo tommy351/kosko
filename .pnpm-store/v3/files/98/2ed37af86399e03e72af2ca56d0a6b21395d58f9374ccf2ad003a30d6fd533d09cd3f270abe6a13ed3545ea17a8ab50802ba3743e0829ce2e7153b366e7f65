@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PolicyRulesWithSubjects = exports.IoK8sApiFlowcontrolV1alpha1PolicyRulesWithSubjects = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiFlowcontrolV1alpha1PolicyRulesWithSubjects_1 = require("../_schemas/IoK8sApiFlowcontrolV1alpha1PolicyRulesWithSubjects.js");
+/**
+ * PolicyRulesWithSubjects prescribes a test that applies to a request to an apiserver. The test considers the subject making the request, the verb being requested, and the resource to be acted upon. This PolicyRulesWithSubjects matches a request if and only if both (a) at least one member of subjects matches the request and (b) at least one member of resourceRules or nonResourceRules matches the request.
+ */
+class IoK8sApiFlowcontrolV1alpha1PolicyRulesWithSubjects extends base_1.Model {
+}
+exports.IoK8sApiFlowcontrolV1alpha1PolicyRulesWithSubjects = IoK8sApiFlowcontrolV1alpha1PolicyRulesWithSubjects;
+exports.PolicyRulesWithSubjects = IoK8sApiFlowcontrolV1alpha1PolicyRulesWithSubjects;
+base_1.Model.setSchema(IoK8sApiFlowcontrolV1alpha1PolicyRulesWithSubjects, "io.k8s.api.flowcontrol.v1alpha1.PolicyRulesWithSubjects", IoK8sApiFlowcontrolV1alpha1PolicyRulesWithSubjects_1.addSchema);

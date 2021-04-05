@@ -1,0 +1,25 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiNetworkingV1NetworkPolicyPort } from "./IoK8sApiNetworkingV1NetworkPolicyPort.mjs";
+import { addSchema as IoK8sApiNetworkingV1NetworkPolicyPeer } from "./IoK8sApiNetworkingV1NetworkPolicyPeer.mjs";
+const schema = {
+    "properties": {
+        "ports": {
+            "items": {
+                "$ref": "io.k8s.api.networking.v1.NetworkPolicyPort#"
+            },
+            "type": "array"
+        },
+        "to": {
+            "items": {
+                "$ref": "io.k8s.api.networking.v1.NetworkPolicyPeer#"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiNetworkingV1NetworkPolicyPort();
+    IoK8sApiNetworkingV1NetworkPolicyPeer();
+    register("io.k8s.api.networking.v1.NetworkPolicyEgressRule", schema);
+}

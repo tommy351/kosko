@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ContainerImage = exports.IoK8sApiCoreV1ContainerImage = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ContainerImage_1 = require("../_schemas/IoK8sApiCoreV1ContainerImage.js");
+/**
+ * Describe a container image
+ */
+class IoK8sApiCoreV1ContainerImage extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ContainerImage = IoK8sApiCoreV1ContainerImage;
+exports.ContainerImage = IoK8sApiCoreV1ContainerImage;
+base_1.Model.setSchema(IoK8sApiCoreV1ContainerImage, "io.k8s.api.core.v1.ContainerImage", IoK8sApiCoreV1ContainerImage_1.addSchema);

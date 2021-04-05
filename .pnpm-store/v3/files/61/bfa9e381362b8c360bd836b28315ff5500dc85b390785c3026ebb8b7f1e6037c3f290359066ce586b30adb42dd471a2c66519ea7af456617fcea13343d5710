@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PodIP = exports.IoK8sApiCoreV1PodIP = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1PodIP_1 = require("../_schemas/IoK8sApiCoreV1PodIP.js");
+/**
+ * IP address information for entries in the (plural) PodIPs field. Each entry includes:
+ *    IP: An IP address allocated to the pod. Routable at least within the cluster.
+ */
+class IoK8sApiCoreV1PodIP extends base_1.Model {
+}
+exports.IoK8sApiCoreV1PodIP = IoK8sApiCoreV1PodIP;
+exports.PodIP = IoK8sApiCoreV1PodIP;
+base_1.Model.setSchema(IoK8sApiCoreV1PodIP, "io.k8s.api.core.v1.PodIP", IoK8sApiCoreV1PodIP_1.addSchema);

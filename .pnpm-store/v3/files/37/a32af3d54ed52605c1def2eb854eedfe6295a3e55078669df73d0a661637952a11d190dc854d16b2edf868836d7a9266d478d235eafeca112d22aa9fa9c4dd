@@ -1,0 +1,26 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1NodeSelectorTerm_1 = require("./IoK8sApiCoreV1NodeSelectorTerm.js");
+const schema = {
+    "properties": {
+        "preference": {
+            "$ref": "io.k8s.api.core.v1.NodeSelectorTerm#"
+        },
+        "weight": {
+            "format": "int32",
+            "type": "integer"
+        }
+    },
+    "required": [
+        "weight",
+        "preference"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1NodeSelectorTerm_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.PreferredSchedulingTerm", schema);
+}
+exports.addSchema = addSchema;

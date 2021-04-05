@@ -1,0 +1,51 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiAutoscalingV2beta1HorizontalPodAutoscalerCondition_1 = require("./IoK8sApiAutoscalingV2beta1HorizontalPodAutoscalerCondition.js");
+const IoK8sApiAutoscalingV2beta1MetricStatus_1 = require("./IoK8sApiAutoscalingV2beta1MetricStatus.js");
+const IoK8sApimachineryPkgApisMetaV1Time_1 = require("./IoK8sApimachineryPkgApisMetaV1Time.js");
+const schema = {
+    "properties": {
+        "conditions": {
+            "items": {
+                "$ref": "io.k8s.api.autoscaling.v2beta1.HorizontalPodAutoscalerCondition#"
+            },
+            "type": "array"
+        },
+        "currentMetrics": {
+            "items": {
+                "$ref": "io.k8s.api.autoscaling.v2beta1.MetricStatus#"
+            },
+            "type": "array"
+        },
+        "currentReplicas": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "desiredReplicas": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "lastScaleTime": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.Time#"
+        },
+        "observedGeneration": {
+            "format": "int64",
+            "type": "integer"
+        }
+    },
+    "required": [
+        "currentReplicas",
+        "desiredReplicas",
+        "conditions"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiAutoscalingV2beta1HorizontalPodAutoscalerCondition_1.addSchema();
+    IoK8sApiAutoscalingV2beta1MetricStatus_1.addSchema();
+    IoK8sApimachineryPkgApisMetaV1Time_1.addSchema();
+    validate_1.register("io.k8s.api.autoscaling.v2beta1.HorizontalPodAutoscalerStatus", schema);
+}
+exports.addSchema = addSchema;

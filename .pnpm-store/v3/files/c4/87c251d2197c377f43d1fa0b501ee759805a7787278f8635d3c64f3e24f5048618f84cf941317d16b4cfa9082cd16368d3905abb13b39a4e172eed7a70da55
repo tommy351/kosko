@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1ScopeSelector.mjs";
+/**
+ * A scope selector represents the AND of the selectors represented by the scoped-resource selector requirements.
+ */
+export class IoK8sApiCoreV1ScopeSelector extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1ScopeSelector, "io.k8s.api.core.v1.ScopeSelector", addSchema);
+export { IoK8sApiCoreV1ScopeSelector as ScopeSelector };

@@ -1,0 +1,18 @@
+import { IIoK8sApiCoreV1LimitRangeItem } from "./IoK8sApiCoreV1LimitRangeItem";
+import { Model } from "@kubernetes-models/base";
+/**
+ * LimitRangeSpec defines a min/max usage limit for resources that match on kind.
+ */
+export interface IIoK8sApiCoreV1LimitRangeSpec {
+    /**
+     * Limits is the list of LimitRangeItem objects that are enforced.
+     */
+    "limits": Array<IIoK8sApiCoreV1LimitRangeItem>;
+}
+/**
+ * LimitRangeSpec defines a min/max usage limit for resources that match on kind.
+ */
+export declare class IoK8sApiCoreV1LimitRangeSpec extends Model<IIoK8sApiCoreV1LimitRangeSpec> implements IIoK8sApiCoreV1LimitRangeSpec {
+    "limits": Array<IIoK8sApiCoreV1LimitRangeItem>;
+}
+export { IIoK8sApiCoreV1LimitRangeSpec as ILimitRangeSpec, IoK8sApiCoreV1LimitRangeSpec as LimitRangeSpec };

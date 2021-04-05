@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAppsV1DeploymentStrategy.mjs";
+/**
+ * DeploymentStrategy describes how to replace existing pods with new ones.
+ */
+export class IoK8sApiAppsV1DeploymentStrategy extends Model {
+}
+Model.setSchema(IoK8sApiAppsV1DeploymentStrategy, "io.k8s.api.apps.v1.DeploymentStrategy", addSchema);
+export { IoK8sApiAppsV1DeploymentStrategy as DeploymentStrategy };

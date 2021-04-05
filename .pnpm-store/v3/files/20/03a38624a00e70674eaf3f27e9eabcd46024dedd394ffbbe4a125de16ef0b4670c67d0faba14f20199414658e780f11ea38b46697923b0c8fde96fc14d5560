@@ -1,0 +1,49 @@
+import { Infer } from "superstruct";
+declare const targetSchema: import("superstruct").Struct<{
+    extname?: string | undefined;
+    module?: string | undefined;
+    target?: string | undefined;
+}, {
+    extname: import("superstruct").Struct<string | undefined, null>;
+    module: import("superstruct").Struct<string | undefined, null>;
+    target: import("superstruct").Struct<string | undefined, null>;
+}>;
+export declare type Target = Infer<typeof targetSchema>;
+declare const configSchema: import("superstruct").Struct<{
+    projects?: string[] | undefined;
+    targets?: {
+        extname?: string | undefined;
+        module?: string | undefined;
+        target?: string | undefined;
+    }[] | undefined;
+    compiler?: string | undefined;
+}, {
+    projects: import("superstruct").Struct<string[] | undefined, import("superstruct").Struct<string, null>>;
+    targets: import("superstruct").Struct<{
+        extname?: string | undefined;
+        module?: string | undefined;
+        target?: string | undefined;
+    }[] | undefined, import("superstruct").Struct<{
+        extname?: string | undefined;
+        module?: string | undefined;
+        target?: string | undefined;
+    }, {
+        extname: import("superstruct").Struct<string | undefined, null>;
+        module: import("superstruct").Struct<string | undefined, null>;
+        target: import("superstruct").Struct<string | undefined, null>;
+    }>>;
+    compiler: import("superstruct").Struct<string | undefined, null>;
+}>;
+export declare type InferConfig = Infer<typeof configSchema>;
+export declare type Config = InferConfig & {
+    cwd: string;
+    projects: string[];
+    targets: Target[];
+};
+export declare function resolveProjectPath(cwd: string, projects: string[]): Promise<string[]>;
+export interface LoadConfigOptions {
+    cwd?: string;
+    path?: string;
+}
+export declare function loadConfig({ cwd, path, }: LoadConfigOptions): Promise<Config>;
+export {};

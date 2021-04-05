@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.JobCondition = exports.IoK8sApiBatchV1JobCondition = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiBatchV1JobCondition_1 = require("../_schemas/IoK8sApiBatchV1JobCondition.js");
+/**
+ * JobCondition describes current state of a job.
+ */
+class IoK8sApiBatchV1JobCondition extends base_1.Model {
+}
+exports.IoK8sApiBatchV1JobCondition = IoK8sApiBatchV1JobCondition;
+exports.JobCondition = IoK8sApiBatchV1JobCondition;
+base_1.Model.setSchema(IoK8sApiBatchV1JobCondition, "io.k8s.api.batch.v1.JobCondition", IoK8sApiBatchV1JobCondition_1.addSchema);

@@ -1,0 +1,19 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiSchedulingV1alpha1PriorityClass.mjs";
+/**
+ * DEPRECATED - This group version of PriorityClass is deprecated by scheduling.k8s.io/v1/PriorityClass. PriorityClass defines mapping from a priority class name to the priority integer value. The value can be any valid integer.
+ * @deprecated
+ */
+export class IoK8sApiSchedulingV1alpha1PriorityClass extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiSchedulingV1alpha1PriorityClass.apiVersion,
+            kind: IoK8sApiSchedulingV1alpha1PriorityClass.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiSchedulingV1alpha1PriorityClass.apiVersion = "scheduling.k8s.io/v1alpha1";
+IoK8sApiSchedulingV1alpha1PriorityClass.kind = "PriorityClass";
+Model.setSchema(IoK8sApiSchedulingV1alpha1PriorityClass, "io.k8s.api.scheduling.v1alpha1.PriorityClass", addSchema);
+export { IoK8sApiSchedulingV1alpha1PriorityClass as PriorityClass };

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PersistentVolumeClaimCondition = exports.IoK8sApiCoreV1PersistentVolumeClaimCondition = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1PersistentVolumeClaimCondition_1 = require("../_schemas/IoK8sApiCoreV1PersistentVolumeClaimCondition.js");
+/**
+ * PersistentVolumeClaimCondition contails details about state of pvc
+ */
+class IoK8sApiCoreV1PersistentVolumeClaimCondition extends base_1.Model {
+}
+exports.IoK8sApiCoreV1PersistentVolumeClaimCondition = IoK8sApiCoreV1PersistentVolumeClaimCondition;
+exports.PersistentVolumeClaimCondition = IoK8sApiCoreV1PersistentVolumeClaimCondition;
+base_1.Model.setSchema(IoK8sApiCoreV1PersistentVolumeClaimCondition, "io.k8s.api.core.v1.PersistentVolumeClaimCondition", IoK8sApiCoreV1PersistentVolumeClaimCondition_1.addSchema);

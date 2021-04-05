@@ -1,0 +1,50 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1EnvVar_1 = require("./IoK8sApiCoreV1EnvVar.js");
+const IoK8sApiCoreV1EnvFromSource_1 = require("./IoK8sApiCoreV1EnvFromSource.js");
+const IoK8sApimachineryPkgApisMetaV1LabelSelector_1 = require("./IoK8sApimachineryPkgApisMetaV1LabelSelector.js");
+const IoK8sApiCoreV1VolumeMount_1 = require("./IoK8sApiCoreV1VolumeMount.js");
+const IoK8sApiCoreV1Volume_1 = require("./IoK8sApiCoreV1Volume.js");
+const schema = {
+    "properties": {
+        "env": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.EnvVar#"
+            },
+            "type": "array"
+        },
+        "envFrom": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.EnvFromSource#"
+            },
+            "type": "array"
+        },
+        "selector": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector#"
+        },
+        "volumeMounts": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.VolumeMount#"
+            },
+            "type": "array"
+        },
+        "volumes": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.Volume#"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1EnvVar_1.addSchema();
+    IoK8sApiCoreV1EnvFromSource_1.addSchema();
+    IoK8sApimachineryPkgApisMetaV1LabelSelector_1.addSchema();
+    IoK8sApiCoreV1VolumeMount_1.addSchema();
+    IoK8sApiCoreV1Volume_1.addSchema();
+    validate_1.register("io.k8s.api.settings.v1alpha1.PodPresetSpec", schema);
+}
+exports.addSchema = addSchema;

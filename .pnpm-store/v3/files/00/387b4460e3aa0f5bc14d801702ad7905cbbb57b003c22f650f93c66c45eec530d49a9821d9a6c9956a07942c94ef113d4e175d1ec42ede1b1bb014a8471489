@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiDiscoveryV1beta1EndpointSliceList.mjs";
+/**
+ * EndpointSliceList represents a list of endpoint slices
+ */
+export class IoK8sApiDiscoveryV1beta1EndpointSliceList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiDiscoveryV1beta1EndpointSliceList.apiVersion,
+            kind: IoK8sApiDiscoveryV1beta1EndpointSliceList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiDiscoveryV1beta1EndpointSliceList.apiVersion = "discovery.k8s.io/v1beta1";
+IoK8sApiDiscoveryV1beta1EndpointSliceList.kind = "EndpointSliceList";
+Model.setSchema(IoK8sApiDiscoveryV1beta1EndpointSliceList, "io.k8s.api.discovery.v1beta1.EndpointSliceList", addSchema);
+export { IoK8sApiDiscoveryV1beta1EndpointSliceList as EndpointSliceList };

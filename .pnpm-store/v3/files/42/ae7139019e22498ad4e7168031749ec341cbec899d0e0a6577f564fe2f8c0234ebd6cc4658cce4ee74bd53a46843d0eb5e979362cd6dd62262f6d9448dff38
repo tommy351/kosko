@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1NodeAddress.mjs";
+/**
+ * NodeAddress contains information for the node's address.
+ */
+export class IoK8sApiCoreV1NodeAddress extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1NodeAddress, "io.k8s.api.core.v1.NodeAddress", addSchema);
+export { IoK8sApiCoreV1NodeAddress as NodeAddress };

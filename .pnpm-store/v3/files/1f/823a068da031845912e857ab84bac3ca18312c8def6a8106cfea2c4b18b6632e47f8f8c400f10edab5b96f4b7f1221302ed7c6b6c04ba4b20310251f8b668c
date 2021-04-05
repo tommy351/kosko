@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.EndpointConditions = exports.IoK8sApiDiscoveryV1beta1EndpointConditions = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiDiscoveryV1beta1EndpointConditions_1 = require("../_schemas/IoK8sApiDiscoveryV1beta1EndpointConditions.js");
+/**
+ * EndpointConditions represents the current condition of an endpoint.
+ */
+class IoK8sApiDiscoveryV1beta1EndpointConditions extends base_1.Model {
+}
+exports.IoK8sApiDiscoveryV1beta1EndpointConditions = IoK8sApiDiscoveryV1beta1EndpointConditions;
+exports.EndpointConditions = IoK8sApiDiscoveryV1beta1EndpointConditions;
+base_1.Model.setSchema(IoK8sApiDiscoveryV1beta1EndpointConditions, "io.k8s.api.discovery.v1beta1.EndpointConditions", IoK8sApiDiscoveryV1beta1EndpointConditions_1.addSchema);

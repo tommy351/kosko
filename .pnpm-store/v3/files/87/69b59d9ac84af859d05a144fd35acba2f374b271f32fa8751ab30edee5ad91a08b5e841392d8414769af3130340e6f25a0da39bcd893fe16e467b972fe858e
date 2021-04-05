@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CSIDriver = exports.IoK8sApiStorageV1CSIDriver = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiStorageV1CSIDriver_1 = require("../_schemas/IoK8sApiStorageV1CSIDriver.js");
+/**
+ * CSIDriver captures information about a Container Storage Interface (CSI) volume driver deployed on the cluster. Kubernetes attach detach controller uses this object to determine whether attach is required. Kubelet uses this object to determine whether pod information needs to be passed on mount. CSIDriver objects are non-namespaced.
+ */
+class IoK8sApiStorageV1CSIDriver extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiStorageV1CSIDriver.apiVersion,
+            kind: IoK8sApiStorageV1CSIDriver.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiStorageV1CSIDriver = IoK8sApiStorageV1CSIDriver;
+exports.CSIDriver = IoK8sApiStorageV1CSIDriver;
+IoK8sApiStorageV1CSIDriver.apiVersion = "storage.k8s.io/v1";
+IoK8sApiStorageV1CSIDriver.kind = "CSIDriver";
+base_1.Model.setSchema(IoK8sApiStorageV1CSIDriver, "io.k8s.api.storage.v1.CSIDriver", IoK8sApiStorageV1CSIDriver_1.addSchema);

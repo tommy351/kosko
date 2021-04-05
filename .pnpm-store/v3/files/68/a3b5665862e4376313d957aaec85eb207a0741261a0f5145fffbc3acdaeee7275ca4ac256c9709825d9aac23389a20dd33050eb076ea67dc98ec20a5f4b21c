@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PodPresetSpec = exports.IoK8sApiSettingsV1alpha1PodPresetSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiSettingsV1alpha1PodPresetSpec_1 = require("../_schemas/IoK8sApiSettingsV1alpha1PodPresetSpec.js");
+/**
+ * PodPresetSpec is a description of a pod preset.
+ */
+class IoK8sApiSettingsV1alpha1PodPresetSpec extends base_1.Model {
+}
+exports.IoK8sApiSettingsV1alpha1PodPresetSpec = IoK8sApiSettingsV1alpha1PodPresetSpec;
+exports.PodPresetSpec = IoK8sApiSettingsV1alpha1PodPresetSpec;
+base_1.Model.setSchema(IoK8sApiSettingsV1alpha1PodPresetSpec, "io.k8s.api.settings.v1alpha1.PodPresetSpec", IoK8sApiSettingsV1alpha1PodPresetSpec_1.addSchema);

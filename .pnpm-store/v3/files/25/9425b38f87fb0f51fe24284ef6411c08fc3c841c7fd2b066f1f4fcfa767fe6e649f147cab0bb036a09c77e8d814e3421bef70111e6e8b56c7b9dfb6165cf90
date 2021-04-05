@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1PersistentVolumeSpec.mjs";
+/**
+ * PersistentVolumeSpec is the specification of a persistent volume.
+ */
+export class IoK8sApiCoreV1PersistentVolumeSpec extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1PersistentVolumeSpec, "io.k8s.api.core.v1.PersistentVolumeSpec", addSchema);
+export { IoK8sApiCoreV1PersistentVolumeSpec as PersistentVolumeSpec };

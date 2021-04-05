@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LeaseSpec = exports.IoK8sApiCoordinationV1LeaseSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoordinationV1LeaseSpec_1 = require("../_schemas/IoK8sApiCoordinationV1LeaseSpec.js");
+/**
+ * LeaseSpec is a specification of a Lease.
+ */
+class IoK8sApiCoordinationV1LeaseSpec extends base_1.Model {
+}
+exports.IoK8sApiCoordinationV1LeaseSpec = IoK8sApiCoordinationV1LeaseSpec;
+exports.LeaseSpec = IoK8sApiCoordinationV1LeaseSpec;
+base_1.Model.setSchema(IoK8sApiCoordinationV1LeaseSpec, "io.k8s.api.coordination.v1.LeaseSpec", IoK8sApiCoordinationV1LeaseSpec_1.addSchema);

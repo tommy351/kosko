@@ -1,0 +1,43 @@
+import { IIoK8sApimachineryPkgApisMetaV1ObjectMeta } from "./IoK8sApimachineryPkgApisMetaV1ObjectMeta";
+import { IIoK8sApiCoreV1NodeSpec } from "./IoK8sApiCoreV1NodeSpec";
+import { IIoK8sApiCoreV1NodeStatus } from "./IoK8sApiCoreV1NodeStatus";
+import { ModelData, Model } from "@kubernetes-models/base";
+/**
+ * Node is a worker node in Kubernetes. Each node will have a unique identifier in the cache (i.e. in etcd).
+ */
+export interface IIoK8sApiCoreV1Node {
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    "apiVersion": "v1";
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    "kind": "Node";
+    /**
+     * Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ObjectMeta;
+    /**
+     * Spec defines the behavior of a node. https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+     */
+    "spec"?: IIoK8sApiCoreV1NodeSpec;
+    /**
+     * Most recently observed status of the node. Populated by the system. Read-only. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+     */
+    "status"?: IIoK8sApiCoreV1NodeStatus;
+}
+/**
+ * Node is a worker node in Kubernetes. Each node will have a unique identifier in the cache (i.e. in etcd).
+ */
+export declare class IoK8sApiCoreV1Node extends Model<IIoK8sApiCoreV1Node> implements IIoK8sApiCoreV1Node {
+    "apiVersion": IIoK8sApiCoreV1Node["apiVersion"];
+    "kind": IIoK8sApiCoreV1Node["kind"];
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ObjectMeta;
+    "spec"?: IIoK8sApiCoreV1NodeSpec;
+    "status"?: IIoK8sApiCoreV1NodeStatus;
+    static apiVersion: IIoK8sApiCoreV1Node["apiVersion"];
+    static kind: IIoK8sApiCoreV1Node["kind"];
+    constructor(data?: ModelData<IIoK8sApiCoreV1Node>);
+}
+export { IIoK8sApiCoreV1Node as INode, IoK8sApiCoreV1Node as Node };

@@ -1,0 +1,32 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1PodTemplateSpec_1 = require("./IoK8sApiCoreV1PodTemplateSpec.js");
+const schema = {
+    "properties": {
+        "minReadySeconds": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "replicas": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "selector": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "type": "object"
+        },
+        "template": {
+            "$ref": "io.k8s.api.core.v1.PodTemplateSpec#"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1PodTemplateSpec_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.ReplicationControllerSpec", schema);
+}
+exports.addSchema = addSchema;

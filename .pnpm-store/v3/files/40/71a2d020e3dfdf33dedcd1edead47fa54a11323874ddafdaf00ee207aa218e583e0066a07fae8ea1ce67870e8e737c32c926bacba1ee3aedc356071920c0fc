@@ -1,0 +1,17 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiCoreV1LoadBalancerIngress } from "./IoK8sApiCoreV1LoadBalancerIngress.mjs";
+const schema = {
+    "properties": {
+        "ingress": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.LoadBalancerIngress#"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiCoreV1LoadBalancerIngress();
+    register("io.k8s.api.core.v1.LoadBalancerStatus", schema);
+}

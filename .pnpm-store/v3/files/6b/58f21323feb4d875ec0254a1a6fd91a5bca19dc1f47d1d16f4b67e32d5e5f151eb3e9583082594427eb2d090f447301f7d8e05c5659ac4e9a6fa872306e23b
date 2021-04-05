@@ -1,0 +1,21 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "cidr": {
+            "type": "string"
+        },
+        "except": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        }
+    },
+    "required": [
+        "cidr"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.networking.v1.IPBlock", schema);
+}

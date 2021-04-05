@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiRbacV1beta1PolicyRule.mjs";
+/**
+ * PolicyRule holds information that describes a policy rule, but does not contain information about who the rule applies to or which namespace the rule applies to.
+ */
+export class IoK8sApiRbacV1beta1PolicyRule extends Model {
+}
+Model.setSchema(IoK8sApiRbacV1beta1PolicyRule, "io.k8s.api.rbac.v1beta1.PolicyRule", addSchema);
+export { IoK8sApiRbacV1beta1PolicyRule as PolicyRule };

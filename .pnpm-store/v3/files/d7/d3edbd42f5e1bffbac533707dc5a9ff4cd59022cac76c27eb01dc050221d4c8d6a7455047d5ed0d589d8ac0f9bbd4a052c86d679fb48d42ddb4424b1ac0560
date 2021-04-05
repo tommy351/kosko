@@ -1,0 +1,6 @@
+export * from "../../../../../_definitions/IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIService";
+export * from "../../../../../_definitions/IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceCondition";
+export * from "../../../../../_definitions/IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceList";
+export * from "../../../../../_definitions/IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceSpec";
+export * from "../../../../../_definitions/IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceStatus";
+export * from "../../../../../_definitions/IoK8sKubeAggregatorPkgApisApiregistrationV1beta1ServiceReference";

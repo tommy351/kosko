@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAuthenticationV1TokenRequest.mjs";
+/**
+ * TokenRequest requests a token for a given service account.
+ */
+export class IoK8sApiAuthenticationV1TokenRequest extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAuthenticationV1TokenRequest.apiVersion,
+            kind: IoK8sApiAuthenticationV1TokenRequest.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiAuthenticationV1TokenRequest.apiVersion = "authentication.k8s.io/v1";
+IoK8sApiAuthenticationV1TokenRequest.kind = "TokenRequest";
+Model.setSchema(IoK8sApiAuthenticationV1TokenRequest, "io.k8s.api.authentication.v1.TokenRequest", addSchema);
+export { IoK8sApiAuthenticationV1TokenRequest as TokenRequest };

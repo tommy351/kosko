@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PodAntiAffinity = exports.IoK8sApiCoreV1PodAntiAffinity = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1PodAntiAffinity_1 = require("../_schemas/IoK8sApiCoreV1PodAntiAffinity.js");
+/**
+ * Pod anti affinity is a group of inter pod anti affinity scheduling rules.
+ */
+class IoK8sApiCoreV1PodAntiAffinity extends base_1.Model {
+}
+exports.IoK8sApiCoreV1PodAntiAffinity = IoK8sApiCoreV1PodAntiAffinity;
+exports.PodAntiAffinity = IoK8sApiCoreV1PodAntiAffinity;
+base_1.Model.setSchema(IoK8sApiCoreV1PodAntiAffinity, "io.k8s.api.core.v1.PodAntiAffinity", IoK8sApiCoreV1PodAntiAffinity_1.addSchema);

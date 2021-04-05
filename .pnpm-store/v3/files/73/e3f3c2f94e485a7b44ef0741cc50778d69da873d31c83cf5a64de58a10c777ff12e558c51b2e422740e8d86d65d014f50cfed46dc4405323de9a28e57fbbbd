@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiNetworkingV1NetworkPolicySpec.mjs";
+/**
+ * NetworkPolicySpec provides the specification of a NetworkPolicy
+ */
+export class IoK8sApiNetworkingV1NetworkPolicySpec extends Model {
+}
+Model.setSchema(IoK8sApiNetworkingV1NetworkPolicySpec, "io.k8s.api.networking.v1.NetworkPolicySpec", addSchema);
+export { IoK8sApiNetworkingV1NetworkPolicySpec as NetworkPolicySpec };

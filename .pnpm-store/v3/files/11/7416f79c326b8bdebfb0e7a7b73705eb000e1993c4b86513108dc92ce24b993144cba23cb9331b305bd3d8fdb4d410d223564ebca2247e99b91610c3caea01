@@ -1,0 +1,84 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1NodeAddress_1 = require("./IoK8sApiCoreV1NodeAddress.js");
+const IoK8sApimachineryPkgApiResourceQuantity_1 = require("./IoK8sApimachineryPkgApiResourceQuantity.js");
+const IoK8sApiCoreV1NodeCondition_1 = require("./IoK8sApiCoreV1NodeCondition.js");
+const IoK8sApiCoreV1NodeConfigStatus_1 = require("./IoK8sApiCoreV1NodeConfigStatus.js");
+const IoK8sApiCoreV1NodeDaemonEndpoints_1 = require("./IoK8sApiCoreV1NodeDaemonEndpoints.js");
+const IoK8sApiCoreV1ContainerImage_1 = require("./IoK8sApiCoreV1ContainerImage.js");
+const IoK8sApiCoreV1NodeSystemInfo_1 = require("./IoK8sApiCoreV1NodeSystemInfo.js");
+const IoK8sApiCoreV1AttachedVolume_1 = require("./IoK8sApiCoreV1AttachedVolume.js");
+const schema = {
+    "properties": {
+        "addresses": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.NodeAddress#"
+            },
+            "type": "array"
+        },
+        "allocatable": {
+            "additionalProperties": {
+                "$ref": "io.k8s.apimachinery.pkg.api.resource.Quantity#"
+            },
+            "type": "object"
+        },
+        "capacity": {
+            "additionalProperties": {
+                "$ref": "io.k8s.apimachinery.pkg.api.resource.Quantity#"
+            },
+            "type": "object"
+        },
+        "conditions": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.NodeCondition#"
+            },
+            "type": "array"
+        },
+        "config": {
+            "$ref": "io.k8s.api.core.v1.NodeConfigStatus#"
+        },
+        "daemonEndpoints": {
+            "$ref": "io.k8s.api.core.v1.NodeDaemonEndpoints#"
+        },
+        "images": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.ContainerImage#"
+            },
+            "type": "array"
+        },
+        "nodeInfo": {
+            "$ref": "io.k8s.api.core.v1.NodeSystemInfo#"
+        },
+        "phase": {
+            "type": "string"
+        },
+        "volumesAttached": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.AttachedVolume#"
+            },
+            "type": "array"
+        },
+        "volumesInUse": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1NodeAddress_1.addSchema();
+    IoK8sApimachineryPkgApiResourceQuantity_1.addSchema();
+    IoK8sApimachineryPkgApiResourceQuantity_1.addSchema();
+    IoK8sApiCoreV1NodeCondition_1.addSchema();
+    IoK8sApiCoreV1NodeConfigStatus_1.addSchema();
+    IoK8sApiCoreV1NodeDaemonEndpoints_1.addSchema();
+    IoK8sApiCoreV1ContainerImage_1.addSchema();
+    IoK8sApiCoreV1NodeSystemInfo_1.addSchema();
+    IoK8sApiCoreV1AttachedVolume_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.NodeStatus", schema);
+}
+exports.addSchema = addSchema;

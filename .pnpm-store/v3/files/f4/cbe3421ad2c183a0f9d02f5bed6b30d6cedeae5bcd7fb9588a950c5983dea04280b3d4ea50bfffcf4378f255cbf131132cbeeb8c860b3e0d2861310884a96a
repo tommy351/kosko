@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1DownwardAPIVolumeFile.mjs";
+/**
+ * DownwardAPIVolumeFile represents information to create the file containing the pod field
+ */
+export class IoK8sApiCoreV1DownwardAPIVolumeFile extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1DownwardAPIVolumeFile, "io.k8s.api.core.v1.DownwardAPIVolumeFile", addSchema);
+export { IoK8sApiCoreV1DownwardAPIVolumeFile as DownwardAPIVolumeFile };

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.WebhookClientConfig = exports.IoK8sApiAdmissionregistrationV1beta1WebhookClientConfig = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAdmissionregistrationV1beta1WebhookClientConfig_1 = require("../_schemas/IoK8sApiAdmissionregistrationV1beta1WebhookClientConfig.js");
+/**
+ * WebhookClientConfig contains the information to make a TLS connection with the webhook
+ */
+class IoK8sApiAdmissionregistrationV1beta1WebhookClientConfig extends base_1.Model {
+}
+exports.IoK8sApiAdmissionregistrationV1beta1WebhookClientConfig = IoK8sApiAdmissionregistrationV1beta1WebhookClientConfig;
+exports.WebhookClientConfig = IoK8sApiAdmissionregistrationV1beta1WebhookClientConfig;
+base_1.Model.setSchema(IoK8sApiAdmissionregistrationV1beta1WebhookClientConfig, "io.k8s.api.admissionregistration.v1beta1.WebhookClientConfig", IoK8sApiAdmissionregistrationV1beta1WebhookClientConfig_1.addSchema);

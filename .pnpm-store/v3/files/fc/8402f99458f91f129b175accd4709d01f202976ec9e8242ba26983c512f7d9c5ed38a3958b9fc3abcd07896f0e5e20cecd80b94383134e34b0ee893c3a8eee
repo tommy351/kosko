@@ -1,0 +1,27 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiNetworkingV1IPBlock_1 = require("./IoK8sApiNetworkingV1IPBlock.js");
+const IoK8sApimachineryPkgApisMetaV1LabelSelector_1 = require("./IoK8sApimachineryPkgApisMetaV1LabelSelector.js");
+const schema = {
+    "properties": {
+        "ipBlock": {
+            "$ref": "io.k8s.api.networking.v1.IPBlock#"
+        },
+        "namespaceSelector": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector#"
+        },
+        "podSelector": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector#"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiNetworkingV1IPBlock_1.addSchema();
+    IoK8sApimachineryPkgApisMetaV1LabelSelector_1.addSchema();
+    IoK8sApimachineryPkgApisMetaV1LabelSelector_1.addSchema();
+    validate_1.register("io.k8s.api.networking.v1.NetworkPolicyPeer", schema);
+}
+exports.addSchema = addSchema;

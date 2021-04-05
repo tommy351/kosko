@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PodStatus = exports.IoK8sApiCoreV1PodStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1PodStatus_1 = require("../_schemas/IoK8sApiCoreV1PodStatus.js");
+/**
+ * PodStatus represents information about the status of a pod. Status may trail the actual state of a system, especially if the node that hosts the pod cannot contact the control plane.
+ */
+class IoK8sApiCoreV1PodStatus extends base_1.Model {
+}
+exports.IoK8sApiCoreV1PodStatus = IoK8sApiCoreV1PodStatus;
+exports.PodStatus = IoK8sApiCoreV1PodStatus;
+base_1.Model.setSchema(IoK8sApiCoreV1PodStatus, "io.k8s.api.core.v1.PodStatus", IoK8sApiCoreV1PodStatus_1.addSchema);

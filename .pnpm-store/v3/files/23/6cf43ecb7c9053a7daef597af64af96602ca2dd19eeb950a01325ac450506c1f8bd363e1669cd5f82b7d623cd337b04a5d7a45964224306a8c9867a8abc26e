@@ -1,0 +1,23 @@
+import { IIoK8sApiCoreV1SELinuxOptions } from "./IoK8sApiCoreV1SELinuxOptions";
+import { Model } from "@kubernetes-models/base";
+/**
+ * SELinuxStrategyOptions defines the strategy type and any options used to create the strategy.
+ */
+export interface IIoK8sApiPolicyV1beta1SELinuxStrategyOptions {
+    /**
+     * rule is the strategy that will dictate the allowable labels that may be set.
+     */
+    "rule": string;
+    /**
+     * seLinuxOptions required to run as; required for MustRunAs More info: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+     */
+    "seLinuxOptions"?: IIoK8sApiCoreV1SELinuxOptions;
+}
+/**
+ * SELinuxStrategyOptions defines the strategy type and any options used to create the strategy.
+ */
+export declare class IoK8sApiPolicyV1beta1SELinuxStrategyOptions extends Model<IIoK8sApiPolicyV1beta1SELinuxStrategyOptions> implements IIoK8sApiPolicyV1beta1SELinuxStrategyOptions {
+    "rule": string;
+    "seLinuxOptions"?: IIoK8sApiCoreV1SELinuxOptions;
+}
+export { IIoK8sApiPolicyV1beta1SELinuxStrategyOptions as ISELinuxStrategyOptions, IoK8sApiPolicyV1beta1SELinuxStrategyOptions as SELinuxStrategyOptions };

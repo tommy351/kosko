@@ -1,0 +1,36 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1SecretReference_1 = require("./IoK8sApiCoreV1SecretReference.js");
+const schema = {
+    "properties": {
+        "driver": {
+            "type": "string"
+        },
+        "fsType": {
+            "type": "string"
+        },
+        "options": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "type": "object"
+        },
+        "readOnly": {
+            "type": "boolean"
+        },
+        "secretRef": {
+            "$ref": "io.k8s.api.core.v1.SecretReference#"
+        }
+    },
+    "required": [
+        "driver"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1SecretReference_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.FlexPersistentVolumeSource", schema);
+}
+exports.addSchema = addSchema;

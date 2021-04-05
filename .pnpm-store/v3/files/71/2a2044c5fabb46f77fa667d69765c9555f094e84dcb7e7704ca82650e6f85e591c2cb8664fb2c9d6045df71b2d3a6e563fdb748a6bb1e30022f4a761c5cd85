@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiExtensionsV1beta1HTTPIngressRuleValue_1 = require("./IoK8sApiExtensionsV1beta1HTTPIngressRuleValue.js");
+const schema = {
+    "properties": {
+        "host": {
+            "type": "string"
+        },
+        "http": {
+            "$ref": "io.k8s.api.extensions.v1beta1.HTTPIngressRuleValue#"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiExtensionsV1beta1HTTPIngressRuleValue_1.addSchema();
+    validate_1.register("io.k8s.api.extensions.v1beta1.IngressRule", schema);
+}
+exports.addSchema = addSchema;

@@ -1,0 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.pkg = void 0;
+const tslib_1 = require("tslib");
+const pkg = tslib_1.__importStar(require("./pkg/index.js"));
+exports.pkg = pkg;

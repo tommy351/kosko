@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Event = exports.IoK8sApiCoreV1Event = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1Event_1 = require("../_schemas/IoK8sApiCoreV1Event.js");
+/**
+ * Event is a report of an event somewhere in the cluster.
+ */
+class IoK8sApiCoreV1Event extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1Event.apiVersion,
+            kind: IoK8sApiCoreV1Event.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1Event = IoK8sApiCoreV1Event;
+exports.Event = IoK8sApiCoreV1Event;
+IoK8sApiCoreV1Event.apiVersion = "v1";
+IoK8sApiCoreV1Event.kind = "Event";
+base_1.Model.setSchema(IoK8sApiCoreV1Event, "io.k8s.api.core.v1.Event", IoK8sApiCoreV1Event_1.addSchema);

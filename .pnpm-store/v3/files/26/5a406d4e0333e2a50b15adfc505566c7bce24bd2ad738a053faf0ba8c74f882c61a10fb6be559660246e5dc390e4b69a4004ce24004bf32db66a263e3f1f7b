@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LimitRangeList = exports.IoK8sApiCoreV1LimitRangeList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1LimitRangeList_1 = require("../_schemas/IoK8sApiCoreV1LimitRangeList.js");
+/**
+ * LimitRangeList is a list of LimitRange items.
+ */
+class IoK8sApiCoreV1LimitRangeList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1LimitRangeList.apiVersion,
+            kind: IoK8sApiCoreV1LimitRangeList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1LimitRangeList = IoK8sApiCoreV1LimitRangeList;
+exports.LimitRangeList = IoK8sApiCoreV1LimitRangeList;
+IoK8sApiCoreV1LimitRangeList.apiVersion = "v1";
+IoK8sApiCoreV1LimitRangeList.kind = "LimitRangeList";
+base_1.Model.setSchema(IoK8sApiCoreV1LimitRangeList, "io.k8s.api.core.v1.LimitRangeList", IoK8sApiCoreV1LimitRangeList_1.addSchema);

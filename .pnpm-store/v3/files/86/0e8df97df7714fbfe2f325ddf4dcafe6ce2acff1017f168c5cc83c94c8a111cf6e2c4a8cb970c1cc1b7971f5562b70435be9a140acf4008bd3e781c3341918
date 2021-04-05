@@ -1,0 +1,23 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApimachineryPkgApisMetaV1LabelSelectorRequirement } from "./IoK8sApimachineryPkgApisMetaV1LabelSelectorRequirement.mjs";
+const schema = {
+    "properties": {
+        "matchExpressions": {
+            "items": {
+                "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelectorRequirement#"
+            },
+            "type": "array"
+        },
+        "matchLabels": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "type": "object"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1LabelSelectorRequirement();
+    register("io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector", schema);
+}

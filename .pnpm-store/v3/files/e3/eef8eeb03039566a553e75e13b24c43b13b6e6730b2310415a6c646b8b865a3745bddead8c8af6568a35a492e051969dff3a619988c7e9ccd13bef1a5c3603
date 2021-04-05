@@ -1,0 +1,18 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1DaemonEndpoint_1 = require("./IoK8sApiCoreV1DaemonEndpoint.js");
+const schema = {
+    "properties": {
+        "kubeletEndpoint": {
+            "$ref": "io.k8s.api.core.v1.DaemonEndpoint#"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1DaemonEndpoint_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.NodeDaemonEndpoints", schema);
+}
+exports.addSchema = addSchema;

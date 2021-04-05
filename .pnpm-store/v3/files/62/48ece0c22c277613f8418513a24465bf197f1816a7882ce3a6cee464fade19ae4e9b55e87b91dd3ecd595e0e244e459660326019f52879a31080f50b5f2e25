@@ -1,0 +1,17 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * AllowedFlexVolume represents a single Flexvolume that is allowed to be used.
+ */
+export interface IIoK8sApiPolicyV1beta1AllowedFlexVolume {
+    /**
+     * driver is the name of the Flexvolume driver.
+     */
+    "driver": string;
+}
+/**
+ * AllowedFlexVolume represents a single Flexvolume that is allowed to be used.
+ */
+export declare class IoK8sApiPolicyV1beta1AllowedFlexVolume extends Model<IIoK8sApiPolicyV1beta1AllowedFlexVolume> implements IIoK8sApiPolicyV1beta1AllowedFlexVolume {
+    "driver": string;
+}
+export { IIoK8sApiPolicyV1beta1AllowedFlexVolume as IAllowedFlexVolume, IoK8sApiPolicyV1beta1AllowedFlexVolume as AllowedFlexVolume };

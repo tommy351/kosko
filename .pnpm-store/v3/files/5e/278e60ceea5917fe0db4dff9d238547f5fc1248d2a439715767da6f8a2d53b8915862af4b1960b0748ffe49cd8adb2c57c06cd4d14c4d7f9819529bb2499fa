@@ -1,0 +1,37 @@
+{
+  "name": "string-to-stream",
+  "description": "Convert a string into a stream (streams2)",
+  "version": "3.0.1",
+  "author": "Feross Aboukhadijeh <feross@feross.org> (http://feross.org/)",
+  "bugs": {
+    "url": "https://github.com/feross/string-to-stream/issues"
+  },
+  "dependencies": {
+    "readable-stream": "^3.4.0"
+  },
+  "devDependencies": {
+    "concat-stream": "^2.0.0",
+    "standard": "*",
+    "tape": "^4.0.0"
+  },
+  "homepage": "https://github.com/feross/string-to-stream",
+  "keywords": [
+    "convert",
+    "convert string to stream",
+    "str",
+    "str stream",
+    "stream",
+    "string",
+    "string stream",
+    "string to stream"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/feross/string-to-stream.git"
+  },
+  "scripts": {
+    "test": "standard && tape test/*.js"
+  }
+}

@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1VolumeDevice.mjs";
+/**
+ * volumeDevice describes a mapping of a raw block device within a container.
+ */
+export class IoK8sApiCoreV1VolumeDevice extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1VolumeDevice, "io.k8s.api.core.v1.VolumeDevice", addSchema);
+export { IoK8sApiCoreV1VolumeDevice as VolumeDevice };

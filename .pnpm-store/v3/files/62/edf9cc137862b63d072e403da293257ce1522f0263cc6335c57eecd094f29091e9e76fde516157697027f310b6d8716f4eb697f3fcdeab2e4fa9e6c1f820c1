@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ReplicationControllerList = exports.IoK8sApiCoreV1ReplicationControllerList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ReplicationControllerList_1 = require("../_schemas/IoK8sApiCoreV1ReplicationControllerList.js");
+/**
+ * ReplicationControllerList is a collection of replication controllers.
+ */
+class IoK8sApiCoreV1ReplicationControllerList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1ReplicationControllerList.apiVersion,
+            kind: IoK8sApiCoreV1ReplicationControllerList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1ReplicationControllerList = IoK8sApiCoreV1ReplicationControllerList;
+exports.ReplicationControllerList = IoK8sApiCoreV1ReplicationControllerList;
+IoK8sApiCoreV1ReplicationControllerList.apiVersion = "v1";
+IoK8sApiCoreV1ReplicationControllerList.kind = "ReplicationControllerList";
+base_1.Model.setSchema(IoK8sApiCoreV1ReplicationControllerList, "io.k8s.api.core.v1.ReplicationControllerList", IoK8sApiCoreV1ReplicationControllerList_1.addSchema);

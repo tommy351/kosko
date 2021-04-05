@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.HorizontalPodAutoscaler = exports.IoK8sApiAutoscalingV2beta1HorizontalPodAutoscaler = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAutoscalingV2beta1HorizontalPodAutoscaler_1 = require("../_schemas/IoK8sApiAutoscalingV2beta1HorizontalPodAutoscaler.js");
+/**
+ * HorizontalPodAutoscaler is the configuration for a horizontal pod autoscaler, which automatically manages the replica count of any resource implementing the scale subresource based on the metrics specified.
+ */
+class IoK8sApiAutoscalingV2beta1HorizontalPodAutoscaler extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAutoscalingV2beta1HorizontalPodAutoscaler.apiVersion,
+            kind: IoK8sApiAutoscalingV2beta1HorizontalPodAutoscaler.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiAutoscalingV2beta1HorizontalPodAutoscaler = IoK8sApiAutoscalingV2beta1HorizontalPodAutoscaler;
+exports.HorizontalPodAutoscaler = IoK8sApiAutoscalingV2beta1HorizontalPodAutoscaler;
+IoK8sApiAutoscalingV2beta1HorizontalPodAutoscaler.apiVersion = "autoscaling/v2beta1";
+IoK8sApiAutoscalingV2beta1HorizontalPodAutoscaler.kind = "HorizontalPodAutoscaler";
+base_1.Model.setSchema(IoK8sApiAutoscalingV2beta1HorizontalPodAutoscaler, "io.k8s.api.autoscaling.v2beta1.HorizontalPodAutoscaler", IoK8sApiAutoscalingV2beta1HorizontalPodAutoscaler_1.addSchema);

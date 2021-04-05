@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAutoscalingV2beta2MetricValueStatus.mjs";
+/**
+ * MetricValueStatus holds the current value for a metric
+ */
+export class IoK8sApiAutoscalingV2beta2MetricValueStatus extends Model {
+}
+Model.setSchema(IoK8sApiAutoscalingV2beta2MetricValueStatus, "io.k8s.api.autoscaling.v2beta2.MetricValueStatus", addSchema);
+export { IoK8sApiAutoscalingV2beta2MetricValueStatus as MetricValueStatus };

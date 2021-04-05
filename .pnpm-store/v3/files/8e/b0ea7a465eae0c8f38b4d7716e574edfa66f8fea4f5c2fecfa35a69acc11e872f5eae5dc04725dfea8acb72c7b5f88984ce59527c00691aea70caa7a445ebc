@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiStorageV1beta1CSINodeList.mjs";
+/**
+ * CSINodeList is a collection of CSINode objects.
+ */
+export class IoK8sApiStorageV1beta1CSINodeList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiStorageV1beta1CSINodeList.apiVersion,
+            kind: IoK8sApiStorageV1beta1CSINodeList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiStorageV1beta1CSINodeList.apiVersion = "storage.k8s.io/v1beta1";
+IoK8sApiStorageV1beta1CSINodeList.kind = "CSINodeList";
+Model.setSchema(IoK8sApiStorageV1beta1CSINodeList, "io.k8s.api.storage.v1beta1.CSINodeList", addSchema);
+export { IoK8sApiStorageV1beta1CSINodeList as CSINodeList };

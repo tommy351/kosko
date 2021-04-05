@@ -1,0 +1,23 @@
+import { IIoK8sApiCoreV1NamespaceCondition } from "./IoK8sApiCoreV1NamespaceCondition";
+import { Model } from "@kubernetes-models/base";
+/**
+ * NamespaceStatus is information about the current status of a Namespace.
+ */
+export interface IIoK8sApiCoreV1NamespaceStatus {
+    /**
+     * Represents the latest available observations of a namespace's current state.
+     */
+    "conditions"?: Array<IIoK8sApiCoreV1NamespaceCondition>;
+    /**
+     * Phase is the current lifecycle phase of the namespace. More info: https://kubernetes.io/docs/tasks/administer-cluster/namespaces/
+     */
+    "phase"?: string;
+}
+/**
+ * NamespaceStatus is information about the current status of a Namespace.
+ */
+export declare class IoK8sApiCoreV1NamespaceStatus extends Model<IIoK8sApiCoreV1NamespaceStatus> implements IIoK8sApiCoreV1NamespaceStatus {
+    "conditions"?: Array<IIoK8sApiCoreV1NamespaceCondition>;
+    "phase"?: string;
+}
+export { IIoK8sApiCoreV1NamespaceStatus as INamespaceStatus, IoK8sApiCoreV1NamespaceStatus as NamespaceStatus };

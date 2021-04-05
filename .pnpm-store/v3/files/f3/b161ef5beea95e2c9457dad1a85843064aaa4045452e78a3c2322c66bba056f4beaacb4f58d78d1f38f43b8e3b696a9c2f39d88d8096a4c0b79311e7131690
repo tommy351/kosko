@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NamespaceStatus = exports.IoK8sApiCoreV1NamespaceStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1NamespaceStatus_1 = require("../_schemas/IoK8sApiCoreV1NamespaceStatus.js");
+/**
+ * NamespaceStatus is information about the current status of a Namespace.
+ */
+class IoK8sApiCoreV1NamespaceStatus extends base_1.Model {
+}
+exports.IoK8sApiCoreV1NamespaceStatus = IoK8sApiCoreV1NamespaceStatus;
+exports.NamespaceStatus = IoK8sApiCoreV1NamespaceStatus;
+base_1.Model.setSchema(IoK8sApiCoreV1NamespaceStatus, "io.k8s.api.core.v1.NamespaceStatus", IoK8sApiCoreV1NamespaceStatus_1.addSchema);

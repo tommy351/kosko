@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1SecurityContext.mjs";
+/**
+ * SecurityContext holds security configuration that will be applied to a container. Some fields are present in both SecurityContext and PodSecurityContext.  When both are set, the values in SecurityContext take precedence.
+ */
+export class IoK8sApiCoreV1SecurityContext extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1SecurityContext, "io.k8s.api.core.v1.SecurityContext", addSchema);
+export { IoK8sApiCoreV1SecurityContext as SecurityContext };

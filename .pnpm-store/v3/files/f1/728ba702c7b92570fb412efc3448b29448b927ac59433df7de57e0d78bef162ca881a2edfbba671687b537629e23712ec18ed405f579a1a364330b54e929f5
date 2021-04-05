@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ClusterRoleBindingList = exports.IoK8sApiRbacV1beta1ClusterRoleBindingList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiRbacV1beta1ClusterRoleBindingList_1 = require("../_schemas/IoK8sApiRbacV1beta1ClusterRoleBindingList.js");
+/**
+ * ClusterRoleBindingList is a collection of ClusterRoleBindings. Deprecated in v1.17 in favor of rbac.authorization.k8s.io/v1 ClusterRoleBindingList, and will no longer be served in v1.22.
+ */
+class IoK8sApiRbacV1beta1ClusterRoleBindingList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiRbacV1beta1ClusterRoleBindingList.apiVersion,
+            kind: IoK8sApiRbacV1beta1ClusterRoleBindingList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiRbacV1beta1ClusterRoleBindingList = IoK8sApiRbacV1beta1ClusterRoleBindingList;
+exports.ClusterRoleBindingList = IoK8sApiRbacV1beta1ClusterRoleBindingList;
+IoK8sApiRbacV1beta1ClusterRoleBindingList.apiVersion = "rbac.authorization.k8s.io/v1beta1";
+IoK8sApiRbacV1beta1ClusterRoleBindingList.kind = "ClusterRoleBindingList";
+base_1.Model.setSchema(IoK8sApiRbacV1beta1ClusterRoleBindingList, "io.k8s.api.rbac.v1beta1.ClusterRoleBindingList", IoK8sApiRbacV1beta1ClusterRoleBindingList_1.addSchema);

@@ -1,0 +1,37 @@
+import { IIoK8sApimachineryPkgApisMetaV1Time } from "./IoK8sApimachineryPkgApisMetaV1Time";
+import { Model } from "@kubernetes-models/base";
+export interface IIoK8sApiCertificatesV1beta1CertificateSigningRequestCondition {
+    /**
+     * lastTransitionTime is the time the condition last transitioned from one status to another. If unset, when a new condition type is added or an existing condition's status is changed, the server defaults this to the current time.
+     */
+    "lastTransitionTime"?: IIoK8sApimachineryPkgApisMetaV1Time;
+    /**
+     * timestamp for the last update to this condition
+     */
+    "lastUpdateTime"?: IIoK8sApimachineryPkgApisMetaV1Time;
+    /**
+     * human readable message with details about the request state
+     */
+    "message"?: string;
+    /**
+     * brief reason for the request state
+     */
+    "reason"?: string;
+    /**
+     * Status of the condition, one of True, False, Unknown. Approved, Denied, and Failed conditions may not be "False" or "Unknown". Defaults to "True". If unset, should be treated as "True".
+     */
+    "status"?: string;
+    /**
+     * type of the condition. Known conditions include "Approved", "Denied", and "Failed".
+     */
+    "type": string;
+}
+export declare class IoK8sApiCertificatesV1beta1CertificateSigningRequestCondition extends Model<IIoK8sApiCertificatesV1beta1CertificateSigningRequestCondition> implements IIoK8sApiCertificatesV1beta1CertificateSigningRequestCondition {
+    "lastTransitionTime"?: IIoK8sApimachineryPkgApisMetaV1Time;
+    "lastUpdateTime"?: IIoK8sApimachineryPkgApisMetaV1Time;
+    "message"?: string;
+    "reason"?: string;
+    "status"?: string;
+    "type": string;
+}
+export { IIoK8sApiCertificatesV1beta1CertificateSigningRequestCondition as ICertificateSigningRequestCondition, IoK8sApiCertificatesV1beta1CertificateSigningRequestCondition as CertificateSigningRequestCondition };

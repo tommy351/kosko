@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NetworkPolicyList = exports.IoK8sApiNetworkingV1NetworkPolicyList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiNetworkingV1NetworkPolicyList_1 = require("../_schemas/IoK8sApiNetworkingV1NetworkPolicyList.js");
+/**
+ * NetworkPolicyList is a list of NetworkPolicy objects.
+ */
+class IoK8sApiNetworkingV1NetworkPolicyList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiNetworkingV1NetworkPolicyList.apiVersion,
+            kind: IoK8sApiNetworkingV1NetworkPolicyList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiNetworkingV1NetworkPolicyList = IoK8sApiNetworkingV1NetworkPolicyList;
+exports.NetworkPolicyList = IoK8sApiNetworkingV1NetworkPolicyList;
+IoK8sApiNetworkingV1NetworkPolicyList.apiVersion = "networking.k8s.io/v1";
+IoK8sApiNetworkingV1NetworkPolicyList.kind = "NetworkPolicyList";
+base_1.Model.setSchema(IoK8sApiNetworkingV1NetworkPolicyList, "io.k8s.api.networking.v1.NetworkPolicyList", IoK8sApiNetworkingV1NetworkPolicyList_1.addSchema);

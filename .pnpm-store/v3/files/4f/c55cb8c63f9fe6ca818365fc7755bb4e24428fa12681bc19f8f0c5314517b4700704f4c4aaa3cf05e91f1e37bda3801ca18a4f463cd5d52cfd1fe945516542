@@ -1,0 +1,85 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApisMetaV1Time_1 = require("./IoK8sApimachineryPkgApisMetaV1Time.js");
+const IoK8sApimachineryPkgApisMetaV1ManagedFieldsEntry_1 = require("./IoK8sApimachineryPkgApisMetaV1ManagedFieldsEntry.js");
+const IoK8sApimachineryPkgApisMetaV1OwnerReference_1 = require("./IoK8sApimachineryPkgApisMetaV1OwnerReference.js");
+const schema = {
+    "properties": {
+        "annotations": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "type": "object"
+        },
+        "clusterName": {
+            "type": "string"
+        },
+        "creationTimestamp": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.Time#"
+        },
+        "deletionGracePeriodSeconds": {
+            "format": "int64",
+            "type": "integer"
+        },
+        "deletionTimestamp": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.Time#"
+        },
+        "finalizers": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "generateName": {
+            "type": "string"
+        },
+        "generation": {
+            "format": "int64",
+            "type": "integer"
+        },
+        "labels": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "type": "object"
+        },
+        "managedFields": {
+            "items": {
+                "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ManagedFieldsEntry#"
+            },
+            "type": "array"
+        },
+        "name": {
+            "type": "string"
+        },
+        "namespace": {
+            "type": "string"
+        },
+        "ownerReferences": {
+            "items": {
+                "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.OwnerReference#"
+            },
+            "type": "array"
+        },
+        "resourceVersion": {
+            "type": "string"
+        },
+        "selfLink": {
+            "type": "string"
+        },
+        "uid": {
+            "type": "string"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1Time_1.addSchema();
+    IoK8sApimachineryPkgApisMetaV1Time_1.addSchema();
+    IoK8sApimachineryPkgApisMetaV1ManagedFieldsEntry_1.addSchema();
+    IoK8sApimachineryPkgApisMetaV1OwnerReference_1.addSchema();
+    validate_1.register("io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta", schema);
+}
+exports.addSchema = addSchema;

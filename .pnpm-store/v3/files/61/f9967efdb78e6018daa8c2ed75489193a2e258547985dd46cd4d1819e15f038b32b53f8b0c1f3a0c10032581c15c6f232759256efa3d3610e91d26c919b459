@@ -1,0 +1,17 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * LocalObjectReference contains enough information to let you locate the referenced object inside the same namespace.
+ */
+export interface IIoK8sApiCoreV1LocalObjectReference {
+    /**
+     * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+     */
+    "name"?: string;
+}
+/**
+ * LocalObjectReference contains enough information to let you locate the referenced object inside the same namespace.
+ */
+export declare class IoK8sApiCoreV1LocalObjectReference extends Model<IIoK8sApiCoreV1LocalObjectReference> implements IIoK8sApiCoreV1LocalObjectReference {
+    "name"?: string;
+}
+export { IIoK8sApiCoreV1LocalObjectReference as ILocalObjectReference, IoK8sApiCoreV1LocalObjectReference as LocalObjectReference };

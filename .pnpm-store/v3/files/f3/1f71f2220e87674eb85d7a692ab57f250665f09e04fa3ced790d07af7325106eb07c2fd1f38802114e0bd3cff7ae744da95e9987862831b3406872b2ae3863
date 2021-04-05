@@ -1,0 +1,17 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * PodReadinessGate contains the reference to a pod condition
+ */
+export interface IIoK8sApiCoreV1PodReadinessGate {
+    /**
+     * ConditionType refers to a condition in the pod's condition list with matching type.
+     */
+    "conditionType": string;
+}
+/**
+ * PodReadinessGate contains the reference to a pod condition
+ */
+export declare class IoK8sApiCoreV1PodReadinessGate extends Model<IIoK8sApiCoreV1PodReadinessGate> implements IIoK8sApiCoreV1PodReadinessGate {
+    "conditionType": string;
+}
+export { IIoK8sApiCoreV1PodReadinessGate as IPodReadinessGate, IoK8sApiCoreV1PodReadinessGate as PodReadinessGate };

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.EventSeries = exports.IoK8sApiEventsV1EventSeries = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiEventsV1EventSeries_1 = require("../_schemas/IoK8sApiEventsV1EventSeries.js");
+/**
+ * EventSeries contain information on series of events, i.e. thing that was/is happening continuously for some time. How often to update the EventSeries is up to the event reporters. The default event reporter in "k8s.io/client-go/tools/events/event_broadcaster.go" shows how this struct is updated on heartbeats and can guide customized reporter implementations.
+ */
+class IoK8sApiEventsV1EventSeries extends base_1.Model {
+}
+exports.IoK8sApiEventsV1EventSeries = IoK8sApiEventsV1EventSeries;
+exports.EventSeries = IoK8sApiEventsV1EventSeries;
+base_1.Model.setSchema(IoK8sApiEventsV1EventSeries, "io.k8s.api.events.v1.EventSeries", IoK8sApiEventsV1EventSeries_1.addSchema);

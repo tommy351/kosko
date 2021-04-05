@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Subject = exports.IoK8sApiRbacV1beta1Subject = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiRbacV1beta1Subject_1 = require("../_schemas/IoK8sApiRbacV1beta1Subject.js");
+/**
+ * Subject contains a reference to the object or user identities a role binding applies to.  This can either hold a direct API object reference, or a value for non-objects such as user and group names.
+ */
+class IoK8sApiRbacV1beta1Subject extends base_1.Model {
+}
+exports.IoK8sApiRbacV1beta1Subject = IoK8sApiRbacV1beta1Subject;
+exports.Subject = IoK8sApiRbacV1beta1Subject;
+base_1.Model.setSchema(IoK8sApiRbacV1beta1Subject, "io.k8s.api.rbac.v1beta1.Subject", IoK8sApiRbacV1beta1Subject_1.addSchema);

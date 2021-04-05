@@ -1,0 +1,24 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiFlowcontrolV1alpha1QueuingConfiguration_1 = require("./IoK8sApiFlowcontrolV1alpha1QueuingConfiguration.js");
+const schema = {
+    "properties": {
+        "queuing": {
+            "$ref": "io.k8s.api.flowcontrol.v1alpha1.QueuingConfiguration#"
+        },
+        "type": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "type"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiFlowcontrolV1alpha1QueuingConfiguration_1.addSchema();
+    validate_1.register("io.k8s.api.flowcontrol.v1alpha1.LimitResponse", schema);
+}
+exports.addSchema = addSchema;

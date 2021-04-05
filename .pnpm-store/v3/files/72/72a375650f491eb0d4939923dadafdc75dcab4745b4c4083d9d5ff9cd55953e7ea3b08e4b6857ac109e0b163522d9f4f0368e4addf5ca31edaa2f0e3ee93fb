@@ -1,0 +1,2 @@
+import * as pkg from "./pkg/index.mjs";
+export { pkg };

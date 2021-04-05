@@ -1,0 +1,29 @@
+import { IIoK8sApimachineryPkgApisMetaV1Time } from "./IoK8sApimachineryPkgApisMetaV1Time";
+import { Model } from "@kubernetes-models/base";
+/**
+ * NamespaceCondition contains details about state of namespace.
+ */
+export interface IIoK8sApiCoreV1NamespaceCondition {
+    "lastTransitionTime"?: IIoK8sApimachineryPkgApisMetaV1Time;
+    "message"?: string;
+    "reason"?: string;
+    /**
+     * Status of the condition, one of True, False, Unknown.
+     */
+    "status": string;
+    /**
+     * Type of namespace controller condition.
+     */
+    "type": string;
+}
+/**
+ * NamespaceCondition contains details about state of namespace.
+ */
+export declare class IoK8sApiCoreV1NamespaceCondition extends Model<IIoK8sApiCoreV1NamespaceCondition> implements IIoK8sApiCoreV1NamespaceCondition {
+    "lastTransitionTime"?: IIoK8sApimachineryPkgApisMetaV1Time;
+    "message"?: string;
+    "reason"?: string;
+    "status": string;
+    "type": string;
+}
+export { IIoK8sApiCoreV1NamespaceCondition as INamespaceCondition, IoK8sApiCoreV1NamespaceCondition as NamespaceCondition };

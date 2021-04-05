@@ -1,0 +1,3538 @@
+{
+  "name": "kubernetes-models",
+  "version": "1.5.2",
+  "description": "Kubernetes models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/packages/kubernetes-models",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "index.mjs",
+  "types": "index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "openapi-generate --input https://raw.githubusercontent.com/kubernetes/kubernetes/v1.19.2/api/openapi-spec/swagger.json --output ./gen",
+    "postbuild": "cp .export-map-ignore gen/ && export-map generate --cwd gen --export gen/export-map.json",
+    "prepack": "cp package.json README.md dist/ && export-map inject --package dist/package.json --export gen/export-map.json",
+    "clean": "rimraf gen"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "dependencies": {
+    "@kubernetes-models/base": "^1.5.2",
+    "@kubernetes-models/validate": "^1.4.2",
+    "tslib": "^2.0.3"
+  },
+  "devDependencies": {
+    "@kubernetes-models/export-map": "^0.4.2",
+    "@kubernetes-models/openapi-generate": "^1.4.2",
+    "rimraf": "^3.0.2"
+  },
+  "gitHead": "c52063a38aba761fe1277669ed9cdc1484ee4803",
+  "exports": {
+    "./_schemas/IoK8sApimachineryPkgApisMetaV1ObjectMeta": {
+      "require": "./_schemas/IoK8sApimachineryPkgApisMetaV1ObjectMeta.js",
+      "import": "./_schemas/IoK8sApimachineryPkgApisMetaV1ObjectMeta.mjs"
+    },
+    "./admission.k8s.io": {
+      "require": "./admission.k8s.io/index.js",
+      "import": "./admission.k8s.io/index.mjs"
+    },
+    "./admission.k8s.io/v1/APIGroup": {
+      "require": "./admission.k8s.io/v1/APIGroup.js",
+      "import": "./admission.k8s.io/v1/APIGroup.mjs"
+    },
+    "./admission.k8s.io/v1/APIGroupList": {
+      "require": "./admission.k8s.io/v1/APIGroupList.js",
+      "import": "./admission.k8s.io/v1/APIGroupList.mjs"
+    },
+    "./admission.k8s.io/v1/APIResource": {
+      "require": "./admission.k8s.io/v1/APIResource.js",
+      "import": "./admission.k8s.io/v1/APIResource.mjs"
+    },
+    "./admission.k8s.io/v1/APIResourceList": {
+      "require": "./admission.k8s.io/v1/APIResourceList.js",
+      "import": "./admission.k8s.io/v1/APIResourceList.mjs"
+    },
+    "./admission.k8s.io/v1/APIVersions": {
+      "require": "./admission.k8s.io/v1/APIVersions.js",
+      "import": "./admission.k8s.io/v1/APIVersions.mjs"
+    },
+    "./admission.k8s.io/v1/DeleteOptions": {
+      "require": "./admission.k8s.io/v1/DeleteOptions.js",
+      "import": "./admission.k8s.io/v1/DeleteOptions.mjs"
+    },
+    "./admission.k8s.io/v1/FieldsV1": {
+      "require": "./admission.k8s.io/v1/FieldsV1.js",
+      "import": "./admission.k8s.io/v1/FieldsV1.mjs"
+    },
+    "./admission.k8s.io/v1/GroupVersionForDiscovery": {
+      "require": "./admission.k8s.io/v1/GroupVersionForDiscovery.js",
+      "import": "./admission.k8s.io/v1/GroupVersionForDiscovery.mjs"
+    },
+    "./admission.k8s.io/v1/LabelSelector": {
+      "require": "./admission.k8s.io/v1/LabelSelector.js",
+      "import": "./admission.k8s.io/v1/LabelSelector.mjs"
+    },
+    "./admission.k8s.io/v1/LabelSelectorRequirement": {
+      "require": "./admission.k8s.io/v1/LabelSelectorRequirement.js",
+      "import": "./admission.k8s.io/v1/LabelSelectorRequirement.mjs"
+    },
+    "./admission.k8s.io/v1/ListMeta": {
+      "require": "./admission.k8s.io/v1/ListMeta.js",
+      "import": "./admission.k8s.io/v1/ListMeta.mjs"
+    },
+    "./admission.k8s.io/v1/ManagedFieldsEntry": {
+      "require": "./admission.k8s.io/v1/ManagedFieldsEntry.js",
+      "import": "./admission.k8s.io/v1/ManagedFieldsEntry.mjs"
+    },
+    "./admission.k8s.io/v1/MicroTime": {
+      "require": "./admission.k8s.io/v1/MicroTime.js",
+      "import": "./admission.k8s.io/v1/MicroTime.mjs"
+    },
+    "./admission.k8s.io/v1/ObjectMeta": {
+      "require": "./admission.k8s.io/v1/ObjectMeta.js",
+      "import": "./admission.k8s.io/v1/ObjectMeta.mjs"
+    },
+    "./admission.k8s.io/v1/OwnerReference": {
+      "require": "./admission.k8s.io/v1/OwnerReference.js",
+      "import": "./admission.k8s.io/v1/OwnerReference.mjs"
+    },
+    "./admission.k8s.io/v1/Patch": {
+      "require": "./admission.k8s.io/v1/Patch.js",
+      "import": "./admission.k8s.io/v1/Patch.mjs"
+    },
+    "./admission.k8s.io/v1/Preconditions": {
+      "require": "./admission.k8s.io/v1/Preconditions.js",
+      "import": "./admission.k8s.io/v1/Preconditions.mjs"
+    },
+    "./admission.k8s.io/v1/ServerAddressByClientCIDR": {
+      "require": "./admission.k8s.io/v1/ServerAddressByClientCIDR.js",
+      "import": "./admission.k8s.io/v1/ServerAddressByClientCIDR.mjs"
+    },
+    "./admission.k8s.io/v1/Status": {
+      "require": "./admission.k8s.io/v1/Status.js",
+      "import": "./admission.k8s.io/v1/Status.mjs"
+    },
+    "./admission.k8s.io/v1/StatusCause": {
+      "require": "./admission.k8s.io/v1/StatusCause.js",
+      "import": "./admission.k8s.io/v1/StatusCause.mjs"
+    },
+    "./admission.k8s.io/v1/StatusDetails": {
+      "require": "./admission.k8s.io/v1/StatusDetails.js",
+      "import": "./admission.k8s.io/v1/StatusDetails.mjs"
+    },
+    "./admission.k8s.io/v1/Time": {
+      "require": "./admission.k8s.io/v1/Time.js",
+      "import": "./admission.k8s.io/v1/Time.mjs"
+    },
+    "./admission.k8s.io/v1/WatchEvent": {
+      "require": "./admission.k8s.io/v1/WatchEvent.js",
+      "import": "./admission.k8s.io/v1/WatchEvent.mjs"
+    },
+    "./admission.k8s.io/v1": {
+      "require": "./admission.k8s.io/v1/index.js",
+      "import": "./admission.k8s.io/v1/index.mjs"
+    },
+    "./admission.k8s.io/v1beta1/APIGroup": {
+      "require": "./admission.k8s.io/v1beta1/APIGroup.js",
+      "import": "./admission.k8s.io/v1beta1/APIGroup.mjs"
+    },
+    "./admission.k8s.io/v1beta1/APIGroupList": {
+      "require": "./admission.k8s.io/v1beta1/APIGroupList.js",
+      "import": "./admission.k8s.io/v1beta1/APIGroupList.mjs"
+    },
+    "./admission.k8s.io/v1beta1/APIResource": {
+      "require": "./admission.k8s.io/v1beta1/APIResource.js",
+      "import": "./admission.k8s.io/v1beta1/APIResource.mjs"
+    },
+    "./admission.k8s.io/v1beta1/APIResourceList": {
+      "require": "./admission.k8s.io/v1beta1/APIResourceList.js",
+      "import": "./admission.k8s.io/v1beta1/APIResourceList.mjs"
+    },
+    "./admission.k8s.io/v1beta1/APIVersions": {
+      "require": "./admission.k8s.io/v1beta1/APIVersions.js",
+      "import": "./admission.k8s.io/v1beta1/APIVersions.mjs"
+    },
+    "./admission.k8s.io/v1beta1/DeleteOptions": {
+      "require": "./admission.k8s.io/v1beta1/DeleteOptions.js",
+      "import": "./admission.k8s.io/v1beta1/DeleteOptions.mjs"
+    },
+    "./admission.k8s.io/v1beta1/FieldsV1": {
+      "require": "./admission.k8s.io/v1beta1/FieldsV1.js",
+      "import": "./admission.k8s.io/v1beta1/FieldsV1.mjs"
+    },
+    "./admission.k8s.io/v1beta1/GroupVersionForDiscovery": {
+      "require": "./admission.k8s.io/v1beta1/GroupVersionForDiscovery.js",
+      "import": "./admission.k8s.io/v1beta1/GroupVersionForDiscovery.mjs"
+    },
+    "./admission.k8s.io/v1beta1/LabelSelector": {
+      "require": "./admission.k8s.io/v1beta1/LabelSelector.js",
+      "import": "./admission.k8s.io/v1beta1/LabelSelector.mjs"
+    },
+    "./admission.k8s.io/v1beta1/LabelSelectorRequirement": {
+      "require": "./admission.k8s.io/v1beta1/LabelSelectorRequirement.js",
+      "import": "./admission.k8s.io/v1beta1/LabelSelectorRequirement.mjs"
+    },
+    "./admission.k8s.io/v1beta1/ListMeta": {
+      "require": "./admission.k8s.io/v1beta1/ListMeta.js",
+      "import": "./admission.k8s.io/v1beta1/ListMeta.mjs"
+    },
+    "./admission.k8s.io/v1beta1/ManagedFieldsEntry": {
+      "require": "./admission.k8s.io/v1beta1/ManagedFieldsEntry.js",
+      "import": "./admission.k8s.io/v1beta1/ManagedFieldsEntry.mjs"
+    },
+    "./admission.k8s.io/v1beta1/MicroTime": {
+      "require": "./admission.k8s.io/v1beta1/MicroTime.js",
+      "import": "./admission.k8s.io/v1beta1/MicroTime.mjs"
+    },
+    "./admission.k8s.io/v1beta1/ObjectMeta": {
+      "require": "./admission.k8s.io/v1beta1/ObjectMeta.js",
+      "import": "./admission.k8s.io/v1beta1/ObjectMeta.mjs"
+    },
+    "./admission.k8s.io/v1beta1/OwnerReference": {
+      "require": "./admission.k8s.io/v1beta1/OwnerReference.js",
+      "import": "./admission.k8s.io/v1beta1/OwnerReference.mjs"
+    },
+    "./admission.k8s.io/v1beta1/Patch": {
+      "require": "./admission.k8s.io/v1beta1/Patch.js",
+      "import": "./admission.k8s.io/v1beta1/Patch.mjs"
+    },
+    "./admission.k8s.io/v1beta1/Preconditions": {
+      "require": "./admission.k8s.io/v1beta1/Preconditions.js",
+      "import": "./admission.k8s.io/v1beta1/Preconditions.mjs"
+    },
+    "./admission.k8s.io/v1beta1/ServerAddressByClientCIDR": {
+      "require": "./admission.k8s.io/v1beta1/ServerAddressByClientCIDR.js",
+      "import": "./admission.k8s.io/v1beta1/ServerAddressByClientCIDR.mjs"
+    },
+    "./admission.k8s.io/v1beta1/Status": {
+      "require": "./admission.k8s.io/v1beta1/Status.js",
+      "import": "./admission.k8s.io/v1beta1/Status.mjs"
+    },
+    "./admission.k8s.io/v1beta1/StatusCause": {
+      "require": "./admission.k8s.io/v1beta1/StatusCause.js",
+      "import": "./admission.k8s.io/v1beta1/StatusCause.mjs"
+    },
+    "./admission.k8s.io/v1beta1/StatusDetails": {
+      "require": "./admission.k8s.io/v1beta1/StatusDetails.js",
+      "import": "./admission.k8s.io/v1beta1/StatusDetails.mjs"
+    },
+    "./admission.k8s.io/v1beta1/Time": {
+      "require": "./admission.k8s.io/v1beta1/Time.js",
+      "import": "./admission.k8s.io/v1beta1/Time.mjs"
+    },
+    "./admission.k8s.io/v1beta1/WatchEvent": {
+      "require": "./admission.k8s.io/v1beta1/WatchEvent.js",
+      "import": "./admission.k8s.io/v1beta1/WatchEvent.mjs"
+    },
+    "./admission.k8s.io/v1beta1": {
+      "require": "./admission.k8s.io/v1beta1/index.js",
+      "import": "./admission.k8s.io/v1beta1/index.mjs"
+    },
+    "./admissionregistration.k8s.io": {
+      "require": "./admissionregistration.k8s.io/index.js",
+      "import": "./admissionregistration.k8s.io/index.mjs"
+    },
+    "./admissionregistration.k8s.io/v1/MutatingWebhook": {
+      "require": "./admissionregistration.k8s.io/v1/MutatingWebhook.js",
+      "import": "./admissionregistration.k8s.io/v1/MutatingWebhook.mjs"
+    },
+    "./admissionregistration.k8s.io/v1/MutatingWebhookConfiguration": {
+      "require": "./admissionregistration.k8s.io/v1/MutatingWebhookConfiguration.js",
+      "import": "./admissionregistration.k8s.io/v1/MutatingWebhookConfiguration.mjs"
+    },
+    "./admissionregistration.k8s.io/v1/MutatingWebhookConfigurationList": {
+      "require": "./admissionregistration.k8s.io/v1/MutatingWebhookConfigurationList.js",
+      "import": "./admissionregistration.k8s.io/v1/MutatingWebhookConfigurationList.mjs"
+    },
+    "./admissionregistration.k8s.io/v1/RuleWithOperations": {
+      "require": "./admissionregistration.k8s.io/v1/RuleWithOperations.js",
+      "import": "./admissionregistration.k8s.io/v1/RuleWithOperations.mjs"
+    },
+    "./admissionregistration.k8s.io/v1/ServiceReference": {
+      "require": "./admissionregistration.k8s.io/v1/ServiceReference.js",
+      "import": "./admissionregistration.k8s.io/v1/ServiceReference.mjs"
+    },
+    "./admissionregistration.k8s.io/v1/ValidatingWebhook": {
+      "require": "./admissionregistration.k8s.io/v1/ValidatingWebhook.js",
+      "import": "./admissionregistration.k8s.io/v1/ValidatingWebhook.mjs"
+    },
+    "./admissionregistration.k8s.io/v1/ValidatingWebhookConfiguration": {
+      "require": "./admissionregistration.k8s.io/v1/ValidatingWebhookConfiguration.js",
+      "import": "./admissionregistration.k8s.io/v1/ValidatingWebhookConfiguration.mjs"
+    },
+    "./admissionregistration.k8s.io/v1/ValidatingWebhookConfigurationList": {
+      "require": "./admissionregistration.k8s.io/v1/ValidatingWebhookConfigurationList.js",
+      "import": "./admissionregistration.k8s.io/v1/ValidatingWebhookConfigurationList.mjs"
+    },
+    "./admissionregistration.k8s.io/v1/WebhookClientConfig": {
+      "require": "./admissionregistration.k8s.io/v1/WebhookClientConfig.js",
+      "import": "./admissionregistration.k8s.io/v1/WebhookClientConfig.mjs"
+    },
+    "./admissionregistration.k8s.io/v1": {
+      "require": "./admissionregistration.k8s.io/v1/index.js",
+      "import": "./admissionregistration.k8s.io/v1/index.mjs"
+    },
+    "./admissionregistration.k8s.io/v1beta1/MutatingWebhook": {
+      "require": "./admissionregistration.k8s.io/v1beta1/MutatingWebhook.js",
+      "import": "./admissionregistration.k8s.io/v1beta1/MutatingWebhook.mjs"
+    },
+    "./admissionregistration.k8s.io/v1beta1/MutatingWebhookConfiguration": {
+      "require": "./admissionregistration.k8s.io/v1beta1/MutatingWebhookConfiguration.js",
+      "import": "./admissionregistration.k8s.io/v1beta1/MutatingWebhookConfiguration.mjs"
+    },
+    "./admissionregistration.k8s.io/v1beta1/MutatingWebhookConfigurationList": {
+      "require": "./admissionregistration.k8s.io/v1beta1/MutatingWebhookConfigurationList.js",
+      "import": "./admissionregistration.k8s.io/v1beta1/MutatingWebhookConfigurationList.mjs"
+    },
+    "./admissionregistration.k8s.io/v1beta1/RuleWithOperations": {
+      "require": "./admissionregistration.k8s.io/v1beta1/RuleWithOperations.js",
+      "import": "./admissionregistration.k8s.io/v1beta1/RuleWithOperations.mjs"
+    },
+    "./admissionregistration.k8s.io/v1beta1/ServiceReference": {
+      "require": "./admissionregistration.k8s.io/v1beta1/ServiceReference.js",
+      "import": "./admissionregistration.k8s.io/v1beta1/ServiceReference.mjs"
+    },
+    "./admissionregistration.k8s.io/v1beta1/ValidatingWebhook": {
+      "require": "./admissionregistration.k8s.io/v1beta1/ValidatingWebhook.js",
+      "import": "./admissionregistration.k8s.io/v1beta1/ValidatingWebhook.mjs"
+    },
+    "./admissionregistration.k8s.io/v1beta1/ValidatingWebhookConfiguration": {
+      "require": "./admissionregistration.k8s.io/v1beta1/ValidatingWebhookConfiguration.js",
+      "import": "./admissionregistration.k8s.io/v1beta1/ValidatingWebhookConfiguration.mjs"
+    },
+    "./admissionregistration.k8s.io/v1beta1/ValidatingWebhookConfigurationList": {
+      "require": "./admissionregistration.k8s.io/v1beta1/ValidatingWebhookConfigurationList.js",
+      "import": "./admissionregistration.k8s.io/v1beta1/ValidatingWebhookConfigurationList.mjs"
+    },
+    "./admissionregistration.k8s.io/v1beta1/WebhookClientConfig": {
+      "require": "./admissionregistration.k8s.io/v1beta1/WebhookClientConfig.js",
+      "import": "./admissionregistration.k8s.io/v1beta1/WebhookClientConfig.mjs"
+    },
+    "./admissionregistration.k8s.io/v1beta1": {
+      "require": "./admissionregistration.k8s.io/v1beta1/index.js",
+      "import": "./admissionregistration.k8s.io/v1beta1/index.mjs"
+    },
+    "./apiextensions.k8s.io": {
+      "require": "./apiextensions.k8s.io/index.js",
+      "import": "./apiextensions.k8s.io/index.mjs"
+    },
+    "./apiextensions.k8s.io/v1/CustomResourceColumnDefinition": {
+      "require": "./apiextensions.k8s.io/v1/CustomResourceColumnDefinition.js",
+      "import": "./apiextensions.k8s.io/v1/CustomResourceColumnDefinition.mjs"
+    },
+    "./apiextensions.k8s.io/v1/CustomResourceConversion": {
+      "require": "./apiextensions.k8s.io/v1/CustomResourceConversion.js",
+      "import": "./apiextensions.k8s.io/v1/CustomResourceConversion.mjs"
+    },
+    "./apiextensions.k8s.io/v1/CustomResourceDefinition": {
+      "require": "./apiextensions.k8s.io/v1/CustomResourceDefinition.js",
+      "import": "./apiextensions.k8s.io/v1/CustomResourceDefinition.mjs"
+    },
+    "./apiextensions.k8s.io/v1/CustomResourceDefinitionCondition": {
+      "require": "./apiextensions.k8s.io/v1/CustomResourceDefinitionCondition.js",
+      "import": "./apiextensions.k8s.io/v1/CustomResourceDefinitionCondition.mjs"
+    },
+    "./apiextensions.k8s.io/v1/CustomResourceDefinitionList": {
+      "require": "./apiextensions.k8s.io/v1/CustomResourceDefinitionList.js",
+      "import": "./apiextensions.k8s.io/v1/CustomResourceDefinitionList.mjs"
+    },
+    "./apiextensions.k8s.io/v1/CustomResourceDefinitionNames": {
+      "require": "./apiextensions.k8s.io/v1/CustomResourceDefinitionNames.js",
+      "import": "./apiextensions.k8s.io/v1/CustomResourceDefinitionNames.mjs"
+    },
+    "./apiextensions.k8s.io/v1/CustomResourceDefinitionSpec": {
+      "require": "./apiextensions.k8s.io/v1/CustomResourceDefinitionSpec.js",
+      "import": "./apiextensions.k8s.io/v1/CustomResourceDefinitionSpec.mjs"
+    },
+    "./apiextensions.k8s.io/v1/CustomResourceDefinitionStatus": {
+      "require": "./apiextensions.k8s.io/v1/CustomResourceDefinitionStatus.js",
+      "import": "./apiextensions.k8s.io/v1/CustomResourceDefinitionStatus.mjs"
+    },
+    "./apiextensions.k8s.io/v1/CustomResourceDefinitionVersion": {
+      "require": "./apiextensions.k8s.io/v1/CustomResourceDefinitionVersion.js",
+      "import": "./apiextensions.k8s.io/v1/CustomResourceDefinitionVersion.mjs"
+    },
+    "./apiextensions.k8s.io/v1/CustomResourceSubresourceScale": {
+      "require": "./apiextensions.k8s.io/v1/CustomResourceSubresourceScale.js",
+      "import": "./apiextensions.k8s.io/v1/CustomResourceSubresourceScale.mjs"
+    },
+    "./apiextensions.k8s.io/v1/CustomResourceSubresourceStatus": {
+      "require": "./apiextensions.k8s.io/v1/CustomResourceSubresourceStatus.js",
+      "import": "./apiextensions.k8s.io/v1/CustomResourceSubresourceStatus.mjs"
+    },
+    "./apiextensions.k8s.io/v1/CustomResourceSubresources": {
+      "require": "./apiextensions.k8s.io/v1/CustomResourceSubresources.js",
+      "import": "./apiextensions.k8s.io/v1/CustomResourceSubresources.mjs"
+    },
+    "./apiextensions.k8s.io/v1/CustomResourceValidation": {
+      "require": "./apiextensions.k8s.io/v1/CustomResourceValidation.js",
+      "import": "./apiextensions.k8s.io/v1/CustomResourceValidation.mjs"
+    },
+    "./apiextensions.k8s.io/v1/ExternalDocumentation": {
+      "require": "./apiextensions.k8s.io/v1/ExternalDocumentation.js",
+      "import": "./apiextensions.k8s.io/v1/ExternalDocumentation.mjs"
+    },
+    "./apiextensions.k8s.io/v1/JSON": {
+      "require": "./apiextensions.k8s.io/v1/JSON.js",
+      "import": "./apiextensions.k8s.io/v1/JSON.mjs"
+    },
+    "./apiextensions.k8s.io/v1/JSONSchemaProps": {
+      "require": "./apiextensions.k8s.io/v1/JSONSchemaProps.js",
+      "import": "./apiextensions.k8s.io/v1/JSONSchemaProps.mjs"
+    },
+    "./apiextensions.k8s.io/v1/JSONSchemaPropsOrArray": {
+      "require": "./apiextensions.k8s.io/v1/JSONSchemaPropsOrArray.js",
+      "import": "./apiextensions.k8s.io/v1/JSONSchemaPropsOrArray.mjs"
+    },
+    "./apiextensions.k8s.io/v1/JSONSchemaPropsOrBool": {
+      "require": "./apiextensions.k8s.io/v1/JSONSchemaPropsOrBool.js",
+      "import": "./apiextensions.k8s.io/v1/JSONSchemaPropsOrBool.mjs"
+    },
+    "./apiextensions.k8s.io/v1/JSONSchemaPropsOrStringArray": {
+      "require": "./apiextensions.k8s.io/v1/JSONSchemaPropsOrStringArray.js",
+      "import": "./apiextensions.k8s.io/v1/JSONSchemaPropsOrStringArray.mjs"
+    },
+    "./apiextensions.k8s.io/v1/ServiceReference": {
+      "require": "./apiextensions.k8s.io/v1/ServiceReference.js",
+      "import": "./apiextensions.k8s.io/v1/ServiceReference.mjs"
+    },
+    "./apiextensions.k8s.io/v1/WebhookClientConfig": {
+      "require": "./apiextensions.k8s.io/v1/WebhookClientConfig.js",
+      "import": "./apiextensions.k8s.io/v1/WebhookClientConfig.mjs"
+    },
+    "./apiextensions.k8s.io/v1/WebhookConversion": {
+      "require": "./apiextensions.k8s.io/v1/WebhookConversion.js",
+      "import": "./apiextensions.k8s.io/v1/WebhookConversion.mjs"
+    },
+    "./apiextensions.k8s.io/v1": {
+      "require": "./apiextensions.k8s.io/v1/index.js",
+      "import": "./apiextensions.k8s.io/v1/index.mjs"
+    },
+    "./apiextensions.k8s.io/v1beta1/CustomResourceColumnDefinition": {
+      "require": "./apiextensions.k8s.io/v1beta1/CustomResourceColumnDefinition.js",
+      "import": "./apiextensions.k8s.io/v1beta1/CustomResourceColumnDefinition.mjs"
+    },
+    "./apiextensions.k8s.io/v1beta1/CustomResourceConversion": {
+      "require": "./apiextensions.k8s.io/v1beta1/CustomResourceConversion.js",
+      "import": "./apiextensions.k8s.io/v1beta1/CustomResourceConversion.mjs"
+    },
+    "./apiextensions.k8s.io/v1beta1/CustomResourceDefinition": {
+      "require": "./apiextensions.k8s.io/v1beta1/CustomResourceDefinition.js",
+      "import": "./apiextensions.k8s.io/v1beta1/CustomResourceDefinition.mjs"
+    },
+    "./apiextensions.k8s.io/v1beta1/CustomResourceDefinitionCondition": {
+      "require": "./apiextensions.k8s.io/v1beta1/CustomResourceDefinitionCondition.js",
+      "import": "./apiextensions.k8s.io/v1beta1/CustomResourceDefinitionCondition.mjs"
+    },
+    "./apiextensions.k8s.io/v1beta1/CustomResourceDefinitionList": {
+      "require": "./apiextensions.k8s.io/v1beta1/CustomResourceDefinitionList.js",
+      "import": "./apiextensions.k8s.io/v1beta1/CustomResourceDefinitionList.mjs"
+    },
+    "./apiextensions.k8s.io/v1beta1/CustomResourceDefinitionNames": {
+      "require": "./apiextensions.k8s.io/v1beta1/CustomResourceDefinitionNames.js",
+      "import": "./apiextensions.k8s.io/v1beta1/CustomResourceDefinitionNames.mjs"
+    },
+    "./apiextensions.k8s.io/v1beta1/CustomResourceDefinitionSpec": {
+      "require": "./apiextensions.k8s.io/v1beta1/CustomResourceDefinitionSpec.js",
+      "import": "./apiextensions.k8s.io/v1beta1/CustomResourceDefinitionSpec.mjs"
+    },
+    "./apiextensions.k8s.io/v1beta1/CustomResourceDefinitionStatus": {
+      "require": "./apiextensions.k8s.io/v1beta1/CustomResourceDefinitionStatus.js",
+      "import": "./apiextensions.k8s.io/v1beta1/CustomResourceDefinitionStatus.mjs"
+    },
+    "./apiextensions.k8s.io/v1beta1/CustomResourceDefinitionVersion": {
+      "require": "./apiextensions.k8s.io/v1beta1/CustomResourceDefinitionVersion.js",
+      "import": "./apiextensions.k8s.io/v1beta1/CustomResourceDefinitionVersion.mjs"
+    },
+    "./apiextensions.k8s.io/v1beta1/CustomResourceSubresourceScale": {
+      "require": "./apiextensions.k8s.io/v1beta1/CustomResourceSubresourceScale.js",
+      "import": "./apiextensions.k8s.io/v1beta1/CustomResourceSubresourceScale.mjs"
+    },
+    "./apiextensions.k8s.io/v1beta1/CustomResourceSubresourceStatus": {
+      "require": "./apiextensions.k8s.io/v1beta1/CustomResourceSubresourceStatus.js",
+      "import": "./apiextensions.k8s.io/v1beta1/CustomResourceSubresourceStatus.mjs"
+    },
+    "./apiextensions.k8s.io/v1beta1/CustomResourceSubresources": {
+      "require": "./apiextensions.k8s.io/v1beta1/CustomResourceSubresources.js",
+      "import": "./apiextensions.k8s.io/v1beta1/CustomResourceSubresources.mjs"
+    },
+    "./apiextensions.k8s.io/v1beta1/CustomResourceValidation": {
+      "require": "./apiextensions.k8s.io/v1beta1/CustomResourceValidation.js",
+      "import": "./apiextensions.k8s.io/v1beta1/CustomResourceValidation.mjs"
+    },
+    "./apiextensions.k8s.io/v1beta1/ExternalDocumentation": {
+      "require": "./apiextensions.k8s.io/v1beta1/ExternalDocumentation.js",
+      "import": "./apiextensions.k8s.io/v1beta1/ExternalDocumentation.mjs"
+    },
+    "./apiextensions.k8s.io/v1beta1/JSON": {
+      "require": "./apiextensions.k8s.io/v1beta1/JSON.js",
+      "import": "./apiextensions.k8s.io/v1beta1/JSON.mjs"
+    },
+    "./apiextensions.k8s.io/v1beta1/JSONSchemaProps": {
+      "require": "./apiextensions.k8s.io/v1beta1/JSONSchemaProps.js",
+      "import": "./apiextensions.k8s.io/v1beta1/JSONSchemaProps.mjs"
+    },
+    "./apiextensions.k8s.io/v1beta1/JSONSchemaPropsOrArray": {
+      "require": "./apiextensions.k8s.io/v1beta1/JSONSchemaPropsOrArray.js",
+      "import": "./apiextensions.k8s.io/v1beta1/JSONSchemaPropsOrArray.mjs"
+    },
+    "./apiextensions.k8s.io/v1beta1/JSONSchemaPropsOrBool": {
+      "require": "./apiextensions.k8s.io/v1beta1/JSONSchemaPropsOrBool.js",
+      "import": "./apiextensions.k8s.io/v1beta1/JSONSchemaPropsOrBool.mjs"
+    },
+    "./apiextensions.k8s.io/v1beta1/JSONSchemaPropsOrStringArray": {
+      "require": "./apiextensions.k8s.io/v1beta1/JSONSchemaPropsOrStringArray.js",
+      "import": "./apiextensions.k8s.io/v1beta1/JSONSchemaPropsOrStringArray.mjs"
+    },
+    "./apiextensions.k8s.io/v1beta1/ServiceReference": {
+      "require": "./apiextensions.k8s.io/v1beta1/ServiceReference.js",
+      "import": "./apiextensions.k8s.io/v1beta1/ServiceReference.mjs"
+    },
+    "./apiextensions.k8s.io/v1beta1/WebhookClientConfig": {
+      "require": "./apiextensions.k8s.io/v1beta1/WebhookClientConfig.js",
+      "import": "./apiextensions.k8s.io/v1beta1/WebhookClientConfig.mjs"
+    },
+    "./apiextensions.k8s.io/v1beta1": {
+      "require": "./apiextensions.k8s.io/v1beta1/index.js",
+      "import": "./apiextensions.k8s.io/v1beta1/index.mjs"
+    },
+    "./apimachinery": {
+      "require": "./apimachinery/index.js",
+      "import": "./apimachinery/index.mjs"
+    },
+    "./apimachinery/pkg/api": {
+      "require": "./apimachinery/pkg/api/index.js",
+      "import": "./apimachinery/pkg/api/index.mjs"
+    },
+    "./apimachinery/pkg/api/resource/Quantity": {
+      "require": "./apimachinery/pkg/api/resource/Quantity.js",
+      "import": "./apimachinery/pkg/api/resource/Quantity.mjs"
+    },
+    "./apimachinery/pkg/api/resource": {
+      "require": "./apimachinery/pkg/api/resource/index.js",
+      "import": "./apimachinery/pkg/api/resource/index.mjs"
+    },
+    "./apimachinery/pkg/apis": {
+      "require": "./apimachinery/pkg/apis/index.js",
+      "import": "./apimachinery/pkg/apis/index.mjs"
+    },
+    "./apimachinery/pkg/apis/meta": {
+      "require": "./apimachinery/pkg/apis/meta/index.js",
+      "import": "./apimachinery/pkg/apis/meta/index.mjs"
+    },
+    "./apimachinery/pkg/apis/meta/v1/APIGroup": {
+      "require": "./apimachinery/pkg/apis/meta/v1/APIGroup.js",
+      "import": "./apimachinery/pkg/apis/meta/v1/APIGroup.mjs"
+    },
+    "./apimachinery/pkg/apis/meta/v1/APIGroupList": {
+      "require": "./apimachinery/pkg/apis/meta/v1/APIGroupList.js",
+      "import": "./apimachinery/pkg/apis/meta/v1/APIGroupList.mjs"
+    },
+    "./apimachinery/pkg/apis/meta/v1/APIResource": {
+      "require": "./apimachinery/pkg/apis/meta/v1/APIResource.js",
+      "import": "./apimachinery/pkg/apis/meta/v1/APIResource.mjs"
+    },
+    "./apimachinery/pkg/apis/meta/v1/APIResourceList": {
+      "require": "./apimachinery/pkg/apis/meta/v1/APIResourceList.js",
+      "import": "./apimachinery/pkg/apis/meta/v1/APIResourceList.mjs"
+    },
+    "./apimachinery/pkg/apis/meta/v1/APIVersions": {
+      "require": "./apimachinery/pkg/apis/meta/v1/APIVersions.js",
+      "import": "./apimachinery/pkg/apis/meta/v1/APIVersions.mjs"
+    },
+    "./apimachinery/pkg/apis/meta/v1/DeleteOptions": {
+      "require": "./apimachinery/pkg/apis/meta/v1/DeleteOptions.js",
+      "import": "./apimachinery/pkg/apis/meta/v1/DeleteOptions.mjs"
+    },
+    "./apimachinery/pkg/apis/meta/v1/FieldsV1": {
+      "require": "./apimachinery/pkg/apis/meta/v1/FieldsV1.js",
+      "import": "./apimachinery/pkg/apis/meta/v1/FieldsV1.mjs"
+    },
+    "./apimachinery/pkg/apis/meta/v1/GroupVersionForDiscovery": {
+      "require": "./apimachinery/pkg/apis/meta/v1/GroupVersionForDiscovery.js",
+      "import": "./apimachinery/pkg/apis/meta/v1/GroupVersionForDiscovery.mjs"
+    },
+    "./apimachinery/pkg/apis/meta/v1/LabelSelector": {
+      "require": "./apimachinery/pkg/apis/meta/v1/LabelSelector.js",
+      "import": "./apimachinery/pkg/apis/meta/v1/LabelSelector.mjs"
+    },
+    "./apimachinery/pkg/apis/meta/v1/LabelSelectorRequirement": {
+      "require": "./apimachinery/pkg/apis/meta/v1/LabelSelectorRequirement.js",
+      "import": "./apimachinery/pkg/apis/meta/v1/LabelSelectorRequirement.mjs"
+    },
+    "./apimachinery/pkg/apis/meta/v1/ListMeta": {
+      "require": "./apimachinery/pkg/apis/meta/v1/ListMeta.js",
+      "import": "./apimachinery/pkg/apis/meta/v1/ListMeta.mjs"
+    },
+    "./apimachinery/pkg/apis/meta/v1/ManagedFieldsEntry": {
+      "require": "./apimachinery/pkg/apis/meta/v1/ManagedFieldsEntry.js",
+      "import": "./apimachinery/pkg/apis/meta/v1/ManagedFieldsEntry.mjs"
+    },
+    "./apimachinery/pkg/apis/meta/v1/MicroTime": {
+      "require": "./apimachinery/pkg/apis/meta/v1/MicroTime.js",
+      "import": "./apimachinery/pkg/apis/meta/v1/MicroTime.mjs"
+    },
+    "./apimachinery/pkg/apis/meta/v1/ObjectMeta": {
+      "require": "./apimachinery/pkg/apis/meta/v1/ObjectMeta.js",
+      "import": "./apimachinery/pkg/apis/meta/v1/ObjectMeta.mjs"
+    },
+    "./apimachinery/pkg/apis/meta/v1/OwnerReference": {
+      "require": "./apimachinery/pkg/apis/meta/v1/OwnerReference.js",
+      "import": "./apimachinery/pkg/apis/meta/v1/OwnerReference.mjs"
+    },
+    "./apimachinery/pkg/apis/meta/v1/Patch": {
+      "require": "./apimachinery/pkg/apis/meta/v1/Patch.js",
+      "import": "./apimachinery/pkg/apis/meta/v1/Patch.mjs"
+    },
+    "./apimachinery/pkg/apis/meta/v1/Preconditions": {
+      "require": "./apimachinery/pkg/apis/meta/v1/Preconditions.js",
+      "import": "./apimachinery/pkg/apis/meta/v1/Preconditions.mjs"
+    },
+    "./apimachinery/pkg/apis/meta/v1/ServerAddressByClientCIDR": {
+      "require": "./apimachinery/pkg/apis/meta/v1/ServerAddressByClientCIDR.js",
+      "import": "./apimachinery/pkg/apis/meta/v1/ServerAddressByClientCIDR.mjs"
+    },
+    "./apimachinery/pkg/apis/meta/v1/Status": {
+      "require": "./apimachinery/pkg/apis/meta/v1/Status.js",
+      "import": "./apimachinery/pkg/apis/meta/v1/Status.mjs"
+    },
+    "./apimachinery/pkg/apis/meta/v1/StatusCause": {
+      "require": "./apimachinery/pkg/apis/meta/v1/StatusCause.js",
+      "import": "./apimachinery/pkg/apis/meta/v1/StatusCause.mjs"
+    },
+    "./apimachinery/pkg/apis/meta/v1/StatusDetails": {
+      "require": "./apimachinery/pkg/apis/meta/v1/StatusDetails.js",
+      "import": "./apimachinery/pkg/apis/meta/v1/StatusDetails.mjs"
+    },
+    "./apimachinery/pkg/apis/meta/v1/Time": {
+      "require": "./apimachinery/pkg/apis/meta/v1/Time.js",
+      "import": "./apimachinery/pkg/apis/meta/v1/Time.mjs"
+    },
+    "./apimachinery/pkg/apis/meta/v1/WatchEvent": {
+      "require": "./apimachinery/pkg/apis/meta/v1/WatchEvent.js",
+      "import": "./apimachinery/pkg/apis/meta/v1/WatchEvent.mjs"
+    },
+    "./apimachinery/pkg/apis/meta/v1": {
+      "require": "./apimachinery/pkg/apis/meta/v1/index.js",
+      "import": "./apimachinery/pkg/apis/meta/v1/index.mjs"
+    },
+    "./apimachinery/pkg": {
+      "require": "./apimachinery/pkg/index.js",
+      "import": "./apimachinery/pkg/index.mjs"
+    },
+    "./apimachinery/pkg/runtime/RawExtension": {
+      "require": "./apimachinery/pkg/runtime/RawExtension.js",
+      "import": "./apimachinery/pkg/runtime/RawExtension.mjs"
+    },
+    "./apimachinery/pkg/runtime": {
+      "require": "./apimachinery/pkg/runtime/index.js",
+      "import": "./apimachinery/pkg/runtime/index.mjs"
+    },
+    "./apimachinery/pkg/util": {
+      "require": "./apimachinery/pkg/util/index.js",
+      "import": "./apimachinery/pkg/util/index.mjs"
+    },
+    "./apimachinery/pkg/util/intstr/IntOrString": {
+      "require": "./apimachinery/pkg/util/intstr/IntOrString.js",
+      "import": "./apimachinery/pkg/util/intstr/IntOrString.mjs"
+    },
+    "./apimachinery/pkg/util/intstr": {
+      "require": "./apimachinery/pkg/util/intstr/index.js",
+      "import": "./apimachinery/pkg/util/intstr/index.mjs"
+    },
+    "./apimachinery/pkg/version/Info": {
+      "require": "./apimachinery/pkg/version/Info.js",
+      "import": "./apimachinery/pkg/version/Info.mjs"
+    },
+    "./apimachinery/pkg/version": {
+      "require": "./apimachinery/pkg/version/index.js",
+      "import": "./apimachinery/pkg/version/index.mjs"
+    },
+    "./apiregistration.k8s.io": {
+      "require": "./apiregistration.k8s.io/index.js",
+      "import": "./apiregistration.k8s.io/index.mjs"
+    },
+    "./apiregistration.k8s.io/v1/APIGroup": {
+      "require": "./apiregistration.k8s.io/v1/APIGroup.js",
+      "import": "./apiregistration.k8s.io/v1/APIGroup.mjs"
+    },
+    "./apiregistration.k8s.io/v1/APIGroupList": {
+      "require": "./apiregistration.k8s.io/v1/APIGroupList.js",
+      "import": "./apiregistration.k8s.io/v1/APIGroupList.mjs"
+    },
+    "./apiregistration.k8s.io/v1/APIResource": {
+      "require": "./apiregistration.k8s.io/v1/APIResource.js",
+      "import": "./apiregistration.k8s.io/v1/APIResource.mjs"
+    },
+    "./apiregistration.k8s.io/v1/APIResourceList": {
+      "require": "./apiregistration.k8s.io/v1/APIResourceList.js",
+      "import": "./apiregistration.k8s.io/v1/APIResourceList.mjs"
+    },
+    "./apiregistration.k8s.io/v1/APIVersions": {
+      "require": "./apiregistration.k8s.io/v1/APIVersions.js",
+      "import": "./apiregistration.k8s.io/v1/APIVersions.mjs"
+    },
+    "./apiregistration.k8s.io/v1/DeleteOptions": {
+      "require": "./apiregistration.k8s.io/v1/DeleteOptions.js",
+      "import": "./apiregistration.k8s.io/v1/DeleteOptions.mjs"
+    },
+    "./apiregistration.k8s.io/v1/FieldsV1": {
+      "require": "./apiregistration.k8s.io/v1/FieldsV1.js",
+      "import": "./apiregistration.k8s.io/v1/FieldsV1.mjs"
+    },
+    "./apiregistration.k8s.io/v1/GroupVersionForDiscovery": {
+      "require": "./apiregistration.k8s.io/v1/GroupVersionForDiscovery.js",
+      "import": "./apiregistration.k8s.io/v1/GroupVersionForDiscovery.mjs"
+    },
+    "./apiregistration.k8s.io/v1/LabelSelector": {
+      "require": "./apiregistration.k8s.io/v1/LabelSelector.js",
+      "import": "./apiregistration.k8s.io/v1/LabelSelector.mjs"
+    },
+    "./apiregistration.k8s.io/v1/LabelSelectorRequirement": {
+      "require": "./apiregistration.k8s.io/v1/LabelSelectorRequirement.js",
+      "import": "./apiregistration.k8s.io/v1/LabelSelectorRequirement.mjs"
+    },
+    "./apiregistration.k8s.io/v1/ListMeta": {
+      "require": "./apiregistration.k8s.io/v1/ListMeta.js",
+      "import": "./apiregistration.k8s.io/v1/ListMeta.mjs"
+    },
+    "./apiregistration.k8s.io/v1/ManagedFieldsEntry": {
+      "require": "./apiregistration.k8s.io/v1/ManagedFieldsEntry.js",
+      "import": "./apiregistration.k8s.io/v1/ManagedFieldsEntry.mjs"
+    },
+    "./apiregistration.k8s.io/v1/MicroTime": {
+      "require": "./apiregistration.k8s.io/v1/MicroTime.js",
+      "import": "./apiregistration.k8s.io/v1/MicroTime.mjs"
+    },
+    "./apiregistration.k8s.io/v1/ObjectMeta": {
+      "require": "./apiregistration.k8s.io/v1/ObjectMeta.js",
+      "import": "./apiregistration.k8s.io/v1/ObjectMeta.mjs"
+    },
+    "./apiregistration.k8s.io/v1/OwnerReference": {
+      "require": "./apiregistration.k8s.io/v1/OwnerReference.js",
+      "import": "./apiregistration.k8s.io/v1/OwnerReference.mjs"
+    },
+    "./apiregistration.k8s.io/v1/Patch": {
+      "require": "./apiregistration.k8s.io/v1/Patch.js",
+      "import": "./apiregistration.k8s.io/v1/Patch.mjs"
+    },
+    "./apiregistration.k8s.io/v1/Preconditions": {
+      "require": "./apiregistration.k8s.io/v1/Preconditions.js",
+      "import": "./apiregistration.k8s.io/v1/Preconditions.mjs"
+    },
+    "./apiregistration.k8s.io/v1/ServerAddressByClientCIDR": {
+      "require": "./apiregistration.k8s.io/v1/ServerAddressByClientCIDR.js",
+      "import": "./apiregistration.k8s.io/v1/ServerAddressByClientCIDR.mjs"
+    },
+    "./apiregistration.k8s.io/v1/Status": {
+      "require": "./apiregistration.k8s.io/v1/Status.js",
+      "import": "./apiregistration.k8s.io/v1/Status.mjs"
+    },
+    "./apiregistration.k8s.io/v1/StatusCause": {
+      "require": "./apiregistration.k8s.io/v1/StatusCause.js",
+      "import": "./apiregistration.k8s.io/v1/StatusCause.mjs"
+    },
+    "./apiregistration.k8s.io/v1/StatusDetails": {
+      "require": "./apiregistration.k8s.io/v1/StatusDetails.js",
+      "import": "./apiregistration.k8s.io/v1/StatusDetails.mjs"
+    },
+    "./apiregistration.k8s.io/v1/Time": {
+      "require": "./apiregistration.k8s.io/v1/Time.js",
+      "import": "./apiregistration.k8s.io/v1/Time.mjs"
+    },
+    "./apiregistration.k8s.io/v1/WatchEvent": {
+      "require": "./apiregistration.k8s.io/v1/WatchEvent.js",
+      "import": "./apiregistration.k8s.io/v1/WatchEvent.mjs"
+    },
+    "./apiregistration.k8s.io/v1": {
+      "require": "./apiregistration.k8s.io/v1/index.js",
+      "import": "./apiregistration.k8s.io/v1/index.mjs"
+    },
+    "./apiregistration.k8s.io/v1beta1/APIGroup": {
+      "require": "./apiregistration.k8s.io/v1beta1/APIGroup.js",
+      "import": "./apiregistration.k8s.io/v1beta1/APIGroup.mjs"
+    },
+    "./apiregistration.k8s.io/v1beta1/APIGroupList": {
+      "require": "./apiregistration.k8s.io/v1beta1/APIGroupList.js",
+      "import": "./apiregistration.k8s.io/v1beta1/APIGroupList.mjs"
+    },
+    "./apiregistration.k8s.io/v1beta1/APIResource": {
+      "require": "./apiregistration.k8s.io/v1beta1/APIResource.js",
+      "import": "./apiregistration.k8s.io/v1beta1/APIResource.mjs"
+    },
+    "./apiregistration.k8s.io/v1beta1/APIResourceList": {
+      "require": "./apiregistration.k8s.io/v1beta1/APIResourceList.js",
+      "import": "./apiregistration.k8s.io/v1beta1/APIResourceList.mjs"
+    },
+    "./apiregistration.k8s.io/v1beta1/APIVersions": {
+      "require": "./apiregistration.k8s.io/v1beta1/APIVersions.js",
+      "import": "./apiregistration.k8s.io/v1beta1/APIVersions.mjs"
+    },
+    "./apiregistration.k8s.io/v1beta1/DeleteOptions": {
+      "require": "./apiregistration.k8s.io/v1beta1/DeleteOptions.js",
+      "import": "./apiregistration.k8s.io/v1beta1/DeleteOptions.mjs"
+    },
+    "./apiregistration.k8s.io/v1beta1/FieldsV1": {
+      "require": "./apiregistration.k8s.io/v1beta1/FieldsV1.js",
+      "import": "./apiregistration.k8s.io/v1beta1/FieldsV1.mjs"
+    },
+    "./apiregistration.k8s.io/v1beta1/GroupVersionForDiscovery": {
+      "require": "./apiregistration.k8s.io/v1beta1/GroupVersionForDiscovery.js",
+      "import": "./apiregistration.k8s.io/v1beta1/GroupVersionForDiscovery.mjs"
+    },
+    "./apiregistration.k8s.io/v1beta1/LabelSelector": {
+      "require": "./apiregistration.k8s.io/v1beta1/LabelSelector.js",
+      "import": "./apiregistration.k8s.io/v1beta1/LabelSelector.mjs"
+    },
+    "./apiregistration.k8s.io/v1beta1/LabelSelectorRequirement": {
+      "require": "./apiregistration.k8s.io/v1beta1/LabelSelectorRequirement.js",
+      "import": "./apiregistration.k8s.io/v1beta1/LabelSelectorRequirement.mjs"
+    },
+    "./apiregistration.k8s.io/v1beta1/ListMeta": {
+      "require": "./apiregistration.k8s.io/v1beta1/ListMeta.js",
+      "import": "./apiregistration.k8s.io/v1beta1/ListMeta.mjs"
+    },
+    "./apiregistration.k8s.io/v1beta1/ManagedFieldsEntry": {
+      "require": "./apiregistration.k8s.io/v1beta1/ManagedFieldsEntry.js",
+      "import": "./apiregistration.k8s.io/v1beta1/ManagedFieldsEntry.mjs"
+    },
+    "./apiregistration.k8s.io/v1beta1/MicroTime": {
+      "require": "./apiregistration.k8s.io/v1beta1/MicroTime.js",
+      "import": "./apiregistration.k8s.io/v1beta1/MicroTime.mjs"
+    },
+    "./apiregistration.k8s.io/v1beta1/ObjectMeta": {
+      "require": "./apiregistration.k8s.io/v1beta1/ObjectMeta.js",
+      "import": "./apiregistration.k8s.io/v1beta1/ObjectMeta.mjs"
+    },
+    "./apiregistration.k8s.io/v1beta1/OwnerReference": {
+      "require": "./apiregistration.k8s.io/v1beta1/OwnerReference.js",
+      "import": "./apiregistration.k8s.io/v1beta1/OwnerReference.mjs"
+    },
+    "./apiregistration.k8s.io/v1beta1/Patch": {
+      "require": "./apiregistration.k8s.io/v1beta1/Patch.js",
+      "import": "./apiregistration.k8s.io/v1beta1/Patch.mjs"
+    },
+    "./apiregistration.k8s.io/v1beta1/Preconditions": {
+      "require": "./apiregistration.k8s.io/v1beta1/Preconditions.js",
+      "import": "./apiregistration.k8s.io/v1beta1/Preconditions.mjs"
+    },
+    "./apiregistration.k8s.io/v1beta1/ServerAddressByClientCIDR": {
+      "require": "./apiregistration.k8s.io/v1beta1/ServerAddressByClientCIDR.js",
+      "import": "./apiregistration.k8s.io/v1beta1/ServerAddressByClientCIDR.mjs"
+    },
+    "./apiregistration.k8s.io/v1beta1/Status": {
+      "require": "./apiregistration.k8s.io/v1beta1/Status.js",
+      "import": "./apiregistration.k8s.io/v1beta1/Status.mjs"
+    },
+    "./apiregistration.k8s.io/v1beta1/StatusCause": {
+      "require": "./apiregistration.k8s.io/v1beta1/StatusCause.js",
+      "import": "./apiregistration.k8s.io/v1beta1/StatusCause.mjs"
+    },
+    "./apiregistration.k8s.io/v1beta1/StatusDetails": {
+      "require": "./apiregistration.k8s.io/v1beta1/StatusDetails.js",
+      "import": "./apiregistration.k8s.io/v1beta1/StatusDetails.mjs"
+    },
+    "./apiregistration.k8s.io/v1beta1/Time": {
+      "require": "./apiregistration.k8s.io/v1beta1/Time.js",
+      "import": "./apiregistration.k8s.io/v1beta1/Time.mjs"
+    },
+    "./apiregistration.k8s.io/v1beta1/WatchEvent": {
+      "require": "./apiregistration.k8s.io/v1beta1/WatchEvent.js",
+      "import": "./apiregistration.k8s.io/v1beta1/WatchEvent.mjs"
+    },
+    "./apiregistration.k8s.io/v1beta1": {
+      "require": "./apiregistration.k8s.io/v1beta1/index.js",
+      "import": "./apiregistration.k8s.io/v1beta1/index.mjs"
+    },
+    "./apps": {
+      "require": "./apps/index.js",
+      "import": "./apps/index.mjs"
+    },
+    "./apps/v1/ControllerRevision": {
+      "require": "./apps/v1/ControllerRevision.js",
+      "import": "./apps/v1/ControllerRevision.mjs"
+    },
+    "./apps/v1/ControllerRevisionList": {
+      "require": "./apps/v1/ControllerRevisionList.js",
+      "import": "./apps/v1/ControllerRevisionList.mjs"
+    },
+    "./apps/v1/DaemonSet": {
+      "require": "./apps/v1/DaemonSet.js",
+      "import": "./apps/v1/DaemonSet.mjs"
+    },
+    "./apps/v1/DaemonSetCondition": {
+      "require": "./apps/v1/DaemonSetCondition.js",
+      "import": "./apps/v1/DaemonSetCondition.mjs"
+    },
+    "./apps/v1/DaemonSetList": {
+      "require": "./apps/v1/DaemonSetList.js",
+      "import": "./apps/v1/DaemonSetList.mjs"
+    },
+    "./apps/v1/DaemonSetSpec": {
+      "require": "./apps/v1/DaemonSetSpec.js",
+      "import": "./apps/v1/DaemonSetSpec.mjs"
+    },
+    "./apps/v1/DaemonSetStatus": {
+      "require": "./apps/v1/DaemonSetStatus.js",
+      "import": "./apps/v1/DaemonSetStatus.mjs"
+    },
+    "./apps/v1/DaemonSetUpdateStrategy": {
+      "require": "./apps/v1/DaemonSetUpdateStrategy.js",
+      "import": "./apps/v1/DaemonSetUpdateStrategy.mjs"
+    },
+    "./apps/v1/Deployment": {
+      "require": "./apps/v1/Deployment.js",
+      "import": "./apps/v1/Deployment.mjs"
+    },
+    "./apps/v1/DeploymentCondition": {
+      "require": "./apps/v1/DeploymentCondition.js",
+      "import": "./apps/v1/DeploymentCondition.mjs"
+    },
+    "./apps/v1/DeploymentList": {
+      "require": "./apps/v1/DeploymentList.js",
+      "import": "./apps/v1/DeploymentList.mjs"
+    },
+    "./apps/v1/DeploymentSpec": {
+      "require": "./apps/v1/DeploymentSpec.js",
+      "import": "./apps/v1/DeploymentSpec.mjs"
+    },
+    "./apps/v1/DeploymentStatus": {
+      "require": "./apps/v1/DeploymentStatus.js",
+      "import": "./apps/v1/DeploymentStatus.mjs"
+    },
+    "./apps/v1/DeploymentStrategy": {
+      "require": "./apps/v1/DeploymentStrategy.js",
+      "import": "./apps/v1/DeploymentStrategy.mjs"
+    },
+    "./apps/v1/ReplicaSet": {
+      "require": "./apps/v1/ReplicaSet.js",
+      "import": "./apps/v1/ReplicaSet.mjs"
+    },
+    "./apps/v1/ReplicaSetCondition": {
+      "require": "./apps/v1/ReplicaSetCondition.js",
+      "import": "./apps/v1/ReplicaSetCondition.mjs"
+    },
+    "./apps/v1/ReplicaSetList": {
+      "require": "./apps/v1/ReplicaSetList.js",
+      "import": "./apps/v1/ReplicaSetList.mjs"
+    },
+    "./apps/v1/ReplicaSetSpec": {
+      "require": "./apps/v1/ReplicaSetSpec.js",
+      "import": "./apps/v1/ReplicaSetSpec.mjs"
+    },
+    "./apps/v1/ReplicaSetStatus": {
+      "require": "./apps/v1/ReplicaSetStatus.js",
+      "import": "./apps/v1/ReplicaSetStatus.mjs"
+    },
+    "./apps/v1/RollingUpdateDaemonSet": {
+      "require": "./apps/v1/RollingUpdateDaemonSet.js",
+      "import": "./apps/v1/RollingUpdateDaemonSet.mjs"
+    },
+    "./apps/v1/RollingUpdateDeployment": {
+      "require": "./apps/v1/RollingUpdateDeployment.js",
+      "import": "./apps/v1/RollingUpdateDeployment.mjs"
+    },
+    "./apps/v1/RollingUpdateStatefulSetStrategy": {
+      "require": "./apps/v1/RollingUpdateStatefulSetStrategy.js",
+      "import": "./apps/v1/RollingUpdateStatefulSetStrategy.mjs"
+    },
+    "./apps/v1/StatefulSet": {
+      "require": "./apps/v1/StatefulSet.js",
+      "import": "./apps/v1/StatefulSet.mjs"
+    },
+    "./apps/v1/StatefulSetCondition": {
+      "require": "./apps/v1/StatefulSetCondition.js",
+      "import": "./apps/v1/StatefulSetCondition.mjs"
+    },
+    "./apps/v1/StatefulSetList": {
+      "require": "./apps/v1/StatefulSetList.js",
+      "import": "./apps/v1/StatefulSetList.mjs"
+    },
+    "./apps/v1/StatefulSetSpec": {
+      "require": "./apps/v1/StatefulSetSpec.js",
+      "import": "./apps/v1/StatefulSetSpec.mjs"
+    },
+    "./apps/v1/StatefulSetStatus": {
+      "require": "./apps/v1/StatefulSetStatus.js",
+      "import": "./apps/v1/StatefulSetStatus.mjs"
+    },
+    "./apps/v1/StatefulSetUpdateStrategy": {
+      "require": "./apps/v1/StatefulSetUpdateStrategy.js",
+      "import": "./apps/v1/StatefulSetUpdateStrategy.mjs"
+    },
+    "./apps/v1": {
+      "require": "./apps/v1/index.js",
+      "import": "./apps/v1/index.mjs"
+    },
+    "./apps/v1beta1/APIGroup": {
+      "require": "./apps/v1beta1/APIGroup.js",
+      "import": "./apps/v1beta1/APIGroup.mjs"
+    },
+    "./apps/v1beta1/APIGroupList": {
+      "require": "./apps/v1beta1/APIGroupList.js",
+      "import": "./apps/v1beta1/APIGroupList.mjs"
+    },
+    "./apps/v1beta1/APIResource": {
+      "require": "./apps/v1beta1/APIResource.js",
+      "import": "./apps/v1beta1/APIResource.mjs"
+    },
+    "./apps/v1beta1/APIResourceList": {
+      "require": "./apps/v1beta1/APIResourceList.js",
+      "import": "./apps/v1beta1/APIResourceList.mjs"
+    },
+    "./apps/v1beta1/APIVersions": {
+      "require": "./apps/v1beta1/APIVersions.js",
+      "import": "./apps/v1beta1/APIVersions.mjs"
+    },
+    "./apps/v1beta1/DeleteOptions": {
+      "require": "./apps/v1beta1/DeleteOptions.js",
+      "import": "./apps/v1beta1/DeleteOptions.mjs"
+    },
+    "./apps/v1beta1/FieldsV1": {
+      "require": "./apps/v1beta1/FieldsV1.js",
+      "import": "./apps/v1beta1/FieldsV1.mjs"
+    },
+    "./apps/v1beta1/GroupVersionForDiscovery": {
+      "require": "./apps/v1beta1/GroupVersionForDiscovery.js",
+      "import": "./apps/v1beta1/GroupVersionForDiscovery.mjs"
+    },
+    "./apps/v1beta1/LabelSelector": {
+      "require": "./apps/v1beta1/LabelSelector.js",
+      "import": "./apps/v1beta1/LabelSelector.mjs"
+    },
+    "./apps/v1beta1/LabelSelectorRequirement": {
+      "require": "./apps/v1beta1/LabelSelectorRequirement.js",
+      "import": "./apps/v1beta1/LabelSelectorRequirement.mjs"
+    },
+    "./apps/v1beta1/ListMeta": {
+      "require": "./apps/v1beta1/ListMeta.js",
+      "import": "./apps/v1beta1/ListMeta.mjs"
+    },
+    "./apps/v1beta1/ManagedFieldsEntry": {
+      "require": "./apps/v1beta1/ManagedFieldsEntry.js",
+      "import": "./apps/v1beta1/ManagedFieldsEntry.mjs"
+    },
+    "./apps/v1beta1/MicroTime": {
+      "require": "./apps/v1beta1/MicroTime.js",
+      "import": "./apps/v1beta1/MicroTime.mjs"
+    },
+    "./apps/v1beta1/ObjectMeta": {
+      "require": "./apps/v1beta1/ObjectMeta.js",
+      "import": "./apps/v1beta1/ObjectMeta.mjs"
+    },
+    "./apps/v1beta1/OwnerReference": {
+      "require": "./apps/v1beta1/OwnerReference.js",
+      "import": "./apps/v1beta1/OwnerReference.mjs"
+    },
+    "./apps/v1beta1/Patch": {
+      "require": "./apps/v1beta1/Patch.js",
+      "import": "./apps/v1beta1/Patch.mjs"
+    },
+    "./apps/v1beta1/Preconditions": {
+      "require": "./apps/v1beta1/Preconditions.js",
+      "import": "./apps/v1beta1/Preconditions.mjs"
+    },
+    "./apps/v1beta1/ServerAddressByClientCIDR": {
+      "require": "./apps/v1beta1/ServerAddressByClientCIDR.js",
+      "import": "./apps/v1beta1/ServerAddressByClientCIDR.mjs"
+    },
+    "./apps/v1beta1/Status": {
+      "require": "./apps/v1beta1/Status.js",
+      "import": "./apps/v1beta1/Status.mjs"
+    },
+    "./apps/v1beta1/StatusCause": {
+      "require": "./apps/v1beta1/StatusCause.js",
+      "import": "./apps/v1beta1/StatusCause.mjs"
+    },
+    "./apps/v1beta1/StatusDetails": {
+      "require": "./apps/v1beta1/StatusDetails.js",
+      "import": "./apps/v1beta1/StatusDetails.mjs"
+    },
+    "./apps/v1beta1/Time": {
+      "require": "./apps/v1beta1/Time.js",
+      "import": "./apps/v1beta1/Time.mjs"
+    },
+    "./apps/v1beta1/WatchEvent": {
+      "require": "./apps/v1beta1/WatchEvent.js",
+      "import": "./apps/v1beta1/WatchEvent.mjs"
+    },
+    "./apps/v1beta1": {
+      "require": "./apps/v1beta1/index.js",
+      "import": "./apps/v1beta1/index.mjs"
+    },
+    "./apps/v1beta2/APIGroup": {
+      "require": "./apps/v1beta2/APIGroup.js",
+      "import": "./apps/v1beta2/APIGroup.mjs"
+    },
+    "./apps/v1beta2/APIGroupList": {
+      "require": "./apps/v1beta2/APIGroupList.js",
+      "import": "./apps/v1beta2/APIGroupList.mjs"
+    },
+    "./apps/v1beta2/APIResource": {
+      "require": "./apps/v1beta2/APIResource.js",
+      "import": "./apps/v1beta2/APIResource.mjs"
+    },
+    "./apps/v1beta2/APIResourceList": {
+      "require": "./apps/v1beta2/APIResourceList.js",
+      "import": "./apps/v1beta2/APIResourceList.mjs"
+    },
+    "./apps/v1beta2/APIVersions": {
+      "require": "./apps/v1beta2/APIVersions.js",
+      "import": "./apps/v1beta2/APIVersions.mjs"
+    },
+    "./apps/v1beta2/DeleteOptions": {
+      "require": "./apps/v1beta2/DeleteOptions.js",
+      "import": "./apps/v1beta2/DeleteOptions.mjs"
+    },
+    "./apps/v1beta2/FieldsV1": {
+      "require": "./apps/v1beta2/FieldsV1.js",
+      "import": "./apps/v1beta2/FieldsV1.mjs"
+    },
+    "./apps/v1beta2/GroupVersionForDiscovery": {
+      "require": "./apps/v1beta2/GroupVersionForDiscovery.js",
+      "import": "./apps/v1beta2/GroupVersionForDiscovery.mjs"
+    },
+    "./apps/v1beta2/LabelSelector": {
+      "require": "./apps/v1beta2/LabelSelector.js",
+      "import": "./apps/v1beta2/LabelSelector.mjs"
+    },
+    "./apps/v1beta2/LabelSelectorRequirement": {
+      "require": "./apps/v1beta2/LabelSelectorRequirement.js",
+      "import": "./apps/v1beta2/LabelSelectorRequirement.mjs"
+    },
+    "./apps/v1beta2/ListMeta": {
+      "require": "./apps/v1beta2/ListMeta.js",
+      "import": "./apps/v1beta2/ListMeta.mjs"
+    },
+    "./apps/v1beta2/ManagedFieldsEntry": {
+      "require": "./apps/v1beta2/ManagedFieldsEntry.js",
+      "import": "./apps/v1beta2/ManagedFieldsEntry.mjs"
+    },
+    "./apps/v1beta2/MicroTime": {
+      "require": "./apps/v1beta2/MicroTime.js",
+      "import": "./apps/v1beta2/MicroTime.mjs"
+    },
+    "./apps/v1beta2/ObjectMeta": {
+      "require": "./apps/v1beta2/ObjectMeta.js",
+      "import": "./apps/v1beta2/ObjectMeta.mjs"
+    },
+    "./apps/v1beta2/OwnerReference": {
+      "require": "./apps/v1beta2/OwnerReference.js",
+      "import": "./apps/v1beta2/OwnerReference.mjs"
+    },
+    "./apps/v1beta2/Patch": {
+      "require": "./apps/v1beta2/Patch.js",
+      "import": "./apps/v1beta2/Patch.mjs"
+    },
+    "./apps/v1beta2/Preconditions": {
+      "require": "./apps/v1beta2/Preconditions.js",
+      "import": "./apps/v1beta2/Preconditions.mjs"
+    },
+    "./apps/v1beta2/ServerAddressByClientCIDR": {
+      "require": "./apps/v1beta2/ServerAddressByClientCIDR.js",
+      "import": "./apps/v1beta2/ServerAddressByClientCIDR.mjs"
+    },
+    "./apps/v1beta2/Status": {
+      "require": "./apps/v1beta2/Status.js",
+      "import": "./apps/v1beta2/Status.mjs"
+    },
+    "./apps/v1beta2/StatusCause": {
+      "require": "./apps/v1beta2/StatusCause.js",
+      "import": "./apps/v1beta2/StatusCause.mjs"
+    },
+    "./apps/v1beta2/StatusDetails": {
+      "require": "./apps/v1beta2/StatusDetails.js",
+      "import": "./apps/v1beta2/StatusDetails.mjs"
+    },
+    "./apps/v1beta2/Time": {
+      "require": "./apps/v1beta2/Time.js",
+      "import": "./apps/v1beta2/Time.mjs"
+    },
+    "./apps/v1beta2/WatchEvent": {
+      "require": "./apps/v1beta2/WatchEvent.js",
+      "import": "./apps/v1beta2/WatchEvent.mjs"
+    },
+    "./apps/v1beta2": {
+      "require": "./apps/v1beta2/index.js",
+      "import": "./apps/v1beta2/index.mjs"
+    },
+    "./authentication.k8s.io": {
+      "require": "./authentication.k8s.io/index.js",
+      "import": "./authentication.k8s.io/index.mjs"
+    },
+    "./authentication.k8s.io/v1/BoundObjectReference": {
+      "require": "./authentication.k8s.io/v1/BoundObjectReference.js",
+      "import": "./authentication.k8s.io/v1/BoundObjectReference.mjs"
+    },
+    "./authentication.k8s.io/v1/TokenRequest": {
+      "require": "./authentication.k8s.io/v1/TokenRequest.js",
+      "import": "./authentication.k8s.io/v1/TokenRequest.mjs"
+    },
+    "./authentication.k8s.io/v1/TokenRequestSpec": {
+      "require": "./authentication.k8s.io/v1/TokenRequestSpec.js",
+      "import": "./authentication.k8s.io/v1/TokenRequestSpec.mjs"
+    },
+    "./authentication.k8s.io/v1/TokenRequestStatus": {
+      "require": "./authentication.k8s.io/v1/TokenRequestStatus.js",
+      "import": "./authentication.k8s.io/v1/TokenRequestStatus.mjs"
+    },
+    "./authentication.k8s.io/v1/TokenReview": {
+      "require": "./authentication.k8s.io/v1/TokenReview.js",
+      "import": "./authentication.k8s.io/v1/TokenReview.mjs"
+    },
+    "./authentication.k8s.io/v1/TokenReviewSpec": {
+      "require": "./authentication.k8s.io/v1/TokenReviewSpec.js",
+      "import": "./authentication.k8s.io/v1/TokenReviewSpec.mjs"
+    },
+    "./authentication.k8s.io/v1/TokenReviewStatus": {
+      "require": "./authentication.k8s.io/v1/TokenReviewStatus.js",
+      "import": "./authentication.k8s.io/v1/TokenReviewStatus.mjs"
+    },
+    "./authentication.k8s.io/v1/UserInfo": {
+      "require": "./authentication.k8s.io/v1/UserInfo.js",
+      "import": "./authentication.k8s.io/v1/UserInfo.mjs"
+    },
+    "./authentication.k8s.io/v1": {
+      "require": "./authentication.k8s.io/v1/index.js",
+      "import": "./authentication.k8s.io/v1/index.mjs"
+    },
+    "./authentication.k8s.io/v1beta1/TokenReview": {
+      "require": "./authentication.k8s.io/v1beta1/TokenReview.js",
+      "import": "./authentication.k8s.io/v1beta1/TokenReview.mjs"
+    },
+    "./authentication.k8s.io/v1beta1/TokenReviewSpec": {
+      "require": "./authentication.k8s.io/v1beta1/TokenReviewSpec.js",
+      "import": "./authentication.k8s.io/v1beta1/TokenReviewSpec.mjs"
+    },
+    "./authentication.k8s.io/v1beta1/TokenReviewStatus": {
+      "require": "./authentication.k8s.io/v1beta1/TokenReviewStatus.js",
+      "import": "./authentication.k8s.io/v1beta1/TokenReviewStatus.mjs"
+    },
+    "./authentication.k8s.io/v1beta1/UserInfo": {
+      "require": "./authentication.k8s.io/v1beta1/UserInfo.js",
+      "import": "./authentication.k8s.io/v1beta1/UserInfo.mjs"
+    },
+    "./authentication.k8s.io/v1beta1": {
+      "require": "./authentication.k8s.io/v1beta1/index.js",
+      "import": "./authentication.k8s.io/v1beta1/index.mjs"
+    },
+    "./authorization.k8s.io": {
+      "require": "./authorization.k8s.io/index.js",
+      "import": "./authorization.k8s.io/index.mjs"
+    },
+    "./authorization.k8s.io/v1/LocalSubjectAccessReview": {
+      "require": "./authorization.k8s.io/v1/LocalSubjectAccessReview.js",
+      "import": "./authorization.k8s.io/v1/LocalSubjectAccessReview.mjs"
+    },
+    "./authorization.k8s.io/v1/NonResourceAttributes": {
+      "require": "./authorization.k8s.io/v1/NonResourceAttributes.js",
+      "import": "./authorization.k8s.io/v1/NonResourceAttributes.mjs"
+    },
+    "./authorization.k8s.io/v1/NonResourceRule": {
+      "require": "./authorization.k8s.io/v1/NonResourceRule.js",
+      "import": "./authorization.k8s.io/v1/NonResourceRule.mjs"
+    },
+    "./authorization.k8s.io/v1/ResourceAttributes": {
+      "require": "./authorization.k8s.io/v1/ResourceAttributes.js",
+      "import": "./authorization.k8s.io/v1/ResourceAttributes.mjs"
+    },
+    "./authorization.k8s.io/v1/ResourceRule": {
+      "require": "./authorization.k8s.io/v1/ResourceRule.js",
+      "import": "./authorization.k8s.io/v1/ResourceRule.mjs"
+    },
+    "./authorization.k8s.io/v1/SelfSubjectAccessReview": {
+      "require": "./authorization.k8s.io/v1/SelfSubjectAccessReview.js",
+      "import": "./authorization.k8s.io/v1/SelfSubjectAccessReview.mjs"
+    },
+    "./authorization.k8s.io/v1/SelfSubjectAccessReviewSpec": {
+      "require": "./authorization.k8s.io/v1/SelfSubjectAccessReviewSpec.js",
+      "import": "./authorization.k8s.io/v1/SelfSubjectAccessReviewSpec.mjs"
+    },
+    "./authorization.k8s.io/v1/SelfSubjectRulesReview": {
+      "require": "./authorization.k8s.io/v1/SelfSubjectRulesReview.js",
+      "import": "./authorization.k8s.io/v1/SelfSubjectRulesReview.mjs"
+    },
+    "./authorization.k8s.io/v1/SelfSubjectRulesReviewSpec": {
+      "require": "./authorization.k8s.io/v1/SelfSubjectRulesReviewSpec.js",
+      "import": "./authorization.k8s.io/v1/SelfSubjectRulesReviewSpec.mjs"
+    },
+    "./authorization.k8s.io/v1/SubjectAccessReview": {
+      "require": "./authorization.k8s.io/v1/SubjectAccessReview.js",
+      "import": "./authorization.k8s.io/v1/SubjectAccessReview.mjs"
+    },
+    "./authorization.k8s.io/v1/SubjectAccessReviewSpec": {
+      "require": "./authorization.k8s.io/v1/SubjectAccessReviewSpec.js",
+      "import": "./authorization.k8s.io/v1/SubjectAccessReviewSpec.mjs"
+    },
+    "./authorization.k8s.io/v1/SubjectAccessReviewStatus": {
+      "require": "./authorization.k8s.io/v1/SubjectAccessReviewStatus.js",
+      "import": "./authorization.k8s.io/v1/SubjectAccessReviewStatus.mjs"
+    },
+    "./authorization.k8s.io/v1/SubjectRulesReviewStatus": {
+      "require": "./authorization.k8s.io/v1/SubjectRulesReviewStatus.js",
+      "import": "./authorization.k8s.io/v1/SubjectRulesReviewStatus.mjs"
+    },
+    "./authorization.k8s.io/v1": {
+      "require": "./authorization.k8s.io/v1/index.js",
+      "import": "./authorization.k8s.io/v1/index.mjs"
+    },
+    "./authorization.k8s.io/v1beta1/LocalSubjectAccessReview": {
+      "require": "./authorization.k8s.io/v1beta1/LocalSubjectAccessReview.js",
+      "import": "./authorization.k8s.io/v1beta1/LocalSubjectAccessReview.mjs"
+    },
+    "./authorization.k8s.io/v1beta1/NonResourceAttributes": {
+      "require": "./authorization.k8s.io/v1beta1/NonResourceAttributes.js",
+      "import": "./authorization.k8s.io/v1beta1/NonResourceAttributes.mjs"
+    },
+    "./authorization.k8s.io/v1beta1/NonResourceRule": {
+      "require": "./authorization.k8s.io/v1beta1/NonResourceRule.js",
+      "import": "./authorization.k8s.io/v1beta1/NonResourceRule.mjs"
+    },
+    "./authorization.k8s.io/v1beta1/ResourceAttributes": {
+      "require": "./authorization.k8s.io/v1beta1/ResourceAttributes.js",
+      "import": "./authorization.k8s.io/v1beta1/ResourceAttributes.mjs"
+    },
+    "./authorization.k8s.io/v1beta1/ResourceRule": {
+      "require": "./authorization.k8s.io/v1beta1/ResourceRule.js",
+      "import": "./authorization.k8s.io/v1beta1/ResourceRule.mjs"
+    },
+    "./authorization.k8s.io/v1beta1/SelfSubjectAccessReview": {
+      "require": "./authorization.k8s.io/v1beta1/SelfSubjectAccessReview.js",
+      "import": "./authorization.k8s.io/v1beta1/SelfSubjectAccessReview.mjs"
+    },
+    "./authorization.k8s.io/v1beta1/SelfSubjectAccessReviewSpec": {
+      "require": "./authorization.k8s.io/v1beta1/SelfSubjectAccessReviewSpec.js",
+      "import": "./authorization.k8s.io/v1beta1/SelfSubjectAccessReviewSpec.mjs"
+    },
+    "./authorization.k8s.io/v1beta1/SelfSubjectRulesReview": {
+      "require": "./authorization.k8s.io/v1beta1/SelfSubjectRulesReview.js",
+      "import": "./authorization.k8s.io/v1beta1/SelfSubjectRulesReview.mjs"
+    },
+    "./authorization.k8s.io/v1beta1/SelfSubjectRulesReviewSpec": {
+      "require": "./authorization.k8s.io/v1beta1/SelfSubjectRulesReviewSpec.js",
+      "import": "./authorization.k8s.io/v1beta1/SelfSubjectRulesReviewSpec.mjs"
+    },
+    "./authorization.k8s.io/v1beta1/SubjectAccessReview": {
+      "require": "./authorization.k8s.io/v1beta1/SubjectAccessReview.js",
+      "import": "./authorization.k8s.io/v1beta1/SubjectAccessReview.mjs"
+    },
+    "./authorization.k8s.io/v1beta1/SubjectAccessReviewSpec": {
+      "require": "./authorization.k8s.io/v1beta1/SubjectAccessReviewSpec.js",
+      "import": "./authorization.k8s.io/v1beta1/SubjectAccessReviewSpec.mjs"
+    },
+    "./authorization.k8s.io/v1beta1/SubjectAccessReviewStatus": {
+      "require": "./authorization.k8s.io/v1beta1/SubjectAccessReviewStatus.js",
+      "import": "./authorization.k8s.io/v1beta1/SubjectAccessReviewStatus.mjs"
+    },
+    "./authorization.k8s.io/v1beta1/SubjectRulesReviewStatus": {
+      "require": "./authorization.k8s.io/v1beta1/SubjectRulesReviewStatus.js",
+      "import": "./authorization.k8s.io/v1beta1/SubjectRulesReviewStatus.mjs"
+    },
+    "./authorization.k8s.io/v1beta1": {
+      "require": "./authorization.k8s.io/v1beta1/index.js",
+      "import": "./authorization.k8s.io/v1beta1/index.mjs"
+    },
+    "./autoscaling": {
+      "require": "./autoscaling/index.js",
+      "import": "./autoscaling/index.mjs"
+    },
+    "./autoscaling/v1/CrossVersionObjectReference": {
+      "require": "./autoscaling/v1/CrossVersionObjectReference.js",
+      "import": "./autoscaling/v1/CrossVersionObjectReference.mjs"
+    },
+    "./autoscaling/v1/HorizontalPodAutoscaler": {
+      "require": "./autoscaling/v1/HorizontalPodAutoscaler.js",
+      "import": "./autoscaling/v1/HorizontalPodAutoscaler.mjs"
+    },
+    "./autoscaling/v1/HorizontalPodAutoscalerList": {
+      "require": "./autoscaling/v1/HorizontalPodAutoscalerList.js",
+      "import": "./autoscaling/v1/HorizontalPodAutoscalerList.mjs"
+    },
+    "./autoscaling/v1/HorizontalPodAutoscalerSpec": {
+      "require": "./autoscaling/v1/HorizontalPodAutoscalerSpec.js",
+      "import": "./autoscaling/v1/HorizontalPodAutoscalerSpec.mjs"
+    },
+    "./autoscaling/v1/HorizontalPodAutoscalerStatus": {
+      "require": "./autoscaling/v1/HorizontalPodAutoscalerStatus.js",
+      "import": "./autoscaling/v1/HorizontalPodAutoscalerStatus.mjs"
+    },
+    "./autoscaling/v1/Scale": {
+      "require": "./autoscaling/v1/Scale.js",
+      "import": "./autoscaling/v1/Scale.mjs"
+    },
+    "./autoscaling/v1/ScaleSpec": {
+      "require": "./autoscaling/v1/ScaleSpec.js",
+      "import": "./autoscaling/v1/ScaleSpec.mjs"
+    },
+    "./autoscaling/v1/ScaleStatus": {
+      "require": "./autoscaling/v1/ScaleStatus.js",
+      "import": "./autoscaling/v1/ScaleStatus.mjs"
+    },
+    "./autoscaling/v1": {
+      "require": "./autoscaling/v1/index.js",
+      "import": "./autoscaling/v1/index.mjs"
+    },
+    "./autoscaling/v2beta1/CrossVersionObjectReference": {
+      "require": "./autoscaling/v2beta1/CrossVersionObjectReference.js",
+      "import": "./autoscaling/v2beta1/CrossVersionObjectReference.mjs"
+    },
+    "./autoscaling/v2beta1/ExternalMetricSource": {
+      "require": "./autoscaling/v2beta1/ExternalMetricSource.js",
+      "import": "./autoscaling/v2beta1/ExternalMetricSource.mjs"
+    },
+    "./autoscaling/v2beta1/ExternalMetricStatus": {
+      "require": "./autoscaling/v2beta1/ExternalMetricStatus.js",
+      "import": "./autoscaling/v2beta1/ExternalMetricStatus.mjs"
+    },
+    "./autoscaling/v2beta1/HorizontalPodAutoscaler": {
+      "require": "./autoscaling/v2beta1/HorizontalPodAutoscaler.js",
+      "import": "./autoscaling/v2beta1/HorizontalPodAutoscaler.mjs"
+    },
+    "./autoscaling/v2beta1/HorizontalPodAutoscalerCondition": {
+      "require": "./autoscaling/v2beta1/HorizontalPodAutoscalerCondition.js",
+      "import": "./autoscaling/v2beta1/HorizontalPodAutoscalerCondition.mjs"
+    },
+    "./autoscaling/v2beta1/HorizontalPodAutoscalerList": {
+      "require": "./autoscaling/v2beta1/HorizontalPodAutoscalerList.js",
+      "import": "./autoscaling/v2beta1/HorizontalPodAutoscalerList.mjs"
+    },
+    "./autoscaling/v2beta1/HorizontalPodAutoscalerSpec": {
+      "require": "./autoscaling/v2beta1/HorizontalPodAutoscalerSpec.js",
+      "import": "./autoscaling/v2beta1/HorizontalPodAutoscalerSpec.mjs"
+    },
+    "./autoscaling/v2beta1/HorizontalPodAutoscalerStatus": {
+      "require": "./autoscaling/v2beta1/HorizontalPodAutoscalerStatus.js",
+      "import": "./autoscaling/v2beta1/HorizontalPodAutoscalerStatus.mjs"
+    },
+    "./autoscaling/v2beta1/MetricSpec": {
+      "require": "./autoscaling/v2beta1/MetricSpec.js",
+      "import": "./autoscaling/v2beta1/MetricSpec.mjs"
+    },
+    "./autoscaling/v2beta1/MetricStatus": {
+      "require": "./autoscaling/v2beta1/MetricStatus.js",
+      "import": "./autoscaling/v2beta1/MetricStatus.mjs"
+    },
+    "./autoscaling/v2beta1/ObjectMetricSource": {
+      "require": "./autoscaling/v2beta1/ObjectMetricSource.js",
+      "import": "./autoscaling/v2beta1/ObjectMetricSource.mjs"
+    },
+    "./autoscaling/v2beta1/ObjectMetricStatus": {
+      "require": "./autoscaling/v2beta1/ObjectMetricStatus.js",
+      "import": "./autoscaling/v2beta1/ObjectMetricStatus.mjs"
+    },
+    "./autoscaling/v2beta1/PodsMetricSource": {
+      "require": "./autoscaling/v2beta1/PodsMetricSource.js",
+      "import": "./autoscaling/v2beta1/PodsMetricSource.mjs"
+    },
+    "./autoscaling/v2beta1/PodsMetricStatus": {
+      "require": "./autoscaling/v2beta1/PodsMetricStatus.js",
+      "import": "./autoscaling/v2beta1/PodsMetricStatus.mjs"
+    },
+    "./autoscaling/v2beta1/ResourceMetricSource": {
+      "require": "./autoscaling/v2beta1/ResourceMetricSource.js",
+      "import": "./autoscaling/v2beta1/ResourceMetricSource.mjs"
+    },
+    "./autoscaling/v2beta1/ResourceMetricStatus": {
+      "require": "./autoscaling/v2beta1/ResourceMetricStatus.js",
+      "import": "./autoscaling/v2beta1/ResourceMetricStatus.mjs"
+    },
+    "./autoscaling/v2beta1": {
+      "require": "./autoscaling/v2beta1/index.js",
+      "import": "./autoscaling/v2beta1/index.mjs"
+    },
+    "./autoscaling/v2beta2/CrossVersionObjectReference": {
+      "require": "./autoscaling/v2beta2/CrossVersionObjectReference.js",
+      "import": "./autoscaling/v2beta2/CrossVersionObjectReference.mjs"
+    },
+    "./autoscaling/v2beta2/ExternalMetricSource": {
+      "require": "./autoscaling/v2beta2/ExternalMetricSource.js",
+      "import": "./autoscaling/v2beta2/ExternalMetricSource.mjs"
+    },
+    "./autoscaling/v2beta2/ExternalMetricStatus": {
+      "require": "./autoscaling/v2beta2/ExternalMetricStatus.js",
+      "import": "./autoscaling/v2beta2/ExternalMetricStatus.mjs"
+    },
+    "./autoscaling/v2beta2/HPAScalingPolicy": {
+      "require": "./autoscaling/v2beta2/HPAScalingPolicy.js",
+      "import": "./autoscaling/v2beta2/HPAScalingPolicy.mjs"
+    },
+    "./autoscaling/v2beta2/HPAScalingRules": {
+      "require": "./autoscaling/v2beta2/HPAScalingRules.js",
+      "import": "./autoscaling/v2beta2/HPAScalingRules.mjs"
+    },
+    "./autoscaling/v2beta2/HorizontalPodAutoscaler": {
+      "require": "./autoscaling/v2beta2/HorizontalPodAutoscaler.js",
+      "import": "./autoscaling/v2beta2/HorizontalPodAutoscaler.mjs"
+    },
+    "./autoscaling/v2beta2/HorizontalPodAutoscalerBehavior": {
+      "require": "./autoscaling/v2beta2/HorizontalPodAutoscalerBehavior.js",
+      "import": "./autoscaling/v2beta2/HorizontalPodAutoscalerBehavior.mjs"
+    },
+    "./autoscaling/v2beta2/HorizontalPodAutoscalerCondition": {
+      "require": "./autoscaling/v2beta2/HorizontalPodAutoscalerCondition.js",
+      "import": "./autoscaling/v2beta2/HorizontalPodAutoscalerCondition.mjs"
+    },
+    "./autoscaling/v2beta2/HorizontalPodAutoscalerList": {
+      "require": "./autoscaling/v2beta2/HorizontalPodAutoscalerList.js",
+      "import": "./autoscaling/v2beta2/HorizontalPodAutoscalerList.mjs"
+    },
+    "./autoscaling/v2beta2/HorizontalPodAutoscalerSpec": {
+      "require": "./autoscaling/v2beta2/HorizontalPodAutoscalerSpec.js",
+      "import": "./autoscaling/v2beta2/HorizontalPodAutoscalerSpec.mjs"
+    },
+    "./autoscaling/v2beta2/HorizontalPodAutoscalerStatus": {
+      "require": "./autoscaling/v2beta2/HorizontalPodAutoscalerStatus.js",
+      "import": "./autoscaling/v2beta2/HorizontalPodAutoscalerStatus.mjs"
+    },
+    "./autoscaling/v2beta2/MetricIdentifier": {
+      "require": "./autoscaling/v2beta2/MetricIdentifier.js",
+      "import": "./autoscaling/v2beta2/MetricIdentifier.mjs"
+    },
+    "./autoscaling/v2beta2/MetricSpec": {
+      "require": "./autoscaling/v2beta2/MetricSpec.js",
+      "import": "./autoscaling/v2beta2/MetricSpec.mjs"
+    },
+    "./autoscaling/v2beta2/MetricStatus": {
+      "require": "./autoscaling/v2beta2/MetricStatus.js",
+      "import": "./autoscaling/v2beta2/MetricStatus.mjs"
+    },
+    "./autoscaling/v2beta2/MetricTarget": {
+      "require": "./autoscaling/v2beta2/MetricTarget.js",
+      "import": "./autoscaling/v2beta2/MetricTarget.mjs"
+    },
+    "./autoscaling/v2beta2/MetricValueStatus": {
+      "require": "./autoscaling/v2beta2/MetricValueStatus.js",
+      "import": "./autoscaling/v2beta2/MetricValueStatus.mjs"
+    },
+    "./autoscaling/v2beta2/ObjectMetricSource": {
+      "require": "./autoscaling/v2beta2/ObjectMetricSource.js",
+      "import": "./autoscaling/v2beta2/ObjectMetricSource.mjs"
+    },
+    "./autoscaling/v2beta2/ObjectMetricStatus": {
+      "require": "./autoscaling/v2beta2/ObjectMetricStatus.js",
+      "import": "./autoscaling/v2beta2/ObjectMetricStatus.mjs"
+    },
+    "./autoscaling/v2beta2/PodsMetricSource": {
+      "require": "./autoscaling/v2beta2/PodsMetricSource.js",
+      "import": "./autoscaling/v2beta2/PodsMetricSource.mjs"
+    },
+    "./autoscaling/v2beta2/PodsMetricStatus": {
+      "require": "./autoscaling/v2beta2/PodsMetricStatus.js",
+      "import": "./autoscaling/v2beta2/PodsMetricStatus.mjs"
+    },
+    "./autoscaling/v2beta2/ResourceMetricSource": {
+      "require": "./autoscaling/v2beta2/ResourceMetricSource.js",
+      "import": "./autoscaling/v2beta2/ResourceMetricSource.mjs"
+    },
+    "./autoscaling/v2beta2/ResourceMetricStatus": {
+      "require": "./autoscaling/v2beta2/ResourceMetricStatus.js",
+      "import": "./autoscaling/v2beta2/ResourceMetricStatus.mjs"
+    },
+    "./autoscaling/v2beta2": {
+      "require": "./autoscaling/v2beta2/index.js",
+      "import": "./autoscaling/v2beta2/index.mjs"
+    },
+    "./batch": {
+      "require": "./batch/index.js",
+      "import": "./batch/index.mjs"
+    },
+    "./batch/v1/Job": {
+      "require": "./batch/v1/Job.js",
+      "import": "./batch/v1/Job.mjs"
+    },
+    "./batch/v1/JobCondition": {
+      "require": "./batch/v1/JobCondition.js",
+      "import": "./batch/v1/JobCondition.mjs"
+    },
+    "./batch/v1/JobList": {
+      "require": "./batch/v1/JobList.js",
+      "import": "./batch/v1/JobList.mjs"
+    },
+    "./batch/v1/JobSpec": {
+      "require": "./batch/v1/JobSpec.js",
+      "import": "./batch/v1/JobSpec.mjs"
+    },
+    "./batch/v1/JobStatus": {
+      "require": "./batch/v1/JobStatus.js",
+      "import": "./batch/v1/JobStatus.mjs"
+    },
+    "./batch/v1": {
+      "require": "./batch/v1/index.js",
+      "import": "./batch/v1/index.mjs"
+    },
+    "./batch/v1beta1/CronJob": {
+      "require": "./batch/v1beta1/CronJob.js",
+      "import": "./batch/v1beta1/CronJob.mjs"
+    },
+    "./batch/v1beta1/CronJobList": {
+      "require": "./batch/v1beta1/CronJobList.js",
+      "import": "./batch/v1beta1/CronJobList.mjs"
+    },
+    "./batch/v1beta1/CronJobSpec": {
+      "require": "./batch/v1beta1/CronJobSpec.js",
+      "import": "./batch/v1beta1/CronJobSpec.mjs"
+    },
+    "./batch/v1beta1/CronJobStatus": {
+      "require": "./batch/v1beta1/CronJobStatus.js",
+      "import": "./batch/v1beta1/CronJobStatus.mjs"
+    },
+    "./batch/v1beta1/JobTemplateSpec": {
+      "require": "./batch/v1beta1/JobTemplateSpec.js",
+      "import": "./batch/v1beta1/JobTemplateSpec.mjs"
+    },
+    "./batch/v1beta1": {
+      "require": "./batch/v1beta1/index.js",
+      "import": "./batch/v1beta1/index.mjs"
+    },
+    "./batch/v2alpha1/CronJob": {
+      "require": "./batch/v2alpha1/CronJob.js",
+      "import": "./batch/v2alpha1/CronJob.mjs"
+    },
+    "./batch/v2alpha1/CronJobList": {
+      "require": "./batch/v2alpha1/CronJobList.js",
+      "import": "./batch/v2alpha1/CronJobList.mjs"
+    },
+    "./batch/v2alpha1/CronJobSpec": {
+      "require": "./batch/v2alpha1/CronJobSpec.js",
+      "import": "./batch/v2alpha1/CronJobSpec.mjs"
+    },
+    "./batch/v2alpha1/CronJobStatus": {
+      "require": "./batch/v2alpha1/CronJobStatus.js",
+      "import": "./batch/v2alpha1/CronJobStatus.mjs"
+    },
+    "./batch/v2alpha1/JobTemplateSpec": {
+      "require": "./batch/v2alpha1/JobTemplateSpec.js",
+      "import": "./batch/v2alpha1/JobTemplateSpec.mjs"
+    },
+    "./batch/v2alpha1": {
+      "require": "./batch/v2alpha1/index.js",
+      "import": "./batch/v2alpha1/index.mjs"
+    },
+    "./certificates.k8s.io": {
+      "require": "./certificates.k8s.io/index.js",
+      "import": "./certificates.k8s.io/index.mjs"
+    },
+    "./certificates.k8s.io/v1/CertificateSigningRequest": {
+      "require": "./certificates.k8s.io/v1/CertificateSigningRequest.js",
+      "import": "./certificates.k8s.io/v1/CertificateSigningRequest.mjs"
+    },
+    "./certificates.k8s.io/v1/CertificateSigningRequestCondition": {
+      "require": "./certificates.k8s.io/v1/CertificateSigningRequestCondition.js",
+      "import": "./certificates.k8s.io/v1/CertificateSigningRequestCondition.mjs"
+    },
+    "./certificates.k8s.io/v1/CertificateSigningRequestList": {
+      "require": "./certificates.k8s.io/v1/CertificateSigningRequestList.js",
+      "import": "./certificates.k8s.io/v1/CertificateSigningRequestList.mjs"
+    },
+    "./certificates.k8s.io/v1/CertificateSigningRequestSpec": {
+      "require": "./certificates.k8s.io/v1/CertificateSigningRequestSpec.js",
+      "import": "./certificates.k8s.io/v1/CertificateSigningRequestSpec.mjs"
+    },
+    "./certificates.k8s.io/v1/CertificateSigningRequestStatus": {
+      "require": "./certificates.k8s.io/v1/CertificateSigningRequestStatus.js",
+      "import": "./certificates.k8s.io/v1/CertificateSigningRequestStatus.mjs"
+    },
+    "./certificates.k8s.io/v1": {
+      "require": "./certificates.k8s.io/v1/index.js",
+      "import": "./certificates.k8s.io/v1/index.mjs"
+    },
+    "./certificates.k8s.io/v1beta1/CertificateSigningRequest": {
+      "require": "./certificates.k8s.io/v1beta1/CertificateSigningRequest.js",
+      "import": "./certificates.k8s.io/v1beta1/CertificateSigningRequest.mjs"
+    },
+    "./certificates.k8s.io/v1beta1/CertificateSigningRequestCondition": {
+      "require": "./certificates.k8s.io/v1beta1/CertificateSigningRequestCondition.js",
+      "import": "./certificates.k8s.io/v1beta1/CertificateSigningRequestCondition.mjs"
+    },
+    "./certificates.k8s.io/v1beta1/CertificateSigningRequestList": {
+      "require": "./certificates.k8s.io/v1beta1/CertificateSigningRequestList.js",
+      "import": "./certificates.k8s.io/v1beta1/CertificateSigningRequestList.mjs"
+    },
+    "./certificates.k8s.io/v1beta1/CertificateSigningRequestSpec": {
+      "require": "./certificates.k8s.io/v1beta1/CertificateSigningRequestSpec.js",
+      "import": "./certificates.k8s.io/v1beta1/CertificateSigningRequestSpec.mjs"
+    },
+    "./certificates.k8s.io/v1beta1/CertificateSigningRequestStatus": {
+      "require": "./certificates.k8s.io/v1beta1/CertificateSigningRequestStatus.js",
+      "import": "./certificates.k8s.io/v1beta1/CertificateSigningRequestStatus.mjs"
+    },
+    "./certificates.k8s.io/v1beta1": {
+      "require": "./certificates.k8s.io/v1beta1/index.js",
+      "import": "./certificates.k8s.io/v1beta1/index.mjs"
+    },
+    "./coordination.k8s.io": {
+      "require": "./coordination.k8s.io/index.js",
+      "import": "./coordination.k8s.io/index.mjs"
+    },
+    "./coordination.k8s.io/v1/Lease": {
+      "require": "./coordination.k8s.io/v1/Lease.js",
+      "import": "./coordination.k8s.io/v1/Lease.mjs"
+    },
+    "./coordination.k8s.io/v1/LeaseList": {
+      "require": "./coordination.k8s.io/v1/LeaseList.js",
+      "import": "./coordination.k8s.io/v1/LeaseList.mjs"
+    },
+    "./coordination.k8s.io/v1/LeaseSpec": {
+      "require": "./coordination.k8s.io/v1/LeaseSpec.js",
+      "import": "./coordination.k8s.io/v1/LeaseSpec.mjs"
+    },
+    "./coordination.k8s.io/v1": {
+      "require": "./coordination.k8s.io/v1/index.js",
+      "import": "./coordination.k8s.io/v1/index.mjs"
+    },
+    "./coordination.k8s.io/v1beta1/Lease": {
+      "require": "./coordination.k8s.io/v1beta1/Lease.js",
+      "import": "./coordination.k8s.io/v1beta1/Lease.mjs"
+    },
+    "./coordination.k8s.io/v1beta1/LeaseList": {
+      "require": "./coordination.k8s.io/v1beta1/LeaseList.js",
+      "import": "./coordination.k8s.io/v1beta1/LeaseList.mjs"
+    },
+    "./coordination.k8s.io/v1beta1/LeaseSpec": {
+      "require": "./coordination.k8s.io/v1beta1/LeaseSpec.js",
+      "import": "./coordination.k8s.io/v1beta1/LeaseSpec.mjs"
+    },
+    "./coordination.k8s.io/v1beta1": {
+      "require": "./coordination.k8s.io/v1beta1/index.js",
+      "import": "./coordination.k8s.io/v1beta1/index.mjs"
+    },
+    "./discovery.k8s.io": {
+      "require": "./discovery.k8s.io/index.js",
+      "import": "./discovery.k8s.io/index.mjs"
+    },
+    "./discovery.k8s.io/v1alpha1/APIGroup": {
+      "require": "./discovery.k8s.io/v1alpha1/APIGroup.js",
+      "import": "./discovery.k8s.io/v1alpha1/APIGroup.mjs"
+    },
+    "./discovery.k8s.io/v1alpha1/APIGroupList": {
+      "require": "./discovery.k8s.io/v1alpha1/APIGroupList.js",
+      "import": "./discovery.k8s.io/v1alpha1/APIGroupList.mjs"
+    },
+    "./discovery.k8s.io/v1alpha1/APIResource": {
+      "require": "./discovery.k8s.io/v1alpha1/APIResource.js",
+      "import": "./discovery.k8s.io/v1alpha1/APIResource.mjs"
+    },
+    "./discovery.k8s.io/v1alpha1/APIResourceList": {
+      "require": "./discovery.k8s.io/v1alpha1/APIResourceList.js",
+      "import": "./discovery.k8s.io/v1alpha1/APIResourceList.mjs"
+    },
+    "./discovery.k8s.io/v1alpha1/APIVersions": {
+      "require": "./discovery.k8s.io/v1alpha1/APIVersions.js",
+      "import": "./discovery.k8s.io/v1alpha1/APIVersions.mjs"
+    },
+    "./discovery.k8s.io/v1alpha1/DeleteOptions": {
+      "require": "./discovery.k8s.io/v1alpha1/DeleteOptions.js",
+      "import": "./discovery.k8s.io/v1alpha1/DeleteOptions.mjs"
+    },
+    "./discovery.k8s.io/v1alpha1/FieldsV1": {
+      "require": "./discovery.k8s.io/v1alpha1/FieldsV1.js",
+      "import": "./discovery.k8s.io/v1alpha1/FieldsV1.mjs"
+    },
+    "./discovery.k8s.io/v1alpha1/GroupVersionForDiscovery": {
+      "require": "./discovery.k8s.io/v1alpha1/GroupVersionForDiscovery.js",
+      "import": "./discovery.k8s.io/v1alpha1/GroupVersionForDiscovery.mjs"
+    },
+    "./discovery.k8s.io/v1alpha1/LabelSelector": {
+      "require": "./discovery.k8s.io/v1alpha1/LabelSelector.js",
+      "import": "./discovery.k8s.io/v1alpha1/LabelSelector.mjs"
+    },
+    "./discovery.k8s.io/v1alpha1/LabelSelectorRequirement": {
+      "require": "./discovery.k8s.io/v1alpha1/LabelSelectorRequirement.js",
+      "import": "./discovery.k8s.io/v1alpha1/LabelSelectorRequirement.mjs"
+    },
+    "./discovery.k8s.io/v1alpha1/ListMeta": {
+      "require": "./discovery.k8s.io/v1alpha1/ListMeta.js",
+      "import": "./discovery.k8s.io/v1alpha1/ListMeta.mjs"
+    },
+    "./discovery.k8s.io/v1alpha1/ManagedFieldsEntry": {
+      "require": "./discovery.k8s.io/v1alpha1/ManagedFieldsEntry.js",
+      "import": "./discovery.k8s.io/v1alpha1/ManagedFieldsEntry.mjs"
+    },
+    "./discovery.k8s.io/v1alpha1/MicroTime": {
+      "require": "./discovery.k8s.io/v1alpha1/MicroTime.js",
+      "import": "./discovery.k8s.io/v1alpha1/MicroTime.mjs"
+    },
+    "./discovery.k8s.io/v1alpha1/ObjectMeta": {
+      "require": "./discovery.k8s.io/v1alpha1/ObjectMeta.js",
+      "import": "./discovery.k8s.io/v1alpha1/ObjectMeta.mjs"
+    },
+    "./discovery.k8s.io/v1alpha1/OwnerReference": {
+      "require": "./discovery.k8s.io/v1alpha1/OwnerReference.js",
+      "import": "./discovery.k8s.io/v1alpha1/OwnerReference.mjs"
+    },
+    "./discovery.k8s.io/v1alpha1/Patch": {
+      "require": "./discovery.k8s.io/v1alpha1/Patch.js",
+      "import": "./discovery.k8s.io/v1alpha1/Patch.mjs"
+    },
+    "./discovery.k8s.io/v1alpha1/Preconditions": {
+      "require": "./discovery.k8s.io/v1alpha1/Preconditions.js",
+      "import": "./discovery.k8s.io/v1alpha1/Preconditions.mjs"
+    },
+    "./discovery.k8s.io/v1alpha1/ServerAddressByClientCIDR": {
+      "require": "./discovery.k8s.io/v1alpha1/ServerAddressByClientCIDR.js",
+      "import": "./discovery.k8s.io/v1alpha1/ServerAddressByClientCIDR.mjs"
+    },
+    "./discovery.k8s.io/v1alpha1/Status": {
+      "require": "./discovery.k8s.io/v1alpha1/Status.js",
+      "import": "./discovery.k8s.io/v1alpha1/Status.mjs"
+    },
+    "./discovery.k8s.io/v1alpha1/StatusCause": {
+      "require": "./discovery.k8s.io/v1alpha1/StatusCause.js",
+      "import": "./discovery.k8s.io/v1alpha1/StatusCause.mjs"
+    },
+    "./discovery.k8s.io/v1alpha1/StatusDetails": {
+      "require": "./discovery.k8s.io/v1alpha1/StatusDetails.js",
+      "import": "./discovery.k8s.io/v1alpha1/StatusDetails.mjs"
+    },
+    "./discovery.k8s.io/v1alpha1/Time": {
+      "require": "./discovery.k8s.io/v1alpha1/Time.js",
+      "import": "./discovery.k8s.io/v1alpha1/Time.mjs"
+    },
+    "./discovery.k8s.io/v1alpha1/WatchEvent": {
+      "require": "./discovery.k8s.io/v1alpha1/WatchEvent.js",
+      "import": "./discovery.k8s.io/v1alpha1/WatchEvent.mjs"
+    },
+    "./discovery.k8s.io/v1alpha1": {
+      "require": "./discovery.k8s.io/v1alpha1/index.js",
+      "import": "./discovery.k8s.io/v1alpha1/index.mjs"
+    },
+    "./discovery.k8s.io/v1beta1/Endpoint": {
+      "require": "./discovery.k8s.io/v1beta1/Endpoint.js",
+      "import": "./discovery.k8s.io/v1beta1/Endpoint.mjs"
+    },
+    "./discovery.k8s.io/v1beta1/EndpointConditions": {
+      "require": "./discovery.k8s.io/v1beta1/EndpointConditions.js",
+      "import": "./discovery.k8s.io/v1beta1/EndpointConditions.mjs"
+    },
+    "./discovery.k8s.io/v1beta1/EndpointPort": {
+      "require": "./discovery.k8s.io/v1beta1/EndpointPort.js",
+      "import": "./discovery.k8s.io/v1beta1/EndpointPort.mjs"
+    },
+    "./discovery.k8s.io/v1beta1/EndpointSlice": {
+      "require": "./discovery.k8s.io/v1beta1/EndpointSlice.js",
+      "import": "./discovery.k8s.io/v1beta1/EndpointSlice.mjs"
+    },
+    "./discovery.k8s.io/v1beta1/EndpointSliceList": {
+      "require": "./discovery.k8s.io/v1beta1/EndpointSliceList.js",
+      "import": "./discovery.k8s.io/v1beta1/EndpointSliceList.mjs"
+    },
+    "./discovery.k8s.io/v1beta1": {
+      "require": "./discovery.k8s.io/v1beta1/index.js",
+      "import": "./discovery.k8s.io/v1beta1/index.mjs"
+    },
+    "./events.k8s.io": {
+      "require": "./events.k8s.io/index.js",
+      "import": "./events.k8s.io/index.mjs"
+    },
+    "./events.k8s.io/v1/Event": {
+      "require": "./events.k8s.io/v1/Event.js",
+      "import": "./events.k8s.io/v1/Event.mjs"
+    },
+    "./events.k8s.io/v1/EventList": {
+      "require": "./events.k8s.io/v1/EventList.js",
+      "import": "./events.k8s.io/v1/EventList.mjs"
+    },
+    "./events.k8s.io/v1/EventSeries": {
+      "require": "./events.k8s.io/v1/EventSeries.js",
+      "import": "./events.k8s.io/v1/EventSeries.mjs"
+    },
+    "./events.k8s.io/v1": {
+      "require": "./events.k8s.io/v1/index.js",
+      "import": "./events.k8s.io/v1/index.mjs"
+    },
+    "./events.k8s.io/v1beta1/Event": {
+      "require": "./events.k8s.io/v1beta1/Event.js",
+      "import": "./events.k8s.io/v1beta1/Event.mjs"
+    },
+    "./events.k8s.io/v1beta1/EventList": {
+      "require": "./events.k8s.io/v1beta1/EventList.js",
+      "import": "./events.k8s.io/v1beta1/EventList.mjs"
+    },
+    "./events.k8s.io/v1beta1/EventSeries": {
+      "require": "./events.k8s.io/v1beta1/EventSeries.js",
+      "import": "./events.k8s.io/v1beta1/EventSeries.mjs"
+    },
+    "./events.k8s.io/v1beta1": {
+      "require": "./events.k8s.io/v1beta1/index.js",
+      "import": "./events.k8s.io/v1beta1/index.mjs"
+    },
+    "./extensions": {
+      "require": "./extensions/index.js",
+      "import": "./extensions/index.mjs"
+    },
+    "./extensions/v1beta1/HTTPIngressPath": {
+      "require": "./extensions/v1beta1/HTTPIngressPath.js",
+      "import": "./extensions/v1beta1/HTTPIngressPath.mjs"
+    },
+    "./extensions/v1beta1/HTTPIngressRuleValue": {
+      "require": "./extensions/v1beta1/HTTPIngressRuleValue.js",
+      "import": "./extensions/v1beta1/HTTPIngressRuleValue.mjs"
+    },
+    "./extensions/v1beta1/Ingress": {
+      "require": "./extensions/v1beta1/Ingress.js",
+      "import": "./extensions/v1beta1/Ingress.mjs"
+    },
+    "./extensions/v1beta1/IngressBackend": {
+      "require": "./extensions/v1beta1/IngressBackend.js",
+      "import": "./extensions/v1beta1/IngressBackend.mjs"
+    },
+    "./extensions/v1beta1/IngressList": {
+      "require": "./extensions/v1beta1/IngressList.js",
+      "import": "./extensions/v1beta1/IngressList.mjs"
+    },
+    "./extensions/v1beta1/IngressRule": {
+      "require": "./extensions/v1beta1/IngressRule.js",
+      "import": "./extensions/v1beta1/IngressRule.mjs"
+    },
+    "./extensions/v1beta1/IngressSpec": {
+      "require": "./extensions/v1beta1/IngressSpec.js",
+      "import": "./extensions/v1beta1/IngressSpec.mjs"
+    },
+    "./extensions/v1beta1/IngressStatus": {
+      "require": "./extensions/v1beta1/IngressStatus.js",
+      "import": "./extensions/v1beta1/IngressStatus.mjs"
+    },
+    "./extensions/v1beta1/IngressTLS": {
+      "require": "./extensions/v1beta1/IngressTLS.js",
+      "import": "./extensions/v1beta1/IngressTLS.mjs"
+    },
+    "./extensions/v1beta1": {
+      "require": "./extensions/v1beta1/index.js",
+      "import": "./extensions/v1beta1/index.mjs"
+    },
+    "./flowcontrol.apiserver.k8s.io": {
+      "require": "./flowcontrol.apiserver.k8s.io/index.js",
+      "import": "./flowcontrol.apiserver.k8s.io/index.mjs"
+    },
+    "./flowcontrol.apiserver.k8s.io/v1alpha1/FlowDistinguisherMethod": {
+      "require": "./flowcontrol.apiserver.k8s.io/v1alpha1/FlowDistinguisherMethod.js",
+      "import": "./flowcontrol.apiserver.k8s.io/v1alpha1/FlowDistinguisherMethod.mjs"
+    },
+    "./flowcontrol.apiserver.k8s.io/v1alpha1/FlowSchema": {
+      "require": "./flowcontrol.apiserver.k8s.io/v1alpha1/FlowSchema.js",
+      "import": "./flowcontrol.apiserver.k8s.io/v1alpha1/FlowSchema.mjs"
+    },
+    "./flowcontrol.apiserver.k8s.io/v1alpha1/FlowSchemaCondition": {
+      "require": "./flowcontrol.apiserver.k8s.io/v1alpha1/FlowSchemaCondition.js",
+      "import": "./flowcontrol.apiserver.k8s.io/v1alpha1/FlowSchemaCondition.mjs"
+    },
+    "./flowcontrol.apiserver.k8s.io/v1alpha1/FlowSchemaList": {
+      "require": "./flowcontrol.apiserver.k8s.io/v1alpha1/FlowSchemaList.js",
+      "import": "./flowcontrol.apiserver.k8s.io/v1alpha1/FlowSchemaList.mjs"
+    },
+    "./flowcontrol.apiserver.k8s.io/v1alpha1/FlowSchemaSpec": {
+      "require": "./flowcontrol.apiserver.k8s.io/v1alpha1/FlowSchemaSpec.js",
+      "import": "./flowcontrol.apiserver.k8s.io/v1alpha1/FlowSchemaSpec.mjs"
+    },
+    "./flowcontrol.apiserver.k8s.io/v1alpha1/FlowSchemaStatus": {
+      "require": "./flowcontrol.apiserver.k8s.io/v1alpha1/FlowSchemaStatus.js",
+      "import": "./flowcontrol.apiserver.k8s.io/v1alpha1/FlowSchemaStatus.mjs"
+    },
+    "./flowcontrol.apiserver.k8s.io/v1alpha1/GroupSubject": {
+      "require": "./flowcontrol.apiserver.k8s.io/v1alpha1/GroupSubject.js",
+      "import": "./flowcontrol.apiserver.k8s.io/v1alpha1/GroupSubject.mjs"
+    },
+    "./flowcontrol.apiserver.k8s.io/v1alpha1/LimitResponse": {
+      "require": "./flowcontrol.apiserver.k8s.io/v1alpha1/LimitResponse.js",
+      "import": "./flowcontrol.apiserver.k8s.io/v1alpha1/LimitResponse.mjs"
+    },
+    "./flowcontrol.apiserver.k8s.io/v1alpha1/LimitedPriorityLevelConfiguration": {
+      "require": "./flowcontrol.apiserver.k8s.io/v1alpha1/LimitedPriorityLevelConfiguration.js",
+      "import": "./flowcontrol.apiserver.k8s.io/v1alpha1/LimitedPriorityLevelConfiguration.mjs"
+    },
+    "./flowcontrol.apiserver.k8s.io/v1alpha1/NonResourcePolicyRule": {
+      "require": "./flowcontrol.apiserver.k8s.io/v1alpha1/NonResourcePolicyRule.js",
+      "import": "./flowcontrol.apiserver.k8s.io/v1alpha1/NonResourcePolicyRule.mjs"
+    },
+    "./flowcontrol.apiserver.k8s.io/v1alpha1/PolicyRulesWithSubjects": {
+      "require": "./flowcontrol.apiserver.k8s.io/v1alpha1/PolicyRulesWithSubjects.js",
+      "import": "./flowcontrol.apiserver.k8s.io/v1alpha1/PolicyRulesWithSubjects.mjs"
+    },
+    "./flowcontrol.apiserver.k8s.io/v1alpha1/PriorityLevelConfiguration": {
+      "require": "./flowcontrol.apiserver.k8s.io/v1alpha1/PriorityLevelConfiguration.js",
+      "import": "./flowcontrol.apiserver.k8s.io/v1alpha1/PriorityLevelConfiguration.mjs"
+    },
+    "./flowcontrol.apiserver.k8s.io/v1alpha1/PriorityLevelConfigurationCondition": {
+      "require": "./flowcontrol.apiserver.k8s.io/v1alpha1/PriorityLevelConfigurationCondition.js",
+      "import": "./flowcontrol.apiserver.k8s.io/v1alpha1/PriorityLevelConfigurationCondition.mjs"
+    },
+    "./flowcontrol.apiserver.k8s.io/v1alpha1/PriorityLevelConfigurationList": {
+      "require": "./flowcontrol.apiserver.k8s.io/v1alpha1/PriorityLevelConfigurationList.js",
+      "import": "./flowcontrol.apiserver.k8s.io/v1alpha1/PriorityLevelConfigurationList.mjs"
+    },
+    "./flowcontrol.apiserver.k8s.io/v1alpha1/PriorityLevelConfigurationReference": {
+      "require": "./flowcontrol.apiserver.k8s.io/v1alpha1/PriorityLevelConfigurationReference.js",
+      "import": "./flowcontrol.apiserver.k8s.io/v1alpha1/PriorityLevelConfigurationReference.mjs"
+    },
+    "./flowcontrol.apiserver.k8s.io/v1alpha1/PriorityLevelConfigurationSpec": {
+      "require": "./flowcontrol.apiserver.k8s.io/v1alpha1/PriorityLevelConfigurationSpec.js",
+      "import": "./flowcontrol.apiserver.k8s.io/v1alpha1/PriorityLevelConfigurationSpec.mjs"
+    },
+    "./flowcontrol.apiserver.k8s.io/v1alpha1/PriorityLevelConfigurationStatus": {
+      "require": "./flowcontrol.apiserver.k8s.io/v1alpha1/PriorityLevelConfigurationStatus.js",
+      "import": "./flowcontrol.apiserver.k8s.io/v1alpha1/PriorityLevelConfigurationStatus.mjs"
+    },
+    "./flowcontrol.apiserver.k8s.io/v1alpha1/QueuingConfiguration": {
+      "require": "./flowcontrol.apiserver.k8s.io/v1alpha1/QueuingConfiguration.js",
+      "import": "./flowcontrol.apiserver.k8s.io/v1alpha1/QueuingConfiguration.mjs"
+    },
+    "./flowcontrol.apiserver.k8s.io/v1alpha1/ResourcePolicyRule": {
+      "require": "./flowcontrol.apiserver.k8s.io/v1alpha1/ResourcePolicyRule.js",
+      "import": "./flowcontrol.apiserver.k8s.io/v1alpha1/ResourcePolicyRule.mjs"
+    },
+    "./flowcontrol.apiserver.k8s.io/v1alpha1/ServiceAccountSubject": {
+      "require": "./flowcontrol.apiserver.k8s.io/v1alpha1/ServiceAccountSubject.js",
+      "import": "./flowcontrol.apiserver.k8s.io/v1alpha1/ServiceAccountSubject.mjs"
+    },
+    "./flowcontrol.apiserver.k8s.io/v1alpha1/Subject": {
+      "require": "./flowcontrol.apiserver.k8s.io/v1alpha1/Subject.js",
+      "import": "./flowcontrol.apiserver.k8s.io/v1alpha1/Subject.mjs"
+    },
+    "./flowcontrol.apiserver.k8s.io/v1alpha1/UserSubject": {
+      "require": "./flowcontrol.apiserver.k8s.io/v1alpha1/UserSubject.js",
+      "import": "./flowcontrol.apiserver.k8s.io/v1alpha1/UserSubject.mjs"
+    },
+    "./flowcontrol.apiserver.k8s.io/v1alpha1": {
+      "require": "./flowcontrol.apiserver.k8s.io/v1alpha1/index.js",
+      "import": "./flowcontrol.apiserver.k8s.io/v1alpha1/index.mjs"
+    },
+    "./imagepolicy.k8s.io": {
+      "require": "./imagepolicy.k8s.io/index.js",
+      "import": "./imagepolicy.k8s.io/index.mjs"
+    },
+    "./imagepolicy.k8s.io/v1alpha1/APIGroup": {
+      "require": "./imagepolicy.k8s.io/v1alpha1/APIGroup.js",
+      "import": "./imagepolicy.k8s.io/v1alpha1/APIGroup.mjs"
+    },
+    "./imagepolicy.k8s.io/v1alpha1/APIGroupList": {
+      "require": "./imagepolicy.k8s.io/v1alpha1/APIGroupList.js",
+      "import": "./imagepolicy.k8s.io/v1alpha1/APIGroupList.mjs"
+    },
+    "./imagepolicy.k8s.io/v1alpha1/APIResource": {
+      "require": "./imagepolicy.k8s.io/v1alpha1/APIResource.js",
+      "import": "./imagepolicy.k8s.io/v1alpha1/APIResource.mjs"
+    },
+    "./imagepolicy.k8s.io/v1alpha1/APIResourceList": {
+      "require": "./imagepolicy.k8s.io/v1alpha1/APIResourceList.js",
+      "import": "./imagepolicy.k8s.io/v1alpha1/APIResourceList.mjs"
+    },
+    "./imagepolicy.k8s.io/v1alpha1/APIVersions": {
+      "require": "./imagepolicy.k8s.io/v1alpha1/APIVersions.js",
+      "import": "./imagepolicy.k8s.io/v1alpha1/APIVersions.mjs"
+    },
+    "./imagepolicy.k8s.io/v1alpha1/DeleteOptions": {
+      "require": "./imagepolicy.k8s.io/v1alpha1/DeleteOptions.js",
+      "import": "./imagepolicy.k8s.io/v1alpha1/DeleteOptions.mjs"
+    },
+    "./imagepolicy.k8s.io/v1alpha1/FieldsV1": {
+      "require": "./imagepolicy.k8s.io/v1alpha1/FieldsV1.js",
+      "import": "./imagepolicy.k8s.io/v1alpha1/FieldsV1.mjs"
+    },
+    "./imagepolicy.k8s.io/v1alpha1/GroupVersionForDiscovery": {
+      "require": "./imagepolicy.k8s.io/v1alpha1/GroupVersionForDiscovery.js",
+      "import": "./imagepolicy.k8s.io/v1alpha1/GroupVersionForDiscovery.mjs"
+    },
+    "./imagepolicy.k8s.io/v1alpha1/LabelSelector": {
+      "require": "./imagepolicy.k8s.io/v1alpha1/LabelSelector.js",
+      "import": "./imagepolicy.k8s.io/v1alpha1/LabelSelector.mjs"
+    },
+    "./imagepolicy.k8s.io/v1alpha1/LabelSelectorRequirement": {
+      "require": "./imagepolicy.k8s.io/v1alpha1/LabelSelectorRequirement.js",
+      "import": "./imagepolicy.k8s.io/v1alpha1/LabelSelectorRequirement.mjs"
+    },
+    "./imagepolicy.k8s.io/v1alpha1/ListMeta": {
+      "require": "./imagepolicy.k8s.io/v1alpha1/ListMeta.js",
+      "import": "./imagepolicy.k8s.io/v1alpha1/ListMeta.mjs"
+    },
+    "./imagepolicy.k8s.io/v1alpha1/ManagedFieldsEntry": {
+      "require": "./imagepolicy.k8s.io/v1alpha1/ManagedFieldsEntry.js",
+      "import": "./imagepolicy.k8s.io/v1alpha1/ManagedFieldsEntry.mjs"
+    },
+    "./imagepolicy.k8s.io/v1alpha1/MicroTime": {
+      "require": "./imagepolicy.k8s.io/v1alpha1/MicroTime.js",
+      "import": "./imagepolicy.k8s.io/v1alpha1/MicroTime.mjs"
+    },
+    "./imagepolicy.k8s.io/v1alpha1/ObjectMeta": {
+      "require": "./imagepolicy.k8s.io/v1alpha1/ObjectMeta.js",
+      "import": "./imagepolicy.k8s.io/v1alpha1/ObjectMeta.mjs"
+    },
+    "./imagepolicy.k8s.io/v1alpha1/OwnerReference": {
+      "require": "./imagepolicy.k8s.io/v1alpha1/OwnerReference.js",
+      "import": "./imagepolicy.k8s.io/v1alpha1/OwnerReference.mjs"
+    },
+    "./imagepolicy.k8s.io/v1alpha1/Patch": {
+      "require": "./imagepolicy.k8s.io/v1alpha1/Patch.js",
+      "import": "./imagepolicy.k8s.io/v1alpha1/Patch.mjs"
+    },
+    "./imagepolicy.k8s.io/v1alpha1/Preconditions": {
+      "require": "./imagepolicy.k8s.io/v1alpha1/Preconditions.js",
+      "import": "./imagepolicy.k8s.io/v1alpha1/Preconditions.mjs"
+    },
+    "./imagepolicy.k8s.io/v1alpha1/ServerAddressByClientCIDR": {
+      "require": "./imagepolicy.k8s.io/v1alpha1/ServerAddressByClientCIDR.js",
+      "import": "./imagepolicy.k8s.io/v1alpha1/ServerAddressByClientCIDR.mjs"
+    },
+    "./imagepolicy.k8s.io/v1alpha1/Status": {
+      "require": "./imagepolicy.k8s.io/v1alpha1/Status.js",
+      "import": "./imagepolicy.k8s.io/v1alpha1/Status.mjs"
+    },
+    "./imagepolicy.k8s.io/v1alpha1/StatusCause": {
+      "require": "./imagepolicy.k8s.io/v1alpha1/StatusCause.js",
+      "import": "./imagepolicy.k8s.io/v1alpha1/StatusCause.mjs"
+    },
+    "./imagepolicy.k8s.io/v1alpha1/StatusDetails": {
+      "require": "./imagepolicy.k8s.io/v1alpha1/StatusDetails.js",
+      "import": "./imagepolicy.k8s.io/v1alpha1/StatusDetails.mjs"
+    },
+    "./imagepolicy.k8s.io/v1alpha1/Time": {
+      "require": "./imagepolicy.k8s.io/v1alpha1/Time.js",
+      "import": "./imagepolicy.k8s.io/v1alpha1/Time.mjs"
+    },
+    "./imagepolicy.k8s.io/v1alpha1/WatchEvent": {
+      "require": "./imagepolicy.k8s.io/v1alpha1/WatchEvent.js",
+      "import": "./imagepolicy.k8s.io/v1alpha1/WatchEvent.mjs"
+    },
+    "./imagepolicy.k8s.io/v1alpha1": {
+      "require": "./imagepolicy.k8s.io/v1alpha1/index.js",
+      "import": "./imagepolicy.k8s.io/v1alpha1/index.mjs"
+    },
+    ".": {
+      "require": "./index.js",
+      "import": "./index.mjs"
+    },
+    "./networking.k8s.io": {
+      "require": "./networking.k8s.io/index.js",
+      "import": "./networking.k8s.io/index.mjs"
+    },
+    "./networking.k8s.io/v1/HTTPIngressPath": {
+      "require": "./networking.k8s.io/v1/HTTPIngressPath.js",
+      "import": "./networking.k8s.io/v1/HTTPIngressPath.mjs"
+    },
+    "./networking.k8s.io/v1/HTTPIngressRuleValue": {
+      "require": "./networking.k8s.io/v1/HTTPIngressRuleValue.js",
+      "import": "./networking.k8s.io/v1/HTTPIngressRuleValue.mjs"
+    },
+    "./networking.k8s.io/v1/IPBlock": {
+      "require": "./networking.k8s.io/v1/IPBlock.js",
+      "import": "./networking.k8s.io/v1/IPBlock.mjs"
+    },
+    "./networking.k8s.io/v1/Ingress": {
+      "require": "./networking.k8s.io/v1/Ingress.js",
+      "import": "./networking.k8s.io/v1/Ingress.mjs"
+    },
+    "./networking.k8s.io/v1/IngressBackend": {
+      "require": "./networking.k8s.io/v1/IngressBackend.js",
+      "import": "./networking.k8s.io/v1/IngressBackend.mjs"
+    },
+    "./networking.k8s.io/v1/IngressClass": {
+      "require": "./networking.k8s.io/v1/IngressClass.js",
+      "import": "./networking.k8s.io/v1/IngressClass.mjs"
+    },
+    "./networking.k8s.io/v1/IngressClassList": {
+      "require": "./networking.k8s.io/v1/IngressClassList.js",
+      "import": "./networking.k8s.io/v1/IngressClassList.mjs"
+    },
+    "./networking.k8s.io/v1/IngressClassSpec": {
+      "require": "./networking.k8s.io/v1/IngressClassSpec.js",
+      "import": "./networking.k8s.io/v1/IngressClassSpec.mjs"
+    },
+    "./networking.k8s.io/v1/IngressList": {
+      "require": "./networking.k8s.io/v1/IngressList.js",
+      "import": "./networking.k8s.io/v1/IngressList.mjs"
+    },
+    "./networking.k8s.io/v1/IngressRule": {
+      "require": "./networking.k8s.io/v1/IngressRule.js",
+      "import": "./networking.k8s.io/v1/IngressRule.mjs"
+    },
+    "./networking.k8s.io/v1/IngressServiceBackend": {
+      "require": "./networking.k8s.io/v1/IngressServiceBackend.js",
+      "import": "./networking.k8s.io/v1/IngressServiceBackend.mjs"
+    },
+    "./networking.k8s.io/v1/IngressSpec": {
+      "require": "./networking.k8s.io/v1/IngressSpec.js",
+      "import": "./networking.k8s.io/v1/IngressSpec.mjs"
+    },
+    "./networking.k8s.io/v1/IngressStatus": {
+      "require": "./networking.k8s.io/v1/IngressStatus.js",
+      "import": "./networking.k8s.io/v1/IngressStatus.mjs"
+    },
+    "./networking.k8s.io/v1/IngressTLS": {
+      "require": "./networking.k8s.io/v1/IngressTLS.js",
+      "import": "./networking.k8s.io/v1/IngressTLS.mjs"
+    },
+    "./networking.k8s.io/v1/NetworkPolicy": {
+      "require": "./networking.k8s.io/v1/NetworkPolicy.js",
+      "import": "./networking.k8s.io/v1/NetworkPolicy.mjs"
+    },
+    "./networking.k8s.io/v1/NetworkPolicyEgressRule": {
+      "require": "./networking.k8s.io/v1/NetworkPolicyEgressRule.js",
+      "import": "./networking.k8s.io/v1/NetworkPolicyEgressRule.mjs"
+    },
+    "./networking.k8s.io/v1/NetworkPolicyIngressRule": {
+      "require": "./networking.k8s.io/v1/NetworkPolicyIngressRule.js",
+      "import": "./networking.k8s.io/v1/NetworkPolicyIngressRule.mjs"
+    },
+    "./networking.k8s.io/v1/NetworkPolicyList": {
+      "require": "./networking.k8s.io/v1/NetworkPolicyList.js",
+      "import": "./networking.k8s.io/v1/NetworkPolicyList.mjs"
+    },
+    "./networking.k8s.io/v1/NetworkPolicyPeer": {
+      "require": "./networking.k8s.io/v1/NetworkPolicyPeer.js",
+      "import": "./networking.k8s.io/v1/NetworkPolicyPeer.mjs"
+    },
+    "./networking.k8s.io/v1/NetworkPolicyPort": {
+      "require": "./networking.k8s.io/v1/NetworkPolicyPort.js",
+      "import": "./networking.k8s.io/v1/NetworkPolicyPort.mjs"
+    },
+    "./networking.k8s.io/v1/NetworkPolicySpec": {
+      "require": "./networking.k8s.io/v1/NetworkPolicySpec.js",
+      "import": "./networking.k8s.io/v1/NetworkPolicySpec.mjs"
+    },
+    "./networking.k8s.io/v1/ServiceBackendPort": {
+      "require": "./networking.k8s.io/v1/ServiceBackendPort.js",
+      "import": "./networking.k8s.io/v1/ServiceBackendPort.mjs"
+    },
+    "./networking.k8s.io/v1": {
+      "require": "./networking.k8s.io/v1/index.js",
+      "import": "./networking.k8s.io/v1/index.mjs"
+    },
+    "./networking.k8s.io/v1beta1/HTTPIngressPath": {
+      "require": "./networking.k8s.io/v1beta1/HTTPIngressPath.js",
+      "import": "./networking.k8s.io/v1beta1/HTTPIngressPath.mjs"
+    },
+    "./networking.k8s.io/v1beta1/HTTPIngressRuleValue": {
+      "require": "./networking.k8s.io/v1beta1/HTTPIngressRuleValue.js",
+      "import": "./networking.k8s.io/v1beta1/HTTPIngressRuleValue.mjs"
+    },
+    "./networking.k8s.io/v1beta1/Ingress": {
+      "require": "./networking.k8s.io/v1beta1/Ingress.js",
+      "import": "./networking.k8s.io/v1beta1/Ingress.mjs"
+    },
+    "./networking.k8s.io/v1beta1/IngressBackend": {
+      "require": "./networking.k8s.io/v1beta1/IngressBackend.js",
+      "import": "./networking.k8s.io/v1beta1/IngressBackend.mjs"
+    },
+    "./networking.k8s.io/v1beta1/IngressClass": {
+      "require": "./networking.k8s.io/v1beta1/IngressClass.js",
+      "import": "./networking.k8s.io/v1beta1/IngressClass.mjs"
+    },
+    "./networking.k8s.io/v1beta1/IngressClassList": {
+      "require": "./networking.k8s.io/v1beta1/IngressClassList.js",
+      "import": "./networking.k8s.io/v1beta1/IngressClassList.mjs"
+    },
+    "./networking.k8s.io/v1beta1/IngressClassSpec": {
+      "require": "./networking.k8s.io/v1beta1/IngressClassSpec.js",
+      "import": "./networking.k8s.io/v1beta1/IngressClassSpec.mjs"
+    },
+    "./networking.k8s.io/v1beta1/IngressList": {
+      "require": "./networking.k8s.io/v1beta1/IngressList.js",
+      "import": "./networking.k8s.io/v1beta1/IngressList.mjs"
+    },
+    "./networking.k8s.io/v1beta1/IngressRule": {
+      "require": "./networking.k8s.io/v1beta1/IngressRule.js",
+      "import": "./networking.k8s.io/v1beta1/IngressRule.mjs"
+    },
+    "./networking.k8s.io/v1beta1/IngressSpec": {
+      "require": "./networking.k8s.io/v1beta1/IngressSpec.js",
+      "import": "./networking.k8s.io/v1beta1/IngressSpec.mjs"
+    },
+    "./networking.k8s.io/v1beta1/IngressStatus": {
+      "require": "./networking.k8s.io/v1beta1/IngressStatus.js",
+      "import": "./networking.k8s.io/v1beta1/IngressStatus.mjs"
+    },
+    "./networking.k8s.io/v1beta1/IngressTLS": {
+      "require": "./networking.k8s.io/v1beta1/IngressTLS.js",
+      "import": "./networking.k8s.io/v1beta1/IngressTLS.mjs"
+    },
+    "./networking.k8s.io/v1beta1": {
+      "require": "./networking.k8s.io/v1beta1/index.js",
+      "import": "./networking.k8s.io/v1beta1/index.mjs"
+    },
+    "./node.k8s.io": {
+      "require": "./node.k8s.io/index.js",
+      "import": "./node.k8s.io/index.mjs"
+    },
+    "./node.k8s.io/v1alpha1/Overhead": {
+      "require": "./node.k8s.io/v1alpha1/Overhead.js",
+      "import": "./node.k8s.io/v1alpha1/Overhead.mjs"
+    },
+    "./node.k8s.io/v1alpha1/RuntimeClass": {
+      "require": "./node.k8s.io/v1alpha1/RuntimeClass.js",
+      "import": "./node.k8s.io/v1alpha1/RuntimeClass.mjs"
+    },
+    "./node.k8s.io/v1alpha1/RuntimeClassList": {
+      "require": "./node.k8s.io/v1alpha1/RuntimeClassList.js",
+      "import": "./node.k8s.io/v1alpha1/RuntimeClassList.mjs"
+    },
+    "./node.k8s.io/v1alpha1/RuntimeClassSpec": {
+      "require": "./node.k8s.io/v1alpha1/RuntimeClassSpec.js",
+      "import": "./node.k8s.io/v1alpha1/RuntimeClassSpec.mjs"
+    },
+    "./node.k8s.io/v1alpha1/Scheduling": {
+      "require": "./node.k8s.io/v1alpha1/Scheduling.js",
+      "import": "./node.k8s.io/v1alpha1/Scheduling.mjs"
+    },
+    "./node.k8s.io/v1alpha1": {
+      "require": "./node.k8s.io/v1alpha1/index.js",
+      "import": "./node.k8s.io/v1alpha1/index.mjs"
+    },
+    "./node.k8s.io/v1beta1/Overhead": {
+      "require": "./node.k8s.io/v1beta1/Overhead.js",
+      "import": "./node.k8s.io/v1beta1/Overhead.mjs"
+    },
+    "./node.k8s.io/v1beta1/RuntimeClass": {
+      "require": "./node.k8s.io/v1beta1/RuntimeClass.js",
+      "import": "./node.k8s.io/v1beta1/RuntimeClass.mjs"
+    },
+    "./node.k8s.io/v1beta1/RuntimeClassList": {
+      "require": "./node.k8s.io/v1beta1/RuntimeClassList.js",
+      "import": "./node.k8s.io/v1beta1/RuntimeClassList.mjs"
+    },
+    "./node.k8s.io/v1beta1/Scheduling": {
+      "require": "./node.k8s.io/v1beta1/Scheduling.js",
+      "import": "./node.k8s.io/v1beta1/Scheduling.mjs"
+    },
+    "./node.k8s.io/v1beta1": {
+      "require": "./node.k8s.io/v1beta1/index.js",
+      "import": "./node.k8s.io/v1beta1/index.mjs"
+    },
+    "./policy": {
+      "require": "./policy/index.js",
+      "import": "./policy/index.mjs"
+    },
+    "./policy/v1beta1/AllowedCSIDriver": {
+      "require": "./policy/v1beta1/AllowedCSIDriver.js",
+      "import": "./policy/v1beta1/AllowedCSIDriver.mjs"
+    },
+    "./policy/v1beta1/AllowedFlexVolume": {
+      "require": "./policy/v1beta1/AllowedFlexVolume.js",
+      "import": "./policy/v1beta1/AllowedFlexVolume.mjs"
+    },
+    "./policy/v1beta1/AllowedHostPath": {
+      "require": "./policy/v1beta1/AllowedHostPath.js",
+      "import": "./policy/v1beta1/AllowedHostPath.mjs"
+    },
+    "./policy/v1beta1/Eviction": {
+      "require": "./policy/v1beta1/Eviction.js",
+      "import": "./policy/v1beta1/Eviction.mjs"
+    },
+    "./policy/v1beta1/FSGroupStrategyOptions": {
+      "require": "./policy/v1beta1/FSGroupStrategyOptions.js",
+      "import": "./policy/v1beta1/FSGroupStrategyOptions.mjs"
+    },
+    "./policy/v1beta1/HostPortRange": {
+      "require": "./policy/v1beta1/HostPortRange.js",
+      "import": "./policy/v1beta1/HostPortRange.mjs"
+    },
+    "./policy/v1beta1/IDRange": {
+      "require": "./policy/v1beta1/IDRange.js",
+      "import": "./policy/v1beta1/IDRange.mjs"
+    },
+    "./policy/v1beta1/PodDisruptionBudget": {
+      "require": "./policy/v1beta1/PodDisruptionBudget.js",
+      "import": "./policy/v1beta1/PodDisruptionBudget.mjs"
+    },
+    "./policy/v1beta1/PodDisruptionBudgetList": {
+      "require": "./policy/v1beta1/PodDisruptionBudgetList.js",
+      "import": "./policy/v1beta1/PodDisruptionBudgetList.mjs"
+    },
+    "./policy/v1beta1/PodDisruptionBudgetSpec": {
+      "require": "./policy/v1beta1/PodDisruptionBudgetSpec.js",
+      "import": "./policy/v1beta1/PodDisruptionBudgetSpec.mjs"
+    },
+    "./policy/v1beta1/PodDisruptionBudgetStatus": {
+      "require": "./policy/v1beta1/PodDisruptionBudgetStatus.js",
+      "import": "./policy/v1beta1/PodDisruptionBudgetStatus.mjs"
+    },
+    "./policy/v1beta1/PodSecurityPolicy": {
+      "require": "./policy/v1beta1/PodSecurityPolicy.js",
+      "import": "./policy/v1beta1/PodSecurityPolicy.mjs"
+    },
+    "./policy/v1beta1/PodSecurityPolicyList": {
+      "require": "./policy/v1beta1/PodSecurityPolicyList.js",
+      "import": "./policy/v1beta1/PodSecurityPolicyList.mjs"
+    },
+    "./policy/v1beta1/PodSecurityPolicySpec": {
+      "require": "./policy/v1beta1/PodSecurityPolicySpec.js",
+      "import": "./policy/v1beta1/PodSecurityPolicySpec.mjs"
+    },
+    "./policy/v1beta1/RunAsGroupStrategyOptions": {
+      "require": "./policy/v1beta1/RunAsGroupStrategyOptions.js",
+      "import": "./policy/v1beta1/RunAsGroupStrategyOptions.mjs"
+    },
+    "./policy/v1beta1/RunAsUserStrategyOptions": {
+      "require": "./policy/v1beta1/RunAsUserStrategyOptions.js",
+      "import": "./policy/v1beta1/RunAsUserStrategyOptions.mjs"
+    },
+    "./policy/v1beta1/RuntimeClassStrategyOptions": {
+      "require": "./policy/v1beta1/RuntimeClassStrategyOptions.js",
+      "import": "./policy/v1beta1/RuntimeClassStrategyOptions.mjs"
+    },
+    "./policy/v1beta1/SELinuxStrategyOptions": {
+      "require": "./policy/v1beta1/SELinuxStrategyOptions.js",
+      "import": "./policy/v1beta1/SELinuxStrategyOptions.mjs"
+    },
+    "./policy/v1beta1/SupplementalGroupsStrategyOptions": {
+      "require": "./policy/v1beta1/SupplementalGroupsStrategyOptions.js",
+      "import": "./policy/v1beta1/SupplementalGroupsStrategyOptions.mjs"
+    },
+    "./policy/v1beta1": {
+      "require": "./policy/v1beta1/index.js",
+      "import": "./policy/v1beta1/index.mjs"
+    },
+    "./rbac.authorization.k8s.io": {
+      "require": "./rbac.authorization.k8s.io/index.js",
+      "import": "./rbac.authorization.k8s.io/index.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1/AggregationRule": {
+      "require": "./rbac.authorization.k8s.io/v1/AggregationRule.js",
+      "import": "./rbac.authorization.k8s.io/v1/AggregationRule.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1/ClusterRole": {
+      "require": "./rbac.authorization.k8s.io/v1/ClusterRole.js",
+      "import": "./rbac.authorization.k8s.io/v1/ClusterRole.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1/ClusterRoleBinding": {
+      "require": "./rbac.authorization.k8s.io/v1/ClusterRoleBinding.js",
+      "import": "./rbac.authorization.k8s.io/v1/ClusterRoleBinding.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1/ClusterRoleBindingList": {
+      "require": "./rbac.authorization.k8s.io/v1/ClusterRoleBindingList.js",
+      "import": "./rbac.authorization.k8s.io/v1/ClusterRoleBindingList.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1/ClusterRoleList": {
+      "require": "./rbac.authorization.k8s.io/v1/ClusterRoleList.js",
+      "import": "./rbac.authorization.k8s.io/v1/ClusterRoleList.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1/PolicyRule": {
+      "require": "./rbac.authorization.k8s.io/v1/PolicyRule.js",
+      "import": "./rbac.authorization.k8s.io/v1/PolicyRule.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1/Role": {
+      "require": "./rbac.authorization.k8s.io/v1/Role.js",
+      "import": "./rbac.authorization.k8s.io/v1/Role.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1/RoleBinding": {
+      "require": "./rbac.authorization.k8s.io/v1/RoleBinding.js",
+      "import": "./rbac.authorization.k8s.io/v1/RoleBinding.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1/RoleBindingList": {
+      "require": "./rbac.authorization.k8s.io/v1/RoleBindingList.js",
+      "import": "./rbac.authorization.k8s.io/v1/RoleBindingList.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1/RoleList": {
+      "require": "./rbac.authorization.k8s.io/v1/RoleList.js",
+      "import": "./rbac.authorization.k8s.io/v1/RoleList.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1/RoleRef": {
+      "require": "./rbac.authorization.k8s.io/v1/RoleRef.js",
+      "import": "./rbac.authorization.k8s.io/v1/RoleRef.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1/Subject": {
+      "require": "./rbac.authorization.k8s.io/v1/Subject.js",
+      "import": "./rbac.authorization.k8s.io/v1/Subject.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1": {
+      "require": "./rbac.authorization.k8s.io/v1/index.js",
+      "import": "./rbac.authorization.k8s.io/v1/index.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1alpha1/AggregationRule": {
+      "require": "./rbac.authorization.k8s.io/v1alpha1/AggregationRule.js",
+      "import": "./rbac.authorization.k8s.io/v1alpha1/AggregationRule.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1alpha1/ClusterRole": {
+      "require": "./rbac.authorization.k8s.io/v1alpha1/ClusterRole.js",
+      "import": "./rbac.authorization.k8s.io/v1alpha1/ClusterRole.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1alpha1/ClusterRoleBinding": {
+      "require": "./rbac.authorization.k8s.io/v1alpha1/ClusterRoleBinding.js",
+      "import": "./rbac.authorization.k8s.io/v1alpha1/ClusterRoleBinding.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1alpha1/ClusterRoleBindingList": {
+      "require": "./rbac.authorization.k8s.io/v1alpha1/ClusterRoleBindingList.js",
+      "import": "./rbac.authorization.k8s.io/v1alpha1/ClusterRoleBindingList.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1alpha1/ClusterRoleList": {
+      "require": "./rbac.authorization.k8s.io/v1alpha1/ClusterRoleList.js",
+      "import": "./rbac.authorization.k8s.io/v1alpha1/ClusterRoleList.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1alpha1/PolicyRule": {
+      "require": "./rbac.authorization.k8s.io/v1alpha1/PolicyRule.js",
+      "import": "./rbac.authorization.k8s.io/v1alpha1/PolicyRule.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1alpha1/Role": {
+      "require": "./rbac.authorization.k8s.io/v1alpha1/Role.js",
+      "import": "./rbac.authorization.k8s.io/v1alpha1/Role.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1alpha1/RoleBinding": {
+      "require": "./rbac.authorization.k8s.io/v1alpha1/RoleBinding.js",
+      "import": "./rbac.authorization.k8s.io/v1alpha1/RoleBinding.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1alpha1/RoleBindingList": {
+      "require": "./rbac.authorization.k8s.io/v1alpha1/RoleBindingList.js",
+      "import": "./rbac.authorization.k8s.io/v1alpha1/RoleBindingList.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1alpha1/RoleList": {
+      "require": "./rbac.authorization.k8s.io/v1alpha1/RoleList.js",
+      "import": "./rbac.authorization.k8s.io/v1alpha1/RoleList.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1alpha1/RoleRef": {
+      "require": "./rbac.authorization.k8s.io/v1alpha1/RoleRef.js",
+      "import": "./rbac.authorization.k8s.io/v1alpha1/RoleRef.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1alpha1/Subject": {
+      "require": "./rbac.authorization.k8s.io/v1alpha1/Subject.js",
+      "import": "./rbac.authorization.k8s.io/v1alpha1/Subject.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1alpha1": {
+      "require": "./rbac.authorization.k8s.io/v1alpha1/index.js",
+      "import": "./rbac.authorization.k8s.io/v1alpha1/index.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1beta1/AggregationRule": {
+      "require": "./rbac.authorization.k8s.io/v1beta1/AggregationRule.js",
+      "import": "./rbac.authorization.k8s.io/v1beta1/AggregationRule.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1beta1/ClusterRole": {
+      "require": "./rbac.authorization.k8s.io/v1beta1/ClusterRole.js",
+      "import": "./rbac.authorization.k8s.io/v1beta1/ClusterRole.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1beta1/ClusterRoleBinding": {
+      "require": "./rbac.authorization.k8s.io/v1beta1/ClusterRoleBinding.js",
+      "import": "./rbac.authorization.k8s.io/v1beta1/ClusterRoleBinding.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1beta1/ClusterRoleBindingList": {
+      "require": "./rbac.authorization.k8s.io/v1beta1/ClusterRoleBindingList.js",
+      "import": "./rbac.authorization.k8s.io/v1beta1/ClusterRoleBindingList.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1beta1/ClusterRoleList": {
+      "require": "./rbac.authorization.k8s.io/v1beta1/ClusterRoleList.js",
+      "import": "./rbac.authorization.k8s.io/v1beta1/ClusterRoleList.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1beta1/PolicyRule": {
+      "require": "./rbac.authorization.k8s.io/v1beta1/PolicyRule.js",
+      "import": "./rbac.authorization.k8s.io/v1beta1/PolicyRule.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1beta1/Role": {
+      "require": "./rbac.authorization.k8s.io/v1beta1/Role.js",
+      "import": "./rbac.authorization.k8s.io/v1beta1/Role.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1beta1/RoleBinding": {
+      "require": "./rbac.authorization.k8s.io/v1beta1/RoleBinding.js",
+      "import": "./rbac.authorization.k8s.io/v1beta1/RoleBinding.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1beta1/RoleBindingList": {
+      "require": "./rbac.authorization.k8s.io/v1beta1/RoleBindingList.js",
+      "import": "./rbac.authorization.k8s.io/v1beta1/RoleBindingList.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1beta1/RoleList": {
+      "require": "./rbac.authorization.k8s.io/v1beta1/RoleList.js",
+      "import": "./rbac.authorization.k8s.io/v1beta1/RoleList.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1beta1/RoleRef": {
+      "require": "./rbac.authorization.k8s.io/v1beta1/RoleRef.js",
+      "import": "./rbac.authorization.k8s.io/v1beta1/RoleRef.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1beta1/Subject": {
+      "require": "./rbac.authorization.k8s.io/v1beta1/Subject.js",
+      "import": "./rbac.authorization.k8s.io/v1beta1/Subject.mjs"
+    },
+    "./rbac.authorization.k8s.io/v1beta1": {
+      "require": "./rbac.authorization.k8s.io/v1beta1/index.js",
+      "import": "./rbac.authorization.k8s.io/v1beta1/index.mjs"
+    },
+    "./scheduling.k8s.io": {
+      "require": "./scheduling.k8s.io/index.js",
+      "import": "./scheduling.k8s.io/index.mjs"
+    },
+    "./scheduling.k8s.io/v1/PriorityClass": {
+      "require": "./scheduling.k8s.io/v1/PriorityClass.js",
+      "import": "./scheduling.k8s.io/v1/PriorityClass.mjs"
+    },
+    "./scheduling.k8s.io/v1/PriorityClassList": {
+      "require": "./scheduling.k8s.io/v1/PriorityClassList.js",
+      "import": "./scheduling.k8s.io/v1/PriorityClassList.mjs"
+    },
+    "./scheduling.k8s.io/v1": {
+      "require": "./scheduling.k8s.io/v1/index.js",
+      "import": "./scheduling.k8s.io/v1/index.mjs"
+    },
+    "./scheduling.k8s.io/v1alpha1/PriorityClass": {
+      "require": "./scheduling.k8s.io/v1alpha1/PriorityClass.js",
+      "import": "./scheduling.k8s.io/v1alpha1/PriorityClass.mjs"
+    },
+    "./scheduling.k8s.io/v1alpha1/PriorityClassList": {
+      "require": "./scheduling.k8s.io/v1alpha1/PriorityClassList.js",
+      "import": "./scheduling.k8s.io/v1alpha1/PriorityClassList.mjs"
+    },
+    "./scheduling.k8s.io/v1alpha1": {
+      "require": "./scheduling.k8s.io/v1alpha1/index.js",
+      "import": "./scheduling.k8s.io/v1alpha1/index.mjs"
+    },
+    "./scheduling.k8s.io/v1beta1/PriorityClass": {
+      "require": "./scheduling.k8s.io/v1beta1/PriorityClass.js",
+      "import": "./scheduling.k8s.io/v1beta1/PriorityClass.mjs"
+    },
+    "./scheduling.k8s.io/v1beta1/PriorityClassList": {
+      "require": "./scheduling.k8s.io/v1beta1/PriorityClassList.js",
+      "import": "./scheduling.k8s.io/v1beta1/PriorityClassList.mjs"
+    },
+    "./scheduling.k8s.io/v1beta1": {
+      "require": "./scheduling.k8s.io/v1beta1/index.js",
+      "import": "./scheduling.k8s.io/v1beta1/index.mjs"
+    },
+    "./settings.k8s.io": {
+      "require": "./settings.k8s.io/index.js",
+      "import": "./settings.k8s.io/index.mjs"
+    },
+    "./settings.k8s.io/v1alpha1/PodPreset": {
+      "require": "./settings.k8s.io/v1alpha1/PodPreset.js",
+      "import": "./settings.k8s.io/v1alpha1/PodPreset.mjs"
+    },
+    "./settings.k8s.io/v1alpha1/PodPresetList": {
+      "require": "./settings.k8s.io/v1alpha1/PodPresetList.js",
+      "import": "./settings.k8s.io/v1alpha1/PodPresetList.mjs"
+    },
+    "./settings.k8s.io/v1alpha1/PodPresetSpec": {
+      "require": "./settings.k8s.io/v1alpha1/PodPresetSpec.js",
+      "import": "./settings.k8s.io/v1alpha1/PodPresetSpec.mjs"
+    },
+    "./settings.k8s.io/v1alpha1": {
+      "require": "./settings.k8s.io/v1alpha1/index.js",
+      "import": "./settings.k8s.io/v1alpha1/index.mjs"
+    },
+    "./storage.k8s.io": {
+      "require": "./storage.k8s.io/index.js",
+      "import": "./storage.k8s.io/index.mjs"
+    },
+    "./storage.k8s.io/v1/CSIDriver": {
+      "require": "./storage.k8s.io/v1/CSIDriver.js",
+      "import": "./storage.k8s.io/v1/CSIDriver.mjs"
+    },
+    "./storage.k8s.io/v1/CSIDriverList": {
+      "require": "./storage.k8s.io/v1/CSIDriverList.js",
+      "import": "./storage.k8s.io/v1/CSIDriverList.mjs"
+    },
+    "./storage.k8s.io/v1/CSIDriverSpec": {
+      "require": "./storage.k8s.io/v1/CSIDriverSpec.js",
+      "import": "./storage.k8s.io/v1/CSIDriverSpec.mjs"
+    },
+    "./storage.k8s.io/v1/CSINode": {
+      "require": "./storage.k8s.io/v1/CSINode.js",
+      "import": "./storage.k8s.io/v1/CSINode.mjs"
+    },
+    "./storage.k8s.io/v1/CSINodeDriver": {
+      "require": "./storage.k8s.io/v1/CSINodeDriver.js",
+      "import": "./storage.k8s.io/v1/CSINodeDriver.mjs"
+    },
+    "./storage.k8s.io/v1/CSINodeList": {
+      "require": "./storage.k8s.io/v1/CSINodeList.js",
+      "import": "./storage.k8s.io/v1/CSINodeList.mjs"
+    },
+    "./storage.k8s.io/v1/CSINodeSpec": {
+      "require": "./storage.k8s.io/v1/CSINodeSpec.js",
+      "import": "./storage.k8s.io/v1/CSINodeSpec.mjs"
+    },
+    "./storage.k8s.io/v1/StorageClass": {
+      "require": "./storage.k8s.io/v1/StorageClass.js",
+      "import": "./storage.k8s.io/v1/StorageClass.mjs"
+    },
+    "./storage.k8s.io/v1/StorageClassList": {
+      "require": "./storage.k8s.io/v1/StorageClassList.js",
+      "import": "./storage.k8s.io/v1/StorageClassList.mjs"
+    },
+    "./storage.k8s.io/v1/VolumeAttachment": {
+      "require": "./storage.k8s.io/v1/VolumeAttachment.js",
+      "import": "./storage.k8s.io/v1/VolumeAttachment.mjs"
+    },
+    "./storage.k8s.io/v1/VolumeAttachmentList": {
+      "require": "./storage.k8s.io/v1/VolumeAttachmentList.js",
+      "import": "./storage.k8s.io/v1/VolumeAttachmentList.mjs"
+    },
+    "./storage.k8s.io/v1/VolumeAttachmentSource": {
+      "require": "./storage.k8s.io/v1/VolumeAttachmentSource.js",
+      "import": "./storage.k8s.io/v1/VolumeAttachmentSource.mjs"
+    },
+    "./storage.k8s.io/v1/VolumeAttachmentSpec": {
+      "require": "./storage.k8s.io/v1/VolumeAttachmentSpec.js",
+      "import": "./storage.k8s.io/v1/VolumeAttachmentSpec.mjs"
+    },
+    "./storage.k8s.io/v1/VolumeAttachmentStatus": {
+      "require": "./storage.k8s.io/v1/VolumeAttachmentStatus.js",
+      "import": "./storage.k8s.io/v1/VolumeAttachmentStatus.mjs"
+    },
+    "./storage.k8s.io/v1/VolumeError": {
+      "require": "./storage.k8s.io/v1/VolumeError.js",
+      "import": "./storage.k8s.io/v1/VolumeError.mjs"
+    },
+    "./storage.k8s.io/v1/VolumeNodeResources": {
+      "require": "./storage.k8s.io/v1/VolumeNodeResources.js",
+      "import": "./storage.k8s.io/v1/VolumeNodeResources.mjs"
+    },
+    "./storage.k8s.io/v1": {
+      "require": "./storage.k8s.io/v1/index.js",
+      "import": "./storage.k8s.io/v1/index.mjs"
+    },
+    "./storage.k8s.io/v1alpha1/VolumeAttachment": {
+      "require": "./storage.k8s.io/v1alpha1/VolumeAttachment.js",
+      "import": "./storage.k8s.io/v1alpha1/VolumeAttachment.mjs"
+    },
+    "./storage.k8s.io/v1alpha1/VolumeAttachmentList": {
+      "require": "./storage.k8s.io/v1alpha1/VolumeAttachmentList.js",
+      "import": "./storage.k8s.io/v1alpha1/VolumeAttachmentList.mjs"
+    },
+    "./storage.k8s.io/v1alpha1/VolumeAttachmentSource": {
+      "require": "./storage.k8s.io/v1alpha1/VolumeAttachmentSource.js",
+      "import": "./storage.k8s.io/v1alpha1/VolumeAttachmentSource.mjs"
+    },
+    "./storage.k8s.io/v1alpha1/VolumeAttachmentSpec": {
+      "require": "./storage.k8s.io/v1alpha1/VolumeAttachmentSpec.js",
+      "import": "./storage.k8s.io/v1alpha1/VolumeAttachmentSpec.mjs"
+    },
+    "./storage.k8s.io/v1alpha1/VolumeAttachmentStatus": {
+      "require": "./storage.k8s.io/v1alpha1/VolumeAttachmentStatus.js",
+      "import": "./storage.k8s.io/v1alpha1/VolumeAttachmentStatus.mjs"
+    },
+    "./storage.k8s.io/v1alpha1/VolumeError": {
+      "require": "./storage.k8s.io/v1alpha1/VolumeError.js",
+      "import": "./storage.k8s.io/v1alpha1/VolumeError.mjs"
+    },
+    "./storage.k8s.io/v1alpha1": {
+      "require": "./storage.k8s.io/v1alpha1/index.js",
+      "import": "./storage.k8s.io/v1alpha1/index.mjs"
+    },
+    "./storage.k8s.io/v1beta1/CSIDriver": {
+      "require": "./storage.k8s.io/v1beta1/CSIDriver.js",
+      "import": "./storage.k8s.io/v1beta1/CSIDriver.mjs"
+    },
+    "./storage.k8s.io/v1beta1/CSIDriverList": {
+      "require": "./storage.k8s.io/v1beta1/CSIDriverList.js",
+      "import": "./storage.k8s.io/v1beta1/CSIDriverList.mjs"
+    },
+    "./storage.k8s.io/v1beta1/CSIDriverSpec": {
+      "require": "./storage.k8s.io/v1beta1/CSIDriverSpec.js",
+      "import": "./storage.k8s.io/v1beta1/CSIDriverSpec.mjs"
+    },
+    "./storage.k8s.io/v1beta1/CSINode": {
+      "require": "./storage.k8s.io/v1beta1/CSINode.js",
+      "import": "./storage.k8s.io/v1beta1/CSINode.mjs"
+    },
+    "./storage.k8s.io/v1beta1/CSINodeDriver": {
+      "require": "./storage.k8s.io/v1beta1/CSINodeDriver.js",
+      "import": "./storage.k8s.io/v1beta1/CSINodeDriver.mjs"
+    },
+    "./storage.k8s.io/v1beta1/CSINodeList": {
+      "require": "./storage.k8s.io/v1beta1/CSINodeList.js",
+      "import": "./storage.k8s.io/v1beta1/CSINodeList.mjs"
+    },
+    "./storage.k8s.io/v1beta1/CSINodeSpec": {
+      "require": "./storage.k8s.io/v1beta1/CSINodeSpec.js",
+      "import": "./storage.k8s.io/v1beta1/CSINodeSpec.mjs"
+    },
+    "./storage.k8s.io/v1beta1/StorageClass": {
+      "require": "./storage.k8s.io/v1beta1/StorageClass.js",
+      "import": "./storage.k8s.io/v1beta1/StorageClass.mjs"
+    },
+    "./storage.k8s.io/v1beta1/StorageClassList": {
+      "require": "./storage.k8s.io/v1beta1/StorageClassList.js",
+      "import": "./storage.k8s.io/v1beta1/StorageClassList.mjs"
+    },
+    "./storage.k8s.io/v1beta1/VolumeAttachment": {
+      "require": "./storage.k8s.io/v1beta1/VolumeAttachment.js",
+      "import": "./storage.k8s.io/v1beta1/VolumeAttachment.mjs"
+    },
+    "./storage.k8s.io/v1beta1/VolumeAttachmentList": {
+      "require": "./storage.k8s.io/v1beta1/VolumeAttachmentList.js",
+      "import": "./storage.k8s.io/v1beta1/VolumeAttachmentList.mjs"
+    },
+    "./storage.k8s.io/v1beta1/VolumeAttachmentSource": {
+      "require": "./storage.k8s.io/v1beta1/VolumeAttachmentSource.js",
+      "import": "./storage.k8s.io/v1beta1/VolumeAttachmentSource.mjs"
+    },
+    "./storage.k8s.io/v1beta1/VolumeAttachmentSpec": {
+      "require": "./storage.k8s.io/v1beta1/VolumeAttachmentSpec.js",
+      "import": "./storage.k8s.io/v1beta1/VolumeAttachmentSpec.mjs"
+    },
+    "./storage.k8s.io/v1beta1/VolumeAttachmentStatus": {
+      "require": "./storage.k8s.io/v1beta1/VolumeAttachmentStatus.js",
+      "import": "./storage.k8s.io/v1beta1/VolumeAttachmentStatus.mjs"
+    },
+    "./storage.k8s.io/v1beta1/VolumeError": {
+      "require": "./storage.k8s.io/v1beta1/VolumeError.js",
+      "import": "./storage.k8s.io/v1beta1/VolumeError.mjs"
+    },
+    "./storage.k8s.io/v1beta1/VolumeNodeResources": {
+      "require": "./storage.k8s.io/v1beta1/VolumeNodeResources.js",
+      "import": "./storage.k8s.io/v1beta1/VolumeNodeResources.mjs"
+    },
+    "./storage.k8s.io/v1beta1": {
+      "require": "./storage.k8s.io/v1beta1/index.js",
+      "import": "./storage.k8s.io/v1beta1/index.mjs"
+    },
+    "./v1/AWSElasticBlockStoreVolumeSource": {
+      "require": "./v1/AWSElasticBlockStoreVolumeSource.js",
+      "import": "./v1/AWSElasticBlockStoreVolumeSource.mjs"
+    },
+    "./v1/Affinity": {
+      "require": "./v1/Affinity.js",
+      "import": "./v1/Affinity.mjs"
+    },
+    "./v1/AttachedVolume": {
+      "require": "./v1/AttachedVolume.js",
+      "import": "./v1/AttachedVolume.mjs"
+    },
+    "./v1/AzureDiskVolumeSource": {
+      "require": "./v1/AzureDiskVolumeSource.js",
+      "import": "./v1/AzureDiskVolumeSource.mjs"
+    },
+    "./v1/AzureFilePersistentVolumeSource": {
+      "require": "./v1/AzureFilePersistentVolumeSource.js",
+      "import": "./v1/AzureFilePersistentVolumeSource.mjs"
+    },
+    "./v1/AzureFileVolumeSource": {
+      "require": "./v1/AzureFileVolumeSource.js",
+      "import": "./v1/AzureFileVolumeSource.mjs"
+    },
+    "./v1/Binding": {
+      "require": "./v1/Binding.js",
+      "import": "./v1/Binding.mjs"
+    },
+    "./v1/CSIPersistentVolumeSource": {
+      "require": "./v1/CSIPersistentVolumeSource.js",
+      "import": "./v1/CSIPersistentVolumeSource.mjs"
+    },
+    "./v1/CSIVolumeSource": {
+      "require": "./v1/CSIVolumeSource.js",
+      "import": "./v1/CSIVolumeSource.mjs"
+    },
+    "./v1/Capabilities": {
+      "require": "./v1/Capabilities.js",
+      "import": "./v1/Capabilities.mjs"
+    },
+    "./v1/CephFSPersistentVolumeSource": {
+      "require": "./v1/CephFSPersistentVolumeSource.js",
+      "import": "./v1/CephFSPersistentVolumeSource.mjs"
+    },
+    "./v1/CephFSVolumeSource": {
+      "require": "./v1/CephFSVolumeSource.js",
+      "import": "./v1/CephFSVolumeSource.mjs"
+    },
+    "./v1/CinderPersistentVolumeSource": {
+      "require": "./v1/CinderPersistentVolumeSource.js",
+      "import": "./v1/CinderPersistentVolumeSource.mjs"
+    },
+    "./v1/CinderVolumeSource": {
+      "require": "./v1/CinderVolumeSource.js",
+      "import": "./v1/CinderVolumeSource.mjs"
+    },
+    "./v1/ClientIPConfig": {
+      "require": "./v1/ClientIPConfig.js",
+      "import": "./v1/ClientIPConfig.mjs"
+    },
+    "./v1/ComponentCondition": {
+      "require": "./v1/ComponentCondition.js",
+      "import": "./v1/ComponentCondition.mjs"
+    },
+    "./v1/ComponentStatus": {
+      "require": "./v1/ComponentStatus.js",
+      "import": "./v1/ComponentStatus.mjs"
+    },
+    "./v1/ComponentStatusList": {
+      "require": "./v1/ComponentStatusList.js",
+      "import": "./v1/ComponentStatusList.mjs"
+    },
+    "./v1/ConfigMap": {
+      "require": "./v1/ConfigMap.js",
+      "import": "./v1/ConfigMap.mjs"
+    },
+    "./v1/ConfigMapEnvSource": {
+      "require": "./v1/ConfigMapEnvSource.js",
+      "import": "./v1/ConfigMapEnvSource.mjs"
+    },
+    "./v1/ConfigMapKeySelector": {
+      "require": "./v1/ConfigMapKeySelector.js",
+      "import": "./v1/ConfigMapKeySelector.mjs"
+    },
+    "./v1/ConfigMapList": {
+      "require": "./v1/ConfigMapList.js",
+      "import": "./v1/ConfigMapList.mjs"
+    },
+    "./v1/ConfigMapNodeConfigSource": {
+      "require": "./v1/ConfigMapNodeConfigSource.js",
+      "import": "./v1/ConfigMapNodeConfigSource.mjs"
+    },
+    "./v1/ConfigMapProjection": {
+      "require": "./v1/ConfigMapProjection.js",
+      "import": "./v1/ConfigMapProjection.mjs"
+    },
+    "./v1/ConfigMapVolumeSource": {
+      "require": "./v1/ConfigMapVolumeSource.js",
+      "import": "./v1/ConfigMapVolumeSource.mjs"
+    },
+    "./v1/Container": {
+      "require": "./v1/Container.js",
+      "import": "./v1/Container.mjs"
+    },
+    "./v1/ContainerImage": {
+      "require": "./v1/ContainerImage.js",
+      "import": "./v1/ContainerImage.mjs"
+    },
+    "./v1/ContainerPort": {
+      "require": "./v1/ContainerPort.js",
+      "import": "./v1/ContainerPort.mjs"
+    },
+    "./v1/ContainerState": {
+      "require": "./v1/ContainerState.js",
+      "import": "./v1/ContainerState.mjs"
+    },
+    "./v1/ContainerStateRunning": {
+      "require": "./v1/ContainerStateRunning.js",
+      "import": "./v1/ContainerStateRunning.mjs"
+    },
+    "./v1/ContainerStateTerminated": {
+      "require": "./v1/ContainerStateTerminated.js",
+      "import": "./v1/ContainerStateTerminated.mjs"
+    },
+    "./v1/ContainerStateWaiting": {
+      "require": "./v1/ContainerStateWaiting.js",
+      "import": "./v1/ContainerStateWaiting.mjs"
+    },
+    "./v1/ContainerStatus": {
+      "require": "./v1/ContainerStatus.js",
+      "import": "./v1/ContainerStatus.mjs"
+    },
+    "./v1/DaemonEndpoint": {
+      "require": "./v1/DaemonEndpoint.js",
+      "import": "./v1/DaemonEndpoint.mjs"
+    },
+    "./v1/DownwardAPIProjection": {
+      "require": "./v1/DownwardAPIProjection.js",
+      "import": "./v1/DownwardAPIProjection.mjs"
+    },
+    "./v1/DownwardAPIVolumeFile": {
+      "require": "./v1/DownwardAPIVolumeFile.js",
+      "import": "./v1/DownwardAPIVolumeFile.mjs"
+    },
+    "./v1/DownwardAPIVolumeSource": {
+      "require": "./v1/DownwardAPIVolumeSource.js",
+      "import": "./v1/DownwardAPIVolumeSource.mjs"
+    },
+    "./v1/EmptyDirVolumeSource": {
+      "require": "./v1/EmptyDirVolumeSource.js",
+      "import": "./v1/EmptyDirVolumeSource.mjs"
+    },
+    "./v1/EndpointAddress": {
+      "require": "./v1/EndpointAddress.js",
+      "import": "./v1/EndpointAddress.mjs"
+    },
+    "./v1/EndpointPort": {
+      "require": "./v1/EndpointPort.js",
+      "import": "./v1/EndpointPort.mjs"
+    },
+    "./v1/EndpointSubset": {
+      "require": "./v1/EndpointSubset.js",
+      "import": "./v1/EndpointSubset.mjs"
+    },
+    "./v1/Endpoints": {
+      "require": "./v1/Endpoints.js",
+      "import": "./v1/Endpoints.mjs"
+    },
+    "./v1/EndpointsList": {
+      "require": "./v1/EndpointsList.js",
+      "import": "./v1/EndpointsList.mjs"
+    },
+    "./v1/EnvFromSource": {
+      "require": "./v1/EnvFromSource.js",
+      "import": "./v1/EnvFromSource.mjs"
+    },
+    "./v1/EnvVar": {
+      "require": "./v1/EnvVar.js",
+      "import": "./v1/EnvVar.mjs"
+    },
+    "./v1/EnvVarSource": {
+      "require": "./v1/EnvVarSource.js",
+      "import": "./v1/EnvVarSource.mjs"
+    },
+    "./v1/EphemeralContainer": {
+      "require": "./v1/EphemeralContainer.js",
+      "import": "./v1/EphemeralContainer.mjs"
+    },
+    "./v1/EphemeralVolumeSource": {
+      "require": "./v1/EphemeralVolumeSource.js",
+      "import": "./v1/EphemeralVolumeSource.mjs"
+    },
+    "./v1/Event": {
+      "require": "./v1/Event.js",
+      "import": "./v1/Event.mjs"
+    },
+    "./v1/EventList": {
+      "require": "./v1/EventList.js",
+      "import": "./v1/EventList.mjs"
+    },
+    "./v1/EventSeries": {
+      "require": "./v1/EventSeries.js",
+      "import": "./v1/EventSeries.mjs"
+    },
+    "./v1/EventSource": {
+      "require": "./v1/EventSource.js",
+      "import": "./v1/EventSource.mjs"
+    },
+    "./v1/ExecAction": {
+      "require": "./v1/ExecAction.js",
+      "import": "./v1/ExecAction.mjs"
+    },
+    "./v1/FCVolumeSource": {
+      "require": "./v1/FCVolumeSource.js",
+      "import": "./v1/FCVolumeSource.mjs"
+    },
+    "./v1/FlexPersistentVolumeSource": {
+      "require": "./v1/FlexPersistentVolumeSource.js",
+      "import": "./v1/FlexPersistentVolumeSource.mjs"
+    },
+    "./v1/FlexVolumeSource": {
+      "require": "./v1/FlexVolumeSource.js",
+      "import": "./v1/FlexVolumeSource.mjs"
+    },
+    "./v1/FlockerVolumeSource": {
+      "require": "./v1/FlockerVolumeSource.js",
+      "import": "./v1/FlockerVolumeSource.mjs"
+    },
+    "./v1/GCEPersistentDiskVolumeSource": {
+      "require": "./v1/GCEPersistentDiskVolumeSource.js",
+      "import": "./v1/GCEPersistentDiskVolumeSource.mjs"
+    },
+    "./v1/GitRepoVolumeSource": {
+      "require": "./v1/GitRepoVolumeSource.js",
+      "import": "./v1/GitRepoVolumeSource.mjs"
+    },
+    "./v1/GlusterfsPersistentVolumeSource": {
+      "require": "./v1/GlusterfsPersistentVolumeSource.js",
+      "import": "./v1/GlusterfsPersistentVolumeSource.mjs"
+    },
+    "./v1/GlusterfsVolumeSource": {
+      "require": "./v1/GlusterfsVolumeSource.js",
+      "import": "./v1/GlusterfsVolumeSource.mjs"
+    },
+    "./v1/HTTPGetAction": {
+      "require": "./v1/HTTPGetAction.js",
+      "import": "./v1/HTTPGetAction.mjs"
+    },
+    "./v1/HTTPHeader": {
+      "require": "./v1/HTTPHeader.js",
+      "import": "./v1/HTTPHeader.mjs"
+    },
+    "./v1/Handler": {
+      "require": "./v1/Handler.js",
+      "import": "./v1/Handler.mjs"
+    },
+    "./v1/HostAlias": {
+      "require": "./v1/HostAlias.js",
+      "import": "./v1/HostAlias.mjs"
+    },
+    "./v1/HostPathVolumeSource": {
+      "require": "./v1/HostPathVolumeSource.js",
+      "import": "./v1/HostPathVolumeSource.mjs"
+    },
+    "./v1/ISCSIPersistentVolumeSource": {
+      "require": "./v1/ISCSIPersistentVolumeSource.js",
+      "import": "./v1/ISCSIPersistentVolumeSource.mjs"
+    },
+    "./v1/ISCSIVolumeSource": {
+      "require": "./v1/ISCSIVolumeSource.js",
+      "import": "./v1/ISCSIVolumeSource.mjs"
+    },
+    "./v1/KeyToPath": {
+      "require": "./v1/KeyToPath.js",
+      "import": "./v1/KeyToPath.mjs"
+    },
+    "./v1/Lifecycle": {
+      "require": "./v1/Lifecycle.js",
+      "import": "./v1/Lifecycle.mjs"
+    },
+    "./v1/LimitRange": {
+      "require": "./v1/LimitRange.js",
+      "import": "./v1/LimitRange.mjs"
+    },
+    "./v1/LimitRangeItem": {
+      "require": "./v1/LimitRangeItem.js",
+      "import": "./v1/LimitRangeItem.mjs"
+    },
+    "./v1/LimitRangeList": {
+      "require": "./v1/LimitRangeList.js",
+      "import": "./v1/LimitRangeList.mjs"
+    },
+    "./v1/LimitRangeSpec": {
+      "require": "./v1/LimitRangeSpec.js",
+      "import": "./v1/LimitRangeSpec.mjs"
+    },
+    "./v1/LoadBalancerIngress": {
+      "require": "./v1/LoadBalancerIngress.js",
+      "import": "./v1/LoadBalancerIngress.mjs"
+    },
+    "./v1/LoadBalancerStatus": {
+      "require": "./v1/LoadBalancerStatus.js",
+      "import": "./v1/LoadBalancerStatus.mjs"
+    },
+    "./v1/LocalObjectReference": {
+      "require": "./v1/LocalObjectReference.js",
+      "import": "./v1/LocalObjectReference.mjs"
+    },
+    "./v1/LocalVolumeSource": {
+      "require": "./v1/LocalVolumeSource.js",
+      "import": "./v1/LocalVolumeSource.mjs"
+    },
+    "./v1/NFSVolumeSource": {
+      "require": "./v1/NFSVolumeSource.js",
+      "import": "./v1/NFSVolumeSource.mjs"
+    },
+    "./v1/Namespace": {
+      "require": "./v1/Namespace.js",
+      "import": "./v1/Namespace.mjs"
+    },
+    "./v1/NamespaceCondition": {
+      "require": "./v1/NamespaceCondition.js",
+      "import": "./v1/NamespaceCondition.mjs"
+    },
+    "./v1/NamespaceList": {
+      "require": "./v1/NamespaceList.js",
+      "import": "./v1/NamespaceList.mjs"
+    },
+    "./v1/NamespaceSpec": {
+      "require": "./v1/NamespaceSpec.js",
+      "import": "./v1/NamespaceSpec.mjs"
+    },
+    "./v1/NamespaceStatus": {
+      "require": "./v1/NamespaceStatus.js",
+      "import": "./v1/NamespaceStatus.mjs"
+    },
+    "./v1/Node": {
+      "require": "./v1/Node.js",
+      "import": "./v1/Node.mjs"
+    },
+    "./v1/NodeAddress": {
+      "require": "./v1/NodeAddress.js",
+      "import": "./v1/NodeAddress.mjs"
+    },
+    "./v1/NodeAffinity": {
+      "require": "./v1/NodeAffinity.js",
+      "import": "./v1/NodeAffinity.mjs"
+    },
+    "./v1/NodeCondition": {
+      "require": "./v1/NodeCondition.js",
+      "import": "./v1/NodeCondition.mjs"
+    },
+    "./v1/NodeConfigSource": {
+      "require": "./v1/NodeConfigSource.js",
+      "import": "./v1/NodeConfigSource.mjs"
+    },
+    "./v1/NodeConfigStatus": {
+      "require": "./v1/NodeConfigStatus.js",
+      "import": "./v1/NodeConfigStatus.mjs"
+    },
+    "./v1/NodeDaemonEndpoints": {
+      "require": "./v1/NodeDaemonEndpoints.js",
+      "import": "./v1/NodeDaemonEndpoints.mjs"
+    },
+    "./v1/NodeList": {
+      "require": "./v1/NodeList.js",
+      "import": "./v1/NodeList.mjs"
+    },
+    "./v1/NodeSelector": {
+      "require": "./v1/NodeSelector.js",
+      "import": "./v1/NodeSelector.mjs"
+    },
+    "./v1/NodeSelectorRequirement": {
+      "require": "./v1/NodeSelectorRequirement.js",
+      "import": "./v1/NodeSelectorRequirement.mjs"
+    },
+    "./v1/NodeSelectorTerm": {
+      "require": "./v1/NodeSelectorTerm.js",
+      "import": "./v1/NodeSelectorTerm.mjs"
+    },
+    "./v1/NodeSpec": {
+      "require": "./v1/NodeSpec.js",
+      "import": "./v1/NodeSpec.mjs"
+    },
+    "./v1/NodeStatus": {
+      "require": "./v1/NodeStatus.js",
+      "import": "./v1/NodeStatus.mjs"
+    },
+    "./v1/NodeSystemInfo": {
+      "require": "./v1/NodeSystemInfo.js",
+      "import": "./v1/NodeSystemInfo.mjs"
+    },
+    "./v1/ObjectFieldSelector": {
+      "require": "./v1/ObjectFieldSelector.js",
+      "import": "./v1/ObjectFieldSelector.mjs"
+    },
+    "./v1/ObjectReference": {
+      "require": "./v1/ObjectReference.js",
+      "import": "./v1/ObjectReference.mjs"
+    },
+    "./v1/PersistentVolume": {
+      "require": "./v1/PersistentVolume.js",
+      "import": "./v1/PersistentVolume.mjs"
+    },
+    "./v1/PersistentVolumeClaim": {
+      "require": "./v1/PersistentVolumeClaim.js",
+      "import": "./v1/PersistentVolumeClaim.mjs"
+    },
+    "./v1/PersistentVolumeClaimCondition": {
+      "require": "./v1/PersistentVolumeClaimCondition.js",
+      "import": "./v1/PersistentVolumeClaimCondition.mjs"
+    },
+    "./v1/PersistentVolumeClaimList": {
+      "require": "./v1/PersistentVolumeClaimList.js",
+      "import": "./v1/PersistentVolumeClaimList.mjs"
+    },
+    "./v1/PersistentVolumeClaimSpec": {
+      "require": "./v1/PersistentVolumeClaimSpec.js",
+      "import": "./v1/PersistentVolumeClaimSpec.mjs"
+    },
+    "./v1/PersistentVolumeClaimStatus": {
+      "require": "./v1/PersistentVolumeClaimStatus.js",
+      "import": "./v1/PersistentVolumeClaimStatus.mjs"
+    },
+    "./v1/PersistentVolumeClaimTemplate": {
+      "require": "./v1/PersistentVolumeClaimTemplate.js",
+      "import": "./v1/PersistentVolumeClaimTemplate.mjs"
+    },
+    "./v1/PersistentVolumeClaimVolumeSource": {
+      "require": "./v1/PersistentVolumeClaimVolumeSource.js",
+      "import": "./v1/PersistentVolumeClaimVolumeSource.mjs"
+    },
+    "./v1/PersistentVolumeList": {
+      "require": "./v1/PersistentVolumeList.js",
+      "import": "./v1/PersistentVolumeList.mjs"
+    },
+    "./v1/PersistentVolumeSpec": {
+      "require": "./v1/PersistentVolumeSpec.js",
+      "import": "./v1/PersistentVolumeSpec.mjs"
+    },
+    "./v1/PersistentVolumeStatus": {
+      "require": "./v1/PersistentVolumeStatus.js",
+      "import": "./v1/PersistentVolumeStatus.mjs"
+    },
+    "./v1/PhotonPersistentDiskVolumeSource": {
+      "require": "./v1/PhotonPersistentDiskVolumeSource.js",
+      "import": "./v1/PhotonPersistentDiskVolumeSource.mjs"
+    },
+    "./v1/Pod": {
+      "require": "./v1/Pod.js",
+      "import": "./v1/Pod.mjs"
+    },
+    "./v1/PodAffinity": {
+      "require": "./v1/PodAffinity.js",
+      "import": "./v1/PodAffinity.mjs"
+    },
+    "./v1/PodAffinityTerm": {
+      "require": "./v1/PodAffinityTerm.js",
+      "import": "./v1/PodAffinityTerm.mjs"
+    },
+    "./v1/PodAntiAffinity": {
+      "require": "./v1/PodAntiAffinity.js",
+      "import": "./v1/PodAntiAffinity.mjs"
+    },
+    "./v1/PodCondition": {
+      "require": "./v1/PodCondition.js",
+      "import": "./v1/PodCondition.mjs"
+    },
+    "./v1/PodDNSConfig": {
+      "require": "./v1/PodDNSConfig.js",
+      "import": "./v1/PodDNSConfig.mjs"
+    },
+    "./v1/PodDNSConfigOption": {
+      "require": "./v1/PodDNSConfigOption.js",
+      "import": "./v1/PodDNSConfigOption.mjs"
+    },
+    "./v1/PodIP": {
+      "require": "./v1/PodIP.js",
+      "import": "./v1/PodIP.mjs"
+    },
+    "./v1/PodList": {
+      "require": "./v1/PodList.js",
+      "import": "./v1/PodList.mjs"
+    },
+    "./v1/PodReadinessGate": {
+      "require": "./v1/PodReadinessGate.js",
+      "import": "./v1/PodReadinessGate.mjs"
+    },
+    "./v1/PodSecurityContext": {
+      "require": "./v1/PodSecurityContext.js",
+      "import": "./v1/PodSecurityContext.mjs"
+    },
+    "./v1/PodSpec": {
+      "require": "./v1/PodSpec.js",
+      "import": "./v1/PodSpec.mjs"
+    },
+    "./v1/PodStatus": {
+      "require": "./v1/PodStatus.js",
+      "import": "./v1/PodStatus.mjs"
+    },
+    "./v1/PodTemplate": {
+      "require": "./v1/PodTemplate.js",
+      "import": "./v1/PodTemplate.mjs"
+    },
+    "./v1/PodTemplateList": {
+      "require": "./v1/PodTemplateList.js",
+      "import": "./v1/PodTemplateList.mjs"
+    },
+    "./v1/PodTemplateSpec": {
+      "require": "./v1/PodTemplateSpec.js",
+      "import": "./v1/PodTemplateSpec.mjs"
+    },
+    "./v1/PortworxVolumeSource": {
+      "require": "./v1/PortworxVolumeSource.js",
+      "import": "./v1/PortworxVolumeSource.mjs"
+    },
+    "./v1/PreferredSchedulingTerm": {
+      "require": "./v1/PreferredSchedulingTerm.js",
+      "import": "./v1/PreferredSchedulingTerm.mjs"
+    },
+    "./v1/Probe": {
+      "require": "./v1/Probe.js",
+      "import": "./v1/Probe.mjs"
+    },
+    "./v1/ProjectedVolumeSource": {
+      "require": "./v1/ProjectedVolumeSource.js",
+      "import": "./v1/ProjectedVolumeSource.mjs"
+    },
+    "./v1/QuobyteVolumeSource": {
+      "require": "./v1/QuobyteVolumeSource.js",
+      "import": "./v1/QuobyteVolumeSource.mjs"
+    },
+    "./v1/RBDPersistentVolumeSource": {
+      "require": "./v1/RBDPersistentVolumeSource.js",
+      "import": "./v1/RBDPersistentVolumeSource.mjs"
+    },
+    "./v1/RBDVolumeSource": {
+      "require": "./v1/RBDVolumeSource.js",
+      "import": "./v1/RBDVolumeSource.mjs"
+    },
+    "./v1/ReplicationController": {
+      "require": "./v1/ReplicationController.js",
+      "import": "./v1/ReplicationController.mjs"
+    },
+    "./v1/ReplicationControllerCondition": {
+      "require": "./v1/ReplicationControllerCondition.js",
+      "import": "./v1/ReplicationControllerCondition.mjs"
+    },
+    "./v1/ReplicationControllerList": {
+      "require": "./v1/ReplicationControllerList.js",
+      "import": "./v1/ReplicationControllerList.mjs"
+    },
+    "./v1/ReplicationControllerSpec": {
+      "require": "./v1/ReplicationControllerSpec.js",
+      "import": "./v1/ReplicationControllerSpec.mjs"
+    },
+    "./v1/ReplicationControllerStatus": {
+      "require": "./v1/ReplicationControllerStatus.js",
+      "import": "./v1/ReplicationControllerStatus.mjs"
+    },
+    "./v1/ResourceFieldSelector": {
+      "require": "./v1/ResourceFieldSelector.js",
+      "import": "./v1/ResourceFieldSelector.mjs"
+    },
+    "./v1/ResourceQuota": {
+      "require": "./v1/ResourceQuota.js",
+      "import": "./v1/ResourceQuota.mjs"
+    },
+    "./v1/ResourceQuotaList": {
+      "require": "./v1/ResourceQuotaList.js",
+      "import": "./v1/ResourceQuotaList.mjs"
+    },
+    "./v1/ResourceQuotaSpec": {
+      "require": "./v1/ResourceQuotaSpec.js",
+      "import": "./v1/ResourceQuotaSpec.mjs"
+    },
+    "./v1/ResourceQuotaStatus": {
+      "require": "./v1/ResourceQuotaStatus.js",
+      "import": "./v1/ResourceQuotaStatus.mjs"
+    },
+    "./v1/ResourceRequirements": {
+      "require": "./v1/ResourceRequirements.js",
+      "import": "./v1/ResourceRequirements.mjs"
+    },
+    "./v1/SELinuxOptions": {
+      "require": "./v1/SELinuxOptions.js",
+      "import": "./v1/SELinuxOptions.mjs"
+    },
+    "./v1/ScaleIOPersistentVolumeSource": {
+      "require": "./v1/ScaleIOPersistentVolumeSource.js",
+      "import": "./v1/ScaleIOPersistentVolumeSource.mjs"
+    },
+    "./v1/ScaleIOVolumeSource": {
+      "require": "./v1/ScaleIOVolumeSource.js",
+      "import": "./v1/ScaleIOVolumeSource.mjs"
+    },
+    "./v1/ScopeSelector": {
+      "require": "./v1/ScopeSelector.js",
+      "import": "./v1/ScopeSelector.mjs"
+    },
+    "./v1/ScopedResourceSelectorRequirement": {
+      "require": "./v1/ScopedResourceSelectorRequirement.js",
+      "import": "./v1/ScopedResourceSelectorRequirement.mjs"
+    },
+    "./v1/SeccompProfile": {
+      "require": "./v1/SeccompProfile.js",
+      "import": "./v1/SeccompProfile.mjs"
+    },
+    "./v1/Secret": {
+      "require": "./v1/Secret.js",
+      "import": "./v1/Secret.mjs"
+    },
+    "./v1/SecretEnvSource": {
+      "require": "./v1/SecretEnvSource.js",
+      "import": "./v1/SecretEnvSource.mjs"
+    },
+    "./v1/SecretKeySelector": {
+      "require": "./v1/SecretKeySelector.js",
+      "import": "./v1/SecretKeySelector.mjs"
+    },
+    "./v1/SecretList": {
+      "require": "./v1/SecretList.js",
+      "import": "./v1/SecretList.mjs"
+    },
+    "./v1/SecretProjection": {
+      "require": "./v1/SecretProjection.js",
+      "import": "./v1/SecretProjection.mjs"
+    },
+    "./v1/SecretReference": {
+      "require": "./v1/SecretReference.js",
+      "import": "./v1/SecretReference.mjs"
+    },
+    "./v1/SecretVolumeSource": {
+      "require": "./v1/SecretVolumeSource.js",
+      "import": "./v1/SecretVolumeSource.mjs"
+    },
+    "./v1/SecurityContext": {
+      "require": "./v1/SecurityContext.js",
+      "import": "./v1/SecurityContext.mjs"
+    },
+    "./v1/Service": {
+      "require": "./v1/Service.js",
+      "import": "./v1/Service.mjs"
+    },
+    "./v1/ServiceAccount": {
+      "require": "./v1/ServiceAccount.js",
+      "import": "./v1/ServiceAccount.mjs"
+    },
+    "./v1/ServiceAccountList": {
+      "require": "./v1/ServiceAccountList.js",
+      "import": "./v1/ServiceAccountList.mjs"
+    },
+    "./v1/ServiceAccountTokenProjection": {
+      "require": "./v1/ServiceAccountTokenProjection.js",
+      "import": "./v1/ServiceAccountTokenProjection.mjs"
+    },
+    "./v1/ServiceList": {
+      "require": "./v1/ServiceList.js",
+      "import": "./v1/ServiceList.mjs"
+    },
+    "./v1/ServicePort": {
+      "require": "./v1/ServicePort.js",
+      "import": "./v1/ServicePort.mjs"
+    },
+    "./v1/ServiceSpec": {
+      "require": "./v1/ServiceSpec.js",
+      "import": "./v1/ServiceSpec.mjs"
+    },
+    "./v1/ServiceStatus": {
+      "require": "./v1/ServiceStatus.js",
+      "import": "./v1/ServiceStatus.mjs"
+    },
+    "./v1/SessionAffinityConfig": {
+      "require": "./v1/SessionAffinityConfig.js",
+      "import": "./v1/SessionAffinityConfig.mjs"
+    },
+    "./v1/StorageOSPersistentVolumeSource": {
+      "require": "./v1/StorageOSPersistentVolumeSource.js",
+      "import": "./v1/StorageOSPersistentVolumeSource.mjs"
+    },
+    "./v1/StorageOSVolumeSource": {
+      "require": "./v1/StorageOSVolumeSource.js",
+      "import": "./v1/StorageOSVolumeSource.mjs"
+    },
+    "./v1/Sysctl": {
+      "require": "./v1/Sysctl.js",
+      "import": "./v1/Sysctl.mjs"
+    },
+    "./v1/TCPSocketAction": {
+      "require": "./v1/TCPSocketAction.js",
+      "import": "./v1/TCPSocketAction.mjs"
+    },
+    "./v1/Taint": {
+      "require": "./v1/Taint.js",
+      "import": "./v1/Taint.mjs"
+    },
+    "./v1/Toleration": {
+      "require": "./v1/Toleration.js",
+      "import": "./v1/Toleration.mjs"
+    },
+    "./v1/TopologySelectorLabelRequirement": {
+      "require": "./v1/TopologySelectorLabelRequirement.js",
+      "import": "./v1/TopologySelectorLabelRequirement.mjs"
+    },
+    "./v1/TopologySelectorTerm": {
+      "require": "./v1/TopologySelectorTerm.js",
+      "import": "./v1/TopologySelectorTerm.mjs"
+    },
+    "./v1/TopologySpreadConstraint": {
+      "require": "./v1/TopologySpreadConstraint.js",
+      "import": "./v1/TopologySpreadConstraint.mjs"
+    },
+    "./v1/TypedLocalObjectReference": {
+      "require": "./v1/TypedLocalObjectReference.js",
+      "import": "./v1/TypedLocalObjectReference.mjs"
+    },
+    "./v1/Volume": {
+      "require": "./v1/Volume.js",
+      "import": "./v1/Volume.mjs"
+    },
+    "./v1/VolumeDevice": {
+      "require": "./v1/VolumeDevice.js",
+      "import": "./v1/VolumeDevice.mjs"
+    },
+    "./v1/VolumeMount": {
+      "require": "./v1/VolumeMount.js",
+      "import": "./v1/VolumeMount.mjs"
+    },
+    "./v1/VolumeNodeAffinity": {
+      "require": "./v1/VolumeNodeAffinity.js",
+      "import": "./v1/VolumeNodeAffinity.mjs"
+    },
+    "./v1/VolumeProjection": {
+      "require": "./v1/VolumeProjection.js",
+      "import": "./v1/VolumeProjection.mjs"
+    },
+    "./v1/VsphereVirtualDiskVolumeSource": {
+      "require": "./v1/VsphereVirtualDiskVolumeSource.js",
+      "import": "./v1/VsphereVirtualDiskVolumeSource.mjs"
+    },
+    "./v1/WeightedPodAffinityTerm": {
+      "require": "./v1/WeightedPodAffinityTerm.js",
+      "import": "./v1/WeightedPodAffinityTerm.mjs"
+    },
+    "./v1/WindowsSecurityContextOptions": {
+      "require": "./v1/WindowsSecurityContextOptions.js",
+      "import": "./v1/WindowsSecurityContextOptions.mjs"
+    },
+    "./v1": {
+      "require": "./v1/index.js",
+      "import": "./v1/index.mjs"
+    }
+  }
+}

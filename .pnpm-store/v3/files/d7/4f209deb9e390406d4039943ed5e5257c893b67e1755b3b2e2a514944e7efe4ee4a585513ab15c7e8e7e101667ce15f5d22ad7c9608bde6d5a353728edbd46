@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PodsMetricStatus = exports.IoK8sApiAutoscalingV2beta2PodsMetricStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAutoscalingV2beta2PodsMetricStatus_1 = require("../_schemas/IoK8sApiAutoscalingV2beta2PodsMetricStatus.js");
+/**
+ * PodsMetricStatus indicates the current value of a metric describing each pod in the current scale target (for example, transactions-processed-per-second).
+ */
+class IoK8sApiAutoscalingV2beta2PodsMetricStatus extends base_1.Model {
+}
+exports.IoK8sApiAutoscalingV2beta2PodsMetricStatus = IoK8sApiAutoscalingV2beta2PodsMetricStatus;
+exports.PodsMetricStatus = IoK8sApiAutoscalingV2beta2PodsMetricStatus;
+base_1.Model.setSchema(IoK8sApiAutoscalingV2beta2PodsMetricStatus, "io.k8s.api.autoscaling.v2beta2.PodsMetricStatus", IoK8sApiAutoscalingV2beta2PodsMetricStatus_1.addSchema);

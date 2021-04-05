@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.StorageOSPersistentVolumeSource = exports.IoK8sApiCoreV1StorageOSPersistentVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1StorageOSPersistentVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1StorageOSPersistentVolumeSource.js");
+/**
+ * Represents a StorageOS persistent volume resource.
+ */
+class IoK8sApiCoreV1StorageOSPersistentVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1StorageOSPersistentVolumeSource = IoK8sApiCoreV1StorageOSPersistentVolumeSource;
+exports.StorageOSPersistentVolumeSource = IoK8sApiCoreV1StorageOSPersistentVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1StorageOSPersistentVolumeSource, "io.k8s.api.core.v1.StorageOSPersistentVolumeSource", IoK8sApiCoreV1StorageOSPersistentVolumeSource_1.addSchema);

@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCertificatesV1CertificateSigningRequestStatus.mjs";
+/**
+ * CertificateSigningRequestStatus contains conditions used to indicate approved/denied/failed status of the request, and the issued certificate.
+ */
+export class IoK8sApiCertificatesV1CertificateSigningRequestStatus extends Model {
+}
+Model.setSchema(IoK8sApiCertificatesV1CertificateSigningRequestStatus, "io.k8s.api.certificates.v1.CertificateSigningRequestStatus", addSchema);
+export { IoK8sApiCertificatesV1CertificateSigningRequestStatus as CertificateSigningRequestStatus };

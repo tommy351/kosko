@@ -1,0 +1,23 @@
+import { IIoK8sApimachineryPkgApisMetaV1Time } from "./IoK8sApimachineryPkgApisMetaV1Time";
+import { Model } from "@kubernetes-models/base";
+/**
+ * TokenRequestStatus is the result of a token request.
+ */
+export interface IIoK8sApiAuthenticationV1TokenRequestStatus {
+    /**
+     * ExpirationTimestamp is the time of expiration of the returned token.
+     */
+    "expirationTimestamp": IIoK8sApimachineryPkgApisMetaV1Time;
+    /**
+     * Token is the opaque bearer token.
+     */
+    "token": string;
+}
+/**
+ * TokenRequestStatus is the result of a token request.
+ */
+export declare class IoK8sApiAuthenticationV1TokenRequestStatus extends Model<IIoK8sApiAuthenticationV1TokenRequestStatus> implements IIoK8sApiAuthenticationV1TokenRequestStatus {
+    "expirationTimestamp": IIoK8sApimachineryPkgApisMetaV1Time;
+    "token": string;
+}
+export { IIoK8sApiAuthenticationV1TokenRequestStatus as ITokenRequestStatus, IoK8sApiAuthenticationV1TokenRequestStatus as TokenRequestStatus };

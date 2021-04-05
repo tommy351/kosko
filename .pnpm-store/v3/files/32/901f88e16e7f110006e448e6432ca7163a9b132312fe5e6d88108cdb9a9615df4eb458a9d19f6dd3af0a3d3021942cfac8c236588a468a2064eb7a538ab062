@@ -1,0 +1,61 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiAdmissionregistrationV1beta1WebhookClientConfig_1 = require("./IoK8sApiAdmissionregistrationV1beta1WebhookClientConfig.js");
+const IoK8sApimachineryPkgApisMetaV1LabelSelector_1 = require("./IoK8sApimachineryPkgApisMetaV1LabelSelector.js");
+const IoK8sApiAdmissionregistrationV1beta1RuleWithOperations_1 = require("./IoK8sApiAdmissionregistrationV1beta1RuleWithOperations.js");
+const schema = {
+    "properties": {
+        "admissionReviewVersions": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "clientConfig": {
+            "$ref": "io.k8s.api.admissionregistration.v1beta1.WebhookClientConfig#"
+        },
+        "failurePolicy": {
+            "type": "string"
+        },
+        "matchPolicy": {
+            "type": "string"
+        },
+        "name": {
+            "type": "string"
+        },
+        "namespaceSelector": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector#"
+        },
+        "objectSelector": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector#"
+        },
+        "rules": {
+            "items": {
+                "$ref": "io.k8s.api.admissionregistration.v1beta1.RuleWithOperations#"
+            },
+            "type": "array"
+        },
+        "sideEffects": {
+            "type": "string"
+        },
+        "timeoutSeconds": {
+            "format": "int32",
+            "type": "integer"
+        }
+    },
+    "required": [
+        "name",
+        "clientConfig"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiAdmissionregistrationV1beta1WebhookClientConfig_1.addSchema();
+    IoK8sApimachineryPkgApisMetaV1LabelSelector_1.addSchema();
+    IoK8sApimachineryPkgApisMetaV1LabelSelector_1.addSchema();
+    IoK8sApiAdmissionregistrationV1beta1RuleWithOperations_1.addSchema();
+    validate_1.register("io.k8s.api.admissionregistration.v1beta1.ValidatingWebhook", schema);
+}
+exports.addSchema = addSchema;

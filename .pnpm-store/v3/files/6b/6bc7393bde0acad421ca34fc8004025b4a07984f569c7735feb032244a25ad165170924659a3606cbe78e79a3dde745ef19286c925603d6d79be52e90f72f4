@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NodeConfigStatus = exports.IoK8sApiCoreV1NodeConfigStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1NodeConfigStatus_1 = require("../_schemas/IoK8sApiCoreV1NodeConfigStatus.js");
+/**
+ * NodeConfigStatus describes the status of the config assigned by Node.Spec.ConfigSource.
+ */
+class IoK8sApiCoreV1NodeConfigStatus extends base_1.Model {
+}
+exports.IoK8sApiCoreV1NodeConfigStatus = IoK8sApiCoreV1NodeConfigStatus;
+exports.NodeConfigStatus = IoK8sApiCoreV1NodeConfigStatus;
+base_1.Model.setSchema(IoK8sApiCoreV1NodeConfigStatus, "io.k8s.api.core.v1.NodeConfigStatus", IoK8sApiCoreV1NodeConfigStatus_1.addSchema);

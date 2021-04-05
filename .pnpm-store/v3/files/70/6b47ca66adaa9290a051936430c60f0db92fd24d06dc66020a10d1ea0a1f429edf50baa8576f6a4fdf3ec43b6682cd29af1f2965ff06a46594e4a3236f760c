@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1ReplicationControllerCondition.mjs";
+/**
+ * ReplicationControllerCondition describes the state of a replication controller at a certain point.
+ */
+export class IoK8sApiCoreV1ReplicationControllerCondition extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1ReplicationControllerCondition, "io.k8s.api.core.v1.ReplicationControllerCondition", addSchema);
+export { IoK8sApiCoreV1ReplicationControllerCondition as ReplicationControllerCondition };

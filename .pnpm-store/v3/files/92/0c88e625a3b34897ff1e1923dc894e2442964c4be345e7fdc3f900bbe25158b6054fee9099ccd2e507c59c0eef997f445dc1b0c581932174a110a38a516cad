@@ -1,0 +1,37 @@
+import { IIoK8sApiNetworkingV1IngressClass } from "./IoK8sApiNetworkingV1IngressClass";
+import { IIoK8sApimachineryPkgApisMetaV1ListMeta } from "./IoK8sApimachineryPkgApisMetaV1ListMeta";
+import { ModelData, Model } from "@kubernetes-models/base";
+/**
+ * IngressClassList is a collection of IngressClasses.
+ */
+export interface IIoK8sApiNetworkingV1IngressClassList {
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    "apiVersion": "networking.k8s.io/v1";
+    /**
+     * Items is the list of IngressClasses.
+     */
+    "items": Array<IIoK8sApiNetworkingV1IngressClass>;
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    "kind": "IngressClassList";
+    /**
+     * Standard list metadata.
+     */
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+}
+/**
+ * IngressClassList is a collection of IngressClasses.
+ */
+export declare class IoK8sApiNetworkingV1IngressClassList extends Model<IIoK8sApiNetworkingV1IngressClassList> implements IIoK8sApiNetworkingV1IngressClassList {
+    "apiVersion": IIoK8sApiNetworkingV1IngressClassList["apiVersion"];
+    "items": Array<IIoK8sApiNetworkingV1IngressClass>;
+    "kind": IIoK8sApiNetworkingV1IngressClassList["kind"];
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+    static apiVersion: IIoK8sApiNetworkingV1IngressClassList["apiVersion"];
+    static kind: IIoK8sApiNetworkingV1IngressClassList["kind"];
+    constructor(data?: ModelData<IIoK8sApiNetworkingV1IngressClassList>);
+}
+export { IIoK8sApiNetworkingV1IngressClassList as IIngressClassList, IoK8sApiNetworkingV1IngressClassList as IngressClassList };

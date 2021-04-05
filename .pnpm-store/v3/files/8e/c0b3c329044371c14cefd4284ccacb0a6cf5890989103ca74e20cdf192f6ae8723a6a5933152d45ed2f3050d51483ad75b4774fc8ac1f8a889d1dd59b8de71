@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DaemonEndpoint = exports.IoK8sApiCoreV1DaemonEndpoint = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1DaemonEndpoint_1 = require("../_schemas/IoK8sApiCoreV1DaemonEndpoint.js");
+/**
+ * DaemonEndpoint contains information about a single Daemon endpoint.
+ */
+class IoK8sApiCoreV1DaemonEndpoint extends base_1.Model {
+}
+exports.IoK8sApiCoreV1DaemonEndpoint = IoK8sApiCoreV1DaemonEndpoint;
+exports.DaemonEndpoint = IoK8sApiCoreV1DaemonEndpoint;
+base_1.Model.setSchema(IoK8sApiCoreV1DaemonEndpoint, "io.k8s.api.core.v1.DaemonEndpoint", IoK8sApiCoreV1DaemonEndpoint_1.addSchema);

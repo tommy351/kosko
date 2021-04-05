@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApimachineryPkgApisMetaV1APIVersions.mjs";
+/**
+ * APIVersions lists the versions that are available, to allow clients to discover the API at /api, which is the root path of the legacy v1 API.
+ */
+export class IoK8sApimachineryPkgApisMetaV1APIVersions extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApimachineryPkgApisMetaV1APIVersions.apiVersion,
+            kind: IoK8sApimachineryPkgApisMetaV1APIVersions.kind,
+            ...data
+        });
+    }
+}
+IoK8sApimachineryPkgApisMetaV1APIVersions.apiVersion = "v1";
+IoK8sApimachineryPkgApisMetaV1APIVersions.kind = "APIVersions";
+Model.setSchema(IoK8sApimachineryPkgApisMetaV1APIVersions, "io.k8s.apimachinery.pkg.apis.meta.v1.APIVersions", addSchema);
+export { IoK8sApimachineryPkgApisMetaV1APIVersions as APIVersions };

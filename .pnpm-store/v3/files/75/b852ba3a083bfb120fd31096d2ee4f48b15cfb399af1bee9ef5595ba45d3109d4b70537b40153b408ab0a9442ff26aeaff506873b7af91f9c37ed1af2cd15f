@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DaemonSet = exports.IoK8sApiAppsV1DaemonSet = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAppsV1DaemonSet_1 = require("../_schemas/IoK8sApiAppsV1DaemonSet.js");
+/**
+ * DaemonSet represents the configuration of a daemon set.
+ */
+class IoK8sApiAppsV1DaemonSet extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAppsV1DaemonSet.apiVersion,
+            kind: IoK8sApiAppsV1DaemonSet.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiAppsV1DaemonSet = IoK8sApiAppsV1DaemonSet;
+exports.DaemonSet = IoK8sApiAppsV1DaemonSet;
+IoK8sApiAppsV1DaemonSet.apiVersion = "apps/v1";
+IoK8sApiAppsV1DaemonSet.kind = "DaemonSet";
+base_1.Model.setSchema(IoK8sApiAppsV1DaemonSet, "io.k8s.api.apps.v1.DaemonSet", IoK8sApiAppsV1DaemonSet_1.addSchema);

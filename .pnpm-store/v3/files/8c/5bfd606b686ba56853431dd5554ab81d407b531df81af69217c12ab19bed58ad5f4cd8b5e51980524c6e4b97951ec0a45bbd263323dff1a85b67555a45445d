@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1SecretList.mjs";
+/**
+ * SecretList is a list of Secret.
+ */
+export class IoK8sApiCoreV1SecretList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1SecretList.apiVersion,
+            kind: IoK8sApiCoreV1SecretList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiCoreV1SecretList.apiVersion = "v1";
+IoK8sApiCoreV1SecretList.kind = "SecretList";
+Model.setSchema(IoK8sApiCoreV1SecretList, "io.k8s.api.core.v1.SecretList", addSchema);
+export { IoK8sApiCoreV1SecretList as SecretList };

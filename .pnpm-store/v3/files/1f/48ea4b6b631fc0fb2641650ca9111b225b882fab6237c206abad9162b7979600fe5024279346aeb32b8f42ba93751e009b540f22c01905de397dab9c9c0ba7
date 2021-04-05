@@ -1,0 +1,26 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApimachineryPkgApisMetaV1Time } from "./IoK8sApimachineryPkgApisMetaV1Time.mjs";
+const schema = {
+    "properties": {
+        "lastTransitionTime": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.Time#"
+        },
+        "message": {
+            "type": "string"
+        },
+        "reason": {
+            "type": "string"
+        },
+        "status": {
+            "type": "string"
+        },
+        "type": {
+            "type": "string"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1Time();
+    register("io.k8s.api.flowcontrol.v1alpha1.FlowSchemaCondition", schema);
+}

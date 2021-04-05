@@ -1,0 +1,21 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "level": {
+            "type": "string"
+        },
+        "role": {
+            "type": "string"
+        },
+        "type": {
+            "type": "string"
+        },
+        "user": {
+            "type": "string"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.core.v1.SELinuxOptions", schema);
+}

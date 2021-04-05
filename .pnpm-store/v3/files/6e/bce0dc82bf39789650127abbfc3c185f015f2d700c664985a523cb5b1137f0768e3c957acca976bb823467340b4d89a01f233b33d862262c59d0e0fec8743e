@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CertificateSigningRequestCondition = exports.IoK8sApiCertificatesV1CertificateSigningRequestCondition = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCertificatesV1CertificateSigningRequestCondition_1 = require("../_schemas/IoK8sApiCertificatesV1CertificateSigningRequestCondition.js");
+/**
+ * CertificateSigningRequestCondition describes a condition of a CertificateSigningRequest object
+ */
+class IoK8sApiCertificatesV1CertificateSigningRequestCondition extends base_1.Model {
+}
+exports.IoK8sApiCertificatesV1CertificateSigningRequestCondition = IoK8sApiCertificatesV1CertificateSigningRequestCondition;
+exports.CertificateSigningRequestCondition = IoK8sApiCertificatesV1CertificateSigningRequestCondition;
+base_1.Model.setSchema(IoK8sApiCertificatesV1CertificateSigningRequestCondition, "io.k8s.api.certificates.v1.CertificateSigningRequestCondition", IoK8sApiCertificatesV1CertificateSigningRequestCondition_1.addSchema);

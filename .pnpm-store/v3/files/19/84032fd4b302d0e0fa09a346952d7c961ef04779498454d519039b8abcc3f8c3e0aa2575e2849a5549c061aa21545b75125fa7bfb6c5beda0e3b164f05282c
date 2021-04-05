@@ -1,0 +1,28 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1ContainerStateRunning_1 = require("./IoK8sApiCoreV1ContainerStateRunning.js");
+const IoK8sApiCoreV1ContainerStateTerminated_1 = require("./IoK8sApiCoreV1ContainerStateTerminated.js");
+const IoK8sApiCoreV1ContainerStateWaiting_1 = require("./IoK8sApiCoreV1ContainerStateWaiting.js");
+const schema = {
+    "properties": {
+        "running": {
+            "$ref": "io.k8s.api.core.v1.ContainerStateRunning#"
+        },
+        "terminated": {
+            "$ref": "io.k8s.api.core.v1.ContainerStateTerminated#"
+        },
+        "waiting": {
+            "$ref": "io.k8s.api.core.v1.ContainerStateWaiting#"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1ContainerStateRunning_1.addSchema();
+    IoK8sApiCoreV1ContainerStateTerminated_1.addSchema();
+    IoK8sApiCoreV1ContainerStateWaiting_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.ContainerState", schema);
+}
+exports.addSchema = addSchema;

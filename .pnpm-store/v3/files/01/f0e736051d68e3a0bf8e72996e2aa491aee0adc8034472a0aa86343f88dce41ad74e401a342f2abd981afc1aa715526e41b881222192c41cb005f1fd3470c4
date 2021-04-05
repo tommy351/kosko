@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TokenRequest = exports.IoK8sApiAuthenticationV1TokenRequest = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAuthenticationV1TokenRequest_1 = require("../_schemas/IoK8sApiAuthenticationV1TokenRequest.js");
+/**
+ * TokenRequest requests a token for a given service account.
+ */
+class IoK8sApiAuthenticationV1TokenRequest extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAuthenticationV1TokenRequest.apiVersion,
+            kind: IoK8sApiAuthenticationV1TokenRequest.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiAuthenticationV1TokenRequest = IoK8sApiAuthenticationV1TokenRequest;
+exports.TokenRequest = IoK8sApiAuthenticationV1TokenRequest;
+IoK8sApiAuthenticationV1TokenRequest.apiVersion = "authentication.k8s.io/v1";
+IoK8sApiAuthenticationV1TokenRequest.kind = "TokenRequest";
+base_1.Model.setSchema(IoK8sApiAuthenticationV1TokenRequest, "io.k8s.api.authentication.v1.TokenRequest", IoK8sApiAuthenticationV1TokenRequest_1.addSchema);

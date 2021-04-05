@@ -1,0 +1,45 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApisMetaV1ObjectMeta_1 = require("./IoK8sApimachineryPkgApisMetaV1ObjectMeta.js");
+const IoK8sApiAuthorizationV1beta1SubjectAccessReviewSpec_1 = require("./IoK8sApiAuthorizationV1beta1SubjectAccessReviewSpec.js");
+const IoK8sApiAuthorizationV1beta1SubjectAccessReviewStatus_1 = require("./IoK8sApiAuthorizationV1beta1SubjectAccessReviewStatus.js");
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string",
+            "enum": [
+                "authorization.k8s.io/v1beta1"
+            ]
+        },
+        "kind": {
+            "type": "string",
+            "enum": [
+                "LocalSubjectAccessReview"
+            ]
+        },
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta#"
+        },
+        "spec": {
+            "$ref": "io.k8s.api.authorization.v1beta1.SubjectAccessReviewSpec#"
+        },
+        "status": {
+            "$ref": "io.k8s.api.authorization.v1beta1.SubjectAccessReviewStatus#"
+        }
+    },
+    "required": [
+        "spec",
+        "apiVersion",
+        "kind"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1ObjectMeta_1.addSchema();
+    IoK8sApiAuthorizationV1beta1SubjectAccessReviewSpec_1.addSchema();
+    IoK8sApiAuthorizationV1beta1SubjectAccessReviewStatus_1.addSchema();
+    validate_1.register("io.k8s.api.authorization.v1beta1.LocalSubjectAccessReview", schema);
+}
+exports.addSchema = addSchema;

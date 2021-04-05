@@ -1,0 +1,9 @@
+import type ts from "typescript";
+export interface Reporter {
+    formatDiagnosticsHost: ts.FormatDiagnosticsHost;
+    reportDiagnostic: ts.DiagnosticReporter;
+    reportSolutionBuilderStatus: ts.DiagnosticReporter;
+    reportErrorSummary: ts.ReportEmitErrorSummary;
+    reportWatchStatus: ts.WatchStatusReporter;
+}
+export default function createReporter(cwd: string, { sys, formatDiagnosticsWithColorAndContext }: typeof ts): Reporter;

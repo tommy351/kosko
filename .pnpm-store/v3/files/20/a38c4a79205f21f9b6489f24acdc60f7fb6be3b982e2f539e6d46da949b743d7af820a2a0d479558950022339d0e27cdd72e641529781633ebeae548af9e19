@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1ComponentStatusList.mjs";
+/**
+ * Status of all the conditions for the component as a list of ComponentStatus objects. Deprecated: This API is deprecated in v1.19+
+ */
+export class IoK8sApiCoreV1ComponentStatusList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1ComponentStatusList.apiVersion,
+            kind: IoK8sApiCoreV1ComponentStatusList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiCoreV1ComponentStatusList.apiVersion = "v1";
+IoK8sApiCoreV1ComponentStatusList.kind = "ComponentStatusList";
+Model.setSchema(IoK8sApiCoreV1ComponentStatusList, "io.k8s.api.core.v1.ComponentStatusList", addSchema);
+export { IoK8sApiCoreV1ComponentStatusList as ComponentStatusList };

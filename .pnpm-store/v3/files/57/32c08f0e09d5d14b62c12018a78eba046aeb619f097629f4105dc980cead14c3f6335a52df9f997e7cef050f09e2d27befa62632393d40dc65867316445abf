@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.JobStatus = exports.IoK8sApiBatchV1JobStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiBatchV1JobStatus_1 = require("../_schemas/IoK8sApiBatchV1JobStatus.js");
+/**
+ * JobStatus represents the current state of a Job.
+ */
+class IoK8sApiBatchV1JobStatus extends base_1.Model {
+}
+exports.IoK8sApiBatchV1JobStatus = IoK8sApiBatchV1JobStatus;
+exports.JobStatus = IoK8sApiBatchV1JobStatus;
+base_1.Model.setSchema(IoK8sApiBatchV1JobStatus, "io.k8s.api.batch.v1.JobStatus", IoK8sApiBatchV1JobStatus_1.addSchema);

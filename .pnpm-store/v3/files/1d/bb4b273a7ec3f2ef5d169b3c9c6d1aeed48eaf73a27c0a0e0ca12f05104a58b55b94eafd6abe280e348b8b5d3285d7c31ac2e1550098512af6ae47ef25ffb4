@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.APIServiceSpec = exports.IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceSpec_1 = require("../_schemas/IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceSpec.js");
+/**
+ * APIServiceSpec contains information for locating and communicating with a server. Only https is supported, though you are able to disable certificate verification.
+ */
+class IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceSpec extends base_1.Model {
+}
+exports.IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceSpec = IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceSpec;
+exports.APIServiceSpec = IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceSpec;
+base_1.Model.setSchema(IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceSpec, "io.k8s.kube-aggregator.pkg.apis.apiregistration.v1beta1.APIServiceSpec", IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceSpec_1.addSchema);

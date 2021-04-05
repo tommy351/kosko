@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiNetworkingV1IPBlock.mjs";
+/**
+ * IPBlock describes a particular CIDR (Ex. "192.168.1.1/24","2001:db9::/64") that is allowed to the pods matched by a NetworkPolicySpec's podSelector. The except entry describes CIDRs that should not be included within this rule.
+ */
+export class IoK8sApiNetworkingV1IPBlock extends Model {
+}
+Model.setSchema(IoK8sApiNetworkingV1IPBlock, "io.k8s.api.networking.v1.IPBlock", addSchema);
+export { IoK8sApiNetworkingV1IPBlock as IPBlock };

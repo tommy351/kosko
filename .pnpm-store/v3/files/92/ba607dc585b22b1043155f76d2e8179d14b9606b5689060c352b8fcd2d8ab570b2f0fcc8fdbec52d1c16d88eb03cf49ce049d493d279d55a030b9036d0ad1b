@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NFSVolumeSource = exports.IoK8sApiCoreV1NFSVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1NFSVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1NFSVolumeSource.js");
+/**
+ * Represents an NFS mount that lasts the lifetime of a pod. NFS volumes do not support ownership management or SELinux relabeling.
+ */
+class IoK8sApiCoreV1NFSVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1NFSVolumeSource = IoK8sApiCoreV1NFSVolumeSource;
+exports.NFSVolumeSource = IoK8sApiCoreV1NFSVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1NFSVolumeSource, "io.k8s.api.core.v1.NFSVolumeSource", IoK8sApiCoreV1NFSVolumeSource_1.addSchema);

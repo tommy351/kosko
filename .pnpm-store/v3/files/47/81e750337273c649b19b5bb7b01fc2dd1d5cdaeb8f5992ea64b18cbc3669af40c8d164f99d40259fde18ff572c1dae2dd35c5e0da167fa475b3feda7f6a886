@@ -1,0 +1,31 @@
+import { IIoK8sApimachineryPkgApisMetaV1APIGroup } from "./IoK8sApimachineryPkgApisMetaV1APIGroup";
+import { ModelData, Model } from "@kubernetes-models/base";
+/**
+ * APIGroupList is a list of APIGroup, to allow clients to discover the API at /apis.
+ */
+export interface IIoK8sApimachineryPkgApisMetaV1APIGroupList {
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    "apiVersion": "v1";
+    /**
+     * groups is a list of APIGroup.
+     */
+    "groups": Array<IIoK8sApimachineryPkgApisMetaV1APIGroup>;
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    "kind": "APIGroupList";
+}
+/**
+ * APIGroupList is a list of APIGroup, to allow clients to discover the API at /apis.
+ */
+export declare class IoK8sApimachineryPkgApisMetaV1APIGroupList extends Model<IIoK8sApimachineryPkgApisMetaV1APIGroupList> implements IIoK8sApimachineryPkgApisMetaV1APIGroupList {
+    "apiVersion": IIoK8sApimachineryPkgApisMetaV1APIGroupList["apiVersion"];
+    "groups": Array<IIoK8sApimachineryPkgApisMetaV1APIGroup>;
+    "kind": IIoK8sApimachineryPkgApisMetaV1APIGroupList["kind"];
+    static apiVersion: IIoK8sApimachineryPkgApisMetaV1APIGroupList["apiVersion"];
+    static kind: IIoK8sApimachineryPkgApisMetaV1APIGroupList["kind"];
+    constructor(data?: ModelData<IIoK8sApimachineryPkgApisMetaV1APIGroupList>);
+}
+export { IIoK8sApimachineryPkgApisMetaV1APIGroupList as IAPIGroupList, IoK8sApimachineryPkgApisMetaV1APIGroupList as APIGroupList };

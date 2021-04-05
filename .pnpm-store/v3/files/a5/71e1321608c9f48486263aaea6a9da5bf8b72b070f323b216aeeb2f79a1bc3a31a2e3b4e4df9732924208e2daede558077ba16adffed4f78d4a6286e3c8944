@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Secret = exports.IoK8sApiCoreV1Secret = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1Secret_1 = require("../_schemas/IoK8sApiCoreV1Secret.js");
+/**
+ * Secret holds secret data of a certain type. The total bytes of the values in the Data field must be less than MaxSecretSize bytes.
+ */
+class IoK8sApiCoreV1Secret extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1Secret.apiVersion,
+            kind: IoK8sApiCoreV1Secret.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1Secret = IoK8sApiCoreV1Secret;
+exports.Secret = IoK8sApiCoreV1Secret;
+IoK8sApiCoreV1Secret.apiVersion = "v1";
+IoK8sApiCoreV1Secret.kind = "Secret";
+base_1.Model.setSchema(IoK8sApiCoreV1Secret, "io.k8s.api.core.v1.Secret", IoK8sApiCoreV1Secret_1.addSchema);

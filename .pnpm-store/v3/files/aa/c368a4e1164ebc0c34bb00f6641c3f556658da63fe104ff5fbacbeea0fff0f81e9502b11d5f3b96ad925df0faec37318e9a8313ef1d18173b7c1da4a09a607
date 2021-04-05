@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1WindowsSecurityContextOptions.mjs";
+/**
+ * WindowsSecurityContextOptions contain Windows-specific options and credentials.
+ */
+export class IoK8sApiCoreV1WindowsSecurityContextOptions extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1WindowsSecurityContextOptions, "io.k8s.api.core.v1.WindowsSecurityContextOptions", addSchema);
+export { IoK8sApiCoreV1WindowsSecurityContextOptions as WindowsSecurityContextOptions };

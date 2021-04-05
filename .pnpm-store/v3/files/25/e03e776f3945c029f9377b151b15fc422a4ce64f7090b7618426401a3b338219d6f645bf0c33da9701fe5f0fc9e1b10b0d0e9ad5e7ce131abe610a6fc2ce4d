@@ -1,0 +1,29 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1NodeConfigSource_1 = require("./IoK8sApiCoreV1NodeConfigSource.js");
+const schema = {
+    "properties": {
+        "active": {
+            "$ref": "io.k8s.api.core.v1.NodeConfigSource#"
+        },
+        "assigned": {
+            "$ref": "io.k8s.api.core.v1.NodeConfigSource#"
+        },
+        "error": {
+            "type": "string"
+        },
+        "lastKnownGood": {
+            "$ref": "io.k8s.api.core.v1.NodeConfigSource#"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1NodeConfigSource_1.addSchema();
+    IoK8sApiCoreV1NodeConfigSource_1.addSchema();
+    IoK8sApiCoreV1NodeConfigSource_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.NodeConfigStatus", schema);
+}
+exports.addSchema = addSchema;

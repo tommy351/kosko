@@ -1,0 +1,18 @@
+import { IIoK8sApiCoreV1TopologySelectorLabelRequirement } from "./IoK8sApiCoreV1TopologySelectorLabelRequirement";
+import { Model } from "@kubernetes-models/base";
+/**
+ * A topology selector term represents the result of label queries. A null or empty topology selector term matches no objects. The requirements of them are ANDed. It provides a subset of functionality as NodeSelectorTerm. This is an alpha feature and may change in the future.
+ */
+export interface IIoK8sApiCoreV1TopologySelectorTerm {
+    /**
+     * A list of topology selector requirements by labels.
+     */
+    "matchLabelExpressions"?: Array<IIoK8sApiCoreV1TopologySelectorLabelRequirement>;
+}
+/**
+ * A topology selector term represents the result of label queries. A null or empty topology selector term matches no objects. The requirements of them are ANDed. It provides a subset of functionality as NodeSelectorTerm. This is an alpha feature and may change in the future.
+ */
+export declare class IoK8sApiCoreV1TopologySelectorTerm extends Model<IIoK8sApiCoreV1TopologySelectorTerm> implements IIoK8sApiCoreV1TopologySelectorTerm {
+    "matchLabelExpressions"?: Array<IIoK8sApiCoreV1TopologySelectorLabelRequirement>;
+}
+export { IIoK8sApiCoreV1TopologySelectorTerm as ITopologySelectorTerm, IoK8sApiCoreV1TopologySelectorTerm as TopologySelectorTerm };

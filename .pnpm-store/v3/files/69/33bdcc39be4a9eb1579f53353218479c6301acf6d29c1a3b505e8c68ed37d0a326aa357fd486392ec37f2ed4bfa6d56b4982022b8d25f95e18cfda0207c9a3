@@ -1,0 +1,40 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiFlowcontrolV1alpha1NonResourcePolicyRule_1 = require("./IoK8sApiFlowcontrolV1alpha1NonResourcePolicyRule.js");
+const IoK8sApiFlowcontrolV1alpha1ResourcePolicyRule_1 = require("./IoK8sApiFlowcontrolV1alpha1ResourcePolicyRule.js");
+const IoK8sApiFlowcontrolV1alpha1Subject_1 = require("./IoK8sApiFlowcontrolV1alpha1Subject.js");
+const schema = {
+    "properties": {
+        "nonResourceRules": {
+            "items": {
+                "$ref": "io.k8s.api.flowcontrol.v1alpha1.NonResourcePolicyRule#"
+            },
+            "type": "array"
+        },
+        "resourceRules": {
+            "items": {
+                "$ref": "io.k8s.api.flowcontrol.v1alpha1.ResourcePolicyRule#"
+            },
+            "type": "array"
+        },
+        "subjects": {
+            "items": {
+                "$ref": "io.k8s.api.flowcontrol.v1alpha1.Subject#"
+            },
+            "type": "array"
+        }
+    },
+    "required": [
+        "subjects"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiFlowcontrolV1alpha1NonResourcePolicyRule_1.addSchema();
+    IoK8sApiFlowcontrolV1alpha1ResourcePolicyRule_1.addSchema();
+    IoK8sApiFlowcontrolV1alpha1Subject_1.addSchema();
+    validate_1.register("io.k8s.api.flowcontrol.v1alpha1.PolicyRulesWithSubjects", schema);
+}
+exports.addSchema = addSchema;

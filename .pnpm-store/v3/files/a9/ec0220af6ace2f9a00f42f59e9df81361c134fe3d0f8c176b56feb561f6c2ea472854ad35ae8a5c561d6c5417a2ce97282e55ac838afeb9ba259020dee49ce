@@ -1,0 +1,22 @@
+import { IIoK8sApimachineryPkgApiResourceQuantity } from "./IoK8sApimachineryPkgApiResourceQuantity";
+import { Model } from "@kubernetes-models/base";
+/**
+ * Overhead structure represents the resource overhead associated with running a pod.
+ */
+export interface IIoK8sApiNodeV1beta1Overhead {
+    /**
+     * PodFixed represents the fixed resource overhead associated with running a pod.
+     */
+    "podFixed"?: {
+        [key: string]: IIoK8sApimachineryPkgApiResourceQuantity;
+    };
+}
+/**
+ * Overhead structure represents the resource overhead associated with running a pod.
+ */
+export declare class IoK8sApiNodeV1beta1Overhead extends Model<IIoK8sApiNodeV1beta1Overhead> implements IIoK8sApiNodeV1beta1Overhead {
+    "podFixed"?: {
+        [key: string]: IIoK8sApimachineryPkgApiResourceQuantity;
+    };
+}
+export { IIoK8sApiNodeV1beta1Overhead as IOverhead, IoK8sApiNodeV1beta1Overhead as Overhead };

@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAppsV1DaemonSetSpec.mjs";
+/**
+ * DaemonSetSpec is the specification of a daemon set.
+ */
+export class IoK8sApiAppsV1DaemonSetSpec extends Model {
+}
+Model.setSchema(IoK8sApiAppsV1DaemonSetSpec, "io.k8s.api.apps.v1.DaemonSetSpec", addSchema);
+export { IoK8sApiAppsV1DaemonSetSpec as DaemonSetSpec };

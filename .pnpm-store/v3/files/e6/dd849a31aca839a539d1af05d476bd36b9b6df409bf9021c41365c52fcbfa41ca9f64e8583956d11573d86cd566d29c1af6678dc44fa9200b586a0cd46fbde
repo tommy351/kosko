@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DownwardAPIProjection = exports.IoK8sApiCoreV1DownwardAPIProjection = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1DownwardAPIProjection_1 = require("../_schemas/IoK8sApiCoreV1DownwardAPIProjection.js");
+/**
+ * Represents downward API info for projecting into a projected volume. Note that this is identical to a downwardAPI volume source without the default mode.
+ */
+class IoK8sApiCoreV1DownwardAPIProjection extends base_1.Model {
+}
+exports.IoK8sApiCoreV1DownwardAPIProjection = IoK8sApiCoreV1DownwardAPIProjection;
+exports.DownwardAPIProjection = IoK8sApiCoreV1DownwardAPIProjection;
+base_1.Model.setSchema(IoK8sApiCoreV1DownwardAPIProjection, "io.k8s.api.core.v1.DownwardAPIProjection", IoK8sApiCoreV1DownwardAPIProjection_1.addSchema);

@@ -1,0 +1,18 @@
+import { IIoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceCondition } from "./IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceCondition";
+import { Model } from "@kubernetes-models/base";
+/**
+ * APIServiceStatus contains derived information about an API server
+ */
+export interface IIoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceStatus {
+    /**
+     * Current service state of apiService.
+     */
+    "conditions"?: Array<IIoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceCondition>;
+}
+/**
+ * APIServiceStatus contains derived information about an API server
+ */
+export declare class IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceStatus extends Model<IIoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceStatus> implements IIoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceStatus {
+    "conditions"?: Array<IIoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceCondition>;
+}
+export { IIoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceStatus as IAPIServiceStatus, IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceStatus as APIServiceStatus };

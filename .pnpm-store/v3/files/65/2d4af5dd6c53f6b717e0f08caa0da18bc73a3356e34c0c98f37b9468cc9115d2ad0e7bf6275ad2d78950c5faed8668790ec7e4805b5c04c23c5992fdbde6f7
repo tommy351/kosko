@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.JSONSchemaProps = exports.IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1JSONSchemaProps = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1JSONSchemaProps_1 = require("../_schemas/IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1JSONSchemaProps.js");
+/**
+ * JSONSchemaProps is a JSON-Schema following Specification Draft 4 (http://json-schema.org/).
+ */
+class IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1JSONSchemaProps extends base_1.Model {
+}
+exports.IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1JSONSchemaProps = IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1JSONSchemaProps;
+exports.JSONSchemaProps = IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1JSONSchemaProps;
+base_1.Model.setSchema(IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1JSONSchemaProps, "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1beta1.JSONSchemaProps", IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1JSONSchemaProps_1.addSchema);

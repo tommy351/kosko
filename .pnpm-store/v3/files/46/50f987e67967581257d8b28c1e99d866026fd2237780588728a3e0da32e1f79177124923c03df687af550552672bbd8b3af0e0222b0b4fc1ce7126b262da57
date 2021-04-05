@@ -1,0 +1,46 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1LocalObjectReference_1 = require("./IoK8sApiCoreV1LocalObjectReference.js");
+const schema = {
+    "properties": {
+        "fsType": {
+            "type": "string"
+        },
+        "image": {
+            "type": "string"
+        },
+        "keyring": {
+            "type": "string"
+        },
+        "monitors": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "pool": {
+            "type": "string"
+        },
+        "readOnly": {
+            "type": "boolean"
+        },
+        "secretRef": {
+            "$ref": "io.k8s.api.core.v1.LocalObjectReference#"
+        },
+        "user": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "monitors",
+        "image"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1LocalObjectReference_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.RBDVolumeSource", schema);
+}
+exports.addSchema = addSchema;

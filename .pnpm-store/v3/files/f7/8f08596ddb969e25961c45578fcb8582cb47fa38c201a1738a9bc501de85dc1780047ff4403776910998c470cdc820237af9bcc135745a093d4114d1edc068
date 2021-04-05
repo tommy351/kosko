@@ -1,0 +1,78 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1ServicePort_1 = require("./IoK8sApiCoreV1ServicePort.js");
+const IoK8sApiCoreV1SessionAffinityConfig_1 = require("./IoK8sApiCoreV1SessionAffinityConfig.js");
+const schema = {
+    "properties": {
+        "clusterIP": {
+            "type": "string"
+        },
+        "externalIPs": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "externalName": {
+            "type": "string"
+        },
+        "externalTrafficPolicy": {
+            "type": "string"
+        },
+        "healthCheckNodePort": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "ipFamily": {
+            "type": "string"
+        },
+        "loadBalancerIP": {
+            "type": "string"
+        },
+        "loadBalancerSourceRanges": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "ports": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.ServicePort#"
+            },
+            "type": "array"
+        },
+        "publishNotReadyAddresses": {
+            "type": "boolean"
+        },
+        "selector": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "type": "object"
+        },
+        "sessionAffinity": {
+            "type": "string"
+        },
+        "sessionAffinityConfig": {
+            "$ref": "io.k8s.api.core.v1.SessionAffinityConfig#"
+        },
+        "topologyKeys": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "type": {
+            "type": "string"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1ServicePort_1.addSchema();
+    IoK8sApiCoreV1SessionAffinityConfig_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.ServiceSpec", schema);
+}
+exports.addSchema = addSchema;

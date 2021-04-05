@@ -1,0 +1,62 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiAdmissionregistrationV1WebhookClientConfig } from "./IoK8sApiAdmissionregistrationV1WebhookClientConfig.mjs";
+import { addSchema as IoK8sApimachineryPkgApisMetaV1LabelSelector } from "./IoK8sApimachineryPkgApisMetaV1LabelSelector.mjs";
+import { addSchema as IoK8sApiAdmissionregistrationV1RuleWithOperations } from "./IoK8sApiAdmissionregistrationV1RuleWithOperations.mjs";
+const schema = {
+    "properties": {
+        "admissionReviewVersions": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "clientConfig": {
+            "$ref": "io.k8s.api.admissionregistration.v1.WebhookClientConfig#"
+        },
+        "failurePolicy": {
+            "type": "string"
+        },
+        "matchPolicy": {
+            "type": "string"
+        },
+        "name": {
+            "type": "string"
+        },
+        "namespaceSelector": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector#"
+        },
+        "objectSelector": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector#"
+        },
+        "reinvocationPolicy": {
+            "type": "string"
+        },
+        "rules": {
+            "items": {
+                "$ref": "io.k8s.api.admissionregistration.v1.RuleWithOperations#"
+            },
+            "type": "array"
+        },
+        "sideEffects": {
+            "type": "string"
+        },
+        "timeoutSeconds": {
+            "format": "int32",
+            "type": "integer"
+        }
+    },
+    "required": [
+        "name",
+        "clientConfig",
+        "sideEffects",
+        "admissionReviewVersions"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiAdmissionregistrationV1WebhookClientConfig();
+    IoK8sApimachineryPkgApisMetaV1LabelSelector();
+    IoK8sApimachineryPkgApisMetaV1LabelSelector();
+    IoK8sApiAdmissionregistrationV1RuleWithOperations();
+    register("io.k8s.api.admissionregistration.v1.MutatingWebhook", schema);
+}

@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiFlowcontrolV1alpha1UserSubject.mjs";
+/**
+ * UserSubject holds detailed information for user-kind subject.
+ */
+export class IoK8sApiFlowcontrolV1alpha1UserSubject extends Model {
+}
+Model.setSchema(IoK8sApiFlowcontrolV1alpha1UserSubject, "io.k8s.api.flowcontrol.v1alpha1.UserSubject", addSchema);
+export { IoK8sApiFlowcontrolV1alpha1UserSubject as UserSubject };

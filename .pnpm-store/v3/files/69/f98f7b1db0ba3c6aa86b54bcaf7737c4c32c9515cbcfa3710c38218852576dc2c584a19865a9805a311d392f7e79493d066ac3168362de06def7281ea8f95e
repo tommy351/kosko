@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NonResourcePolicyRule = exports.IoK8sApiFlowcontrolV1alpha1NonResourcePolicyRule = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiFlowcontrolV1alpha1NonResourcePolicyRule_1 = require("../_schemas/IoK8sApiFlowcontrolV1alpha1NonResourcePolicyRule.js");
+/**
+ * NonResourcePolicyRule is a predicate that matches non-resource requests according to their verb and the target non-resource URL. A NonResourcePolicyRule matches a request if and only if both (a) at least one member of verbs matches the request and (b) at least one member of nonResourceURLs matches the request.
+ */
+class IoK8sApiFlowcontrolV1alpha1NonResourcePolicyRule extends base_1.Model {
+}
+exports.IoK8sApiFlowcontrolV1alpha1NonResourcePolicyRule = IoK8sApiFlowcontrolV1alpha1NonResourcePolicyRule;
+exports.NonResourcePolicyRule = IoK8sApiFlowcontrolV1alpha1NonResourcePolicyRule;
+base_1.Model.setSchema(IoK8sApiFlowcontrolV1alpha1NonResourcePolicyRule, "io.k8s.api.flowcontrol.v1alpha1.NonResourcePolicyRule", IoK8sApiFlowcontrolV1alpha1NonResourcePolicyRule_1.addSchema);

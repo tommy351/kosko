@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAutoscalingV1ScaleSpec.mjs";
+/**
+ * ScaleSpec describes the attributes of a scale subresource.
+ */
+export class IoK8sApiAutoscalingV1ScaleSpec extends Model {
+}
+Model.setSchema(IoK8sApiAutoscalingV1ScaleSpec, "io.k8s.api.autoscaling.v1.ScaleSpec", addSchema);
+export { IoK8sApiAutoscalingV1ScaleSpec as ScaleSpec };

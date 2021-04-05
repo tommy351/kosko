@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionStatus.mjs";
+/**
+ * CustomResourceDefinitionStatus indicates the state of the CustomResourceDefinition
+ */
+export class IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionStatus extends Model {
+}
+Model.setSchema(IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionStatus, "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceDefinitionStatus", addSchema);
+export { IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionStatus as CustomResourceDefinitionStatus };

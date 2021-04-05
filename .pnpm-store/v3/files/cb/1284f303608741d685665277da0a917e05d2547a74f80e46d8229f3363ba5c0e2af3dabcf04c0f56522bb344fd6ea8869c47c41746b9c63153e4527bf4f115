@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PodSpec = exports.IoK8sApiCoreV1PodSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1PodSpec_1 = require("../_schemas/IoK8sApiCoreV1PodSpec.js");
+/**
+ * PodSpec is a description of a pod.
+ */
+class IoK8sApiCoreV1PodSpec extends base_1.Model {
+}
+exports.IoK8sApiCoreV1PodSpec = IoK8sApiCoreV1PodSpec;
+exports.PodSpec = IoK8sApiCoreV1PodSpec;
+base_1.Model.setSchema(IoK8sApiCoreV1PodSpec, "io.k8s.api.core.v1.PodSpec", IoK8sApiCoreV1PodSpec_1.addSchema);

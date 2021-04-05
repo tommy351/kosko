@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1FlexPersistentVolumeSource.mjs";
+/**
+ * FlexPersistentVolumeSource represents a generic persistent volume resource that is provisioned/attached using an exec based plugin.
+ */
+export class IoK8sApiCoreV1FlexPersistentVolumeSource extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1FlexPersistentVolumeSource, "io.k8s.api.core.v1.FlexPersistentVolumeSource", addSchema);
+export { IoK8sApiCoreV1FlexPersistentVolumeSource as FlexPersistentVolumeSource };

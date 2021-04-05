@@ -1,0 +1,26 @@
+{
+    "name": "@types/jsonpath",
+    "version": "0.2.0",
+    "description": "TypeScript definitions for jsonpath",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Hiroki Horiuchi",
+            "url": "https://github.com/horiuchi"
+        },
+        {
+            "name": "Ika",
+            "url": "https://github.com/ikatyang"
+        }
+    ],
+    "main": "",
+    "repository": {
+        "type": "git",
+        "url": "https://www.github.com/DefinitelyTyped/DefinitelyTyped.git"
+    },
+    "scripts": {},
+    "dependencies": {},
+    "peerDependencies": {},
+    "typesPublisherContentHash": "ed39f2e62506d84f415b705365d8e1edc5d332d5b96c03d1525e9837c75751c8",
+    "typeScriptVersion": "2.0"
+}

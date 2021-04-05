@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiSettingsV1alpha1PodPresetSpec.mjs";
+/**
+ * PodPresetSpec is a description of a pod preset.
+ */
+export class IoK8sApiSettingsV1alpha1PodPresetSpec extends Model {
+}
+Model.setSchema(IoK8sApiSettingsV1alpha1PodPresetSpec, "io.k8s.api.settings.v1alpha1.PodPresetSpec", addSchema);
+export { IoK8sApiSettingsV1alpha1PodPresetSpec as PodPresetSpec };

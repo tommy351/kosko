@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1AzureDiskVolumeSource.mjs";
+/**
+ * AzureDisk represents an Azure Data Disk mount on the host and bind mount to the pod.
+ */
+export class IoK8sApiCoreV1AzureDiskVolumeSource extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1AzureDiskVolumeSource, "io.k8s.api.core.v1.AzureDiskVolumeSource", addSchema);
+export { IoK8sApiCoreV1AzureDiskVolumeSource as AzureDiskVolumeSource };

@@ -1,0 +1,17 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiAppsV1RollingUpdateStatefulSetStrategy } from "./IoK8sApiAppsV1RollingUpdateStatefulSetStrategy.mjs";
+const schema = {
+    "properties": {
+        "rollingUpdate": {
+            "$ref": "io.k8s.api.apps.v1.RollingUpdateStatefulSetStrategy#"
+        },
+        "type": {
+            "type": "string"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiAppsV1RollingUpdateStatefulSetStrategy();
+    register("io.k8s.api.apps.v1.StatefulSetUpdateStrategy", schema);
+}

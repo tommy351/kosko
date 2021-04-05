@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.HTTPHeader = exports.IoK8sApiCoreV1HTTPHeader = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1HTTPHeader_1 = require("../_schemas/IoK8sApiCoreV1HTTPHeader.js");
+/**
+ * HTTPHeader describes a custom header to be used in HTTP probes
+ */
+class IoK8sApiCoreV1HTTPHeader extends base_1.Model {
+}
+exports.IoK8sApiCoreV1HTTPHeader = IoK8sApiCoreV1HTTPHeader;
+exports.HTTPHeader = IoK8sApiCoreV1HTTPHeader;
+base_1.Model.setSchema(IoK8sApiCoreV1HTTPHeader, "io.k8s.api.core.v1.HTTPHeader", IoK8sApiCoreV1HTTPHeader_1.addSchema);

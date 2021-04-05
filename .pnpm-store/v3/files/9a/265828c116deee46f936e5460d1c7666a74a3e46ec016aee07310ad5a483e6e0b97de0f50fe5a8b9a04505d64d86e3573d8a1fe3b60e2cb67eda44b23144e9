@@ -1,0 +1,41 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApimachineryPkgApisMetaV1ObjectMeta } from "./IoK8sApimachineryPkgApisMetaV1ObjectMeta.mjs";
+import { addSchema as IoK8sApiCertificatesV1CertificateSigningRequestSpec } from "./IoK8sApiCertificatesV1CertificateSigningRequestSpec.mjs";
+import { addSchema as IoK8sApiCertificatesV1CertificateSigningRequestStatus } from "./IoK8sApiCertificatesV1CertificateSigningRequestStatus.mjs";
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string",
+            "enum": [
+                "certificates.k8s.io/v1"
+            ]
+        },
+        "kind": {
+            "type": "string",
+            "enum": [
+                "CertificateSigningRequest"
+            ]
+        },
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta#"
+        },
+        "spec": {
+            "$ref": "io.k8s.api.certificates.v1.CertificateSigningRequestSpec#"
+        },
+        "status": {
+            "$ref": "io.k8s.api.certificates.v1.CertificateSigningRequestStatus#"
+        }
+    },
+    "required": [
+        "spec",
+        "apiVersion",
+        "kind"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1ObjectMeta();
+    IoK8sApiCertificatesV1CertificateSigningRequestSpec();
+    IoK8sApiCertificatesV1CertificateSigningRequestStatus();
+    register("io.k8s.api.certificates.v1.CertificateSigningRequest", schema);
+}

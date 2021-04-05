@@ -1,0 +1,18 @@
+import { IIoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationCondition } from "./IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationCondition";
+import { Model } from "@kubernetes-models/base";
+/**
+ * PriorityLevelConfigurationStatus represents the current state of a "request-priority".
+ */
+export interface IIoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationStatus {
+    /**
+     * `conditions` is the current state of "request-priority".
+     */
+    "conditions"?: Array<IIoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationCondition>;
+}
+/**
+ * PriorityLevelConfigurationStatus represents the current state of a "request-priority".
+ */
+export declare class IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationStatus extends Model<IIoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationStatus> implements IIoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationStatus {
+    "conditions"?: Array<IIoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationCondition>;
+}
+export { IIoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationStatus as IPriorityLevelConfigurationStatus, IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationStatus as PriorityLevelConfigurationStatus };

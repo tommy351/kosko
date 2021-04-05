@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1ExecAction.mjs";
+/**
+ * ExecAction describes a "run in container" action.
+ */
+export class IoK8sApiCoreV1ExecAction extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1ExecAction, "io.k8s.api.core.v1.ExecAction", addSchema);
+export { IoK8sApiCoreV1ExecAction as ExecAction };

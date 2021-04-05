@@ -1,0 +1,18 @@
+import { IIoK8sApiCoreV1LoadBalancerStatus } from "./IoK8sApiCoreV1LoadBalancerStatus";
+import { Model } from "@kubernetes-models/base";
+/**
+ * ServiceStatus represents the current status of a service.
+ */
+export interface IIoK8sApiCoreV1ServiceStatus {
+    /**
+     * LoadBalancer contains the current status of the load-balancer, if one is present.
+     */
+    "loadBalancer"?: IIoK8sApiCoreV1LoadBalancerStatus;
+}
+/**
+ * ServiceStatus represents the current status of a service.
+ */
+export declare class IoK8sApiCoreV1ServiceStatus extends Model<IIoK8sApiCoreV1ServiceStatus> implements IIoK8sApiCoreV1ServiceStatus {
+    "loadBalancer"?: IIoK8sApiCoreV1LoadBalancerStatus;
+}
+export { IIoK8sApiCoreV1ServiceStatus as IServiceStatus, IoK8sApiCoreV1ServiceStatus as ServiceStatus };

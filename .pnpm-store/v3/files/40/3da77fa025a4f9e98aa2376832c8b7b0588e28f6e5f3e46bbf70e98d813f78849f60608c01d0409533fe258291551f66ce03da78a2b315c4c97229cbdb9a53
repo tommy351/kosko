@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.IngressServiceBackend = exports.IoK8sApiNetworkingV1IngressServiceBackend = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiNetworkingV1IngressServiceBackend_1 = require("../_schemas/IoK8sApiNetworkingV1IngressServiceBackend.js");
+/**
+ * IngressServiceBackend references a Kubernetes Service as a Backend.
+ */
+class IoK8sApiNetworkingV1IngressServiceBackend extends base_1.Model {
+}
+exports.IoK8sApiNetworkingV1IngressServiceBackend = IoK8sApiNetworkingV1IngressServiceBackend;
+exports.IngressServiceBackend = IoK8sApiNetworkingV1IngressServiceBackend;
+base_1.Model.setSchema(IoK8sApiNetworkingV1IngressServiceBackend, "io.k8s.api.networking.v1.IngressServiceBackend", IoK8sApiNetworkingV1IngressServiceBackend_1.addSchema);

@@ -1,0 +1,2 @@
+import * as meta from "./meta/index.mjs";
+export { meta };

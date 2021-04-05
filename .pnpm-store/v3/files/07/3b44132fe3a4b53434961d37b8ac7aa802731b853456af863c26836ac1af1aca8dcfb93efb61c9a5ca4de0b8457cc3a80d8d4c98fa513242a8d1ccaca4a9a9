@@ -1,0 +1,25 @@
+import { IIoK8sApiCertificatesV1beta1CertificateSigningRequest } from "./IoK8sApiCertificatesV1beta1CertificateSigningRequest";
+import { IIoK8sApimachineryPkgApisMetaV1ListMeta } from "./IoK8sApimachineryPkgApisMetaV1ListMeta";
+import { ModelData, Model } from "@kubernetes-models/base";
+export interface IIoK8sApiCertificatesV1beta1CertificateSigningRequestList {
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    "apiVersion": "certificates.k8s.io/v1beta1";
+    "items": Array<IIoK8sApiCertificatesV1beta1CertificateSigningRequest>;
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    "kind": "CertificateSigningRequestList";
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+}
+export declare class IoK8sApiCertificatesV1beta1CertificateSigningRequestList extends Model<IIoK8sApiCertificatesV1beta1CertificateSigningRequestList> implements IIoK8sApiCertificatesV1beta1CertificateSigningRequestList {
+    "apiVersion": IIoK8sApiCertificatesV1beta1CertificateSigningRequestList["apiVersion"];
+    "items": Array<IIoK8sApiCertificatesV1beta1CertificateSigningRequest>;
+    "kind": IIoK8sApiCertificatesV1beta1CertificateSigningRequestList["kind"];
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+    static apiVersion: IIoK8sApiCertificatesV1beta1CertificateSigningRequestList["apiVersion"];
+    static kind: IIoK8sApiCertificatesV1beta1CertificateSigningRequestList["kind"];
+    constructor(data?: ModelData<IIoK8sApiCertificatesV1beta1CertificateSigningRequestList>);
+}
+export { IIoK8sApiCertificatesV1beta1CertificateSigningRequestList as ICertificateSigningRequestList, IoK8sApiCertificatesV1beta1CertificateSigningRequestList as CertificateSigningRequestList };

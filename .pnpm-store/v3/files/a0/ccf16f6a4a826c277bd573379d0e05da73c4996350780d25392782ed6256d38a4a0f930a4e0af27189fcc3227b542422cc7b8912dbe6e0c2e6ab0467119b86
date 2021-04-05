@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1Container.mjs";
+/**
+ * A single application container that you want to run within a pod.
+ */
+export class IoK8sApiCoreV1Container extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1Container, "io.k8s.api.core.v1.Container", addSchema);
+export { IoK8sApiCoreV1Container as Container };

@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NetworkPolicy = exports.IoK8sApiNetworkingV1NetworkPolicy = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiNetworkingV1NetworkPolicy_1 = require("../_schemas/IoK8sApiNetworkingV1NetworkPolicy.js");
+/**
+ * NetworkPolicy describes what network traffic is allowed for a set of Pods
+ */
+class IoK8sApiNetworkingV1NetworkPolicy extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiNetworkingV1NetworkPolicy.apiVersion,
+            kind: IoK8sApiNetworkingV1NetworkPolicy.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiNetworkingV1NetworkPolicy = IoK8sApiNetworkingV1NetworkPolicy;
+exports.NetworkPolicy = IoK8sApiNetworkingV1NetworkPolicy;
+IoK8sApiNetworkingV1NetworkPolicy.apiVersion = "networking.k8s.io/v1";
+IoK8sApiNetworkingV1NetworkPolicy.kind = "NetworkPolicy";
+base_1.Model.setSchema(IoK8sApiNetworkingV1NetworkPolicy, "io.k8s.api.networking.v1.NetworkPolicy", IoK8sApiNetworkingV1NetworkPolicy_1.addSchema);

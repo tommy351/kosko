@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAuthorizationV1beta1SubjectRulesReviewStatus.mjs";
+/**
+ * SubjectRulesReviewStatus contains the result of a rules check. This check can be incomplete depending on the set of authorizers the server is configured with and any errors experienced during evaluation. Because authorization rules are additive, if a rule appears in a list it's safe to assume the subject has that permission, even if that list is incomplete.
+ */
+export class IoK8sApiAuthorizationV1beta1SubjectRulesReviewStatus extends Model {
+}
+Model.setSchema(IoK8sApiAuthorizationV1beta1SubjectRulesReviewStatus, "io.k8s.api.authorization.v1beta1.SubjectRulesReviewStatus", addSchema);
+export { IoK8sApiAuthorizationV1beta1SubjectRulesReviewStatus as SubjectRulesReviewStatus };

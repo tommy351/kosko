@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationSpec.mjs";
+/**
+ * PriorityLevelConfigurationSpec specifies the configuration of a priority level.
+ */
+export class IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationSpec extends Model {
+}
+Model.setSchema(IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationSpec, "io.k8s.api.flowcontrol.v1alpha1.PriorityLevelConfigurationSpec", addSchema);
+export { IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationSpec as PriorityLevelConfigurationSpec };

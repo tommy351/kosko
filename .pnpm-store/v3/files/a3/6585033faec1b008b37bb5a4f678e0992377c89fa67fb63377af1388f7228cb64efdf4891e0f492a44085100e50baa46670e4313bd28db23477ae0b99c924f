@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1PersistentVolumeClaimList.mjs";
+/**
+ * PersistentVolumeClaimList is a list of PersistentVolumeClaim items.
+ */
+export class IoK8sApiCoreV1PersistentVolumeClaimList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1PersistentVolumeClaimList.apiVersion,
+            kind: IoK8sApiCoreV1PersistentVolumeClaimList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiCoreV1PersistentVolumeClaimList.apiVersion = "v1";
+IoK8sApiCoreV1PersistentVolumeClaimList.kind = "PersistentVolumeClaimList";
+Model.setSchema(IoK8sApiCoreV1PersistentVolumeClaimList, "io.k8s.api.core.v1.PersistentVolumeClaimList", addSchema);
+export { IoK8sApiCoreV1PersistentVolumeClaimList as PersistentVolumeClaimList };

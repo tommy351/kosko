@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.VolumeAttachmentList = exports.IoK8sApiStorageV1VolumeAttachmentList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiStorageV1VolumeAttachmentList_1 = require("../_schemas/IoK8sApiStorageV1VolumeAttachmentList.js");
+/**
+ * VolumeAttachmentList is a collection of VolumeAttachment objects.
+ */
+class IoK8sApiStorageV1VolumeAttachmentList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiStorageV1VolumeAttachmentList.apiVersion,
+            kind: IoK8sApiStorageV1VolumeAttachmentList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiStorageV1VolumeAttachmentList = IoK8sApiStorageV1VolumeAttachmentList;
+exports.VolumeAttachmentList = IoK8sApiStorageV1VolumeAttachmentList;
+IoK8sApiStorageV1VolumeAttachmentList.apiVersion = "storage.k8s.io/v1";
+IoK8sApiStorageV1VolumeAttachmentList.kind = "VolumeAttachmentList";
+base_1.Model.setSchema(IoK8sApiStorageV1VolumeAttachmentList, "io.k8s.api.storage.v1.VolumeAttachmentList", IoK8sApiStorageV1VolumeAttachmentList_1.addSchema);

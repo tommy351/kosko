@@ -1,0 +1,23 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiNetworkingV1IPBlock } from "./IoK8sApiNetworkingV1IPBlock.mjs";
+import { addSchema as IoK8sApimachineryPkgApisMetaV1LabelSelector } from "./IoK8sApimachineryPkgApisMetaV1LabelSelector.mjs";
+const schema = {
+    "properties": {
+        "ipBlock": {
+            "$ref": "io.k8s.api.networking.v1.IPBlock#"
+        },
+        "namespaceSelector": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector#"
+        },
+        "podSelector": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector#"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiNetworkingV1IPBlock();
+    IoK8sApimachineryPkgApisMetaV1LabelSelector();
+    IoK8sApimachineryPkgApisMetaV1LabelSelector();
+    register("io.k8s.api.networking.v1.NetworkPolicyPeer", schema);
+}

@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiBatchV1beta1CronJobSpec.mjs";
+/**
+ * CronJobSpec describes how the job execution will look like and when it will actually run.
+ */
+export class IoK8sApiBatchV1beta1CronJobSpec extends Model {
+}
+Model.setSchema(IoK8sApiBatchV1beta1CronJobSpec, "io.k8s.api.batch.v1beta1.CronJobSpec", addSchema);
+export { IoK8sApiBatchV1beta1CronJobSpec as CronJobSpec };

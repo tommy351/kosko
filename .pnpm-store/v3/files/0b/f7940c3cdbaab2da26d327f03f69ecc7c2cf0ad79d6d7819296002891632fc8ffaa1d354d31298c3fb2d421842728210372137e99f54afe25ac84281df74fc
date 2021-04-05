@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1EmptyDirVolumeSource.mjs";
+/**
+ * Represents an empty directory for a pod. Empty directory volumes support ownership management and SELinux relabeling.
+ */
+export class IoK8sApiCoreV1EmptyDirVolumeSource extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1EmptyDirVolumeSource, "io.k8s.api.core.v1.EmptyDirVolumeSource", addSchema);
+export { IoK8sApiCoreV1EmptyDirVolumeSource as EmptyDirVolumeSource };

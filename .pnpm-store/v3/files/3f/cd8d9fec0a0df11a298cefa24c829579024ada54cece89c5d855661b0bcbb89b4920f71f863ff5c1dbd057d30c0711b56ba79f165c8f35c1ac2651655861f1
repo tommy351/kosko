@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RunAsGroupStrategyOptions = exports.IoK8sApiPolicyV1beta1RunAsGroupStrategyOptions = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiPolicyV1beta1RunAsGroupStrategyOptions_1 = require("../_schemas/IoK8sApiPolicyV1beta1RunAsGroupStrategyOptions.js");
+/**
+ * RunAsGroupStrategyOptions defines the strategy type and any options used to create the strategy.
+ */
+class IoK8sApiPolicyV1beta1RunAsGroupStrategyOptions extends base_1.Model {
+}
+exports.IoK8sApiPolicyV1beta1RunAsGroupStrategyOptions = IoK8sApiPolicyV1beta1RunAsGroupStrategyOptions;
+exports.RunAsGroupStrategyOptions = IoK8sApiPolicyV1beta1RunAsGroupStrategyOptions;
+base_1.Model.setSchema(IoK8sApiPolicyV1beta1RunAsGroupStrategyOptions, "io.k8s.api.policy.v1beta1.RunAsGroupStrategyOptions", IoK8sApiPolicyV1beta1RunAsGroupStrategyOptions_1.addSchema);

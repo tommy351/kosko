@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CustomResourceValidation = exports.IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceValidation = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceValidation_1 = require("../_schemas/IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceValidation.js");
+/**
+ * CustomResourceValidation is a list of validation methods for CustomResources.
+ */
+class IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceValidation extends base_1.Model {
+}
+exports.IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceValidation = IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceValidation;
+exports.CustomResourceValidation = IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceValidation;
+base_1.Model.setSchema(IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceValidation, "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceValidation", IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceValidation_1.addSchema);

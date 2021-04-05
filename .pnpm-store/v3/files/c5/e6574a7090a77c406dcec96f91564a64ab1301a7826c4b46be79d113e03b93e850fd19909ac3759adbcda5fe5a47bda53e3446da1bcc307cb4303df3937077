@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MutatingWebhook = exports.IoK8sApiAdmissionregistrationV1beta1MutatingWebhook = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAdmissionregistrationV1beta1MutatingWebhook_1 = require("../_schemas/IoK8sApiAdmissionregistrationV1beta1MutatingWebhook.js");
+/**
+ * MutatingWebhook describes an admission webhook and the resources and operations it applies to.
+ */
+class IoK8sApiAdmissionregistrationV1beta1MutatingWebhook extends base_1.Model {
+}
+exports.IoK8sApiAdmissionregistrationV1beta1MutatingWebhook = IoK8sApiAdmissionregistrationV1beta1MutatingWebhook;
+exports.MutatingWebhook = IoK8sApiAdmissionregistrationV1beta1MutatingWebhook;
+base_1.Model.setSchema(IoK8sApiAdmissionregistrationV1beta1MutatingWebhook, "io.k8s.api.admissionregistration.v1beta1.MutatingWebhook", IoK8sApiAdmissionregistrationV1beta1MutatingWebhook_1.addSchema);

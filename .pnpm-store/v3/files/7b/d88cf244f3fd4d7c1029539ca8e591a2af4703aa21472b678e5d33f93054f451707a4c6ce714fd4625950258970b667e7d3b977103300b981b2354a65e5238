@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1PersistentVolumeSpec_1 = require("./IoK8sApiCoreV1PersistentVolumeSpec.js");
+const schema = {
+    "properties": {
+        "inlineVolumeSpec": {
+            "$ref": "io.k8s.api.core.v1.PersistentVolumeSpec#"
+        },
+        "persistentVolumeName": {
+            "type": "string"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1PersistentVolumeSpec_1.addSchema();
+    validate_1.register("io.k8s.api.storage.v1alpha1.VolumeAttachmentSource", schema);
+}
+exports.addSchema = addSchema;

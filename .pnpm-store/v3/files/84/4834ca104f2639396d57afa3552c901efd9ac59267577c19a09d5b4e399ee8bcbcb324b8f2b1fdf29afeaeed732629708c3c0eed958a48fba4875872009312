@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinition.mjs";
+/**
+ * CustomResourceDefinition represents a resource that should be exposed on the API server.  Its name MUST be in the format <.spec.name>.<.spec.group>.
+ */
+export class IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinition extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinition.apiVersion,
+            kind: IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinition.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinition.apiVersion = "apiextensions.k8s.io/v1";
+IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinition.kind = "CustomResourceDefinition";
+Model.setSchema(IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinition, "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceDefinition", addSchema);
+export { IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinition as CustomResourceDefinition };

@@ -1,0 +1,18 @@
+import { IIoK8sApiCoreV1ScopedResourceSelectorRequirement } from "./IoK8sApiCoreV1ScopedResourceSelectorRequirement";
+import { Model } from "@kubernetes-models/base";
+/**
+ * A scope selector represents the AND of the selectors represented by the scoped-resource selector requirements.
+ */
+export interface IIoK8sApiCoreV1ScopeSelector {
+    /**
+     * A list of scope selector requirements by scope of the resources.
+     */
+    "matchExpressions"?: Array<IIoK8sApiCoreV1ScopedResourceSelectorRequirement>;
+}
+/**
+ * A scope selector represents the AND of the selectors represented by the scoped-resource selector requirements.
+ */
+export declare class IoK8sApiCoreV1ScopeSelector extends Model<IIoK8sApiCoreV1ScopeSelector> implements IIoK8sApiCoreV1ScopeSelector {
+    "matchExpressions"?: Array<IIoK8sApiCoreV1ScopedResourceSelectorRequirement>;
+}
+export { IIoK8sApiCoreV1ScopeSelector as IScopeSelector, IoK8sApiCoreV1ScopeSelector as ScopeSelector };

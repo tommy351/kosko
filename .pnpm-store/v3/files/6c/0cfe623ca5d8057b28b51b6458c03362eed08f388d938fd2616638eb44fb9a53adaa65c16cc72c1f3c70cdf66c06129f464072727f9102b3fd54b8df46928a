@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiBatchV1JobCondition.mjs";
+/**
+ * JobCondition describes current state of a job.
+ */
+export class IoK8sApiBatchV1JobCondition extends Model {
+}
+Model.setSchema(IoK8sApiBatchV1JobCondition, "io.k8s.api.batch.v1.JobCondition", addSchema);
+export { IoK8sApiBatchV1JobCondition as JobCondition };

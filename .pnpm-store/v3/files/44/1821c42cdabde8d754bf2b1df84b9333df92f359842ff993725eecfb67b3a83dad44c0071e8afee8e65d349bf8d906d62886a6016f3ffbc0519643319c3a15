@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CustomResourceSubresourceScale = exports.IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceSubresourceScale = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceSubresourceScale_1 = require("../_schemas/IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceSubresourceScale.js");
+/**
+ * CustomResourceSubresourceScale defines how to serve the scale subresource for CustomResources.
+ */
+class IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceSubresourceScale extends base_1.Model {
+}
+exports.IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceSubresourceScale = IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceSubresourceScale;
+exports.CustomResourceSubresourceScale = IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceSubresourceScale;
+base_1.Model.setSchema(IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceSubresourceScale, "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceSubresourceScale", IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceSubresourceScale_1.addSchema);

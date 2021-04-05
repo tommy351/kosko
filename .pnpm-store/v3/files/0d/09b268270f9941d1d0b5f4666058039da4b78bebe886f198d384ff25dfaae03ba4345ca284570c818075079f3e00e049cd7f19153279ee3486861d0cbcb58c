@@ -1,0 +1,4 @@
+import ts from "typescript";
+export declare function trimSuffix(input: string, suffix: string): string;
+export declare function tryReadJSON(path: string): Promise<any>;
+export declare function mergeCustomTransformers(target: ts.CustomTransformers, source: ts.CustomTransformers): ts.CustomTransformers;

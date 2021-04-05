@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceList.mjs";
+/**
+ * APIServiceList is a list of APIService objects.
+ */
+export class IoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceList.apiVersion,
+            kind: IoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceList.kind,
+            ...data
+        });
+    }
+}
+IoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceList.apiVersion = "apiregistration.k8s.io/v1";
+IoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceList.kind = "APIServiceList";
+Model.setSchema(IoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceList, "io.k8s.kube-aggregator.pkg.apis.apiregistration.v1.APIServiceList", addSchema);
+export { IoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceList as APIServiceList };

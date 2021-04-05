@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerStatus.mjs";
+/**
+ * HorizontalPodAutoscalerStatus describes the current status of a horizontal pod autoscaler.
+ */
+export class IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerStatus extends Model {
+}
+Model.setSchema(IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerStatus, "io.k8s.api.autoscaling.v2beta2.HorizontalPodAutoscalerStatus", addSchema);
+export { IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerStatus as HorizontalPodAutoscalerStatus };

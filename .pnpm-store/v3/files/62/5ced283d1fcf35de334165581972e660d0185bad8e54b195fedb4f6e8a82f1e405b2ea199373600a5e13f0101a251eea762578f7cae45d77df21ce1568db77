@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.IngressClassSpec = exports.IoK8sApiNetworkingV1beta1IngressClassSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiNetworkingV1beta1IngressClassSpec_1 = require("../_schemas/IoK8sApiNetworkingV1beta1IngressClassSpec.js");
+/**
+ * IngressClassSpec provides information about the class of an Ingress.
+ */
+class IoK8sApiNetworkingV1beta1IngressClassSpec extends base_1.Model {
+}
+exports.IoK8sApiNetworkingV1beta1IngressClassSpec = IoK8sApiNetworkingV1beta1IngressClassSpec;
+exports.IngressClassSpec = IoK8sApiNetworkingV1beta1IngressClassSpec;
+base_1.Model.setSchema(IoK8sApiNetworkingV1beta1IngressClassSpec, "io.k8s.api.networking.v1beta1.IngressClassSpec", IoK8sApiNetworkingV1beta1IngressClassSpec_1.addSchema);

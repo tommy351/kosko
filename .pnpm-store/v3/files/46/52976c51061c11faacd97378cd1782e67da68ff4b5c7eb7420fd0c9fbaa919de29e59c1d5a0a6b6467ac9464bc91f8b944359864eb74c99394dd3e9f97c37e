@@ -1,0 +1,18 @@
+import { IIoK8sApiCoreV1LoadBalancerIngress } from "./IoK8sApiCoreV1LoadBalancerIngress";
+import { Model } from "@kubernetes-models/base";
+/**
+ * LoadBalancerStatus represents the status of a load-balancer.
+ */
+export interface IIoK8sApiCoreV1LoadBalancerStatus {
+    /**
+     * Ingress is a list containing ingress points for the load-balancer. Traffic intended for the service should be sent to these ingress points.
+     */
+    "ingress"?: Array<IIoK8sApiCoreV1LoadBalancerIngress>;
+}
+/**
+ * LoadBalancerStatus represents the status of a load-balancer.
+ */
+export declare class IoK8sApiCoreV1LoadBalancerStatus extends Model<IIoK8sApiCoreV1LoadBalancerStatus> implements IIoK8sApiCoreV1LoadBalancerStatus {
+    "ingress"?: Array<IIoK8sApiCoreV1LoadBalancerIngress>;
+}
+export { IIoK8sApiCoreV1LoadBalancerStatus as ILoadBalancerStatus, IoK8sApiCoreV1LoadBalancerStatus as LoadBalancerStatus };

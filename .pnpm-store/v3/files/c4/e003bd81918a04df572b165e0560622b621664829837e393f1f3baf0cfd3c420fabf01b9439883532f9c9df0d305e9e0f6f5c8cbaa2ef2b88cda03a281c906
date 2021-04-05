@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.HPAScalingRules = exports.IoK8sApiAutoscalingV2beta2HPAScalingRules = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAutoscalingV2beta2HPAScalingRules_1 = require("../_schemas/IoK8sApiAutoscalingV2beta2HPAScalingRules.js");
+/**
+ * HPAScalingRules configures the scaling behavior for one direction. These Rules are applied after calculating DesiredReplicas from metrics for the HPA. They can limit the scaling velocity by specifying scaling policies. They can prevent flapping by specifying the stabilization window, so that the number of replicas is not set instantly, instead, the safest value from the stabilization window is chosen.
+ */
+class IoK8sApiAutoscalingV2beta2HPAScalingRules extends base_1.Model {
+}
+exports.IoK8sApiAutoscalingV2beta2HPAScalingRules = IoK8sApiAutoscalingV2beta2HPAScalingRules;
+exports.HPAScalingRules = IoK8sApiAutoscalingV2beta2HPAScalingRules;
+base_1.Model.setSchema(IoK8sApiAutoscalingV2beta2HPAScalingRules, "io.k8s.api.autoscaling.v2beta2.HPAScalingRules", IoK8sApiAutoscalingV2beta2HPAScalingRules_1.addSchema);

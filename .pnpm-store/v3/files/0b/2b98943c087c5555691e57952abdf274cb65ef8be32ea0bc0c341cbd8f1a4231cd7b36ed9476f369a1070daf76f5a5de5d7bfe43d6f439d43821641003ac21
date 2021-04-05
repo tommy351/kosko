@@ -1,0 +1,27 @@
+import { IIoK8sApiCoreV1Toleration } from "./IoK8sApiCoreV1Toleration";
+import { Model } from "@kubernetes-models/base";
+/**
+ * Scheduling specifies the scheduling constraints for nodes supporting a RuntimeClass.
+ */
+export interface IIoK8sApiNodeV1alpha1Scheduling {
+    /**
+     * nodeSelector lists labels that must be present on nodes that support this RuntimeClass. Pods using this RuntimeClass can only be scheduled to a node matched by this selector. The RuntimeClass nodeSelector is merged with a pod's existing nodeSelector. Any conflicts will cause the pod to be rejected in admission.
+     */
+    "nodeSelector"?: {
+        [key: string]: string;
+    };
+    /**
+     * tolerations are appended (excluding duplicates) to pods running with this RuntimeClass during admission, effectively unioning the set of nodes tolerated by the pod and the RuntimeClass.
+     */
+    "tolerations"?: Array<IIoK8sApiCoreV1Toleration>;
+}
+/**
+ * Scheduling specifies the scheduling constraints for nodes supporting a RuntimeClass.
+ */
+export declare class IoK8sApiNodeV1alpha1Scheduling extends Model<IIoK8sApiNodeV1alpha1Scheduling> implements IIoK8sApiNodeV1alpha1Scheduling {
+    "nodeSelector"?: {
+        [key: string]: string;
+    };
+    "tolerations"?: Array<IIoK8sApiCoreV1Toleration>;
+}
+export { IIoK8sApiNodeV1alpha1Scheduling as IScheduling, IoK8sApiNodeV1alpha1Scheduling as Scheduling };

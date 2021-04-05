@@ -1,0 +1,32 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * BoundObjectReference is a reference to an object that a token is bound to.
+ */
+export interface IIoK8sApiAuthenticationV1BoundObjectReference {
+    /**
+     * API version of the referent.
+     */
+    "apiVersion"?: string;
+    /**
+     * Kind of the referent. Valid kinds are 'Pod' and 'Secret'.
+     */
+    "kind"?: string;
+    /**
+     * Name of the referent.
+     */
+    "name"?: string;
+    /**
+     * UID of the referent.
+     */
+    "uid"?: string;
+}
+/**
+ * BoundObjectReference is a reference to an object that a token is bound to.
+ */
+export declare class IoK8sApiAuthenticationV1BoundObjectReference extends Model<IIoK8sApiAuthenticationV1BoundObjectReference> implements IIoK8sApiAuthenticationV1BoundObjectReference {
+    "apiVersion"?: IIoK8sApiAuthenticationV1BoundObjectReference["apiVersion"];
+    "kind"?: IIoK8sApiAuthenticationV1BoundObjectReference["kind"];
+    "name"?: string;
+    "uid"?: string;
+}
+export { IIoK8sApiAuthenticationV1BoundObjectReference as IBoundObjectReference, IoK8sApiAuthenticationV1BoundObjectReference as BoundObjectReference };

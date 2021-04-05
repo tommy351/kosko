@@ -1,0 +1,43 @@
+import { IIoK8sApimachineryPkgApisMetaV1ObjectMeta } from "./IoK8sApimachineryPkgApisMetaV1ObjectMeta";
+import { IIoK8sApiCoreV1ServiceSpec } from "./IoK8sApiCoreV1ServiceSpec";
+import { IIoK8sApiCoreV1ServiceStatus } from "./IoK8sApiCoreV1ServiceStatus";
+import { ModelData, Model } from "@kubernetes-models/base";
+/**
+ * Service is a named abstraction of software service (for example, mysql) consisting of local port (for example 3306) that the proxy listens on, and the selector that determines which pods will answer requests sent through the proxy.
+ */
+export interface IIoK8sApiCoreV1Service {
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    "apiVersion": "v1";
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    "kind": "Service";
+    /**
+     * Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ObjectMeta;
+    /**
+     * Spec defines the behavior of a service. https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+     */
+    "spec"?: IIoK8sApiCoreV1ServiceSpec;
+    /**
+     * Most recently observed status of the service. Populated by the system. Read-only. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+     */
+    "status"?: IIoK8sApiCoreV1ServiceStatus;
+}
+/**
+ * Service is a named abstraction of software service (for example, mysql) consisting of local port (for example 3306) that the proxy listens on, and the selector that determines which pods will answer requests sent through the proxy.
+ */
+export declare class IoK8sApiCoreV1Service extends Model<IIoK8sApiCoreV1Service> implements IIoK8sApiCoreV1Service {
+    "apiVersion": IIoK8sApiCoreV1Service["apiVersion"];
+    "kind": IIoK8sApiCoreV1Service["kind"];
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ObjectMeta;
+    "spec"?: IIoK8sApiCoreV1ServiceSpec;
+    "status"?: IIoK8sApiCoreV1ServiceStatus;
+    static apiVersion: IIoK8sApiCoreV1Service["apiVersion"];
+    static kind: IIoK8sApiCoreV1Service["kind"];
+    constructor(data?: ModelData<IIoK8sApiCoreV1Service>);
+}
+export { IIoK8sApiCoreV1Service as IService, IoK8sApiCoreV1Service as Service };

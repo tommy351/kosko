@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ReplicaSet = exports.IoK8sApiAppsV1ReplicaSet = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAppsV1ReplicaSet_1 = require("../_schemas/IoK8sApiAppsV1ReplicaSet.js");
+/**
+ * ReplicaSet ensures that a specified number of pod replicas are running at any given time.
+ */
+class IoK8sApiAppsV1ReplicaSet extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAppsV1ReplicaSet.apiVersion,
+            kind: IoK8sApiAppsV1ReplicaSet.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiAppsV1ReplicaSet = IoK8sApiAppsV1ReplicaSet;
+exports.ReplicaSet = IoK8sApiAppsV1ReplicaSet;
+IoK8sApiAppsV1ReplicaSet.apiVersion = "apps/v1";
+IoK8sApiAppsV1ReplicaSet.kind = "ReplicaSet";
+base_1.Model.setSchema(IoK8sApiAppsV1ReplicaSet, "io.k8s.api.apps.v1.ReplicaSet", IoK8sApiAppsV1ReplicaSet_1.addSchema);

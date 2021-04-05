@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiNetworkingV1beta1IngressBackend.mjs";
+/**
+ * IngressBackend describes all endpoints for a given service and port.
+ */
+export class IoK8sApiNetworkingV1beta1IngressBackend extends Model {
+}
+Model.setSchema(IoK8sApiNetworkingV1beta1IngressBackend, "io.k8s.api.networking.v1beta1.IngressBackend", addSchema);
+export { IoK8sApiNetworkingV1beta1IngressBackend as IngressBackend };

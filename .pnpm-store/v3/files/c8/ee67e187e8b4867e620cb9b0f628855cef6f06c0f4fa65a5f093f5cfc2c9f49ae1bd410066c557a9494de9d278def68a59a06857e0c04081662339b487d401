@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApimachineryPkgApisMetaV1Patch.mjs";
+/**
+ * Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.
+ */
+export class IoK8sApimachineryPkgApisMetaV1Patch extends Model {
+}
+Model.setSchema(IoK8sApimachineryPkgApisMetaV1Patch, "io.k8s.apimachinery.pkg.apis.meta.v1.Patch", addSchema);
+export { IoK8sApimachineryPkgApisMetaV1Patch as Patch };

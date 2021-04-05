@@ -1,0 +1,22 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * HTTPHeader describes a custom header to be used in HTTP probes
+ */
+export interface IIoK8sApiCoreV1HTTPHeader {
+    /**
+     * The header field name
+     */
+    "name": string;
+    /**
+     * The header field value
+     */
+    "value": string;
+}
+/**
+ * HTTPHeader describes a custom header to be used in HTTP probes
+ */
+export declare class IoK8sApiCoreV1HTTPHeader extends Model<IIoK8sApiCoreV1HTTPHeader> implements IIoK8sApiCoreV1HTTPHeader {
+    "name": string;
+    "value": string;
+}
+export { IIoK8sApiCoreV1HTTPHeader as IHTTPHeader, IoK8sApiCoreV1HTTPHeader as HTTPHeader };

@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1HostAlias.mjs";
+/**
+ * HostAlias holds the mapping between IP and hostnames that will be injected as an entry in the pod's hosts file.
+ */
+export class IoK8sApiCoreV1HostAlias extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1HostAlias, "io.k8s.api.core.v1.HostAlias", addSchema);
+export { IoK8sApiCoreV1HostAlias as HostAlias };

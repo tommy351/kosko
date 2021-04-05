@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ISCSIPersistentVolumeSource = exports.IoK8sApiCoreV1ISCSIPersistentVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ISCSIPersistentVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1ISCSIPersistentVolumeSource.js");
+/**
+ * ISCSIPersistentVolumeSource represents an ISCSI disk. ISCSI volumes can only be mounted as read/write once. ISCSI volumes support ownership management and SELinux relabeling.
+ */
+class IoK8sApiCoreV1ISCSIPersistentVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ISCSIPersistentVolumeSource = IoK8sApiCoreV1ISCSIPersistentVolumeSource;
+exports.ISCSIPersistentVolumeSource = IoK8sApiCoreV1ISCSIPersistentVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1ISCSIPersistentVolumeSource, "io.k8s.api.core.v1.ISCSIPersistentVolumeSource", IoK8sApiCoreV1ISCSIPersistentVolumeSource_1.addSchema);

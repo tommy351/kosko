@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TokenReview = exports.IoK8sApiAuthenticationV1TokenReview = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAuthenticationV1TokenReview_1 = require("../_schemas/IoK8sApiAuthenticationV1TokenReview.js");
+/**
+ * TokenReview attempts to authenticate a token to a known user. Note: TokenReview requests may be cached by the webhook token authenticator plugin in the kube-apiserver.
+ */
+class IoK8sApiAuthenticationV1TokenReview extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAuthenticationV1TokenReview.apiVersion,
+            kind: IoK8sApiAuthenticationV1TokenReview.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiAuthenticationV1TokenReview = IoK8sApiAuthenticationV1TokenReview;
+exports.TokenReview = IoK8sApiAuthenticationV1TokenReview;
+IoK8sApiAuthenticationV1TokenReview.apiVersion = "authentication.k8s.io/v1";
+IoK8sApiAuthenticationV1TokenReview.kind = "TokenReview";
+base_1.Model.setSchema(IoK8sApiAuthenticationV1TokenReview, "io.k8s.api.authentication.v1.TokenReview", IoK8sApiAuthenticationV1TokenReview_1.addSchema);

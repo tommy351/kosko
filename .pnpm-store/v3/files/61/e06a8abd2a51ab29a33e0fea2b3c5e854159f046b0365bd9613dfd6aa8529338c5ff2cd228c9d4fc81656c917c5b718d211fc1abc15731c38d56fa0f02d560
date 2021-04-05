@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1TopologySelectorLabelRequirement.mjs";
+/**
+ * A topology selector requirement is a selector that matches given label. This is an alpha feature and may change in the future.
+ */
+export class IoK8sApiCoreV1TopologySelectorLabelRequirement extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1TopologySelectorLabelRequirement, "io.k8s.api.core.v1.TopologySelectorLabelRequirement", addSchema);
+export { IoK8sApiCoreV1TopologySelectorLabelRequirement as TopologySelectorLabelRequirement };

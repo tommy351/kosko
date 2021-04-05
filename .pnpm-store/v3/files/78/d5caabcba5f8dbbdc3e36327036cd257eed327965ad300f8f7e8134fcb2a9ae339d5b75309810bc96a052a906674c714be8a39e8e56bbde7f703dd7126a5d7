@@ -1,0 +1,7 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "type": "string"
+};
+export function addSchema() {
+    register("io.k8s.apimachinery.pkg.api.resource.Quantity", schema);
+}

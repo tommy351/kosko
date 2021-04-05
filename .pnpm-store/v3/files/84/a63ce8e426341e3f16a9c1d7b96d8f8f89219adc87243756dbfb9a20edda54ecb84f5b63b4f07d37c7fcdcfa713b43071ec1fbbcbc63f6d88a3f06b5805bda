@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAuthorizationV1beta1SelfSubjectAccessReviewSpec.mjs";
+/**
+ * SelfSubjectAccessReviewSpec is a description of the access request.  Exactly one of ResourceAuthorizationAttributes and NonResourceAuthorizationAttributes must be set
+ */
+export class IoK8sApiAuthorizationV1beta1SelfSubjectAccessReviewSpec extends Model {
+}
+Model.setSchema(IoK8sApiAuthorizationV1beta1SelfSubjectAccessReviewSpec, "io.k8s.api.authorization.v1beta1.SelfSubjectAccessReviewSpec", addSchema);
+export { IoK8sApiAuthorizationV1beta1SelfSubjectAccessReviewSpec as SelfSubjectAccessReviewSpec };

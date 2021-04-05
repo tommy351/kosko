@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiNodeV1alpha1RuntimeClassSpec.mjs";
+/**
+ * RuntimeClassSpec is a specification of a RuntimeClass. It contains parameters that are required to describe the RuntimeClass to the Container Runtime Interface (CRI) implementation, as well as any other components that need to understand how the pod will be run. The RuntimeClassSpec is immutable.
+ */
+export class IoK8sApiNodeV1alpha1RuntimeClassSpec extends Model {
+}
+Model.setSchema(IoK8sApiNodeV1alpha1RuntimeClassSpec, "io.k8s.api.node.v1alpha1.RuntimeClassSpec", addSchema);
+export { IoK8sApiNodeV1alpha1RuntimeClassSpec as RuntimeClassSpec };

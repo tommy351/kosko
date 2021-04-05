@@ -1,0 +1,20 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApimachineryPkgApisMetaV1LabelSelector } from "./IoK8sApimachineryPkgApisMetaV1LabelSelector.mjs";
+const schema = {
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "selector": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector#"
+        }
+    },
+    "required": [
+        "name"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1LabelSelector();
+    register("io.k8s.api.autoscaling.v2beta2.MetricIdentifier", schema);
+}

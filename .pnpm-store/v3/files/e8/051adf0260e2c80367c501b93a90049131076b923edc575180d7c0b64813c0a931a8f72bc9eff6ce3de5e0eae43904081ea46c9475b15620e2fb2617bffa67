@@ -1,0 +1,14 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiCoreV1ConfigMapNodeConfigSource } from "./IoK8sApiCoreV1ConfigMapNodeConfigSource.mjs";
+const schema = {
+    "properties": {
+        "configMap": {
+            "$ref": "io.k8s.api.core.v1.ConfigMapNodeConfigSource#"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiCoreV1ConfigMapNodeConfigSource();
+    register("io.k8s.api.core.v1.NodeConfigSource", schema);
+}

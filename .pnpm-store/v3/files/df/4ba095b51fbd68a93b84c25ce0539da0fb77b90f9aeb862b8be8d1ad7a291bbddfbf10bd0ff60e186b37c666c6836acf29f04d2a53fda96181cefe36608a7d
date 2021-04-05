@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiBatchV1JobSpec.mjs";
+/**
+ * JobSpec describes how the job execution will look like.
+ */
+export class IoK8sApiBatchV1JobSpec extends Model {
+}
+Model.setSchema(IoK8sApiBatchV1JobSpec, "io.k8s.api.batch.v1.JobSpec", addSchema);
+export { IoK8sApiBatchV1JobSpec as JobSpec };

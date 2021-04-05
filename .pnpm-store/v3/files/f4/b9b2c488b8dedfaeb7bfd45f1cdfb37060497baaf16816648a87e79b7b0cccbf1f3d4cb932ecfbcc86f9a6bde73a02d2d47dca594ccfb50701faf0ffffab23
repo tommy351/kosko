@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiStorageV1VolumeAttachmentSpec.mjs";
+/**
+ * VolumeAttachmentSpec is the specification of a VolumeAttachment request.
+ */
+export class IoK8sApiStorageV1VolumeAttachmentSpec extends Model {
+}
+Model.setSchema(IoK8sApiStorageV1VolumeAttachmentSpec, "io.k8s.api.storage.v1.VolumeAttachmentSpec", addSchema);
+export { IoK8sApiStorageV1VolumeAttachmentSpec as VolumeAttachmentSpec };

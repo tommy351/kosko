@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ConfigMap = exports.IoK8sApiCoreV1ConfigMap = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ConfigMap_1 = require("../_schemas/IoK8sApiCoreV1ConfigMap.js");
+/**
+ * ConfigMap holds configuration data for pods to consume.
+ */
+class IoK8sApiCoreV1ConfigMap extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1ConfigMap.apiVersion,
+            kind: IoK8sApiCoreV1ConfigMap.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1ConfigMap = IoK8sApiCoreV1ConfigMap;
+exports.ConfigMap = IoK8sApiCoreV1ConfigMap;
+IoK8sApiCoreV1ConfigMap.apiVersion = "v1";
+IoK8sApiCoreV1ConfigMap.kind = "ConfigMap";
+base_1.Model.setSchema(IoK8sApiCoreV1ConfigMap, "io.k8s.api.core.v1.ConfigMap", IoK8sApiCoreV1ConfigMap_1.addSchema);

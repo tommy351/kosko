@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiFlowcontrolV1alpha1LimitResponse.mjs";
+/**
+ * LimitResponse defines how to handle requests that can not be executed right now.
+ */
+export class IoK8sApiFlowcontrolV1alpha1LimitResponse extends Model {
+}
+Model.setSchema(IoK8sApiFlowcontrolV1alpha1LimitResponse, "io.k8s.api.flowcontrol.v1alpha1.LimitResponse", addSchema);
+export { IoK8sApiFlowcontrolV1alpha1LimitResponse as LimitResponse };

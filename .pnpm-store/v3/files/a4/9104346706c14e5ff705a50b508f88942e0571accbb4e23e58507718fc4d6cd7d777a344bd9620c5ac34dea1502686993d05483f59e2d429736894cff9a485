@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1NodeStatus.mjs";
+/**
+ * NodeStatus is information about the current status of a node.
+ */
+export class IoK8sApiCoreV1NodeStatus extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1NodeStatus, "io.k8s.api.core.v1.NodeStatus", addSchema);
+export { IoK8sApiCoreV1NodeStatus as NodeStatus };

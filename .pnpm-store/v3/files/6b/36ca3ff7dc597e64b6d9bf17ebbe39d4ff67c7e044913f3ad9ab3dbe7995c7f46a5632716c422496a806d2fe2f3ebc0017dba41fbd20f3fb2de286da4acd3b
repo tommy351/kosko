@@ -1,0 +1,27 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * WindowsSecurityContextOptions contain Windows-specific options and credentials.
+ */
+export interface IIoK8sApiCoreV1WindowsSecurityContextOptions {
+    /**
+     * GMSACredentialSpec is where the GMSA admission webhook (https://github.com/kubernetes-sigs/windows-gmsa) inlines the contents of the GMSA credential spec named by the GMSACredentialSpecName field.
+     */
+    "gmsaCredentialSpec"?: string;
+    /**
+     * GMSACredentialSpecName is the name of the GMSA credential spec to use.
+     */
+    "gmsaCredentialSpecName"?: string;
+    /**
+     * The UserName in Windows to run the entrypoint of the container process. Defaults to the user specified in image metadata if unspecified. May also be set in PodSecurityContext. If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence.
+     */
+    "runAsUserName"?: string;
+}
+/**
+ * WindowsSecurityContextOptions contain Windows-specific options and credentials.
+ */
+export declare class IoK8sApiCoreV1WindowsSecurityContextOptions extends Model<IIoK8sApiCoreV1WindowsSecurityContextOptions> implements IIoK8sApiCoreV1WindowsSecurityContextOptions {
+    "gmsaCredentialSpec"?: string;
+    "gmsaCredentialSpecName"?: string;
+    "runAsUserName"?: string;
+}
+export { IIoK8sApiCoreV1WindowsSecurityContextOptions as IWindowsSecurityContextOptions, IoK8sApiCoreV1WindowsSecurityContextOptions as WindowsSecurityContextOptions };

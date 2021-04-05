@@ -1,0 +1,17 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiCoreV1TopologySelectorLabelRequirement } from "./IoK8sApiCoreV1TopologySelectorLabelRequirement.mjs";
+const schema = {
+    "properties": {
+        "matchLabelExpressions": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.TopologySelectorLabelRequirement#"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiCoreV1TopologySelectorLabelRequirement();
+    register("io.k8s.api.core.v1.TopologySelectorTerm", schema);
+}

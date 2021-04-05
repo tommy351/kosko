@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1PersistentVolumeClaimStatus.mjs";
+/**
+ * PersistentVolumeClaimStatus is the current status of a persistent volume claim.
+ */
+export class IoK8sApiCoreV1PersistentVolumeClaimStatus extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1PersistentVolumeClaimStatus, "io.k8s.api.core.v1.PersistentVolumeClaimStatus", addSchema);
+export { IoK8sApiCoreV1PersistentVolumeClaimStatus as PersistentVolumeClaimStatus };

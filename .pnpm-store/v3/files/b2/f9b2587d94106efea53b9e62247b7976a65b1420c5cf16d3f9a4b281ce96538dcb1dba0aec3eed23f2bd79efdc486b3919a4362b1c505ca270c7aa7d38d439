@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1EventSeries.mjs";
+/**
+ * EventSeries contain information on series of events, i.e. thing that was/is happening continuously for some time.
+ */
+export class IoK8sApiCoreV1EventSeries extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1EventSeries, "io.k8s.api.core.v1.EventSeries", addSchema);
+export { IoK8sApiCoreV1EventSeries as EventSeries };

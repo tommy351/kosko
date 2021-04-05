@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SeccompProfile = exports.IoK8sApiCoreV1SeccompProfile = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1SeccompProfile_1 = require("../_schemas/IoK8sApiCoreV1SeccompProfile.js");
+/**
+ * SeccompProfile defines a pod/container's seccomp profile settings. Only one profile source may be set.
+ */
+class IoK8sApiCoreV1SeccompProfile extends base_1.Model {
+}
+exports.IoK8sApiCoreV1SeccompProfile = IoK8sApiCoreV1SeccompProfile;
+exports.SeccompProfile = IoK8sApiCoreV1SeccompProfile;
+base_1.Model.setSchema(IoK8sApiCoreV1SeccompProfile, "io.k8s.api.core.v1.SeccompProfile", IoK8sApiCoreV1SeccompProfile_1.addSchema);

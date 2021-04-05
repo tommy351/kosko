@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NodeSelectorRequirement = exports.IoK8sApiCoreV1NodeSelectorRequirement = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1NodeSelectorRequirement_1 = require("../_schemas/IoK8sApiCoreV1NodeSelectorRequirement.js");
+/**
+ * A node selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
+ */
+class IoK8sApiCoreV1NodeSelectorRequirement extends base_1.Model {
+}
+exports.IoK8sApiCoreV1NodeSelectorRequirement = IoK8sApiCoreV1NodeSelectorRequirement;
+exports.NodeSelectorRequirement = IoK8sApiCoreV1NodeSelectorRequirement;
+base_1.Model.setSchema(IoK8sApiCoreV1NodeSelectorRequirement, "io.k8s.api.core.v1.NodeSelectorRequirement", IoK8sApiCoreV1NodeSelectorRequirement_1.addSchema);

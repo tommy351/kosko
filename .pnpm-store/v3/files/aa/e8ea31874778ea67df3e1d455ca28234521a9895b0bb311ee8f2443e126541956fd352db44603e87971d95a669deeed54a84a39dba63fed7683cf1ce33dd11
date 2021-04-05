@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RoleBindingList = exports.IoK8sApiRbacV1beta1RoleBindingList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiRbacV1beta1RoleBindingList_1 = require("../_schemas/IoK8sApiRbacV1beta1RoleBindingList.js");
+/**
+ * RoleBindingList is a collection of RoleBindings Deprecated in v1.17 in favor of rbac.authorization.k8s.io/v1 RoleBindingList, and will no longer be served in v1.22.
+ */
+class IoK8sApiRbacV1beta1RoleBindingList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiRbacV1beta1RoleBindingList.apiVersion,
+            kind: IoK8sApiRbacV1beta1RoleBindingList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiRbacV1beta1RoleBindingList = IoK8sApiRbacV1beta1RoleBindingList;
+exports.RoleBindingList = IoK8sApiRbacV1beta1RoleBindingList;
+IoK8sApiRbacV1beta1RoleBindingList.apiVersion = "rbac.authorization.k8s.io/v1beta1";
+IoK8sApiRbacV1beta1RoleBindingList.kind = "RoleBindingList";
+base_1.Model.setSchema(IoK8sApiRbacV1beta1RoleBindingList, "io.k8s.api.rbac.v1beta1.RoleBindingList", IoK8sApiRbacV1beta1RoleBindingList_1.addSchema);

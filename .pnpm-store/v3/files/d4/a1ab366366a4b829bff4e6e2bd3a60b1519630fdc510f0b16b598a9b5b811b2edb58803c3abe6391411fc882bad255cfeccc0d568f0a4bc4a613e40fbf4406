@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAutoscalingV2beta1PodsMetricStatus.mjs";
+/**
+ * PodsMetricStatus indicates the current value of a metric describing each pod in the current scale target (for example, transactions-processed-per-second).
+ */
+export class IoK8sApiAutoscalingV2beta1PodsMetricStatus extends Model {
+}
+Model.setSchema(IoK8sApiAutoscalingV2beta1PodsMetricStatus, "io.k8s.api.autoscaling.v2beta1.PodsMetricStatus", addSchema);
+export { IoK8sApiAutoscalingV2beta1PodsMetricStatus as PodsMetricStatus };

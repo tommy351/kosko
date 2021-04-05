@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoordinationV1LeaseSpec.mjs";
+/**
+ * LeaseSpec is a specification of a Lease.
+ */
+export class IoK8sApiCoordinationV1LeaseSpec extends Model {
+}
+Model.setSchema(IoK8sApiCoordinationV1LeaseSpec, "io.k8s.api.coordination.v1.LeaseSpec", addSchema);
+export { IoK8sApiCoordinationV1LeaseSpec as LeaseSpec };

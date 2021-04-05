@@ -1,0 +1,22 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * Adds and removes POSIX capabilities from running containers.
+ */
+export interface IIoK8sApiCoreV1Capabilities {
+    /**
+     * Added capabilities
+     */
+    "add"?: Array<string>;
+    /**
+     * Removed capabilities
+     */
+    "drop"?: Array<string>;
+}
+/**
+ * Adds and removes POSIX capabilities from running containers.
+ */
+export declare class IoK8sApiCoreV1Capabilities extends Model<IIoK8sApiCoreV1Capabilities> implements IIoK8sApiCoreV1Capabilities {
+    "add"?: Array<string>;
+    "drop"?: Array<string>;
+}
+export { IIoK8sApiCoreV1Capabilities as ICapabilities, IoK8sApiCoreV1Capabilities as Capabilities };

@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1PodList.mjs";
+/**
+ * PodList is a list of Pods.
+ */
+export class IoK8sApiCoreV1PodList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1PodList.apiVersion,
+            kind: IoK8sApiCoreV1PodList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiCoreV1PodList.apiVersion = "v1";
+IoK8sApiCoreV1PodList.kind = "PodList";
+Model.setSchema(IoK8sApiCoreV1PodList, "io.k8s.api.core.v1.PodList", addSchema);
+export { IoK8sApiCoreV1PodList as PodList };

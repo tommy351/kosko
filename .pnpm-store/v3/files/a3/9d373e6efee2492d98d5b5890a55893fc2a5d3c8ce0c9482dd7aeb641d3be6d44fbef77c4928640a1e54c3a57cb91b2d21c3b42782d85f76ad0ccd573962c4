@@ -1,0 +1,17 @@
+import type ts from "typescript";
+import { WorkerOptions } from "./types";
+export declare class Worker {
+    private readonly data;
+    private readonly ts;
+    private readonly system;
+    private readonly reporter;
+    constructor(data: WorkerOptions, system?: ts.System);
+    run(): number;
+    private getJSPath;
+    private getJSMapPath;
+    private rewritePath;
+    private rewriteSourceMappingURL;
+    private rewriteSourceMap;
+    private createBuilder;
+    private patchSolutionBuilderHost;
+}

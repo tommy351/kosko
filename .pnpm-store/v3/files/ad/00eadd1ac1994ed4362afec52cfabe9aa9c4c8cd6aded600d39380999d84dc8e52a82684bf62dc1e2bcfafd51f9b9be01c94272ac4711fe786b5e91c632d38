@@ -1,0 +1,43 @@
+import { IIoK8sApimachineryPkgApisMetaV1ObjectMeta } from "./IoK8sApimachineryPkgApisMetaV1ObjectMeta";
+import { IIoK8sApiCoreV1ResourceQuotaSpec } from "./IoK8sApiCoreV1ResourceQuotaSpec";
+import { IIoK8sApiCoreV1ResourceQuotaStatus } from "./IoK8sApiCoreV1ResourceQuotaStatus";
+import { ModelData, Model } from "@kubernetes-models/base";
+/**
+ * ResourceQuota sets aggregate quota restrictions enforced per namespace
+ */
+export interface IIoK8sApiCoreV1ResourceQuota {
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    "apiVersion": "v1";
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    "kind": "ResourceQuota";
+    /**
+     * Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ObjectMeta;
+    /**
+     * Spec defines the desired quota. https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+     */
+    "spec"?: IIoK8sApiCoreV1ResourceQuotaSpec;
+    /**
+     * Status defines the actual enforced quota and its current usage. https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+     */
+    "status"?: IIoK8sApiCoreV1ResourceQuotaStatus;
+}
+/**
+ * ResourceQuota sets aggregate quota restrictions enforced per namespace
+ */
+export declare class IoK8sApiCoreV1ResourceQuota extends Model<IIoK8sApiCoreV1ResourceQuota> implements IIoK8sApiCoreV1ResourceQuota {
+    "apiVersion": IIoK8sApiCoreV1ResourceQuota["apiVersion"];
+    "kind": IIoK8sApiCoreV1ResourceQuota["kind"];
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ObjectMeta;
+    "spec"?: IIoK8sApiCoreV1ResourceQuotaSpec;
+    "status"?: IIoK8sApiCoreV1ResourceQuotaStatus;
+    static apiVersion: IIoK8sApiCoreV1ResourceQuota["apiVersion"];
+    static kind: IIoK8sApiCoreV1ResourceQuota["kind"];
+    constructor(data?: ModelData<IIoK8sApiCoreV1ResourceQuota>);
+}
+export { IIoK8sApiCoreV1ResourceQuota as IResourceQuota, IoK8sApiCoreV1ResourceQuota as ResourceQuota };

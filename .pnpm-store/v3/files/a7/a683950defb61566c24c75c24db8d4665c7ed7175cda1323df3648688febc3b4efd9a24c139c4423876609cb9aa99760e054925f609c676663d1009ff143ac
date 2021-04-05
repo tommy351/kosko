@@ -1,0 +1,28 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApiResourceQuantity_1 = require("./IoK8sApimachineryPkgApiResourceQuantity.js");
+const schema = {
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "targetAverageUtilization": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "targetAverageValue": {
+            "$ref": "io.k8s.apimachinery.pkg.api.resource.Quantity#"
+        }
+    },
+    "required": [
+        "name"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApimachineryPkgApiResourceQuantity_1.addSchema();
+    validate_1.register("io.k8s.api.autoscaling.v2beta1.ResourceMetricSource", schema);
+}
+exports.addSchema = addSchema;

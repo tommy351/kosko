@@ -1,0 +1,126 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1EnvVar_1 = require("./IoK8sApiCoreV1EnvVar.js");
+const IoK8sApiCoreV1EnvFromSource_1 = require("./IoK8sApiCoreV1EnvFromSource.js");
+const IoK8sApiCoreV1Lifecycle_1 = require("./IoK8sApiCoreV1Lifecycle.js");
+const IoK8sApiCoreV1Probe_1 = require("./IoK8sApiCoreV1Probe.js");
+const IoK8sApiCoreV1ContainerPort_1 = require("./IoK8sApiCoreV1ContainerPort.js");
+const IoK8sApiCoreV1ResourceRequirements_1 = require("./IoK8sApiCoreV1ResourceRequirements.js");
+const IoK8sApiCoreV1SecurityContext_1 = require("./IoK8sApiCoreV1SecurityContext.js");
+const IoK8sApiCoreV1VolumeDevice_1 = require("./IoK8sApiCoreV1VolumeDevice.js");
+const IoK8sApiCoreV1VolumeMount_1 = require("./IoK8sApiCoreV1VolumeMount.js");
+const schema = {
+    "properties": {
+        "args": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "command": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "env": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.EnvVar#"
+            },
+            "type": "array"
+        },
+        "envFrom": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.EnvFromSource#"
+            },
+            "type": "array"
+        },
+        "image": {
+            "type": "string"
+        },
+        "imagePullPolicy": {
+            "type": "string"
+        },
+        "lifecycle": {
+            "$ref": "io.k8s.api.core.v1.Lifecycle#"
+        },
+        "livenessProbe": {
+            "$ref": "io.k8s.api.core.v1.Probe#"
+        },
+        "name": {
+            "type": "string"
+        },
+        "ports": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.ContainerPort#"
+            },
+            "type": "array"
+        },
+        "readinessProbe": {
+            "$ref": "io.k8s.api.core.v1.Probe#"
+        },
+        "resources": {
+            "$ref": "io.k8s.api.core.v1.ResourceRequirements#"
+        },
+        "securityContext": {
+            "$ref": "io.k8s.api.core.v1.SecurityContext#"
+        },
+        "startupProbe": {
+            "$ref": "io.k8s.api.core.v1.Probe#"
+        },
+        "stdin": {
+            "type": "boolean"
+        },
+        "stdinOnce": {
+            "type": "boolean"
+        },
+        "targetContainerName": {
+            "type": "string"
+        },
+        "terminationMessagePath": {
+            "type": "string"
+        },
+        "terminationMessagePolicy": {
+            "type": "string"
+        },
+        "tty": {
+            "type": "boolean"
+        },
+        "volumeDevices": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.VolumeDevice#"
+            },
+            "type": "array"
+        },
+        "volumeMounts": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.VolumeMount#"
+            },
+            "type": "array"
+        },
+        "workingDir": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "name"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1EnvVar_1.addSchema();
+    IoK8sApiCoreV1EnvFromSource_1.addSchema();
+    IoK8sApiCoreV1Lifecycle_1.addSchema();
+    IoK8sApiCoreV1Probe_1.addSchema();
+    IoK8sApiCoreV1ContainerPort_1.addSchema();
+    IoK8sApiCoreV1Probe_1.addSchema();
+    IoK8sApiCoreV1ResourceRequirements_1.addSchema();
+    IoK8sApiCoreV1SecurityContext_1.addSchema();
+    IoK8sApiCoreV1Probe_1.addSchema();
+    IoK8sApiCoreV1VolumeDevice_1.addSchema();
+    IoK8sApiCoreV1VolumeMount_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.EphemeralContainer", schema);
+}
+exports.addSchema = addSchema;

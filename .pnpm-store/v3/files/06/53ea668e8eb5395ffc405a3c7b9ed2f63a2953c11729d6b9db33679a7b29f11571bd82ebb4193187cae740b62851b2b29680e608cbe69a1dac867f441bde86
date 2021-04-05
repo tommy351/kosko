@@ -1,0 +1,26 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1ObjectReference_1 = require("./IoK8sApiCoreV1ObjectReference.js");
+const IoK8sApimachineryPkgApisMetaV1Time_1 = require("./IoK8sApimachineryPkgApisMetaV1Time.js");
+const schema = {
+    "properties": {
+        "active": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.ObjectReference#"
+            },
+            "type": "array"
+        },
+        "lastScheduleTime": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.Time#"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1ObjectReference_1.addSchema();
+    IoK8sApimachineryPkgApisMetaV1Time_1.addSchema();
+    validate_1.register("io.k8s.api.batch.v2alpha1.CronJobStatus", schema);
+}
+exports.addSchema = addSchema;

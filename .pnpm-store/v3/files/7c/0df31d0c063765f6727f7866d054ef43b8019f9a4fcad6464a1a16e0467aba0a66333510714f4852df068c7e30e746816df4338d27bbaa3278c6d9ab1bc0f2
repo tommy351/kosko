@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1WeightedPodAffinityTerm.mjs";
+/**
+ * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
+ */
+export class IoK8sApiCoreV1WeightedPodAffinityTerm extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1WeightedPodAffinityTerm, "io.k8s.api.core.v1.WeightedPodAffinityTerm", addSchema);
+export { IoK8sApiCoreV1WeightedPodAffinityTerm as WeightedPodAffinityTerm };

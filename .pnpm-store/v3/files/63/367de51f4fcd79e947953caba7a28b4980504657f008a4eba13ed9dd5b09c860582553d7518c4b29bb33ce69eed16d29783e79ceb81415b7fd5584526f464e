@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NamespaceCondition = exports.IoK8sApiCoreV1NamespaceCondition = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1NamespaceCondition_1 = require("../_schemas/IoK8sApiCoreV1NamespaceCondition.js");
+/**
+ * NamespaceCondition contains details about state of namespace.
+ */
+class IoK8sApiCoreV1NamespaceCondition extends base_1.Model {
+}
+exports.IoK8sApiCoreV1NamespaceCondition = IoK8sApiCoreV1NamespaceCondition;
+exports.NamespaceCondition = IoK8sApiCoreV1NamespaceCondition;
+base_1.Model.setSchema(IoK8sApiCoreV1NamespaceCondition, "io.k8s.api.core.v1.NamespaceCondition", IoK8sApiCoreV1NamespaceCondition_1.addSchema);

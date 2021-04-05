@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CSIDriverList = exports.IoK8sApiStorageV1beta1CSIDriverList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiStorageV1beta1CSIDriverList_1 = require("../_schemas/IoK8sApiStorageV1beta1CSIDriverList.js");
+/**
+ * CSIDriverList is a collection of CSIDriver objects.
+ */
+class IoK8sApiStorageV1beta1CSIDriverList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiStorageV1beta1CSIDriverList.apiVersion,
+            kind: IoK8sApiStorageV1beta1CSIDriverList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiStorageV1beta1CSIDriverList = IoK8sApiStorageV1beta1CSIDriverList;
+exports.CSIDriverList = IoK8sApiStorageV1beta1CSIDriverList;
+IoK8sApiStorageV1beta1CSIDriverList.apiVersion = "storage.k8s.io/v1beta1";
+IoK8sApiStorageV1beta1CSIDriverList.kind = "CSIDriverList";
+base_1.Model.setSchema(IoK8sApiStorageV1beta1CSIDriverList, "io.k8s.api.storage.v1beta1.CSIDriverList", IoK8sApiStorageV1beta1CSIDriverList_1.addSchema);

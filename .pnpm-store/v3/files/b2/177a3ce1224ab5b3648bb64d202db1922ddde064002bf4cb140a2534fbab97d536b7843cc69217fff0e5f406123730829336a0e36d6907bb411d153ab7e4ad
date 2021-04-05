@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1PersistentVolumeClaimVolumeSource.mjs";
+/**
+ * PersistentVolumeClaimVolumeSource references the user's PVC in the same namespace. This volume finds the bound PV and mounts that volume for the pod. A PersistentVolumeClaimVolumeSource is, essentially, a wrapper around another type of volume that is owned by someone else (the system).
+ */
+export class IoK8sApiCoreV1PersistentVolumeClaimVolumeSource extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1PersistentVolumeClaimVolumeSource, "io.k8s.api.core.v1.PersistentVolumeClaimVolumeSource", addSchema);
+export { IoK8sApiCoreV1PersistentVolumeClaimVolumeSource as PersistentVolumeClaimVolumeSource };

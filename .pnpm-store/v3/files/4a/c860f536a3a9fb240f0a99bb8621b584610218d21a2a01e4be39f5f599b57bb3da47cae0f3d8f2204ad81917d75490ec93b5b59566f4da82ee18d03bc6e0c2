@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UserInfo = exports.IoK8sApiAuthenticationV1UserInfo = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAuthenticationV1UserInfo_1 = require("../_schemas/IoK8sApiAuthenticationV1UserInfo.js");
+/**
+ * UserInfo holds the information about the user needed to implement the user.Info interface.
+ */
+class IoK8sApiAuthenticationV1UserInfo extends base_1.Model {
+}
+exports.IoK8sApiAuthenticationV1UserInfo = IoK8sApiAuthenticationV1UserInfo;
+exports.UserInfo = IoK8sApiAuthenticationV1UserInfo;
+base_1.Model.setSchema(IoK8sApiAuthenticationV1UserInfo, "io.k8s.api.authentication.v1.UserInfo", IoK8sApiAuthenticationV1UserInfo_1.addSchema);

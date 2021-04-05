@@ -1,0 +1,33 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1PodDNSConfigOption_1 = require("./IoK8sApiCoreV1PodDNSConfigOption.js");
+const schema = {
+    "properties": {
+        "nameservers": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "options": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.PodDNSConfigOption#"
+            },
+            "type": "array"
+        },
+        "searches": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1PodDNSConfigOption_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.PodDNSConfig", schema);
+}
+exports.addSchema = addSchema;

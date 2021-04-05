@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1CinderPersistentVolumeSource.mjs";
+/**
+ * Represents a cinder volume resource in Openstack. A Cinder volume must exist before mounting to a container. The volume must also be in the same region as the kubelet. Cinder volumes support ownership management and SELinux relabeling.
+ */
+export class IoK8sApiCoreV1CinderPersistentVolumeSource extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1CinderPersistentVolumeSource, "io.k8s.api.core.v1.CinderPersistentVolumeSource", addSchema);
+export { IoK8sApiCoreV1CinderPersistentVolumeSource as CinderPersistentVolumeSource };

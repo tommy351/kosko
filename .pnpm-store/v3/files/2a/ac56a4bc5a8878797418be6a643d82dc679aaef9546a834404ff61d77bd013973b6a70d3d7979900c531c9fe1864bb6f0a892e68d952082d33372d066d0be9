@@ -1,0 +1,39 @@
+{
+    "name": "@types/tmp",
+    "version": "0.2.0",
+    "description": "TypeScript definitions for tmp",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Jared Klopper",
+            "url": "https://github.com/optical",
+            "githubUsername": "optical"
+        },
+        {
+            "name": "Gyusun Yeom",
+            "url": "https://github.com/Perlmint",
+            "githubUsername": "Perlmint"
+        },
+        {
+            "name": "Alan Plum",
+            "url": "https://github.com/pluma",
+            "githubUsername": "pluma"
+        },
+        {
+            "name": "Carsten Klein",
+            "url": "https://github.com/silkentrance",
+            "githubUsername": "silkentrance"
+        }
+    ],
+    "main": "",
+    "types": "index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+        "directory": "types/tmp"
+    },
+    "scripts": {},
+    "dependencies": {},
+    "typesPublisherContentHash": "81e5cbee412d51593d28e13f6046ba15d28b4480ea65938ccc7d15e098eb663c",
+    "typeScriptVersion": "2.9"
+}

@@ -1,0 +1,27 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1Toleration_1 = require("./IoK8sApiCoreV1Toleration.js");
+const schema = {
+    "properties": {
+        "nodeSelector": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "type": "object"
+        },
+        "tolerations": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.Toleration#"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1Toleration_1.addSchema();
+    validate_1.register("io.k8s.api.node.v1beta1.Scheduling", schema);
+}
+exports.addSchema = addSchema;

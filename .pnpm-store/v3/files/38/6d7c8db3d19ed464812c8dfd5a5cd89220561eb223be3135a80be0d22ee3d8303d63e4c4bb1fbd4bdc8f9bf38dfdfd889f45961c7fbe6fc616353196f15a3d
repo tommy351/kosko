@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1ComponentCondition.mjs";
+/**
+ * Information about the condition of a component.
+ */
+export class IoK8sApiCoreV1ComponentCondition extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1ComponentCondition, "io.k8s.api.core.v1.ComponentCondition", addSchema);
+export { IoK8sApiCoreV1ComponentCondition as ComponentCondition };

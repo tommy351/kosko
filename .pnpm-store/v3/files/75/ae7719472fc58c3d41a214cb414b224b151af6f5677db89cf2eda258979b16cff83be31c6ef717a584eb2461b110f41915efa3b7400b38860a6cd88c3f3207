@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1Affinity.mjs";
+/**
+ * Affinity is a group of affinity scheduling rules.
+ */
+export class IoK8sApiCoreV1Affinity extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1Affinity, "io.k8s.api.core.v1.Affinity", addSchema);
+export { IoK8sApiCoreV1Affinity as Affinity };

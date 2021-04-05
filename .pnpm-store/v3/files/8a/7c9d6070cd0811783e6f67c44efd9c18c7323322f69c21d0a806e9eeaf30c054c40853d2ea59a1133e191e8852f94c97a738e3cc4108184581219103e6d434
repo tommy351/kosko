@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiPolicyV1beta1PodDisruptionBudgetStatus.mjs";
+/**
+ * PodDisruptionBudgetStatus represents information about the status of a PodDisruptionBudget. Status may trail the actual state of a system.
+ */
+export class IoK8sApiPolicyV1beta1PodDisruptionBudgetStatus extends Model {
+}
+Model.setSchema(IoK8sApiPolicyV1beta1PodDisruptionBudgetStatus, "io.k8s.api.policy.v1beta1.PodDisruptionBudgetStatus", addSchema);
+export { IoK8sApiPolicyV1beta1PodDisruptionBudgetStatus as PodDisruptionBudgetStatus };

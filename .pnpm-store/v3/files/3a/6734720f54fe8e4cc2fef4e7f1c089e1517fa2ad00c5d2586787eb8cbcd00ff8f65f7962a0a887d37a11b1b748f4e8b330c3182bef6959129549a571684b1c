@@ -1,0 +1,44 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApisMetaV1ObjectMeta_1 = require("./IoK8sApimachineryPkgApisMetaV1ObjectMeta.js");
+const IoK8sApiCoreV1NodeSpec_1 = require("./IoK8sApiCoreV1NodeSpec.js");
+const IoK8sApiCoreV1NodeStatus_1 = require("./IoK8sApiCoreV1NodeStatus.js");
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string",
+            "enum": [
+                "v1"
+            ]
+        },
+        "kind": {
+            "type": "string",
+            "enum": [
+                "Node"
+            ]
+        },
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta#"
+        },
+        "spec": {
+            "$ref": "io.k8s.api.core.v1.NodeSpec#"
+        },
+        "status": {
+            "$ref": "io.k8s.api.core.v1.NodeStatus#"
+        }
+    },
+    "type": "object",
+    "required": [
+        "apiVersion",
+        "kind"
+    ]
+};
+function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1ObjectMeta_1.addSchema();
+    IoK8sApiCoreV1NodeSpec_1.addSchema();
+    IoK8sApiCoreV1NodeStatus_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.Node", schema);
+}
+exports.addSchema = addSchema;

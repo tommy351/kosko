@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAppsV1DeploymentList.mjs";
+/**
+ * DeploymentList is a list of Deployments.
+ */
+export class IoK8sApiAppsV1DeploymentList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAppsV1DeploymentList.apiVersion,
+            kind: IoK8sApiAppsV1DeploymentList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiAppsV1DeploymentList.apiVersion = "apps/v1";
+IoK8sApiAppsV1DeploymentList.kind = "DeploymentList";
+Model.setSchema(IoK8sApiAppsV1DeploymentList, "io.k8s.api.apps.v1.DeploymentList", addSchema);
+export { IoK8sApiAppsV1DeploymentList as DeploymentList };

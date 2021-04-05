@@ -1,0 +1,26 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApisMetaV1MicroTime_1 = require("./IoK8sApimachineryPkgApisMetaV1MicroTime.js");
+const schema = {
+    "properties": {
+        "count": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "lastObservedTime": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.MicroTime#"
+        }
+    },
+    "required": [
+        "count",
+        "lastObservedTime"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1MicroTime_1.addSchema();
+    validate_1.register("io.k8s.api.events.v1.EventSeries", schema);
+}
+exports.addSchema = addSchema;

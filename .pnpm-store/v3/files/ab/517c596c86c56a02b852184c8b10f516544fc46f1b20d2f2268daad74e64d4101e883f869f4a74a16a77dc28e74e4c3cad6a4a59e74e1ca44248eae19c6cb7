@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1ContainerImage.mjs";
+/**
+ * Describe a container image
+ */
+export class IoK8sApiCoreV1ContainerImage extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1ContainerImage, "io.k8s.api.core.v1.ContainerImage", addSchema);
+export { IoK8sApiCoreV1ContainerImage as ContainerImage };

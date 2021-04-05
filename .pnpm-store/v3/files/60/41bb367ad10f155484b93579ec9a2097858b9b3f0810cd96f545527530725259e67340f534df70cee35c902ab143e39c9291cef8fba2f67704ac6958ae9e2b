@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PodReadinessGate = exports.IoK8sApiCoreV1PodReadinessGate = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1PodReadinessGate_1 = require("../_schemas/IoK8sApiCoreV1PodReadinessGate.js");
+/**
+ * PodReadinessGate contains the reference to a pod condition
+ */
+class IoK8sApiCoreV1PodReadinessGate extends base_1.Model {
+}
+exports.IoK8sApiCoreV1PodReadinessGate = IoK8sApiCoreV1PodReadinessGate;
+exports.PodReadinessGate = IoK8sApiCoreV1PodReadinessGate;
+base_1.Model.setSchema(IoK8sApiCoreV1PodReadinessGate, "io.k8s.api.core.v1.PodReadinessGate", IoK8sApiCoreV1PodReadinessGate_1.addSchema);

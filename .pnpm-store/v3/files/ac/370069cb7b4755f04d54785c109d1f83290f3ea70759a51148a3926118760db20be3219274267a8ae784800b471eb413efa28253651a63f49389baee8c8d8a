@@ -1,0 +1,22 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * Sysctl defines a kernel parameter to be set
+ */
+export interface IIoK8sApiCoreV1Sysctl {
+    /**
+     * Name of a property to set
+     */
+    "name": string;
+    /**
+     * Value of a property to set
+     */
+    "value": string;
+}
+/**
+ * Sysctl defines a kernel parameter to be set
+ */
+export declare class IoK8sApiCoreV1Sysctl extends Model<IIoK8sApiCoreV1Sysctl> implements IIoK8sApiCoreV1Sysctl {
+    "name": string;
+    "value": string;
+}
+export { IIoK8sApiCoreV1Sysctl as ISysctl, IoK8sApiCoreV1Sysctl as Sysctl };

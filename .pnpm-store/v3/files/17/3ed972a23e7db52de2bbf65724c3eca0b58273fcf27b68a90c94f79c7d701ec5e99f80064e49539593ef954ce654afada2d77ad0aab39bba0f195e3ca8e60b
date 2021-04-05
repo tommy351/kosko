@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.IngressBackend = exports.IoK8sApiNetworkingV1beta1IngressBackend = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiNetworkingV1beta1IngressBackend_1 = require("../_schemas/IoK8sApiNetworkingV1beta1IngressBackend.js");
+/**
+ * IngressBackend describes all endpoints for a given service and port.
+ */
+class IoK8sApiNetworkingV1beta1IngressBackend extends base_1.Model {
+}
+exports.IoK8sApiNetworkingV1beta1IngressBackend = IoK8sApiNetworkingV1beta1IngressBackend;
+exports.IngressBackend = IoK8sApiNetworkingV1beta1IngressBackend;
+base_1.Model.setSchema(IoK8sApiNetworkingV1beta1IngressBackend, "io.k8s.api.networking.v1beta1.IngressBackend", IoK8sApiNetworkingV1beta1IngressBackend_1.addSchema);

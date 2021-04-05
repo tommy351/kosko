@@ -1,0 +1,13 @@
+/// <reference types="node" />
+import { Config } from "./config";
+import { Stream } from "stream";
+declare type Stdio = "ignore" | "inherit" | Stream;
+export interface BuildOptions extends Config {
+    watch?: boolean;
+    clean?: boolean;
+    verbose?: boolean;
+    stdout?: Stdio;
+    stderr?: Stdio;
+}
+export declare function build({ targets, stdout, stderr, verbose, watch, clean, projects, cwd, compiler, }: BuildOptions): Promise<number>;
+export {};

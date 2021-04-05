@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DownwardAPIVolumeSource = exports.IoK8sApiCoreV1DownwardAPIVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1DownwardAPIVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1DownwardAPIVolumeSource.js");
+/**
+ * DownwardAPIVolumeSource represents a volume containing downward API info. Downward API volumes support ownership management and SELinux relabeling.
+ */
+class IoK8sApiCoreV1DownwardAPIVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1DownwardAPIVolumeSource = IoK8sApiCoreV1DownwardAPIVolumeSource;
+exports.DownwardAPIVolumeSource = IoK8sApiCoreV1DownwardAPIVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1DownwardAPIVolumeSource, "io.k8s.api.core.v1.DownwardAPIVolumeSource", IoK8sApiCoreV1DownwardAPIVolumeSource_1.addSchema);

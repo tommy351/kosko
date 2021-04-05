@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAppsV1DaemonSetUpdateStrategy.mjs";
+/**
+ * DaemonSetUpdateStrategy is a struct used to control the update strategy for a DaemonSet.
+ */
+export class IoK8sApiAppsV1DaemonSetUpdateStrategy extends Model {
+}
+Model.setSchema(IoK8sApiAppsV1DaemonSetUpdateStrategy, "io.k8s.api.apps.v1.DaemonSetUpdateStrategy", addSchema);
+export { IoK8sApiAppsV1DaemonSetUpdateStrategy as DaemonSetUpdateStrategy };

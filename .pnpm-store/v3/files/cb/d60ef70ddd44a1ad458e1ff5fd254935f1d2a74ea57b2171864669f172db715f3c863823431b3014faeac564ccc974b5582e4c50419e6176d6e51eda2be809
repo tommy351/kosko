@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ServerAddressByClientCIDR = exports.IoK8sApimachineryPkgApisMetaV1ServerAddressByClientCIDR = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApimachineryPkgApisMetaV1ServerAddressByClientCIDR_1 = require("../_schemas/IoK8sApimachineryPkgApisMetaV1ServerAddressByClientCIDR.js");
+/**
+ * ServerAddressByClientCIDR helps the client to determine the server address that they should use, depending on the clientCIDR that they match.
+ */
+class IoK8sApimachineryPkgApisMetaV1ServerAddressByClientCIDR extends base_1.Model {
+}
+exports.IoK8sApimachineryPkgApisMetaV1ServerAddressByClientCIDR = IoK8sApimachineryPkgApisMetaV1ServerAddressByClientCIDR;
+exports.ServerAddressByClientCIDR = IoK8sApimachineryPkgApisMetaV1ServerAddressByClientCIDR;
+base_1.Model.setSchema(IoK8sApimachineryPkgApisMetaV1ServerAddressByClientCIDR, "io.k8s.apimachinery.pkg.apis.meta.v1.ServerAddressByClientCIDR", IoK8sApimachineryPkgApisMetaV1ServerAddressByClientCIDR_1.addSchema);

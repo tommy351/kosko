@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.WeightedPodAffinityTerm = exports.IoK8sApiCoreV1WeightedPodAffinityTerm = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1WeightedPodAffinityTerm_1 = require("../_schemas/IoK8sApiCoreV1WeightedPodAffinityTerm.js");
+/**
+ * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
+ */
+class IoK8sApiCoreV1WeightedPodAffinityTerm extends base_1.Model {
+}
+exports.IoK8sApiCoreV1WeightedPodAffinityTerm = IoK8sApiCoreV1WeightedPodAffinityTerm;
+exports.WeightedPodAffinityTerm = IoK8sApiCoreV1WeightedPodAffinityTerm;
+base_1.Model.setSchema(IoK8sApiCoreV1WeightedPodAffinityTerm, "io.k8s.api.core.v1.WeightedPodAffinityTerm", IoK8sApiCoreV1WeightedPodAffinityTerm_1.addSchema);

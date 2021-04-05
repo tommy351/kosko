@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Info = exports.IoK8sApimachineryPkgVersionInfo = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApimachineryPkgVersionInfo_1 = require("../_schemas/IoK8sApimachineryPkgVersionInfo.js");
+/**
+ * Info contains versioning information. how we'll want to distribute that information.
+ */
+class IoK8sApimachineryPkgVersionInfo extends base_1.Model {
+}
+exports.IoK8sApimachineryPkgVersionInfo = IoK8sApimachineryPkgVersionInfo;
+exports.Info = IoK8sApimachineryPkgVersionInfo;
+base_1.Model.setSchema(IoK8sApimachineryPkgVersionInfo, "io.k8s.apimachinery.pkg.version.Info", IoK8sApimachineryPkgVersionInfo_1.addSchema);

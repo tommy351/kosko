@@ -1,0 +1,23 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiCoreV1Toleration } from "./IoK8sApiCoreV1Toleration.mjs";
+const schema = {
+    "properties": {
+        "nodeSelector": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "type": "object"
+        },
+        "tolerations": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.Toleration#"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiCoreV1Toleration();
+    register("io.k8s.api.node.v1beta1.Scheduling", schema);
+}

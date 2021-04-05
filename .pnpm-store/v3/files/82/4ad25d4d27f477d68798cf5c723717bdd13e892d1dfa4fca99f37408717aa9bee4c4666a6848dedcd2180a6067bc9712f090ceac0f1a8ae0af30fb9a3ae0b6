@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1Volume.mjs";
+/**
+ * Volume represents a named volume in a pod that may be accessed by any container in the pod.
+ */
+export class IoK8sApiCoreV1Volume extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1Volume, "io.k8s.api.core.v1.Volume", addSchema);
+export { IoK8sApiCoreV1Volume as Volume };

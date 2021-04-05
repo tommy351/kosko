@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1LimitRangeList.mjs";
+/**
+ * LimitRangeList is a list of LimitRange items.
+ */
+export class IoK8sApiCoreV1LimitRangeList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1LimitRangeList.apiVersion,
+            kind: IoK8sApiCoreV1LimitRangeList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiCoreV1LimitRangeList.apiVersion = "v1";
+IoK8sApiCoreV1LimitRangeList.kind = "LimitRangeList";
+Model.setSchema(IoK8sApiCoreV1LimitRangeList, "io.k8s.api.core.v1.LimitRangeList", addSchema);
+export { IoK8sApiCoreV1LimitRangeList as LimitRangeList };

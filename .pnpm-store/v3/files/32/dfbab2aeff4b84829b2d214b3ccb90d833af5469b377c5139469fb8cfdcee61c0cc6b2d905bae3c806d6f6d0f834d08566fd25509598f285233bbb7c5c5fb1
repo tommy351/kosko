@@ -1,0 +1,42 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.loadConfig = exports.resolveProjectPath = void 0;
+const tslib_1 = require("tslib");
+const path_1 = require("path");
+const superstruct_1 = require("superstruct");
+const debug_1 = tslib_1.__importDefault(require("./debug"));
+const utils_1 = require("./utils");
+const fast_glob_1 = tslib_1.__importDefault(require("fast-glob"));
+const debug = debug_1.default.extend("config");
+const targetSchema = superstruct_1.object({
+    extname: superstruct_1.optional(superstruct_1.string()),
+    module: superstruct_1.optional(superstruct_1.string()),
+    target: superstruct_1.optional(superstruct_1.string()),
+});
+const configSchema = superstruct_1.object({
+    projects: superstruct_1.optional(superstruct_1.array(superstruct_1.string())),
+    targets: superstruct_1.optional(superstruct_1.array(targetSchema)),
+    compiler: superstruct_1.optional(superstruct_1.string()),
+});
+async function resolveProjectPath(cwd, projects) {
+    return fast_glob_1.default(projects, { cwd, onlyFiles: false });
+}
+exports.resolveProjectPath = resolveProjectPath;
+async function loadConfig({ cwd = process.cwd(), path = "tsc-multi.json", }) {
+    const configPath = path_1.resolve(cwd, path);
+    debug("Read config from %s", configPath);
+    const json = await utils_1.tryReadJSON(configPath);
+    const result = superstruct_1.validate(json, configSchema);
+    if (result[0]) {
+        throw result[0];
+    }
+    const config = result[1];
+    return {
+        ...config,
+        cwd,
+        projects: await resolveProjectPath(path_1.dirname(configPath), config.projects || []),
+        targets: config.targets || [],
+    };
+}
+exports.loadConfig = loadConfig;
+//# sourceMappingURL=config.js.map

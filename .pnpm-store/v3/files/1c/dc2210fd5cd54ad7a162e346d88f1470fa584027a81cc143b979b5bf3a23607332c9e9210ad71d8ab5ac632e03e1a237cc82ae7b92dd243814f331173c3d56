@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1NodeSelectorRequirement.mjs";
+/**
+ * A node selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
+ */
+export class IoK8sApiCoreV1NodeSelectorRequirement extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1NodeSelectorRequirement, "io.k8s.api.core.v1.NodeSelectorRequirement", addSchema);
+export { IoK8sApiCoreV1NodeSelectorRequirement as NodeSelectorRequirement };

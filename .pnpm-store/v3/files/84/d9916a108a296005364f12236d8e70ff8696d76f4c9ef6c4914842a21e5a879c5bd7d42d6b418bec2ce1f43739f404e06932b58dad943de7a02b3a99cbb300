@@ -1,0 +1,23 @@
+import { IIoK8sApimachineryPkgUtilIntstrIntOrString } from "./IoK8sApimachineryPkgUtilIntstrIntOrString";
+import { Model } from "@kubernetes-models/base";
+/**
+ * TCPSocketAction describes an action based on opening a socket
+ */
+export interface IIoK8sApiCoreV1TCPSocketAction {
+    /**
+     * Optional: Host name to connect to, defaults to the pod IP.
+     */
+    "host"?: string;
+    /**
+     * Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.
+     */
+    "port": IIoK8sApimachineryPkgUtilIntstrIntOrString;
+}
+/**
+ * TCPSocketAction describes an action based on opening a socket
+ */
+export declare class IoK8sApiCoreV1TCPSocketAction extends Model<IIoK8sApiCoreV1TCPSocketAction> implements IIoK8sApiCoreV1TCPSocketAction {
+    "host"?: string;
+    "port": IIoK8sApimachineryPkgUtilIntstrIntOrString;
+}
+export { IIoK8sApiCoreV1TCPSocketAction as ITCPSocketAction, IoK8sApiCoreV1TCPSocketAction as TCPSocketAction };

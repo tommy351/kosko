@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ConfigMapKeySelector = exports.IoK8sApiCoreV1ConfigMapKeySelector = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ConfigMapKeySelector_1 = require("../_schemas/IoK8sApiCoreV1ConfigMapKeySelector.js");
+/**
+ * Selects a key from a ConfigMap.
+ */
+class IoK8sApiCoreV1ConfigMapKeySelector extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ConfigMapKeySelector = IoK8sApiCoreV1ConfigMapKeySelector;
+exports.ConfigMapKeySelector = IoK8sApiCoreV1ConfigMapKeySelector;
+base_1.Model.setSchema(IoK8sApiCoreV1ConfigMapKeySelector, "io.k8s.api.core.v1.ConfigMapKeySelector", IoK8sApiCoreV1ConfigMapKeySelector_1.addSchema);

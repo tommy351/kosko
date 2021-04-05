@@ -1,0 +1,6 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAuthorizationV1SelfSubjectRulesReviewSpec.mjs";
+export class IoK8sApiAuthorizationV1SelfSubjectRulesReviewSpec extends Model {
+}
+Model.setSchema(IoK8sApiAuthorizationV1SelfSubjectRulesReviewSpec, "io.k8s.api.authorization.v1.SelfSubjectRulesReviewSpec", addSchema);
+export { IoK8sApiAuthorizationV1SelfSubjectRulesReviewSpec as SelfSubjectRulesReviewSpec };

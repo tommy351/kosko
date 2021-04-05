@@ -1,0 +1,5 @@
+export * from "../../_definitions/IoK8sApiCertificatesV1beta1CertificateSigningRequest";
+export * from "../../_definitions/IoK8sApiCertificatesV1beta1CertificateSigningRequestCondition";
+export * from "../../_definitions/IoK8sApiCertificatesV1beta1CertificateSigningRequestList";
+export * from "../../_definitions/IoK8sApiCertificatesV1beta1CertificateSigningRequestSpec";
+export * from "../../_definitions/IoK8sApiCertificatesV1beta1CertificateSigningRequestStatus";

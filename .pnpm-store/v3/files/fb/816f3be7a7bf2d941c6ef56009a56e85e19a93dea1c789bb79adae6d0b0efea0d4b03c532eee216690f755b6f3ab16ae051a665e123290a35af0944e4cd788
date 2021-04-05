@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ContainerStatus = exports.IoK8sApiCoreV1ContainerStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ContainerStatus_1 = require("../_schemas/IoK8sApiCoreV1ContainerStatus.js");
+/**
+ * ContainerStatus contains details for the current status of this container.
+ */
+class IoK8sApiCoreV1ContainerStatus extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ContainerStatus = IoK8sApiCoreV1ContainerStatus;
+exports.ContainerStatus = IoK8sApiCoreV1ContainerStatus;
+base_1.Model.setSchema(IoK8sApiCoreV1ContainerStatus, "io.k8s.api.core.v1.ContainerStatus", IoK8sApiCoreV1ContainerStatus_1.addSchema);

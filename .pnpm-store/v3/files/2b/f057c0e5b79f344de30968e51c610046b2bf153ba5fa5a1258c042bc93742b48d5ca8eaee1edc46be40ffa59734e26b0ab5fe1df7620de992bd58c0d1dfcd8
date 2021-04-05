@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AllowedHostPath = exports.IoK8sApiPolicyV1beta1AllowedHostPath = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiPolicyV1beta1AllowedHostPath_1 = require("../_schemas/IoK8sApiPolicyV1beta1AllowedHostPath.js");
+/**
+ * AllowedHostPath defines the host volume conditions that will be enabled by a policy for pods to use. It requires the path prefix to be defined.
+ */
+class IoK8sApiPolicyV1beta1AllowedHostPath extends base_1.Model {
+}
+exports.IoK8sApiPolicyV1beta1AllowedHostPath = IoK8sApiPolicyV1beta1AllowedHostPath;
+exports.AllowedHostPath = IoK8sApiPolicyV1beta1AllowedHostPath;
+base_1.Model.setSchema(IoK8sApiPolicyV1beta1AllowedHostPath, "io.k8s.api.policy.v1beta1.AllowedHostPath", IoK8sApiPolicyV1beta1AllowedHostPath_1.addSchema);

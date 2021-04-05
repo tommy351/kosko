@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RollingUpdateDaemonSet = exports.IoK8sApiAppsV1RollingUpdateDaemonSet = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAppsV1RollingUpdateDaemonSet_1 = require("../_schemas/IoK8sApiAppsV1RollingUpdateDaemonSet.js");
+/**
+ * Spec to control the desired behavior of daemon set rolling update.
+ */
+class IoK8sApiAppsV1RollingUpdateDaemonSet extends base_1.Model {
+}
+exports.IoK8sApiAppsV1RollingUpdateDaemonSet = IoK8sApiAppsV1RollingUpdateDaemonSet;
+exports.RollingUpdateDaemonSet = IoK8sApiAppsV1RollingUpdateDaemonSet;
+base_1.Model.setSchema(IoK8sApiAppsV1RollingUpdateDaemonSet, "io.k8s.api.apps.v1.RollingUpdateDaemonSet", IoK8sApiAppsV1RollingUpdateDaemonSet_1.addSchema);

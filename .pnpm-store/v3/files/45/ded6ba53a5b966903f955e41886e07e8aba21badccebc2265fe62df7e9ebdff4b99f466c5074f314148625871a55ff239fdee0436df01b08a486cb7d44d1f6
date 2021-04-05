@@ -1,0 +1,62 @@
+{
+  "name": "jest-serializer-path",
+  "version": "0.1.15",
+  "description": "Remove absolute paths from your Jest snapshots",
+  "author": "tribou",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "engines": {
+    "node": ">=6.4.x",
+    "npm": ">=3.10.3"
+  },
+  "homepage": "https://github.com/tribou/jest-serializer-path#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tribou/jest-serializer-path.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tribou/jest-serializer-path/issues"
+  },
+  "keywords": [
+    "jest",
+    "serializer"
+  ],
+  "files": [
+    "lib/",
+    "yarn.lock"
+  ],
+  "devDependencies": {
+    "babel-eslint": "^8.0.2",
+    "coveralls": "^3.0.0",
+    "cross-env": "^5.1.1",
+    "eslint": "^4.19.1",
+    "eslint-plugin-tribou": "^1.0.5",
+    "fs-extra": "^5.0.0",
+    "jest": "^22.4.3",
+    "jest-junit": "^3.3.0"
+  },
+  "dependencies": {
+    "lodash.clonedeep": "^4.5.0",
+    "lodash.iserror": "^3.1.1",
+    "slash": "^2.0.0"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "verbose": true,
+    "testRegex": "/(lib)/.*_test\\.js$",
+    "testResultsProcessor": "jest-junit",
+    "snapshotSerializers": [
+      "./"
+    ],
+    "resetModules": true
+  },
+  "scripts": {
+    "coverage": "coveralls < coverage/lcov.info",
+    "lint": "eslint --ignore-path .gitignore lib",
+    "test-jest": "cross-env NODE_ENV=test jest",
+    "test": "npm run --silent lint && npm run --silent test-jest",
+    "watch": "npm run test-jest -- --watch",
+    "yarn": "npm run --silent yarn-bin -- install --prefer-offline",
+    "yarn-bin": "node bin/yarn-1.6.0.js"
+  }
+}

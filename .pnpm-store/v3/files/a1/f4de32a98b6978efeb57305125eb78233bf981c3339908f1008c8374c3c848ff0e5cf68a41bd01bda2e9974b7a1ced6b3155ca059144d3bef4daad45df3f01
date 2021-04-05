@@ -1,0 +1,33 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiNetworkingV1IngressBackend } from "./IoK8sApiNetworkingV1IngressBackend.mjs";
+import { addSchema as IoK8sApiNetworkingV1IngressRule } from "./IoK8sApiNetworkingV1IngressRule.mjs";
+import { addSchema as IoK8sApiNetworkingV1IngressTLS } from "./IoK8sApiNetworkingV1IngressTLS.mjs";
+const schema = {
+    "properties": {
+        "defaultBackend": {
+            "$ref": "io.k8s.api.networking.v1.IngressBackend#"
+        },
+        "ingressClassName": {
+            "type": "string"
+        },
+        "rules": {
+            "items": {
+                "$ref": "io.k8s.api.networking.v1.IngressRule#"
+            },
+            "type": "array"
+        },
+        "tls": {
+            "items": {
+                "$ref": "io.k8s.api.networking.v1.IngressTLS#"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiNetworkingV1IngressBackend();
+    IoK8sApiNetworkingV1IngressRule();
+    IoK8sApiNetworkingV1IngressTLS();
+    register("io.k8s.api.networking.v1.IngressSpec", schema);
+}

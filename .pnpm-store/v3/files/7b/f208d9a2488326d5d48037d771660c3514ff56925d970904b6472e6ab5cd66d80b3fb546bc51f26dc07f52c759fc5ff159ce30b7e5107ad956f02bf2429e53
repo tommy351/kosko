@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceCondition_1 = require("./IoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceCondition.js");
+const schema = {
+    "properties": {
+        "conditions": {
+            "items": {
+                "$ref": "io.k8s.kube-aggregator.pkg.apis.apiregistration.v1.APIServiceCondition#"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceCondition_1.addSchema();
+    validate_1.register("io.k8s.kube-aggregator.pkg.apis.apiregistration.v1.APIServiceStatus", schema);
+}
+exports.addSchema = addSchema;

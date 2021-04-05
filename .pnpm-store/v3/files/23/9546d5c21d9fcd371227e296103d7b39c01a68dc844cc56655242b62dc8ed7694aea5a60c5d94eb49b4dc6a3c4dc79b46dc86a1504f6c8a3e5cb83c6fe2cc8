@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Status = exports.IoK8sApimachineryPkgApisMetaV1Status = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApimachineryPkgApisMetaV1Status_1 = require("../_schemas/IoK8sApimachineryPkgApisMetaV1Status.js");
+/**
+ * Status is a return value for calls that don't return other objects.
+ */
+class IoK8sApimachineryPkgApisMetaV1Status extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApimachineryPkgApisMetaV1Status.apiVersion,
+            kind: IoK8sApimachineryPkgApisMetaV1Status.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApimachineryPkgApisMetaV1Status = IoK8sApimachineryPkgApisMetaV1Status;
+exports.Status = IoK8sApimachineryPkgApisMetaV1Status;
+IoK8sApimachineryPkgApisMetaV1Status.apiVersion = "v1";
+IoK8sApimachineryPkgApisMetaV1Status.kind = "Status";
+base_1.Model.setSchema(IoK8sApimachineryPkgApisMetaV1Status, "io.k8s.apimachinery.pkg.apis.meta.v1.Status", IoK8sApimachineryPkgApisMetaV1Status_1.addSchema);

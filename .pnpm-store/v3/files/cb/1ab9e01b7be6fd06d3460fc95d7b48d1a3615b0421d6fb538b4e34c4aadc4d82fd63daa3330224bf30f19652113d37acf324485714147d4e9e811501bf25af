@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SupplementalGroupsStrategyOptions = exports.IoK8sApiPolicyV1beta1SupplementalGroupsStrategyOptions = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiPolicyV1beta1SupplementalGroupsStrategyOptions_1 = require("../_schemas/IoK8sApiPolicyV1beta1SupplementalGroupsStrategyOptions.js");
+/**
+ * SupplementalGroupsStrategyOptions defines the strategy type and options used to create the strategy.
+ */
+class IoK8sApiPolicyV1beta1SupplementalGroupsStrategyOptions extends base_1.Model {
+}
+exports.IoK8sApiPolicyV1beta1SupplementalGroupsStrategyOptions = IoK8sApiPolicyV1beta1SupplementalGroupsStrategyOptions;
+exports.SupplementalGroupsStrategyOptions = IoK8sApiPolicyV1beta1SupplementalGroupsStrategyOptions;
+base_1.Model.setSchema(IoK8sApiPolicyV1beta1SupplementalGroupsStrategyOptions, "io.k8s.api.policy.v1beta1.SupplementalGroupsStrategyOptions", IoK8sApiPolicyV1beta1SupplementalGroupsStrategyOptions_1.addSchema);

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LimitResponse = exports.IoK8sApiFlowcontrolV1alpha1LimitResponse = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiFlowcontrolV1alpha1LimitResponse_1 = require("../_schemas/IoK8sApiFlowcontrolV1alpha1LimitResponse.js");
+/**
+ * LimitResponse defines how to handle requests that can not be executed right now.
+ */
+class IoK8sApiFlowcontrolV1alpha1LimitResponse extends base_1.Model {
+}
+exports.IoK8sApiFlowcontrolV1alpha1LimitResponse = IoK8sApiFlowcontrolV1alpha1LimitResponse;
+exports.LimitResponse = IoK8sApiFlowcontrolV1alpha1LimitResponse;
+base_1.Model.setSchema(IoK8sApiFlowcontrolV1alpha1LimitResponse, "io.k8s.api.flowcontrol.v1alpha1.LimitResponse", IoK8sApiFlowcontrolV1alpha1LimitResponse_1.addSchema);

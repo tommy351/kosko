@@ -1,0 +1,24 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.VolumeAttachment = exports.IoK8sApiStorageV1VolumeAttachment = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiStorageV1VolumeAttachment_1 = require("../_schemas/IoK8sApiStorageV1VolumeAttachment.js");
+/**
+ * VolumeAttachment captures the intent to attach or detach the specified volume to/from the specified node.
+ *
+ * VolumeAttachment objects are non-namespaced.
+ */
+class IoK8sApiStorageV1VolumeAttachment extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiStorageV1VolumeAttachment.apiVersion,
+            kind: IoK8sApiStorageV1VolumeAttachment.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiStorageV1VolumeAttachment = IoK8sApiStorageV1VolumeAttachment;
+exports.VolumeAttachment = IoK8sApiStorageV1VolumeAttachment;
+IoK8sApiStorageV1VolumeAttachment.apiVersion = "storage.k8s.io/v1";
+IoK8sApiStorageV1VolumeAttachment.kind = "VolumeAttachment";
+base_1.Model.setSchema(IoK8sApiStorageV1VolumeAttachment, "io.k8s.api.storage.v1.VolumeAttachment", IoK8sApiStorageV1VolumeAttachment_1.addSchema);

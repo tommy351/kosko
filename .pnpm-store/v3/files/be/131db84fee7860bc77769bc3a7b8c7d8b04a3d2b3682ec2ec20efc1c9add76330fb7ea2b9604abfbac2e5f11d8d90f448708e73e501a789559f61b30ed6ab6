@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ListMeta = exports.IoK8sApimachineryPkgApisMetaV1ListMeta = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApimachineryPkgApisMetaV1ListMeta_1 = require("../_schemas/IoK8sApimachineryPkgApisMetaV1ListMeta.js");
+/**
+ * ListMeta describes metadata that synthetic resources must have, including lists and various status objects. A resource may have only one of {ObjectMeta, ListMeta}.
+ */
+class IoK8sApimachineryPkgApisMetaV1ListMeta extends base_1.Model {
+}
+exports.IoK8sApimachineryPkgApisMetaV1ListMeta = IoK8sApimachineryPkgApisMetaV1ListMeta;
+exports.ListMeta = IoK8sApimachineryPkgApisMetaV1ListMeta;
+base_1.Model.setSchema(IoK8sApimachineryPkgApisMetaV1ListMeta, "io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta", IoK8sApimachineryPkgApisMetaV1ListMeta_1.addSchema);

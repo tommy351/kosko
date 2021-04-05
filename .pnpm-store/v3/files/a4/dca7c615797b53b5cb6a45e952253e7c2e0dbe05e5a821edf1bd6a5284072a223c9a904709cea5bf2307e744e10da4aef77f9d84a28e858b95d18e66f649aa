@@ -1,0 +1,38 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApimachineryPkgApisMetaV1Time } from "./IoK8sApimachineryPkgApisMetaV1Time.mjs";
+const schema = {
+    "properties": {
+        "containerID": {
+            "type": "string"
+        },
+        "exitCode": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "finishedAt": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.Time#"
+        },
+        "message": {
+            "type": "string"
+        },
+        "reason": {
+            "type": "string"
+        },
+        "signal": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "startedAt": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.Time#"
+        }
+    },
+    "required": [
+        "exitCode"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1Time();
+    IoK8sApimachineryPkgApisMetaV1Time();
+    register("io.k8s.api.core.v1.ContainerStateTerminated", schema);
+}

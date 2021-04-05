@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.OwnerReference = exports.IoK8sApimachineryPkgApisMetaV1OwnerReference = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApimachineryPkgApisMetaV1OwnerReference_1 = require("../_schemas/IoK8sApimachineryPkgApisMetaV1OwnerReference.js");
+/**
+ * OwnerReference contains enough information to let you identify an owning object. An owning object must be in the same namespace as the dependent, or be cluster-scoped, so there is no namespace field.
+ */
+class IoK8sApimachineryPkgApisMetaV1OwnerReference extends base_1.Model {
+}
+exports.IoK8sApimachineryPkgApisMetaV1OwnerReference = IoK8sApimachineryPkgApisMetaV1OwnerReference;
+exports.OwnerReference = IoK8sApimachineryPkgApisMetaV1OwnerReference;
+base_1.Model.setSchema(IoK8sApimachineryPkgApisMetaV1OwnerReference, "io.k8s.apimachinery.pkg.apis.meta.v1.OwnerReference", IoK8sApimachineryPkgApisMetaV1OwnerReference_1.addSchema);

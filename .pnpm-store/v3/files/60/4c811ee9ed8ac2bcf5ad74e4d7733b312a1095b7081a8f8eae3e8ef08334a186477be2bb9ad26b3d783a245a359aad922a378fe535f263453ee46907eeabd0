@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.VolumeNodeResources = exports.IoK8sApiStorageV1VolumeNodeResources = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiStorageV1VolumeNodeResources_1 = require("../_schemas/IoK8sApiStorageV1VolumeNodeResources.js");
+/**
+ * VolumeNodeResources is a set of resource limits for scheduling of volumes.
+ */
+class IoK8sApiStorageV1VolumeNodeResources extends base_1.Model {
+}
+exports.IoK8sApiStorageV1VolumeNodeResources = IoK8sApiStorageV1VolumeNodeResources;
+exports.VolumeNodeResources = IoK8sApiStorageV1VolumeNodeResources;
+base_1.Model.setSchema(IoK8sApiStorageV1VolumeNodeResources, "io.k8s.api.storage.v1.VolumeNodeResources", IoK8sApiStorageV1VolumeNodeResources_1.addSchema);

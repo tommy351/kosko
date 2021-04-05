@@ -1,0 +1,27 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * RoleRef contains information that points to the role being used
+ */
+export interface IIoK8sApiRbacV1alpha1RoleRef {
+    /**
+     * APIGroup is the group for the resource being referenced
+     */
+    "apiGroup": string;
+    /**
+     * Kind is the type of resource being referenced
+     */
+    "kind": string;
+    /**
+     * Name is the name of resource being referenced
+     */
+    "name": string;
+}
+/**
+ * RoleRef contains information that points to the role being used
+ */
+export declare class IoK8sApiRbacV1alpha1RoleRef extends Model<IIoK8sApiRbacV1alpha1RoleRef> implements IIoK8sApiRbacV1alpha1RoleRef {
+    "apiGroup": string;
+    "kind": IIoK8sApiRbacV1alpha1RoleRef["kind"];
+    "name": string;
+}
+export { IIoK8sApiRbacV1alpha1RoleRef as IRoleRef, IoK8sApiRbacV1alpha1RoleRef as RoleRef };

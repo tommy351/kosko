@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SecurityContext = exports.IoK8sApiCoreV1SecurityContext = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1SecurityContext_1 = require("../_schemas/IoK8sApiCoreV1SecurityContext.js");
+/**
+ * SecurityContext holds security configuration that will be applied to a container. Some fields are present in both SecurityContext and PodSecurityContext.  When both are set, the values in SecurityContext take precedence.
+ */
+class IoK8sApiCoreV1SecurityContext extends base_1.Model {
+}
+exports.IoK8sApiCoreV1SecurityContext = IoK8sApiCoreV1SecurityContext;
+exports.SecurityContext = IoK8sApiCoreV1SecurityContext;
+base_1.Model.setSchema(IoK8sApiCoreV1SecurityContext, "io.k8s.api.core.v1.SecurityContext", IoK8sApiCoreV1SecurityContext_1.addSchema);

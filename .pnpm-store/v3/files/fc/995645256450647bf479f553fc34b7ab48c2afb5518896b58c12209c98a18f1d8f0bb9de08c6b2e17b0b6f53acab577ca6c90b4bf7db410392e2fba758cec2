@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PodTemplateList = exports.IoK8sApiCoreV1PodTemplateList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1PodTemplateList_1 = require("../_schemas/IoK8sApiCoreV1PodTemplateList.js");
+/**
+ * PodTemplateList is a list of PodTemplates.
+ */
+class IoK8sApiCoreV1PodTemplateList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1PodTemplateList.apiVersion,
+            kind: IoK8sApiCoreV1PodTemplateList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1PodTemplateList = IoK8sApiCoreV1PodTemplateList;
+exports.PodTemplateList = IoK8sApiCoreV1PodTemplateList;
+IoK8sApiCoreV1PodTemplateList.apiVersion = "v1";
+IoK8sApiCoreV1PodTemplateList.kind = "PodTemplateList";
+base_1.Model.setSchema(IoK8sApiCoreV1PodTemplateList, "io.k8s.api.core.v1.PodTemplateList", IoK8sApiCoreV1PodTemplateList_1.addSchema);

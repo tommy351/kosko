@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiNodeV1alpha1Overhead.mjs";
+/**
+ * Overhead structure represents the resource overhead associated with running a pod.
+ */
+export class IoK8sApiNodeV1alpha1Overhead extends Model {
+}
+Model.setSchema(IoK8sApiNodeV1alpha1Overhead, "io.k8s.api.node.v1alpha1.Overhead", addSchema);
+export { IoK8sApiNodeV1alpha1Overhead as Overhead };

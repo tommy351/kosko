@@ -1,0 +1,5 @@
+export * from "../../_definitions/IoK8sApiBatchV2alpha1CronJob";
+export * from "../../_definitions/IoK8sApiBatchV2alpha1CronJobList";
+export * from "../../_definitions/IoK8sApiBatchV2alpha1CronJobSpec";
+export * from "../../_definitions/IoK8sApiBatchV2alpha1CronJobStatus";
+export * from "../../_definitions/IoK8sApiBatchV2alpha1JobTemplateSpec";

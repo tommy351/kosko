@@ -1,0 +1,22 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "path": {
+            "type": "string"
+        },
+        "readOnly": {
+            "type": "boolean"
+        },
+        "server": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "server",
+        "path"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.core.v1.NFSVolumeSource", schema);
+}

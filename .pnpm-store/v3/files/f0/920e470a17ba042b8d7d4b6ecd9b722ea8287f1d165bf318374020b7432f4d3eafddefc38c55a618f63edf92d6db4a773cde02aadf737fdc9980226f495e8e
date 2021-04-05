@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.APIResource = exports.IoK8sApimachineryPkgApisMetaV1APIResource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApimachineryPkgApisMetaV1APIResource_1 = require("../_schemas/IoK8sApimachineryPkgApisMetaV1APIResource.js");
+/**
+ * APIResource specifies the name of a resource and whether it is namespaced.
+ */
+class IoK8sApimachineryPkgApisMetaV1APIResource extends base_1.Model {
+}
+exports.IoK8sApimachineryPkgApisMetaV1APIResource = IoK8sApimachineryPkgApisMetaV1APIResource;
+exports.APIResource = IoK8sApimachineryPkgApisMetaV1APIResource;
+base_1.Model.setSchema(IoK8sApimachineryPkgApisMetaV1APIResource, "io.k8s.apimachinery.pkg.apis.meta.v1.APIResource", IoK8sApimachineryPkgApisMetaV1APIResource_1.addSchema);

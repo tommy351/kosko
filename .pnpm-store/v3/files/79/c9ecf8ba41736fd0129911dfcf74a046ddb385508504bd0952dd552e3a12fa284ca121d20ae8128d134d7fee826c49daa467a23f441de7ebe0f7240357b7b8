@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionVersion.mjs";
+/**
+ * CustomResourceDefinitionVersion describes a version for CRD.
+ */
+export class IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionVersion extends Model {
+}
+Model.setSchema(IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionVersion, "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceDefinitionVersion", addSchema);
+export { IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionVersion as CustomResourceDefinitionVersion };

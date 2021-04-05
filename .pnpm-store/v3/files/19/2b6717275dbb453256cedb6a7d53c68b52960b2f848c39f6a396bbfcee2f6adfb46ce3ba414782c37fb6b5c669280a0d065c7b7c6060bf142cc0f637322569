@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LocalSubjectAccessReview = exports.IoK8sApiAuthorizationV1beta1LocalSubjectAccessReview = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAuthorizationV1beta1LocalSubjectAccessReview_1 = require("../_schemas/IoK8sApiAuthorizationV1beta1LocalSubjectAccessReview.js");
+/**
+ * LocalSubjectAccessReview checks whether or not a user or group can perform an action in a given namespace. Having a namespace scoped resource makes it much easier to grant namespace scoped policy that includes permissions checking.
+ */
+class IoK8sApiAuthorizationV1beta1LocalSubjectAccessReview extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAuthorizationV1beta1LocalSubjectAccessReview.apiVersion,
+            kind: IoK8sApiAuthorizationV1beta1LocalSubjectAccessReview.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiAuthorizationV1beta1LocalSubjectAccessReview = IoK8sApiAuthorizationV1beta1LocalSubjectAccessReview;
+exports.LocalSubjectAccessReview = IoK8sApiAuthorizationV1beta1LocalSubjectAccessReview;
+IoK8sApiAuthorizationV1beta1LocalSubjectAccessReview.apiVersion = "authorization.k8s.io/v1beta1";
+IoK8sApiAuthorizationV1beta1LocalSubjectAccessReview.kind = "LocalSubjectAccessReview";
+base_1.Model.setSchema(IoK8sApiAuthorizationV1beta1LocalSubjectAccessReview, "io.k8s.api.authorization.v1beta1.LocalSubjectAccessReview", IoK8sApiAuthorizationV1beta1LocalSubjectAccessReview_1.addSchema);

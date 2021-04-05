@@ -1,0 +1,27 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "attachRequired": {
+            "type": "boolean"
+        },
+        "fsGroupPolicy": {
+            "type": "string"
+        },
+        "podInfoOnMount": {
+            "type": "boolean"
+        },
+        "storageCapacity": {
+            "type": "boolean"
+        },
+        "volumeLifecycleModes": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.storage.v1.CSIDriverSpec", schema);
+}

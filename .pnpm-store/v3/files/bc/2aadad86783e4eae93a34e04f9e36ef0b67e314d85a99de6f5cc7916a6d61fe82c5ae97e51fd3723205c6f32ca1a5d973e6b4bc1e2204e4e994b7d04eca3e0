@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.IngressClassList = exports.IoK8sApiNetworkingV1IngressClassList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiNetworkingV1IngressClassList_1 = require("../_schemas/IoK8sApiNetworkingV1IngressClassList.js");
+/**
+ * IngressClassList is a collection of IngressClasses.
+ */
+class IoK8sApiNetworkingV1IngressClassList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiNetworkingV1IngressClassList.apiVersion,
+            kind: IoK8sApiNetworkingV1IngressClassList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiNetworkingV1IngressClassList = IoK8sApiNetworkingV1IngressClassList;
+exports.IngressClassList = IoK8sApiNetworkingV1IngressClassList;
+IoK8sApiNetworkingV1IngressClassList.apiVersion = "networking.k8s.io/v1";
+IoK8sApiNetworkingV1IngressClassList.kind = "IngressClassList";
+base_1.Model.setSchema(IoK8sApiNetworkingV1IngressClassList, "io.k8s.api.networking.v1.IngressClassList", IoK8sApiNetworkingV1IngressClassList_1.addSchema);

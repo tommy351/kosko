@@ -1,0 +1,13 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "replicas": {
+            "format": "int32",
+            "type": "integer"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.autoscaling.v1.ScaleSpec", schema);
+}

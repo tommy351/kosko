@@ -1,0 +1,23 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiCoreV1KeyToPath } from "./IoK8sApiCoreV1KeyToPath.mjs";
+const schema = {
+    "properties": {
+        "items": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.KeyToPath#"
+            },
+            "type": "array"
+        },
+        "name": {
+            "type": "string"
+        },
+        "optional": {
+            "type": "boolean"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiCoreV1KeyToPath();
+    register("io.k8s.api.core.v1.ConfigMapProjection", schema);
+}

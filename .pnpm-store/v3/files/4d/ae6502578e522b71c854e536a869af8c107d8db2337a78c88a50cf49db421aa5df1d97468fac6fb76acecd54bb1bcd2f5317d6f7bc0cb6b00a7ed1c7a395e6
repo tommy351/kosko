@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.StatefulSetUpdateStrategy = exports.IoK8sApiAppsV1StatefulSetUpdateStrategy = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAppsV1StatefulSetUpdateStrategy_1 = require("../_schemas/IoK8sApiAppsV1StatefulSetUpdateStrategy.js");
+/**
+ * StatefulSetUpdateStrategy indicates the strategy that the StatefulSet controller will use to perform updates. It includes any additional parameters necessary to perform the update for the indicated strategy.
+ */
+class IoK8sApiAppsV1StatefulSetUpdateStrategy extends base_1.Model {
+}
+exports.IoK8sApiAppsV1StatefulSetUpdateStrategy = IoK8sApiAppsV1StatefulSetUpdateStrategy;
+exports.StatefulSetUpdateStrategy = IoK8sApiAppsV1StatefulSetUpdateStrategy;
+base_1.Model.setSchema(IoK8sApiAppsV1StatefulSetUpdateStrategy, "io.k8s.api.apps.v1.StatefulSetUpdateStrategy", IoK8sApiAppsV1StatefulSetUpdateStrategy_1.addSchema);

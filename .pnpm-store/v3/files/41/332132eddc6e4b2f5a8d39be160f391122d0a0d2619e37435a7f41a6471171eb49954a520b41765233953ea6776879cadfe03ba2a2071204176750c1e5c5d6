@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoordinationV1beta1Lease.mjs";
+/**
+ * Lease defines a lease concept.
+ */
+export class IoK8sApiCoordinationV1beta1Lease extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoordinationV1beta1Lease.apiVersion,
+            kind: IoK8sApiCoordinationV1beta1Lease.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiCoordinationV1beta1Lease.apiVersion = "coordination.k8s.io/v1beta1";
+IoK8sApiCoordinationV1beta1Lease.kind = "Lease";
+Model.setSchema(IoK8sApiCoordinationV1beta1Lease, "io.k8s.api.coordination.v1beta1.Lease", addSchema);
+export { IoK8sApiCoordinationV1beta1Lease as Lease };

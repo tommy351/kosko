@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAutoscalingV2beta2MetricTarget.mjs";
+/**
+ * MetricTarget defines the target value, average value, or average utilization of a specific metric
+ */
+export class IoK8sApiAutoscalingV2beta2MetricTarget extends Model {
+}
+Model.setSchema(IoK8sApiAutoscalingV2beta2MetricTarget, "io.k8s.api.autoscaling.v2beta2.MetricTarget", addSchema);
+export { IoK8sApiAutoscalingV2beta2MetricTarget as MetricTarget };

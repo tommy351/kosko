@@ -1,0 +1,19 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiAuthorizationV1NonResourceAttributes } from "./IoK8sApiAuthorizationV1NonResourceAttributes.mjs";
+import { addSchema as IoK8sApiAuthorizationV1ResourceAttributes } from "./IoK8sApiAuthorizationV1ResourceAttributes.mjs";
+const schema = {
+    "properties": {
+        "nonResourceAttributes": {
+            "$ref": "io.k8s.api.authorization.v1.NonResourceAttributes#"
+        },
+        "resourceAttributes": {
+            "$ref": "io.k8s.api.authorization.v1.ResourceAttributes#"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiAuthorizationV1NonResourceAttributes();
+    IoK8sApiAuthorizationV1ResourceAttributes();
+    register("io.k8s.api.authorization.v1.SelfSubjectAccessReviewSpec", schema);
+}

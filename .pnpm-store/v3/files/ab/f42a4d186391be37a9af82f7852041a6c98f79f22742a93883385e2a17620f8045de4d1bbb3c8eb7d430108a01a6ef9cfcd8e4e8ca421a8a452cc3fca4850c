@@ -1,0 +1,27 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * AzureFile represents an Azure File Service mount on the host and bind mount to the pod.
+ */
+export interface IIoK8sApiCoreV1AzureFileVolumeSource {
+    /**
+     * Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.
+     */
+    "readOnly"?: boolean;
+    /**
+     * the name of secret that contains Azure Storage Account Name and Key
+     */
+    "secretName": string;
+    /**
+     * Share Name
+     */
+    "shareName": string;
+}
+/**
+ * AzureFile represents an Azure File Service mount on the host and bind mount to the pod.
+ */
+export declare class IoK8sApiCoreV1AzureFileVolumeSource extends Model<IIoK8sApiCoreV1AzureFileVolumeSource> implements IIoK8sApiCoreV1AzureFileVolumeSource {
+    "readOnly"?: boolean;
+    "secretName": string;
+    "shareName": string;
+}
+export { IIoK8sApiCoreV1AzureFileVolumeSource as IAzureFileVolumeSource, IoK8sApiCoreV1AzureFileVolumeSource as AzureFileVolumeSource };

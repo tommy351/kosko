@@ -1,0 +1,27 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiExtensionsV1beta1IngressBackend_1 = require("./IoK8sApiExtensionsV1beta1IngressBackend.js");
+const schema = {
+    "properties": {
+        "backend": {
+            "$ref": "io.k8s.api.extensions.v1beta1.IngressBackend#"
+        },
+        "path": {
+            "type": "string"
+        },
+        "pathType": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "backend"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiExtensionsV1beta1IngressBackend_1.addSchema();
+    validate_1.register("io.k8s.api.extensions.v1beta1.HTTPIngressPath", schema);
+}
+exports.addSchema = addSchema;

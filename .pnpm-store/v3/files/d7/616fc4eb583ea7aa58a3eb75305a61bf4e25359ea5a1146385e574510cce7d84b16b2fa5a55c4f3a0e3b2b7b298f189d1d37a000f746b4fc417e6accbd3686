@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiRbacV1ClusterRoleList.mjs";
+/**
+ * ClusterRoleList is a collection of ClusterRoles
+ */
+export class IoK8sApiRbacV1ClusterRoleList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiRbacV1ClusterRoleList.apiVersion,
+            kind: IoK8sApiRbacV1ClusterRoleList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiRbacV1ClusterRoleList.apiVersion = "rbac.authorization.k8s.io/v1";
+IoK8sApiRbacV1ClusterRoleList.kind = "ClusterRoleList";
+Model.setSchema(IoK8sApiRbacV1ClusterRoleList, "io.k8s.api.rbac.v1.ClusterRoleList", addSchema);
+export { IoK8sApiRbacV1ClusterRoleList as ClusterRoleList };

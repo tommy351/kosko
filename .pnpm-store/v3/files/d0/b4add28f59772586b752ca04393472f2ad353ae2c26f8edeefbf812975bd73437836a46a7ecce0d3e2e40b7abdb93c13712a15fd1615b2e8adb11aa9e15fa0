@@ -1,0 +1,21 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiCertificatesV1CertificateSigningRequestCondition } from "./IoK8sApiCertificatesV1CertificateSigningRequestCondition.mjs";
+const schema = {
+    "properties": {
+        "certificate": {
+            "format": "byte",
+            "type": "string"
+        },
+        "conditions": {
+            "items": {
+                "$ref": "io.k8s.api.certificates.v1.CertificateSigningRequestCondition#"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiCertificatesV1CertificateSigningRequestCondition();
+    register("io.k8s.api.certificates.v1.CertificateSigningRequestStatus", schema);
+}

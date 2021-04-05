@@ -1,0 +1,23 @@
+import { IIoK8sApimachineryPkgApisMetaV1Time } from "./IoK8sApimachineryPkgApisMetaV1Time";
+import { Model } from "@kubernetes-models/base";
+/**
+ * VolumeError captures an error encountered during a volume operation.
+ */
+export interface IIoK8sApiStorageV1beta1VolumeError {
+    /**
+     * String detailing the error encountered during Attach or Detach operation. This string may be logged, so it should not contain sensitive information.
+     */
+    "message"?: string;
+    /**
+     * Time the error was encountered.
+     */
+    "time"?: IIoK8sApimachineryPkgApisMetaV1Time;
+}
+/**
+ * VolumeError captures an error encountered during a volume operation.
+ */
+export declare class IoK8sApiStorageV1beta1VolumeError extends Model<IIoK8sApiStorageV1beta1VolumeError> implements IIoK8sApiStorageV1beta1VolumeError {
+    "message"?: string;
+    "time"?: IIoK8sApimachineryPkgApisMetaV1Time;
+}
+export { IIoK8sApiStorageV1beta1VolumeError as IVolumeError, IoK8sApiStorageV1beta1VolumeError as VolumeError };

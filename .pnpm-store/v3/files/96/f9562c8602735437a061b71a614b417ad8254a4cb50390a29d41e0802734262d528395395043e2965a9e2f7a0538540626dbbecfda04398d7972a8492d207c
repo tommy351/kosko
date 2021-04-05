@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiExtensionsV1beta1Ingress.mjs";
+/**
+ * Ingress is a collection of rules that allow inbound connections to reach the endpoints defined by a backend. An Ingress can be configured to give services externally-reachable urls, load balance traffic, terminate SSL, offer name based virtual hosting etc. DEPRECATED - This group version of Ingress is deprecated by networking.k8s.io/v1beta1 Ingress. See the release notes for more information.
+ */
+export class IoK8sApiExtensionsV1beta1Ingress extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiExtensionsV1beta1Ingress.apiVersion,
+            kind: IoK8sApiExtensionsV1beta1Ingress.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiExtensionsV1beta1Ingress.apiVersion = "extensions/v1beta1";
+IoK8sApiExtensionsV1beta1Ingress.kind = "Ingress";
+Model.setSchema(IoK8sApiExtensionsV1beta1Ingress, "io.k8s.api.extensions.v1beta1.Ingress", addSchema);
+export { IoK8sApiExtensionsV1beta1Ingress as Ingress };

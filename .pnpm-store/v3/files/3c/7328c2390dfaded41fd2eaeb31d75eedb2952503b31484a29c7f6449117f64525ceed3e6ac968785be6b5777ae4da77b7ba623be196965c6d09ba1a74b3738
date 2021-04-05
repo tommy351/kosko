@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FSGroupStrategyOptions = exports.IoK8sApiPolicyV1beta1FSGroupStrategyOptions = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiPolicyV1beta1FSGroupStrategyOptions_1 = require("../_schemas/IoK8sApiPolicyV1beta1FSGroupStrategyOptions.js");
+/**
+ * FSGroupStrategyOptions defines the strategy type and options used to create the strategy.
+ */
+class IoK8sApiPolicyV1beta1FSGroupStrategyOptions extends base_1.Model {
+}
+exports.IoK8sApiPolicyV1beta1FSGroupStrategyOptions = IoK8sApiPolicyV1beta1FSGroupStrategyOptions;
+exports.FSGroupStrategyOptions = IoK8sApiPolicyV1beta1FSGroupStrategyOptions;
+base_1.Model.setSchema(IoK8sApiPolicyV1beta1FSGroupStrategyOptions, "io.k8s.api.policy.v1beta1.FSGroupStrategyOptions", IoK8sApiPolicyV1beta1FSGroupStrategyOptions_1.addSchema);

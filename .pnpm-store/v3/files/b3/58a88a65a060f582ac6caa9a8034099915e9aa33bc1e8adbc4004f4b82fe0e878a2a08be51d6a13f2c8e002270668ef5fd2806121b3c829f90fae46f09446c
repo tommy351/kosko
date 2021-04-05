@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ServiceSpec = exports.IoK8sApiCoreV1ServiceSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ServiceSpec_1 = require("../_schemas/IoK8sApiCoreV1ServiceSpec.js");
+/**
+ * ServiceSpec describes the attributes that a user creates on a service.
+ */
+class IoK8sApiCoreV1ServiceSpec extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ServiceSpec = IoK8sApiCoreV1ServiceSpec;
+exports.ServiceSpec = IoK8sApiCoreV1ServiceSpec;
+base_1.Model.setSchema(IoK8sApiCoreV1ServiceSpec, "io.k8s.api.core.v1.ServiceSpec", IoK8sApiCoreV1ServiceSpec_1.addSchema);

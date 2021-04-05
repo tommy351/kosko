@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PriorityLevelConfigurationCondition = exports.IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationCondition = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationCondition_1 = require("../_schemas/IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationCondition.js");
+/**
+ * PriorityLevelConfigurationCondition defines the condition of priority level.
+ */
+class IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationCondition extends base_1.Model {
+}
+exports.IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationCondition = IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationCondition;
+exports.PriorityLevelConfigurationCondition = IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationCondition;
+base_1.Model.setSchema(IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationCondition, "io.k8s.api.flowcontrol.v1alpha1.PriorityLevelConfigurationCondition", IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationCondition_1.addSchema);

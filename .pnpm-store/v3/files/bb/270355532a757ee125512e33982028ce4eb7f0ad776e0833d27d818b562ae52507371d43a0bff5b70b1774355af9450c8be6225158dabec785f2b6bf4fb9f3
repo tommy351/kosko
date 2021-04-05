@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PodDNSConfig = exports.IoK8sApiCoreV1PodDNSConfig = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1PodDNSConfig_1 = require("../_schemas/IoK8sApiCoreV1PodDNSConfig.js");
+/**
+ * PodDNSConfig defines the DNS parameters of a pod in addition to those generated from DNSPolicy.
+ */
+class IoK8sApiCoreV1PodDNSConfig extends base_1.Model {
+}
+exports.IoK8sApiCoreV1PodDNSConfig = IoK8sApiCoreV1PodDNSConfig;
+exports.PodDNSConfig = IoK8sApiCoreV1PodDNSConfig;
+base_1.Model.setSchema(IoK8sApiCoreV1PodDNSConfig, "io.k8s.api.core.v1.PodDNSConfig", IoK8sApiCoreV1PodDNSConfig_1.addSchema);

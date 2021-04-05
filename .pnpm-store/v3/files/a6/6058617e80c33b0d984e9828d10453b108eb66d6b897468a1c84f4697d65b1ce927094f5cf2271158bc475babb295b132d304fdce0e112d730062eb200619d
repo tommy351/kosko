@@ -1,0 +1,48 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApisMetaV1ObjectMeta_1 = require("./IoK8sApimachineryPkgApisMetaV1ObjectMeta.js");
+const IoK8sApiNodeV1beta1Overhead_1 = require("./IoK8sApiNodeV1beta1Overhead.js");
+const IoK8sApiNodeV1beta1Scheduling_1 = require("./IoK8sApiNodeV1beta1Scheduling.js");
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string",
+            "enum": [
+                "node.k8s.io/v1beta1"
+            ]
+        },
+        "handler": {
+            "type": "string"
+        },
+        "kind": {
+            "type": "string",
+            "enum": [
+                "RuntimeClass"
+            ]
+        },
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta#"
+        },
+        "overhead": {
+            "$ref": "io.k8s.api.node.v1beta1.Overhead#"
+        },
+        "scheduling": {
+            "$ref": "io.k8s.api.node.v1beta1.Scheduling#"
+        }
+    },
+    "required": [
+        "handler",
+        "apiVersion",
+        "kind"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1ObjectMeta_1.addSchema();
+    IoK8sApiNodeV1beta1Overhead_1.addSchema();
+    IoK8sApiNodeV1beta1Scheduling_1.addSchema();
+    validate_1.register("io.k8s.api.node.v1beta1.RuntimeClass", schema);
+}
+exports.addSchema = addSchema;

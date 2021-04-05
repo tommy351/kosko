@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1LocalObjectReference.mjs";
+/**
+ * LocalObjectReference contains enough information to let you locate the referenced object inside the same namespace.
+ */
+export class IoK8sApiCoreV1LocalObjectReference extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1LocalObjectReference, "io.k8s.api.core.v1.LocalObjectReference", addSchema);
+export { IoK8sApiCoreV1LocalObjectReference as LocalObjectReference };

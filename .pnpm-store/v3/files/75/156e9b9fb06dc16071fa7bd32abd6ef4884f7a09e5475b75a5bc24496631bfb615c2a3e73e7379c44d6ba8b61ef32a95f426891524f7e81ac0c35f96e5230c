@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PriorityClassList = exports.IoK8sApiSchedulingV1beta1PriorityClassList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiSchedulingV1beta1PriorityClassList_1 = require("../_schemas/IoK8sApiSchedulingV1beta1PriorityClassList.js");
+/**
+ * PriorityClassList is a collection of priority classes.
+ */
+class IoK8sApiSchedulingV1beta1PriorityClassList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiSchedulingV1beta1PriorityClassList.apiVersion,
+            kind: IoK8sApiSchedulingV1beta1PriorityClassList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiSchedulingV1beta1PriorityClassList = IoK8sApiSchedulingV1beta1PriorityClassList;
+exports.PriorityClassList = IoK8sApiSchedulingV1beta1PriorityClassList;
+IoK8sApiSchedulingV1beta1PriorityClassList.apiVersion = "scheduling.k8s.io/v1beta1";
+IoK8sApiSchedulingV1beta1PriorityClassList.kind = "PriorityClassList";
+base_1.Model.setSchema(IoK8sApiSchedulingV1beta1PriorityClassList, "io.k8s.api.scheduling.v1beta1.PriorityClassList", IoK8sApiSchedulingV1beta1PriorityClassList_1.addSchema);

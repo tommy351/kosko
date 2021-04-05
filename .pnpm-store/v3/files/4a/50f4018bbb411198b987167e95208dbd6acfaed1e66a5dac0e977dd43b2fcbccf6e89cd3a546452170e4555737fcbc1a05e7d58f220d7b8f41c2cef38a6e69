@@ -1,0 +1,11 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1GCEPersistentDiskVolumeSource.mjs";
+/**
+ * Represents a Persistent Disk resource in Google Compute Engine.
+ *
+ * A GCE PD must exist before mounting to a container. The disk must also be in the same GCE project and zone as the kubelet. A GCE PD can only be mounted as read/write once or read-only many times. GCE PDs support ownership management and SELinux relabeling.
+ */
+export class IoK8sApiCoreV1GCEPersistentDiskVolumeSource extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1GCEPersistentDiskVolumeSource, "io.k8s.api.core.v1.GCEPersistentDiskVolumeSource", addSchema);
+export { IoK8sApiCoreV1GCEPersistentDiskVolumeSource as GCEPersistentDiskVolumeSource };

@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.APIResourceList = exports.IoK8sApimachineryPkgApisMetaV1APIResourceList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApimachineryPkgApisMetaV1APIResourceList_1 = require("../_schemas/IoK8sApimachineryPkgApisMetaV1APIResourceList.js");
+/**
+ * APIResourceList is a list of APIResource, it is used to expose the name of the resources supported in a specific group and version, and if the resource is namespaced.
+ */
+class IoK8sApimachineryPkgApisMetaV1APIResourceList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApimachineryPkgApisMetaV1APIResourceList.apiVersion,
+            kind: IoK8sApimachineryPkgApisMetaV1APIResourceList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApimachineryPkgApisMetaV1APIResourceList = IoK8sApimachineryPkgApisMetaV1APIResourceList;
+exports.APIResourceList = IoK8sApimachineryPkgApisMetaV1APIResourceList;
+IoK8sApimachineryPkgApisMetaV1APIResourceList.apiVersion = "v1";
+IoK8sApimachineryPkgApisMetaV1APIResourceList.kind = "APIResourceList";
+base_1.Model.setSchema(IoK8sApimachineryPkgApisMetaV1APIResourceList, "io.k8s.apimachinery.pkg.apis.meta.v1.APIResourceList", IoK8sApimachineryPkgApisMetaV1APIResourceList_1.addSchema);

@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1NodeList.mjs";
+/**
+ * NodeList is the whole list of all Nodes which have been registered with master.
+ */
+export class IoK8sApiCoreV1NodeList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1NodeList.apiVersion,
+            kind: IoK8sApiCoreV1NodeList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiCoreV1NodeList.apiVersion = "v1";
+IoK8sApiCoreV1NodeList.kind = "NodeList";
+Model.setSchema(IoK8sApiCoreV1NodeList, "io.k8s.api.core.v1.NodeList", addSchema);
+export { IoK8sApiCoreV1NodeList as NodeList };

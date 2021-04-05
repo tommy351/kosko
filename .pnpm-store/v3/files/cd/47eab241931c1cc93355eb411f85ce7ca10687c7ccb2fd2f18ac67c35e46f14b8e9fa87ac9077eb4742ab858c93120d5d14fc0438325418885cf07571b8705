@@ -1,0 +1,5 @@
+export * from "../../_definitions/IoK8sApiBatchV1Job.mjs";
+export * from "../../_definitions/IoK8sApiBatchV1JobCondition.mjs";
+export * from "../../_definitions/IoK8sApiBatchV1JobList.mjs";
+export * from "../../_definitions/IoK8sApiBatchV1JobSpec.mjs";
+export * from "../../_definitions/IoK8sApiBatchV1JobStatus.mjs";

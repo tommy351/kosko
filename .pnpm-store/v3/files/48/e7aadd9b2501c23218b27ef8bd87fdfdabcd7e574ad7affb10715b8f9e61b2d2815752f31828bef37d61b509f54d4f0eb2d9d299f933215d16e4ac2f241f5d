@@ -1,0 +1,29 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1WeightedPodAffinityTerm_1 = require("./IoK8sApiCoreV1WeightedPodAffinityTerm.js");
+const IoK8sApiCoreV1PodAffinityTerm_1 = require("./IoK8sApiCoreV1PodAffinityTerm.js");
+const schema = {
+    "properties": {
+        "preferredDuringSchedulingIgnoredDuringExecution": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.WeightedPodAffinityTerm#"
+            },
+            "type": "array"
+        },
+        "requiredDuringSchedulingIgnoredDuringExecution": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.PodAffinityTerm#"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1WeightedPodAffinityTerm_1.addSchema();
+    IoK8sApiCoreV1PodAffinityTerm_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.PodAffinity", schema);
+}
+exports.addSchema = addSchema;

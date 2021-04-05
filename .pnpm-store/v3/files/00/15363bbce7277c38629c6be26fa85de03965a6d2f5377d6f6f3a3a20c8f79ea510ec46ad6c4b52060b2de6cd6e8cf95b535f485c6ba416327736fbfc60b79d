@@ -1,0 +1,24 @@
+import { IIoK8sApimachineryPkgApisMetaV1ObjectMeta } from "./IoK8sApimachineryPkgApisMetaV1ObjectMeta";
+import { IIoK8sApiCoreV1PodSpec } from "./IoK8sApiCoreV1PodSpec";
+import { Model } from "@kubernetes-models/base";
+/**
+ * PodTemplateSpec describes the data a pod should have when created from a template
+ */
+export interface IIoK8sApiCoreV1PodTemplateSpec {
+    /**
+     * Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ObjectMeta;
+    /**
+     * Specification of the desired behavior of the pod. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+     */
+    "spec"?: IIoK8sApiCoreV1PodSpec;
+}
+/**
+ * PodTemplateSpec describes the data a pod should have when created from a template
+ */
+export declare class IoK8sApiCoreV1PodTemplateSpec extends Model<IIoK8sApiCoreV1PodTemplateSpec> implements IIoK8sApiCoreV1PodTemplateSpec {
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ObjectMeta;
+    "spec"?: IIoK8sApiCoreV1PodSpec;
+}
+export { IIoK8sApiCoreV1PodTemplateSpec as IPodTemplateSpec, IoK8sApiCoreV1PodTemplateSpec as PodTemplateSpec };

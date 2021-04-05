@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAppsV1DeploymentStatus.mjs";
+/**
+ * DeploymentStatus is the most recently observed status of the Deployment.
+ */
+export class IoK8sApiAppsV1DeploymentStatus extends Model {
+}
+Model.setSchema(IoK8sApiAppsV1DeploymentStatus, "io.k8s.api.apps.v1.DeploymentStatus", addSchema);
+export { IoK8sApiAppsV1DeploymentStatus as DeploymentStatus };

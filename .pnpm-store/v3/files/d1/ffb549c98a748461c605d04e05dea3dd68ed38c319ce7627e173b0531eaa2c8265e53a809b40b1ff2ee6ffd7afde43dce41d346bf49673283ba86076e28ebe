@@ -1,0 +1,12 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * JSONSchemaPropsOrStringArray represents a JSONSchemaProps or a string array.
+ */
+export interface IIoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrStringArray {
+}
+/**
+ * JSONSchemaPropsOrStringArray represents a JSONSchemaProps or a string array.
+ */
+export declare class IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrStringArray extends Model<IIoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrStringArray> implements IIoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrStringArray {
+}
+export { IIoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrStringArray as IJSONSchemaPropsOrStringArray, IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrStringArray as JSONSchemaPropsOrStringArray };

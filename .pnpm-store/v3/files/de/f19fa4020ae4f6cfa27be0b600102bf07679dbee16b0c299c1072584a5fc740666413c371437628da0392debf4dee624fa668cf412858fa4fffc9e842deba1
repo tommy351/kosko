@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SelfSubjectAccessReviewSpec = exports.IoK8sApiAuthorizationV1SelfSubjectAccessReviewSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAuthorizationV1SelfSubjectAccessReviewSpec_1 = require("../_schemas/IoK8sApiAuthorizationV1SelfSubjectAccessReviewSpec.js");
+/**
+ * SelfSubjectAccessReviewSpec is a description of the access request.  Exactly one of ResourceAuthorizationAttributes and NonResourceAuthorizationAttributes must be set
+ */
+class IoK8sApiAuthorizationV1SelfSubjectAccessReviewSpec extends base_1.Model {
+}
+exports.IoK8sApiAuthorizationV1SelfSubjectAccessReviewSpec = IoK8sApiAuthorizationV1SelfSubjectAccessReviewSpec;
+exports.SelfSubjectAccessReviewSpec = IoK8sApiAuthorizationV1SelfSubjectAccessReviewSpec;
+base_1.Model.setSchema(IoK8sApiAuthorizationV1SelfSubjectAccessReviewSpec, "io.k8s.api.authorization.v1.SelfSubjectAccessReviewSpec", IoK8sApiAuthorizationV1SelfSubjectAccessReviewSpec_1.addSchema);

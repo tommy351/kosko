@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ConfigMapEnvSource = exports.IoK8sApiCoreV1ConfigMapEnvSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ConfigMapEnvSource_1 = require("../_schemas/IoK8sApiCoreV1ConfigMapEnvSource.js");
+/**
+ * ConfigMapEnvSource selects a ConfigMap to populate the environment variables with.
+ *
+ * The contents of the target ConfigMap's Data field will represent the key-value pairs as environment variables.
+ */
+class IoK8sApiCoreV1ConfigMapEnvSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ConfigMapEnvSource = IoK8sApiCoreV1ConfigMapEnvSource;
+exports.ConfigMapEnvSource = IoK8sApiCoreV1ConfigMapEnvSource;
+base_1.Model.setSchema(IoK8sApiCoreV1ConfigMapEnvSource, "io.k8s.api.core.v1.ConfigMapEnvSource", IoK8sApiCoreV1ConfigMapEnvSource_1.addSchema);

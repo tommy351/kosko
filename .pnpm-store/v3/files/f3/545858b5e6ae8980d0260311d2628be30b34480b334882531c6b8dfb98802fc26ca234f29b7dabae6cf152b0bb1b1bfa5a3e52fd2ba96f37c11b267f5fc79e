@@ -1,0 +1,18 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string"
+        },
+        "fieldPath": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "fieldPath"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.core.v1.ObjectFieldSelector", schema);
+}

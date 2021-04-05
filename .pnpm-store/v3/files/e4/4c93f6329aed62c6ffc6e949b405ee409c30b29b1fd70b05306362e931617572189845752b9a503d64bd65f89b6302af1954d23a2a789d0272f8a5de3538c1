@@ -1,0 +1,61 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1SELinuxOptions_1 = require("./IoK8sApiCoreV1SELinuxOptions.js");
+const IoK8sApiCoreV1SeccompProfile_1 = require("./IoK8sApiCoreV1SeccompProfile.js");
+const IoK8sApiCoreV1Sysctl_1 = require("./IoK8sApiCoreV1Sysctl.js");
+const IoK8sApiCoreV1WindowsSecurityContextOptions_1 = require("./IoK8sApiCoreV1WindowsSecurityContextOptions.js");
+const schema = {
+    "properties": {
+        "fsGroup": {
+            "format": "int64",
+            "type": "integer"
+        },
+        "fsGroupChangePolicy": {
+            "type": "string"
+        },
+        "runAsGroup": {
+            "format": "int64",
+            "type": "integer"
+        },
+        "runAsNonRoot": {
+            "type": "boolean"
+        },
+        "runAsUser": {
+            "format": "int64",
+            "type": "integer"
+        },
+        "seLinuxOptions": {
+            "$ref": "io.k8s.api.core.v1.SELinuxOptions#"
+        },
+        "seccompProfile": {
+            "$ref": "io.k8s.api.core.v1.SeccompProfile#"
+        },
+        "supplementalGroups": {
+            "items": {
+                "format": "int64",
+                "type": "integer"
+            },
+            "type": "array"
+        },
+        "sysctls": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.Sysctl#"
+            },
+            "type": "array"
+        },
+        "windowsOptions": {
+            "$ref": "io.k8s.api.core.v1.WindowsSecurityContextOptions#"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1SELinuxOptions_1.addSchema();
+    IoK8sApiCoreV1SeccompProfile_1.addSchema();
+    IoK8sApiCoreV1Sysctl_1.addSchema();
+    IoK8sApiCoreV1WindowsSecurityContextOptions_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.PodSecurityContext", schema);
+}
+exports.addSchema = addSchema;

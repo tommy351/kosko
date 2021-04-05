@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiRbacV1alpha1ClusterRoleBinding.mjs";
+/**
+ * ClusterRoleBinding references a ClusterRole, but not contain it.  It can reference a ClusterRole in the global namespace, and adds who information via Subject. Deprecated in v1.17 in favor of rbac.authorization.k8s.io/v1 ClusterRoleBinding, and will no longer be served in v1.22.
+ */
+export class IoK8sApiRbacV1alpha1ClusterRoleBinding extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiRbacV1alpha1ClusterRoleBinding.apiVersion,
+            kind: IoK8sApiRbacV1alpha1ClusterRoleBinding.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiRbacV1alpha1ClusterRoleBinding.apiVersion = "rbac.authorization.k8s.io/v1alpha1";
+IoK8sApiRbacV1alpha1ClusterRoleBinding.kind = "ClusterRoleBinding";
+Model.setSchema(IoK8sApiRbacV1alpha1ClusterRoleBinding, "io.k8s.api.rbac.v1alpha1.ClusterRoleBinding", addSchema);
+export { IoK8sApiRbacV1alpha1ClusterRoleBinding as ClusterRoleBinding };

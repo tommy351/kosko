@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiDiscoveryV1beta1Endpoint.mjs";
+/**
+ * Endpoint represents a single logical "backend" implementing a service.
+ */
+export class IoK8sApiDiscoveryV1beta1Endpoint extends Model {
+}
+Model.setSchema(IoK8sApiDiscoveryV1beta1Endpoint, "io.k8s.api.discovery.v1beta1.Endpoint", addSchema);
+export { IoK8sApiDiscoveryV1beta1Endpoint as Endpoint };

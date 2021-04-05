@@ -1,0 +1,144 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiPolicyV1beta1AllowedCSIDriver_1 = require("./IoK8sApiPolicyV1beta1AllowedCSIDriver.js");
+const IoK8sApiPolicyV1beta1AllowedFlexVolume_1 = require("./IoK8sApiPolicyV1beta1AllowedFlexVolume.js");
+const IoK8sApiPolicyV1beta1AllowedHostPath_1 = require("./IoK8sApiPolicyV1beta1AllowedHostPath.js");
+const IoK8sApiPolicyV1beta1FSGroupStrategyOptions_1 = require("./IoK8sApiPolicyV1beta1FSGroupStrategyOptions.js");
+const IoK8sApiPolicyV1beta1HostPortRange_1 = require("./IoK8sApiPolicyV1beta1HostPortRange.js");
+const IoK8sApiPolicyV1beta1RunAsGroupStrategyOptions_1 = require("./IoK8sApiPolicyV1beta1RunAsGroupStrategyOptions.js");
+const IoK8sApiPolicyV1beta1RunAsUserStrategyOptions_1 = require("./IoK8sApiPolicyV1beta1RunAsUserStrategyOptions.js");
+const IoK8sApiPolicyV1beta1RuntimeClassStrategyOptions_1 = require("./IoK8sApiPolicyV1beta1RuntimeClassStrategyOptions.js");
+const IoK8sApiPolicyV1beta1SELinuxStrategyOptions_1 = require("./IoK8sApiPolicyV1beta1SELinuxStrategyOptions.js");
+const IoK8sApiPolicyV1beta1SupplementalGroupsStrategyOptions_1 = require("./IoK8sApiPolicyV1beta1SupplementalGroupsStrategyOptions.js");
+const schema = {
+    "properties": {
+        "allowPrivilegeEscalation": {
+            "type": "boolean"
+        },
+        "allowedCSIDrivers": {
+            "items": {
+                "$ref": "io.k8s.api.policy.v1beta1.AllowedCSIDriver#"
+            },
+            "type": "array"
+        },
+        "allowedCapabilities": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "allowedFlexVolumes": {
+            "items": {
+                "$ref": "io.k8s.api.policy.v1beta1.AllowedFlexVolume#"
+            },
+            "type": "array"
+        },
+        "allowedHostPaths": {
+            "items": {
+                "$ref": "io.k8s.api.policy.v1beta1.AllowedHostPath#"
+            },
+            "type": "array"
+        },
+        "allowedProcMountTypes": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "allowedUnsafeSysctls": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "defaultAddCapabilities": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "defaultAllowPrivilegeEscalation": {
+            "type": "boolean"
+        },
+        "forbiddenSysctls": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "fsGroup": {
+            "$ref": "io.k8s.api.policy.v1beta1.FSGroupStrategyOptions#"
+        },
+        "hostIPC": {
+            "type": "boolean"
+        },
+        "hostNetwork": {
+            "type": "boolean"
+        },
+        "hostPID": {
+            "type": "boolean"
+        },
+        "hostPorts": {
+            "items": {
+                "$ref": "io.k8s.api.policy.v1beta1.HostPortRange#"
+            },
+            "type": "array"
+        },
+        "privileged": {
+            "type": "boolean"
+        },
+        "readOnlyRootFilesystem": {
+            "type": "boolean"
+        },
+        "requiredDropCapabilities": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "runAsGroup": {
+            "$ref": "io.k8s.api.policy.v1beta1.RunAsGroupStrategyOptions#"
+        },
+        "runAsUser": {
+            "$ref": "io.k8s.api.policy.v1beta1.RunAsUserStrategyOptions#"
+        },
+        "runtimeClass": {
+            "$ref": "io.k8s.api.policy.v1beta1.RuntimeClassStrategyOptions#"
+        },
+        "seLinux": {
+            "$ref": "io.k8s.api.policy.v1beta1.SELinuxStrategyOptions#"
+        },
+        "supplementalGroups": {
+            "$ref": "io.k8s.api.policy.v1beta1.SupplementalGroupsStrategyOptions#"
+        },
+        "volumes": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        }
+    },
+    "required": [
+        "seLinux",
+        "runAsUser",
+        "supplementalGroups",
+        "fsGroup"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiPolicyV1beta1AllowedCSIDriver_1.addSchema();
+    IoK8sApiPolicyV1beta1AllowedFlexVolume_1.addSchema();
+    IoK8sApiPolicyV1beta1AllowedHostPath_1.addSchema();
+    IoK8sApiPolicyV1beta1FSGroupStrategyOptions_1.addSchema();
+    IoK8sApiPolicyV1beta1HostPortRange_1.addSchema();
+    IoK8sApiPolicyV1beta1RunAsGroupStrategyOptions_1.addSchema();
+    IoK8sApiPolicyV1beta1RunAsUserStrategyOptions_1.addSchema();
+    IoK8sApiPolicyV1beta1RuntimeClassStrategyOptions_1.addSchema();
+    IoK8sApiPolicyV1beta1SELinuxStrategyOptions_1.addSchema();
+    IoK8sApiPolicyV1beta1SupplementalGroupsStrategyOptions_1.addSchema();
+    validate_1.register("io.k8s.api.policy.v1beta1.PodSecurityPolicySpec", schema);
+}
+exports.addSchema = addSchema;

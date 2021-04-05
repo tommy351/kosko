@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.GroupVersionForDiscovery = exports.IoK8sApimachineryPkgApisMetaV1GroupVersionForDiscovery = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApimachineryPkgApisMetaV1GroupVersionForDiscovery_1 = require("../_schemas/IoK8sApimachineryPkgApisMetaV1GroupVersionForDiscovery.js");
+/**
+ * GroupVersion contains the "group/version" and "version" string of a version. It is made a struct to keep extensibility.
+ */
+class IoK8sApimachineryPkgApisMetaV1GroupVersionForDiscovery extends base_1.Model {
+}
+exports.IoK8sApimachineryPkgApisMetaV1GroupVersionForDiscovery = IoK8sApimachineryPkgApisMetaV1GroupVersionForDiscovery;
+exports.GroupVersionForDiscovery = IoK8sApimachineryPkgApisMetaV1GroupVersionForDiscovery;
+base_1.Model.setSchema(IoK8sApimachineryPkgApisMetaV1GroupVersionForDiscovery, "io.k8s.apimachinery.pkg.apis.meta.v1.GroupVersionForDiscovery", IoK8sApimachineryPkgApisMetaV1GroupVersionForDiscovery_1.addSchema);

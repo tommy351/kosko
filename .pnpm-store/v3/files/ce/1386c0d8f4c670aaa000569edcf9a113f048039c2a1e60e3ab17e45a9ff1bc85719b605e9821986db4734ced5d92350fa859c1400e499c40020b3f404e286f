@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.JobSpec = exports.IoK8sApiBatchV1JobSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiBatchV1JobSpec_1 = require("../_schemas/IoK8sApiBatchV1JobSpec.js");
+/**
+ * JobSpec describes how the job execution will look like.
+ */
+class IoK8sApiBatchV1JobSpec extends base_1.Model {
+}
+exports.IoK8sApiBatchV1JobSpec = IoK8sApiBatchV1JobSpec;
+exports.JobSpec = IoK8sApiBatchV1JobSpec;
+base_1.Model.setSchema(IoK8sApiBatchV1JobSpec, "io.k8s.api.batch.v1.JobSpec", IoK8sApiBatchV1JobSpec_1.addSchema);

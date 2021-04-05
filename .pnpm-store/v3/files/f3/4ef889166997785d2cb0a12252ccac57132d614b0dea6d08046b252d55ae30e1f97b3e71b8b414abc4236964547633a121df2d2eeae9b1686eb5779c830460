@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TopologySelectorTerm = exports.IoK8sApiCoreV1TopologySelectorTerm = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1TopologySelectorTerm_1 = require("../_schemas/IoK8sApiCoreV1TopologySelectorTerm.js");
+/**
+ * A topology selector term represents the result of label queries. A null or empty topology selector term matches no objects. The requirements of them are ANDed. It provides a subset of functionality as NodeSelectorTerm. This is an alpha feature and may change in the future.
+ */
+class IoK8sApiCoreV1TopologySelectorTerm extends base_1.Model {
+}
+exports.IoK8sApiCoreV1TopologySelectorTerm = IoK8sApiCoreV1TopologySelectorTerm;
+exports.TopologySelectorTerm = IoK8sApiCoreV1TopologySelectorTerm;
+base_1.Model.setSchema(IoK8sApiCoreV1TopologySelectorTerm, "io.k8s.api.core.v1.TopologySelectorTerm", IoK8sApiCoreV1TopologySelectorTerm_1.addSchema);

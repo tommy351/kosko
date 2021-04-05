@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.VolumeAttachmentSource = exports.IoK8sApiStorageV1VolumeAttachmentSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiStorageV1VolumeAttachmentSource_1 = require("../_schemas/IoK8sApiStorageV1VolumeAttachmentSource.js");
+/**
+ * VolumeAttachmentSource represents a volume that should be attached. Right now only PersistenVolumes can be attached via external attacher, in future we may allow also inline volumes in pods. Exactly one member can be set.
+ */
+class IoK8sApiStorageV1VolumeAttachmentSource extends base_1.Model {
+}
+exports.IoK8sApiStorageV1VolumeAttachmentSource = IoK8sApiStorageV1VolumeAttachmentSource;
+exports.VolumeAttachmentSource = IoK8sApiStorageV1VolumeAttachmentSource;
+base_1.Model.setSchema(IoK8sApiStorageV1VolumeAttachmentSource, "io.k8s.api.storage.v1.VolumeAttachmentSource", IoK8sApiStorageV1VolumeAttachmentSource_1.addSchema);

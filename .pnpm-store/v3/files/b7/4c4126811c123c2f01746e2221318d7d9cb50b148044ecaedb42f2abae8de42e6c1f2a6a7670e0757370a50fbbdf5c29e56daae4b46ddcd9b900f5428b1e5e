@@ -1,0 +1,37 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiDiscoveryV1beta1EndpointConditions } from "./IoK8sApiDiscoveryV1beta1EndpointConditions.mjs";
+import { addSchema as IoK8sApiCoreV1ObjectReference } from "./IoK8sApiCoreV1ObjectReference.mjs";
+const schema = {
+    "properties": {
+        "addresses": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "conditions": {
+            "$ref": "io.k8s.api.discovery.v1beta1.EndpointConditions#"
+        },
+        "hostname": {
+            "type": "string"
+        },
+        "targetRef": {
+            "$ref": "io.k8s.api.core.v1.ObjectReference#"
+        },
+        "topology": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "type": "object"
+        }
+    },
+    "required": [
+        "addresses"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiDiscoveryV1beta1EndpointConditions();
+    IoK8sApiCoreV1ObjectReference();
+    register("io.k8s.api.discovery.v1beta1.Endpoint", schema);
+}

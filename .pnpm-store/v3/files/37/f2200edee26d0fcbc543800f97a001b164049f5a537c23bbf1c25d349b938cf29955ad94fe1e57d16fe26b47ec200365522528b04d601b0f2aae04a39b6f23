@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LeaseList = exports.IoK8sApiCoordinationV1LeaseList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoordinationV1LeaseList_1 = require("../_schemas/IoK8sApiCoordinationV1LeaseList.js");
+/**
+ * LeaseList is a list of Lease objects.
+ */
+class IoK8sApiCoordinationV1LeaseList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoordinationV1LeaseList.apiVersion,
+            kind: IoK8sApiCoordinationV1LeaseList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoordinationV1LeaseList = IoK8sApiCoordinationV1LeaseList;
+exports.LeaseList = IoK8sApiCoordinationV1LeaseList;
+IoK8sApiCoordinationV1LeaseList.apiVersion = "coordination.k8s.io/v1";
+IoK8sApiCoordinationV1LeaseList.kind = "LeaseList";
+base_1.Model.setSchema(IoK8sApiCoordinationV1LeaseList, "io.k8s.api.coordination.v1.LeaseList", IoK8sApiCoordinationV1LeaseList_1.addSchema);

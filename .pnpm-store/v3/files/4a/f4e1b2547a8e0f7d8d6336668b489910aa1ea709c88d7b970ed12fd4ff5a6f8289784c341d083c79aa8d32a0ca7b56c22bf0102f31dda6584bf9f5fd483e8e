@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.APIVersions = exports.IoK8sApimachineryPkgApisMetaV1APIVersions = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApimachineryPkgApisMetaV1APIVersions_1 = require("../_schemas/IoK8sApimachineryPkgApisMetaV1APIVersions.js");
+/**
+ * APIVersions lists the versions that are available, to allow clients to discover the API at /api, which is the root path of the legacy v1 API.
+ */
+class IoK8sApimachineryPkgApisMetaV1APIVersions extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApimachineryPkgApisMetaV1APIVersions.apiVersion,
+            kind: IoK8sApimachineryPkgApisMetaV1APIVersions.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApimachineryPkgApisMetaV1APIVersions = IoK8sApimachineryPkgApisMetaV1APIVersions;
+exports.APIVersions = IoK8sApimachineryPkgApisMetaV1APIVersions;
+IoK8sApimachineryPkgApisMetaV1APIVersions.apiVersion = "v1";
+IoK8sApimachineryPkgApisMetaV1APIVersions.kind = "APIVersions";
+base_1.Model.setSchema(IoK8sApimachineryPkgApisMetaV1APIVersions, "io.k8s.apimachinery.pkg.apis.meta.v1.APIVersions", IoK8sApimachineryPkgApisMetaV1APIVersions_1.addSchema);

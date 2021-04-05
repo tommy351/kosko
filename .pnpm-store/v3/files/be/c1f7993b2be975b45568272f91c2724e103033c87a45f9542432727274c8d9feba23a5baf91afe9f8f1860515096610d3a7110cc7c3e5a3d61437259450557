@@ -1,0 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.meta = void 0;
+const tslib_1 = require("tslib");
+const meta = tslib_1.__importStar(require("./meta/index.js"));
+exports.meta = meta;

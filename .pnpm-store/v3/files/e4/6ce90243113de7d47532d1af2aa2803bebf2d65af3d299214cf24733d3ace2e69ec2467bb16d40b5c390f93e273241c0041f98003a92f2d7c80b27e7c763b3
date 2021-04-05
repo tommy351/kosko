@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiRbacV1beta1RoleList.mjs";
+/**
+ * RoleList is a collection of Roles Deprecated in v1.17 in favor of rbac.authorization.k8s.io/v1 RoleList, and will no longer be served in v1.22.
+ */
+export class IoK8sApiRbacV1beta1RoleList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiRbacV1beta1RoleList.apiVersion,
+            kind: IoK8sApiRbacV1beta1RoleList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiRbacV1beta1RoleList.apiVersion = "rbac.authorization.k8s.io/v1beta1";
+IoK8sApiRbacV1beta1RoleList.kind = "RoleList";
+Model.setSchema(IoK8sApiRbacV1beta1RoleList, "io.k8s.api.rbac.v1beta1.RoleList", addSchema);
+export { IoK8sApiRbacV1beta1RoleList as RoleList };

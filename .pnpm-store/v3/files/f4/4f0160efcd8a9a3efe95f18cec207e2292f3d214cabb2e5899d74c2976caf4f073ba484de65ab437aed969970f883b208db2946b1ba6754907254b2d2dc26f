@@ -1,0 +1,29 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const schema = {
+    "properties": {
+        "periodSeconds": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "type": {
+            "type": "string"
+        },
+        "value": {
+            "format": "int32",
+            "type": "integer"
+        }
+    },
+    "required": [
+        "type",
+        "value",
+        "periodSeconds"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    validate_1.register("io.k8s.api.autoscaling.v2beta2.HPAScalingPolicy", schema);
+}
+exports.addSchema = addSchema;

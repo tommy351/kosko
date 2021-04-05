@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.APIGroupList = exports.IoK8sApimachineryPkgApisMetaV1APIGroupList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApimachineryPkgApisMetaV1APIGroupList_1 = require("../_schemas/IoK8sApimachineryPkgApisMetaV1APIGroupList.js");
+/**
+ * APIGroupList is a list of APIGroup, to allow clients to discover the API at /apis.
+ */
+class IoK8sApimachineryPkgApisMetaV1APIGroupList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApimachineryPkgApisMetaV1APIGroupList.apiVersion,
+            kind: IoK8sApimachineryPkgApisMetaV1APIGroupList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApimachineryPkgApisMetaV1APIGroupList = IoK8sApimachineryPkgApisMetaV1APIGroupList;
+exports.APIGroupList = IoK8sApimachineryPkgApisMetaV1APIGroupList;
+IoK8sApimachineryPkgApisMetaV1APIGroupList.apiVersion = "v1";
+IoK8sApimachineryPkgApisMetaV1APIGroupList.kind = "APIGroupList";
+base_1.Model.setSchema(IoK8sApimachineryPkgApisMetaV1APIGroupList, "io.k8s.apimachinery.pkg.apis.meta.v1.APIGroupList", IoK8sApimachineryPkgApisMetaV1APIGroupList_1.addSchema);

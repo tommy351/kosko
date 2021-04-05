@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1ServiceAccount.mjs";
+/**
+ * ServiceAccount binds together: \* a name, understood by users, and perhaps by peripheral systems, for an identity \* a principal that can be authenticated and authorized \* a set of secrets
+ */
+export class IoK8sApiCoreV1ServiceAccount extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1ServiceAccount.apiVersion,
+            kind: IoK8sApiCoreV1ServiceAccount.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiCoreV1ServiceAccount.apiVersion = "v1";
+IoK8sApiCoreV1ServiceAccount.kind = "ServiceAccount";
+Model.setSchema(IoK8sApiCoreV1ServiceAccount, "io.k8s.api.core.v1.ServiceAccount", addSchema);
+export { IoK8sApiCoreV1ServiceAccount as ServiceAccount };

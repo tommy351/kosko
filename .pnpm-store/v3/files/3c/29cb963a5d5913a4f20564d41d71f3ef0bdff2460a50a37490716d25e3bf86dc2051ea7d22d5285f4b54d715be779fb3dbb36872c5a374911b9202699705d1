@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Probe = exports.IoK8sApiCoreV1Probe = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1Probe_1 = require("../_schemas/IoK8sApiCoreV1Probe.js");
+/**
+ * Probe describes a health check to be performed against a container to determine whether it is alive or ready to receive traffic.
+ */
+class IoK8sApiCoreV1Probe extends base_1.Model {
+}
+exports.IoK8sApiCoreV1Probe = IoK8sApiCoreV1Probe;
+exports.Probe = IoK8sApiCoreV1Probe;
+base_1.Model.setSchema(IoK8sApiCoreV1Probe, "io.k8s.api.core.v1.Probe", IoK8sApiCoreV1Probe_1.addSchema);

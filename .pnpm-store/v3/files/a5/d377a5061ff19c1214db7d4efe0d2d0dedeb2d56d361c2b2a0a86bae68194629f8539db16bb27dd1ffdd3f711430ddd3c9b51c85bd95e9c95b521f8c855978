@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiExtensionsV1beta1IngressTLS.mjs";
+/**
+ * IngressTLS describes the transport layer security associated with an Ingress.
+ */
+export class IoK8sApiExtensionsV1beta1IngressTLS extends Model {
+}
+Model.setSchema(IoK8sApiExtensionsV1beta1IngressTLS, "io.k8s.api.extensions.v1beta1.IngressTLS", addSchema);
+export { IoK8sApiExtensionsV1beta1IngressTLS as IngressTLS };

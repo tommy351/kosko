@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAutoscalingV1ScaleStatus.mjs";
+/**
+ * ScaleStatus represents the current status of a scale subresource.
+ */
+export class IoK8sApiAutoscalingV1ScaleStatus extends Model {
+}
+Model.setSchema(IoK8sApiAutoscalingV1ScaleStatus, "io.k8s.api.autoscaling.v1.ScaleStatus", addSchema);
+export { IoK8sApiAutoscalingV1ScaleStatus as ScaleStatus };

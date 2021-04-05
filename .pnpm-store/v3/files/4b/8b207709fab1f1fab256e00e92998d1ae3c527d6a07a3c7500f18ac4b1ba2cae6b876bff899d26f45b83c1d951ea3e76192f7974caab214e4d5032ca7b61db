@@ -1,0 +1,182 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1Affinity_1 = require("./IoK8sApiCoreV1Affinity.js");
+const IoK8sApiCoreV1Container_1 = require("./IoK8sApiCoreV1Container.js");
+const IoK8sApiCoreV1PodDNSConfig_1 = require("./IoK8sApiCoreV1PodDNSConfig.js");
+const IoK8sApiCoreV1EphemeralContainer_1 = require("./IoK8sApiCoreV1EphemeralContainer.js");
+const IoK8sApiCoreV1HostAlias_1 = require("./IoK8sApiCoreV1HostAlias.js");
+const IoK8sApiCoreV1LocalObjectReference_1 = require("./IoK8sApiCoreV1LocalObjectReference.js");
+const IoK8sApimachineryPkgApiResourceQuantity_1 = require("./IoK8sApimachineryPkgApiResourceQuantity.js");
+const IoK8sApiCoreV1PodReadinessGate_1 = require("./IoK8sApiCoreV1PodReadinessGate.js");
+const IoK8sApiCoreV1PodSecurityContext_1 = require("./IoK8sApiCoreV1PodSecurityContext.js");
+const IoK8sApiCoreV1Toleration_1 = require("./IoK8sApiCoreV1Toleration.js");
+const IoK8sApiCoreV1TopologySpreadConstraint_1 = require("./IoK8sApiCoreV1TopologySpreadConstraint.js");
+const IoK8sApiCoreV1Volume_1 = require("./IoK8sApiCoreV1Volume.js");
+const schema = {
+    "properties": {
+        "activeDeadlineSeconds": {
+            "format": "int64",
+            "type": "integer"
+        },
+        "affinity": {
+            "$ref": "io.k8s.api.core.v1.Affinity#"
+        },
+        "automountServiceAccountToken": {
+            "type": "boolean"
+        },
+        "containers": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.Container#"
+            },
+            "type": "array"
+        },
+        "dnsConfig": {
+            "$ref": "io.k8s.api.core.v1.PodDNSConfig#"
+        },
+        "dnsPolicy": {
+            "type": "string"
+        },
+        "enableServiceLinks": {
+            "type": "boolean"
+        },
+        "ephemeralContainers": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.EphemeralContainer#"
+            },
+            "type": "array"
+        },
+        "hostAliases": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.HostAlias#"
+            },
+            "type": "array"
+        },
+        "hostIPC": {
+            "type": "boolean"
+        },
+        "hostNetwork": {
+            "type": "boolean"
+        },
+        "hostPID": {
+            "type": "boolean"
+        },
+        "hostname": {
+            "type": "string"
+        },
+        "imagePullSecrets": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.LocalObjectReference#"
+            },
+            "type": "array"
+        },
+        "initContainers": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.Container#"
+            },
+            "type": "array"
+        },
+        "nodeName": {
+            "type": "string"
+        },
+        "nodeSelector": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "type": "object"
+        },
+        "overhead": {
+            "additionalProperties": {
+                "$ref": "io.k8s.apimachinery.pkg.api.resource.Quantity#"
+            },
+            "type": "object"
+        },
+        "preemptionPolicy": {
+            "type": "string"
+        },
+        "priority": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "priorityClassName": {
+            "type": "string"
+        },
+        "readinessGates": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.PodReadinessGate#"
+            },
+            "type": "array"
+        },
+        "restartPolicy": {
+            "type": "string"
+        },
+        "runtimeClassName": {
+            "type": "string"
+        },
+        "schedulerName": {
+            "type": "string"
+        },
+        "securityContext": {
+            "$ref": "io.k8s.api.core.v1.PodSecurityContext#"
+        },
+        "serviceAccount": {
+            "type": "string"
+        },
+        "serviceAccountName": {
+            "type": "string"
+        },
+        "setHostnameAsFQDN": {
+            "type": "boolean"
+        },
+        "shareProcessNamespace": {
+            "type": "boolean"
+        },
+        "subdomain": {
+            "type": "string"
+        },
+        "terminationGracePeriodSeconds": {
+            "format": "int64",
+            "type": "integer"
+        },
+        "tolerations": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.Toleration#"
+            },
+            "type": "array"
+        },
+        "topologySpreadConstraints": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.TopologySpreadConstraint#"
+            },
+            "type": "array"
+        },
+        "volumes": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.Volume#"
+            },
+            "type": "array"
+        }
+    },
+    "required": [
+        "containers"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1Affinity_1.addSchema();
+    IoK8sApiCoreV1Container_1.addSchema();
+    IoK8sApiCoreV1PodDNSConfig_1.addSchema();
+    IoK8sApiCoreV1EphemeralContainer_1.addSchema();
+    IoK8sApiCoreV1HostAlias_1.addSchema();
+    IoK8sApiCoreV1LocalObjectReference_1.addSchema();
+    IoK8sApiCoreV1Container_1.addSchema();
+    IoK8sApimachineryPkgApiResourceQuantity_1.addSchema();
+    IoK8sApiCoreV1PodReadinessGate_1.addSchema();
+    IoK8sApiCoreV1PodSecurityContext_1.addSchema();
+    IoK8sApiCoreV1Toleration_1.addSchema();
+    IoK8sApiCoreV1TopologySpreadConstraint_1.addSchema();
+    IoK8sApiCoreV1Volume_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.PodSpec", schema);
+}
+exports.addSchema = addSchema;

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.EndpointPort = exports.IoK8sApiCoreV1EndpointPort = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1EndpointPort_1 = require("../_schemas/IoK8sApiCoreV1EndpointPort.js");
+/**
+ * EndpointPort is a tuple that describes a single port.
+ */
+class IoK8sApiCoreV1EndpointPort extends base_1.Model {
+}
+exports.IoK8sApiCoreV1EndpointPort = IoK8sApiCoreV1EndpointPort;
+exports.EndpointPort = IoK8sApiCoreV1EndpointPort;
+base_1.Model.setSchema(IoK8sApiCoreV1EndpointPort, "io.k8s.api.core.v1.EndpointPort", IoK8sApiCoreV1EndpointPort_1.addSchema);

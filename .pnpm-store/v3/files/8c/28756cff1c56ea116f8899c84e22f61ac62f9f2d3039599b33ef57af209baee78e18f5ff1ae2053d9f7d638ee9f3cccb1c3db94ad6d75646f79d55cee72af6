@@ -1,0 +1,33 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1ConfigMapKeySelector_1 = require("./IoK8sApiCoreV1ConfigMapKeySelector.js");
+const IoK8sApiCoreV1ObjectFieldSelector_1 = require("./IoK8sApiCoreV1ObjectFieldSelector.js");
+const IoK8sApiCoreV1ResourceFieldSelector_1 = require("./IoK8sApiCoreV1ResourceFieldSelector.js");
+const IoK8sApiCoreV1SecretKeySelector_1 = require("./IoK8sApiCoreV1SecretKeySelector.js");
+const schema = {
+    "properties": {
+        "configMapKeyRef": {
+            "$ref": "io.k8s.api.core.v1.ConfigMapKeySelector#"
+        },
+        "fieldRef": {
+            "$ref": "io.k8s.api.core.v1.ObjectFieldSelector#"
+        },
+        "resourceFieldRef": {
+            "$ref": "io.k8s.api.core.v1.ResourceFieldSelector#"
+        },
+        "secretKeyRef": {
+            "$ref": "io.k8s.api.core.v1.SecretKeySelector#"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1ConfigMapKeySelector_1.addSchema();
+    IoK8sApiCoreV1ObjectFieldSelector_1.addSchema();
+    IoK8sApiCoreV1ResourceFieldSelector_1.addSchema();
+    IoK8sApiCoreV1SecretKeySelector_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.EnvVarSource", schema);
+}
+exports.addSchema = addSchema;

@@ -1,0 +1,17 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiCoreV1PersistentVolumeClaimTemplate } from "./IoK8sApiCoreV1PersistentVolumeClaimTemplate.mjs";
+const schema = {
+    "properties": {
+        "readOnly": {
+            "type": "boolean"
+        },
+        "volumeClaimTemplate": {
+            "$ref": "io.k8s.api.core.v1.PersistentVolumeClaimTemplate#"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiCoreV1PersistentVolumeClaimTemplate();
+    register("io.k8s.api.core.v1.EphemeralVolumeSource", schema);
+}

@@ -1,0 +1,28 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApimachineryPkgApiResourceQuantity } from "./IoK8sApimachineryPkgApiResourceQuantity.mjs";
+import { addSchema as IoK8sApiCoreV1ScopeSelector } from "./IoK8sApiCoreV1ScopeSelector.mjs";
+const schema = {
+    "properties": {
+        "hard": {
+            "additionalProperties": {
+                "$ref": "io.k8s.apimachinery.pkg.api.resource.Quantity#"
+            },
+            "type": "object"
+        },
+        "scopeSelector": {
+            "$ref": "io.k8s.api.core.v1.ScopeSelector#"
+        },
+        "scopes": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApimachineryPkgApiResourceQuantity();
+    IoK8sApiCoreV1ScopeSelector();
+    register("io.k8s.api.core.v1.ResourceQuotaSpec", schema);
+}

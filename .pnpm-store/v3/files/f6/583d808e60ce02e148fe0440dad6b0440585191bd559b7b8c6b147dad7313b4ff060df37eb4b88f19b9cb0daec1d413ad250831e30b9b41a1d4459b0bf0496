@@ -1,0 +1,30 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1WebhookClientConfig_1 = require("./IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1WebhookClientConfig.js");
+const schema = {
+    "properties": {
+        "conversionReviewVersions": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "strategy": {
+            "type": "string"
+        },
+        "webhookClientConfig": {
+            "$ref": "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1beta1.WebhookClientConfig#"
+        }
+    },
+    "required": [
+        "strategy"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1WebhookClientConfig_1.addSchema();
+    validate_1.register("io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1beta1.CustomResourceConversion", schema);
+}
+exports.addSchema = addSchema;

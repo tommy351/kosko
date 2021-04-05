@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.StatusCause = exports.IoK8sApimachineryPkgApisMetaV1StatusCause = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApimachineryPkgApisMetaV1StatusCause_1 = require("../_schemas/IoK8sApimachineryPkgApisMetaV1StatusCause.js");
+/**
+ * StatusCause provides more information about an api.Status failure, including cases when multiple errors are encountered.
+ */
+class IoK8sApimachineryPkgApisMetaV1StatusCause extends base_1.Model {
+}
+exports.IoK8sApimachineryPkgApisMetaV1StatusCause = IoK8sApimachineryPkgApisMetaV1StatusCause;
+exports.StatusCause = IoK8sApimachineryPkgApisMetaV1StatusCause;
+base_1.Model.setSchema(IoK8sApimachineryPkgApisMetaV1StatusCause, "io.k8s.apimachinery.pkg.apis.meta.v1.StatusCause", IoK8sApimachineryPkgApisMetaV1StatusCause_1.addSchema);

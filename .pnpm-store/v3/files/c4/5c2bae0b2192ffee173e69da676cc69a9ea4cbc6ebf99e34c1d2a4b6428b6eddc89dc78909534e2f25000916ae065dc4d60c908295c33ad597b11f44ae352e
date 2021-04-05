@@ -1,0 +1,51 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1ContainerState_1 = require("./IoK8sApiCoreV1ContainerState.js");
+const schema = {
+    "properties": {
+        "containerID": {
+            "type": "string"
+        },
+        "image": {
+            "type": "string"
+        },
+        "imageID": {
+            "type": "string"
+        },
+        "lastState": {
+            "$ref": "io.k8s.api.core.v1.ContainerState#"
+        },
+        "name": {
+            "type": "string"
+        },
+        "ready": {
+            "type": "boolean"
+        },
+        "restartCount": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "started": {
+            "type": "boolean"
+        },
+        "state": {
+            "$ref": "io.k8s.api.core.v1.ContainerState#"
+        }
+    },
+    "required": [
+        "name",
+        "ready",
+        "restartCount",
+        "image",
+        "imageID"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1ContainerState_1.addSchema();
+    IoK8sApiCoreV1ContainerState_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.ContainerStatus", schema);
+}
+exports.addSchema = addSchema;

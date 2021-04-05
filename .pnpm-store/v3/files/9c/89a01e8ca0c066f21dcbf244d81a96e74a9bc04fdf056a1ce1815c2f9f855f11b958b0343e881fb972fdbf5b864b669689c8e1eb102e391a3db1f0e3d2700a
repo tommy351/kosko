@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAppsV1DaemonSetCondition.mjs";
+/**
+ * DaemonSetCondition describes the state of a DaemonSet at a certain point.
+ */
+export class IoK8sApiAppsV1DaemonSetCondition extends Model {
+}
+Model.setSchema(IoK8sApiAppsV1DaemonSetCondition, "io.k8s.api.apps.v1.DaemonSetCondition", addSchema);
+export { IoK8sApiAppsV1DaemonSetCondition as DaemonSetCondition };

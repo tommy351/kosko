@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApimachineryPkgApisMetaV1Preconditions.mjs";
+/**
+ * Preconditions must be fulfilled before an operation (update, delete, etc.) is carried out.
+ */
+export class IoK8sApimachineryPkgApisMetaV1Preconditions extends Model {
+}
+Model.setSchema(IoK8sApimachineryPkgApisMetaV1Preconditions, "io.k8s.apimachinery.pkg.apis.meta.v1.Preconditions", addSchema);
+export { IoK8sApimachineryPkgApisMetaV1Preconditions as Preconditions };

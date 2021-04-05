@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ConfigMapList = exports.IoK8sApiCoreV1ConfigMapList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ConfigMapList_1 = require("../_schemas/IoK8sApiCoreV1ConfigMapList.js");
+/**
+ * ConfigMapList is a resource containing a list of ConfigMap objects.
+ */
+class IoK8sApiCoreV1ConfigMapList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1ConfigMapList.apiVersion,
+            kind: IoK8sApiCoreV1ConfigMapList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1ConfigMapList = IoK8sApiCoreV1ConfigMapList;
+exports.ConfigMapList = IoK8sApiCoreV1ConfigMapList;
+IoK8sApiCoreV1ConfigMapList.apiVersion = "v1";
+IoK8sApiCoreV1ConfigMapList.kind = "ConfigMapList";
+base_1.Model.setSchema(IoK8sApiCoreV1ConfigMapList, "io.k8s.api.core.v1.ConfigMapList", IoK8sApiCoreV1ConfigMapList_1.addSchema);

@@ -1,0 +1,18 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "localhostProfile": {
+            "type": "string"
+        },
+        "type": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "type"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.core.v1.SeccompProfile", schema);
+}

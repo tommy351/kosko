@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Handler = exports.IoK8sApiCoreV1Handler = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1Handler_1 = require("../_schemas/IoK8sApiCoreV1Handler.js");
+/**
+ * Handler defines a specific action that should be taken
+ */
+class IoK8sApiCoreV1Handler extends base_1.Model {
+}
+exports.IoK8sApiCoreV1Handler = IoK8sApiCoreV1Handler;
+exports.Handler = IoK8sApiCoreV1Handler;
+base_1.Model.setSchema(IoK8sApiCoreV1Handler, "io.k8s.api.core.v1.Handler", IoK8sApiCoreV1Handler_1.addSchema);

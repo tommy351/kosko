@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TokenRequestSpec = exports.IoK8sApiAuthenticationV1TokenRequestSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAuthenticationV1TokenRequestSpec_1 = require("../_schemas/IoK8sApiAuthenticationV1TokenRequestSpec.js");
+/**
+ * TokenRequestSpec contains client provided parameters of a token request.
+ */
+class IoK8sApiAuthenticationV1TokenRequestSpec extends base_1.Model {
+}
+exports.IoK8sApiAuthenticationV1TokenRequestSpec = IoK8sApiAuthenticationV1TokenRequestSpec;
+exports.TokenRequestSpec = IoK8sApiAuthenticationV1TokenRequestSpec;
+base_1.Model.setSchema(IoK8sApiAuthenticationV1TokenRequestSpec, "io.k8s.api.authentication.v1.TokenRequestSpec", IoK8sApiAuthenticationV1TokenRequestSpec_1.addSchema);

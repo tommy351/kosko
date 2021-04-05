@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceSubresources.mjs";
+/**
+ * CustomResourceSubresources defines the status and scale subresources for CustomResources.
+ */
+export class IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceSubresources extends Model {
+}
+Model.setSchema(IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceSubresources, "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceSubresources", addSchema);
+export { IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceSubresources as CustomResourceSubresources };

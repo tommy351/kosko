@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1EnvVarSource.mjs";
+/**
+ * EnvVarSource represents a source for the value of an EnvVar.
+ */
+export class IoK8sApiCoreV1EnvVarSource extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1EnvVarSource, "io.k8s.api.core.v1.EnvVarSource", addSchema);
+export { IoK8sApiCoreV1EnvVarSource as EnvVarSource };

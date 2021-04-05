@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RuntimeClass = exports.IoK8sApiNodeV1alpha1RuntimeClass = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiNodeV1alpha1RuntimeClass_1 = require("../_schemas/IoK8sApiNodeV1alpha1RuntimeClass.js");
+/**
+ * RuntimeClass defines a class of container runtime supported in the cluster. The RuntimeClass is used to determine which container runtime is used to run all containers in a pod. RuntimeClasses are (currently) manually defined by a user or cluster provisioner, and referenced in the PodSpec. The Kubelet is responsible for resolving the RuntimeClassName reference before running the pod.  For more details, see https://git.k8s.io/enhancements/keps/sig-node/runtime-class.md
+ */
+class IoK8sApiNodeV1alpha1RuntimeClass extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiNodeV1alpha1RuntimeClass.apiVersion,
+            kind: IoK8sApiNodeV1alpha1RuntimeClass.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiNodeV1alpha1RuntimeClass = IoK8sApiNodeV1alpha1RuntimeClass;
+exports.RuntimeClass = IoK8sApiNodeV1alpha1RuntimeClass;
+IoK8sApiNodeV1alpha1RuntimeClass.apiVersion = "node.k8s.io/v1alpha1";
+IoK8sApiNodeV1alpha1RuntimeClass.kind = "RuntimeClass";
+base_1.Model.setSchema(IoK8sApiNodeV1alpha1RuntimeClass, "io.k8s.api.node.v1alpha1.RuntimeClass", IoK8sApiNodeV1alpha1RuntimeClass_1.addSchema);

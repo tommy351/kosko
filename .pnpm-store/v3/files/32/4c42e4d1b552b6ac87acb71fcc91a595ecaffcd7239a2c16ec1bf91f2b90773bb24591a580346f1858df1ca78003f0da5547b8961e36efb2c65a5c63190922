@@ -1,0 +1,40 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApiResourceQuantity_1 = require("./IoK8sApimachineryPkgApiResourceQuantity.js");
+const IoK8sApimachineryPkgApisMetaV1LabelSelector_1 = require("./IoK8sApimachineryPkgApisMetaV1LabelSelector.js");
+const IoK8sApiAutoscalingV2beta1CrossVersionObjectReference_1 = require("./IoK8sApiAutoscalingV2beta1CrossVersionObjectReference.js");
+const schema = {
+    "properties": {
+        "averageValue": {
+            "$ref": "io.k8s.apimachinery.pkg.api.resource.Quantity#"
+        },
+        "metricName": {
+            "type": "string"
+        },
+        "selector": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector#"
+        },
+        "target": {
+            "$ref": "io.k8s.api.autoscaling.v2beta1.CrossVersionObjectReference#"
+        },
+        "targetValue": {
+            "$ref": "io.k8s.apimachinery.pkg.api.resource.Quantity#"
+        }
+    },
+    "required": [
+        "target",
+        "metricName",
+        "targetValue"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApimachineryPkgApiResourceQuantity_1.addSchema();
+    IoK8sApimachineryPkgApisMetaV1LabelSelector_1.addSchema();
+    IoK8sApiAutoscalingV2beta1CrossVersionObjectReference_1.addSchema();
+    IoK8sApimachineryPkgApiResourceQuantity_1.addSchema();
+    validate_1.register("io.k8s.api.autoscaling.v2beta1.ObjectMetricSource", schema);
+}
+exports.addSchema = addSchema;

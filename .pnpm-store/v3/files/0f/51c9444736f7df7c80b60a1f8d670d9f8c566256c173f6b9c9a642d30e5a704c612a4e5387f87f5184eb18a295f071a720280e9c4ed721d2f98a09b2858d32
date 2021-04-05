@@ -1,0 +1,46 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceConversion_1 = require("./IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceConversion.js");
+const IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionNames_1 = require("./IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionNames.js");
+const IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionVersion_1 = require("./IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionVersion.js");
+const schema = {
+    "properties": {
+        "conversion": {
+            "$ref": "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceConversion#"
+        },
+        "group": {
+            "type": "string"
+        },
+        "names": {
+            "$ref": "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceDefinitionNames#"
+        },
+        "preserveUnknownFields": {
+            "type": "boolean"
+        },
+        "scope": {
+            "type": "string"
+        },
+        "versions": {
+            "items": {
+                "$ref": "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceDefinitionVersion#"
+            },
+            "type": "array"
+        }
+    },
+    "required": [
+        "group",
+        "names",
+        "scope",
+        "versions"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceConversion_1.addSchema();
+    IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionNames_1.addSchema();
+    IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionVersion_1.addSchema();
+    validate_1.register("io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceDefinitionSpec", schema);
+}
+exports.addSchema = addSchema;

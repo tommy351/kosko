@@ -1,0 +1,18 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "gmsaCredentialSpec": {
+            "type": "string"
+        },
+        "gmsaCredentialSpecName": {
+            "type": "string"
+        },
+        "runAsUserName": {
+            "type": "string"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.core.v1.WindowsSecurityContextOptions", schema);
+}

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TopologySpreadConstraint = exports.IoK8sApiCoreV1TopologySpreadConstraint = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1TopologySpreadConstraint_1 = require("../_schemas/IoK8sApiCoreV1TopologySpreadConstraint.js");
+/**
+ * TopologySpreadConstraint specifies how to spread matching pods among the given topology.
+ */
+class IoK8sApiCoreV1TopologySpreadConstraint extends base_1.Model {
+}
+exports.IoK8sApiCoreV1TopologySpreadConstraint = IoK8sApiCoreV1TopologySpreadConstraint;
+exports.TopologySpreadConstraint = IoK8sApiCoreV1TopologySpreadConstraint;
+base_1.Model.setSchema(IoK8sApiCoreV1TopologySpreadConstraint, "io.k8s.api.core.v1.TopologySpreadConstraint", IoK8sApiCoreV1TopologySpreadConstraint_1.addSchema);

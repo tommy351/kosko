@@ -1,0 +1,22 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * LoadBalancerIngress represents the status of a load-balancer ingress point: traffic intended for the service should be sent to an ingress point.
+ */
+export interface IIoK8sApiCoreV1LoadBalancerIngress {
+    /**
+     * Hostname is set for load-balancer ingress points that are DNS based (typically AWS load-balancers)
+     */
+    "hostname"?: string;
+    /**
+     * IP is set for load-balancer ingress points that are IP based (typically GCE or OpenStack load-balancers)
+     */
+    "ip"?: string;
+}
+/**
+ * LoadBalancerIngress represents the status of a load-balancer ingress point: traffic intended for the service should be sent to an ingress point.
+ */
+export declare class IoK8sApiCoreV1LoadBalancerIngress extends Model<IIoK8sApiCoreV1LoadBalancerIngress> implements IIoK8sApiCoreV1LoadBalancerIngress {
+    "hostname"?: string;
+    "ip"?: string;
+}
+export { IIoK8sApiCoreV1LoadBalancerIngress as ILoadBalancerIngress, IoK8sApiCoreV1LoadBalancerIngress as LoadBalancerIngress };

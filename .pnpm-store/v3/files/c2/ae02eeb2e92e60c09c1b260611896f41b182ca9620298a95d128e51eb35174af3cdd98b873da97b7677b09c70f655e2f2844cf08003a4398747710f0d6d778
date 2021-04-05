@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.QueuingConfiguration = exports.IoK8sApiFlowcontrolV1alpha1QueuingConfiguration = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiFlowcontrolV1alpha1QueuingConfiguration_1 = require("../_schemas/IoK8sApiFlowcontrolV1alpha1QueuingConfiguration.js");
+/**
+ * QueuingConfiguration holds the configuration parameters for queuing
+ */
+class IoK8sApiFlowcontrolV1alpha1QueuingConfiguration extends base_1.Model {
+}
+exports.IoK8sApiFlowcontrolV1alpha1QueuingConfiguration = IoK8sApiFlowcontrolV1alpha1QueuingConfiguration;
+exports.QueuingConfiguration = IoK8sApiFlowcontrolV1alpha1QueuingConfiguration;
+base_1.Model.setSchema(IoK8sApiFlowcontrolV1alpha1QueuingConfiguration, "io.k8s.api.flowcontrol.v1alpha1.QueuingConfiguration", IoK8sApiFlowcontrolV1alpha1QueuingConfiguration_1.addSchema);

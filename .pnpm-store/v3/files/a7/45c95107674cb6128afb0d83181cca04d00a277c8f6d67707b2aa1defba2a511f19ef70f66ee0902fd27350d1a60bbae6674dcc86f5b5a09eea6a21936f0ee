@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.APIServiceStatus = exports.IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceStatus_1 = require("../_schemas/IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceStatus.js");
+/**
+ * APIServiceStatus contains derived information about an API server
+ */
+class IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceStatus extends base_1.Model {
+}
+exports.IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceStatus = IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceStatus;
+exports.APIServiceStatus = IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceStatus;
+base_1.Model.setSchema(IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceStatus, "io.k8s.kube-aggregator.pkg.apis.apiregistration.v1beta1.APIServiceStatus", IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceStatus_1.addSchema);

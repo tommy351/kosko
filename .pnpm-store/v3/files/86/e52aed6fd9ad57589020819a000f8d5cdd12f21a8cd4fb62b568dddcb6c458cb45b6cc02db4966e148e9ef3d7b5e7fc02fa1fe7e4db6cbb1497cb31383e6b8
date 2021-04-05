@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ScaleIOVolumeSource = exports.IoK8sApiCoreV1ScaleIOVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ScaleIOVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1ScaleIOVolumeSource.js");
+/**
+ * ScaleIOVolumeSource represents a persistent ScaleIO volume
+ */
+class IoK8sApiCoreV1ScaleIOVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ScaleIOVolumeSource = IoK8sApiCoreV1ScaleIOVolumeSource;
+exports.ScaleIOVolumeSource = IoK8sApiCoreV1ScaleIOVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1ScaleIOVolumeSource, "io.k8s.api.core.v1.ScaleIOVolumeSource", IoK8sApiCoreV1ScaleIOVolumeSource_1.addSchema);

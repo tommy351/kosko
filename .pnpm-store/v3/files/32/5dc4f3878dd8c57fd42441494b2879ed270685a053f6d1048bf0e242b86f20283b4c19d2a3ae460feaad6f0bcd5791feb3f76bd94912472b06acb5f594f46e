@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ObjectMetricStatus = exports.IoK8sApiAutoscalingV2beta2ObjectMetricStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAutoscalingV2beta2ObjectMetricStatus_1 = require("../_schemas/IoK8sApiAutoscalingV2beta2ObjectMetricStatus.js");
+/**
+ * ObjectMetricStatus indicates the current value of a metric describing a kubernetes object (for example, hits-per-second on an Ingress object).
+ */
+class IoK8sApiAutoscalingV2beta2ObjectMetricStatus extends base_1.Model {
+}
+exports.IoK8sApiAutoscalingV2beta2ObjectMetricStatus = IoK8sApiAutoscalingV2beta2ObjectMetricStatus;
+exports.ObjectMetricStatus = IoK8sApiAutoscalingV2beta2ObjectMetricStatus;
+base_1.Model.setSchema(IoK8sApiAutoscalingV2beta2ObjectMetricStatus, "io.k8s.api.autoscaling.v2beta2.ObjectMetricStatus", IoK8sApiAutoscalingV2beta2ObjectMetricStatus_1.addSchema);

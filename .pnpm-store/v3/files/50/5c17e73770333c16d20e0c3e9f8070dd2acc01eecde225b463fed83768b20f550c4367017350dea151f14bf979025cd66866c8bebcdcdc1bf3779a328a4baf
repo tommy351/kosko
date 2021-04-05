@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ExternalMetricStatus = exports.IoK8sApiAutoscalingV2beta2ExternalMetricStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAutoscalingV2beta2ExternalMetricStatus_1 = require("../_schemas/IoK8sApiAutoscalingV2beta2ExternalMetricStatus.js");
+/**
+ * ExternalMetricStatus indicates the current value of a global metric not associated with any Kubernetes object.
+ */
+class IoK8sApiAutoscalingV2beta2ExternalMetricStatus extends base_1.Model {
+}
+exports.IoK8sApiAutoscalingV2beta2ExternalMetricStatus = IoK8sApiAutoscalingV2beta2ExternalMetricStatus;
+exports.ExternalMetricStatus = IoK8sApiAutoscalingV2beta2ExternalMetricStatus;
+base_1.Model.setSchema(IoK8sApiAutoscalingV2beta2ExternalMetricStatus, "io.k8s.api.autoscaling.v2beta2.ExternalMetricStatus", IoK8sApiAutoscalingV2beta2ExternalMetricStatus_1.addSchema);

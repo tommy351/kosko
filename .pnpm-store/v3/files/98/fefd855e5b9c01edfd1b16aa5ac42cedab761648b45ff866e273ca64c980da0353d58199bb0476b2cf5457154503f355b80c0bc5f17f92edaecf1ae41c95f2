@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.HorizontalPodAutoscalerBehavior = exports.IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerBehavior = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerBehavior_1 = require("../_schemas/IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerBehavior.js");
+/**
+ * HorizontalPodAutoscalerBehavior configures the scaling behavior of the target in both Up and Down directions (scaleUp and scaleDown fields respectively).
+ */
+class IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerBehavior extends base_1.Model {
+}
+exports.IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerBehavior = IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerBehavior;
+exports.HorizontalPodAutoscalerBehavior = IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerBehavior;
+base_1.Model.setSchema(IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerBehavior, "io.k8s.api.autoscaling.v2beta2.HorizontalPodAutoscalerBehavior", IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerBehavior_1.addSchema);

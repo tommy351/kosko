@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiRbacV1alpha1ClusterRoleBindingList.mjs";
+/**
+ * ClusterRoleBindingList is a collection of ClusterRoleBindings. Deprecated in v1.17 in favor of rbac.authorization.k8s.io/v1 ClusterRoleBindings, and will no longer be served in v1.22.
+ */
+export class IoK8sApiRbacV1alpha1ClusterRoleBindingList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiRbacV1alpha1ClusterRoleBindingList.apiVersion,
+            kind: IoK8sApiRbacV1alpha1ClusterRoleBindingList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiRbacV1alpha1ClusterRoleBindingList.apiVersion = "rbac.authorization.k8s.io/v1alpha1";
+IoK8sApiRbacV1alpha1ClusterRoleBindingList.kind = "ClusterRoleBindingList";
+Model.setSchema(IoK8sApiRbacV1alpha1ClusterRoleBindingList, "io.k8s.api.rbac.v1alpha1.ClusterRoleBindingList", addSchema);
+export { IoK8sApiRbacV1alpha1ClusterRoleBindingList as ClusterRoleBindingList };

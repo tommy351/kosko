@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1TopologySelectorTerm.mjs";
+/**
+ * A topology selector term represents the result of label queries. A null or empty topology selector term matches no objects. The requirements of them are ANDed. It provides a subset of functionality as NodeSelectorTerm. This is an alpha feature and may change in the future.
+ */
+export class IoK8sApiCoreV1TopologySelectorTerm extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1TopologySelectorTerm, "io.k8s.api.core.v1.TopologySelectorTerm", addSchema);
+export { IoK8sApiCoreV1TopologySelectorTerm as TopologySelectorTerm };

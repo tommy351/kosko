@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LimitRangeItem = exports.IoK8sApiCoreV1LimitRangeItem = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1LimitRangeItem_1 = require("../_schemas/IoK8sApiCoreV1LimitRangeItem.js");
+/**
+ * LimitRangeItem defines a min/max usage limit for any resource that matches on kind.
+ */
+class IoK8sApiCoreV1LimitRangeItem extends base_1.Model {
+}
+exports.IoK8sApiCoreV1LimitRangeItem = IoK8sApiCoreV1LimitRangeItem;
+exports.LimitRangeItem = IoK8sApiCoreV1LimitRangeItem;
+base_1.Model.setSchema(IoK8sApiCoreV1LimitRangeItem, "io.k8s.api.core.v1.LimitRangeItem", IoK8sApiCoreV1LimitRangeItem_1.addSchema);

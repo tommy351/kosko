@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DaemonSetSpec = exports.IoK8sApiAppsV1DaemonSetSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAppsV1DaemonSetSpec_1 = require("../_schemas/IoK8sApiAppsV1DaemonSetSpec.js");
+/**
+ * DaemonSetSpec is the specification of a daemon set.
+ */
+class IoK8sApiAppsV1DaemonSetSpec extends base_1.Model {
+}
+exports.IoK8sApiAppsV1DaemonSetSpec = IoK8sApiAppsV1DaemonSetSpec;
+exports.DaemonSetSpec = IoK8sApiAppsV1DaemonSetSpec;
+base_1.Model.setSchema(IoK8sApiAppsV1DaemonSetSpec, "io.k8s.api.apps.v1.DaemonSetSpec", IoK8sApiAppsV1DaemonSetSpec_1.addSchema);

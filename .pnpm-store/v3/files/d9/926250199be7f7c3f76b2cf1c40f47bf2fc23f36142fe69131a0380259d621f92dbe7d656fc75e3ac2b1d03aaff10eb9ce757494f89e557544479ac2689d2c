@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ServiceAccountTokenProjection = exports.IoK8sApiCoreV1ServiceAccountTokenProjection = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ServiceAccountTokenProjection_1 = require("../_schemas/IoK8sApiCoreV1ServiceAccountTokenProjection.js");
+/**
+ * ServiceAccountTokenProjection represents a projected service account token volume. This projection can be used to insert a service account token into the pods runtime filesystem for use against APIs (Kubernetes API Server or otherwise).
+ */
+class IoK8sApiCoreV1ServiceAccountTokenProjection extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ServiceAccountTokenProjection = IoK8sApiCoreV1ServiceAccountTokenProjection;
+exports.ServiceAccountTokenProjection = IoK8sApiCoreV1ServiceAccountTokenProjection;
+base_1.Model.setSchema(IoK8sApiCoreV1ServiceAccountTokenProjection, "io.k8s.api.core.v1.ServiceAccountTokenProjection", IoK8sApiCoreV1ServiceAccountTokenProjection_1.addSchema);

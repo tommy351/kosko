@@ -1,0 +1,33 @@
+import { IIoK8sApiNetworkingV1IPBlock } from "./IoK8sApiNetworkingV1IPBlock";
+import { IIoK8sApimachineryPkgApisMetaV1LabelSelector } from "./IoK8sApimachineryPkgApisMetaV1LabelSelector";
+import { Model } from "@kubernetes-models/base";
+/**
+ * NetworkPolicyPeer describes a peer to allow traffic to/from. Only certain combinations of fields are allowed
+ */
+export interface IIoK8sApiNetworkingV1NetworkPolicyPeer {
+    /**
+     * IPBlock defines policy on a particular IPBlock. If this field is set then neither of the other fields can be.
+     */
+    "ipBlock"?: IIoK8sApiNetworkingV1IPBlock;
+    /**
+     * Selects Namespaces using cluster-scoped labels. This field follows standard label selector semantics; if present but empty, it selects all namespaces.
+     *
+     * If PodSelector is also set, then the NetworkPolicyPeer as a whole selects the Pods matching PodSelector in the Namespaces selected by NamespaceSelector. Otherwise it selects all Pods in the Namespaces selected by NamespaceSelector.
+     */
+    "namespaceSelector"?: IIoK8sApimachineryPkgApisMetaV1LabelSelector;
+    /**
+     * This is a label selector which selects Pods. This field follows standard label selector semantics; if present but empty, it selects all pods.
+     *
+     * If NamespaceSelector is also set, then the NetworkPolicyPeer as a whole selects the Pods matching PodSelector in the Namespaces selected by NamespaceSelector. Otherwise it selects the Pods matching PodSelector in the policy's own Namespace.
+     */
+    "podSelector"?: IIoK8sApimachineryPkgApisMetaV1LabelSelector;
+}
+/**
+ * NetworkPolicyPeer describes a peer to allow traffic to/from. Only certain combinations of fields are allowed
+ */
+export declare class IoK8sApiNetworkingV1NetworkPolicyPeer extends Model<IIoK8sApiNetworkingV1NetworkPolicyPeer> implements IIoK8sApiNetworkingV1NetworkPolicyPeer {
+    "ipBlock"?: IIoK8sApiNetworkingV1IPBlock;
+    "namespaceSelector"?: IIoK8sApimachineryPkgApisMetaV1LabelSelector;
+    "podSelector"?: IIoK8sApimachineryPkgApisMetaV1LabelSelector;
+}
+export { IIoK8sApiNetworkingV1NetworkPolicyPeer as INetworkPolicyPeer, IoK8sApiNetworkingV1NetworkPolicyPeer as NetworkPolicyPeer };

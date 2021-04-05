@@ -1,0 +1,1 @@
+{"version":3,"file":"WaitPlugin.d.ts","sourceRoot":"","sources":["../../../src/webpack/plugins/WaitPlugin.ts"],"names":[],"mappings":"AAAA;;;;;GAKG;AAKH,OAAO,EAAC,QAAQ,EAAC,MAAM,SAAS,CAAC;AAEjC,UAAU,iBAAiB;IACzB,QAAQ,EAAE,MAAM,CAAC;CAClB;AAED,MAAM,CAAC,OAAO,OAAO,UAAU;IAC7B,QAAQ,EAAE,MAAM,CAAC;gBAEL,OAAO,EAAE,iBAAiB;IAItC,KAAK,CAAC,QAAQ,EAAE,QAAQ;CAmBzB"}

@@ -1,0 +1,18 @@
+import { IIoK8sApiCoreV1LoadBalancerStatus } from "./IoK8sApiCoreV1LoadBalancerStatus";
+import { Model } from "@kubernetes-models/base";
+/**
+ * IngressStatus describe the current state of the Ingress.
+ */
+export interface IIoK8sApiNetworkingV1beta1IngressStatus {
+    /**
+     * LoadBalancer contains the current status of the load-balancer.
+     */
+    "loadBalancer"?: IIoK8sApiCoreV1LoadBalancerStatus;
+}
+/**
+ * IngressStatus describe the current state of the Ingress.
+ */
+export declare class IoK8sApiNetworkingV1beta1IngressStatus extends Model<IIoK8sApiNetworkingV1beta1IngressStatus> implements IIoK8sApiNetworkingV1beta1IngressStatus {
+    "loadBalancer"?: IIoK8sApiCoreV1LoadBalancerStatus;
+}
+export { IIoK8sApiNetworkingV1beta1IngressStatus as IIngressStatus, IoK8sApiNetworkingV1beta1IngressStatus as IngressStatus };

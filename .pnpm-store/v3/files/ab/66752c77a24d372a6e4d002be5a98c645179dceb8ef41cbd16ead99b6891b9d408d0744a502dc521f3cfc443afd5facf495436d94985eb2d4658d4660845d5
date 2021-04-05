@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const tslib_1 = require("tslib");
+const get_stdin_1 = tslib_1.__importDefault(require("get-stdin"));
+const debug_1 = tslib_1.__importDefault(require("./debug"));
+const worker_1 = require("./worker");
+async function loadWorkerData() {
+    const stdin = await get_stdin_1.default();
+    return JSON.parse(stdin);
+}
+(async () => {
+    debug_1.default("Worker started");
+    const data = await loadWorkerData();
+    debug_1.default("Target", data.target);
+    const worker = new worker_1.Worker(data);
+    return worker.run();
+})().catch((err) => {
+    console.error(err);
+    process.exitCode = 1;
+});
+//# sourceMappingURL=entry.js.map

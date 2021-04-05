@@ -1,0 +1,43 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiRbacV1beta1AggregationRule } from "./IoK8sApiRbacV1beta1AggregationRule.mjs";
+import { addSchema as IoK8sApimachineryPkgApisMetaV1ObjectMeta } from "./IoK8sApimachineryPkgApisMetaV1ObjectMeta.mjs";
+import { addSchema as IoK8sApiRbacV1beta1PolicyRule } from "./IoK8sApiRbacV1beta1PolicyRule.mjs";
+const schema = {
+    "properties": {
+        "aggregationRule": {
+            "$ref": "io.k8s.api.rbac.v1beta1.AggregationRule#"
+        },
+        "apiVersion": {
+            "type": "string",
+            "enum": [
+                "rbac.authorization.k8s.io/v1beta1"
+            ]
+        },
+        "kind": {
+            "type": "string",
+            "enum": [
+                "ClusterRole"
+            ]
+        },
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta#"
+        },
+        "rules": {
+            "items": {
+                "$ref": "io.k8s.api.rbac.v1beta1.PolicyRule#"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object",
+    "required": [
+        "apiVersion",
+        "kind"
+    ]
+};
+export function addSchema() {
+    IoK8sApiRbacV1beta1AggregationRule();
+    IoK8sApimachineryPkgApisMetaV1ObjectMeta();
+    IoK8sApiRbacV1beta1PolicyRule();
+    register("io.k8s.api.rbac.v1beta1.ClusterRole", schema);
+}

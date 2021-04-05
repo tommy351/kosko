@@ -1,0 +1,15 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "resourceVersion": {
+            "type": "string"
+        },
+        "uid": {
+            "type": "string"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.apimachinery.pkg.apis.meta.v1.Preconditions", schema);
+}

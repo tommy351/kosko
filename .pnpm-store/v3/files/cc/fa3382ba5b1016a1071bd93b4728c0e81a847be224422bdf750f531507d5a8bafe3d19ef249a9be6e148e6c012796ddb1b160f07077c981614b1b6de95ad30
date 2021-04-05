@@ -1,0 +1,39 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiAutoscalingV2beta2ExternalMetricSource_1 = require("./IoK8sApiAutoscalingV2beta2ExternalMetricSource.js");
+const IoK8sApiAutoscalingV2beta2ObjectMetricSource_1 = require("./IoK8sApiAutoscalingV2beta2ObjectMetricSource.js");
+const IoK8sApiAutoscalingV2beta2PodsMetricSource_1 = require("./IoK8sApiAutoscalingV2beta2PodsMetricSource.js");
+const IoK8sApiAutoscalingV2beta2ResourceMetricSource_1 = require("./IoK8sApiAutoscalingV2beta2ResourceMetricSource.js");
+const schema = {
+    "properties": {
+        "external": {
+            "$ref": "io.k8s.api.autoscaling.v2beta2.ExternalMetricSource#"
+        },
+        "object": {
+            "$ref": "io.k8s.api.autoscaling.v2beta2.ObjectMetricSource#"
+        },
+        "pods": {
+            "$ref": "io.k8s.api.autoscaling.v2beta2.PodsMetricSource#"
+        },
+        "resource": {
+            "$ref": "io.k8s.api.autoscaling.v2beta2.ResourceMetricSource#"
+        },
+        "type": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "type"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiAutoscalingV2beta2ExternalMetricSource_1.addSchema();
+    IoK8sApiAutoscalingV2beta2ObjectMetricSource_1.addSchema();
+    IoK8sApiAutoscalingV2beta2PodsMetricSource_1.addSchema();
+    IoK8sApiAutoscalingV2beta2ResourceMetricSource_1.addSchema();
+    validate_1.register("io.k8s.api.autoscaling.v2beta2.MetricSpec", schema);
+}
+exports.addSchema = addSchema;

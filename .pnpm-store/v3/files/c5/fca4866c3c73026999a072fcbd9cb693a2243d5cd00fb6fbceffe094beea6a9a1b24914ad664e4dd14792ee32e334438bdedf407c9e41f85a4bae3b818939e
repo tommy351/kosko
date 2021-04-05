@@ -1,0 +1,39 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApisMetaV1ObjectMeta_1 = require("./IoK8sApimachineryPkgApisMetaV1ObjectMeta.js");
+const IoK8sApiNetworkingV1NetworkPolicySpec_1 = require("./IoK8sApiNetworkingV1NetworkPolicySpec.js");
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string",
+            "enum": [
+                "networking.k8s.io/v1"
+            ]
+        },
+        "kind": {
+            "type": "string",
+            "enum": [
+                "NetworkPolicy"
+            ]
+        },
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta#"
+        },
+        "spec": {
+            "$ref": "io.k8s.api.networking.v1.NetworkPolicySpec#"
+        }
+    },
+    "type": "object",
+    "required": [
+        "apiVersion",
+        "kind"
+    ]
+};
+function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1ObjectMeta_1.addSchema();
+    IoK8sApiNetworkingV1NetworkPolicySpec_1.addSchema();
+    validate_1.register("io.k8s.api.networking.v1.NetworkPolicy", schema);
+}
+exports.addSchema = addSchema;

@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PodPreset = exports.IoK8sApiSettingsV1alpha1PodPreset = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiSettingsV1alpha1PodPreset_1 = require("../_schemas/IoK8sApiSettingsV1alpha1PodPreset.js");
+/**
+ * PodPreset is a policy resource that defines additional runtime requirements for a Pod.
+ */
+class IoK8sApiSettingsV1alpha1PodPreset extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiSettingsV1alpha1PodPreset.apiVersion,
+            kind: IoK8sApiSettingsV1alpha1PodPreset.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiSettingsV1alpha1PodPreset = IoK8sApiSettingsV1alpha1PodPreset;
+exports.PodPreset = IoK8sApiSettingsV1alpha1PodPreset;
+IoK8sApiSettingsV1alpha1PodPreset.apiVersion = "settings.k8s.io/v1alpha1";
+IoK8sApiSettingsV1alpha1PodPreset.kind = "PodPreset";
+base_1.Model.setSchema(IoK8sApiSettingsV1alpha1PodPreset, "io.k8s.api.settings.v1alpha1.PodPreset", IoK8sApiSettingsV1alpha1PodPreset_1.addSchema);

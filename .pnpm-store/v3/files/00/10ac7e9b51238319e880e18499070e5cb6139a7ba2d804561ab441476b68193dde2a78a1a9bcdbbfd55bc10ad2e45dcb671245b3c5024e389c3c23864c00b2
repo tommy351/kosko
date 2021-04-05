@@ -1,0 +1,18 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1LoadBalancerStatus_1 = require("./IoK8sApiCoreV1LoadBalancerStatus.js");
+const schema = {
+    "properties": {
+        "loadBalancer": {
+            "$ref": "io.k8s.api.core.v1.LoadBalancerStatus#"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1LoadBalancerStatus_1.addSchema();
+    validate_1.register("io.k8s.api.extensions.v1beta1.IngressStatus", schema);
+}
+exports.addSchema = addSchema;

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CustomResourceColumnDefinition = exports.IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceColumnDefinition = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceColumnDefinition_1 = require("../_schemas/IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceColumnDefinition.js");
+/**
+ * CustomResourceColumnDefinition specifies a column for server side printing.
+ */
+class IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceColumnDefinition extends base_1.Model {
+}
+exports.IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceColumnDefinition = IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceColumnDefinition;
+exports.CustomResourceColumnDefinition = IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceColumnDefinition;
+base_1.Model.setSchema(IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceColumnDefinition, "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceColumnDefinition", IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceColumnDefinition_1.addSchema);

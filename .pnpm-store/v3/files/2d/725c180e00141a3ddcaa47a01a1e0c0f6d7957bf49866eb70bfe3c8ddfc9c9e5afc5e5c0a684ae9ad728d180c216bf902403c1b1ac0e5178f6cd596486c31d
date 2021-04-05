@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Toleration = exports.IoK8sApiCoreV1Toleration = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1Toleration_1 = require("../_schemas/IoK8sApiCoreV1Toleration.js");
+/**
+ * The pod this Toleration is attached to tolerates any taint that matches the triple <key,value,effect> using the matching operator <operator>.
+ */
+class IoK8sApiCoreV1Toleration extends base_1.Model {
+}
+exports.IoK8sApiCoreV1Toleration = IoK8sApiCoreV1Toleration;
+exports.Toleration = IoK8sApiCoreV1Toleration;
+base_1.Model.setSchema(IoK8sApiCoreV1Toleration, "io.k8s.api.core.v1.Toleration", IoK8sApiCoreV1Toleration_1.addSchema);

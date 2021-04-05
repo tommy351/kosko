@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CronJobStatus = exports.IoK8sApiBatchV2alpha1CronJobStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiBatchV2alpha1CronJobStatus_1 = require("../_schemas/IoK8sApiBatchV2alpha1CronJobStatus.js");
+/**
+ * CronJobStatus represents the current state of a cron job.
+ */
+class IoK8sApiBatchV2alpha1CronJobStatus extends base_1.Model {
+}
+exports.IoK8sApiBatchV2alpha1CronJobStatus = IoK8sApiBatchV2alpha1CronJobStatus;
+exports.CronJobStatus = IoK8sApiBatchV2alpha1CronJobStatus;
+base_1.Model.setSchema(IoK8sApiBatchV2alpha1CronJobStatus, "io.k8s.api.batch.v2alpha1.CronJobStatus", IoK8sApiBatchV2alpha1CronJobStatus_1.addSchema);

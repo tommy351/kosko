@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiNetworkingV1IngressServiceBackend.mjs";
+/**
+ * IngressServiceBackend references a Kubernetes Service as a Backend.
+ */
+export class IoK8sApiNetworkingV1IngressServiceBackend extends Model {
+}
+Model.setSchema(IoK8sApiNetworkingV1IngressServiceBackend, "io.k8s.api.networking.v1.IngressServiceBackend", addSchema);
+export { IoK8sApiNetworkingV1IngressServiceBackend as IngressServiceBackend };

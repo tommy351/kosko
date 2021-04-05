@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.KeyToPath = exports.IoK8sApiCoreV1KeyToPath = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1KeyToPath_1 = require("../_schemas/IoK8sApiCoreV1KeyToPath.js");
+/**
+ * Maps a string key to a path within a volume.
+ */
+class IoK8sApiCoreV1KeyToPath extends base_1.Model {
+}
+exports.IoK8sApiCoreV1KeyToPath = IoK8sApiCoreV1KeyToPath;
+exports.KeyToPath = IoK8sApiCoreV1KeyToPath;
+base_1.Model.setSchema(IoK8sApiCoreV1KeyToPath, "io.k8s.api.core.v1.KeyToPath", IoK8sApiCoreV1KeyToPath_1.addSchema);

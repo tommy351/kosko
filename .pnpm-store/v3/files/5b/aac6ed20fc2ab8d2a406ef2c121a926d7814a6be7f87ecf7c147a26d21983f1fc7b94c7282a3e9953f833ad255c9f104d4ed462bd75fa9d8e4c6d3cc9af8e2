@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.EndpointSliceList = exports.IoK8sApiDiscoveryV1beta1EndpointSliceList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiDiscoveryV1beta1EndpointSliceList_1 = require("../_schemas/IoK8sApiDiscoveryV1beta1EndpointSliceList.js");
+/**
+ * EndpointSliceList represents a list of endpoint slices
+ */
+class IoK8sApiDiscoveryV1beta1EndpointSliceList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiDiscoveryV1beta1EndpointSliceList.apiVersion,
+            kind: IoK8sApiDiscoveryV1beta1EndpointSliceList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiDiscoveryV1beta1EndpointSliceList = IoK8sApiDiscoveryV1beta1EndpointSliceList;
+exports.EndpointSliceList = IoK8sApiDiscoveryV1beta1EndpointSliceList;
+IoK8sApiDiscoveryV1beta1EndpointSliceList.apiVersion = "discovery.k8s.io/v1beta1";
+IoK8sApiDiscoveryV1beta1EndpointSliceList.kind = "EndpointSliceList";
+base_1.Model.setSchema(IoK8sApiDiscoveryV1beta1EndpointSliceList, "io.k8s.api.discovery.v1beta1.EndpointSliceList", IoK8sApiDiscoveryV1beta1EndpointSliceList_1.addSchema);

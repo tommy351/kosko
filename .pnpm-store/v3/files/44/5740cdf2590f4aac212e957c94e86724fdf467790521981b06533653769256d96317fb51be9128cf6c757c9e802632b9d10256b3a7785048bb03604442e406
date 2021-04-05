@@ -1,0 +1,15 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "path": {
+            "type": "string"
+        },
+        "verb": {
+            "type": "string"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.authorization.v1beta1.NonResourceAttributes", schema);
+}

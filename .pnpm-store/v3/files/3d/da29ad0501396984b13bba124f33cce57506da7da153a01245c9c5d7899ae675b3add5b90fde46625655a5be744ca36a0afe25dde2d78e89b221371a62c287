@@ -1,0 +1,35 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApisMetaV1FieldsV1_1 = require("./IoK8sApimachineryPkgApisMetaV1FieldsV1.js");
+const IoK8sApimachineryPkgApisMetaV1Time_1 = require("./IoK8sApimachineryPkgApisMetaV1Time.js");
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string"
+        },
+        "fieldsType": {
+            "type": "string"
+        },
+        "fieldsV1": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.FieldsV1#"
+        },
+        "manager": {
+            "type": "string"
+        },
+        "operation": {
+            "type": "string"
+        },
+        "time": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.Time#"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1FieldsV1_1.addSchema();
+    IoK8sApimachineryPkgApisMetaV1Time_1.addSchema();
+    validate_1.register("io.k8s.apimachinery.pkg.apis.meta.v1.ManagedFieldsEntry", schema);
+}
+exports.addSchema = addSchema;

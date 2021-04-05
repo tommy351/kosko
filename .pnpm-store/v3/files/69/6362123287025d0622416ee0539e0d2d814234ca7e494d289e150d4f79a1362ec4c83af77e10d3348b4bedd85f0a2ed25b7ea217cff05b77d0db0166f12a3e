@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LoadBalancerIngress = exports.IoK8sApiCoreV1LoadBalancerIngress = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1LoadBalancerIngress_1 = require("../_schemas/IoK8sApiCoreV1LoadBalancerIngress.js");
+/**
+ * LoadBalancerIngress represents the status of a load-balancer ingress point: traffic intended for the service should be sent to an ingress point.
+ */
+class IoK8sApiCoreV1LoadBalancerIngress extends base_1.Model {
+}
+exports.IoK8sApiCoreV1LoadBalancerIngress = IoK8sApiCoreV1LoadBalancerIngress;
+exports.LoadBalancerIngress = IoK8sApiCoreV1LoadBalancerIngress;
+base_1.Model.setSchema(IoK8sApiCoreV1LoadBalancerIngress, "io.k8s.api.core.v1.LoadBalancerIngress", IoK8sApiCoreV1LoadBalancerIngress_1.addSchema);

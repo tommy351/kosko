@@ -1,0 +1,5 @@
+export * from "../../_definitions/IoK8sApiBatchV1Job";
+export * from "../../_definitions/IoK8sApiBatchV1JobCondition";
+export * from "../../_definitions/IoK8sApiBatchV1JobList";
+export * from "../../_definitions/IoK8sApiBatchV1JobSpec";
+export * from "../../_definitions/IoK8sApiBatchV1JobStatus";

@@ -1,0 +1,33 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApisMetaV1LabelSelector_1 = require("./IoK8sApimachineryPkgApisMetaV1LabelSelector.js");
+const schema = {
+    "properties": {
+        "labelSelector": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector#"
+        },
+        "maxSkew": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "topologyKey": {
+            "type": "string"
+        },
+        "whenUnsatisfiable": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "maxSkew",
+        "topologyKey",
+        "whenUnsatisfiable"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1LabelSelector_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.TopologySpreadConstraint", schema);
+}
+exports.addSchema = addSchema;

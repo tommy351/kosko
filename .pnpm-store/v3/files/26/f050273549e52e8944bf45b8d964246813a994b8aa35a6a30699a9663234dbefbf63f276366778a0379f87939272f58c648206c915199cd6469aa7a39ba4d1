@@ -1,0 +1,3 @@
+export * from "../../../_definitions/IoK8sApiCoordinationV1Lease.mjs";
+export * from "../../../_definitions/IoK8sApiCoordinationV1LeaseList.mjs";
+export * from "../../../_definitions/IoK8sApiCoordinationV1LeaseSpec.mjs";

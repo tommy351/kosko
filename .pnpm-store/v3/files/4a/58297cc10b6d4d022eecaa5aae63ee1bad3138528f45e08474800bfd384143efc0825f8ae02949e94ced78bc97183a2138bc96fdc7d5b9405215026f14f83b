@@ -1,0 +1,15 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "message": {
+            "type": "string"
+        },
+        "reason": {
+            "type": "string"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.core.v1.ContainerStateWaiting", schema);
+}

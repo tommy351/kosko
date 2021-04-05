@@ -1,0 +1,3 @@
+export * from "../../_definitions/IoK8sApiEventsV1beta1Event.mjs";
+export * from "../../_definitions/IoK8sApiEventsV1beta1EventList.mjs";
+export * from "../../_definitions/IoK8sApiEventsV1beta1EventSeries.mjs";

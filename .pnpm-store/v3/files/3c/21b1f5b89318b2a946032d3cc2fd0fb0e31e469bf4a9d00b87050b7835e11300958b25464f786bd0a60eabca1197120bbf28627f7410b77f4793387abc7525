@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SELinuxOptions = exports.IoK8sApiCoreV1SELinuxOptions = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1SELinuxOptions_1 = require("../_schemas/IoK8sApiCoreV1SELinuxOptions.js");
+/**
+ * SELinuxOptions are the labels to be applied to the container
+ */
+class IoK8sApiCoreV1SELinuxOptions extends base_1.Model {
+}
+exports.IoK8sApiCoreV1SELinuxOptions = IoK8sApiCoreV1SELinuxOptions;
+exports.SELinuxOptions = IoK8sApiCoreV1SELinuxOptions;
+base_1.Model.setSchema(IoK8sApiCoreV1SELinuxOptions, "io.k8s.api.core.v1.SELinuxOptions", IoK8sApiCoreV1SELinuxOptions_1.addSchema);

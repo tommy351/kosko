@@ -1,0 +1,8 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const tslib_1 = require("tslib");
+tslib_1.__exportStar(require("../../_definitions/IoK8sApiDiscoveryV1beta1Endpoint.js"), exports);
+tslib_1.__exportStar(require("../../_definitions/IoK8sApiDiscoveryV1beta1EndpointConditions.js"), exports);
+tslib_1.__exportStar(require("../../_definitions/IoK8sApiDiscoveryV1beta1EndpointPort.js"), exports);
+tslib_1.__exportStar(require("../../_definitions/IoK8sApiDiscoveryV1beta1EndpointSlice.js"), exports);
+tslib_1.__exportStar(require("../../_definitions/IoK8sApiDiscoveryV1beta1EndpointSliceList.js"), exports);

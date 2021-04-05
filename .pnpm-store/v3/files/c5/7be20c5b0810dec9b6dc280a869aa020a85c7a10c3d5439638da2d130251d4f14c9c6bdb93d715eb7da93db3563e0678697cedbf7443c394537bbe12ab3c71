@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1ScaleIOPersistentVolumeSource.mjs";
+/**
+ * ScaleIOPersistentVolumeSource represents a persistent ScaleIO volume
+ */
+export class IoK8sApiCoreV1ScaleIOPersistentVolumeSource extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1ScaleIOPersistentVolumeSource, "io.k8s.api.core.v1.ScaleIOPersistentVolumeSource", addSchema);
+export { IoK8sApiCoreV1ScaleIOPersistentVolumeSource as ScaleIOPersistentVolumeSource };

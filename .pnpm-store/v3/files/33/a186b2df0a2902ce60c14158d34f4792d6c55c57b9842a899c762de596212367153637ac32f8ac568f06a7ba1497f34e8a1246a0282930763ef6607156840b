@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1EnvFromSource.mjs";
+/**
+ * EnvFromSource represents the source of a set of ConfigMaps
+ */
+export class IoK8sApiCoreV1EnvFromSource extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1EnvFromSource, "io.k8s.api.core.v1.EnvFromSource", addSchema);
+export { IoK8sApiCoreV1EnvFromSource as EnvFromSource };

@@ -1,0 +1,43 @@
+import { IIoK8sApimachineryPkgApisMetaV1ObjectMeta } from "./IoK8sApimachineryPkgApisMetaV1ObjectMeta";
+import { IIoK8sApiAutoscalingV1ScaleSpec } from "./IoK8sApiAutoscalingV1ScaleSpec";
+import { IIoK8sApiAutoscalingV1ScaleStatus } from "./IoK8sApiAutoscalingV1ScaleStatus";
+import { ModelData, Model } from "@kubernetes-models/base";
+/**
+ * Scale represents a scaling request for a resource.
+ */
+export interface IIoK8sApiAutoscalingV1Scale {
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    "apiVersion": "autoscaling/v1";
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    "kind": "Scale";
+    /**
+     * Standard object metadata; More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.
+     */
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ObjectMeta;
+    /**
+     * defines the behavior of the scale. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.
+     */
+    "spec"?: IIoK8sApiAutoscalingV1ScaleSpec;
+    /**
+     * current status of the scale. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status. Read-only.
+     */
+    "status"?: IIoK8sApiAutoscalingV1ScaleStatus;
+}
+/**
+ * Scale represents a scaling request for a resource.
+ */
+export declare class IoK8sApiAutoscalingV1Scale extends Model<IIoK8sApiAutoscalingV1Scale> implements IIoK8sApiAutoscalingV1Scale {
+    "apiVersion": IIoK8sApiAutoscalingV1Scale["apiVersion"];
+    "kind": IIoK8sApiAutoscalingV1Scale["kind"];
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ObjectMeta;
+    "spec"?: IIoK8sApiAutoscalingV1ScaleSpec;
+    "status"?: IIoK8sApiAutoscalingV1ScaleStatus;
+    static apiVersion: IIoK8sApiAutoscalingV1Scale["apiVersion"];
+    static kind: IIoK8sApiAutoscalingV1Scale["kind"];
+    constructor(data?: ModelData<IIoK8sApiAutoscalingV1Scale>);
+}
+export { IIoK8sApiAutoscalingV1Scale as IScale, IoK8sApiAutoscalingV1Scale as Scale };

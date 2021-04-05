@@ -1,0 +1,25 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCertificatesV1CertificateSigningRequestCondition_1 = require("./IoK8sApiCertificatesV1CertificateSigningRequestCondition.js");
+const schema = {
+    "properties": {
+        "certificate": {
+            "format": "byte",
+            "type": "string"
+        },
+        "conditions": {
+            "items": {
+                "$ref": "io.k8s.api.certificates.v1.CertificateSigningRequestCondition#"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCertificatesV1CertificateSigningRequestCondition_1.addSchema();
+    validate_1.register("io.k8s.api.certificates.v1.CertificateSigningRequestStatus", schema);
+}
+exports.addSchema = addSchema;

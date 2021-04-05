@@ -1,0 +1,19 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const schema = {
+    "properties": {
+        "driver": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "driver"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    validate_1.register("io.k8s.api.policy.v1beta1.AllowedFlexVolume", schema);
+}
+exports.addSchema = addSchema;

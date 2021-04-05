@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PriorityClass = exports.IoK8sApiSchedulingV1PriorityClass = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiSchedulingV1PriorityClass_1 = require("../_schemas/IoK8sApiSchedulingV1PriorityClass.js");
+/**
+ * PriorityClass defines mapping from a priority class name to the priority integer value. The value can be any valid integer.
+ */
+class IoK8sApiSchedulingV1PriorityClass extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiSchedulingV1PriorityClass.apiVersion,
+            kind: IoK8sApiSchedulingV1PriorityClass.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiSchedulingV1PriorityClass = IoK8sApiSchedulingV1PriorityClass;
+exports.PriorityClass = IoK8sApiSchedulingV1PriorityClass;
+IoK8sApiSchedulingV1PriorityClass.apiVersion = "scheduling.k8s.io/v1";
+IoK8sApiSchedulingV1PriorityClass.kind = "PriorityClass";
+base_1.Model.setSchema(IoK8sApiSchedulingV1PriorityClass, "io.k8s.api.scheduling.v1.PriorityClass", IoK8sApiSchedulingV1PriorityClass_1.addSchema);

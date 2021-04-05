@@ -1,0 +1,2 @@
+import * as apiregistration from "./apiregistration";
+export { apiregistration };

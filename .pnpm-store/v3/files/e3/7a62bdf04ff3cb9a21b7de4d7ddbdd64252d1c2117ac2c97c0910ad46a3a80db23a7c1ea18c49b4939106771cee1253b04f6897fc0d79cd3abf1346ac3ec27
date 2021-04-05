@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.HTTPIngressPath = exports.IoK8sApiNetworkingV1HTTPIngressPath = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiNetworkingV1HTTPIngressPath_1 = require("../_schemas/IoK8sApiNetworkingV1HTTPIngressPath.js");
+/**
+ * HTTPIngressPath associates a path with a backend. Incoming urls matching the path are forwarded to the backend.
+ */
+class IoK8sApiNetworkingV1HTTPIngressPath extends base_1.Model {
+}
+exports.IoK8sApiNetworkingV1HTTPIngressPath = IoK8sApiNetworkingV1HTTPIngressPath;
+exports.HTTPIngressPath = IoK8sApiNetworkingV1HTTPIngressPath;
+base_1.Model.setSchema(IoK8sApiNetworkingV1HTTPIngressPath, "io.k8s.api.networking.v1.HTTPIngressPath", IoK8sApiNetworkingV1HTTPIngressPath_1.addSchema);

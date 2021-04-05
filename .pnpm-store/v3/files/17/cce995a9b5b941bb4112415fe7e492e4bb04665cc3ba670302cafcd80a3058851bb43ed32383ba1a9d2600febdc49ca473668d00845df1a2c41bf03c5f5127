@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FCVolumeSource = exports.IoK8sApiCoreV1FCVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1FCVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1FCVolumeSource.js");
+/**
+ * Represents a Fibre Channel volume. Fibre Channel volumes can only be mounted as read/write once. Fibre Channel volumes support ownership management and SELinux relabeling.
+ */
+class IoK8sApiCoreV1FCVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1FCVolumeSource = IoK8sApiCoreV1FCVolumeSource;
+exports.FCVolumeSource = IoK8sApiCoreV1FCVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1FCVolumeSource, "io.k8s.api.core.v1.FCVolumeSource", IoK8sApiCoreV1FCVolumeSource_1.addSchema);

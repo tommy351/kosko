@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AllowedFlexVolume = exports.IoK8sApiPolicyV1beta1AllowedFlexVolume = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiPolicyV1beta1AllowedFlexVolume_1 = require("../_schemas/IoK8sApiPolicyV1beta1AllowedFlexVolume.js");
+/**
+ * AllowedFlexVolume represents a single Flexvolume that is allowed to be used.
+ */
+class IoK8sApiPolicyV1beta1AllowedFlexVolume extends base_1.Model {
+}
+exports.IoK8sApiPolicyV1beta1AllowedFlexVolume = IoK8sApiPolicyV1beta1AllowedFlexVolume;
+exports.AllowedFlexVolume = IoK8sApiPolicyV1beta1AllowedFlexVolume;
+base_1.Model.setSchema(IoK8sApiPolicyV1beta1AllowedFlexVolume, "io.k8s.api.policy.v1beta1.AllowedFlexVolume", IoK8sApiPolicyV1beta1AllowedFlexVolume_1.addSchema);

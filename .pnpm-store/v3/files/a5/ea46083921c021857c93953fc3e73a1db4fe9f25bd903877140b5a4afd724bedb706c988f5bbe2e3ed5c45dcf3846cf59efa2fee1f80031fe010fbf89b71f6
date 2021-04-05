@@ -1,0 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.v1alpha1 = void 0;
+const tslib_1 = require("tslib");
+const v1alpha1 = tslib_1.__importStar(require("./v1alpha1/index.js"));
+exports.v1alpha1 = v1alpha1;

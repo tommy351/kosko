@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1CSIVolumeSource.mjs";
+/**
+ * Represents a source location of a volume to mount, managed by an external CSI driver
+ */
+export class IoK8sApiCoreV1CSIVolumeSource extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1CSIVolumeSource, "io.k8s.api.core.v1.CSIVolumeSource", addSchema);
+export { IoK8sApiCoreV1CSIVolumeSource as CSIVolumeSource };

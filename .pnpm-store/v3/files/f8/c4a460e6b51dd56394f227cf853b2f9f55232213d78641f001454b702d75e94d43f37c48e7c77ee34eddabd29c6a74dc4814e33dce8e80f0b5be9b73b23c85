@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiDiscoveryV1beta1EndpointConditions.mjs";
+/**
+ * EndpointConditions represents the current condition of an endpoint.
+ */
+export class IoK8sApiDiscoveryV1beta1EndpointConditions extends Model {
+}
+Model.setSchema(IoK8sApiDiscoveryV1beta1EndpointConditions, "io.k8s.api.discovery.v1beta1.EndpointConditions", addSchema);
+export { IoK8sApiDiscoveryV1beta1EndpointConditions as EndpointConditions };

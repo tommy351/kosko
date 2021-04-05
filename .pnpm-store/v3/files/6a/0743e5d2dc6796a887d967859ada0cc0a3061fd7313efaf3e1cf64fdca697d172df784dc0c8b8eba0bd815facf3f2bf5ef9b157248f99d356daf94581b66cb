@@ -1,0 +1,29 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiNetworkingV1NetworkPolicyPort_1 = require("./IoK8sApiNetworkingV1NetworkPolicyPort.js");
+const IoK8sApiNetworkingV1NetworkPolicyPeer_1 = require("./IoK8sApiNetworkingV1NetworkPolicyPeer.js");
+const schema = {
+    "properties": {
+        "ports": {
+            "items": {
+                "$ref": "io.k8s.api.networking.v1.NetworkPolicyPort#"
+            },
+            "type": "array"
+        },
+        "to": {
+            "items": {
+                "$ref": "io.k8s.api.networking.v1.NetworkPolicyPeer#"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiNetworkingV1NetworkPolicyPort_1.addSchema();
+    IoK8sApiNetworkingV1NetworkPolicyPeer_1.addSchema();
+    validate_1.register("io.k8s.api.networking.v1.NetworkPolicyEgressRule", schema);
+}
+exports.addSchema = addSchema;

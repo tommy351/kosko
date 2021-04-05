@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LoadBalancerStatus = exports.IoK8sApiCoreV1LoadBalancerStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1LoadBalancerStatus_1 = require("../_schemas/IoK8sApiCoreV1LoadBalancerStatus.js");
+/**
+ * LoadBalancerStatus represents the status of a load-balancer.
+ */
+class IoK8sApiCoreV1LoadBalancerStatus extends base_1.Model {
+}
+exports.IoK8sApiCoreV1LoadBalancerStatus = IoK8sApiCoreV1LoadBalancerStatus;
+exports.LoadBalancerStatus = IoK8sApiCoreV1LoadBalancerStatus;
+base_1.Model.setSchema(IoK8sApiCoreV1LoadBalancerStatus, "io.k8s.api.core.v1.LoadBalancerStatus", IoK8sApiCoreV1LoadBalancerStatus_1.addSchema);

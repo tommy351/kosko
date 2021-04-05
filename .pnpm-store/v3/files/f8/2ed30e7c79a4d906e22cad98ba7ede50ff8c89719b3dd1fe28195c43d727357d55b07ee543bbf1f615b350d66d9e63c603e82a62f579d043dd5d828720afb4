@@ -1,0 +1,31 @@
+import { IIoK8sApiAppsV1StatefulSet } from "./IoK8sApiAppsV1StatefulSet";
+import { IIoK8sApimachineryPkgApisMetaV1ListMeta } from "./IoK8sApimachineryPkgApisMetaV1ListMeta";
+import { ModelData, Model } from "@kubernetes-models/base";
+/**
+ * StatefulSetList is a collection of StatefulSets.
+ */
+export interface IIoK8sApiAppsV1StatefulSetList {
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    "apiVersion": "apps/v1";
+    "items": Array<IIoK8sApiAppsV1StatefulSet>;
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    "kind": "StatefulSetList";
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+}
+/**
+ * StatefulSetList is a collection of StatefulSets.
+ */
+export declare class IoK8sApiAppsV1StatefulSetList extends Model<IIoK8sApiAppsV1StatefulSetList> implements IIoK8sApiAppsV1StatefulSetList {
+    "apiVersion": IIoK8sApiAppsV1StatefulSetList["apiVersion"];
+    "items": Array<IIoK8sApiAppsV1StatefulSet>;
+    "kind": IIoK8sApiAppsV1StatefulSetList["kind"];
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+    static apiVersion: IIoK8sApiAppsV1StatefulSetList["apiVersion"];
+    static kind: IIoK8sApiAppsV1StatefulSetList["kind"];
+    constructor(data?: ModelData<IIoK8sApiAppsV1StatefulSetList>);
+}
+export { IIoK8sApiAppsV1StatefulSetList as IStatefulSetList, IoK8sApiAppsV1StatefulSetList as StatefulSetList };

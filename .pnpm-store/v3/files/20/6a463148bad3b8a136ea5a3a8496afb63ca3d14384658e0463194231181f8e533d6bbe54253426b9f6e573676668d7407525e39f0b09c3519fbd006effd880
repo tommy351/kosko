@@ -1,0 +1,14 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApimachineryPkgUtilIntstrIntOrString } from "./IoK8sApimachineryPkgUtilIntstrIntOrString.mjs";
+const schema = {
+    "properties": {
+        "maxUnavailable": {
+            "$ref": "io.k8s.apimachinery.pkg.util.intstr.IntOrString#"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApimachineryPkgUtilIntstrIntOrString();
+    register("io.k8s.api.apps.v1.RollingUpdateDaemonSet", schema);
+}

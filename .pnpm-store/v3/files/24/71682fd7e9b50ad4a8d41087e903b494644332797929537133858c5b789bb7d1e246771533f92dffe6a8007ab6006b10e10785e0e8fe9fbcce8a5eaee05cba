@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1ServiceSpec.mjs";
+/**
+ * ServiceSpec describes the attributes that a user creates on a service.
+ */
+export class IoK8sApiCoreV1ServiceSpec extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1ServiceSpec, "io.k8s.api.core.v1.ServiceSpec", addSchema);
+export { IoK8sApiCoreV1ServiceSpec as ServiceSpec };

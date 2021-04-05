@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CSIDriverSpec = exports.IoK8sApiStorageV1CSIDriverSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiStorageV1CSIDriverSpec_1 = require("../_schemas/IoK8sApiStorageV1CSIDriverSpec.js");
+/**
+ * CSIDriverSpec is the specification of a CSIDriver.
+ */
+class IoK8sApiStorageV1CSIDriverSpec extends base_1.Model {
+}
+exports.IoK8sApiStorageV1CSIDriverSpec = IoK8sApiStorageV1CSIDriverSpec;
+exports.CSIDriverSpec = IoK8sApiStorageV1CSIDriverSpec;
+base_1.Model.setSchema(IoK8sApiStorageV1CSIDriverSpec, "io.k8s.api.storage.v1.CSIDriverSpec", IoK8sApiStorageV1CSIDriverSpec_1.addSchema);

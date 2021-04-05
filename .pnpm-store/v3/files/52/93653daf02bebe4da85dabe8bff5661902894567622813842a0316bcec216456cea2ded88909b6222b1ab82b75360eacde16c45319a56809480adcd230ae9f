@@ -1,0 +1,23 @@
+import { IIoK8sApiAppsV1RollingUpdateStatefulSetStrategy } from "./IoK8sApiAppsV1RollingUpdateStatefulSetStrategy";
+import { Model } from "@kubernetes-models/base";
+/**
+ * StatefulSetUpdateStrategy indicates the strategy that the StatefulSet controller will use to perform updates. It includes any additional parameters necessary to perform the update for the indicated strategy.
+ */
+export interface IIoK8sApiAppsV1StatefulSetUpdateStrategy {
+    /**
+     * RollingUpdate is used to communicate parameters when Type is RollingUpdateStatefulSetStrategyType.
+     */
+    "rollingUpdate"?: IIoK8sApiAppsV1RollingUpdateStatefulSetStrategy;
+    /**
+     * Type indicates the type of the StatefulSetUpdateStrategy. Default is RollingUpdate.
+     */
+    "type"?: string;
+}
+/**
+ * StatefulSetUpdateStrategy indicates the strategy that the StatefulSet controller will use to perform updates. It includes any additional parameters necessary to perform the update for the indicated strategy.
+ */
+export declare class IoK8sApiAppsV1StatefulSetUpdateStrategy extends Model<IIoK8sApiAppsV1StatefulSetUpdateStrategy> implements IIoK8sApiAppsV1StatefulSetUpdateStrategy {
+    "rollingUpdate"?: IIoK8sApiAppsV1RollingUpdateStatefulSetStrategy;
+    "type"?: string;
+}
+export { IIoK8sApiAppsV1StatefulSetUpdateStrategy as IStatefulSetUpdateStrategy, IoK8sApiAppsV1StatefulSetUpdateStrategy as StatefulSetUpdateStrategy };

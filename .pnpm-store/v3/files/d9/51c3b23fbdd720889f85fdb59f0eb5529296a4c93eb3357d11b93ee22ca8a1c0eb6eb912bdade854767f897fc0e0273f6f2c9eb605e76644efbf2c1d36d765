@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiStorageV1alpha1VolumeAttachmentSource.mjs";
+/**
+ * VolumeAttachmentSource represents a volume that should be attached. Right now only PersistenVolumes can be attached via external attacher, in future we may allow also inline volumes in pods. Exactly one member can be set.
+ */
+export class IoK8sApiStorageV1alpha1VolumeAttachmentSource extends Model {
+}
+Model.setSchema(IoK8sApiStorageV1alpha1VolumeAttachmentSource, "io.k8s.api.storage.v1alpha1.VolumeAttachmentSource", addSchema);
+export { IoK8sApiStorageV1alpha1VolumeAttachmentSource as VolumeAttachmentSource };

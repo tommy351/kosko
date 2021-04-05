@@ -1,0 +1,52 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1SecretReference_1 = require("./IoK8sApiCoreV1SecretReference.js");
+const schema = {
+    "properties": {
+        "controllerExpandSecretRef": {
+            "$ref": "io.k8s.api.core.v1.SecretReference#"
+        },
+        "controllerPublishSecretRef": {
+            "$ref": "io.k8s.api.core.v1.SecretReference#"
+        },
+        "driver": {
+            "type": "string"
+        },
+        "fsType": {
+            "type": "string"
+        },
+        "nodePublishSecretRef": {
+            "$ref": "io.k8s.api.core.v1.SecretReference#"
+        },
+        "nodeStageSecretRef": {
+            "$ref": "io.k8s.api.core.v1.SecretReference#"
+        },
+        "readOnly": {
+            "type": "boolean"
+        },
+        "volumeAttributes": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "type": "object"
+        },
+        "volumeHandle": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "driver",
+        "volumeHandle"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1SecretReference_1.addSchema();
+    IoK8sApiCoreV1SecretReference_1.addSchema();
+    IoK8sApiCoreV1SecretReference_1.addSchema();
+    IoK8sApiCoreV1SecretReference_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.CSIPersistentVolumeSource", schema);
+}
+exports.addSchema = addSchema;

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.JSON = exports.IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSON = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSON_1 = require("../_schemas/IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSON.js");
+/**
+ * JSON represents any valid JSON value. These types are supported: bool, int64, float64, string, []interface{}, map[string]interface{} and nil.
+ */
+class IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSON extends base_1.Model {
+}
+exports.IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSON = IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSON;
+exports.JSON = IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSON;
+base_1.Model.setSchema(IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSON, "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSON", IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSON_1.addSchema);

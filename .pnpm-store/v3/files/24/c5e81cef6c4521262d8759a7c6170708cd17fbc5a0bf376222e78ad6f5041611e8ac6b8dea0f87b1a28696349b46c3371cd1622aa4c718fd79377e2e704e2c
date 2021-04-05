@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApimachineryPkgApisMetaV1ListMeta.mjs";
+/**
+ * ListMeta describes metadata that synthetic resources must have, including lists and various status objects. A resource may have only one of {ObjectMeta, ListMeta}.
+ */
+export class IoK8sApimachineryPkgApisMetaV1ListMeta extends Model {
+}
+Model.setSchema(IoK8sApimachineryPkgApisMetaV1ListMeta, "io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta", addSchema);
+export { IoK8sApimachineryPkgApisMetaV1ListMeta as ListMeta };

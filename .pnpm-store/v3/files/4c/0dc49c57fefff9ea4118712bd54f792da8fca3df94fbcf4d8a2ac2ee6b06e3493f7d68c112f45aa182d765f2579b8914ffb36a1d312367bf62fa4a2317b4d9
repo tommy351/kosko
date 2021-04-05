@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApimachineryPkgApisMetaV1OwnerReference.mjs";
+/**
+ * OwnerReference contains enough information to let you identify an owning object. An owning object must be in the same namespace as the dependent, or be cluster-scoped, so there is no namespace field.
+ */
+export class IoK8sApimachineryPkgApisMetaV1OwnerReference extends Model {
+}
+Model.setSchema(IoK8sApimachineryPkgApisMetaV1OwnerReference, "io.k8s.apimachinery.pkg.apis.meta.v1.OwnerReference", addSchema);
+export { IoK8sApimachineryPkgApisMetaV1OwnerReference as OwnerReference };

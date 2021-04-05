@@ -1,0 +1,22 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * ServiceBackendPort is the service port being referenced.
+ */
+export interface IIoK8sApiNetworkingV1ServiceBackendPort {
+    /**
+     * Name is the name of the port on the Service. This is a mutually exclusive setting with "Number".
+     */
+    "name"?: string;
+    /**
+     * Number is the numerical port number (e.g. 80) on the Service. This is a mutually exclusive setting with "Name".
+     */
+    "number"?: number;
+}
+/**
+ * ServiceBackendPort is the service port being referenced.
+ */
+export declare class IoK8sApiNetworkingV1ServiceBackendPort extends Model<IIoK8sApiNetworkingV1ServiceBackendPort> implements IIoK8sApiNetworkingV1ServiceBackendPort {
+    "name"?: string;
+    "number"?: number;
+}
+export { IIoK8sApiNetworkingV1ServiceBackendPort as IServiceBackendPort, IoK8sApiNetworkingV1ServiceBackendPort as ServiceBackendPort };

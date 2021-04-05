@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.JSONSchemaPropsOrArray = exports.IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrArray = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrArray_1 = require("../_schemas/IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrArray.js");
+/**
+ * JSONSchemaPropsOrArray represents a value that can either be a JSONSchemaProps or an array of JSONSchemaProps. Mainly here for serialization purposes.
+ */
+class IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrArray extends base_1.Model {
+}
+exports.IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrArray = IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrArray;
+exports.JSONSchemaPropsOrArray = IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrArray;
+base_1.Model.setSchema(IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrArray, "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSONSchemaPropsOrArray", IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrArray_1.addSchema);

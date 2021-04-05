@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiNetworkingV1beta1IngressSpec.mjs";
+/**
+ * IngressSpec describes the Ingress the user wishes to exist.
+ */
+export class IoK8sApiNetworkingV1beta1IngressSpec extends Model {
+}
+Model.setSchema(IoK8sApiNetworkingV1beta1IngressSpec, "io.k8s.api.networking.v1beta1.IngressSpec", addSchema);
+export { IoK8sApiNetworkingV1beta1IngressSpec as IngressSpec };

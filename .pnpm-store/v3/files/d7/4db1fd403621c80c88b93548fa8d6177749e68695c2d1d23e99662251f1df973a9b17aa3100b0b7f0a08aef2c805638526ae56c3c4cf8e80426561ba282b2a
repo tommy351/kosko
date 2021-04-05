@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ProjectedVolumeSource = exports.IoK8sApiCoreV1ProjectedVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ProjectedVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1ProjectedVolumeSource.js");
+/**
+ * Represents a projected volume source
+ */
+class IoK8sApiCoreV1ProjectedVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ProjectedVolumeSource = IoK8sApiCoreV1ProjectedVolumeSource;
+exports.ProjectedVolumeSource = IoK8sApiCoreV1ProjectedVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1ProjectedVolumeSource, "io.k8s.api.core.v1.ProjectedVolumeSource", IoK8sApiCoreV1ProjectedVolumeSource_1.addSchema);

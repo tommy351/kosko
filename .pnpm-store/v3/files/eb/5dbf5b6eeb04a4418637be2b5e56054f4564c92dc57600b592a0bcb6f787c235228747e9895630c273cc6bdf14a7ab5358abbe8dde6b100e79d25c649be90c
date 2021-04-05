@@ -1,0 +1,31 @@
+import { IIoK8sApimachineryPkgApiResourceQuantity } from "./IoK8sApimachineryPkgApiResourceQuantity";
+import { Model } from "@kubernetes-models/base";
+/**
+ * ResourceRequirements describes the compute resource requirements.
+ */
+export interface IIoK8sApiCoreV1ResourceRequirements {
+    /**
+     * Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+     */
+    "limits"?: {
+        [key: string]: IIoK8sApimachineryPkgApiResourceQuantity;
+    };
+    /**
+     * Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+     */
+    "requests"?: {
+        [key: string]: IIoK8sApimachineryPkgApiResourceQuantity;
+    };
+}
+/**
+ * ResourceRequirements describes the compute resource requirements.
+ */
+export declare class IoK8sApiCoreV1ResourceRequirements extends Model<IIoK8sApiCoreV1ResourceRequirements> implements IIoK8sApiCoreV1ResourceRequirements {
+    "limits"?: {
+        [key: string]: IIoK8sApimachineryPkgApiResourceQuantity;
+    };
+    "requests"?: {
+        [key: string]: IIoK8sApimachineryPkgApiResourceQuantity;
+    };
+}
+export { IIoK8sApiCoreV1ResourceRequirements as IResourceRequirements, IoK8sApiCoreV1ResourceRequirements as ResourceRequirements };

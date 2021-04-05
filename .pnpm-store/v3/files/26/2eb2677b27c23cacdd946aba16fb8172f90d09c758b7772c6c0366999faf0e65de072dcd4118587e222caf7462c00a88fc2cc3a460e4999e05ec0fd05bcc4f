@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1PersistentVolumeList.mjs";
+/**
+ * PersistentVolumeList is a list of PersistentVolume items.
+ */
+export class IoK8sApiCoreV1PersistentVolumeList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1PersistentVolumeList.apiVersion,
+            kind: IoK8sApiCoreV1PersistentVolumeList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiCoreV1PersistentVolumeList.apiVersion = "v1";
+IoK8sApiCoreV1PersistentVolumeList.kind = "PersistentVolumeList";
+Model.setSchema(IoK8sApiCoreV1PersistentVolumeList, "io.k8s.api.core.v1.PersistentVolumeList", addSchema);
+export { IoK8sApiCoreV1PersistentVolumeList as PersistentVolumeList };

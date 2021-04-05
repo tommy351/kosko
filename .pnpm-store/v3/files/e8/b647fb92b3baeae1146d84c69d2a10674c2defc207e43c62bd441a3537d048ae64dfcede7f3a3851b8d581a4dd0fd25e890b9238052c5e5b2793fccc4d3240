@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAutoscalingV2beta2HPAScalingPolicy.mjs";
+/**
+ * HPAScalingPolicy is a single policy which must hold true for a specified past interval.
+ */
+export class IoK8sApiAutoscalingV2beta2HPAScalingPolicy extends Model {
+}
+Model.setSchema(IoK8sApiAutoscalingV2beta2HPAScalingPolicy, "io.k8s.api.autoscaling.v2beta2.HPAScalingPolicy", addSchema);
+export { IoK8sApiAutoscalingV2beta2HPAScalingPolicy as HPAScalingPolicy };

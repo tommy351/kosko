@@ -1,0 +1,30 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1SecretReference_1 = require("./IoK8sApiCoreV1SecretReference.js");
+const schema = {
+    "properties": {
+        "fsType": {
+            "type": "string"
+        },
+        "readOnly": {
+            "type": "boolean"
+        },
+        "secretRef": {
+            "$ref": "io.k8s.api.core.v1.SecretReference#"
+        },
+        "volumeID": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "volumeID"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1SecretReference_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.CinderPersistentVolumeSource", schema);
+}
+exports.addSchema = addSchema;

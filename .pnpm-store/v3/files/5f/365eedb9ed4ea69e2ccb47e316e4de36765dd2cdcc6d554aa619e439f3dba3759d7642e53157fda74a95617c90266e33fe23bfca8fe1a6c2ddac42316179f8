@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1ClientIPConfig.mjs";
+/**
+ * ClientIPConfig represents the configurations of Client IP based session affinity.
+ */
+export class IoK8sApiCoreV1ClientIPConfig extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1ClientIPConfig, "io.k8s.api.core.v1.ClientIPConfig", addSchema);
+export { IoK8sApiCoreV1ClientIPConfig as ClientIPConfig };

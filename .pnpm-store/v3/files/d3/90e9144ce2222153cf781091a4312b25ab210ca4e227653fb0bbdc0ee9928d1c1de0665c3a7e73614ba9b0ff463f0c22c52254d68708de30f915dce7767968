@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAutoscalingV2beta2ObjectMetricSource.mjs";
+/**
+ * ObjectMetricSource indicates how to scale on a metric describing a kubernetes object (for example, hits-per-second on an Ingress object).
+ */
+export class IoK8sApiAutoscalingV2beta2ObjectMetricSource extends Model {
+}
+Model.setSchema(IoK8sApiAutoscalingV2beta2ObjectMetricSource, "io.k8s.api.autoscaling.v2beta2.ObjectMetricSource", addSchema);
+export { IoK8sApiAutoscalingV2beta2ObjectMetricSource as ObjectMetricSource };

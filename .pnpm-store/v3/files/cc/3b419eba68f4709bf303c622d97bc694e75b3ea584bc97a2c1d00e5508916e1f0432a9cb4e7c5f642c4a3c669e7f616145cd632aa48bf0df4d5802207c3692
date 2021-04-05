@@ -1,0 +1,11 @@
+import { Model } from "@kubernetes-models/base";
+export interface IIoK8sApiAuthorizationV1SelfSubjectRulesReviewSpec {
+    /**
+     * Namespace to evaluate rules for. Required.
+     */
+    "namespace"?: string;
+}
+export declare class IoK8sApiAuthorizationV1SelfSubjectRulesReviewSpec extends Model<IIoK8sApiAuthorizationV1SelfSubjectRulesReviewSpec> implements IIoK8sApiAuthorizationV1SelfSubjectRulesReviewSpec {
+    "namespace"?: string;
+}
+export { IIoK8sApiAuthorizationV1SelfSubjectRulesReviewSpec as ISelfSubjectRulesReviewSpec, IoK8sApiAuthorizationV1SelfSubjectRulesReviewSpec as SelfSubjectRulesReviewSpec };

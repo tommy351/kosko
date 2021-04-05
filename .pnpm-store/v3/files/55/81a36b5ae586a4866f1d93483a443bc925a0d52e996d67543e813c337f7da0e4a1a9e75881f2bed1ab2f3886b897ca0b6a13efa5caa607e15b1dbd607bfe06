@@ -1,0 +1,54 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiAppsV1StatefulSetCondition_1 = require("./IoK8sApiAppsV1StatefulSetCondition.js");
+const schema = {
+    "properties": {
+        "collisionCount": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "conditions": {
+            "items": {
+                "$ref": "io.k8s.api.apps.v1.StatefulSetCondition#"
+            },
+            "type": "array"
+        },
+        "currentReplicas": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "currentRevision": {
+            "type": "string"
+        },
+        "observedGeneration": {
+            "format": "int64",
+            "type": "integer"
+        },
+        "readyReplicas": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "replicas": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "updateRevision": {
+            "type": "string"
+        },
+        "updatedReplicas": {
+            "format": "int32",
+            "type": "integer"
+        }
+    },
+    "required": [
+        "replicas"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiAppsV1StatefulSetCondition_1.addSchema();
+    validate_1.register("io.k8s.api.apps.v1.StatefulSetStatus", schema);
+}
+exports.addSchema = addSchema;

@@ -1,0 +1,131 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Worker = void 0;
+const tslib_1 = require("tslib");
+const debug_1 = tslib_1.__importDefault(require("./debug"));
+const report_1 = tslib_1.__importDefault(require("../report"));
+const lodash_omit_1 = tslib_1.__importDefault(require("lodash.omit"));
+const utils_1 = require("../utils");
+const rewriteImport_1 = require("../transformers/rewriteImport");
+const JS_EXT = ".js";
+const MAP_EXT = ".map";
+const JS_MAP_EXT = `${JS_EXT}${MAP_EXT}`;
+function loadCompiler(cwd, name = "typescript") {
+    const path = require.resolve(name, { paths: [cwd, __dirname] });
+    return require(path);
+}
+class Worker {
+    constructor(data, system) {
+        this.data = data;
+        this.ts = loadCompiler(data.cwd, data.compiler);
+        this.system = system || this.ts.sys;
+        this.reporter = report_1.default(data.cwd, this.ts);
+    }
+    run() {
+        const builder = this.createBuilder();
+        if (this.data.clean) {
+            return builder.clean();
+        }
+        return builder.build();
+    }
+    getJSPath(path) {
+        const { extname } = this.data.target;
+        if (!extname)
+            return path;
+        return utils_1.trimSuffix(path, JS_EXT) + extname;
+    }
+    getJSMapPath(path) {
+        const { extname } = this.data.target;
+        if (!extname)
+            return path;
+        return utils_1.trimSuffix(path, JS_MAP_EXT) + extname + MAP_EXT;
+    }
+    rewritePath(path) {
+        if (path.endsWith(JS_EXT)) {
+            return this.getJSPath(path);
+        }
+        if (path.endsWith(JS_MAP_EXT)) {
+            return this.getJSMapPath(path);
+        }
+        return path;
+    }
+    rewriteSourceMappingURL(data) {
+        return data.replace(/\/\/# sourceMappingURL=(.+)/g, (_, path) => `//# sourceMappingURL=${this.getJSMapPath(path)}`);
+    }
+    rewriteSourceMap(data) {
+        const json = JSON.parse(data);
+        json.file = this.getJSPath(json.file);
+        return JSON.stringify(json);
+    }
+    createBuilder() {
+        const buildOptions = {
+            verbose: this.data.verbose,
+        };
+        const createProgram = this.ts.createSemanticDiagnosticsBuilderProgram;
+        if (this.data.watch) {
+            const host = this.ts.createSolutionBuilderWithWatchHost(this.system, createProgram, this.reporter.reportDiagnostic, this.reporter.reportSolutionBuilderStatus, this.reporter.reportWatchStatus);
+            this.patchSolutionBuilderHost(host);
+            return this.ts.createSolutionBuilderWithWatch(host, this.data.projects, buildOptions);
+        }
+        const host = this.ts.createSolutionBuilderHost(this.system, createProgram, this.reporter.reportDiagnostic, this.reporter.reportSolutionBuilderStatus, this.reporter.reportErrorSummary);
+        this.patchSolutionBuilderHost(host);
+        return this.ts.createSolutionBuilder(host, this.data.projects, buildOptions);
+    }
+    patchSolutionBuilderHost(host) {
+        const { writeFile, deleteFile, fileExists, readFile, createProgram, reportDiagnostic, } = host;
+        const transformers = {
+            after: [
+                rewriteImport_1.createRewriteImportTransformer({
+                    extname: this.data.target.extname || JS_EXT,
+                    system: this.system,
+                }),
+            ],
+        };
+        const parseConfigFileHost = {
+            ...this.system,
+            onUnRecoverableConfigFileDiagnostic(diagnostic) {
+                reportDiagnostic === null || reportDiagnostic === void 0 ? void 0 : reportDiagnostic(diagnostic);
+            },
+        };
+        host.getParsedCommandLine = (path) => {
+            const { options } = this.ts.convertCompilerOptionsFromJson(lodash_omit_1.default(this.data.target, ["extname"]), path);
+            const config = this.ts.getParsedCommandLineOfConfigFile(path, options, parseConfigFileHost);
+            return config;
+        };
+        host.createProgram = (...args) => {
+            const program = createProgram(...args);
+            const emit = program.emit;
+            program.emit = (targetSourceFile, writeFile, cancellationToken, emitOnlyDtsFiles, customTransformers) => {
+                return emit(targetSourceFile, writeFile, cancellationToken, emitOnlyDtsFiles, utils_1.mergeCustomTransformers(customTransformers || {}, transformers));
+            };
+            return program;
+        };
+        host.fileExists = (path) => {
+            return fileExists(this.rewritePath(path));
+        };
+        host.readFile = (path, encoding) => {
+            return readFile(this.rewritePath(path), encoding);
+        };
+        host.writeFile = (path, data, writeByteOrderMark) => {
+            const newPath = this.rewritePath(path);
+            const newData = (() => {
+                if (path.endsWith(JS_EXT)) {
+                    return this.rewriteSourceMappingURL(data);
+                }
+                if (path.endsWith(JS_MAP_EXT)) {
+                    return this.rewriteSourceMap(data);
+                }
+                return data;
+            })();
+            debug_1.default("Write file: %s", newPath);
+            writeFile === null || writeFile === void 0 ? void 0 : writeFile(newPath, newData, writeByteOrderMark);
+        };
+        host.deleteFile = (path) => {
+            const newPath = this.rewritePath(path);
+            debug_1.default("Delete file: %s", newPath);
+            deleteFile === null || deleteFile === void 0 ? void 0 : deleteFile(newPath);
+        };
+    }
+}
+exports.Worker = Worker;
+//# sourceMappingURL=worker.js.map

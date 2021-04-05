@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TokenReviewStatus = exports.IoK8sApiAuthenticationV1TokenReviewStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAuthenticationV1TokenReviewStatus_1 = require("../_schemas/IoK8sApiAuthenticationV1TokenReviewStatus.js");
+/**
+ * TokenReviewStatus is the result of the token authentication request.
+ */
+class IoK8sApiAuthenticationV1TokenReviewStatus extends base_1.Model {
+}
+exports.IoK8sApiAuthenticationV1TokenReviewStatus = IoK8sApiAuthenticationV1TokenReviewStatus;
+exports.TokenReviewStatus = IoK8sApiAuthenticationV1TokenReviewStatus;
+base_1.Model.setSchema(IoK8sApiAuthenticationV1TokenReviewStatus, "io.k8s.api.authentication.v1.TokenReviewStatus", IoK8sApiAuthenticationV1TokenReviewStatus_1.addSchema);

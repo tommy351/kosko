@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1Capabilities.mjs";
+/**
+ * Adds and removes POSIX capabilities from running containers.
+ */
+export class IoK8sApiCoreV1Capabilities extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1Capabilities, "io.k8s.api.core.v1.Capabilities", addSchema);
+export { IoK8sApiCoreV1Capabilities as Capabilities };

@@ -1,0 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.apiextensions = void 0;
+const tslib_1 = require("tslib");
+const apiextensions = tslib_1.__importStar(require("./apiextensions/index.js"));
+exports.apiextensions = apiextensions;

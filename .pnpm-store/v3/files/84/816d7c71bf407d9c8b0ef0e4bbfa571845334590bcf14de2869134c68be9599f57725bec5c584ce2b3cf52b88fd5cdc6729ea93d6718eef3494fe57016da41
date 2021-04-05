@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PodAffinityTerm = exports.IoK8sApiCoreV1PodAffinityTerm = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1PodAffinityTerm_1 = require("../_schemas/IoK8sApiCoreV1PodAffinityTerm.js");
+/**
+ * Defines a set of pods (namely those matching the labelSelector relative to the given namespace(s)) that this pod should be co-located (affinity) or not co-located (anti-affinity) with, where co-located is defined as running on a node whose value of the label with key <topologyKey> matches that of any node on which a pod of the set of pods is running
+ */
+class IoK8sApiCoreV1PodAffinityTerm extends base_1.Model {
+}
+exports.IoK8sApiCoreV1PodAffinityTerm = IoK8sApiCoreV1PodAffinityTerm;
+exports.PodAffinityTerm = IoK8sApiCoreV1PodAffinityTerm;
+base_1.Model.setSchema(IoK8sApiCoreV1PodAffinityTerm, "io.k8s.api.core.v1.PodAffinityTerm", IoK8sApiCoreV1PodAffinityTerm_1.addSchema);

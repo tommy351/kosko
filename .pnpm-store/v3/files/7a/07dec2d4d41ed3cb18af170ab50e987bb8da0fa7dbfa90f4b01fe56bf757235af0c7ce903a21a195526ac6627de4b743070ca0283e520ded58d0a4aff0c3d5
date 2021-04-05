@@ -1,0 +1,162 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1AWSElasticBlockStoreVolumeSource_1 = require("./IoK8sApiCoreV1AWSElasticBlockStoreVolumeSource.js");
+const IoK8sApiCoreV1AzureDiskVolumeSource_1 = require("./IoK8sApiCoreV1AzureDiskVolumeSource.js");
+const IoK8sApiCoreV1AzureFilePersistentVolumeSource_1 = require("./IoK8sApiCoreV1AzureFilePersistentVolumeSource.js");
+const IoK8sApimachineryPkgApiResourceQuantity_1 = require("./IoK8sApimachineryPkgApiResourceQuantity.js");
+const IoK8sApiCoreV1CephFSPersistentVolumeSource_1 = require("./IoK8sApiCoreV1CephFSPersistentVolumeSource.js");
+const IoK8sApiCoreV1CinderPersistentVolumeSource_1 = require("./IoK8sApiCoreV1CinderPersistentVolumeSource.js");
+const IoK8sApiCoreV1ObjectReference_1 = require("./IoK8sApiCoreV1ObjectReference.js");
+const IoK8sApiCoreV1CSIPersistentVolumeSource_1 = require("./IoK8sApiCoreV1CSIPersistentVolumeSource.js");
+const IoK8sApiCoreV1FCVolumeSource_1 = require("./IoK8sApiCoreV1FCVolumeSource.js");
+const IoK8sApiCoreV1FlexPersistentVolumeSource_1 = require("./IoK8sApiCoreV1FlexPersistentVolumeSource.js");
+const IoK8sApiCoreV1FlockerVolumeSource_1 = require("./IoK8sApiCoreV1FlockerVolumeSource.js");
+const IoK8sApiCoreV1GCEPersistentDiskVolumeSource_1 = require("./IoK8sApiCoreV1GCEPersistentDiskVolumeSource.js");
+const IoK8sApiCoreV1GlusterfsPersistentVolumeSource_1 = require("./IoK8sApiCoreV1GlusterfsPersistentVolumeSource.js");
+const IoK8sApiCoreV1HostPathVolumeSource_1 = require("./IoK8sApiCoreV1HostPathVolumeSource.js");
+const IoK8sApiCoreV1ISCSIPersistentVolumeSource_1 = require("./IoK8sApiCoreV1ISCSIPersistentVolumeSource.js");
+const IoK8sApiCoreV1LocalVolumeSource_1 = require("./IoK8sApiCoreV1LocalVolumeSource.js");
+const IoK8sApiCoreV1NFSVolumeSource_1 = require("./IoK8sApiCoreV1NFSVolumeSource.js");
+const IoK8sApiCoreV1VolumeNodeAffinity_1 = require("./IoK8sApiCoreV1VolumeNodeAffinity.js");
+const IoK8sApiCoreV1PhotonPersistentDiskVolumeSource_1 = require("./IoK8sApiCoreV1PhotonPersistentDiskVolumeSource.js");
+const IoK8sApiCoreV1PortworxVolumeSource_1 = require("./IoK8sApiCoreV1PortworxVolumeSource.js");
+const IoK8sApiCoreV1QuobyteVolumeSource_1 = require("./IoK8sApiCoreV1QuobyteVolumeSource.js");
+const IoK8sApiCoreV1RBDPersistentVolumeSource_1 = require("./IoK8sApiCoreV1RBDPersistentVolumeSource.js");
+const IoK8sApiCoreV1ScaleIOPersistentVolumeSource_1 = require("./IoK8sApiCoreV1ScaleIOPersistentVolumeSource.js");
+const IoK8sApiCoreV1StorageOSPersistentVolumeSource_1 = require("./IoK8sApiCoreV1StorageOSPersistentVolumeSource.js");
+const IoK8sApiCoreV1VsphereVirtualDiskVolumeSource_1 = require("./IoK8sApiCoreV1VsphereVirtualDiskVolumeSource.js");
+const schema = {
+    "properties": {
+        "accessModes": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "awsElasticBlockStore": {
+            "$ref": "io.k8s.api.core.v1.AWSElasticBlockStoreVolumeSource#"
+        },
+        "azureDisk": {
+            "$ref": "io.k8s.api.core.v1.AzureDiskVolumeSource#"
+        },
+        "azureFile": {
+            "$ref": "io.k8s.api.core.v1.AzureFilePersistentVolumeSource#"
+        },
+        "capacity": {
+            "additionalProperties": {
+                "$ref": "io.k8s.apimachinery.pkg.api.resource.Quantity#"
+            },
+            "type": "object"
+        },
+        "cephfs": {
+            "$ref": "io.k8s.api.core.v1.CephFSPersistentVolumeSource#"
+        },
+        "cinder": {
+            "$ref": "io.k8s.api.core.v1.CinderPersistentVolumeSource#"
+        },
+        "claimRef": {
+            "$ref": "io.k8s.api.core.v1.ObjectReference#"
+        },
+        "csi": {
+            "$ref": "io.k8s.api.core.v1.CSIPersistentVolumeSource#"
+        },
+        "fc": {
+            "$ref": "io.k8s.api.core.v1.FCVolumeSource#"
+        },
+        "flexVolume": {
+            "$ref": "io.k8s.api.core.v1.FlexPersistentVolumeSource#"
+        },
+        "flocker": {
+            "$ref": "io.k8s.api.core.v1.FlockerVolumeSource#"
+        },
+        "gcePersistentDisk": {
+            "$ref": "io.k8s.api.core.v1.GCEPersistentDiskVolumeSource#"
+        },
+        "glusterfs": {
+            "$ref": "io.k8s.api.core.v1.GlusterfsPersistentVolumeSource#"
+        },
+        "hostPath": {
+            "$ref": "io.k8s.api.core.v1.HostPathVolumeSource#"
+        },
+        "iscsi": {
+            "$ref": "io.k8s.api.core.v1.ISCSIPersistentVolumeSource#"
+        },
+        "local": {
+            "$ref": "io.k8s.api.core.v1.LocalVolumeSource#"
+        },
+        "mountOptions": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "nfs": {
+            "$ref": "io.k8s.api.core.v1.NFSVolumeSource#"
+        },
+        "nodeAffinity": {
+            "$ref": "io.k8s.api.core.v1.VolumeNodeAffinity#"
+        },
+        "persistentVolumeReclaimPolicy": {
+            "type": "string"
+        },
+        "photonPersistentDisk": {
+            "$ref": "io.k8s.api.core.v1.PhotonPersistentDiskVolumeSource#"
+        },
+        "portworxVolume": {
+            "$ref": "io.k8s.api.core.v1.PortworxVolumeSource#"
+        },
+        "quobyte": {
+            "$ref": "io.k8s.api.core.v1.QuobyteVolumeSource#"
+        },
+        "rbd": {
+            "$ref": "io.k8s.api.core.v1.RBDPersistentVolumeSource#"
+        },
+        "scaleIO": {
+            "$ref": "io.k8s.api.core.v1.ScaleIOPersistentVolumeSource#"
+        },
+        "storageClassName": {
+            "type": "string"
+        },
+        "storageos": {
+            "$ref": "io.k8s.api.core.v1.StorageOSPersistentVolumeSource#"
+        },
+        "volumeMode": {
+            "type": "string"
+        },
+        "vsphereVolume": {
+            "$ref": "io.k8s.api.core.v1.VsphereVirtualDiskVolumeSource#"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1AWSElasticBlockStoreVolumeSource_1.addSchema();
+    IoK8sApiCoreV1AzureDiskVolumeSource_1.addSchema();
+    IoK8sApiCoreV1AzureFilePersistentVolumeSource_1.addSchema();
+    IoK8sApimachineryPkgApiResourceQuantity_1.addSchema();
+    IoK8sApiCoreV1CephFSPersistentVolumeSource_1.addSchema();
+    IoK8sApiCoreV1CinderPersistentVolumeSource_1.addSchema();
+    IoK8sApiCoreV1ObjectReference_1.addSchema();
+    IoK8sApiCoreV1CSIPersistentVolumeSource_1.addSchema();
+    IoK8sApiCoreV1FCVolumeSource_1.addSchema();
+    IoK8sApiCoreV1FlexPersistentVolumeSource_1.addSchema();
+    IoK8sApiCoreV1FlockerVolumeSource_1.addSchema();
+    IoK8sApiCoreV1GCEPersistentDiskVolumeSource_1.addSchema();
+    IoK8sApiCoreV1GlusterfsPersistentVolumeSource_1.addSchema();
+    IoK8sApiCoreV1HostPathVolumeSource_1.addSchema();
+    IoK8sApiCoreV1ISCSIPersistentVolumeSource_1.addSchema();
+    IoK8sApiCoreV1LocalVolumeSource_1.addSchema();
+    IoK8sApiCoreV1NFSVolumeSource_1.addSchema();
+    IoK8sApiCoreV1VolumeNodeAffinity_1.addSchema();
+    IoK8sApiCoreV1PhotonPersistentDiskVolumeSource_1.addSchema();
+    IoK8sApiCoreV1PortworxVolumeSource_1.addSchema();
+    IoK8sApiCoreV1QuobyteVolumeSource_1.addSchema();
+    IoK8sApiCoreV1RBDPersistentVolumeSource_1.addSchema();
+    IoK8sApiCoreV1ScaleIOPersistentVolumeSource_1.addSchema();
+    IoK8sApiCoreV1StorageOSPersistentVolumeSource_1.addSchema();
+    IoK8sApiCoreV1VsphereVirtualDiskVolumeSource_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.PersistentVolumeSpec", schema);
+}
+exports.addSchema = addSchema;

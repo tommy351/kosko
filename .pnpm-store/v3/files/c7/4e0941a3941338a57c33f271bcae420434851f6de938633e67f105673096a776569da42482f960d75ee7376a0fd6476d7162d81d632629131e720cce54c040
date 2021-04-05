@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const schema = {
+    "properties": {
+        "fsType": {
+            "type": "string"
+        },
+        "path": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "path"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    validate_1.register("io.k8s.api.core.v1.LocalVolumeSource", schema);
+}
+exports.addSchema = addSchema;

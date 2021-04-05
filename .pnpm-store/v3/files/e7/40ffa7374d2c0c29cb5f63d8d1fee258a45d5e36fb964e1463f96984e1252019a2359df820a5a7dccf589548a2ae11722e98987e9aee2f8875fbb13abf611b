@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AWSElasticBlockStoreVolumeSource = exports.IoK8sApiCoreV1AWSElasticBlockStoreVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1AWSElasticBlockStoreVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1AWSElasticBlockStoreVolumeSource.js");
+/**
+ * Represents a Persistent Disk resource in AWS.
+ *
+ * An AWS EBS disk must exist before mounting to a container. The disk must also be in the same AWS zone as the kubelet. An AWS EBS disk can only be mounted as read/write once. AWS EBS volumes support ownership management and SELinux relabeling.
+ */
+class IoK8sApiCoreV1AWSElasticBlockStoreVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1AWSElasticBlockStoreVolumeSource = IoK8sApiCoreV1AWSElasticBlockStoreVolumeSource;
+exports.AWSElasticBlockStoreVolumeSource = IoK8sApiCoreV1AWSElasticBlockStoreVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1AWSElasticBlockStoreVolumeSource, "io.k8s.api.core.v1.AWSElasticBlockStoreVolumeSource", IoK8sApiCoreV1AWSElasticBlockStoreVolumeSource_1.addSchema);

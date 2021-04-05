@@ -1,0 +1,12 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "ready": {
+            "type": "boolean"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.discovery.v1beta1.EndpointConditions", schema);
+}

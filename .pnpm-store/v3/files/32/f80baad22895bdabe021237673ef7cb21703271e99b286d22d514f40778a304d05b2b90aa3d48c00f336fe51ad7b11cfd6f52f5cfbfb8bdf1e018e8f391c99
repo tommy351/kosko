@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.JSONSchemaPropsOrBool = exports.IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrBool = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrBool_1 = require("../_schemas/IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrBool.js");
+/**
+ * JSONSchemaPropsOrBool represents JSONSchemaProps or a boolean value. Defaults to true for the boolean property.
+ */
+class IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrBool extends base_1.Model {
+}
+exports.IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrBool = IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrBool;
+exports.JSONSchemaPropsOrBool = IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrBool;
+base_1.Model.setSchema(IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrBool, "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSONSchemaPropsOrBool", IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaPropsOrBool_1.addSchema);

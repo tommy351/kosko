@@ -1,0 +1,6 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCertificatesV1beta1CertificateSigningRequestCondition.mjs";
+export class IoK8sApiCertificatesV1beta1CertificateSigningRequestCondition extends Model {
+}
+Model.setSchema(IoK8sApiCertificatesV1beta1CertificateSigningRequestCondition, "io.k8s.api.certificates.v1beta1.CertificateSigningRequestCondition", addSchema);
+export { IoK8sApiCertificatesV1beta1CertificateSigningRequestCondition as CertificateSigningRequestCondition };

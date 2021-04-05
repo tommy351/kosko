@@ -1,0 +1,17 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * FlowDistinguisherMethod specifies the method of a flow distinguisher.
+ */
+export interface IIoK8sApiFlowcontrolV1alpha1FlowDistinguisherMethod {
+    /**
+     * `type` is the type of flow distinguisher method The supported types are "ByUser" and "ByNamespace". Required.
+     */
+    "type": string;
+}
+/**
+ * FlowDistinguisherMethod specifies the method of a flow distinguisher.
+ */
+export declare class IoK8sApiFlowcontrolV1alpha1FlowDistinguisherMethod extends Model<IIoK8sApiFlowcontrolV1alpha1FlowDistinguisherMethod> implements IIoK8sApiFlowcontrolV1alpha1FlowDistinguisherMethod {
+    "type": string;
+}
+export { IIoK8sApiFlowcontrolV1alpha1FlowDistinguisherMethod as IFlowDistinguisherMethod, IoK8sApiFlowcontrolV1alpha1FlowDistinguisherMethod as FlowDistinguisherMethod };

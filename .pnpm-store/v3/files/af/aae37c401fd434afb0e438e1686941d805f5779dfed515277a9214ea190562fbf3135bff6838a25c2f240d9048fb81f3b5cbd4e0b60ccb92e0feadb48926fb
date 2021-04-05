@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CSIVolumeSource = exports.IoK8sApiCoreV1CSIVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1CSIVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1CSIVolumeSource.js");
+/**
+ * Represents a source location of a volume to mount, managed by an external CSI driver
+ */
+class IoK8sApiCoreV1CSIVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1CSIVolumeSource = IoK8sApiCoreV1CSIVolumeSource;
+exports.CSIVolumeSource = IoK8sApiCoreV1CSIVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1CSIVolumeSource, "io.k8s.api.core.v1.CSIVolumeSource", IoK8sApiCoreV1CSIVolumeSource_1.addSchema);

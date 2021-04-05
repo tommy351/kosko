@@ -1,0 +1,24 @@
+import { IIoK8sApiAuthorizationV1beta1NonResourceAttributes } from "./IoK8sApiAuthorizationV1beta1NonResourceAttributes";
+import { IIoK8sApiAuthorizationV1beta1ResourceAttributes } from "./IoK8sApiAuthorizationV1beta1ResourceAttributes";
+import { Model } from "@kubernetes-models/base";
+/**
+ * SelfSubjectAccessReviewSpec is a description of the access request.  Exactly one of ResourceAuthorizationAttributes and NonResourceAuthorizationAttributes must be set
+ */
+export interface IIoK8sApiAuthorizationV1beta1SelfSubjectAccessReviewSpec {
+    /**
+     * NonResourceAttributes describes information for a non-resource access request
+     */
+    "nonResourceAttributes"?: IIoK8sApiAuthorizationV1beta1NonResourceAttributes;
+    /**
+     * ResourceAuthorizationAttributes describes information for a resource access request
+     */
+    "resourceAttributes"?: IIoK8sApiAuthorizationV1beta1ResourceAttributes;
+}
+/**
+ * SelfSubjectAccessReviewSpec is a description of the access request.  Exactly one of ResourceAuthorizationAttributes and NonResourceAuthorizationAttributes must be set
+ */
+export declare class IoK8sApiAuthorizationV1beta1SelfSubjectAccessReviewSpec extends Model<IIoK8sApiAuthorizationV1beta1SelfSubjectAccessReviewSpec> implements IIoK8sApiAuthorizationV1beta1SelfSubjectAccessReviewSpec {
+    "nonResourceAttributes"?: IIoK8sApiAuthorizationV1beta1NonResourceAttributes;
+    "resourceAttributes"?: IIoK8sApiAuthorizationV1beta1ResourceAttributes;
+}
+export { IIoK8sApiAuthorizationV1beta1SelfSubjectAccessReviewSpec as ISelfSubjectAccessReviewSpec, IoK8sApiAuthorizationV1beta1SelfSubjectAccessReviewSpec as SelfSubjectAccessReviewSpec };

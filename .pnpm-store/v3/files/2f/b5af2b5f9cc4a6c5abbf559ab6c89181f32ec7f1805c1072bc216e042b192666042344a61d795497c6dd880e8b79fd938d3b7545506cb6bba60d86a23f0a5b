@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ResourceRule = exports.IoK8sApiAuthorizationV1ResourceRule = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAuthorizationV1ResourceRule_1 = require("../_schemas/IoK8sApiAuthorizationV1ResourceRule.js");
+/**
+ * ResourceRule is the list of actions the subject is allowed to perform on resources. The list ordering isn't significant, may contain duplicates, and possibly be incomplete.
+ */
+class IoK8sApiAuthorizationV1ResourceRule extends base_1.Model {
+}
+exports.IoK8sApiAuthorizationV1ResourceRule = IoK8sApiAuthorizationV1ResourceRule;
+exports.ResourceRule = IoK8sApiAuthorizationV1ResourceRule;
+base_1.Model.setSchema(IoK8sApiAuthorizationV1ResourceRule, "io.k8s.api.authorization.v1.ResourceRule", IoK8sApiAuthorizationV1ResourceRule_1.addSchema);

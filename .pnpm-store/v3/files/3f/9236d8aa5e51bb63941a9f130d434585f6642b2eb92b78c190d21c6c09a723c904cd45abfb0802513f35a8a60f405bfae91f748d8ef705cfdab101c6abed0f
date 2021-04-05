@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1VsphereVirtualDiskVolumeSource.mjs";
+/**
+ * Represents a vSphere volume resource.
+ */
+export class IoK8sApiCoreV1VsphereVirtualDiskVolumeSource extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1VsphereVirtualDiskVolumeSource, "io.k8s.api.core.v1.VsphereVirtualDiskVolumeSource", addSchema);
+export { IoK8sApiCoreV1VsphereVirtualDiskVolumeSource as VsphereVirtualDiskVolumeSource };

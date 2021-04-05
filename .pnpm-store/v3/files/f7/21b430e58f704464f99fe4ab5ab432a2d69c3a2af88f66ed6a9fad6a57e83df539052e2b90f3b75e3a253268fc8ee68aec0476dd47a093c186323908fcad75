@@ -1,0 +1,43 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1CustomResourceDefinition_1 = require("./IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1CustomResourceDefinition.js");
+const IoK8sApimachineryPkgApisMetaV1ListMeta_1 = require("./IoK8sApimachineryPkgApisMetaV1ListMeta.js");
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string",
+            "enum": [
+                "apiextensions.k8s.io/v1beta1"
+            ]
+        },
+        "items": {
+            "items": {
+                "$ref": "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1beta1.CustomResourceDefinition#"
+            },
+            "type": "array"
+        },
+        "kind": {
+            "type": "string",
+            "enum": [
+                "CustomResourceDefinitionList"
+            ]
+        },
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta#"
+        }
+    },
+    "required": [
+        "items",
+        "apiVersion",
+        "kind"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1CustomResourceDefinition_1.addSchema();
+    IoK8sApimachineryPkgApisMetaV1ListMeta_1.addSchema();
+    validate_1.register("io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1beta1.CustomResourceDefinitionList", schema);
+}
+exports.addSchema = addSchema;

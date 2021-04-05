@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiBatchV1JobList.mjs";
+/**
+ * JobList is a collection of jobs.
+ */
+export class IoK8sApiBatchV1JobList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiBatchV1JobList.apiVersion,
+            kind: IoK8sApiBatchV1JobList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiBatchV1JobList.apiVersion = "batch/v1";
+IoK8sApiBatchV1JobList.kind = "JobList";
+Model.setSchema(IoK8sApiBatchV1JobList, "io.k8s.api.batch.v1.JobList", addSchema);
+export { IoK8sApiBatchV1JobList as JobList };

@@ -1,0 +1,31 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApimachineryPkgApisMetaV1FieldsV1 } from "./IoK8sApimachineryPkgApisMetaV1FieldsV1.mjs";
+import { addSchema as IoK8sApimachineryPkgApisMetaV1Time } from "./IoK8sApimachineryPkgApisMetaV1Time.mjs";
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string"
+        },
+        "fieldsType": {
+            "type": "string"
+        },
+        "fieldsV1": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.FieldsV1#"
+        },
+        "manager": {
+            "type": "string"
+        },
+        "operation": {
+            "type": "string"
+        },
+        "time": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.Time#"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1FieldsV1();
+    IoK8sApimachineryPkgApisMetaV1Time();
+    register("io.k8s.apimachinery.pkg.apis.meta.v1.ManagedFieldsEntry", schema);
+}

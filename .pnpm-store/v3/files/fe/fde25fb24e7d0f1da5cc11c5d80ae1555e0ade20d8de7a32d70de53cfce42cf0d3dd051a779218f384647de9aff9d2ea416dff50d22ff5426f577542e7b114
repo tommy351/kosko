@@ -1,0 +1,20 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiStorageV1StorageClass.mjs";
+/**
+ * StorageClass describes the parameters for a class of storage for which PersistentVolumes can be dynamically provisioned.
+ *
+ * StorageClasses are non-namespaced; the name of the storage class according to etcd is in ObjectMeta.Name.
+ */
+export class IoK8sApiStorageV1StorageClass extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiStorageV1StorageClass.apiVersion,
+            kind: IoK8sApiStorageV1StorageClass.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiStorageV1StorageClass.apiVersion = "storage.k8s.io/v1";
+IoK8sApiStorageV1StorageClass.kind = "StorageClass";
+Model.setSchema(IoK8sApiStorageV1StorageClass, "io.k8s.api.storage.v1.StorageClass", addSchema);
+export { IoK8sApiStorageV1StorageClass as StorageClass };

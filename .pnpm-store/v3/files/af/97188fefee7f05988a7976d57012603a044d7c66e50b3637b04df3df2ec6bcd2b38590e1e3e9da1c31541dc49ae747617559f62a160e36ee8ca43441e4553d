@@ -1,0 +1,22 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApimachineryPkgApiResourceQuantity } from "./IoK8sApimachineryPkgApiResourceQuantity.mjs";
+const schema = {
+    "properties": {
+        "averageUtilization": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "averageValue": {
+            "$ref": "io.k8s.apimachinery.pkg.api.resource.Quantity#"
+        },
+        "value": {
+            "$ref": "io.k8s.apimachinery.pkg.api.resource.Quantity#"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApimachineryPkgApiResourceQuantity();
+    IoK8sApimachineryPkgApiResourceQuantity();
+    register("io.k8s.api.autoscaling.v2beta2.MetricValueStatus", schema);
+}

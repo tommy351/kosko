@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NodeSelector = exports.IoK8sApiCoreV1NodeSelector = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1NodeSelector_1 = require("../_schemas/IoK8sApiCoreV1NodeSelector.js");
+/**
+ * A node selector represents the union of the results of one or more label queries over a set of nodes; that is, it represents the OR of the selectors represented by the node selector terms.
+ */
+class IoK8sApiCoreV1NodeSelector extends base_1.Model {
+}
+exports.IoK8sApiCoreV1NodeSelector = IoK8sApiCoreV1NodeSelector;
+exports.NodeSelector = IoK8sApiCoreV1NodeSelector;
+base_1.Model.setSchema(IoK8sApiCoreV1NodeSelector, "io.k8s.api.core.v1.NodeSelector", IoK8sApiCoreV1NodeSelector_1.addSchema);

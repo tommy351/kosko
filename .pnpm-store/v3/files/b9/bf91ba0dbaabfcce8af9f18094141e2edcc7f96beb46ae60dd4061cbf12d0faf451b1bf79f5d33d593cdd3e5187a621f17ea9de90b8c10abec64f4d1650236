@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApimachineryPkgApisMetaV1ManagedFieldsEntry.mjs";
+/**
+ * ManagedFieldsEntry is a workflow-id, a FieldSet and the group version of the resource that the fieldset applies to.
+ */
+export class IoK8sApimachineryPkgApisMetaV1ManagedFieldsEntry extends Model {
+}
+Model.setSchema(IoK8sApimachineryPkgApisMetaV1ManagedFieldsEntry, "io.k8s.apimachinery.pkg.apis.meta.v1.ManagedFieldsEntry", addSchema);
+export { IoK8sApimachineryPkgApisMetaV1ManagedFieldsEntry as ManagedFieldsEntry };

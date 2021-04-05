@@ -1,0 +1,24 @@
+import { IIoK8sApiAutoscalingV2beta2MetricIdentifier } from "./IoK8sApiAutoscalingV2beta2MetricIdentifier";
+import { IIoK8sApiAutoscalingV2beta2MetricTarget } from "./IoK8sApiAutoscalingV2beta2MetricTarget";
+import { Model } from "@kubernetes-models/base";
+/**
+ * PodsMetricSource indicates how to scale on a metric describing each pod in the current scale target (for example, transactions-processed-per-second). The values will be averaged together before being compared to the target value.
+ */
+export interface IIoK8sApiAutoscalingV2beta2PodsMetricSource {
+    /**
+     * metric identifies the target metric by name and selector
+     */
+    "metric": IIoK8sApiAutoscalingV2beta2MetricIdentifier;
+    /**
+     * target specifies the target value for the given metric
+     */
+    "target": IIoK8sApiAutoscalingV2beta2MetricTarget;
+}
+/**
+ * PodsMetricSource indicates how to scale on a metric describing each pod in the current scale target (for example, transactions-processed-per-second). The values will be averaged together before being compared to the target value.
+ */
+export declare class IoK8sApiAutoscalingV2beta2PodsMetricSource extends Model<IIoK8sApiAutoscalingV2beta2PodsMetricSource> implements IIoK8sApiAutoscalingV2beta2PodsMetricSource {
+    "metric": IIoK8sApiAutoscalingV2beta2MetricIdentifier;
+    "target": IIoK8sApiAutoscalingV2beta2MetricTarget;
+}
+export { IIoK8sApiAutoscalingV2beta2PodsMetricSource as IPodsMetricSource, IoK8sApiAutoscalingV2beta2PodsMetricSource as PodsMetricSource };

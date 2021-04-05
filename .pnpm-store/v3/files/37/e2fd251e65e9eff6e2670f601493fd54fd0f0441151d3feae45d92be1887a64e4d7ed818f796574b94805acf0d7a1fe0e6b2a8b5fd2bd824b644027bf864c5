@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1NodeConfigStatus.mjs";
+/**
+ * NodeConfigStatus describes the status of the config assigned by Node.Spec.ConfigSource.
+ */
+export class IoK8sApiCoreV1NodeConfigStatus extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1NodeConfigStatus, "io.k8s.api.core.v1.NodeConfigStatus", addSchema);
+export { IoK8sApiCoreV1NodeConfigStatus as NodeConfigStatus };

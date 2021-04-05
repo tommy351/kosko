@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.JobTemplateSpec = exports.IoK8sApiBatchV2alpha1JobTemplateSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiBatchV2alpha1JobTemplateSpec_1 = require("../_schemas/IoK8sApiBatchV2alpha1JobTemplateSpec.js");
+/**
+ * JobTemplateSpec describes the data a Job should have when created from a template
+ */
+class IoK8sApiBatchV2alpha1JobTemplateSpec extends base_1.Model {
+}
+exports.IoK8sApiBatchV2alpha1JobTemplateSpec = IoK8sApiBatchV2alpha1JobTemplateSpec;
+exports.JobTemplateSpec = IoK8sApiBatchV2alpha1JobTemplateSpec;
+base_1.Model.setSchema(IoK8sApiBatchV2alpha1JobTemplateSpec, "io.k8s.api.batch.v2alpha1.JobTemplateSpec", IoK8sApiBatchV2alpha1JobTemplateSpec_1.addSchema);

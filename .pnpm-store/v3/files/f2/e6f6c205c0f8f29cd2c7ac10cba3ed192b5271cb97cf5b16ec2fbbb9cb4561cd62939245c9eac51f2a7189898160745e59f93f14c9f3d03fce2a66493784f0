@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.StatefulSetCondition = exports.IoK8sApiAppsV1StatefulSetCondition = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAppsV1StatefulSetCondition_1 = require("../_schemas/IoK8sApiAppsV1StatefulSetCondition.js");
+/**
+ * StatefulSetCondition describes the state of a statefulset at a certain point.
+ */
+class IoK8sApiAppsV1StatefulSetCondition extends base_1.Model {
+}
+exports.IoK8sApiAppsV1StatefulSetCondition = IoK8sApiAppsV1StatefulSetCondition;
+exports.StatefulSetCondition = IoK8sApiAppsV1StatefulSetCondition;
+base_1.Model.setSchema(IoK8sApiAppsV1StatefulSetCondition, "io.k8s.api.apps.v1.StatefulSetCondition", IoK8sApiAppsV1StatefulSetCondition_1.addSchema);

@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAuthenticationV1BoundObjectReference.mjs";
+/**
+ * BoundObjectReference is a reference to an object that a token is bound to.
+ */
+export class IoK8sApiAuthenticationV1BoundObjectReference extends Model {
+}
+Model.setSchema(IoK8sApiAuthenticationV1BoundObjectReference, "io.k8s.api.authentication.v1.BoundObjectReference", addSchema);
+export { IoK8sApiAuthenticationV1BoundObjectReference as BoundObjectReference };

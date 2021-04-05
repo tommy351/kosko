@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.HorizontalPodAutoscaler = exports.IoK8sApiAutoscalingV1HorizontalPodAutoscaler = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAutoscalingV1HorizontalPodAutoscaler_1 = require("../_schemas/IoK8sApiAutoscalingV1HorizontalPodAutoscaler.js");
+/**
+ * configuration of a horizontal pod autoscaler.
+ */
+class IoK8sApiAutoscalingV1HorizontalPodAutoscaler extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAutoscalingV1HorizontalPodAutoscaler.apiVersion,
+            kind: IoK8sApiAutoscalingV1HorizontalPodAutoscaler.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiAutoscalingV1HorizontalPodAutoscaler = IoK8sApiAutoscalingV1HorizontalPodAutoscaler;
+exports.HorizontalPodAutoscaler = IoK8sApiAutoscalingV1HorizontalPodAutoscaler;
+IoK8sApiAutoscalingV1HorizontalPodAutoscaler.apiVersion = "autoscaling/v1";
+IoK8sApiAutoscalingV1HorizontalPodAutoscaler.kind = "HorizontalPodAutoscaler";
+base_1.Model.setSchema(IoK8sApiAutoscalingV1HorizontalPodAutoscaler, "io.k8s.api.autoscaling.v1.HorizontalPodAutoscaler", IoK8sApiAutoscalingV1HorizontalPodAutoscaler_1.addSchema);

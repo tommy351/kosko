@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1VolumeNodeAffinity.mjs";
+/**
+ * VolumeNodeAffinity defines constraints that limit what nodes this volume can be accessed from.
+ */
+export class IoK8sApiCoreV1VolumeNodeAffinity extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1VolumeNodeAffinity, "io.k8s.api.core.v1.VolumeNodeAffinity", addSchema);
+export { IoK8sApiCoreV1VolumeNodeAffinity as VolumeNodeAffinity };

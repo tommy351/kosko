@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiFlowcontrolV1alpha1GroupSubject.mjs";
+/**
+ * GroupSubject holds detailed information for group-kind subject.
+ */
+export class IoK8sApiFlowcontrolV1alpha1GroupSubject extends Model {
+}
+Model.setSchema(IoK8sApiFlowcontrolV1alpha1GroupSubject, "io.k8s.api.flowcontrol.v1alpha1.GroupSubject", addSchema);
+export { IoK8sApiFlowcontrolV1alpha1GroupSubject as GroupSubject };

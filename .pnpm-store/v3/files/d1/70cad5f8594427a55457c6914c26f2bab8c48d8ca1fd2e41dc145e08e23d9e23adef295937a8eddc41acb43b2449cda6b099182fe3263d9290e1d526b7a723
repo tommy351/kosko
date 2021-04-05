@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAuthorizationV1ResourceRule.mjs";
+/**
+ * ResourceRule is the list of actions the subject is allowed to perform on resources. The list ordering isn't significant, may contain duplicates, and possibly be incomplete.
+ */
+export class IoK8sApiAuthorizationV1ResourceRule extends Model {
+}
+Model.setSchema(IoK8sApiAuthorizationV1ResourceRule, "io.k8s.api.authorization.v1.ResourceRule", addSchema);
+export { IoK8sApiAuthorizationV1ResourceRule as ResourceRule };

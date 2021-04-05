@@ -1,0 +1,12 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * JSON represents any valid JSON value. These types are supported: bool, int64, float64, string, []interface{}, map[string]interface{} and nil.
+ */
+export interface IIoK8sApiextensionsApiserverPkgApisApiextensionsV1JSON {
+}
+/**
+ * JSON represents any valid JSON value. These types are supported: bool, int64, float64, string, []interface{}, map[string]interface{} and nil.
+ */
+export declare class IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSON extends Model<IIoK8sApiextensionsApiserverPkgApisApiextensionsV1JSON> implements IIoK8sApiextensionsApiserverPkgApisApiextensionsV1JSON {
+}
+export { IIoK8sApiextensionsApiserverPkgApisApiextensionsV1JSON as IJSON, IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSON as JSON };

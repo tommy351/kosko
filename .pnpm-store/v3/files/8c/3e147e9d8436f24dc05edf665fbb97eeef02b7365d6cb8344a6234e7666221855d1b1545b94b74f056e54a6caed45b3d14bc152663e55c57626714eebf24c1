@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ScopeSelector = exports.IoK8sApiCoreV1ScopeSelector = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ScopeSelector_1 = require("../_schemas/IoK8sApiCoreV1ScopeSelector.js");
+/**
+ * A scope selector represents the AND of the selectors represented by the scoped-resource selector requirements.
+ */
+class IoK8sApiCoreV1ScopeSelector extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ScopeSelector = IoK8sApiCoreV1ScopeSelector;
+exports.ScopeSelector = IoK8sApiCoreV1ScopeSelector;
+base_1.Model.setSchema(IoK8sApiCoreV1ScopeSelector, "io.k8s.api.core.v1.ScopeSelector", IoK8sApiCoreV1ScopeSelector_1.addSchema);

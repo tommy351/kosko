@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAutoscalingV2beta1PodsMetricSource.mjs";
+/**
+ * PodsMetricSource indicates how to scale on a metric describing each pod in the current scale target (for example, transactions-processed-per-second). The values will be averaged together before being compared to the target value.
+ */
+export class IoK8sApiAutoscalingV2beta1PodsMetricSource extends Model {
+}
+Model.setSchema(IoK8sApiAutoscalingV2beta1PodsMetricSource, "io.k8s.api.autoscaling.v2beta1.PodsMetricSource", addSchema);
+export { IoK8sApiAutoscalingV2beta1PodsMetricSource as PodsMetricSource };

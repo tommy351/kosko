@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiNetworkingV1NetworkPolicyPeer.mjs";
+/**
+ * NetworkPolicyPeer describes a peer to allow traffic to/from. Only certain combinations of fields are allowed
+ */
+export class IoK8sApiNetworkingV1NetworkPolicyPeer extends Model {
+}
+Model.setSchema(IoK8sApiNetworkingV1NetworkPolicyPeer, "io.k8s.api.networking.v1.NetworkPolicyPeer", addSchema);
+export { IoK8sApiNetworkingV1NetworkPolicyPeer as NetworkPolicyPeer };

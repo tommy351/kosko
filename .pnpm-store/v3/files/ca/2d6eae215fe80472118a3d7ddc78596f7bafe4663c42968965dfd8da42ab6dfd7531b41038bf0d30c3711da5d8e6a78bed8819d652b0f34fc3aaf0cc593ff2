@@ -1,0 +1,44 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApisMetaV1ObjectMeta_1 = require("./IoK8sApimachineryPkgApisMetaV1ObjectMeta.js");
+const IoK8sApiCoreV1PersistentVolumeClaimSpec_1 = require("./IoK8sApiCoreV1PersistentVolumeClaimSpec.js");
+const IoK8sApiCoreV1PersistentVolumeClaimStatus_1 = require("./IoK8sApiCoreV1PersistentVolumeClaimStatus.js");
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string",
+            "enum": [
+                "v1"
+            ]
+        },
+        "kind": {
+            "type": "string",
+            "enum": [
+                "PersistentVolumeClaim"
+            ]
+        },
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta#"
+        },
+        "spec": {
+            "$ref": "io.k8s.api.core.v1.PersistentVolumeClaimSpec#"
+        },
+        "status": {
+            "$ref": "io.k8s.api.core.v1.PersistentVolumeClaimStatus#"
+        }
+    },
+    "type": "object",
+    "required": [
+        "apiVersion",
+        "kind"
+    ]
+};
+function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1ObjectMeta_1.addSchema();
+    IoK8sApiCoreV1PersistentVolumeClaimSpec_1.addSchema();
+    IoK8sApiCoreV1PersistentVolumeClaimStatus_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.PersistentVolumeClaim", schema);
+}
+exports.addSchema = addSchema;

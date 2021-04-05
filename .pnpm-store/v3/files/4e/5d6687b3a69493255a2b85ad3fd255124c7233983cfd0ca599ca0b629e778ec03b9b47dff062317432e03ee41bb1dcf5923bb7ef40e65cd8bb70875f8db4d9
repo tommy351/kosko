@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SubjectAccessReview = exports.IoK8sApiAuthorizationV1SubjectAccessReview = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAuthorizationV1SubjectAccessReview_1 = require("../_schemas/IoK8sApiAuthorizationV1SubjectAccessReview.js");
+/**
+ * SubjectAccessReview checks whether or not a user or group can perform an action.
+ */
+class IoK8sApiAuthorizationV1SubjectAccessReview extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAuthorizationV1SubjectAccessReview.apiVersion,
+            kind: IoK8sApiAuthorizationV1SubjectAccessReview.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiAuthorizationV1SubjectAccessReview = IoK8sApiAuthorizationV1SubjectAccessReview;
+exports.SubjectAccessReview = IoK8sApiAuthorizationV1SubjectAccessReview;
+IoK8sApiAuthorizationV1SubjectAccessReview.apiVersion = "authorization.k8s.io/v1";
+IoK8sApiAuthorizationV1SubjectAccessReview.kind = "SubjectAccessReview";
+base_1.Model.setSchema(IoK8sApiAuthorizationV1SubjectAccessReview, "io.k8s.api.authorization.v1.SubjectAccessReview", IoK8sApiAuthorizationV1SubjectAccessReview_1.addSchema);

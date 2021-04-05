@@ -1,0 +1,24 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "nonResourceURLs": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "verbs": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        }
+    },
+    "required": [
+        "verbs"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.authorization.v1beta1.NonResourceRule", schema);
+}

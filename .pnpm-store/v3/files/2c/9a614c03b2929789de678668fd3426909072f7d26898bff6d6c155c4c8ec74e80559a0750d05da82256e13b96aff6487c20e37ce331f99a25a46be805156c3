@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1NodeSpec.mjs";
+/**
+ * NodeSpec describes the attributes that a node is created with.
+ */
+export class IoK8sApiCoreV1NodeSpec extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1NodeSpec, "io.k8s.api.core.v1.NodeSpec", addSchema);
+export { IoK8sApiCoreV1NodeSpec as NodeSpec };

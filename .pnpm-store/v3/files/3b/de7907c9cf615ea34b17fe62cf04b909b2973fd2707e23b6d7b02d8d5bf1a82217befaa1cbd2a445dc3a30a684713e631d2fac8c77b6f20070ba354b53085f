@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CertificateSigningRequestSpec = exports.IoK8sApiCertificatesV1CertificateSigningRequestSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCertificatesV1CertificateSigningRequestSpec_1 = require("../_schemas/IoK8sApiCertificatesV1CertificateSigningRequestSpec.js");
+/**
+ * CertificateSigningRequestSpec contains the certificate request.
+ */
+class IoK8sApiCertificatesV1CertificateSigningRequestSpec extends base_1.Model {
+}
+exports.IoK8sApiCertificatesV1CertificateSigningRequestSpec = IoK8sApiCertificatesV1CertificateSigningRequestSpec;
+exports.CertificateSigningRequestSpec = IoK8sApiCertificatesV1CertificateSigningRequestSpec;
+base_1.Model.setSchema(IoK8sApiCertificatesV1CertificateSigningRequestSpec, "io.k8s.api.certificates.v1.CertificateSigningRequestSpec", IoK8sApiCertificatesV1CertificateSigningRequestSpec_1.addSchema);

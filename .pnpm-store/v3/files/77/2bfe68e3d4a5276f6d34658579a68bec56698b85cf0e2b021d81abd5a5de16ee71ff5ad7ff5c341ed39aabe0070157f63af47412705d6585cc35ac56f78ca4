@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.HPAScalingPolicy = exports.IoK8sApiAutoscalingV2beta2HPAScalingPolicy = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAutoscalingV2beta2HPAScalingPolicy_1 = require("../_schemas/IoK8sApiAutoscalingV2beta2HPAScalingPolicy.js");
+/**
+ * HPAScalingPolicy is a single policy which must hold true for a specified past interval.
+ */
+class IoK8sApiAutoscalingV2beta2HPAScalingPolicy extends base_1.Model {
+}
+exports.IoK8sApiAutoscalingV2beta2HPAScalingPolicy = IoK8sApiAutoscalingV2beta2HPAScalingPolicy;
+exports.HPAScalingPolicy = IoK8sApiAutoscalingV2beta2HPAScalingPolicy;
+base_1.Model.setSchema(IoK8sApiAutoscalingV2beta2HPAScalingPolicy, "io.k8s.api.autoscaling.v2beta2.HPAScalingPolicy", IoK8sApiAutoscalingV2beta2HPAScalingPolicy_1.addSchema);

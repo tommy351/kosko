@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NetworkPolicyIngressRule = exports.IoK8sApiNetworkingV1NetworkPolicyIngressRule = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiNetworkingV1NetworkPolicyIngressRule_1 = require("../_schemas/IoK8sApiNetworkingV1NetworkPolicyIngressRule.js");
+/**
+ * NetworkPolicyIngressRule describes a particular set of traffic that is allowed to the pods matched by a NetworkPolicySpec's podSelector. The traffic must match both ports and from.
+ */
+class IoK8sApiNetworkingV1NetworkPolicyIngressRule extends base_1.Model {
+}
+exports.IoK8sApiNetworkingV1NetworkPolicyIngressRule = IoK8sApiNetworkingV1NetworkPolicyIngressRule;
+exports.NetworkPolicyIngressRule = IoK8sApiNetworkingV1NetworkPolicyIngressRule;
+base_1.Model.setSchema(IoK8sApiNetworkingV1NetworkPolicyIngressRule, "io.k8s.api.networking.v1.NetworkPolicyIngressRule", IoK8sApiNetworkingV1NetworkPolicyIngressRule_1.addSchema);

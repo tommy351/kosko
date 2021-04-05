@@ -1,0 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.apiregistration = void 0;
+const tslib_1 = require("tslib");
+const apiregistration = tslib_1.__importStar(require("./apiregistration/index.js"));
+exports.apiregistration = apiregistration;

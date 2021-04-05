@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.HorizontalPodAutoscalerCondition = exports.IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerCondition = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerCondition_1 = require("../_schemas/IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerCondition.js");
+/**
+ * HorizontalPodAutoscalerCondition describes the state of a HorizontalPodAutoscaler at a certain point.
+ */
+class IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerCondition extends base_1.Model {
+}
+exports.IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerCondition = IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerCondition;
+exports.HorizontalPodAutoscalerCondition = IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerCondition;
+base_1.Model.setSchema(IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerCondition, "io.k8s.api.autoscaling.v2beta2.HorizontalPodAutoscalerCondition", IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerCondition_1.addSchema);

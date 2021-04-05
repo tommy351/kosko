@@ -1,0 +1,37 @@
+import { IIoK8sApiStorageV1VolumeAttachment } from "./IoK8sApiStorageV1VolumeAttachment";
+import { IIoK8sApimachineryPkgApisMetaV1ListMeta } from "./IoK8sApimachineryPkgApisMetaV1ListMeta";
+import { ModelData, Model } from "@kubernetes-models/base";
+/**
+ * VolumeAttachmentList is a collection of VolumeAttachment objects.
+ */
+export interface IIoK8sApiStorageV1VolumeAttachmentList {
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    "apiVersion": "storage.k8s.io/v1";
+    /**
+     * Items is the list of VolumeAttachments
+     */
+    "items": Array<IIoK8sApiStorageV1VolumeAttachment>;
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    "kind": "VolumeAttachmentList";
+    /**
+     * Standard list metadata More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+}
+/**
+ * VolumeAttachmentList is a collection of VolumeAttachment objects.
+ */
+export declare class IoK8sApiStorageV1VolumeAttachmentList extends Model<IIoK8sApiStorageV1VolumeAttachmentList> implements IIoK8sApiStorageV1VolumeAttachmentList {
+    "apiVersion": IIoK8sApiStorageV1VolumeAttachmentList["apiVersion"];
+    "items": Array<IIoK8sApiStorageV1VolumeAttachment>;
+    "kind": IIoK8sApiStorageV1VolumeAttachmentList["kind"];
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+    static apiVersion: IIoK8sApiStorageV1VolumeAttachmentList["apiVersion"];
+    static kind: IIoK8sApiStorageV1VolumeAttachmentList["kind"];
+    constructor(data?: ModelData<IIoK8sApiStorageV1VolumeAttachmentList>);
+}
+export { IIoK8sApiStorageV1VolumeAttachmentList as IVolumeAttachmentList, IoK8sApiStorageV1VolumeAttachmentList as VolumeAttachmentList };

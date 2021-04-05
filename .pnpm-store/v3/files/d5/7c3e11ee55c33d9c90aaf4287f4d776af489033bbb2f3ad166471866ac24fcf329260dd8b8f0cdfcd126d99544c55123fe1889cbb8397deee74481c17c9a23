@@ -1,0 +1,22 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * ServiceAccountSubject holds detailed information for service-account-kind subject.
+ */
+export interface IIoK8sApiFlowcontrolV1alpha1ServiceAccountSubject {
+    /**
+     * `name` is the name of matching ServiceAccount objects, or "\*" to match regardless of name. Required.
+     */
+    "name": string;
+    /**
+     * `namespace` is the namespace of matching ServiceAccount objects. Required.
+     */
+    "namespace": string;
+}
+/**
+ * ServiceAccountSubject holds detailed information for service-account-kind subject.
+ */
+export declare class IoK8sApiFlowcontrolV1alpha1ServiceAccountSubject extends Model<IIoK8sApiFlowcontrolV1alpha1ServiceAccountSubject> implements IIoK8sApiFlowcontrolV1alpha1ServiceAccountSubject {
+    "name": string;
+    "namespace": string;
+}
+export { IIoK8sApiFlowcontrolV1alpha1ServiceAccountSubject as IServiceAccountSubject, IoK8sApiFlowcontrolV1alpha1ServiceAccountSubject as ServiceAccountSubject };

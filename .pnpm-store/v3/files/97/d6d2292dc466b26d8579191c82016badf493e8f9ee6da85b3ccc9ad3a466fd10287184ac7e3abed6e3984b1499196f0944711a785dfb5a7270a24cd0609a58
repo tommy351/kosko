@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.IngressStatus = exports.IoK8sApiExtensionsV1beta1IngressStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiExtensionsV1beta1IngressStatus_1 = require("../_schemas/IoK8sApiExtensionsV1beta1IngressStatus.js");
+/**
+ * IngressStatus describe the current state of the Ingress.
+ */
+class IoK8sApiExtensionsV1beta1IngressStatus extends base_1.Model {
+}
+exports.IoK8sApiExtensionsV1beta1IngressStatus = IoK8sApiExtensionsV1beta1IngressStatus;
+exports.IngressStatus = IoK8sApiExtensionsV1beta1IngressStatus;
+base_1.Model.setSchema(IoK8sApiExtensionsV1beta1IngressStatus, "io.k8s.api.extensions.v1beta1.IngressStatus", IoK8sApiExtensionsV1beta1IngressStatus_1.addSchema);

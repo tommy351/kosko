@@ -1,0 +1,11 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1ConfigMapVolumeSource.mjs";
+/**
+ * Adapts a ConfigMap into a volume.
+ *
+ * The contents of the target ConfigMap's Data field will be presented in a volume as files using the keys in the Data field as the file names, unless the items element is populated with specific mappings of keys to paths. ConfigMap volumes support ownership management and SELinux relabeling.
+ */
+export class IoK8sApiCoreV1ConfigMapVolumeSource extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1ConfigMapVolumeSource, "io.k8s.api.core.v1.ConfigMapVolumeSource", addSchema);
+export { IoK8sApiCoreV1ConfigMapVolumeSource as ConfigMapVolumeSource };

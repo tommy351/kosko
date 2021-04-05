@@ -1,0 +1,23 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiCoreV1EnvVarSource } from "./IoK8sApiCoreV1EnvVarSource.mjs";
+const schema = {
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "value": {
+            "type": "string"
+        },
+        "valueFrom": {
+            "$ref": "io.k8s.api.core.v1.EnvVarSource#"
+        }
+    },
+    "required": [
+        "name"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiCoreV1EnvVarSource();
+    register("io.k8s.api.core.v1.EnvVar", schema);
+}

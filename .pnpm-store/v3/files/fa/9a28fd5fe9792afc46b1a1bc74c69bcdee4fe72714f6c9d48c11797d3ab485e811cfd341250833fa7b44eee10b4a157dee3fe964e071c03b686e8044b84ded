@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DaemonSetList = exports.IoK8sApiAppsV1DaemonSetList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAppsV1DaemonSetList_1 = require("../_schemas/IoK8sApiAppsV1DaemonSetList.js");
+/**
+ * DaemonSetList is a collection of daemon sets.
+ */
+class IoK8sApiAppsV1DaemonSetList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAppsV1DaemonSetList.apiVersion,
+            kind: IoK8sApiAppsV1DaemonSetList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiAppsV1DaemonSetList = IoK8sApiAppsV1DaemonSetList;
+exports.DaemonSetList = IoK8sApiAppsV1DaemonSetList;
+IoK8sApiAppsV1DaemonSetList.apiVersion = "apps/v1";
+IoK8sApiAppsV1DaemonSetList.kind = "DaemonSetList";
+base_1.Model.setSchema(IoK8sApiAppsV1DaemonSetList, "io.k8s.api.apps.v1.DaemonSetList", IoK8sApiAppsV1DaemonSetList_1.addSchema);

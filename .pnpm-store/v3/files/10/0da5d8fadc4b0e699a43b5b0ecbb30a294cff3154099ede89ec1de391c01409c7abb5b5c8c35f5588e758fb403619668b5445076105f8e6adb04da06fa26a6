@@ -1,0 +1,24 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "fsType": {
+            "type": "string"
+        },
+        "storagePolicyID": {
+            "type": "string"
+        },
+        "storagePolicyName": {
+            "type": "string"
+        },
+        "volumePath": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "volumePath"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.core.v1.VsphereVirtualDiskVolumeSource", schema);
+}

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RuntimeClassStrategyOptions = exports.IoK8sApiPolicyV1beta1RuntimeClassStrategyOptions = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiPolicyV1beta1RuntimeClassStrategyOptions_1 = require("../_schemas/IoK8sApiPolicyV1beta1RuntimeClassStrategyOptions.js");
+/**
+ * RuntimeClassStrategyOptions define the strategy that will dictate the allowable RuntimeClasses for a pod.
+ */
+class IoK8sApiPolicyV1beta1RuntimeClassStrategyOptions extends base_1.Model {
+}
+exports.IoK8sApiPolicyV1beta1RuntimeClassStrategyOptions = IoK8sApiPolicyV1beta1RuntimeClassStrategyOptions;
+exports.RuntimeClassStrategyOptions = IoK8sApiPolicyV1beta1RuntimeClassStrategyOptions;
+base_1.Model.setSchema(IoK8sApiPolicyV1beta1RuntimeClassStrategyOptions, "io.k8s.api.policy.v1beta1.RuntimeClassStrategyOptions", IoK8sApiPolicyV1beta1RuntimeClassStrategyOptions_1.addSchema);

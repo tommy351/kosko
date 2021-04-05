@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.VsphereVirtualDiskVolumeSource = exports.IoK8sApiCoreV1VsphereVirtualDiskVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1VsphereVirtualDiskVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1VsphereVirtualDiskVolumeSource.js");
+/**
+ * Represents a vSphere volume resource.
+ */
+class IoK8sApiCoreV1VsphereVirtualDiskVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1VsphereVirtualDiskVolumeSource = IoK8sApiCoreV1VsphereVirtualDiskVolumeSource;
+exports.VsphereVirtualDiskVolumeSource = IoK8sApiCoreV1VsphereVirtualDiskVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1VsphereVirtualDiskVolumeSource, "io.k8s.api.core.v1.VsphereVirtualDiskVolumeSource", IoK8sApiCoreV1VsphereVirtualDiskVolumeSource_1.addSchema);

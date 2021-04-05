@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1ConfigMap.mjs";
+/**
+ * ConfigMap holds configuration data for pods to consume.
+ */
+export class IoK8sApiCoreV1ConfigMap extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1ConfigMap.apiVersion,
+            kind: IoK8sApiCoreV1ConfigMap.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiCoreV1ConfigMap.apiVersion = "v1";
+IoK8sApiCoreV1ConfigMap.kind = "ConfigMap";
+Model.setSchema(IoK8sApiCoreV1ConfigMap, "io.k8s.api.core.v1.ConfigMap", addSchema);
+export { IoK8sApiCoreV1ConfigMap as ConfigMap };

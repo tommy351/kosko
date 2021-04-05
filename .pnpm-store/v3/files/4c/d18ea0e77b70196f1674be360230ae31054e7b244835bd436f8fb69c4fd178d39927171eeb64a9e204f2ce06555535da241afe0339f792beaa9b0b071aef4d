@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.EventSource = exports.IoK8sApiCoreV1EventSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1EventSource_1 = require("../_schemas/IoK8sApiCoreV1EventSource.js");
+/**
+ * EventSource contains information for an event.
+ */
+class IoK8sApiCoreV1EventSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1EventSource = IoK8sApiCoreV1EventSource;
+exports.EventSource = IoK8sApiCoreV1EventSource;
+base_1.Model.setSchema(IoK8sApiCoreV1EventSource, "io.k8s.api.core.v1.EventSource", IoK8sApiCoreV1EventSource_1.addSchema);

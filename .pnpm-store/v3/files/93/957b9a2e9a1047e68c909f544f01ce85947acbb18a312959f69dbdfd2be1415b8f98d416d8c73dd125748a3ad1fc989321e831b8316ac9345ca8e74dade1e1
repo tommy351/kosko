@@ -1,0 +1,41 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiDiscoveryV1beta1EndpointConditions_1 = require("./IoK8sApiDiscoveryV1beta1EndpointConditions.js");
+const IoK8sApiCoreV1ObjectReference_1 = require("./IoK8sApiCoreV1ObjectReference.js");
+const schema = {
+    "properties": {
+        "addresses": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "conditions": {
+            "$ref": "io.k8s.api.discovery.v1beta1.EndpointConditions#"
+        },
+        "hostname": {
+            "type": "string"
+        },
+        "targetRef": {
+            "$ref": "io.k8s.api.core.v1.ObjectReference#"
+        },
+        "topology": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "type": "object"
+        }
+    },
+    "required": [
+        "addresses"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiDiscoveryV1beta1EndpointConditions_1.addSchema();
+    IoK8sApiCoreV1ObjectReference_1.addSchema();
+    validate_1.register("io.k8s.api.discovery.v1beta1.Endpoint", schema);
+}
+exports.addSchema = addSchema;

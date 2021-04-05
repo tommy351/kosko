@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RuleWithOperations = exports.IoK8sApiAdmissionregistrationV1RuleWithOperations = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAdmissionregistrationV1RuleWithOperations_1 = require("../_schemas/IoK8sApiAdmissionregistrationV1RuleWithOperations.js");
+/**
+ * RuleWithOperations is a tuple of Operations and Resources. It is recommended to make sure that all the tuple expansions are valid.
+ */
+class IoK8sApiAdmissionregistrationV1RuleWithOperations extends base_1.Model {
+}
+exports.IoK8sApiAdmissionregistrationV1RuleWithOperations = IoK8sApiAdmissionregistrationV1RuleWithOperations;
+exports.RuleWithOperations = IoK8sApiAdmissionregistrationV1RuleWithOperations;
+base_1.Model.setSchema(IoK8sApiAdmissionregistrationV1RuleWithOperations, "io.k8s.api.admissionregistration.v1.RuleWithOperations", IoK8sApiAdmissionregistrationV1RuleWithOperations_1.addSchema);

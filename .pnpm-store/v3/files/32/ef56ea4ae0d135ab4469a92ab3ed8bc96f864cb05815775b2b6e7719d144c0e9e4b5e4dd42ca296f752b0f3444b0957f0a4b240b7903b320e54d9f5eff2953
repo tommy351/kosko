@@ -1,0 +1,23 @@
+import { IIoK8sApimachineryPkgApisMetaV1MicroTime } from "./IoK8sApimachineryPkgApisMetaV1MicroTime";
+import { Model } from "@kubernetes-models/base";
+/**
+ * EventSeries contain information on series of events, i.e. thing that was/is happening continuously for some time.
+ */
+export interface IIoK8sApiEventsV1beta1EventSeries {
+    /**
+     * count is the number of occurrences in this series up to the last heartbeat time.
+     */
+    "count": number;
+    /**
+     * lastObservedTime is the time when last Event from the series was seen before last heartbeat.
+     */
+    "lastObservedTime": IIoK8sApimachineryPkgApisMetaV1MicroTime;
+}
+/**
+ * EventSeries contain information on series of events, i.e. thing that was/is happening continuously for some time.
+ */
+export declare class IoK8sApiEventsV1beta1EventSeries extends Model<IIoK8sApiEventsV1beta1EventSeries> implements IIoK8sApiEventsV1beta1EventSeries {
+    "count": number;
+    "lastObservedTime": IIoK8sApimachineryPkgApisMetaV1MicroTime;
+}
+export { IIoK8sApiEventsV1beta1EventSeries as IEventSeries, IoK8sApiEventsV1beta1EventSeries as EventSeries };

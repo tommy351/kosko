@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1ObjectReference.mjs";
+/**
+ * ObjectReference contains enough information to let you inspect or modify the referred object.
+ */
+export class IoK8sApiCoreV1ObjectReference extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1ObjectReference, "io.k8s.api.core.v1.ObjectReference", addSchema);
+export { IoK8sApiCoreV1ObjectReference as ObjectReference };

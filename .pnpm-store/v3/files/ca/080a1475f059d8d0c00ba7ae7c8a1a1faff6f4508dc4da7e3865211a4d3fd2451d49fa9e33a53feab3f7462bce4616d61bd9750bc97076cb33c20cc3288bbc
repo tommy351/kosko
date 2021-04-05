@@ -1,0 +1,47 @@
+{
+  "name": "conventional-changelog-cli",
+  "version": "2.1.1",
+  "description": "Generate a changelog from git metadata",
+  "bugs": {
+    "url": "https://github.com/conventional-changelog/conventional-changelog/issues"
+  },
+  "homepage": "https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-cli#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/conventional-changelog/conventional-changelog.git"
+  },
+  "author": {
+    "name": "Steve Mao",
+    "email": "maochenyan@gmail.com",
+    "url": "https://github.com/stevemao"
+  },
+  "bin": {
+    "conventional-changelog": "cli.js"
+  },
+  "files": [
+    "cli.js"
+  ],
+  "keywords": [
+    "cli",
+    "cli-app",
+    "conventional-changelog",
+    "conventional",
+    "changelog",
+    "log"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "dependencies": {
+    "add-stream": "^1.0.0",
+    "conventional-changelog": "^3.1.24",
+    "lodash": "^4.17.15",
+    "meow": "^8.0.0",
+    "tempfile": "^3.0.0"
+  },
+  "scripts": {
+    "test-windows": "echo 'make work on windows'"
+  },
+  "license": "MIT",
+  "gitHead": "cc567b98facf71315f4b1620d81ce01d155efaca"
+}

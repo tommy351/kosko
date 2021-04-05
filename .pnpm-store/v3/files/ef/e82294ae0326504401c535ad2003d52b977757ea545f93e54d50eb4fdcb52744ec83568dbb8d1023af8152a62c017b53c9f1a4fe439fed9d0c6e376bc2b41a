@@ -1,0 +1,91 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApisMetaV1MicroTime_1 = require("./IoK8sApimachineryPkgApisMetaV1MicroTime.js");
+const IoK8sApimachineryPkgApisMetaV1Time_1 = require("./IoK8sApimachineryPkgApisMetaV1Time.js");
+const IoK8sApiCoreV1ObjectReference_1 = require("./IoK8sApiCoreV1ObjectReference.js");
+const IoK8sApimachineryPkgApisMetaV1ObjectMeta_1 = require("./IoK8sApimachineryPkgApisMetaV1ObjectMeta.js");
+const IoK8sApiCoreV1EventSeries_1 = require("./IoK8sApiCoreV1EventSeries.js");
+const IoK8sApiCoreV1EventSource_1 = require("./IoK8sApiCoreV1EventSource.js");
+const schema = {
+    "properties": {
+        "action": {
+            "type": "string"
+        },
+        "apiVersion": {
+            "type": "string",
+            "enum": [
+                "v1"
+            ]
+        },
+        "count": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "eventTime": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.MicroTime#"
+        },
+        "firstTimestamp": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.Time#"
+        },
+        "involvedObject": {
+            "$ref": "io.k8s.api.core.v1.ObjectReference#"
+        },
+        "kind": {
+            "type": "string",
+            "enum": [
+                "Event"
+            ]
+        },
+        "lastTimestamp": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.Time#"
+        },
+        "message": {
+            "type": "string"
+        },
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta#"
+        },
+        "reason": {
+            "type": "string"
+        },
+        "related": {
+            "$ref": "io.k8s.api.core.v1.ObjectReference#"
+        },
+        "reportingComponent": {
+            "type": "string"
+        },
+        "reportingInstance": {
+            "type": "string"
+        },
+        "series": {
+            "$ref": "io.k8s.api.core.v1.EventSeries#"
+        },
+        "source": {
+            "$ref": "io.k8s.api.core.v1.EventSource#"
+        },
+        "type": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "metadata",
+        "involvedObject",
+        "apiVersion",
+        "kind"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1MicroTime_1.addSchema();
+    IoK8sApimachineryPkgApisMetaV1Time_1.addSchema();
+    IoK8sApiCoreV1ObjectReference_1.addSchema();
+    IoK8sApimachineryPkgApisMetaV1Time_1.addSchema();
+    IoK8sApimachineryPkgApisMetaV1ObjectMeta_1.addSchema();
+    IoK8sApiCoreV1ObjectReference_1.addSchema();
+    IoK8sApiCoreV1EventSeries_1.addSchema();
+    IoK8sApiCoreV1EventSource_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.Event", schema);
+}
+exports.addSchema = addSchema;

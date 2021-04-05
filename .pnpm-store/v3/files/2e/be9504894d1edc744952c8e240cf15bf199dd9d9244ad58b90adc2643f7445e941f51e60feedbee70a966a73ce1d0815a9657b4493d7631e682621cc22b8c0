@@ -1,0 +1,37 @@
+import { IIoK8sApiAppsV1DaemonSet } from "./IoK8sApiAppsV1DaemonSet";
+import { IIoK8sApimachineryPkgApisMetaV1ListMeta } from "./IoK8sApimachineryPkgApisMetaV1ListMeta";
+import { ModelData, Model } from "@kubernetes-models/base";
+/**
+ * DaemonSetList is a collection of daemon sets.
+ */
+export interface IIoK8sApiAppsV1DaemonSetList {
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    "apiVersion": "apps/v1";
+    /**
+     * A list of daemon sets.
+     */
+    "items": Array<IIoK8sApiAppsV1DaemonSet>;
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    "kind": "DaemonSetList";
+    /**
+     * Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+}
+/**
+ * DaemonSetList is a collection of daemon sets.
+ */
+export declare class IoK8sApiAppsV1DaemonSetList extends Model<IIoK8sApiAppsV1DaemonSetList> implements IIoK8sApiAppsV1DaemonSetList {
+    "apiVersion": IIoK8sApiAppsV1DaemonSetList["apiVersion"];
+    "items": Array<IIoK8sApiAppsV1DaemonSet>;
+    "kind": IIoK8sApiAppsV1DaemonSetList["kind"];
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+    static apiVersion: IIoK8sApiAppsV1DaemonSetList["apiVersion"];
+    static kind: IIoK8sApiAppsV1DaemonSetList["kind"];
+    constructor(data?: ModelData<IIoK8sApiAppsV1DaemonSetList>);
+}
+export { IIoK8sApiAppsV1DaemonSetList as IDaemonSetList, IoK8sApiAppsV1DaemonSetList as DaemonSetList };

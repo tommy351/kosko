@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ContainerStateRunning = exports.IoK8sApiCoreV1ContainerStateRunning = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ContainerStateRunning_1 = require("../_schemas/IoK8sApiCoreV1ContainerStateRunning.js");
+/**
+ * ContainerStateRunning is a running state of a container.
+ */
+class IoK8sApiCoreV1ContainerStateRunning extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ContainerStateRunning = IoK8sApiCoreV1ContainerStateRunning;
+exports.ContainerStateRunning = IoK8sApiCoreV1ContainerStateRunning;
+base_1.Model.setSchema(IoK8sApiCoreV1ContainerStateRunning, "io.k8s.api.core.v1.ContainerStateRunning", IoK8sApiCoreV1ContainerStateRunning_1.addSchema);

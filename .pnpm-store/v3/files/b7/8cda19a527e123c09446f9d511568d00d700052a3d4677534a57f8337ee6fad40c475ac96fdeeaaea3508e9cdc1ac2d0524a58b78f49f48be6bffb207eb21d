@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1KeyToPath.mjs";
+/**
+ * Maps a string key to a path within a volume.
+ */
+export class IoK8sApiCoreV1KeyToPath extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1KeyToPath, "io.k8s.api.core.v1.KeyToPath", addSchema);
+export { IoK8sApiCoreV1KeyToPath as KeyToPath };

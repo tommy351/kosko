@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PreferredSchedulingTerm = exports.IoK8sApiCoreV1PreferredSchedulingTerm = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1PreferredSchedulingTerm_1 = require("../_schemas/IoK8sApiCoreV1PreferredSchedulingTerm.js");
+/**
+ * An empty preferred scheduling term matches all objects with implicit weight 0 (i.e. it's a no-op). A null preferred scheduling term matches no objects (i.e. is also a no-op).
+ */
+class IoK8sApiCoreV1PreferredSchedulingTerm extends base_1.Model {
+}
+exports.IoK8sApiCoreV1PreferredSchedulingTerm = IoK8sApiCoreV1PreferredSchedulingTerm;
+exports.PreferredSchedulingTerm = IoK8sApiCoreV1PreferredSchedulingTerm;
+base_1.Model.setSchema(IoK8sApiCoreV1PreferredSchedulingTerm, "io.k8s.api.core.v1.PreferredSchedulingTerm", IoK8sApiCoreV1PreferredSchedulingTerm_1.addSchema);

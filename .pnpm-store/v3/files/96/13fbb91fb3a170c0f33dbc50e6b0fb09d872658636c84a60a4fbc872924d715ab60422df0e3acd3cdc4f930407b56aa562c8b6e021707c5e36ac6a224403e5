@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CustomResourceDefinitionStatus = exports.IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionStatus_1 = require("../_schemas/IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionStatus.js");
+/**
+ * CustomResourceDefinitionStatus indicates the state of the CustomResourceDefinition
+ */
+class IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionStatus extends base_1.Model {
+}
+exports.IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionStatus = IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionStatus;
+exports.CustomResourceDefinitionStatus = IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionStatus;
+base_1.Model.setSchema(IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionStatus, "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceDefinitionStatus", IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionStatus_1.addSchema);

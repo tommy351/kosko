@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApisMetaV1LabelSelector_1 = require("./IoK8sApimachineryPkgApisMetaV1LabelSelector.js");
+const schema = {
+    "properties": {
+        "clusterRoleSelectors": {
+            "items": {
+                "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector#"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1LabelSelector_1.addSchema();
+    validate_1.register("io.k8s.api.rbac.v1alpha1.AggregationRule", schema);
+}
+exports.addSchema = addSchema;

@@ -1,0 +1,18 @@
+import { IIoK8sApiCoreV1ClientIPConfig } from "./IoK8sApiCoreV1ClientIPConfig";
+import { Model } from "@kubernetes-models/base";
+/**
+ * SessionAffinityConfig represents the configurations of session affinity.
+ */
+export interface IIoK8sApiCoreV1SessionAffinityConfig {
+    /**
+     * clientIP contains the configurations of Client IP based session affinity.
+     */
+    "clientIP"?: IIoK8sApiCoreV1ClientIPConfig;
+}
+/**
+ * SessionAffinityConfig represents the configurations of session affinity.
+ */
+export declare class IoK8sApiCoreV1SessionAffinityConfig extends Model<IIoK8sApiCoreV1SessionAffinityConfig> implements IIoK8sApiCoreV1SessionAffinityConfig {
+    "clientIP"?: IIoK8sApiCoreV1ClientIPConfig;
+}
+export { IIoK8sApiCoreV1SessionAffinityConfig as ISessionAffinityConfig, IoK8sApiCoreV1SessionAffinityConfig as SessionAffinityConfig };

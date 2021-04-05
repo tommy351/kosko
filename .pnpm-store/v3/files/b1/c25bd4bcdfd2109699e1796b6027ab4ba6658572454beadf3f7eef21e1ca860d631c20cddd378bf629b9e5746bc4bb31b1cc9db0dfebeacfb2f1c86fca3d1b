@@ -1,0 +1,49 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApisMetaV1LabelSelector_1 = require("./IoK8sApimachineryPkgApisMetaV1LabelSelector.js");
+const IoK8sApiCoreV1PodTemplateSpec_1 = require("./IoK8sApiCoreV1PodTemplateSpec.js");
+const schema = {
+    "properties": {
+        "activeDeadlineSeconds": {
+            "format": "int64",
+            "type": "integer"
+        },
+        "backoffLimit": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "completions": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "manualSelector": {
+            "type": "boolean"
+        },
+        "parallelism": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "selector": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector#"
+        },
+        "template": {
+            "$ref": "io.k8s.api.core.v1.PodTemplateSpec#"
+        },
+        "ttlSecondsAfterFinished": {
+            "format": "int32",
+            "type": "integer"
+        }
+    },
+    "required": [
+        "template"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1LabelSelector_1.addSchema();
+    IoK8sApiCoreV1PodTemplateSpec_1.addSchema();
+    validate_1.register("io.k8s.api.batch.v1.JobSpec", schema);
+}
+exports.addSchema = addSchema;

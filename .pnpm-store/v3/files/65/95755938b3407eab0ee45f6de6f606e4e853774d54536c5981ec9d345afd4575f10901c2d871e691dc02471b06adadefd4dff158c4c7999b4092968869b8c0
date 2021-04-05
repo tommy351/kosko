@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.EphemeralContainer = exports.IoK8sApiCoreV1EphemeralContainer = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1EphemeralContainer_1 = require("../_schemas/IoK8sApiCoreV1EphemeralContainer.js");
+/**
+ * An EphemeralContainer is a container that may be added temporarily to an existing pod for user-initiated activities such as debugging. Ephemeral containers have no resource or scheduling guarantees, and they will not be restarted when they exit or when a pod is removed or restarted. If an ephemeral container causes a pod to exceed its resource allocation, the pod may be evicted. Ephemeral containers may not be added by directly updating the pod spec. They must be added via the pod's ephemeralcontainers subresource, and they will appear in the pod spec once added. This is an alpha feature enabled by the EphemeralContainers feature flag.
+ */
+class IoK8sApiCoreV1EphemeralContainer extends base_1.Model {
+}
+exports.IoK8sApiCoreV1EphemeralContainer = IoK8sApiCoreV1EphemeralContainer;
+exports.EphemeralContainer = IoK8sApiCoreV1EphemeralContainer;
+base_1.Model.setSchema(IoK8sApiCoreV1EphemeralContainer, "io.k8s.api.core.v1.EphemeralContainer", IoK8sApiCoreV1EphemeralContainer_1.addSchema);

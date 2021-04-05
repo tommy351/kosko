@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.EndpointsList = exports.IoK8sApiCoreV1EndpointsList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1EndpointsList_1 = require("../_schemas/IoK8sApiCoreV1EndpointsList.js");
+/**
+ * EndpointsList is a list of endpoints.
+ */
+class IoK8sApiCoreV1EndpointsList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1EndpointsList.apiVersion,
+            kind: IoK8sApiCoreV1EndpointsList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1EndpointsList = IoK8sApiCoreV1EndpointsList;
+exports.EndpointsList = IoK8sApiCoreV1EndpointsList;
+IoK8sApiCoreV1EndpointsList.apiVersion = "v1";
+IoK8sApiCoreV1EndpointsList.kind = "EndpointsList";
+base_1.Model.setSchema(IoK8sApiCoreV1EndpointsList, "io.k8s.api.core.v1.EndpointsList", IoK8sApiCoreV1EndpointsList_1.addSchema);

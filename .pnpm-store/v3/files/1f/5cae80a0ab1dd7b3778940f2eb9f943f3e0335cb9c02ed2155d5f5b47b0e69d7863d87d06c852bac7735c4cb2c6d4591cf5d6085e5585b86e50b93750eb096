@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1SeccompProfile.mjs";
+/**
+ * SeccompProfile defines a pod/container's seccomp profile settings. Only one profile source may be set.
+ */
+export class IoK8sApiCoreV1SeccompProfile extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1SeccompProfile, "io.k8s.api.core.v1.SeccompProfile", addSchema);
+export { IoK8sApiCoreV1SeccompProfile as SeccompProfile };

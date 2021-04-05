@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1Toleration.mjs";
+/**
+ * The pod this Toleration is attached to tolerates any taint that matches the triple <key,value,effect> using the matching operator <operator>.
+ */
+export class IoK8sApiCoreV1Toleration extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1Toleration, "io.k8s.api.core.v1.Toleration", addSchema);
+export { IoK8sApiCoreV1Toleration as Toleration };

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PortworxVolumeSource = exports.IoK8sApiCoreV1PortworxVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1PortworxVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1PortworxVolumeSource.js");
+/**
+ * PortworxVolumeSource represents a Portworx volume resource.
+ */
+class IoK8sApiCoreV1PortworxVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1PortworxVolumeSource = IoK8sApiCoreV1PortworxVolumeSource;
+exports.PortworxVolumeSource = IoK8sApiCoreV1PortworxVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1PortworxVolumeSource, "io.k8s.api.core.v1.PortworxVolumeSource", IoK8sApiCoreV1PortworxVolumeSource_1.addSchema);

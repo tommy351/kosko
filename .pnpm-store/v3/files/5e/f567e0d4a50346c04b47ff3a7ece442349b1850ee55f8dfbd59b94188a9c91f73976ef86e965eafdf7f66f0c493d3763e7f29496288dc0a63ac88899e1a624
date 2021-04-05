@@ -1,0 +1,18 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "audiences": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "token": {
+            "type": "string"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.authentication.v1.TokenReviewSpec", schema);
+}

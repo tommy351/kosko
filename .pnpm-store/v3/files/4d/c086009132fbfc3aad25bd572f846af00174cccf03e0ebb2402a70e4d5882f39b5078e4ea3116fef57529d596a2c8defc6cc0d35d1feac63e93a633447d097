@@ -1,0 +1,17 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * RollingUpdateStatefulSetStrategy is used to communicate parameter for RollingUpdateStatefulSetStrategyType.
+ */
+export interface IIoK8sApiAppsV1RollingUpdateStatefulSetStrategy {
+    /**
+     * Partition indicates the ordinal at which the StatefulSet should be partitioned. Default value is 0.
+     */
+    "partition"?: number;
+}
+/**
+ * RollingUpdateStatefulSetStrategy is used to communicate parameter for RollingUpdateStatefulSetStrategyType.
+ */
+export declare class IoK8sApiAppsV1RollingUpdateStatefulSetStrategy extends Model<IIoK8sApiAppsV1RollingUpdateStatefulSetStrategy> implements IIoK8sApiAppsV1RollingUpdateStatefulSetStrategy {
+    "partition"?: number;
+}
+export { IIoK8sApiAppsV1RollingUpdateStatefulSetStrategy as IRollingUpdateStatefulSetStrategy, IoK8sApiAppsV1RollingUpdateStatefulSetStrategy as RollingUpdateStatefulSetStrategy };

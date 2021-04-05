@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApimachineryPkgApisMetaV1Status.mjs";
+/**
+ * Status is a return value for calls that don't return other objects.
+ */
+export class IoK8sApimachineryPkgApisMetaV1Status extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApimachineryPkgApisMetaV1Status.apiVersion,
+            kind: IoK8sApimachineryPkgApisMetaV1Status.kind,
+            ...data
+        });
+    }
+}
+IoK8sApimachineryPkgApisMetaV1Status.apiVersion = "v1";
+IoK8sApimachineryPkgApisMetaV1Status.kind = "Status";
+Model.setSchema(IoK8sApimachineryPkgApisMetaV1Status, "io.k8s.apimachinery.pkg.apis.meta.v1.Status", addSchema);
+export { IoK8sApimachineryPkgApisMetaV1Status as Status };

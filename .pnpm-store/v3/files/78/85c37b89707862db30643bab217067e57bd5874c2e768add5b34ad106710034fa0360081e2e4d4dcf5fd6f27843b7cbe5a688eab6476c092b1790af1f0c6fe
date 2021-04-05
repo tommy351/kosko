@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Scale = exports.IoK8sApiAutoscalingV1Scale = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAutoscalingV1Scale_1 = require("../_schemas/IoK8sApiAutoscalingV1Scale.js");
+/**
+ * Scale represents a scaling request for a resource.
+ */
+class IoK8sApiAutoscalingV1Scale extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAutoscalingV1Scale.apiVersion,
+            kind: IoK8sApiAutoscalingV1Scale.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiAutoscalingV1Scale = IoK8sApiAutoscalingV1Scale;
+exports.Scale = IoK8sApiAutoscalingV1Scale;
+IoK8sApiAutoscalingV1Scale.apiVersion = "autoscaling/v1";
+IoK8sApiAutoscalingV1Scale.kind = "Scale";
+base_1.Model.setSchema(IoK8sApiAutoscalingV1Scale, "io.k8s.api.autoscaling.v1.Scale", IoK8sApiAutoscalingV1Scale_1.addSchema);

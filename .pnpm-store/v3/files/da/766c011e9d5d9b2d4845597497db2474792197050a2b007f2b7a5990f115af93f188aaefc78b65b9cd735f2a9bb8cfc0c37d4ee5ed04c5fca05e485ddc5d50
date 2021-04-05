@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1Pod.mjs";
+/**
+ * Pod is a collection of containers that can run on a host. This resource is created by clients and scheduled onto hosts.
+ */
+export class IoK8sApiCoreV1Pod extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1Pod.apiVersion,
+            kind: IoK8sApiCoreV1Pod.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiCoreV1Pod.apiVersion = "v1";
+IoK8sApiCoreV1Pod.kind = "Pod";
+Model.setSchema(IoK8sApiCoreV1Pod, "io.k8s.api.core.v1.Pod", addSchema);
+export { IoK8sApiCoreV1Pod as Pod };

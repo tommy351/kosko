@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApimachineryPkgApisMetaV1GroupVersionForDiscovery.mjs";
+/**
+ * GroupVersion contains the "group/version" and "version" string of a version. It is made a struct to keep extensibility.
+ */
+export class IoK8sApimachineryPkgApisMetaV1GroupVersionForDiscovery extends Model {
+}
+Model.setSchema(IoK8sApimachineryPkgApisMetaV1GroupVersionForDiscovery, "io.k8s.apimachinery.pkg.apis.meta.v1.GroupVersionForDiscovery", addSchema);
+export { IoK8sApimachineryPkgApisMetaV1GroupVersionForDiscovery as GroupVersionForDiscovery };

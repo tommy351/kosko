@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ObjectReference = exports.IoK8sApiCoreV1ObjectReference = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ObjectReference_1 = require("../_schemas/IoK8sApiCoreV1ObjectReference.js");
+/**
+ * ObjectReference contains enough information to let you inspect or modify the referred object.
+ */
+class IoK8sApiCoreV1ObjectReference extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ObjectReference = IoK8sApiCoreV1ObjectReference;
+exports.ObjectReference = IoK8sApiCoreV1ObjectReference;
+base_1.Model.setSchema(IoK8sApiCoreV1ObjectReference, "io.k8s.api.core.v1.ObjectReference", IoK8sApiCoreV1ObjectReference_1.addSchema);

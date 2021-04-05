@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PersistentVolumeSpec = exports.IoK8sApiCoreV1PersistentVolumeSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1PersistentVolumeSpec_1 = require("../_schemas/IoK8sApiCoreV1PersistentVolumeSpec.js");
+/**
+ * PersistentVolumeSpec is the specification of a persistent volume.
+ */
+class IoK8sApiCoreV1PersistentVolumeSpec extends base_1.Model {
+}
+exports.IoK8sApiCoreV1PersistentVolumeSpec = IoK8sApiCoreV1PersistentVolumeSpec;
+exports.PersistentVolumeSpec = IoK8sApiCoreV1PersistentVolumeSpec;
+base_1.Model.setSchema(IoK8sApiCoreV1PersistentVolumeSpec, "io.k8s.api.core.v1.PersistentVolumeSpec", IoK8sApiCoreV1PersistentVolumeSpec_1.addSchema);

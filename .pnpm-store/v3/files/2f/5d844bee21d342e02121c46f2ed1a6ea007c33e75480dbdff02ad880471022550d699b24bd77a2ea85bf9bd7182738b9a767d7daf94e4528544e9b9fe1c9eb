@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SessionAffinityConfig = exports.IoK8sApiCoreV1SessionAffinityConfig = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1SessionAffinityConfig_1 = require("../_schemas/IoK8sApiCoreV1SessionAffinityConfig.js");
+/**
+ * SessionAffinityConfig represents the configurations of session affinity.
+ */
+class IoK8sApiCoreV1SessionAffinityConfig extends base_1.Model {
+}
+exports.IoK8sApiCoreV1SessionAffinityConfig = IoK8sApiCoreV1SessionAffinityConfig;
+exports.SessionAffinityConfig = IoK8sApiCoreV1SessionAffinityConfig;
+base_1.Model.setSchema(IoK8sApiCoreV1SessionAffinityConfig, "io.k8s.api.core.v1.SessionAffinityConfig", IoK8sApiCoreV1SessionAffinityConfig_1.addSchema);

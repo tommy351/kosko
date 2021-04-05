@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ContainerState = exports.IoK8sApiCoreV1ContainerState = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ContainerState_1 = require("../_schemas/IoK8sApiCoreV1ContainerState.js");
+/**
+ * ContainerState holds a possible state of container. Only one of its members may be specified. If none of them is specified, the default one is ContainerStateWaiting.
+ */
+class IoK8sApiCoreV1ContainerState extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ContainerState = IoK8sApiCoreV1ContainerState;
+exports.ContainerState = IoK8sApiCoreV1ContainerState;
+base_1.Model.setSchema(IoK8sApiCoreV1ContainerState, "io.k8s.api.core.v1.ContainerState", IoK8sApiCoreV1ContainerState_1.addSchema);

@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiExtensionsV1beta1HTTPIngressPath.mjs";
+/**
+ * HTTPIngressPath associates a path with a backend. Incoming urls matching the path are forwarded to the backend.
+ */
+export class IoK8sApiExtensionsV1beta1HTTPIngressPath extends Model {
+}
+Model.setSchema(IoK8sApiExtensionsV1beta1HTTPIngressPath, "io.k8s.api.extensions.v1beta1.HTTPIngressPath", addSchema);
+export { IoK8sApiExtensionsV1beta1HTTPIngressPath as HTTPIngressPath };

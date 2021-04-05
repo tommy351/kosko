@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NodeStatus = exports.IoK8sApiCoreV1NodeStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1NodeStatus_1 = require("../_schemas/IoK8sApiCoreV1NodeStatus.js");
+/**
+ * NodeStatus is information about the current status of a node.
+ */
+class IoK8sApiCoreV1NodeStatus extends base_1.Model {
+}
+exports.IoK8sApiCoreV1NodeStatus = IoK8sApiCoreV1NodeStatus;
+exports.NodeStatus = IoK8sApiCoreV1NodeStatus;
+base_1.Model.setSchema(IoK8sApiCoreV1NodeStatus, "io.k8s.api.core.v1.NodeStatus", IoK8sApiCoreV1NodeStatus_1.addSchema);

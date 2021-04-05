@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.StatusDetails = exports.IoK8sApimachineryPkgApisMetaV1StatusDetails = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApimachineryPkgApisMetaV1StatusDetails_1 = require("../_schemas/IoK8sApimachineryPkgApisMetaV1StatusDetails.js");
+/**
+ * StatusDetails is a set of additional properties that MAY be set by the server to provide additional information about a response. The Reason field of a Status object defines what attributes will be set. Clients must ignore fields that do not match the defined type of each attribute, and should assume that any attribute may be empty, invalid, or under defined.
+ */
+class IoK8sApimachineryPkgApisMetaV1StatusDetails extends base_1.Model {
+}
+exports.IoK8sApimachineryPkgApisMetaV1StatusDetails = IoK8sApimachineryPkgApisMetaV1StatusDetails;
+exports.StatusDetails = IoK8sApimachineryPkgApisMetaV1StatusDetails;
+base_1.Model.setSchema(IoK8sApimachineryPkgApisMetaV1StatusDetails, "io.k8s.apimachinery.pkg.apis.meta.v1.StatusDetails", IoK8sApimachineryPkgApisMetaV1StatusDetails_1.addSchema);

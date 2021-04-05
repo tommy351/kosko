@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RunAsUserStrategyOptions = exports.IoK8sApiPolicyV1beta1RunAsUserStrategyOptions = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiPolicyV1beta1RunAsUserStrategyOptions_1 = require("../_schemas/IoK8sApiPolicyV1beta1RunAsUserStrategyOptions.js");
+/**
+ * RunAsUserStrategyOptions defines the strategy type and any options used to create the strategy.
+ */
+class IoK8sApiPolicyV1beta1RunAsUserStrategyOptions extends base_1.Model {
+}
+exports.IoK8sApiPolicyV1beta1RunAsUserStrategyOptions = IoK8sApiPolicyV1beta1RunAsUserStrategyOptions;
+exports.RunAsUserStrategyOptions = IoK8sApiPolicyV1beta1RunAsUserStrategyOptions;
+base_1.Model.setSchema(IoK8sApiPolicyV1beta1RunAsUserStrategyOptions, "io.k8s.api.policy.v1beta1.RunAsUserStrategyOptions", IoK8sApiPolicyV1beta1RunAsUserStrategyOptions_1.addSchema);

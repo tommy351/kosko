@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1PodSecurityContext.mjs";
+/**
+ * PodSecurityContext holds pod-level security attributes and common container settings. Some fields are also present in container.securityContext.  Field values of container.securityContext take precedence over field values of PodSecurityContext.
+ */
+export class IoK8sApiCoreV1PodSecurityContext extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1PodSecurityContext, "io.k8s.api.core.v1.PodSecurityContext", addSchema);
+export { IoK8sApiCoreV1PodSecurityContext as PodSecurityContext };

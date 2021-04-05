@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RoleRef = exports.IoK8sApiRbacV1RoleRef = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiRbacV1RoleRef_1 = require("../_schemas/IoK8sApiRbacV1RoleRef.js");
+/**
+ * RoleRef contains information that points to the role being used
+ */
+class IoK8sApiRbacV1RoleRef extends base_1.Model {
+}
+exports.IoK8sApiRbacV1RoleRef = IoK8sApiRbacV1RoleRef;
+exports.RoleRef = IoK8sApiRbacV1RoleRef;
+base_1.Model.setSchema(IoK8sApiRbacV1RoleRef, "io.k8s.api.rbac.v1.RoleRef", IoK8sApiRbacV1RoleRef_1.addSchema);

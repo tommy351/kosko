@@ -1,0 +1,24 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiFlowcontrolV1alpha1LimitedPriorityLevelConfiguration_1 = require("./IoK8sApiFlowcontrolV1alpha1LimitedPriorityLevelConfiguration.js");
+const schema = {
+    "properties": {
+        "limited": {
+            "$ref": "io.k8s.api.flowcontrol.v1alpha1.LimitedPriorityLevelConfiguration#"
+        },
+        "type": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "type"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiFlowcontrolV1alpha1LimitedPriorityLevelConfiguration_1.addSchema();
+    validate_1.register("io.k8s.api.flowcontrol.v1alpha1.PriorityLevelConfigurationSpec", schema);
+}
+exports.addSchema = addSchema;

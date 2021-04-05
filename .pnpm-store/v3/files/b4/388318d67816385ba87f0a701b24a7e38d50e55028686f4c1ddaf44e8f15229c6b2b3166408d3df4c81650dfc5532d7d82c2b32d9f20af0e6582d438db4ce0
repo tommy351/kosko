@@ -1,0 +1,40 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApimachineryPkgApisMetaV1ObjectMeta } from "./IoK8sApimachineryPkgApisMetaV1ObjectMeta.mjs";
+import { addSchema as IoK8sApiCoreV1ServiceSpec } from "./IoK8sApiCoreV1ServiceSpec.mjs";
+import { addSchema as IoK8sApiCoreV1ServiceStatus } from "./IoK8sApiCoreV1ServiceStatus.mjs";
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string",
+            "enum": [
+                "v1"
+            ]
+        },
+        "kind": {
+            "type": "string",
+            "enum": [
+                "Service"
+            ]
+        },
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta#"
+        },
+        "spec": {
+            "$ref": "io.k8s.api.core.v1.ServiceSpec#"
+        },
+        "status": {
+            "$ref": "io.k8s.api.core.v1.ServiceStatus#"
+        }
+    },
+    "type": "object",
+    "required": [
+        "apiVersion",
+        "kind"
+    ]
+};
+export function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1ObjectMeta();
+    IoK8sApiCoreV1ServiceSpec();
+    IoK8sApiCoreV1ServiceStatus();
+    register("io.k8s.api.core.v1.Service", schema);
+}

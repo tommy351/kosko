@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1Sysctl.mjs";
+/**
+ * Sysctl defines a kernel parameter to be set
+ */
+export class IoK8sApiCoreV1Sysctl extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1Sysctl, "io.k8s.api.core.v1.Sysctl", addSchema);
+export { IoK8sApiCoreV1Sysctl as Sysctl };

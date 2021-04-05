@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ServiceReference = exports.IoK8sKubeAggregatorPkgApisApiregistrationV1beta1ServiceReference = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sKubeAggregatorPkgApisApiregistrationV1beta1ServiceReference_1 = require("../_schemas/IoK8sKubeAggregatorPkgApisApiregistrationV1beta1ServiceReference.js");
+/**
+ * ServiceReference holds a reference to Service.legacy.k8s.io
+ */
+class IoK8sKubeAggregatorPkgApisApiregistrationV1beta1ServiceReference extends base_1.Model {
+}
+exports.IoK8sKubeAggregatorPkgApisApiregistrationV1beta1ServiceReference = IoK8sKubeAggregatorPkgApisApiregistrationV1beta1ServiceReference;
+exports.ServiceReference = IoK8sKubeAggregatorPkgApisApiregistrationV1beta1ServiceReference;
+base_1.Model.setSchema(IoK8sKubeAggregatorPkgApisApiregistrationV1beta1ServiceReference, "io.k8s.kube-aggregator.pkg.apis.apiregistration.v1beta1.ServiceReference", IoK8sKubeAggregatorPkgApisApiregistrationV1beta1ServiceReference_1.addSchema);

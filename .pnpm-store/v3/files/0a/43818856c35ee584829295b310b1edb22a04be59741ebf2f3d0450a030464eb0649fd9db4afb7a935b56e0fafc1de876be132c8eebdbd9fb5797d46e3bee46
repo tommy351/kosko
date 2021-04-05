@@ -1,0 +1,51 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApisMetaV1LabelSelector_1 = require("./IoK8sApimachineryPkgApisMetaV1LabelSelector.js");
+const IoK8sApiAppsV1DeploymentStrategy_1 = require("./IoK8sApiAppsV1DeploymentStrategy.js");
+const IoK8sApiCoreV1PodTemplateSpec_1 = require("./IoK8sApiCoreV1PodTemplateSpec.js");
+const schema = {
+    "properties": {
+        "minReadySeconds": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "paused": {
+            "type": "boolean"
+        },
+        "progressDeadlineSeconds": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "replicas": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "revisionHistoryLimit": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "selector": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector#"
+        },
+        "strategy": {
+            "$ref": "io.k8s.api.apps.v1.DeploymentStrategy#"
+        },
+        "template": {
+            "$ref": "io.k8s.api.core.v1.PodTemplateSpec#"
+        }
+    },
+    "required": [
+        "selector",
+        "template"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1LabelSelector_1.addSchema();
+    IoK8sApiAppsV1DeploymentStrategy_1.addSchema();
+    IoK8sApiCoreV1PodTemplateSpec_1.addSchema();
+    validate_1.register("io.k8s.api.apps.v1.DeploymentSpec", schema);
+}
+exports.addSchema = addSchema;

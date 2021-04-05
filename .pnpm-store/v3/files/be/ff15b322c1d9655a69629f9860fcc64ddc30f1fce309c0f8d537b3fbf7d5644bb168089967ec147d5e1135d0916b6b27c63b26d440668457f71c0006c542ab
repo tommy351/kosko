@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ConfigMapNodeConfigSource = exports.IoK8sApiCoreV1ConfigMapNodeConfigSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ConfigMapNodeConfigSource_1 = require("../_schemas/IoK8sApiCoreV1ConfigMapNodeConfigSource.js");
+/**
+ * ConfigMapNodeConfigSource contains the information to reference a ConfigMap as a config source for the Node.
+ */
+class IoK8sApiCoreV1ConfigMapNodeConfigSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ConfigMapNodeConfigSource = IoK8sApiCoreV1ConfigMapNodeConfigSource;
+exports.ConfigMapNodeConfigSource = IoK8sApiCoreV1ConfigMapNodeConfigSource;
+base_1.Model.setSchema(IoK8sApiCoreV1ConfigMapNodeConfigSource, "io.k8s.api.core.v1.ConfigMapNodeConfigSource", IoK8sApiCoreV1ConfigMapNodeConfigSource_1.addSchema);

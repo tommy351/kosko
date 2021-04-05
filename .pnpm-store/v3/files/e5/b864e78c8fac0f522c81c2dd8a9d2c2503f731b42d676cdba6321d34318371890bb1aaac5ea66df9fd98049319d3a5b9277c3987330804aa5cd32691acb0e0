@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.IngressRule = exports.IoK8sApiNetworkingV1IngressRule = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiNetworkingV1IngressRule_1 = require("../_schemas/IoK8sApiNetworkingV1IngressRule.js");
+/**
+ * IngressRule represents the rules mapping the paths under a specified host to the related backend services. Incoming requests are first evaluated for a host match, then routed to the backend associated with the matching IngressRuleValue.
+ */
+class IoK8sApiNetworkingV1IngressRule extends base_1.Model {
+}
+exports.IoK8sApiNetworkingV1IngressRule = IoK8sApiNetworkingV1IngressRule;
+exports.IngressRule = IoK8sApiNetworkingV1IngressRule;
+base_1.Model.setSchema(IoK8sApiNetworkingV1IngressRule, "io.k8s.api.networking.v1.IngressRule", IoK8sApiNetworkingV1IngressRule_1.addSchema);

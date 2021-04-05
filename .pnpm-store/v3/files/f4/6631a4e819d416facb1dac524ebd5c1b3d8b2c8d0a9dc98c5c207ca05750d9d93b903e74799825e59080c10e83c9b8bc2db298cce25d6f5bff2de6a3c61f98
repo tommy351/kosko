@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.IngressSpec = exports.IoK8sApiExtensionsV1beta1IngressSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiExtensionsV1beta1IngressSpec_1 = require("../_schemas/IoK8sApiExtensionsV1beta1IngressSpec.js");
+/**
+ * IngressSpec describes the Ingress the user wishes to exist.
+ */
+class IoK8sApiExtensionsV1beta1IngressSpec extends base_1.Model {
+}
+exports.IoK8sApiExtensionsV1beta1IngressSpec = IoK8sApiExtensionsV1beta1IngressSpec;
+exports.IngressSpec = IoK8sApiExtensionsV1beta1IngressSpec;
+base_1.Model.setSchema(IoK8sApiExtensionsV1beta1IngressSpec, "io.k8s.api.extensions.v1beta1.IngressSpec", IoK8sApiExtensionsV1beta1IngressSpec_1.addSchema);

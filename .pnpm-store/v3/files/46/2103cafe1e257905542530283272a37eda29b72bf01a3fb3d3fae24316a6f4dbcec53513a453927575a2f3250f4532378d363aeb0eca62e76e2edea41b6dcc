@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ServicePort = exports.IoK8sApiCoreV1ServicePort = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ServicePort_1 = require("../_schemas/IoK8sApiCoreV1ServicePort.js");
+/**
+ * ServicePort contains information on service's port.
+ */
+class IoK8sApiCoreV1ServicePort extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ServicePort = IoK8sApiCoreV1ServicePort;
+exports.ServicePort = IoK8sApiCoreV1ServicePort;
+base_1.Model.setSchema(IoK8sApiCoreV1ServicePort, "io.k8s.api.core.v1.ServicePort", IoK8sApiCoreV1ServicePort_1.addSchema);

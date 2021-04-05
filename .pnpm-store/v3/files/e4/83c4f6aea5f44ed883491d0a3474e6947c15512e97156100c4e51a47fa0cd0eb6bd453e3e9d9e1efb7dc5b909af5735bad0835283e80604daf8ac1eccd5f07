@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAdmissionregistrationV1beta1WebhookClientConfig.mjs";
+/**
+ * WebhookClientConfig contains the information to make a TLS connection with the webhook
+ */
+export class IoK8sApiAdmissionregistrationV1beta1WebhookClientConfig extends Model {
+}
+Model.setSchema(IoK8sApiAdmissionregistrationV1beta1WebhookClientConfig, "io.k8s.api.admissionregistration.v1beta1.WebhookClientConfig", addSchema);
+export { IoK8sApiAdmissionregistrationV1beta1WebhookClientConfig as WebhookClientConfig };

@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1EndpointAddress.mjs";
+/**
+ * EndpointAddress is a tuple that describes single IP address.
+ */
+export class IoK8sApiCoreV1EndpointAddress extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1EndpointAddress, "io.k8s.api.core.v1.EndpointAddress", addSchema);
+export { IoK8sApiCoreV1EndpointAddress as EndpointAddress };

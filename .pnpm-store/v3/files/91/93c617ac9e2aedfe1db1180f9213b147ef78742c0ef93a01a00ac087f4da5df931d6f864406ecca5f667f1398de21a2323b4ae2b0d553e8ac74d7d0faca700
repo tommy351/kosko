@@ -1,0 +1,23 @@
+import { IIoK8sApiFlowcontrolV1alpha1QueuingConfiguration } from "./IoK8sApiFlowcontrolV1alpha1QueuingConfiguration";
+import { Model } from "@kubernetes-models/base";
+/**
+ * LimitResponse defines how to handle requests that can not be executed right now.
+ */
+export interface IIoK8sApiFlowcontrolV1alpha1LimitResponse {
+    /**
+     * `queuing` holds the configuration parameters for queuing. This field may be non-empty only if `type` is `"Queue"`.
+     */
+    "queuing"?: IIoK8sApiFlowcontrolV1alpha1QueuingConfiguration;
+    /**
+     * `type` is "Queue" or "Reject". "Queue" means that requests that can not be executed upon arrival are held in a queue until they can be executed or a queuing limit is reached. "Reject" means that requests that can not be executed upon arrival are rejected. Required.
+     */
+    "type": string;
+}
+/**
+ * LimitResponse defines how to handle requests that can not be executed right now.
+ */
+export declare class IoK8sApiFlowcontrolV1alpha1LimitResponse extends Model<IIoK8sApiFlowcontrolV1alpha1LimitResponse> implements IIoK8sApiFlowcontrolV1alpha1LimitResponse {
+    "queuing"?: IIoK8sApiFlowcontrolV1alpha1QueuingConfiguration;
+    "type": string;
+}
+export { IIoK8sApiFlowcontrolV1alpha1LimitResponse as ILimitResponse, IoK8sApiFlowcontrolV1alpha1LimitResponse as LimitResponse };

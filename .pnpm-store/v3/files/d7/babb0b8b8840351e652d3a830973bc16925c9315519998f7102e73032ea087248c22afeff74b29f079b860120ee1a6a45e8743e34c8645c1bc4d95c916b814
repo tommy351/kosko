@@ -1,0 +1,43 @@
+import { IIoK8sApimachineryPkgApisMetaV1Time } from "./IoK8sApimachineryPkgApisMetaV1Time";
+import { Model } from "@kubernetes-models/base";
+/**
+ * JobCondition describes current state of a job.
+ */
+export interface IIoK8sApiBatchV1JobCondition {
+    /**
+     * Last time the condition was checked.
+     */
+    "lastProbeTime"?: IIoK8sApimachineryPkgApisMetaV1Time;
+    /**
+     * Last time the condition transit from one status to another.
+     */
+    "lastTransitionTime"?: IIoK8sApimachineryPkgApisMetaV1Time;
+    /**
+     * Human readable message indicating details about last transition.
+     */
+    "message"?: string;
+    /**
+     * (brief) reason for the condition's last transition.
+     */
+    "reason"?: string;
+    /**
+     * Status of the condition, one of True, False, Unknown.
+     */
+    "status": string;
+    /**
+     * Type of job condition, Complete or Failed.
+     */
+    "type": string;
+}
+/**
+ * JobCondition describes current state of a job.
+ */
+export declare class IoK8sApiBatchV1JobCondition extends Model<IIoK8sApiBatchV1JobCondition> implements IIoK8sApiBatchV1JobCondition {
+    "lastProbeTime"?: IIoK8sApimachineryPkgApisMetaV1Time;
+    "lastTransitionTime"?: IIoK8sApimachineryPkgApisMetaV1Time;
+    "message"?: string;
+    "reason"?: string;
+    "status": string;
+    "type": string;
+}
+export { IIoK8sApiBatchV1JobCondition as IJobCondition, IoK8sApiBatchV1JobCondition as JobCondition };

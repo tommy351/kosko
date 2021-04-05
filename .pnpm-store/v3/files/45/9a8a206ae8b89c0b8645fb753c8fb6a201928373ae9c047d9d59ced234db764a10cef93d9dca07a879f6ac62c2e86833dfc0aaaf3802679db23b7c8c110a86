@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1EphemeralVolumeSource.mjs";
+/**
+ * Represents an ephemeral volume that is handled by a normal storage driver.
+ */
+export class IoK8sApiCoreV1EphemeralVolumeSource extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1EphemeralVolumeSource, "io.k8s.api.core.v1.EphemeralVolumeSource", addSchema);
+export { IoK8sApiCoreV1EphemeralVolumeSource as EphemeralVolumeSource };

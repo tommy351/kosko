@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1ScopedResourceSelectorRequirement.mjs";
+/**
+ * A scoped-resource selector requirement is a selector that contains values, a scope name, and an operator that relates the scope name and values.
+ */
+export class IoK8sApiCoreV1ScopedResourceSelectorRequirement extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1ScopedResourceSelectorRequirement, "io.k8s.api.core.v1.ScopedResourceSelectorRequirement", addSchema);
+export { IoK8sApiCoreV1ScopedResourceSelectorRequirement as ScopedResourceSelectorRequirement };

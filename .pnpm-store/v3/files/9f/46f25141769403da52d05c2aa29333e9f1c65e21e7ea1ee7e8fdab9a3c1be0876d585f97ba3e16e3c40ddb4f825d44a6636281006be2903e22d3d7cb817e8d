@@ -1,0 +1,31 @@
+import { IIoK8sApimachineryPkgRuntimeRawExtension } from "./IoK8sApimachineryPkgRuntimeRawExtension";
+import { ModelData, Model } from "@kubernetes-models/base";
+/**
+ * Event represents a single event to a watched resource.
+ */
+export interface IIoK8sApimachineryPkgApisMetaV1WatchEvent {
+    /**
+     * Object is:
+     *  \* If Type is Added or Modified: the new state of the object.
+     *  \* If Type is Deleted: the state of the object immediately before deletion.
+     *  \* If Type is Error: \*Status is recommended; other types may make sense
+     *    depending on context.
+     */
+    "object": IIoK8sApimachineryPkgRuntimeRawExtension;
+    "type": string;
+    "apiVersion": "v1" | "admission.k8s.io/v1" | "admission.k8s.io/v1beta1" | "admissionregistration.k8s.io/v1" | "admissionregistration.k8s.io/v1beta1" | "apiextensions.k8s.io/v1" | "apiextensions.k8s.io/v1beta1" | "apiregistration.k8s.io/v1" | "apiregistration.k8s.io/v1beta1" | "apps/v1" | "apps/v1beta1" | "apps/v1beta2" | "authentication.k8s.io/v1" | "authentication.k8s.io/v1beta1" | "authorization.k8s.io/v1" | "authorization.k8s.io/v1beta1" | "autoscaling/v1" | "autoscaling/v2beta1" | "autoscaling/v2beta2" | "batch/v1" | "batch/v1beta1" | "batch/v2alpha1" | "certificates.k8s.io/v1" | "certificates.k8s.io/v1beta1" | "coordination.k8s.io/v1" | "coordination.k8s.io/v1beta1" | "discovery.k8s.io/v1alpha1" | "discovery.k8s.io/v1beta1" | "events.k8s.io/v1" | "events.k8s.io/v1beta1" | "extensions/v1beta1" | "flowcontrol.apiserver.k8s.io/v1alpha1" | "imagepolicy.k8s.io/v1alpha1" | "networking.k8s.io/v1" | "networking.k8s.io/v1beta1" | "node.k8s.io/v1alpha1" | "node.k8s.io/v1beta1" | "policy/v1beta1" | "rbac.authorization.k8s.io/v1" | "rbac.authorization.k8s.io/v1alpha1" | "rbac.authorization.k8s.io/v1beta1" | "scheduling.k8s.io/v1" | "scheduling.k8s.io/v1alpha1" | "scheduling.k8s.io/v1beta1" | "settings.k8s.io/v1alpha1" | "storage.k8s.io/v1" | "storage.k8s.io/v1alpha1" | "storage.k8s.io/v1beta1";
+    "kind": "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent" | "WatchEvent";
+}
+/**
+ * Event represents a single event to a watched resource.
+ */
+export declare class IoK8sApimachineryPkgApisMetaV1WatchEvent extends Model<IIoK8sApimachineryPkgApisMetaV1WatchEvent> implements IIoK8sApimachineryPkgApisMetaV1WatchEvent {
+    "object": IIoK8sApimachineryPkgRuntimeRawExtension;
+    "type": string;
+    "apiVersion": IIoK8sApimachineryPkgApisMetaV1WatchEvent["apiVersion"];
+    "kind": IIoK8sApimachineryPkgApisMetaV1WatchEvent["kind"];
+    static apiVersion: IIoK8sApimachineryPkgApisMetaV1WatchEvent["apiVersion"];
+    static kind: IIoK8sApimachineryPkgApisMetaV1WatchEvent["kind"];
+    constructor(data?: ModelData<IIoK8sApimachineryPkgApisMetaV1WatchEvent>);
+}
+export { IIoK8sApimachineryPkgApisMetaV1WatchEvent as IWatchEvent, IoK8sApimachineryPkgApisMetaV1WatchEvent as WatchEvent };

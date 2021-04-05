@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PodSecurityPolicyList = exports.IoK8sApiPolicyV1beta1PodSecurityPolicyList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiPolicyV1beta1PodSecurityPolicyList_1 = require("../_schemas/IoK8sApiPolicyV1beta1PodSecurityPolicyList.js");
+/**
+ * PodSecurityPolicyList is a list of PodSecurityPolicy objects.
+ */
+class IoK8sApiPolicyV1beta1PodSecurityPolicyList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiPolicyV1beta1PodSecurityPolicyList.apiVersion,
+            kind: IoK8sApiPolicyV1beta1PodSecurityPolicyList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiPolicyV1beta1PodSecurityPolicyList = IoK8sApiPolicyV1beta1PodSecurityPolicyList;
+exports.PodSecurityPolicyList = IoK8sApiPolicyV1beta1PodSecurityPolicyList;
+IoK8sApiPolicyV1beta1PodSecurityPolicyList.apiVersion = "policy/v1beta1";
+IoK8sApiPolicyV1beta1PodSecurityPolicyList.kind = "PodSecurityPolicyList";
+base_1.Model.setSchema(IoK8sApiPolicyV1beta1PodSecurityPolicyList, "io.k8s.api.policy.v1beta1.PodSecurityPolicyList", IoK8sApiPolicyV1beta1PodSecurityPolicyList_1.addSchema);

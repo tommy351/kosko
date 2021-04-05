@@ -1,0 +1,31 @@
+import { IIoK8sKubeAggregatorPkgApisApiregistrationV1APIService } from "./IoK8sKubeAggregatorPkgApisApiregistrationV1APIService";
+import { IIoK8sApimachineryPkgApisMetaV1ListMeta } from "./IoK8sApimachineryPkgApisMetaV1ListMeta";
+import { ModelData, Model } from "@kubernetes-models/base";
+/**
+ * APIServiceList is a list of APIService objects.
+ */
+export interface IIoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceList {
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    "apiVersion": "apiregistration.k8s.io/v1";
+    "items": Array<IIoK8sKubeAggregatorPkgApisApiregistrationV1APIService>;
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    "kind": "APIServiceList";
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+}
+/**
+ * APIServiceList is a list of APIService objects.
+ */
+export declare class IoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceList extends Model<IIoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceList> implements IIoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceList {
+    "apiVersion": IIoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceList["apiVersion"];
+    "items": Array<IIoK8sKubeAggregatorPkgApisApiregistrationV1APIService>;
+    "kind": IIoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceList["kind"];
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ListMeta;
+    static apiVersion: IIoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceList["apiVersion"];
+    static kind: IIoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceList["kind"];
+    constructor(data?: ModelData<IIoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceList>);
+}
+export { IIoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceList as IAPIServiceList, IoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceList as APIServiceList };

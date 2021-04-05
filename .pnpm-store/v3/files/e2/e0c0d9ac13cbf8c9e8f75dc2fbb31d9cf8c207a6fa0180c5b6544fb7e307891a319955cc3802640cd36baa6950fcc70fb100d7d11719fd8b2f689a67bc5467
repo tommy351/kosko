@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FlexPersistentVolumeSource = exports.IoK8sApiCoreV1FlexPersistentVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1FlexPersistentVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1FlexPersistentVolumeSource.js");
+/**
+ * FlexPersistentVolumeSource represents a generic persistent volume resource that is provisioned/attached using an exec based plugin.
+ */
+class IoK8sApiCoreV1FlexPersistentVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1FlexPersistentVolumeSource = IoK8sApiCoreV1FlexPersistentVolumeSource;
+exports.FlexPersistentVolumeSource = IoK8sApiCoreV1FlexPersistentVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1FlexPersistentVolumeSource, "io.k8s.api.core.v1.FlexPersistentVolumeSource", IoK8sApiCoreV1FlexPersistentVolumeSource_1.addSchema);

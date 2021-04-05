@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ServiceAccountList = exports.IoK8sApiCoreV1ServiceAccountList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ServiceAccountList_1 = require("../_schemas/IoK8sApiCoreV1ServiceAccountList.js");
+/**
+ * ServiceAccountList is a list of ServiceAccount objects
+ */
+class IoK8sApiCoreV1ServiceAccountList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1ServiceAccountList.apiVersion,
+            kind: IoK8sApiCoreV1ServiceAccountList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1ServiceAccountList = IoK8sApiCoreV1ServiceAccountList;
+exports.ServiceAccountList = IoK8sApiCoreV1ServiceAccountList;
+IoK8sApiCoreV1ServiceAccountList.apiVersion = "v1";
+IoK8sApiCoreV1ServiceAccountList.kind = "ServiceAccountList";
+base_1.Model.setSchema(IoK8sApiCoreV1ServiceAccountList, "io.k8s.api.core.v1.ServiceAccountList", IoK8sApiCoreV1ServiceAccountList_1.addSchema);

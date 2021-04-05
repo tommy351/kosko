@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ServiceStatus = exports.IoK8sApiCoreV1ServiceStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ServiceStatus_1 = require("../_schemas/IoK8sApiCoreV1ServiceStatus.js");
+/**
+ * ServiceStatus represents the current status of a service.
+ */
+class IoK8sApiCoreV1ServiceStatus extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ServiceStatus = IoK8sApiCoreV1ServiceStatus;
+exports.ServiceStatus = IoK8sApiCoreV1ServiceStatus;
+base_1.Model.setSchema(IoK8sApiCoreV1ServiceStatus, "io.k8s.api.core.v1.ServiceStatus", IoK8sApiCoreV1ServiceStatus_1.addSchema);

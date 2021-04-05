@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiStorageV1beta1VolumeNodeResources.mjs";
+/**
+ * VolumeNodeResources is a set of resource limits for scheduling of volumes.
+ */
+export class IoK8sApiStorageV1beta1VolumeNodeResources extends Model {
+}
+Model.setSchema(IoK8sApiStorageV1beta1VolumeNodeResources, "io.k8s.api.storage.v1beta1.VolumeNodeResources", addSchema);
+export { IoK8sApiStorageV1beta1VolumeNodeResources as VolumeNodeResources };

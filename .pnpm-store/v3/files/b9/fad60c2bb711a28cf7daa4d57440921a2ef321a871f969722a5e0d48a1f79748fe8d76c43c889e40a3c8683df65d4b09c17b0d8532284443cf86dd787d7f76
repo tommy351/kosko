@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FlexVolumeSource = exports.IoK8sApiCoreV1FlexVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1FlexVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1FlexVolumeSource.js");
+/**
+ * FlexVolume represents a generic volume resource that is provisioned/attached using an exec based plugin.
+ */
+class IoK8sApiCoreV1FlexVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1FlexVolumeSource = IoK8sApiCoreV1FlexVolumeSource;
+exports.FlexVolumeSource = IoK8sApiCoreV1FlexVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1FlexVolumeSource, "io.k8s.api.core.v1.FlexVolumeSource", IoK8sApiCoreV1FlexVolumeSource_1.addSchema);

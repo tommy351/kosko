@@ -1,0 +1,26 @@
+{
+    "name": "@types/exit",
+    "version": "0.1.31",
+    "description": "TypeScript definitions for exit",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Bart van der Schoor",
+            "url": "https://github.com/Bartvds",
+            "githubUsername": "Bartvds"
+        }
+    ],
+    "main": "",
+    "types": "index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+        "directory": "types/exit"
+    },
+    "scripts": {},
+    "dependencies": {
+        "@types/node": "*"
+    },
+    "typesPublisherContentHash": "0604880673f8875eefe8a4bacefa217de59cf953298783951cbb05b8d186d685",
+    "typeScriptVersion": "2.8"
+}

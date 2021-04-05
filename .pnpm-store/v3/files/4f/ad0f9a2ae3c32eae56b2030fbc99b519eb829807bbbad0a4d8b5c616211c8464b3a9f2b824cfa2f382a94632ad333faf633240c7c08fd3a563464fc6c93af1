@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NetworkPolicyPort = exports.IoK8sApiNetworkingV1NetworkPolicyPort = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiNetworkingV1NetworkPolicyPort_1 = require("../_schemas/IoK8sApiNetworkingV1NetworkPolicyPort.js");
+/**
+ * NetworkPolicyPort describes a port to allow traffic on
+ */
+class IoK8sApiNetworkingV1NetworkPolicyPort extends base_1.Model {
+}
+exports.IoK8sApiNetworkingV1NetworkPolicyPort = IoK8sApiNetworkingV1NetworkPolicyPort;
+exports.NetworkPolicyPort = IoK8sApiNetworkingV1NetworkPolicyPort;
+base_1.Model.setSchema(IoK8sApiNetworkingV1NetworkPolicyPort, "io.k8s.api.networking.v1.NetworkPolicyPort", IoK8sApiNetworkingV1NetworkPolicyPort_1.addSchema);

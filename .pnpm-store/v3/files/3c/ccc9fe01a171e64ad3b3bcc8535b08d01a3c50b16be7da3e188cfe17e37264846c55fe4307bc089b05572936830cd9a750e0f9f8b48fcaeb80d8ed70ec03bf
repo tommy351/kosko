@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1Probe.mjs";
+/**
+ * Probe describes a health check to be performed against a container to determine whether it is alive or ready to receive traffic.
+ */
+export class IoK8sApiCoreV1Probe extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1Probe, "io.k8s.api.core.v1.Probe", addSchema);
+export { IoK8sApiCoreV1Probe as Probe };

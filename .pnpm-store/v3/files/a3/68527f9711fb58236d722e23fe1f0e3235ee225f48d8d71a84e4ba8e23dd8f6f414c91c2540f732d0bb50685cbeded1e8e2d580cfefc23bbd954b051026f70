@@ -1,0 +1,26 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "namespace": {
+            "type": "string"
+        },
+        "path": {
+            "type": "string"
+        },
+        "port": {
+            "format": "int32",
+            "type": "integer"
+        }
+    },
+    "required": [
+        "namespace",
+        "name"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.ServiceReference", schema);
+}

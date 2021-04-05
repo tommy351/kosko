@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NodeList = exports.IoK8sApiCoreV1NodeList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1NodeList_1 = require("../_schemas/IoK8sApiCoreV1NodeList.js");
+/**
+ * NodeList is the whole list of all Nodes which have been registered with master.
+ */
+class IoK8sApiCoreV1NodeList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1NodeList.apiVersion,
+            kind: IoK8sApiCoreV1NodeList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1NodeList = IoK8sApiCoreV1NodeList;
+exports.NodeList = IoK8sApiCoreV1NodeList;
+IoK8sApiCoreV1NodeList.apiVersion = "v1";
+IoK8sApiCoreV1NodeList.kind = "NodeList";
+base_1.Model.setSchema(IoK8sApiCoreV1NodeList, "io.k8s.api.core.v1.NodeList", IoK8sApiCoreV1NodeList_1.addSchema);

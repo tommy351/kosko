@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiNodeV1beta1Scheduling.mjs";
+/**
+ * Scheduling specifies the scheduling constraints for nodes supporting a RuntimeClass.
+ */
+export class IoK8sApiNodeV1beta1Scheduling extends Model {
+}
+Model.setSchema(IoK8sApiNodeV1beta1Scheduling, "io.k8s.api.node.v1beta1.Scheduling", addSchema);
+export { IoK8sApiNodeV1beta1Scheduling as Scheduling };

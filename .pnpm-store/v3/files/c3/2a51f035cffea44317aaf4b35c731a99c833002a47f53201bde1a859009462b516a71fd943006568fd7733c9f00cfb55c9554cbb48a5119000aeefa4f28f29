@@ -1,0 +1,34 @@
+import { IIoK8sApimachineryPkgApisMetaV1ObjectMeta } from "./IoK8sApimachineryPkgApisMetaV1ObjectMeta";
+import { IIoK8sApiAuthenticationV1TokenRequestSpec } from "./IoK8sApiAuthenticationV1TokenRequestSpec";
+import { IIoK8sApiAuthenticationV1TokenRequestStatus } from "./IoK8sApiAuthenticationV1TokenRequestStatus";
+import { ModelData, Model } from "@kubernetes-models/base";
+/**
+ * TokenRequest requests a token for a given service account.
+ */
+export interface IIoK8sApiAuthenticationV1TokenRequest {
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    "apiVersion": "authentication.k8s.io/v1";
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    "kind": "TokenRequest";
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ObjectMeta;
+    "spec": IIoK8sApiAuthenticationV1TokenRequestSpec;
+    "status"?: IIoK8sApiAuthenticationV1TokenRequestStatus;
+}
+/**
+ * TokenRequest requests a token for a given service account.
+ */
+export declare class IoK8sApiAuthenticationV1TokenRequest extends Model<IIoK8sApiAuthenticationV1TokenRequest> implements IIoK8sApiAuthenticationV1TokenRequest {
+    "apiVersion": IIoK8sApiAuthenticationV1TokenRequest["apiVersion"];
+    "kind": IIoK8sApiAuthenticationV1TokenRequest["kind"];
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ObjectMeta;
+    "spec": IIoK8sApiAuthenticationV1TokenRequestSpec;
+    "status"?: IIoK8sApiAuthenticationV1TokenRequestStatus;
+    static apiVersion: IIoK8sApiAuthenticationV1TokenRequest["apiVersion"];
+    static kind: IIoK8sApiAuthenticationV1TokenRequest["kind"];
+    constructor(data?: ModelData<IIoK8sApiAuthenticationV1TokenRequest>);
+}
+export { IIoK8sApiAuthenticationV1TokenRequest as ITokenRequest, IoK8sApiAuthenticationV1TokenRequest as TokenRequest };

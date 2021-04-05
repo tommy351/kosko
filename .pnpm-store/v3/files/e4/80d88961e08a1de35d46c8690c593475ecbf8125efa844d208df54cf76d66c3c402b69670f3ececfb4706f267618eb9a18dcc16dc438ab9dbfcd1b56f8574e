@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ExternalMetricSource = exports.IoK8sApiAutoscalingV2beta1ExternalMetricSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAutoscalingV2beta1ExternalMetricSource_1 = require("../_schemas/IoK8sApiAutoscalingV2beta1ExternalMetricSource.js");
+/**
+ * ExternalMetricSource indicates how to scale on a metric not associated with any Kubernetes object (for example length of queue in cloud messaging service, or QPS from loadbalancer running outside of cluster). Exactly one "target" type should be set.
+ */
+class IoK8sApiAutoscalingV2beta1ExternalMetricSource extends base_1.Model {
+}
+exports.IoK8sApiAutoscalingV2beta1ExternalMetricSource = IoK8sApiAutoscalingV2beta1ExternalMetricSource;
+exports.ExternalMetricSource = IoK8sApiAutoscalingV2beta1ExternalMetricSource;
+base_1.Model.setSchema(IoK8sApiAutoscalingV2beta1ExternalMetricSource, "io.k8s.api.autoscaling.v2beta1.ExternalMetricSource", IoK8sApiAutoscalingV2beta1ExternalMetricSource_1.addSchema);

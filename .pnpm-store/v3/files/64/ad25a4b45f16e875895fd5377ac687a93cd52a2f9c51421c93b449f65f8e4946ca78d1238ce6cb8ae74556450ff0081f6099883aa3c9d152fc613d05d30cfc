@@ -1,0 +1,17 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * DaemonEndpoint contains information about a single Daemon endpoint.
+ */
+export interface IIoK8sApiCoreV1DaemonEndpoint {
+    /**
+     * Port number of the given endpoint.
+     */
+    "Port": number;
+}
+/**
+ * DaemonEndpoint contains information about a single Daemon endpoint.
+ */
+export declare class IoK8sApiCoreV1DaemonEndpoint extends Model<IIoK8sApiCoreV1DaemonEndpoint> implements IIoK8sApiCoreV1DaemonEndpoint {
+    "Port": number;
+}
+export { IIoK8sApiCoreV1DaemonEndpoint as IDaemonEndpoint, IoK8sApiCoreV1DaemonEndpoint as DaemonEndpoint };

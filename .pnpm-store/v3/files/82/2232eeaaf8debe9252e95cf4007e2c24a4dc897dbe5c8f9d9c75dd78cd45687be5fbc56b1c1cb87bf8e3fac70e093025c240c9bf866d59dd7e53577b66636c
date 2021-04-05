@@ -1,0 +1,38 @@
+import { IIoK8sApimachineryPkgApisMetaV1Time } from "./IoK8sApimachineryPkgApisMetaV1Time";
+import { Model } from "@kubernetes-models/base";
+/**
+ * CustomResourceDefinitionCondition contains details for the current condition of this pod.
+ */
+export interface IIoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1CustomResourceDefinitionCondition {
+    /**
+     * lastTransitionTime last time the condition transitioned from one status to another.
+     */
+    "lastTransitionTime"?: IIoK8sApimachineryPkgApisMetaV1Time;
+    /**
+     * message is a human-readable message indicating details about last transition.
+     */
+    "message"?: string;
+    /**
+     * reason is a unique, one-word, CamelCase reason for the condition's last transition.
+     */
+    "reason"?: string;
+    /**
+     * status is the status of the condition. Can be True, False, Unknown.
+     */
+    "status": string;
+    /**
+     * type is the type of the condition. Types include Established, NamesAccepted and Terminating.
+     */
+    "type": string;
+}
+/**
+ * CustomResourceDefinitionCondition contains details for the current condition of this pod.
+ */
+export declare class IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1CustomResourceDefinitionCondition extends Model<IIoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1CustomResourceDefinitionCondition> implements IIoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1CustomResourceDefinitionCondition {
+    "lastTransitionTime"?: IIoK8sApimachineryPkgApisMetaV1Time;
+    "message"?: string;
+    "reason"?: string;
+    "status": string;
+    "type": string;
+}
+export { IIoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1CustomResourceDefinitionCondition as ICustomResourceDefinitionCondition, IoK8sApiextensionsApiserverPkgApisApiextensionsV1beta1CustomResourceDefinitionCondition as CustomResourceDefinitionCondition };

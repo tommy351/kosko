@@ -1,0 +1,51 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceColumnDefinition_1 = require("./IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceColumnDefinition.js");
+const IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceValidation_1 = require("./IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceValidation.js");
+const IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceSubresources_1 = require("./IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceSubresources.js");
+const schema = {
+    "properties": {
+        "additionalPrinterColumns": {
+            "items": {
+                "$ref": "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceColumnDefinition#"
+            },
+            "type": "array"
+        },
+        "deprecated": {
+            "type": "boolean"
+        },
+        "deprecationWarning": {
+            "type": "string"
+        },
+        "name": {
+            "type": "string"
+        },
+        "schema": {
+            "$ref": "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceValidation#"
+        },
+        "served": {
+            "type": "boolean"
+        },
+        "storage": {
+            "type": "boolean"
+        },
+        "subresources": {
+            "$ref": "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceSubresources#"
+        }
+    },
+    "required": [
+        "name",
+        "served",
+        "storage"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceColumnDefinition_1.addSchema();
+    IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceValidation_1.addSchema();
+    IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceSubresources_1.addSchema();
+    validate_1.register("io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceDefinitionVersion", schema);
+}
+exports.addSchema = addSchema;

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DaemonSetStatus = exports.IoK8sApiAppsV1DaemonSetStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAppsV1DaemonSetStatus_1 = require("../_schemas/IoK8sApiAppsV1DaemonSetStatus.js");
+/**
+ * DaemonSetStatus represents the current status of a daemon set.
+ */
+class IoK8sApiAppsV1DaemonSetStatus extends base_1.Model {
+}
+exports.IoK8sApiAppsV1DaemonSetStatus = IoK8sApiAppsV1DaemonSetStatus;
+exports.DaemonSetStatus = IoK8sApiAppsV1DaemonSetStatus;
+base_1.Model.setSchema(IoK8sApiAppsV1DaemonSetStatus, "io.k8s.api.apps.v1.DaemonSetStatus", IoK8sApiAppsV1DaemonSetStatus_1.addSchema);

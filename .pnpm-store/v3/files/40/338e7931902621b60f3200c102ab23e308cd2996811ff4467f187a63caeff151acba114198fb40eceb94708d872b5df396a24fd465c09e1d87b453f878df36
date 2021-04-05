@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TCPSocketAction = exports.IoK8sApiCoreV1TCPSocketAction = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1TCPSocketAction_1 = require("../_schemas/IoK8sApiCoreV1TCPSocketAction.js");
+/**
+ * TCPSocketAction describes an action based on opening a socket
+ */
+class IoK8sApiCoreV1TCPSocketAction extends base_1.Model {
+}
+exports.IoK8sApiCoreV1TCPSocketAction = IoK8sApiCoreV1TCPSocketAction;
+exports.TCPSocketAction = IoK8sApiCoreV1TCPSocketAction;
+base_1.Model.setSchema(IoK8sApiCoreV1TCPSocketAction, "io.k8s.api.core.v1.TCPSocketAction", IoK8sApiCoreV1TCPSocketAction_1.addSchema);

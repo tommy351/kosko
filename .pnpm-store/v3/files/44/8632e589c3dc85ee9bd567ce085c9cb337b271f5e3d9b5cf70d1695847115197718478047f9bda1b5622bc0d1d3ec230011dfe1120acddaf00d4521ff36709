@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AzureFileVolumeSource = exports.IoK8sApiCoreV1AzureFileVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1AzureFileVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1AzureFileVolumeSource.js");
+/**
+ * AzureFile represents an Azure File Service mount on the host and bind mount to the pod.
+ */
+class IoK8sApiCoreV1AzureFileVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1AzureFileVolumeSource = IoK8sApiCoreV1AzureFileVolumeSource;
+exports.AzureFileVolumeSource = IoK8sApiCoreV1AzureFileVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1AzureFileVolumeSource, "io.k8s.api.core.v1.AzureFileVolumeSource", IoK8sApiCoreV1AzureFileVolumeSource_1.addSchema);

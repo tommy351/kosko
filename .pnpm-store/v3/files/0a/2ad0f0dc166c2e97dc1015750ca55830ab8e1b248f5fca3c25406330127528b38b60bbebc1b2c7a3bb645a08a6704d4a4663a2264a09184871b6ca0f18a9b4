@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1ContainerStatus.mjs";
+/**
+ * ContainerStatus contains details for the current status of this container.
+ */
+export class IoK8sApiCoreV1ContainerStatus extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1ContainerStatus, "io.k8s.api.core.v1.ContainerStatus", addSchema);
+export { IoK8sApiCoreV1ContainerStatus as ContainerStatus };

@@ -1,0 +1,38 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiFlowcontrolV1alpha1FlowDistinguisherMethod_1 = require("./IoK8sApiFlowcontrolV1alpha1FlowDistinguisherMethod.js");
+const IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationReference_1 = require("./IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationReference.js");
+const IoK8sApiFlowcontrolV1alpha1PolicyRulesWithSubjects_1 = require("./IoK8sApiFlowcontrolV1alpha1PolicyRulesWithSubjects.js");
+const schema = {
+    "properties": {
+        "distinguisherMethod": {
+            "$ref": "io.k8s.api.flowcontrol.v1alpha1.FlowDistinguisherMethod#"
+        },
+        "matchingPrecedence": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "priorityLevelConfiguration": {
+            "$ref": "io.k8s.api.flowcontrol.v1alpha1.PriorityLevelConfigurationReference#"
+        },
+        "rules": {
+            "items": {
+                "$ref": "io.k8s.api.flowcontrol.v1alpha1.PolicyRulesWithSubjects#"
+            },
+            "type": "array"
+        }
+    },
+    "required": [
+        "priorityLevelConfiguration"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiFlowcontrolV1alpha1FlowDistinguisherMethod_1.addSchema();
+    IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationReference_1.addSchema();
+    IoK8sApiFlowcontrolV1alpha1PolicyRulesWithSubjects_1.addSchema();
+    validate_1.register("io.k8s.api.flowcontrol.v1alpha1.FlowSchemaSpec", schema);
+}
+exports.addSchema = addSchema;

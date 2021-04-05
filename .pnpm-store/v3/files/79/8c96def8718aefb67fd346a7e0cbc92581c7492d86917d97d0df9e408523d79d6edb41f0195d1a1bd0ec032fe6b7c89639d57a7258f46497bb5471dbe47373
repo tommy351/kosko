@@ -1,0 +1,22 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiCoreV1ConfigMapEnvSource } from "./IoK8sApiCoreV1ConfigMapEnvSource.mjs";
+import { addSchema as IoK8sApiCoreV1SecretEnvSource } from "./IoK8sApiCoreV1SecretEnvSource.mjs";
+const schema = {
+    "properties": {
+        "configMapRef": {
+            "$ref": "io.k8s.api.core.v1.ConfigMapEnvSource#"
+        },
+        "prefix": {
+            "type": "string"
+        },
+        "secretRef": {
+            "$ref": "io.k8s.api.core.v1.SecretEnvSource#"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiCoreV1ConfigMapEnvSource();
+    IoK8sApiCoreV1SecretEnvSource();
+    register("io.k8s.api.core.v1.EnvFromSource", schema);
+}

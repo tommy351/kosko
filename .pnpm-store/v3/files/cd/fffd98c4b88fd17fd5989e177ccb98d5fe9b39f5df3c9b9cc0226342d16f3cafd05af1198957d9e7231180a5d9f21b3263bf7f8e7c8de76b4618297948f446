@@ -1,0 +1,20 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiNetworkingV1ServiceBackendPort } from "./IoK8sApiNetworkingV1ServiceBackendPort.mjs";
+const schema = {
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "port": {
+            "$ref": "io.k8s.api.networking.v1.ServiceBackendPort#"
+        }
+    },
+    "required": [
+        "name"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiNetworkingV1ServiceBackendPort();
+    register("io.k8s.api.networking.v1.IngressServiceBackend", schema);
+}

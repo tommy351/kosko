@@ -1,0 +1,43 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerBehavior_1 = require("./IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerBehavior.js");
+const IoK8sApiAutoscalingV2beta2MetricSpec_1 = require("./IoK8sApiAutoscalingV2beta2MetricSpec.js");
+const IoK8sApiAutoscalingV2beta2CrossVersionObjectReference_1 = require("./IoK8sApiAutoscalingV2beta2CrossVersionObjectReference.js");
+const schema = {
+    "properties": {
+        "behavior": {
+            "$ref": "io.k8s.api.autoscaling.v2beta2.HorizontalPodAutoscalerBehavior#"
+        },
+        "maxReplicas": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "metrics": {
+            "items": {
+                "$ref": "io.k8s.api.autoscaling.v2beta2.MetricSpec#"
+            },
+            "type": "array"
+        },
+        "minReplicas": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "scaleTargetRef": {
+            "$ref": "io.k8s.api.autoscaling.v2beta2.CrossVersionObjectReference#"
+        }
+    },
+    "required": [
+        "scaleTargetRef",
+        "maxReplicas"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerBehavior_1.addSchema();
+    IoK8sApiAutoscalingV2beta2MetricSpec_1.addSchema();
+    IoK8sApiAutoscalingV2beta2CrossVersionObjectReference_1.addSchema();
+    validate_1.register("io.k8s.api.autoscaling.v2beta2.HorizontalPodAutoscalerSpec", schema);
+}
+exports.addSchema = addSchema;

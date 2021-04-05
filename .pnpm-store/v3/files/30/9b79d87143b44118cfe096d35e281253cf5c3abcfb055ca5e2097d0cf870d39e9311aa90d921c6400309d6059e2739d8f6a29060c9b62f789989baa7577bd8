@@ -1,0 +1,50 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1LocalObjectReference_1 = require("./IoK8sApiCoreV1LocalObjectReference.js");
+const schema = {
+    "properties": {
+        "fsType": {
+            "type": "string"
+        },
+        "gateway": {
+            "type": "string"
+        },
+        "protectionDomain": {
+            "type": "string"
+        },
+        "readOnly": {
+            "type": "boolean"
+        },
+        "secretRef": {
+            "$ref": "io.k8s.api.core.v1.LocalObjectReference#"
+        },
+        "sslEnabled": {
+            "type": "boolean"
+        },
+        "storageMode": {
+            "type": "string"
+        },
+        "storagePool": {
+            "type": "string"
+        },
+        "system": {
+            "type": "string"
+        },
+        "volumeName": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "gateway",
+        "system",
+        "secretRef"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1LocalObjectReference_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.ScaleIOVolumeSource", schema);
+}
+exports.addSchema = addSchema;

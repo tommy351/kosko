@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAdmissionregistrationV1RuleWithOperations.mjs";
+/**
+ * RuleWithOperations is a tuple of Operations and Resources. It is recommended to make sure that all the tuple expansions are valid.
+ */
+export class IoK8sApiAdmissionregistrationV1RuleWithOperations extends Model {
+}
+Model.setSchema(IoK8sApiAdmissionregistrationV1RuleWithOperations, "io.k8s.api.admissionregistration.v1.RuleWithOperations", addSchema);
+export { IoK8sApiAdmissionregistrationV1RuleWithOperations as RuleWithOperations };

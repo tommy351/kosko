@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PersistentVolumeClaimSpec = exports.IoK8sApiCoreV1PersistentVolumeClaimSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1PersistentVolumeClaimSpec_1 = require("../_schemas/IoK8sApiCoreV1PersistentVolumeClaimSpec.js");
+/**
+ * PersistentVolumeClaimSpec describes the common attributes of storage devices and allows a Source for provider-specific attributes
+ */
+class IoK8sApiCoreV1PersistentVolumeClaimSpec extends base_1.Model {
+}
+exports.IoK8sApiCoreV1PersistentVolumeClaimSpec = IoK8sApiCoreV1PersistentVolumeClaimSpec;
+exports.PersistentVolumeClaimSpec = IoK8sApiCoreV1PersistentVolumeClaimSpec;
+base_1.Model.setSchema(IoK8sApiCoreV1PersistentVolumeClaimSpec, "io.k8s.api.core.v1.PersistentVolumeClaimSpec", IoK8sApiCoreV1PersistentVolumeClaimSpec_1.addSchema);

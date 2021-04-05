@@ -1,0 +1,19 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApimachineryPkgApisMetaV1ObjectMeta } from "./IoK8sApimachineryPkgApisMetaV1ObjectMeta.mjs";
+import { addSchema as IoK8sApiBatchV1JobSpec } from "./IoK8sApiBatchV1JobSpec.mjs";
+const schema = {
+    "properties": {
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta#"
+        },
+        "spec": {
+            "$ref": "io.k8s.api.batch.v1.JobSpec#"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1ObjectMeta();
+    IoK8sApiBatchV1JobSpec();
+    register("io.k8s.api.batch.v1beta1.JobTemplateSpec", schema);
+}

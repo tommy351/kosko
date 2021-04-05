@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PriorityLevelConfigurationReference = exports.IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationReference = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationReference_1 = require("../_schemas/IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationReference.js");
+/**
+ * PriorityLevelConfigurationReference contains information that points to the "request-priority" being used.
+ */
+class IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationReference extends base_1.Model {
+}
+exports.IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationReference = IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationReference;
+exports.PriorityLevelConfigurationReference = IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationReference;
+base_1.Model.setSchema(IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationReference, "io.k8s.api.flowcontrol.v1alpha1.PriorityLevelConfigurationReference", IoK8sApiFlowcontrolV1alpha1PriorityLevelConfigurationReference_1.addSchema);

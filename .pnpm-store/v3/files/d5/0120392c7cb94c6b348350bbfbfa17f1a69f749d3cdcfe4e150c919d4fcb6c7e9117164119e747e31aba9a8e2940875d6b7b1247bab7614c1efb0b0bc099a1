@@ -1,0 +1,31 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "group": {
+            "type": "string"
+        },
+        "readOnly": {
+            "type": "boolean"
+        },
+        "registry": {
+            "type": "string"
+        },
+        "tenant": {
+            "type": "string"
+        },
+        "user": {
+            "type": "string"
+        },
+        "volume": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "registry",
+        "volume"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.core.v1.QuobyteVolumeSource", schema);
+}

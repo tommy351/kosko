@@ -1,0 +1,17 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * NamespaceSpec describes the attributes on a Namespace.
+ */
+export interface IIoK8sApiCoreV1NamespaceSpec {
+    /**
+     * Finalizers is an opaque list of values that must be empty to permanently remove object from storage. More info: https://kubernetes.io/docs/tasks/administer-cluster/namespaces/
+     */
+    "finalizers"?: Array<string>;
+}
+/**
+ * NamespaceSpec describes the attributes on a Namespace.
+ */
+export declare class IoK8sApiCoreV1NamespaceSpec extends Model<IIoK8sApiCoreV1NamespaceSpec> implements IIoK8sApiCoreV1NamespaceSpec {
+    "finalizers"?: Array<string>;
+}
+export { IIoK8sApiCoreV1NamespaceSpec as INamespaceSpec, IoK8sApiCoreV1NamespaceSpec as NamespaceSpec };

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.QuobyteVolumeSource = exports.IoK8sApiCoreV1QuobyteVolumeSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1QuobyteVolumeSource_1 = require("../_schemas/IoK8sApiCoreV1QuobyteVolumeSource.js");
+/**
+ * Represents a Quobyte mount that lasts the lifetime of a pod. Quobyte volumes do not support ownership management or SELinux relabeling.
+ */
+class IoK8sApiCoreV1QuobyteVolumeSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1QuobyteVolumeSource = IoK8sApiCoreV1QuobyteVolumeSource;
+exports.QuobyteVolumeSource = IoK8sApiCoreV1QuobyteVolumeSource;
+base_1.Model.setSchema(IoK8sApiCoreV1QuobyteVolumeSource, "io.k8s.api.core.v1.QuobyteVolumeSource", IoK8sApiCoreV1QuobyteVolumeSource_1.addSchema);

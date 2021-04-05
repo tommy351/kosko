@@ -1,0 +1,18 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiAutoscalingV2beta2HPAScalingRules } from "./IoK8sApiAutoscalingV2beta2HPAScalingRules.mjs";
+const schema = {
+    "properties": {
+        "scaleDown": {
+            "$ref": "io.k8s.api.autoscaling.v2beta2.HPAScalingRules#"
+        },
+        "scaleUp": {
+            "$ref": "io.k8s.api.autoscaling.v2beta2.HPAScalingRules#"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiAutoscalingV2beta2HPAScalingRules();
+    IoK8sApiAutoscalingV2beta2HPAScalingRules();
+    register("io.k8s.api.autoscaling.v2beta2.HorizontalPodAutoscalerBehavior", schema);
+}

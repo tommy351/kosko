@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiPolicyV1beta1AllowedFlexVolume.mjs";
+/**
+ * AllowedFlexVolume represents a single Flexvolume that is allowed to be used.
+ */
+export class IoK8sApiPolicyV1beta1AllowedFlexVolume extends Model {
+}
+Model.setSchema(IoK8sApiPolicyV1beta1AllowedFlexVolume, "io.k8s.api.policy.v1beta1.AllowedFlexVolume", addSchema);
+export { IoK8sApiPolicyV1beta1AllowedFlexVolume as AllowedFlexVolume };

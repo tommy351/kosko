@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Endpoint = exports.IoK8sApiDiscoveryV1beta1Endpoint = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiDiscoveryV1beta1Endpoint_1 = require("../_schemas/IoK8sApiDiscoveryV1beta1Endpoint.js");
+/**
+ * Endpoint represents a single logical "backend" implementing a service.
+ */
+class IoK8sApiDiscoveryV1beta1Endpoint extends base_1.Model {
+}
+exports.IoK8sApiDiscoveryV1beta1Endpoint = IoK8sApiDiscoveryV1beta1Endpoint;
+exports.Endpoint = IoK8sApiDiscoveryV1beta1Endpoint;
+base_1.Model.setSchema(IoK8sApiDiscoveryV1beta1Endpoint, "io.k8s.api.discovery.v1beta1.Endpoint", IoK8sApiDiscoveryV1beta1Endpoint_1.addSchema);

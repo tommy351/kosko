@@ -1,0 +1,59 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const schema = {
+    "properties": {
+        "categories": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "group": {
+            "type": "string"
+        },
+        "kind": {
+            "type": "string"
+        },
+        "name": {
+            "type": "string"
+        },
+        "namespaced": {
+            "type": "boolean"
+        },
+        "shortNames": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "singularName": {
+            "type": "string"
+        },
+        "storageVersionHash": {
+            "type": "string"
+        },
+        "verbs": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "version": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "name",
+        "singularName",
+        "namespaced",
+        "kind",
+        "verbs"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    validate_1.register("io.k8s.apimachinery.pkg.apis.meta.v1.APIResource", schema);
+}
+exports.addSchema = addSchema;

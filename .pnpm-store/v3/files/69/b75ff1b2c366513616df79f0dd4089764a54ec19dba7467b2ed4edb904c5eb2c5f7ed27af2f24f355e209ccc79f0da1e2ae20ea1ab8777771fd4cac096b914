@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MetricTarget = exports.IoK8sApiAutoscalingV2beta2MetricTarget = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAutoscalingV2beta2MetricTarget_1 = require("../_schemas/IoK8sApiAutoscalingV2beta2MetricTarget.js");
+/**
+ * MetricTarget defines the target value, average value, or average utilization of a specific metric
+ */
+class IoK8sApiAutoscalingV2beta2MetricTarget extends base_1.Model {
+}
+exports.IoK8sApiAutoscalingV2beta2MetricTarget = IoK8sApiAutoscalingV2beta2MetricTarget;
+exports.MetricTarget = IoK8sApiAutoscalingV2beta2MetricTarget;
+base_1.Model.setSchema(IoK8sApiAutoscalingV2beta2MetricTarget, "io.k8s.api.autoscaling.v2beta2.MetricTarget", IoK8sApiAutoscalingV2beta2MetricTarget_1.addSchema);

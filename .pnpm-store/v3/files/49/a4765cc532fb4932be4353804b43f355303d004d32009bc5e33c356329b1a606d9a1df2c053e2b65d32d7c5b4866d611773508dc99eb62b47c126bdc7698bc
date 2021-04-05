@@ -1,0 +1,19 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * PodDNSConfigOption defines DNS resolver options of a pod.
+ */
+export interface IIoK8sApiCoreV1PodDNSConfigOption {
+    /**
+     * Required.
+     */
+    "name"?: string;
+    "value"?: string;
+}
+/**
+ * PodDNSConfigOption defines DNS resolver options of a pod.
+ */
+export declare class IoK8sApiCoreV1PodDNSConfigOption extends Model<IIoK8sApiCoreV1PodDNSConfigOption> implements IIoK8sApiCoreV1PodDNSConfigOption {
+    "name"?: string;
+    "value"?: string;
+}
+export { IIoK8sApiCoreV1PodDNSConfigOption as IPodDNSConfigOption, IoK8sApiCoreV1PodDNSConfigOption as PodDNSConfigOption };

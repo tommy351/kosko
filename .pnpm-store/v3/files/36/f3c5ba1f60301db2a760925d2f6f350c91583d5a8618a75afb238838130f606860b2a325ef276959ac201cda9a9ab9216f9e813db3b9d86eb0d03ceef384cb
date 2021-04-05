@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FlowDistinguisherMethod = exports.IoK8sApiFlowcontrolV1alpha1FlowDistinguisherMethod = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiFlowcontrolV1alpha1FlowDistinguisherMethod_1 = require("../_schemas/IoK8sApiFlowcontrolV1alpha1FlowDistinguisherMethod.js");
+/**
+ * FlowDistinguisherMethod specifies the method of a flow distinguisher.
+ */
+class IoK8sApiFlowcontrolV1alpha1FlowDistinguisherMethod extends base_1.Model {
+}
+exports.IoK8sApiFlowcontrolV1alpha1FlowDistinguisherMethod = IoK8sApiFlowcontrolV1alpha1FlowDistinguisherMethod;
+exports.FlowDistinguisherMethod = IoK8sApiFlowcontrolV1alpha1FlowDistinguisherMethod;
+base_1.Model.setSchema(IoK8sApiFlowcontrolV1alpha1FlowDistinguisherMethod, "io.k8s.api.flowcontrol.v1alpha1.FlowDistinguisherMethod", IoK8sApiFlowcontrolV1alpha1FlowDistinguisherMethod_1.addSchema);

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ValidatingWebhook = exports.IoK8sApiAdmissionregistrationV1ValidatingWebhook = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAdmissionregistrationV1ValidatingWebhook_1 = require("../_schemas/IoK8sApiAdmissionregistrationV1ValidatingWebhook.js");
+/**
+ * ValidatingWebhook describes an admission webhook and the resources and operations it applies to.
+ */
+class IoK8sApiAdmissionregistrationV1ValidatingWebhook extends base_1.Model {
+}
+exports.IoK8sApiAdmissionregistrationV1ValidatingWebhook = IoK8sApiAdmissionregistrationV1ValidatingWebhook;
+exports.ValidatingWebhook = IoK8sApiAdmissionregistrationV1ValidatingWebhook;
+base_1.Model.setSchema(IoK8sApiAdmissionregistrationV1ValidatingWebhook, "io.k8s.api.admissionregistration.v1.ValidatingWebhook", IoK8sApiAdmissionregistrationV1ValidatingWebhook_1.addSchema);

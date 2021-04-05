@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAutoscalingV2beta1MetricSpec.mjs";
+/**
+ * MetricSpec specifies how to scale based on a single metric (only `type` and one other matching field should be set at once).
+ */
+export class IoK8sApiAutoscalingV2beta1MetricSpec extends Model {
+}
+Model.setSchema(IoK8sApiAutoscalingV2beta1MetricSpec, "io.k8s.api.autoscaling.v2beta1.MetricSpec", addSchema);
+export { IoK8sApiAutoscalingV2beta1MetricSpec as MetricSpec };

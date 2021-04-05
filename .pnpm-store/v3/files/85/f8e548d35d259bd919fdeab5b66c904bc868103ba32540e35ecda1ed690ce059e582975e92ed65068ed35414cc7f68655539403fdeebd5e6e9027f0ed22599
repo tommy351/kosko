@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RuntimeClassSpec = exports.IoK8sApiNodeV1alpha1RuntimeClassSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiNodeV1alpha1RuntimeClassSpec_1 = require("../_schemas/IoK8sApiNodeV1alpha1RuntimeClassSpec.js");
+/**
+ * RuntimeClassSpec is a specification of a RuntimeClass. It contains parameters that are required to describe the RuntimeClass to the Container Runtime Interface (CRI) implementation, as well as any other components that need to understand how the pod will be run. The RuntimeClassSpec is immutable.
+ */
+class IoK8sApiNodeV1alpha1RuntimeClassSpec extends base_1.Model {
+}
+exports.IoK8sApiNodeV1alpha1RuntimeClassSpec = IoK8sApiNodeV1alpha1RuntimeClassSpec;
+exports.RuntimeClassSpec = IoK8sApiNodeV1alpha1RuntimeClassSpec;
+base_1.Model.setSchema(IoK8sApiNodeV1alpha1RuntimeClassSpec, "io.k8s.api.node.v1alpha1.RuntimeClassSpec", IoK8sApiNodeV1alpha1RuntimeClassSpec_1.addSchema);

@@ -1,0 +1,30 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiFlowcontrolV1alpha1GroupSubject } from "./IoK8sApiFlowcontrolV1alpha1GroupSubject.mjs";
+import { addSchema as IoK8sApiFlowcontrolV1alpha1ServiceAccountSubject } from "./IoK8sApiFlowcontrolV1alpha1ServiceAccountSubject.mjs";
+import { addSchema as IoK8sApiFlowcontrolV1alpha1UserSubject } from "./IoK8sApiFlowcontrolV1alpha1UserSubject.mjs";
+const schema = {
+    "properties": {
+        "group": {
+            "$ref": "io.k8s.api.flowcontrol.v1alpha1.GroupSubject#"
+        },
+        "kind": {
+            "type": "string"
+        },
+        "serviceAccount": {
+            "$ref": "io.k8s.api.flowcontrol.v1alpha1.ServiceAccountSubject#"
+        },
+        "user": {
+            "$ref": "io.k8s.api.flowcontrol.v1alpha1.UserSubject#"
+        }
+    },
+    "required": [
+        "kind"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiFlowcontrolV1alpha1GroupSubject();
+    IoK8sApiFlowcontrolV1alpha1ServiceAccountSubject();
+    IoK8sApiFlowcontrolV1alpha1UserSubject();
+    register("io.k8s.api.flowcontrol.v1alpha1.Subject", schema);
+}

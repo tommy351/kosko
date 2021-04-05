@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MetricValueStatus = exports.IoK8sApiAutoscalingV2beta2MetricValueStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAutoscalingV2beta2MetricValueStatus_1 = require("../_schemas/IoK8sApiAutoscalingV2beta2MetricValueStatus.js");
+/**
+ * MetricValueStatus holds the current value for a metric
+ */
+class IoK8sApiAutoscalingV2beta2MetricValueStatus extends base_1.Model {
+}
+exports.IoK8sApiAutoscalingV2beta2MetricValueStatus = IoK8sApiAutoscalingV2beta2MetricValueStatus;
+exports.MetricValueStatus = IoK8sApiAutoscalingV2beta2MetricValueStatus;
+base_1.Model.setSchema(IoK8sApiAutoscalingV2beta2MetricValueStatus, "io.k8s.api.autoscaling.v2beta2.MetricValueStatus", IoK8sApiAutoscalingV2beta2MetricValueStatus_1.addSchema);

@@ -1,0 +1,23 @@
+import { IIoK8sApiCoreV1PodAffinityTerm } from "./IoK8sApiCoreV1PodAffinityTerm";
+import { Model } from "@kubernetes-models/base";
+/**
+ * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
+ */
+export interface IIoK8sApiCoreV1WeightedPodAffinityTerm {
+    /**
+     * Required. A pod affinity term, associated with the corresponding weight.
+     */
+    "podAffinityTerm": IIoK8sApiCoreV1PodAffinityTerm;
+    /**
+     * weight associated with matching the corresponding podAffinityTerm, in the range 1-100.
+     */
+    "weight": number;
+}
+/**
+ * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
+ */
+export declare class IoK8sApiCoreV1WeightedPodAffinityTerm extends Model<IIoK8sApiCoreV1WeightedPodAffinityTerm> implements IIoK8sApiCoreV1WeightedPodAffinityTerm {
+    "podAffinityTerm": IIoK8sApiCoreV1PodAffinityTerm;
+    "weight": number;
+}
+export { IIoK8sApiCoreV1WeightedPodAffinityTerm as IWeightedPodAffinityTerm, IoK8sApiCoreV1WeightedPodAffinityTerm as WeightedPodAffinityTerm };

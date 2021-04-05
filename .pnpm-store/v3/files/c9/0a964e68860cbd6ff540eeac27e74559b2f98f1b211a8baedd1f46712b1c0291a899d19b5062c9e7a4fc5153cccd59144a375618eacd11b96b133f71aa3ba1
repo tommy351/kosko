@@ -1,0 +1,30 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiAuthenticationV1UserInfo_1 = require("./IoK8sApiAuthenticationV1UserInfo.js");
+const schema = {
+    "properties": {
+        "audiences": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "authenticated": {
+            "type": "boolean"
+        },
+        "error": {
+            "type": "string"
+        },
+        "user": {
+            "$ref": "io.k8s.api.authentication.v1.UserInfo#"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiAuthenticationV1UserInfo_1.addSchema();
+    validate_1.register("io.k8s.api.authentication.v1.TokenReviewStatus", schema);
+}
+exports.addSchema = addSchema;

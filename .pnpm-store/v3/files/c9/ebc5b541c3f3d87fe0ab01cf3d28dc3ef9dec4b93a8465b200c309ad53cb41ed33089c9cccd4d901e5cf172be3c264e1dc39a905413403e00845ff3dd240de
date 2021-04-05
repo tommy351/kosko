@@ -1,0 +1,39 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiPolicyV1beta1PodSecurityPolicy } from "./IoK8sApiPolicyV1beta1PodSecurityPolicy.mjs";
+import { addSchema as IoK8sApimachineryPkgApisMetaV1ListMeta } from "./IoK8sApimachineryPkgApisMetaV1ListMeta.mjs";
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string",
+            "enum": [
+                "policy/v1beta1"
+            ]
+        },
+        "items": {
+            "items": {
+                "$ref": "io.k8s.api.policy.v1beta1.PodSecurityPolicy#"
+            },
+            "type": "array"
+        },
+        "kind": {
+            "type": "string",
+            "enum": [
+                "PodSecurityPolicyList"
+            ]
+        },
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta#"
+        }
+    },
+    "required": [
+        "items",
+        "apiVersion",
+        "kind"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiPolicyV1beta1PodSecurityPolicy();
+    IoK8sApimachineryPkgApisMetaV1ListMeta();
+    register("io.k8s.api.policy.v1beta1.PodSecurityPolicyList", schema);
+}

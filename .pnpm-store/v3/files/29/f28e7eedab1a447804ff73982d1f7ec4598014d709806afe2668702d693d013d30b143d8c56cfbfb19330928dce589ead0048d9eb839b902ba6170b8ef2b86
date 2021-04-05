@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UserSubject = exports.IoK8sApiFlowcontrolV1alpha1UserSubject = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiFlowcontrolV1alpha1UserSubject_1 = require("../_schemas/IoK8sApiFlowcontrolV1alpha1UserSubject.js");
+/**
+ * UserSubject holds detailed information for user-kind subject.
+ */
+class IoK8sApiFlowcontrolV1alpha1UserSubject extends base_1.Model {
+}
+exports.IoK8sApiFlowcontrolV1alpha1UserSubject = IoK8sApiFlowcontrolV1alpha1UserSubject;
+exports.UserSubject = IoK8sApiFlowcontrolV1alpha1UserSubject;
+base_1.Model.setSchema(IoK8sApiFlowcontrolV1alpha1UserSubject, "io.k8s.api.flowcontrol.v1alpha1.UserSubject", IoK8sApiFlowcontrolV1alpha1UserSubject_1.addSchema);

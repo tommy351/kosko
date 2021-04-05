@@ -1,0 +1,27 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApimachineryPkgApisMetaV1Time } from "./IoK8sApimachineryPkgApisMetaV1Time.mjs";
+const schema = {
+    "properties": {
+        "effect": {
+            "type": "string"
+        },
+        "key": {
+            "type": "string"
+        },
+        "timeAdded": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.Time#"
+        },
+        "value": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "key",
+        "effect"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1Time();
+    register("io.k8s.api.core.v1.Taint", schema);
+}

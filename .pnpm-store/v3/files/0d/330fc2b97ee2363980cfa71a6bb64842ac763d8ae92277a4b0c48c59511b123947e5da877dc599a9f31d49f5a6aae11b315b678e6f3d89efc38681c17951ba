@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Deployment = exports.IoK8sApiAppsV1Deployment = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAppsV1Deployment_1 = require("../_schemas/IoK8sApiAppsV1Deployment.js");
+/**
+ * Deployment enables declarative updates for Pods and ReplicaSets.
+ */
+class IoK8sApiAppsV1Deployment extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAppsV1Deployment.apiVersion,
+            kind: IoK8sApiAppsV1Deployment.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiAppsV1Deployment = IoK8sApiAppsV1Deployment;
+exports.Deployment = IoK8sApiAppsV1Deployment;
+IoK8sApiAppsV1Deployment.apiVersion = "apps/v1";
+IoK8sApiAppsV1Deployment.kind = "Deployment";
+base_1.Model.setSchema(IoK8sApiAppsV1Deployment, "io.k8s.api.apps.v1.Deployment", IoK8sApiAppsV1Deployment_1.addSchema);

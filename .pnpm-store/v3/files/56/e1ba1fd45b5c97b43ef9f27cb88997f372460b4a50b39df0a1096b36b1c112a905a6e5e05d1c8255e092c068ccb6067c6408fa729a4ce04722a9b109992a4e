@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ServiceAccountSubject = exports.IoK8sApiFlowcontrolV1alpha1ServiceAccountSubject = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiFlowcontrolV1alpha1ServiceAccountSubject_1 = require("../_schemas/IoK8sApiFlowcontrolV1alpha1ServiceAccountSubject.js");
+/**
+ * ServiceAccountSubject holds detailed information for service-account-kind subject.
+ */
+class IoK8sApiFlowcontrolV1alpha1ServiceAccountSubject extends base_1.Model {
+}
+exports.IoK8sApiFlowcontrolV1alpha1ServiceAccountSubject = IoK8sApiFlowcontrolV1alpha1ServiceAccountSubject;
+exports.ServiceAccountSubject = IoK8sApiFlowcontrolV1alpha1ServiceAccountSubject;
+base_1.Model.setSchema(IoK8sApiFlowcontrolV1alpha1ServiceAccountSubject, "io.k8s.api.flowcontrol.v1alpha1.ServiceAccountSubject", IoK8sApiFlowcontrolV1alpha1ServiceAccountSubject_1.addSchema);

@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ResourceQuotaList = exports.IoK8sApiCoreV1ResourceQuotaList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ResourceQuotaList_1 = require("../_schemas/IoK8sApiCoreV1ResourceQuotaList.js");
+/**
+ * ResourceQuotaList is a list of ResourceQuota items.
+ */
+class IoK8sApiCoreV1ResourceQuotaList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1ResourceQuotaList.apiVersion,
+            kind: IoK8sApiCoreV1ResourceQuotaList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1ResourceQuotaList = IoK8sApiCoreV1ResourceQuotaList;
+exports.ResourceQuotaList = IoK8sApiCoreV1ResourceQuotaList;
+IoK8sApiCoreV1ResourceQuotaList.apiVersion = "v1";
+IoK8sApiCoreV1ResourceQuotaList.kind = "ResourceQuotaList";
+base_1.Model.setSchema(IoK8sApiCoreV1ResourceQuotaList, "io.k8s.api.core.v1.ResourceQuotaList", IoK8sApiCoreV1ResourceQuotaList_1.addSchema);

@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SecretList = exports.IoK8sApiCoreV1SecretList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1SecretList_1 = require("../_schemas/IoK8sApiCoreV1SecretList.js");
+/**
+ * SecretList is a list of Secret.
+ */
+class IoK8sApiCoreV1SecretList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1SecretList.apiVersion,
+            kind: IoK8sApiCoreV1SecretList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1SecretList = IoK8sApiCoreV1SecretList;
+exports.SecretList = IoK8sApiCoreV1SecretList;
+IoK8sApiCoreV1SecretList.apiVersion = "v1";
+IoK8sApiCoreV1SecretList.kind = "SecretList";
+base_1.Model.setSchema(IoK8sApiCoreV1SecretList, "io.k8s.api.core.v1.SecretList", IoK8sApiCoreV1SecretList_1.addSchema);

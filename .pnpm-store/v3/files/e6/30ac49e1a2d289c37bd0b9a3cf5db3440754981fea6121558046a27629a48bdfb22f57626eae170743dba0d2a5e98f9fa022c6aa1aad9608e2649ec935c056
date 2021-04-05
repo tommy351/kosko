@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.WindowsSecurityContextOptions = exports.IoK8sApiCoreV1WindowsSecurityContextOptions = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1WindowsSecurityContextOptions_1 = require("../_schemas/IoK8sApiCoreV1WindowsSecurityContextOptions.js");
+/**
+ * WindowsSecurityContextOptions contain Windows-specific options and credentials.
+ */
+class IoK8sApiCoreV1WindowsSecurityContextOptions extends base_1.Model {
+}
+exports.IoK8sApiCoreV1WindowsSecurityContextOptions = IoK8sApiCoreV1WindowsSecurityContextOptions;
+exports.WindowsSecurityContextOptions = IoK8sApiCoreV1WindowsSecurityContextOptions;
+base_1.Model.setSchema(IoK8sApiCoreV1WindowsSecurityContextOptions, "io.k8s.api.core.v1.WindowsSecurityContextOptions", IoK8sApiCoreV1WindowsSecurityContextOptions_1.addSchema);

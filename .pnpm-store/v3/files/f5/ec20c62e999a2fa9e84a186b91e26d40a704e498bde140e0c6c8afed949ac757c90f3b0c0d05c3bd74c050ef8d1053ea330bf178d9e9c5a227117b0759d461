@@ -1,0 +1,23 @@
+import { IIoK8sApiNetworkingV1ServiceBackendPort } from "./IoK8sApiNetworkingV1ServiceBackendPort";
+import { Model } from "@kubernetes-models/base";
+/**
+ * IngressServiceBackend references a Kubernetes Service as a Backend.
+ */
+export interface IIoK8sApiNetworkingV1IngressServiceBackend {
+    /**
+     * Name is the referenced service. The service must exist in the same namespace as the Ingress object.
+     */
+    "name": string;
+    /**
+     * Port of the referenced service. A port name or port number is required for a IngressServiceBackend.
+     */
+    "port"?: IIoK8sApiNetworkingV1ServiceBackendPort;
+}
+/**
+ * IngressServiceBackend references a Kubernetes Service as a Backend.
+ */
+export declare class IoK8sApiNetworkingV1IngressServiceBackend extends Model<IIoK8sApiNetworkingV1IngressServiceBackend> implements IIoK8sApiNetworkingV1IngressServiceBackend {
+    "name": string;
+    "port"?: IIoK8sApiNetworkingV1ServiceBackendPort;
+}
+export { IIoK8sApiNetworkingV1IngressServiceBackend as IIngressServiceBackend, IoK8sApiNetworkingV1IngressServiceBackend as IngressServiceBackend };

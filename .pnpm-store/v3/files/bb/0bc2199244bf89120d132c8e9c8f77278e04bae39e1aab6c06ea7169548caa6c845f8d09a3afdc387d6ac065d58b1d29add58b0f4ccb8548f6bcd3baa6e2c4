@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ResourceQuotaStatus = exports.IoK8sApiCoreV1ResourceQuotaStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ResourceQuotaStatus_1 = require("../_schemas/IoK8sApiCoreV1ResourceQuotaStatus.js");
+/**
+ * ResourceQuotaStatus defines the enforced hard limits and observed use.
+ */
+class IoK8sApiCoreV1ResourceQuotaStatus extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ResourceQuotaStatus = IoK8sApiCoreV1ResourceQuotaStatus;
+exports.ResourceQuotaStatus = IoK8sApiCoreV1ResourceQuotaStatus;
+base_1.Model.setSchema(IoK8sApiCoreV1ResourceQuotaStatus, "io.k8s.api.core.v1.ResourceQuotaStatus", IoK8sApiCoreV1ResourceQuotaStatus_1.addSchema);

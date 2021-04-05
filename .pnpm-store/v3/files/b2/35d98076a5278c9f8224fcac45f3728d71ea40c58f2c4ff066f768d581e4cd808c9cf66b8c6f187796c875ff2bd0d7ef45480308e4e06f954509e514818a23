@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApimachineryPkgApisMetaV1WatchEvent.mjs";
+/**
+ * Event represents a single event to a watched resource.
+ */
+export class IoK8sApimachineryPkgApisMetaV1WatchEvent extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApimachineryPkgApisMetaV1WatchEvent.apiVersion,
+            kind: IoK8sApimachineryPkgApisMetaV1WatchEvent.kind,
+            ...data
+        });
+    }
+}
+IoK8sApimachineryPkgApisMetaV1WatchEvent.apiVersion = "v1";
+IoK8sApimachineryPkgApisMetaV1WatchEvent.kind = "WatchEvent";
+Model.setSchema(IoK8sApimachineryPkgApisMetaV1WatchEvent, "io.k8s.apimachinery.pkg.apis.meta.v1.WatchEvent", addSchema);
+export { IoK8sApimachineryPkgApisMetaV1WatchEvent as WatchEvent };

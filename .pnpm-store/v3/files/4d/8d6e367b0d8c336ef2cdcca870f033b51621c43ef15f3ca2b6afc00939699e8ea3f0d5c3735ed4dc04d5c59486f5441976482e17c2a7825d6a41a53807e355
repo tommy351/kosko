@@ -1,0 +1,39 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApimachineryPkgApisMetaV1DeleteOptions_1 = require("./IoK8sApimachineryPkgApisMetaV1DeleteOptions.js");
+const IoK8sApimachineryPkgApisMetaV1ObjectMeta_1 = require("./IoK8sApimachineryPkgApisMetaV1ObjectMeta.js");
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string",
+            "enum": [
+                "policy/v1beta1"
+            ]
+        },
+        "deleteOptions": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions#"
+        },
+        "kind": {
+            "type": "string",
+            "enum": [
+                "Eviction"
+            ]
+        },
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta#"
+        }
+    },
+    "type": "object",
+    "required": [
+        "apiVersion",
+        "kind"
+    ]
+};
+function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1DeleteOptions_1.addSchema();
+    IoK8sApimachineryPkgApisMetaV1ObjectMeta_1.addSchema();
+    validate_1.register("io.k8s.api.policy.v1beta1.Eviction", schema);
+}
+exports.addSchema = addSchema;

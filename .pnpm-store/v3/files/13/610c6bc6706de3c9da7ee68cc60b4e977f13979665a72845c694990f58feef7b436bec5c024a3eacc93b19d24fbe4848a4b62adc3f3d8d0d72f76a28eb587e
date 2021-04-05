@@ -1,0 +1,17 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiFlowcontrolV1alpha1FlowSchemaCondition } from "./IoK8sApiFlowcontrolV1alpha1FlowSchemaCondition.mjs";
+const schema = {
+    "properties": {
+        "conditions": {
+            "items": {
+                "$ref": "io.k8s.api.flowcontrol.v1alpha1.FlowSchemaCondition#"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiFlowcontrolV1alpha1FlowSchemaCondition();
+    register("io.k8s.api.flowcontrol.v1alpha1.FlowSchemaStatus", schema);
+}

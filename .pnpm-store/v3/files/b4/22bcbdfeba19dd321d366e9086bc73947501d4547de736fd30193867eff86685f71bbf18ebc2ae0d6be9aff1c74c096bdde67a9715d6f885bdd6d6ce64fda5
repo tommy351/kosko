@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CronJobList = exports.IoK8sApiBatchV1beta1CronJobList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiBatchV1beta1CronJobList_1 = require("../_schemas/IoK8sApiBatchV1beta1CronJobList.js");
+/**
+ * CronJobList is a collection of cron jobs.
+ */
+class IoK8sApiBatchV1beta1CronJobList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiBatchV1beta1CronJobList.apiVersion,
+            kind: IoK8sApiBatchV1beta1CronJobList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiBatchV1beta1CronJobList = IoK8sApiBatchV1beta1CronJobList;
+exports.CronJobList = IoK8sApiBatchV1beta1CronJobList;
+IoK8sApiBatchV1beta1CronJobList.apiVersion = "batch/v1beta1";
+IoK8sApiBatchV1beta1CronJobList.kind = "CronJobList";
+base_1.Model.setSchema(IoK8sApiBatchV1beta1CronJobList, "io.k8s.api.batch.v1beta1.CronJobList", IoK8sApiBatchV1beta1CronJobList_1.addSchema);

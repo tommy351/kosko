@@ -1,0 +1,47 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "extra": {
+            "additionalProperties": {
+                "items": {
+                    "type": "string"
+                },
+                "type": "array"
+            },
+            "type": "object"
+        },
+        "groups": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "request": {
+            "format": "byte",
+            "type": "string"
+        },
+        "signerName": {
+            "type": "string"
+        },
+        "uid": {
+            "type": "string"
+        },
+        "usages": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "username": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "request",
+        "signerName"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.certificates.v1.CertificateSigningRequestSpec", schema);
+}

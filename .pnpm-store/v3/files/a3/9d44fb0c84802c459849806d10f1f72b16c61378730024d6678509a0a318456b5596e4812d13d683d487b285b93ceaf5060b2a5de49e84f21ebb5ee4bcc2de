@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PersistentVolumeClaim = exports.IoK8sApiCoreV1PersistentVolumeClaim = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1PersistentVolumeClaim_1 = require("../_schemas/IoK8sApiCoreV1PersistentVolumeClaim.js");
+/**
+ * PersistentVolumeClaim is a user's request for and claim to a persistent volume
+ */
+class IoK8sApiCoreV1PersistentVolumeClaim extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1PersistentVolumeClaim.apiVersion,
+            kind: IoK8sApiCoreV1PersistentVolumeClaim.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1PersistentVolumeClaim = IoK8sApiCoreV1PersistentVolumeClaim;
+exports.PersistentVolumeClaim = IoK8sApiCoreV1PersistentVolumeClaim;
+IoK8sApiCoreV1PersistentVolumeClaim.apiVersion = "v1";
+IoK8sApiCoreV1PersistentVolumeClaim.kind = "PersistentVolumeClaim";
+base_1.Model.setSchema(IoK8sApiCoreV1PersistentVolumeClaim, "io.k8s.api.core.v1.PersistentVolumeClaim", IoK8sApiCoreV1PersistentVolumeClaim_1.addSchema);

@@ -1,0 +1,15 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "optional": {
+            "type": "boolean"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.core.v1.ConfigMapEnvSource", schema);
+}

@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PodTemplate = exports.IoK8sApiCoreV1PodTemplate = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1PodTemplate_1 = require("../_schemas/IoK8sApiCoreV1PodTemplate.js");
+/**
+ * PodTemplate describes a template for creating copies of a predefined pod.
+ */
+class IoK8sApiCoreV1PodTemplate extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1PodTemplate.apiVersion,
+            kind: IoK8sApiCoreV1PodTemplate.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1PodTemplate = IoK8sApiCoreV1PodTemplate;
+exports.PodTemplate = IoK8sApiCoreV1PodTemplate;
+IoK8sApiCoreV1PodTemplate.apiVersion = "v1";
+IoK8sApiCoreV1PodTemplate.kind = "PodTemplate";
+base_1.Model.setSchema(IoK8sApiCoreV1PodTemplate, "io.k8s.api.core.v1.PodTemplate", IoK8sApiCoreV1PodTemplate_1.addSchema);

@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MutatingWebhookConfiguration = exports.IoK8sApiAdmissionregistrationV1MutatingWebhookConfiguration = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAdmissionregistrationV1MutatingWebhookConfiguration_1 = require("../_schemas/IoK8sApiAdmissionregistrationV1MutatingWebhookConfiguration.js");
+/**
+ * MutatingWebhookConfiguration describes the configuration of and admission webhook that accept or reject and may change the object.
+ */
+class IoK8sApiAdmissionregistrationV1MutatingWebhookConfiguration extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAdmissionregistrationV1MutatingWebhookConfiguration.apiVersion,
+            kind: IoK8sApiAdmissionregistrationV1MutatingWebhookConfiguration.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiAdmissionregistrationV1MutatingWebhookConfiguration = IoK8sApiAdmissionregistrationV1MutatingWebhookConfiguration;
+exports.MutatingWebhookConfiguration = IoK8sApiAdmissionregistrationV1MutatingWebhookConfiguration;
+IoK8sApiAdmissionregistrationV1MutatingWebhookConfiguration.apiVersion = "admissionregistration.k8s.io/v1";
+IoK8sApiAdmissionregistrationV1MutatingWebhookConfiguration.kind = "MutatingWebhookConfiguration";
+base_1.Model.setSchema(IoK8sApiAdmissionregistrationV1MutatingWebhookConfiguration, "io.k8s.api.admissionregistration.v1.MutatingWebhookConfiguration", IoK8sApiAdmissionregistrationV1MutatingWebhookConfiguration_1.addSchema);

@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiEventsV1Event.mjs";
+/**
+ * Event is a report of an event somewhere in the cluster. It generally denotes some state change in the system.
+ */
+export class IoK8sApiEventsV1Event extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiEventsV1Event.apiVersion,
+            kind: IoK8sApiEventsV1Event.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiEventsV1Event.apiVersion = "events.k8s.io/v1";
+IoK8sApiEventsV1Event.kind = "Event";
+Model.setSchema(IoK8sApiEventsV1Event, "io.k8s.api.events.v1.Event", addSchema);
+export { IoK8sApiEventsV1Event as Event };

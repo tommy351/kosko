@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SecretEnvSource = exports.IoK8sApiCoreV1SecretEnvSource = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1SecretEnvSource_1 = require("../_schemas/IoK8sApiCoreV1SecretEnvSource.js");
+/**
+ * SecretEnvSource selects a Secret to populate the environment variables with.
+ *
+ * The contents of the target Secret's Data field will represent the key-value pairs as environment variables.
+ */
+class IoK8sApiCoreV1SecretEnvSource extends base_1.Model {
+}
+exports.IoK8sApiCoreV1SecretEnvSource = IoK8sApiCoreV1SecretEnvSource;
+exports.SecretEnvSource = IoK8sApiCoreV1SecretEnvSource;
+base_1.Model.setSchema(IoK8sApiCoreV1SecretEnvSource, "io.k8s.api.core.v1.SecretEnvSource", IoK8sApiCoreV1SecretEnvSource_1.addSchema);

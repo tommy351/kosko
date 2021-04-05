@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ObjectMeta = exports.IoK8sApimachineryPkgApisMetaV1ObjectMeta = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApimachineryPkgApisMetaV1ObjectMeta_1 = require("../_schemas/IoK8sApimachineryPkgApisMetaV1ObjectMeta.js");
+/**
+ * ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+ */
+class IoK8sApimachineryPkgApisMetaV1ObjectMeta extends base_1.Model {
+}
+exports.IoK8sApimachineryPkgApisMetaV1ObjectMeta = IoK8sApimachineryPkgApisMetaV1ObjectMeta;
+exports.ObjectMeta = IoK8sApimachineryPkgApisMetaV1ObjectMeta;
+base_1.Model.setSchema(IoK8sApimachineryPkgApisMetaV1ObjectMeta, "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta", IoK8sApimachineryPkgApisMetaV1ObjectMeta_1.addSchema);

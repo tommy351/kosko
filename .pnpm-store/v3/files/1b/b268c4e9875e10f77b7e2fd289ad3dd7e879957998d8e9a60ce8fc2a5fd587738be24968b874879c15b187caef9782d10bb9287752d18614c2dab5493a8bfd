@@ -1,0 +1,43 @@
+import { IIoK8sApimachineryPkgApisMetaV1ObjectMeta } from "./IoK8sApimachineryPkgApisMetaV1ObjectMeta";
+import { IIoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerSpec } from "./IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerSpec";
+import { IIoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerStatus } from "./IoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerStatus";
+import { ModelData, Model } from "@kubernetes-models/base";
+/**
+ * HorizontalPodAutoscaler is the configuration for a horizontal pod autoscaler, which automatically manages the replica count of any resource implementing the scale subresource based on the metrics specified.
+ */
+export interface IIoK8sApiAutoscalingV2beta2HorizontalPodAutoscaler {
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    "apiVersion": "autoscaling/v2beta2";
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    "kind": "HorizontalPodAutoscaler";
+    /**
+     * metadata is the standard object metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ObjectMeta;
+    /**
+     * spec is the specification for the behaviour of the autoscaler. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.
+     */
+    "spec"?: IIoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerSpec;
+    /**
+     * status is the current information about the autoscaler.
+     */
+    "status"?: IIoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerStatus;
+}
+/**
+ * HorizontalPodAutoscaler is the configuration for a horizontal pod autoscaler, which automatically manages the replica count of any resource implementing the scale subresource based on the metrics specified.
+ */
+export declare class IoK8sApiAutoscalingV2beta2HorizontalPodAutoscaler extends Model<IIoK8sApiAutoscalingV2beta2HorizontalPodAutoscaler> implements IIoK8sApiAutoscalingV2beta2HorizontalPodAutoscaler {
+    "apiVersion": IIoK8sApiAutoscalingV2beta2HorizontalPodAutoscaler["apiVersion"];
+    "kind": IIoK8sApiAutoscalingV2beta2HorizontalPodAutoscaler["kind"];
+    "metadata"?: IIoK8sApimachineryPkgApisMetaV1ObjectMeta;
+    "spec"?: IIoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerSpec;
+    "status"?: IIoK8sApiAutoscalingV2beta2HorizontalPodAutoscalerStatus;
+    static apiVersion: IIoK8sApiAutoscalingV2beta2HorizontalPodAutoscaler["apiVersion"];
+    static kind: IIoK8sApiAutoscalingV2beta2HorizontalPodAutoscaler["kind"];
+    constructor(data?: ModelData<IIoK8sApiAutoscalingV2beta2HorizontalPodAutoscaler>);
+}
+export { IIoK8sApiAutoscalingV2beta2HorizontalPodAutoscaler as IHorizontalPodAutoscaler, IoK8sApiAutoscalingV2beta2HorizontalPodAutoscaler as HorizontalPodAutoscaler };

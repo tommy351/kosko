@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiStorageV1CSIDriverList.mjs";
+/**
+ * CSIDriverList is a collection of CSIDriver objects.
+ */
+export class IoK8sApiStorageV1CSIDriverList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiStorageV1CSIDriverList.apiVersion,
+            kind: IoK8sApiStorageV1CSIDriverList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiStorageV1CSIDriverList.apiVersion = "storage.k8s.io/v1";
+IoK8sApiStorageV1CSIDriverList.kind = "CSIDriverList";
+Model.setSchema(IoK8sApiStorageV1CSIDriverList, "io.k8s.api.storage.v1.CSIDriverList", addSchema);
+export { IoK8sApiStorageV1CSIDriverList as CSIDriverList };

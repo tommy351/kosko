@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DeploymentStatus = exports.IoK8sApiAppsV1DeploymentStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAppsV1DeploymentStatus_1 = require("../_schemas/IoK8sApiAppsV1DeploymentStatus.js");
+/**
+ * DeploymentStatus is the most recently observed status of the Deployment.
+ */
+class IoK8sApiAppsV1DeploymentStatus extends base_1.Model {
+}
+exports.IoK8sApiAppsV1DeploymentStatus = IoK8sApiAppsV1DeploymentStatus;
+exports.DeploymentStatus = IoK8sApiAppsV1DeploymentStatus;
+base_1.Model.setSchema(IoK8sApiAppsV1DeploymentStatus, "io.k8s.api.apps.v1.DeploymentStatus", IoK8sApiAppsV1DeploymentStatus_1.addSchema);

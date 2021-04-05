@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`serializer errors are immutable 1`] = `[Error: <PROJECT_ROOT>/error-message]`;
+
+exports[`serializer handle NaN 1`] = `NaN`;
+
+exports[`serializer handle boolean 1`] = `true`;
+
+exports[`serializer handle date 1`] = `2018-01-01T00:00:00.000Z`;
+
+exports[`serializer handle function 1`] = `[Function]`;
+
+exports[`serializer handle null 1`] = `null`;
+
+exports[`serializer handle number 1`] = `1`;
+
+exports[`serializer handle promise 1`] = `Promise {}`;
+
+exports[`serializer handle regex 1`] = `/-/`;
+
+exports[`serializer handle undefined 1`] = `undefined`;
+
+exports[`serializer handles an assortment of nested objects 1`] = `
+Object {
+  "nested": Object {
+    "arr": Array [
+      "<PROJECT_ROOT>/arr",
+      Object {
+        "arrPath": "<PROJECT_ROOT>/arrPath",
+      },
+    ],
+    "myPath": "<PROJECT_ROOT>/src",
+  },
+}
+`;
+
+exports[`serializer handles path inside string without process.cwd 1`] = `"long string /root/src/somewhere path"`;
+
+exports[`serializer handles process.chdir <PROJECT_ROOT> 1`] = `"<PROJECT_ROOT>/src/somewhere"`;
+
+exports[`serializer is immutable 1`] = `
+Object {
+  "nested": Object {
+    "arr": Array [
+      "<PROJECT_ROOT>/arr",
+      Object {
+        "arrPath": "<PROJECT_ROOT>/arrPath",
+      },
+    ],
+    "myPath": "<PROJECT_ROOT>/src",
+  },
+}
+`;
+
+exports[`serializer preserves path directories after the <PROJECT_ROOT> 1`] = `"<PROJECT_ROOT>/src/somewhere"`;
+
+exports[`serializer replaces all roots 1`] = `
+Object {
+  "cwd": "<PROJECT_ROOT>/nested/cwd",
+  "home": "<HOME_DIR>/nested/home",
+  "temp": "<TEMP_DIR>/nested/temp",
+}
+`;
+
+exports[`serializer replaces every instance of process.cwd in the same string 1`] = `
+Object {
+  "PATH": "<PROJECT_ROOT>/path:<PROJECT_ROOT>/another/path",
+  "script": "const myPath = <PROJECT_ROOT>/path;
+      const mySecondPath = <PROJECT_ROOT>/another/path;",
+}
+`;
+
+exports[`serializer replaces process.cwd with <PROJECT_ROOT> 1`] = `"<PROJECT_ROOT>"`;
+
+exports[`serializer replaces process.cwd with <PROJECT_ROOT> in Object properties 1`] = `
+Object {
+  "myPath": "<PROJECT_ROOT>/src",
+}
+`;
+
+exports[`serializer replaces process.cwd with <PROJECT_ROOT> in an Error 1`] = `[Error: some error in <PROJECT_ROOT>/a/path]`;
+
+exports[`serializer replaces process.cwd with <PROJECT_ROOT> in array 1`] = `
+Array [
+  "<PROJECT_ROOT>/src",
+]
+`;
+
+exports[`serializer replaces process.cwd with <PROJECT_ROOT> when inside string 1`] = `"long string <PROJECT_ROOT>/src/somewhere path"`;
+
+exports[`serializer supports trailing slashes in the path 1`] = `"<PROJECT_ROOT>/path/with/trailing/slash/"`;

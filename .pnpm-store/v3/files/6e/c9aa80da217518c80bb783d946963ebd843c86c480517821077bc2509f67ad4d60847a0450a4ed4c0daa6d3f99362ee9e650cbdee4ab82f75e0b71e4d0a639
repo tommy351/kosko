@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ResourceQuotaSpec = exports.IoK8sApiCoreV1ResourceQuotaSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ResourceQuotaSpec_1 = require("../_schemas/IoK8sApiCoreV1ResourceQuotaSpec.js");
+/**
+ * ResourceQuotaSpec defines the desired hard limits to enforce for Quota.
+ */
+class IoK8sApiCoreV1ResourceQuotaSpec extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ResourceQuotaSpec = IoK8sApiCoreV1ResourceQuotaSpec;
+exports.ResourceQuotaSpec = IoK8sApiCoreV1ResourceQuotaSpec;
+base_1.Model.setSchema(IoK8sApiCoreV1ResourceQuotaSpec, "io.k8s.api.core.v1.ResourceQuotaSpec", IoK8sApiCoreV1ResourceQuotaSpec_1.addSchema);

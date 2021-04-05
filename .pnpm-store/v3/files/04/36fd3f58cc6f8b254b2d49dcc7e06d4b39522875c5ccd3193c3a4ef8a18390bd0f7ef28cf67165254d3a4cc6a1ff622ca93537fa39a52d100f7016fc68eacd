@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const schema = {
+    "properties": {
+        "audiences": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "token": {
+            "type": "string"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    validate_1.register("io.k8s.api.authentication.v1.TokenReviewSpec", schema);
+}
+exports.addSchema = addSchema;

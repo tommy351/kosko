@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.EventSeries = exports.IoK8sApiCoreV1EventSeries = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1EventSeries_1 = require("../_schemas/IoK8sApiCoreV1EventSeries.js");
+/**
+ * EventSeries contain information on series of events, i.e. thing that was/is happening continuously for some time.
+ */
+class IoK8sApiCoreV1EventSeries extends base_1.Model {
+}
+exports.IoK8sApiCoreV1EventSeries = IoK8sApiCoreV1EventSeries;
+exports.EventSeries = IoK8sApiCoreV1EventSeries;
+base_1.Model.setSchema(IoK8sApiCoreV1EventSeries, "io.k8s.api.core.v1.EventSeries", IoK8sApiCoreV1EventSeries_1.addSchema);

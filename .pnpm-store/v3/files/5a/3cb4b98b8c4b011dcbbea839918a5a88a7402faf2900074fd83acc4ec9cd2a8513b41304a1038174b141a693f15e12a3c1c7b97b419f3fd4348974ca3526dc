@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Container = exports.IoK8sApiCoreV1Container = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1Container_1 = require("../_schemas/IoK8sApiCoreV1Container.js");
+/**
+ * A single application container that you want to run within a pod.
+ */
+class IoK8sApiCoreV1Container extends base_1.Model {
+}
+exports.IoK8sApiCoreV1Container = IoK8sApiCoreV1Container;
+exports.Container = IoK8sApiCoreV1Container;
+base_1.Model.setSchema(IoK8sApiCoreV1Container, "io.k8s.api.core.v1.Container", IoK8sApiCoreV1Container_1.addSchema);

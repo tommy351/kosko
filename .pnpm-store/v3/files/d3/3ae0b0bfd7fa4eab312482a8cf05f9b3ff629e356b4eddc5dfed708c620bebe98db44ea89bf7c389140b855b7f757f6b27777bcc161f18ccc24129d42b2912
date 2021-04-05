@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ContainerPort = exports.IoK8sApiCoreV1ContainerPort = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1ContainerPort_1 = require("../_schemas/IoK8sApiCoreV1ContainerPort.js");
+/**
+ * ContainerPort represents a network port in a single container.
+ */
+class IoK8sApiCoreV1ContainerPort extends base_1.Model {
+}
+exports.IoK8sApiCoreV1ContainerPort = IoK8sApiCoreV1ContainerPort;
+exports.ContainerPort = IoK8sApiCoreV1ContainerPort;
+base_1.Model.setSchema(IoK8sApiCoreV1ContainerPort, "io.k8s.api.core.v1.ContainerPort", IoK8sApiCoreV1ContainerPort_1.addSchema);

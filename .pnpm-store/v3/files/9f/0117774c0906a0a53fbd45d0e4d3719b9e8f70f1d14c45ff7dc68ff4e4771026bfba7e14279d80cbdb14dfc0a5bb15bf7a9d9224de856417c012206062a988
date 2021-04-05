@@ -1,0 +1,21 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiextensionsApiserverPkgApisApiextensionsV1ServiceReference } from "./IoK8sApiextensionsApiserverPkgApisApiextensionsV1ServiceReference.mjs";
+const schema = {
+    "properties": {
+        "caBundle": {
+            "format": "byte",
+            "type": "string"
+        },
+        "service": {
+            "$ref": "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.ServiceReference#"
+        },
+        "url": {
+            "type": "string"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiextensionsApiserverPkgApisApiextensionsV1ServiceReference();
+    register("io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.WebhookClientConfig", schema);
+}

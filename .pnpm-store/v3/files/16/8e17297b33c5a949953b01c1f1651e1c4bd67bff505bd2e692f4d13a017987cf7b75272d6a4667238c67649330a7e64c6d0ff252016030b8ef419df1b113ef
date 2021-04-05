@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NodeDaemonEndpoints = exports.IoK8sApiCoreV1NodeDaemonEndpoints = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1NodeDaemonEndpoints_1 = require("../_schemas/IoK8sApiCoreV1NodeDaemonEndpoints.js");
+/**
+ * NodeDaemonEndpoints lists ports opened by daemons running on the Node.
+ */
+class IoK8sApiCoreV1NodeDaemonEndpoints extends base_1.Model {
+}
+exports.IoK8sApiCoreV1NodeDaemonEndpoints = IoK8sApiCoreV1NodeDaemonEndpoints;
+exports.NodeDaemonEndpoints = IoK8sApiCoreV1NodeDaemonEndpoints;
+base_1.Model.setSchema(IoK8sApiCoreV1NodeDaemonEndpoints, "io.k8s.api.core.v1.NodeDaemonEndpoints", IoK8sApiCoreV1NodeDaemonEndpoints_1.addSchema);

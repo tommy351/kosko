@@ -1,0 +1,41 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const schema = {
+    "properties": {
+        "categories": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "kind": {
+            "type": "string"
+        },
+        "listKind": {
+            "type": "string"
+        },
+        "plural": {
+            "type": "string"
+        },
+        "shortNames": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "singular": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "plural",
+        "kind"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    validate_1.register("io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1beta1.CustomResourceDefinitionNames", schema);
+}
+exports.addSchema = addSchema;

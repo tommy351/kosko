@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ReplicaSetSpec = exports.IoK8sApiAppsV1ReplicaSetSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAppsV1ReplicaSetSpec_1 = require("../_schemas/IoK8sApiAppsV1ReplicaSetSpec.js");
+/**
+ * ReplicaSetSpec is the specification of a ReplicaSet.
+ */
+class IoK8sApiAppsV1ReplicaSetSpec extends base_1.Model {
+}
+exports.IoK8sApiAppsV1ReplicaSetSpec = IoK8sApiAppsV1ReplicaSetSpec;
+exports.ReplicaSetSpec = IoK8sApiAppsV1ReplicaSetSpec;
+base_1.Model.setSchema(IoK8sApiAppsV1ReplicaSetSpec, "io.k8s.api.apps.v1.ReplicaSetSpec", IoK8sApiAppsV1ReplicaSetSpec_1.addSchema);

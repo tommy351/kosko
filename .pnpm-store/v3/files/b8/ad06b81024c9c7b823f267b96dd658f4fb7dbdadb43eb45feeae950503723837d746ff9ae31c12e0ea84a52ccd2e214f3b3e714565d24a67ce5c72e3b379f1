@@ -1,0 +1,44 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApimachineryPkgApisMetaV1ObjectMeta } from "./IoK8sApimachineryPkgApisMetaV1ObjectMeta.mjs";
+import { addSchema as IoK8sApiRbacV1alpha1RoleRef } from "./IoK8sApiRbacV1alpha1RoleRef.mjs";
+import { addSchema as IoK8sApiRbacV1alpha1Subject } from "./IoK8sApiRbacV1alpha1Subject.mjs";
+const schema = {
+    "properties": {
+        "apiVersion": {
+            "type": "string",
+            "enum": [
+                "rbac.authorization.k8s.io/v1alpha1"
+            ]
+        },
+        "kind": {
+            "type": "string",
+            "enum": [
+                "ClusterRoleBinding"
+            ]
+        },
+        "metadata": {
+            "$ref": "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta#"
+        },
+        "roleRef": {
+            "$ref": "io.k8s.api.rbac.v1alpha1.RoleRef#"
+        },
+        "subjects": {
+            "items": {
+                "$ref": "io.k8s.api.rbac.v1alpha1.Subject#"
+            },
+            "type": "array"
+        }
+    },
+    "required": [
+        "roleRef",
+        "apiVersion",
+        "kind"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApimachineryPkgApisMetaV1ObjectMeta();
+    IoK8sApiRbacV1alpha1RoleRef();
+    IoK8sApiRbacV1alpha1Subject();
+    register("io.k8s.api.rbac.v1alpha1.ClusterRoleBinding", schema);
+}

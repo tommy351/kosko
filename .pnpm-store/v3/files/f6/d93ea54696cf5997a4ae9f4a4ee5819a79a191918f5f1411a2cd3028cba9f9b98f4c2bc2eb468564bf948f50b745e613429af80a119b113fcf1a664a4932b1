@@ -1,0 +1,33 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const schema = {
+    "properties": {
+        "kubeletConfigKey": {
+            "type": "string"
+        },
+        "name": {
+            "type": "string"
+        },
+        "namespace": {
+            "type": "string"
+        },
+        "resourceVersion": {
+            "type": "string"
+        },
+        "uid": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "namespace",
+        "name",
+        "kubeletConfigKey"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    validate_1.register("io.k8s.api.core.v1.ConfigMapNodeConfigSource", schema);
+}
+exports.addSchema = addSchema;

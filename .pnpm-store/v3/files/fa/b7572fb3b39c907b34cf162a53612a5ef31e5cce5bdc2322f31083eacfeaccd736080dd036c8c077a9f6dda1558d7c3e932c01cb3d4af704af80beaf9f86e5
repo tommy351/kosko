@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NodeAddress = exports.IoK8sApiCoreV1NodeAddress = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1NodeAddress_1 = require("../_schemas/IoK8sApiCoreV1NodeAddress.js");
+/**
+ * NodeAddress contains information for the node's address.
+ */
+class IoK8sApiCoreV1NodeAddress extends base_1.Model {
+}
+exports.IoK8sApiCoreV1NodeAddress = IoK8sApiCoreV1NodeAddress;
+exports.NodeAddress = IoK8sApiCoreV1NodeAddress;
+base_1.Model.setSchema(IoK8sApiCoreV1NodeAddress, "io.k8s.api.core.v1.NodeAddress", IoK8sApiCoreV1NodeAddress_1.addSchema);

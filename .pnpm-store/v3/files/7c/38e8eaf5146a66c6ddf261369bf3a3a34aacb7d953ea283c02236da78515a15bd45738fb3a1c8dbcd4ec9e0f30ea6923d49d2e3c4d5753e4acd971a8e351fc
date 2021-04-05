@@ -1,0 +1,43 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiBatchV1beta1JobTemplateSpec_1 = require("./IoK8sApiBatchV1beta1JobTemplateSpec.js");
+const schema = {
+    "properties": {
+        "concurrencyPolicy": {
+            "type": "string"
+        },
+        "failedJobsHistoryLimit": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "jobTemplate": {
+            "$ref": "io.k8s.api.batch.v1beta1.JobTemplateSpec#"
+        },
+        "schedule": {
+            "type": "string"
+        },
+        "startingDeadlineSeconds": {
+            "format": "int64",
+            "type": "integer"
+        },
+        "successfulJobsHistoryLimit": {
+            "format": "int32",
+            "type": "integer"
+        },
+        "suspend": {
+            "type": "boolean"
+        }
+    },
+    "required": [
+        "schedule",
+        "jobTemplate"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiBatchV1beta1JobTemplateSpec_1.addSchema();
+    validate_1.register("io.k8s.api.batch.v1beta1.CronJobSpec", schema);
+}
+exports.addSchema = addSchema;

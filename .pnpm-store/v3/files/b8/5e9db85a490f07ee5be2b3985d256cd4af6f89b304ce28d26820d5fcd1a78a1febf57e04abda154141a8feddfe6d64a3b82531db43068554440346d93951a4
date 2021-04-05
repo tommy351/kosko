@@ -1,0 +1,33 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiAutoscalingV2beta2MetricValueStatus_1 = require("./IoK8sApiAutoscalingV2beta2MetricValueStatus.js");
+const IoK8sApiAutoscalingV2beta2CrossVersionObjectReference_1 = require("./IoK8sApiAutoscalingV2beta2CrossVersionObjectReference.js");
+const IoK8sApiAutoscalingV2beta2MetricIdentifier_1 = require("./IoK8sApiAutoscalingV2beta2MetricIdentifier.js");
+const schema = {
+    "properties": {
+        "current": {
+            "$ref": "io.k8s.api.autoscaling.v2beta2.MetricValueStatus#"
+        },
+        "describedObject": {
+            "$ref": "io.k8s.api.autoscaling.v2beta2.CrossVersionObjectReference#"
+        },
+        "metric": {
+            "$ref": "io.k8s.api.autoscaling.v2beta2.MetricIdentifier#"
+        }
+    },
+    "required": [
+        "metric",
+        "current",
+        "describedObject"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiAutoscalingV2beta2MetricValueStatus_1.addSchema();
+    IoK8sApiAutoscalingV2beta2CrossVersionObjectReference_1.addSchema();
+    IoK8sApiAutoscalingV2beta2MetricIdentifier_1.addSchema();
+    validate_1.register("io.k8s.api.autoscaling.v2beta2.ObjectMetricStatus", schema);
+}
+exports.addSchema = addSchema;

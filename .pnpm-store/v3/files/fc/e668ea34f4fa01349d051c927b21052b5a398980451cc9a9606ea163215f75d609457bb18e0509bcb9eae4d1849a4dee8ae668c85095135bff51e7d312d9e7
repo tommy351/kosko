@@ -1,0 +1,17 @@
+import { Model } from "@kubernetes-models/base";
+/**
+ * AllowedCSIDriver represents a single inline CSI Driver that is allowed to be used.
+ */
+export interface IIoK8sApiPolicyV1beta1AllowedCSIDriver {
+    /**
+     * Name is the registered name of the CSI driver
+     */
+    "name": string;
+}
+/**
+ * AllowedCSIDriver represents a single inline CSI Driver that is allowed to be used.
+ */
+export declare class IoK8sApiPolicyV1beta1AllowedCSIDriver extends Model<IIoK8sApiPolicyV1beta1AllowedCSIDriver> implements IIoK8sApiPolicyV1beta1AllowedCSIDriver {
+    "name": string;
+}
+export { IIoK8sApiPolicyV1beta1AllowedCSIDriver as IAllowedCSIDriver, IoK8sApiPolicyV1beta1AllowedCSIDriver as AllowedCSIDriver };

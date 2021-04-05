@@ -1,0 +1,38 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.mergeCustomTransformers = exports.tryReadJSON = exports.trimSuffix = void 0;
+const tslib_1 = require("tslib");
+const fs_1 = tslib_1.__importDefault(require("fs"));
+const util_1 = require("util");
+const readFile = util_1.promisify(fs_1.default.readFile);
+function trimSuffix(input, suffix) {
+    if (input.endsWith(suffix)) {
+        return input.substring(0, input.length - suffix.length);
+    }
+    return input;
+}
+exports.trimSuffix = trimSuffix;
+async function tryReadJSON(path) {
+    try {
+        const content = await readFile(path, "utf8");
+        return JSON.parse(content);
+    }
+    catch (err) {
+        if (err.code === "ENOENT")
+            return {};
+        throw err;
+    }
+}
+exports.tryReadJSON = tryReadJSON;
+function mergeCustomTransformers(target, source) {
+    function merge(target = [], source = []) {
+        return [...target, ...source];
+    }
+    return {
+        before: merge(target.before, source.before),
+        after: merge(target.after, source.after),
+        afterDeclarations: merge(target.afterDeclarations, source.afterDeclarations),
+    };
+}
+exports.mergeCustomTransformers = mergeCustomTransformers;
+//# sourceMappingURL=utils.js.map

@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SecretProjection = exports.IoK8sApiCoreV1SecretProjection = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1SecretProjection_1 = require("../_schemas/IoK8sApiCoreV1SecretProjection.js");
+/**
+ * Adapts a secret into a projected volume.
+ *
+ * The contents of the target Secret's Data field will be presented in a projected volume as files using the keys in the Data field as the file names. Note that this is identical to a secret volume source without the default mode.
+ */
+class IoK8sApiCoreV1SecretProjection extends base_1.Model {
+}
+exports.IoK8sApiCoreV1SecretProjection = IoK8sApiCoreV1SecretProjection;
+exports.SecretProjection = IoK8sApiCoreV1SecretProjection;
+base_1.Model.setSchema(IoK8sApiCoreV1SecretProjection, "io.k8s.api.core.v1.SecretProjection", IoK8sApiCoreV1SecretProjection_1.addSchema);

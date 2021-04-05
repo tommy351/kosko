@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.VolumeMount = exports.IoK8sApiCoreV1VolumeMount = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1VolumeMount_1 = require("../_schemas/IoK8sApiCoreV1VolumeMount.js");
+/**
+ * VolumeMount describes a mounting of a Volume within a container.
+ */
+class IoK8sApiCoreV1VolumeMount extends base_1.Model {
+}
+exports.IoK8sApiCoreV1VolumeMount = IoK8sApiCoreV1VolumeMount;
+exports.VolumeMount = IoK8sApiCoreV1VolumeMount;
+base_1.Model.setSchema(IoK8sApiCoreV1VolumeMount, "io.k8s.api.core.v1.VolumeMount", IoK8sApiCoreV1VolumeMount_1.addSchema);

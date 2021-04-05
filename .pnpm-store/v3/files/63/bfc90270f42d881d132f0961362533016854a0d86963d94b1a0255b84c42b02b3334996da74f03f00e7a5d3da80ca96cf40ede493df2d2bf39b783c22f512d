@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CertificateSigningRequestSpec = exports.IoK8sApiCertificatesV1beta1CertificateSigningRequestSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCertificatesV1beta1CertificateSigningRequestSpec_1 = require("../_schemas/IoK8sApiCertificatesV1beta1CertificateSigningRequestSpec.js");
+/**
+ * This information is immutable after the request is created. Only the Request and Usages fields can be set on creation, other fields are derived by Kubernetes and cannot be modified by users.
+ */
+class IoK8sApiCertificatesV1beta1CertificateSigningRequestSpec extends base_1.Model {
+}
+exports.IoK8sApiCertificatesV1beta1CertificateSigningRequestSpec = IoK8sApiCertificatesV1beta1CertificateSigningRequestSpec;
+exports.CertificateSigningRequestSpec = IoK8sApiCertificatesV1beta1CertificateSigningRequestSpec;
+base_1.Model.setSchema(IoK8sApiCertificatesV1beta1CertificateSigningRequestSpec, "io.k8s.api.certificates.v1beta1.CertificateSigningRequestSpec", IoK8sApiCertificatesV1beta1CertificateSigningRequestSpec_1.addSchema);

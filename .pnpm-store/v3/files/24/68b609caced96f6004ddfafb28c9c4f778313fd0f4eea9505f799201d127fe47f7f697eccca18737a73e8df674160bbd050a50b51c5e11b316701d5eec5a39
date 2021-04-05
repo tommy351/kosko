@@ -1,0 +1,24 @@
+import { register } from "@kubernetes-models/validate";
+import { addSchema as IoK8sApiCoreV1NodeSelectorRequirement } from "./IoK8sApiCoreV1NodeSelectorRequirement.mjs";
+const schema = {
+    "properties": {
+        "matchExpressions": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.NodeSelectorRequirement#"
+            },
+            "type": "array"
+        },
+        "matchFields": {
+            "items": {
+                "$ref": "io.k8s.api.core.v1.NodeSelectorRequirement#"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
+};
+export function addSchema() {
+    IoK8sApiCoreV1NodeSelectorRequirement();
+    IoK8sApiCoreV1NodeSelectorRequirement();
+    register("io.k8s.api.core.v1.NodeSelectorTerm", schema);
+}

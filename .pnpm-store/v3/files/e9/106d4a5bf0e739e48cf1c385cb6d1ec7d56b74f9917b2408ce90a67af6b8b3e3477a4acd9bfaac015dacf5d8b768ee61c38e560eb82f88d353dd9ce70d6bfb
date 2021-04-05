@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CronJob = exports.IoK8sApiBatchV2alpha1CronJob = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiBatchV2alpha1CronJob_1 = require("../_schemas/IoK8sApiBatchV2alpha1CronJob.js");
+/**
+ * CronJob represents the configuration of a single cron job.
+ */
+class IoK8sApiBatchV2alpha1CronJob extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiBatchV2alpha1CronJob.apiVersion,
+            kind: IoK8sApiBatchV2alpha1CronJob.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiBatchV2alpha1CronJob = IoK8sApiBatchV2alpha1CronJob;
+exports.CronJob = IoK8sApiBatchV2alpha1CronJob;
+IoK8sApiBatchV2alpha1CronJob.apiVersion = "batch/v2alpha1";
+IoK8sApiBatchV2alpha1CronJob.kind = "CronJob";
+base_1.Model.setSchema(IoK8sApiBatchV2alpha1CronJob, "io.k8s.api.batch.v2alpha1.CronJob", IoK8sApiBatchV2alpha1CronJob_1.addSchema);

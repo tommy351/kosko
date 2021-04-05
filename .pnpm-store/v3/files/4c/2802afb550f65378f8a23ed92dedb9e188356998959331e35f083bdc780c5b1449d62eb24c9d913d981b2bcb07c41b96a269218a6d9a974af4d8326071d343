@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.VolumeDevice = exports.IoK8sApiCoreV1VolumeDevice = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1VolumeDevice_1 = require("../_schemas/IoK8sApiCoreV1VolumeDevice.js");
+/**
+ * volumeDevice describes a mapping of a raw block device within a container.
+ */
+class IoK8sApiCoreV1VolumeDevice extends base_1.Model {
+}
+exports.IoK8sApiCoreV1VolumeDevice = IoK8sApiCoreV1VolumeDevice;
+exports.VolumeDevice = IoK8sApiCoreV1VolumeDevice;
+base_1.Model.setSchema(IoK8sApiCoreV1VolumeDevice, "io.k8s.api.core.v1.VolumeDevice", IoK8sApiCoreV1VolumeDevice_1.addSchema);

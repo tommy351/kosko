@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Service = exports.IoK8sApiCoreV1Service = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiCoreV1Service_1 = require("../_schemas/IoK8sApiCoreV1Service.js");
+/**
+ * Service is a named abstraction of software service (for example, mysql) consisting of local port (for example 3306) that the proxy listens on, and the selector that determines which pods will answer requests sent through the proxy.
+ */
+class IoK8sApiCoreV1Service extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiCoreV1Service.apiVersion,
+            kind: IoK8sApiCoreV1Service.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sApiCoreV1Service = IoK8sApiCoreV1Service;
+exports.Service = IoK8sApiCoreV1Service;
+IoK8sApiCoreV1Service.apiVersion = "v1";
+IoK8sApiCoreV1Service.kind = "Service";
+base_1.Model.setSchema(IoK8sApiCoreV1Service, "io.k8s.api.core.v1.Service", IoK8sApiCoreV1Service_1.addSchema);

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PodDisruptionBudgetStatus = exports.IoK8sApiPolicyV1beta1PodDisruptionBudgetStatus = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiPolicyV1beta1PodDisruptionBudgetStatus_1 = require("../_schemas/IoK8sApiPolicyV1beta1PodDisruptionBudgetStatus.js");
+/**
+ * PodDisruptionBudgetStatus represents information about the status of a PodDisruptionBudget. Status may trail the actual state of a system.
+ */
+class IoK8sApiPolicyV1beta1PodDisruptionBudgetStatus extends base_1.Model {
+}
+exports.IoK8sApiPolicyV1beta1PodDisruptionBudgetStatus = IoK8sApiPolicyV1beta1PodDisruptionBudgetStatus;
+exports.PodDisruptionBudgetStatus = IoK8sApiPolicyV1beta1PodDisruptionBudgetStatus;
+base_1.Model.setSchema(IoK8sApiPolicyV1beta1PodDisruptionBudgetStatus, "io.k8s.api.policy.v1beta1.PodDisruptionBudgetStatus", IoK8sApiPolicyV1beta1PodDisruptionBudgetStatus_1.addSchema);

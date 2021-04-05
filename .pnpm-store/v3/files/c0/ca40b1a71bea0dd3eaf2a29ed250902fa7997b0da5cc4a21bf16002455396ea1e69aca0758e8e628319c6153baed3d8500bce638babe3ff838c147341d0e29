@@ -1,0 +1,35 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const schema = {
+    "properties": {
+        "group": {
+            "type": "string"
+        },
+        "readOnly": {
+            "type": "boolean"
+        },
+        "registry": {
+            "type": "string"
+        },
+        "tenant": {
+            "type": "string"
+        },
+        "user": {
+            "type": "string"
+        },
+        "volume": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "registry",
+        "volume"
+    ],
+    "type": "object"
+};
+function addSchema() {
+    validate_1.register("io.k8s.api.core.v1.QuobyteVolumeSource", schema);
+}
+exports.addSchema = addSchema;

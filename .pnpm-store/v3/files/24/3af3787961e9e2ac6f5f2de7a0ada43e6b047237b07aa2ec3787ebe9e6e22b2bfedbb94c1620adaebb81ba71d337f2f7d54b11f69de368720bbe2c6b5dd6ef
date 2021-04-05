@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAppsV1RollingUpdateDaemonSet.mjs";
+/**
+ * Spec to control the desired behavior of daemon set rolling update.
+ */
+export class IoK8sApiAppsV1RollingUpdateDaemonSet extends Model {
+}
+Model.setSchema(IoK8sApiAppsV1RollingUpdateDaemonSet, "io.k8s.api.apps.v1.RollingUpdateDaemonSet", addSchema);
+export { IoK8sApiAppsV1RollingUpdateDaemonSet as RollingUpdateDaemonSet };

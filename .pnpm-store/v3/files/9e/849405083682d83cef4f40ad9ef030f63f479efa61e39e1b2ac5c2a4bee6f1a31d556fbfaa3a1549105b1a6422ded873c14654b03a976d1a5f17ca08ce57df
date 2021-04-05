@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.APIServiceList = exports.IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceList = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceList_1 = require("../_schemas/IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceList.js");
+/**
+ * APIServiceList is a list of APIService objects.
+ */
+class IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceList extends base_1.Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceList.apiVersion,
+            kind: IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceList.kind,
+            ...data
+        });
+    }
+}
+exports.IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceList = IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceList;
+exports.APIServiceList = IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceList;
+IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceList.apiVersion = "apiregistration.k8s.io/v1beta1";
+IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceList.kind = "APIServiceList";
+base_1.Model.setSchema(IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceList, "io.k8s.kube-aggregator.pkg.apis.apiregistration.v1beta1.APIServiceList", IoK8sKubeAggregatorPkgApisApiregistrationV1beta1APIServiceList_1.addSchema);

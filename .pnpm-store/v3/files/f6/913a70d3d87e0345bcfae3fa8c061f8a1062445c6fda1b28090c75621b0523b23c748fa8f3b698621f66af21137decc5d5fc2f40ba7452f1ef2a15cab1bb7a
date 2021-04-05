@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MetricSpec = exports.IoK8sApiAutoscalingV2beta1MetricSpec = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAutoscalingV2beta1MetricSpec_1 = require("../_schemas/IoK8sApiAutoscalingV2beta1MetricSpec.js");
+/**
+ * MetricSpec specifies how to scale based on a single metric (only `type` and one other matching field should be set at once).
+ */
+class IoK8sApiAutoscalingV2beta1MetricSpec extends base_1.Model {
+}
+exports.IoK8sApiAutoscalingV2beta1MetricSpec = IoK8sApiAutoscalingV2beta1MetricSpec;
+exports.MetricSpec = IoK8sApiAutoscalingV2beta1MetricSpec;
+base_1.Model.setSchema(IoK8sApiAutoscalingV2beta1MetricSpec, "io.k8s.api.autoscaling.v2beta1.MetricSpec", IoK8sApiAutoscalingV2beta1MetricSpec_1.addSchema);

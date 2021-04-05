@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiNetworkingV1IngressClassSpec.mjs";
+/**
+ * IngressClassSpec provides information about the class of an Ingress.
+ */
+export class IoK8sApiNetworkingV1IngressClassSpec extends Model {
+}
+Model.setSchema(IoK8sApiNetworkingV1IngressClassSpec, "io.k8s.api.networking.v1.IngressClassSpec", addSchema);
+export { IoK8sApiNetworkingV1IngressClassSpec as IngressClassSpec };

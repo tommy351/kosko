@@ -1,0 +1,25 @@
+import { register } from "@kubernetes-models/validate";
+const schema = {
+    "properties": {
+        "operator": {
+            "type": "string"
+        },
+        "scopeName": {
+            "type": "string"
+        },
+        "values": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        }
+    },
+    "required": [
+        "scopeName",
+        "operator"
+    ],
+    "type": "object"
+};
+export function addSchema() {
+    register("io.k8s.api.core.v1.ScopedResourceSelectorRequirement", schema);
+}

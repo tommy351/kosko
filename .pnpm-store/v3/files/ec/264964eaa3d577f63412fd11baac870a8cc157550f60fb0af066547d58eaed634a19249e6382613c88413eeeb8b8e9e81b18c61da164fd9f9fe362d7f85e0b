@@ -1,0 +1,24 @@
+import { IIoK8sApiAutoscalingV2beta2MetricValueStatus } from "./IoK8sApiAutoscalingV2beta2MetricValueStatus";
+import { IIoK8sApiAutoscalingV2beta2MetricIdentifier } from "./IoK8sApiAutoscalingV2beta2MetricIdentifier";
+import { Model } from "@kubernetes-models/base";
+/**
+ * PodsMetricStatus indicates the current value of a metric describing each pod in the current scale target (for example, transactions-processed-per-second).
+ */
+export interface IIoK8sApiAutoscalingV2beta2PodsMetricStatus {
+    /**
+     * current contains the current value for the given metric
+     */
+    "current": IIoK8sApiAutoscalingV2beta2MetricValueStatus;
+    /**
+     * metric identifies the target metric by name and selector
+     */
+    "metric": IIoK8sApiAutoscalingV2beta2MetricIdentifier;
+}
+/**
+ * PodsMetricStatus indicates the current value of a metric describing each pod in the current scale target (for example, transactions-processed-per-second).
+ */
+export declare class IoK8sApiAutoscalingV2beta2PodsMetricStatus extends Model<IIoK8sApiAutoscalingV2beta2PodsMetricStatus> implements IIoK8sApiAutoscalingV2beta2PodsMetricStatus {
+    "current": IIoK8sApiAutoscalingV2beta2MetricValueStatus;
+    "metric": IIoK8sApiAutoscalingV2beta2MetricIdentifier;
+}
+export { IIoK8sApiAutoscalingV2beta2PodsMetricStatus as IPodsMetricStatus, IoK8sApiAutoscalingV2beta2PodsMetricStatus as PodsMetricStatus };

@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApimachineryPkgApisMetaV1StatusDetails.mjs";
+/**
+ * StatusDetails is a set of additional properties that MAY be set by the server to provide additional information about a response. The Reason field of a Status object defines what attributes will be set. Clients must ignore fields that do not match the defined type of each attribute, and should assume that any attribute may be empty, invalid, or under defined.
+ */
+export class IoK8sApimachineryPkgApisMetaV1StatusDetails extends Model {
+}
+Model.setSchema(IoK8sApimachineryPkgApisMetaV1StatusDetails, "io.k8s.apimachinery.pkg.apis.meta.v1.StatusDetails", addSchema);
+export { IoK8sApimachineryPkgApisMetaV1StatusDetails as StatusDetails };

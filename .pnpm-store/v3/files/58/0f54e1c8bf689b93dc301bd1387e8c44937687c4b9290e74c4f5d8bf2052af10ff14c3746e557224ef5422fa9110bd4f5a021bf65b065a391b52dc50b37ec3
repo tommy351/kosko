@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiAppsV1ReplicaSet.mjs";
+/**
+ * ReplicaSet ensures that a specified number of pod replicas are running at any given time.
+ */
+export class IoK8sApiAppsV1ReplicaSet extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiAppsV1ReplicaSet.apiVersion,
+            kind: IoK8sApiAppsV1ReplicaSet.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiAppsV1ReplicaSet.apiVersion = "apps/v1";
+IoK8sApiAppsV1ReplicaSet.kind = "ReplicaSet";
+Model.setSchema(IoK8sApiAppsV1ReplicaSet, "io.k8s.api.apps.v1.ReplicaSet", addSchema);
+export { IoK8sApiAppsV1ReplicaSet as ReplicaSet };

@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiCoreV1HTTPHeader.mjs";
+/**
+ * HTTPHeader describes a custom header to be used in HTTP probes
+ */
+export class IoK8sApiCoreV1HTTPHeader extends Model {
+}
+Model.setSchema(IoK8sApiCoreV1HTTPHeader, "io.k8s.api.core.v1.HTTPHeader", addSchema);
+export { IoK8sApiCoreV1HTTPHeader as HTTPHeader };

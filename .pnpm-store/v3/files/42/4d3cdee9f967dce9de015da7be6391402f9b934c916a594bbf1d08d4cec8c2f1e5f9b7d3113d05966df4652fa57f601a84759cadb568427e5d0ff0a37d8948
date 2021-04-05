@@ -1,0 +1,39 @@
+{
+  "name": "@kubernetes-models/base",
+  "version": "1.5.2",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "exports": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js"
+  },
+  "description": "Base model for Kubernetes models.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/packages/base",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "/dist/"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "dependencies": {
+    "@kubernetes-models/validate": "^1.4.2",
+    "is-plain-object": "^5.0.0",
+    "tslib": "^2.0.3"
+  },
+  "gitHead": "c52063a38aba761fe1277669ed9cdc1484ee4803"
+}

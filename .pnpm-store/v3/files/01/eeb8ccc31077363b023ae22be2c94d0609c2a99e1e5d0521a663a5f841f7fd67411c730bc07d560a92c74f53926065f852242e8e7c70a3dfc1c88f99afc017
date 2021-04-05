@@ -1,0 +1,2 @@
+import * as v1beta1 from "./v1beta1/index.mjs";
+export { v1beta1 };

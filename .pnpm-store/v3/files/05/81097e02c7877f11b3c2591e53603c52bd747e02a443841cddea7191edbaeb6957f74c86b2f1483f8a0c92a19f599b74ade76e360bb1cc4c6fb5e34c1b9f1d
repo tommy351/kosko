@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DaemonSetCondition = exports.IoK8sApiAppsV1DaemonSetCondition = void 0;
+const base_1 = require("@kubernetes-models/base");
+const IoK8sApiAppsV1DaemonSetCondition_1 = require("../_schemas/IoK8sApiAppsV1DaemonSetCondition.js");
+/**
+ * DaemonSetCondition describes the state of a DaemonSet at a certain point.
+ */
+class IoK8sApiAppsV1DaemonSetCondition extends base_1.Model {
+}
+exports.IoK8sApiAppsV1DaemonSetCondition = IoK8sApiAppsV1DaemonSetCondition;
+exports.DaemonSetCondition = IoK8sApiAppsV1DaemonSetCondition;
+base_1.Model.setSchema(IoK8sApiAppsV1DaemonSetCondition, "io.k8s.api.apps.v1.DaemonSetCondition", IoK8sApiAppsV1DaemonSetCondition_1.addSchema);

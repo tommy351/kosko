@@ -1,0 +1,9 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiStorageV1alpha1VolumeAttachmentStatus.mjs";
+/**
+ * VolumeAttachmentStatus is the status of a VolumeAttachment request.
+ */
+export class IoK8sApiStorageV1alpha1VolumeAttachmentStatus extends Model {
+}
+Model.setSchema(IoK8sApiStorageV1alpha1VolumeAttachmentStatus, "io.k8s.api.storage.v1alpha1.VolumeAttachmentStatus", addSchema);
+export { IoK8sApiStorageV1alpha1VolumeAttachmentStatus as VolumeAttachmentStatus };

@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSchema = void 0;
+const validate_1 = require("@kubernetes-models/validate");
+const IoK8sApiCoreV1PersistentVolumeClaimTemplate_1 = require("./IoK8sApiCoreV1PersistentVolumeClaimTemplate.js");
+const schema = {
+    "properties": {
+        "readOnly": {
+            "type": "boolean"
+        },
+        "volumeClaimTemplate": {
+            "$ref": "io.k8s.api.core.v1.PersistentVolumeClaimTemplate#"
+        }
+    },
+    "type": "object"
+};
+function addSchema() {
+    IoK8sApiCoreV1PersistentVolumeClaimTemplate_1.addSchema();
+    validate_1.register("io.k8s.api.core.v1.EphemeralVolumeSource", schema);
+}
+exports.addSchema = addSchema;

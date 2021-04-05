@@ -1,0 +1,18 @@
+import { Model } from "@kubernetes-models/base";
+import { addSchema } from "../_schemas/IoK8sApiStorageV1StorageClassList.mjs";
+/**
+ * StorageClassList is a collection of storage classes.
+ */
+export class IoK8sApiStorageV1StorageClassList extends Model {
+    constructor(data) {
+        super({
+            apiVersion: IoK8sApiStorageV1StorageClassList.apiVersion,
+            kind: IoK8sApiStorageV1StorageClassList.kind,
+            ...data
+        });
+    }
+}
+IoK8sApiStorageV1StorageClassList.apiVersion = "storage.k8s.io/v1";
+IoK8sApiStorageV1StorageClassList.kind = "StorageClassList";
+Model.setSchema(IoK8sApiStorageV1StorageClassList, "io.k8s.api.storage.v1.StorageClassList", addSchema);
+export { IoK8sApiStorageV1StorageClassList as StorageClassList };
