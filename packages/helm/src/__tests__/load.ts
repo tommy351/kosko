@@ -4,6 +4,8 @@ import { join } from "path";
 const FIXTURE_DIR = join(__dirname, "../__fixtures__");
 const NGINX_CHART = join(FIXTURE_DIR, "nginx");
 
+jest.setTimeout(10000);
+
 test("chart is a local path", async () => {
   const result = loadChart({ chart: NGINX_CHART });
   await expect(result()).resolves.toMatchSnapshot();
