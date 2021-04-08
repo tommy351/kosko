@@ -3,7 +3,7 @@ import { Config } from "@kosko/config";
 import env from "@kosko/env";
 import { generate, print, PrintFormat, Result } from "@kosko/generate";
 import { writeFile, readFile, outputFile, ensureSymlink } from "fs-extra";
-import { join, dirname } from "path";
+import { join } from "path";
 import pkgDir from "pkg-dir";
 import { Signale } from "signale";
 import tempDir from "temp-dir";
