@@ -2,9 +2,8 @@
 import { generate } from "../generate";
 import tmp from "tmp-promise";
 import { Result } from "../base";
-import { writeFile } from "fs-extra";
-import makeDir from "make-dir";
-import { join, dirname } from "path";
+import { outputFile } from "fs-extra";
+import { join } from "path";
 import tempDir from "temp-dir";
 import { ValidationError } from "../error";
 
@@ -30,8 +29,7 @@ beforeEach(async () => {
 
   for (const file of tmpFiles) {
     const path = join(tmpDir.path, file.path);
-    await makeDir(dirname(path));
-    await writeFile(path, file.content);
+    await outputFile(path, file.content);
   }
 });
 

@@ -25,11 +25,9 @@ importers:
       jest-serializer-path: 0.1.15
       kubernetes-models: 1.5.2
       lint-staged: 10.5.4
-      make-dir: 3.1.0
       npm-run-all: 4.1.5
       pkg-dir: 5.0.0
       prettier: 2.2.1
-      symlink-dir: 4.1.0
       temp-dir: 2.0.0
       tmp-promise: 3.0.2
       ts-jest: 26.5.3_jest@26.6.3+typescript@4.2.3
@@ -61,11 +59,9 @@ importers:
       jest-serializer-path: ^0.1.15
       kubernetes-models: ^1.5.2
       lint-staged: ^10.5.3
-      make-dir: ^3.1.0
       npm-run-all: ^4.1.5
       pkg-dir: ^5.0.0
       prettier: ^2.2.1
-      symlink-dir: ^4.1.0
       temp-dir: ^2.0.0
       tmp-promise: ^3.0.2
       ts-jest: ^26.5.3
@@ -181,7 +177,6 @@ importers:
       get-stdin: 8.0.0
       import-local: 3.0.2
       jsonpath: 1.1.0
-      make-dir: 3.1.0
       signale: 1.4.0
       tslib: 2.1.0
       yargs: 16.2.0
@@ -195,7 +190,6 @@ importers:
       '@types/signale': 1.4.1
       '@types/yargs': 16.0.0
       pkg-dir: 5.0.0
-      symlink-dir: 4.1.0
       temp-dir: 2.0.0
       tmp-promise: 3.0.2
     specifiers:
@@ -219,10 +213,8 @@ importers:
       get-stdin: ^8.0.0
       import-local: ^3.0.2
       jsonpath: ^1.0.2
-      make-dir: ^3.1.0
       pkg-dir: ^5.0.0
       signale: ^1.4.0
-      symlink-dir: ^4.1.0
       temp-dir: ^2.0.0
       tmp-promise: ^3.0.2
       tslib: ^2.1.0
@@ -277,7 +269,6 @@ importers:
       '@types/fs-extra': 9.0.8
       '@types/js-yaml': 4.0.0
       bl: 4.1.0
-      make-dir: 3.1.0
       temp-dir: 2.0.0
       tmp-promise: 3.0.2
     specifiers:
@@ -291,7 +282,6 @@ importers:
       fast-glob: ^3.2.4
       fs-extra: ^9.1.0
       js-yaml: ^4.0.0
-      make-dir: ^3.1.0
       temp-dir: ^2.0.0
       tmp-promise: ^3.0.2
       tslib: ^2.1.0
@@ -339,7 +329,6 @@ importers:
     dependencies:
       exit: 0.1.2
       fs-extra: 9.1.0
-      make-dir: 3.1.0
       signale: 1.4.0
       tslib: 2.1.0
       yargs: 16.2.0
@@ -357,7 +346,6 @@ importers:
       '@types/yargs': ^15.0.12
       exit: ^0.1.2
       fs-extra: ^9.1.0
-      make-dir: ^3.1.0
       signale: ^1.4.0
       temp-dir: ^2.0.0
       tmp-promise: ^3.0.2
@@ -13056,14 +13044,6 @@ packages:
   /remove-trailing-separator/1.1.0:
     resolution:
       integrity: sha1-wkvOKig62tW8P1jg1IJJuSN52O8=
-  /rename-overwrite/3.1.0:
-    dependencies:
-      rimraf: 3.0.2
-    dev: true
-    engines:
-      node: '>=10.12'
-    resolution:
-      integrity: sha512-Txm8AChJq2dC/yLiKnZfmhj0fQWL3GoVkfzgqvxpgEXvSrpjX+FuJ3Q2+ErzanA72y3IQLPXuKDgFxCCOsksNA==
   /renderkid/2.0.5:
     dependencies:
       css-select: 2.1.0
@@ -14379,17 +14359,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==
-  /symlink-dir/4.1.0:
-    dependencies:
-      better-path-resolve: 1.0.0
-      graceful-fs: 4.2.6
-      rename-overwrite: 3.1.0
-    dev: true
-    engines:
-      node: '>=10.12'
-    hasBin: true
-    resolution:
-      integrity: sha512-yT256U0E+AcFxbSUc0suJXTdOjVbVk5MmBLzqD+unQRwQbcMhTvTZnG/3UZZknemOK8+nQz2lTBZs0+uYS2apg==
   /table/6.0.7:
     dependencies:
       ajv: 7.2.1

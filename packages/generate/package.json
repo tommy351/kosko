@@ -40,7 +40,6 @@
     "@types/fs-extra": "^9.0.7",
     "@types/js-yaml": "^4.0.0",
     "bl": "^4.0.3",
-    "make-dir": "^3.1.0",
     "temp-dir": "^2.0.0",
     "tmp-promise": "^3.0.2"
   }
