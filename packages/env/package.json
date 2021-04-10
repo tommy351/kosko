@@ -6,16 +6,18 @@
   "repository": "https://github.com/tommy351/kosko/tree/master/packages/env",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "dist/index.node.js",
   "module": "dist/index.node.esm.mjs",
-  "browser": "dist/index.browser.mjs",
-  "types": "dist/index.d.ts",
-  "source": "src/index.ts",
+  "browser": "dist/index.mjs",
+  "types": "dist/index.node.d.ts",
+  "source": "src/index.node.ts",
   "sideEffects": false,
   "exports": {
-    "import": "./dist/index.node.esm.mjs",
-    "require": "./dist/index.js",
-    "browser": "./dist/index.browser.mjs"
+    "node": {
+      "import": "./dist/index.node.esm.mjs",
+      "require": "./dist/index.node.js"
+    },
+    "default": "./dist/index.mjs"
   },
   "files": [
     "/dist/"

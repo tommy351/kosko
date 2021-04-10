@@ -5,8 +5,6 @@ export {
   createSyncLoaderReducers,
   createAsyncLoaderReducers
 } from "./environment/base";
-export { NodeEnvironmentOptions } from "./environment/node";
-export { createNodeCJSEnvironment } from "./environment/node-cjs";
-export { createNodeESMEnvironment } from "./environment/node-esm";
+export type { NodeEnvironmentOptions } from "./environment/node";
 export { createAsyncEnvironment } from "./environment/async";
 export { createSyncEnvironment } from "./environment/sync";
