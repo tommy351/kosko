@@ -6,14 +6,18 @@
   "repository": "https://github.com/tommy351/kosko/tree/master/packages/generate",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
-  "source": "src/index.ts",
+  "main": "dist/index.node.js",
+  "module": "dist/index.node.mjs",
+  "browser": "dist/index.mjs",
+  "types": "dist/index.node.d.ts",
+  "source": "src/index.node.ts",
   "sideEffects": false,
   "exports": {
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.js"
+    "node": {
+      "import": "./dist/index.node.mjs",
+      "require": "./dist/index.node.js"
+    },
+    "default": "./dist/index.mjs"
   },
   "files": [
     "/dist/"
