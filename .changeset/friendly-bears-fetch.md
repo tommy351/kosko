@@ -21,8 +21,10 @@ import env, { createLoaderReducers } from "@kosko/env";
 env.setReducers((reducers) => [
   ...reducers,
   ...createAsyncLoaderReducers({
-    global: () => import("./environments/dev/index.js"),
-    component: (name) => import(`./environments/dev/${name}.js`)
+    global: () =>
+      import("./environments/dev/index.js").then((mod) => mod.default),
+    component: (name) =>
+      import(`./environments/dev/${name}.js`).then((mod) => mod.default)
   })
 ]);
 ```
