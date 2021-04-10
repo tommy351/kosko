@@ -2,7 +2,8 @@
 import { join } from "path";
 import { merge } from "../../merge";
 import { Reducer } from "../../reduce";
-import { AsyncEnvironment } from "../async";
+import { createNodeESMEnvironment } from "../node-esm";
+import { Environment } from "../types";
 
 jest.mock("@kosko/require", () => {
   const pkg = jest.requireActual("@kosko/require");
@@ -14,10 +15,10 @@ jest.mock("@kosko/require", () => {
 });
 
 const fixturePath = join(__dirname, "..", "..", "__fixtures__");
-let env: AsyncEnvironment;
+let env: Environment;
 
 beforeEach(() => {
-  env = new AsyncEnvironment(fixturePath);
+  env = createNodeESMEnvironment({ cwd: fixturePath });
 });
 
 describe("when module exists", () => {

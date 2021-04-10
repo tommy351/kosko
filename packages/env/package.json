@@ -7,13 +7,15 @@
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "main": "dist/index.js",
-  "module": "dist/index.esm.mjs",
+  "module": "dist/index.node.esm.mjs",
+  "browser": "dist/index.browser.mjs",
   "types": "dist/index.d.ts",
   "source": "src/index.ts",
   "sideEffects": false,
   "exports": {
-    "import": "./dist/index.esm.mjs",
-    "require": "./dist/index.js"
+    "import": "./dist/index.node.esm.mjs",
+    "require": "./dist/index.js",
+    "browser": "./dist/index.browser.mjs"
   },
   "files": [
     "/dist/"

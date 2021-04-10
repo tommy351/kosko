@@ -18,7 +18,10 @@ export interface Reducer {
   ): Record<string, any>;
 }
 
-export function reduce(reducers: Reducer[], componentName?: string): any {
+export function reduce(
+  reducers: readonly Reducer[],
+  componentName?: string
+): any {
   return reducers.reduce(
     (target, reducer) => reducer.reduce(target, componentName),
     {}
@@ -26,7 +29,7 @@ export function reduce(reducers: Reducer[], componentName?: string): any {
 }
 
 export async function reduceAsync(
-  reducers: Reducer[],
+  reducers: readonly Reducer[],
   componentName?: string
 ): Promise<any> {
   let target = {};

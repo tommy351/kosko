@@ -1,30 +1,16 @@
-import { requireDefault } from "@kosko/require";
-import debug from "../debug";
-import { merge } from "../merge";
-import { reduce } from "../reduce";
-import { BaseEnvironment } from "./base";
+import {
+  createSyncReducerExecutor,
+  createEnvironment,
+  createReducerList
+} from "./base";
+import { Environment } from "./types";
 
-export class SyncEnvironment extends BaseEnvironment {
-  protected execReducers(name?: string): any {
-    return reduce(this.reducers, name);
-  }
+export function createSyncEnvironment(): Environment {
+  const reducers = createReducerList();
+  const { reduce } = createSyncReducerExecutor(reducers);
 
-  protected mergeValues(values: any[]): any {
-    return merge(values);
-  }
-
-  protected requireModule(id: string): any {
-    // The path doesn't need to be resolved before importing, because `require()`
-    // resolves the path automatically anyway.
-    try {
-      return requireDefault(id);
-    } catch (err) {
-      if (err.code === "MODULE_NOT_FOUND") {
-        debug("Cannot find module: %s", id);
-        return {};
-      }
-
-      throw err;
-    }
-  }
+  return createEnvironment({
+    ...reducers,
+    reduce
+  });
 }

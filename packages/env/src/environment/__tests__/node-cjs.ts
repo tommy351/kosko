@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { SyncEnvironment } from "../sync";
+import { createNodeCJSEnvironment } from "../node-cjs";
 import { join } from "path";
 import { merge } from "../../merge";
 import { Reducer } from "../../reduce";
+import { Environment } from "../types";
 
 const fixturePath = join(__dirname, "..", "..", "__fixtures__");
-let env: SyncEnvironment;
+let env: Environment;
 
 beforeEach(() => {
-  env = new SyncEnvironment(fixturePath);
+  env = createNodeCJSEnvironment({ cwd: fixturePath });
 });
 
 describe("when env is set", () => {

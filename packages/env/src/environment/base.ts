@@ -1,114 +1,99 @@
-import { getRequireExtensions } from "@kosko/require";
-import { join } from "path";
-import { formatPath, Paths } from "../paths";
-import { Reducer } from "../reduce";
+import { Environment, Loader, ReducerExecutor, ReducerList } from "./types";
+import { reduce, reduceAsync, Reducer } from "../reduce";
+import { merge, mergeAsync } from "../merge";
+import { toArray } from "../utils";
 
-export abstract class BaseEnvironment {
-  protected reducers: Reducer[] = [];
+export type EnvironmentOptions = Pick<
+  ReducerList,
+  "setReducers" | "resetReducers"
+> &
+  ReducerExecutor &
+  Partial<Pick<Environment, "cwd" | "extensions">>;
 
-  /**
-   * Current environment.
-   */
-  public env?: string | string[];
-
-  /**
-   * Paths of environment files.
-   */
-  public paths: Paths = {
-    global: "environments/#{environment}",
-    component: "environments/#{environment}/#{component}"
+export function createEnvironment({
+  cwd = "/",
+  extensions = [],
+  setReducers,
+  resetReducers,
+  reduce
+}: EnvironmentOptions): Environment {
+  return {
+    cwd,
+    paths: {
+      global: "environments/#{environment}",
+      component: "environments/#{environment}/#{component}"
+    },
+    extensions,
+    setReducers,
+    resetReducers,
+    global: () => reduce(),
+    component: (name) => reduce(name)
   };
+}
 
-  /**
-   * File extensions of environments.
-   */
-  public extensions: string[] = getRequireExtensions().map((ext) =>
-    ext.substring(1)
-  );
-
-  public constructor(public cwd: string) {
-    this.resetReducers();
-  }
-
-  protected abstract execReducers(name?: string): any;
-  protected abstract mergeValues(values: any[]): any;
-  protected abstract requireModule(id: string): any;
-
-  /**
-   * Returns global variables.
-   *
-   * If env is not set or require failed, returns an empty object.
-   */
-  public global(): any {
-    return this.execReducers();
-  }
-
-  /**
-   * Returns component variables merged with global variables.
-   *
-   * If env is not set or require failed, returns an empty object.
-   *
-   * @param name Component name
-   */
-  public component(name: string): any {
-    return this.execReducers(name);
-  }
-
-  /**
-   * Sets list of reducers using the specified callback function.
-   */
-  public setReducers(callbackfn: (reducers: Reducer[]) => Reducer[]): void {
-    this.reducers = callbackfn([...this.reducers]);
-  }
-
-  /**
-   * Resets reducers to the defaults.
-   */
-  public resetReducers(): void {
-    this.setReducers(() => [
-      this.createGlobalReducer(),
-      this.createComponentReducer()
-    ]);
-  }
-
-  private createGlobalReducer(): Reducer {
-    const reducer: Reducer = {
+export function createLoaderReducers(
+  loader: Loader,
+  mergeValues: (data: any[]) => any
+): readonly Reducer[] {
+  return [
+    {
       name: "global",
-      reduce: (values) =>
-        this.mergeValues([values, ...this.requireAllEnvs(this.paths.global)])
-    };
-
-    return reducer;
-  }
-
-  private createComponentReducer(): Reducer {
-    const reducer: Reducer = {
+      reduce: (values) => mergeValues([values, ...toArray(loader.global())])
+    },
+    {
       name: "component",
       reduce: (values, componentName) => {
         if (!componentName) return values;
 
-        return this.mergeValues([
+        return mergeValues([
           values,
-          ...this.requireAllEnvs(this.paths.component, componentName)
+          ...toArray(loader.component(componentName))
         ]);
       }
-    };
+    }
+  ];
+}
 
-    return reducer;
+export function createSyncLoaderReducers(loader: Loader): readonly Reducer[] {
+  return createLoaderReducers(loader, merge);
+}
+
+export function createAsyncLoaderReducers(loader: Loader): readonly Reducer[] {
+  return createLoaderReducers(loader, mergeAsync);
+}
+
+export function createReducerList(
+  initialReducers: readonly Reducer[] = []
+): ReducerList {
+  let reducers: readonly Reducer[] = [];
+
+  function resetReducers() {
+    reducers = [...initialReducers];
   }
 
-  private requireAllEnvs(template: string, component?: string): any[] {
-    if (!this.env) return [];
+  resetReducers();
 
-    const envs = Array.isArray(this.env) ? this.env : [this.env];
+  return {
+    getReducers: () => reducers,
+    setReducers: (callback) => {
+      reducers = callback([...reducers]);
+    },
+    resetReducers
+  };
+}
 
-    return envs.map((env) => {
-      const path = formatPath(template, {
-        environment: env,
-        ...(component && { component })
-      });
+export function createSyncReducerExecutor({
+  getReducers
+}: ReducerList): ReducerExecutor {
+  return {
+    reduce: (componentName) => reduce(getReducers(), componentName)
+  };
+}
 
-      return this.requireModule(join(this.cwd, path));
-    });
-  }
+export function createAsyncReducerExecutor({
+  getReducers
+}: ReducerList): ReducerExecutor {
+  return {
+    reduce: (componentName) => reduceAsync(getReducers(), componentName)
+  };
 }

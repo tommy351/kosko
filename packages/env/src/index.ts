@@ -5,9 +5,8 @@
 
 export * from "./index.base";
 
-import { SyncEnvironment } from "./environment/sync";
-export default new SyncEnvironment(process.cwd());
-export { SyncEnvironment as Environment };
+import { createNodeCJSEnvironment } from "./environment/node-cjs";
+export default createNodeCJSEnvironment();
 
 // HACK: Export default to module.exports and maintain types above.
 if (typeof module !== "undefined") {
