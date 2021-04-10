@@ -28,6 +28,11 @@ export interface Environment
   extends Pick<ReducerList, "setReducers" | "resetReducers"> {
   /**
    * Current working directory.
+   *
+   * Default values:
+   *
+   * - Node.js: `process.cwd()`
+   * - Browser: `/`
    */
   cwd: string;
 
@@ -48,15 +53,11 @@ export interface Environment
 
   /**
    * Returns global variables.
-   *
-   * If env is not set or require failed, returns an empty object.
    */
   global(): any;
 
   /**
    * Returns component variables merged with global variables.
-   *
-   * If env is not set or require failed, returns an empty object.
    *
    * @param name Component name
    */
@@ -64,6 +65,17 @@ export interface Environment
 }
 
 export interface Loader {
+  /**
+   * Returns global variables. If the returned value is an array, the
+   * value will be flattened.
+   */
   global(): any;
+
+  /**
+   * Returns component variables. If the returned value is an array,
+   * the value will be flattened.
+   *
+   * @param name Component name
+   */
   component(name: string): any;
 }

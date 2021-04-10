@@ -5,6 +5,10 @@ import { mergeAsync } from "../merge";
 import { Environment } from "./types";
 import { createAsyncReducerExecutor } from "./base";
 
+/**
+ * Returns a new `Environment` which loads environment variables using ECMAScript
+ * module (ESM) `import()` function.
+ */
 export function createNodeESMEnvironment(
   options: NodeEnvironmentOptions = {}
 ): Environment {

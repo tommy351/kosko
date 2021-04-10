@@ -5,6 +5,10 @@ import { Environment } from "./types";
 import { createSyncReducerExecutor } from "./base";
 import { merge } from "../merge";
 
+/**
+ * Returns a new `Environment` which loads environment variables using Node.js's
+ * `require()` function.
+ */
 export function createNodeCJSEnvironment(
   options: NodeEnvironmentOptions = {}
 ): Environment {

@@ -54,10 +54,18 @@ export function createLoaderReducers(
   ];
 }
 
+/**
+ * Returns the default reducers which load environment variables synchronously
+ * using the specified `loader`.
+ */
 export function createSyncLoaderReducers(loader: Loader): readonly Reducer[] {
   return createLoaderReducers(loader, merge);
 }
 
+/**
+ * Returns the default reducers which load environment variables asynchronously
+ * using the specified `loader`.
+ */
 export function createAsyncLoaderReducers(loader: Loader): readonly Reducer[] {
   return createLoaderReducers(loader, mergeAsync);
 }

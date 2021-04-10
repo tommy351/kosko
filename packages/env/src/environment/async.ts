@@ -5,6 +5,9 @@ import {
 } from "./base";
 import { Environment } from "./types";
 
+/**
+ * Returns a new asynchronized `Environment`.
+ */
 export function createAsyncEnvironment(): Environment {
   const reducers = createReducerList();
   const { reduce } = createAsyncReducerExecutor(reducers);
