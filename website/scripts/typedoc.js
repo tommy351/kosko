@@ -1,8 +1,8 @@
 /* eslint-disable node/no-unpublished-require */
 "use strict";
 
-const del = require("del");
 const globby = require("globby");
+const fs = require("fs-extra");
 const { join, dirname, extname } = require("path");
 const { Application, TSConfigReader } = require("typedoc");
 const {
@@ -32,15 +32,29 @@ class DocsaurusFrontMatterComponent extends FrontMatterComponent {
   }
 }
 
+async function getEntryPoints() {
+  const tsconfigs = await globby("packages/*/tsconfig.json", {
+    cwd: ROOT_DIR,
+    absolute: true
+  });
+  const entryPoints = [];
+
+  for (const tsconfig of tsconfigs) {
+    const pkgDir = dirname(tsconfig);
+    const { source } = await fs.readJSON(join(pkgDir, "package.json"));
+
+    if (source) {
+      entryPoints.push(join(pkgDir, source));
+    }
+  }
+
+  return entryPoints;
+}
+
 (async () => {
   const app = new Application();
 
   app.options.addReader(new TSConfigReader());
-
-  const entryPoints = await globby("packages/*/src/index.ts", {
-    cwd: ROOT_DIR,
-    absolute: true
-  });
 
   app.bootstrap({
     name: "Kosko",
@@ -49,7 +63,7 @@ class DocsaurusFrontMatterComponent extends FrontMatterComponent {
     hideBreadcrumbs: true,
     hideProjectName: true,
     hideInPageTOC: true,
-    entryPoints,
+    entryPoints: await getEntryPoints(),
     tsconfig: join(__dirname, "../tsconfig.typedoc.json")
   });
 
@@ -61,9 +75,9 @@ class DocsaurusFrontMatterComponent extends FrontMatterComponent {
   const project = app.convert();
   const outDir = join(WEBSITE_DIR, "docs", "api");
 
-  await del(outDir);
+  await fs.remove(outDir);
   await app.generateDocs(project, outDir);
-  await del(join(outDir, "README.md"));
+  await fs.remove(join(outDir, "README.md"));
 })().catch((err) => {
   console.error(err);
   process.exitCode = 1;
