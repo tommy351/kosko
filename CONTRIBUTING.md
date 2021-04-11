@@ -58,6 +58,25 @@ Run integration tests.
 npm run test:integration
 ```
 
+### Browser Tests
+
+Build TypeScript files.
+
+```sh
+npm run build
+```
+
+Run browser tests.
+
+```sh
+npm run test:browser
+```
+
+If the tests don't run:
+
+- [Puppeteer troubleshooting](https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md)
+- For WSL: [puppeteer/puppeteer#1837](https://github.com/puppeteer/puppeteer/issues/1837#issuecomment-689006806)
+
 ## Linting
 
 Lint TypeScript and JavaScript files.
