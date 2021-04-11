@@ -49,6 +49,16 @@ test("value is an async function that throws an error", async () => {
   ).rejects.toThrow();
 });
 
+test("value is a resolved Promise", async () => {
+  await expect(resolve(Promise.resolve({ foo: "bar" }))).resolves.toEqual([
+    { path: "", index: [], data: { foo: "bar" } }
+  ]);
+});
+
+test("value is a rejected Promise", async () => {
+  await expect(resolve(Promise.reject(new Error("err")))).rejects.toThrow();
+});
+
 test("value is nested", async () => {
   await expect(
     resolve([

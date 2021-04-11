@@ -2,6 +2,24 @@ import { Manifest } from "./base";
 import debug from "./debug";
 import { ValidationError } from "./error";
 
+interface Validator {
+  validate(): Promise<void>;
+}
+
+function isValidator(value: unknown): value is Validator {
+  return !!value && typeof (value as any).validate === "function";
+}
+
+function isPromiseLike(value: unknown): value is PromiseLike<unknown> {
+  if (value instanceof Promise) return true;
+
+  return (
+    !!value &&
+    (typeof value === "function" || typeof value === "object") &&
+    typeof (value as any).then === "function"
+  );
+}
+
 export interface ResolveOptions {
   /**
    * Execute `validate` method of each values. Default to `true`.
@@ -26,6 +44,7 @@ export interface ResolveOptions {
  * The `value` can be a:
  *   - Object
  *   - Array
+ *   - Promise
  *   - Function
  *   - Async function
  */
@@ -35,6 +54,10 @@ export async function resolve(
 ): Promise<readonly Manifest[]> {
   if (typeof value === "function") {
     return resolve(await value(), options);
+  }
+
+  if (isPromiseLike(value)) {
+    return resolve(await value, options);
   }
 
   const { validate = true, index = [], path = "" } = options;
@@ -56,10 +79,10 @@ export async function resolve(
   }
 
   if (validate) {
-    if (typeof (value as any).validate === "function") {
+    if (isValidator(value)) {
       try {
         debug("Validating manifest %s in %s", index.join("."), options.path);
-        await (value as any).validate();
+        await value.validate();
       } catch (err) {
         throw new ValidationError({
           path,
