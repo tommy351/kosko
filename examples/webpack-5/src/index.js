@@ -10,9 +10,9 @@ env.setReducers((reducers) => [
   })
 ]);
 
-const manifests = await resolve([
-  () => import("./components/nginx").then((mod) => mod.default)
-]);
+const manifests = await resolve(() =>
+  import("./components/nginx").then((mod) => mod.default)
+);
 
 console.log(manifests);
 
