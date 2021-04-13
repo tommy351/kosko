@@ -1,5 +1,61 @@
 # @kosko/env
 
+## 2.0.0
+
+### Major Changes
+
+- [#73](https://github.com/tommy351/kosko/pull/73) [`b90c724`](https://github.com/tommy351/kosko/commit/b90c724754ee8b7bd6e4e99e037b28a89f71ddb3) Thanks [@tommy351](https://github.com/tommy351)! - Add support for browser. Several APIs were introduced in this release.
+
+  - `Loader` interface
+  - `createEnvironment` function
+  - `createAsyncEnvironment` function
+  - `createNodeCJSEnvironment` function
+  - `createNodeESMEnvironment` function
+  - `createSyncEnvironment` function
+  - `createSyncLoaderReducers` function
+  - `createAsyncLoaderReducers` function
+
+  The following example shows how to use this package in browsers.
+
+  ```js
+  import env, { createLoaderReducers } from "@kosko/env";
+
+  env.setReducers(reducers => [
+    ...reducers,
+    ...createAsyncLoaderReducers({
+      global: () =>
+        import("./environments/dev/index.js").then(mod => mod.default),
+      component: name =>
+        import(`./environments/dev/${name}.js`).then(mod => mod.default)
+    })
+  ]);
+  ```
+
+  **BREAKING CHANGES**: The following APIs were changed in this release.
+
+  - `Environment` class → `Environment` interface
+  - `SyncEnvironment` class → `createNodeCJSEnvironment` function
+  - `AsyncEnvironment` class → `createNodeESMEnvironment` function
+
+  You don't have to change anything, unless you initialize these classes manually.
+
+  ```js
+  // Before
+  const { Environment } = require("@kosko/env");
+  const env = new Environment(process.cwd());
+
+  // After
+  const { createNodeCJSEnvironment } = require("@kosko/env");
+  const env = createNodeCJSEnvironment({ cwd: process.cwd() });
+  ```
+
+### Patch Changes
+
+- [#73](https://github.com/tommy351/kosko/pull/73) [`b6183c3`](https://github.com/tommy351/kosko/commit/b6183c3781ab3f1f1d21de8fbd21e5ef0ca37e17) Thanks [@tommy351](https://github.com/tommy351)! - Add `sideEffect: false` to `package.json`.
+
+- Updated dependencies [[`b6183c3`](https://github.com/tommy351/kosko/commit/b6183c3781ab3f1f1d21de8fbd21e5ef0ca37e17)]:
+  - @kosko/require@2.0.1
+
 ## 1.1.0
 
 ### Minor Changes

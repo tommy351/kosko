@@ -1,6 +1,6 @@
 {
   "name": "@kosko/template-deployed-service",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Create a new component including a deployment and a service.",
   "homepage": "https://kosko.dev",
   "repository": "https://github.com/tommy351/kosko/tree/master/packages/template-deployed-service",
