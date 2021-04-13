@@ -1,6 +1,9 @@
 import yaml from "js-yaml";
-import { Writable } from "stream";
 import { Result } from "./base";
+
+export interface Writer {
+  write(data: string): void;
+}
 
 export enum PrintFormat {
   YAML = "yaml",
@@ -9,10 +12,10 @@ export enum PrintFormat {
 
 export interface PrintOptions {
   format: PrintFormat;
-  writer: Writable;
+  writer: Writer;
 }
 
-type Printer<T> = (writer: Writable, data: T) => void;
+type Printer<T> = (writer: Writer, data: T) => void;
 type PrinterMap<T> = { [key in PrintFormat]: Printer<T> };
 
 function stringifyYAML(data: any): string {

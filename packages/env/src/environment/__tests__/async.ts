@@ -1,134 +1,31 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-import { join } from "path";
-import { merge } from "../../merge";
-import { Reducer } from "../../reduce";
-import { AsyncEnvironment } from "../async";
+import { createAsyncEnvironment } from "../async";
+import { Environment } from "../types";
 
-jest.mock("@kosko/require", () => {
-  const pkg = jest.requireActual("@kosko/require");
-
-  return {
-    ...pkg,
-    getRequireExtensions: () => [".js"]
-  };
-});
-
-const fixturePath = join(__dirname, "..", "..", "__fixtures__");
-let env: AsyncEnvironment;
+let env: Environment;
 
 beforeEach(() => {
-  env = new AsyncEnvironment(fixturePath);
-});
-
-describe("when module exists", () => {
-  let envPath: string;
-
-  beforeEach(() => {
-    env.env = "dev";
-    envPath = join(fixturePath, "environments", env.env);
-  });
-
-  describe("global", () => {
-    test("should return global vars", async () => {
-      await expect(env.global()).resolves.toEqual(require(envPath));
-    });
-  });
-
-  describe("component", () => {
-    test("shold return global + component vars", async () => {
-      await expect(env.component("foo")).resolves.toEqual(
-        merge([require(envPath), require(join(envPath, "foo"))])
-      );
-    });
-  });
-});
-
-describe("when module does not exist", () => {
-  beforeEach(() => {
-    env.env = "foo";
-  });
-
-  describe("global", () => {
-    test("should return empty object", async () => {
-      await expect(env.global()).resolves.toEqual({});
-    });
-  });
-
-  describe("component", () => {
-    test("should return empty object", async () => {
-      await expect(env.component("foo")).resolves.toEqual({});
-    });
-  });
-});
-
-describe("when module throws an error", () => {
-  beforeEach(() => {
-    env.env = "error";
-  });
-
-  test("should throw the error", async () => {
-    await expect(() => env.global()).rejects.toThrow();
-  });
-});
-
-describe("with additional reducers", () => {
-  let envPath: string;
-
-  const customReducer: Reducer = {
-    name: "custom",
-    reduce: async (variables, componentName) => {
-      return {
-        ...variables,
-        [componentName || "global"]: "overridden"
-      };
+  env = createAsyncEnvironment();
+  env.setReducers((reducers) => [
+    ...reducers,
+    {
+      name: "a",
+      reduce: async (values, name) => ({ ...values, a: name || "" })
+    },
+    {
+      name: "b",
+      reduce: async (values, name) => ({ ...values, b: name || "" })
     }
-  };
+  ]);
+});
 
-  beforeEach(() => {
-    env.env = "dev";
-    envPath = join(fixturePath, "environments", env.env);
-    env.setReducers((reducers) => reducers.concat(customReducer));
-  });
-
-  afterEach(() => {
-    env.resetReducers();
-  });
-
-  describe("global", () => {
-    test("shold return global vars", async () => {
-      await expect(env.global()).resolves.toEqual({
-        ...require(envPath),
-        global: "overridden"
-      });
-    });
-  });
-
-  describe("component", () => {
-    test("shold return global + component vars", async () => {
-      await expect(env.component("foo")).resolves.toEqual({
-        ...merge([require(envPath), require(join(envPath, "foo"))]),
-        foo: "overridden"
-      });
-    });
+describe("global", () => {
+  test("should return global vars", async () => {
+    await expect(env.global()).resolves.toEqual({ a: "", b: "" });
   });
 });
 
-describe("when reducer throws an error", () => {
-  const errorReducer: Reducer = {
-    name: "error",
-    reduce: () => Promise.reject(new Error("Reduce error"))
-  };
-
-  beforeEach(() => {
-    env.env = "dev";
-    env.setReducers((reducers) => reducers.concat(errorReducer));
-  });
-
-  afterEach(() => {
-    env.resetReducers();
-  });
-
-  test("should throw the error", async () => {
-    await expect(env.global()).rejects.toThrow();
+describe("component", () => {
+  test("should return component vars", async () => {
+    await expect(env.component("foo")).resolves.toEqual({ a: "foo", b: "foo" });
   });
 });

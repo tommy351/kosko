@@ -1,5 +1,4 @@
 import fs from "fs-extra";
-import makeDir from "make-dir";
 import { join, resolve } from "path";
 import { Command, getLogger, RootArguments } from "../cli/command";
 import Debug from "../cli/debug";
@@ -81,7 +80,7 @@ export const initCmd: Command<InitArguments> = {
     for (const name of ["components", "environments", "templates"]) {
       const dir = join(path, name);
       debug("Creating directory", dir);
-      await makeDir(dir);
+      await fs.ensureDir(dir);
     }
 
     await updatePkg(join(path, "package.json"), {

@@ -1,0 +1,20 @@
+{
+  "name": "@kosko-example/webpack-5",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "webpack serve",
+    "build": "webpack"
+  },
+  "dependencies": {
+    "@kosko/env": "workspace:*",
+    "@kosko/generate": "workspace:*",
+    "kubernetes-models": "^1.5.2"
+  },
+  "devDependencies": {
+    "html-webpack-plugin": "^5.3.1",
+    "webpack": "^5.31.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
+  }
+}

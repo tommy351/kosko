@@ -10,6 +10,7 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "source": "src/index.ts",
+  "sideEffects": false,
   "exports": {
     "import": "./dist/index.mjs",
     "require": "./dist/index.js"
@@ -29,7 +30,6 @@
   "dependencies": {
     "exit": "^0.1.2",
     "fs-extra": "^9.1.0",
-    "make-dir": "^3.1.0",
     "signale": "^1.4.0",
     "tslib": "^2.1.0",
     "yargs": "^16.2.0"

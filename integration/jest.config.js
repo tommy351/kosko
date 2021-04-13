@@ -8,7 +8,8 @@ module.exports = {
   testEnvironment: "node",
   snapshotSerializers: ["jest-serializer-path"],
   setupFilesAfterEnv: ["jest-extended", "<rootDir>/setup.ts"],
-  ...(!isESMSupported && {
-    testPathIgnorePatterns: ["<rootDir>/esm/"]
-  })
+  testPathIgnorePatterns: [
+    "<rootDir>/browser",
+    ...(isESMSupported ? [] : ["<rootDir>/esm/"])
+  ]
 };

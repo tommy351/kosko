@@ -1,16 +1,15 @@
-/**
- * @packageDocumentation
- * @module @kosko/env
- */
-
 export * from "./index.base";
 
-import { SyncEnvironment } from "./environment/sync";
-export default new SyncEnvironment(process.cwd());
-export { SyncEnvironment as Environment };
+import { createAsyncEnvironment } from "./environment/async";
+import type { createNodeCJSEnvironment as _createNodeCJSEnvironment } from "./environment/node-cjs";
+import type { createNodeESMEnvironment as _createNodeESMEnvironment } from "./environment/node-esm";
 
-// HACK: Export default to module.exports and maintain types above.
-if (typeof module !== "undefined") {
-  module.exports = Object.assign(exports.default, exports);
-  Object.defineProperty(module.exports, "__esModule", { value: true });
-}
+export default createAsyncEnvironment();
+
+export const createNodeCJSEnvironment: typeof _createNodeCJSEnvironment = () => {
+  throw new Error("createNodeCJSEnvironment is only supported on Node.js");
+};
+
+export const createNodeESMEnvironment: typeof _createNodeESMEnvironment = () => {
+  throw new Error("createNodeESMEnvironment is only supported on Node.js");
+};

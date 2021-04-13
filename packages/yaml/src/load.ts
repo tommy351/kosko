@@ -51,39 +51,6 @@ async function getConstructor(
 
 /**
  * Load a Kubernetes YAML file from a string.
- *
- * ## Examples
- *
- * ### Transform manifests
- *
- * ```ts
- * loadString('', {
- *   transform(manifest) {
- *     if (manifest.apiVersion === "apps/v1" && manifest.kind === "Deployment") {
- *       manifest.spec.replicas = 3;
- *     }
- *
- *     return manifest;
- *   }
- * });
- * ```
- *
- * ### Filter manifests
- *
- * Values are removed from array if `transform` function returns a falsy value,
- * such as `null` or `undefined`.
- *
- * ```ts
- * loadString('', {
- *   transform(manifest) {
- *     if (manifest.metadata.name === 'foo') {
- *       return null;
- *     }
- *
- *     return manifest;
- *   }
- * });
- * ```
  */
 export async function loadString(
   content: string,

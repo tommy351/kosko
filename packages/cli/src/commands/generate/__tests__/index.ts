@@ -2,12 +2,10 @@ import toml from "@iarna/toml";
 import { Config } from "@kosko/config";
 import env from "@kosko/env";
 import { generate, print, PrintFormat, Result } from "@kosko/generate";
-import { writeFile, readFile } from "fs-extra";
-import makeDir from "make-dir";
-import { join, dirname } from "path";
+import { writeFile, readFile, outputFile, ensureSymlink } from "fs-extra";
+import { join } from "path";
 import pkgDir from "pkg-dir";
 import { Signale } from "signale";
-import symlinkDir from "symlink-dir";
 import tempDir from "temp-dir";
 import tmp from "tmp-promise";
 import { setLogger } from "../../../cli/command";
@@ -26,8 +24,7 @@ let result: Result;
 
 async function createFakeModule(id: string): Promise<void> {
   const dir = join(tmpDir.path, "node_modules", id);
-  await makeDir(dir);
-  await writeFile(
+  await outputFile(
     join(dir, "index.js"),
     `require('fs').appendFileSync(__dirname + '/../../fakeModules', '${id},');`
   );
@@ -63,8 +60,7 @@ beforeEach(async () => {
   const envSrc = join(root!, "packages", "env");
   const envDest = join(tmpDir.path, "node_modules", "@kosko", "env");
 
-  await makeDir(dirname(envDest));
-  await symlinkDir(envSrc, envDest);
+  await ensureSymlink(envSrc, envDest, "dir");
 });
 
 afterEach(async () => {

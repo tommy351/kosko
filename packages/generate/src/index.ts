@@ -1,9 +1,7 @@
-/**
- * @packageDocumentation
- * @module @kosko/generate
- */
+import type { generate as _generate } from "./generate";
 
-export * from "./base";
-export { ValidationError } from "./error";
-export * from "./generate";
-export * from "./print";
+export * from "./index.base";
+
+export const generate: typeof _generate = () => {
+  throw new Error("generate is only supported on Node.js");
+};

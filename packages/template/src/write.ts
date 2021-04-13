@@ -1,6 +1,5 @@
 import fs from "fs-extra";
-import makeDir from "make-dir";
-import { dirname, join } from "path";
+import { join } from "path";
 import signale from "signale";
 import { File } from "./template";
 
@@ -18,7 +17,6 @@ export async function writeFiles(
     const filePath = join(path, file.path);
 
     signale.info("Writing file", filePath);
-    await makeDir(dirname(filePath));
-    await fs.writeFile(filePath, file.content);
+    await fs.outputFile(filePath, file.content);
   }
 }

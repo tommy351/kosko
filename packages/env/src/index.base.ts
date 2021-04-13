@@ -1,4 +1,10 @@
 export { Paths } from "./paths";
 export { Reducer } from "./reduce";
-export { SyncEnvironment } from "./environment/sync";
-export { AsyncEnvironment } from "./environment/async";
+export { Environment, Loader } from "./environment/types";
+export {
+  createSyncLoaderReducers,
+  createAsyncLoaderReducers
+} from "./environment/base";
+export type { NodeEnvironmentOptions } from "./environment/node";
+export { createAsyncEnvironment } from "./environment/async";
+export { createSyncEnvironment } from "./environment/sync";
