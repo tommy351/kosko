@@ -1,5 +1,17 @@
 # @kosko/cli
 
+## 1.2.4
+
+### Patch Changes
+
+- [#73](https://github.com/tommy351/kosko/pull/73) [`b6183c3`](https://github.com/tommy351/kosko/commit/b6183c3781ab3f1f1d21de8fbd21e5ef0ca37e17) Thanks [@tommy351](https://github.com/tommy351)! - Add `sideEffect: false` to `package.json`.
+
+- Updated dependencies [[`b6183c3`](https://github.com/tommy351/kosko/commit/b6183c3781ab3f1f1d21de8fbd21e5ef0ca37e17), [`2718ffe`](https://github.com/tommy351/kosko/commit/2718ffed812b8224252a47fa0208b70a6c7adab4), [`5c09694`](https://github.com/tommy351/kosko/commit/5c09694e98a72f7335965d57d7935472a74ce974), [`35c5ce8`](https://github.com/tommy351/kosko/commit/35c5ce8cb5745a6befc895c0eb108f0618c25b3a)]:
+  - @kosko/config@1.0.5
+  - @kosko/generate@1.2.0
+  - @kosko/migrate@2.0.1
+  - @kosko/require@2.0.1
+
 ## 1.2.3
 
 ### Patch Changes
