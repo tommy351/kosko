@@ -20,14 +20,13 @@ class DocsaurusFrontMatterComponent extends FrontMatterComponent {
     );
 
     const isGlobals = path === "modules";
-    const slug = `/api${isGlobals ? "" : `/${path}`}`;
     const title = isGlobals ? "Overview" : page.model.name;
 
     return {
       id: this.getId(page),
       title,
-      slug,
-      hide_title: true
+      hide_title: true,
+      ...(isGlobals && { slug: "/api" })
     };
   }
 }

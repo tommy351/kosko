@@ -1,4 +1,10 @@
 /**
+ * This page is for `@kosko/env` v2.0.
+ *
+ * Previous API docs:
+ *
+ * - [v1.0](../../api-archives/env-1.0/modules/_kosko_env.md)
+ *
  * @packageDocumentation
  * @module @kosko/env
  */
