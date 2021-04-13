@@ -7,8 +7,8 @@
     "build": "webpack"
   },
   "dependencies": {
-    "@kosko/env": "workspace:*",
-    "@kosko/generate": "workspace:*",
+    "@kosko/env": "^2.0.0",
+    "@kosko/generate": "^1.2.0",
     "kubernetes-models": "^1.5.2"
   },
   "devDependencies": {

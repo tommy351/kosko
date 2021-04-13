@@ -188,8 +188,8 @@ importers:
       webpack-cli: 4.6.0_122c48df1bb4900de3c8d3856836cf3d
       webpack-dev-server: 3.11.2_webpack-cli@4.6.0+webpack@5.31.2
     specifiers:
-      '@kosko/env': workspace:*
-      '@kosko/generate': workspace:*
+      '@kosko/env': ^2.0.0
+      '@kosko/generate': ^1.2.0
       html-webpack-plugin: ^5.3.1
       kubernetes-models: ^1.5.2
       webpack: ^5.31.0
