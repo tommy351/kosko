@@ -26,7 +26,7 @@ jobs:
         with:
           version: ${{ env.PNPM_VERSION }}
       - name: Set pnpm store dir
-        run: printf '\nstore-dir=${{ env.PNPM_CACHE_FOLDER }}' >> $NPM_CONFIG_USERCONFIG
+        run: pnpm config set store-dir .pnpm-store
       - name: Install dependencies
         run: pnpm install
       - name: Build packages
@@ -56,7 +56,7 @@ jobs:
         with:
           version: ${{ env.PNPM_VERSION }}
       - name: Set pnpm store dir
-        run: printf '\nstore-dir=${{ env.PNPM_CACHE_FOLDER }}' >> $NPM_CONFIG_USERCONFIG
+        run: pnpm config set store-dir .pnpm-store
       - name: Install dependencies
         run: pnpm install
       - name: Build packages
@@ -100,7 +100,7 @@ jobs:
         with:
           version: ${{ env.PNPM_VERSION }}
       - name: Set pnpm store dir
-        run: printf '\nstore-dir=${{ env.PNPM_CACHE_FOLDER }}' >> $NPM_CONFIG_USERCONFIG
+        run: pnpm config set store-dir .pnpm-store
       - name: Install dependencies
         run: pnpm install
       - name: Build packages
