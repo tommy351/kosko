@@ -18,6 +18,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 14.x
+          registry-url: https://registry.npmjs.org
       - uses: actions/cache@v2
         with:
           path: ${{ env.PNPM_CACHE_FOLDER }}
@@ -28,7 +29,7 @@ jobs:
         with:
           version: ${{ env.PNPM_VERSION }}
       - name: Set pnpm store dir
-        run: pnpm config set store-dir ${{ env.PNPM_CACHE_FOLDER }}
+        run: printf '\nstore-dir=${{ env.PNPM_CACHE_FOLDER }}' >> $NPM_CONFIG_USERCONFIG
       - name: Install dependencies
         run: pnpm install
       - name: Create Release Pull Request or Publish to npm
@@ -39,3 +40,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
