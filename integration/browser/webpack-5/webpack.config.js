@@ -5,11 +5,17 @@ const path = require("path");
 
 module.exports = {
   mode: "development",
-  entry: "./src/index.js",
+  entry: path.join(__dirname, "../__fixtures__/environment/index.js"),
   output: {
     path: path.join(__dirname, "dist")
   },
   experiments: {
     topLevelAwait: true
+  },
+  resolve: {
+    alias: {
+      "@kosko/env": path.join(__dirname, "../../../packages/env"),
+      "@kosko/generate": path.join(__dirname, "../../../packages/generate")
+    }
   }
 };

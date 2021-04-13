@@ -10,7 +10,7 @@ env.setReducers((reducers) => [
   })
 ]);
 
-const manifests = await resolve(() =>
+const manifests = await resolve(
   import("./components/nginx").then((mod) => mod.default)
 );
 
