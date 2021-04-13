@@ -1,5 +1,14 @@
 # @kosko/migrate
 
+## 2.0.1
+
+### Patch Changes
+
+- [#73](https://github.com/tommy351/kosko/pull/73) [`b6183c3`](https://github.com/tommy351/kosko/commit/b6183c3781ab3f1f1d21de8fbd21e5ef0ca37e17) Thanks [@tommy351](https://github.com/tommy351)! - Add `sideEffect: false` to `package.json`.
+
+- Updated dependencies [[`b6183c3`](https://github.com/tommy351/kosko/commit/b6183c3781ab3f1f1d21de8fbd21e5ef0ca37e17)]:
+  - @kosko/yaml@1.0.1
+
 ## 2.0.0
 
 ### Major Changes

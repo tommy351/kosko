@@ -1,5 +1,11 @@
 # @kosko/config
 
+## 1.0.5
+
+### Patch Changes
+
+- [#73](https://github.com/tommy351/kosko/pull/73) [`b6183c3`](https://github.com/tommy351/kosko/commit/b6183c3781ab3f1f1d21de8fbd21e5ef0ca37e17) Thanks [@tommy351](https://github.com/tommy351)! - Add `sideEffect: false` to `package.json`.
+
 ## [1.0.4](https://github.com/tommy351/kosko/compare/@kosko/config@1.0.3...@kosko/config@1.0.4) (2021-02-27)
 
 **Note:** Version bump only for package @kosko/config
