@@ -1,5 +1,5 @@
 {
   "template": "node",
-  "view": "console",
+  "view": "browser",
   "node": 14
 }

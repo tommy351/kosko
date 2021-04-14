@@ -1,3 +1,4 @@
+/* eslint-env browser */
 import env, { createAsyncLoaderReducers } from "@kosko/env";
 import { resolve, print, PrintFormat } from "@kosko/generate";
 
@@ -16,7 +17,17 @@ const manifests = await resolve(
 
 console.log(manifests);
 
+const element = document.createElement("pre");
+document.body.appendChild(element);
+
 print(
   { manifests },
-  { format: PrintFormat.YAML, writer: { write: console.log } }
+  {
+    format: PrintFormat.YAML,
+    writer: {
+      write: (data) => {
+        element.innerText += data;
+      }
+    }
+  }
 );

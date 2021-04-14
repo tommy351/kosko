@@ -1,5 +1,5 @@
 {
   "hardReloadOnChange": true,
   "template": "parcel",
-  "view": "console"
+  "view": "browser"
 }
