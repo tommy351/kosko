@@ -1,0 +1,22 @@
+{
+  "name": "@kosko-example/web-parcel-1",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "dependencies": {
+    "@kosko/env": "^2.0.0",
+    "@kosko/generate": "^1.2.0",
+    "kubernetes-models": "^1.5.2"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
+  },
+  "browserslist": [
+    "last 1 chrome version",
+    "last 1 firefox version",
+    "last 1 safari version"
+  ]
+}
