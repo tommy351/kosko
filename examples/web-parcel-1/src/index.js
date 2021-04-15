@@ -13,7 +13,7 @@ env.setReducers((reducers) => [
 
 (async () => {
   const manifests = await resolve(
-    import("./components/nginx.js").then((mod) => mod.default)
+    import("./components/nginx").then((mod) => mod.default)
   );
 
   console.log(manifests);
