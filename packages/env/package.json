@@ -1,6 +1,6 @@
 {
   "name": "@kosko/env",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Manage environemnts in kosko.",
   "homepage": "https://kosko.dev",
   "repository": "https://github.com/tommy351/kosko/tree/master/packages/env",
