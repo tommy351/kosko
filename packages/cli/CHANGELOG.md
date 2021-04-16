@@ -1,5 +1,14 @@
 # @kosko/cli
 
+## 1.2.5
+
+### Patch Changes
+
+- Updated dependencies [[`3f1bc58`](https://github.com/tommy351/kosko/commit/3f1bc58dc9cc2dacfd748471e46b459c81d92c43)]:
+  - @kosko/require@2.0.2
+  - @kosko/generate@1.2.1
+  - @kosko/migrate@2.0.2
+
 ## 1.2.4
 
 ### Patch Changes

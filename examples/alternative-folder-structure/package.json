@@ -1,6 +1,6 @@
 {
   "name": "@kosko-example/alternative-folder-structure",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "private": true,
   "dependencies": {
     "@kosko/env": "workspace:*",
