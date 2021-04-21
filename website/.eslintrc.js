@@ -17,6 +17,7 @@ module.exports = {
         "@theme/Layout",
         "@theme/CodeBlock",
         "@theme/hooks/usePrismTheme",
+        "@theme/hooks/useThemeContext",
         "@docusaurus/Link",
         "@docusaurus/useDocusaurusContext",
         "@docusaurus/useBaseUrl"

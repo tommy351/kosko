@@ -34,6 +34,7 @@ module.exports = {
           docId: "api/modules"
         },
         { to: "blog", label: "Blog", position: "left" },
+        { to: "play", label: "Playground", position: "left" },
         {
           href: githubUrl,
           label: "GitHub",
@@ -77,5 +78,8 @@ module.exports = {
       }
     ]
   ],
-  plugins: ["docusaurus-plugin-sass"]
+  plugins: [
+    "docusaurus-plugin-sass",
+    require.resolve("./plugins/lodash-webpack-plugin")
+  ]
 };
