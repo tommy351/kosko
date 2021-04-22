@@ -1,23 +1,21 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { usePlayground } from "../context";
 import styles from "./styles.module.scss";
-import useRollup from "../hooks/useRollup";
 import generateBundle from "./generateBundle";
 import executeModule from "./executeModule";
 import MonacoEditor from "../MonacoEditor";
+import { useThrottle } from "react-use";
 
 let CALLBACK_ID = 0;
 
-const Preview: FunctionComponent = () => {
-  const rollup = useRollup();
+const PreviewContent: FunctionComponent = () => {
   const [code, setCode] = useState("");
   const {
-    value: { component, environment, files }
+    value: { component, environment, files: filesValue }
   } = usePlayground();
+  const files = useThrottle(filesValue, 500);
 
   useEffect(() => {
-    if (!rollup) return;
-
     const callbackId = `__koskoPreview${CALLBACK_ID++}`;
     let scriptElement: HTMLScriptElement | undefined;
     let canceled = false;
@@ -29,7 +27,6 @@ const Preview: FunctionComponent = () => {
 
     (async () => {
       const result = await generateBundle({
-        rollup,
         files,
         component,
         environment,
@@ -49,11 +46,21 @@ const Preview: FunctionComponent = () => {
         scriptElement.remove();
       }
     };
-  }, [rollup, files, component, environment]);
+  }, [files, component, environment]);
+
+  return (
+    <MonacoEditor language="yaml" value={code} options={{ readOnly: true }} />
+  );
+};
+
+const Preview: FunctionComponent = () => {
+  const {
+    value: { editorMounted }
+  } = usePlayground();
 
   return (
     <div className={styles.container}>
-      <MonacoEditor language="yaml" value={code} options={{ readOnly: true }} />
+      {editorMounted && <PreviewContent />}
     </div>
   );
 };

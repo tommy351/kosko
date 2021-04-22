@@ -1,12 +1,8 @@
-import type { Plugin } from "rollup";
-import {
-  basename,
-  dirname,
-  extname,
-  isAbsolute,
-  isRelative,
-  relative
-} from "../../../utils/path";
+import type rollupType from "rollup";
+import { basename, extname } from "../../../utils/path";
+import createVirtualFSPlugin from "./virtualFS";
+import createCDNResolvePlugin, { getModuleURLForCDN } from "./cdnResolve";
+import createAliasPlugin from "./alias";
 
 const SYSTEM_DIR = "/.kosko";
 const SYSTEM_ENTRY_ID = `${SYSTEM_DIR}/entry.js`;
@@ -14,19 +10,10 @@ const SYSTEM_ENV_ID = `${SYSTEM_DIR}/env.js`;
 const KOSKO_ENV_BARE_SPECIFIER = "@kosko/env";
 
 interface BundleOptions {
-  rollup: typeof import("rollup");
   files: Record<string, string>;
   component: string;
   environment: string;
   callbackId: string;
-}
-
-function isURL(url: string): boolean {
-  return url.includes(":");
-}
-
-function getModuleURLForCDN(module: string) {
-  return `https://cdn.skypack.dev/${module}`;
 }
 
 function generateEntry({
@@ -89,68 +76,20 @@ export default env;
 `;
 }
 
-function createVirtualFSPlugin(files: Record<string, string>): Plugin {
-  return {
-    name: "virtual-fs",
-    resolveId(source, importer) {
-      if (isAbsolute(source)) {
-        return source;
-      }
-
-      if (isRelative(source)) {
-        const path = "/" + relative(dirname(importer), source);
-        return path;
-      }
-    },
-    load(id) {
-      if (files[id] != null) {
-        return files[id];
-      }
-    }
-  };
-}
-
-function createCDNResolvePlugin(): Plugin {
-  return {
-    name: "cdn-resolve",
-    resolveId(source) {
-      if (isRelative(source) || isAbsolute(source)) {
-        return;
-      }
-
-      if (isURL(source)) {
-        return false;
-      }
-
-      return {
-        id: getModuleURLForCDN(source),
-        external: true
-      };
-    }
-  };
-}
-
-function createAliasResolvePlugin(aliases: Record<string, string>): Plugin {
-  return {
-    name: "alias-resolve",
-    resolveId(source) {
-      const alias = aliases[source];
-      if (alias) return alias;
-    }
-  };
-}
-
 export default async function generateBundle({
-  rollup,
   files,
   component,
   environment,
   callbackId
 }: BundleOptions) {
+  const rollup: typeof rollupType = await import(
+    /* webpackChunkName: "rollup" */ "rollup/dist/rollup.browser"
+  );
+
   const build = await rollup.rollup({
     input: SYSTEM_ENTRY_ID,
     plugins: [
-      createAliasResolvePlugin({
+      createAliasPlugin({
         [KOSKO_ENV_BARE_SPECIFIER]: SYSTEM_ENV_ID
       }),
       createVirtualFSPlugin({

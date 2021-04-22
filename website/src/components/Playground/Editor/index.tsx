@@ -16,6 +16,11 @@ const Editor: FunctionComponent = () => {
         language="javascript"
         path={activePath}
         value={value}
+        onMount={() => {
+          updateValue((draft) => {
+            draft.editorMounted = true;
+          });
+        }}
         onChange={(value) => {
           updateValue((draft) => {
             draft.files[activePath] = value;

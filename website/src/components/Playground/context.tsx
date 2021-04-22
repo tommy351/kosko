@@ -13,6 +13,7 @@ interface ContextValue {
   files: Record<string, string>;
   component: string;
   environment: string;
+  editorMounted: boolean;
 }
 
 const PlaygroundContext = createContext<{
@@ -23,7 +24,8 @@ const PlaygroundContext = createContext<{
     activePath: "",
     files: {},
     component: "",
-    environment: ""
+    environment: "",
+    editorMounted: false
   },
   updateValue: noop
 });
@@ -50,7 +52,8 @@ export const PlaygroundProvider: FunctionComponent = ({ children }) => {
       /* eslint-enable @typescript-eslint/no-var-requires */
     },
     component: "nginx",
-    environment: "dev"
+    environment: "dev",
+    editorMounted: false
   }));
   const ctx = useMemo(() => ({ value, updateValue }), [value, updateValue]);
 
