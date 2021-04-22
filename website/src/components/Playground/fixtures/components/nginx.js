@@ -2,7 +2,7 @@ import { Deployment } from "kubernetes-models/apps/v1/Deployment";
 import { Service } from "kubernetes-models/v1/Service";
 import env from "@kosko/env";
 
-const params = await env.component("nginx");
+const params = env.component("nginx");
 
 const metadata = { name: "nginx" };
 const labels = { app: "nginx" };

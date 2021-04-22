@@ -1,5 +1,4 @@
 import type { Plugin } from "rollup";
-import { init, parse } from "es-module-lexer";
 import {
   basename,
   dirname,
@@ -10,101 +9,9 @@ import {
 } from "../../../utils/path";
 
 const SYSTEM_DIR = "/.kosko";
-const ENTRY_ID = `${SYSTEM_DIR}/entry.js`;
-
-function isURL(url: string): boolean {
-  return url.includes(":");
-}
-
-function generateEntry({
-  files,
-  component,
-  environment,
-  callbackId
-}: Omit<BundleOptions, "rollup">): string {
-  return `
-import env, { createAsyncLoaderReducers } from "@kosko/env";
-import { resolve, print, PrintFormat } from "@kosko/generate";
-
-env.setReducers(() => createAsyncLoaderReducers({
-  global: () => import("/environments/${environment}/index.js").then(mod => mod.default),
-  component: (name) => {
-    switch (name) {
-      ${Object.keys(files)
-        .filter((path) => path.startsWith(`/environments/${environment}/`))
-        .map((path) => {
-          const name = basename(path, extname(path));
-          return `case "${name}": return import("${path}").then(mod => mod.default);`;
-        })
-        .join("\n")}
-    }
-  }
-}));
-
-const manifests = await resolve(import("./components/${component}.js").then(mod => mod.default));
-const result = [];
-
-print({ manifests }, {
-  format: PrintFormat.YAML,
-  writer: {
-    write(data) {
-      result.push(data);
-    }
-  }
-});
-
-if (typeof window.${callbackId} === "function") {
-  window.${callbackId}(result.join(""));
-}
-`;
-}
-
-function createResolveImportPlugin(files: Record<string, string>): Plugin {
-  return {
-    name: "resolve-import",
-    resolveId(source, importer) {
-      if (isAbsolute(source)) {
-        return source;
-      }
-
-      if (isRelative(source)) {
-        const path = "/" + relative(dirname(importer), source);
-        return path;
-      }
-
-      if (isURL(source)) {
-        return false;
-      }
-
-      return {
-        id: `https://cdn.skypack.dev/${source}`,
-        external: true
-      };
-    },
-    load(id) {
-      if (files[id] != null) {
-        return files[id];
-      }
-    }
-  };
-}
-
-function createWrapChunkPlugin(): Plugin {
-  return {
-    name: "wrap-chunk",
-    renderChunk(code) {
-      const [imports] = parse(code);
-      if (!imports.length) return code;
-
-      const lastImport = imports[imports.length - 1];
-      const endOfImportStatement = lastImport.se;
-      const importStatements = code.substring(0, endOfImportStatement);
-      const wrapperContent = code.substring(endOfImportStatement + 1);
-
-      return `${importStatements};(async () => {${wrapperContent}})();`;
-    }
-  };
-}
+const SYSTEM_ENTRY_ID = `${SYSTEM_DIR}/entry.js`;
+const SYSTEM_ENV_ID = `${SYSTEM_DIR}/env.js`;
+const KOSKO_ENV_BARE_SPECIFIER = "@kosko/env";
 
 interface BundleOptions {
   rollup: typeof import("rollup");
@@ -114,6 +21,125 @@ interface BundleOptions {
   callbackId: string;
 }
 
+function isURL(url: string): boolean {
+  return url.includes(":");
+}
+
+function getModuleURLForCDN(module: string) {
+  return `https://cdn.skypack.dev/${module}`;
+}
+
+function generateEntry({
+  component,
+  callbackId
+}: Pick<BundleOptions, "component" | "callbackId">): string {
+  return `
+import "${SYSTEM_ENV_ID}";
+import { resolve, print, PrintFormat } from "@kosko/generate";
+import component from "/components/${component}.js";
+
+(async () => {
+  const manifests = await resolve(component);
+  const result = [];
+
+  print({ manifests }, {
+    format: PrintFormat.YAML,
+    writer: {
+      write(data) {
+        result.push(data);
+      }
+    }
+  });
+
+  if (typeof window[${JSON.stringify(callbackId)}] === "function") {
+    window[${JSON.stringify(callbackId)}](result.join(""));
+  }
+})();
+`;
+}
+
+function generateEnvModule({
+  files,
+  environment
+}: Pick<BundleOptions, "files" | "environment">): string {
+  const koskoEnv = getModuleURLForCDN(KOSKO_ENV_BARE_SPECIFIER);
+  const envs = Object.keys(files)
+    .filter(
+      (path) =>
+        path.startsWith(`/environments/${environment}/`) &&
+        extname(path) === ".js"
+    )
+    .map((path) => [basename(path, extname(path)), path] as const);
+
+  return `
+import { createSyncEnvironment, createSyncLoaderReducers } from "${koskoEnv}";
+${envs.map(([, path], i) => `import env${i} from "${path}";`).join("\n")}
+
+const envMap = {
+  ${envs.map(([name], i) => `"${name}": env${i}`).join(",\n")}
+};
+const env = createSyncEnvironment();
+
+env.setReducers(reducers => reducers.concat(createSyncLoaderReducers({
+  global: () => envMap.index || {},
+  component: (name) => envMap[name] || {},
+})));
+
+export default env;
+`;
+}
+
+function createVirtualFSPlugin(files: Record<string, string>): Plugin {
+  return {
+    name: "virtual-fs",
+    resolveId(source, importer) {
+      if (isAbsolute(source)) {
+        return source;
+      }
+
+      if (isRelative(source)) {
+        const path = "/" + relative(dirname(importer), source);
+        return path;
+      }
+    },
+    load(id) {
+      if (files[id] != null) {
+        return files[id];
+      }
+    }
+  };
+}
+
+function createCDNResolvePlugin(): Plugin {
+  return {
+    name: "cdn-resolve",
+    resolveId(source) {
+      if (isRelative(source) || isAbsolute(source)) {
+        return;
+      }
+
+      if (isURL(source)) {
+        return false;
+      }
+
+      return {
+        id: getModuleURLForCDN(source),
+        external: true
+      };
+    }
+  };
+}
+
+function createAliasResolvePlugin(aliases: Record<string, string>): Plugin {
+  return {
+    name: "alias-resolve",
+    resolveId(source) {
+      const alias = aliases[source];
+      if (alias) return alias;
+    }
+  };
+}
+
 export default async function generateBundle({
   rollup,
   files,
@@ -121,25 +147,25 @@ export default async function generateBundle({
   environment,
   callbackId
 }: BundleOptions) {
-  await init;
-
   const build = await rollup.rollup({
-    input: ENTRY_ID,
+    input: SYSTEM_ENTRY_ID,
     plugins: [
-      createResolveImportPlugin({
+      createAliasResolvePlugin({
+        [KOSKO_ENV_BARE_SPECIFIER]: SYSTEM_ENV_ID
+      }),
+      createVirtualFSPlugin({
         ...files,
-        [ENTRY_ID]: generateEntry({ files, component, environment, callbackId })
-      })
+        [SYSTEM_ENTRY_ID]: generateEntry({ component, callbackId }),
+        [SYSTEM_ENV_ID]: generateEnvModule({ files, environment })
+      }),
+      createCDNResolvePlugin()
     ],
     onwarn(warning) {
       console.warn(warning);
     }
   });
 
-  const result = await build.generate({
-    inlineDynamicImports: true,
-    plugins: [createWrapChunkPlugin()]
-  });
+  const result = await build.generate({});
 
   return result.output[0].code;
 }
