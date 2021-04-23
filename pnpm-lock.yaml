@@ -465,6 +465,7 @@ importers:
       react: 17.0.1
       react-dom: 17.0.1_react@17.0.1
       react-icons: 4.2.0_react@17.0.1
+      react-simple-resizer: 2.1.0_react-dom@17.0.1+react@17.0.1
       react-use: 17.2.3_react-dom@17.0.1+react@17.0.1
       use-immer: 0.5.1_immer@9.0.1+react@17.0.1
     devDependencies:
@@ -513,6 +514,7 @@ importers:
       react: ^17.0.1
       react-dom: ^17.0.1
       react-icons: ^4.1.0
+      react-simple-resizer: ^2.1.0
       react-use: ^17.2.3
       read-pkg: ^5.2.0
       resolve-pkg: ^2.0.0
@@ -13847,6 +13849,17 @@ packages:
       react: ^16.3.0 || ^17.0.0
     resolution:
       integrity: sha512-2FoTQzRNTncBVtnzxFOk2mCpcfxQpenBMbk5kSVBg5UcPqV9fRbgY2zhb7GTWWOlpFmAxhClBDlIq8Rsubz1yQ==
+  /react-simple-resizer/2.1.0_react-dom@17.0.1+react@17.0.1:
+    dependencies:
+      react: 17.0.1
+      react-dom: 17.0.1_react@17.0.1
+      rxjs: 6.6.7
+    dev: false
+    peerDependencies:
+      react: ^16.3.0
+      react-dom: ^16.4.2
+    resolution:
+      integrity: sha512-iiPER+vuKsW5+6+HroNnahc2Cah6UpO4w9SeuGw1pf/6p/F/vAD4+4288yJS5fLY4xJpDNEiOiRBk2kLUui6nw==
   /react-textarea-autosize/8.3.2_@types+react@17.0.3+react@17.0.1:
     dependencies:
       '@babel/runtime': 7.13.9
@@ -14518,6 +14531,14 @@ packages:
       npm: '>=2.0.0'
     resolution:
       integrity: sha512-/oTwee4N4iWzAMAL9xdGKjkEHmIwupR3oXbQjCKywF1BeFohswF3vZdogbmEF6pZkOsXTzWkrZszrWpQTByYVg==
+  /rxjs/6.6.7:
+    dependencies:
+      tslib: 1.14.1
+    dev: false
+    engines:
+      npm: '>=2.0.0'
+    resolution:
+      integrity: sha512-hTdwr+7yYNIT5n4AMYp85KA6yw2Va0FLa3Rguvbpa4W3I5xynaBZo41cM3XM+4Q6fRMj3sBYIR1VAmZMXYJvRQ==
   /safe-buffer/5.1.2:
     resolution:
       integrity: sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==

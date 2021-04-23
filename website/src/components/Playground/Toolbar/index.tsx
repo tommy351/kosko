@@ -1,8 +1,10 @@
 import React, { FunctionComponent } from "react";
 import styles from "./styles.module.scss";
 
-const Toolbar: FunctionComponent = () => {
-  return <nav className={styles.container}>Toolbar</nav>;
+export const ToolbarContainer: FunctionComponent = ({ children }) => {
+  return <div className={styles.container}>{children}</div>;
 };
 
-export default Toolbar;
+export const ToolbarTitle: FunctionComponent = ({ children }) => {
+  return <div className={styles.title}>{children}</div>;
+};

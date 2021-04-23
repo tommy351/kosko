@@ -1,24 +1,27 @@
 import React, { FunctionComponent } from "react";
 import Layout from "@theme/Layout";
-import Container from "./Container";
-import Toolbar from "./Toolbar";
+import { Container, Section, Bar } from "./Container";
 import Sidebar from "./Sidebar";
 import Editor from "./Editor";
 import Preview from "./Preview";
 import { PlaygroundProvider } from "./context";
-import styles from "./styles.module.scss";
 
 const Playground: FunctionComponent = () => {
   return (
     <Layout title="Playground">
       <PlaygroundProvider>
         <Container>
-          <Toolbar />
-          <div className={styles.main}>
+          <Section defaultSize={200}>
             <Sidebar />
+          </Section>
+          <Bar />
+          <Section>
             <Editor />
+          </Section>
+          <Bar />
+          <Section>
             <Preview />
-          </div>
+          </Section>
         </Container>
       </PlaygroundProvider>
     </Layout>

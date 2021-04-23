@@ -1,55 +1,51 @@
-import React, { FunctionComponent, useEffect, useState } from "react";
+import React, { FunctionComponent } from "react";
 import { usePlayground } from "../context";
 import styles from "./styles.module.scss";
-import generateBundle from "./generateBundle";
-import executeModule from "./executeModule";
-import MonacoEditor from "../MonacoEditor";
-import { useThrottle } from "react-use";
+import { ToolbarContainer, ToolbarTitle } from "../Toolbar";
+import Content from "./Content";
+import useComponentList from "../hooks/useComponentList";
+import useEnvironmentList from "../hooks/useEnvironmentList";
+import Select from "./Select";
 
-let CALLBACK_ID = 0;
-
-const PreviewContent: FunctionComponent = () => {
-  const [code, setCode] = useState("");
+const ComponentSelect: FunctionComponent = () => {
+  const components = useComponentList();
   const {
-    value: { component, environment, files: filesValue }
+    value: { component },
+    updateValue
   } = usePlayground();
-  const files = useThrottle(filesValue, 500);
-
-  useEffect(() => {
-    const callbackId = `__koskoPreview${CALLBACK_ID++}`;
-    let scriptElement: HTMLScriptElement | undefined;
-    let canceled = false;
-
-    (window as any)[callbackId] = (result) => {
-      if (canceled) return;
-      setCode(result);
-    };
-
-    (async () => {
-      const result = await generateBundle({
-        files,
-        component,
-        environment,
-        callbackId
-      });
-
-      scriptElement = executeModule(result);
-      scriptElement.id = callbackId;
-    })();
-
-    return () => {
-      canceled = true;
-
-      delete (window as any)[callbackId];
-
-      if (scriptElement) {
-        scriptElement.remove();
-      }
-    };
-  }, [files, component, environment]);
 
   return (
-    <MonacoEditor language="yaml" value={code} options={{ readOnly: true }} />
+    <Select
+      label="Component"
+      options={components}
+      value={component}
+      onChange={(value) => {
+        updateValue((draft) => {
+          draft.component = value;
+        });
+      }}
+    />
+  );
+};
+
+const EnvironmentSelect: FunctionComponent = () => {
+  const environments = useEnvironmentList();
+  const {
+    value: { environment },
+    updateValue
+  } = usePlayground();
+
+  return (
+    <Select
+      label="Environment"
+      options={environments}
+      value={environment}
+      onChange={(value) => {
+        updateValue((draft) => {
+          draft.environment = value;
+        });
+      }}
+    />
   );
 };
 
@@ -60,7 +56,12 @@ const Preview: FunctionComponent = () => {
 
   return (
     <div className={styles.container}>
-      {editorMounted && <PreviewContent />}
+      <ToolbarContainer>
+        <ToolbarTitle>Preview</ToolbarTitle>
+        <ComponentSelect />
+        <EnvironmentSelect />
+      </ToolbarContainer>
+      {editorMounted && <Content />}
     </div>
   );
 };

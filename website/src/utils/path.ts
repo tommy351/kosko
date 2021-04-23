@@ -20,9 +20,7 @@ export function extname(path: string): string {
 
 export function basename(path: string, ext?: string): string {
   const index = path.lastIndexOf("/");
-  if (index === -1) return "";
-
-  const base = path.substring(index + 1);
+  const base = index === -1 ? path : path.substring(index + 1);
 
   if (base.endsWith(ext)) {
     return base.substring(0, base.length - ext.length);
