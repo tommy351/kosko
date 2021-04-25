@@ -1,5 +1,3 @@
-import type { RollupWarning } from "rollup";
-
 export interface BundleOptions {
   files: Record<string, string>;
   component: string;
@@ -9,7 +7,7 @@ export interface BundleOptions {
 
 export interface BundleResult {
   code: string;
-  warnings: RollupWarning[];
+  warnings: string[];
 }
 
 export interface PlaygroundWorker {

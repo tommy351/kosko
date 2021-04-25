@@ -32,9 +32,17 @@ import component from "${COMPONENT_DIR}${component}${JS_EXT}";
       }
     });
 
-    ${callback}(null, result.join(""));
+    ${callback}({
+      source: "kosko-playground",
+      type: "success",
+      payload: result.join("")
+    });
   } catch (err) {
-    ${callback}(err);
+    ${callback}({
+      source: "kosko-playground",
+      type: "error",
+      payload: err
+    });
   }
 })();
 `;

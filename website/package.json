@@ -45,6 +45,7 @@
     "react-icons": "^4.1.0",
     "react-simple-resizer": "^2.1.0",
     "react-use": "^17.2.3",
+    "serialize-error": "^8.1.0",
     "use-immer": "^0.5.1"
   },
   "devDependencies": {

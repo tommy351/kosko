@@ -2,7 +2,7 @@ import React, { FunctionComponent, useEffect, useRef } from "react";
 import Layout from "@theme/Layout";
 import Provider from "./Provider";
 import { Container, Section } from "react-simple-resizer";
-import Bar from "./Bar";
+import Bar from "../Bar";
 import styles from "./styles.module.scss";
 import Sidebar from "../Sidebar";
 import Editor from "../Editor";

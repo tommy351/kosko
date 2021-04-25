@@ -1,20 +1,26 @@
 import React, { FunctionComponent } from "react";
 import styles from "./styles.module.scss";
-import { ToolbarContainer, ToolbarTitle } from "../Toolbar";
-import Content from "./Content";
-import ComponentSelect from "./ComponentSelect";
-import EnvironmentSelect from "./EnvironmentSelect";
+import { PreviewContextProvider } from "./context";
+import { Container, Section } from "react-simple-resizer";
+import Bar from "../Bar";
+import PreviewPane from "./PreviewPane";
+import ErrorPane from "./ErrorPane";
+import Executor from "./Executor";
 
 const Preview: FunctionComponent = () => {
   return (
-    <div className={styles.container}>
-      <ToolbarContainer>
-        <ToolbarTitle>Preview</ToolbarTitle>
-        <ComponentSelect />
-        <EnvironmentSelect />
-      </ToolbarContainer>
-      <Content />
-    </div>
+    <PreviewContextProvider>
+      <Executor />
+      <Container vertical className={styles.container}>
+        <Section minSize={40}>
+          <PreviewPane />
+        </Section>
+        <Bar vertical />
+        <Section defaultSize={40} minSize={40}>
+          <ErrorPane />
+        </Section>
+      </Container>
+    </PreviewContextProvider>
   );
 };
 

@@ -11,26 +11,3 @@
 .container {
   flex: 1;
 }
-
-.bar {
-  background: var(--ifm-color-emphasis-200);
-  z-index: 1;
-
-  > * {
-    background: var(--ifm-color-primary-light);
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-
-  &:hover {
-    > * {
-      opacity: 1;
-    }
-  }
-}
-
-.barActive {
-  > * {
-    opacity: 1;
-  }
-}
