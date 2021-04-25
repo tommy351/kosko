@@ -46,7 +46,7 @@ const ErrorCell: FunctionComponent<{ error: any }> = ({ error }) => {
     <Cell
       icon={<ErrorIcon />}
       message={`${name}: ${message}`}
-      detail={<pre>{stack}</pre>}
+      detail={stack && <pre>{stack}</pre>}
     />
   );
 };

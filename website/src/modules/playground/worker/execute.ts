@@ -2,12 +2,14 @@ type ExecuteCallback = (err?: unknown, content?: string) => void;
 type Dispose = () => void;
 
 const CATCH_GLOBAL_ERROR = `
-<script>
+<script type="module">
+  import { serializeError } from "https://cdn.skypack.dev/serialize-error";
+
   window.addEventListener("error", (event) => {
     window.parent.postMessage({
       source: "kosko-playground",
       type: "error",
-      payload: event.error
+      payload: serializeError(event.error)
     });
   });
 </script>

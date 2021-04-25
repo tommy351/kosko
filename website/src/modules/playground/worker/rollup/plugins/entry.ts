@@ -13,14 +13,20 @@ function generateEntry({
   component,
   callback
 }: Pick<BundleOptions, "component" | "callback">): string {
+  const componentPath = `${COMPONENT_DIR}${component}${JS_EXT}`;
+
   return `
 import "${ENV_ID}";
 import { resolve, print, PrintFormat } from "@kosko/generate";
-import component from "${COMPONENT_DIR}${component}${JS_EXT}";
+import { serializeError } from "serialize-error";
+import component from "${componentPath}";
 
 (async () => {
   try {
-    const manifests = await resolve(component);
+    const manifests = await resolve(component, {
+      path: "${componentPath}"
+    });
+
     const result = [];
 
     print({ manifests }, {
@@ -41,7 +47,7 @@ import component from "${COMPONENT_DIR}${component}${JS_EXT}";
     ${callback}({
       source: "kosko-playground",
       type: "error",
-      payload: err
+      payload: serializeError(err)
     });
   }
 })();
