@@ -30,7 +30,7 @@ const Playground: FunctionComponent = () => {
       <Provider>
         <div className={styles.main} ref={ref}>
           <Container className={styles.container}>
-            <Section defaultSize={160}>
+            <Section defaultSize={200}>
               <Sidebar />
             </Section>
             <Bar />

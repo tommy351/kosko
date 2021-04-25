@@ -1,9 +1,11 @@
 import { FunctionComponent, useEffect, useMemo } from "react";
-import { useThrottle } from "react-use";
 import usePlaygroundContext from "../../hooks/usePlaygroundContext";
 import { usePreviewContext } from "./context";
 import { createPlaygroundWorker, execute } from "../../worker";
 import { noop } from "lodash";
+import { useDebounce } from "use-debounce";
+
+let CALLBACK_ID = 0;
 
 const Executor: FunctionComponent = () => {
   const {
@@ -13,12 +15,13 @@ const Executor: FunctionComponent = () => {
   const {
     value: { files: filesValue, component, environment }
   } = usePlaygroundContext();
-  const files = useThrottle(filesValue, 500);
+  const [files] = useDebounce(filesValue, 300);
   const worker = useMemo(() => createPlaygroundWorker(), []);
 
   useEffect(() => {
     if (!mounted) return;
 
+    const callbackId = `__koskoPlayground_${CALLBACK_ID++}`;
     let canceled = false;
     let dispose = noop;
 
@@ -41,7 +44,7 @@ const Executor: FunctionComponent = () => {
           files,
           component,
           environment,
-          callback: "window.parent.postMessage"
+          callback: `window.${callbackId}`
         });
 
         if (canceled) return;
@@ -50,7 +53,7 @@ const Executor: FunctionComponent = () => {
           draft.warnings.push(...result.warnings);
         });
 
-        dispose = execute(result.code, (err, code) => {
+        dispose = execute(callbackId, result.code, (err, code) => {
           update((draft) => {
             draft.updating = false;
 
