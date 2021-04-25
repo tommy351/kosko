@@ -11,7 +11,7 @@ export function isRelative(path: string): boolean {
 export function dirname(path: string): string {
   const index = path.lastIndexOf(sep);
   if (index === -1) return ".";
-  return path.substring(0, index - 1) || sep;
+  return path.substring(0, index) || sep;
 }
 
 export function extname(path: string): string {

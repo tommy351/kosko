@@ -26,6 +26,6 @@ export default function useComponentList(): readonly string[] {
       result.push(name.substring(0, name.length - JS_EXT.length));
     }
 
-    return result;
+    return result.sort();
   }, [files]);
 }

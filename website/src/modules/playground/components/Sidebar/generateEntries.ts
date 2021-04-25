@@ -1,6 +1,7 @@
 import { groupBy } from "lodash";
 import { sep } from "@site/src/utils/path";
 import { Entry, EntryType, File, Directory } from "./types";
+import { DIRECTORY_PLACEHOLDER } from "../../constants";
 
 function doGenerateEntries(
   paths: readonly string[],
@@ -25,13 +26,15 @@ function doGenerateEntries(
         };
       }
     ),
-    ...files.map(
-      (name): File => ({
-        type: EntryType.File,
-        name,
-        path: prefix + name
-      })
-    )
+    ...files
+      .filter((name) => name !== DIRECTORY_PLACEHOLDER)
+      .map(
+        (name): File => ({
+          type: EntryType.File,
+          name,
+          path: prefix + name
+        })
+      )
   ].sort((a, b) => {
     // Move directories to the front
     if (a.type !== b.type) {

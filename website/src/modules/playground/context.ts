@@ -3,7 +3,7 @@ import { createContext } from "react";
 import { noop } from "lodash";
 
 export interface PlaygroundContextValue {
-  activePath: string;
+  activePath?: string;
   files: Record<string, string>;
   component: string;
   environment: string;
@@ -14,7 +14,6 @@ export const PlaygroundContext = createContext<{
   updateValue(callback: (draft: Draft<PlaygroundContextValue>) => void): void;
 }>({
   value: {
-    activePath: "",
     files: {},
     component: "",
     environment: ""

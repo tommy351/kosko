@@ -10,7 +10,16 @@
   overflow: auto;
 }
 
+.cellMain {
+  display: flex;
+}
+
+.cellMainActive {
+  background: var(--ifm-color-emphasis-200);
+}
+
 .cellButton {
+  flex: 1;
   width: 100%;
   display: flex;
   align-items: center;
@@ -23,10 +32,10 @@
   appearance: none;
   vertical-align: middle;
   font-size: 0.875rem;
-}
-
-.cellButtonActive {
-  background: var(--ifm-color-emphasis-200);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
 }
 
 .cellIcon {
@@ -36,8 +45,26 @@
 
 .cellLabel {
   flex: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: left;
+}
+
+.cellAction {
+  display: flex;
+  display: none;
+  padding: 0 0.25rem;
+
+  .cellMain:hover & {
+    display: block;
+  }
+}
+
+.actionButton {
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+  color: var(--ifm-font-color-base);
+}
+
+.toolbarSpacing {
+  flex: 1;
 }

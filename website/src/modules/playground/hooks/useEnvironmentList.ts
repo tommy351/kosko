@@ -23,6 +23,6 @@ export default function useEnvironmentList(): readonly string[] {
       result[name] = true;
     }
 
-    return Object.keys(result);
+    return Object.keys(result).sort();
   }, [files]);
 }

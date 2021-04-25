@@ -8,18 +8,27 @@ const Cell: FunctionComponent<{
   icon: ReactNode;
   depth: number;
   onClick?(): void;
-  className?: string;
-}> = ({ children, entry, icon, depth, onClick, className }) => {
+  action?: ReactNode;
+  active?: boolean;
+}> = ({ children, entry, icon, depth, onClick, action, active }) => {
   return (
     <div>
-      <button
-        className={clsx(styles.cellButton, className)}
-        style={{ paddingLeft: `${(depth + 1) * 0.75}rem` }}
-        onClick={onClick}
+      <div
+        className={clsx(styles.cellMain, {
+          [styles.cellMainActive]: active
+        })}
       >
-        <div className={styles.cellIcon}>{icon}</div>
-        <div className={styles.cellLabel}>{entry.name}</div>
-      </button>
+        <button
+          type="button"
+          className={styles.cellButton}
+          style={{ paddingLeft: `${(depth + 1) * 0.75}rem` }}
+          onClick={onClick}
+        >
+          <div className={styles.cellIcon}>{icon}</div>
+          <div className={styles.cellLabel}>{entry.name}</div>
+        </button>
+        {action && <div className={styles.cellAction}>{action}</div>}
+      </div>
       {children}
     </div>
   );

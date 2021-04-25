@@ -4,6 +4,7 @@ import { ToolbarContainer, ToolbarTitle } from "../Toolbar";
 import styles from "./styles.module.scss";
 import generateEntries from "./generateEntries";
 import Tree from "./Tree";
+import DirectoryAction from "./DirectoryAction";
 
 const Sidebar: FunctionComponent = () => {
   const {
@@ -15,6 +16,8 @@ const Sidebar: FunctionComponent = () => {
     <aside className={styles.container}>
       <ToolbarContainer>
         <ToolbarTitle>Files</ToolbarTitle>
+        <div className={styles.toolbarSpacing} />
+        <DirectoryAction path="" />
       </ToolbarContainer>
       <div className={styles.treeContainer}>
         <Tree entries={entries} />
