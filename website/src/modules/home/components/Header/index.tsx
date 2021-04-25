@@ -15,6 +15,9 @@ const Header: FunctionComponent = () => {
         <LinkButton color="primary" size="lg" to={useBaseUrl("docs/")}>
           Get Started
         </LinkButton>
+        <LinkButton color="info" size="lg" to={useBaseUrl("play")}>
+          Playground
+        </LinkButton>
         <div className={styles.install}>npm install kosko -g</div>
       </div>
     </header>
