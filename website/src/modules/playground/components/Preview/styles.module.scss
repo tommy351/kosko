@@ -50,3 +50,16 @@
     transform: translateX(200%);
   }
 }
+
+.selectContainer {
+  display: flex;
+  align-items: center;
+  border-left: 1px solid var(--ifm-color-emphasis-500);
+  padding-left: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.selectLabel {
+  font-size: 0.875rem;
+  padding-right: 0.5rem;
+}
