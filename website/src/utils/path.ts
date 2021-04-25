@@ -1,15 +1,17 @@
+export const sep = "/";
+
 export function isAbsolute(path: string): boolean {
-  return path.startsWith("/");
+  return path.startsWith(sep);
 }
 
 export function isRelative(path: string): boolean {
-  return path.startsWith("./") || path.startsWith("../");
+  return path.startsWith(`.${sep}`) || path.startsWith(`../${sep}`);
 }
 
 export function dirname(path: string): string {
-  const index = path.lastIndexOf("/");
-  if (index === -1) return path;
-  return path.substring(0, index - 1) || "/";
+  const index = path.lastIndexOf(sep);
+  if (index === -1) return ".";
+  return path.substring(0, index - 1) || sep;
 }
 
 export function extname(path: string): string {
@@ -19,7 +21,7 @@ export function extname(path: string): string {
 }
 
 export function basename(path: string, ext?: string): string {
-  const index = path.lastIndexOf("/");
+  const index = path.lastIndexOf(sep);
   const base = index === -1 ? path : path.substring(index + 1);
 
   if (base.endsWith(ext)) {
@@ -30,8 +32,8 @@ export function basename(path: string, ext?: string): string {
 }
 
 export function relative(from: string, to: string): string {
-  const fromParts = from.split("/").filter(Boolean);
-  const toParts = to.split("/").filter(Boolean);
+  const fromParts = from.split(sep).filter(Boolean);
+  const toParts = to.split(sep).filter(Boolean);
 
   while (fromParts[0] && toParts[0]) {
     fromParts.shift();
@@ -50,5 +52,5 @@ export function relative(from: string, to: string): string {
     toParts.unshift("..");
   }
 
-  return toParts.join("/");
+  return toParts.join(sep);
 }
