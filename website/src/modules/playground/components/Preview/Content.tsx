@@ -6,6 +6,7 @@ import { createPlaygroundWorker, execute } from "../../worker";
 import usePlaygroundContext from "../../hooks/usePlaygroundContext";
 import { useThrottle } from "react-use";
 import { noop } from "lodash";
+import ProgressBar from "./ProgressBar";
 
 let CALLBACK_ID = 0;
 
@@ -16,8 +17,9 @@ const EDITOR_OPTIONS: monaco.editor.IStandaloneEditorConstructionOptions = {
 const Content: FunctionComponent = () => {
   const [code, setCode] = useState("");
   const [mounted, setMounted] = useState(false);
+  const [updating, setUpdating] = useState(false);
   const { value } = usePlaygroundContext();
-  const files = useThrottle(value.files, 1000);
+  const files = useThrottle(value.files, 500);
   const worker = useMemo(() => createPlaygroundWorker(), []);
 
   useEffect(() => {
@@ -28,25 +30,36 @@ const Content: FunctionComponent = () => {
     let dispose: () => void = noop;
 
     (async () => {
-      const result = await worker.bundle({
-        files,
-        component: value.component,
-        environment: value.environment,
-        callback: `window.${id}`
-      });
+      setUpdating(true);
 
-      if (canceled) return;
+      try {
+        const result = await worker.bundle({
+          files,
+          component: value.component,
+          environment: value.environment,
+          callback: `window.${id}`
+        });
 
-      // TODO: Handle bundle warnings
+        if (canceled) return;
 
-      dispose = execute(id, result.code, (err, code) => {
-        if (err) {
-          // TODO: Handle error
-          return;
-        }
+        // TODO: Handle bundle warnings
 
-        setCode(code);
-      });
+        dispose = execute(id, result.code, (err, code) => {
+          if (err) {
+            // TODO: Handle err
+            return;
+          }
+
+          setCode(code);
+          setUpdating(false);
+        });
+
+        if (canceled) setCode(code);
+      } catch (err) {
+        // TODO: Handle err
+        console.error(err);
+        setUpdating(false);
+      }
     })();
 
     return () => {
@@ -56,8 +69,9 @@ const Content: FunctionComponent = () => {
   }, [mounted, files, value.component, value.environment]);
 
   return (
-    <div className={styles.editor}>
+    <div className={styles.content}>
       <MonacoEditor
+        className={styles.contentEditor}
         language="yaml"
         value={code}
         options={EDITOR_OPTIONS}
@@ -65,6 +79,11 @@ const Content: FunctionComponent = () => {
           setMounted(true);
         }}
       />
+      {updating && (
+        <div className={styles.contentProgressBar}>
+          <ProgressBar />
+        </div>
+      )}
     </div>
   );
 };
