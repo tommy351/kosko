@@ -1,10 +1,6 @@
 ---
-id: "_kosko_env.asyncenvironment"
-title: "AsyncEnvironment"
-hide_title: true
+title: "Class: AsyncEnvironment"
 ---
-
-# Class: AsyncEnvironment
 
 [@kosko/env](../modules/_kosko_env.md).AsyncEnvironment
 

@@ -1,10 +1,6 @@
 ---
-id: "_kosko_env"
-title: "@kosko/env"
-hide_title: true
+title: "Module: @kosko/env"
 ---
-
-# Module: @kosko/env
 
 ## Table of contents
 

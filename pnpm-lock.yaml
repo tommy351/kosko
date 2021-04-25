@@ -456,7 +456,6 @@ importers:
       comlink: 4.3.0
       docusaurus-plugin-sass: 0.1.12_fbfe03ce431717eca61618b6732e25d5
       fs-extra: 9.1.0
-      globby: 11.0.2
       immer: 9.0.1
       lodash: 4.17.21
       monaco-editor: 0.23.0
@@ -478,6 +477,7 @@ importers:
       '@types/react-router-dom': 5.1.7
       '@types/systemjs': 6.1.0
       babel-plugin-lodash: 3.3.4
+      globby: 11.0.2
       lodash-webpack-plugin: 0.11.6
       raw-loader: 4.0.2
       read-pkg: 5.2.0
@@ -485,7 +485,7 @@ importers:
       rollup: 2.45.2
       sass-loader: 10.1.1
       typedoc: 0.20.30_typescript@4.2.3
-      typedoc-plugin-markdown: 3.5.0_typedoc@0.20.30
+      typedoc-plugin-markdown: 3.7.2_typedoc@0.20.30
       typescript: 4.2.3
     specifiers:
       '@docusaurus/core': 2.0.0-alpha.b305145da9
@@ -522,7 +522,7 @@ importers:
       sass-loader: ^10.0.2
       serialize-error: ^8.1.0
       typedoc: ^0.20.28
-      typedoc-plugin-markdown: ~3.5.0
+      typedoc-plugin-markdown: ~3.7.2
       typescript: ^4.1.3
       use-debounce: ^6.0.1
       use-immer: ^0.5.1
@@ -8480,7 +8480,7 @@ packages:
       lodash: 4.17.21
       pretty-error: 2.1.2
       tapable: 2.2.0
-      webpack: 5.31.2
+      webpack: 5.31.2_webpack-cli@4.6.0
     engines:
       node: '>=10.13.0'
     peerDependencies:
@@ -15631,7 +15631,7 @@ packages:
       serialize-javascript: 5.0.1
       source-map: 0.6.1
       terser: 5.6.1
-      webpack: 5.31.2
+      webpack: 5.31.2_webpack-cli@4.6.0
     engines:
       node: '>= 10.13.0'
     peerDependencies:
@@ -16099,7 +16099,7 @@ packages:
       node: '>= 8'
     resolution:
       integrity: sha512-tyjyDTKy/JLnBSwvhoqd99VIjrP33SdOtwcMD32b+OqnrjZWe8HmZECbfBoacqoxjHd58gfeNw6wA7uvqWFa4w==
-  /typedoc-plugin-markdown/3.5.0_typedoc@0.20.30:
+  /typedoc-plugin-markdown/3.7.2_typedoc@0.20.30:
     dependencies:
       handlebars: 4.7.7
       typedoc: 0.20.30_typescript@4.2.3
@@ -16109,7 +16109,7 @@ packages:
     peerDependencies:
       typedoc: '>=0.20.0'
     resolution:
-      integrity: sha512-UzSTK5RpQVbIrcxV1ypHt3Pqr4O3DObYZIhcAXBazitHnpdl500cggXFHmxH7F/j3P3P2IBvPKpfnU6lzRdk8w==
+      integrity: sha512-SBGYKSJO48oGEXF9vC1ldcuqNyOC17st6LXy9/KMQ5tSGY0NRW8ldlBXI0PYrci+IbeXlkUfyhN0n3ud/2/VjQ==
   /typedoc/0.20.30_typescript@4.2.3:
     dependencies:
       colors: 1.4.0
@@ -16817,7 +16817,7 @@ packages:
       mime: 2.5.2
       mkdirp: 0.5.5
       range-parser: 1.2.1
-      webpack: 5.31.2
+      webpack: 5.31.2_webpack-cli@4.6.0
       webpack-log: 2.0.0
     engines:
       node: '>= 6'

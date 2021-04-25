@@ -1,10 +1,6 @@
 ---
-id: "_kosko_env.reducer"
-title: "Reducer"
-hide_title: true
+title: "Interface: Reducer"
 ---
-
-# Interface: Reducer
 
 [@kosko/env](../modules/_kosko_env.md).Reducer
 
