@@ -1,8 +1,8 @@
 import { expose } from "comlink";
-import { PlaygroundWorker } from "./types";
+import { Bundler } from "./types";
 import { bundle } from "./rollup";
 
-const worker: PlaygroundWorker = {
+const worker: Bundler = {
   bundle
 };
 

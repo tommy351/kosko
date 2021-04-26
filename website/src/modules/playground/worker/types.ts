@@ -10,6 +10,6 @@ export interface BundleResult {
   warnings: string[];
 }
 
-export interface PlaygroundWorker {
+export interface Bundler {
   bundle(options: BundleOptions): Promise<BundleResult>;
 }

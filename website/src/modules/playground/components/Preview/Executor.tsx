@@ -1,11 +1,51 @@
-import { FunctionComponent, useEffect, useMemo } from "react";
+import { FunctionComponent, useEffect, useMemo, useState } from "react";
 import usePlaygroundContext from "../../hooks/usePlaygroundContext";
 import { usePreviewContext } from "./context";
-import { createPlaygroundWorker, execute } from "../../worker";
-import { noop } from "lodash";
+import { createBundler } from "../../worker";
 import { useDebounce } from "use-debounce";
 
-let CALLBACK_ID = 0;
+const EVENT_SOURCE = "kosko-playground";
+const EVENT_CALLBACK = "window.__postMessageToParent";
+
+const FRAME_CONTENT = `
+<script>
+  ${EVENT_CALLBACK} = (data) => {
+    window.parent.postMessage(Object.assign({
+      source: "${EVENT_SOURCE}"
+    }, data));
+  };
+
+  window.addEventListener("error", event => {
+    ${EVENT_CALLBACK}({
+      type: "error",
+      payload: {
+        name: event.error.name,
+        message: event.error.message,
+        stack: event.error.stack
+      }
+    });
+  });
+
+  window.addEventListener("message", event => {
+    const script = document.createElement("script");
+
+    script.type = "module";
+    script.innerHTML = event.data.code;
+
+    script.addEventListener("error", () => {
+      ${EVENT_CALLBACK}({
+        type: "error",
+        payload: {
+          name: "NetworkError",
+          message: "Script load failed. Open the console for more details."
+        }
+      });
+    });
+
+    document.body.appendChild(script);
+  });
+</script>
+`;
 
 const Executor: FunctionComponent = () => {
   const {
@@ -16,14 +56,58 @@ const Executor: FunctionComponent = () => {
     value: { files: filesValue, component, environment }
   } = usePlaygroundContext();
   const [files] = useDebounce(filesValue, 300);
-  const worker = useMemo(() => createPlaygroundWorker(), []);
+  const bundler = useMemo(() => createBundler(), []);
+  const [frame, setFrame] = useState<HTMLIFrameElement | undefined>();
+
+  // Create a iframe as a sandbox
+  useEffect(() => {
+    const frame = document.createElement("iframe");
+    const blob = new Blob([FRAME_CONTENT], { type: "text/html" });
+    const url = URL.createObjectURL(blob);
+
+    frame.src = url;
+    frame.style.display = "none";
+
+    document.body.appendChild(frame);
+    setFrame(frame);
+
+    return () => {
+      setFrame(undefined);
+      frame.remove();
+      URL.revokeObjectURL(url);
+    };
+  }, []);
+
+  // Handle iframe messages
+  useEffect(() => {
+    function handleMessage(event: MessageEvent) {
+      if (event.data.source !== EVENT_SOURCE) return;
+
+      updateValue((draft) => {
+        draft.updating = false;
+
+        switch (event.data.type) {
+          case "success":
+            draft.content = event.data.payload;
+            break;
+          case "error":
+            draft.errors.push(event.data.payload);
+            break;
+        }
+      });
+    }
+
+    window.addEventListener("message", handleMessage);
+
+    return () => {
+      window.removeEventListener("message", handleMessage);
+    };
+  }, []);
 
   useEffect(() => {
-    if (!mounted) return;
+    if (!mounted || !frame) return;
 
-    const callbackId = `__koskoPlayground_${CALLBACK_ID++}`;
     let canceled = false;
-    let dispose = noop;
 
     const update: typeof updateValue = (callback) => {
       if (canceled) return;
@@ -40,11 +124,11 @@ const Executor: FunctionComponent = () => {
       });
 
       try {
-        const result = await worker.bundle({
+        const result = await bundler.bundle({
           files,
           component,
           environment,
-          callback: `window.${callbackId}`
+          callback: EVENT_CALLBACK
         });
 
         if (canceled) return;
@@ -53,17 +137,8 @@ const Executor: FunctionComponent = () => {
           draft.warnings.push(...result.warnings);
         });
 
-        dispose = execute(callbackId, result.code, (err, code) => {
-          update((draft) => {
-            draft.updating = false;
-
-            if (err) {
-              draft.errors.push(err);
-            } else {
-              draft.content = code;
-            }
-          });
-        });
+        // Send data to iframe
+        frame.contentWindow.postMessage({ code: result.code }, frame.src);
       } catch (err) {
         update((draft) => {
           draft.updating = false;
@@ -74,9 +149,8 @@ const Executor: FunctionComponent = () => {
 
     return () => {
       canceled = true;
-      dispose();
     };
-  }, [mounted, files, component, environment]);
+  }, [mounted, frame, files, component, environment]);
 
   return null;
 };

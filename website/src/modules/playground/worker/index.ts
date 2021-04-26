@@ -1,7 +1,7 @@
 // import { wrap } from "comlink";
-import type { PlaygroundWorker } from "./types";
+import type { Bundler } from "./types";
 
-export function createPlaygroundWorker(): PlaygroundWorker {
+export function createBundler(): Bundler {
   // FIXME: Currently the worker build failed on production.
   // const worker = new Worker(new URL("./worker", import.meta.url));
   // return wrap<PlaygroundWorker>(worker);
@@ -15,4 +15,3 @@ export function createPlaygroundWorker(): PlaygroundWorker {
 }
 
 export * from "./types";
-export { execute } from "./execute";

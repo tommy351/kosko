@@ -39,13 +39,11 @@ import component from "${componentPath}";
     });
 
     ${callback}({
-      source: "kosko-playground",
       type: "success",
       payload: result.join("")
     });
   } catch (err) {
     ${callback}({
-      source: "kosko-playground",
       type: "error",
       payload: serializeError(err)
     });
