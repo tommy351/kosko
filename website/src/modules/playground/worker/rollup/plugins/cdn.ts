@@ -1,4 +1,4 @@
-import { Plugin } from "rollup";
+import type { Plugin } from "rollup";
 import { isRelative, isAbsolute } from "@site/src/utils/path";
 import { getModuleURLForCDN } from "../utils";
 

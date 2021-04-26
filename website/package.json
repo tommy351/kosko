@@ -27,8 +27,8 @@
     ]
   },
   "dependencies": {
-    "@docusaurus/core": "2.0.0-alpha.b305145da9",
-    "@docusaurus/preset-classic": "2.0.0-alpha.b305145da9",
+    "@docusaurus/core": "2.0.0-alpha.73",
+    "@docusaurus/preset-classic": "2.0.0-alpha.73",
     "@mdx-js/react": "^1.6.22",
     "@monaco-editor/react": "^4.1.1",
     "clsx": "^1.1.1",
@@ -49,7 +49,7 @@
     "use-immer": "^0.5.1"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "2.0.0-alpha.b305145da9",
+    "@docusaurus/module-type-aliases": "2.0.0-alpha.73",
     "@tsconfig/docusaurus": "^1.0.2",
     "@types/lodash": "^4.14.167",
     "@types/react": "^17.0.0",

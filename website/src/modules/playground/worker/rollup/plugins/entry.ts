@@ -1,4 +1,4 @@
-import { Plugin } from "rollup";
+import type { Plugin } from "rollup";
 import { BundleOptions } from "../../types";
 import { COMPONENT_DIR, ENVIRONMENT_DIR, JS_EXT } from "../../../constants";
 import { getModuleURLForCDN } from "../utils";
