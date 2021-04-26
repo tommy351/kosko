@@ -16,7 +16,7 @@ const Preview: FunctionComponent = () => {
           <PreviewPane />
         </Section>
         <Bar vertical />
-        <Section defaultSize={40} minSize={40}>
+        <Section defaultSize={40} minSize={40} disableResponsive>
           <ErrorPane />
         </Section>
       </Container>
