@@ -138,7 +138,7 @@ const Executor: FunctionComponent = () => {
         });
 
         // Send data to iframe
-        frame.contentWindow.postMessage({ code: result.code }, frame.src);
+        frame.contentWindow.postMessage({ code: result.code }, "*");
       } catch (err) {
         update((draft) => {
           draft.updating = false;
