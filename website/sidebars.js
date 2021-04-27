@@ -24,6 +24,7 @@ module.exports = {
         "typescript-support",
         "ecmascript-modules",
         "programmatic-usage",
+        "using-in-browser",
         "troubleshooting"
       ]
     },
