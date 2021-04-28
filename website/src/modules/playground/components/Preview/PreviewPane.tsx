@@ -1,15 +1,23 @@
 import React, { FunctionComponent } from "react";
-import MonacoEditor from "../MonacoEditor";
 import { ToolbarContainer, ToolbarTitle } from "../Toolbar";
 import ComponentSelect from "./ComponentSelect";
 import { usePreviewContext } from "./context";
 import EnvironmentSelect from "./EnvironmentSelect";
 import ProgressBar from "./ProgressBar";
 import styles from "./styles.module.scss";
-import type * as monaco from "monaco-editor/esm/vs/editor/editor.api";
+import CodeMirrorEditor from "../CodeMirrorEditor";
+import { noop } from "lodash";
+import { EditorConfiguration } from "codemirror";
 
-const EDITOR_OPTIONS: monaco.editor.IStandaloneEditorConstructionOptions = {
-  readOnly: true
+try {
+  require("codemirror/mode/yaml/yaml.js");
+} catch {
+  // ignore error
+}
+
+const EDITOR_OPTIONS: EditorConfiguration = {
+  readOnly: true,
+  mode: "yaml"
 };
 
 const PreviewPane: FunctionComponent = () => {
@@ -26,12 +34,12 @@ const PreviewPane: FunctionComponent = () => {
         <EnvironmentSelect />
       </ToolbarContainer>
       <div className={styles.previewPaneContent}>
-        <MonacoEditor
+        <CodeMirrorEditor
           className={styles.previewPaneEditor}
-          language="yaml"
           value={content}
           options={EDITOR_OPTIONS}
-          onMount={() => {
+          onBeforeChange={noop}
+          editorDidMount={() => {
             updateValue((draft) => {
               draft.mounted = true;
             });

@@ -1,9 +1,15 @@
 import React, { FunctionComponent, useMemo } from "react";
 import styles from "./styles.module.scss";
 import usePlaygroundContext from "../../hooks/usePlaygroundContext";
-import MonacoEditor from "../MonacoEditor";
 import { ToolbarContainer, ToolbarTitle } from "../Toolbar";
-import type * as monaco from "monaco-editor/esm/vs/editor/editor.api";
+import CodeMirrorEditor from "../CodeMirrorEditor";
+import { EditorConfiguration } from "codemirror";
+
+try {
+  require("codemirror/mode/javascript/javascript.js");
+} catch {
+  // ignore error
+}
 
 const Editor: FunctionComponent = () => {
   const {
@@ -12,7 +18,8 @@ const Editor: FunctionComponent = () => {
   } = usePlaygroundContext();
   const value = useMemo(() => files[activePath] || "", [activePath, files]);
   const editorOptions = useMemo(
-    (): monaco.editor.IStandaloneEditorConstructionOptions => ({
+    (): EditorConfiguration => ({
+      mode: "javascript",
       readOnly: !activePath
     }),
     [activePath]
@@ -25,12 +32,10 @@ const Editor: FunctionComponent = () => {
         {activePath && <div className={styles.activePath}>{activePath}</div>}
       </ToolbarContainer>
       <div className={styles.editor}>
-        <MonacoEditor
-          language="javascript"
-          path={activePath}
+        <CodeMirrorEditor
           value={value}
           options={editorOptions}
-          onChange={(value) => {
+          onBeforeChange={(editor, data, value) => {
             if (!activePath) return;
 
             updateValue((draft) => {

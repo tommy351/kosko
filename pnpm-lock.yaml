@@ -451,16 +451,16 @@ importers:
       '@docusaurus/core': 2.0.0-alpha.73_5347ba9dae72bc17e95cc7756ff465f1
       '@docusaurus/preset-classic': 2.0.0-alpha.73_7f53837c1fb7715cbd51937d57b7f4b7
       '@mdx-js/react': 1.6.22_react@17.0.1
-      '@monaco-editor/react': 4.1.1_f093545f51687bd95e04fbf414b6aba1
       clsx: 1.1.1
+      codemirror: 5.61.0
       comlink: 4.3.0
       docusaurus-plugin-sass: 0.1.12_@docusaurus+core@2.0.0-alpha.73
       fs-extra: 9.1.0
       immer: 9.0.1
       lodash: 4.17.21
-      monaco-editor: 0.23.0
       prism-react-renderer: 1.2.0_react@17.0.1
       react: 17.0.1
+      react-codemirror2: 7.2.1_codemirror@5.61.0+react@17.0.1
       react-dom: 17.0.1_react@17.0.1
       react-icons: 4.2.0_react@17.0.1
       react-simple-resizer: 2.1.0_react-dom@17.0.1+react@17.0.1
@@ -471,6 +471,7 @@ importers:
     devDependencies:
       '@docusaurus/module-type-aliases': 2.0.0-alpha.73
       '@tsconfig/docusaurus': 1.0.2
+      '@types/codemirror': 0.0.109
       '@types/lodash': 4.14.168
       '@types/react': 17.0.3
       '@types/react-helmet': 6.1.0
@@ -492,8 +493,8 @@ importers:
       '@docusaurus/module-type-aliases': 2.0.0-alpha.73
       '@docusaurus/preset-classic': 2.0.0-alpha.73
       '@mdx-js/react': ^1.6.22
-      '@monaco-editor/react': ^4.1.1
       '@tsconfig/docusaurus': ^1.0.2
+      '@types/codemirror': ^0.0.109
       '@types/lodash': ^4.14.167
       '@types/react': ^17.0.0
       '@types/react-helmet': ^6.1.0
@@ -501,6 +502,7 @@ importers:
       '@types/systemjs': ^6.1.0
       babel-plugin-lodash: ^3.3.4
       clsx: ^1.1.1
+      codemirror: ^5.61.0
       comlink: ^4.3.0
       docusaurus-plugin-sass: ^0.1.12
       fs-extra: ^9.1.0
@@ -508,10 +510,10 @@ importers:
       immer: ^9.0.1
       lodash: ^4.17.20
       lodash-webpack-plugin: ^0.11.6
-      monaco-editor: ^0.23.0
       prism-react-renderer: ^1.1.1
       raw-loader: ^4.0.2
       react: ^17.0.1
+      react-codemirror2: ^7.2.1
       react-dom: ^17.0.1
       react-icons: ^4.1.0
       react-simple-resizer: ^2.1.0
@@ -2830,30 +2832,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-H1rQc1ZOHANWBvPcW+JpGwr+juXSxM8Q8YCkm3GhZd8REu1fHR3z99CErO1p9pkcfcxZnMdIZdIsXkOHY0NilA==
-  /@monaco-editor/loader/1.0.1_monaco-editor@0.23.0:
-    dependencies:
-      monaco-editor: 0.23.0
-      state-local: 1.0.7
-    dev: false
-    peerDependencies:
-      monaco-editor: '>= 0.21.0 < 1'
-    resolution:
-      integrity: sha512-hycGOhLqLYjnD0A/FHs56covEQWnDFrSnm/qLKkB/yoeayQ7ju+Vaj4SdTojGrXeY6jhMDx59map0+Jqwquh1Q==
-  /@monaco-editor/react/4.1.1_f093545f51687bd95e04fbf414b6aba1:
-    dependencies:
-      '@monaco-editor/loader': 1.0.1_monaco-editor@0.23.0
-      monaco-editor: 0.23.0
-      prop-types: 15.7.2
-      react: 17.0.1
-      react-dom: 17.0.1_react@17.0.1
-      state-local: 1.0.7
-    dev: false
-    peerDependencies:
-      monaco-editor: ^0.21.2
-      react: ^16.8.0 || ^17.0.0
-      react-dom: ^16.8.0 || ^17.0.0
-    resolution:
-      integrity: sha512-A9aZAb4fa81unRfwo63dHJpX5hgppYdMTdQVk2RAT7viiFwdfSfxz+k4WHiFdAdhFWYH/99VSec0vpZbQd0yng==
   /@mrmlnc/readdir-enhanced/2.2.1:
     dependencies:
       call-me-maybe: 1.0.1
@@ -3147,6 +3125,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-1TdA9IXOy4sdqn8vgieQ6GZAiHiPNrOiO1s2GJjuYPw4QVY7gYoVjkW049avj33Ez7IcIvu43hQsMsoUFbCn2g==
+  /@types/codemirror/0.0.109:
+    dependencies:
+      '@types/tern': 0.23.3
+    dev: true
+    resolution:
+      integrity: sha512-cSdiHeeLjvGn649lRTNeYrVCDOgDrtP+bDDSFDd1TF+i0jKGPDRozno2NOJ9lTniso+taiv4kiVS8dgM8Jm5lg==
   /@types/debug/4.1.5:
     dev: true
     resolution:
@@ -3169,6 +3153,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-laIjwTQaD+5DukBZaygQ79K1Z0jb1bPEMRrkXSLjtCcZm+abyp5YbrqpSLzD42FwWW6gK/aS4NYpJ804nG2brg==
+  /@types/estree/0.0.47:
+    dev: true
+    resolution:
+      integrity: sha512-c5ciR06jK8u9BstrmJyO97m+klJrrhCf9u3rLu3DEAJBirxRqSCvDQoYKmxuYwQI5SZChAWu+tq9oVlGRuzPAg==
   /@types/exit/0.1.31:
     dependencies:
       '@types/node': 14.14.32
@@ -3415,6 +3403,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-0VBprVqfgFD7Ehb2vd8Lh9TG3jP98gvr8rgehQqzztZNI7o8zS8Ad4jyZneKELphpuE212D8J70LnSNQSyO6bQ==
+  /@types/tern/0.23.3:
+    dependencies:
+      '@types/estree': 0.0.47
+    dev: true
+    resolution:
+      integrity: sha512-imDtS4TAoTcXk0g7u4kkWqedB3E4qpjXzCpD2LU5M5NAXHzCDsypyvXSaG7mM8DKYkCRa7tFp4tS/lp/Wo7Q3w==
   /@types/tmp/0.2.0:
     dev: true
     resolution:
@@ -5495,6 +5489,10 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
+  /codemirror/5.61.0:
+    dev: false
+    resolution:
+      integrity: sha512-D3wYH90tYY1BsKlUe0oNj2JAhQ9TepkD51auk3N7q+4uz7A/cgJ5JsWHreT0PqieW1QhOuqxQ2reCXV1YXzecg==
   /collapse-white-space/1.0.6:
     dev: false
     resolution:
@@ -11196,10 +11194,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-A/78XjoX2EmNvppVWEhM2oGk3x4lLxnkEA4jTbaK97QKSDjkIoOsKQlfylt/d3kKKi596Qy3NP5XrXJ6fZIC9Q==
-  /monaco-editor/0.23.0:
-    dev: false
-    resolution:
-      integrity: sha512-q+CP5zMR/aFiMTE9QlIavGyGicKnG2v/H8qVvybLzeFsARM8f6G9fL0sMST2tyVYCwDKkGamZUI6647A0jR/Lg==
   /move-concurrently/1.0.1:
     dependencies:
       aproba: 1.2.0
@@ -13228,6 +13222,16 @@ packages:
     dev: false
     resolution:
       integrity: sha1-7yFW1mz0E5aVyKFniGy2nqZgeSw=
+  /react-codemirror2/7.2.1_codemirror@5.61.0+react@17.0.1:
+    dependencies:
+      codemirror: 5.61.0
+      react: 17.0.1
+    dev: false
+    peerDependencies:
+      codemirror: 5.x
+      react: '>=15.5 <=16.x'
+    resolution:
+      integrity: sha512-t7YFmz1AXdlImgHXA9Ja0T6AWuopilub24jRaQdPVbzUJVNKIYuy3uCFZYa7CE5S3UW6SrSa5nAqVQvtzRF9gw==
   /react-dev-utils/11.0.4:
     dependencies:
       '@babel/code-frame': 7.10.4
@@ -14867,10 +14871,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-Je5vBeY4S1r/RnLydLl0TBTi3F2qdfWmYsGvtfZgEI+SCprPppaIhQf5nGcal4gI4cGpCV/duLcAzT1np6sQqg==
-  /state-local/1.0.7:
-    dev: false
-    resolution:
-      integrity: sha512-HTEHMNieakEnoe33shBYcZ7NX83ACUjCu8c40iOGEZsngj9zRnkqS9j1pqQPXwobB0ZcVTk27REb7COQ0UR59w==
   /state-toggle/1.0.3:
     dev: false
     resolution:
