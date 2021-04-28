@@ -9,6 +9,13 @@ import useThemeContext from "@theme/hooks/useThemeContext";
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/seti.css";
 
+try {
+  require("codemirror/addon/edit/matchbrackets.js");
+  require("codemirror/addon/edit/closebrackets.js");
+} catch {
+  // Ignore errors
+}
+
 const CodeMirrorEditor: FunctionComponent<IControlledCodeMirror> = ({
   options: inputOptions,
   value,
@@ -22,6 +29,8 @@ const CodeMirrorEditor: FunctionComponent<IControlledCodeMirror> = ({
       tabSize: 2,
       theme: isDarkTheme ? "seti" : "default",
       lineNumbers: true,
+      matchBrackets: true,
+      autoCloseBrackets: true,
       ...inputOptions
     }),
     [inputOptions, isDarkTheme]

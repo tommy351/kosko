@@ -10,6 +10,9 @@
       right: 0;
       bottom: 0;
       height: auto;
+      font-family: var(--ifm-font-family-monospace);
+      font-size: var(--ifm-code-font-size);
+      line-height: var(--ifm-pre-line-height);
     }
   }
 }
