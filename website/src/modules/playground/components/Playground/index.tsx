@@ -8,6 +8,24 @@ import Sidebar from "../Sidebar";
 import Editor from "../Editor";
 import Preview from "../Preview";
 
+const Content: FunctionComponent = () => {
+  return (
+    <Container className={styles.container}>
+      <Section defaultSize={200}>
+        <Sidebar />
+      </Section>
+      <Bar />
+      <Section>
+        <Editor />
+      </Section>
+      <Bar />
+      <Section>
+        <Preview />
+      </Section>
+    </Container>
+  );
+};
+
 const Playground: FunctionComponent = () => {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -28,21 +46,13 @@ const Playground: FunctionComponent = () => {
   return (
     <Layout title="Playground">
       <Provider>
-        <div className={styles.main} ref={ref}>
-          <Container className={styles.container}>
-            <Section defaultSize={200}>
-              <Sidebar />
-            </Section>
-            <Bar />
-            <Section>
-              <Editor />
-            </Section>
-            <Bar />
-            <Section>
-              <Preview />
-            </Section>
-          </Container>
-        </div>
+        <main className={styles.main} ref={ref}>
+          {typeof window === "undefined" ? (
+            <noscript>Please enable JavaScript to use the playground.</noscript>
+          ) : (
+            <Content />
+          )}
+        </main>
       </Provider>
     </Layout>
   );
