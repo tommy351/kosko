@@ -8,6 +8,7 @@ title: Using in Browser
 - [Webpack 5](https://github.com/tommy351/kosko/tree/master/examples/web-webpack-5)
 - [Parcel 1](https://github.com/tommy351/kosko/tree/master/examples/web-parcel-1)
 - [Static](https://github.com/tommy351/kosko/tree/master/examples/web-static)
+- [Sync Environment](https://github.com/tommy351/kosko/tree/master/examples/web-sync-environment)
 
 :::
 
@@ -93,19 +94,21 @@ env.setReducers((reducers) => [
 export default env;
 ```
 
-One caveat is that you can't use dynamic imports in the environment loader anymore. Another is that you have to rewrite the `@kosko/env` import paths in components, or use aliases.
-
-Below is an example of setting aliases for Webpack.
+One caveat is that you can't use dynamic imports in the environment loader anymore. In Webpack, you can use [`require.context`](https://webpack.js.org/guides/dependency-management/#requirecontext) to import files in a folder.
 
 ```js
-{
-  resolve: {
-    alias: {
-      "@kosko/env": "./path/to/env.js"
-    }
-  }
-}
+const dev = require.context("./environments/dev");
+
+env.setReducers((reducers) => [
+  ...reducers,
+  ...createSyncLoaderReducers({
+    global: () => dev("./index"),
+    component: (name) => dev(`./${name}`)
+  })
+]);
 ```
+
+Another caveat is that you have to rewrite the `@kosko/env` import paths in components, or use aliases.
 
 ## Without Bundlers
 

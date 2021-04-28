@@ -1,0 +1,5 @@
+{
+  "template": "node",
+  "view": "browser",
+  "node": 14
+}
