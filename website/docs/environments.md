@@ -1,5 +1,4 @@
 ---
-id: environments
 title: Environments
 ---
 

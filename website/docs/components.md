@@ -1,5 +1,4 @@
 ---
-id: components
 title: Components
 ---
 

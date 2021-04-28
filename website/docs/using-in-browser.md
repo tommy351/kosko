@@ -1,5 +1,4 @@
 ---
-id: using-in-browser
 title: Using in Browser
 ---
 

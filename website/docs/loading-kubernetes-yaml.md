@@ -1,5 +1,4 @@
 ---
-id: loading-kubernetes-yaml
 title: Loading Kubernetes YAML
 ---
 

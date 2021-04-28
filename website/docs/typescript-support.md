@@ -1,5 +1,4 @@
 ---
-id: typescript-support
 title: TypeScript Support
 ---
 
