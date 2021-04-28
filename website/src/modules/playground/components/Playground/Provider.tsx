@@ -1,14 +1,19 @@
 import { sep } from "@site/src/utils/path";
 import React, { FunctionComponent, useMemo } from "react";
 import { useImmer } from "use-immer";
-import {
-  COMPONENT_DIR,
-  DIRECTORY_PLACEHOLDER,
-  ENVIRONMENT_DIR,
-  JS_EXT,
-  MODULE_ENTRY
-} from "../../constants";
+import { DIRECTORY_PLACEHOLDER } from "../../constants";
 import { PlaygroundContext, PlaygroundContextValue } from "../../context";
+
+const fixturesContext = require.context(
+  "!!raw-loader!../../fixtures",
+  true,
+  /\.js$/
+);
+const fixtures = Object.fromEntries(
+  fixturesContext
+    .keys()
+    .map((key) => [key.substring(1), fixturesContext(key).default])
+);
 
 function insertPlaceholder(
   files: Record<string, string>
@@ -31,21 +36,8 @@ function insertPlaceholder(
 
 const Provider: FunctionComponent = ({ children }) => {
   const [value, updateValue] = useImmer<PlaygroundContextValue>(() => ({
-    activePath: `${COMPONENT_DIR}nginx${JS_EXT}`,
-    files: insertPlaceholder({
-      /* eslint-disable @typescript-eslint/no-var-requires */
-      [`${COMPONENT_DIR}nginx${JS_EXT}`]: require("!!raw-loader!../../fixtures/components/nginx.js")
-        .default,
-      [`${ENVIRONMENT_DIR}dev${sep}${MODULE_ENTRY}`]: require("!!raw-loader!../../fixtures/environments/dev/index.js")
-        .default,
-      [`${ENVIRONMENT_DIR}dev${sep}nginx${JS_EXT}`]: require("!!raw-loader!../../fixtures/environments/dev/nginx.js")
-        .default,
-      [`${ENVIRONMENT_DIR}prod${sep}${MODULE_ENTRY}`]: require("!!raw-loader!../../fixtures/environments/prod/index.js")
-        .default,
-      [`${ENVIRONMENT_DIR}prod${sep}nginx${JS_EXT}`]: require("!!raw-loader!../../fixtures/environments/prod/nginx.js")
-        .default
-      /* eslint-enable @typescript-eslint/no-var-requires */
-    }),
+    activePath: Object.keys(fixtures)[0],
+    files: insertPlaceholder(fixtures),
     component: "nginx",
     environment: "dev",
     editorMounted: false

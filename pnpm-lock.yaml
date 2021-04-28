@@ -477,6 +477,7 @@ importers:
       '@types/react-helmet': 6.1.0
       '@types/react-router-dom': 5.1.7
       '@types/systemjs': 6.1.0
+      '@types/webpack-env': 1.16.0
       babel-plugin-lodash: 3.3.4
       globby: 11.0.2
       lodash-webpack-plugin: 0.11.6
@@ -500,6 +501,7 @@ importers:
       '@types/react-helmet': ^6.1.0
       '@types/react-router-dom': ^5.1.7
       '@types/systemjs': ^6.1.0
+      '@types/webpack-env': ^1.16.0
       babel-plugin-lodash: ^3.3.4
       clsx: ^1.1.1
       codemirror: ^5.61.0
@@ -3423,6 +3425,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-FvUupuM3rlRsRtCN+fDudtmytGO6iHJuuRKS1Ss0pG5z8oX0diNEw94UEL7hgDbpN94rgaK5R7sWm6RrSkZuAQ==
+  /@types/webpack-env/1.16.0:
+    dev: true
+    resolution:
+      integrity: sha512-Fx+NpfOO0CpeYX2g9bkvX8O5qh9wrU1sOF4g8sft4Mu7z+qfe387YlyY8w8daDyDsKY5vUxM0yxkAYnbkRbZEw==
   /@types/webpack-sources/2.1.0:
     dependencies:
       '@types/node': 14.14.37
