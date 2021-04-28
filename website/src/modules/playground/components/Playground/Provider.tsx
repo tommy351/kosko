@@ -38,7 +38,7 @@ const Provider: FunctionComponent = ({ children }) => {
   const [value, updateValue] = useImmer<PlaygroundContextValue>(() => ({
     activePath: Object.keys(fixtures)[0],
     files: insertPlaceholder(fixtures),
-    component: "nginx",
+    component: "mongo",
     environment: "dev",
     editorMounted: false
   }));

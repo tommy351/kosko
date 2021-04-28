@@ -4,7 +4,7 @@ import env from "@kosko/env";
 
 const params = env.component("nginx");
 
-const metadata = { name: "nginx" };
+const metadata = { name: "nginx", namespace: params.namespace };
 const labels = { app: "nginx" };
 
 const deployment = new Deployment({
@@ -15,19 +15,13 @@ const deployment = new Deployment({
       matchLabels: labels
     },
     template: {
-      metadata: {
-        labels
-      },
+      metadata: { labels },
       spec: {
         containers: [
           {
-            image: `${params.imageRegistry}/nginx:${params.imageTag}`,
+            image: `nginx:${params.imageTag}`,
             name: "nginx",
-            ports: [
-              {
-                containerPort: 80
-              }
-            ]
+            ports: [{ containerPort: 80 }]
           }
         ]
       }
@@ -39,13 +33,7 @@ const service = new Service({
   metadata,
   spec: {
     selector: labels,
-    type: "ClusterIP",
-    ports: [
-      {
-        port: 80,
-        targetPort: 80
-      }
-    ]
+    ports: [{ port: 80 }]
   }
 });
 

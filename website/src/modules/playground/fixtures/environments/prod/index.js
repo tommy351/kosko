@@ -1,3 +1,3 @@
 export default {
-  imageRegistry: "gcr.io/image-prod"
+  namespace: "prod"
 };
