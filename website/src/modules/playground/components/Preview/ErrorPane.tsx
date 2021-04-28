@@ -5,6 +5,10 @@ import { usePreviewContext } from "./context";
 import ErrorIcon from "./ErrorIcon";
 import WarningIcon from "./WarningIcon";
 import { serializeError } from "serialize-error";
+import { useContainer } from "../Container";
+
+export const DEFAULT_SIZE = 40;
+export const EXPANDED_SIZE = 200;
 
 const Summary: FunctionComponent<{
   icon: ReactNode;
@@ -55,10 +59,24 @@ const ErrorPane: FunctionComponent = () => {
   const {
     value: { errors, warnings }
   } = usePreviewContext();
+  const { ref: containerRef } = useContainer();
 
   return (
     <div className={styles.pane}>
-      <ToolbarContainer>
+      <ToolbarContainer
+        className={styles.errorPaneToolbar}
+        onClick={() => {
+          const container = containerRef.current;
+          const resizer = container.getResizer();
+          const toSize =
+            resizer.getSectionSize(1) <= DEFAULT_SIZE
+              ? EXPANDED_SIZE
+              : DEFAULT_SIZE;
+
+          resizer.resizeSection(1, { toSize });
+          container.applyResizer(resizer);
+        }}
+      >
         <ToolbarTitle>Errors</ToolbarTitle>
         <Summary icon={<ErrorIcon />} value={errors.length} />
         <Summary icon={<WarningIcon />} value={warnings.length} />

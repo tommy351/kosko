@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from "react";
 import styles from "./styles.module.scss";
 import { PreviewContextProvider } from "./context";
-import { Container, Section } from "react-simple-resizer";
+import { Section } from "react-simple-resizer";
 import Bar from "../Bar";
+import Container from "../Container";
 import PreviewPane from "./PreviewPane";
-import ErrorPane from "./ErrorPane";
+import ErrorPane, { DEFAULT_SIZE } from "./ErrorPane";
 import Executor from "./Executor";
 
 const Preview: FunctionComponent = () => {
@@ -14,8 +15,12 @@ const Preview: FunctionComponent = () => {
         <Section minSize={40}>
           <PreviewPane />
         </Section>
-        <Bar vertical />
-        <Section defaultSize={40} minSize={40} disableResponsive>
+        <Bar />
+        <Section
+          defaultSize={DEFAULT_SIZE}
+          minSize={DEFAULT_SIZE}
+          disableResponsive
+        >
           <ErrorPane />
         </Section>
       </Container>
