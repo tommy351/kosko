@@ -36,7 +36,7 @@ const FRAME_CONTENT = `
       ${EVENT_CALLBACK}({
         type: "error",
         payload: {
-          name: "NetworkError",
+          name: "Error",
           message: "Script load failed. Open the console for more details."
         }
       });

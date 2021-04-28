@@ -18,7 +18,6 @@ function generateEntry({
   return `
 import "${ENV_ID}";
 import { resolve, print, PrintFormat } from "@kosko/generate";
-import { serializeError } from "serialize-error";
 import component from "${componentPath}";
 
 (async () => {
@@ -45,7 +44,11 @@ import component from "${componentPath}";
   } catch (err) {
     ${callback}({
       type: "error",
-      payload: serializeError(err)
+      payload: {
+        name: err.name,
+        message: err.message,
+        stack: err.stack
+      }
     });
   }
 })();
