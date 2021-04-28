@@ -22,8 +22,7 @@ const EDITOR_OPTIONS: EditorConfiguration = {
 
 const PreviewPane: FunctionComponent = () => {
   const {
-    value: { updating, content },
-    updateValue
+    value: { updating, content }
   } = usePreviewContext();
 
   return (
@@ -39,11 +38,6 @@ const PreviewPane: FunctionComponent = () => {
           value={content}
           options={EDITOR_OPTIONS}
           onBeforeChange={noop}
-          editorDidMount={() => {
-            updateValue((draft) => {
-              draft.mounted = true;
-            });
-          }}
         />
         {updating && (
           <div className={styles.previewPaneProgressBar}>

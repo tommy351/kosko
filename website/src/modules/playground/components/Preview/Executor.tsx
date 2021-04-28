@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useMemo, useState } from "react";
+import React, { FunctionComponent, useEffect, useMemo, useRef } from "react";
 import usePlaygroundContext from "../../hooks/usePlaygroundContext";
 import { usePreviewContext } from "./context";
 import { createBundler } from "../../worker";
@@ -8,75 +8,72 @@ const EVENT_SOURCE = "kosko-playground";
 const EVENT_CALLBACK = "window.__postMessageToParent";
 
 const FRAME_CONTENT = `
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
 <script>
-  ${EVENT_CALLBACK} = (data) => {
-    window.parent.postMessage(Object.assign({
-      source: "${EVENT_SOURCE}"
-    }, data));
-  };
+  (function(){
+    "use strict";
 
-  window.addEventListener("error", event => {
-    ${EVENT_CALLBACK}({
-      type: "error",
-      payload: {
-        name: event.error.name,
-        message: event.error.message,
-        stack: event.error.stack
-      }
-    });
-  });
+    ${EVENT_CALLBACK} = (data) => {
+      window.parent.postMessage(Object.assign({
+        source: "${EVENT_SOURCE}"
+      }, data));
+    };
 
-  window.addEventListener("message", event => {
-    const script = document.createElement("script");
-
-    script.type = "module";
-    script.innerHTML = event.data.code;
-
-    script.addEventListener("error", () => {
+    window.addEventListener("error", event => {
       ${EVENT_CALLBACK}({
         type: "error",
         payload: {
-          name: "Error",
-          message: "Script load failed. Open the console for more details."
+          name: event.error.name,
+          message: event.error.message,
+          stack: event.error.stack
         }
       });
     });
 
-    document.body.appendChild(script);
-  });
+    window.addEventListener("message", event => {
+      const script = document.createElement("script");
+
+      script.type = "module";
+      script.innerHTML = event.data.code;
+
+      script.addEventListener("error", () => {
+        ${EVENT_CALLBACK}({
+          type: "error",
+          payload: {
+            name: "Error",
+            message: "Script load failed. Open the console for more details."
+          }
+        });
+      });
+
+      document.body.appendChild(script);
+    });
+  })();
 </script>
+</head>
 `;
 
 const Executor: FunctionComponent = () => {
-  const {
-    value: { mounted },
-    updateValue
-  } = usePreviewContext();
+  const { updateValue } = usePreviewContext();
   const {
     value: { files: filesValue, component, environment }
   } = usePlaygroundContext();
   const [files] = useDebounce(filesValue, 300);
   const bundler = useMemo(() => createBundler(), []);
-  const [frame, setFrame] = useState<HTMLIFrameElement | undefined>();
-
-  // Create a iframe as a sandbox
-  useEffect(() => {
-    const frame = document.createElement("iframe");
+  const frameRef = useRef<HTMLIFrameElement>(null);
+  const frameSrc = useMemo(() => {
     const blob = new Blob([FRAME_CONTENT], { type: "text/html" });
-    const url = URL.createObjectURL(blob);
-
-    frame.src = url;
-    frame.style.display = "none";
-
-    document.body.appendChild(frame);
-    setFrame(frame);
-
-    return () => {
-      setFrame(undefined);
-      frame.remove();
-      URL.revokeObjectURL(url);
-    };
+    return URL.createObjectURL(blob);
   }, []);
+
+  useEffect(() => {
+    return () => {
+      URL.revokeObjectURL(frameSrc);
+    };
+  }, [frameSrc]);
 
   // Handle iframe messages
   useEffect(() => {
@@ -105,7 +102,7 @@ const Executor: FunctionComponent = () => {
   }, []);
 
   useEffect(() => {
-    if (!mounted || !frame) return;
+    if (!frameRef.current) return;
 
     let canceled = false;
 
@@ -138,7 +135,7 @@ const Executor: FunctionComponent = () => {
         });
 
         // Send data to iframe
-        frame.contentWindow.postMessage({ code: result.code }, "*");
+        frameRef.current.contentWindow.postMessage({ code: result.code }, "*");
       } catch (err) {
         update((draft) => {
           draft.updating = false;
@@ -150,9 +147,9 @@ const Executor: FunctionComponent = () => {
     return () => {
       canceled = true;
     };
-  }, [mounted, frame, files, component, environment]);
+  }, [frameRef, files, component, environment]);
 
-  return null;
+  return <iframe ref={frameRef} style={{ display: "none" }} src={frameSrc} />;
 };
 
 export default Executor;

@@ -20,7 +20,9 @@ const Sidebar: FunctionComponent = () => {
         <DirectoryAction path="" />
       </ToolbarContainer>
       <div className={styles.treeContainer}>
-        <Tree entries={entries} />
+        <div className={styles.tree}>
+          <Tree entries={entries} />
+        </div>
       </div>
     </aside>
   );

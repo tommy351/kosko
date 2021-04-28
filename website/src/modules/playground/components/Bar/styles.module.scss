@@ -1,6 +1,6 @@
 .bar {
   background: var(--ifm-color-emphasis-200);
-  z-index: 1;
+  z-index: 10;
 
   > * {
     background: var(--ifm-color-primary-light);

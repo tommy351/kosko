@@ -10,7 +10,6 @@ import Executor from "./Executor";
 const Preview: FunctionComponent = () => {
   return (
     <PreviewContextProvider>
-      <Executor />
       <Container vertical className={styles.container}>
         <Section minSize={40}>
           <PreviewPane />
@@ -20,6 +19,7 @@ const Preview: FunctionComponent = () => {
           <ErrorPane />
         </Section>
       </Container>
+      <Executor />
     </PreviewContextProvider>
   );
 };

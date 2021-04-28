@@ -9,7 +9,6 @@ import React, {
 import { useImmer } from "use-immer";
 
 export interface PreviewContextValue {
-  mounted: boolean;
   updating: boolean;
   content: string;
   warnings: string[];
@@ -21,7 +20,6 @@ export const PreviewContext = createContext<{
   updateValue(callback: (draft: Draft<PreviewContextValue>) => void): void;
 }>({
   value: {
-    mounted: false,
     updating: false,
     content: "",
     warnings: [],
@@ -36,7 +34,6 @@ export function usePreviewContext() {
 
 export const PreviewContextProvider: FunctionComponent = ({ children }) => {
   const [value, updateValue] = useImmer<PreviewContextValue>({
-    mounted: false,
     updating: false,
     content: "",
     warnings: [],
