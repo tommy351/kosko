@@ -33,6 +33,7 @@ const Editor: FunctionComponent = () => {
       </ToolbarContainer>
       <div className={styles.editor}>
         <CodeMirrorEditor
+          path={activePath}
           value={value}
           options={editorOptions}
           onBeforeChange={(editor, data, value) => {
