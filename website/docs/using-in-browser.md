@@ -26,7 +26,7 @@ The browser support was introduced in the following versions. Make sure to updat
 
 Another difference is that you can't use the `generate` function exported from the `@kosko/generate` package. Instead, use the `resolve` function to resolve and validate components. This is because the `generate` function finds matched components with [glob](<https://en.wikipedia.org/wiki/Glob_(programming)>), which is not available in browsers.
 
-Below is a basic example of an entry file.
+Below is a basic example of an entry file. First, we use dynamic import to load environment variables. Then, use the `resolve` function to resolve and validate components. And finally, print the resolved manifests with the `print` function.
 
 ```js
 import env, { createAsyncLoaderReducers } from "@kosko/env";
@@ -59,6 +59,8 @@ env.setReducers((reducers) => [
   );
 })();
 ```
+
+See [API docs](/docs/api) for more details.
 
 ## Environments
 
