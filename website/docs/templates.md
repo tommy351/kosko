@@ -1,5 +1,4 @@
 ---
-id: templates
 title: Templates
 ---
 

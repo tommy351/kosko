@@ -1,10 +1,6 @@
 ---
-id: "_kosko_env.environment"
-title: "Environment"
-hide_title: true
+title: "Class: Environment"
 ---
-
-# Class: Environment
 
 [@kosko/env](../modules/_kosko_env.md).Environment
 

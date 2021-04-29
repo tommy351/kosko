@@ -9,19 +9,10 @@ module.exports = {
   rules: {
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "node/no-unpublished-import": "off",
+    "node/no-missing-import": "off",
     "react/prop-types": "off"
   },
   settings: {
-    node: {
-      allowModules: [
-        "@theme/Layout",
-        "@theme/CodeBlock",
-        "@theme/hooks/usePrismTheme",
-        "@docusaurus/Link",
-        "@docusaurus/useDocusaurusContext",
-        "@docusaurus/useBaseUrl"
-      ]
-    },
     react: {
       version: readPkg.sync({
         cwd: resolvePkg("react", { cwd: __dirname })

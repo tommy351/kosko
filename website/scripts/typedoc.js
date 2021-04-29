@@ -6,30 +6,53 @@ const fs = require("fs-extra");
 const { join, dirname, extname } = require("path");
 const { Application, TSConfigReader } = require("typedoc");
 const {
-  FrontMatterComponent
-} = require("typedoc-plugin-markdown/dist/components/front-matter");
+  getPageTitle,
+  prependYAML
+} = require("typedoc-plugin-markdown/dist/utils/front-matter");
+const {
+  Component,
+  ContextAwareRendererComponent
+} = require("typedoc/dist/lib/output/components");
+const { PageEvent } = require("typedoc/dist/lib/output/events");
 
 const WEBSITE_DIR = dirname(__dirname);
 const ROOT_DIR = dirname(WEBSITE_DIR);
 
-class DocsaurusFrontMatterComponent extends FrontMatterComponent {
-  getYamlItems(page) {
-    const path = page.url.substring(
-      0,
-      page.url.length - extname(page.url).length
-    );
+class FrontMatter extends ContextAwareRendererComponent {
+  initialize() {
+    super.initialize();
 
-    const isGlobals = path === "modules";
-    const title = isGlobals ? "Overview" : page.model.name;
+    this.listenTo(this.application.renderer, {
+      [PageEvent.END]: this.onPageEnd
+    });
+  }
 
-    return {
-      id: this.getId(page),
-      title,
-      hide_title: true,
-      ...(isGlobals && { slug: "/api" })
-    };
+  /**
+   * @param {PageEvent} page
+   */
+  onPageEnd(page) {
+    if (page.contents) {
+      const path = page.url.substring(
+        0,
+        page.url.length - extname(page.url).length
+      );
+
+      const isGlobals = path === "modules";
+
+      page.contents = prependYAML(page.contents, {
+        title: getPageTitle(page),
+        sidebar_label: page.model.name,
+        ...(isGlobals && {
+          slug: "/api",
+          title: "Overview",
+          sidebar_label: "Overview"
+        })
+      });
+    }
   }
 }
+
+Component({ name: "frontmatter" })(FrontMatter);
 
 async function getEntryPoints() {
   const tsconfigs = await globby("packages/*/tsconfig.json", {
@@ -60,16 +83,13 @@ async function getEntryPoints() {
     plugin: ["typedoc-plugin-markdown"],
     excludePrivate: true,
     hideBreadcrumbs: true,
-    hideProjectName: true,
     hideInPageTOC: true,
+    hidePageTitle: true,
     entryPoints: await getEntryPoints(),
     tsconfig: join(__dirname, "../tsconfig.typedoc.json")
   });
 
-  app.renderer.addComponent(
-    "frontmatter",
-    new DocsaurusFrontMatterComponent(app.renderer)
-  );
+  app.renderer.addComponent("frontmatter", new FrontMatter(app.renderer));
 
   const project = app.convert();
   const outDir = join(WEBSITE_DIR, "docs", "api");

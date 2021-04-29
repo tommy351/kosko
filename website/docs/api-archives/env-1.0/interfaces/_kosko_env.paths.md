@@ -1,10 +1,6 @@
 ---
-id: "_kosko_env.paths"
-title: "Paths"
-hide_title: true
+title: "Interface: Paths"
 ---
-
-# Interface: Paths
 
 [@kosko/env](../modules/_kosko_env.md).Paths
 

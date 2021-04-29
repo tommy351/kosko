@@ -1,0 +1,79 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
+}
+
+.treeContainer {
+  flex: 1;
+  position: relative;
+}
+
+.tree {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+}
+
+.cellMain {
+  display: flex;
+}
+
+.cellMainActive {
+  background: var(--ifm-color-emphasis-200);
+}
+
+.cellButton {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--ifm-font-color-base);
+  padding: 0;
+  font: inherit;
+  appearance: none;
+  vertical-align: middle;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+.cellIcon {
+  padding-top: 0.25rem;
+  padding-right: 0.375rem;
+}
+
+.cellLabel {
+  flex: 1;
+}
+
+.cellAction {
+  display: flex;
+  display: none;
+  padding: 0 0.25rem;
+
+  .cellMain:hover & {
+    display: block;
+  }
+}
+
+.actionButton {
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+  color: var(--ifm-font-color-base);
+}
+
+.toolbarSpacing {
+  flex: 1;
+}

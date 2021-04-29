@@ -1,4 +1,13 @@
 {
   "extends": "./node_modules/@tsconfig/docusaurus/tsconfig.json",
-  "include": ["src/"]
+  "include": ["src/"],
+  "compilerOptions": {
+    "module": "esnext",
+    "lib": ["WebWorker", "DOM"],
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@site/*": ["./*"]
+    }
+  }
 }

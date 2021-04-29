@@ -1,5 +1,4 @@
 ---
-id: commands
 title: Commands
 ---
 

@@ -1,0 +1,165 @@
+---
+title: Using in Browser
+---
+
+:::note Examples
+
+- [Webpack 5](https://github.com/tommy351/kosko/tree/master/examples/web-webpack-5)
+- [Parcel 1](https://github.com/tommy351/kosko/tree/master/examples/web-parcel-1)
+- [Static](https://github.com/tommy351/kosko/tree/master/examples/web-static)
+- [Sync Environment](https://github.com/tommy351/kosko/tree/master/examples/web-sync-environment)
+
+:::
+
+Kosko can be used in browsers via the programmatic API. Currently only `@kosko/env` and `@kosko/generate` packages are browser-ready.
+
+## Prerequisites
+
+The browser support was introduced in the following versions. Make sure to update these packages before getting started.
+
+- `@kosko/env` - 2.0.0
+- `@kosko/generate` - 1.2.0
+
+## Entry File
+
+`@kosko/env` doesn't come with any default environment loaders in browser. You have to set one manually. This is because bundlers (e.g. Webpack, Parcel) transpile `import` statements and bundlers can't parse dynamic import paths without any contexts. Import paths are much simpler in userland. (`import(path)` v.s. `import("./envs/" + name)`)
+
+Another difference is that you can't use the `generate` function exported from the `@kosko/generate` package. Instead, use the `resolve` function to resolve and validate components. This is because the `generate` function finds matched components with [glob](<https://en.wikipedia.org/wiki/Glob_(programming)>), which is not available in browsers.
+
+Below is a basic example of an entry file. First, we use dynamic import to load environment variables. Then, use the `resolve` function to resolve and validate components. And finally, print the resolved manifests with the `print` function.
+
+```js
+import env, { createAsyncLoaderReducers } from "@kosko/env";
+import { resolve, print, PrintFormat } from "@kosko/generate";
+
+// Load environment variables with dynamic import
+env.setReducers((reducers) => [
+  ...reducers,
+  ...createAsyncLoaderReducers({
+    global: () =>
+      import("./environments/dev/index.js").then((mod) => mod.default),
+    component: (name) =>
+      import(`./environments/dev/${name}.js`).then((mod) => mod.default)
+  })
+]);
+
+(async () => {
+  // Resolve and validate components
+  const manifests = await resolve(
+    import("./components/nginx.js").then((mod) => mod.default)
+  );
+
+  // Print resolved manifests
+  print(
+    { manifests },
+    {
+      format: PrintFormat.YAML,
+      writer: { write: (data) => console.log(data) }
+    }
+  );
+})();
+```
+
+See [API docs](/docs/api) for more details.
+
+## Environments
+
+### Async
+
+`@kosko/env` is asynchronous by default in browser. You **MUST** add `await` when retrieving environment variables.
+
+```js
+import env from "@kosko/env";
+
+const globalParams = await env.global();
+const componentParams = await env.component("demo");
+
+export default [new Deployment()];
+```
+
+However, [top-level await](https://github.com/tc39/proposal-top-level-await) is only available on Webpack 5 and Chrome (as of April 2021). If your bundler or browser doesn't support top-level await yet, you must wrap components with an async function.
+
+```js
+import env from "@kosko/env";
+
+export default async function () {
+  const params = await env.component("demo");
+
+  return [new Deployment()];
+}
+```
+
+### Sync
+
+:::note Examples
+
+- [Sync Environment](https://github.com/tommy351/kosko/tree/master/examples/web-sync-environment)
+
+:::
+
+The other way is to create a synchronous environment, so you don't have to add `await` when retrieving environment variables.
+
+```js
+import { createSyncEnvironment, createSyncLoaderReducers } from "@kosko/env";
+
+const env = createSyncEnvironment();
+
+env.setReducers((reducers) => [
+  ...reducers,
+  ...createSyncLoaderReducers({
+    global: () => {},
+    component: (name) => {}
+  })
+]);
+
+export default env;
+```
+
+One caveat is that you can't use dynamic imports in the environment loader anymore. In Webpack, you can use [`require.context`](https://webpack.js.org/guides/dependency-management/#requirecontext) to import files in a folder.
+
+```js
+const dev = require.context("./environments/dev");
+
+env.setReducers((reducers) => [
+  ...reducers,
+  ...createSyncLoaderReducers({
+    global: () => dev("./index"),
+    component: (name) => dev(`./${name}`)
+  })
+]);
+```
+
+Another caveat is that you have to rewrite the `@kosko/env` import paths in components, or use aliases.
+
+## Without Bundlers
+
+:::note Examples
+
+- [Static](https://github.com/tommy351/kosko/tree/master/examples/web-static)
+
+:::
+
+Kosko can also be used without a bundler. You can import modules from a CDN that supports ECMAScript modules (e.g. [Skypack](https://www.skypack.dev/), [JSPM](https://jspm.org/), etc.).
+
+```js
+import env from "https://cdn.skypack.dev/@kosko/env";
+import { Deployment } from "https://cdn.skypack.dev/kubernetes-models/apps/v1/Deployment";
+
+const params = await env.component("demo");
+
+export default [new Deployment()];
+```
+
+You can also use [import maps](https://github.com/WICG/import-maps) so you don't have to rewrite import paths. Noted that it is only supported on Chrome (as of April 2021). You may need a polyfill such as [es-module-shims](https://github.com/guybedford/es-module-shims).
+
+```html
+<script type="importmap">
+  {
+    "imports": {
+      "@kosko/env": "https://cdn.skypack.dev/@kosko/env",
+      "@kosko/generate": "https://cdn.skypack.dev/@kosko/generate",
+      "kubernetes-models/": "https://cdn.skypack.dev/kubernetes-models/"
+    }
+  }
+</script>
+```

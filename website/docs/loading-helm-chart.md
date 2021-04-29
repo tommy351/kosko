@@ -1,5 +1,4 @@
 ---
-id: loading-helm-chart
 title: Loading Helm Chart
 ---
 

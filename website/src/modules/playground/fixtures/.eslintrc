@@ -1,0 +1,6 @@
+{
+  "extends": "../../../../.eslintrc",
+  "rules": {
+    "node/no-extraneous-import": "off"
+  }
+}

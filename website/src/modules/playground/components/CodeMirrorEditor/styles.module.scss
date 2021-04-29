@@ -1,0 +1,18 @@
+.container {
+  height: 100%;
+  position: relative;
+
+  :global {
+    .CodeMirror {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: auto;
+      font-family: var(--ifm-font-family-monospace);
+      font-size: var(--ifm-code-font-size);
+      line-height: var(--ifm-pre-line-height);
+    }
+  }
+}

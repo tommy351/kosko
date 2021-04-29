@@ -1,5 +1,4 @@
 ---
-id: ecmascript-modules
 title: ECMAScript Modules
 ---
 
