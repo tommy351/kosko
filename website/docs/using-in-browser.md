@@ -13,6 +13,13 @@ title: Using in Browser
 
 Kosko can be used in browsers via the programmatic API. Currently only `@kosko/env` and `@kosko/generate` packages are browser-ready.
 
+## Prerequisites
+
+The browser support was introduced in the following versions. Make sure to update these packages before getting started.
+
+- `@kosko/env` - 2.0.0
+- `@kosko/generate` - 1.2.0
+
 ## Entry File
 
 `@kosko/env` doesn't come with any default environment loaders in browser. You have to set one manually. This is because bundlers (e.g. Webpack, Parcel) transpile `import` statements and bundlers can't parse dynamic import paths without any contexts. Import paths are much simpler in userland. (`import(path)` v.s. `import("./envs/" + name)`)
@@ -25,6 +32,7 @@ Below is a basic example of an entry file.
 import env, { createAsyncLoaderReducers } from "@kosko/env";
 import { resolve, print, PrintFormat } from "@kosko/generate";
 
+// Load environment variables with dynamic import
 env.setReducers((reducers) => [
   ...reducers,
   ...createAsyncLoaderReducers({
@@ -35,17 +43,21 @@ env.setReducers((reducers) => [
   })
 ]);
 
-const manifests = await resolve(
-  import("./components/nginx.js").then((mod) => mod.default)
-);
+(async () => {
+  // Resolve and validate components
+  const manifests = await resolve(
+    import("./components/nginx.js").then((mod) => mod.default)
+  );
 
-print(
-  { manifests },
-  {
-    format: PrintFormat.YAML,
-    writer: { write: (data) => console.log(data) }
-  }
-);
+  // Print resolved manifests
+  print(
+    { manifests },
+    {
+      format: PrintFormat.YAML,
+      writer: { write: (data) => console.log(data) }
+    }
+  );
+})();
 ```
 
 ## Environments
@@ -59,6 +71,8 @@ import env from "@kosko/env";
 
 const globalParams = await env.global();
 const componentParams = await env.component("demo");
+
+export default [new Deployment()];
 ```
 
 However, [top-level await](https://github.com/tc39/proposal-top-level-await) is only available on Webpack 5 and Chrome (as of April 2021). If your bundler or browser doesn't support top-level await yet, you must wrap components with an async function.
@@ -74,6 +88,12 @@ export default async function () {
 ```
 
 ### Sync
+
+:::note Examples
+
+- [Sync Environment](https://github.com/tommy351/kosko/tree/master/examples/web-sync-environment)
+
+:::
 
 The other way is to create a synchronous environment, so you don't have to add `await` when retrieving environment variables.
 
@@ -110,6 +130,12 @@ env.setReducers((reducers) => [
 Another caveat is that you have to rewrite the `@kosko/env` import paths in components, or use aliases.
 
 ## Without Bundlers
+
+:::note Examples
+
+- [Static](https://github.com/tommy351/kosko/tree/master/examples/web-static)
+
+:::
 
 Kosko can also be used without a bundler. You can import modules from a CDN that supports ECMAScript modules (e.g. [Skypack](https://www.skypack.dev/), [JSPM](https://jspm.org/), etc.).
 

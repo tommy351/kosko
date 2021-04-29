@@ -11,17 +11,3 @@ This error may occurred when some of components can't be dumped by [js-yaml](htt
 ```shell
 YAMLException: unacceptable kind of an object to dump
 ```
-
-For example, you may accidentally export a `Promise` rather than a `() => Promise`. The former is an `Object` and can't be stringified, while the latter is a `Function` and its return value can be flattened.
-
-```js
-async function createApp() {
-  return [new Deployment(), new Service()];
-}
-
-// Don't
-module.exports = createApp();
-
-// Do
-module.exports = createApp;
-```
