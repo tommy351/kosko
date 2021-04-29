@@ -1,7 +1,17 @@
 {
   "targets": [
     { "extname": ".mjs", "module": "esnext" },
-    { "extname": ".js", "module": "commonjs" }
+    { "extname": ".js", "module": "commonjs" },
+    {
+      "extname": ".deno.js",
+      "module": "esnext",
+      "plugins": [
+        {
+          "transform": "./scripts/typescript/transform-import.js"
+        }
+      ]
+    }
   ],
-  "projects": ["packages/*/tsconfig.json"]
+  "projects": ["packages/*/tsconfig.json"],
+  "compiler": "ttypescript"
 }

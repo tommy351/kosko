@@ -85,6 +85,12 @@
           }
         ]
       }
+    },
+    {
+      "files": ["scripts/**/*.js"],
+      "rules": {
+        "node/no-unpublished-require": "off"
+      }
     }
   ]
 }
