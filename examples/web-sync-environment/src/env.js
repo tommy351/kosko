@@ -6,8 +6,8 @@ const dev = require.context("./environments/dev");
 env.setReducers((reducers) => [
   ...reducers,
   ...createSyncLoaderReducers({
-    global: () => dev("./index"),
-    component: (name) => dev(`./${name}`)
+    global: () => dev("./index").default,
+    component: (name) => dev(`./${name}`).default
   })
 ]);
 
