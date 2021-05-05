@@ -81,7 +81,7 @@ If the tests don't run:
 
 Lint TypeScript and JavaScript files.
 
-```
+```sh
 npm run lint
 ```
 

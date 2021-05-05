@@ -36,9 +36,9 @@
   },
   "devDependencies": {
     "@types/exit": "^0.1.31",
-    "@types/fs-extra": "^9.0.7",
+    "@types/fs-extra": "^9.0.10",
     "@types/signale": "^1.4.1",
-    "@types/yargs": "^15.0.12",
+    "@types/yargs": "^16.0.0",
     "temp-dir": "^2.0.0",
     "tmp-promise": "^3.0.2"
   }
