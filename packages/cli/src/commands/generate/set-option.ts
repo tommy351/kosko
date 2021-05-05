@@ -5,8 +5,6 @@ import { CLIError } from "../../cli/error";
 /**
  * Contains a value to override a variable of the specified component
  * by the specified key.
- *
- * @internal
  */
 export interface SetOption {
   componentName?: string;
@@ -53,7 +51,6 @@ function parseKeyValuePair(s: unknown): SetOption {
  * for components.
  *
  * @param arg Arguments provided by `yargs-parser`.
- * @internal
  */
 export function parseSetOptions(arg: unknown): SetOption[] {
   const result: SetOption[] = [];
@@ -95,7 +92,6 @@ export function parseSetOptions(arg: unknown): SetOption[] {
  * Creates a reducer from the specified set arguments.
  *
  * @param setOptions List of set arguments.
- * @internal
  */
 export function createCLIEnvReducer(setOptions: SetOption[]): Reducer {
   // reorder arguments to ensure that global overrides will be applied

@@ -36,6 +36,7 @@
   "devDependencies": {
     "@changesets/changelog-github": "^0.3.0",
     "@changesets/cli": "^2.14.1",
+    "@tsconfig/node10": "^1.0.7",
     "@types/expect-puppeteer": "^4.4.5",
     "@types/fs-extra": "^9.0.10",
     "@types/jest": "^26.0.20",
