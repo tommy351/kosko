@@ -3,5 +3,5 @@
     { "extname": ".mjs", "module": "esnext" },
     { "extname": ".js", "module": "commonjs" }
   ],
-  "projects": ["packages/*/tsconfig.json"]
+  "projects": ["packages/*/tsconfig.json", "internal/*/tsconfig.json"]
 }

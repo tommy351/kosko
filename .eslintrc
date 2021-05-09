@@ -85,6 +85,12 @@
           }
         ]
       }
+    },
+    {
+      "files": ["packages/*/mod.ts", "packages/*/deno_dist/**/*.ts"],
+      "rules": {
+        "node/no-missing-import": "off"
+      }
     }
   ]
 }

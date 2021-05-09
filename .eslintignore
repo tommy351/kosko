@@ -1,4 +1,5 @@
 dist/
+deno_dist/
 /coverage/
 node_modules/
 /website/.docusaurus/

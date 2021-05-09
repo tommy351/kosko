@@ -13,9 +13,11 @@
     "lint": "npm-run-all lint:*",
     "lint:eslint": "eslint . --ext .js,.ts,.jsx,.tsx,.cjs.,mjs",
     "lint:syncpack": "syncpack list-mismatches",
-    "build": "tsc-multi",
-    "clean": "rm -rf packages/*/dist && npm run build -- --clean",
-    "watch": "npm run build -- --watch",
+    "build": "npm-run-all build:*",
+    "build:ts": "tsc-multi",
+    "build:deno": "deno-build packages/*/tsconfig.json",
+    "clean": "rm -rf packages/*/dist && npm run build:ts -- --clean",
+    "watch": "npm run build:ts -- --watch",
     "test": "npm-run-all test:*",
     "test:unit": "cross-env ESM_IMPORT_DISABLED=true jest",
     "test:integration": "jest --config integration/jest.config.js",
@@ -36,6 +38,7 @@
   "devDependencies": {
     "@changesets/changelog-github": "^0.3.0",
     "@changesets/cli": "^2.14.1",
+    "@kosko/deno-build": "workspace:*",
     "@tsconfig/node10": "^1.0.7",
     "@types/expect-puppeteer": "^4.4.5",
     "@types/fs-extra": "^9.0.10",
@@ -81,7 +84,8 @@
     "peer": false,
     "source": [
       "package.json",
-      "packages/*/package.json"
+      "packages/*/package.json",
+      "internal/*/package.json"
     ]
   }
 }

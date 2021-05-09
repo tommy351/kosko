@@ -1,0 +1,23 @@
+{
+  "name": "@kosko/deno-build",
+  "version": "0.0.0",
+  "private": true,
+  "bin": {
+    "deno-build": "./bin/deno-build.js"
+  },
+  "dependencies": {
+    "@babel/core": "^7.14.0",
+    "@babel/plugin-syntax-typescript": "^7.12.13",
+    "@babel/types": "^7.14.1",
+    "@kosko/babel-plugin-deno-import": "workspace:*",
+    "fs-extra": "^9.1.0",
+    "globby": "^11.0.3",
+    "pkg-up": "^3.1.0",
+    "tslib": "^2.1.0",
+    "yargs": "^16.2.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.10",
+    "@types/yargs": "^16.0.0"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "@kosko/babel-plugin-deno-import",
+  "version": "0.0.0",
+  "private": true,
+  "main": "dist",
+  "engines": {
+    "node": ">=10"
+  },
+  "dependencies": {
+    "@babel/core": "^7.14.0",
+    "@babel/types": "^7.14.1",
+    "fs-extra": "^9.1.0",
+    "pkg-up": "^3.1.0",
+    "resolve": "^1.19.0",
+    "tslib": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.10",
+    "@types/resolve": "^1.19.0"
+  }
+}
