@@ -1,6 +1,6 @@
 import { builtinModules } from "module";
 import pkgUp from "pkg-up";
-import { dirname } from "path";
+import { dirname, join } from "path";
 import assert from "assert";
 import fs from "fs-extra";
 import resolve from "resolve";
@@ -51,4 +51,16 @@ export function getDependencyVersion(source: string, mod: string): string {
   }
 
   return version;
+}
+
+export function hasTypeDefinitions(source: string, mod: string): boolean {
+  const pkgPath = join(
+    dirname(getPackageJsonPath(dirname(source))),
+    "node_modules",
+    mod,
+    "package.json"
+  );
+  const pkg = readPackageJson(pkgPath);
+
+  return Boolean(pkg.types || pkg.typings);
 }

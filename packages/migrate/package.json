@@ -16,7 +16,9 @@
     "require": "./dist/index.js"
   },
   "files": [
-    "/dist/"
+    "/dist/",
+    "/deno_dist/",
+    "/mod.ts"
   ],
   "keywords": [
     "kosko"

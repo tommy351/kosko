@@ -1,6 +1,11 @@
 import type babel from "@babel/core";
 import type { StringLiteral } from "@babel/types";
-import { getDependencyVersion, isBuiltinModule, isRelativePath } from "./utils";
+import {
+  getDependencyVersion,
+  hasTypeDefinitions,
+  isBuiltinModule,
+  isRelativePath
+} from "./utils";
 
 function rewriteModuleSpecifier(source: string, mod: string): string {
   if (isRelativePath(mod)) {
@@ -12,7 +17,11 @@ function rewriteModuleSpecifier(source: string, mod: string): string {
   }
 
   const version = getDependencyVersion(source, mod);
-  const suffix = mod.startsWith("@kosko/") ? "/mod.ts" : "?dts";
+  const suffix = (() => {
+    if (mod.startsWith("@kosko/")) return "/mod.ts";
+    if (hasTypeDefinitions(source, mod)) return "?dts";
+    return "";
+  })();
 
   return `https://cdn.skypack.dev/${mod}@${version}${suffix}`;
 }

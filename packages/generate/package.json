@@ -20,7 +20,9 @@
     "default": "./dist/index.mjs"
   },
   "files": [
-    "/dist/"
+    "/dist/",
+    "/deno_dist/",
+    "/mod.ts"
   ],
   "keywords": [
     "kosko"

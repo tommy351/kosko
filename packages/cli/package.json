@@ -23,7 +23,9 @@
   },
   "files": [
     "/bin/",
-    "/dist/"
+    "/dist/",
+    "/deno_dist/",
+    "/mod.ts"
   ],
   "keywords": [
     "kubernetes",
