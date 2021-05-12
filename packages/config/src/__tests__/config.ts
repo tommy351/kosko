@@ -3,7 +3,7 @@ import { getConfig, loadConfig, searchConfig } from "../config";
 import { Config, EnvironmentConfig } from "../types";
 import { ValidationError } from "../validate";
 
-const fixturePath = join(__dirname, "..", "__fixtures__");
+const fixturePath = join(__dirname, "../../__fixtures__");
 
 describe("loadConfig", () => {
   describe("when file exists", () => {
