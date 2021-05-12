@@ -2,17 +2,18 @@ import { expandGlob } from "https://deno.land/std@0.96.0/fs/mod.ts";
 import * as path from "https://deno.land/std@0.96.0/path/mod.ts";
 
 const importMapPath = await Deno.makeTempFile();
+const __filename = path.fromFileUrl(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 async function writeImportMap() {
   const imports: Record<string, string> = {
-    "@test/": path.dirname(path.fromFileUrl(import.meta.url)) + "/"
+    "@test/": `${path.toFileUrl(__dirname)}/`
   };
 
   for await (const entry of expandGlob("packages/*/package.json")) {
     const pkg = await JSON.parse(await Deno.readTextFile(entry.path));
-    imports[
-      `https://cdn.skypack.dev/${pkg.name}@${pkg.version}/mod.ts`
-    ] = path.join(entry.path, "../mod.ts");
+    imports[`https://cdn.skypack.dev/${pkg.name}@${pkg.version}/mod.ts`] =
+      path.toFileUrl(path.dirname(entry.path)) + "/mod.ts";
   }
 
   console.log("");
@@ -34,7 +35,7 @@ async function runTests() {
     importMapPath,
     "--location",
     "http://localhost",
-    path.join(path.fromFileUrl(import.meta.url), "../test.ts")
+    path.join(__dirname, "test.ts")
   ];
 
   console.log("");
