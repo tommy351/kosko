@@ -108,9 +108,12 @@ jobs:
       - name: Run browser tests
         run: pnpm run test:browser
   test-deno:
-    runs-on: ubuntu-20.04
+    runs-on: ${{ matrix.os }}
     needs:
       - lint
+    strategy:
+      matrix:
+        os: [ubuntu-20.04, windows-latest]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
