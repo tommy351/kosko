@@ -24,7 +24,7 @@
     "test:unit": "cross-env ESM_IMPORT_DISABLED=true jest",
     "test:integration": "jest --config integration/jest.config.js",
     "test:browser": "jest --config integration/browser/jest.config.js",
-    "test:deno": "ts-node scripts/deno-test.ts",
+    "test:deno": "deno run --unstable --allow-write --allow-read --allow-run ./test/deno/run.ts",
     "preinstall": "npx only-allow pnpm"
   },
   "husky": {
@@ -62,7 +62,6 @@
     "execa": "^5.0.0",
     "expect-puppeteer": "^4.4.0",
     "fs-extra": "^9.1.0",
-    "globby": "^11.0.3",
     "husky": "^4.3.7",
     "jest": "^26.6.3",
     "jest-extended": "^0.11.5",

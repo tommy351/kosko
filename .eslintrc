@@ -90,11 +90,13 @@
       "files": [
         "packages/*/mod.ts",
         "packages/*/deno_dist/**/*.ts",
-        "packages/*/test/deno/**/*.ts"
+        "packages/*/test/deno/**/*.ts",
+        "test/deno/**/*.ts"
       ],
       "rules": {
         "node/no-missing-import": "off",
-        "node/no-unpublished-import": "off"
+        "node/no-unpublished-import": "off",
+        "jest/valid-expect": "off"
       }
     }
   ]
