@@ -1,3 +1,8 @@
+/**
+ * @packageDocumentation
+ * @module @kosko/system-utils
+ */
+
 import fs from "fs";
 import path from "path";
 import makeDir from "make-dir";
