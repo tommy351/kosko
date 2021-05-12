@@ -96,7 +96,8 @@
       "rules": {
         "node/no-missing-import": "off",
         "node/no-unpublished-import": "off",
-        "jest/valid-expect": "off"
+        "jest/valid-expect": "off",
+        "jest/consistent-test-it": "off"
       }
     }
   ]

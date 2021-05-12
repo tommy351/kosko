@@ -8,7 +8,7 @@ const fixturePath = path.join(
 
 describe("@kosko/config loadConfig", () => {
   describe("when file exists", () => {
-    test("should load the config", async () => {
+    it("should load the config", async () => {
       const config = await loadConfig(
         path.join(fixturePath, "toml", "kosko.toml")
       );
@@ -28,14 +28,14 @@ describe("@kosko/config loadConfig", () => {
   });
 
   describe("when file does not exist", () => {
-    test("should throw an error", async () => {
+    it("should throw an error", async () => {
       await expect(loadConfig(path.join(fixturePath, "nowhere"))).to.be
         .rejected;
     });
   });
 
   describe("when config is invalid", () => {
-    test("should throw ValidationError", async () => {
+    it("should throw ValidationError", async () => {
       await expect(
         loadConfig(path.join(fixturePath, "invalid", "kosko.toml"))
       ).to.be.rejectedWith(ValidationError);
@@ -45,7 +45,7 @@ describe("@kosko/config loadConfig", () => {
 
 describe("@kosko/config searchConfig", () => {
   describe("when config is at kosko.toml", () => {
-    test("should load the config", async () => {
+    it("should load the config", async () => {
       const config = await searchConfig(path.join(fixturePath, "toml"));
 
       expect(config).to.deep.equal({
@@ -63,7 +63,7 @@ describe("@kosko/config searchConfig", () => {
   });
 
   describe("when config not found", () => {
-    test("should return an empty object", async () => {
+    it("should return an empty object", async () => {
       const config = await searchConfig(fixturePath);
 
       expect(config).to.deep.equal({});
@@ -71,7 +71,7 @@ describe("@kosko/config searchConfig", () => {
   });
 
   describe("when config is invalid", () => {
-    test("should throw ValidationError", async () => {
+    it("should throw ValidationError", async () => {
       await expect(
         searchConfig(path.join(fixturePath, "invalid"))
       ).to.be.rejectedWith(ValidationError);
