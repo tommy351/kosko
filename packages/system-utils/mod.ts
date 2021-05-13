@@ -7,22 +7,19 @@ import {
 import {
   ensureDir,
   exists,
-  walk,
-  WalkOptions
+  walk
 } from "https://deno.land/std@0.96.0/fs/mod.ts";
 import {
   dirname,
   join,
   relative,
-  sep
+  sep,
+  globToRegExp
 } from "https://deno.land/std@0.96.0/path/mod.ts";
-import _micromatch from "https://jspm.dev/micromatch@4.0.4";
 import escapeStringRegExp from "https://cdn.skypack.dev/escape-string-regexp@5.0.0?dts";
 
 export type { Stats, GlobEntry, GlobOptions };
 export { NotFoundError, ensureDir, exists as pathExists, join as joinPath };
-
-const micromatch = _micromatch as any;
 
 function handleError(err: any) {
   if (err instanceof Deno.errors.NotFound) {
@@ -88,31 +85,20 @@ export async function glob(
   { cwd = Deno.cwd(), onlyFiles = true }: GlobOptions = {}
 ): Promise<GlobEntry[]> {
   const sources = Array.isArray(source) ? source : [source];
-  const patternPrefix = escapeStringRegExp(cwd + sep);
-  const parsedPatterns: any[] = sources.map((src) =>
-    micromatch.parse(src, { cwd })
-  );
-  const match: RegExp[] = [];
-  const skip: RegExp[] = [];
   const entries: GlobEntry[] = [];
+  const patternPrefix = escapeStringRegExp(cwd + sep);
+  const match = sources
+    .map((src) =>
+      globToRegExp(src, {
+        extended: true,
+        globstar: true
+      })
+    )
+    .map(
+      (r) => new RegExp(`^${patternPrefix}${r.source.substring(1)}`, r.flags)
+    );
 
-  for (const [parsed] of parsedPatterns) {
-    const pattern = new RegExp(`^${patternPrefix}(?:${parsed.output})$`);
-
-    if (parsed.negated) {
-      skip.push(pattern);
-    } else {
-      match.push(pattern);
-    }
-  }
-
-  const walkOptions: WalkOptions = {
-    includeDirs: !onlyFiles,
-    ...(match.length && { match }),
-    ...(skip.length && { skip })
-  };
-
-  for await (const entry of walk(cwd, walkOptions)) {
+  for await (const entry of walk(cwd, { includeDirs: !onlyFiles, match })) {
     entries.push({
       relativePath: relative(cwd, entry.path),
       absolutePath: entry.path
