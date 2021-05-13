@@ -40,7 +40,7 @@ export const resolve: typeof mod.resolve = async (
     // With file extension
     ...extensions.map((ext) => absId + ext),
     // Directory index
-    ...extensions.map((ext) => `${absId}/index${ext}`)
+    ...extensions.map((ext) => join(absId, "index" + ext))
   ];
 
   for (const path of possiblePaths) {
