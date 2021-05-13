@@ -1,5 +1,6 @@
-import { createRequire } from "https://deno.land/std@0.95.0/node/module.ts";
-import type mod from "./index";
+import { createRequire } from "https://deno.land/std@0.96.0/node/module.ts";
+import { join, isAbsolute } from "https://deno.land/std@0.96.0/path/mod.ts";
+import type mod from "./index.d.ts";
 
 const require = createRequire(import.meta.url);
 
@@ -13,18 +14,47 @@ export const requireDefault: typeof mod.requireDefault = (path) => {
   return mod && mod.__esModule ? mod.default : mod;
 };
 
-export const resolve: typeof mod.resolve = (id, options) => {
-  throw new Error("resolve is not supported on Deno currently");
+async function tryStat(path: string): Promise<Deno.FileInfo | undefined> {
+  try {
+    return await Deno.stat(path);
+  } catch (err) {
+    if (err instanceof Deno.errors.NotFound) return;
+    throw err;
+  }
+}
+
+export const resolve: typeof mod.resolve = async (
+  id,
+  { baseDir = Deno.cwd(), extensions = getRequireExtensions() } = {}
+) => {
+  const absId = isAbsolute(id) ? id : join(baseDir, id);
+  const possiblePaths = [
+    // Without file extension
+    absId,
+    // With file extension
+    ...extensions.map((ext) => absId + ext),
+    // Directory index
+    ...extensions.map((ext) => `${absId}/index${ext}`)
+  ];
+
+  for (const path of possiblePaths) {
+    const stats = await tryStat(path);
+
+    if (stats?.isFile) {
+      return path;
+    }
+  }
+
+  throw new Error(`Cannot find module "${id}".`);
 };
 
-export const resolveESM: typeof mod.resolveESM = (id, options) => {
-  throw new Error("resolveESM is not supported on Deno currently");
-};
+export const resolveESM: typeof mod.resolveESM = resolve;
 
 export const getRequireExtensions: typeof mod.getRequireExtensions = () => [
   ".ts",
+  ".tsx",
   ".js",
-  ".json"
+  ".jsx"
 ];
 
-export type { ResolveOptions } from "./index";
+export type { ResolveOptions } from "./index.d.ts";

@@ -10,3 +10,13 @@ export class NotFoundError extends Error {
     super(message);
   }
 }
+
+export interface GlobOptions {
+  cwd?: string;
+  onlyFiles?: boolean;
+}
+
+export interface GlobEntry {
+  relativePath: string;
+  absolutePath: string;
+}

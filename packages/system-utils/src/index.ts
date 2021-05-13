@@ -4,11 +4,12 @@
  */
 
 import fs from "fs";
-import path from "path";
+import p from "path";
 import makeDir from "make-dir";
-import { Stats, NotFoundError } from "./types";
+import fastGlob from "fast-glob";
+import { Stats, NotFoundError, GlobEntry, GlobOptions } from "./types";
 
-export { Stats, NotFoundError };
+export { Stats, NotFoundError, GlobEntry, GlobOptions };
 
 function handleError(err: any) {
   if (err.code === "ENOENT") {
@@ -22,54 +23,54 @@ export function cwd(): string {
   return process.cwd();
 }
 
-export function readFile(src: string): Promise<string> {
+export function readFile(path: string): Promise<string> {
   return new Promise<string>((resolve, reject) => {
-    fs.readFile(src, "utf8", (err, data) => {
+    fs.readFile(path, "utf8", (err, data) => {
       if (err) return reject(handleError(err));
       resolve(data);
     });
   });
 }
 
-export async function writeFile(dest: string, data: string): Promise<void> {
-  await ensureDir(path.dirname(dest));
+export async function writeFile(path: string, data: string): Promise<void> {
+  await ensureDir(p.dirname(path));
 
   return new Promise<void>((resolve, reject) => {
-    fs.writeFile(dest, data, (err) => {
+    fs.writeFile(path, data, (err) => {
       if (err) return reject(handleError(err));
       resolve();
     });
   });
 }
 
-export async function ensureDir(dest: string): Promise<void> {
+export async function ensureDir(path: string): Promise<void> {
   try {
-    await makeDir(dest);
+    await makeDir(path);
   } catch (err) {
     throw handleError(err);
   }
 }
 
-export function pathExists(src: string): Promise<boolean> {
+export function pathExists(path: string): Promise<boolean> {
   return new Promise((resolve) => {
-    fs.access(src, (err) => {
+    fs.access(path, (err) => {
       resolve(!err);
     });
   });
 }
 
-export function readDir(src: string): Promise<string[]> {
+export function readDir(path: string): Promise<string[]> {
   return new Promise((resolve, reject) => {
-    fs.readdir(src, (err, files) => {
+    fs.readdir(path, (err, files) => {
       if (err) return reject(handleError(err));
       resolve(files);
     });
   });
 }
 
-export function stat(src: string): Promise<Stats> {
+export function stat(path: string): Promise<Stats> {
   return new Promise<Stats>((resolve, reject) => {
-    fs.stat(src, (err, stats) => {
+    fs.stat(path, (err, stats) => {
       if (err) return reject(handleError(err));
 
       resolve({
@@ -83,5 +84,17 @@ export function stat(src: string): Promise<Stats> {
 }
 
 export function joinPath(...paths: string[]): string {
-  return path.join(...paths);
+  return p.join(...paths);
+}
+
+export async function glob(
+  source: string | string[],
+  { cwd = process.cwd(), onlyFiles = true }: GlobOptions = {}
+): Promise<GlobEntry[]> {
+  const paths = await fastGlob(source, { cwd, onlyFiles });
+
+  return paths.map((path) => ({
+    relativePath: path,
+    absolutePath: p.join(cwd, path)
+  }));
 }

@@ -4,8 +4,22 @@ import chaiAsPromised from "https://cdn.skypack.dev/chai-as-promised@7.1.1";
 
 export * as path from "https://deno.land/std@0.96.0/path/mod.ts";
 
+declare global {
+  const beforeAll: typeof before;
+  const afterAll: typeof after;
+
+  interface Window {
+    beforeAll: typeof before;
+    afterAll: typeof after;
+  }
+}
+
 mocha.setup({ ui: "bdd", reporter: "spec" });
 chai.should();
 chai.use(chaiAsPromised);
 
 export const expect = chai.expect;
+
+window.test = window.it;
+window.beforeAll = window.before;
+window.afterAll = window.after;

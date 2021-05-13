@@ -30,6 +30,7 @@
     "node": ">=10"
   },
   "dependencies": {
+    "fast-glob": "^3.2.5",
     "make-dir": "^3.1.0",
     "tslib": "^2.1.0"
   }

@@ -1,1 +1,1 @@
-export * from "./deno_dist/index.ts";
+export * from "./deno_dist/index.node.ts";
