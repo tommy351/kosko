@@ -1,5 +1,3 @@
-import "./deno/polyfill.ts";
-
 import {
   Stats,
   NotFoundError,
@@ -18,11 +16,13 @@ import {
   relative,
   sep
 } from "https://deno.land/std@0.96.0/path/mod.ts";
-import micromatch from "https://cdn.skypack.dev/micromatch@4.0.4?dts";
+import _micromatch from "https://jspm.dev/micromatch@4.0.4";
 import escapeStringRegExp from "https://cdn.skypack.dev/escape-string-regexp@5.0.0?dts";
 
 export type { Stats, GlobEntry, GlobOptions };
 export { NotFoundError, ensureDir, exists as pathExists, join as joinPath };
+
+const micromatch = _micromatch as any;
 
 function handleError(err: any) {
   if (err instanceof Deno.errors.NotFound) {
