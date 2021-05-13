@@ -1,12 +1,18 @@
 import { createRequire } from "https://deno.land/std@0.96.0/node/module.ts";
-import { join, isAbsolute } from "https://deno.land/std@0.96.0/path/mod.ts";
+import {
+  join,
+  isAbsolute,
+  toFileUrl
+} from "https://deno.land/std@0.96.0/path/mod.ts";
 import type mod from "./index.d.ts";
 
 const require = createRequire(import.meta.url);
 
 export const isESMSupported: typeof mod.isESMSupported = async () => true;
 
-export const importPath: typeof mod.importPath = (path) => import(path);
+export const importPath: typeof mod.importPath = (path) => {
+  return import(toFileUrl(path).toString());
+};
 
 export const requireDefault: typeof mod.requireDefault = (path) => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
