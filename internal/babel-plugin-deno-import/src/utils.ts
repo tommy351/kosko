@@ -8,6 +8,8 @@ import resolve from "resolve";
 const CACHED_PACKAGE_JSON_PATH: Record<string, string> = {};
 const CACHED_PACKAGE_JSON: Record<string, any> = {};
 
+const FORCE_ENABLE_TYPE_DEFS = ["js-yaml"];
+
 export function isRelativePath(path: string): boolean {
   return path.startsWith("./") || path.startsWith("../");
 }
@@ -54,6 +56,8 @@ export function getDependencyVersion(source: string, mod: string): string {
 }
 
 export function hasTypeDefinitions(source: string, mod: string): boolean {
+  if (FORCE_ENABLE_TYPE_DEFS.includes(mod)) return true;
+
   const pkgPath = join(
     dirname(getPackageJsonPath(dirname(source))),
     "node_modules",

@@ -1,6 +1,5 @@
 import { loadAll } from "js-yaml";
-import fs from "fs-extra";
-import fetch, { RequestInfo, RequestInit } from "node-fetch";
+import { readFile } from "@kosko/system-utils";
 import { getResourceModule, ResourceKind } from "./module";
 import Debug from "./debug";
 import { importPath } from "@kosko/require";
@@ -89,7 +88,7 @@ export async function loadString(
  */
 export function loadFile(path: string, options?: LoadOptions) {
   return async (): Promise<readonly Manifest[]> => {
-    const content = await fs.readFile(path, "utf-8");
+    const content = await readFile(path);
     debug("File loaded from: %s", path);
 
     return loadString(content, options);

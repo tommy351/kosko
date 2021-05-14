@@ -7,7 +7,8 @@ const __dirname = path.dirname(__filename);
 
 async function writeImportMap() {
   const imports: Record<string, string> = {
-    "@test/": `${path.toFileUrl(__dirname)}/`
+    "@test/": `${path.toFileUrl(__dirname)}/`,
+    "kubernetes-models/": "https://cdn.skypack.dev/kubernetes-models@1.5.4/"
   };
 
   for await (const entry of expandGlob("packages/*/package.json")) {

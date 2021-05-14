@@ -496,32 +496,30 @@ importers:
   packages/yaml:
     dependencies:
       '@kosko/require': link:../require
+      '@kosko/system-utils': link:../system-utils
       debug: 4.3.1
-      fs-extra: 9.1.0
-      js-yaml: 4.0.0
-      node-fetch: 2.6.1
+      isomorphic-fetch: 3.0.0
+      js-yaml: 4.1.0
       tslib: 2.1.0
     devDependencies:
       '@types/debug': 4.1.5
-      '@types/fs-extra': 9.0.10
-      '@types/js-yaml': 4.0.0
-      '@types/node-fetch': 2.5.8
-      fetch-mock: 9.11.0_node-fetch@2.6.1
+      '@types/isomorphic-fetch': 0.0.35
+      '@types/js-yaml': 4.0.1
+      fetch-mock: 9.11.0
       kubernetes-models: 1.5.2
       temp-dir: 2.0.0
       tmp-promise: 3.0.2
     specifiers:
       '@kosko/require': workspace:*
+      '@kosko/system-utils': workspace:*
       '@types/debug': ^4.1.5
-      '@types/fs-extra': ^9.0.10
+      '@types/isomorphic-fetch': ^0.0.35
       '@types/js-yaml': ^4.0.0
-      '@types/node-fetch': ^2.5.7
       debug: ^4.3.1
       fetch-mock: ^9.11.0
-      fs-extra: ^9.1.0
+      isomorphic-fetch: ^3.0.0
       js-yaml: ^4.0.0
       kubernetes-models: ^1.5.2
-      node-fetch: ^2.6.1
       temp-dir: ^2.0.0
       tmp-promise: ^3.0.2
       tslib: ^2.1.0
@@ -3395,6 +3393,10 @@ packages:
   /@types/html-minifier-terser/5.1.1:
     resolution:
       integrity: sha512-giAlZwstKbmvMk1OO7WXSj4OZ0keXAcl2TQq4LWHiiPH2ByaH7WeUzng+Qej8UPxxv+8lRTuouo0iaNDBuzIBA==
+  /@types/isomorphic-fetch/0.0.35:
+    dev: true
+    resolution:
+      integrity: sha512-DaZNUvLDCAnCTjgwxgiL1eQdxIKEpNLOlTNtAgnZc50bG2copGhRrFN9/PxPBuJe+tZVLCbQ7ls0xveXVRPkvw==
   /@types/istanbul-lib-coverage/2.0.3:
     dev: true
     resolution:
@@ -3448,6 +3450,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-4vlpCM5KPCL5CfGmTbpjwVKbISRYhduEJvvUWsH5EB7QInhEj94XPZ3ts/9FPiLZFqYO0xoW4ZL8z2AabTGgJA==
+  /@types/js-yaml/4.0.1:
+    dev: true
+    resolution:
+      integrity: sha512-xdOvNmXmrZqqPy3kuCQ+fz6wA0xU5pji9cd1nDrflWaAWtYLLGk5ykW0H6yg5TVyehHP1pfmuuSaZkhP+kspVA==
   /@types/json-schema/7.0.7:
     resolution:
       integrity: sha512-cxWFQVseBm6O9Gbw1IWb8r6OS4OhSt3hPZLkFApLjM8TEXROBuQGLAH2i2gZpcXdLBIrpXuTDhH7Vbm1iXmNGA==
@@ -3472,13 +3478,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-fZQQafSREFyuZcdWFAExYjBiCL7AUCdgsk80iO0q4yihYYdcIiH28CcuPTGFgLOCC8RlW49GSQxdHwZP+I7CNg==
-  /@types/node-fetch/2.5.8:
-    dependencies:
-      '@types/node': 14.14.32
-      form-data: 3.0.1
-    dev: true
-    resolution:
-      integrity: sha512-fbjI6ja0N5ZA8TV53RUqzsKNkl9fv8Oj3T7zxW7FGv1GSH7gwJaNF8dzCjrqKaxKeUpTz4yT1DaJFq/omNpGfw==
   /@types/node/12.20.4:
     dev: true
     resolution:
@@ -7777,7 +7776,7 @@ packages:
       node: '>=0.4.0'
     resolution:
       integrity: sha512-u5/sxGfiMfZNtJ3OvQpXcvotFpYkL0n9u9mM2vkui2nGo8b4wvDkJ8gAkYqbA8QpGyFCv3RK0Z+Iv+9veCS9bQ==
-  /fetch-mock/9.11.0_node-fetch@2.6.1:
+  /fetch-mock/9.11.0:
     dependencies:
       '@babel/core': 7.13.8
       '@babel/runtime': 7.13.9
@@ -7786,7 +7785,6 @@ packages:
       glob-to-regexp: 0.4.1
       is-subset: 0.1.1
       lodash.isequal: 4.5.0
-      node-fetch: 2.6.1
       path-to-regexp: 2.4.0
       querystring: 0.2.1
       whatwg-url: 6.5.0
@@ -8077,16 +8075,6 @@ packages:
       node: '>= 0.12'
     resolution:
       integrity: sha512-1lLKB2Mu3aGP1Q/2eCOx0fNbRMe7XdwktwOruhfqqd0rIJWwN4Dh+E3hrPSlDCXnSR7UtZ1N38rVXm+6+MEhJQ==
-  /form-data/3.0.1:
-    dependencies:
-      asynckit: 0.4.0
-      combined-stream: 1.0.8
-      mime-types: 2.1.29
-    dev: true
-    engines:
-      node: '>= 6'
-    resolution:
-      integrity: sha512-RHkBKtLWUVwd7SqRIvCZMEvAMoGUp0XU+seQiZejj0COz3RI3hWP4sCv3gZWWLjJTd7rGwcsF5eKZGii0r/hbg==
   /forwarded/0.1.2:
     engines:
       node: '>= 0.6'
@@ -9710,6 +9698,13 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
+  /isomorphic-fetch/3.0.0:
+    dependencies:
+      node-fetch: 2.6.1
+      whatwg-fetch: 3.6.2
+    dev: false
+    resolution:
+      integrity: sha512-qvUtwJ3j6qwsF3jLxkZ72qCgjMysPzDfeV240JHiGZsANBYd+EEuu35v7dfrJ9Up0Ak07D7GGSkGhCHTqg/5wA==
   /isstream/0.1.2:
     resolution:
       integrity: sha1-R+Y/evVa+m+S4VAOaQ64uFKcCZo=
@@ -11201,12 +11196,6 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha512-BHJ/EKruNIqJf/QahvxwQZXKygOQ256myeN/Ew+THcAa5q+PjyTTMMeNQC4DZw5AwfvelsUrA6B67NKMqXDbzQ==
-  /mime-db/1.46.0:
-    dev: true
-    engines:
-      node: '>= 0.6'
-    resolution:
-      integrity: sha512-svXaP8UQRZ5K7or+ZmfNhg2xX3yKDMUzqadsSqi4NCH/KomcH75MAMYAGVlvXn4+b/xOPhS3I2uHKRUzvjY7BQ==
   /mime-db/1.47.0:
     engines:
       node: '>= 0.6'
@@ -11220,14 +11209,6 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha512-lc/aahn+t4/SWV/qcmumYjymLsWfN3ELhpmVuUFjgsORruuZPVSwAQryq+HHGvO/SI2KVX26bx+En+zhM8g8hQ==
-  /mime-types/2.1.29:
-    dependencies:
-      mime-db: 1.46.0
-    dev: true
-    engines:
-      node: '>= 0.6'
-    resolution:
-      integrity: sha512-Y/jMt/S5sR9OaqteJtslsFZKWOIIqMACsJSiHghlCAyhf7jfVYjKBmLiX8OgpWeW+fjJ2b+Az69aPFPkUOY6xQ==
   /mime-types/2.1.30:
     dependencies:
       mime-db: 1.47.0
@@ -17173,6 +17154,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-b5lim54JOPN9HtzvK9HFXvBma/rnfFeqsic0hSpjtDbVxR3dJKLc+KB4V6GgiGOvl7CY/KNh8rxSo9DKQrnUEw==
+  /whatwg-fetch/3.6.2:
+    dev: false
+    resolution:
+      integrity: sha512-bJlen0FcuU/0EMLrdbJ7zOnW6ITZLrZMIarMUVmdKtsGvZna8vxKYaexICWPfZ8qwf9fzNq+UEIZrnSaApt6RA==
   /whatwg-mimetype/2.3.0:
     dev: true
     resolution:
