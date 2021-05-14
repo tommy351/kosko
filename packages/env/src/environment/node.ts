@@ -1,5 +1,5 @@
 import { getRequireExtensions } from "@kosko/require";
-import { join } from "path";
+import { joinPath, cwd as getCWD } from "@kosko/system-utils";
 import { formatPath } from "../paths";
 import { toArray } from "../utils";
 import {
@@ -27,7 +27,7 @@ export interface InternalNodeEnvironmentOptions extends NodeEnvironmentOptions {
 }
 
 export function createNodeEnvironment({
-  cwd = process.cwd(),
+  cwd = getCWD(),
   createReducerExecutor,
   requireModule,
   mergeValues
@@ -43,7 +43,7 @@ export function createNodeEnvironment({
         ...(component && { component })
       });
 
-      return requireModule(environment, join(environment.cwd, path));
+      return requireModule(environment, joinPath(environment.cwd, path));
     });
   }
 

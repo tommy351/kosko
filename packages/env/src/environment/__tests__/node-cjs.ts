@@ -5,7 +5,7 @@ import { merge } from "../../merge";
 import { Reducer } from "../../reduce";
 import { Environment } from "../types";
 
-const fixturePath = join(__dirname, "..", "..", "__fixtures__");
+const fixturePath = join(__dirname, "..", "..", "..", "__fixtures__");
 let env: Environment;
 
 beforeEach(() => {
@@ -40,7 +40,7 @@ describe("when env is set", () => {
     let envPath: string;
 
     beforeEach(() => {
-      env.env = "esm";
+      env.env = "cjs-esm";
       envPath = join(fixturePath, "environments", env.env);
     });
 

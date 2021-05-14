@@ -29,6 +29,10 @@ async function tryStat(path: string): Promise<Deno.FileInfo | undefined> {
   }
 }
 
+class ModuleNotFoundError extends Error {
+  public code = "MODULE_NOT_FOUND";
+}
+
 export const resolve: typeof mod.resolve = async (
   id,
   { baseDir = Deno.cwd(), extensions = getRequireExtensions() } = {}
@@ -51,7 +55,9 @@ export const resolve: typeof mod.resolve = async (
     }
   }
 
-  throw new Error(`Cannot find module "${id}".`);
+  throw new ModuleNotFoundError(
+    `Cannot find module "${id}" from parent "${baseDir}".`
+  );
 };
 
 export const resolveESM: typeof mod.resolveESM = resolve;

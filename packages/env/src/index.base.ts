@@ -1,6 +1,6 @@
-export { Paths } from "./paths";
-export { Reducer } from "./reduce";
-export { Environment, Loader } from "./environment/types";
+export type { Paths } from "./paths";
+export type { Reducer } from "./reduce";
+export type { Environment, Loader } from "./environment/types";
 export {
   createSyncLoaderReducers,
   createAsyncLoaderReducers

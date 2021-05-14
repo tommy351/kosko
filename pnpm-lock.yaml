@@ -363,6 +363,7 @@ importers:
   packages/env:
     dependencies:
       '@kosko/require': link:../require
+      '@kosko/system-utils': link:../system-utils
       debug: 4.3.1
       deepmerge: 4.2.2
       is-plain-object: 5.0.0
@@ -371,6 +372,7 @@ importers:
       '@types/debug': 4.1.5
     specifiers:
       '@kosko/require': workspace:*
+      '@kosko/system-utils': workspace:*
       '@types/debug': ^4.1.5
       debug: ^4.3.1
       deepmerge: ^4.2.2

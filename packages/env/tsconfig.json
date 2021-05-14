@@ -5,5 +5,5 @@
     "outDir": "dist"
   },
   "include": ["src"],
-  "references": []
+  "references": [{ "path": "../system-utils" }]
 }

@@ -14,7 +14,7 @@ jest.mock("@kosko/require", () => {
   };
 });
 
-const fixturePath = join(__dirname, "..", "..", "__fixtures__");
+const fixturePath = join(__dirname, "..", "..", "..", "__fixtures__");
 let env: Environment;
 
 beforeEach(() => {

@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "@kosko/require": "workspace:*",
+    "@kosko/system-utils": "workspace:*",
     "debug": "^4.3.1",
     "deepmerge": "^4.2.2",
     "is-plain-object": "^5.0.0",
