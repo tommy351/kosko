@@ -2,32 +2,20 @@ import {
   Stats,
   NotFoundError,
   GlobEntry,
-  GlobOptions
+  GlobOptions,
+  SpawnResult
 } from "./deno_dist/types.ts";
-import {
-  ensureDir,
-  exists,
-  walk
-} from "https://deno.land/std@0.96.0/fs/mod.ts";
-import {
-  dirname,
-  join,
-  relative,
-  sep,
-  globToRegExp
-} from "https://deno.land/std@0.96.0/path/mod.ts";
-import escapeStringRegExp from "https://cdn.skypack.dev/escape-string-regexp@5.0.0?dts";
+import { ensureDir, exists } from "https://deno.land/std@0.96.0/fs/mod.ts";
+import { dirname, join } from "https://deno.land/std@0.96.0/path/mod.ts";
+import { handleError } from "./deno/utils.ts";
 
-export type { Stats, GlobEntry, GlobOptions };
+export { readDir } from "./deno/readDir.ts";
+export { stat } from "./deno/stat.ts";
+export { glob } from "./deno/glob.ts";
+export { spawn } from "./deno/spawn.ts";
+
+export type { Stats, GlobEntry, GlobOptions, SpawnResult };
 export { NotFoundError, ensureDir, exists as pathExists, join as joinPath };
-
-function handleError(err: any) {
-  if (err instanceof Deno.errors.NotFound) {
-    return new NotFoundError(err.message);
-  }
-
-  return err;
-}
 
 export function cwd(): string {
   return Deno.cwd();
@@ -51,59 +39,14 @@ export async function writeFile(path: string, data: string): Promise<void> {
   }
 }
 
-export async function readDir(path: string): Promise<string[]> {
-  const result: string[] = [];
+export async function makeTempFile(): Promise<string> {
+  return Deno.makeTempFile();
+}
 
+export async function remove(path: string): Promise<void> {
   try {
-    for await (const entry of Deno.readDir(path)) {
-      result.push(entry.name);
-    }
+    await Deno.remove(path);
   } catch (err) {
     throw handleError(err);
   }
-
-  return result;
-}
-
-export async function stat(path: string): Promise<Stats> {
-  try {
-    const info = await Deno.stat(path);
-
-    return {
-      isFile: info.isFile,
-      isDirectory: info.isDirectory,
-      isSymbolicLink: info.isSymlink,
-      size: info.size
-    };
-  } catch (err) {
-    throw handleError(err);
-  }
-}
-
-export async function glob(
-  source: string | string[],
-  { cwd = Deno.cwd(), onlyFiles = true }: GlobOptions = {}
-): Promise<GlobEntry[]> {
-  const sources = Array.isArray(source) ? source : [source];
-  const entries: GlobEntry[] = [];
-  const patternPrefix = escapeStringRegExp(cwd + sep);
-  const match = sources
-    .map((src) =>
-      globToRegExp(src, {
-        extended: true,
-        globstar: true
-      })
-    )
-    .map(
-      (r) => new RegExp(`^${patternPrefix}${r.source.substring(1)}`, r.flags)
-    );
-
-  for await (const entry of walk(cwd, { includeDirs: !onlyFiles, match })) {
-    entries.push({
-      relativePath: relative(cwd, entry.path),
-      absolutePath: entry.path
-    });
-  }
-
-  return entries;
 }

@@ -1,9 +1,5 @@
 import * as cp from "child_process";
-
-export interface SpawnResult {
-  stdout: string;
-  stderr: string;
-}
+import { SpawnResult } from "./types";
 
 export function spawn(
   command: string,

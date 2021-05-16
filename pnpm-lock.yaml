@@ -406,17 +406,15 @@ importers:
       tslib: ^2.1.0
   packages/helm:
     dependencies:
+      '@kosko/system-utils': link:../system-utils
       '@kosko/yaml': link:../yaml
-      fs-extra: 9.1.0
-      tmp-promise: 3.0.2
       tslib: 2.1.0
     devDependencies:
-      '@types/fs-extra': 9.0.10
+      kubernetes-models: 1.5.4
     specifiers:
+      '@kosko/system-utils': workspace:*
       '@kosko/yaml': workspace:*
-      '@types/fs-extra': ^9.0.10
-      fs-extra: ^9.1.0
-      tmp-promise: ^3.0.2
+      kubernetes-models: ^1.5.2
       tslib: ^2.1.0
   packages/kosko:
     dependencies:
@@ -448,10 +446,17 @@ importers:
     dependencies:
       fast-glob: 3.2.5
       make-dir: 3.1.0
+      rimraf: 3.0.2
+      tmp-promise: 3.0.2
       tslib: 2.2.0
+    devDependencies:
+      '@types/rimraf': 3.0.0
     specifiers:
+      '@types/rimraf': ^3.0.0
       fast-glob: ^3.2.5
       make-dir: ^3.1.0
+      rimraf: ^3.0.2
+      tmp-promise: ^3.0.2
       tslib: ^2.1.0
   packages/template:
     dependencies:
@@ -3371,7 +3376,7 @@ packages:
   /@types/glob/7.1.3:
     dependencies:
       '@types/minimatch': 3.0.4
-      '@types/node': 14.14.37
+      '@types/node': 15.3.0
     resolution:
       integrity: sha512-SEYeGAIQIQX8NN6LDKprLjbrd5dARM5EXsd8GI/A5l0apYI1fGMWgPHSe4ZKL4eozlAyI+doUE9XbYS4xCkQ1w==
   /@types/graceful-fs/4.1.5:
@@ -3493,6 +3498,9 @@ packages:
     dev: true
     resolution:
       integrity: sha512-p68+a+KoxpoB47015IeYZYRrdqMUcpbK8re/zpFB8Ld46LHC1lPEbp3EXgkEhAYEcPvjJF6ZO+869SQ0aH1dcA==
+  /@types/node/15.3.0:
+    resolution:
+      integrity: sha512-8/bnjSZD86ZfpBsDlCIkNXIvm+h6wi9g7IqL+kmFkQ+Wvu3JrasgLElfiPgoo8V8vVfnEi0QVS12gbl94h9YsQ==
   /@types/normalize-package-data/2.4.0:
     dev: true
     resolution:
@@ -3554,6 +3562,13 @@ packages:
     dev: true
     resolution:
       integrity: sha512-SFT3jdUNlLkjxUWwH/0QjLiEsV38hjdDX8oMcX9jZAD8KWNzRLdg6INZE7UMz9O86b2BOHzA3dR8nF+DbonX2Q==
+  /@types/rimraf/3.0.0:
+    dependencies:
+      '@types/glob': 7.1.3
+      '@types/node': 15.3.0
+    dev: true
+    resolution:
+      integrity: sha512-7WhJ0MdpFgYQPXlF4Dx+DhgvlPCfz/x5mHaeDQAKhcenvQP1KCpLQ18JklAqeGMYSAT2PxLpzd0g2/HE7fj7hQ==
   /@types/sax/1.2.1:
     dependencies:
       '@types/node': 14.14.37
@@ -4808,9 +4823,9 @@ packages:
     dev: false
     resolution:
       integrity: sha512-xFbRxM1tahm08yHBP16MMjVUAvDaBMD38zsM9EMAUN61omwLmKlOpB/Zku5QkjZ8TZ4vn53pj+t518cH0S03RQ==
-  /balanced-match/1.0.0:
+  /balanced-match/1.0.2:
     resolution:
-      integrity: sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
+      integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==
   /base/0.11.2:
     dependencies:
       cache-base: 1.0.1
@@ -4951,7 +4966,7 @@ packages:
       integrity: sha512-5bvsqw+hhgUi3oYGK0Vf4WpIkyemp60WBInn7+WNfoISzAqk/HX4L7WNROq38E6UR/y3YADpv6pEm4BfkeEAdA==
   /brace-expansion/1.1.11:
     dependencies:
-      balanced-match: 1.0.0
+      balanced-match: 1.0.2
       concat-map: 0.0.1
     resolution:
       integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==
@@ -8337,6 +8352,16 @@ packages:
       path-is-absolute: 1.0.1
     resolution:
       integrity: sha512-LwaxwyZ72Lk7vZINtNNrywX0ZuLyStrdDtabefZKAY5ZGJhVtgdznluResxNmPitE0SAO+O26sWTHeKSI2wMBA==
+  /glob/7.1.7:
+    dependencies:
+      fs.realpath: 1.0.0
+      inflight: 1.0.6
+      inherits: 2.0.4
+      minimatch: 3.0.4
+      once: 1.4.0
+      path-is-absolute: 1.0.1
+    resolution:
+      integrity: sha512-OvD9ENzPLbegENnYP5UUfJIirTg4+XwMWGaQfQTY0JenxNvvIKP3U3/tAQSPIu/lHxXYSZmpXlUHeqAIdKzBLQ==
   /global-dirs/3.0.0:
     dependencies:
       ini: 2.0.0
@@ -10561,6 +10586,16 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-st0l4Q3cmK4XmK5h7P7dQqfChm3a2G7huP1EVMzZ1IoMARommE3lsXOm3BjBEZEFGeS4fLAKj+c8iOYXySK6Nw==
+  /kubernetes-models/1.5.4:
+    dependencies:
+      '@kubernetes-models/base': 1.5.2
+      '@kubernetes-models/validate': 1.4.2
+      tslib: 2.2.0
+    dev: true
+    engines:
+      node: '>=10'
+    resolution:
+      integrity: sha512-ipJ+13V9W9oFPSf31jldMb9M8gCo1xXoBf9LigMXXdJ5zUbi3yb03BgRY/1hovCR+u97dEtfo0c44ShlCtR1cQ==
   /last-call-webpack-plugin/3.0.0:
     dependencies:
       lodash: 4.17.21
@@ -14232,7 +14267,7 @@ packages:
       integrity: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==
   /rimraf/3.0.2:
     dependencies:
-      glob: 7.1.6
+      glob: 7.1.7
     hasBin: true
     resolution:
       integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==

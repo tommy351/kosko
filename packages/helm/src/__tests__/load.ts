@@ -1,7 +1,7 @@
 import { loadChart } from "../load";
 import { join } from "path";
 
-const FIXTURE_DIR = join(__dirname, "../__fixtures__");
+const FIXTURE_DIR = join(__dirname, "../../__fixtures__");
 const NGINX_CHART = join(FIXTURE_DIR, "nginx");
 
 jest.setTimeout(10000);

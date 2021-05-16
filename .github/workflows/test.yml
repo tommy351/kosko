@@ -137,5 +137,14 @@ jobs:
         run: pnpm install
       - name: Build packages
         run: pnpm run build
+      - name: Install Helm on Linux
+        run: curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash --version v${{ env.HELM_VERSION }}
+        if: ${{ runner.os != 'Windows' }}
+      - name: Install Helm on Windows
+        run: |
+          Invoke-WebRequest https://get.helm.sh/helm-v${{ env.HELM_VERSION }}-windows-amd64.zip -OutFile $env:TEMP\helm.zip
+          Expand-Archive $env:TEMP\helm.zip -DestinationPath $env:TEMP\helm
+          Move-Item -Path $env:TEMP\helm\windows-amd64\helm.exe -Destination C:\Windows\helm.exe
+        if: ${{ runner.os == 'Windows' }}
       - name: Run Deno tests
         run: pnpm run test:deno

@@ -20,3 +20,8 @@ export interface GlobEntry {
   relativePath: string;
   absolutePath: string;
 }
+
+export interface SpawnResult {
+  stdout: string;
+  stderr: string;
+}

@@ -1,7 +1,5 @@
 import { LoadOptions, loadString, Manifest } from "@kosko/yaml";
-import tmp from "tmp-promise";
-import fs from "fs-extra";
-import { spawn } from "./spawn";
+import { makeTempFile, writeFile, remove, spawn } from "@kosko/system-utils";
 
 function getArgName(name: string) {
   return `--${name}`;
@@ -23,11 +21,11 @@ function stringArrayArg(name: string, values: string[] = []) {
 }
 
 async function writeValues(values: any) {
-  const file = await tmp.file();
+  const path = await makeTempFile();
 
-  await fs.writeFile(file.path, JSON.stringify(values));
+  await writeFile(path, JSON.stringify(values));
 
-  return file;
+  return path;
 }
 
 export interface ChartOptions extends LoadOptions {
@@ -199,11 +197,11 @@ export function loadChart({
       ...booleanArg("verify", verify),
       ...stringArg("version", version)
     ];
-    let valueFile: tmp.FileResult | undefined;
+    let valueFile: string | undefined;
 
     if (values) {
       valueFile = await writeValues(values);
-      args.push("--values", valueFile.path);
+      args.push("--values", valueFile);
     }
 
     try {
@@ -214,7 +212,7 @@ export function loadChart({
 
       return loadString(stdout.substring(index), { transform });
     } finally {
-      await valueFile?.cleanup();
+      if (valueFile) await remove(valueFile);
     }
   };
 }

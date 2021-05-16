@@ -5,5 +5,5 @@
     "outDir": "dist"
   },
   "include": ["src"],
-  "references": [{ "path": "../yaml" }]
+  "references": [{ "path": "../yaml" }, { "path": "../system-utils" }]
 }

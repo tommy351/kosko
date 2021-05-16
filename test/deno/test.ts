@@ -9,6 +9,9 @@ import "../../packages/env/test/deno/environment.ts";
 // generate
 import "../../packages/generate/test/deno/generate.ts";
 
+// helm
+import "../../packages/helm/test/deno/load.ts";
+
 // migrate
 import "../../packages/migrate/test/deno/migrate.ts";
 
