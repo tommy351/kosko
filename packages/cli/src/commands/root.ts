@@ -1,4 +1,4 @@
-import { isAbsolute, resolve } from "path";
+import { isAbsolutePath, resolvePath, cwd, args } from "@kosko/system-utils";
 import yargs from "yargs";
 import { wrapCommand } from "../cli/command";
 import { generateCmd } from "./generate";
@@ -6,17 +6,17 @@ import { initCmd } from "./init";
 import { validateCmd } from "./validate";
 import { migrateCmd } from "./migrate";
 
-export const rootCmd = yargs(process.argv.slice(2))
+export const rootCmd = yargs(args)
   .scriptName("kosko")
   .exitProcess(false)
   .option("cwd", {
     type: "string",
     describe: "Path of working directory",
     global: true,
-    default: process.cwd(),
+    default: cwd(),
     defaultDescription: "CWD",
     coerce(arg) {
-      return isAbsolute(arg) ? arg : resolve(arg);
+      return isAbsolutePath(arg) ? arg : resolvePath(arg);
     }
   })
   .option("silent", {

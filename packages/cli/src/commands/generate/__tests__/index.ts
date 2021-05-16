@@ -2,8 +2,9 @@ import toml from "@iarna/toml";
 import { Config } from "@kosko/config";
 import env from "@kosko/env";
 import { generate, print, PrintFormat, Result } from "@kosko/generate";
-import { writeFile, readFile, outputFile, ensureSymlink } from "fs-extra";
-import { join } from "path";
+import { writeFile, readFile, joinPath, ensureDir } from "@kosko/system-utils";
+import { dirname } from "path";
+import symlinkDir from "symlink-dir";
 import pkgDir from "pkg-dir";
 import { Signale } from "signale";
 import tempDir from "temp-dir";
@@ -23,15 +24,15 @@ let tmpDir: tmp.DirectoryResult;
 let result: Result;
 
 async function createFakeModule(id: string): Promise<void> {
-  const dir = join(tmpDir.path, "node_modules", id);
-  await outputFile(
-    join(dir, "index.js"),
+  const dir = joinPath(tmpDir.path, "node_modules", id);
+  await writeFile(
+    joinPath(dir, "index.js"),
     `require('fs').appendFileSync(__dirname + '/../../fakeModules', '${id},');`
   );
 }
 
 async function getLoadedFakeModules(): Promise<ReadonlyArray<string>> {
-  const content = await readFile(join(tmpDir.path, "fakeModules"), "utf8");
+  const content = await readFile(joinPath(tmpDir.path, "fakeModules"));
   return content.split(",").filter(Boolean);
 }
 
@@ -52,15 +53,16 @@ beforeEach(async () => {
 
   // Write kosko.toml
   await writeFile(
-    join(tmpDir.path, "kosko.toml"),
+    joinPath(tmpDir.path, "kosko.toml"),
     toml.stringify(config as toml.JsonMap)
   );
 
   // Install @kosko/env in the temp folder
-  const envSrc = join(root!, "packages", "env");
-  const envDest = join(tmpDir.path, "node_modules", "@kosko", "env");
+  const envSrc = joinPath(root!, "packages", "env");
+  const envDest = joinPath(tmpDir.path, "node_modules", "@kosko", "env");
 
-  await ensureSymlink(envSrc, envDest, "dir");
+  await ensureDir(dirname(envDest));
+  await symlinkDir(envSrc, envDest);
 });
 
 afterEach(async () => {
@@ -123,7 +125,7 @@ describe("with components in config", () => {
 
   test("should call generate with given components", () => {
     expect(generate).toHaveBeenCalledWith({
-      path: join(tmpDir.path, "components"),
+      path: joinPath(tmpDir.path, "components"),
       components: ["a", "b"],
       extensions: ["x", "y", "z"]
     });
@@ -161,7 +163,7 @@ describe("with components in config", () => {
 
     test("should add environment specific components", () => {
       expect(generate).toHaveBeenCalledWith({
-        path: join(tmpDir.path, "components"),
+        path: joinPath(tmpDir.path, "components"),
         components: ["a", "b", "c", "d"],
         extensions: ["x", "y", "z"]
       });
@@ -226,7 +228,7 @@ describe("with components in config", () => {
 
     test("should call generate with given components", () => {
       expect(generate).toHaveBeenCalledWith({
-        path: join(tmpDir.path, "components"),
+        path: joinPath(tmpDir.path, "components"),
         components: ["e", "f"],
         extensions: ["x", "y", "z"]
       });

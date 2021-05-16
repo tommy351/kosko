@@ -1,13 +1,18 @@
 import chalk from "chalk";
 import cleanStack from "clean-stack";
-import exit from "exit";
+import { exit } from "@kosko/system-utils";
 import { CLIError, formatError, handleError } from "../error";
+
+const mockedExit = exit as jest.MockedFunction<typeof exit>;
 
 jest.spyOn(console, "error").mockImplementation(() => {
   // do nothing
 });
 
-jest.mock("exit");
+jest.mock("@kosko/system-utils", () => ({
+  ...(jest.requireActual("@kosko/system-utils") as any),
+  exit: jest.fn()
+}));
 
 describe("formatError", () => {
   let stack: string;
@@ -94,7 +99,7 @@ describe("handleError", () => {
         });
 
         test("should exit with the code", () => {
-          expect(exit).toHaveBeenCalledWith(0);
+          expect(mockedExit).toHaveBeenCalledWith(0);
         });
       });
 
@@ -104,7 +109,7 @@ describe("handleError", () => {
         });
 
         test("should exit with the code", () => {
-          expect(exit).toHaveBeenCalledWith(46);
+          expect(mockedExit).toHaveBeenCalledWith(46);
         });
       });
     });
@@ -115,7 +120,7 @@ describe("handleError", () => {
       });
 
       test("should exit with 1", () => {
-        expect(exit).toHaveBeenCalledWith(1);
+        expect(mockedExit).toHaveBeenCalledWith(1);
       });
     });
   });
@@ -126,7 +131,7 @@ describe("handleError", () => {
     });
 
     test("should exit with 1", () => {
-      expect(exit).toHaveBeenCalledWith(1);
+      expect(mockedExit).toHaveBeenCalledWith(1);
     });
 
     test("should print stack", () => {
@@ -140,7 +145,7 @@ describe("handleError", () => {
     });
 
     test("should exit with 1", () => {
-      expect(exit).toHaveBeenCalledWith(1);
+      expect(mockedExit).toHaveBeenCalledWith(1);
     });
 
     test("should print stack", () => {

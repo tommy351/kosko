@@ -5,7 +5,6 @@ import {
   searchConfig
 } from "@kosko/config";
 import { generate, print, PrintFormat, Result } from "@kosko/generate";
-import { join } from "path";
 import { Argv } from "yargs";
 import { Command, Context, RootArguments } from "../../cli/command";
 import { CLIError } from "../../cli/error";
@@ -13,6 +12,7 @@ import { SetOption, parseSetOptions } from "./set-option";
 import { localRequireDefault } from "./require";
 import { BaseGenerateArguments, GenerateArguments } from "./types";
 import { setupEnv } from "./env";
+import { joinPath } from "@kosko/system-utils";
 
 export type { BaseGenerateArguments, GenerateArguments };
 
@@ -93,7 +93,7 @@ export async function generateHandler(
 
   // Generate manifests
   const result = await generate({
-    path: join(args.cwd, "components"),
+    path: joinPath(args.cwd, "components"),
     components: config.components,
     extensions: config.extensions,
     validate: args.validate

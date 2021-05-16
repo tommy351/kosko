@@ -6,19 +6,39 @@ import {
   SpawnResult
 } from "./deno_dist/types.ts";
 import { ensureDir, exists } from "https://deno.land/std@0.96.0/fs/mod.ts";
-import { dirname, join } from "https://deno.land/std@0.96.0/path/mod.ts";
+import {
+  dirname,
+  join,
+  isAbsolute,
+  resolve
+} from "https://deno.land/std@0.96.0/path/mod.ts";
 import { handleError } from "./deno/utils.ts";
 
 export { readDir } from "./deno/readDir.ts";
 export { stat } from "./deno/stat.ts";
 export { glob } from "./deno/glob.ts";
 export { spawn } from "./deno/spawn.ts";
+export { getStdin } from "./deno/stdin.ts";
 
 export type { Stats, GlobEntry, GlobOptions, SpawnResult };
-export { NotFoundError, ensureDir, exists as pathExists, join as joinPath };
+
+export {
+  NotFoundError,
+  ensureDir,
+  exists as pathExists,
+  join as joinPath,
+  isAbsolute as isAbsolutePath,
+  resolve as resolvePath
+};
+
+export const args: readonly string[] = Deno.args;
 
 export function cwd(): string {
   return Deno.cwd();
+}
+
+export function exit(code: number): void {
+  Deno.exit(code);
 }
 
 export async function readFile(path: string): Promise<string> {

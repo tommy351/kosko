@@ -84,7 +84,7 @@ function handleParse(err: Error | undefined, args: any, output: string): void {
   }
 }
 
-export function parse(input: Argv, argv: string[]): Promise<void> {
+export function parse(input: Argv, argv: readonly string[]): Promise<void> {
   return new Promise((resolve, reject): void => {
     const ctx: Context = { [RESOLVE]: resolve, [REJECT]: reject };
     input.parse(argv, ctx, handleParse);

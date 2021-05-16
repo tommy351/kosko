@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import cleanStack from "clean-stack";
-import exit from "exit";
+import { exit } from "@kosko/system-utils";
 
 export class CLIError extends Error {
   public readonly name = "CLIError";

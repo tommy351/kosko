@@ -1,17 +1,23 @@
 import { migrateString } from "@kosko/migrate";
-import { readdir, readFile } from "fs-extra";
-import getStdin from "get-stdin";
-import { join } from "path";
+import { readDir, readFile, joinPath, getStdin } from "@kosko/system-utils";
 import { Signale } from "signale";
 import { setLogger } from "../../cli/command";
 import { print } from "../../cli/print";
 import { MigrateArguments, migrateCmd } from "../migrate";
 
-jest.mock("get-stdin");
+const mockGetStdin = getStdin as jest.MockedFunction<typeof getStdin>;
+
+jest.mock("@kosko/system-utils", () => ({
+  ...(jest.requireActual("@kosko/system-utils") as any),
+  getStdin: jest.fn()
+}));
+
 jest.mock("../../cli/print");
 
-const fixturePath = join(__dirname, "..", "__fixtures__");
+const fixturePath = joinPath(__dirname, "..", "__fixtures__");
 const logger = new Signale({ disabled: true });
+
+console.log(fixturePath);
 
 async function execute(args: Partial<MigrateArguments>): Promise<void> {
   const ctx = setLogger({ cwd: fixturePath, ...args } as any, logger);
@@ -31,7 +37,7 @@ spec:
   `;
 
   beforeEach(async () => {
-    ((getStdin as any) as jest.Mock).mockResolvedValueOnce(input);
+    mockGetStdin.mockResolvedValueOnce(input);
     await execute({ filename: ["-"] });
   });
 
@@ -56,7 +62,7 @@ describe("given a file", () => {
 
   test("should call print with result", async () => {
     const expected = await migrateString(
-      await readFile(join(fixturePath, "only-deployment.yaml"), "utf8")
+      await readFile(joinPath(fixturePath, "only-deployment.yaml"))
     );
 
     expect(print).toHaveBeenCalledWith(expected);
@@ -64,7 +70,7 @@ describe("given a file", () => {
 });
 
 describe("given an absolute path", () => {
-  const path = join(fixturePath, "only-deployment.yaml");
+  const path = joinPath(fixturePath, "only-deployment.yaml");
 
   beforeEach(async () => {
     await execute({ filename: [path] });
@@ -75,7 +81,7 @@ describe("given an absolute path", () => {
   });
 
   test("should call print with result", async () => {
-    const expected = await migrateString(await readFile(path, "utf8"));
+    const expected = await migrateString(await readFile(path));
     expect(print).toHaveBeenCalledWith(expected);
   });
 });
@@ -90,9 +96,9 @@ describe("given a directory", () => {
   });
 
   test("should call print with result", async () => {
-    const files = await readdir(fixturePath);
+    const files = await readDir(fixturePath);
     const contents = await Promise.all(
-      files.map((file) => readFile(join(fixturePath, file), "utf8"))
+      files.map((file) => readFile(joinPath(fixturePath, file)))
     );
     const expected = await migrateString(contents.join("---\n"));
     expect(print).toHaveBeenCalledWith(expected);
@@ -113,7 +119,7 @@ describe("given multiple files", () => {
   test("should call print with result", async () => {
     const contents = await Promise.all(
       ["only-deployment.yaml", "deployment-and-service.yaml"].map((file) =>
-        readFile(join(fixturePath, file), "utf8")
+        readFile(joinPath(fixturePath, file))
       )
     );
     const expected = await migrateString("---\n" + contents.join("\n"));

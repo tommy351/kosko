@@ -1,6 +1,5 @@
 /// <reference types="jest-extended"/>
-import { readFile, stat, writeJSON } from "fs-extra";
-import { join } from "path";
+import { readFile, stat, writeFile, joinPath } from "@kosko/system-utils";
 import { Signale } from "signale";
 import tempDir from "temp-dir";
 import tmp from "tmp-promise";
@@ -42,25 +41,28 @@ describe("when the target exists", () => {
     let pkgPath: string;
 
     beforeEach(async () => {
-      pkgPath = join(tmpDir.path, "package.json");
+      pkgPath = joinPath(tmpDir.path, "package.json");
 
-      await writeJSON(
+      await writeFile(
         pkgPath,
-        {
-          name: "foo",
-          version: "1.2.3",
-          dependencies: {
-            debug: "3.2.1"
-          }
-        },
-        { spaces: 2 }
+        JSON.stringify(
+          {
+            name: "foo",
+            version: "1.2.3",
+            dependencies: {
+              debug: "3.2.1"
+            }
+          },
+          null,
+          "  "
+        ) + "\n"
       );
 
       await execute({ path: tmpDir.path, force: true });
     });
 
     test("should update package.json", async () => {
-      const content = await readFile(pkgPath, "utf8");
+      const content = await readFile(pkgPath);
       expect(content).toMatchSnapshot();
     });
   });
@@ -86,7 +88,7 @@ describe("success", () => {
 
   beforeAll(async () => {
     tmpDir = await tmp.dir({ unsafeCleanup: true });
-    path = join(tmpDir.path, "target");
+    path = joinPath(tmpDir.path, "target");
 
     await execute({ path });
   });
@@ -94,12 +96,12 @@ describe("success", () => {
   afterAll(() => tmpDir.cleanup());
 
   async function isDirectory(...names: string[]): Promise<boolean> {
-    const stats = await stat(join(path, ...names));
-    return stats.isDirectory();
+    const stats = await stat(joinPath(path, ...names));
+    return stats.isDirectory;
   }
 
   async function readFileContent(...names: string[]): Promise<string> {
-    return readFile(join(path, ...names), "utf8");
+    return readFile(joinPath(path, ...names));
   }
 
   test("should create components folder", async () => {
