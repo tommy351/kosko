@@ -3,4 +3,6 @@
  * @module @kosko/migrate
  */
 
-export * from "./migrate";
+export type { Manifest } from "@kosko/yaml";
+export { migrate, migrateString } from "./migrate";
+export type { MigrateFormat, MigrateOptions } from "./types";

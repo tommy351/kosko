@@ -7,7 +7,8 @@ import { Service } from "kubernetes-models/v1/Service";
 import { ClusterRoleBinding } from "kubernetes-models/rbac.authorization.k8s.io/v1/ClusterRoleBinding";
 import Module from "module";
 import { runInThisContext } from "vm";
-import { Manifest, migrate, migrateString } from "../migrate";
+import { migrate, migrateString } from "../migrate";
+import { Manifest } from "@kosko/yaml";
 
 describe("migrate", () => {
   let data: ReadonlyArray<Manifest>;

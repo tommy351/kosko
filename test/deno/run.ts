@@ -32,6 +32,7 @@ async function runTests() {
     "--allow-read",
     "--allow-write",
     "--allow-env",
+    "--allow-net",
     "--import-map",
     importMapPath,
     "--location",

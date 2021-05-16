@@ -1,114 +1,14 @@
-import camelcase from "camelcase";
-import { Manifest, loadString, getResourceModule } from "@kosko/yaml";
+import { Manifest, loadString } from "@kosko/yaml";
+import { Component, MigrateFormat, MigrateOptions } from "./types";
+import { collectImports, generateForList, uniqComponentName } from "./utils";
 
-export type { Manifest };
+let defaultFormat: MigrateFormat = MigrateFormat.CJS;
 
-interface Component {
-  readonly name: string;
-  readonly text: string;
-  readonly imports: readonly Import[];
+export function setDefaultFormat(format: MigrateFormat): void {
+  defaultFormat = format;
 }
 
-interface Import {
-  readonly names: readonly string[];
-  readonly path: string;
-}
-
-function jsonStringify(data: unknown): string {
-  return JSON.stringify(data, null, "  ");
-}
-
-async function generateComponent(manifest: Manifest): Promise<Component> {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { apiVersion, kind, ...data } = manifest;
-  const name = camelcase(kind);
-  const mod = await getResourceModule(manifest);
-
-  if (!mod) {
-    return {
-      name,
-      text: jsonStringify(manifest),
-      imports: []
-    };
-  }
-
-  return {
-    name,
-    text: `new ${mod.export}(${jsonStringify(data)})`,
-    imports: [
-      {
-        path: mod.path,
-        names: [mod.export]
-      }
-    ]
-  };
-}
-
-async function generateForList(
-  items: readonly Manifest[]
-): Promise<readonly Component[]> {
-  const result: Component[] = [];
-
-  for (const data of items) {
-    if (data.apiVersion === "v1" && data.kind === "List") {
-      result.push(...(await generateForList(data.items as any)));
-    } else {
-      result.push(await generateComponent(data));
-    }
-  }
-
-  return result;
-}
-
-function uniqComponentName(
-  components: readonly Component[]
-): readonly Component[] {
-  const nameMap: { [key: string]: number } = {};
-
-  return components.map((component) => {
-    let name = component.name;
-    const idx = nameMap[name];
-
-    if (idx) {
-      nameMap[name]++;
-      name += idx;
-    } else {
-      nameMap[name] = 1;
-    }
-
-    return {
-      ...component,
-      name
-    };
-  });
-}
-
-function collectImports(components: readonly Component[]): readonly Import[] {
-  const importMap: { [key: string]: Set<string> } = {};
-
-  for (const component of components) {
-    for (const { path, names } of component.imports) {
-      if (!importMap[path]) importMap[path] = new Set();
-
-      for (const name of names) {
-        importMap[path].add(name);
-      }
-    }
-  }
-
-  return Object.keys(importMap).map((path) => ({
-    path,
-    names: [...importMap[path].values()]
-  }));
-}
-
-/**
- * Migrate Kubernetes manifests into a kosko component.
- *
- * @param data Array of Kubernetes manifests
- */
-export async function migrate(data: readonly Manifest[]): Promise<string> {
-  const components = uniqComponentName(await generateForList(data));
+function generateCJS(components: readonly Component[]): string {
   let output = `"use strict";\n\n`;
 
   for (const { path, names } of collectImports(components)) {
@@ -126,11 +26,51 @@ export async function migrate(data: readonly Manifest[]): Promise<string> {
   return output;
 }
 
+function generateESM(components: readonly Component[]): string {
+  let output = "";
+
+  for (const { path, names } of collectImports(components)) {
+    output += `import { ${names.join(", ")} } from "${path}";\n`;
+  }
+
+  for (const { name, text } of components) {
+    output += `\nconst ${name} = ${text};\n`;
+  }
+
+  output += `\nexport default [${components.map((c) => c.name).join(", ")}];\n`;
+
+  return output;
+}
+
+/**
+ * Migrate Kubernetes manifests into a kosko component.
+ *
+ * @param data Array of Kubernetes manifests
+ */
+export async function migrate(
+  data: readonly Manifest[],
+  { format = defaultFormat }: MigrateOptions = {}
+): Promise<string> {
+  const components = uniqComponentName(await generateForList(data));
+
+  switch (format) {
+    case MigrateFormat.CJS:
+      return generateCJS(components);
+    case MigrateFormat.ESM:
+      return generateESM(components);
+    default:
+      throw new Error(`Format "${format}" is not supported.`);
+  }
+}
+
 /**
  * Migrate Kubernetes YAML into a kosko component.
  *
  * @param input Kubernetes YAML string
  */
-export async function migrateString(input: string): Promise<string> {
-  return migrate(await loadString(input));
+export async function migrateString(
+  input: string,
+  options?: MigrateOptions
+): Promise<string> {
+  return migrate(await loadString(input), options);
 }
