@@ -46,6 +46,9 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+      - uses: azure/setup-helm@v1
+        with:
+          version: ${{ env.HELM_VERSION }}
       - uses: actions/cache@v2
         with:
           path: ${{ env.PNPM_CACHE_FOLDER }}
@@ -64,15 +67,6 @@ jobs:
       # https://github.com/actions/virtual-environments/issues/712#issuecomment-613004302
       - name: Set TEMP on Windows
         run: echo "TEMP=$env:USERPROFILE\AppData\Local\Temp" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-        if: ${{ runner.os == 'Windows' }}
-      - name: Install Helm on Linux
-        run: curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash --version v${{ env.HELM_VERSION }}
-        if: ${{ runner.os != 'Windows' }}
-      - name: Install Helm on Windows
-        run: |
-          Invoke-WebRequest https://get.helm.sh/helm-v${{ env.HELM_VERSION }}-windows-amd64.zip -OutFile $env:TEMP\helm.zip
-          Expand-Archive $env:TEMP\helm.zip -DestinationPath $env:TEMP\helm
-          Move-Item -Path $env:TEMP\helm\windows-amd64\helm.exe -Destination C:\Windows\helm.exe
         if: ${{ runner.os == 'Windows' }}
       - name: Run unit tests
         run: pnpm run test:unit -- --coverage
@@ -122,6 +116,9 @@ jobs:
       - uses: denoland/setup-deno@main
         with:
           deno-version: v1.x
+      - uses: azure/setup-helm@v1
+        with:
+          version: ${{ env.HELM_VERSION }}
       - uses: actions/cache@v2
         with:
           path: ${{ env.PNPM_CACHE_FOLDER }}
@@ -137,14 +134,5 @@ jobs:
         run: pnpm install
       - name: Build packages
         run: pnpm run build
-      - name: Install Helm on Linux
-        run: curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash --version v${{ env.HELM_VERSION }}
-        if: ${{ runner.os != 'Windows' }}
-      - name: Install Helm on Windows
-        run: |
-          Invoke-WebRequest https://get.helm.sh/helm-v${{ env.HELM_VERSION }}-windows-amd64.zip -OutFile $env:TEMP\helm.zip
-          Expand-Archive $env:TEMP\helm.zip -DestinationPath $env:TEMP\helm
-          Move-Item -Path $env:TEMP\helm\windows-amd64\helm.exe -Destination C:\Windows\helm.exe
-        if: ${{ runner.os == 'Windows' }}
       - name: Run Deno tests
         run: pnpm run test:deno
