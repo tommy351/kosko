@@ -11,7 +11,11 @@ const require = createRequire(import.meta.url);
 export const isESMSupported: typeof mod.isESMSupported = async () => true;
 
 export const importPath: typeof mod.importPath = (path) => {
-  return import(toFileUrl(path).toString());
+  if (path.startsWith("./") || path.startsWith("../") || isAbsolute(path)) {
+    return import(toFileUrl(path).toString());
+  }
+
+  return import(path);
 };
 
 export const requireDefault: typeof mod.requireDefault = (path) => {
