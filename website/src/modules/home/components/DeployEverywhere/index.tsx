@@ -26,7 +26,7 @@ const Pane: FunctionComponent<{
     <div className={styles.pane}>
       <div className={styles.tabs}>
         {Object.keys(tabs).map((key) => (
-          <div
+          <button
             key={key}
             className={clsx(styles.tab, {
               [styles.tabActive]: active === key
@@ -34,7 +34,7 @@ const Pane: FunctionComponent<{
             onClick={() => setActive(key)}
           >
             {key}
-          </div>
+          </button>
         ))}
       </div>
       <CodeBlock {...tabs[active]} className={styles.paneCode} />
