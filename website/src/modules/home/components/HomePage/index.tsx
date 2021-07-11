@@ -7,7 +7,7 @@ import TypeSafe from "../TypeSafe";
 
 const HomePage: FunctionComponent = () => {
   return (
-    <Layout title="Organize Kubernetes manifests in JavaScript">
+    <Layout description="Organize Kubernetes manifests in JavaScript.">
       <Header />
       <main>
         <WriteLess />

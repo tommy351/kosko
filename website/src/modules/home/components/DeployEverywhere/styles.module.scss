@@ -42,6 +42,11 @@
   white-space: nowrap;
   padding: 0.75rem;
   line-height: 1;
+  background: none;
+  border: none;
+  color: var(--ifm-color-white);
+  font-family: var(--ifm-font-family-base);
+  font-size: 0.875rem;
 }
 
 .tabActive {
