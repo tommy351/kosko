@@ -14,6 +14,8 @@ module.exports = {
   organizationName,
   projectName,
   themeConfig: {
+    image: "img/logo.png",
+    metadatas: [{ name: "twitter:card", content: "summary" }],
     navbar: {
       title: "Kosko",
       logo: {
