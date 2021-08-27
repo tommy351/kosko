@@ -152,13 +152,13 @@ Components to generate. It can be either a component's name or a [glob pattern])
 
 ```shell
 # Generate components set in kosko.toml
-kosko generate
+kosko validate
 
 # Generate components with specified names
-kosko generate foo bar
+kosko validate foo bar
 
 # Generate components matched to the glob pattern
-kosko generate nginx_*
+kosko validate nginx_*
 ```
 
 ### Options
@@ -177,7 +177,7 @@ Require external modules. Modules set in the config file will also be required.
 
 ```shell
 # Using TypeScript
-kosko generate -r ts-node/register
+kosko validate -r ts-node/register
 ```
 
 ## `migrate`
