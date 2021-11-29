@@ -1,5 +1,11 @@
 # @kosko/helm
 
+## 1.0.0
+
+### Major Changes
+
+- [#86](https://github.com/tommy351/kosko/pull/86) [`03761b6`](https://github.com/tommy351/kosko/commit/03761b6789e735de94bb5500f5b6d9e8b4538cdd) Thanks [@tommy351](https://github.com/tommy351)! - Replace `skipCrds` option with `includeCrds` option.
+
 ## 0.1.2
 
 ### Patch Changes
