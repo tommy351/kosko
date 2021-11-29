@@ -1,5 +1,6 @@
-import { loadChart } from "../load";
+import { ChartOptions, loadChart } from "../load";
 import { join } from "path";
+import { Manifest } from "@kosko/yaml";
 
 const FIXTURE_DIR = join(__dirname, "../__fixtures__");
 const NGINX_CHART = join(FIXTURE_DIR, "nginx");
@@ -50,4 +51,31 @@ test("values are specified", async () => {
   });
 
   await expect(result()).resolves.toMatchSnapshot();
+});
+
+describe("includeCrds option", () => {
+  const baseOptions: ChartOptions = {
+    chart: "traefik",
+    repo: "https://helm.traefik.io/traefik",
+    version: "v10.6.1"
+  };
+
+  function pickCrds(manifests: readonly Manifest[]): Manifest[] {
+    return manifests.filter((m) => m.kind === "CustomResourceDefinition");
+  }
+
+  test("should not include CRDs when includeCrds is not set", async () => {
+    const result = loadChart(baseOptions);
+
+    expect(pickCrds(await result())).toHaveLength(0);
+  });
+
+  test("should include CRDs when includeCrds is set", async () => {
+    const result = loadChart({
+      ...baseOptions,
+      includeCrds: true
+    });
+
+    expect(pickCrds(await result())).not.toHaveLength(0);
+  });
 });

@@ -112,9 +112,9 @@ export interface ChartOptions extends LoadOptions {
   repo?: string;
 
   /**
-   * If set, no CRDs will be installed. By default, CRDs are installed if not already present.
+   * Include CRDs in the templated output.
    */
-  skipCrds?: boolean;
+  includeCrds?: boolean;
 
   /**
    * Skip tests from templated output.
@@ -164,7 +164,7 @@ export function loadChart({
   noHooks,
   password,
   repo,
-  skipCrds,
+  includeCrds,
   skipTests,
   timeout,
   username,
@@ -192,7 +192,7 @@ export function loadChart({
       ...booleanArg("no-hooks", noHooks),
       ...stringArg("password", password),
       ...stringArg("repo", repo),
-      ...booleanArg("skip-crds", skipCrds),
+      ...booleanArg("include-crds", includeCrds),
       ...booleanArg("skip-tests", skipTests),
       ...stringArg("timeout", timeout),
       ...stringArg("username", username),
