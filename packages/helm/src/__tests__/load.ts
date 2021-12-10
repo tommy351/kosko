@@ -5,7 +5,7 @@ import { Manifest } from "@kosko/yaml";
 const FIXTURE_DIR = join(__dirname, "../__fixtures__");
 const NGINX_CHART = join(FIXTURE_DIR, "nginx");
 
-jest.setTimeout(10000);
+jest.setTimeout(15000);
 
 test("chart is a local path", async () => {
   const result = loadChart({ chart: NGINX_CHART });
