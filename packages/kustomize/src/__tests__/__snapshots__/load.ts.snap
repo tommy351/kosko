@@ -1,0 +1,383 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`helm chart 1`] = `
+Array [
+  Object {
+    "apiVersion": "v1",
+    "data": Object {
+      "server-blocks-paths.conf": "include  \\"/opt/bitnami/nginx/conf/server_blocks/ldap/*.conf\\";
+include  \\"/opt/bitnami/nginx/conf/server_blocks/common/*.conf\\";",
+    },
+    "kind": "ConfigMap",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/instance": "foobar",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "nginx",
+        "helm.sh/chart": "nginx-9.5.16",
+      },
+      "name": "foobar-nginx-server-block",
+    },
+  },
+  Object {
+    "apiVersion": "v1",
+    "kind": "Service",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/instance": "foobar",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "nginx",
+        "helm.sh/chart": "nginx-9.5.16",
+      },
+      "name": "foobar-nginx",
+    },
+    "spec": Object {
+      "externalTrafficPolicy": "Cluster",
+      "ports": Array [
+        Object {
+          "name": "http",
+          "port": 80,
+          "targetPort": "http",
+        },
+      ],
+      "selector": Object {
+        "app.kubernetes.io/instance": "foobar",
+        "app.kubernetes.io/name": "nginx",
+      },
+      "type": "LoadBalancer",
+    },
+  },
+  Object {
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/instance": "foobar",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "nginx",
+        "helm.sh/chart": "nginx-9.5.16",
+      },
+      "name": "foobar-nginx",
+    },
+    "spec": Object {
+      "replicas": 1,
+      "selector": Object {
+        "matchLabels": Object {
+          "app.kubernetes.io/instance": "foobar",
+          "app.kubernetes.io/name": "nginx",
+        },
+      },
+      "template": Object {
+        "metadata": Object {
+          "labels": Object {
+            "app.kubernetes.io/instance": "foobar",
+            "app.kubernetes.io/managed-by": "Helm",
+            "app.kubernetes.io/name": "nginx",
+            "helm.sh/chart": "nginx-9.5.16",
+          },
+        },
+        "spec": Object {
+          "affinity": Object {
+            "nodeAffinity": null,
+            "podAffinity": null,
+            "podAntiAffinity": Object {
+              "preferredDuringSchedulingIgnoredDuringExecution": Array [
+                Object {
+                  "podAffinityTerm": Object {
+                    "labelSelector": Object {
+                      "matchLabels": Object {
+                        "app.kubernetes.io/instance": "foobar",
+                        "app.kubernetes.io/name": "nginx",
+                      },
+                    },
+                    "namespaces": Array [
+                      "default",
+                    ],
+                    "topologyKey": "kubernetes.io/hostname",
+                  },
+                  "weight": 1,
+                },
+              ],
+            },
+          },
+          "automountServiceAccountToken": false,
+          "containers": Array [
+            Object {
+              "env": Array [
+                Object {
+                  "name": "BITNAMI_DEBUG",
+                  "value": "false",
+                },
+              ],
+              "image": "docker.io/bitnami/nginx:1.21.4-debian-10-r27",
+              "imagePullPolicy": "IfNotPresent",
+              "livenessProbe": Object {
+                "failureThreshold": 6,
+                "periodSeconds": 10,
+                "successThreshold": 1,
+                "tcpSocket": Object {
+                  "port": "http",
+                },
+                "timeoutSeconds": 5,
+              },
+              "name": "nginx",
+              "ports": Array [
+                Object {
+                  "containerPort": 8080,
+                  "name": "http",
+                },
+              ],
+              "readinessProbe": Object {
+                "failureThreshold": 3,
+                "initialDelaySeconds": 5,
+                "periodSeconds": 5,
+                "successThreshold": 1,
+                "tcpSocket": Object {
+                  "port": "http",
+                },
+                "timeoutSeconds": 3,
+              },
+              "resources": Object {
+                "limits": Object {},
+                "requests": Object {},
+              },
+              "volumeMounts": null,
+            },
+          ],
+          "serviceAccountName": "default",
+          "shareProcessNamespace": false,
+          "volumes": Array [
+            Object {
+              "configMap": Object {
+                "items": Array [
+                  Object {
+                    "key": "server-blocks-paths.conf",
+                    "path": "server-blocks-paths.conf",
+                  },
+                ],
+                "name": "foobar-nginx-server-block",
+              },
+              "name": "nginx-server-block-paths",
+            },
+          ],
+        },
+      },
+    },
+  },
+]
+`;
+
+exports[`local path 1`] = `
+Array [
+  Object {
+    "apiVersion": "v1",
+    "data": Object {
+      "altGreeting": "Good Morning!",
+      "enableRisky": "false",
+    },
+    "kind": "ConfigMap",
+    "metadata": Object {
+      "labels": Object {
+        "app": "hello",
+      },
+      "name": "the-map",
+    },
+  },
+  Object {
+    "apiVersion": "v1",
+    "kind": "Service",
+    "metadata": Object {
+      "labels": Object {
+        "app": "hello",
+      },
+      "name": "the-service",
+    },
+    "spec": Object {
+      "ports": Array [
+        Object {
+          "port": 8666,
+          "protocol": "TCP",
+          "targetPort": 8080,
+        },
+      ],
+      "selector": Object {
+        "app": "hello",
+        "deployment": "hello",
+      },
+      "type": "LoadBalancer",
+    },
+  },
+  Object {
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
+    "metadata": Object {
+      "labels": Object {
+        "app": "hello",
+      },
+      "name": "the-deployment",
+    },
+    "spec": Object {
+      "replicas": 3,
+      "selector": Object {
+        "matchLabels": Object {
+          "app": "hello",
+          "deployment": "hello",
+        },
+      },
+      "template": Object {
+        "metadata": Object {
+          "labels": Object {
+            "app": "hello",
+            "deployment": "hello",
+          },
+        },
+        "spec": Object {
+          "containers": Array [
+            Object {
+              "command": Array [
+                "/hello",
+                "--port=8080",
+                "--enableRiskyFeature=$(ENABLE_RISKY)",
+              ],
+              "env": Array [
+                Object {
+                  "name": "ALT_GREETING",
+                  "valueFrom": Object {
+                    "configMapKeyRef": Object {
+                      "key": "altGreeting",
+                      "name": "the-map",
+                    },
+                  },
+                },
+                Object {
+                  "name": "ENABLE_RISKY",
+                  "valueFrom": Object {
+                    "configMapKeyRef": Object {
+                      "key": "enableRisky",
+                      "name": "the-map",
+                    },
+                  },
+                },
+              ],
+              "image": "monopole/hello:1",
+              "name": "the-container",
+              "ports": Array [
+                Object {
+                  "containerPort": 8080,
+                },
+              ],
+            },
+          ],
+        },
+      },
+    },
+  },
+]
+`;
+
+exports[`remote url 1`] = `
+Array [
+  Object {
+    "apiVersion": "v1",
+    "data": Object {
+      "altGreeting": "Good Morning!",
+      "enableRisky": "false",
+    },
+    "kind": "ConfigMap",
+    "metadata": Object {
+      "labels": Object {
+        "app": "hello",
+      },
+      "name": "the-map",
+    },
+  },
+  Object {
+    "apiVersion": "v1",
+    "kind": "Service",
+    "metadata": Object {
+      "labels": Object {
+        "app": "hello",
+      },
+      "name": "the-service",
+    },
+    "spec": Object {
+      "ports": Array [
+        Object {
+          "port": 8666,
+          "protocol": "TCP",
+          "targetPort": 8080,
+        },
+      ],
+      "selector": Object {
+        "app": "hello",
+        "deployment": "hello",
+      },
+      "type": "LoadBalancer",
+    },
+  },
+  Object {
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
+    "metadata": Object {
+      "labels": Object {
+        "app": "hello",
+      },
+      "name": "the-deployment",
+    },
+    "spec": Object {
+      "replicas": 3,
+      "selector": Object {
+        "matchLabels": Object {
+          "app": "hello",
+        },
+      },
+      "template": Object {
+        "metadata": Object {
+          "labels": Object {
+            "app": "hello",
+            "deployment": "hello",
+          },
+        },
+        "spec": Object {
+          "containers": Array [
+            Object {
+              "command": Array [
+                "/hello",
+                "--port=8080",
+                "--enableRiskyFeature=$(ENABLE_RISKY)",
+              ],
+              "env": Array [
+                Object {
+                  "name": "ALT_GREETING",
+                  "valueFrom": Object {
+                    "configMapKeyRef": Object {
+                      "key": "altGreeting",
+                      "name": "the-map",
+                    },
+                  },
+                },
+                Object {
+                  "name": "ENABLE_RISKY",
+                  "valueFrom": Object {
+                    "configMapKeyRef": Object {
+                      "key": "enableRisky",
+                      "name": "the-map",
+                    },
+                  },
+                },
+              ],
+              "image": "monopole/hello:1",
+              "name": "the-container",
+              "ports": Array [
+                Object {
+                  "containerPort": 8080,
+                },
+              ],
+            },
+          ],
+        },
+      },
+    },
+  },
+]
+`;

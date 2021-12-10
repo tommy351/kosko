@@ -1,0 +1,5 @@
+helmCharts:
+  - repo: https://charts.bitnami.com/bitnami
+    name: nginx
+    version: 9.5.16
+    releaseName: foobar
