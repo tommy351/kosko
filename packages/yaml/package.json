@@ -34,14 +34,14 @@
     "debug": "^4.3.3",
     "fs-extra": "^10.0.0",
     "js-yaml": "^4.1.0",
-    "node-fetch": "^3.1.0",
+    "node-fetch": "^2.6.6",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@types/debug": "^4.1.7",
     "@types/fs-extra": "^9.0.13",
     "@types/js-yaml": "^4.0.5",
-    "@types/node-fetch": "^3.0.3",
+    "@types/node-fetch": "^2.5.12",
     "fetch-mock": "^9.11.0",
     "kubernetes-models": "^2.0.2",
     "temp-dir": "^2.0.0",

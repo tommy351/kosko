@@ -40,11 +40,11 @@
     "@kosko/generate": "workspace:*",
     "@kosko/migrate": "workspace:*",
     "@kosko/require": "workspace:*",
-    "clean-stack": "^4.1.0",
+    "clean-stack": "^3.0.1",
     "debug": "^4.3.3",
     "exit": "^0.1.2",
     "fs-extra": "^10.0.0",
-    "get-stdin": "^9.0.0",
+    "get-stdin": "^8.0.0",
     "import-local": "^3.0.3",
     "jsonpath": "^1.1.1",
     "picocolors": "^1.0.0",
@@ -61,7 +61,7 @@
     "@types/jsonpath": "^0.2.0",
     "@types/signale": "^1.4.2",
     "@types/yargs": "^17.0.7",
-    "pkg-dir": "^6.0.1",
+    "pkg-dir": "^5.0.0",
     "temp-dir": "^2.0.0",
     "tmp-promise": "^3.0.3"
   }
