@@ -24,7 +24,7 @@ async function updatePkg(path: string, data: any): Promise<void> {
   try {
     debug("Reading existing package.json from", path);
     base = JSON.parse(await fs.readFile(path, "utf8"));
-  } catch (err) {
+  } catch (err: any) {
     if (err.code !== "ENOENT") throw err;
   }
 

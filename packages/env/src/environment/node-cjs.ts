@@ -21,7 +21,7 @@ export function createNodeCJSEnvironment(
       // resolves the path automatically anyway.
       try {
         return requireDefault(id);
-      } catch (err) {
+      } catch (err: any) {
         if (err.code === "MODULE_NOT_FOUND") {
           debug("Cannot find module: %s", id);
           return {};

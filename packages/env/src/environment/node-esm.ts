@@ -31,7 +31,7 @@ export function createNodeESMEnvironment(
         path = await resolve(id, {
           extensions: env.extensions.map((ext) => `.${ext}`)
         });
-      } catch (err) {
+      } catch (err: any) {
         if (err.code === "MODULE_NOT_FOUND") {
           debug("Cannot resolve module: %s", id);
           return {};
@@ -44,7 +44,7 @@ export function createNodeESMEnvironment(
         debug("Importing %s", path);
         const mod = await importPath(path);
         return mod.default;
-      } catch (err) {
+      } catch (err: any) {
         if (["ERR_MODULE_NOT_FOUND", "MODULE_NOT_FOUND"].includes(err.code)) {
           debug("Cannot import module: %s", path);
           return {};

@@ -33,7 +33,7 @@ export async function searchConfig(
 
   try {
     return await loadConfig(path);
-  } catch (err) {
+  } catch (err: any) {
     if (err.code === "ENOENT") return {};
 
     debug("Config load failed", err);
