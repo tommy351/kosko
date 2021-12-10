@@ -1,5 +1,14 @@
 # @kosko/helm
 
+## 2.0.1
+
+### Patch Changes
+
+- [#90](https://github.com/tommy351/kosko/pull/90) [`5b71844`](https://github.com/tommy351/kosko/commit/5b71844e700fdec9225c6c1395004a12e0869254) Thanks [@tommy351](https://github.com/tommy351)! - Shared utility functions are moved to `@kosko/exec-utils` package.
+
+- Updated dependencies [[`5b71844`](https://github.com/tommy351/kosko/commit/5b71844e700fdec9225c6c1395004a12e0869254)]:
+  - @kosko/exec-utils@0.1.0
+
 ## 2.0.0
 
 ### Major Changes
