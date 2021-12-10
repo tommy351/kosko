@@ -1,14 +1,14 @@
 {
   "name": "@kosko-example/web-webpack-5",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "start": "webpack serve",
     "build": "webpack"
   },
   "dependencies": {
-    "@kosko/env": "workspace:^2.0.1",
-    "@kosko/generate": "workspace:^1.2.1",
+    "@kosko/env": "workspace:^3.0.0",
+    "@kosko/generate": "workspace:^2.0.0",
     "kubernetes-models": "^2.0.2"
   },
   "devDependencies": {
