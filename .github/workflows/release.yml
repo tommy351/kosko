@@ -37,7 +37,7 @@ jobs:
         uses: changesets/action@v1
         with:
           publish: ./scripts/publish.sh
-          version: pnpm changeset version && pnpm install --lockfile-only
+          version: ./scripts/version.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
