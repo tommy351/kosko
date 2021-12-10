@@ -1,5 +1,16 @@
 # @kosko/migrate
 
+## 3.0.0
+
+### Major Changes
+
+- [#88](https://github.com/tommy351/kosko/pull/88) [`fe85506`](https://github.com/tommy351/kosko/commit/fe8550688d7fe53f006bb64b8dd925348facef04) Thanks [@tommy351](https://github.com/tommy351)! - Drop support of Node.js 10. The minimum supported version is Node.js 12 now.
+
+### Patch Changes
+
+- Updated dependencies [[`fe85506`](https://github.com/tommy351/kosko/commit/fe8550688d7fe53f006bb64b8dd925348facef04)]:
+  - @kosko/yaml@2.0.0
+
 ## 2.0.2
 
 ### Patch Changes

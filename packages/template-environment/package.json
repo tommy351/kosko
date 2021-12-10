@@ -1,6 +1,6 @@
 {
   "name": "@kosko/template-environment",
-  "version": "1.0.5",
+  "version": "2.0.0",
   "description": "Create a new environment.",
   "homepage": "https://kosko.dev",
   "repository": "https://github.com/tommy351/kosko/tree/master/packages/template-environment",
