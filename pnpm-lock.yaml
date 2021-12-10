@@ -196,8 +196,8 @@ importers:
 
   examples/web-parcel-1:
     specifiers:
-      '@kosko/env': workspace:^2.0.1
-      '@kosko/generate': workspace:^1.2.1
+      '@kosko/env': workspace:^3.0.0
+      '@kosko/generate': workspace:^2.0.0
       kubernetes-models: ^2.0.2
       parcel-bundler: ^1.12.5
     dependencies:
@@ -215,8 +215,8 @@ importers:
 
   examples/web-sync-environment:
     specifiers:
-      '@kosko/env': workspace:^2.0.1
-      '@kosko/generate': workspace:^1.2.1
+      '@kosko/env': workspace:^3.0.0
+      '@kosko/generate': workspace:^2.0.0
       html-webpack-plugin: ^5.5.0
       kubernetes-models: ^2.0.2
       webpack: ^5.65.0
@@ -234,8 +234,8 @@ importers:
 
   examples/web-webpack-5:
     specifiers:
-      '@kosko/env': workspace:^2.0.1
-      '@kosko/generate': workspace:^1.2.1
+      '@kosko/env': workspace:^3.0.0
+      '@kosko/generate': workspace:^2.0.0
       html-webpack-plugin: ^5.5.0
       kubernetes-models: ^2.0.2
       webpack: ^5.65.0
