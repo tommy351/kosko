@@ -6,10 +6,12 @@ import type { createNodeESMEnvironment as _createNodeESMEnvironment } from "./en
 
 export default createAsyncEnvironment();
 
-export const createNodeCJSEnvironment: typeof _createNodeCJSEnvironment = () => {
-  throw new Error("createNodeCJSEnvironment is only supported on Node.js");
-};
+export const createNodeCJSEnvironment: typeof _createNodeCJSEnvironment =
+  () => {
+    throw new Error("createNodeCJSEnvironment is only supported on Node.js");
+  };
 
-export const createNodeESMEnvironment: typeof _createNodeESMEnvironment = () => {
-  throw new Error("createNodeESMEnvironment is only supported on Node.js");
-};
+export const createNodeESMEnvironment: typeof _createNodeESMEnvironment =
+  () => {
+    throw new Error("createNodeESMEnvironment is only supported on Node.js");
+  };

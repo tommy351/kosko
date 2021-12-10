@@ -4,6 +4,6 @@
   "private": true,
   "dependencies": {
     "@kosko/template": "workspace:*",
-    "kubernetes-models": "^1.0.1"
+    "kubernetes-models": "^2.0.2"
   }
 }

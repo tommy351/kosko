@@ -37,4 +37,4 @@ const { join } = require("path");
 })();
 ```
 
-For more information, please check the [API documentation](api/modules.md).
+For more information, please check the [API documentation](api/index.md).

@@ -13,19 +13,17 @@ function doGenerateEntries(
   });
 
   return [
-    ...Object.entries(dirs).map(
-      ([name, children]): Directory => {
-        return {
-          type: EntryType.Directory,
-          name,
-          path: prefix + name,
-          children: doGenerateEntries(
-            children.map((v) => v.substring(name.length + 1)),
-            prefix + name + sep
-          )
-        };
-      }
-    ),
+    ...Object.entries(dirs).map(([name, children]): Directory => {
+      return {
+        type: EntryType.Directory,
+        name,
+        path: prefix + name,
+        children: doGenerateEntries(
+          children.map((v) => v.substring(name.length + 1)),
+          prefix + name + sep
+        )
+      };
+    }),
     ...files
       .filter((name) => name !== DIRECTORY_PLACEHOLDER)
       .map(

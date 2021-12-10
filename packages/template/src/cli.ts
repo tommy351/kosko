@@ -20,7 +20,7 @@ export async function run(
     describe: "Path of working directory",
     default: process.cwd(),
     defaultDescription: "CWD",
-    coerce(arg) {
+    coerce(arg): string {
       return isAbsolute(arg) ? arg : resolve(arg);
     }
   });
@@ -36,7 +36,7 @@ export async function run(
   }
 
   try {
-    const args = cmd.parse(argv);
+    const args = await cmd.parse(argv);
     const result = await template.generate(args);
 
     await writeFiles(args.cwd, result.files);

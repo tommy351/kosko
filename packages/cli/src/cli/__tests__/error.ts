@@ -1,4 +1,4 @@
-import chalk from "chalk";
+import pc from "picocolors";
 import cleanStack from "clean-stack";
 import exit from "exit";
 import { CLIError, formatError, handleError } from "../error";
@@ -38,7 +38,7 @@ describe("formatError", () => {
         pretty: true
       }).split("\n");
 
-      expect(stack).toEqual(headline + chalk.gray("\n" + rest.join("\n")));
+      expect(stack).toEqual(headline + pc.gray("\n" + rest.join("\n")));
     });
   });
 
@@ -53,7 +53,7 @@ describe("formatError", () => {
       }).split("\n");
 
       expect(stack).toEqual(
-        first + "\n" + second + chalk.gray("\n" + rest.join("\n"))
+        first + "\n" + second + pc.gray("\n" + rest.join("\n"))
       );
     });
   });

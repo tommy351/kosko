@@ -31,7 +31,7 @@ spec:
   `;
 
   beforeEach(async () => {
-    ((getStdin as any) as jest.Mock).mockResolvedValueOnce(input);
+    (getStdin as any as jest.Mock).mockResolvedValueOnce(input);
     await execute({ filename: ["-"] });
   });
 

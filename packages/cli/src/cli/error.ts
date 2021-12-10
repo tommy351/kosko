@@ -1,4 +1,4 @@
-import chalk from "chalk";
+import pc from "picocolors";
 import cleanStack from "clean-stack";
 import exit from "exit";
 
@@ -25,7 +25,7 @@ export function formatError(err: Error): string {
   const pos = stack.search(/(?:\n {4}at .*)+/);
   if (!~pos) return stack;
 
-  return stack.substring(0, pos) + chalk.gray(stack.substring(pos));
+  return stack.substring(0, pos) + pc.gray(stack.substring(pos));
 }
 
 export function handleError(err: unknown): void {

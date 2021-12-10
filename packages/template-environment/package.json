@@ -9,7 +9,6 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  "source": "src/index.ts",
   "sideEffects": false,
   "exports": {
     "import": "./dist/index.mjs",
@@ -29,10 +28,10 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "dependencies": {
     "@kosko/template": "workspace:*",
-    "tslib": "^2.1.0"
+    "tslib": "^2.3.1"
   }
 }

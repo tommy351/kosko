@@ -24,6 +24,6 @@ test("should return status code 1", () => {
 
 test("should print the error", () => {
   expect(result.stderr).toStartWith(
-    "ValidationError: data.spec should have required property 'containers'"
+    "ValidationError: data/spec must have required property 'containers'"
   );
 });

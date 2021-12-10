@@ -10,7 +10,6 @@
   "module": "dist/index.node.mjs",
   "browser": "dist/index.mjs",
   "types": "dist/index.node.d.ts",
-  "source": "src/index.node.ts",
   "sideEffects": false,
   "exports": {
     "node": {
@@ -29,23 +28,23 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "dependencies": {
     "@kosko/require": "workspace:*",
-    "debug": "^4.3.1",
-    "fast-glob": "^3.2.4",
-    "fs-extra": "^9.1.0",
-    "js-yaml": "^4.0.0",
-    "tslib": "^2.1.0"
+    "debug": "^4.3.3",
+    "fast-glob": "^3.2.7",
+    "fs-extra": "^10.0.0",
+    "js-yaml": "^4.1.0",
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@types/bl": "^2.1.0",
-    "@types/debug": "^4.1.5",
-    "@types/fs-extra": "^9.0.10",
-    "@types/js-yaml": "^4.0.0",
-    "bl": "^4.0.3",
+    "@types/bl": "^5.0.2",
+    "@types/debug": "^4.1.7",
+    "@types/fs-extra": "^9.0.13",
+    "@types/js-yaml": "^4.0.5",
+    "bl": "^5.0.0",
     "temp-dir": "^2.0.0",
-    "tmp-promise": "^3.0.2"
+    "tmp-promise": "^3.0.3"
   }
 }

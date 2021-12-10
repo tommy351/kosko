@@ -113,7 +113,7 @@ export function createCLIEnvReducer(setOptions: SetOption[]): Reducer {
         if (isGlobalVariable || variable.componentName === componentName) {
           try {
             jp.apply(target, "$." + variable.key, () => variable.value);
-          } catch (e) {
+          } catch (e: any) {
             throw new CLIError(e.message, {
               code: 1,
               output: `Failed to override key "${variable.key}". ${e.message}`

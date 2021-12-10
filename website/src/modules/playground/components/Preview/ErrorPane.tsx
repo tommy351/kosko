@@ -41,10 +41,11 @@ const Cell: FunctionComponent<{
 };
 
 const ErrorCell: FunctionComponent<{ error: any }> = ({ error }) => {
-  const { name = "Error", message = "", stack } = useMemo(
-    () => serializeError(error),
-    [error]
-  );
+  const {
+    name = "Error",
+    message = "",
+    stack
+  } = useMemo(() => serializeError(error), [error]);
 
   return (
     <Cell

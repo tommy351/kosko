@@ -20,6 +20,19 @@ function isPromiseLike(value: unknown): value is PromiseLike<unknown> {
   );
 }
 
+function toErrorObject(value: unknown): Error {
+  if (value instanceof Error) return value;
+
+  const err: Partial<Error> =
+    typeof value === "object" && value != null ? value : {};
+
+  return {
+    ...err,
+    name: err.name ?? "Error",
+    message: err.message ?? ""
+  };
+}
+
 export interface ResolveOptions {
   /**
    * Execute `validate` method of each values. Default to `true`.
@@ -87,7 +100,7 @@ export async function resolve(
         throw new ValidationError({
           path,
           index,
-          cause: err,
+          cause: toErrorObject(err),
           component: value
         });
       }

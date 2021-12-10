@@ -10,7 +10,7 @@ import { Pod } from "kubernetes-models/v1/Pod";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 jest.mock("node-fetch", () => require("fetch-mock").sandbox());
 
-const fetchMock = (fetch as unknown) as FetchMockStatic;
+const fetchMock = fetch as unknown as FetchMockStatic;
 
 afterEach(() => {
   fetchMock.reset();

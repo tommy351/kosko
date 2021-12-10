@@ -23,10 +23,10 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "dependencies": {
     "@kosko/cli": "workspace:*",
-    "import-local": "^3.0.2"
+    "import-local": "^3.0.3"
   }
 }

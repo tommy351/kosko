@@ -2,7 +2,7 @@
 title: "Interface: Paths"
 ---
 
-[@kosko/env](../modules/_kosko_env.md).Paths
+[@kosko/env](../modules/kosko_env.md).Paths
 
 ## Properties
 
