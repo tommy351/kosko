@@ -1,5 +1,8 @@
 "use strict";
 
+const globby = require("globby");
+const { dirname } = require("path");
+
 const organizationName = "tommy351";
 const projectName = "kosko";
 const githubUrl = `https://github.com/${organizationName}/${projectName}`;
@@ -33,7 +36,7 @@ module.exports = {
           type: "doc",
           label: "API",
           position: "left",
-          docId: "api/modules"
+          docId: "api/index"
         },
         { to: "blog", label: "Blog", position: "left" },
         { to: "play", label: "Playground", position: "left" },
@@ -82,6 +85,23 @@ module.exports = {
   ],
   plugins: [
     "docusaurus-plugin-sass",
-    require.resolve("./plugins/lodash-webpack-plugin")
+    require.resolve("./plugins/lodash-webpack-plugin"),
+    [
+      "docusaurus-plugin-typedoc",
+      {
+        entryPoints: globby
+          .sync("packages/*/tsconfig.json", {
+            cwd: dirname(__dirname),
+            absolute: true
+          })
+          .map((path) => dirname(path)),
+        entryPointStrategy: "packages",
+        sidebar: {
+          fullNames: true
+        },
+        readme: "none",
+        excludePrivate: true
+      }
+    ]
   ]
 };

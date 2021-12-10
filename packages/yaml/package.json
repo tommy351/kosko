@@ -9,7 +9,6 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  "source": "src/index.ts",
   "sideEffects": false,
   "exports": {
     "import": "./dist/index.mjs",

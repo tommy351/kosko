@@ -10,7 +10,6 @@
   "module": "dist/index.node.mjs",
   "browser": "dist/index.mjs",
   "types": "dist/index.node.d.ts",
-  "source": "src/index.node.ts",
   "sideEffects": false,
   "exports": {
     "node": {
