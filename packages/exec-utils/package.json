@@ -1,6 +1,6 @@
 {
   "name": "@kosko/exec-utils",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Utilities for executing external processes.",
   "homepage": "https://kosko.dev",
   "repository": "https://github.com/tommy351/kosko/tree/master/packages/exec-utils",
