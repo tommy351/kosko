@@ -7,6 +7,7 @@ env:
   PNPM_CACHE_FOLDER: .pnpm-store
   PNPM_VERSION: 6.18.0
   HELM_VERSION: 3.5.3
+  KUSTOMIZE_VERSION: 4.4.1
 
 jobs:
   lint:
@@ -65,15 +66,25 @@ jobs:
       - name: Set TEMP on Windows
         run: echo "TEMP=$env:USERPROFILE\AppData\Local\Temp" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
         if: ${{ runner.os == 'Windows' }}
-      - name: Install Helm on Linux
-        run: curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash --version v${{ env.HELM_VERSION }}
-        if: ${{ runner.os != 'Windows' }}
-      - name: Install Helm on Windows
+      - name: Install Helm
         run: |
-          Invoke-WebRequest https://get.helm.sh/helm-v${{ env.HELM_VERSION }}-windows-amd64.zip -OutFile $env:TEMP\helm.zip
-          Expand-Archive $env:TEMP\helm.zip -DestinationPath $env:TEMP\helm
-          Move-Item -Path $env:TEMP\helm\windows-amd64\helm.exe -Destination C:\Windows\helm.exe
-        if: ${{ runner.os == 'Windows' }}
+          if [ $RUNNER_OS = 'Windows' ]; then
+            export HELM_INSTALL_DIR=/c/Windows
+          fi
+
+          curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash -s -- --version v${{ env.HELM_VERSION }} --no-sudo
+        shell: bash
+      - name: Install Kustomize
+        run: |
+          bin_path=/usr/local/bin
+
+          if [ $RUNNER_OS = 'Windows' ]; then
+            bin_path=/c/Windows
+          fi
+
+          rm -rf $bin_path/kustomize
+          curl -s https://raw.githubusercontent.com/kubernetes-sigs/kustomize/kustomize/v${{ env.KUSTOMIZE_VERSION }}/hack/install_kustomize.sh | bash -s -- ${{ env.KUSTOMIZE_VERSION }} $bin_path
+        shell: bash
       - name: Run unit tests
         run: pnpm run test:unit -- --coverage
       - name: Run integration tests

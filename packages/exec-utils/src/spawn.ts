@@ -1,4 +1,4 @@
-import * as cp from "child_process";
+import crossSpawn from "cross-spawn";
 
 export interface SpawnResult {
   stdout: string;
@@ -7,21 +7,23 @@ export interface SpawnResult {
 
 export function spawn(
   command: string,
-  args: readonly string[]
+  args: readonly string[] = []
 ): Promise<SpawnResult> {
-  const proc = cp.spawn(command, args);
+  const proc = crossSpawn(command, args);
   const stdoutChunks: string[] = [];
   const stderrChunks: string[] = [];
 
-  proc.stdout.on("data", (chunk) => {
+  proc.stdout?.on("data", (chunk) => {
     stdoutChunks.push(chunk);
   });
 
-  proc.stderr.on("data", (chunk) => {
+  proc.stderr?.on("data", (chunk) => {
     stderrChunks.push(chunk);
   });
 
   return new Promise<SpawnResult>((resolve, reject) => {
+    proc.on("error", (err) => reject(err));
+
     proc.on("close", (code) => {
       const stdout = stdoutChunks.join("");
       const stderr = stderrChunks.join("");
@@ -33,8 +35,8 @@ export function spawn(
               `Command failed with exit code ${code}: ${command} ${args.join(
                 " "
               )}`,
-              stderr,
-              stdout
+              stderr.trim(),
+              stdout.trim()
             ]
               .filter(Boolean)
               .join("\n")

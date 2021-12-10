@@ -346,6 +346,17 @@ importers:
     devDependencies:
       '@types/debug': 4.1.7
 
+  packages/exec-utils:
+    specifiers:
+      '@types/cross-spawn': ^6.0.2
+      cross-spawn: ^7.0.3
+      tslib: ^2.3.1
+    dependencies:
+      cross-spawn: 7.0.3
+      tslib: 2.3.1
+    devDependencies:
+      '@types/cross-spawn': 6.0.2
+
   packages/generate:
     specifiers:
       '@kosko/require': workspace:*
@@ -379,12 +390,14 @@ importers:
 
   packages/helm:
     specifiers:
+      '@kosko/exec-utils': workspace:*
       '@kosko/yaml': workspace:*
       '@types/fs-extra': ^9.0.13
       fs-extra: ^10.0.0
       tmp-promise: ^3.0.3
       tslib: ^2.3.1
     dependencies:
+      '@kosko/exec-utils': link:../exec-utils
       '@kosko/yaml': link:../yaml
       fs-extra: 10.0.0
       tmp-promise: 3.0.3
@@ -399,6 +412,16 @@ importers:
     dependencies:
       '@kosko/cli': link:../cli
       import-local: 3.0.3
+
+  packages/kustomize:
+    specifiers:
+      '@kosko/exec-utils': workspace:*
+      '@kosko/yaml': workspace:*
+      tslib: ^2.3.1
+    dependencies:
+      '@kosko/exec-utils': link:../exec-utils
+      '@kosko/yaml': link:../yaml
+      tslib: 2.3.1
 
   packages/migrate:
     specifiers:
@@ -3471,6 +3494,12 @@ packages:
     resolution: {integrity: sha512-TiECZmm8St5YxjFUp64LK0c8WU5bxMDt9YaAek1UqUb9swrSCoJhh92fWu1p3mTEqlHjhB5sY7OFBhWroJXZVg==}
     dependencies:
       '@types/tern': 0.23.4
+    dev: true
+
+  /@types/cross-spawn/6.0.2:
+    resolution: {integrity: sha512-KuwNhp3eza+Rhu8IFI5HUXRP0LIhqH5cAjubUvGXXthh4YYBuP2ntwEX+Cz8GJoZUHlKo247wPWOfA9LYEq4cw==}
+    dependencies:
+      '@types/node': 16.11.12
     dev: true
 
   /@types/cssnano/4.0.1:

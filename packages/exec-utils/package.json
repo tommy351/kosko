@@ -1,9 +1,9 @@
 {
-  "name": "@kosko/helm",
-  "version": "2.0.0",
-  "description": "Load Helm charts in kosko.",
+  "name": "@kosko/exec-utils",
+  "version": "0.0.0",
+  "description": "Utilities for executing external processes.",
   "homepage": "https://kosko.dev",
-  "repository": "https://github.com/tommy351/kosko/tree/master/packages/helm",
+  "repository": "https://github.com/tommy351/kosko/tree/master/packages/exec-utils",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "main": "dist/index.js",
@@ -19,9 +19,7 @@
   ],
   "keywords": [
     "kubernetes",
-    "kosko",
-    "helm",
-    "chart"
+    "kosko"
   ],
   "publishConfig": {
     "access": "public"
@@ -30,13 +28,10 @@
     "node": ">=12"
   },
   "dependencies": {
-    "@kosko/exec-utils": "workspace:*",
-    "@kosko/yaml": "workspace:*",
-    "fs-extra": "^10.0.0",
-    "tmp-promise": "^3.0.3",
+    "cross-spawn": "^7.0.3",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@types/fs-extra": "^9.0.13"
+    "@types/cross-spawn": "^6.0.2"
   }
 }
