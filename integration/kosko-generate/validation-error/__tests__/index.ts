@@ -32,7 +32,7 @@ describe("when validate is not set", () => {
 
   test("should print the error", () => {
     expect(result.stderr).toStartWith(
-      "ValidationError: data.spec should have required property 'containers'"
+      "ValidationError: data/spec must have required property 'containers'"
     );
   });
 });
@@ -49,7 +49,7 @@ describe("when validate is true", () => {
 
   test("should print the error", () => {
     expect(result.stderr).toStartWith(
-      "ValidationError: data.spec should have required property 'containers'"
+      "ValidationError: data/spec must have required property 'containers'"
     );
   });
 });
