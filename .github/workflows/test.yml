@@ -22,7 +22,7 @@ jobs:
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-
-      - uses: pnpm/action-setup@v1.2.1
+      - uses: pnpm/action-setup@v2
         with:
           version: ${{ env.PNPM_VERSION }}
       - name: Set pnpm store dir
@@ -52,7 +52,7 @@ jobs:
           key: ${{ runner.os }}-pnpm-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-${{ matrix.node-version }}-
-      - uses: pnpm/action-setup@v1.2.1
+      - uses: pnpm/action-setup@v2
         with:
           version: ${{ env.PNPM_VERSION }}
       - name: Set pnpm store dir
@@ -96,7 +96,7 @@ jobs:
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-
-      - uses: pnpm/action-setup@v1.2.1
+      - uses: pnpm/action-setup@v2
         with:
           version: ${{ env.PNPM_VERSION }}
       - name: Set pnpm store dir
