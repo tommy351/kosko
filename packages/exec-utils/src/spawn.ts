@@ -7,7 +7,7 @@ export interface SpawnResult {
 
 export function spawn(
   command: string,
-  args: readonly string[]
+  args: readonly string[] = []
 ): Promise<SpawnResult> {
   const proc = cp.spawn(command, args);
   const stdoutChunks: string[] = [];
@@ -22,6 +22,8 @@ export function spawn(
   });
 
   return new Promise<SpawnResult>((resolve, reject) => {
+    proc.on("error", (err) => reject(err));
+
     proc.on("close", (code) => {
       const stdout = stdoutChunks.join("");
       const stderr = stderrChunks.join("");
@@ -33,8 +35,8 @@ export function spawn(
               `Command failed with exit code ${code}: ${command} ${args.join(
                 " "
               )}`,
-              stderr,
-              stdout
+              stderr.trim(),
+              stdout.trim()
             ]
               .filter(Boolean)
               .join("\n")
