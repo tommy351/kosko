@@ -40,7 +40,6 @@
     "@kosko/generate": "workspace:*",
     "@kosko/migrate": "workspace:*",
     "@kosko/require": "workspace:*",
-    "chalk": "^5.0.0",
     "clean-stack": "^4.1.0",
     "debug": "^4.3.3",
     "exit": "^0.1.2",
@@ -48,6 +47,7 @@
     "get-stdin": "^9.0.0",
     "import-local": "^3.0.3",
     "jsonpath": "^1.1.1",
+    "picocolors": "^1.0.0",
     "signale": "^1.4.0",
     "tslib": "^2.3.1",
     "yargs": "^17.3.0"
