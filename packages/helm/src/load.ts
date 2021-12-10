@@ -1,26 +1,12 @@
 import { LoadOptions, loadString, Manifest } from "@kosko/yaml";
 import tmp from "tmp-promise";
 import fs from "fs-extra";
-import { spawn } from "./spawn";
-
-function getArgName(name: string) {
-  return `--${name}`;
-}
-
-function booleanArg(name: string, value?: boolean) {
-  return value ? [getArgName(name)] : [];
-}
-
-function stringArg(name: string, value?: string) {
-  return value ? [getArgName(name), value] : [];
-}
-
-function stringArrayArg(name: string, values: string[] = []) {
-  return values.reduce(
-    (acc, value) => [...acc, getArgName(name), value],
-    [] as string[]
-  );
-}
+import {
+  spawn,
+  booleanArg,
+  stringArg,
+  stringArrayArg
+} from "@kosko/exec-utils";
 
 async function writeValues(values: any) {
   const file = await tmp.file();
