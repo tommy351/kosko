@@ -7,9 +7,9 @@
     "build": "parcel build index.html"
   },
   "dependencies": {
-    "@kosko/env": "^2.0.0",
-    "@kosko/generate": "^1.2.0",
-    "kubernetes-models": "^1.5.2"
+    "@kosko/env": "workspace:^2.0.1",
+    "@kosko/generate": "workspace:^1.2.1",
+    "kubernetes-models": "^2.0.2"
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.5"

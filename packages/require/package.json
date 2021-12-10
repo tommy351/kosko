@@ -21,9 +21,9 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "dependencies": {
-    "resolve": "^1.19.0"
+    "resolve": "^1.20.0"
   }
 }

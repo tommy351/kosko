@@ -29,16 +29,16 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "dependencies": {
     "@kosko/require": "workspace:*",
-    "debug": "^4.3.1",
+    "debug": "^4.3.3",
     "deepmerge": "^4.2.2",
     "is-plain-object": "^5.0.0",
-    "tslib": "^2.1.0"
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@types/debug": "^4.1.5"
+    "@types/debug": "^4.1.7"
   }
 }

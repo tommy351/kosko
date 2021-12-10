@@ -6,6 +6,6 @@
     "start": "serve"
   },
   "dependencies": {
-    "serve": "^11.3.2"
+    "serve": "^13.0.2"
   }
 }

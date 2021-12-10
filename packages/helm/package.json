@@ -28,15 +28,15 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "dependencies": {
     "@kosko/yaml": "workspace:*",
-    "fs-extra": "^9.1.0",
-    "tmp-promise": "^3.0.2",
-    "tslib": "^2.1.0"
+    "fs-extra": "^10.0.0",
+    "tmp-promise": "^3.0.3",
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@types/fs-extra": "^9.0.10"
+    "@types/fs-extra": "^9.0.13"
   }
 }

@@ -5,6 +5,6 @@
   "dependencies": {
     "@kosko/env": "workspace:*",
     "kosko": "workspace:*",
-    "kubernetes-models": "^1.0.3"
+    "kubernetes-models": "^2.0.2"
   }
 }
