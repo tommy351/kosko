@@ -12,7 +12,7 @@ test("local path", async () => {
 
 test("remote url", async () => {
   const result = loadKustomize({
-    path: "https://github.com/kubernetes-sigs/kustomize.git/examples/helloWorld?ref=v1.0.6"
+    path: "github.com/kustless/kustomize-examples"
   });
 
   await expect(result()).resolves.toMatchSnapshot();
