@@ -1,4 +1,4 @@
-import * as cp from "child_process";
+import crossSpawn from "cross-spawn";
 
 export interface SpawnResult {
   stdout: string;
@@ -9,15 +9,15 @@ export function spawn(
   command: string,
   args: readonly string[] = []
 ): Promise<SpawnResult> {
-  const proc = cp.spawn(command, args);
+  const proc = crossSpawn(command, args);
   const stdoutChunks: string[] = [];
   const stderrChunks: string[] = [];
 
-  proc.stdout.on("data", (chunk) => {
+  proc.stdout?.on("data", (chunk) => {
     stdoutChunks.push(chunk);
   });
 
-  proc.stderr.on("data", (chunk) => {
+  proc.stderr?.on("data", (chunk) => {
     stderrChunks.push(chunk);
   });
 
