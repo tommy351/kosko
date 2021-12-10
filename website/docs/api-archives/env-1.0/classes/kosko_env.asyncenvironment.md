@@ -1,20 +1,20 @@
 ---
-title: "Class: Environment"
+title: "Class: AsyncEnvironment"
 ---
 
-[@kosko/env](../modules/_kosko_env.md).Environment
+[@kosko/env](../modules/kosko_env.md).AsyncEnvironment
 
 ## Hierarchy
 
 - _BaseEnvironment_
 
-  ↳ **Environment**
+  ↳ **AsyncEnvironment**
 
 ## Constructors
 
 ### constructor
 
-\+ **new Environment**(`cwd`: _string_): [_Environment_](_kosko_env.environment.md)
+\+ **new AsyncEnvironment**(`cwd`: _string_): [_AsyncEnvironment_](kosko_env.asyncenvironment.md)
 
 #### Parameters:
 
@@ -22,7 +22,7 @@ title: "Class: Environment"
 | :---- | :------- |
 | `cwd` | _string_ |
 
-**Returns:** [_Environment_](_kosko_env.environment.md)
+**Returns:** [_AsyncEnvironment_](kosko_env.asyncenvironment.md)
 
 Defined in: [packages/env/src/environment/base.ts:27](https://github.com/tommy351/kosko/blob/93cd0b7/packages/env/src/environment/base.ts#L27)
 
@@ -56,7 +56,7 @@ Defined in: [packages/env/src/environment/base.ts:25](https://github.com/tommy35
 
 ### paths
 
-• **paths**: [_Paths_](../interfaces/_kosko_env.paths.md)
+• **paths**: [_Paths_](../interfaces/kosko_env.paths.md)
 
 Paths of environment files.
 
@@ -66,7 +66,7 @@ Defined in: [packages/env/src/environment/base.ts:17](https://github.com/tommy35
 
 ### reducers
 
-• `Protected` **reducers**: [_Reducer_](../interfaces/_kosko_env.reducer.md)[]
+• `Protected` **reducers**: [_Reducer_](../interfaces/kosko_env.reducer.md)[]
 
 Defined in: [packages/env/src/environment/base.ts:7](https://github.com/tommy351/kosko/blob/93cd0b7/packages/env/src/environment/base.ts#L7)
 
@@ -104,7 +104,7 @@ Defined in: [packages/env/src/environment/base.ts:53](https://github.com/tommy35
 
 **Returns:** _any_
 
-Defined in: [packages/env/src/environment/sync.ts:8](https://github.com/tommy351/kosko/blob/93cd0b7/packages/env/src/environment/sync.ts#L8)
+Defined in: [packages/env/src/environment/async.ts:8](https://github.com/tommy351/kosko/blob/93cd0b7/packages/env/src/environment/async.ts#L8)
 
 ---
 
@@ -134,13 +134,13 @@ Defined in: [packages/env/src/environment/base.ts:42](https://github.com/tommy35
 
 **Returns:** _any_
 
-Defined in: [packages/env/src/environment/sync.ts:12](https://github.com/tommy351/kosko/blob/93cd0b7/packages/env/src/environment/sync.ts#L12)
+Defined in: [packages/env/src/environment/async.ts:12](https://github.com/tommy351/kosko/blob/93cd0b7/packages/env/src/environment/async.ts#L12)
 
 ---
 
 ### requireModule
 
-▸ `Protected`**requireModule**(`id`: _string_): _any_
+▸ `Protected`**requireModule**(`id`: _string_): _Promise_<any\>
 
 #### Parameters:
 
@@ -148,9 +148,9 @@ Defined in: [packages/env/src/environment/sync.ts:12](https://github.com/tommy35
 | :--- | :------- |
 | `id` | _string_ |
 
-**Returns:** _any_
+**Returns:** _Promise_<any\>
 
-Defined in: [packages/env/src/environment/sync.ts:16](https://github.com/tommy351/kosko/blob/93cd0b7/packages/env/src/environment/sync.ts#L16)
+Defined in: [packages/env/src/environment/async.ts:16](https://github.com/tommy351/kosko/blob/93cd0b7/packages/env/src/environment/async.ts#L16)
 
 ---
 
@@ -168,15 +168,15 @@ Defined in: [packages/env/src/environment/base.ts:67](https://github.com/tommy35
 
 ### setReducers
 
-▸ **setReducers**(`callbackfn`: (`reducers`: [_Reducer_](../interfaces/_kosko_env.reducer.md)[]) => [_Reducer_](../interfaces/_kosko_env.reducer.md)[]): _void_
+▸ **setReducers**(`callbackfn`: (`reducers`: [_Reducer_](../interfaces/kosko_env.reducer.md)[]) => [_Reducer_](../interfaces/kosko_env.reducer.md)[]): _void_
 
 Sets list of reducers using the specified callback function.
 
 #### Parameters:
 
-| Name         | Type                                                                                                                   |
-| :----------- | :--------------------------------------------------------------------------------------------------------------------- |
-| `callbackfn` | (`reducers`: [_Reducer_](../interfaces/_kosko_env.reducer.md)[]) => [_Reducer_](../interfaces/_kosko_env.reducer.md)[] |
+| Name         | Type                                                                                                                 |
+| :----------- | :------------------------------------------------------------------------------------------------------------------- |
+| `callbackfn` | (`reducers`: [_Reducer_](../interfaces/kosko_env.reducer.md)[]) => [_Reducer_](../interfaces/kosko_env.reducer.md)[] |
 
 **Returns:** _void_
 

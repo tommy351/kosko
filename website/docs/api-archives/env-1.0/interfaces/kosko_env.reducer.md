@@ -2,7 +2,7 @@
 title: "Interface: Reducer"
 ---
 
-[@kosko/env](../modules/_kosko_env.md).Reducer
+[@kosko/env](../modules/kosko_env.md).Reducer
 
 Describes a step in the variables overriding chain.
 

@@ -3,7 +3,7 @@
  *
  * Previous API docs:
  *
- * - [v1.0](../../api-archives/env-1.0/modules/_kosko_env.md)
+ * - [v1.0](../../api-archives/env-1.0/modules/kosko_env.md)
  *
  * @packageDocumentation
  * @module @kosko/env

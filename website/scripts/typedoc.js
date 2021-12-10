@@ -4,55 +4,14 @@
 const globby = require("globby");
 const fs = require("fs-extra");
 const { join, dirname, extname } = require("path");
-const { Application, TSConfigReader } = require("typedoc");
+const { Application, TSConfigReader, PageEvent } = require("typedoc");
 const {
   getPageTitle,
   prependYAML
 } = require("typedoc-plugin-markdown/dist/utils/front-matter");
-const {
-  Component,
-  ContextAwareRendererComponent
-} = require("typedoc/dist/lib/output/components");
-const { PageEvent } = require("typedoc/dist/lib/output/events");
 
 const WEBSITE_DIR = dirname(__dirname);
 const ROOT_DIR = dirname(WEBSITE_DIR);
-
-class FrontMatter extends ContextAwareRendererComponent {
-  initialize() {
-    super.initialize();
-
-    this.listenTo(this.application.renderer, {
-      [PageEvent.END]: this.onPageEnd
-    });
-  }
-
-  /**
-   * @param {PageEvent} page
-   */
-  onPageEnd(page) {
-    if (page.contents) {
-      const path = page.url.substring(
-        0,
-        page.url.length - extname(page.url).length
-      );
-
-      const isGlobals = path === "modules";
-
-      page.contents = prependYAML(page.contents, {
-        title: getPageTitle(page),
-        sidebar_label: page.model.name,
-        ...(isGlobals && {
-          slug: "/api",
-          title: "Overview",
-          sidebar_label: "Overview"
-        })
-      });
-    }
-  }
-}
-
-Component({ name: "frontmatter" })(FrontMatter);
 
 async function getEntryPoints() {
   const tsconfigs = await globby("packages/*/tsconfig.json", {
@@ -85,11 +44,31 @@ async function getEntryPoints() {
     hideBreadcrumbs: true,
     hideInPageTOC: true,
     hidePageTitle: true,
+    githubPages: false,
     entryPoints: await getEntryPoints(),
     tsconfig: join(__dirname, "../tsconfig.typedoc.json")
   });
 
-  app.renderer.addComponent("frontmatter", new FrontMatter(app.renderer));
+  app.renderer.listenTo(app.renderer, {
+    [PageEvent.END]: (page) => {
+      if (page.contents) {
+        const path = page.url.substring(
+          0,
+          page.url.length - extname(page.url).length
+        );
+        const isGlobals = path === "modules";
+        page.contents = prependYAML(page.contents, {
+          title: getPageTitle(page),
+          sidebar_label: page.model.name,
+          ...(isGlobals && {
+            slug: "/api",
+            title: "Overview",
+            sidebar_label: "Overview"
+          })
+        });
+      }
+    }
+  });
 
   const project = app.convert();
   const outDir = join(WEBSITE_DIR, "docs", "api");
