@@ -56,10 +56,6 @@ module.exports = {
       additionalLanguages: ["toml"],
       theme: require("prism-react-renderer/themes/oceanicNext")
     },
-    gtag: {
-      trackingID: "G-2CPELJ4990",
-      anonymizeIP: true
-    },
     algolia: {
       apiKey: "23788e4b80d39b6c0cdea10cd50d3663",
       indexName: "kosko"
@@ -79,6 +75,10 @@ module.exports = {
         },
         theme: {
           customCss: require.resolve("./src/css/custom.scss")
+        },
+        gtag: {
+          trackingID: "G-2CPELJ4990",
+          anonymizeIP: true
         }
       }
     ]
