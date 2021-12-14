@@ -62,4 +62,16 @@ loadChart({
 });
 ```
 
+### Include CRDs
+
+```js
+const { loadChart } = require("@kosko/helm");
+
+loadChart({
+  chart: "traefik",
+  repo: "https://helm.traefik.io/traefik",
+  includeCrds: true
+});
+```
+
 [kubernetes-models]: https://github.com/tommy351/kubernetes-models-ts
