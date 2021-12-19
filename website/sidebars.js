@@ -21,6 +21,7 @@ module.exports = {
       items: [
         "loading-kubernetes-yaml",
         "loading-helm-chart",
+        "loading-kustomize",
         "typescript-support",
         "ecmascript-modules",
         "programmatic-usage",
