@@ -417,11 +417,24 @@ importers:
     specifiers:
       '@kosko/exec-utils': workspace:*
       '@kosko/yaml': workspace:*
+      '@types/fs-extra': ^9.0.13
+      '@types/which': ^2.0.1
+      fs-extra: ^10.0.0
+      temp-dir: ^2.0.0
+      tmp-promise: ^3.0.3
       tslib: ^2.3.1
+      which: ^2.0.2
     dependencies:
       '@kosko/exec-utils': link:../exec-utils
       '@kosko/yaml': link:../yaml
       tslib: 2.3.1
+    devDependencies:
+      '@types/fs-extra': 9.0.13
+      '@types/which': 2.0.1
+      fs-extra: 10.0.0
+      temp-dir: 2.0.0
+      tmp-promise: 3.0.3
+      which: 2.0.2
 
   packages/migrate:
     specifiers:
@@ -3862,6 +3875,10 @@ packages:
 
   /@types/webpack-env/1.16.3:
     resolution: {integrity: sha512-9gtOPPkfyNoEqCQgx4qJKkuNm/x0R2hKR7fdl7zvTJyHnIisuE/LfvXOsYWL0o3qq6uiBnKZNNNzi3l0y/X+xw==}
+    dev: true
+
+  /@types/which/2.0.1:
+    resolution: {integrity: sha512-Jjakcv8Roqtio6w1gr0D7y6twbhx6gGgFGF5BLwajPpnOIOxFkakFhCq+LmyyeAz7BX6ULrjBOxdKaCDy+4+dQ==}
     dev: true
 
   /@types/yargs-parser/20.2.1:
