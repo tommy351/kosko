@@ -290,3 +290,15 @@ Array [
   },
 ]
 `;
+
+exports[`when buildCommand is given command exists 1`] = `
+Array [
+  Object {
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": Object {
+      "name": "test",
+    },
+  },
+]
+`;

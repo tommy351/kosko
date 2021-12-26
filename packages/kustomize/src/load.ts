@@ -6,6 +6,11 @@ import {
   stringArrayArg
 } from "@kosko/exec-utils";
 
+const BUILD_COMMANDS = [
+  ["kustomize", "build"],
+  ["kubectl", "kustomize"]
+];
+
 export interface KustomizeOptions extends LoadOptions {
   /**
    * The path to a directory containing `kustomization.yaml`, or a Git repository
@@ -81,6 +86,12 @@ export interface KustomizeOptions extends LoadOptions {
    * final reordering. (default `legacy`)
    */
   reorder?: string;
+
+  /**
+   * The command to build Kustomize files. By default, it uses `kustomize build`
+   * when the `kustomize` executable exists, otherwise fallback to `kubectl kustomize`.
+   */
+  buildCommand?: readonly string[];
 }
 
 export function loadKustomize({
@@ -98,11 +109,12 @@ export function loadKustomize({
   network,
   networkName,
   reorder,
-  transform
+  transform,
+  buildCommand
 }: KustomizeOptions) {
-  return async (): Promise<readonly Manifest[]> => {
-    const args: string[] = [
-      "build",
+  async function build(cmd: readonly string[]): Promise<readonly Manifest[]> {
+    const [command, ...args]: string[] = [
+      ...cmd,
       path,
       ...booleanArg("as-current-user", asCurrentUser),
       ...booleanArg("enable-alpha-plugins", enableAlphaPlugins),
@@ -124,8 +136,28 @@ export function loadKustomize({
       ...stringArg("reorder", reorder)
     ];
 
-    const { stdout } = await spawn("kustomize", args);
+    const { stdout } = await spawn(command, args);
 
     return loadString(stdout, { transform });
+  }
+
+  return async () => {
+    if (buildCommand) {
+      return build(buildCommand);
+    }
+
+    for (const cmd of BUILD_COMMANDS) {
+      try {
+        return await build(cmd);
+      } catch (err: any) {
+        if (err.code !== "ENOENT") {
+          throw err;
+        }
+      }
+    }
+
+    throw new Error(
+      `"loadKustomize" requires either kustomize or kubectl CLI installed in your environment. More info: https://kosko.dev/docs/loading-kustomize`
+    );
   };
 }
