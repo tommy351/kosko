@@ -1,30 +1,30 @@
 import { join } from "path";
-import tmp from "tmp-promise";
-import tempDir from "temp-dir";
-import which from "which";
-import fs from "fs-extra";
 import { loadKustomize } from "../load";
-import { SpawnOptions } from "child_process";
+import { spawn } from "@kosko/exec-utils";
+
+const mockSpawn = spawn as jest.MockedFunction<typeof spawn>;
 
 const FIXTURE_DIR = join(__dirname, "../__fixtures__");
 const HELLO_WORLD = join(FIXTURE_DIR, "hello-world");
 
-let spawnOptions: SpawnOptions | undefined;
-
 jest.setTimeout(15000);
 
-jest.mock("cross-spawn", () => {
-  const spawn = jest.requireActual("cross-spawn");
+jest.mock("@kosko/exec-utils", () => {
+  const mod = jest.requireActual("@kosko/exec-utils");
 
-  return (command: string, args: string[]) => {
-    return spawn(command, args, spawnOptions);
+  return {
+    ...mod,
+    spawn: jest.fn()
   };
 });
 
-beforeEach(() => {
-  spawnOptions = undefined;
+function useRealSpawn() {
+  mockSpawn.mockImplementation(jest.requireActual("@kosko/exec-utils").spawn);
+}
 
+beforeEach(() => {
   jest.resetAllMocks();
+  useRealSpawn();
 });
 
 test("local path", async () => {
@@ -49,83 +49,100 @@ test("helm chart", async () => {
   await expect(result()).resolves.toMatchSnapshot();
 });
 
+test("when path does not exist", async () => {
+  const result = loadKustomize({
+    path: join(FIXTURE_DIR, "not-exist")
+  });
+
+  await expect(result()).rejects.toThrow();
+});
+
 describe("when buildCommand is given", () => {
-  test("command does not exist", async () => {
+  test("command exists", async () => {
+    mockSpawn.mockResolvedValueOnce({
+      stdout: `
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test
+`,
+      stderr: ""
+    });
     const result = loadKustomize({
       path: HELLO_WORLD,
-      buildCommand: ["foo"]
+      buildCommand: ["foo", "abc", "def"]
+    });
+
+    await expect(result()).resolves.toMatchSnapshot();
+    expect(spawn).toBeCalledTimes(1);
+    expect(spawn).toBeCalledWith("foo", ["abc", "def", HELLO_WORLD]);
+  });
+
+  test("command does not exist", async () => {
+    mockSpawn.mockRejectedValue(
+      Object.assign(new Error("spawn foo ENOENT"), {
+        code: "ENOENT"
+      })
+    );
+    const result = loadKustomize({
+      path: HELLO_WORLD,
+      buildCommand: ["foo", "abc", "def"]
     });
 
     await expect(result()).rejects.toThrow("ENOENT");
-  });
-
-  test("kustomize", async () => {
-    const result = loadKustomize({
-      path: HELLO_WORLD,
-      buildCommand: ["kustomize", "build"]
-    });
-
-    await expect(result()).resolves.toHaveLength(3);
-  });
-
-  test("kubectl", async () => {
-    const result = loadKustomize({
-      path: HELLO_WORLD,
-      buildCommand: ["kubectl", "kustomize"]
-    });
-
-    await expect(result()).resolves.toHaveLength(3);
+    expect(spawn).toBeCalledTimes(1);
+    expect(spawn).toBeCalledWith("foo", ["abc", "def", HELLO_WORLD]);
   });
 });
 
 describe("when buildCommand is not given", () => {
-  let tmpDir: tmp.DirectoryResult;
+  function allowCommands(commands: readonly string[]) {
+    const realSpawn = jest.requireActual("@kosko/exec-utils").spawn;
 
-  async function linkBins(bins: readonly string[]) {
-    for (const bin of bins) {
-      await fs.ensureSymlink(await which(bin), join(tmpDir.path, bin));
-    }
+    mockSpawn.mockImplementation(async (command, args) => {
+      if (commands.includes(command)) {
+        return realSpawn(command, args);
+      }
+
+      throw Object.assign(new Error(`spawn ${command} ENOENT`), {
+        code: "ENOENT"
+      });
+    });
   }
 
-  beforeEach(async () => {
-    tmpDir = await tmp.dir({ tmpdir: tempDir, unsafeCleanup: true });
-
-    spawnOptions = {
-      env: {
-        ...process.env,
-        // Override `PATH` environment variable so we can simulate `kustomize`
-        // or `kubectl` CLI not installed in the environment.
-        PATH: tmpDir.path
-      }
-    };
-  });
-
-  afterEach(async () => {
-    await tmpDir.cleanup();
-  });
-
   test("kustomize", async () => {
-    await linkBins(["kustomize"]);
+    allowCommands(["kustomize"]);
 
     const result = loadKustomize({ path: HELLO_WORLD });
     await expect(result()).resolves.toHaveLength(3);
+    expect(spawn).toBeCalledTimes(1);
+    expect(spawn).toBeCalledWith("kustomize", ["build", HELLO_WORLD]);
   });
 
   test("kubectl", async () => {
-    await linkBins(["kubectl"]);
+    allowCommands(["kubectl"]);
 
     const result = loadKustomize({ path: HELLO_WORLD });
     await expect(result()).resolves.toHaveLength(3);
+    expect(spawn).toBeCalledTimes(2);
+    expect(spawn).toHaveBeenLastCalledWith("kubectl", [
+      "kustomize",
+      HELLO_WORLD
+    ]);
   });
 
   test("Both are installed", async () => {
-    await linkBins(["kustomize", "kubectl"]);
+    allowCommands(["kustomize", "kubectl"]);
 
     const result = loadKustomize({ path: HELLO_WORLD });
     await expect(result()).resolves.toHaveLength(3);
+    expect(spawn).toBeCalledTimes(1);
+    expect(spawn).toBeCalledWith("kustomize", ["build", HELLO_WORLD]);
   });
 
   test("Neither is installed", async () => {
+    allowCommands([]);
+
     const result = loadKustomize({ path: HELLO_WORLD });
     await expect(result()).rejects.toThrow(
       `"loadKustomize" requires either kustomize or kubectl CLI installed in your environment. More info: https://kosko.dev/docs/loading-kustomize`
