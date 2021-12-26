@@ -1,2 +1,9 @@
 /assets/*
   Cache-Control: public, max-age=604800, immutable
+
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://kosko.pages.dev/*
+  Link: https://kosko.dev/:splat; rel="canonical"
+  Refresh: 0; url=https://kosko.dev/:splat
