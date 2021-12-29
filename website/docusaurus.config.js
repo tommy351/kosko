@@ -57,7 +57,8 @@ module.exports = {
       theme: require("prism-react-renderer/themes/oceanicNext")
     },
     algolia: {
-      apiKey: "23788e4b80d39b6c0cdea10cd50d3663",
+      appId: "DAH00NTYY8",
+      apiKey: "7e5f9782393bd0e6a947b2de73f4f1de",
       indexName: "kosko"
     }
   },
