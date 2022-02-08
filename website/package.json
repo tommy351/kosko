@@ -26,13 +26,13 @@
     ]
   },
   "dependencies": {
-    "@docusaurus/core": "2.0.0-beta.14",
-    "@docusaurus/preset-classic": "2.0.0-beta.14",
+    "@docusaurus/core": "2.0.0-beta.15",
+    "@docusaurus/preset-classic": "2.0.0-beta.15",
     "@mdx-js/react": "^1.6.22",
     "clsx": "^1.1.1",
     "codemirror": "^5.64.0",
     "comlink": "^4.3.1",
-    "docusaurus-plugin-sass": "^0.2.1",
+    "docusaurus-plugin-sass": "^0.2.2",
     "fs-extra": "^10.0.0",
     "globby": "^11.0.2",
     "immer": "^9.0.7",
@@ -49,7 +49,7 @@
     "use-immer": "^0.6.0"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "2.0.0-beta.14",
+    "@docusaurus/module-type-aliases": "2.0.0-beta.15",
     "@tsconfig/docusaurus": "^1.0.4",
     "@types/codemirror": "^5.60.5",
     "@types/lodash": "^4.14.178",
@@ -59,7 +59,7 @@
     "@types/systemjs": "^6.1.1",
     "@types/webpack-env": "^1.16.3",
     "babel-plugin-lodash": "^3.3.4",
-    "docusaurus-plugin-typedoc": "~0.16.6",
+    "docusaurus-plugin-typedoc": "~0.16.9",
     "lodash-webpack-plugin": "^0.11.6",
     "raw-loader": "^4.0.2",
     "read-pkg": "^5.2.0",
@@ -67,8 +67,8 @@
     "rollup": "^2.61.0",
     "sass": "^1.44.0",
     "sass-loader": "^12.4.0",
-    "typedoc": "~0.22.10",
-    "typedoc-plugin-markdown": "~3.11.7",
+    "typedoc": "~0.22.11",
+    "typedoc-plugin-markdown": "~3.11.13",
     "typescript": "^4.5.3"
   }
 }
