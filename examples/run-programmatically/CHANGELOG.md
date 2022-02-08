@@ -1,5 +1,12 @@
 # @kosko-example/run-programmatically
 
+## 0.0.8
+
+### Patch Changes
+
+- Updated dependencies []:
+  - kosko@2.0.1
+
 ## 0.0.7
 
 ### Patch Changes
