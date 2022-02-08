@@ -1,6 +1,6 @@
 {
   "name": "@kosko/cli",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Organize Kubernetes manifests in JavaScript.",
   "homepage": "https://kosko.dev",
   "repository": "https://github.com/tommy351/kosko/tree/master/packages/cli",

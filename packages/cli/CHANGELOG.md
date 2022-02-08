@@ -1,5 +1,11 @@
 # @kosko/cli
 
+## 2.0.1
+
+### Patch Changes
+
+- [#94](https://github.com/tommy351/kosko/pull/94) [`784cce5`](https://github.com/tommy351/kosko/commit/784cce5f53388f9d8fc175febc760ef81e772d36) Thanks [@tommy351](https://github.com/tommy351)! - Update initial dependency version.
+
 ## 2.0.0
 
 ### Major Changes
