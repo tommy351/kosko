@@ -525,6 +525,7 @@ importers:
       '@docusaurus/core': 2.0.0-beta.15
       '@docusaurus/module-type-aliases': 2.0.0-beta.15
       '@docusaurus/preset-classic': 2.0.0-beta.15
+      '@docusaurus/theme-common': 2.0.0-beta.15
       '@mdx-js/react': ^1.6.22
       '@tsconfig/docusaurus': ^1.0.4
       '@types/codemirror': ^5.60.5
@@ -567,6 +568,7 @@ importers:
     dependencies:
       '@docusaurus/core': 2.0.0-beta.15_d3b8e7d50146a4c3cde22354d2fc15b7
       '@docusaurus/preset-classic': 2.0.0-beta.15_50b476997c327600a7dd80b4cd2bb049
+      '@docusaurus/theme-common': 2.0.0-beta.15_2a533b742d89dfed0d78e522f71e43ad
       '@mdx-js/react': 1.6.22_react@17.0.2
       clsx: 1.1.1
       codemirror: 5.64.0

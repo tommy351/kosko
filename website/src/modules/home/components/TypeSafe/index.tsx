@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from "react";
 import CodeBlock, {
   defaultTokenRenderer,
-  TokenRenderer,
-  usePrismTheme
+  TokenRenderer
 } from "@site/src/modules/common/components/CodeBlock";
+import { usePrismTheme } from "@docusaurus/theme-common";
 import {
   Feature,
   FeatureDescription,

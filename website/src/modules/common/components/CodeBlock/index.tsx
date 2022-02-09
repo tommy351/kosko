@@ -1,11 +1,8 @@
 import React, { FunctionComponent, useMemo } from "react";
 import clsx from "clsx";
 import Highlight, { defaultProps, Language } from "prism-react-renderer";
-import usePrismTheme from "@theme/hooks/usePrismTheme";
-
 import styles from "./styles.module.scss";
-
-export { usePrismTheme };
+import { usePrismTheme } from "@docusaurus/theme-common";
 
 export interface StyleObj {
   [key: string]: string | number | null;

@@ -14,7 +14,7 @@ import {
 } from "react-codemirror2";
 import styles from "./styles.module.scss";
 import { Editor, EditorConfiguration } from "codemirror";
-import useThemeContext from "@theme/hooks/useThemeContext";
+import { useColorMode } from "@docusaurus/theme-common";
 import { usePrevious } from "react-use";
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/seti.css";
@@ -37,7 +37,7 @@ const CodeMirrorEditor: FunctionComponent<CodeMirrorEditorProps> = ({
   path,
   ...props
 }) => {
-  const { isDarkTheme } = useThemeContext();
+  const { isDarkTheme } = useColorMode();
   const [mounted, setMounted] = useState(false);
   const options = useMemo(
     (): EditorConfiguration => ({

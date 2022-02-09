@@ -13,9 +13,9 @@ import environmentStage from "!!raw-loader!./examples/environments/stage.js";
 import resultProd from "!!raw-loader!./examples/results/prod.yml";
 import resultStage from "!!raw-loader!./examples/results/stage.yml";
 import CodeBlock, {
-  CodeBlockProps,
-  usePrismTheme
+  CodeBlockProps
 } from "@site/src/modules/common/components/CodeBlock";
+import { usePrismTheme } from "@docusaurus/theme-common";
 
 const Pane: FunctionComponent<{
   tabs: Record<string, CodeBlockProps>;
