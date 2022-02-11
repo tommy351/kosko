@@ -6,3 +6,6 @@
 /docs/guides/commands /docs/commands 301
 /docs/guides/configuration /docs/configuration 301
 /api /docs/api 301
+/docs/api/classes/:name /docs/api/classes/:name/ 302
+/docs/api/enums/:name /docs/api/enums/:name/ 302
+/docs/api/interfaces/:name /docs/api/interfaces/:name/ 302
