@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`when key in the set argument is invalid should print the error 1`] = `
-"Failed to override key \\"tolerations[?@.key=='key2'].value\\". Lexical error on line 1. Unrecognized text.
+"[31merror[39m - Failed to override key \\"tolerations[?@.key=='key2'].value\\". Lexical error on line 1. Unrecognized text.
 $.tolerations[?@.key=='key2'].valu
 --------------^"
 `;
@@ -62,10 +62,11 @@ Positionals:
               file.                                        [array] [default: []]
 
 Global Options:
-      --cwd      Path of working directory               [string] [default: CWD]
-      --silent   Disable log output                   [boolean] [default: false]
-      --help     Show help                                             [boolean]
-      --version  Show version number                                   [boolean]
+      --cwd        Path of working directory             [string] [default: CWD]
+      --log-level  Set log level                      [string] [default: \\"info\\"]
+      --silent     Disable log output                 [boolean] [default: false]
+      --help       Show help                                           [boolean]
+      --version    Show version number                                 [boolean]
 
 Options:
   -e, --env       Environment name                                      [string]
@@ -222,10 +223,11 @@ Positionals:
               file.                                        [array] [default: []]
 
 Global Options:
-      --cwd      Path of working directory               [string] [default: CWD]
-      --silent   Disable log output                   [boolean] [default: false]
-      --help     Show help                                             [boolean]
-      --version  Show version number                                   [boolean]
+      --cwd        Path of working directory             [string] [default: CWD]
+      --log-level  Set log level                      [string] [default: \\"info\\"]
+      --silent     Disable log output                 [boolean] [default: false]
+      --help       Show help                                           [boolean]
+      --version    Show version number                                 [boolean]
 
 Options:
   -e, --env       Environment name                                      [string]
@@ -304,10 +306,11 @@ Positionals:
               file.                                        [array] [default: []]
 
 Global Options:
-      --cwd      Path of working directory               [string] [default: CWD]
-      --silent   Disable log output                   [boolean] [default: false]
-      --help     Show help                                             [boolean]
-      --version  Show version number                                   [boolean]
+      --cwd        Path of working directory             [string] [default: CWD]
+      --log-level  Set log level                      [string] [default: \\"info\\"]
+      --silent     Disable log output                 [boolean] [default: false]
+      --help       Show help                                           [boolean]
+      --version    Show version number                                 [boolean]
 
 Options:
   -e, --env       Environment name                                      [string]

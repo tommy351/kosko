@@ -8,6 +8,7 @@
     { "path": "../generate" },
     { "path": "../env" },
     { "path": "../config" },
-    { "path": "../migrate" }
+    { "path": "../migrate" },
+    { "path": "../log" }
   ]
 }

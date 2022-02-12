@@ -1,5 +1,5 @@
 import { Manifest } from "./base";
-import debug from "./debug";
+import logger, { LogLevel } from "@kosko/log";
 import { ValidationError } from "./error";
 
 interface Validator {
@@ -94,7 +94,10 @@ export async function resolve(
   if (validate) {
     if (isValidator(value)) {
       try {
-        debug("Validating manifest %s in %s", index.join("."), options.path);
+        logger.log(
+          LogLevel.Debug,
+          `Validating manifests ${index.join(".")} in ${options.path}`
+        );
         await value.validate();
       } catch (err) {
         throw new ValidationError({

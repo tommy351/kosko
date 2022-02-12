@@ -5,7 +5,7 @@ import tmp from "tmp-promise";
 import { File } from "../template";
 import { writeFiles } from "../write";
 
-jest.mock("signale");
+jest.mock("@kosko/log");
 
 let tmpDir: tmp.DirectoryResult;
 let files: File[];

@@ -1,63 +1,19 @@
-import pc from "picocolors";
-import cleanStack from "clean-stack";
 import exit from "exit";
-import { CLIError, formatError, handleError } from "../error";
+import { CLIError, handleError } from "../error";
+import logger, { LogLevel } from "@kosko/log";
 
-jest.spyOn(console, "error").mockImplementation(() => {
-  // do nothing
-});
+class YError extends Error {
+  constructor() {
+    super("Fake yargs error");
+  }
+}
 
+YError.prototype.name = "YError";
+
+jest.mock("@kosko/log");
 jest.mock("exit");
 
-describe("formatError", () => {
-  let stack: string;
-  let err: Error;
-
-  beforeEach(() => {
-    stack = formatError(err);
-  });
-
-  describe("when stack is undefined", () => {
-    beforeAll(() => {
-      err = new Error("foo");
-      delete err.stack;
-    });
-
-    test("should return message", () => {
-      expect(stack).toEqual(err.message);
-    });
-  });
-
-  describe("when stack is defined", () => {
-    beforeAll(() => {
-      err = new Error("foo");
-    });
-
-    test("should turn stack into gray", () => {
-      const [headline, ...rest] = cleanStack(err.stack!, {
-        pretty: true
-      }).split("\n");
-
-      expect(stack).toEqual(headline + pc.gray("\n" + rest.join("\n")));
-    });
-  });
-
-  describe("when message is multi-line", () => {
-    beforeAll(() => {
-      err = new Error("foo\nbar");
-    });
-
-    test("should extract stack properly", () => {
-      const [first, second, ...rest] = cleanStack(err.stack!, {
-        pretty: true
-      }).split("\n");
-
-      expect(stack).toEqual(
-        first + "\n" + second + pc.gray("\n" + rest.join("\n"))
-      );
-    });
-  });
-});
+beforeEach(() => jest.resetAllMocks());
 
 describe("handleError", () => {
   let err: any;
@@ -73,7 +29,7 @@ describe("handleError", () => {
       });
 
       test("should print output", () => {
-        expect(console.error).toHaveBeenCalledWith("foo");
+        expect(logger.log).toHaveBeenCalledWith(LogLevel.Error, "foo");
       });
     });
 
@@ -83,7 +39,9 @@ describe("handleError", () => {
       });
 
       test("should print stack", () => {
-        expect(console.error).toHaveBeenCalledWith(formatError(err));
+        expect(logger.log).toHaveBeenCalledWith(LogLevel.Error, err.message, {
+          error: err
+        });
       });
     });
 
@@ -120,6 +78,20 @@ describe("handleError", () => {
     });
   });
 
+  describe("given a YError", () => {
+    beforeAll(() => {
+      err = new YError();
+    });
+
+    test("should exit with 1", () => {
+      expect(exit).toHaveBeenCalledWith(1);
+    });
+
+    test("should not print log", () => {
+      expect(logger.log).not.toHaveBeenCalled();
+    });
+  });
+
   describe("given a normal error", () => {
     beforeAll(() => {
       err = new Error("err");
@@ -130,7 +102,9 @@ describe("handleError", () => {
     });
 
     test("should print stack", () => {
-      expect(console.error).toHaveBeenCalledWith(formatError(err));
+      expect(logger.log).toHaveBeenCalledWith(LogLevel.Error, "", {
+        error: err
+      });
     });
   });
 
@@ -144,7 +118,9 @@ describe("handleError", () => {
     });
 
     test("should print stack", () => {
-      expect(console.error).toHaveBeenCalledWith(err);
+      expect(logger.log).toHaveBeenCalledWith(LogLevel.Error, "", {
+        error: "foo"
+      });
     });
   });
 });

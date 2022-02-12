@@ -1,6 +1,6 @@
 import exit from "exit";
 import { isAbsolute, resolve } from "path";
-import signale from "signale";
+import logger, { LogLevel } from "@kosko/log";
 import yargs from "yargs";
 import { Template } from "./template";
 import { writeFiles } from "./write";
@@ -40,7 +40,7 @@ export async function run(
     const result = await template.generate(args);
 
     await writeFiles(args.cwd, result.files);
-    signale.success("%d files are generated", result.files.length);
+    logger.log(LogLevel.Info, `${result.files.length} files are generated`);
   } catch (err) {
     console.error(err);
     exit(1);

@@ -4,7 +4,7 @@ import {
   importPath,
   resolveESM
 } from "@kosko/require";
-import debug from "./debug";
+import logger, { LogLevel } from "@kosko/log";
 
 export async function localRequireDefault(
   id: string,
@@ -12,7 +12,7 @@ export async function localRequireDefault(
 ): Promise<any> {
   const path = await resolve(id, { baseDir: cwd });
 
-  debug("Importing %s from %s", id, path);
+  logger.log(LogLevel.Debug, `Importing ${id} from ${path}`);
   return requireDefault(path);
 }
 
@@ -24,7 +24,7 @@ export async function localImportDefault(
     baseDir: cwd
   });
 
-  debug("Importing %s from %s", id, path);
+  logger.log(LogLevel.Debug, `Importing ${id} from ${path}`);
   const mod = await importPath(path);
   return mod.default;
 }

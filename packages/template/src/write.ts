@@ -1,6 +1,6 @@
 import fs from "fs-extra";
 import { join } from "path";
-import signale from "signale";
+import logger, { LogLevel } from "@kosko/log";
 import { File } from "./template";
 
 /**
@@ -16,7 +16,7 @@ export async function writeFiles(
   for (const file of files) {
     const filePath = join(path, file.path);
 
-    signale.info("Writing file", filePath);
+    logger.log(LogLevel.Info, `Writing file ${filePath}`);
     await fs.outputFile(filePath, file.content);
   }
 }

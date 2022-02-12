@@ -1,10 +1,8 @@
 import fs from "fs-extra";
 import { join, resolve } from "path";
-import { Command, getLogger, RootArguments } from "../cli/command";
-import Debug from "../cli/debug";
+import { Command, RootArguments } from "../cli/command";
 import { CLIError } from "../cli/error";
-
-const debug = Debug.extend("init");
+import logger, { LogLevel } from "@kosko/log";
 
 const DEFAULT_CONFIG = `components = ["*"]`;
 
@@ -22,13 +20,13 @@ async function updatePkg(path: string, data: any): Promise<void> {
   let base: any = {};
 
   try {
-    debug("Reading existing package.json from", path);
+    logger.log(LogLevel.Debug, `Reading existing package.json from "${path}"`);
     base = JSON.parse(await fs.readFile(path, "utf8"));
   } catch (err: any) {
     if (err.code !== "ENOENT") throw err;
   }
 
-  debug("Writing package.json at", path);
+  logger.log(LogLevel.Debug, `Writing package.json at "${path}"`);
   await fs.writeJSON(
     path,
     {
@@ -65,9 +63,8 @@ export const initCmd: Command<InitArguments> = {
       .example("$0 init example", "Initialize in specified directory");
   },
   async handler(args) {
-    const logger = getLogger(args);
     const path = args.path ? resolve(args.cwd, args.path) : args.cwd;
-    logger.info("Initialize in", path);
+    logger.log(LogLevel.Info, `Initialize in "${path}"`);
 
     const exist = await fs.pathExists(path);
 
@@ -79,7 +76,7 @@ export const initCmd: Command<InitArguments> = {
 
     for (const name of ["components", "environments", "templates"]) {
       const dir = join(path, name);
-      debug("Creating directory", dir);
+      logger.log(LogLevel.Debug, `Creating directory "${dir}"`);
       await fs.ensureDir(dir);
     }
 
@@ -92,10 +89,11 @@ export const initCmd: Command<InitArguments> = {
     });
 
     const configPath = join(path, "kosko.toml");
-    debug("Writing config", configPath);
+    logger.log(LogLevel.Debug, `Writing config at "${configPath}"`);
     await fs.writeFile(configPath, DEFAULT_CONFIG);
 
-    logger.success(
+    logger.log(
+      LogLevel.Info,
       `We are almost there. Run "npm install" to finish the setup.`
     );
   }

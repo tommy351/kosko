@@ -1,6 +1,6 @@
 import { importPath, resolve } from "@kosko/require";
 import { createNodeEnvironment, NodeEnvironmentOptions } from "./node";
-import debug from "../debug";
+import logger, { LogLevel } from "@kosko/log";
 import { mergeAsync } from "../merge";
 import { Environment } from "./types";
 import { createAsyncReducerExecutor } from "./base";
@@ -33,7 +33,7 @@ export function createNodeESMEnvironment(
         });
       } catch (err: any) {
         if (err.code === "MODULE_NOT_FOUND") {
-          debug("Cannot resolve module: %s", id);
+          logger.log(LogLevel.Debug, `Cannot resolve module: ${id}`);
           return {};
         }
 
@@ -41,12 +41,12 @@ export function createNodeESMEnvironment(
       }
 
       try {
-        debug("Importing %s", path);
+        logger.log(LogLevel.Debug, `Importing ${path}`);
         const mod = await importPath(path);
         return mod.default;
       } catch (err: any) {
         if (["ERR_MODULE_NOT_FOUND", "MODULE_NOT_FOUND"].includes(err.code)) {
-          debug("Cannot import module: %s", path);
+          logger.log(LogLevel.Debug, `Cannot import module: ${path}`);
           return {};
         }
 

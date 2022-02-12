@@ -24,6 +24,7 @@ Learn more on [the official site](https://kosko.dev).
 - [@kosko/env](packages/env) - Manage environemnts in Kosko.
 - [@kosko/generate](packages/generate) - Find and print components.
 - [@kosko/helm](packages/helm) - Load Helm charts in Kosko.
+- [@kosko/log](packages/log) - Logging library for Kosko.
 - [@kosko/migrate](packages/migrate) - Migrate Kubernetes YAML into Kosko components.
 - [@kosko/require](packages/require) - Import and resolve modules.
 - [@kosko/template](packages/template) - Utilities for templates.

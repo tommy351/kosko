@@ -1,6 +1,5 @@
-import pc from "picocolors";
-import cleanStack from "clean-stack";
 import exit from "exit";
+import logger, { LogLevel } from "@kosko/log";
 
 export class CLIError extends Error {
   public readonly name = "CLIError";
@@ -17,28 +16,26 @@ export class CLIError extends Error {
   }
 }
 
-export function formatError(err: Error): string {
-  if (!err.stack) return err.message;
-
-  const stack = cleanStack(err.stack, { pretty: true });
-  // Regular expression is from: https://github.com/sindresorhus/extract-stack
-  const pos = stack.search(/(?:\n {4}at .*)+/);
-  if (!~pos) return stack;
-
-  return stack.substring(0, pos) + pc.gray(stack.substring(pos));
-}
-
 export function handleError(err: unknown): void {
   let code = 1;
-  let msg = err;
 
   if (err instanceof CLIError) {
-    msg = err.output || formatError(err);
-    if (err.code != null) code = err.code;
+    if (err.code != null) {
+      code = err.code;
+    }
+
+    if (err.output) {
+      logger.log(LogLevel.Error, err.output);
+    } else {
+      logger.log(LogLevel.Error, err.message, { error: err });
+    }
   } else if (err instanceof Error) {
-    msg = formatError(err);
+    if (err.name !== "YError") {
+      logger.log(LogLevel.Error, "", { error: err });
+    }
+  } else {
+    logger.log(LogLevel.Error, "", { error: err });
   }
 
-  console.error(msg);
   exit(code);
 }

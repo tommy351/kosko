@@ -27,7 +27,7 @@
     "node": ">=12"
   },
   "dependencies": {
-    "@kosko/yaml": "workspace:*",
+    "@kosko/yaml": "workspace:^",
     "camelcase": "^6.2.1",
     "tslib": "^2.3.1"
   },

@@ -1,11 +1,9 @@
 import toml from "@iarna/toml";
-import Debug from "debug";
 import fs from "fs-extra";
 import { join } from "path";
 import { Config, EnvironmentConfig } from "./types";
 import { validate } from "./validate";
-
-const debug = Debug("kosko:config");
+import logger, { LogLevel } from "@kosko/log";
 
 /**
  * Parses and validates a config file from the specified path.
@@ -16,7 +14,7 @@ export async function loadConfig(path: string): Promise<Config> {
   const content = await fs.readFile(path, "utf8");
   const data = await toml.parse.async(content);
 
-  debug("Found config at", path);
+  logger.log(LogLevel.Debug, `Found config at "${path}"`);
   return validate(data);
 }
 
@@ -36,7 +34,7 @@ export async function searchConfig(
   } catch (err: any) {
     if (err.code === "ENOENT") return {};
 
-    debug("Config load failed", err);
+    logger.log(LogLevel.Debug, "Config load failed", { error: err });
     throw err;
   }
 }

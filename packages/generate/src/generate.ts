@@ -6,7 +6,7 @@ import {
 import glob from "fast-glob";
 import { join } from "path";
 import { Result, Manifest } from "./base";
-import debug from "./debug";
+import logger, { LogLevel } from "@kosko/log";
 import { resolve } from "./resolve";
 
 export interface GenerateOptions {
@@ -52,13 +52,13 @@ export async function generate(options: GenerateOptions): Promise<Result> {
     options.extensions || getRequireExtensions().map((ext) => ext.substring(1));
   const suffix = `?(.{${extensions.join(",")}})`;
   const patterns = options.components.map((x) => x + suffix);
-  debug("Component patterns", patterns);
+  logger.log(LogLevel.Debug, `Component patterns`, { data: patterns });
 
   const ids = await glob(patterns, {
     cwd: options.path,
     onlyFiles: false
   });
-  debug("Found components", ids);
+  logger.log(LogLevel.Debug, "Found components", { data: ids });
 
   const manifests: Manifest[] = [];
 
