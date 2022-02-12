@@ -1,6 +1,6 @@
 {
   "name": "@kosko/generate",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Find and print components in a kosko app directory.",
   "homepage": "https://kosko.dev",
   "repository": "https://github.com/tommy351/kosko/tree/master/packages/generate",

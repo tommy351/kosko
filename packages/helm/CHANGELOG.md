@@ -1,5 +1,12 @@
 # @kosko/helm
 
+## 2.0.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @kosko/yaml@2.0.1
+
 ## 2.0.1
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@kosko/kustomize",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Load Kustomize in kosko.",
   "homepage": "https://kosko.dev",
   "repository": "https://github.com/tommy351/kosko/tree/master/packages/kustomize",

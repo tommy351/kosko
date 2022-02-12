@@ -1,5 +1,14 @@
 # @kosko-example/run-programmatically
 
+## 0.0.9
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @kosko/env@3.0.1
+  - @kosko/generate@2.0.1
+  - kosko@2.0.2
+
 ## 0.0.8
 
 ### Patch Changes

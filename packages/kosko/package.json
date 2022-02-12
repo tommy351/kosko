@@ -1,6 +1,6 @@
 {
   "name": "kosko",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Organize Kubernetes manifests in JavaScript.",
   "homepage": "https://kosko.dev",
   "repository": {
