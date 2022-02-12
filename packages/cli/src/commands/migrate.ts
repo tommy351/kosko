@@ -3,10 +3,8 @@ import fs from "fs-extra";
 import getStdin from "get-stdin";
 import { join, resolve } from "path";
 import { Command, RootArguments } from "../cli/command";
-import Debug from "../cli/debug";
 import { print } from "../cli/print";
-
-const debug = Debug.extend("migrate");
+import logger, { LogLevel } from "@kosko/log";
 
 function concatFiles(arr: ReadonlyArray<string>): string {
   if (!arr.length) return "";
@@ -21,12 +19,12 @@ function concatFiles(arr: ReadonlyArray<string>): string {
 }
 
 function readFileString(path: string): Promise<string> {
-  debug("Reading file", path);
+  logger.log(LogLevel.Debug, `Reading file "${path}"`);
   return fs.readFile(path, "utf8");
 }
 
 async function readFilesInDir(dir: string): Promise<string> {
-  debug("Reading directory", dir);
+  logger.log(LogLevel.Debug, `Reading directory "${dir}"`);
 
   const files = await fs.readdir(dir);
   const contents = await Promise.all(
@@ -43,7 +41,7 @@ function readFiles(
   return Promise.all(
     files.map(async (file) => {
       if (file === "-") {
-        debug("Reading from stdin");
+        logger.log(LogLevel.Debug, "Reading from stdin");
         return getStdin();
       }
 

@@ -257,24 +257,19 @@ importers:
       '@kosko/config': workspace:*
       '@kosko/env': workspace:*
       '@kosko/generate': workspace:*
+      '@kosko/log': workspace:*
       '@kosko/migrate': workspace:*
       '@kosko/require': workspace:*
-      '@types/debug': ^4.1.7
       '@types/exit': ^0.1.31
       '@types/fs-extra': ^9.0.13
       '@types/jsonpath': ^0.2.0
-      '@types/signale': ^1.4.2
       '@types/yargs': ^17.0.7
-      clean-stack: ^3.0.1
-      debug: ^4.3.3
       exit: ^0.1.2
       fs-extra: ^10.0.0
       get-stdin: ^8.0.0
       import-local: ^3.0.3
       jsonpath: ^1.1.1
-      picocolors: ^1.0.0
       pkg-dir: ^5.0.0
-      signale: ^1.4.0
       temp-dir: ^2.0.0
       tmp-promise: ^3.0.3
       tslib: ^2.3.1
@@ -282,27 +277,22 @@ importers:
     dependencies:
       '@kosko/config': link:../config
       '@kosko/generate': link:../generate
+      '@kosko/log': link:../log
       '@kosko/migrate': link:../migrate
       '@kosko/require': link:../require
-      clean-stack: 3.0.1
-      debug: 4.3.3
       exit: 0.1.2
       fs-extra: 10.0.0
       get-stdin: 8.0.0
       import-local: 3.0.3
       jsonpath: 1.1.1
-      picocolors: 1.0.0
-      signale: 1.4.0
       tslib: 2.3.1
       yargs: 17.3.0
     devDependencies:
       '@iarna/toml': 2.2.5
       '@kosko/env': link:../env
-      '@types/debug': 4.1.7
       '@types/exit': 0.1.31
       '@types/fs-extra': 9.0.13
       '@types/jsonpath': 0.2.0
-      '@types/signale': 1.4.2
       '@types/yargs': 17.0.7
       pkg-dir: 5.0.0
       temp-dir: 2.0.0
@@ -311,40 +301,35 @@ importers:
   packages/config:
     specifiers:
       '@iarna/toml': ^2.2.5
-      '@types/debug': ^4.1.7
+      '@kosko/log': workspace:*
       '@types/fs-extra': ^9.0.13
-      debug: ^4.3.3
       fs-extra: ^10.0.0
       superstruct: ^0.15.3
       tslib: ^2.3.1
       type-fest: ^2.8.0
     dependencies:
       '@iarna/toml': 2.2.5
-      debug: 4.3.3
+      '@kosko/log': link:../log
       fs-extra: 10.0.0
       superstruct: 0.15.3
       tslib: 2.3.1
       type-fest: 2.8.0
     devDependencies:
-      '@types/debug': 4.1.7
       '@types/fs-extra': 9.0.13
 
   packages/env:
     specifiers:
+      '@kosko/log': workspace:*
       '@kosko/require': workspace:*
-      '@types/debug': ^4.1.7
-      debug: ^4.3.3
       deepmerge: ^4.2.2
       is-plain-object: ^5.0.0
       tslib: ^2.3.1
     dependencies:
+      '@kosko/log': link:../log
       '@kosko/require': link:../require
-      debug: 4.3.3
       deepmerge: 4.2.2
       is-plain-object: 5.0.0
       tslib: 2.3.1
-    devDependencies:
-      '@types/debug': 4.1.7
 
   packages/exec-utils:
     specifiers:
@@ -359,13 +344,12 @@ importers:
 
   packages/generate:
     specifiers:
+      '@kosko/log': workspace:*
       '@kosko/require': workspace:*
       '@types/bl': ^5.0.2
-      '@types/debug': ^4.1.7
       '@types/fs-extra': ^9.0.13
       '@types/js-yaml': ^4.0.5
       bl: ^5.0.0
-      debug: ^4.3.3
       fast-glob: ^3.2.7
       fs-extra: ^10.0.0
       js-yaml: ^4.1.0
@@ -373,15 +357,14 @@ importers:
       tmp-promise: ^3.0.3
       tslib: ^2.3.1
     dependencies:
+      '@kosko/log': link:../log
       '@kosko/require': link:../require
-      debug: 4.3.3
       fast-glob: 3.2.7
       fs-extra: 10.0.0
       js-yaml: 4.1.0
       tslib: 2.3.1
     devDependencies:
       '@types/bl': 5.0.2
-      '@types/debug': 4.1.7
       '@types/fs-extra': 9.0.13
       '@types/js-yaml': 4.0.5
       bl: 5.0.0
@@ -423,6 +406,18 @@ importers:
       '@kosko/yaml': link:../yaml
       tslib: 2.3.1
 
+  packages/log:
+    specifiers:
+      clean-stack: ^3.0.1
+      fast-safe-stringify: ^2.1.1
+      picocolors: ^1.0.0
+      tslib: ^2.3.1
+    dependencies:
+      clean-stack: 3.0.1
+      fast-safe-stringify: 2.1.1
+      picocolors: 1.0.0
+      tslib: 2.3.1
+
   packages/migrate:
     specifiers:
       '@kosko/yaml': workspace:*
@@ -446,27 +441,25 @@ importers:
 
   packages/template:
     specifiers:
+      '@kosko/log': workspace:^0.0.0
       '@types/exit': ^0.1.31
       '@types/fs-extra': ^9.0.13
-      '@types/signale': ^1.4.2
       '@types/yargs': ^17.0.7
       exit: ^0.1.2
       fs-extra: ^10.0.0
-      signale: ^1.4.0
       temp-dir: ^2.0.0
       tmp-promise: ^3.0.3
       tslib: ^2.3.1
       yargs: ^17.3.0
     dependencies:
+      '@kosko/log': link:../log
       exit: 0.1.2
       fs-extra: 10.0.0
-      signale: 1.4.0
       tslib: 2.3.1
       yargs: 17.3.0
     devDependencies:
       '@types/exit': 0.1.31
       '@types/fs-extra': 9.0.13
-      '@types/signale': 1.4.2
       '@types/yargs': 17.0.7
       temp-dir: 2.0.0
       tmp-promise: 3.0.3
@@ -489,12 +482,11 @@ importers:
 
   packages/yaml:
     specifiers:
+      '@kosko/log': workspace:*
       '@kosko/require': workspace:*
-      '@types/debug': ^4.1.7
       '@types/fs-extra': ^9.0.13
       '@types/js-yaml': ^4.0.5
       '@types/node-fetch': ^2.5.12
-      debug: ^4.3.3
       fetch-mock: ^9.11.0
       fs-extra: ^10.0.0
       js-yaml: ^4.1.0
@@ -504,14 +496,13 @@ importers:
       tmp-promise: ^3.0.3
       tslib: ^2.3.1
     dependencies:
+      '@kosko/log': link:../log
       '@kosko/require': link:../require
-      debug: 4.3.3
       fs-extra: 10.0.0
       js-yaml: 4.1.0
       node-fetch: 2.6.6
       tslib: 2.3.1
     devDependencies:
-      '@types/debug': 4.1.7
       '@types/fs-extra': 9.0.13
       '@types/js-yaml': 4.0.5
       '@types/node-fetch': 2.5.12
@@ -3740,12 +3731,6 @@ packages:
       '@types/node': 16.11.12
     dev: true
 
-  /@types/debug/4.1.7:
-    resolution: {integrity: sha512-9AonUzyTjXXhEOa0DnqpzZi6VHlqKMswga9EXjpXnnqxwLtdvPPtlO8evrI5D9S6asFRCQ6v+wpiUKbw+vKqyg==}
-    dependencies:
-      '@types/ms': 0.7.31
-    dev: true
-
   /@types/eslint-scope/3.7.1:
     resolution: {integrity: sha512-SCFeogqiptms4Fg29WpOTk5nHIzfpKCemSN63ksBQYKTcXoJEmJagV+DhVmbapZzY4/5YaOV1nZwrsU79fFm1g==}
     dependencies:
@@ -3885,10 +3870,6 @@ packages:
     resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==}
     dev: true
 
-  /@types/ms/0.7.31:
-    resolution: {integrity: sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==}
-    dev: true
-
   /@types/node-fetch/2.5.12:
     resolution: {integrity: sha512-MKgC4dlq4kKNa/mYrwpKfzQMB5X3ee5U6fSprkKpToBqBmX4nFZL9cW5jl6sWn+xpRJ7ypWh2yyqqr8UUCstSw==}
     dependencies:
@@ -4014,12 +3995,6 @@ packages:
       '@types/mime': 1.3.2
       '@types/node': 16.11.12
     dev: false
-
-  /@types/signale/1.4.2:
-    resolution: {integrity: sha512-cIqvDXQmLD5UNgtYhHvTt4dEyR+FXuCwoqQbz7mZaS7pGyJvpUFDAoMbgwymptqUXH3eL8vBcNU+dBiyauaA6Q==}
-    dependencies:
-      '@types/node': 16.11.12
-    dev: true
 
   /@types/sockjs/0.3.33:
     resolution: {integrity: sha512-f0KEEe05NvUnat+boPTZ0dgaLZ4SfSouXUgv5noUiefG2ajgKjmETo9ZJyuqsl7dfl2aHlLJUiki6B4ZYldiiw==}
@@ -7799,6 +7774,10 @@ packages:
   /fast-levenshtein/2.0.6:
     resolution: {integrity: sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=}
 
+  /fast-safe-stringify/2.1.1:
+    resolution: {integrity: sha512-W+KJc2dmILlPplD/H4K9l9LcAHAfPtP6BY84uVLXQ6Evcz9Lcg33Y2z1IVblT6xdY54PXYVHEv+0Wpq8Io6zkA==}
+    dev: false
+
   /fast-shallow-equal/1.0.0:
     resolution: {integrity: sha512-HPtaa38cPgWvaCFmRNhlc6NG7pv6NUHqjPgVAkWGoB9mQMwYB27/K0CvOM5Czy+qpT3e8XJ6Q4aPAnzpNpzNaw==}
     dev: false
@@ -7896,13 +7875,6 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
-
-  /figures/2.0.0:
-    resolution: {integrity: sha1-OrGi0qYsi/tDGgyUy3l6L84nyWI=}
-    engines: {node: '>=4'}
-    dependencies:
-      escape-string-regexp: 1.0.5
-    dev: false
 
   /file-entry-cache/6.0.1:
     resolution: {integrity: sha512-7Gps/XWymbLk2QLYK4NzpMOrYjMhdIxXuIvy2QBsLE6ljuodKvdkWs/cpyJJ3CVIVpH0Oi1Hvg1ovbMzLdFBBg==}
@@ -8007,13 +7979,6 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
-
-  /find-up/2.1.0:
-    resolution: {integrity: sha1-RdG35QbHF93UgndaK3eSCjwMV6c=}
-    engines: {node: '>=4'}
-    dependencies:
-      locate-path: 2.0.0
-    dev: false
 
   /find-up/3.0.0:
     resolution: {integrity: sha512-1yD6RmLI1XBfxugvORwlck6f75tYL+iR0jqwsOrOxMZyGYqUuDhJ0l4AXdO1iX/FTs9cBAMEk1gWSEx1kSbylg==}
@@ -10573,6 +10538,7 @@ packages:
       parse-json: 4.0.0
       pify: 3.0.0
       strip-bom: 3.0.0
+    dev: true
 
   /load-yaml-file/0.2.0:
     resolution: {integrity: sha512-OfCBkGEw4nN6JLtgRidPX6QxjBQGQf72q3si2uvqyFEMbycSFFHwAZeXx6cJgFM9wmLrf9zBwCP3Ivqa+LLZPw==}
@@ -10608,14 +10574,6 @@ packages:
   /loader-utils/3.2.0:
     resolution: {integrity: sha512-HVl9ZqccQihZ7JM85dco1MvO9G+ONvxoGa9rkhzFsneGLKSUg1gJf9bWzhRhcvm2qChhWpebQhP44qxjKIUCaQ==}
     engines: {node: '>= 12.13.0'}
-    dev: false
-
-  /locate-path/2.0.0:
-    resolution: {integrity: sha1-K1aLJl7slExtnA3pw9u7ygNUzY4=}
-    engines: {node: '>=4'}
-    dependencies:
-      p-locate: 2.0.0
-      path-exists: 3.0.0
     dev: false
 
   /locate-path/3.0.0:
@@ -11623,13 +11581,6 @@ packages:
     resolution: {integrity: sha1-P7z7FbiZpEEjs0ttzBi3JDNqLK4=}
     engines: {node: '>=4'}
 
-  /p-limit/1.3.0:
-    resolution: {integrity: sha512-vvcXsLAJ9Dr5rQOPk7toZQZJApBl2K4J6dANSsEuh6QI41JYcsS/qhTGa9ErIUUgK3WNQoJYvylxvjqmiqEA9Q==}
-    engines: {node: '>=4'}
-    dependencies:
-      p-try: 1.0.0
-    dev: false
-
   /p-limit/2.3.0:
     resolution: {integrity: sha512-//88mFWSJx8lxCzwdAABTJL2MyWB12+eIY7MDL2SqLmAkeKU9qxRvWuSyTjm3FUmpBEMuFfckAIqEaVGUDxb6w==}
     engines: {node: '>=6'}
@@ -11641,13 +11592,6 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       yocto-queue: 0.1.0
-
-  /p-locate/2.0.0:
-    resolution: {integrity: sha1-IKAQOyIqcMj9OcwuWAaA893l7EM=}
-    engines: {node: '>=4'}
-    dependencies:
-      p-limit: 1.3.0
-    dev: false
 
   /p-locate/3.0.0:
     resolution: {integrity: sha512-x+12w/To+4GFfgJhBEpiDcLozRJGegY+Ei7/z0tSLkMmxGZNybVMSfWj9aJn8Z5Fc7dBUNJOOVgPv2H7IwulSQ==}
@@ -11684,11 +11628,6 @@ packages:
     dependencies:
       '@types/retry': 0.12.1
       retry: 0.13.1
-
-  /p-try/1.0.0:
-    resolution: {integrity: sha1-y8ec26+P1CKOE/Yh8rGiN8GyB7M=}
-    engines: {node: '>=4'}
-    dev: false
 
   /p-try/2.2.0:
     resolution: {integrity: sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==}
@@ -11822,6 +11761,7 @@ packages:
     dependencies:
       error-ex: 1.3.2
       json-parse-better-errors: 1.0.2
+    dev: true
 
   /parse-json/5.2.0:
     resolution: {integrity: sha512-ayCKvm/phCGxOkYRSCM82iDwct8/EonSEgCSxWxD7ve6jHggsFl4fZVQBPRNgQoKiuV/odhFrGzQXZwbifC8Rg==}
@@ -11979,6 +11919,7 @@ packages:
   /pify/3.0.0:
     resolution: {integrity: sha1-5aSs0sEB/fPZpNB/DbxNtJ3SgXY=}
     engines: {node: '>=4'}
+    dev: true
 
   /pify/4.0.1:
     resolution: {integrity: sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==}
@@ -11989,14 +11930,6 @@ packages:
     resolution: {integrity: sha512-ZIrVPH+A52Dw84R0L3/VS9Op04PuQ2SEoJL6bkshmiTic/HldyW9Tf7oH5mhJZBK7NmDx27vSMrYEXPXclpDKw==}
     engines: {node: '>= 6'}
     dev: true
-
-  /pkg-conf/2.1.0:
-    resolution: {integrity: sha1-ISZRTKbyq/69FoWW3xi6V4Z/AFg=}
-    engines: {node: '>=4'}
-    dependencies:
-      find-up: 2.1.0
-      load-json-file: 4.0.0
-    dev: false
 
   /pkg-dir/3.0.0:
     resolution: {integrity: sha512-/E57AYkoeQ25qkxMj5PBOVgF8Kiu/h7cYS30Z5+R7WaiCCBfLq58ZI/dSeaEKb9WVJV5n/03QwrN3IeWIFllvw==}
@@ -14614,15 +14547,6 @@ packages:
   /signal-exit/3.0.6:
     resolution: {integrity: sha512-sDl4qMFpijcGw22U5w63KmD3cZJfBuFlVNbVMKje2keoKML7X2UzWbc4XrmEbDwg0NXJc3yv4/ox7b+JWb57kQ==}
 
-  /signale/1.4.0:
-    resolution: {integrity: sha512-iuh+gPf28RkltuJC7W5MRi6XAjTDCAPC/prJUpQoG4vIP3MJZ+GTydVnodXA7pwvTKb2cA0m9OFZW/cdWy/I/w==}
-    engines: {node: '>=6'}
-    dependencies:
-      chalk: 2.4.2
-      figures: 2.0.0
-      pkg-conf: 2.1.0
-    dev: false
-
   /simple-swizzle/0.2.2:
     resolution: {integrity: sha1-pNprY1/8zMoz9w0Xy5JZLeleVXo=}
     dependencies:
@@ -15144,6 +15068,7 @@ packages:
   /strip-bom/3.0.0:
     resolution: {integrity: sha1-IzTBjpx1n3vdVv3vfprj1YjmjtM=}
     engines: {node: '>=4'}
+    dev: true
 
   /strip-bom/4.0.0:
     resolution: {integrity: sha512-3xurFv5tEgii33Zi8Jtp55wEIILR9eh34FAW00PZf+JnSsTmV/ioewSgQl97JHvgjoRGwPShsWm+IdrxB35d0w==}

@@ -1,7 +1,5 @@
-import Debug from "./debug";
+import logger, { LogLevel } from "@kosko/log";
 import { importPath } from "@kosko/require";
-
-const debug = Debug.extend("module");
 
 export interface ResourceModule {
   readonly path: string;
@@ -31,7 +29,12 @@ export function setResourceModule(
   }
 
   moduleMap[apiVersion][kind] = mod;
-  debug("Set resource module", res, mod);
+  logger.log(LogLevel.Debug, "Set resource module", {
+    data: {
+      resourceKind: res,
+      resourceModule: mod
+    }
+  });
 }
 
 async function getKubernetesModels(
@@ -69,5 +72,5 @@ export async function getResourceModule(
 
 export function resetResourceModules(): void {
   moduleMap = {};
-  debug("Reset resource modules");
+  logger.log(LogLevel.Debug, "Reset resource modules");
 }

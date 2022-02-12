@@ -1,9 +1,9 @@
 import { requireDefault } from "@kosko/require";
 import { createNodeEnvironment, NodeEnvironmentOptions } from "./node";
-import debug from "../debug";
 import { Environment } from "./types";
 import { createSyncReducerExecutor } from "./base";
 import { merge } from "../merge";
+import logger, { LogLevel } from "@kosko/log";
 
 /**
  * Returns a new `Environment` which loads environment variables using Node.js's
@@ -23,7 +23,7 @@ export function createNodeCJSEnvironment(
         return requireDefault(id);
       } catch (err: any) {
         if (err.code === "MODULE_NOT_FOUND") {
-          debug("Cannot find module: %s", id);
+          logger.log(LogLevel.Debug, `Cannot find module: ${id}`);
           return {};
         }
 

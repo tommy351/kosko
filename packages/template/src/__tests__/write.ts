@@ -4,8 +4,7 @@ import tempDir from "temp-dir";
 import tmp from "tmp-promise";
 import { File } from "../template";
 import { writeFiles } from "../write";
-
-jest.mock("signale");
+import logger, { SilentLogWriter } from "@kosko/log";
 
 let tmpDir: tmp.DirectoryResult;
 let files: File[];
@@ -13,6 +12,10 @@ let files: File[];
 function readTmpFile(path: string): Promise<string> {
   return readFile(join(tmpDir.path, path), "utf8");
 }
+
+beforeAll(() => {
+  logger.setWriter(new SilentLogWriter());
+});
 
 beforeEach(async () => {
   tmpDir = await tmp.dir({ tmpdir: tempDir, unsafeCleanup: true });

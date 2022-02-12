@@ -3,8 +3,7 @@ import exit from "exit";
 import { Template } from "../template";
 import { writeFiles } from "../write";
 import { join } from "path";
-
-jest.mock("signale");
+import logger, { SilentLogWriter } from "@kosko/log";
 
 jest.spyOn(console, "error").mockImplementation(() => {
   // do nothing
@@ -12,6 +11,10 @@ jest.spyOn(console, "error").mockImplementation(() => {
 
 jest.mock("exit");
 jest.mock("../write.ts");
+
+beforeAll(() => {
+  logger.setWriter(new SilentLogWriter());
+});
 
 beforeEach(() => jest.resetAllMocks());
 

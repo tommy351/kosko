@@ -5,18 +5,16 @@ import { generate, print, PrintFormat, Result } from "@kosko/generate";
 import { writeFile, readFile, outputFile, ensureSymlink } from "fs-extra";
 import { join } from "path";
 import pkgDir from "pkg-dir";
-import { Signale } from "signale";
 import tempDir from "temp-dir";
 import tmp from "tmp-promise";
-import { setLogger } from "../../../cli/command";
 import { GenerateArguments, generateCmd } from "../index";
+import logger, { SilentLogWriter } from "@kosko/log";
 
 jest.mock("@kosko/generate");
 jest.mock("@kosko/env");
 
 type DeepWriteable<T> = { -readonly [P in keyof T]: DeepWriteable<T[P]> };
 
-const logger = new Signale({ disabled: true });
 let config: DeepWriteable<Config>;
 let args: Partial<GenerateArguments>;
 let tmpDir: tmp.DirectoryResult;
@@ -39,9 +37,12 @@ async function execute(): Promise<void> {
   // Mock result
   (generate as jest.Mock).mockResolvedValueOnce(result);
 
-  const ctx = setLogger({ cwd: tmpDir.path, ...args } as any, logger);
-  await generateCmd.handler(ctx);
+  await generateCmd.handler({ cwd: tmpDir.path, ...args } as any);
 }
+
+beforeAll(() => {
+  logger.setWriter(new SilentLogWriter());
+});
 
 beforeEach(async () => {
   // Reset mocks

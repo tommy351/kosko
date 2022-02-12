@@ -1,10 +1,14 @@
 import { isAbsolute, resolve } from "path";
 import yargs from "yargs";
-import { wrapCommand } from "../cli/command";
 import { generateCmd } from "./generate";
 import { initCmd } from "./init";
 import { validateCmd } from "./validate";
 import { migrateCmd } from "./migrate";
+import logger, {
+  LogLevel,
+  logLevelFromString,
+  SilentLogWriter
+} from "@kosko/log";
 
 export const rootCmd = yargs(process.argv.slice(2))
   .scriptName("kosko")
@@ -19,15 +23,30 @@ export const rootCmd = yargs(process.argv.slice(2))
       return isAbsolute(arg) ? arg : resolve(arg);
     }
   })
+  .option("log-level", {
+    type: "string",
+    describe: "Set log level",
+    global: true,
+    default: "info"
+  })
   .option("silent", {
     type: "boolean",
     describe: "Disable log output",
     global: true,
     default: false
   })
-  .group(["cwd", "silent", "help", "version"], "Global Options:")
-  .command(wrapCommand(initCmd))
-  .command(wrapCommand(generateCmd))
-  .command(wrapCommand(validateCmd))
-  .command(wrapCommand(migrateCmd))
+  .group(["cwd", "log-level", "silent", "help", "version"], "Global Options:")
+  .middleware((args) => {
+    if (args.silent) {
+      logger.setWriter(new SilentLogWriter());
+    } else {
+      const level = args["log-level"];
+
+      logger.setLevel((level && logLevelFromString(level)) || LogLevel.Info);
+    }
+  })
+  .command(initCmd)
+  .command(generateCmd)
+  .command(validateCmd)
+  .command(migrateCmd)
   .demandCommand();

@@ -6,10 +6,11 @@ exports[`when filename is not given should print the error 1`] = `
 Migrate YAML into components
 
 Global Options:
-      --cwd      Path of working directory               [string] [default: CWD]
-      --silent   Disable log output                   [boolean] [default: false]
-      --help     Show help                                             [boolean]
-      --version  Show version number                                   [boolean]
+      --cwd        Path of working directory             [string] [default: CWD]
+      --log-level  Set log level                      [string] [default: \\"info\\"]
+      --silent     Disable log output                 [boolean] [default: false]
+      --help       Show help                                           [boolean]
+      --version    Show version number                                 [boolean]
 
 Options:
   -f, --filename  File, directory to migrate                 [string] [required]

@@ -7,7 +7,7 @@ import {
 import { generate, print, PrintFormat, Result } from "@kosko/generate";
 import { join } from "path";
 import { Argv } from "yargs";
-import { Command, Context, RootArguments } from "../../cli/command";
+import { Command, RootArguments } from "../../cli/command";
 import { CLIError } from "../../cli/error";
 import { SetOption, parseSetOptions } from "./set-option";
 import { localRequireDefault } from "./require";
@@ -67,7 +67,7 @@ export function generateBuilder(
 }
 
 export async function generateHandler(
-  args: BaseGenerateArguments & Context
+  args: BaseGenerateArguments
 ): Promise<Result> {
   // Load config
   const globalConfig = await searchConfig(args.cwd);

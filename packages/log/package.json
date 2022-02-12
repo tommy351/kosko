@@ -1,15 +1,16 @@
 {
-  "name": "@kosko/generate",
-  "version": "2.0.0",
-  "description": "Find and print components in a kosko app directory.",
+  "name": "@kosko/log",
+  "version": "0.0.0",
+  "description": "Logging library for Kosko.",
   "homepage": "https://kosko.dev",
-  "repository": "https://github.com/tommy351/kosko/tree/master/packages/generate",
+  "repository": "https://github.com/tommy351/kosko/tree/master/packages/log",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "main": "dist/index.node.js",
   "module": "dist/index.node.mjs",
   "browser": "dist/index.mjs",
   "types": "dist/index.node.d.ts",
+  "typedocMain": "src/index.node.ts",
   "sideEffects": false,
   "exports": {
     "node": {
@@ -31,19 +32,9 @@
     "node": ">=12"
   },
   "dependencies": {
-    "@kosko/log": "workspace:*",
-    "@kosko/require": "workspace:*",
-    "fast-glob": "^3.2.7",
-    "fs-extra": "^10.0.0",
-    "js-yaml": "^4.1.0",
+    "clean-stack": "^3.0.1",
+    "fast-safe-stringify": "^2.1.1",
+    "picocolors": "^1.0.0",
     "tslib": "^2.3.1"
-  },
-  "devDependencies": {
-    "@types/bl": "^5.0.2",
-    "@types/fs-extra": "^9.0.13",
-    "@types/js-yaml": "^4.0.5",
-    "bl": "^5.0.0",
-    "temp-dir": "^2.0.0",
-    "tmp-promise": "^3.0.3"
   }
 }

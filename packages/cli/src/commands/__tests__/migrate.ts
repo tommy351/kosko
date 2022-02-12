@@ -2,8 +2,7 @@ import { migrateString } from "@kosko/migrate";
 import { readdir, readFile } from "fs-extra";
 import getStdin from "get-stdin";
 import { join } from "path";
-import { Signale } from "signale";
-import { setLogger } from "../../cli/command";
+import logger, { SilentLogWriter } from "@kosko/log";
 import { print } from "../../cli/print";
 import { MigrateArguments, migrateCmd } from "../migrate";
 
@@ -11,12 +10,14 @@ jest.mock("get-stdin");
 jest.mock("../../cli/print");
 
 const fixturePath = join(__dirname, "..", "__fixtures__");
-const logger = new Signale({ disabled: true });
 
 async function execute(args: Partial<MigrateArguments>): Promise<void> {
-  const ctx = setLogger({ cwd: fixturePath, ...args } as any, logger);
-  await migrateCmd.handler(ctx);
+  await migrateCmd.handler({ cwd: fixturePath, ...args } as any);
 }
+
+beforeAll(() => {
+  logger.setWriter(new SilentLogWriter());
+});
 
 beforeEach(() => jest.resetAllMocks());
 

@@ -1,18 +1,18 @@
 /// <reference types="jest-extended"/>
 import { readFile, stat, writeJSON } from "fs-extra";
 import { join } from "path";
-import { Signale } from "signale";
 import tempDir from "temp-dir";
 import tmp from "tmp-promise";
-import { setLogger } from "../../cli/command";
+import logger, { SilentLogWriter } from "@kosko/log";
 import { initCmd, InitArguments } from "../init";
 
-const logger = new Signale({ disabled: true });
-
 async function execute(args: Partial<InitArguments>): Promise<void> {
-  const ctx = setLogger(args as any, logger);
-  await initCmd.handler(ctx);
+  await initCmd.handler(args as any);
 }
+
+beforeAll(() => {
+  logger.setWriter(new SilentLogWriter());
+});
 
 beforeEach(() => jest.resetAllMocks());
 
@@ -34,8 +34,9 @@ describe("when the target exists", () => {
   });
 
   test("should proceed with --force flag", async () => {
-    const args = setLogger({ path: tmpDir.path, force: true } as any, logger);
-    await expect(initCmd.handler(args)).toResolve();
+    await expect(
+      initCmd.handler({ path: tmpDir.path, force: true } as any)
+    ).toResolve();
   });
 
   describe("when package.json exists", () => {

@@ -2,10 +2,8 @@ import { loadAll } from "js-yaml";
 import fs from "fs-extra";
 import fetch, { RequestInfo, RequestInit } from "node-fetch";
 import { getResourceModule, ResourceKind } from "./module";
-import Debug from "./debug";
+import logger, { LogLevel } from "@kosko/log";
 import { importPath } from "@kosko/require";
-
-const debug = Debug.extend("load");
 
 export interface Manifest extends ResourceKind {
   [key: string]: any;
@@ -36,7 +34,9 @@ async function getConstructor(
   const mod = await getResourceModule(res);
 
   if (!mod) {
-    debug("No resource modules for", res);
+    logger.log(LogLevel.Debug, `No resource modules`, {
+      data: res
+    });
     return;
   }
 
@@ -44,7 +44,9 @@ async function getConstructor(
     const result = await importPath(mod.path);
     return result[mod.export];
   } catch {
-    debug("Failed to import the resource module", mod);
+    logger.log(LogLevel.Debug, "Failed to import the resource module", {
+      data: mod
+    });
     return;
   }
 }
@@ -90,7 +92,7 @@ export async function loadString(
 export function loadFile(path: string, options?: LoadOptions) {
   return async (): Promise<readonly Manifest[]> => {
     const content = await fs.readFile(path, "utf-8");
-    debug("File loaded from: %s", path);
+    logger.log(LogLevel.Debug, `File loaded from: ${path}`);
 
     return loadString(content, options);
   };
@@ -110,7 +112,9 @@ export function loadUrl(
 
   return async () => {
     const res = await fetch(url, init);
-    debug(`Fetch "%s": status=%d`, url, res.status);
+    logger.log(LogLevel.Debug, `Fetched YAML`, {
+      data: { url, status: res.status }
+    });
 
     if (!res.ok) {
       throw new Error(`Failed to fetch YAML file from: ${url}`);

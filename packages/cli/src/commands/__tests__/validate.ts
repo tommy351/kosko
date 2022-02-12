@@ -1,17 +1,18 @@
-import { Signale } from "signale";
-import { setLogger } from "../../cli/command";
+import logger, { SilentLogWriter } from "@kosko/log";
 import { generateHandler } from "../generate";
 import { ValidateArguments, validateCmd } from "../validate";
 
 jest.mock("../generate");
 
-const logger = new Signale({ disabled: true });
 let args: Partial<ValidateArguments>;
 
 async function execute(): Promise<void> {
-  const ctx = setLogger(args as any, logger);
-  await validateCmd.handler(ctx);
+  await validateCmd.handler(args as any);
 }
+
+beforeAll(() => {
+  logger.setWriter(new SilentLogWriter());
+});
 
 describe("when validation passed", () => {
   beforeEach(async () => {
