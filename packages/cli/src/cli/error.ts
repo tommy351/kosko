@@ -18,7 +18,6 @@ export class CLIError extends Error {
 
 export function handleError(err: unknown): void {
   let code = 1;
-  let logError = true;
 
   if (err instanceof CLIError) {
     if (err.code != null) {
@@ -26,17 +25,16 @@ export function handleError(err: unknown): void {
     }
 
     if (err.output) {
-      logError = false;
       logger.log(LogLevel.Error, err.output);
+    } else {
+      logger.log(LogLevel.Error, err.message, { error: err });
     }
-  } else if (err instanceof Error && err.name === "YError") {
-    logError = false;
-  }
-
-  if (logError) {
-    logger.log(LogLevel.Error, (err as any)?.message || "CLI error", {
-      error: err
-    });
+  } else if (err instanceof Error) {
+    if (err.name !== "YError") {
+      logger.log(LogLevel.Error, "", { error: err });
+    }
+  } else {
+    logger.log(LogLevel.Error, "", { error: err });
   }
 
   exit(code);
