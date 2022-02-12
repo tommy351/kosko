@@ -92,8 +92,8 @@ importers:
 
   examples/alternative-folder-structure:
     specifiers:
-      '@kosko/env': workspace:*
-      kosko: workspace:*
+      '@kosko/env': workspace:^
+      kosko: workspace:^
       kubernetes-models: ^2.0.2
     dependencies:
       '@kosko/env': link:../../packages/env
@@ -105,8 +105,8 @@ importers:
       '@babel/core': ^7.16.0
       '@babel/preset-env': ^7.16.4
       '@babel/register': ^7.16.0
-      '@kosko/env': workspace:*
-      kosko: workspace:*
+      '@kosko/env': workspace:^
+      kosko: workspace:^
       kubernetes-models: ^2.0.2
     dependencies:
       '@kosko/env': link:../../packages/env
@@ -119,8 +119,8 @@ importers:
 
   examples/environment:
     specifiers:
-      '@kosko/env': workspace:*
-      kosko: workspace:*
+      '@kosko/env': workspace:^
+      kosko: workspace:^
       kubernetes-models: ^2.0.2
     dependencies:
       '@kosko/env': link:../../packages/env
@@ -129,8 +129,8 @@ importers:
 
   examples/esm:
     specifiers:
-      '@kosko/env': workspace:*
-      kosko: workspace:*
+      '@kosko/env': workspace:^
+      kosko: workspace:^
       kubernetes-models: ^2.0.2
     dependencies:
       '@kosko/env': link:../../packages/env
@@ -139,8 +139,8 @@ importers:
 
   examples/getting-started:
     specifiers:
-      '@kosko/env': workspace:*
-      kosko: workspace:*
+      '@kosko/env': workspace:^
+      kosko: workspace:^
       kubernetes-models: ^2.0.2
     dependencies:
       '@kosko/env': link:../../packages/env
@@ -149,9 +149,9 @@ importers:
 
   examples/run-programmatically:
     specifiers:
-      '@kosko/env': workspace:*
-      '@kosko/generate': workspace:*
-      kosko: workspace:*
+      '@kosko/env': workspace:^
+      '@kosko/generate': workspace:^
+      kosko: workspace:^
       kubernetes-models: ^2.0.2
     dependencies:
       '@kosko/env': link:../../packages/env
@@ -161,9 +161,9 @@ importers:
 
   examples/run-programmatically-esm:
     specifiers:
-      '@kosko/env': workspace:*
-      '@kosko/generate': workspace:*
-      kosko: workspace:*
+      '@kosko/env': workspace:^
+      '@kosko/generate': workspace:^
+      kosko: workspace:^
       kubernetes-models: ^2.0.2
     dependencies:
       '@kosko/env': link:../../packages/env
@@ -173,7 +173,7 @@ importers:
 
   examples/template-component:
     specifiers:
-      '@kosko/template': workspace:*
+      '@kosko/template': workspace:^
       kubernetes-models: ^2.0.2
     dependencies:
       '@kosko/template': link:../../packages/template
@@ -181,8 +181,8 @@ importers:
 
   examples/typescript:
     specifiers:
-      '@kosko/env': workspace:*
-      kosko: workspace:*
+      '@kosko/env': workspace:^
+      kosko: workspace:^
       kubernetes-models: ^2.0.2
       ts-node: ^10.4.0
       typescript: ^4.5.3
@@ -254,12 +254,12 @@ importers:
   packages/cli:
     specifiers:
       '@iarna/toml': ^2.2.5
-      '@kosko/config': workspace:*
-      '@kosko/env': workspace:*
-      '@kosko/generate': workspace:*
-      '@kosko/log': workspace:*
-      '@kosko/migrate': workspace:*
-      '@kosko/require': workspace:*
+      '@kosko/config': workspace:^
+      '@kosko/env': workspace:^
+      '@kosko/generate': workspace:^
+      '@kosko/log': workspace:^
+      '@kosko/migrate': workspace:^
+      '@kosko/require': workspace:^
       '@types/exit': ^0.1.31
       '@types/fs-extra': ^9.0.13
       '@types/jsonpath': ^0.2.0
@@ -301,7 +301,7 @@ importers:
   packages/config:
     specifiers:
       '@iarna/toml': ^2.2.5
-      '@kosko/log': workspace:*
+      '@kosko/log': workspace:^
       '@types/fs-extra': ^9.0.13
       fs-extra: ^10.0.0
       superstruct: ^0.15.3
@@ -319,8 +319,8 @@ importers:
 
   packages/env:
     specifiers:
-      '@kosko/log': workspace:*
-      '@kosko/require': workspace:*
+      '@kosko/log': workspace:^
+      '@kosko/require': workspace:^
       deepmerge: ^4.2.2
       is-plain-object: ^5.0.0
       tslib: ^2.3.1
@@ -344,8 +344,8 @@ importers:
 
   packages/generate:
     specifiers:
-      '@kosko/log': workspace:*
-      '@kosko/require': workspace:*
+      '@kosko/log': workspace:^
+      '@kosko/require': workspace:^
       '@types/bl': ^5.0.2
       '@types/fs-extra': ^9.0.13
       '@types/js-yaml': ^4.0.5
@@ -373,8 +373,8 @@ importers:
 
   packages/helm:
     specifiers:
-      '@kosko/exec-utils': workspace:*
-      '@kosko/yaml': workspace:*
+      '@kosko/exec-utils': workspace:^
+      '@kosko/yaml': workspace:^
       '@types/fs-extra': ^9.0.13
       fs-extra: ^10.0.0
       tmp-promise: ^3.0.3
@@ -398,8 +398,8 @@ importers:
 
   packages/kustomize:
     specifiers:
-      '@kosko/exec-utils': workspace:*
-      '@kosko/yaml': workspace:*
+      '@kosko/exec-utils': workspace:^
+      '@kosko/yaml': workspace:^
       tslib: ^2.3.1
     dependencies:
       '@kosko/exec-utils': link:../exec-utils
@@ -420,7 +420,7 @@ importers:
 
   packages/migrate:
     specifiers:
-      '@kosko/yaml': workspace:*
+      '@kosko/yaml': workspace:^
       camelcase: ^6.2.1
       is-plain-object: ^5.0.0
       kubernetes-models: ^2.0.2
@@ -441,7 +441,7 @@ importers:
 
   packages/template:
     specifiers:
-      '@kosko/log': workspace:^0.0.0
+      '@kosko/log': workspace:^
       '@types/exit': ^0.1.31
       '@types/fs-extra': ^9.0.13
       '@types/yargs': ^17.0.7
@@ -466,7 +466,7 @@ importers:
 
   packages/template-deployed-service:
     specifiers:
-      '@kosko/template': workspace:*
+      '@kosko/template': workspace:^
       tslib: ^2.3.1
     dependencies:
       '@kosko/template': link:../template
@@ -474,7 +474,7 @@ importers:
 
   packages/template-environment:
     specifiers:
-      '@kosko/template': workspace:*
+      '@kosko/template': workspace:^
       tslib: ^2.3.1
     dependencies:
       '@kosko/template': link:../template
@@ -482,8 +482,8 @@ importers:
 
   packages/yaml:
     specifiers:
-      '@kosko/log': workspace:*
-      '@kosko/require': workspace:*
+      '@kosko/log': workspace:^
+      '@kosko/require': workspace:^
       '@types/fs-extra': ^9.0.13
       '@types/js-yaml': ^4.0.5
       '@types/node-fetch': ^2.5.12

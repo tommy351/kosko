@@ -31,8 +31,8 @@
     "node": ">=12"
   },
   "dependencies": {
-    "@kosko/log": "workspace:*",
-    "@kosko/require": "workspace:*",
+    "@kosko/log": "workspace:^",
+    "@kosko/require": "workspace:^",
     "fast-glob": "^3.2.7",
     "fs-extra": "^10.0.0",
     "js-yaml": "^4.1.0",

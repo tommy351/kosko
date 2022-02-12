@@ -35,11 +35,11 @@
     "node": ">=12"
   },
   "dependencies": {
-    "@kosko/config": "workspace:*",
-    "@kosko/generate": "workspace:*",
-    "@kosko/log": "workspace:*",
-    "@kosko/migrate": "workspace:*",
-    "@kosko/require": "workspace:*",
+    "@kosko/config": "workspace:^",
+    "@kosko/generate": "workspace:^",
+    "@kosko/log": "workspace:^",
+    "@kosko/migrate": "workspace:^",
+    "@kosko/require": "workspace:^",
     "exit": "^0.1.2",
     "fs-extra": "^10.0.0",
     "get-stdin": "^8.0.0",
@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "@iarna/toml": "^2.2.5",
-    "@kosko/env": "workspace:*",
+    "@kosko/env": "workspace:^",
     "@types/exit": "^0.1.31",
     "@types/fs-extra": "^9.0.13",
     "@types/jsonpath": "^0.2.0",

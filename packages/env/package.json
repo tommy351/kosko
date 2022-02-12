@@ -32,8 +32,8 @@
     "node": ">=12"
   },
   "dependencies": {
-    "@kosko/log": "workspace:*",
-    "@kosko/require": "workspace:*",
+    "@kosko/log": "workspace:^",
+    "@kosko/require": "workspace:^",
     "deepmerge": "^4.2.2",
     "is-plain-object": "^5.0.0",
     "tslib": "^2.3.1"

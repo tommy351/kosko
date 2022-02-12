@@ -31,7 +31,7 @@
     "node": ">=12"
   },
   "dependencies": {
-    "@kosko/template": "workspace:*",
+    "@kosko/template": "workspace:^",
     "tslib": "^2.3.1"
   }
 }
