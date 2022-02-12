@@ -3,16 +3,12 @@ import { readFile, stat, writeJSON } from "fs-extra";
 import { join } from "path";
 import tempDir from "temp-dir";
 import tmp from "tmp-promise";
-import logger, { SilentLogWriter } from "@kosko/log";
 import { initCmd, InitArguments } from "../init";
 
 async function execute(args: Partial<InitArguments>): Promise<void> {
   await initCmd.handler(args as any);
 }
-
-beforeAll(() => {
-  logger.setWriter(new SilentLogWriter());
-});
+jest.mock("@kosko/log");
 
 beforeEach(() => jest.resetAllMocks());
 

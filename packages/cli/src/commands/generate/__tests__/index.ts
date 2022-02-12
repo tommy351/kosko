@@ -8,10 +8,10 @@ import pkgDir from "pkg-dir";
 import tempDir from "temp-dir";
 import tmp from "tmp-promise";
 import { GenerateArguments, generateCmd } from "../index";
-import logger, { SilentLogWriter } from "@kosko/log";
 
 jest.mock("@kosko/generate");
 jest.mock("@kosko/env");
+jest.mock("@kosko/log");
 
 type DeepWriteable<T> = { -readonly [P in keyof T]: DeepWriteable<T[P]> };
 
@@ -39,10 +39,6 @@ async function execute(): Promise<void> {
 
   await generateCmd.handler({ cwd: tmpDir.path, ...args } as any);
 }
-
-beforeAll(() => {
-  logger.setWriter(new SilentLogWriter());
-});
 
 beforeEach(async () => {
   // Reset mocks

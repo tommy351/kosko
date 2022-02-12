@@ -4,7 +4,7 @@ export interface Log {
   loggerLevel: LogLevel;
   level: LogLevel;
   time: Date;
-  message: string;
+  message?: string;
   error?: unknown;
   data?: unknown;
 }

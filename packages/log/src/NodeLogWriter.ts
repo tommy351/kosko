@@ -33,30 +33,37 @@ function formatTime(time: Date): string {
   return `${h}:${m}:${s}.${ms}`;
 }
 
+function formatData(data: any): string {
+  return stringify(data, undefined, "  ");
+}
+
 function formatError(err: any): string {
   if (!err.stack) {
-    return err.message || "";
+    if (err.message) return err.message;
+    return formatData(err);
   }
 
   const stack = cleanStack(err.stack, { pretty: true });
-  // Regular expression is from: https://github.com/sindresorhus/extract-stack
-  const pos = stack.search(/(?:\n {4}at .*)+/);
-  if (!~pos) return stack;
-
-  return stack.substring(0, pos) + pc.gray(stack.substring(pos));
+  return stack;
 }
 
-export class NodeLogWriter implements LogWriter {
+export default class NodeLogWriter implements LogWriter {
   public write(log: Log): void {
     const { level, time, message, error, data } = log;
-    let content = `${formatLevel(level)} - ${message}`;
+    let content = `${formatLevel(level)} -`;
 
     if (log.loggerLevel <= LogLevel.Debug) {
       content = `${pc.gray(`[${formatTime(time)}]`)} ${content}`;
     }
 
+    if (message) {
+      content += ` ${message}`;
+    } else if (error && (error as any).message) {
+      content += ` ${(error as any).message}`;
+    }
+
     if (data != null) {
-      content += ` ${stringify(data, undefined, "  ")}`;
+      content += ` ${formatData(data)}`;
     }
 
     if (error) {

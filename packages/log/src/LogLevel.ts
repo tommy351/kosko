@@ -1,10 +1,10 @@
 export enum LogLevel {
-  Trace = 10,
-  Debug = 20,
-  Info = 30,
-  Warn = 40,
-  Error = 50,
-  Fatal = 60
+  Trace = 1,
+  Debug = 2,
+  Info = 3,
+  Warn = 4,
+  Error = 5,
+  Fatal = 6
 }
 
 const LOG_LEVEL_MAP: Record<string, LogLevel> = {

@@ -6,7 +6,7 @@ export interface LoggerOptions {
   writer?: LogWriter;
 }
 
-export class Logger {
+export default class Logger {
   private level: LogLevel;
   private writer: LogWriter;
 
@@ -54,12 +54,10 @@ export class Logger {
   }
 }
 
-export function createLoggerFactory(writer: LogWriter) {
-  return (options?: Partial<LoggerOptions>): Logger => {
-    return new Logger({
-      level: LogLevel.Info,
-      writer,
-      ...options
-    });
+export function createLoggerFactory(createWriter: () => LogWriter) {
+  return (options: Partial<LoggerOptions> = {}): Logger => {
+    const { level = LogLevel.Info, writer = createWriter() } = options;
+
+    return new Logger({ level, writer });
   };
 }

@@ -102,7 +102,7 @@ describe("handleError", () => {
     });
 
     test("should print stack", () => {
-      expect(logger.log).toHaveBeenCalledWith(LogLevel.Error, err.message, {
+      expect(logger.log).toHaveBeenCalledWith(LogLevel.Error, "", {
         error: err
       });
     });
