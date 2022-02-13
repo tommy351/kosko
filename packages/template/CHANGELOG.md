@@ -1,5 +1,12 @@
 # @kosko/template
 
+## 2.0.1
+
+### Patch Changes
+
+- Updated dependencies [[`75372ef`](https://github.com/tommy351/kosko/commit/75372efd9b05de73eda77895f3b8b968ae3c3055)]:
+  - @kosko/log@0.1.0
+
 ## 2.0.0
 
 ### Major Changes
