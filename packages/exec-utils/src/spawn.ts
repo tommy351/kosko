@@ -1,15 +1,23 @@
 import crossSpawn from "cross-spawn";
+import { StdioOptions } from "child_process";
 
 export interface SpawnResult {
   stdout: string;
   stderr: string;
 }
 
+export interface SpawnOptions {
+  cwd?: string;
+  env?: Record<string, string>;
+  stdio?: StdioOptions;
+}
+
 export function spawn(
   command: string,
-  args: readonly string[] = []
+  args: readonly string[] = [],
+  options?: SpawnOptions
 ): Promise<SpawnResult> {
-  const proc = crossSpawn(command, args);
+  const proc = crossSpawn(command, args, options);
   const stdoutChunks: string[] = [];
   const stderrChunks: string[] = [];
 
