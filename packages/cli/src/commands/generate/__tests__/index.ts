@@ -2,7 +2,7 @@ import toml from "@iarna/toml";
 import { Config } from "@kosko/config";
 import env from "@kosko/env";
 import { generate, print, PrintFormat, Result } from "@kosko/generate";
-import { writeFile, readFile, outputFile, ensureSymlink } from "fs-extra";
+import fs from "fs";
 import { join } from "path";
 import pkgDir from "pkg-dir";
 import tempDir from "temp-dir";
@@ -22,14 +22,18 @@ let result: Result;
 
 async function createFakeModule(id: string): Promise<void> {
   const dir = join(tmpDir.path, "node_modules", id);
-  await outputFile(
+  await fs.promises.mkdir(dir, { recursive: true });
+  await fs.promises.writeFile(
     join(dir, "index.js"),
     `require('fs').appendFileSync(__dirname + '/../../fakeModules', '${id},');`
   );
 }
 
 async function getLoadedFakeModules(): Promise<ReadonlyArray<string>> {
-  const content = await readFile(join(tmpDir.path, "fakeModules"), "utf8");
+  const content = await fs.promises.readFile(
+    join(tmpDir.path, "fakeModules"),
+    "utf8"
+  );
   return content.split(",").filter(Boolean);
 }
 
@@ -48,7 +52,7 @@ beforeEach(async () => {
   tmpDir = await tmp.dir({ tmpdir: tempDir, unsafeCleanup: true });
 
   // Write kosko.toml
-  await writeFile(
+  await fs.promises.writeFile(
     join(tmpDir.path, "kosko.toml"),
     toml.stringify(config as toml.JsonMap)
   );
@@ -57,7 +61,7 @@ beforeEach(async () => {
   const envSrc = join(root!, "packages", "env");
   const envDest = join(tmpDir.path, "node_modules", "@kosko", "env");
 
-  await ensureSymlink(envSrc, envDest, "dir");
+  await fs.promises.symlink(envSrc, envDest, "dir");
 });
 
 afterEach(async () => {

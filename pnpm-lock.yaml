@@ -256,43 +256,47 @@ importers:
       '@iarna/toml': ^2.2.5
       '@kosko/config': workspace:^
       '@kosko/env': workspace:^
+      '@kosko/exec-utils': workspace:^
       '@kosko/generate': workspace:^
       '@kosko/log': workspace:^
       '@kosko/migrate': workspace:^
       '@kosko/require': workspace:^
       '@types/exit': ^0.1.31
-      '@types/fs-extra': ^9.0.13
       '@types/jsonpath': ^0.2.0
+      '@types/which-pm-runs': ^1.0.0
       '@types/yargs': ^17.0.7
       exit: ^0.1.2
-      fs-extra: ^10.0.0
       get-stdin: ^8.0.0
       import-local: ^3.0.3
       jsonpath: ^1.1.1
+      picocolors: ^1.0.0
       pkg-dir: ^5.0.0
       temp-dir: ^2.0.0
       tmp-promise: ^3.0.3
       tslib: ^2.3.1
+      which-pm-runs: ^1.0.0
       yargs: ^17.3.0
     dependencies:
       '@kosko/config': link:../config
+      '@kosko/exec-utils': link:../exec-utils
       '@kosko/generate': link:../generate
       '@kosko/log': link:../log
       '@kosko/migrate': link:../migrate
       '@kosko/require': link:../require
       exit: 0.1.2
-      fs-extra: 10.0.0
       get-stdin: 8.0.0
       import-local: 3.0.3
       jsonpath: 1.1.1
+      picocolors: 1.0.0
       tslib: 2.3.1
+      which-pm-runs: 1.0.0
       yargs: 17.3.0
     devDependencies:
       '@iarna/toml': 2.2.5
       '@kosko/env': link:../env
       '@types/exit': 0.1.31
-      '@types/fs-extra': 9.0.13
       '@types/jsonpath': 0.2.0
+      '@types/which-pm-runs': 1.0.0
       '@types/yargs': 17.0.7
       pkg-dir: 5.0.0
       temp-dir: 2.0.0
@@ -4026,6 +4030,10 @@ packages:
 
   /@types/webpack-env/1.16.3:
     resolution: {integrity: sha512-9gtOPPkfyNoEqCQgx4qJKkuNm/x0R2hKR7fdl7zvTJyHnIisuE/LfvXOsYWL0o3qq6uiBnKZNNNzi3l0y/X+xw==}
+    dev: true
+
+  /@types/which-pm-runs/1.0.0:
+    resolution: {integrity: sha512-BXfdlYLWvRhngJbih4N57DjO+63Z7AxiFiip8yq3rD46U7V4I2W538gngPvBsZiMehhD8sfGf4xLI6k7TgXvNw==}
     dev: true
 
   /@types/ws/8.2.2:
@@ -16718,6 +16726,10 @@ packages:
   /which-module/2.0.0:
     resolution: {integrity: sha1-2e8H3Od7mQK4o6j6SzHD4/fm6Ho=}
     dev: true
+
+  /which-pm-runs/1.0.0:
+    resolution: {integrity: sha1-Zws6+8VS4LVd9rd4DKdGFfI60cs=}
+    dev: false
 
   /which-pm/2.0.0:
     resolution: {integrity: sha512-Lhs9Pmyph0p5n5Z3mVnN0yWcbQYUAD7rbQUiMsQxOJ3T57k7RFe35SUwWMf7dsbDZks1uOmw4AecB/JMDj3v/w==}
