@@ -6,6 +6,11 @@ export async function installDependencies(path: string): Promise<void> {
 
   await spawn("npm", ["install"], {
     stdio: "inherit",
-    cwd: path
+    cwd: path,
+    env: {
+      ...process.env,
+      ADBLOCK: "1",
+      DISABLE_OPENCOLLECTIVE: "1"
+    }
   });
 }

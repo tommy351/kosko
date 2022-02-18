@@ -134,7 +134,19 @@ export const initCmd: Command<InitArguments> = {
       LogLevel.Info,
       `Project created at "${path}"
 
+Inside that directory, you can run several commands:
+${[
+  [
+    "npm run generate",
+    "Validate components and generate Kubernetes manifests."
+  ],
+  ["npm run validate", "Only validate components."]
+]
+  .map(([cmd, desc]) => `\n  ${pc.cyan(cmd)}\n    ${desc}`)
+  .join("\n")}
+
 We suggest that you begin by typing:
+
 ${[
   ...(cdPath ? [`cd ${cdPath}`] : []),
   ...(args.install ? [] : ["npm install"]),

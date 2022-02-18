@@ -72,7 +72,8 @@ export async function generatePackageJson(
       mergePackageJson(
         mergePackageJson(base, {
           scripts: {
-            generate: "kosko generate"
+            generate: "kosko generate",
+            validate: "kosko validate"
           },
           dependencies: {
             "@kosko/env": "^3.0.0",

@@ -272,6 +272,7 @@ importers:
       '@types/jsonpath': ^0.2.0
       '@types/yargs': ^17.0.7
       exit: ^0.1.2
+      fast-glob: ^3.2.7
       get-stdin: ^8.0.0
       import-local: ^3.0.3
       jsonpath: ^1.1.1
@@ -302,6 +303,7 @@ importers:
       '@types/exit': 0.1.31
       '@types/jsonpath': 0.2.0
       '@types/yargs': 17.0.7
+      fast-glob: 3.2.7
       pkg-dir: 5.0.0
       temp-dir: 2.0.0
       tmp-promise: 3.0.3
