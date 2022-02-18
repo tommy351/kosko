@@ -32,7 +32,11 @@
     "tslib": "^2.3.1"
   },
   "devDependencies": {
+    "@kosko/jest-preset": "workspace:^",
     "is-plain-object": "^5.0.0",
     "kubernetes-models": "^2.0.2"
+  },
+  "jest": {
+    "preset": "@kosko/jest-preset"
   }
 }

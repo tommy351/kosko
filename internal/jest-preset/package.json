@@ -1,0 +1,13 @@
+{
+  "name": "@kosko/jest-preset",
+  "version": "0.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=12"
+  },
+  "dependencies": {
+    "jest-extended": "^1.2.0",
+    "jest-serializer-path": "^0.1.15",
+    "ts-jest": "^27.1.1"
+  }
+}

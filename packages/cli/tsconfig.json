@@ -9,6 +9,8 @@
     { "path": "../env" },
     { "path": "../config" },
     { "path": "../migrate" },
-    { "path": "../log" }
-  ]
+    { "path": "../log" },
+    { "path": "../exec-utils" }
+  ],
+  "include": ["src"]
 }

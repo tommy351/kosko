@@ -34,16 +34,18 @@
     "@kosko/log": "workspace:^",
     "@kosko/require": "workspace:^",
     "fast-glob": "^3.2.7",
-    "fs-extra": "^10.0.0",
     "js-yaml": "^4.1.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
+    "@kosko/jest-preset": "workspace:^",
     "@types/bl": "^5.0.2",
-    "@types/fs-extra": "^9.0.13",
     "@types/js-yaml": "^4.0.5",
     "bl": "^5.0.0",
     "temp-dir": "^2.0.0",
     "tmp-promise": "^3.0.3"
+  },
+  "jest": {
+    "preset": "@kosko/jest-preset"
   }
 }

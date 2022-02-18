@@ -29,12 +29,14 @@
   "dependencies": {
     "@iarna/toml": "^2.2.5",
     "@kosko/log": "workspace:^",
-    "fs-extra": "^10.0.0",
     "superstruct": "^0.15.3",
     "tslib": "^2.3.1",
     "type-fest": "^2.8.0"
   },
   "devDependencies": {
-    "@types/fs-extra": "^9.0.13"
+    "@kosko/jest-preset": "workspace:^"
+  },
+  "jest": {
+    "preset": "@kosko/jest-preset"
   }
 }

@@ -1,7 +1,7 @@
 import { loadFile, LoadOptions, loadString, loadUrl } from "../load";
 import tmp from "tmp-promise";
 import tempDir from "temp-dir";
-import { writeFile } from "fs-extra";
+import fs from "fs";
 import { join } from "path";
 import fetch from "node-fetch";
 import type { FetchMockStatic } from "fetch-mock";
@@ -248,7 +248,7 @@ describe("loadFile", () => {
   });
 
   testLoad({
-    setup: (content) => writeFile(path, content),
+    setup: (content) => fs.promises.writeFile(path, content),
     load: (options) => loadFile(path, options)
   });
 });
