@@ -3,101 +3,62 @@ title: Getting Started
 slug: /
 ---
 
-:::note Examples
+Welcome to the Kosko documentation! Before we start, make sure your computer meets the following system requirements.
 
-- [Getting Started](https://github.com/tommy351/kosko/tree/master/examples/getting-started)
+- Node.js 12 or later.
 
-:::
+## Automatic Setup
 
-## Setup
+It's recommended to setup a Kosko project with [`kosko init`](commands.md#init) command, which sets up basic folder structure and installs everything you need automatically.
 
-Run `kosko init` to set up a new kosko directory.
-
-```shell
+```sh
 npx kosko init example
 ```
 
-This command will create a new folder named `example`, and generate a `package.json` inside the folder. The version may not be the same as the example below. It's depended on the version of kosko you installed.
+We also recommend using TypeScript, which can improve user experience in IDE and make debugging much easier. To set up a TypeScript project, run:
 
-```json title="package.json"
+```sh
+npx kosko init example --typescript
+```
+
+After the installation complete, the command will generate following files in `example` folder.
+
+```
+├── README.md
+├── components
+│   └── nginx.js
+├── environments
+│   └── dev
+│       ├── index.js
+│       └── nginx.js
+├── kosko.toml
+├── package-lock.json
+└── package.json
+```
+
+## Manual Setup
+
+Install `kosko`, `@kosko/env` and `kubernetes-models`.
+
+```sh
+npm install kosko @kosko/env kubernetes-models
+```
+
+Add the following `scripts` to your `package.json`.
+
+```json
 {
-  "dependencies": {
-    "@kosko/env": "^1.1.0",
-    "kosko": "^1.1.0",
-    "kubernetes-models": "^1.5.2"
+  "scripts": {
+    "generate": "kosko generate",
+    "validate": "kosko validate"
   }
 }
 ```
 
-Next, run `npm install` inside the folder we just created.
-
-```shell
-cd example
-npm install
-```
-
-## Create a Component
-
 Create a new component with `@kosko/template-deployed-service` template.
 
-```shell
+```sh
 npx @kosko/template-deployed-service --name nginx --image nginx
-```
-
-This template creates a new file named `nginx.js` in `components` folder.
-
-```js title="components/nginx.js"
-"use strict";
-
-const { Deployment } = require("kubernetes-models/apps/v1/Deployment");
-const { Service } = require("kubernetes-models/v1/Service");
-
-const metadata = { name: "nginx" };
-const labels = { app: "nginx" };
-
-const deployment = new Deployment({
-  metadata,
-  spec: {
-    replicas: 1,
-    selector: {
-      matchLabels: labels
-    },
-    template: {
-      metadata: {
-        labels
-      },
-      spec: {
-        containers: [
-          {
-            image: "nginx",
-            name: "nginx",
-            ports: [
-              {
-                containerPort: 80
-              }
-            ]
-          }
-        ]
-      }
-    }
-  }
-});
-
-const service = new Service({
-  metadata,
-  spec: {
-    selector: labels,
-    type: "ClusterIP",
-    ports: [
-      {
-        port: 80,
-        targetPort: 80
-      }
-    ]
-  }
-});
-
-module.exports = [deployment, service];
 ```
 
 ## Generate Kubernetes Manifests
@@ -105,11 +66,11 @@ module.exports = [deployment, service];
 Run `kosko generate` to print Kubernetes manifests in the console.
 
 ```shell
-npx kosko generate
+npm run generate
 ```
 
 Pipe the output to kubectl to apply to a cluster.
 
 ```shell
-npx kosko generate | kubectl apply -f -
+npm run --silent generate | kubectl apply -f -
 ```

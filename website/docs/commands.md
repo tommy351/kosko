@@ -18,9 +18,13 @@ Set path to the working directory. Default to the current working directory (CWD
 
 Disable log output.
 
+#### `--log-level`
+
+Set log level. Default to `info`. Possible values are `trace`, `debug`, `info`, `warn`, `error`, `fatal`.
+
 ## `init`
 
-Set up a new kosko directory.
+Create a new Kosko project.
 
 ```shell
 kosko init [path]
@@ -37,6 +41,18 @@ Path to initialize. Default to the current directory.
 #### `--force, -f`
 
 Overwrite existing files.
+
+#### `--typescript, --ts`
+
+Generate TypeScript files.
+
+#### `--esm`
+
+Generate ECMAScript module (ESM) files.
+
+#### `--install`
+
+Install dependencies automatically.
 
 ## `generate`
 

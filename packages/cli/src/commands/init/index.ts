@@ -99,7 +99,8 @@ export const initCmd: Command<InitArguments> = {
       })
       .positional("path", { type: "string", describe: "Path to initialize" })
       .example("$0 init", "Initialize in current directory")
-      .example("$0 init example", "Initialize in specified directory");
+      .example("$0 init example", "Initialize in specified directory")
+      .example("$0 init --typescript", "Setup a TypeScript project");
   },
   async handler(args) {
     const path = args.path ? resolve(args.cwd, args.path) : args.cwd;
