@@ -1,4 +1,4 @@
-import { ComponentEnvironment } from "../types";
+import { ComponentEnvironment } from "@kosko/env";
 
 const env: ComponentEnvironment["nginx"] = {
   replicas: 1

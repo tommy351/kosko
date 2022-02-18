@@ -10,6 +10,14 @@ title: TypeScript Support
 
 Kosko and [kubernetes-models](https://github.com/tommy351/kubernetes-models-ts) are written in TypeScript, so you don't have to install any additional type declaration files.
 
+## Installation
+
+Install `typescript`, `ts-node` and `@tsconfig/recommended`. `@tsconfig/recommended` is optional, you can change it to any tsconfig you prefer.
+
+```sh
+npm install typescript ts-node @tsconfig/recommended --save-dev
+```
+
 ## Configuration
 
 To start using TypeScript, you have to either add [`require`](configuration.md#require) option in `kosko.toml`, or run Kosko with [`-r/--require`](commands.md#--require--r) option.
@@ -18,31 +26,43 @@ To start using TypeScript, you have to either add [`require`](configuration.md#r
 require = ["ts-node/register"]
 ```
 
+And then, create a `tsconfig.json` as below.
+
+```json title="tsconfig.json"
+{
+  "extends": "@tsconfig/recommended/tsconfig.json",
+  "compilerOptions": {
+    "typeRoots": ["./node_modules/@types", "./typings"],
+    "moduleResolution": "node"
+  }
+}
+```
+
 ## Environment Types
 
 You can specify types of environment variables by extending type declarations of `@kosko/env` module.
 
-```ts title="environments/types.d.ts"
-import * as env from "@kosko/env";
-
-// Declare types for global environment variables
-declare interface GlobalEnvironment {
-  imageRegistry: string;
-}
-
-// Declare types for component environment variables
-declare interface ComponentEnvironment {
-  // Fallback type of all other component variables which are not specified below
-  [key: string]: unknown;
-
-  // Specify types for each component
-  nginx: {
-    replicas: number;
-  };
-}
+```ts title="typings/@kosko__env/index.d.ts"
+import "@kosko/env";
 
 // Extend type declarations of "@kosko/env" module
 declare module "@kosko/env" {
+  // Declare types for global environment variables
+  interface GlobalEnvironment {
+    imageRegistry: string;
+  }
+
+  // Declare types for component environment variables
+  interface ComponentEnvironment {
+    // Fallback type of all other component variables which are not specified below
+    [key: string]: unknown;
+
+    // Specify types for each component
+    nginx: {
+      replicas: number;
+    };
+  }
+
   // Extend Environment interface
   interface Environment {
     global(): GlobalEnvironment;

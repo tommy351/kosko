@@ -1,4 +1,4 @@
-import { GlobalEnvironment } from "../types";
+import { GlobalEnvironment } from "@kosko/env";
 
 const env: GlobalEnvironment = {
   imageRegistry: ""
