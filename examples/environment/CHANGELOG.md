@@ -1,5 +1,12 @@
 # @kosko-example/environment
 
+## 0.0.11
+
+### Patch Changes
+
+- Updated dependencies []:
+  - kosko@2.1.1
+
 ## 0.0.10
 
 ### Patch Changes

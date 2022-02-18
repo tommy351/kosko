@@ -1,5 +1,11 @@
 # @kosko/cli
 
+## 2.1.1
+
+### Patch Changes
+
+- [`6d59e0a`](https://github.com/tommy351/kosko/commit/6d59e0a2318badc577dd570eb13c1f8efc8b592a) Thanks [@tommy351](https://github.com/tommy351)! - Update TypeScript templates.
+
 ## 2.1.0
 
 ### Minor Changes
