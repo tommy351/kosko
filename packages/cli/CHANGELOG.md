@@ -1,5 +1,16 @@
 # @kosko/cli
 
+## 2.1.0
+
+### Minor Changes
+
+- [#98](https://github.com/tommy351/kosko/pull/98) [`44c81ab`](https://github.com/tommy351/kosko/commit/44c81ab9f2f2811179a89420122106b6db991fd5) Thanks [@tommy351](https://github.com/tommy351)! - Add `--typescript` and `--esm` option to `kosko init` command.
+
+### Patch Changes
+
+- Updated dependencies [[`9f16569`](https://github.com/tommy351/kosko/commit/9f165696ffc1274ee28386b5bac979373fbce68b)]:
+  - @kosko/exec-utils@0.2.0
+
 ## 2.0.2
 
 ### Patch Changes
