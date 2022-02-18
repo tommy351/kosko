@@ -29,14 +29,12 @@
   "dependencies": {
     "@kosko/log": "workspace:^",
     "exit": "^0.1.2",
-    "fs-extra": "^10.0.0",
     "tslib": "^2.3.1",
     "yargs": "^17.3.0"
   },
   "devDependencies": {
     "@kosko/jest-preset": "workspace:^",
     "@types/exit": "^0.1.31",
-    "@types/fs-extra": "^9.0.13",
     "@types/yargs": "^17.0.7",
     "temp-dir": "^2.0.0",
     "tmp-promise": "^3.0.3"

@@ -32,13 +32,11 @@
   "dependencies": {
     "@kosko/exec-utils": "workspace:^",
     "@kosko/yaml": "workspace:^",
-    "fs-extra": "^10.0.0",
     "tmp-promise": "^3.0.3",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@kosko/jest-preset": "workspace:^",
-    "@types/fs-extra": "^9.0.13"
+    "@kosko/jest-preset": "workspace:^"
   },
   "jest": {
     "preset": "@kosko/jest-preset"

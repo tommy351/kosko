@@ -1,5 +1,5 @@
 import execa from "execa";
-import { copyFile, readFile } from "fs-extra";
+import fs from "fs";
 import { join } from "path";
 import tempDir from "temp-dir";
 import tmp from "tmp-promise";
@@ -15,7 +15,7 @@ beforeEach(async () => {
 
   const src = join(__dirname, "..", "bin.js");
   const dst = join(tmpDir.path, "bin.js");
-  await copyFile(src, dst);
+  await fs.promises.copyFile(src, dst);
   await installPackage(tmpDir.path, "template");
 
   result = await execa(dst, args, {
@@ -33,7 +33,9 @@ afterEach(async () => {
 
 async function readFiles(cwd: string): Promise<string[]> {
   return Promise.all(
-    ["foo", "bar/baz"].map((path) => readFile(join(cwd, path), "utf8"))
+    ["foo", "bar/baz"].map((path) =>
+      fs.promises.readFile(join(cwd, path), "utf8")
+    )
   );
 }
 

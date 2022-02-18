@@ -1,6 +1,6 @@
 import execa from "execa";
 import { join, dirname } from "path";
-import fs from "fs-extra";
+import fs from "fs";
 
 const root = dirname(__dirname);
 
@@ -24,5 +24,13 @@ export async function installPackage(
   const src = join(root, "packages", name);
   const dest = join(path, "node_modules", "@kosko", name);
 
-  await fs.ensureSymlink(src, dest, "dir");
+  await fs.promises.mkdir(dirname(dest), { recursive: true });
+
+  try {
+    await fs.promises.unlink(dest);
+  } catch (err: any) {
+    if (err.code !== "ENOENT") throw err;
+  }
+
+  await fs.promises.symlink(src, dest, "dir");
 }
