@@ -187,34 +187,6 @@ const service = new Service({
 
 export default [deployment, service];
 ",
-  "env.d.ts": "import \\"@kosko/env\\";
-
-// Declare types for global environment variables
-declare interface GlobalEnvironment {
-  namespace: string;
-}
-
-// Declare types for component environment variables
-declare interface ComponentEnvironment {
-  // Fallback type of all other component variables which are not specified below
-  [key: string]: unknown;
-
-  // Specify types for each component
-  nginx: {
-    replicas: number;
-  };
-}
-
-declare module \\"@kosko/env\\" {
-  interface Environment {
-    global(): GlobalEnvironment;
-
-    component<K extends string>(
-      name: K
-    ): GlobalEnvironment & ComponentEnvironment[K];
-  }
-}
-",
   "environments/dev/index.ts": "export default {
   namespace: \\"dev\\"
 };
@@ -246,9 +218,41 @@ require = [\\"ts-node/register\\"]
   "tsconfig.json": "{
   \\"extends\\": \\"@tsconfig/recommended/tsconfig.json\\",
   \\"compilerOptions\\": {
+    \\"typeRoots\\": [
+      \\"./node_modules/@types\\",
+      \\"./typings\\"
+    ],
     \\"module\\": \\"esnext\\"
   }
 }",
+  "typings/@kosko__env/index.d.ts": "import \\"@kosko/env\\";
+
+// Declare types for global environment variables
+declare interface GlobalEnvironment {
+  namespace: string;
+}
+
+// Declare types for component environment variables
+declare interface ComponentEnvironment {
+  // Fallback type of all other component variables which are not specified below
+  [key: string]: unknown;
+
+  // Specify types for each component
+  nginx: {
+    replicas: number;
+  };
+}
+
+declare module \\"@kosko/env\\" {
+  interface Environment {
+    global(): GlobalEnvironment;
+
+    component<K extends string>(
+      name: K
+    ): GlobalEnvironment & ComponentEnvironment[K];
+  }
+}
+",
 }
 `;
 
@@ -333,34 +337,6 @@ const service = new Service({
 
 export default [deployment, service];
 ",
-  "env.d.ts": "import \\"@kosko/env\\";
-
-// Declare types for global environment variables
-declare interface GlobalEnvironment {
-  namespace: string;
-}
-
-// Declare types for component environment variables
-declare interface ComponentEnvironment {
-  // Fallback type of all other component variables which are not specified below
-  [key: string]: unknown;
-
-  // Specify types for each component
-  nginx: {
-    replicas: number;
-  };
-}
-
-declare module \\"@kosko/env\\" {
-  interface Environment {
-    global(): GlobalEnvironment;
-
-    component<K extends string>(
-      name: K
-    ): GlobalEnvironment & ComponentEnvironment[K];
-  }
-}
-",
   "environments/dev/index.ts": "export default {
   namespace: \\"dev\\"
 };
@@ -389,8 +365,42 @@ require = [\\"ts-node/register\\"]
   }
 }",
   "tsconfig.json": "{
-  \\"extends\\": \\"@tsconfig/recommended/tsconfig.json\\"
+  \\"extends\\": \\"@tsconfig/recommended/tsconfig.json\\",
+  \\"compilerOptions\\": {
+    \\"typeRoots\\": [
+      \\"./node_modules/@types\\",
+      \\"./typings\\"
+    ]
+  }
 }",
+  "typings/@kosko__env/index.d.ts": "import \\"@kosko/env\\";
+
+// Declare types for global environment variables
+declare interface GlobalEnvironment {
+  namespace: string;
+}
+
+// Declare types for component environment variables
+declare interface ComponentEnvironment {
+  // Fallback type of all other component variables which are not specified below
+  [key: string]: unknown;
+
+  // Specify types for each component
+  nginx: {
+    replicas: number;
+  };
+}
+
+declare module \\"@kosko/env\\" {
+  interface Environment {
+    global(): GlobalEnvironment;
+
+    component<K extends string>(
+      name: K
+    ): GlobalEnvironment & ComponentEnvironment[K];
+  }
+}
+",
 }
 `;
 

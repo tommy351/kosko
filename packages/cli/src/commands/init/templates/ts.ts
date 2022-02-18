@@ -7,17 +7,22 @@ import {
 } from "./package-json";
 import { generateFromTemplateFile, generateReadme } from "./template";
 
-export function generateTsConfig(
-  data: {
-    compilerOptions?: Record<string, unknown>;
-    [key: string]: unknown;
-  } = {}
-): File {
+export function generateTsConfig({
+  compilerOptions,
+  ...data
+}: {
+  compilerOptions?: Record<string, unknown>;
+  [key: string]: unknown;
+} = {}): File {
   return {
     path: "tsconfig.json",
     content: JSON.stringify(
       {
         extends: "@tsconfig/recommended/tsconfig.json",
+        compilerOptions: {
+          typeRoots: ["./node_modules/@types", "./typings"],
+          ...compilerOptions
+        },
         ...data
       },
       null,
@@ -50,7 +55,10 @@ export function generateKoskoConfigTs() {
 }
 
 export function generateTypeDeclaration() {
-  return generateFromTemplateFile("env.d.ts", "ts/env.d.ts");
+  return generateFromTemplateFile(
+    "typings/@kosko__env/index.d.ts",
+    "ts/typings/kosko-env.d.ts"
+  );
 }
 
 export function generateTsEnvFiles() {
