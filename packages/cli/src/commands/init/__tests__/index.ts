@@ -93,6 +93,43 @@ describe("when the target exists and is not empty", () => {
   });
 });
 
+describe("when the target exists and existing files can be ignored", () => {
+  beforeEach(async () => {
+    await fs.promises.writeFile(join(tmpDir.path, ".DS_Store"), "");
+  });
+
+  test("should succeed", async () => {
+    await expect(execute({ path: tmpDir.path })).toResolve();
+  });
+
+  test("should throw an error if other unignorable files exist", async () => {
+    await fs.promises.writeFile(join(tmpDir.path, "test"), "foobar");
+    await expect(execute({ path: tmpDir.path })).rejects.toThrow(
+      "Path already exists"
+    );
+  });
+});
+
+describe("when the target exists and only git folder exist", () => {
+  beforeEach(async () => {
+    await fs.promises.mkdir(join(tmpDir.path, ".git"));
+  });
+
+  test("should succeed", async () => {
+    await expect(execute({ path: tmpDir.path })).toResolve();
+  });
+});
+
+describe("when the target exists and only contain log files", () => {
+  beforeEach(async () => {
+    await fs.promises.writeFile(join(tmpDir.path, "npm.log"), "foo");
+  });
+
+  test("should succeed", async () => {
+    await expect(execute({ path: tmpDir.path })).toResolve();
+  });
+});
+
 describe("when path is not specified", () => {
   test("should use cwd instead", async () => {
     await expect(execute({ cwd: tmpDir.path })).toResolve();

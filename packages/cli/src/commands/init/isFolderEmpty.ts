@@ -22,12 +22,15 @@ const IGNORE_FILES: (string | RegExp)[] = [
   ".cache"
 ];
 
+function shouldIgnoreFile(name: string): boolean {
+  return IGNORE_FILES.some((pattern) =>
+    typeof pattern === "string" ? name === pattern : pattern.test(name)
+  );
+}
+
 export default async function isFolderEmpty(path: string): Promise<boolean> {
   const files = await fs.promises.readdir(path);
+  const filtered = files.filter((name) => !shouldIgnoreFile(name));
 
-  return files.every((name) => {
-    return IGNORE_FILES.some((x) =>
-      typeof x === "string" ? x === name : x.test(name)
-    );
-  });
+  return !filtered.length;
 }
