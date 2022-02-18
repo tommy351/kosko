@@ -1,26 +1,31 @@
-import { File, Template, TemplateContext } from "./base";
+import { File, Template } from "./base";
 import { generateKoskoConfig } from "./kosko-config";
-import {
-  generatePackageJson,
-  mergePackageJson,
-  PackageJson
-} from "./package-json";
+import { generatePackageJson } from "./package-json";
 import { generateFromTemplateFile, generateReadme } from "./template";
+
+const BASE_TSCONFIG = "@tsconfig/recommended";
+
+export const tsDevDependencies = {
+  "ts-node": "^10.4.0",
+  typescript: "^4.5.3"
+};
 
 export function generateTsConfig({
   compilerOptions,
   ...data
 }: {
   compilerOptions?: Record<string, unknown>;
+  extends?: string;
   [key: string]: unknown;
 } = {}): File {
   return {
     path: "tsconfig.json",
     content: JSON.stringify(
       {
-        extends: "@tsconfig/recommended/tsconfig.json",
+        extends: `${BASE_TSCONFIG}/tsconfig.json`,
         compilerOptions: {
           typeRoots: ["./node_modules/@types", "./typings"],
+          moduleResolution: "node",
           ...compilerOptions
         },
         ...data
@@ -29,25 +34,6 @@ export function generateTsConfig({
       "  "
     )
   };
-}
-
-export function generatePackageJsonTs(
-  ctx: TemplateContext,
-  data: PackageJson = {}
-) {
-  return generatePackageJson(
-    ctx,
-    mergePackageJson(
-      {
-        devDependencies: {
-          "@tsconfig/recommended": "^1.0.1",
-          "ts-node": "^10.4.0",
-          typescript: "^4.5.3"
-        }
-      },
-      data
-    )
-  );
 }
 
 export function generateKoskoConfigTs() {
@@ -76,7 +62,12 @@ export function generateTsEnvFiles() {
 
 const tsTemplate: Template = async (ctx) => {
   return [
-    await generatePackageJsonTs(ctx),
+    await generatePackageJson(ctx, {
+      devDependencies: {
+        ...tsDevDependencies,
+        [BASE_TSCONFIG]: "^1.0.1"
+      }
+    }),
     generateKoskoConfigTs(),
     await generateReadme(),
     generateTsConfig(),
