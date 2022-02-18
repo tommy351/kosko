@@ -51,11 +51,11 @@ export function generateTsEnvFiles() {
   return Promise.all([
     generateFromTemplateFile(
       "environments/dev/index.ts",
-      "esm/environments/dev/index.js"
+      "ts/environments/dev/index.ts"
     ),
     generateFromTemplateFile(
       "environments/dev/nginx.ts",
-      "esm/environments/dev/nginx.js"
+      "ts/environments/dev/nginx.ts"
     )
   ]);
 }
