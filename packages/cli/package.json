@@ -48,18 +48,20 @@
     "jsonpath": "^1.1.1",
     "picocolors": "^1.0.0",
     "tslib": "^2.3.1",
-    "which-pm-runs": "^1.0.0",
     "yargs": "^17.3.0"
   },
   "devDependencies": {
     "@iarna/toml": "^2.2.5",
     "@kosko/env": "workspace:^",
+    "@kosko/jest-preset": "workspace:^",
     "@types/exit": "^0.1.31",
     "@types/jsonpath": "^0.2.0",
-    "@types/which-pm-runs": "^1.0.0",
     "@types/yargs": "^17.0.7",
     "pkg-dir": "^5.0.0",
     "temp-dir": "^2.0.0",
     "tmp-promise": "^3.0.3"
+  },
+  "jest": {
+    "preset": "@kosko/jest-preset"
   }
 }

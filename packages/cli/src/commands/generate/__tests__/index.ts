@@ -3,7 +3,7 @@ import { Config } from "@kosko/config";
 import env from "@kosko/env";
 import { generate, print, PrintFormat, Result } from "@kosko/generate";
 import fs from "fs";
-import { join } from "path";
+import { dirname, join } from "path";
 import pkgDir from "pkg-dir";
 import tempDir from "temp-dir";
 import tmp from "tmp-promise";
@@ -61,6 +61,7 @@ beforeEach(async () => {
   const envSrc = join(root!, "packages", "env");
   const envDest = join(tmpDir.path, "node_modules", "@kosko", "env");
 
+  await fs.promises.mkdir(dirname(envDest), { recursive: true });
   await fs.promises.symlink(envSrc, envDest, "dir");
 });
 

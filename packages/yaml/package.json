@@ -37,6 +37,7 @@
     "tslib": "^2.3.1"
   },
   "devDependencies": {
+    "@kosko/jest-preset": "workspace:^",
     "@types/fs-extra": "^9.0.13",
     "@types/js-yaml": "^4.0.5",
     "@types/node-fetch": "^2.5.12",
@@ -47,5 +48,8 @@
   },
   "peerDependencies": {
     "kubernetes-models": ">=1.0.3"
+  },
+  "jest": {
+    "preset": "@kosko/jest-preset"
   }
 }

@@ -10,7 +10,7 @@ import cjsTemplate from "./templates/cjs";
 import tsTemplate from "./templates/ts";
 import esmTemplate from "./templates/esm";
 import tsEsmTemplate from "./templates/ts-esm";
-import { getPackageManager, installDependencies } from "./install";
+import { installDependencies } from "./install";
 
 async function checkPath(path: string, force?: boolean) {
   try {
@@ -125,10 +125,9 @@ export const initCmd: Command<InitArguments> = {
     await writeFiles(path, files);
 
     const cdPath = getCDPath(args.cwd, path);
-    const pm = getPackageManager();
 
     if (args.install) {
-      await installDependencies(pm, path);
+      await installDependencies(path);
     }
 
     logger.log(
@@ -138,8 +137,8 @@ export const initCmd: Command<InitArguments> = {
 We suggest that you begin by typing:
 ${[
   ...(cdPath ? [`cd ${cdPath}`] : []),
-  ...(args.install ? [] : [`${pm} install`]),
-  `${pm} run generate`
+  ...(args.install ? [] : ["npm install"]),
+  `npm run generate`
 ]
   .filter(Boolean)
   .map((line) => `  ${pc.cyan(line)}`)

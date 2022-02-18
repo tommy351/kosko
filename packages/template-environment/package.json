@@ -33,5 +33,11 @@
   "dependencies": {
     "@kosko/template": "workspace:^",
     "tslib": "^2.3.1"
+  },
+  "devDependencies": {
+    "@kosko/jest-preset": "workspace:^"
+  },
+  "jest": {
+    "preset": "@kosko/jest-preset"
   }
 }

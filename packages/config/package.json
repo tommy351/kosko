@@ -35,6 +35,10 @@
     "type-fest": "^2.8.0"
   },
   "devDependencies": {
+    "@kosko/jest-preset": "workspace:^",
     "@types/fs-extra": "^9.0.13"
+  },
+  "jest": {
+    "preset": "@kosko/jest-preset"
   }
 }

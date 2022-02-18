@@ -81,7 +81,13 @@
     "peer": false,
     "source": [
       "package.json",
+      "internal/*/package.json",
       "packages/*/package.json"
+    ]
+  },
+  "jest": {
+    "projects": [
+      "<rootDir>/packages/*"
     ]
   }
 }
