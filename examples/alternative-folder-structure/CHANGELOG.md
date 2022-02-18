@@ -1,5 +1,12 @@
 # @kosko-example/alternative-folder-structure
 
+## 0.0.10
+
+### Patch Changes
+
+- Updated dependencies []:
+  - kosko@2.1.0
+
 ## 0.0.9
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # @kosko/kustomize
 
+## 0.2.2
+
+### Patch Changes
+
+- Updated dependencies [[`9f16569`](https://github.com/tommy351/kosko/commit/9f165696ffc1274ee28386b5bac979373fbce68b)]:
+  - @kosko/exec-utils@0.2.0
+
 ## 0.2.1
 
 ### Patch Changes
