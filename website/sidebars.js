@@ -31,7 +31,7 @@ module.exports = {
     },
     {
       type: "category",
-      label: "References",
+      label: "Reference",
       collapsed: false,
       items: ["commands", "configuration"]
     }

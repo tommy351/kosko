@@ -65,6 +65,7 @@ metadata:
 
 ```js
 const { loadFile } = require("@kosko/yaml");
+const { Service } = require("kubernetes-models/v1/Service");
 
 loadFile("manifest.yaml", {
   transform(manifest) {
@@ -74,7 +75,7 @@ loadFile("manifest.yaml", {
     }
 
     // Set all service type as "ClusterIP"
-    if (manifest.apiVersion === "v1" && manifest.kind === "Service") {
+    if (Service.is(manifest)) {
       manifest.spec.type = "ClusterIP";
     }
 

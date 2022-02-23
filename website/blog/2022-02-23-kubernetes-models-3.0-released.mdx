@@ -1,0 +1,133 @@
+---
+title: kubernetes-models 3.0 Released
+---
+
+import Image from "@theme/IdealImage";
+
+[kubernetes-models] 3.0 has been released last month. To upgrade to the latest `kubernetes-models`, run:
+
+```shell
+npm install kubernetes-models@latest
+```
+
+If you have installed any CRD packages, don't forget to upgrade them as well.
+
+## Smaller Package Size
+
+The package size of `kubernetes-models` 3.0 is reduced by 34% compressed, or 20% unpacked (compared to 2.0.2).
+
+| Version | Unpacked | Compressed |
+| ------- | -------: | ---------: |
+| 2.0.2   |    5.9MB |      749KB |
+| 3.0.1   |    4.7MB |      494KB |
+| Diff    |  -20.33% |    -34.04% |
+
+Several changes made the package size smaller in 3.0.
+
+First, the following alias files are removed in 3.0. These alias files were introduced a few years ago. Removing these files can reduce the number of files and the size of the export map.
+
+:::caution Breaking Change
+
+If you are using any of these import patterns, please rewrite import paths after upgrading to 3.0.
+
+- `kubernetes-models/api/core/v1/Pod`
+- `kubernetes-models/api/apps/v1/Deployment`
+- `kubernetes-models/apiextensions-apiserver/pkg/apis/apiextensions/v1/CustomResourceDefinition`
+
+:::
+
+Next, type definition files are used to be stored in `_definitions/<id>.js`. In 3.0, they are moved to `<apiVersion>/<kind>.js`. This can also reduce the number of alias files, and import paths can be shorter, too.
+
+Last, a new type `TypeMeta` has been added to `@kubernetes-models/base` package. Interfaces with `apiVersion` and `kind` will extend `TypeMeta` type now. This can remove doc comments in each type.
+
+```ts
+// Before
+export interface IIoK8sApiCoreV1Pod {
+  /**
+   * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+   */
+  apiVersion: "v1";
+  /**
+   * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+   */
+  kind: "Pod";
+}
+
+// After
+export interface IPod extends TypeMeta {
+  apiVersion: "v1";
+  kind: "Pod";
+}
+```
+
+## Better Import Suggestions
+
+Type definition files are used to be stored in `_definitions/<id>.js`, which are supposed to be hidden files. But sometimes IDEs get confused and show them in import suggestions. In 3.0, they are moved to more proper locations, which should provide a better IDE experience.
+
+Before:
+
+<Image
+  img={require("./2022-02-23-kubernetes-models-3.0-released/import-path-before.jpg")}
+/>
+
+After:
+
+<Image
+  img={require("./2022-02-23-kubernetes-models-3.0-released/import-path-after.jpg")}
+/>
+
+## API Machinery Package
+
+A new package `@kubernetes-models/apimachinery` has been released with `kubernetes-models` 3.0. This package includes types defined in [kubernetes/apimachinery](https://github.com/kubernetes/apimachinery) only. All CRD packages have been migrated to import this package instead of the whole `kubernetes-models`. This can reduce the size of dependencies of CRD packages.
+
+:::caution Breaking Change
+
+If you are using API machinery files, please rewrite import paths as below.
+
+```ts
+// Before
+import { IObjectMeta } from "kubernetes-models/apimachinery/pkg/apis/meta/v1/ObjectMeta";
+
+// After
+import { IObjectMeta } from "@kubernetes-models/apimachinery/pkg/apis/meta/v1/ObjectMeta";
+```
+
+:::
+
+## Type Guard
+
+All classes with `apiVersion` and `kind` now come with a new static method `is`, which can be used to narrow down object types. Noted that this function does **NOT** validate the object itself. It just checks whether `apiVersion` and `kind` match or not.
+
+```ts
+import { Pod } from "kubernetes-models/v1/Pod";
+
+const thing = { apiVersion: "v1", kind: "Pod" };
+
+if (Pod.is(thing)) {
+  // thing is an `IPod`.
+} else {
+  // thing is something else
+}
+```
+
+Type guards can also be used in the `transform` function of `@kosko/yaml`.
+
+```ts
+import { loadFile } from "@kosko/yaml";
+import { Service } from "kubernetes-models/v1/Service";
+
+loadFile("manifest.yaml", {
+  transform(manifest) {
+    // Set all service type as "ClusterIP"
+    if (Service.is(manifest)) {
+      manifest.spec.type = "ClusterIP";
+    }
+
+    return manifest;
+  }
+});
+```
+
+You can see [TypeScript documentation](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates) for more information about narrowing and type predicates.
+
+[kubernetes-models]: https://github.com/tommy351/kubernetes-models-ts
