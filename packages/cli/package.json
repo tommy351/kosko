@@ -41,6 +41,7 @@
     "@kosko/generate": "workspace:^",
     "@kosko/log": "workspace:^",
     "@kosko/migrate": "workspace:^",
+    "@kosko/plugin": "workspace:^",
     "@kosko/require": "workspace:^",
     "exit": "^0.1.2",
     "get-stdin": "^8.0.0",

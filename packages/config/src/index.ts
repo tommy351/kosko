@@ -4,5 +4,5 @@
  */
 
 export * from "./config";
-export { EnvironmentConfig, Config } from "./types";
+export { EnvironmentConfig, Config, PluginConfig } from "./types";
 export * from "./validate";

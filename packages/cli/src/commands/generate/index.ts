@@ -13,6 +13,7 @@ import { SetOption, parseSetOptions } from "./set-option";
 import { localRequireDefault } from "./require";
 import { BaseGenerateArguments, GenerateArguments } from "./types";
 import { setupEnv } from "./env";
+import { composeTransformFunc, loadPlugins } from "./plugin";
 
 export type { BaseGenerateArguments, GenerateArguments };
 
@@ -27,7 +28,8 @@ function resolveConfig(
   return {
     components:
       args.components && args.components.length ? args.components : components,
-    require: [...require, ...(args.require || [])]
+    require: [...require, ...(args.require || [])],
+    plugins: base.plugins || []
   };
 }
 
@@ -91,12 +93,16 @@ export async function generateHandler(
     await localRequireDefault(id, args.cwd);
   }
 
+  // Load plugins
+  const plugins = await loadPlugins({ cwd: args.cwd }, config.plugins);
+
   // Generate manifests
   const result = await generate({
     path: join(args.cwd, "components"),
     components: config.components,
     extensions: config.extensions,
-    validate: args.validate
+    validate: args.validate,
+    transform: plugins.length ? composeTransformFunc(plugins) : undefined
   });
 
   if (!result.manifests.length) {

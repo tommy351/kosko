@@ -29,6 +29,8 @@ export interface GenerateOptions {
    * Validate components.
    */
   validate?: boolean;
+
+  transform?(data: unknown): unknown;
 }
 
 async function getComponentValue(id: string): Promise<unknown> {
@@ -69,7 +71,8 @@ export async function generate(options: GenerateOptions): Promise<Result> {
     const components = await resolve(await getComponentValue(path), {
       validate: options.validate,
       index: [],
-      path
+      path,
+      transform: options.transform
     });
 
     manifests.push(...components);

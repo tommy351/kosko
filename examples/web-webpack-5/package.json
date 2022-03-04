@@ -9,7 +9,7 @@
   "dependencies": {
     "@kosko/env": "workspace:^3.0.0",
     "@kosko/generate": "workspace:^2.0.0",
-    "kubernetes-models": "^2.0.2"
+    "kubernetes-models": "^3.0.1"
   },
   "devDependencies": {
     "html-webpack-plugin": "^5.5.0",

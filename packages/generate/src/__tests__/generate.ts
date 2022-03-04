@@ -516,3 +516,44 @@ module.exports = new Validator();
     });
   });
 });
+
+describe("given transform function", () => {
+  let result: Result;
+  let transform: jest.Mock;
+
+  beforeAll(() => {
+    tmpFiles = [{ path: "foo.js", content: "module.exports = {foo: 'bar'}" }];
+  });
+
+  beforeEach(async () => {
+    transform = jest.fn((manifest) => {
+      return {
+        ...manifest,
+        x: "y"
+      };
+    });
+    result = await generate({
+      components: ["*"],
+      path: tmpDir.path,
+      transform
+    });
+  });
+
+  test("should call the hook", () => {
+    expect(transform).toBeCalledTimes(1);
+    expect(transform).toBeCalledWith({
+      path: join(tmpDir.path, "foo.js"),
+      index: [],
+      data: { foo: "bar" }
+    });
+    expect(result).toEqual({
+      manifests: [
+        {
+          path: join(tmpDir.path, "foo.js"),
+          index: [],
+          data: { foo: "bar", x: "y" }
+        }
+      ]
+    });
+  });
+});

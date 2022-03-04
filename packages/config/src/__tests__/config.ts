@@ -86,7 +86,8 @@ describe("getConfig", () => {
     test("should return an empty config", () => {
       expect(result).toEqual({
         components: [],
-        require: []
+        require: [],
+        plugins: []
       });
     });
   });
@@ -95,7 +96,8 @@ describe("getConfig", () => {
     beforeAll(() => {
       input = {
         components: ["foo"],
-        require: ["bar"]
+        require: ["bar"],
+        plugins: [{ name: "a" }]
       };
     });
 
@@ -110,10 +112,12 @@ describe("getConfig", () => {
         input = {
           components: ["foo"],
           require: ["bar"],
+          plugins: [{ name: "a" }],
           environments: {
             dev: {
               components: ["aaa"],
-              require: ["bbb"]
+              require: ["bbb"],
+              plugins: [{ name: "b" }]
             }
           }
         };
@@ -122,7 +126,8 @@ describe("getConfig", () => {
       test("should return the merge of global and environment config", () => {
         expect(result).toEqual({
           components: ["foo", "aaa"],
-          require: ["bar", "bbb"]
+          require: ["bar", "bbb"],
+          plugins: [{ name: "a" }, { name: "b" }]
         });
       });
     });
@@ -132,10 +137,12 @@ describe("getConfig", () => {
         input = {
           components: ["foo"],
           require: ["bar"],
+          plugins: [{ name: "a" }],
           environments: {
             prod: {
               components: ["aaa"],
-              require: ["bbb"]
+              require: ["bbb"],
+              plugins: [{ name: "b" }]
             }
           }
         };
@@ -144,7 +151,8 @@ describe("getConfig", () => {
       test("should return the global config", () => {
         expect(result).toEqual({
           components: ["foo"],
-          require: ["bar"]
+          require: ["bar"],
+          plugins: [{ name: "a" }]
         });
       });
     });

@@ -5,13 +5,22 @@ import {
   Infer,
   assign,
   optional,
-  record
+  record,
+  any
 } from "superstruct";
 import { ReadonlyDeep } from "type-fest";
 
+export const pluginConfigSchema = object({
+  name: string(),
+  options: optional(any())
+});
+
+export type PluginConfig = ReadonlyDeep<Infer<typeof pluginConfigSchema>>;
+
 export const environmentConfigSchema = object({
   require: optional(array(string())),
-  components: optional(array(string()))
+  components: optional(array(string())),
+  plugins: optional(array(pluginConfigSchema))
 });
 
 export type EnvironmentConfig = ReadonlyDeep<

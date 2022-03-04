@@ -58,6 +58,7 @@ export function getConfig(
 
   return {
     require: flatten(config.require, envConfig.require),
-    components: flatten(config.components, envConfig.components)
+    components: flatten(config.components, envConfig.components),
+    plugins: flatten(config.plugins, envConfig.plugins)
   };
 }

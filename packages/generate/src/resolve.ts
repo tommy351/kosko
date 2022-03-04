@@ -48,6 +48,12 @@ export interface ResolveOptions {
    * Source index of a manifest.
    */
   index?: number[];
+
+  /**
+   * Transform a manifest. Return `null` or `undefined` to omit manifests. This
+   * function is executed before validation.
+   */
+  transform?(data: unknown): unknown;
 }
 
 /**
@@ -73,7 +79,7 @@ export async function resolve(
     return resolve(await value, options);
   }
 
-  const { validate = true, index = [], path = "" } = options;
+  const { validate = true, index = [], path = "", transform } = options;
 
   if (Array.isArray(value)) {
     const manifests: Manifest[] = [];
@@ -89,6 +95,14 @@ export async function resolve(
     }
 
     return manifests;
+  }
+
+  if (typeof transform === "function") {
+    value = await transform(value);
+
+    if (value == null) {
+      return [];
+    }
   }
 
   if (validate) {

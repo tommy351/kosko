@@ -29,7 +29,7 @@ importers:
       jest-extended: ^1.2.0
       jest-puppeteer: ^6.0.2
       jest-serializer-path: ^0.1.15
-      kubernetes-models: ^2.0.2
+      kubernetes-models: ^3.0.1
       lint-staged: ^12.1.2
       npm-run-all: ^4.1.5
       pkg-dir: ^5.0.0
@@ -70,7 +70,7 @@ importers:
       jest-extended: 1.2.0
       jest-puppeteer: 6.0.2_puppeteer@12.0.1
       jest-serializer-path: 0.1.15
-      kubernetes-models: 2.0.2
+      kubernetes-models: 3.0.1
       lint-staged: 12.1.2
       npm-run-all: 4.1.5
       pkg-dir: 5.0.0
@@ -90,11 +90,11 @@ importers:
     specifiers:
       '@kosko/env': workspace:^
       kosko: workspace:^
-      kubernetes-models: ^2.0.2
+      kubernetes-models: ^3.0.1
     dependencies:
       '@kosko/env': link:../../packages/env
       kosko: link:../../packages/kosko
-      kubernetes-models: 2.0.2
+      kubernetes-models: 3.0.1
 
   examples/babel:
     specifiers:
@@ -103,11 +103,11 @@ importers:
       '@babel/register': ^7.16.0
       '@kosko/env': workspace:^
       kosko: workspace:^
-      kubernetes-models: ^2.0.2
+      kubernetes-models: ^3.0.1
     dependencies:
       '@kosko/env': link:../../packages/env
       kosko: link:../../packages/kosko
-      kubernetes-models: 2.0.2
+      kubernetes-models: 3.0.1
     devDependencies:
       '@babel/core': 7.16.0
       '@babel/preset-env': 7.16.4_@babel+core@7.16.0
@@ -117,75 +117,75 @@ importers:
     specifiers:
       '@kosko/env': workspace:^
       kosko: workspace:^
-      kubernetes-models: ^2.0.2
+      kubernetes-models: ^3.0.1
     dependencies:
       '@kosko/env': link:../../packages/env
       kosko: link:../../packages/kosko
-      kubernetes-models: 2.0.2
+      kubernetes-models: 3.0.1
 
   examples/esm:
     specifiers:
       '@kosko/env': workspace:^
       kosko: workspace:^
-      kubernetes-models: ^2.0.2
+      kubernetes-models: ^3.0.1
     dependencies:
       '@kosko/env': link:../../packages/env
       kosko: link:../../packages/kosko
-      kubernetes-models: 2.0.2
+      kubernetes-models: 3.0.1
 
   examples/getting-started:
     specifiers:
       '@kosko/env': workspace:^
       kosko: workspace:^
-      kubernetes-models: ^2.0.2
+      kubernetes-models: ^3.0.1
     dependencies:
       '@kosko/env': link:../../packages/env
       kosko: link:../../packages/kosko
-      kubernetes-models: 2.0.2
+      kubernetes-models: 3.0.1
 
   examples/run-programmatically:
     specifiers:
       '@kosko/env': workspace:^
       '@kosko/generate': workspace:^
       kosko: workspace:^
-      kubernetes-models: ^2.0.2
+      kubernetes-models: ^3.0.1
     dependencies:
       '@kosko/env': link:../../packages/env
       '@kosko/generate': link:../../packages/generate
       kosko: link:../../packages/kosko
-      kubernetes-models: 2.0.2
+      kubernetes-models: 3.0.1
 
   examples/run-programmatically-esm:
     specifiers:
       '@kosko/env': workspace:^
       '@kosko/generate': workspace:^
       kosko: workspace:^
-      kubernetes-models: ^2.0.2
+      kubernetes-models: ^3.0.1
     dependencies:
       '@kosko/env': link:../../packages/env
       '@kosko/generate': link:../../packages/generate
       kosko: link:../../packages/kosko
-      kubernetes-models: 2.0.2
+      kubernetes-models: 3.0.1
 
   examples/template-component:
     specifiers:
       '@kosko/template': workspace:^
-      kubernetes-models: ^2.0.2
+      kubernetes-models: ^3.0.1
     dependencies:
       '@kosko/template': link:../../packages/template
-      kubernetes-models: 2.0.2
+      kubernetes-models: 3.0.1
 
   examples/typescript:
     specifiers:
       '@kosko/env': workspace:^
       kosko: workspace:^
-      kubernetes-models: ^2.0.2
+      kubernetes-models: ^3.0.1
       ts-node: ^10.4.0
       typescript: ^4.5.3
     dependencies:
       '@kosko/env': link:../../packages/env
       kosko: link:../../packages/kosko
-      kubernetes-models: 2.0.2
+      kubernetes-models: 3.0.1
     devDependencies:
       ts-node: 10.4.0_74e588db5264178750052e53ffe97b8f
       typescript: 4.5.3
@@ -194,12 +194,12 @@ importers:
     specifiers:
       '@kosko/env': workspace:^3.0.0
       '@kosko/generate': workspace:^2.0.0
-      kubernetes-models: ^2.0.2
+      kubernetes-models: ^3.0.1
       parcel-bundler: ^1.12.5
     dependencies:
       '@kosko/env': link:../../packages/env
       '@kosko/generate': link:../../packages/generate
-      kubernetes-models: 2.0.2
+      kubernetes-models: 3.0.1
     devDependencies:
       parcel-bundler: 1.12.5
 
@@ -214,14 +214,14 @@ importers:
       '@kosko/env': workspace:^3.0.0
       '@kosko/generate': workspace:^2.0.0
       html-webpack-plugin: ^5.5.0
-      kubernetes-models: ^2.0.2
+      kubernetes-models: ^3.0.1
       webpack: ^5.65.0
       webpack-cli: ^4.9.1
       webpack-dev-server: ^4.6.0
     dependencies:
       '@kosko/env': link:../../packages/env
       '@kosko/generate': link:../../packages/generate
-      kubernetes-models: 2.0.2
+      kubernetes-models: 3.0.1
     devDependencies:
       html-webpack-plugin: 5.5.0_webpack@5.65.0
       webpack: 5.65.0_webpack-cli@4.9.1
@@ -233,14 +233,14 @@ importers:
       '@kosko/env': workspace:^3.0.0
       '@kosko/generate': workspace:^2.0.0
       html-webpack-plugin: ^5.5.0
-      kubernetes-models: ^2.0.2
+      kubernetes-models: ^3.0.1
       webpack: ^5.65.0
       webpack-cli: ^4.9.1
       webpack-dev-server: ^4.6.0
     dependencies:
       '@kosko/env': link:../../packages/env
       '@kosko/generate': link:../../packages/generate
-      kubernetes-models: 2.0.2
+      kubernetes-models: 3.0.1
     devDependencies:
       html-webpack-plugin: 5.5.0_webpack@5.65.0
       webpack: 5.65.0_webpack-cli@4.9.1
@@ -267,6 +267,7 @@ importers:
       '@kosko/jest-preset': workspace:^
       '@kosko/log': workspace:^
       '@kosko/migrate': workspace:^
+      '@kosko/plugin': workspace:^
       '@kosko/require': workspace:^
       '@types/exit': ^0.1.31
       '@types/jsonpath': ^0.2.0
@@ -288,6 +289,7 @@ importers:
       '@kosko/generate': link:../generate
       '@kosko/log': link:../log
       '@kosko/migrate': link:../migrate
+      '@kosko/plugin': link:../plugin
       '@kosko/require': link:../require
       exit: 0.1.2
       get-stdin: 8.0.0
@@ -439,7 +441,7 @@ importers:
       '@kosko/yaml': workspace:^
       camelcase: ^6.2.1
       is-plain-object: ^5.0.0
-      kubernetes-models: ^2.0.2
+      kubernetes-models: ^3.0.1
       tslib: ^2.3.1
     dependencies:
       '@kosko/yaml': link:../yaml
@@ -448,7 +450,41 @@ importers:
     devDependencies:
       '@kosko/jest-preset': link:../../internal/jest-preset
       is-plain-object: 5.0.0
-      kubernetes-models: 2.0.2
+      kubernetes-models: 3.0.1
+
+  packages/plugin:
+    specifiers:
+      tslib: ^2.3.1
+    dependencies:
+      tslib: 2.3.1
+
+  packages/plugin-set-image:
+    specifiers:
+      '@kosko/plugin': workspace:^
+      kubernetes-models: ^3.0.1
+      superstruct: ^0.15.3
+      tslib: ^2.3.1
+    dependencies:
+      kubernetes-models: 3.0.1
+      superstruct: 0.15.3
+      tslib: 2.3.1
+    devDependencies:
+      '@kosko/plugin': link:../plugin
+
+  packages/plugin-set-metadata:
+    specifiers:
+      '@kosko/plugin': workspace:^
+      deepmerge: ^4.2.2
+      dot: ^2.0.0-beta.1
+      superstruct: ^0.15.3
+      tslib: ^2.3.1
+    dependencies:
+      deepmerge: 4.2.2
+      dot: 2.0.0-beta.1
+      superstruct: 0.15.3
+      tslib: 2.3.1
+    devDependencies:
+      '@kosko/plugin': link:../plugin
 
   packages/require:
     specifiers:
@@ -510,7 +546,7 @@ importers:
       '@types/node-fetch': ^2.5.12
       fetch-mock: ^9.11.0
       js-yaml: ^4.1.0
-      kubernetes-models: ^2.0.2
+      kubernetes-models: ^3.0.1
       node-fetch: ^2.6.6
       temp-dir: ^2.0.0
       tmp-promise: ^3.0.3
@@ -526,7 +562,7 @@ importers:
       '@types/js-yaml': 4.0.5
       '@types/node-fetch': 2.5.12
       fetch-mock: 9.11.0_node-fetch@2.6.6
-      kubernetes-models: 2.0.2
+      kubernetes-models: 3.0.1
       temp-dir: 2.0.0
       tmp-promise: 3.0.3
 
@@ -3472,8 +3508,16 @@ packages:
       regenerator-runtime: 0.13.9
     dev: false
 
-  /@kubernetes-models/base/2.0.1:
-    resolution: {integrity: sha512-vaQgb8n4a/yrsVbuxc1M0X3revKkn9apJcgcjtn13mgmaA/P2SNtWrOOeRjE+U8LpYjGREDf24VLL5fl55AGRw==}
+  /@kubernetes-models/apimachinery/0.1.0:
+    resolution: {integrity: sha512-HKQ1EPbDZptSgrxodqiW/boft6fGHLJvfSc19JddRAPTd+otKPsbmOelWEQNp3yfAAU/ptAFi9/+8b7Ap6kpmQ==}
+    engines: {node: '>=12'}
+    dependencies:
+      '@kubernetes-models/base': 3.0.0
+      '@kubernetes-models/validate': 2.0.1
+      tslib: 2.3.1
+
+  /@kubernetes-models/base/3.0.0:
+    resolution: {integrity: sha512-oaWmwwZjMHgxa7FSpfUi8GbXPKmPZGOceVvB4KXc9JtgakZwDVgYBX2Q+fCf1mybbvypLOB/pjwpjznihaXEFQ==}
     engines: {node: '>=12'}
     dependencies:
       '@kubernetes-models/validate': 2.0.1
@@ -7287,6 +7331,10 @@ packages:
     dependencies:
       is-obj: 2.0.0
 
+  /dot/2.0.0-beta.1:
+    resolution: {integrity: sha512-kxM7fSnNQTXOmaeGuBSXM8O3fEsBb7XSDBllkGbRwa0lJSJTxxDE/4eSNGLKZUmlFw0f1vJ5qSV2BljrgQtgIA==}
+    dev: false
+
   /dotenv-expand/5.1.0:
     resolution: {integrity: sha512-YXQl1DSa4/PQyRfgrv6aoNjhasp/p4qs9FjJ4q4cQk+8m4r6k4ZSiEyytKG8f8W9gi8WsQtIObNmKd+tMzNTmA==}
     dev: true
@@ -10745,11 +10793,12 @@ packages:
     resolution: {integrity: sha512-pJiBpiXMbt7dkzXe8Ghj/u4FfXOOa98fPW+bihOJ4SjnoijweJrNThJfd3ifXpXhREjpoF2mZVH1GfS9LV3kHQ==}
     engines: {node: '>= 8'}
 
-  /kubernetes-models/2.0.2:
-    resolution: {integrity: sha512-4tonAim5mF6UFw07wnuEmQSDQ9AaNv54cwsTN32sEVBjrHtItC6RvOUJk36xn3IiFAPLIzwXHpRsjNpnLmbIKw==}
+  /kubernetes-models/3.0.1:
+    resolution: {integrity: sha512-A9i38mVLV8bIooq0AJacze8wQcJdPbly299wLPIA0kK2MjhOfRs7GFw7snqv5G2tHypWSRDykafVPBCAQNsxxQ==}
     engines: {node: '>=12'}
     dependencies:
-      '@kubernetes-models/base': 2.0.1
+      '@kubernetes-models/apimachinery': 0.1.0
+      '@kubernetes-models/base': 3.0.0
       '@kubernetes-models/validate': 2.0.1
       tslib: 2.3.1
 
