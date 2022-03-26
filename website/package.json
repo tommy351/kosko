@@ -26,10 +26,10 @@
     ]
   },
   "dependencies": {
-    "@docusaurus/core": "2.0.0-beta.15",
-    "@docusaurus/plugin-ideal-image": "^2.0.0-beta.15",
-    "@docusaurus/preset-classic": "2.0.0-beta.15",
-    "@docusaurus/theme-common": "2.0.0-beta.15",
+    "@docusaurus/core": "2.0.0-beta.18",
+    "@docusaurus/plugin-ideal-image": "2.0.0-beta.18",
+    "@docusaurus/preset-classic": "2.0.0-beta.18",
+    "@docusaurus/theme-common": "2.0.0-beta.18",
     "@mdx-js/react": "^1.6.22",
     "clsx": "^1.1.1",
     "codemirror": "^5.64.0",
@@ -50,7 +50,7 @@
     "use-immer": "^0.6.0"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "2.0.0-beta.15",
+    "@docusaurus/module-type-aliases": "2.0.0-beta.18",
     "@tsconfig/docusaurus": "^1.0.4",
     "@types/codemirror": "^5.60.5",
     "@types/lodash": "^4.14.178",
