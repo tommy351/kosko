@@ -460,7 +460,9 @@ importers:
 
   packages/plugin-set-image:
     specifiers:
+      '@kosko/jest-preset': workspace:^0.0.0
       '@kosko/plugin': workspace:^
+      '@kubernetes-models/base': ^3.0.0
       kubernetes-models: ^3.0.1
       superstruct: ^0.15.3
       tslib: ^2.3.1
@@ -469,21 +471,23 @@ importers:
       superstruct: 0.15.3
       tslib: 2.3.1
     devDependencies:
+      '@kosko/jest-preset': link:../../internal/jest-preset
       '@kosko/plugin': link:../plugin
+      '@kubernetes-models/base': 3.0.0
 
   packages/plugin-set-metadata:
     specifiers:
+      '@kosko/jest-preset': workspace:^0.0.0
       '@kosko/plugin': workspace:^
       deepmerge: ^4.2.2
-      dot: ^2.0.0-beta.1
       superstruct: ^0.15.3
       tslib: ^2.3.1
     dependencies:
       deepmerge: 4.2.2
-      dot: 2.0.0-beta.1
       superstruct: 0.15.3
       tslib: 2.3.1
     devDependencies:
+      '@kosko/jest-preset': link:../../internal/jest-preset
       '@kosko/plugin': link:../plugin
 
   packages/require:
@@ -7330,10 +7334,6 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       is-obj: 2.0.0
-
-  /dot/2.0.0-beta.1:
-    resolution: {integrity: sha512-kxM7fSnNQTXOmaeGuBSXM8O3fEsBb7XSDBllkGbRwa0lJSJTxxDE/4eSNGLKZUmlFw0f1vJ5qSV2BljrgQtgIA==}
-    dev: false
 
   /dotenv-expand/5.1.0:
     resolution: {integrity: sha512-YXQl1DSa4/PQyRfgrv6aoNjhasp/p4qs9FjJ4q4cQk+8m4r6k4ZSiEyytKG8f8W9gi8WsQtIObNmKd+tMzNTmA==}

@@ -541,11 +541,7 @@ describe("given transform function", () => {
 
   test("should call the hook", () => {
     expect(transform).toBeCalledTimes(1);
-    expect(transform).toBeCalledWith({
-      path: join(tmpDir.path, "foo.js"),
-      index: [],
-      data: { foo: "bar" }
-    });
+    expect(transform).toBeCalledWith({ foo: "bar" });
     expect(result).toEqual({
       manifests: [
         {

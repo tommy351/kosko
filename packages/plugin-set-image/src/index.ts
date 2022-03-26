@@ -27,12 +27,15 @@ interface ImageSpec {
 }
 
 function parseImage(image: string): ImageSpec {
-  const nameParts = image.split("/");
-  const parts = nameParts[nameParts.length - 1].split(":", 2);
+  const index = image.lastIndexOf(":");
+
+  if (index === -1) {
+    return { name: image, tag: "" };
+  }
 
   return {
-    name: parts[0],
-    tag: parts[1] || ""
+    name: image.substring(0, index),
+    tag: image.substring(index + 1)
   };
 }
 
@@ -94,13 +97,13 @@ const factory: PluginFactory = (ctx, options) => {
         for (const container of spec.containers) {
           if (!container.image) continue;
 
-          const spec = parseImage(container.image);
+          const image = parseImage(container.image);
 
-          if (!isImageMatch(container.image, spec, options.from)) {
+          if (!isImageMatch(container.image, image, options.from)) {
             continue;
           }
 
-          container.image = replaceImage(spec, options.to);
+          container.image = replaceImage(image, options.to);
         }
 
         return manifest;
