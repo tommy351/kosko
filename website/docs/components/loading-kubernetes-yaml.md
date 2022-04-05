@@ -6,30 +6,26 @@ If you already have lots of existing Kubernetes YAML files, you don't have to re
 
 ## Load YAML Files
 
-:::info
-This feature works better with [nested manifests](components.md#nested-manifests), which is available with v1.0.0 and above.
-:::
-
 This is the easiest way to import your existing Kubernetes YAML files. It's recommended to try this first if you don't need to manipulate YAML files. All manifests except custom resource definitions (CRD) are created with [kubernetes-models], so they are validated against Kubernetes OpenAPI schema.
 
-### Installation
+### Install
 
 ```shell
-npm install @kosko/yaml kubernetes-models
+npm install @kosko/yaml
 ```
 
 ### Load from a File
 
-```js
-const { loadFile } = require("@kosko/yaml");
+```ts ts2js
+import { loadFile } from "@kosko/yaml";
 
 loadFile("manifest.yaml");
 ```
 
 ### Load from a URL
 
-```js
-const { loadUrl } = require("@kosko/yaml");
+```ts ts2js
+import { loadUrl } from "@kosko/yaml";
 
 // Load from a URL
 loadUrl(
@@ -39,7 +35,9 @@ loadUrl(
 
 You can customize headers or method in options. See [node-fetch](https://github.com/node-fetch/node-fetch#options) for more information about available options.
 
-```js
+```ts ts2js
+import { loadUrl } from "@kosko/yaml";
+
 loadUrl("", {
   method: "POST",
   headers: {
@@ -50,8 +48,8 @@ loadUrl("", {
 
 ### Load from a String
 
-```js
-const { loadString } = require("@kosko/yaml");
+```ts ts2js
+import { loadString } from "@kosko/yaml";
 
 loadString(`
 apiVersion: v1
@@ -63,9 +61,9 @@ metadata:
 
 ### Transform Manifests
 
-```js
-const { loadFile } = require("@kosko/yaml");
-const { Service } = require("kubernetes-models/v1/Service");
+```ts ts2js
+import { loadFile } from "@kosko/yaml";
+import { Service } from "kubernetes-models/v1/Service";
 
 loadFile("manifest.yaml", {
   transform(manifest) {
@@ -90,7 +88,7 @@ loadFile("manifest.yaml", {
 Register custom resource definitions (CRD) with `setResourceModule` function.
 
 ```js
-const { setResourceModule } = require("@kosko/yaml");
+import { setResourceModule } from "@kosko/yaml";
 
 setResourceModule(
   {
@@ -109,6 +107,8 @@ setResourceModule(
 By default, all manifests except custom resource definitions (CRD) are created with [kubernetes-models]. If you don't want to validate them for some reasons, you can transform them into plain objects, or override the `validate` method.
 
 ```js
+import { loadFile } from "@kosko/yaml";
+
 loadFile("manifest.yaml", {
   tranform(manifest) {
     // Return the plain object
@@ -136,6 +136,6 @@ kosko migrate -f manifest.yaml > components/nginx.js
 cat manifest.yaml | kosko migrate -f - > components/nginx.js
 ```
 
-See [commands](commands.md#migrate) for more information about available options.
+See [kosko migrate](commands.md#migrate) for more information about available options.
 
 [kubernetes-models]: https://github.com/tommy351/kubernetes-models-ts

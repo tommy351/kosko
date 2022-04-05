@@ -2,11 +2,10 @@
 title: Environments
 ---
 
-:::note Examples
+Environments are variables specific to different clusters or namespaces. There are two types of variables:
 
-- [Environment](https://github.com/tommy351/kosko/tree/master/examples/environment)
-
-:::
+- **Global Variables** - Shared across all components.
+- **Component Variables** - Only used within a component.
 
 ## Create Environments
 
@@ -86,7 +85,7 @@ require("@kosko/env").component("nginx") ===
 When running `kosko generate` or `kosko validate`, use [`-e,--env`](commands.md#--env--e) to specify environments.
 
 ```shell
-npx kosko generate -e dev
+kosko generate -e dev
 ```
 
 You can also set [`baseEnvironment`](configuration.md#baseenvironment) as the default environment.

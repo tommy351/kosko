@@ -11,10 +11,10 @@ title: Programmatic Usage
 
 In order to run Kosko programmatically, you need at least `@kosko/env` and `@kosko/generate` package. The following is a basic example.
 
-```js
-const env = require("@kosko/env");
-const { generate, print, PrintFormat } = require("@kosko/generate");
-const { join } = require("path");
+```ts ts2js
+import env from "@kosko/env";
+import { generate, print, PrintFormat } from "@kosko/generate";
+import path from "path";
 
 (async () => {
   // Set environment
@@ -25,7 +25,7 @@ const { join } = require("path");
 
   // Generate manifests
   const result = await generate({
-    path: join(env.cwd, "components"),
+    path: path.join(env.cwd, "components"),
     components: ["*"]
   });
 

@@ -22,4 +22,4 @@ loadKustomize({
 });
 ```
 
-See [loading Kustomize](/docs/loading-kustomize) for more details.
+See [loading Kustomize](/docs/components/loading-kustomize) for more details.

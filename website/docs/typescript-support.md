@@ -2,15 +2,9 @@
 title: TypeScript Support
 ---
 
-:::note Examples
-
-- [TypeScript](https://github.com/tommy351/kosko/tree/master/examples/typescript)
-
-:::
-
 Kosko and [kubernetes-models](https://github.com/tommy351/kubernetes-models-ts) are written in TypeScript, so you don't have to install any additional type declaration files.
 
-## Installation
+## Install
 
 Install `typescript`, `ts-node` and `@tsconfig/recommended`. `@tsconfig/recommended` is optional, you can change it to any tsconfig you prefer.
 

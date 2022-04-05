@@ -2,18 +2,14 @@
 title: Templates
 ---
 
-:::note Examples
-
-- [Template component](https://github.com/tommy351/kosko/tree/master/examples/template-component)
-
-:::
+A template helps you generate code easily so you don't have to build from scratch every time.
 
 ## Generate Components
 
 This example shows how to generate a component containing a horizontal pod autoscaler (HPA). You can see the result in [the example](https://github.com/tommy351/kosko/tree/master/examples/template-component).
 
-```js
-const { run } = require("@kosko/template");
+```ts ts2js
+import { run } from "@kosko/template";
 
 run({
   description: "Create a new HPA",

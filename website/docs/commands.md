@@ -66,7 +66,7 @@ kosko generate [components..]
 
 #### `components`
 
-Components to generate. It can be either a component's name or a [glob pattern]). This overrides components set in the config file.
+Components to generate. It can be either a component's name or a [glob pattern]. This overrides components set in the config file.
 
 ```shell
 # Generate components set in kosko.toml
