@@ -82,7 +82,7 @@ require("@kosko/env").component("nginx") ===
 
 ## Specify Environments
 
-When running `kosko generate` or `kosko validate`, use [`-e,--env`](commands.md#--env--e) to specify environments.
+When running `kosko generate` or `kosko validate`, use [`-e,--env`](cli/generate.md#--env--e) to specify environments.
 
 ```shell
 kosko generate -e dev

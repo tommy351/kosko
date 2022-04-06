@@ -14,7 +14,7 @@ npm install typescript ts-node @tsconfig/recommended --save-dev
 
 ## Configuration
 
-To start using TypeScript, you have to either add [`require`](configuration.md#require) option in `kosko.toml`, or run Kosko with [`-r/--require`](commands.md#--require--r) option.
+To start using TypeScript, you have to either add [`require`](configuration.md#require) option in `kosko.toml`, or run Kosko with [`-r/--require`](cli/generate.md#--require--r) option.
 
 ```toml title="kosko.toml"
 require = ["ts-node/register"]

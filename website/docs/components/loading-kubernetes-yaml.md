@@ -136,6 +136,6 @@ kosko migrate -f manifest.yaml > components/nginx.js
 cat manifest.yaml | kosko migrate -f - > components/nginx.js
 ```
 
-See [kosko migrate](commands.md#migrate) for more information about available options.
+See [kosko migrate](cli/migrate.md) for more information about available options.
 
 [kubernetes-models]: https://github.com/tommy351/kubernetes-models-ts

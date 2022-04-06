@@ -16,7 +16,7 @@ A component should be placed in `components/<name>.js` or `components/<name>/ind
     └── nginx.js
 ```
 
-When you run [`kosko generate`](commands.md#generate), Kosko will find all files or folders in `components` folder that matching the pattern set in [`components`](configuration.md#components) configuration (it is `*` by default, which means everything in components folder). You can add component names or patterns to the command to specify which components to generate.
+When you run [`kosko generate`](cli/generate.md), Kosko will find all files or folders in `components` folder that matching the pattern set in [`components`](configuration.md#components) configuration (it is `*` by default, which means everything in components folder). You can add component names or patterns to the command to specify which components to generate.
 
 ```shell
 # Use `components` in `kosko.toml`.
@@ -43,7 +43,7 @@ const pod = new Pod({
 export default pod;
 ```
 
-Then you can run [`kosko generate`](commands.md#generate) to print YAML.
+Then you can run [`kosko generate`](cli/generate.md) to print YAML.
 
 ```shell
 kosko generate
@@ -124,7 +124,7 @@ const service = new Service({
 export default [deployment, service];
 ```
 
-At the last line, we replace the export value with an array. So when you run [`kosko generate`](commands.md#generate), it will print YAML as below.
+At the last line, we replace the export value with an array. So when you run [`kosko generate`](cli/generate.md), it will print YAML as below.
 
 ```shell
 kosko generate

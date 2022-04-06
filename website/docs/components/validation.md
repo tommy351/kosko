@@ -2,7 +2,7 @@
 title: Validation
 ---
 
-When you run [`kosko generate`](commands.md#generate) or [`kosko validate`](commands.md#validate), Kosko will run `validate()` method of every exported manifests.
+When you run [`kosko generate`](cli/generate.md) or [`kosko validate`](cli/validate.md), Kosko will run `validate()` method of every exported manifests.
 
 ## Error
 
@@ -89,7 +89,7 @@ new Pod().toJSON();
 }
 ```
 
-To disable validation on all manifests, run [`kosko generate`](commands.md#generate) with `--validate=false` option.
+To disable validation on all manifests, run [`kosko generate`](cli/generate.md) with `--validate=false` option.
 
 ```shell
 kosko generate --validate=false

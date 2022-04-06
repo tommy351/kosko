@@ -41,7 +41,7 @@ npx kosko
 
 ## Automatic Setup
 
-It's recommended to setup a Kosko project with [`kosko init`](commands.md#init) command, which sets up basic folder structure and installs everything you need automatically.
+It's recommended to setup a Kosko project with [`kosko init`](cli/init.md) command, which sets up basic folder structure and installs everything you need automatically.
 
 ```shell
 kosko init example
@@ -85,7 +85,7 @@ npx @kosko/template-deployed-service --name nginx --image nginx
 
 ## Generate YAML
 
-Run [`kosko generate`](commands.md#generate) to print Kubernetes manifests in the console.
+Run [`kosko generate`](cli/generate.md) to print Kubernetes manifests in the console.
 
 ```shell
 kosko generate
@@ -97,7 +97,7 @@ Pipe the output to kubectl to apply to a cluster.
 kosko generate | kubectl apply -f -
 ```
 
-If you don't want to print manifests to console, run [`kosko validate`](commands.md#validate).
+If you don't want to print manifests to console, run [`kosko validate`](cli/validate.md).
 
 ```shell
 kosko validate

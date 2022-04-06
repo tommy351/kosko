@@ -1,60 +1,6 @@
 ---
-title: Commands
+title: kosko generate
 ---
-
-## Usage
-
-```shell
-kosko <command>
-```
-
-### Options
-
-#### `--cwd`
-
-Set path to the working directory. Default to the current working directory (CWD).
-
-#### `--silent`
-
-Disable log output.
-
-#### `--log-level`
-
-Set log level. Default to `info`. Possible values are `trace`, `debug`, `info`, `warn`, `error`, `fatal`.
-
-## `init`
-
-Create a new Kosko project.
-
-```shell
-kosko init [path]
-```
-
-### Positionals
-
-#### `path`
-
-Path to initialize. Default to the current directory.
-
-### Options
-
-#### `--force, -f`
-
-Overwrite existing files.
-
-#### `--typescript, --ts`
-
-Generate TypeScript files.
-
-#### `--esm`
-
-Generate ECMAScript module (ESM) files.
-
-#### `--install`
-
-Install dependencies automatically.
-
-## `generate`
 
 Generate Kubernetes manifests.
 
@@ -62,9 +8,9 @@ Generate Kubernetes manifests.
 kosko generate [components..]
 ```
 
-### Positionals
+## Positionals
 
-#### `components`
+### `components`
 
 Components to generate. It can be either a component's name or a [glob pattern]. This overrides components set in the config file.
 
@@ -79,13 +25,13 @@ kosko generate foo bar
 kosko generate nginx_*
 ```
 
-### Options
+## Options
 
-#### `--env, -e`
+### `--env, -e`
 
 Environment name.
 
-#### `--set, -s`
+### `--set, -s`
 
 Override global environment variables on the command line KEY=VAL (can be used multiple times).
 
@@ -116,7 +62,7 @@ kosko generate --set myService=\'true\'
 kosko generate --set myService='"true"'
 ```
 
-#### `--set.<component>, -s.<component>`
+### `--set.<component>, -s.<component>`
 
 Override variables of the specified component. Format is the same as in the `--set` argument. Component overrides are always applied after the global ones regardless of an order of arguments in the command line.
 
@@ -125,7 +71,7 @@ Override variables of the specified component. Format is the same as in the `--s
 kosko generate --set.backend mysql.port=3308 --set mysql.port=3307
 ```
 
-#### `--require, -r`
+### `--require, -r`
 
 Require external modules. Modules set in the config file will also be required.
 
@@ -134,15 +80,15 @@ Require external modules. Modules set in the config file will also be required.
 kosko generate -r ts-node/register
 ```
 
-#### `--output, -o`
+### `--output, -o`
 
 Output format. The value can be `yaml` or `json`. Default to `yaml`.
 
-#### `--validate`
+### `--validate`
 
-Validate components. It is enabled by default. It can be disabled by setting `--no-validate` or `--validate=false`.
+Validate components. It is enabled by default. It can be disabled by setting `--validate=false`.
 
-### Examples
+## Examples
 
 ```shell
 # Print components to console
@@ -150,78 +96,6 @@ kosko generate
 
 # Apply to Kubernetes cluster
 kosko generate | kubectl apply -f -
-```
-
-## `validate`
-
-Validate components.
-
-```shell
-kosko validate [components..]
-```
-
-### Positionals
-
-#### `components`
-
-Components to generate. It can be either a component's name or a [glob pattern]). This overrides components set in the config file.
-
-```shell
-# Generate components set in kosko.toml
-kosko validate
-
-# Generate components with specified names
-kosko validate foo bar
-
-# Generate components matched to the glob pattern
-kosko validate nginx_*
-```
-
-### Options
-
-#### `--env, -e`
-
-Environment name.
-
-#### `--set, -s, --set.<component>, -s.<component>`
-
-Override global or component variables on the command line KEY=VAL (can be used multiple times). See decription of the generate command for more details.
-
-#### `--require, -r`
-
-Require external modules. Modules set in the config file will also be required.
-
-```shell
-# Using TypeScript
-kosko validate -r ts-node/register
-```
-
-## `migrate`
-
-Migrate Kubernetes YAML into kosko components.
-
-```shell
-kosko migrate
-```
-
-### Options
-
-#### `--filename, -f`
-
-File, directory or stdin to migrate.
-
-```shell
-# Read from a file or a directory
-kosko migrate -f path/to/file
-
-# Read from stdin
-kosko migrate -f -
-```
-
-### Examples
-
-```shell
-kosko migrate -f nginx.yml > components/nginx.js
 ```
 
 [glob pattern]: https://en.wikipedia.org/wiki/Glob_(programming)
