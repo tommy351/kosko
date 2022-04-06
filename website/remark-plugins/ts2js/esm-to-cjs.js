@@ -69,7 +69,7 @@ function esmToCjs(input) {
       source.overwrite(
         path.node.start,
         path.node.declaration.start,
-        "exports.default = "
+        "module.exports = "
       );
     },
     ExportNamedDeclaration(path) {

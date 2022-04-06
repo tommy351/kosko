@@ -13,10 +13,13 @@ function isParent(node) {
 }
 
 function matchNode(node) {
-  return node.type === "code" && node.meta === "ts2js";
+  if (node.type !== "code" || !node.meta) return false;
+
+  const meta = node.meta.split(/\s+/g);
+  return meta.includes("ts2js");
 }
 
-function renderTabItem(label, value) {
+function renderTabItem(label, meta, value) {
   return [
     {
       type: "jsx",
@@ -25,6 +28,7 @@ function renderTabItem(label, value) {
     {
       type: "code",
       lang: "typescript",
+      meta,
       value
     },
     {
@@ -40,8 +44,8 @@ function transformNode(node) {
       type: "jsx",
       value: `<Tabs groupId="ts2js">`
     },
-    ...renderTabItem("TypeScript", node.value),
-    ...renderTabItem("JavaScript", esmToCjs(tsToEsm(node.value))),
+    ...renderTabItem("TypeScript", node.meta, node.value),
+    ...renderTabItem("JavaScript", node.meta, esmToCjs(tsToEsm(node.value))),
     {
       type: "jsx",
       value: "</Tabs>"

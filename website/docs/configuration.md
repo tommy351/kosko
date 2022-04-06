@@ -64,11 +64,11 @@ Extension names of components. You don't have to set this option. It's detected 
 
 ### `baseEnvironment`
 
-Specify the base environment. You may define default or common variables in the base environment. The base environment can be used with or without `--env/e` option. When `--env/-e` option is set, variables in the base environment are overrided by the specified environment.
+Specify the base environment. You may define default or common variables in the base environment. The base environment can be used with or without `--env/e` option. When `--env/-e` option is set, variables in the base environment are overridden by the specified environment.
 
 ## Environment Configs
 
-Environment configs are applied when you run `kosko generate` with `--env/-e` option. Environment configs are merged with global configs.
+Environment configs are applied when you run [`kosko generate`](cli/generate.md) with `--env/-e` option. Environment configs are merged with global configs.
 
 ```toml
 # Applied when env = "dev"
@@ -86,8 +86,8 @@ components = ["f"]
 
 ### `paths.environment.global`
 
-Specify the path to global environment file.
+Specify path to global environment files.
 
 ### `paths.environment.component`
 
-Specify the path to component environment file.
+Specify path to component environment files.

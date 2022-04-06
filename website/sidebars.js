@@ -24,7 +24,7 @@ module.exports = {
         type: "doc",
         id: "environments/index"
       },
-      items: []
+      items: ["environments/folder-structure"]
     },
     "templates",
     "typescript-support",
