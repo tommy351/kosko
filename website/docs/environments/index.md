@@ -43,7 +43,7 @@ const params = env.global();
 
 ## Component Variables
 
-Component variables should only be used within a component. However, you can still retrieve them from another components. If you find certain component variables are used by multiple components, you should consider move them to global variables.
+Component variables should only be used within a component. However, you can still retrieve them from another components. If you find a component variable is used by multiple components, you should consider move it to global variables.
 
 Component variables are defined in `environments/<env>/<component>.js`.
 

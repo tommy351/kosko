@@ -3,7 +3,6 @@
 const MagicString = require("magic-string");
 const babel = require("@babel/core");
 const traverse = require("@babel/traverse").default;
-const prettier = require("./prettier");
 
 function esmToCjs(input) {
   const ast = babel.parseSync(input, {
@@ -97,7 +96,7 @@ function esmToCjs(input) {
     }
   });
 
-  return prettier(source.toString());
+  return source.toString();
 }
 
 module.exports = esmToCjs;
