@@ -68,7 +68,11 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
-          editUrl: `${githubUrl}/edit/master/website/`
+          editUrl: `${githubUrl}/edit/master/website/`,
+          remarkPlugins: [require("./remark-plugins/ts2js")]
+        },
+        pages: {
+          remarkPlugins: [require("./remark-plugins/ts2js")]
         },
         blog: {
           showReadingTime: true,

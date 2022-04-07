@@ -157,7 +157,7 @@ export function loadKustomize({
     }
 
     throw new Error(
-      `"loadKustomize" requires either kustomize or kubectl CLI installed in your environment. More info: https://kosko.dev/docs/loading-kustomize`
+      `"loadKustomize" requires either kustomize or kubectl CLI installed in your environment. More info: https://kosko.dev/docs/components/loading-kustomize`
     );
   };
 }

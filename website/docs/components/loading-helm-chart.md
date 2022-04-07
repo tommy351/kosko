@@ -8,28 +8,28 @@ Kosko supports loading manifests from Helm charts. You have to [install the Helm
 
 Under the hood, `@kosko/helm` uses `@kosko/yaml` to load YAML, which means the `loadChart` function supports all options of the `loadString` function. See [loading Kubernetes YAML](loading-kubernetes-yaml.md) for more details.
 
-## Installation
+## Install
 
-Install `@kosko/helm` and [kubernetes-models].
+Install `@kosko/helm`.
 
 ```shell
-npm install @kosko/helm kubernetes-models
+npm install @kosko/helm
 ```
 
-### Load from a Local Chart
+## Load from a Local Chart
 
-```js
-const { loadChart } = require("@kosko/helm");
+```ts ts2js
+import { loadChart } from "@kosko/helm";
 
 loadChart({
   chart: "./nginx"
 });
 ```
 
-### Load from a Repository
+## Load from a Repository
 
-```js
-const { loadChart } = require("@kosko/helm");
+```ts ts2js
+import { loadChart } from "@kosko/helm";
 
 loadChart({
   chart: "prometheus",
@@ -38,10 +38,10 @@ loadChart({
 });
 ```
 
-### Specify Release Name
+## Specify Release Name
 
-```js
-const { loadChart } = require("@kosko/helm");
+```ts ts2js
+import { loadChart } from "@kosko/helm";
 
 loadChart({
   chart: "./nginx",
@@ -49,10 +49,10 @@ loadChart({
 });
 ```
 
-### Specify Values
+## Specify Values
 
-```js
-const { loadChart } = require("@kosko/helm");
+```ts ts2js
+import { loadChart } from "@kosko/helm";
 
 loadChart({
   chart: "./nginx",
@@ -62,10 +62,10 @@ loadChart({
 });
 ```
 
-### Include CRDs
+## Include CRDs
 
-```js
-const { loadChart } = require("@kosko/helm");
+```ts ts2js
+import { loadChart } from "@kosko/helm";
 
 loadChart({
   chart: "traefik",
@@ -73,5 +73,3 @@ loadChart({
   includeCrds: true
 });
 ```
-
-[kubernetes-models]: https://github.com/tommy351/kubernetes-models-ts

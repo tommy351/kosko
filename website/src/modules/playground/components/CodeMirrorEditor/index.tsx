@@ -37,7 +37,8 @@ const CodeMirrorEditor: FunctionComponent<CodeMirrorEditorProps> = ({
   path,
   ...props
 }) => {
-  const { isDarkTheme } = useColorMode();
+  const { colorMode } = useColorMode();
+  const isDarkTheme = colorMode === "dark";
   const [mounted, setMounted] = useState(false);
   const options = useMemo(
     (): EditorConfiguration => ({

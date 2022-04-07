@@ -1,6 +1,10 @@
 ---
-title: TypeScript Support
+title: TypeScript
 ---
+
+import DocCardList from "@theme/DocCardList";
+
+Kosko and [kubernetes-models](https://github.com/tommy351/kubernetes-models-ts) are written in TypeScript, so you don't have to install any additional type declaration files.
 
 :::note Examples
 
@@ -8,9 +12,7 @@ title: TypeScript Support
 
 :::
 
-Kosko and [kubernetes-models](https://github.com/tommy351/kubernetes-models-ts) are written in TypeScript, so you don't have to install any additional type declaration files.
-
-## Installation
+## Install
 
 Install `typescript`, `ts-node` and `@tsconfig/recommended`. `@tsconfig/recommended` is optional, you can change it to any tsconfig you prefer.
 
@@ -20,7 +22,7 @@ npm install typescript ts-node @tsconfig/recommended --save-dev
 
 ## Configuration
 
-To start using TypeScript, you have to either add [`require`](configuration.md#require) option in `kosko.toml`, or run Kosko with [`-r/--require`](commands.md#--require--r) option.
+To start using TypeScript, you have to either add [`require`](configuration.md#require) option in `kosko.toml`, or run Kosko with [`-r/--require`](cli/generate.md#--require--r) option.
 
 ```toml title="kosko.toml"
 require = ["ts-node/register"]
@@ -73,3 +75,22 @@ declare module "@kosko/env" {
   }
 }
 ```
+
+## Related
+
+<DocCardList
+  items={[
+    {
+      type: "link",
+      label: "ECMAScript Modules",
+      href: "/docs/ecmascript-modules",
+      docId: "ecmascript-modules"
+    },
+    {
+      type: "link",
+      label: "@kosko/env",
+      href: "/docs/api/modules/kosko_env",
+      docId: "api/modules/kosko_env"
+    }
+  ]}
+/>

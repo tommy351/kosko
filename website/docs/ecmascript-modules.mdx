@@ -2,16 +2,18 @@
 title: ECMAScript Modules
 ---
 
+import DocCardList from "@theme/DocCardList";
+
+Kosko supports ECMAScript modules (ESM). You can write components and environments in native ESM files.
+
+Node.js v12 or above is required for ESM. However, Node.js v14.8.0 or above is recommended because [top-level await](https://nodejs.org/dist/latest-v14.x/docs/api/esm.html#esm_top_level_await) is supported without flags in this version.
+
 :::note Examples
 
 - [ECMAScript Modules](https://github.com/tommy351/kosko/tree/master/examples/esm)
 - [Run Programmatically (ESM)](https://github.com/tommy351/kosko/tree/master/examples/run-programmatically-esm)
 
 :::
-
-Kosko supports ECMAScript modules (ESM). You can write components and environments in native ESM files.
-
-Node.js v12 or above is required for ESM. However, Node.js v14.8.0 or above is recommended because [top-level await](https://nodejs.org/dist/latest-v14.x/docs/api/esm.html#esm_top_level_await) is supported without flags in this version.
 
 ## Enabling
 
@@ -83,3 +85,40 @@ function setupEnv(env) {
   setupEnv((await import("@kosko/env")).default);
 })();
 ```
+
+## TypeScript
+
+Set `compilerOptions.module` to `esnext` to allow TypeScript compile your code into ESM instead of CommonJS.
+
+```json title="tsconfig.json"
+{
+  "compilerOptions": {
+    "module": "esnext"
+  }
+}
+```
+
+Currently Kosko can't set Node.js loader, and [`require`](configuration.md#require) option doesn't work with ESM. So you have to set `ts-node/esm` loader when running Kosko CLI.
+
+```shell
+NODE_OPTIONS='--loader=ts-node/esm' kosko generate
+```
+
+## Related
+
+<DocCardList
+  items={[
+    {
+      type: "link",
+      label: "Programmatic Usage",
+      href: "/docs/programmatic-usage",
+      docId: "programmatic-usage"
+    },
+    {
+      type: "link",
+      label: "@kosko/env",
+      href: "/docs/api/modules/kosko_env",
+      docId: "api/modules/kosko_env"
+    }
+  ]}
+/>
