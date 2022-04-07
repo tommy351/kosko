@@ -73,12 +73,22 @@ function esmToCjs(input) {
     },
     ExportNamedDeclaration(path) {
       if (path.node.declaration) {
-        // export const a = 1;
-        // export function b() {}
         source.remove(path.node.start, path.node.declaration.start);
 
-        for (const decl of path.node.declaration.declarations) {
-          const name = decl.id.name;
+        const declaration = path.node.declaration;
+
+        if (babel.types.isVariableDeclaration(declaration)) {
+          // export const a = 1;
+          const exports = declaration.declarations.map((decl) => {
+            const name = decl.id.name;
+            return `exports.${name} = ${name};`;
+          });
+
+          source.prependRight(path.node.end, "\n" + exports.join("\n"));
+        } else {
+          // export function a() {}
+          // export class A {}
+          const name = declaration.id.name;
 
           source.prependRight(path.node.end, `\nexports.${name} = ${name};`);
         }

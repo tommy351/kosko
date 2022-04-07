@@ -41,6 +41,7 @@
     "immer": "^9.0.7",
     "lodash": "^4.17.21",
     "magic-string": "^0.26.1",
+    "prettier": "^2.5.1",
     "prism-react-renderer": "^1.2.1",
     "react": "^17.0.2",
     "react-codemirror2": "^7.2.1",

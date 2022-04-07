@@ -559,6 +559,7 @@ importers:
       lodash: ^4.17.21
       lodash-webpack-plugin: ^0.11.6
       magic-string: ^0.26.1
+      prettier: ^2.5.1
       prism-react-renderer: ^1.2.1
       raw-loader: ^4.0.2
       react: ^17.0.2
@@ -596,6 +597,7 @@ importers:
       immer: 9.0.7
       lodash: 4.17.21
       magic-string: 0.26.1
+      prettier: 2.5.1
       prism-react-renderer: 1.2.1_react@17.0.2
       react: 17.0.2
       react-codemirror2: 7.2.1_codemirror@5.64.0+react@17.0.2
@@ -14342,7 +14344,6 @@ packages:
     resolution: {integrity: sha512-vBZcPRUR5MZJwoyi3ZoyQlc1rXeEck8KgeC9AwwOn+exuxLxq5toTRDTSaVrXHxelDMHy9zlicw8u66yxoSUFg==}
     engines: {node: '>=10.13.0'}
     hasBin: true
-    dev: true
 
   /pretty-error/4.0.0:
     resolution: {integrity: sha512-AoJ5YMAcXKYxKhuJGdcvse+Voc6v1RgnsR3nWcYU7q4t6z0Q6T86sv5Zq8VIRbOWWFpvdGE83LtdSMNd+6Y0xw==}
