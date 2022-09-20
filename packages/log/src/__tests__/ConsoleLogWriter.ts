@@ -36,33 +36,33 @@ describe.each([
       time: new Date(),
       message: "test"
     });
-    expect(log).toBeCalledTimes(1);
-    expect(log).toBeCalledWith("test");
+    expect(log).toHaveBeenCalledTimes(1);
+    expect(log).toHaveBeenCalledWith("test");
   });
 });
 
 test("should not write message if empty", () => {
   writeInfo({ message: "" });
-  expect(console.info).toBeCalledTimes(1);
-  expect(console.info).toBeCalledWith();
+  expect(console.info).toHaveBeenCalledTimes(1);
+  expect(console.info).toHaveBeenCalledWith();
 });
 
 test("should write data if set", () => {
   writeInfo({ message: "test", data: { foo: "bar" } });
-  expect(console.info).toBeCalledTimes(1);
-  expect(console.info).toBeCalledWith("test", { foo: "bar" });
+  expect(console.info).toHaveBeenCalledTimes(1);
+  expect(console.info).toHaveBeenCalledWith("test", { foo: "bar" });
 });
 
 test("should write error if set", () => {
   const err = new Error("err test");
   writeInfo({ message: "test", error: err });
-  expect(console.info).toBeCalledTimes(1);
-  expect(console.info).toBeCalledWith("test", err);
+  expect(console.info).toHaveBeenCalledTimes(1);
+  expect(console.info).toHaveBeenCalledWith("test", err);
 });
 
 test("should write both if data & error are set", () => {
   const err = new Error("err test");
   writeInfo({ message: "test", data: { foo: "bar" }, error: err });
-  expect(console.info).toBeCalledTimes(1);
-  expect(console.info).toBeCalledWith("test", { foo: "bar" }, err);
+  expect(console.info).toHaveBeenCalledTimes(1);
+  expect(console.info).toHaveBeenCalledWith("test", { foo: "bar" }, err);
 });

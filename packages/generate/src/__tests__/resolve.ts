@@ -92,7 +92,7 @@ test("value should be validated by default", async () => {
       validate
     })
   ).resolves.toBeTruthy();
-  expect(validate).toBeCalledTimes(1);
+  expect(validate).toHaveBeenCalledTimes(1);
 });
 
 test("should throw ValidationError when validate throws an error", async () => {
@@ -109,7 +109,7 @@ test("should throw ValidationError when validate throws an error", async () => {
       ],
       { path: "x", index: [9, 8] }
     )
-  ).rejects.toThrowError(
+  ).rejects.toThrow(
     new ValidationError({
       path: "x",
       index: [9, 8, 1],
@@ -127,7 +127,7 @@ test("should throw ValidationError when validate throws an async error", async (
         throw new Error("err");
       }
     })
-  ).rejects.toThrowError(ValidationError);
+  ).rejects.toThrow(ValidationError);
 });
 
 test("should not call validate when validate=false", async () => {
@@ -142,7 +142,7 @@ test("should not call validate when validate=false", async () => {
       { validate: false }
     )
   ).resolves.toBeTruthy();
-  expect(validate).not.toBeCalled();
+  expect(validate).not.toHaveBeenCalled();
 });
 
 test("set path and index", async () => {
