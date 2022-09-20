@@ -1,258 +1,417 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`helm chart 1`] = `
-Array [
-  Object {
+[
+  {
     "apiVersion": "v1",
-    "data": Object {
-      "server-blocks-paths.conf": "include  \\"/opt/bitnami/nginx/conf/server_blocks/ldap/*.conf\\";
-include  \\"/opt/bitnami/nginx/conf/server_blocks/common/*.conf\\";",
-    },
-    "kind": "ConfigMap",
-    "metadata": Object {
-      "labels": Object {
+    "kind": "ServiceAccount",
+    "metadata": {
+      "labels": {
         "app.kubernetes.io/instance": "foobar",
         "app.kubernetes.io/managed-by": "Helm",
-        "app.kubernetes.io/name": "nginx",
-        "helm.sh/chart": "nginx-9.5.16",
+        "app.kubernetes.io/name": "fluent-bit",
+        "app.kubernetes.io/version": "1.9.8",
+        "helm.sh/chart": "fluent-bit-0.20.8",
       },
-      "name": "foobar-nginx-server-block",
+      "name": "foobar-fluent-bit",
     },
   },
-  Object {
-    "apiVersion": "v1",
-    "kind": "Service",
-    "metadata": Object {
-      "labels": Object {
+  {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRole",
+    "metadata": {
+      "labels": {
         "app.kubernetes.io/instance": "foobar",
         "app.kubernetes.io/managed-by": "Helm",
-        "app.kubernetes.io/name": "nginx",
-        "helm.sh/chart": "nginx-9.5.16",
+        "app.kubernetes.io/name": "fluent-bit",
+        "app.kubernetes.io/version": "1.9.8",
+        "helm.sh/chart": "fluent-bit-0.20.8",
       },
-      "name": "foobar-nginx",
+      "name": "foobar-fluent-bit",
     },
-    "spec": Object {
-      "externalTrafficPolicy": "Cluster",
-      "ports": Array [
-        Object {
+    "rules": [
+      {
+        "apiGroups": [
+          "",
+        ],
+        "resources": [
+          "namespaces",
+          "pods",
+        ],
+        "verbs": [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+    ],
+  },
+  {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRoleBinding",
+    "metadata": {
+      "labels": {
+        "app.kubernetes.io/instance": "foobar",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "fluent-bit",
+        "app.kubernetes.io/version": "1.9.8",
+        "helm.sh/chart": "fluent-bit-0.20.8",
+      },
+      "name": "foobar-fluent-bit",
+    },
+    "roleRef": {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "ClusterRole",
+      "name": "foobar-fluent-bit",
+    },
+    "subjects": [
+      {
+        "kind": "ServiceAccount",
+        "name": "foobar-fluent-bit",
+        "namespace": "default",
+      },
+    ],
+  },
+  {
+    "apiVersion": "v1",
+    "data": {
+      "custom_parsers.conf": "[PARSER]
+    Name docker_no_time
+    Format json
+    Time_Keep Off
+    Time_Key time
+    Time_Format %Y-%m-%dT%H:%M:%S.%L
+",
+      "fluent-bit.conf": "[SERVICE]
+    Daemon Off
+    Flush 1
+    Log_Level info
+    Parsers_File parsers.conf
+    Parsers_File custom_parsers.conf
+    HTTP_Server On
+    HTTP_Listen 0.0.0.0
+    HTTP_Port 2020
+    Health_Check On
+
+[INPUT]
+    Name tail
+    Path /var/log/containers/*.log
+    multiline.parser docker, cri
+    Tag kube.*
+    Mem_Buf_Limit 5MB
+    Skip_Long_Lines On
+
+[INPUT]
+    Name systemd
+    Tag host.*
+    Systemd_Filter _SYSTEMD_UNIT=kubelet.service
+    Read_From_Tail On
+
+[FILTER]
+    Name kubernetes
+    Match kube.*
+    Merge_Log On
+    Keep_Log Off
+    K8S-Logging.Parser On
+    K8S-Logging.Exclude On
+
+[OUTPUT]
+    Name es
+    Match kube.*
+    Host elasticsearch-master
+    Logstash_Format On
+    Retry_Limit False
+
+[OUTPUT]
+    Name es
+    Match host.*
+    Host elasticsearch-master
+    Logstash_Format On
+    Logstash_Prefix node
+    Retry_Limit False
+",
+    },
+    "kind": "ConfigMap",
+    "metadata": {
+      "labels": {
+        "app.kubernetes.io/instance": "foobar",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "fluent-bit",
+        "app.kubernetes.io/version": "1.9.8",
+        "helm.sh/chart": "fluent-bit-0.20.8",
+      },
+      "name": "foobar-fluent-bit",
+    },
+  },
+  {
+    "apiVersion": "v1",
+    "kind": "Service",
+    "metadata": {
+      "labels": {
+        "app.kubernetes.io/instance": "foobar",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "fluent-bit",
+        "app.kubernetes.io/version": "1.9.8",
+        "helm.sh/chart": "fluent-bit-0.20.8",
+      },
+      "name": "foobar-fluent-bit",
+    },
+    "spec": {
+      "ports": [
+        {
           "name": "http",
-          "port": 80,
+          "port": 2020,
+          "protocol": "TCP",
           "targetPort": "http",
         },
       ],
-      "selector": Object {
+      "selector": {
         "app.kubernetes.io/instance": "foobar",
-        "app.kubernetes.io/name": "nginx",
+        "app.kubernetes.io/name": "fluent-bit",
       },
-      "type": "LoadBalancer",
+      "type": "ClusterIP",
     },
   },
-  Object {
+  {
     "apiVersion": "apps/v1",
-    "kind": "Deployment",
-    "metadata": Object {
-      "labels": Object {
+    "kind": "DaemonSet",
+    "metadata": {
+      "labels": {
         "app.kubernetes.io/instance": "foobar",
         "app.kubernetes.io/managed-by": "Helm",
-        "app.kubernetes.io/name": "nginx",
-        "helm.sh/chart": "nginx-9.5.16",
+        "app.kubernetes.io/name": "fluent-bit",
+        "app.kubernetes.io/version": "1.9.8",
+        "helm.sh/chart": "fluent-bit-0.20.8",
       },
-      "name": "foobar-nginx",
+      "name": "foobar-fluent-bit",
     },
-    "spec": Object {
-      "replicas": 1,
-      "selector": Object {
-        "matchLabels": Object {
+    "spec": {
+      "selector": {
+        "matchLabels": {
           "app.kubernetes.io/instance": "foobar",
-          "app.kubernetes.io/name": "nginx",
+          "app.kubernetes.io/name": "fluent-bit",
         },
       },
-      "template": Object {
-        "metadata": Object {
-          "labels": Object {
+      "template": {
+        "metadata": {
+          "annotations": {
+            "checksum/config": "90ed4d580f6a4f13b9c66e0a42af506b4606da3d531bb4ace5dd2cc8ef29d7b3",
+            "checksum/luascripts": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          },
+          "labels": {
             "app.kubernetes.io/instance": "foobar",
-            "app.kubernetes.io/managed-by": "Helm",
-            "app.kubernetes.io/name": "nginx",
-            "helm.sh/chart": "nginx-9.5.16",
+            "app.kubernetes.io/name": "fluent-bit",
           },
         },
-        "spec": Object {
-          "affinity": Object {
-            "nodeAffinity": null,
-            "podAffinity": null,
-            "podAntiAffinity": Object {
-              "preferredDuringSchedulingIgnoredDuringExecution": Array [
-                Object {
-                  "podAffinityTerm": Object {
-                    "labelSelector": Object {
-                      "matchLabels": Object {
-                        "app.kubernetes.io/instance": "foobar",
-                        "app.kubernetes.io/name": "nginx",
-                      },
-                    },
-                    "namespaces": Array [
-                      "default",
-                    ],
-                    "topologyKey": "kubernetes.io/hostname",
-                  },
-                  "weight": 1,
-                },
-              ],
-            },
-          },
-          "automountServiceAccountToken": false,
-          "containers": Array [
-            Object {
-              "env": Array [
-                Object {
-                  "name": "BITNAMI_DEBUG",
-                  "value": "false",
-                },
-              ],
-              "image": "docker.io/bitnami/nginx:1.21.4-debian-10-r27",
-              "imagePullPolicy": "IfNotPresent",
-              "livenessProbe": Object {
-                "failureThreshold": 6,
-                "periodSeconds": 10,
-                "successThreshold": 1,
-                "tcpSocket": Object {
+        "spec": {
+          "containers": [
+            {
+              "image": "cr.fluentbit.io/fluent/fluent-bit:1.9.8",
+              "imagePullPolicy": "Always",
+              "livenessProbe": {
+                "httpGet": {
+                  "path": "/",
                   "port": "http",
                 },
-                "timeoutSeconds": 5,
               },
-              "name": "nginx",
-              "ports": Array [
-                Object {
-                  "containerPort": 8080,
+              "name": "fluent-bit",
+              "ports": [
+                {
+                  "containerPort": 2020,
                   "name": "http",
+                  "protocol": "TCP",
                 },
               ],
-              "readinessProbe": Object {
-                "failureThreshold": 3,
-                "initialDelaySeconds": 5,
-                "periodSeconds": 5,
-                "successThreshold": 1,
-                "tcpSocket": Object {
+              "readinessProbe": {
+                "httpGet": {
+                  "path": "/api/v1/health",
                   "port": "http",
                 },
-                "timeoutSeconds": 3,
               },
-              "resources": Object {
-                "limits": Object {},
-                "requests": Object {},
-              },
-              "volumeMounts": null,
+              "volumeMounts": [
+                {
+                  "mountPath": "/fluent-bit/etc/fluent-bit.conf",
+                  "name": "config",
+                  "subPath": "fluent-bit.conf",
+                },
+                {
+                  "mountPath": "/fluent-bit/etc/custom_parsers.conf",
+                  "name": "config",
+                  "subPath": "custom_parsers.conf",
+                },
+                {
+                  "mountPath": "/var/log",
+                  "name": "varlog",
+                },
+                {
+                  "mountPath": "/var/lib/docker/containers",
+                  "name": "varlibdockercontainers",
+                  "readOnly": true,
+                },
+                {
+                  "mountPath": "/etc/machine-id",
+                  "name": "etcmachineid",
+                  "readOnly": true,
+                },
+              ],
             },
           ],
-          "serviceAccountName": "default",
-          "shareProcessNamespace": false,
-          "volumes": Array [
-            Object {
-              "configMap": Object {
-                "items": Array [
-                  Object {
-                    "key": "server-blocks-paths.conf",
-                    "path": "server-blocks-paths.conf",
-                  },
-                ],
-                "name": "foobar-nginx-server-block",
+          "dnsPolicy": "ClusterFirst",
+          "hostNetwork": false,
+          "serviceAccountName": "foobar-fluent-bit",
+          "volumes": [
+            {
+              "configMap": {
+                "name": "foobar-fluent-bit",
               },
-              "name": "nginx-server-block-paths",
+              "name": "config",
+            },
+            {
+              "hostPath": {
+                "path": "/var/log",
+              },
+              "name": "varlog",
+            },
+            {
+              "hostPath": {
+                "path": "/var/lib/docker/containers",
+              },
+              "name": "varlibdockercontainers",
+            },
+            {
+              "hostPath": {
+                "path": "/etc/machine-id",
+                "type": "File",
+              },
+              "name": "etcmachineid",
             },
           ],
         },
       },
+    },
+  },
+  {
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+      "annotations": {
+        "helm.sh/hook": "test-success",
+      },
+      "labels": {
+        "app.kubernetes.io/instance": "foobar",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "fluent-bit",
+        "app.kubernetes.io/version": "1.9.8",
+        "helm.sh/chart": "fluent-bit-0.20.8",
+      },
+      "name": "foobar-fluent-bit-test-connection",
+    },
+    "spec": {
+      "containers": [
+        {
+          "args": [
+            "foobar-fluent-bit:2020",
+          ],
+          "command": [
+            "wget",
+          ],
+          "image": "busybox:latest",
+          "imagePullPolicy": "Always",
+          "name": "wget",
+        },
+      ],
+      "restartPolicy": "Never",
     },
   },
 ]
 `;
 
 exports[`local path 1`] = `
-Array [
-  Object {
+[
+  {
     "apiVersion": "v1",
-    "data": Object {
+    "data": {
       "altGreeting": "Good Morning!",
       "enableRisky": "false",
     },
     "kind": "ConfigMap",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app": "hello",
       },
       "name": "the-map",
     },
   },
-  Object {
+  {
     "apiVersion": "v1",
     "kind": "Service",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app": "hello",
       },
       "name": "the-service",
     },
-    "spec": Object {
-      "ports": Array [
-        Object {
+    "spec": {
+      "ports": [
+        {
           "port": 8666,
           "protocol": "TCP",
           "targetPort": 8080,
         },
       ],
-      "selector": Object {
+      "selector": {
         "app": "hello",
         "deployment": "hello",
       },
       "type": "LoadBalancer",
     },
   },
-  Object {
+  {
     "apiVersion": "apps/v1",
     "kind": "Deployment",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app": "hello",
       },
       "name": "the-deployment",
     },
-    "spec": Object {
+    "spec": {
       "replicas": 3,
-      "selector": Object {
-        "matchLabels": Object {
+      "selector": {
+        "matchLabels": {
           "app": "hello",
           "deployment": "hello",
         },
       },
-      "template": Object {
-        "metadata": Object {
-          "labels": Object {
+      "template": {
+        "metadata": {
+          "labels": {
             "app": "hello",
             "deployment": "hello",
           },
         },
-        "spec": Object {
-          "containers": Array [
-            Object {
-              "command": Array [
+        "spec": {
+          "containers": [
+            {
+              "command": [
                 "/hello",
                 "--port=8080",
                 "--enableRiskyFeature=$(ENABLE_RISKY)",
               ],
-              "env": Array [
-                Object {
+              "env": [
+                {
                   "name": "ALT_GREETING",
-                  "valueFrom": Object {
-                    "configMapKeyRef": Object {
+                  "valueFrom": {
+                    "configMapKeyRef": {
                       "key": "altGreeting",
                       "name": "the-map",
                     },
                   },
                 },
-                Object {
+                {
                   "name": "ENABLE_RISKY",
-                  "valueFrom": Object {
-                    "configMapKeyRef": Object {
+                  "valueFrom": {
+                    "configMapKeyRef": {
                       "key": "enableRisky",
                       "name": "the-map",
                     },
@@ -261,8 +420,8 @@ Array [
               ],
               "image": "monopole/hello:1",
               "name": "the-container",
-              "ports": Array [
-                Object {
+              "ports": [
+                {
                   "containerPort": 8080,
                 },
               ],
@@ -276,15 +435,15 @@ Array [
 `;
 
 exports[`remote url 1`] = `
-Array [
-  Object {
+[
+  {
     "apiVersion": "v1",
-    "data": Object {
+    "data": {
       "altGreeting": "Good Morning!",
       "enableRisky": "false",
     },
     "kind": "ConfigMap",
-    "metadata": Object {
+    "metadata": {
       "name": "remote-cm",
     },
   },
@@ -292,11 +451,11 @@ Array [
 `;
 
 exports[`when buildCommand is given command exists 1`] = `
-Array [
-  Object {
+[
+  {
     "apiVersion": "v1",
     "kind": "Pod",
-    "metadata": Object {
+    "metadata": {
       "name": "test",
     },
   },

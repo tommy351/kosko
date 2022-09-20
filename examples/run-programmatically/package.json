@@ -3,9 +3,9 @@
   "version": "0.0.11",
   "private": true,
   "dependencies": {
-    "@kosko/env": "workspace:^",
-    "@kosko/generate": "workspace:^",
-    "kosko": "workspace:^",
-    "kubernetes-models": "^2.0.2"
+    "@kosko/env": "workspace:^3.0.1",
+    "@kosko/generate": "workspace:^2.0.1",
+    "kosko": "workspace:^2.1.1",
+    "kubernetes-models": "^3.1.0"
   }
 }

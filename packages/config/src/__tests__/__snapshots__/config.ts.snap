@@ -1,88 +1,88 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`loadConfig when file exists should load the config 1`] = `
-Object {
+{
   "baseEnvironment": "m",
-  "components": Array [
+  "components": [
     "b",
     "c",
   ],
-  "environments": Object {
-    "dev": Object {
-      "components": Array [
+  "environments": {
+    "dev": {
+      "components": [
         "f",
         "g",
       ],
-      "require": Array [
+      "require": [
         "d",
         "e",
       ],
     },
-    "prod": Object {
-      "components": Array [
+    "prod": {
+      "components": [
         "i",
         "j",
       ],
-      "require": Array [
+      "require": [
         "h",
       ],
     },
   },
-  "extensions": Array [
+  "extensions": [
     "js",
     "json",
   ],
-  "paths": Object {
-    "environment": Object {
+  "paths": {
+    "environment": {
       "component": "l",
       "global": "k",
     },
   },
-  "require": Array [
+  "require": [
     "a",
   ],
 }
 `;
 
 exports[`searchConfig succeed when config is at kosko.toml should load the config 1`] = `
-Object {
+{
   "baseEnvironment": "m",
-  "components": Array [
+  "components": [
     "b",
     "c",
   ],
-  "environments": Object {
-    "dev": Object {
-      "components": Array [
+  "environments": {
+    "dev": {
+      "components": [
         "f",
         "g",
       ],
-      "require": Array [
+      "require": [
         "d",
         "e",
       ],
     },
-    "prod": Object {
-      "components": Array [
+    "prod": {
+      "components": [
         "i",
         "j",
       ],
-      "require": Array [
+      "require": [
         "h",
       ],
     },
   },
-  "extensions": Array [
+  "extensions": [
     "js",
     "json",
   ],
-  "paths": Object {
-    "environment": Object {
+  "paths": {
+    "environment": {
       "component": "l",
       "global": "k",
     },
   },
-  "require": Array [
+  "require": [
     "a",
   ],
 }

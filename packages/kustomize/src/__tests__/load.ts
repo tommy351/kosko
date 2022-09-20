@@ -74,8 +74,8 @@ metadata:
     });
 
     await expect(result()).resolves.toMatchSnapshot();
-    expect(spawn).toBeCalledTimes(1);
-    expect(spawn).toBeCalledWith("foo", ["abc", "def", HELLO_WORLD]);
+    expect(spawn).toHaveBeenCalledTimes(1);
+    expect(spawn).toHaveBeenCalledWith("foo", ["abc", "def", HELLO_WORLD]);
   });
 
   test("command does not exist", async () => {
@@ -90,8 +90,8 @@ metadata:
     });
 
     await expect(result()).rejects.toThrow("ENOENT");
-    expect(spawn).toBeCalledTimes(1);
-    expect(spawn).toBeCalledWith("foo", ["abc", "def", HELLO_WORLD]);
+    expect(spawn).toHaveBeenCalledTimes(1);
+    expect(spawn).toHaveBeenCalledWith("foo", ["abc", "def", HELLO_WORLD]);
   });
 });
 
@@ -115,8 +115,8 @@ describe("when buildCommand is not given", () => {
 
     const result = loadKustomize({ path: HELLO_WORLD });
     await expect(result()).resolves.toHaveLength(3);
-    expect(spawn).toBeCalledTimes(1);
-    expect(spawn).toBeCalledWith("kustomize", ["build", HELLO_WORLD]);
+    expect(spawn).toHaveBeenCalledTimes(1);
+    expect(spawn).toHaveBeenCalledWith("kustomize", ["build", HELLO_WORLD]);
   });
 
   test("kubectl", async () => {
@@ -124,7 +124,7 @@ describe("when buildCommand is not given", () => {
 
     const result = loadKustomize({ path: HELLO_WORLD });
     await expect(result()).resolves.toHaveLength(3);
-    expect(spawn).toBeCalledTimes(2);
+    expect(spawn).toHaveBeenCalledTimes(2);
     expect(spawn).toHaveBeenLastCalledWith("kubectl", [
       "kustomize",
       HELLO_WORLD
@@ -136,8 +136,8 @@ describe("when buildCommand is not given", () => {
 
     const result = loadKustomize({ path: HELLO_WORLD });
     await expect(result()).resolves.toHaveLength(3);
-    expect(spawn).toBeCalledTimes(1);
-    expect(spawn).toBeCalledWith("kustomize", ["build", HELLO_WORLD]);
+    expect(spawn).toHaveBeenCalledTimes(1);
+    expect(spawn).toHaveBeenCalledWith("kustomize", ["build", HELLO_WORLD]);
   });
 
   test("Neither is installed", async () => {

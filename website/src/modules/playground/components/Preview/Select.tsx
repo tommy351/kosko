@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import styles from "./styles.module.scss";
 
 interface SelectProps {
@@ -8,12 +8,12 @@ interface SelectProps {
   onChange(value: string): void;
 }
 
-const Select: FunctionComponent<SelectProps> = ({
+export default function Select({
   label,
   value,
   options,
   onChange
-}) => {
+}: SelectProps) {
   return (
     <label className={styles.selectContainer}>
       <div className={styles.selectLabel}>{label}</div>
@@ -31,6 +31,4 @@ const Select: FunctionComponent<SelectProps> = ({
       </select>
     </label>
   );
-};
-
-export default Select;
+}

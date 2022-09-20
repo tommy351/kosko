@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode, useMemo } from "react";
+import React, { ReactNode, useMemo } from "react";
 import styles from "./styles.module.scss";
 import { ToolbarContainer, ToolbarTitle } from "../Toolbar";
 import { usePreviewContext } from "./context";
@@ -10,10 +10,7 @@ import { useContainer } from "../Container";
 export const DEFAULT_SIZE = 40;
 export const EXPANDED_SIZE = 200;
 
-const Summary: FunctionComponent<{
-  icon: ReactNode;
-  value: number;
-}> = ({ icon, value }) => {
+function Summary({ icon, value }: { icon: ReactNode; value: number }) {
   if (!value) return null;
 
   return (
@@ -22,13 +19,17 @@ const Summary: FunctionComponent<{
       <div className={styles.errorPaneSummaryValue}>{value}</div>
     </div>
   );
-};
+}
 
-const Cell: FunctionComponent<{
+function Cell({
+  icon,
+  message,
+  detail
+}: {
   icon: ReactNode;
   message: ReactNode;
   detail?: ReactNode;
-}> = ({ icon, message, detail }) => {
+}) {
   return (
     <details className={styles.errorPaneCellContainer}>
       <summary className={styles.errorPaneCellSummary}>
@@ -38,9 +39,9 @@ const Cell: FunctionComponent<{
       {detail && <div className={styles.errorPaneCellDetail}>{detail}</div>}
     </details>
   );
-};
+}
 
-const ErrorCell: FunctionComponent<{ error: any }> = ({ error }) => {
+function ErrorCell({ error }: { error: any }) {
   const {
     name = "Error",
     message = "",
@@ -54,9 +55,9 @@ const ErrorCell: FunctionComponent<{ error: any }> = ({ error }) => {
       detail={stack && <pre>{stack}</pre>}
     />
   );
-};
+}
 
-const ErrorPane: FunctionComponent = () => {
+export default function ErrorPane() {
   const {
     value: { errors, warnings }
   } = usePreviewContext();
@@ -92,6 +93,4 @@ const ErrorPane: FunctionComponent = () => {
       </div>
     </div>
   );
-};
-
-export default ErrorPane;
+}

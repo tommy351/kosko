@@ -80,7 +80,7 @@ metadata:
     });
 
     test("should throw an error", async () => {
-      await expect(result()).rejects.toThrowError(
+      await expect(result()).rejects.toThrow(
         `The value must be an object: "foo"`
       );
     });
@@ -93,7 +93,7 @@ metadata:
     });
 
     test("should throw an error", async () => {
-      await expect(result()).rejects.toThrowError(
+      await expect(result()).rejects.toThrow(
         `The value must be an object: [1]`
       );
     });
@@ -106,7 +106,7 @@ metadata:
     });
 
     test("should throw an error", async () => {
-      await expect(result()).rejects.toThrowError(
+      await expect(result()).rejects.toThrow(
         `apiVersion and kind are required: {"foo":"bar"}`
       );
     });
@@ -119,7 +119,7 @@ metadata:
     });
 
     test("should throw an error", async () => {
-      await expect(result()).rejects.toThrowError(
+      await expect(result()).rejects.toThrow(
         `apiVersion and kind are required: {"apiVersion":""}`
       );
     });
@@ -132,7 +132,7 @@ metadata:
     });
 
     test("should throw an error", async () => {
-      await expect(result()).rejects.toThrowError(
+      await expect(result()).rejects.toThrow(
         `apiVersion and kind are required: {"apiVersion":"v1"}`
       );
     });
@@ -145,7 +145,7 @@ metadata:
     });
 
     test("should throw an error", async () => {
-      await expect(result()).rejects.toThrowError(
+      await expect(result()).rejects.toThrow(
         `apiVersion and kind are required: {"apiVersion":"v1","kind":""}`
       );
     });
@@ -275,7 +275,7 @@ describe("loadUrl", () => {
     });
 
     test("should throw error", async () => {
-      await expect(loadUrl(url)()).rejects.toThrowError(
+      await expect(loadUrl(url)()).rejects.toThrow(
         `Failed to fetch YAML file from: ${url}`
       );
     });

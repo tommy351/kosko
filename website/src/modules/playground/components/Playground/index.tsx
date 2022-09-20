@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Layout from "@theme/Layout";
 import Provider from "./Provider";
 import { Container, Section } from "react-simple-resizer";
@@ -8,7 +8,7 @@ import Sidebar from "../Sidebar";
 import Editor from "../Editor";
 import Preview from "../Preview";
 
-const Content: FunctionComponent = () => {
+function Content() {
   return (
     <Container className={styles.container}>
       <Section defaultSize={200}>
@@ -24,9 +24,9 @@ const Content: FunctionComponent = () => {
       </Section>
     </Container>
   );
-};
+}
 
-const Playground: FunctionComponent = () => {
+export default function Playground() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -56,6 +56,4 @@ const Playground: FunctionComponent = () => {
       </Provider>
     </Layout>
   );
-};
-
-export default Playground;
+}

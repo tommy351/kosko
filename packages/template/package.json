@@ -27,15 +27,15 @@
     "node": ">=12"
   },
   "dependencies": {
-    "@kosko/log": "workspace:^",
+    "@kosko/log": "workspace:^0.1.0",
     "exit": "^0.1.2",
-    "tslib": "^2.3.1",
-    "yargs": "^17.3.0"
+    "tslib": "^2.4.0",
+    "yargs": "^17.5.1"
   },
   "devDependencies": {
-    "@kosko/jest-preset": "workspace:^",
+    "@kosko/jest-preset": "workspace:^0.0.0",
     "@types/exit": "^0.1.31",
-    "@types/yargs": "^17.0.7",
+    "@types/yargs": "^17.0.12",
     "temp-dir": "^2.0.0",
     "tmp-promise": "^3.0.3"
   },

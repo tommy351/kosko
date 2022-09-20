@@ -1,5 +1,4 @@
 import React, {
-  FunctionComponent,
   createContext,
   RefObject,
   createRef,
@@ -24,10 +23,10 @@ export function useContainer() {
   return useContext(ContainerContext);
 }
 
-const Container: FunctionComponent<ContainerProps> = ({
+export default function Container({
   vertical = false,
   ...props
-}) => {
+}: ContainerProps) {
   const ref = useRef<ResizerContainer>(null);
   const value = useMemo(() => ({ vertical, ref }), [vertical, ref]);
 
@@ -36,6 +35,4 @@ const Container: FunctionComponent<ContainerProps> = ({
       <ResizerContainer {...props} ref={ref} vertical={vertical} />
     </ContainerContext.Provider>
   );
-};
-
-export default Container;
+}

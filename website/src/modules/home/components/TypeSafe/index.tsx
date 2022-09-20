@@ -1,9 +1,8 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 import CodeBlock, {
   defaultTokenRenderer,
   TokenRenderer
 } from "@site/src/modules/common/components/CodeBlock";
-import { usePrismTheme } from "@docusaurus/theme-common";
 import {
   Feature,
   FeatureDescription,
@@ -14,6 +13,7 @@ import component from "!!raw-loader!./examples/component.js";
 import styles from "./styles.module.scss";
 import clsx from "clsx";
 import { VscError } from "react-icons/vsc";
+import { usePrismTheme } from "@docusaurus/theme-common";
 
 const tokenRenderer: TokenRenderer = (props) => {
   if (props.token.content === `"wrong_replicas"`) {
@@ -35,10 +35,7 @@ const tokenRenderer: TokenRenderer = (props) => {
   return defaultTokenRenderer(props);
 };
 
-const Problem: FunctionComponent<{ reason: string; detail: string }> = ({
-  detail,
-  reason
-}) => {
+function Problem({ detail, reason }: { reason: string; detail: string }) {
   return (
     <div className={styles.problem}>
       <div className={styles.problemIcon}>
@@ -48,9 +45,9 @@ const Problem: FunctionComponent<{ reason: string; detail: string }> = ({
       <div className={styles.problemReason}>{reason}</div>
     </div>
   );
-};
+}
 
-const Example: FunctionComponent = () => {
+function Example() {
   const prismTheme = usePrismTheme();
 
   return (
@@ -73,9 +70,9 @@ const Example: FunctionComponent = () => {
       </div>
     </FeatureExample>
   );
-};
+}
 
-const TypeSafe: FunctionComponent = () => {
+export default function TypeSafe() {
   return (
     <Feature id="type-safe">
       <FeatureTitle>
@@ -94,6 +91,4 @@ const TypeSafe: FunctionComponent = () => {
       <Example />
     </Feature>
   );
-};
-
-export default TypeSafe;
+}

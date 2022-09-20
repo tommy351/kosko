@@ -4,8 +4,7 @@ on:
   pull_request:
 
 env:
-  PNPM_CACHE_FOLDER: .pnpm-store
-  PNPM_VERSION: 6.18.0
+  PNPM_VERSION: 7.12.1
   HELM_VERSION: 3.5.3
   KUSTOMIZE_VERSION: 4.4.1
 
@@ -14,20 +13,13 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 16.x
-      - uses: actions/cache@v2
-        with:
-          path: ${{ env.PNPM_CACHE_FOLDER }}
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
       - uses: pnpm/action-setup@v2
         with:
           version: ${{ env.PNPM_VERSION }}
-      - name: Set pnpm store dir
-        run: pnpm config set store-dir ${{ env.PNPM_CACHE_FOLDER }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: pnpm
       - name: Install dependencies
         run: pnpm install
       - name: Build packages
@@ -40,24 +32,17 @@ jobs:
       - lint
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version: [14.x, 16.x, 18.x]
         os: [ubuntu-20.04, windows-latest]
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-      - uses: actions/cache@v2
-        with:
-          path: ${{ env.PNPM_CACHE_FOLDER }}
-          key: ${{ runner.os }}-pnpm-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-${{ matrix.node-version }}-
       - uses: pnpm/action-setup@v2
         with:
           version: ${{ env.PNPM_VERSION }}
-      - name: Set pnpm store dir
-        run: pnpm config set store-dir ${{ env.PNPM_CACHE_FOLDER }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: pnpm
       - name: Install dependencies
         run: pnpm install
       - name: Build packages
@@ -89,7 +74,7 @@ jobs:
           curl -s https://raw.githubusercontent.com/kubernetes-sigs/kustomize/kustomize/v${{ env.KUSTOMIZE_VERSION }}/hack/install_kustomize.sh | bash -s -- ${{ env.KUSTOMIZE_VERSION }} $bin_path
         shell: bash
       - name: Run unit tests
-        run: pnpm run test:unit -- --coverage
+        run: pnpm run test:unit --coverage
       - name: Run integration tests
         run: pnpm run test:integration
       - uses: codecov/codecov-action@v1
@@ -101,20 +86,13 @@ jobs:
       - lint
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 16.x
-      - uses: actions/cache@v2
-        with:
-          path: ${{ env.PNPM_CACHE_FOLDER }}
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
       - uses: pnpm/action-setup@v2
         with:
           version: ${{ env.PNPM_VERSION }}
-      - name: Set pnpm store dir
-        run: pnpm config set store-dir ${{ env.PNPM_CACHE_FOLDER }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: pnpm
       - name: Install dependencies
         run: pnpm install
       - name: Build packages

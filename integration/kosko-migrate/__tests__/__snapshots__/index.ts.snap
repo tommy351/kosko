@@ -7,7 +7,7 @@ Migrate YAML into components
 
 Global Options:
       --cwd        Path of working directory             [string] [default: CWD]
-      --log-level  Set log level                      [string] [default: \\"info\\"]
+      --log-level  Set log level                      [string] [default: "info"]
       --silent     Disable log output                 [boolean] [default: false]
       --help       Show help                                           [boolean]
       --version    Show version number                                 [boolean]
@@ -23,48 +23,48 @@ Missing required argument: filename"
 `;
 
 exports[`when path is - should print the output 1`] = `
-"\\"use strict\\";
+""use strict";
 
-const { Deployment } = require(\\"kubernetes-models/apps/v1/Deployment\\");
+const { Deployment } = require("kubernetes-models/apps/v1/Deployment");
 
 const deployment = new Deployment({
-  \\"metadata\\": {
-    \\"name\\": \\"redis-master\\",
-    \\"labels\\": {
-      \\"app\\": \\"redis\\"
+  "metadata": {
+    "name": "redis-master",
+    "labels": {
+      "app": "redis"
     }
   },
-  \\"spec\\": {
-    \\"selector\\": {
-      \\"matchLabels\\": {
-        \\"app\\": \\"redis\\",
-        \\"role\\": \\"master\\",
-        \\"tier\\": \\"backend\\"
+  "spec": {
+    "selector": {
+      "matchLabels": {
+        "app": "redis",
+        "role": "master",
+        "tier": "backend"
       }
     },
-    \\"replicas\\": 1,
-    \\"template\\": {
-      \\"metadata\\": {
-        \\"labels\\": {
-          \\"app\\": \\"redis\\",
-          \\"role\\": \\"master\\",
-          \\"tier\\": \\"backend\\"
+    "replicas": 1,
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "redis",
+          "role": "master",
+          "tier": "backend"
         }
       },
-      \\"spec\\": {
-        \\"containers\\": [
+      "spec": {
+        "containers": [
           {
-            \\"name\\": \\"master\\",
-            \\"image\\": \\"k8s.gcr.io/redis:e2e\\",
-            \\"resources\\": {
-              \\"requests\\": {
-                \\"cpu\\": \\"100m\\",
-                \\"memory\\": \\"100Mi\\"
+            "name": "master",
+            "image": "k8s.gcr.io/redis:e2e",
+            "resources": {
+              "requests": {
+                "cpu": "100m",
+                "memory": "100Mi"
               }
             },
-            \\"ports\\": [
+            "ports": [
               {
-                \\"containerPort\\": 6379
+                "containerPort": 6379
               }
             ]
           }
@@ -78,49 +78,49 @@ module.exports = [deployment];"
 `;
 
 exports[`when path is a directory should print the output 1`] = `
-"\\"use strict\\";
+""use strict";
 
-const { Deployment } = require(\\"kubernetes-models/apps/v1/Deployment\\");
-const { Service } = require(\\"kubernetes-models/v1/Service\\");
+const { Deployment } = require("kubernetes-models/apps/v1/Deployment");
+const { Service } = require("kubernetes-models/v1/Service");
 
 const deployment = new Deployment({
-  \\"metadata\\": {
-    \\"name\\": \\"redis-master\\",
-    \\"labels\\": {
-      \\"app\\": \\"redis\\"
+  "metadata": {
+    "name": "redis-master",
+    "labels": {
+      "app": "redis"
     }
   },
-  \\"spec\\": {
-    \\"selector\\": {
-      \\"matchLabels\\": {
-        \\"app\\": \\"redis\\",
-        \\"role\\": \\"master\\",
-        \\"tier\\": \\"backend\\"
+  "spec": {
+    "selector": {
+      "matchLabels": {
+        "app": "redis",
+        "role": "master",
+        "tier": "backend"
       }
     },
-    \\"replicas\\": 1,
-    \\"template\\": {
-      \\"metadata\\": {
-        \\"labels\\": {
-          \\"app\\": \\"redis\\",
-          \\"role\\": \\"master\\",
-          \\"tier\\": \\"backend\\"
+    "replicas": 1,
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "redis",
+          "role": "master",
+          "tier": "backend"
         }
       },
-      \\"spec\\": {
-        \\"containers\\": [
+      "spec": {
+        "containers": [
           {
-            \\"name\\": \\"master\\",
-            \\"image\\": \\"k8s.gcr.io/redis:e2e\\",
-            \\"resources\\": {
-              \\"requests\\": {
-                \\"cpu\\": \\"100m\\",
-                \\"memory\\": \\"100Mi\\"
+            "name": "master",
+            "image": "k8s.gcr.io/redis:e2e",
+            "resources": {
+              "requests": {
+                "cpu": "100m",
+                "memory": "100Mi"
               }
             },
-            \\"ports\\": [
+            "ports": [
               {
-                \\"containerPort\\": 6379
+                "containerPort": 6379
               }
             ]
           }
@@ -131,67 +131,67 @@ const deployment = new Deployment({
 });
 
 const service = new Service({
-  \\"metadata\\": {
-    \\"name\\": \\"redis-master\\",
-    \\"labels\\": {
-      \\"app\\": \\"redis\\",
-      \\"role\\": \\"master\\",
-      \\"tier\\": \\"backend\\"
+  "metadata": {
+    "name": "redis-master",
+    "labels": {
+      "app": "redis",
+      "role": "master",
+      "tier": "backend"
     }
   },
-  \\"spec\\": {
-    \\"ports\\": [
+  "spec": {
+    "ports": [
       {
-        \\"port\\": 6379,
-        \\"targetPort\\": 6379
+        "port": 6379,
+        "targetPort": 6379
       }
     ],
-    \\"selector\\": {
-      \\"app\\": \\"redis\\",
-      \\"role\\": \\"master\\",
-      \\"tier\\": \\"backend\\"
+    "selector": {
+      "app": "redis",
+      "role": "master",
+      "tier": "backend"
     }
   }
 });
 
 const deployment1 = new Deployment({
-  \\"metadata\\": {
-    \\"name\\": \\"redis-master\\",
-    \\"labels\\": {
-      \\"app\\": \\"redis\\"
+  "metadata": {
+    "name": "redis-master",
+    "labels": {
+      "app": "redis"
     }
   },
-  \\"spec\\": {
-    \\"selector\\": {
-      \\"matchLabels\\": {
-        \\"app\\": \\"redis\\",
-        \\"role\\": \\"master\\",
-        \\"tier\\": \\"backend\\"
+  "spec": {
+    "selector": {
+      "matchLabels": {
+        "app": "redis",
+        "role": "master",
+        "tier": "backend"
       }
     },
-    \\"replicas\\": 1,
-    \\"template\\": {
-      \\"metadata\\": {
-        \\"labels\\": {
-          \\"app\\": \\"redis\\",
-          \\"role\\": \\"master\\",
-          \\"tier\\": \\"backend\\"
+    "replicas": 1,
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "redis",
+          "role": "master",
+          "tier": "backend"
         }
       },
-      \\"spec\\": {
-        \\"containers\\": [
+      "spec": {
+        "containers": [
           {
-            \\"name\\": \\"master\\",
-            \\"image\\": \\"k8s.gcr.io/redis:e2e\\",
-            \\"resources\\": {
-              \\"requests\\": {
-                \\"cpu\\": \\"100m\\",
-                \\"memory\\": \\"100Mi\\"
+            "name": "master",
+            "image": "k8s.gcr.io/redis:e2e",
+            "resources": {
+              "requests": {
+                "cpu": "100m",
+                "memory": "100Mi"
               }
             },
-            \\"ports\\": [
+            "ports": [
               {
-                \\"containerPort\\": 6379
+                "containerPort": 6379
               }
             ]
           }
@@ -205,48 +205,48 @@ module.exports = [deployment, service, deployment1];"
 `;
 
 exports[`when path is a file should print the output 1`] = `
-"\\"use strict\\";
+""use strict";
 
-const { Deployment } = require(\\"kubernetes-models/apps/v1/Deployment\\");
+const { Deployment } = require("kubernetes-models/apps/v1/Deployment");
 
 const deployment = new Deployment({
-  \\"metadata\\": {
-    \\"name\\": \\"redis-master\\",
-    \\"labels\\": {
-      \\"app\\": \\"redis\\"
+  "metadata": {
+    "name": "redis-master",
+    "labels": {
+      "app": "redis"
     }
   },
-  \\"spec\\": {
-    \\"selector\\": {
-      \\"matchLabels\\": {
-        \\"app\\": \\"redis\\",
-        \\"role\\": \\"master\\",
-        \\"tier\\": \\"backend\\"
+  "spec": {
+    "selector": {
+      "matchLabels": {
+        "app": "redis",
+        "role": "master",
+        "tier": "backend"
       }
     },
-    \\"replicas\\": 1,
-    \\"template\\": {
-      \\"metadata\\": {
-        \\"labels\\": {
-          \\"app\\": \\"redis\\",
-          \\"role\\": \\"master\\",
-          \\"tier\\": \\"backend\\"
+    "replicas": 1,
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "redis",
+          "role": "master",
+          "tier": "backend"
         }
       },
-      \\"spec\\": {
-        \\"containers\\": [
+      "spec": {
+        "containers": [
           {
-            \\"name\\": \\"master\\",
-            \\"image\\": \\"k8s.gcr.io/redis:e2e\\",
-            \\"resources\\": {
-              \\"requests\\": {
-                \\"cpu\\": \\"100m\\",
-                \\"memory\\": \\"100Mi\\"
+            "name": "master",
+            "image": "k8s.gcr.io/redis:e2e",
+            "resources": {
+              "requests": {
+                "cpu": "100m",
+                "memory": "100Mi"
               }
             },
-            \\"ports\\": [
+            "ports": [
               {
-                \\"containerPort\\": 6379
+                "containerPort": 6379
               }
             ]
           }

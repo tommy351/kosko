@@ -1,16 +1,25 @@
-import React, { FunctionComponent, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import clsx from "clsx";
 import styles from "./styles.module.scss";
 import { Entry } from "./types";
 
-const Cell: FunctionComponent<{
+export default function Cell({
+  children,
+  entry,
+  icon,
+  depth,
+  onClick,
+  action,
+  active
+}: {
   entry: Entry;
   icon: ReactNode;
   depth: number;
   onClick?(): void;
   action?: ReactNode;
   active?: boolean;
-}> = ({ children, entry, icon, depth, onClick, action, active }) => {
+  children?: ReactNode;
+}) {
   return (
     <div>
       <div
@@ -32,6 +41,4 @@ const Cell: FunctionComponent<{
       {children}
     </div>
   );
-};
-
-export default Cell;
+}

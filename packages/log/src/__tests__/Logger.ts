@@ -76,15 +76,15 @@ describe("Logger", () => {
 
       /* eslint-disable jest/no-conditional-expect */
       if (expected) {
-        expect(logger.getWriter().write).toBeCalledTimes(1);
-        expect(logger.getWriter().write).toBeCalledWith({
+        expect(logger.getWriter().write).toHaveBeenCalledTimes(1);
+        expect(logger.getWriter().write).toHaveBeenCalledWith({
           loggerLevel: logger.getLevel(),
           level: input,
           message: "test",
           time: new Date()
         });
       } else {
-        expect(logger.getWriter().write).not.toBeCalled();
+        expect(logger.getWriter().write).not.toHaveBeenCalled();
       }
       /* eslint-enable jest/no-conditional-expect */
     });
@@ -96,7 +96,7 @@ describe("Logger", () => {
 
       logger.log(LogLevel.Info, "test", { time });
 
-      expect(logger.getWriter().write).toBeCalledWith({
+      expect(logger.getWriter().write).toHaveBeenCalledWith({
         loggerLevel: logger.getLevel(),
         level: LogLevel.Info,
         message: "test",
@@ -111,7 +111,7 @@ describe("Logger", () => {
 
       logger.log(LogLevel.Info, "test", { time, error: err, data });
 
-      expect(logger.getWriter().write).toBeCalledWith({
+      expect(logger.getWriter().write).toHaveBeenCalledWith({
         loggerLevel: logger.getLevel(),
         level: LogLevel.Info,
         message: "test",
@@ -151,6 +151,6 @@ describe("createLoggerFactory", () => {
 
     factory({ writer: new SilentLogWriter() });
 
-    expect(createWriter).not.toBeCalled();
+    expect(createWriter).not.toHaveBeenCalled();
   });
 });

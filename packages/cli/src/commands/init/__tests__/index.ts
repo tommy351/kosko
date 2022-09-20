@@ -155,15 +155,15 @@ describe("when no options are given", () => {
   });
 
   test("should not run install", async () => {
-    expect(spawn).not.toBeCalled();
+    expect(spawn).not.toHaveBeenCalled();
   });
 });
 
 describe("when --install option is given", () => {
   test("should run install in the folder", async () => {
     await execute({ path: tmpDir.path, install: true });
-    expect(spawn).toBeCalledTimes(1);
-    expect(spawn).toBeCalledWith("npm", ["install"], {
+    expect(spawn).toHaveBeenCalledTimes(1);
+    expect(spawn).toHaveBeenCalledWith("npm", ["install"], {
       cwd: tmpDir.path,
       stdio: "inherit",
       env: {

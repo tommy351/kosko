@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 import Select from "./Select";
 import usePlaygroundContext from "../../hooks/usePlaygroundContext";
 import useComponentList from "../../hooks/useComponentList";
 
-const ComponentSelect: FunctionComponent = () => {
+export default function ComponentSelect() {
   const {
     value: { component },
     updateValue
@@ -22,6 +22,4 @@ const ComponentSelect: FunctionComponent = () => {
       }}
     />
   );
-};
-
-export default ComponentSelect;
+}

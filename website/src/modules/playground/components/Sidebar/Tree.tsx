@@ -1,12 +1,15 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 import { Entry, EntryType } from "./types";
 import DirectoryCell from "./DirectoryCell";
 import FileCell from "./FileCell";
 
-const Tree: FunctionComponent<{
+export default function Tree({
+  entries,
+  depth = 0
+}: {
   entries: readonly Entry[];
   depth?: number;
-}> = ({ entries, depth = 0 }) => {
+}) {
   return (
     <div>
       {entries.map((entry) =>
@@ -18,6 +21,4 @@ const Tree: FunctionComponent<{
       )}
     </div>
   );
-};
-
-export default Tree;
+}

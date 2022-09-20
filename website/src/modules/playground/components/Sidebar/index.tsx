@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from "react";
+import React, { useMemo } from "react";
 import usePlaygroundContext from "../../hooks/usePlaygroundContext";
 import { ToolbarContainer, ToolbarTitle } from "../Toolbar";
 import styles from "./styles.module.scss";
@@ -6,7 +6,7 @@ import generateEntries from "./generateEntries";
 import Tree from "./Tree";
 import DirectoryAction from "./DirectoryAction";
 
-const Sidebar: FunctionComponent = () => {
+export default function Sidebar() {
   const {
     value: { files }
   } = usePlaygroundContext();
@@ -26,6 +26,4 @@ const Sidebar: FunctionComponent = () => {
       </div>
     </aside>
   );
-};
-
-export default Sidebar;
+}

@@ -1,11 +1,11 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 import { ActionButton, ActionContainer } from "./Action";
 import { VscEdit, VscTrash } from "react-icons/vsc";
 import usePlaygroundContext from "../../hooks/usePlaygroundContext";
 import { dirname, sep } from "@site/src/utils/path";
 import { isValidName } from "./utils";
 
-const FileAction: FunctionComponent<{ path: string }> = ({ path }) => {
+export default function FileAction({ path }: { path: string }) {
   const {
     value: { files },
     updateValue
@@ -63,6 +63,4 @@ const FileAction: FunctionComponent<{ path: string }> = ({ path }) => {
       />
     </ActionContainer>
   );
-};
-
-export default FileAction;
+}

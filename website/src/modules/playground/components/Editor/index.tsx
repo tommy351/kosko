@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from "react";
+import React, { useMemo } from "react";
 import styles from "./styles.module.scss";
 import usePlaygroundContext from "../../hooks/usePlaygroundContext";
 import { ToolbarContainer, ToolbarTitle } from "../Toolbar";
@@ -11,7 +11,7 @@ try {
   // ignore error
 }
 
-const Editor: FunctionComponent = () => {
+export default function Editor() {
   const {
     value: { activePath, files },
     updateValue
@@ -47,6 +47,4 @@ const Editor: FunctionComponent = () => {
       </div>
     </div>
   );
-};
-
-export default Editor;
+}

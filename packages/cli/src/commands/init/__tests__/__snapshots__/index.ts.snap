@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`when --esm option is given should generate files 1`] = `
-Object {
+{
   "README.md": "This is a [Kosko] project bootstrapped with [\`kosko init\`][kosko] command.
 
 ## Getting Started
@@ -32,13 +32,13 @@ Check [Kosko docs](https://kosko.dev/docs/) for more information about Kosko.
 
 [kosko]: https://kosko.dev/
 ",
-  "components/nginx.js": "import { Deployment } from \\"kubernetes-models/apps/v1/Deployment\\";
-import { Service } from \\"kubernetes-models/v1/Service\\";
-import env from \\"@kosko/env\\";
+  "components/nginx.js": "import { Deployment } from "kubernetes-models/apps/v1/Deployment";
+import { Service } from "kubernetes-models/v1/Service";
+import env from "@kosko/env";
 
-const params = await env.component(\\"nginx\\");
+const params = await env.component("nginx");
 
-const name = \\"nginx\\";
+const name = "nginx";
 const labels = { app: name };
 const port = 80;
 
@@ -57,10 +57,10 @@ const deployment = new Deployment({
       spec: {
         containers: [
           {
-            name: \\"nginx\\",
-            image: \\"nginx:stable\\",
+            name: "nginx",
+            image: "nginx:stable",
             ports: [{ containerPort: port }],
-            env: [{ name: \\"NGINX_PORT\\", value: \`\${port}\` }]
+            env: [{ name: "NGINX_PORT", value: \`\${port}\` }]
           }
         ]
       }
@@ -82,32 +82,32 @@ const service = new Service({
 export default [deployment, service];
 ",
   "environments/dev/index.js": "export default {
-  namespace: \\"dev\\"
+  namespace: "dev"
 };
 ",
   "environments/dev/nginx.js": "export default {
   replicas: 3
 };
 ",
-  "kosko.toml": "components = [\\"*\\"]
+  "kosko.toml": "components = ["*"]
 ",
   "package.json": "{
-  \\"scripts\\": {
-    \\"generate\\": \\"kosko generate\\",
-    \\"validate\\": \\"kosko validate\\"
+  "scripts": {
+    "generate": "kosko generate",
+    "validate": "kosko validate"
   },
-  \\"dependencies\\": {
-    \\"@kosko/env\\": \\"^3.0.0\\",
-    \\"kosko\\": \\"^2.0.0\\",
-    \\"kubernetes-models\\": \\"^3.0.0\\"
+  "dependencies": {
+    "@kosko/env": "^3.0.0",
+    "kosko": "^2.0.0",
+    "kubernetes-models": "^3.0.0"
   },
-  \\"type\\": \\"module\\"
+  "type": "module"
 }",
 }
 `;
 
 exports[`when --typescript and --esm option is given should generate files 1`] = `
-Object {
+{
   "README.md": "This is a [Kosko] project bootstrapped with [\`kosko init\`][kosko] command.
 
 ## Getting Started
@@ -138,13 +138,13 @@ Check [Kosko docs](https://kosko.dev/docs/) for more information about Kosko.
 
 [kosko]: https://kosko.dev/
 ",
-  "components/nginx.ts": "import { Deployment } from \\"kubernetes-models/apps/v1/Deployment\\";
-import { Service } from \\"kubernetes-models/v1/Service\\";
-import env from \\"@kosko/env\\";
+  "components/nginx.ts": "import { Deployment } from "kubernetes-models/apps/v1/Deployment";
+import { Service } from "kubernetes-models/v1/Service";
+import env from "@kosko/env";
 
-const params = await env.component(\\"nginx\\");
+const params = await env.component("nginx");
 
-const name = \\"nginx\\";
+const name = "nginx";
 const labels = { app: name };
 const port = 80;
 
@@ -163,10 +163,10 @@ const deployment = new Deployment({
       spec: {
         containers: [
           {
-            name: \\"nginx\\",
-            image: \\"nginx:stable\\",
+            name: "nginx",
+            image: "nginx:stable",
             ports: [{ containerPort: port }],
-            env: [{ name: \\"NGINX_PORT\\", value: \`\${port}\` }]
+            env: [{ name: "NGINX_PORT", value: \`\${port}\` }]
           }
         ]
       }
@@ -187,57 +187,57 @@ const service = new Service({
 
 export default [deployment, service];
 ",
-  "environments/dev/index.ts": "import { GlobalEnvironment } from \\"@kosko/env\\";
+  "environments/dev/index.ts": "import { GlobalEnvironment } from "@kosko/env";
 
 const env: GlobalEnvironment = {
-  namespace: \\"dev\\"
+  namespace: "dev"
 };
 
 export default env;
 ",
-  "environments/dev/nginx.ts": "import { ComponentEnvironment } from \\"@kosko/env\\";
+  "environments/dev/nginx.ts": "import { ComponentEnvironment } from "@kosko/env";
 
-const env: ComponentEnvironment[\\"nginx\\"] = {
+const env: ComponentEnvironment["nginx"] = {
   replicas: 3
 };
 
 export default env;
 ",
-  "kosko.toml": "components = [\\"*\\"]
-require = [\\"ts-node/register\\"]
+  "kosko.toml": "components = ["*"]
+require = ["ts-node/register"]
 ",
   "package.json": "{
-  \\"scripts\\": {
-    \\"generate\\": \\"NODE_OPTIONS='--loader=ts-node/esm' kosko generate\\",
-    \\"validate\\": \\"NODE_OPTIONS='--loader=ts-node/esm' kosko validate\\"
+  "scripts": {
+    "generate": "NODE_OPTIONS='--loader=ts-node/esm' kosko generate",
+    "validate": "NODE_OPTIONS='--loader=ts-node/esm' kosko validate"
   },
-  \\"dependencies\\": {
-    \\"@kosko/env\\": \\"^3.0.0\\",
-    \\"kosko\\": \\"^2.0.0\\",
-    \\"kubernetes-models\\": \\"^3.0.0\\"
+  "dependencies": {
+    "@kosko/env": "^3.0.0",
+    "kosko": "^2.0.0",
+    "kubernetes-models": "^3.0.0"
   },
-  \\"type\\": \\"module\\",
-  \\"devDependencies\\": {
-    \\"@tsconfig/node16-strictest-esm\\": \\"^1.0.0\\",
-    \\"ts-node\\": \\"^10.4.0\\",
-    \\"typescript\\": \\"^4.5.3\\"
+  "type": "module",
+  "devDependencies": {
+    "@tsconfig/node16-strictest-esm": "^1.0.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.3"
   }
 }",
   "tsconfig.json": "{
-  \\"extends\\": \\"@tsconfig/node16-strictest-esm/tsconfig.json\\",
-  \\"compilerOptions\\": {
-    \\"typeRoots\\": [
-      \\"./node_modules/@types\\",
-      \\"./typings\\"
+  "extends": "@tsconfig/node16-strictest-esm/tsconfig.json",
+  "compilerOptions": {
+    "typeRoots": [
+      "./node_modules/@types",
+      "./typings"
     ],
-    \\"moduleResolution\\": \\"node\\",
-    \\"module\\": \\"esnext\\"
+    "moduleResolution": "node",
+    "module": "esnext"
   }
 }",
-  "typings/@kosko__env/index.d.ts": "import \\"@kosko/env\\";
+  "typings/@kosko__env/index.d.ts": "import "@kosko/env";
 
-// Extend type declarations of \\"@kosko/env\\" module
-declare module \\"@kosko/env\\" {
+// Extend type declarations of "@kosko/env" module
+declare module "@kosko/env" {
   // Declare types for global environment variables
   interface GlobalEnvironment {
     namespace: string;
@@ -268,7 +268,7 @@ declare module \\"@kosko/env\\" {
 `;
 
 exports[`when --typescript option is given should generate files 1`] = `
-Object {
+{
   "README.md": "This is a [Kosko] project bootstrapped with [\`kosko init\`][kosko] command.
 
 ## Getting Started
@@ -299,13 +299,13 @@ Check [Kosko docs](https://kosko.dev/docs/) for more information about Kosko.
 
 [kosko]: https://kosko.dev/
 ",
-  "components/nginx.ts": "import { Deployment } from \\"kubernetes-models/apps/v1/Deployment\\";
-import { Service } from \\"kubernetes-models/v1/Service\\";
-import env from \\"@kosko/env\\";
+  "components/nginx.ts": "import { Deployment } from "kubernetes-models/apps/v1/Deployment";
+import { Service } from "kubernetes-models/v1/Service";
+import env from "@kosko/env";
 
-const params = env.component(\\"nginx\\");
+const params = env.component("nginx");
 
-const name = \\"nginx\\";
+const name = "nginx";
 const labels = { app: name };
 const port = 80;
 
@@ -324,10 +324,10 @@ const deployment = new Deployment({
       spec: {
         containers: [
           {
-            name: \\"nginx\\",
-            image: \\"nginx:stable\\",
+            name: "nginx",
+            image: "nginx:stable",
             ports: [{ containerPort: port }],
-            env: [{ name: \\"NGINX_PORT\\", value: \`\${port}\` }]
+            env: [{ name: "NGINX_PORT", value: \`\${port}\` }]
           }
         ]
       }
@@ -348,55 +348,55 @@ const service = new Service({
 
 export default [deployment, service];
 ",
-  "environments/dev/index.ts": "import { GlobalEnvironment } from \\"@kosko/env\\";
+  "environments/dev/index.ts": "import { GlobalEnvironment } from "@kosko/env";
 
 const env: GlobalEnvironment = {
-  namespace: \\"dev\\"
+  namespace: "dev"
 };
 
 export default env;
 ",
-  "environments/dev/nginx.ts": "import { ComponentEnvironment } from \\"@kosko/env\\";
+  "environments/dev/nginx.ts": "import { ComponentEnvironment } from "@kosko/env";
 
-const env: ComponentEnvironment[\\"nginx\\"] = {
+const env: ComponentEnvironment["nginx"] = {
   replicas: 3
 };
 
 export default env;
 ",
-  "kosko.toml": "components = [\\"*\\"]
-require = [\\"ts-node/register\\"]
+  "kosko.toml": "components = ["*"]
+require = ["ts-node/register"]
 ",
   "package.json": "{
-  \\"scripts\\": {
-    \\"generate\\": \\"kosko generate\\",
-    \\"validate\\": \\"kosko validate\\"
+  "scripts": {
+    "generate": "kosko generate",
+    "validate": "kosko validate"
   },
-  \\"dependencies\\": {
-    \\"@kosko/env\\": \\"^3.0.0\\",
-    \\"kosko\\": \\"^2.0.0\\",
-    \\"kubernetes-models\\": \\"^3.0.0\\"
+  "dependencies": {
+    "@kosko/env": "^3.0.0",
+    "kosko": "^2.0.0",
+    "kubernetes-models": "^3.0.0"
   },
-  \\"devDependencies\\": {
-    \\"@tsconfig/recommended\\": \\"^1.0.1\\",
-    \\"ts-node\\": \\"^10.4.0\\",
-    \\"typescript\\": \\"^4.5.3\\"
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.1",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.3"
   }
 }",
   "tsconfig.json": "{
-  \\"extends\\": \\"@tsconfig/recommended/tsconfig.json\\",
-  \\"compilerOptions\\": {
-    \\"typeRoots\\": [
-      \\"./node_modules/@types\\",
-      \\"./typings\\"
+  "extends": "@tsconfig/recommended/tsconfig.json",
+  "compilerOptions": {
+    "typeRoots": [
+      "./node_modules/@types",
+      "./typings"
     ],
-    \\"moduleResolution\\": \\"node\\"
+    "moduleResolution": "node"
   }
 }",
-  "typings/@kosko__env/index.d.ts": "import \\"@kosko/env\\";
+  "typings/@kosko__env/index.d.ts": "import "@kosko/env";
 
-// Extend type declarations of \\"@kosko/env\\" module
-declare module \\"@kosko/env\\" {
+// Extend type declarations of "@kosko/env" module
+declare module "@kosko/env" {
   // Declare types for global environment variables
   interface GlobalEnvironment {
     namespace: string;
@@ -427,7 +427,7 @@ declare module \\"@kosko/env\\" {
 `;
 
 exports[`when no options are given should generate files 1`] = `
-Object {
+{
   "README.md": "This is a [Kosko] project bootstrapped with [\`kosko init\`][kosko] command.
 
 ## Getting Started
@@ -458,13 +458,13 @@ Check [Kosko docs](https://kosko.dev/docs/) for more information about Kosko.
 
 [kosko]: https://kosko.dev/
 ",
-  "components/nginx.js": "const { Deployment } = require(\\"kubernetes-models/apps/v1/Deployment\\");
-const { Service } = require(\\"kubernetes-models/v1/Service\\");
-const env = require(\\"@kosko/env\\");
+  "components/nginx.js": "const { Deployment } = require("kubernetes-models/apps/v1/Deployment");
+const { Service } = require("kubernetes-models/v1/Service");
+const env = require("@kosko/env");
 
-const params = env.component(\\"nginx\\");
+const params = env.component("nginx");
 
-const name = \\"nginx\\";
+const name = "nginx";
 const labels = { app: name };
 const port = 80;
 
@@ -483,10 +483,10 @@ const deployment = new Deployment({
       spec: {
         containers: [
           {
-            name: \\"nginx\\",
-            image: \\"nginx:stable\\",
+            name: "nginx",
+            image: "nginx:stable",
             ports: [{ containerPort: port }],
-            env: [{ name: \\"NGINX_PORT\\", value: \`\${port}\` }]
+            env: [{ name: "NGINX_PORT", value: \`\${port}\` }]
           }
         ]
       }
@@ -508,24 +508,24 @@ const service = new Service({
 module.exports = [deployment, service];
 ",
   "environments/dev/index.js": "module.exports = {
-  namespace: \\"dev\\"
+  namespace: "dev"
 };
 ",
   "environments/dev/nginx.js": "module.exports = {
   replicas: 3
 };
 ",
-  "kosko.toml": "components = [\\"*\\"]
+  "kosko.toml": "components = ["*"]
 ",
   "package.json": "{
-  \\"scripts\\": {
-    \\"generate\\": \\"kosko generate\\",
-    \\"validate\\": \\"kosko validate\\"
+  "scripts": {
+    "generate": "kosko generate",
+    "validate": "kosko validate"
   },
-  \\"dependencies\\": {
-    \\"@kosko/env\\": \\"^3.0.0\\",
-    \\"kosko\\": \\"^2.0.0\\",
-    \\"kubernetes-models\\": \\"^3.0.0\\"
+  "dependencies": {
+    "@kosko/env": "^3.0.0",
+    "kosko": "^2.0.0",
+    "kubernetes-models": "^3.0.0"
   }
 }",
 }
@@ -533,17 +533,17 @@ module.exports = [deployment, service];
 
 exports[`when the target exists and is not empty should update package.json 1`] = `
 "{
-  \\"name\\": \\"foo\\",
-  \\"version\\": \\"1.2.3\\",
-  \\"dependencies\\": {
-    \\"@kosko/env\\": \\"^3.0.0\\",
-    \\"debug\\": \\"3.2.1\\",
-    \\"kosko\\": \\"^2.0.0\\",
-    \\"kubernetes-models\\": \\"^3.0.0\\"
+  "name": "foo",
+  "version": "1.2.3",
+  "dependencies": {
+    "@kosko/env": "^3.0.0",
+    "debug": "3.2.1",
+    "kosko": "^2.0.0",
+    "kubernetes-models": "^3.0.0"
   },
-  \\"scripts\\": {
-    \\"generate\\": \\"kosko generate\\",
-    \\"validate\\": \\"kosko validate\\"
+  "scripts": {
+    "generate": "kosko generate",
+    "validate": "kosko validate"
   }
 }"
 `;

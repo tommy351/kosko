@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 import { ToolbarContainer, ToolbarTitle } from "../Toolbar";
 import ComponentSelect from "./ComponentSelect";
 import { usePreviewContext } from "./context";
@@ -20,7 +20,7 @@ const EDITOR_OPTIONS: EditorConfiguration = {
   mode: "yaml"
 };
 
-const PreviewPane: FunctionComponent = () => {
+export default function PreviewPane() {
   const {
     value: { updating, content }
   } = usePreviewContext();
@@ -47,6 +47,4 @@ const PreviewPane: FunctionComponent = () => {
       </div>
     </div>
   );
-};
-
-export default PreviewPane;
+}

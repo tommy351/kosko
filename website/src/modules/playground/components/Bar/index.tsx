@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo, useState } from "react";
+import React, { ReactNode, useMemo, useState } from "react";
 import { Bar as ResizerBar } from "react-simple-resizer";
 import clsx from "clsx";
 import styles from "./styles.module.scss";
@@ -6,7 +6,7 @@ import { useContainer } from "../Container";
 
 const EXPAND_SIZE = 2;
 
-const Bar: FunctionComponent = (props) => {
+export default function Bar(props: { children?: ReactNode }) {
   const [active, setActive] = useState(false);
   const { vertical } = useContainer();
   const expandInteractiveArea = useMemo(
@@ -28,6 +28,4 @@ const Bar: FunctionComponent = (props) => {
       {...props}
     />
   );
-};
-
-export default Bar;
+}

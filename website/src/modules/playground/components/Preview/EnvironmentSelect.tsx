@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 import Select from "./Select";
 import usePlaygroundContext from "../../hooks/usePlaygroundContext";
 import useEnvironmentList from "../../hooks/useEnvironmentList";
 
-const EnvironmentSelect: FunctionComponent = () => {
+export default function EnvironmentSelect() {
   const {
     value: { environment },
     updateValue
@@ -22,6 +22,4 @@ const EnvironmentSelect: FunctionComponent = () => {
       }}
     />
   );
-};
-
-export default EnvironmentSelect;
+}

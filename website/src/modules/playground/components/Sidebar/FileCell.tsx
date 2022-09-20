@@ -1,14 +1,17 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 import usePlaygroundContext from "../../hooks/usePlaygroundContext";
 import { File } from "./types";
 import { FcFile } from "react-icons/fc";
 import Cell from "./Cell";
 import FileAction from "./FileAction";
 
-const FileCell: FunctionComponent<{ entry: File; depth: number }> = ({
+export default function FileCell({
   entry,
   depth
-}) => {
+}: {
+  entry: File;
+  depth: number;
+}) {
   const {
     value: { activePath },
     updateValue
@@ -28,6 +31,4 @@ const FileCell: FunctionComponent<{ entry: File; depth: number }> = ({
       }}
     />
   );
-};
-
-export default FileCell;
+}

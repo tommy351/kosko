@@ -35,8 +35,8 @@ describe.each([
       message: "test"
     });
 
-    expect(process.stderr.write).toBeCalledTimes(1);
-    expect(process.stderr.write).toBeCalledWith(`${prefix} - test\n`);
+    expect(process.stderr.write).toHaveBeenCalledTimes(1);
+    expect(process.stderr.write).toHaveBeenCalledWith(`${prefix} - test\n`);
   });
 
   test("should display time if logger level <= debug", () => {
@@ -50,8 +50,8 @@ describe.each([
       message: "test"
     });
 
-    expect(process.stderr.write).toBeCalledTimes(1);
-    expect(process.stderr.write).toBeCalledWith(
+    expect(process.stderr.write).toHaveBeenCalledTimes(1);
+    expect(process.stderr.write).toHaveBeenCalledWith(
       `${pc.gray(`[${h}:05:06.012]`)} ${prefix} - test\n`
     );
   });
@@ -59,8 +59,10 @@ describe.each([
 
 test("should write data if set", () => {
   writeInfo({ message: "test", data: { foo: "bar" } });
-  expect(process.stderr.write).toBeCalledTimes(1);
-  expect(process.stderr.write).toBeCalledWith(`${pc.green("info ")} - test {
+  expect(process.stderr.write).toHaveBeenCalledTimes(1);
+  expect(process.stderr.write).toHaveBeenCalledWith(`${pc.green(
+    "info "
+  )} - test {
   "foo": "bar"
 }\n`);
 });
@@ -69,8 +71,8 @@ test("should write error if set", () => {
   const err = new Error("err message");
 
   writeInfo({ message: "test", error: err });
-  expect(process.stderr.write).toBeCalledTimes(1);
-  expect(process.stderr.write).toBeCalledWith(`${pc.green("info ")} - test
+  expect(process.stderr.write).toHaveBeenCalledTimes(1);
+  expect(process.stderr.write).toHaveBeenCalledWith(`${pc.green("info ")} - test
 ${pc.gray(cleanStack(err.stack || "", { pretty: true }))}\n`);
 });
 
@@ -78,8 +80,10 @@ test("should write both if data & error are set", () => {
   const err = new Error("err message");
 
   writeInfo({ message: "test", data: { foo: "bar" }, error: err });
-  expect(process.stderr.write).toBeCalledTimes(1);
-  expect(process.stderr.write).toBeCalledWith(`${pc.green("info ")} - test {
+  expect(process.stderr.write).toHaveBeenCalledTimes(1);
+  expect(process.stderr.write).toHaveBeenCalledWith(`${pc.green(
+    "info "
+  )} - test {
   "foo": "bar"
 }
 ${pc.gray(cleanStack(err.stack || "", { pretty: true }))}\n`);
@@ -89,8 +93,8 @@ test("should use error message if message is not set", () => {
   const err = new Error("err message");
 
   writeInfo({ error: err });
-  expect(process.stderr.write).toBeCalledTimes(1);
-  expect(process.stderr.write).toBeCalledWith(`${pc.green("info ")} - ${
+  expect(process.stderr.write).toHaveBeenCalledTimes(1);
+  expect(process.stderr.write).toHaveBeenCalledWith(`${pc.green("info ")} - ${
     err.message
   }
 ${pc.gray(cleanStack(err.stack || "", { pretty: true }))}\n`);
@@ -98,20 +102,20 @@ ${pc.gray(cleanStack(err.stack || "", { pretty: true }))}\n`);
 
 test("should not write message if message is undefined", () => {
   writeInfo({});
-  expect(process.stderr.write).toBeCalledTimes(1);
-  expect(process.stderr.write).toBeCalledWith(`${pc.green("info ")} -\n`);
+  expect(process.stderr.write).toHaveBeenCalledTimes(1);
+  expect(process.stderr.write).toHaveBeenCalledWith(`${pc.green("info ")} -\n`);
 });
 
 test("should use error message for errors without stack", () => {
   writeInfo({ message: "test", error: { message: "err message" } });
-  expect(process.stderr.write).toBeCalledTimes(1);
-  expect(process.stderr.write).toBeCalledWith(`${pc.green("info ")} - test
+  expect(process.stderr.write).toHaveBeenCalledTimes(1);
+  expect(process.stderr.write).toHaveBeenCalledWith(`${pc.green("info ")} - test
 ${pc.gray("err message")}\n`);
 });
 
 test("should serialize error for errors without message and stack", () => {
   writeInfo({ message: "test", error: "foo" });
-  expect(process.stderr.write).toBeCalledTimes(1);
-  expect(process.stderr.write).toBeCalledWith(`${pc.green("info ")} - test
+  expect(process.stderr.write).toHaveBeenCalledTimes(1);
+  expect(process.stderr.write).toHaveBeenCalledWith(`${pc.green("info ")} - test
 ${pc.gray(`"foo"`)}\n`);
 });
