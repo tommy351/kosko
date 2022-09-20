@@ -6,7 +6,7 @@ importers:
     specifiers:
       '@changesets/changelog-github': ^0.4.6
       '@changesets/cli': ^2.24.4
-      '@tsconfig/node12': ^1.0.11
+      '@tsconfig/node14': ^1.0.3
       '@types/expect-puppeteer': ^5.0.1
       '@types/jest': ^29.0.3
       '@types/jest-environment-puppeteer': ^5.0.2
@@ -48,7 +48,7 @@ importers:
     devDependencies:
       '@changesets/changelog-github': 0.4.6
       '@changesets/cli': 2.24.4
-      '@tsconfig/node12': 1.0.11
+      '@tsconfig/node14': 1.0.3
       '@types/expect-puppeteer': 5.0.1
       '@types/jest': 29.0.3
       '@types/jest-environment-puppeteer': 5.0.2
