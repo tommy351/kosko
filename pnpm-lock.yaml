@@ -309,13 +309,13 @@ importers:
       '@iarna/toml': ^2.2.5
       '@kosko/jest-preset': workspace:^0.0.0
       '@kosko/log': workspace:^0.1.0
-      superstruct: ^0.16.2
+      superstruct: ^0.15.3
       tslib: ^2.4.0
       type-fest: ^2.19.0
     dependencies:
       '@iarna/toml': 2.2.5
       '@kosko/log': link:../log
-      superstruct: 0.16.2
+      superstruct: 0.15.5
       tslib: 2.4.0
       type-fest: 2.19.0
     devDependencies:
@@ -12477,8 +12477,8 @@ packages:
     resolution: {integrity: sha512-nPewA6m9mR3d6k7WkZ8N8zpTWfenFH3q9pA2PkuiZxINr9DKB2+40wEQf0ixn8VaGuJ78AB6iWOtStI+/4FKZQ==}
     dev: true
 
-  /superstruct/0.16.2:
-    resolution: {integrity: sha512-79CTq+sufjIbJnxa0ZDTaKMEGIOraQ8DU77qgykXeN2Kgc3HQ+1vauyEo2G4p/6wyIlEEQ1JJLP12Gvm7lMEew==}
+  /superstruct/0.15.5:
+    resolution: {integrity: sha512-4AOeU+P5UuE/4nOUkmcQdW5y7i9ndt1cQd/3iUe+LTz3RxESf/W/5lg4B74HbDMMv8PHnPnGCQFH45kBcrQYoQ==}
     dev: false
 
   /supports-color/5.5.0:
