@@ -84,5 +84,13 @@
     "projects": [
       "<rootDir>/packages/*"
     ]
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "react": "17",
+        "react-dom": "17"
+      }
+    }
   }
 }
