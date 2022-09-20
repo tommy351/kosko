@@ -1,11 +1,6 @@
 import { Draft } from "immer";
 import { noop } from "lodash";
-import React, {
-  createContext,
-  FunctionComponent,
-  useContext,
-  useMemo
-} from "react";
+import React, { createContext, ReactNode, useContext, useMemo } from "react";
 import { useImmer } from "use-immer";
 
 export interface PreviewContextValue {
@@ -32,7 +27,7 @@ export function usePreviewContext() {
   return useContext(PreviewContext);
 }
 
-export const PreviewContextProvider: FunctionComponent = ({ children }) => {
+export function PreviewContextProvider({ children }: { children?: ReactNode }) {
   const [value, updateValue] = useImmer<PreviewContextValue>({
     updating: false,
     content: "",
@@ -44,4 +39,4 @@ export const PreviewContextProvider: FunctionComponent = ({ children }) => {
   return (
     <PreviewContext.Provider value={ctx}>{children}</PreviewContext.Provider>
   );
-};
+}

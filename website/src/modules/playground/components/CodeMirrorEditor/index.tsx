@@ -1,13 +1,7 @@
 /// <reference types="codemirror/addon/edit/matchbrackets"/>
 /// <reference types="codemirror/addon/edit/closebrackets"/>
 
-import React, {
-  FunctionComponent,
-  useEffect,
-  useMemo,
-  useRef,
-  useState
-} from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   Controlled as CodeMirror,
   IControlledCodeMirror
@@ -30,13 +24,13 @@ export interface CodeMirrorEditorProps extends IControlledCodeMirror {
   path?: string;
 }
 
-const CodeMirrorEditor: FunctionComponent<CodeMirrorEditorProps> = ({
+export default function CodeMirrorEditor({
   options: inputOptions,
   value,
   editorDidMount,
   path,
   ...props
-}) => {
+}: CodeMirrorEditorProps) {
   const { colorMode } = useColorMode();
   const isDarkTheme = colorMode === "dark";
   const [mounted, setMounted] = useState(false);
@@ -77,6 +71,4 @@ const CodeMirrorEditor: FunctionComponent<CodeMirrorEditorProps> = ({
       />
     </div>
   );
-};
-
-export default CodeMirrorEditor;
+}

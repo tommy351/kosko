@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import usePlaygroundContext from "../../hooks/usePlaygroundContext";
 import { usePreviewContext } from "./context";
 import { createBundler } from "../../worker";
@@ -9,7 +9,7 @@ const EVENT_CALLBACK = "window.__postMessageToParent";
 
 let EVENT_ID = 0;
 
-const Executor: FunctionComponent = () => {
+export default function Executor() {
   const { updateValue } = usePreviewContext();
   const {
     value: { files: filesValue, component, environment }
@@ -190,6 +190,4 @@ const Executor: FunctionComponent = () => {
   }, [frame, frameLoaded, files, component, environment]);
 
   return null;
-};
-
-export default Executor;
+}

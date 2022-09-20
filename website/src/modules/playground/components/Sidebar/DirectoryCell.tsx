@@ -1,14 +1,17 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 import { Directory } from "./types";
 import { FcFolder } from "react-icons/fc";
 import Cell from "./Cell";
 import Tree from "./Tree";
 import DirectoryAction from "./DirectoryAction";
 
-const DirectoryCell: FunctionComponent<{ entry: Directory; depth: number }> = ({
+export default function DirectoryCell({
   entry,
   depth
-}) => {
+}: {
+  entry: Directory;
+  depth: number;
+}) {
   return (
     <Cell
       entry={entry}
@@ -19,6 +22,4 @@ const DirectoryCell: FunctionComponent<{ entry: Directory; depth: number }> = ({
       <Tree entries={entry.children} depth={depth + 1} />
     </Cell>
   );
-};
-
-export default DirectoryCell;
+}

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { useState } from "react";
 import {
   Feature,
   FeatureDescription,
@@ -17,9 +17,7 @@ import CodeBlock, {
 } from "@site/src/modules/common/components/CodeBlock";
 import { usePrismTheme } from "@docusaurus/theme-common";
 
-const Pane: FunctionComponent<{
-  tabs: Record<string, CodeBlockProps>;
-}> = ({ tabs }) => {
+function Pane({ tabs }: { tabs: Record<string, CodeBlockProps> }) {
   const [active, setActive] = useState(Object.keys(tabs)[0]);
 
   return (
@@ -40,9 +38,9 @@ const Pane: FunctionComponent<{
       <CodeBlock {...tabs[active]} className={styles.paneCode} />
     </div>
   );
-};
+}
 
-const CodePane: FunctionComponent = () => {
+function CodePane() {
   return (
     <Pane
       tabs={{
@@ -62,9 +60,9 @@ const CodePane: FunctionComponent = () => {
       }}
     />
   );
-};
+}
 
-const ResultPane: FunctionComponent = () => {
+function ResultPane() {
   return (
     <Pane
       tabs={{
@@ -79,9 +77,9 @@ const ResultPane: FunctionComponent = () => {
       }}
     />
   );
-};
+}
 
-const Example: FunctionComponent = () => {
+function Example() {
   const prismTheme = usePrismTheme();
 
   return (
@@ -94,9 +92,9 @@ const Example: FunctionComponent = () => {
       </div>
     </FeatureExample>
   );
-};
+}
 
-const DeployEverywhere: FunctionComponent = () => {
+export default function DeployEverywhere() {
   return (
     <Feature id="deploy-everywhere">
       <FeatureTitle>
@@ -113,6 +111,4 @@ const DeployEverywhere: FunctionComponent = () => {
       <Example />
     </Feature>
   );
-};
-
-export default DeployEverywhere;
+}

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { ReactNode } from "react";
 import Link from "@docusaurus/Link";
 import clsx from "clsx";
 
@@ -24,9 +24,10 @@ type LinkButtonProps = {
   active?: boolean;
   disabled?: boolean;
   block?: boolean;
+  children?: ReactNode;
 };
 
-const LinkButton: FunctionComponent<LinkButtonProps> = ({
+export default function LinkButton({
   className,
   color,
   size,
@@ -35,7 +36,7 @@ const LinkButton: FunctionComponent<LinkButtonProps> = ({
   disabled,
   block,
   ...props
-}) => {
+}: LinkButtonProps) {
   return (
     <Link
       {...props}
@@ -53,6 +54,4 @@ const LinkButton: FunctionComponent<LinkButtonProps> = ({
       )}
     />
   );
-};
-
-export default LinkButton;
+}

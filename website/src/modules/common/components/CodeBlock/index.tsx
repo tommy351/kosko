@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from "react";
+import React, { useMemo } from "react";
 import clsx from "clsx";
 import Highlight, { defaultProps, Language } from "prism-react-renderer";
 import styles from "./styles.module.scss";
@@ -55,7 +55,7 @@ export interface CodeBlockProps {
   trimEnd?: boolean;
 }
 
-const CodeBlock: FunctionComponent<CodeBlockProps> = ({
+export default function CodeBlock({
   language,
   highlightLines = [],
   hideLines = [],
@@ -64,7 +64,7 @@ const CodeBlock: FunctionComponent<CodeBlockProps> = ({
   tokenRenderer = defaultTokenRenderer,
   trimStart = true,
   trimEnd = true
-}) => {
+}: CodeBlockProps) {
   const prismTheme = usePrismTheme();
   const trimmedCode = useMemo(() => {
     let result = code;
@@ -109,6 +109,4 @@ const CodeBlock: FunctionComponent<CodeBlockProps> = ({
       )}
     </Highlight>
   );
-};
-
-export default CodeBlock;
+}

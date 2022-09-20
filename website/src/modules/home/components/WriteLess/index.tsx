@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 import {
   Feature,
   FeatureDescription,
@@ -10,7 +10,7 @@ import styles from "./styles.module.scss";
 import deployment from "!!raw-loader!./examples/deployment.yml";
 import service from "!!raw-loader!./examples/service.yml";
 
-const WriteLess: FunctionComponent = () => {
+export default function WriteLess() {
   return (
     <Feature id="write-less">
       <FeatureTitle>
@@ -46,6 +46,4 @@ const WriteLess: FunctionComponent = () => {
       </FeatureExample>
     </Feature>
   );
-};
-
-export default WriteLess;
+}

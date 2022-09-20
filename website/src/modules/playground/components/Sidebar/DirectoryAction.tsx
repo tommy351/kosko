@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 import { ActionButton, ActionContainer } from "./Action";
 import { VscNewFolder, VscNewFile, VscEdit, VscTrash } from "react-icons/vsc";
 import usePlaygroundContext from "../../hooks/usePlaygroundContext";
@@ -6,10 +6,13 @@ import { dirname, sep } from "@site/src/utils/path";
 import { DIRECTORY_PLACEHOLDER } from "../../constants";
 import { isValidName } from "./utils";
 
-const DirectoryAction: FunctionComponent<{
+export default function DirectoryAction({
+  path,
+  showFileActions
+}: {
   path: string;
   showFileActions?: boolean;
-}> = ({ path, showFileActions }) => {
+}) {
   const {
     value: { files },
     updateValue
@@ -135,6 +138,4 @@ const DirectoryAction: FunctionComponent<{
       )}
     </ActionContainer>
   );
-};
-
-export default DirectoryAction;
+}

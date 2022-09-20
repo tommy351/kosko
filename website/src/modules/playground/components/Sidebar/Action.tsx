@@ -1,15 +1,19 @@
-import React, { FunctionComponent, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import styles from "./styles.module.scss";
 
-export const ActionContainer: FunctionComponent = ({ children }) => {
+export function ActionContainer({ children }: { children?: ReactNode }) {
   return <div>{children}</div>;
-};
+}
 
-export const ActionButton: FunctionComponent<{
+export function ActionButton({
+  icon,
+  title,
+  onClick
+}: {
   title: string;
   onClick?(): void;
   icon: ReactNode;
-}> = ({ icon, title, onClick }) => {
+}) {
   return (
     <button
       type="button"
@@ -20,4 +24,4 @@ export const ActionButton: FunctionComponent<{
       {icon}
     </button>
   );
-};
+}

@@ -10,7 +10,6 @@
   "module": "dist/index.node.esm.mjs",
   "browser": "dist/index.mjs",
   "types": "dist/index.node.d.ts",
-  "typedocMain": "src/index.node.ts",
   "sideEffects": false,
   "exports": {
     "node": {
@@ -44,5 +43,8 @@
   },
   "devDependencies": {
     "@kosko/jest-preset": "workspace:^0.0.0"
+  },
+  "typedoc": {
+    "entryPoint": "src/index.node.ts"
   }
 }

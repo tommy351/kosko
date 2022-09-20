@@ -1,11 +1,11 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 import Layout from "@theme/Layout";
 import Header from "../Header";
 import WriteLess from "../WriteLess";
 import DeployEverywhere from "../DeployEverywhere";
 import TypeSafe from "../TypeSafe";
 
-const HomePage: FunctionComponent = () => {
+export default function HomePage() {
   return (
     <Layout description="Organize Kubernetes manifests in JavaScript.">
       <Header />
@@ -16,6 +16,4 @@ const HomePage: FunctionComponent = () => {
       </main>
     </Layout>
   );
-};
-
-export default HomePage;
+}

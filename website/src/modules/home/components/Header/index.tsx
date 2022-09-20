@@ -1,10 +1,10 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 import clsx from "clsx";
 import styles from "./styles.module.scss";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import LinkButton from "@site/src/modules/common/components/LinkButton";
 
-const Header: FunctionComponent = () => {
+export default function Header() {
   return (
     <header className={clsx("container", styles.container)}>
       <h1 className={styles.title}>
@@ -22,6 +22,4 @@ const Header: FunctionComponent = () => {
       </div>
     </header>
   );
-};
-
-export default Header;
+}

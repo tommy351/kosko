@@ -1,5 +1,5 @@
 import { sep } from "@site/src/utils/path";
-import React, { FunctionComponent, useMemo } from "react";
+import React, { ReactNode, useMemo } from "react";
 import { useImmer } from "use-immer";
 import { DIRECTORY_PLACEHOLDER } from "../../constants";
 import { PlaygroundContext, PlaygroundContextValue } from "../../context";
@@ -34,7 +34,7 @@ function insertPlaceholder(
   return result;
 }
 
-const Provider: FunctionComponent = ({ children }) => {
+export default function Provider({ children }: { children?: ReactNode }) {
   const [value, updateValue] = useImmer<PlaygroundContextValue>(() => ({
     activePath: Object.keys(fixtures)[0],
     files: insertPlaceholder(fixtures),
@@ -49,6 +49,4 @@ const Provider: FunctionComponent = ({ children }) => {
       {children}
     </PlaygroundContext.Provider>
   );
-};
-
-export default Provider;
+}
