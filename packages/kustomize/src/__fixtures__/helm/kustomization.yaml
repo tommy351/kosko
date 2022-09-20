@@ -1,5 +1,5 @@
 helmCharts:
-  - repo: https://charts.bitnami.com/bitnami
-    name: nginx
-    version: 9.5.16
+  - repo: https://fluent.github.io/helm-charts
+    name: fluent-bit
+    version: 0.20.8
     releaseName: foobar
