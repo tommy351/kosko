@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`chart is a local path 1`] = `
-Array [
-  Object {
+[
+  {
     "apiVersion": "v1",
     "kind": "ServiceAccount",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app.kubernetes.io/instance": "RELEASE-NAME",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "nginx",
@@ -16,11 +16,11 @@ Array [
       "name": "RELEASE-NAME-nginx",
     },
   },
-  Object {
+  {
     "apiVersion": "v1",
     "kind": "Service",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app.kubernetes.io/instance": "RELEASE-NAME",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "nginx",
@@ -29,27 +29,27 @@ Array [
       },
       "name": "RELEASE-NAME-nginx",
     },
-    "spec": Object {
-      "ports": Array [
-        Object {
+    "spec": {
+      "ports": [
+        {
           "name": "http",
           "port": 80,
           "protocol": "TCP",
           "targetPort": "http",
         },
       ],
-      "selector": Object {
+      "selector": {
         "app.kubernetes.io/instance": "RELEASE-NAME",
         "app.kubernetes.io/name": "nginx",
       },
       "type": "ClusterIP",
     },
   },
-  Object {
+  {
     "apiVersion": "apps/v1",
     "kind": "Deployment",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app.kubernetes.io/instance": "RELEASE-NAME",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "nginx",
@@ -58,51 +58,51 @@ Array [
       },
       "name": "RELEASE-NAME-nginx",
     },
-    "spec": Object {
+    "spec": {
       "replicas": 1,
-      "selector": Object {
-        "matchLabels": Object {
+      "selector": {
+        "matchLabels": {
           "app.kubernetes.io/instance": "RELEASE-NAME",
           "app.kubernetes.io/name": "nginx",
         },
       },
-      "template": Object {
-        "metadata": Object {
-          "labels": Object {
+      "template": {
+        "metadata": {
+          "labels": {
             "app.kubernetes.io/instance": "RELEASE-NAME",
             "app.kubernetes.io/name": "nginx",
           },
         },
-        "spec": Object {
-          "containers": Array [
-            Object {
+        "spec": {
+          "containers": [
+            {
               "image": "nginx:1.16.0",
               "imagePullPolicy": "IfNotPresent",
-              "livenessProbe": Object {
-                "httpGet": Object {
+              "livenessProbe": {
+                "httpGet": {
                   "path": "/",
                   "port": "http",
                 },
               },
               "name": "nginx",
-              "ports": Array [
-                Object {
+              "ports": [
+                {
                   "containerPort": 80,
                   "name": "http",
                   "protocol": "TCP",
                 },
               ],
-              "readinessProbe": Object {
-                "httpGet": Object {
+              "readinessProbe": {
+                "httpGet": {
                   "path": "/",
                   "port": "http",
                 },
               },
-              "resources": Object {},
-              "securityContext": Object {},
+              "resources": {},
+              "securityContext": {},
             },
           ],
-          "securityContext": Object {},
+          "securityContext": {},
           "serviceAccountName": "RELEASE-NAME-nginx",
         },
       },
@@ -112,14 +112,14 @@ Array [
 `;
 
 exports[`chart is deprecated 1`] = `
-Array [
-  Object {
+[
+  {
     "apiVersion": "v1",
-    "data": Object {
+    "data": {
       "key": "value",
     },
     "kind": "ConfigMap",
-    "metadata": Object {
+    "metadata": {
       "name": "myapp",
     },
   },
@@ -127,13 +127,13 @@ Array [
 `;
 
 exports[`chart is remote 1`] = `
-Array [
-  Object {
+[
+  {
     "apiVersion": "v1",
-    "imagePullSecrets": Array [],
+    "imagePullSecrets": [],
     "kind": "ServiceAccount",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app.kubernetes.io/instance": "RELEASE-NAME",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "kube-state-metrics",
@@ -143,12 +143,12 @@ Array [
       "namespace": "default",
     },
   },
-  Object {
+  {
     "apiVersion": "v1",
     "kind": "ServiceAccount",
-    "metadata": Object {
-      "annotations": Object {},
-      "labels": Object {
+    "metadata": {
+      "annotations": {},
+      "labels": {
         "app": "prometheus",
         "chart": "prometheus-13.6.0",
         "component": "alertmanager",
@@ -159,12 +159,12 @@ Array [
       "namespace": "default",
     },
   },
-  Object {
+  {
     "apiVersion": "v1",
     "kind": "ServiceAccount",
-    "metadata": Object {
-      "annotations": Object {},
-      "labels": Object {
+    "metadata": {
+      "annotations": {},
+      "labels": {
         "app": "prometheus",
         "chart": "prometheus-13.6.0",
         "component": "node-exporter",
@@ -175,12 +175,12 @@ Array [
       "namespace": "default",
     },
   },
-  Object {
+  {
     "apiVersion": "v1",
     "kind": "ServiceAccount",
-    "metadata": Object {
-      "annotations": Object {},
-      "labels": Object {
+    "metadata": {
+      "annotations": {},
+      "labels": {
         "app": "prometheus",
         "chart": "prometheus-13.6.0",
         "component": "pushgateway",
@@ -191,12 +191,12 @@ Array [
       "namespace": "default",
     },
   },
-  Object {
+  {
     "apiVersion": "v1",
     "kind": "ServiceAccount",
-    "metadata": Object {
-      "annotations": Object {},
-      "labels": Object {
+    "metadata": {
+      "annotations": {},
+      "labels": {
         "app": "prometheus",
         "chart": "prometheus-13.6.0",
         "component": "server",
@@ -207,9 +207,9 @@ Array [
       "namespace": "default",
     },
   },
-  Object {
+  {
     "apiVersion": "v1",
-    "data": Object {
+    "data": {
       "alertmanager.yml": "global: {}
 receivers:
 - name: default-receiver
@@ -221,8 +221,8 @@ route:
 ",
     },
     "kind": "ConfigMap",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app": "prometheus",
         "chart": "prometheus-13.6.0",
         "component": "alertmanager",
@@ -233,9 +233,9 @@ route:
       "namespace": "default",
     },
   },
-  Object {
+  {
     "apiVersion": "v1",
-    "data": Object {
+    "data": {
       "alerting_rules.yml": "{}
 ",
       "alerts": "{}
@@ -523,7 +523,7 @@ alerting:
       regex: .*
       action: keep
     - source_labels: [__meta_kubernetes_pod_container_port_number]
-      regex: \\"9093\\"
+      regex: "9093"
       action: keep
 ",
       "recording_rules.yml": "{}
@@ -532,8 +532,8 @@ alerting:
 ",
     },
     "kind": "ConfigMap",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app": "prometheus",
         "chart": "prometheus-13.6.0",
         "component": "server",
@@ -544,11 +544,11 @@ alerting:
       "namespace": "default",
     },
   },
-  Object {
+  {
     "apiVersion": "v1",
     "kind": "PersistentVolumeClaim",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app": "prometheus",
         "chart": "prometheus-13.6.0",
         "component": "alertmanager",
@@ -558,22 +558,22 @@ alerting:
       "name": "RELEASE-NAME-prometheus-alertmanager",
       "namespace": "default",
     },
-    "spec": Object {
-      "accessModes": Array [
+    "spec": {
+      "accessModes": [
         "ReadWriteOnce",
       ],
-      "resources": Object {
-        "requests": Object {
+      "resources": {
+        "requests": {
           "storage": "2Gi",
         },
       },
     },
   },
-  Object {
+  {
     "apiVersion": "v1",
     "kind": "PersistentVolumeClaim",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app": "prometheus",
         "chart": "prometheus-13.6.0",
         "component": "server",
@@ -583,22 +583,22 @@ alerting:
       "name": "RELEASE-NAME-prometheus-server",
       "namespace": "default",
     },
-    "spec": Object {
-      "accessModes": Array [
+    "spec": {
+      "accessModes": [
         "ReadWriteOnce",
       ],
-      "resources": Object {
-        "requests": Object {
+      "resources": {
+        "requests": {
           "storage": "8Gi",
         },
       },
     },
   },
-  Object {
+  {
     "apiVersion": "rbac.authorization.k8s.io/v1",
     "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app.kubernetes.io/instance": "RELEASE-NAME",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "kube-state-metrics",
@@ -606,342 +606,342 @@ alerting:
       },
       "name": "RELEASE-NAME-kube-state-metrics",
     },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
+    "rules": [
+      {
+        "apiGroups": [
           "certificates.k8s.io",
         ],
-        "resources": Array [
+        "resources": [
           "certificatesigningrequests",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "",
         ],
-        "resources": Array [
+        "resources": [
           "configmaps",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "batch",
         ],
-        "resources": Array [
+        "resources": [
           "cronjobs",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "extensions",
           "apps",
         ],
-        "resources": Array [
+        "resources": [
           "daemonsets",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "extensions",
           "apps",
         ],
-        "resources": Array [
+        "resources": [
           "deployments",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "",
         ],
-        "resources": Array [
+        "resources": [
           "endpoints",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "autoscaling",
         ],
-        "resources": Array [
+        "resources": [
           "horizontalpodautoscalers",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "extensions",
           "networking.k8s.io",
         ],
-        "resources": Array [
+        "resources": [
           "ingresses",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "batch",
         ],
-        "resources": Array [
+        "resources": [
           "jobs",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "",
         ],
-        "resources": Array [
+        "resources": [
           "limitranges",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "admissionregistration.k8s.io",
         ],
-        "resources": Array [
+        "resources": [
           "mutatingwebhookconfigurations",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "",
         ],
-        "resources": Array [
+        "resources": [
           "namespaces",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "networking.k8s.io",
         ],
-        "resources": Array [
+        "resources": [
           "networkpolicies",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "",
         ],
-        "resources": Array [
+        "resources": [
           "nodes",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "",
         ],
-        "resources": Array [
+        "resources": [
           "persistentvolumeclaims",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "",
         ],
-        "resources": Array [
+        "resources": [
           "persistentvolumes",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "policy",
         ],
-        "resources": Array [
+        "resources": [
           "poddisruptionbudgets",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "",
         ],
-        "resources": Array [
+        "resources": [
           "pods",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "extensions",
           "apps",
         ],
-        "resources": Array [
+        "resources": [
           "replicasets",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "",
         ],
-        "resources": Array [
+        "resources": [
           "replicationcontrollers",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "",
         ],
-        "resources": Array [
+        "resources": [
           "resourcequotas",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "",
         ],
-        "resources": Array [
+        "resources": [
           "secrets",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "",
         ],
-        "resources": Array [
+        "resources": [
           "services",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "apps",
         ],
-        "resources": Array [
+        "resources": [
           "statefulsets",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "storage.k8s.io",
         ],
-        "resources": Array [
+        "resources": [
           "storageclasses",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "admissionregistration.k8s.io",
         ],
-        "resources": Array [
+        "resources": [
           "validatingwebhookconfigurations",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "storage.k8s.io",
         ],
-        "resources": Array [
+        "resources": [
           "volumeattachments",
         ],
-        "verbs": Array [
+        "verbs": [
           "list",
           "watch",
         ],
       },
     ],
   },
-  Object {
+  {
     "apiVersion": "rbac.authorization.k8s.io/v1",
     "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app": "prometheus",
         "chart": "prometheus-13.6.0",
         "component": "alertmanager",
@@ -950,13 +950,13 @@ alerting:
       },
       "name": "RELEASE-NAME-prometheus-alertmanager",
     },
-    "rules": Array [],
+    "rules": [],
   },
-  Object {
+  {
     "apiVersion": "rbac.authorization.k8s.io/v1",
     "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app": "prometheus",
         "chart": "prometheus-13.6.0",
         "component": "pushgateway",
@@ -965,13 +965,13 @@ alerting:
       },
       "name": "RELEASE-NAME-prometheus-pushgateway",
     },
-    "rules": Array [],
+    "rules": [],
   },
-  Object {
+  {
     "apiVersion": "rbac.authorization.k8s.io/v1",
     "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app": "prometheus",
         "chart": "prometheus-13.6.0",
         "component": "server",
@@ -980,12 +980,12 @@ alerting:
       },
       "name": "RELEASE-NAME-prometheus-server",
     },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
+    "rules": [
+      {
+        "apiGroups": [
           "",
         ],
-        "resources": Array [
+        "resources": [
           "nodes",
           "nodes/proxy",
           "nodes/metrics",
@@ -995,42 +995,42 @@ alerting:
           "ingresses",
           "configmaps",
         ],
-        "verbs": Array [
+        "verbs": [
           "get",
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "extensions",
           "networking.k8s.io",
         ],
-        "resources": Array [
+        "resources": [
           "ingresses/status",
           "ingresses",
         ],
-        "verbs": Array [
+        "verbs": [
           "get",
           "list",
           "watch",
         ],
       },
-      Object {
-        "nonResourceURLs": Array [
+      {
+        "nonResourceURLs": [
           "/metrics",
         ],
-        "verbs": Array [
+        "verbs": [
           "get",
         ],
       },
     ],
   },
-  Object {
+  {
     "apiVersion": "rbac.authorization.k8s.io/v1",
     "kind": "ClusterRoleBinding",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app.kubernetes.io/instance": "RELEASE-NAME",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "kube-state-metrics",
@@ -1038,24 +1038,24 @@ alerting:
       },
       "name": "RELEASE-NAME-kube-state-metrics",
     },
-    "roleRef": Object {
+    "roleRef": {
       "apiGroup": "rbac.authorization.k8s.io",
       "kind": "ClusterRole",
       "name": "RELEASE-NAME-kube-state-metrics",
     },
-    "subjects": Array [
-      Object {
+    "subjects": [
+      {
         "kind": "ServiceAccount",
         "name": "RELEASE-NAME-kube-state-metrics",
         "namespace": "default",
       },
     ],
   },
-  Object {
+  {
     "apiVersion": "rbac.authorization.k8s.io/v1",
     "kind": "ClusterRoleBinding",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app": "prometheus",
         "chart": "prometheus-13.6.0",
         "component": "alertmanager",
@@ -1064,24 +1064,24 @@ alerting:
       },
       "name": "RELEASE-NAME-prometheus-alertmanager",
     },
-    "roleRef": Object {
+    "roleRef": {
       "apiGroup": "rbac.authorization.k8s.io",
       "kind": "ClusterRole",
       "name": "RELEASE-NAME-prometheus-alertmanager",
     },
-    "subjects": Array [
-      Object {
+    "subjects": [
+      {
         "kind": "ServiceAccount",
         "name": "RELEASE-NAME-prometheus-alertmanager",
         "namespace": "default",
       },
     ],
   },
-  Object {
+  {
     "apiVersion": "rbac.authorization.k8s.io/v1",
     "kind": "ClusterRoleBinding",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app": "prometheus",
         "chart": "prometheus-13.6.0",
         "component": "pushgateway",
@@ -1090,24 +1090,24 @@ alerting:
       },
       "name": "RELEASE-NAME-prometheus-pushgateway",
     },
-    "roleRef": Object {
+    "roleRef": {
       "apiGroup": "rbac.authorization.k8s.io",
       "kind": "ClusterRole",
       "name": "RELEASE-NAME-prometheus-pushgateway",
     },
-    "subjects": Array [
-      Object {
+    "subjects": [
+      {
         "kind": "ServiceAccount",
         "name": "RELEASE-NAME-prometheus-pushgateway",
         "namespace": "default",
       },
     ],
   },
-  Object {
+  {
     "apiVersion": "rbac.authorization.k8s.io/v1",
     "kind": "ClusterRoleBinding",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app": "prometheus",
         "chart": "prometheus-13.6.0",
         "component": "server",
@@ -1116,27 +1116,27 @@ alerting:
       },
       "name": "RELEASE-NAME-prometheus-server",
     },
-    "roleRef": Object {
+    "roleRef": {
       "apiGroup": "rbac.authorization.k8s.io",
       "kind": "ClusterRole",
       "name": "RELEASE-NAME-prometheus-server",
     },
-    "subjects": Array [
-      Object {
+    "subjects": [
+      {
         "kind": "ServiceAccount",
         "name": "RELEASE-NAME-prometheus-server",
         "namespace": "default",
       },
     ],
   },
-  Object {
+  {
     "apiVersion": "v1",
     "kind": "Service",
-    "metadata": Object {
-      "annotations": Object {
+    "metadata": {
+      "annotations": {
         "prometheus.io/scrape": "true",
       },
-      "labels": Object {
+      "labels": {
         "app.kubernetes.io/instance": "RELEASE-NAME",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "kube-state-metrics",
@@ -1145,27 +1145,27 @@ alerting:
       "name": "RELEASE-NAME-kube-state-metrics",
       "namespace": "default",
     },
-    "spec": Object {
-      "ports": Array [
-        Object {
+    "spec": {
+      "ports": [
+        {
           "name": "http",
           "port": 8080,
           "protocol": "TCP",
           "targetPort": 8080,
         },
       ],
-      "selector": Object {
+      "selector": {
         "app.kubernetes.io/instance": "RELEASE-NAME",
         "app.kubernetes.io/name": "kube-state-metrics",
       },
       "type": "ClusterIP",
     },
   },
-  Object {
+  {
     "apiVersion": "v1",
     "kind": "Service",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app": "prometheus",
         "chart": "prometheus-13.6.0",
         "component": "alertmanager",
@@ -1175,16 +1175,16 @@ alerting:
       "name": "RELEASE-NAME-prometheus-alertmanager",
       "namespace": "default",
     },
-    "spec": Object {
-      "ports": Array [
-        Object {
+    "spec": {
+      "ports": [
+        {
           "name": "http",
           "port": 80,
           "protocol": "TCP",
           "targetPort": 9093,
         },
       ],
-      "selector": Object {
+      "selector": {
         "app": "prometheus",
         "component": "alertmanager",
         "release": "RELEASE-NAME",
@@ -1193,14 +1193,14 @@ alerting:
       "type": "ClusterIP",
     },
   },
-  Object {
+  {
     "apiVersion": "v1",
     "kind": "Service",
-    "metadata": Object {
-      "annotations": Object {
+    "metadata": {
+      "annotations": {
         "prometheus.io/scrape": "true",
       },
-      "labels": Object {
+      "labels": {
         "app": "prometheus",
         "chart": "prometheus-13.6.0",
         "component": "node-exporter",
@@ -1210,17 +1210,17 @@ alerting:
       "name": "RELEASE-NAME-prometheus-node-exporter",
       "namespace": "default",
     },
-    "spec": Object {
+    "spec": {
       "clusterIP": "None",
-      "ports": Array [
-        Object {
+      "ports": [
+        {
           "name": "metrics",
           "port": 9100,
           "protocol": "TCP",
           "targetPort": 9100,
         },
       ],
-      "selector": Object {
+      "selector": {
         "app": "prometheus",
         "component": "node-exporter",
         "release": "RELEASE-NAME",
@@ -1228,14 +1228,14 @@ alerting:
       "type": "ClusterIP",
     },
   },
-  Object {
+  {
     "apiVersion": "v1",
     "kind": "Service",
-    "metadata": Object {
-      "annotations": Object {
+    "metadata": {
+      "annotations": {
         "prometheus.io/probe": "pushgateway",
       },
-      "labels": Object {
+      "labels": {
         "app": "prometheus",
         "chart": "prometheus-13.6.0",
         "component": "pushgateway",
@@ -1245,16 +1245,16 @@ alerting:
       "name": "RELEASE-NAME-prometheus-pushgateway",
       "namespace": "default",
     },
-    "spec": Object {
-      "ports": Array [
-        Object {
+    "spec": {
+      "ports": [
+        {
           "name": "http",
           "port": 9091,
           "protocol": "TCP",
           "targetPort": 9091,
         },
       ],
-      "selector": Object {
+      "selector": {
         "app": "prometheus",
         "component": "pushgateway",
         "release": "RELEASE-NAME",
@@ -1262,11 +1262,11 @@ alerting:
       "type": "ClusterIP",
     },
   },
-  Object {
+  {
     "apiVersion": "v1",
     "kind": "Service",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app": "prometheus",
         "chart": "prometheus-13.6.0",
         "component": "server",
@@ -1276,16 +1276,16 @@ alerting:
       "name": "RELEASE-NAME-prometheus-server",
       "namespace": "default",
     },
-    "spec": Object {
-      "ports": Array [
-        Object {
+    "spec": {
+      "ports": [
+        {
           "name": "http",
           "port": 80,
           "protocol": "TCP",
           "targetPort": 9090,
         },
       ],
-      "selector": Object {
+      "selector": {
         "app": "prometheus",
         "component": "server",
         "release": "RELEASE-NAME",
@@ -1294,11 +1294,11 @@ alerting:
       "type": "ClusterIP",
     },
   },
-  Object {
+  {
     "apiVersion": "apps/v1",
     "kind": "DaemonSet",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app": "prometheus",
         "chart": "prometheus-13.6.0",
         "component": "node-exporter",
@@ -1308,17 +1308,17 @@ alerting:
       "name": "RELEASE-NAME-prometheus-node-exporter",
       "namespace": "default",
     },
-    "spec": Object {
-      "selector": Object {
-        "matchLabels": Object {
+    "spec": {
+      "selector": {
+        "matchLabels": {
           "app": "prometheus",
           "component": "node-exporter",
           "release": "RELEASE-NAME",
         },
       },
-      "template": Object {
-        "metadata": Object {
-          "labels": Object {
+      "template": {
+        "metadata": {
+          "labels": {
             "app": "prometheus",
             "chart": "prometheus-13.6.0",
             "component": "node-exporter",
@@ -1326,10 +1326,10 @@ alerting:
             "release": "RELEASE-NAME",
           },
         },
-        "spec": Object {
-          "containers": Array [
-            Object {
-              "args": Array [
+        "spec": {
+          "containers": [
+            {
+              "args": [
                 "--path.procfs=/host/proc",
                 "--path.sysfs=/host/sys",
                 "--path.rootfs=/host/root",
@@ -1338,26 +1338,26 @@ alerting:
               "image": "quay.io/prometheus/node-exporter:v1.0.1",
               "imagePullPolicy": "IfNotPresent",
               "name": "prometheus-node-exporter",
-              "ports": Array [
-                Object {
+              "ports": [
+                {
                   "containerPort": 9100,
                   "hostPort": 9100,
                   "name": "metrics",
                 },
               ],
-              "resources": Object {},
-              "volumeMounts": Array [
-                Object {
+              "resources": {},
+              "volumeMounts": [
+                {
                   "mountPath": "/host/proc",
                   "name": "proc",
                   "readOnly": true,
                 },
-                Object {
+                {
                   "mountPath": "/host/sys",
                   "name": "sys",
                   "readOnly": true,
                 },
-                Object {
+                {
                   "mountPath": "/host/root",
                   "mountPropagation": "HostToContainer",
                   "name": "root",
@@ -1368,28 +1368,28 @@ alerting:
           ],
           "hostNetwork": true,
           "hostPID": true,
-          "securityContext": Object {
+          "securityContext": {
             "fsGroup": 65534,
             "runAsGroup": 65534,
             "runAsNonRoot": true,
             "runAsUser": 65534,
           },
           "serviceAccountName": "RELEASE-NAME-prometheus-node-exporter",
-          "volumes": Array [
-            Object {
-              "hostPath": Object {
+          "volumes": [
+            {
+              "hostPath": {
                 "path": "/proc",
               },
               "name": "proc",
             },
-            Object {
-              "hostPath": Object {
+            {
+              "hostPath": {
                 "path": "/sys",
               },
               "name": "sys",
             },
-            Object {
-              "hostPath": Object {
+            {
+              "hostPath": {
                 "path": "/",
               },
               "name": "root",
@@ -1397,16 +1397,16 @@ alerting:
           ],
         },
       },
-      "updateStrategy": Object {
+      "updateStrategy": {
         "type": "RollingUpdate",
       },
     },
   },
-  Object {
+  {
     "apiVersion": "apps/v1",
     "kind": "Deployment",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app.kubernetes.io/instance": "RELEASE-NAME",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "kube-state-metrics",
@@ -1416,24 +1416,24 @@ alerting:
       "name": "RELEASE-NAME-kube-state-metrics",
       "namespace": "default",
     },
-    "spec": Object {
+    "spec": {
       "replicas": 1,
-      "selector": Object {
-        "matchLabels": Object {
+      "selector": {
+        "matchLabels": {
           "app.kubernetes.io/name": "kube-state-metrics",
         },
       },
-      "template": Object {
-        "metadata": Object {
-          "labels": Object {
+      "template": {
+        "metadata": {
+          "labels": {
             "app.kubernetes.io/instance": "RELEASE-NAME",
             "app.kubernetes.io/name": "kube-state-metrics",
           },
         },
-        "spec": Object {
-          "containers": Array [
-            Object {
-              "args": Array [
+        "spec": {
+          "containers": [
+            {
+              "args": [
                 "--collectors=certificatesigningrequests",
                 "--collectors=configmaps",
                 "--collectors=cronjobs",
@@ -1465,8 +1465,8 @@ alerting:
               ],
               "image": "k8s.gcr.io/kube-state-metrics/kube-state-metrics:v1.9.8",
               "imagePullPolicy": "IfNotPresent",
-              "livenessProbe": Object {
-                "httpGet": Object {
+              "livenessProbe": {
+                "httpGet": {
                   "path": "/healthz",
                   "port": 8080,
                 },
@@ -1474,13 +1474,13 @@ alerting:
                 "timeoutSeconds": 5,
               },
               "name": "kube-state-metrics",
-              "ports": Array [
-                Object {
+              "ports": [
+                {
                   "containerPort": 8080,
                 },
               ],
-              "readinessProbe": Object {
-                "httpGet": Object {
+              "readinessProbe": {
+                "httpGet": {
                   "path": "/",
                   "port": 8080,
                 },
@@ -1490,7 +1490,7 @@ alerting:
             },
           ],
           "hostNetwork": false,
-          "securityContext": Object {
+          "securityContext": {
             "fsGroup": 65534,
             "runAsGroup": 65534,
             "runAsUser": 65534,
@@ -1500,11 +1500,11 @@ alerting:
       },
     },
   },
-  Object {
+  {
     "apiVersion": "apps/v1",
     "kind": "Deployment",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app": "prometheus",
         "chart": "prometheus-13.6.0",
         "component": "alertmanager",
@@ -1514,18 +1514,18 @@ alerting:
       "name": "RELEASE-NAME-prometheus-alertmanager",
       "namespace": "default",
     },
-    "spec": Object {
+    "spec": {
       "replicas": 1,
-      "selector": Object {
-        "matchLabels": Object {
+      "selector": {
+        "matchLabels": {
           "app": "prometheus",
           "component": "alertmanager",
           "release": "RELEASE-NAME",
         },
       },
-      "template": Object {
-        "metadata": Object {
-          "labels": Object {
+      "template": {
+        "metadata": {
+          "labels": {
             "app": "prometheus",
             "chart": "prometheus-13.6.0",
             "component": "alertmanager",
@@ -1533,20 +1533,20 @@ alerting:
             "release": "RELEASE-NAME",
           },
         },
-        "spec": Object {
-          "containers": Array [
-            Object {
-              "args": Array [
+        "spec": {
+          "containers": [
+            {
+              "args": [
                 "--config.file=/etc/config/alertmanager.yml",
                 "--storage.path=/data",
                 "--cluster.advertise-address=[$(POD_IP)]:6783",
                 "--web.external-url=http://localhost:9093",
               ],
-              "env": Array [
-                Object {
+              "env": [
+                {
                   "name": "POD_IP",
-                  "valueFrom": Object {
-                    "fieldRef": Object {
+                  "valueFrom": {
+                    "fieldRef": {
                       "apiVersion": "v1",
                       "fieldPath": "status.podIP",
                     },
@@ -1556,43 +1556,43 @@ alerting:
               "image": "quay.io/prometheus/alertmanager:v0.21.0",
               "imagePullPolicy": "IfNotPresent",
               "name": "prometheus-alertmanager",
-              "ports": Array [
-                Object {
+              "ports": [
+                {
                   "containerPort": 9093,
                 },
               ],
-              "readinessProbe": Object {
-                "httpGet": Object {
+              "readinessProbe": {
+                "httpGet": {
                   "path": "/-/ready",
                   "port": 9093,
                 },
                 "initialDelaySeconds": 30,
                 "timeoutSeconds": 30,
               },
-              "resources": Object {},
-              "volumeMounts": Array [
-                Object {
+              "resources": {},
+              "volumeMounts": [
+                {
                   "mountPath": "/etc/config",
                   "name": "config-volume",
                 },
-                Object {
+                {
                   "mountPath": "/data",
                   "name": "storage-volume",
                   "subPath": "",
                 },
               ],
             },
-            Object {
-              "args": Array [
+            {
+              "args": [
                 "--volume-dir=/etc/config",
                 "--webhook-url=http://127.0.0.1:9093/-/reload",
               ],
               "image": "jimmidyson/configmap-reload:v0.5.0",
               "imagePullPolicy": "IfNotPresent",
               "name": "prometheus-alertmanager-configmap-reload",
-              "resources": Object {},
-              "volumeMounts": Array [
-                Object {
+              "resources": {},
+              "volumeMounts": [
+                {
                   "mountPath": "/etc/config",
                   "name": "config-volume",
                   "readOnly": true,
@@ -1600,23 +1600,23 @@ alerting:
               ],
             },
           ],
-          "securityContext": Object {
+          "securityContext": {
             "fsGroup": 65534,
             "runAsGroup": 65534,
             "runAsNonRoot": true,
             "runAsUser": 65534,
           },
           "serviceAccountName": "RELEASE-NAME-prometheus-alertmanager",
-          "volumes": Array [
-            Object {
-              "configMap": Object {
+          "volumes": [
+            {
+              "configMap": {
                 "name": "RELEASE-NAME-prometheus-alertmanager",
               },
               "name": "config-volume",
             },
-            Object {
+            {
               "name": "storage-volume",
-              "persistentVolumeClaim": Object {
+              "persistentVolumeClaim": {
                 "claimName": "RELEASE-NAME-prometheus-alertmanager",
               },
             },
@@ -1625,11 +1625,11 @@ alerting:
       },
     },
   },
-  Object {
+  {
     "apiVersion": "apps/v1",
     "kind": "Deployment",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app": "prometheus",
         "chart": "prometheus-13.6.0",
         "component": "pushgateway",
@@ -1639,18 +1639,18 @@ alerting:
       "name": "RELEASE-NAME-prometheus-pushgateway",
       "namespace": "default",
     },
-    "spec": Object {
+    "spec": {
       "replicas": 1,
-      "selector": Object {
-        "matchLabels": Object {
+      "selector": {
+        "matchLabels": {
           "app": "prometheus",
           "component": "pushgateway",
           "release": "RELEASE-NAME",
         },
       },
-      "template": Object {
-        "metadata": Object {
-          "labels": Object {
+      "template": {
+        "metadata": {
+          "labels": {
             "app": "prometheus",
             "chart": "prometheus-13.6.0",
             "component": "pushgateway",
@@ -1658,14 +1658,14 @@ alerting:
             "release": "RELEASE-NAME",
           },
         },
-        "spec": Object {
-          "containers": Array [
-            Object {
+        "spec": {
+          "containers": [
+            {
               "args": null,
               "image": "prom/pushgateway:v1.3.1",
               "imagePullPolicy": "IfNotPresent",
-              "livenessProbe": Object {
-                "httpGet": Object {
+              "livenessProbe": {
+                "httpGet": {
                   "path": "/-/healthy",
                   "port": 9091,
                 },
@@ -1673,23 +1673,23 @@ alerting:
                 "timeoutSeconds": 10,
               },
               "name": "prometheus-pushgateway",
-              "ports": Array [
-                Object {
+              "ports": [
+                {
                   "containerPort": 9091,
                 },
               ],
-              "readinessProbe": Object {
-                "httpGet": Object {
+              "readinessProbe": {
+                "httpGet": {
                   "path": "/-/ready",
                   "port": 9091,
                 },
                 "initialDelaySeconds": 10,
                 "timeoutSeconds": 10,
               },
-              "resources": Object {},
+              "resources": {},
             },
           ],
-          "securityContext": Object {
+          "securityContext": {
             "runAsNonRoot": true,
             "runAsUser": 65534,
           },
@@ -1698,11 +1698,11 @@ alerting:
       },
     },
   },
-  Object {
+  {
     "apiVersion": "apps/v1",
     "kind": "Deployment",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app": "prometheus",
         "chart": "prometheus-13.6.0",
         "component": "server",
@@ -1712,18 +1712,18 @@ alerting:
       "name": "RELEASE-NAME-prometheus-server",
       "namespace": "default",
     },
-    "spec": Object {
+    "spec": {
       "replicas": 1,
-      "selector": Object {
-        "matchLabels": Object {
+      "selector": {
+        "matchLabels": {
           "app": "prometheus",
           "component": "server",
           "release": "RELEASE-NAME",
         },
       },
-      "template": Object {
-        "metadata": Object {
-          "labels": Object {
+      "template": {
+        "metadata": {
+          "labels": {
             "app": "prometheus",
             "chart": "prometheus-13.6.0",
             "component": "server",
@@ -1731,27 +1731,27 @@ alerting:
             "release": "RELEASE-NAME",
           },
         },
-        "spec": Object {
-          "containers": Array [
-            Object {
-              "args": Array [
+        "spec": {
+          "containers": [
+            {
+              "args": [
                 "--volume-dir=/etc/config",
                 "--webhook-url=http://127.0.0.1:9090/-/reload",
               ],
               "image": "jimmidyson/configmap-reload:v0.5.0",
               "imagePullPolicy": "IfNotPresent",
               "name": "prometheus-server-configmap-reload",
-              "resources": Object {},
-              "volumeMounts": Array [
-                Object {
+              "resources": {},
+              "volumeMounts": [
+                {
                   "mountPath": "/etc/config",
                   "name": "config-volume",
                   "readOnly": true,
                 },
               ],
             },
-            Object {
-              "args": Array [
+            {
+              "args": [
                 "--storage.tsdb.retention.time=15d",
                 "--config.file=/etc/config/prometheus.yml",
                 "--storage.tsdb.path=/data",
@@ -1761,9 +1761,9 @@ alerting:
               ],
               "image": "quay.io/prometheus/prometheus:v2.24.0",
               "imagePullPolicy": "IfNotPresent",
-              "livenessProbe": Object {
+              "livenessProbe": {
                 "failureThreshold": 3,
-                "httpGet": Object {
+                "httpGet": {
                   "path": "/-/healthy",
                   "port": 9090,
                 },
@@ -1773,14 +1773,14 @@ alerting:
                 "timeoutSeconds": 10,
               },
               "name": "prometheus-server",
-              "ports": Array [
-                Object {
+              "ports": [
+                {
                   "containerPort": 9090,
                 },
               ],
-              "readinessProbe": Object {
+              "readinessProbe": {
                 "failureThreshold": 3,
-                "httpGet": Object {
+                "httpGet": {
                   "path": "/-/ready",
                   "port": 9090,
                 },
@@ -1789,13 +1789,13 @@ alerting:
                 "successThreshold": 1,
                 "timeoutSeconds": 4,
               },
-              "resources": Object {},
-              "volumeMounts": Array [
-                Object {
+              "resources": {},
+              "volumeMounts": [
+                {
                   "mountPath": "/etc/config",
                   "name": "config-volume",
                 },
-                Object {
+                {
                   "mountPath": "/data",
                   "name": "storage-volume",
                   "subPath": "",
@@ -1805,7 +1805,7 @@ alerting:
           ],
           "dnsPolicy": "ClusterFirst",
           "hostNetwork": false,
-          "securityContext": Object {
+          "securityContext": {
             "fsGroup": 65534,
             "runAsGroup": 65534,
             "runAsNonRoot": true,
@@ -1813,16 +1813,16 @@ alerting:
           },
           "serviceAccountName": "RELEASE-NAME-prometheus-server",
           "terminationGracePeriodSeconds": 300,
-          "volumes": Array [
-            Object {
-              "configMap": Object {
+          "volumes": [
+            {
+              "configMap": {
                 "name": "RELEASE-NAME-prometheus-server",
               },
               "name": "config-volume",
             },
-            Object {
+            {
               "name": "storage-volume",
-              "persistentVolumeClaim": Object {
+              "persistentVolumeClaim": {
                 "claimName": "RELEASE-NAME-prometheus-server",
               },
             },
@@ -1835,12 +1835,12 @@ alerting:
 `;
 
 exports[`name is specified 1`] = `
-Array [
-  Object {
+[
+  {
     "apiVersion": "v1",
     "kind": "ServiceAccount",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app.kubernetes.io/instance": "foobar",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "nginx",
@@ -1850,11 +1850,11 @@ Array [
       "name": "foobar-nginx",
     },
   },
-  Object {
+  {
     "apiVersion": "v1",
     "kind": "Service",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app.kubernetes.io/instance": "foobar",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "nginx",
@@ -1863,27 +1863,27 @@ Array [
       },
       "name": "foobar-nginx",
     },
-    "spec": Object {
-      "ports": Array [
-        Object {
+    "spec": {
+      "ports": [
+        {
           "name": "http",
           "port": 80,
           "protocol": "TCP",
           "targetPort": "http",
         },
       ],
-      "selector": Object {
+      "selector": {
         "app.kubernetes.io/instance": "foobar",
         "app.kubernetes.io/name": "nginx",
       },
       "type": "ClusterIP",
     },
   },
-  Object {
+  {
     "apiVersion": "apps/v1",
     "kind": "Deployment",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app.kubernetes.io/instance": "foobar",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "nginx",
@@ -1892,51 +1892,51 @@ Array [
       },
       "name": "foobar-nginx",
     },
-    "spec": Object {
+    "spec": {
       "replicas": 1,
-      "selector": Object {
-        "matchLabels": Object {
+      "selector": {
+        "matchLabels": {
           "app.kubernetes.io/instance": "foobar",
           "app.kubernetes.io/name": "nginx",
         },
       },
-      "template": Object {
-        "metadata": Object {
-          "labels": Object {
+      "template": {
+        "metadata": {
+          "labels": {
             "app.kubernetes.io/instance": "foobar",
             "app.kubernetes.io/name": "nginx",
           },
         },
-        "spec": Object {
-          "containers": Array [
-            Object {
+        "spec": {
+          "containers": [
+            {
               "image": "nginx:1.16.0",
               "imagePullPolicy": "IfNotPresent",
-              "livenessProbe": Object {
-                "httpGet": Object {
+              "livenessProbe": {
+                "httpGet": {
                   "path": "/",
                   "port": "http",
                 },
               },
               "name": "nginx",
-              "ports": Array [
-                Object {
+              "ports": [
+                {
                   "containerPort": 80,
                   "name": "http",
                   "protocol": "TCP",
                 },
               ],
-              "readinessProbe": Object {
-                "httpGet": Object {
+              "readinessProbe": {
+                "httpGet": {
                   "path": "/",
                   "port": "http",
                 },
               },
-              "resources": Object {},
-              "securityContext": Object {},
+              "resources": {},
+              "securityContext": {},
             },
           ],
-          "securityContext": Object {},
+          "securityContext": {},
           "serviceAccountName": "foobar-nginx",
         },
       },
@@ -1946,12 +1946,12 @@ Array [
 `;
 
 exports[`values are specified 1`] = `
-Array [
-  Object {
+[
+  {
     "apiVersion": "v1",
     "kind": "Service",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app.kubernetes.io/instance": "RELEASE-NAME",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "good-day",
@@ -1960,27 +1960,27 @@ Array [
       },
       "name": "RELEASE-NAME-good-day",
     },
-    "spec": Object {
-      "ports": Array [
-        Object {
+    "spec": {
+      "ports": [
+        {
           "name": "http",
           "port": 80,
           "protocol": "TCP",
           "targetPort": "http",
         },
       ],
-      "selector": Object {
+      "selector": {
         "app.kubernetes.io/instance": "RELEASE-NAME",
         "app.kubernetes.io/name": "good-day",
       },
       "type": "ClusterIP",
     },
   },
-  Object {
+  {
     "apiVersion": "apps/v1",
     "kind": "Deployment",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app.kubernetes.io/instance": "RELEASE-NAME",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "good-day",
@@ -1989,56 +1989,56 @@ Array [
       },
       "name": "RELEASE-NAME-good-day",
     },
-    "spec": Object {
+    "spec": {
       "replicas": 5,
-      "selector": Object {
-        "matchLabels": Object {
+      "selector": {
+        "matchLabels": {
           "app.kubernetes.io/instance": "RELEASE-NAME",
           "app.kubernetes.io/name": "good-day",
         },
       },
-      "template": Object {
-        "metadata": Object {
-          "labels": Object {
+      "template": {
+        "metadata": {
+          "labels": {
             "app.kubernetes.io/instance": "RELEASE-NAME",
             "app.kubernetes.io/name": "good-day",
           },
         },
-        "spec": Object {
-          "containers": Array [
-            Object {
+        "spec": {
+          "containers": [
+            {
               "image": "nginx:1.16.0",
               "imagePullPolicy": "IfNotPresent",
-              "livenessProbe": Object {
-                "httpGet": Object {
+              "livenessProbe": {
+                "httpGet": {
                   "path": "/",
                   "port": "http",
                 },
               },
               "name": "nginx",
-              "ports": Array [
-                Object {
+              "ports": [
+                {
                   "containerPort": 80,
                   "name": "http",
                   "protocol": "TCP",
                 },
               ],
-              "readinessProbe": Object {
-                "httpGet": Object {
+              "readinessProbe": {
+                "httpGet": {
                   "path": "/",
                   "port": "http",
                 },
               },
-              "resources": Object {},
-              "securityContext": Object {},
+              "resources": {},
+              "securityContext": {},
             },
           ],
-          "imagePullSecrets": Array [
-            Object {
+          "imagePullSecrets": [
+            {
               "name": "docker-hub",
             },
           ],
-          "securityContext": Object {},
+          "securityContext": {},
           "serviceAccountName": "default",
         },
       },

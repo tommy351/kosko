@@ -27,6 +27,6 @@
   },
   "dependencies": {
     "@kosko/cli": "workspace:*",
-    "import-local": "^3.0.3"
+    "import-local": "^3.1.0"
   }
 }

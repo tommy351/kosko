@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`helm chart 1`] = `
-Array [
-  Object {
+[
+  {
     "apiVersion": "v1",
-    "data": Object {
-      "server-blocks-paths.conf": "include  \\"/opt/bitnami/nginx/conf/server_blocks/ldap/*.conf\\";
-include  \\"/opt/bitnami/nginx/conf/server_blocks/common/*.conf\\";",
+    "data": {
+      "server-blocks-paths.conf": "include  "/opt/bitnami/nginx/conf/server_blocks/ldap/*.conf";
+include  "/opt/bitnami/nginx/conf/server_blocks/common/*.conf";",
     },
     "kind": "ConfigMap",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app.kubernetes.io/instance": "foobar",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "nginx",
@@ -19,11 +19,11 @@ include  \\"/opt/bitnami/nginx/conf/server_blocks/common/*.conf\\";",
       "name": "foobar-nginx-server-block",
     },
   },
-  Object {
+  {
     "apiVersion": "v1",
     "kind": "Service",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app.kubernetes.io/instance": "foobar",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "nginx",
@@ -31,27 +31,27 @@ include  \\"/opt/bitnami/nginx/conf/server_blocks/common/*.conf\\";",
       },
       "name": "foobar-nginx",
     },
-    "spec": Object {
+    "spec": {
       "externalTrafficPolicy": "Cluster",
-      "ports": Array [
-        Object {
+      "ports": [
+        {
           "name": "http",
           "port": 80,
           "targetPort": "http",
         },
       ],
-      "selector": Object {
+      "selector": {
         "app.kubernetes.io/instance": "foobar",
         "app.kubernetes.io/name": "nginx",
       },
       "type": "LoadBalancer",
     },
   },
-  Object {
+  {
     "apiVersion": "apps/v1",
     "kind": "Deployment",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app.kubernetes.io/instance": "foobar",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "nginx",
@@ -59,38 +59,38 @@ include  \\"/opt/bitnami/nginx/conf/server_blocks/common/*.conf\\";",
       },
       "name": "foobar-nginx",
     },
-    "spec": Object {
+    "spec": {
       "replicas": 1,
-      "selector": Object {
-        "matchLabels": Object {
+      "selector": {
+        "matchLabels": {
           "app.kubernetes.io/instance": "foobar",
           "app.kubernetes.io/name": "nginx",
         },
       },
-      "template": Object {
-        "metadata": Object {
-          "labels": Object {
+      "template": {
+        "metadata": {
+          "labels": {
             "app.kubernetes.io/instance": "foobar",
             "app.kubernetes.io/managed-by": "Helm",
             "app.kubernetes.io/name": "nginx",
             "helm.sh/chart": "nginx-9.5.16",
           },
         },
-        "spec": Object {
-          "affinity": Object {
+        "spec": {
+          "affinity": {
             "nodeAffinity": null,
             "podAffinity": null,
-            "podAntiAffinity": Object {
-              "preferredDuringSchedulingIgnoredDuringExecution": Array [
-                Object {
-                  "podAffinityTerm": Object {
-                    "labelSelector": Object {
-                      "matchLabels": Object {
+            "podAntiAffinity": {
+              "preferredDuringSchedulingIgnoredDuringExecution": [
+                {
+                  "podAffinityTerm": {
+                    "labelSelector": {
+                      "matchLabels": {
                         "app.kubernetes.io/instance": "foobar",
                         "app.kubernetes.io/name": "nginx",
                       },
                     },
-                    "namespaces": Array [
+                    "namespaces": [
                       "default",
                     ],
                     "topologyKey": "kubernetes.io/hostname",
@@ -101,56 +101,56 @@ include  \\"/opt/bitnami/nginx/conf/server_blocks/common/*.conf\\";",
             },
           },
           "automountServiceAccountToken": false,
-          "containers": Array [
-            Object {
-              "env": Array [
-                Object {
+          "containers": [
+            {
+              "env": [
+                {
                   "name": "BITNAMI_DEBUG",
                   "value": "false",
                 },
               ],
               "image": "docker.io/bitnami/nginx:1.21.4-debian-10-r27",
               "imagePullPolicy": "IfNotPresent",
-              "livenessProbe": Object {
+              "livenessProbe": {
                 "failureThreshold": 6,
                 "periodSeconds": 10,
                 "successThreshold": 1,
-                "tcpSocket": Object {
+                "tcpSocket": {
                   "port": "http",
                 },
                 "timeoutSeconds": 5,
               },
               "name": "nginx",
-              "ports": Array [
-                Object {
+              "ports": [
+                {
                   "containerPort": 8080,
                   "name": "http",
                 },
               ],
-              "readinessProbe": Object {
+              "readinessProbe": {
                 "failureThreshold": 3,
                 "initialDelaySeconds": 5,
                 "periodSeconds": 5,
                 "successThreshold": 1,
-                "tcpSocket": Object {
+                "tcpSocket": {
                   "port": "http",
                 },
                 "timeoutSeconds": 3,
               },
-              "resources": Object {
-                "limits": Object {},
-                "requests": Object {},
+              "resources": {
+                "limits": {},
+                "requests": {},
               },
               "volumeMounts": null,
             },
           ],
           "serviceAccountName": "default",
           "shareProcessNamespace": false,
-          "volumes": Array [
-            Object {
-              "configMap": Object {
-                "items": Array [
-                  Object {
+          "volumes": [
+            {
+              "configMap": {
+                "items": [
+                  {
                     "key": "server-blocks-paths.conf",
                     "path": "server-blocks-paths.conf",
                   },
@@ -168,91 +168,91 @@ include  \\"/opt/bitnami/nginx/conf/server_blocks/common/*.conf\\";",
 `;
 
 exports[`local path 1`] = `
-Array [
-  Object {
+[
+  {
     "apiVersion": "v1",
-    "data": Object {
+    "data": {
       "altGreeting": "Good Morning!",
       "enableRisky": "false",
     },
     "kind": "ConfigMap",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app": "hello",
       },
       "name": "the-map",
     },
   },
-  Object {
+  {
     "apiVersion": "v1",
     "kind": "Service",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app": "hello",
       },
       "name": "the-service",
     },
-    "spec": Object {
-      "ports": Array [
-        Object {
+    "spec": {
+      "ports": [
+        {
           "port": 8666,
           "protocol": "TCP",
           "targetPort": 8080,
         },
       ],
-      "selector": Object {
+      "selector": {
         "app": "hello",
         "deployment": "hello",
       },
       "type": "LoadBalancer",
     },
   },
-  Object {
+  {
     "apiVersion": "apps/v1",
     "kind": "Deployment",
-    "metadata": Object {
-      "labels": Object {
+    "metadata": {
+      "labels": {
         "app": "hello",
       },
       "name": "the-deployment",
     },
-    "spec": Object {
+    "spec": {
       "replicas": 3,
-      "selector": Object {
-        "matchLabels": Object {
+      "selector": {
+        "matchLabels": {
           "app": "hello",
           "deployment": "hello",
         },
       },
-      "template": Object {
-        "metadata": Object {
-          "labels": Object {
+      "template": {
+        "metadata": {
+          "labels": {
             "app": "hello",
             "deployment": "hello",
           },
         },
-        "spec": Object {
-          "containers": Array [
-            Object {
-              "command": Array [
+        "spec": {
+          "containers": [
+            {
+              "command": [
                 "/hello",
                 "--port=8080",
                 "--enableRiskyFeature=$(ENABLE_RISKY)",
               ],
-              "env": Array [
-                Object {
+              "env": [
+                {
                   "name": "ALT_GREETING",
-                  "valueFrom": Object {
-                    "configMapKeyRef": Object {
+                  "valueFrom": {
+                    "configMapKeyRef": {
                       "key": "altGreeting",
                       "name": "the-map",
                     },
                   },
                 },
-                Object {
+                {
                   "name": "ENABLE_RISKY",
-                  "valueFrom": Object {
-                    "configMapKeyRef": Object {
+                  "valueFrom": {
+                    "configMapKeyRef": {
                       "key": "enableRisky",
                       "name": "the-map",
                     },
@@ -261,8 +261,8 @@ Array [
               ],
               "image": "monopole/hello:1",
               "name": "the-container",
-              "ports": Array [
-                Object {
+              "ports": [
+                {
                   "containerPort": 8080,
                 },
               ],
@@ -276,15 +276,15 @@ Array [
 `;
 
 exports[`remote url 1`] = `
-Array [
-  Object {
+[
+  {
     "apiVersion": "v1",
-    "data": Object {
+    "data": {
       "altGreeting": "Good Morning!",
       "enableRisky": "false",
     },
     "kind": "ConfigMap",
-    "metadata": Object {
+    "metadata": {
       "name": "remote-cm",
     },
   },
@@ -292,11 +292,11 @@ Array [
 `;
 
 exports[`when buildCommand is given command exists 1`] = `
-Array [
-  Object {
+[
+  {
     "apiVersion": "v1",
     "kind": "Pod",
-    "metadata": Object {
+    "metadata": {
       "name": "test",
     },
   },

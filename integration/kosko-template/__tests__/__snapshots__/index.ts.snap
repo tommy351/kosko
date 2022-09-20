@@ -12,14 +12,14 @@ Options:
 `;
 
 exports[`when cwd is not set should write files to process.cwd 1`] = `
-Array [
+[
   "bar",
   "46.93",
 ]
 `;
 
 exports[`when cwd is set should write files to specified path 1`] = `
-Array [
+[
   "bar",
   "46.93",
 ]

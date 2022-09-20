@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should return files 1`] = `
-Object {
-  "files": Array [
-    Object {
-      "content": "\\"use strict\\";
+{
+  "files": [
+    {
+      "content": ""use strict";
 
-const { Deployment } = require(\\"kubernetes-models/apps/v1/Deployment\\");
-const { Service } = require(\\"kubernetes-models/v1/Service\\");
+const { Deployment } = require("kubernetes-models/apps/v1/Deployment");
+const { Service } = require("kubernetes-models/v1/Service");
 
-const metadata = { name: \\"foo\\" };
-const labels = { app: \\"foo\\" };
+const metadata = { name: "foo" };
+const labels = { app: "foo" };
 
 const deployment = new Deployment({
   metadata,
@@ -26,8 +26,8 @@ const deployment = new Deployment({
       spec: {
         containers: [
           {
-            image: \\"foo:bar\\",
-            name: \\"foo\\",
+            image: "foo:bar",
+            name: "foo",
             ports: [{
               containerPort: 5678
             }]
@@ -42,7 +42,7 @@ const service = new Service({
   metadata,
   spec: {
     selector: labels,
-    type: \\"NodePort\\",
+    type: "NodePort",
     ports: [
       {
         port: 1234,

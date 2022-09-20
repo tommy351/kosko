@@ -16,6 +16,7 @@
       "import": "./dist/index.node.mjs",
       "require": "./dist/index.node.js"
     },
+    "require": "./dist/index.js",
     "default": "./dist/index.mjs"
   },
   "files": [
@@ -31,14 +32,14 @@
     "node": ">=12"
   },
   "dependencies": {
-    "@kosko/log": "workspace:^",
-    "@kosko/require": "workspace:^",
-    "fast-glob": "^3.2.7",
+    "@kosko/log": "workspace:^0.1.0",
+    "@kosko/require": "workspace:^3.0.0",
+    "fast-glob": "^3.2.12",
     "js-yaml": "^4.1.0",
-    "tslib": "^2.3.1"
+    "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@kosko/jest-preset": "workspace:^",
+    "@kosko/jest-preset": "workspace:^0.0.0",
     "@types/bl": "^5.0.2",
     "@types/js-yaml": "^4.0.5",
     "bl": "^5.0.0",

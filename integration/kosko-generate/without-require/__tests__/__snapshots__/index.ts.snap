@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`when key in the set argument is invalid should print the error 1`] = `
-"[31merror[39m - Failed to override key \\"tolerations[?@.key=='key2'].value\\". Lexical error on line 1. Unrecognized text.
+"[31merror[39m - Failed to override key "tolerations[?@.key=='key2'].value". Lexical error on line 1. Unrecognized text.
 $.tolerations[?@.key=='key2'].valu
 --------------^"
 `;
@@ -63,7 +63,7 @@ Positionals:
 
 Global Options:
       --cwd        Path of working directory             [string] [default: CWD]
-      --log-level  Set log level                      [string] [default: \\"info\\"]
+      --log-level  Set log level                      [string] [default: "info"]
       --silent     Disable log output                 [boolean] [default: false]
       --help       Show help                                           [boolean]
       --version    Show version number                                 [boolean]
@@ -75,7 +75,7 @@ Options:
   -s, --set       Set values on the command line KEY=VAL (can be used multiple
                   times)                                   [array] [default: []]
   -o, --output    Output format
-                            [string] [choices: \\"yaml\\", \\"json\\"] [default: \\"yaml\\"]
+                            [string] [choices: "yaml", "json"] [default: "yaml"]
       --validate  Validate components                  [boolean] [default: true]
 
 Examples:
@@ -85,61 +85,61 @@ Examples:
   kosko generate --env foo            Set environment
   kosko generate -r ts-node/register  Require external modules
 
-The specified value \\"3\\" is not a string."
+The specified value "3" is not a string."
 `;
 
 exports[`when output = json should output JSON 1`] = `
 "{
-  \\"apiVersion\\": \\"v1\\",
-  \\"kind\\": \\"List\\",
-  \\"items\\": [
+  "apiVersion": "v1",
+  "kind": "List",
+  "items": [
     {
-      \\"apiVersion\\": \\"apps/v1\\",
-      \\"kind\\": \\"Deployment\\",
-      \\"metadata\\": {
-        \\"name\\": \\"nginx\\",
-        \\"labels\\": {
-          \\"env\\": \\"dev\\"
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "name": "nginx",
+        "labels": {
+          "env": "dev"
         }
       },
-      \\"spec\\": {
-        \\"replicas\\": 1,
-        \\"selector\\": {
-          \\"matchLabels\\": {
-            \\"app\\": \\"nginx\\"
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "app": "nginx"
           }
         },
-        \\"template\\": {
-          \\"metadata\\": {
-            \\"labels\\": {
-              \\"app\\": \\"nginx\\"
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "nginx"
             }
           },
-          \\"spec\\": {
-            \\"containers\\": [
+          "spec": {
+            "containers": [
               {
-                \\"name\\": \\"nginx\\",
-                \\"image\\": \\"docker.io/nginx\\"
+                "name": "nginx",
+                "image": "docker.io/nginx"
               }
             ],
-            \\"tolerations\\": [
+            "tolerations": [
               {
-                \\"key\\": \\"key1\\",
-                \\"operator\\": \\"Equal\\",
-                \\"value\\": \\"value1\\",
-                \\"effect\\": \\"NoSchedule\\"
+                "key": "key1",
+                "operator": "Equal",
+                "value": "value1",
+                "effect": "NoSchedule"
               },
               {
-                \\"key\\": \\"key2\\",
-                \\"operator\\": \\"Equal\\",
-                \\"value\\": \\"value2\\",
-                \\"effect\\": \\"NoExecute\\"
+                "key": "key2",
+                "operator": "Equal",
+                "value": "value2",
+                "effect": "NoExecute"
               },
               {
-                \\"key\\": \\"key3\\",
-                \\"operator\\": \\"Equal\\",
-                \\"value\\": \\"value3\\",
-                \\"effect\\": \\"NoSchedule\\"
+                "key": "key3",
+                "operator": "Equal",
+                "value": "value3",
+                "effect": "NoSchedule"
               }
             ]
           }
@@ -147,18 +147,18 @@ exports[`when output = json should output JSON 1`] = `
       }
     },
     {
-      \\"apiVersion\\": \\"v1\\",
-      \\"kind\\": \\"Service\\",
-      \\"metadata\\": {
-        \\"name\\": \\"nginx\\"
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "name": "nginx"
       },
-      \\"spec\\": {
-        \\"selector\\": {
-          \\"app\\": \\"nginx\\"
+      "spec": {
+        "selector": {
+          "app": "nginx"
         },
-        \\"ports\\": [
+        "ports": [
           {
-            \\"port\\": 80
+            "port": 80
           }
         ]
       }
@@ -224,7 +224,7 @@ Positionals:
 
 Global Options:
       --cwd        Path of working directory             [string] [default: CWD]
-      --log-level  Set log level                      [string] [default: \\"info\\"]
+      --log-level  Set log level                      [string] [default: "info"]
       --silent     Disable log output                 [boolean] [default: false]
       --help       Show help                                           [boolean]
       --version    Show version number                                 [boolean]
@@ -236,7 +236,7 @@ Options:
   -s, --set       Set values on the command line KEY=VAL (can be used multiple
                   times)                                   [array] [default: []]
   -o, --output    Output format
-                            [string] [choices: \\"yaml\\", \\"json\\"] [default: \\"yaml\\"]
+                            [string] [choices: "yaml", "json"] [default: "yaml"]
       --validate  Validate components                  [boolean] [default: true]
 
 Examples:
@@ -247,7 +247,7 @@ Examples:
   kosko generate -r ts-node/register  Require external modules
 
 Invalid values:
-  Argument: output, Given: \\"foo\\", Choices: \\"yaml\\", \\"json\\""
+  Argument: output, Given: "foo", Choices: "yaml", "json""
 `;
 
 exports[`when output is not set should output YAML 1`] = `
@@ -307,7 +307,7 @@ Positionals:
 
 Global Options:
       --cwd        Path of working directory             [string] [default: CWD]
-      --log-level  Set log level                      [string] [default: \\"info\\"]
+      --log-level  Set log level                      [string] [default: "info"]
       --silent     Disable log output                 [boolean] [default: false]
       --help       Show help                                           [boolean]
       --version    Show version number                                 [boolean]
@@ -319,7 +319,7 @@ Options:
   -s, --set       Set values on the command line KEY=VAL (can be used multiple
                   times)                                   [array] [default: []]
   -o, --output    Output format
-                            [string] [choices: \\"yaml\\", \\"json\\"] [default: \\"yaml\\"]
+                            [string] [choices: "yaml", "json"] [default: "yaml"]
       --validate  Validate components                  [boolean] [default: true]
 
 Examples:
@@ -329,5 +329,5 @@ Examples:
   kosko generate --env foo            Set environment
   kosko generate -r ts-node/register  Require external modules
 
-Cannot parse string \\"image.registry nginx.io\\". Expected format is \\"<key>=<value>\\"."
+Cannot parse string "image.registry nginx.io". Expected format is "<key>=<value>"."
 `;

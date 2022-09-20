@@ -1,7 +1,8 @@
 import toml from "@iarna/toml";
 import { Config } from "@kosko/config";
-import env from "@kosko/env";
+import { Environment } from "@kosko/env";
 import { generate, print, PrintFormat, Result } from "@kosko/generate";
+import { requireDefault } from "@kosko/require";
 import fs from "fs";
 import { dirname, join } from "path";
 import pkgDir from "pkg-dir";
@@ -10,7 +11,6 @@ import tmp from "tmp-promise";
 import { GenerateArguments, generateCmd } from "../index";
 
 jest.mock("@kosko/generate");
-jest.mock("@kosko/env");
 jest.mock("@kosko/log");
 
 type DeepWriteable<T> = { -readonly [P in keyof T]: DeepWriteable<T[P]> };
@@ -19,6 +19,7 @@ let config: DeepWriteable<Config>;
 let args: Partial<GenerateArguments>;
 let tmpDir: tmp.DirectoryResult;
 let result: Result;
+let env: Environment;
 
 async function createFakeModule(id: string): Promise<void> {
   const dir = join(tmpDir.path, "node_modules", id);
@@ -63,6 +64,9 @@ beforeEach(async () => {
 
   await fs.promises.mkdir(dirname(envDest), { recursive: true });
   await fs.promises.symlink(envSrc, envDest, "dir");
+
+  env = requireDefault(envDest);
+  env.setReducers = jest.fn();
 });
 
 afterEach(async () => {
@@ -170,6 +174,7 @@ describe("with components in config", () => {
     });
 
     test("should set env", () => {
+      // console.log("test", jest.requireMock("@kosko/env"));
       expect(env.env).toEqual("dev");
     });
 
