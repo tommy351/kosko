@@ -1,5 +1,6 @@
 import crossSpawn from "cross-spawn";
 import { StdioOptions } from "child_process";
+import assert from "assert";
 
 export interface SpawnResult {
   stdout: string;
@@ -10,16 +11,22 @@ export interface SpawnOptions {
   cwd?: string;
   env?: Record<string, string>;
   stdio?: StdioOptions;
+  input?: string;
 }
 
 export function spawn(
   command: string,
   args: readonly string[] = [],
-  options?: SpawnOptions
+  options: SpawnOptions = {}
 ): Promise<SpawnResult> {
   const proc = crossSpawn(command, args, options);
   const stdoutChunks: string[] = [];
   const stderrChunks: string[] = [];
+
+  if (options.input) {
+    assert(proc.stdin);
+    proc.stdin.end(options.input);
+  }
 
   proc.stdout?.on("data", (chunk) => {
     stdoutChunks.push(chunk);

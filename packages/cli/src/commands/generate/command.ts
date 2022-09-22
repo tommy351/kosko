@@ -1,35 +1,10 @@
-import {
-  Config,
-  EnvironmentConfig,
-  getConfig,
-  searchConfig
-} from "@kosko/config";
-import { generate, print, PrintFormat, Result } from "@kosko/generate";
-import { join } from "path";
+import { PrintFormat } from "@kosko/generate";
 import { Argv } from "yargs";
 import { Command, RootArguments } from "../../cli/command";
-import { CLIError } from "../../cli/error";
+import { loadConfig } from "./config";
 import { SetOption, parseSetOptions } from "./set-option";
-import { localRequireDefault } from "./require";
 import { BaseGenerateArguments, GenerateArguments } from "./types";
-import { setupEnv } from "./env";
-
-export type { BaseGenerateArguments, GenerateArguments };
-
-function resolveConfig(
-  base: Config,
-  args: BaseGenerateArguments
-): Required<EnvironmentConfig> {
-  const { components = [], require = [] } = args.env
-    ? getConfig(base, args.env)
-    : base;
-
-  return {
-    components:
-      args.components && args.components.length ? args.components : components,
-    require: [...require, ...(args.require || [])]
-  };
-}
+import { handler } from "./worker";
 
 /* istanbul ignore next */
 export function generateBuilder(
@@ -49,6 +24,13 @@ export function generateBuilder(
       default: [],
       alias: "r"
     })
+    .option("loader", {
+      type: "string",
+      array: true,
+      describe:
+        "Module loader. Loaders set in config file will also be loaded.",
+      default: []
+    })
     .option("set", {
       type: "string",
       array: true,
@@ -64,48 +46,6 @@ export function generateBuilder(
       describe:
         "Components to generate. This overrides components set in config file."
     });
-}
-
-export async function generateHandler(
-  args: BaseGenerateArguments
-): Promise<Result> {
-  // Load config
-  const globalConfig = await searchConfig(args.cwd);
-  const config = {
-    ...globalConfig,
-    ...resolveConfig(globalConfig, args)
-  };
-
-  if (!config.components.length) {
-    throw new CLIError("No components are given", {
-      output:
-        "No components are given. Set components in a config file or in arguments."
-    });
-  }
-
-  // Setup env
-  await setupEnv(config, args);
-
-  // Require external modules
-  for (const id of config.require) {
-    await localRequireDefault(id, args.cwd);
-  }
-
-  // Generate manifests
-  const result = await generate({
-    path: join(args.cwd, "components"),
-    components: config.components,
-    extensions: config.extensions,
-    validate: args.validate
-  });
-
-  if (!result.manifests.length) {
-    throw new CLIError("No manifests are exported from components", {
-      output: `No manifests are exported from components. Make sure there are exported manifests in components.`
-    });
-  }
-
-  return result;
 }
 
 export const generateCmd: Command<GenerateArguments> = {
@@ -135,11 +75,12 @@ export const generateCmd: Command<GenerateArguments> = {
       .example("$0 generate -r ts-node/register", "Require external modules");
   },
   async handler(args) {
-    const result = await generateHandler(args);
+    const config = await loadConfig(args);
 
-    print(result, {
-      format: args.output,
-      writer: process.stdout
+    await handler({
+      printFormat: args.output,
+      args,
+      config
     });
   }
 };

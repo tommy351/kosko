@@ -1,9 +1,15 @@
-import { generateHandler } from "../generate";
+import { handler } from "../generate/worker";
 import { ValidateArguments, validateCmd } from "../validate";
 
 jest.mock("@kosko/log");
-jest.mock("../generate");
+jest.mock("../generate/worker");
+jest.mock("../generate/config", () => ({
+  async loadConfig() {
+    return {};
+  }
+}));
 
+const mockedHandler = jest.mocked(handler);
 let args: Partial<ValidateArguments>;
 
 async function execute(): Promise<void> {
@@ -18,19 +24,22 @@ describe("when validation passed", () => {
       require: ["c", "d"]
     };
 
-    (generateHandler as jest.Mock).mockResolvedValueOnce({});
+    mockedHandler.mockResolvedValueOnce();
     await execute();
   });
 
   test("should call generate handler once", () => {
-    expect(generateHandler).toHaveBeenCalledTimes(1);
+    expect(mockedHandler).toHaveBeenCalledTimes(1);
   });
 
   test("should call generate handler with args", () => {
-    expect(generateHandler).toHaveBeenCalledWith(
+    expect(mockedHandler).toHaveBeenCalledWith(
       expect.objectContaining({
-        ...args,
-        validate: true
+        config: {},
+        args: {
+          ...args,
+          validate: true
+        }
       })
     );
   });
@@ -41,7 +50,7 @@ describe("when validation failed", () => {
 
   beforeEach(() => {
     args = {};
-    (generateHandler as jest.Mock).mockRejectedValueOnce(err);
+    mockedHandler.mockRejectedValueOnce(err);
   });
 
   test("should throw an error", async () => {

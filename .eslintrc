@@ -53,8 +53,7 @@
         ".mjs",
         ".json",
         ".node"
-      ],
-      "allowModules": ["type-fest"]
+      ]
     }
   },
   "overrides": [

@@ -72,6 +72,8 @@ Options:
   -e, --env       Environment name                                      [string]
   -r, --require   Require modules. Modules set in config file will also be
                   required.                                [array] [default: []]
+      --loader    Module loader. Loaders set in config file will also be loaded.
+                                                           [array] [default: []]
   -s, --set       Set values on the command line KEY=VAL (can be used multiple
                   times)                                   [array] [default: []]
   -o, --output    Output format
@@ -233,6 +235,8 @@ Options:
   -e, --env       Environment name                                      [string]
   -r, --require   Require modules. Modules set in config file will also be
                   required.                                [array] [default: []]
+      --loader    Module loader. Loaders set in config file will also be loaded.
+                                                           [array] [default: []]
   -s, --set       Set values on the command line KEY=VAL (can be used multiple
                   times)                                   [array] [default: []]
   -o, --output    Output format
@@ -316,6 +320,8 @@ Options:
   -e, --env       Environment name                                      [string]
   -r, --require   Require modules. Modules set in config file will also be
                   required.                                [array] [default: []]
+      --loader    Module loader. Loaders set in config file will also be loaded.
+                                                           [array] [default: []]
   -s, --set       Set values on the command line KEY=VAL (can be used multiple
                   times)                                   [array] [default: []]
   -o, --output    Output format

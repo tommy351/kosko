@@ -1,10 +1,9 @@
 import { Command } from "../cli/command";
-import {
-  BaseGenerateArguments,
-  generateBuilder,
-  generateHandler
-} from "./generate";
 import logger, { LogLevel } from "@kosko/log";
+import { handler } from "./generate/worker";
+import { BaseGenerateArguments } from "./generate/types";
+import { generateBuilder } from "./generate/command";
+import { loadConfig } from "./generate/config";
 
 export type ValidateArguments = BaseGenerateArguments;
 
@@ -19,7 +18,13 @@ export const validateCmd: Command<ValidateArguments> = {
       .example("$0 validate foo_*", "Use glob syntax");
   },
   async handler(args) {
-    await generateHandler({ ...args, validate: true });
+    const config = await loadConfig(args);
+
+    await handler({
+      args: { ...args, validate: true },
+      config
+    });
+
     logger.log(LogLevel.Info, "Components are valid");
   }
 };

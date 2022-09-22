@@ -7,16 +7,14 @@ import {
   optional,
   record
 } from "superstruct";
-import { ReadonlyDeep } from "type-fest";
 
 export const environmentConfigSchema = object({
   require: optional(array(string())),
-  components: optional(array(string()))
+  components: optional(array(string())),
+  loaders: optional(array(string()))
 });
 
-export type EnvironmentConfig = ReadonlyDeep<
-  Infer<typeof environmentConfigSchema>
->;
+export type EnvironmentConfig = Infer<typeof environmentConfigSchema>;
 
 export const configSchema = assign(
   environmentConfigSchema,
@@ -37,4 +35,4 @@ export const configSchema = assign(
   })
 );
 
-export type Config = ReadonlyDeep<Infer<typeof configSchema>>;
+export type Config = Infer<typeof configSchema>;

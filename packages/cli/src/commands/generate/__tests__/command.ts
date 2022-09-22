@@ -8,14 +8,13 @@ import { dirname, join } from "path";
 import pkgDir from "pkg-dir";
 import tempDir from "temp-dir";
 import tmp from "tmp-promise";
-import { GenerateArguments, generateCmd } from "../index";
+import { generateCmd } from "../command";
+import { GenerateArguments } from "../types";
 
 jest.mock("@kosko/generate");
 jest.mock("@kosko/log");
 
-type DeepWriteable<T> = { -readonly [P in keyof T]: DeepWriteable<T[P]> };
-
-let config: DeepWriteable<Config>;
+let config: Config;
 let args: Partial<GenerateArguments>;
 let tmpDir: tmp.DirectoryResult;
 let result: Result;
@@ -174,7 +173,6 @@ describe("with components in config", () => {
     });
 
     test("should set env", () => {
-      // console.log("test", jest.requireMock("@kosko/env"));
       expect(env.env).toEqual("dev");
     });
 
