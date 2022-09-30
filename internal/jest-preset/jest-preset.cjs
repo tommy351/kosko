@@ -2,6 +2,7 @@
 
 const { defaults: tsJestPreset } = require("ts-jest/presets");
 
+/** @type import("jest").Config */
 module.exports = {
   ...tsJestPreset,
   roots: ["<rootDir>/src"],
