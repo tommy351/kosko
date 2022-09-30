@@ -1,6 +1,6 @@
 import logger, { LogLevel } from "@kosko/log";
 import { join } from "path";
-import fs from "fs";
+import fs from "fs/promises";
 import { File, TemplateContext } from "./base";
 
 export interface PackageJson {
@@ -12,7 +12,7 @@ export interface PackageJson {
 
 async function readJson(path: string): Promise<any> {
   try {
-    const content = await fs.promises.readFile(path, "utf8");
+    const content = await fs.readFile(path, "utf8");
     return JSON.parse(content);
   } catch (err: any) {
     if (err.code !== "ENOENT") throw err;

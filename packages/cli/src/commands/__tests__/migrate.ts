@@ -1,5 +1,5 @@
 import { migrateString } from "@kosko/migrate";
-import fs from "fs";
+import fs from "fs/promises";
 import getStdin from "get-stdin";
 import { join } from "path";
 import { print } from "../../cli/print";
@@ -53,10 +53,7 @@ describe("given a file", () => {
 
   test("should call print with result", async () => {
     const expected = await migrateString(
-      await fs.promises.readFile(
-        join(fixturePath, "only-deployment.yaml"),
-        "utf8"
-      )
+      await fs.readFile(join(fixturePath, "only-deployment.yaml"), "utf8")
     );
 
     expect(print).toHaveBeenCalledWith(expected);
@@ -75,9 +72,7 @@ describe("given an absolute path", () => {
   });
 
   test("should call print with result", async () => {
-    const expected = await migrateString(
-      await fs.promises.readFile(path, "utf8")
-    );
+    const expected = await migrateString(await fs.readFile(path, "utf8"));
     expect(print).toHaveBeenCalledWith(expected);
   });
 });
@@ -92,9 +87,9 @@ describe("given a directory", () => {
   });
 
   test("should call print with result", async () => {
-    const files = await fs.promises.readdir(fixturePath);
+    const files = await fs.readdir(fixturePath);
     const contents = await Promise.all(
-      files.map((file) => fs.promises.readFile(join(fixturePath, file), "utf8"))
+      files.map((file) => fs.readFile(join(fixturePath, file), "utf8"))
     );
     const expected = await migrateString(contents.join("---\n"));
     expect(print).toHaveBeenCalledWith(expected);
@@ -115,7 +110,7 @@ describe("given multiple files", () => {
   test("should call print with result", async () => {
     const contents = await Promise.all(
       ["only-deployment.yaml", "deployment-and-service.yaml"].map((file) =>
-        fs.promises.readFile(join(fixturePath, file), "utf8")
+        fs.readFile(join(fixturePath, file), "utf8")
       )
     );
     const expected = await migrateString("---\n" + contents.join("\n"));

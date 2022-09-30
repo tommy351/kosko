@@ -3,7 +3,7 @@ import { Config } from "@kosko/config";
 import { Environment } from "@kosko/env";
 import { generate, print, PrintFormat, Result } from "@kosko/generate";
 import { requireDefault } from "@kosko/require";
-import fs from "fs";
+import fs from "fs/promises";
 import { dirname, join } from "path";
 import pkgDir from "pkg-dir";
 import tempDir from "temp-dir";
@@ -22,18 +22,15 @@ let env: Environment;
 
 async function createFakeModule(id: string): Promise<void> {
   const dir = join(tmpDir.path, "node_modules", id);
-  await fs.promises.mkdir(dir, { recursive: true });
-  await fs.promises.writeFile(
+  await fs.mkdir(dir, { recursive: true });
+  await fs.writeFile(
     join(dir, "index.js"),
     `require('fs').appendFileSync(__dirname + '/../../fakeModules', '${id},');`
   );
 }
 
 async function getLoadedFakeModules(): Promise<ReadonlyArray<string>> {
-  const content = await fs.promises.readFile(
-    join(tmpDir.path, "fakeModules"),
-    "utf8"
-  );
+  const content = await fs.readFile(join(tmpDir.path, "fakeModules"), "utf8");
   return content.split(",").filter(Boolean);
 }
 
@@ -52,7 +49,7 @@ beforeEach(async () => {
   tmpDir = await tmp.dir({ tmpdir: tempDir, unsafeCleanup: true });
 
   // Write kosko.toml
-  await fs.promises.writeFile(
+  await fs.writeFile(
     join(tmpDir.path, "kosko.toml"),
     toml.stringify(config as toml.JsonMap)
   );
@@ -61,8 +58,8 @@ beforeEach(async () => {
   const envSrc = join(root!, "packages", "env");
   const envDest = join(tmpDir.path, "node_modules", "@kosko", "env");
 
-  await fs.promises.mkdir(dirname(envDest), { recursive: true });
-  await fs.promises.symlink(envSrc, envDest, "dir");
+  await fs.mkdir(dirname(envDest), { recursive: true });
+  await fs.symlink(envSrc, envDest, "dir");
 
   env = requireDefault(envDest);
   env.setReducers = jest.fn();

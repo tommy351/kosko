@@ -1,7 +1,7 @@
 import execa from "execa";
 import { runCLI } from "@kosko/integration-test-utils";
 import { join } from "path";
-import fs from "fs";
+import fs from "fs/promises";
 
 const fixtureDir = join(__dirname, "..", "__fixtures__");
 
@@ -35,9 +35,7 @@ describe("when path is -", () => {
   beforeAll(async () => {
     args = ["migrate", "-f", "-"];
     options = {
-      input: await fs.promises.readFile(
-        join(fixtureDir, "only-deployment.yaml")
-      )
+      input: await fs.readFile(join(fixtureDir, "only-deployment.yaml"))
     };
   });
 

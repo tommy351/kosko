@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "fs/promises";
 import { dirname, join } from "path";
 import logger, { LogLevel } from "@kosko/log";
 import { File } from "./template";
@@ -17,7 +17,7 @@ export async function writeFiles(
     const filePath = join(path, file.path);
 
     logger.log(LogLevel.Info, `Writing file ${filePath}`);
-    await fs.promises.mkdir(dirname(filePath), { recursive: true });
-    await fs.promises.writeFile(filePath, file.content);
+    await fs.mkdir(dirname(filePath), { recursive: true });
+    await fs.writeFile(filePath, file.content);
   }
 }
