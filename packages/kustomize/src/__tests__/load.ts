@@ -23,7 +23,6 @@ function useRealSpawn() {
 }
 
 beforeEach(() => {
-  jest.resetAllMocks();
   useRealSpawn();
 });
 

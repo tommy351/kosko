@@ -6,7 +6,6 @@ jest.mock("../SilentLogWriter");
 
 beforeEach(() => {
   jest.useFakeTimers();
-  jest.resetAllMocks();
 });
 
 describe("Logger", () => {

@@ -2,7 +2,7 @@
 import { generate } from "../generate";
 import tmp from "tmp-promise";
 import { Result } from "../base";
-import fs from "fs";
+import fs from "fs/promises";
 import { dirname, join } from "path";
 import tempDir from "temp-dir";
 import { ValidationError } from "../error";
@@ -29,8 +29,8 @@ beforeEach(async () => {
 
   for (const file of tmpFiles) {
     const path = join(tmpDir.path, file.path);
-    await fs.promises.mkdir(dirname(path), { recursive: true });
-    await fs.promises.writeFile(path, file.content);
+    await fs.mkdir(dirname(path), { recursive: true });
+    await fs.writeFile(path, file.content);
   }
 });
 

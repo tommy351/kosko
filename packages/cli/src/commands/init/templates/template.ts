@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "fs/promises";
 import { join } from "path";
 import { File } from "./base";
 
@@ -10,7 +10,7 @@ export async function generateFromTemplateFile(
 ): Promise<File> {
   return {
     path,
-    content: await fs.promises.readFile(join(TEMPLATE_DIR, template), "utf8")
+    content: await fs.readFile(join(TEMPLATE_DIR, template), "utf8")
   };
 }
 

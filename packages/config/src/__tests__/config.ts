@@ -1,6 +1,5 @@
 import { join } from "path";
 import { getConfig, loadConfig, searchConfig } from "../config";
-import { Config, EnvironmentConfig } from "../types";
 import { ValidationError } from "../validate";
 
 const fixturePath = join(__dirname, "..", "__fixtures__");
@@ -31,122 +30,105 @@ describe("loadConfig", () => {
 });
 
 describe("searchConfig", () => {
-  describe("succeed", () => {
-    let cwd: string;
-    let config: Config;
-
-    beforeEach(async () => {
-      config = await searchConfig(cwd);
-    });
-
-    describe("when config is at kosko.toml", () => {
-      beforeAll(() => {
-        cwd = join(fixturePath, "toml");
-      });
-
-      test("should load the config", () => {
-        expect(config).toMatchSnapshot();
-      });
-    });
-
-    describe("when config not found", () => {
-      beforeAll(() => {
-        cwd = fixturePath;
-      });
-
-      test("should return an empty object", () => {
-        expect(config).toEqual({});
-      });
-    });
+  test("should return the config when kosko.toml exists", async () => {
+    const config = await searchConfig(join(fixturePath, "toml"));
+    expect(config).toMatchSnapshot();
   });
 
-  describe("failed", () => {
-    describe("when config is invalid", () => {
-      test("should throw ValidationError", async () => {
-        const cwd = join(fixturePath, "invalid");
-        await expect(searchConfig(cwd)).rejects.toThrow(ValidationError);
-      });
-    });
+  test("should return an empty object when kosko.toml does not exist", async () => {
+    const config = await searchConfig(join(fixturePath, "nowhere"));
+    expect(config).toEqual({});
+  });
+
+  test("should throw ValidationError when config is invalid", async () => {
+    const cwd = join(fixturePath, "invalid");
+    await expect(searchConfig(cwd)).rejects.toThrow(ValidationError);
   });
 });
 
 describe("getConfig", () => {
-  let input: Config;
-  let result: EnvironmentConfig;
-
-  beforeEach(() => {
-    result = getConfig(input, "dev");
-  });
-
-  describe("when config is empty", () => {
-    beforeAll(() => {
-      input = {};
-    });
-
-    test("should return an empty config", () => {
-      expect(result).toEqual({
-        components: [],
-        require: []
-      });
+  test("should return an empty config when config is empty", () => {
+    expect(getConfig({}, "dev")).toEqual({
+      components: [],
+      require: [],
+      loaders: []
     });
   });
 
-  describe("when environments is not defined", () => {
-    beforeAll(() => {
-      input = {
-        components: ["foo"],
-        require: ["bar"]
-      };
-    });
+  test("should return the global config when env is not defined", () => {
+    const input = {
+      components: ["foo"],
+      require: ["bar"],
+      loaders: ["baz"]
+    };
 
-    test("should return the global config", () => {
-      expect(result).toEqual(input);
+    expect(getConfig(input, "dev")).toEqual(input);
+  });
+
+  test("should return the global config when env is defined but the key does not exist", () => {
+    const globalConf = {
+      components: ["foo"],
+      require: ["bar"],
+      loaders: ["baz"]
+    };
+    const input = {
+      ...globalConf,
+      environments: {
+        prod: {
+          components: ["aaa"],
+          require: ["bbb"],
+          loaders: ["ccc"]
+        }
+      }
+    };
+
+    expect(getConfig(input, "dev")).toEqual(globalConf);
+  });
+
+  test("should return the merge of global and environment config when env is defined and the key exists", () => {
+    const input = {
+      components: ["foo"],
+      require: ["bar"],
+      loaders: ["baz"],
+      environments: {
+        dev: {
+          components: ["aaa"],
+          require: ["bbb"],
+          loaders: ["ccc"]
+        }
+      }
+    };
+
+    expect(getConfig(input, "dev")).toEqual({
+      components: ["foo", "aaa"],
+      require: ["bar", "bbb"],
+      loaders: ["baz", "ccc"]
     });
   });
 
-  describe("when environments is defined", () => {
-    describe("and the key exists", () => {
-      beforeAll(() => {
-        input = {
-          components: ["foo"],
-          require: ["bar"],
-          environments: {
-            dev: {
-              components: ["aaa"],
-              require: ["bbb"]
-            }
-          }
-        };
-      });
+  test("should return the merge of multiple envs when env is an array", () => {
+    const input = {
+      components: ["foo"],
+      require: ["bar"],
+      loaders: ["baz"],
+      environments: {
+        a: {
+          components: ["aa"],
+          require: ["ab"],
+          loaders: ["ac"]
+        },
+        c: {
+          components: ["ca"],
+          require: ["cb"],
+          loaders: ["cc"]
+        }
+      }
+    };
 
-      test("should return the merge of global and environment config", () => {
-        expect(result).toEqual({
-          components: ["foo", "aaa"],
-          require: ["bar", "bbb"]
-        });
-      });
-    });
-
-    describe("but the key does not exist", () => {
-      beforeAll(() => {
-        input = {
-          components: ["foo"],
-          require: ["bar"],
-          environments: {
-            prod: {
-              components: ["aaa"],
-              require: ["bbb"]
-            }
-          }
-        };
-      });
-
-      test("should return the global config", () => {
-        expect(result).toEqual({
-          components: ["foo"],
-          require: ["bar"]
-        });
-      });
+    expect(getConfig(input, ["a", "b", "c"])).toEqual({
+      components: ["foo", "aa", "ca"],
+      require: ["bar", "ab", "cb"],
+      loaders: ["baz", "ac", "cc"]
     });
   });
 });

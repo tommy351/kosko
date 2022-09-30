@@ -10,7 +10,8 @@
     { "path": "../config" },
     { "path": "../migrate" },
     { "path": "../log" },
-    { "path": "../exec-utils" }
+    { "path": "../exec-utils" },
+    { "path": "../../internal/integration-test-utils" }
   ],
   "include": ["src"]
 }

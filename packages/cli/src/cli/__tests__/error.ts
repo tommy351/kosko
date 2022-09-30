@@ -13,8 +13,6 @@ YError.prototype.name = "YError";
 jest.mock("@kosko/log");
 jest.mock("exit");
 
-beforeEach(() => jest.resetAllMocks());
-
 describe("handleError", () => {
   let err: any;
 

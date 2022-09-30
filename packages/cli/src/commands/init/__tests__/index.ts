@@ -2,7 +2,7 @@
 import { InitArguments, initCmd } from "../index";
 import tempDir from "temp-dir";
 import tmp from "tmp-promise";
-import fs from "fs";
+import fs from "fs/promises";
 import { join, posix } from "path";
 import glob from "fast-glob";
 import { spawn } from "@kosko/exec-utils";
@@ -21,16 +21,11 @@ async function listAllFiles(dir: string): Promise<Record<string, string>> {
   const files: Record<string, string> = {};
 
   for (const path of paths) {
-    files[posix.normalize(path)] = await fs.promises.readFile(
-      join(dir, path),
-      "utf8"
-    );
+    files[posix.normalize(path)] = await fs.readFile(join(dir, path), "utf8");
   }
 
   return files;
 }
-
-beforeEach(() => jest.resetAllMocks());
 
 beforeEach(async () => {
   tmpDir = await tmp.dir({ tmpdir: tempDir, unsafeCleanup: true });
@@ -56,7 +51,7 @@ describe("when the target exists and is not a directory", () => {
 
 describe("when the target exists and is not empty", () => {
   beforeEach(async () => {
-    await fs.promises.writeFile(join(tmpDir.path, "test"), "foobar");
+    await fs.writeFile(join(tmpDir.path, "test"), "foobar");
   });
 
   test("should throw an error without --force option", async () => {
@@ -72,7 +67,7 @@ describe("when the target exists and is not empty", () => {
   test("should update package.json", async () => {
     const packageJsonPath = join(tmpDir.path, "package.json");
 
-    await fs.promises.writeFile(
+    await fs.writeFile(
       packageJsonPath,
       JSON.stringify(
         {
@@ -88,14 +83,14 @@ describe("when the target exists and is not empty", () => {
     );
     await expect(execute({ path: tmpDir.path, force: true })).toResolve();
     await expect(
-      fs.promises.readFile(packageJsonPath, "utf8")
+      fs.readFile(packageJsonPath, "utf8")
     ).resolves.toMatchSnapshot();
   });
 });
 
 describe("when the target exists and existing files can be ignored", () => {
   beforeEach(async () => {
-    await fs.promises.writeFile(join(tmpDir.path, ".DS_Store"), "");
+    await fs.writeFile(join(tmpDir.path, ".DS_Store"), "");
   });
 
   test("should succeed", async () => {
@@ -103,7 +98,7 @@ describe("when the target exists and existing files can be ignored", () => {
   });
 
   test("should throw an error if other unignorable files exist", async () => {
-    await fs.promises.writeFile(join(tmpDir.path, "test"), "foobar");
+    await fs.writeFile(join(tmpDir.path, "test"), "foobar");
     await expect(execute({ path: tmpDir.path })).rejects.toThrow(
       "Path already exists"
     );
@@ -112,7 +107,7 @@ describe("when the target exists and existing files can be ignored", () => {
 
 describe("when the target exists and only git folder exist", () => {
   beforeEach(async () => {
-    await fs.promises.mkdir(join(tmpDir.path, ".git"));
+    await fs.mkdir(join(tmpDir.path, ".git"));
   });
 
   test("should succeed", async () => {
@@ -122,7 +117,7 @@ describe("when the target exists and only git folder exist", () => {
 
 describe("when the target exists and only contain log files", () => {
   beforeEach(async () => {
-    await fs.promises.writeFile(join(tmpDir.path, "npm.log"), "foo");
+    await fs.writeFile(join(tmpDir.path, "npm.log"), "foo");
   });
 
   test("should succeed", async () => {
@@ -140,7 +135,7 @@ describe("when relative path is given", () => {
   test("should init in a new folder", async () => {
     await execute({ cwd: tmpDir.path, path: "foo" });
 
-    const stats = await fs.promises.stat(join(tmpDir.path, "foo"));
+    const stats = await fs.stat(join(tmpDir.path, "foo"));
     expect(stats.isDirectory()).toBeTrue();
   });
 });

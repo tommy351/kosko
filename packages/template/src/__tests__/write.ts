@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "fs/promises";
 import { join } from "path";
 import tempDir from "temp-dir";
 import tmp from "tmp-promise";
@@ -11,7 +11,7 @@ let tmpDir: tmp.DirectoryResult;
 let files: File[];
 
 function readTmpFile(path: string): Promise<string> {
-  return fs.promises.readFile(join(tmpDir.path, path), "utf8");
+  return fs.readFile(join(tmpDir.path, path), "utf8");
 }
 
 beforeEach(async () => {

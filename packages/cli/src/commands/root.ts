@@ -1,6 +1,6 @@
 import { isAbsolute, resolve } from "path";
 import yargs from "yargs";
-import { generateCmd } from "./generate";
+import { generateCmd } from "./generate/command";
 import { initCmd } from "./init";
 import { validateCmd } from "./validate";
 import { migrateCmd } from "./migrate";
@@ -10,7 +10,7 @@ import logger, {
   SilentLogWriter
 } from "@kosko/log";
 
-export const rootCmd = yargs(process.argv.slice(2))
+export const rootCmd = yargs
   .scriptName("kosko")
   .exitProcess(false)
   .option("cwd", {

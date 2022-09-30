@@ -27,7 +27,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "dependencies": {
     "@kosko/exec-utils": "workspace:^0.2.0",

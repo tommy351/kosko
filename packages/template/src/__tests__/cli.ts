@@ -12,8 +12,6 @@ jest.mock("exit");
 jest.mock("@kosko/log");
 jest.mock("../write.ts");
 
-beforeEach(() => jest.resetAllMocks());
-
 describe("when generate resolved", () => {
   const template: Template<{ foo: string; bar: number }> = {
     description: "This is a fake template.",

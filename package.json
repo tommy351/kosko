@@ -18,7 +18,7 @@
     "watch": "npm run build -- --watch",
     "test": "npm-run-all test:*",
     "test:unit": "cross-env ESM_IMPORT_DISABLED=true jest",
-    "test:integration": "jest --config integration/jest.config.js",
+    "test:integration": "jest --config jest.integration.config.ts",
     "test:browser": "jest --config integration/browser/jest.config.js",
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky install"
@@ -27,7 +27,7 @@
     "*.{js,ts,jsx,tsx,.cjs,.mjs}": "eslint --fix"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.4.6",
@@ -78,11 +78,6 @@
       "package.json",
       "internal/*/package.json",
       "packages/*/package.json"
-    ]
-  },
-  "jest": {
-    "projects": [
-      "<rootDir>/packages/*"
     ]
   },
   "pnpm": {

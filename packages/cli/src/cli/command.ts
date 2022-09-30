@@ -8,7 +8,7 @@ export interface RootArguments {
 
 export type Command<T> = CommandModule<RootArguments, T>;
 
-export function parse(input: Argv, argv: string[]): Promise<void> {
+export function parse(input: Argv, argv: readonly string[]): Promise<void> {
   return new Promise((resolve, reject) => {
     input.parse(argv, {}, (err, args, output) => {
       if (output) {

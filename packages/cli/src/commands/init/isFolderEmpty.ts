@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "fs/promises";
 
 // Based on:
 // - https://github.com/github/gitignore/blob/ce6f84024931408ce801808fe9f4587f7588b283/Node.gitignore
@@ -29,7 +29,7 @@ function shouldIgnoreFile(name: string): boolean {
 }
 
 export default async function isFolderEmpty(path: string): Promise<boolean> {
-  const files = await fs.promises.readdir(path);
+  const files = await fs.readdir(path);
   const filtered = files.filter((name) => !shouldIgnoreFile(name));
 
   return !filtered.length;

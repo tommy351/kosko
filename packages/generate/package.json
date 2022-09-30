@@ -29,7 +29,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "dependencies": {
     "@kosko/log": "workspace:^0.1.0",
@@ -39,10 +39,13 @@
     "tslib": "^2.4.0"
   },
   "devDependencies": {
+    "@kosko/integration-test-utils": "workspace:^0.0.0",
     "@kosko/jest-preset": "workspace:^0.0.0",
     "@types/bl": "^5.0.2",
     "@types/js-yaml": "^4.0.5",
     "bl": "^5.0.0",
+    "execa": "^5.1.1",
+    "kubernetes-models": "^3.1.0",
     "temp-dir": "^2.0.0",
     "tmp-promise": "^3.0.3"
   },

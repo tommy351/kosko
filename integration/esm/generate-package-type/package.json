@@ -1,9 +1,0 @@
-{
-  "type": "module",
-  "dependencies": {
-    "kubernetes-models": "^1.5.2"
-  },
-  "devDependencies": {
-    "execa": "^5.0.0"
-  }
-}

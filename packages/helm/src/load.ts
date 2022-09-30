@@ -1,6 +1,6 @@
 import { LoadOptions, loadString, Manifest } from "@kosko/yaml";
 import tmp from "tmp-promise";
-import fs from "fs";
+import fs from "fs/promises";
 import {
   spawn,
   booleanArg,
@@ -11,7 +11,7 @@ import {
 async function writeValues(values: any) {
   const file = await tmp.file();
 
-  await fs.promises.writeFile(file.path, JSON.stringify(values));
+  await fs.writeFile(file.path, JSON.stringify(values));
 
   return file;
 }

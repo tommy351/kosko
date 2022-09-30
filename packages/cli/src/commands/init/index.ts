@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "fs/promises";
 import { dirname, join, relative, resolve, sep } from "path";
 import pc from "picocolors";
 import { Command, RootArguments } from "../../cli/command";
@@ -15,7 +15,7 @@ import { installDependencies } from "./install";
 async function checkPath(path: string, force?: boolean) {
   try {
     logger.log(LogLevel.Debug, `Checking stats of "${path}"`);
-    const stats = await fs.promises.stat(path);
+    const stats = await fs.stat(path);
 
     if (!stats.isDirectory()) {
       throw new CLIError("Path is not a directory");
@@ -48,8 +48,8 @@ async function writeFiles(path: string, files: readonly File[]) {
     const filePath = join(path, file.path);
 
     logger.log(LogLevel.Debug, `Writing file: "${file.path}"`);
-    await fs.promises.mkdir(dirname(filePath), { recursive: true });
-    await fs.promises.writeFile(filePath, file.content);
+    await fs.mkdir(dirname(filePath), { recursive: true });
+    await fs.writeFile(filePath, file.content);
   }
 }
 
