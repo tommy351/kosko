@@ -70,9 +70,6 @@ function writeConfigToDefaultPath(config: Config = {}) {
 }
 
 beforeEach(async () => {
-  // Reset mocks
-  jest.resetAllMocks();
-
   const root = await pkgDir();
   assert(root);
 

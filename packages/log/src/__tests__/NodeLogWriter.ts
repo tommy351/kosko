@@ -8,8 +8,6 @@ jest.spyOn(process.stderr, "write");
 
 const writer = new NodeLogWriter();
 
-beforeEach(() => jest.resetAllMocks());
-
 function writeInfo(log: Omit<Log, "level" | "loggerLevel" | "time">) {
   writer.write({
     level: LogLevel.Info,

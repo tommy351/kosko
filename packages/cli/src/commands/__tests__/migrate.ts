@@ -15,8 +15,6 @@ async function execute(args: Partial<MigrateArguments>): Promise<void> {
   await migrateCmd.handler({ cwd: fixturePath, ...args } as any);
 }
 
-beforeEach(() => jest.resetAllMocks());
-
 describe(`given "-"`, () => {
   const input = `
 apiVersion: v1

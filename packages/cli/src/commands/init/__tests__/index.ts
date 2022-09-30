@@ -27,8 +27,6 @@ async function listAllFiles(dir: string): Promise<Record<string, string>> {
   return files;
 }
 
-beforeEach(() => jest.resetAllMocks());
-
 beforeEach(async () => {
   tmpDir = await tmp.dir({ tmpdir: tempDir, unsafeCleanup: true });
 });

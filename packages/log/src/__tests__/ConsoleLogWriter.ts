@@ -10,8 +10,6 @@ jest.spyOn(console, "error");
 
 const writer = new ConsoleLogWriter();
 
-beforeEach(() => jest.resetAllMocks());
-
 function writeInfo(log: Omit<Log, "level" | "loggerLevel" | "time">) {
   writer.write({
     level: LogLevel.Info,
