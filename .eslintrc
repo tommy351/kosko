@@ -92,6 +92,23 @@
         "node/no-unpublished-require": "off",
         "node/no-unpublished-import": "off"
       }
+    },
+    {
+      "files": ["integration/browser/**/*", "packages/*/integration/**/*"],
+      "rules": {
+        "node/no-unpublished-require": "off",
+        "node/no-unpublished-import": "off"
+      },
+      "settings": {
+        "node": {
+          "allowModules": [
+            "@kosko/env",
+            "@kosko/generate",
+            "@kosko/template",
+            "@kosko/yaml"
+          ]
+        }
+      }
     }
   ]
 }

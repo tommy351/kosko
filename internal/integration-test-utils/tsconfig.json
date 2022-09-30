@@ -3,9 +3,5 @@
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "dist"
-  },
-  "references": [
-    { "path": "../log" },
-    { "path": "../../internal/integration-test-utils" }
-  ]
+  }
 }
