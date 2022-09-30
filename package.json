@@ -27,7 +27,7 @@
     "*.{js,ts,jsx,tsx,.cjs,.mjs}": "eslint --fix"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.4.6",
