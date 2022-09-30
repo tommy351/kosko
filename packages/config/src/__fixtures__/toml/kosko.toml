@@ -1,16 +1,19 @@
 require = ["a"]
 components = ["b", "c"]
 extensions = ["js", "json"]
+loaders = ["n", "o"]
 
 baseEnvironment = "m"
 
 [environments.dev]
 require = ["d", "e"]
 components = ["f", "g"]
+loaders = ["p", "q"]
 
 [environments.prod]
 require = ["h"]
 components = ["i", "j"]
+loaders = ["r", "s"]
 
 [paths.environment]
 global = "k"

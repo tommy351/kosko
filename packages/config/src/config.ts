@@ -43,22 +43,39 @@ function flatten<T>(...arrays: (ReadonlyArray<T> | undefined)[]): T[] {
   return arrays.reduce((acc = [], item = []) => acc.concat(item), []) as T[];
 }
 
+export function toArray<T>(value: T | T[]): T[] {
+  return Array.isArray(value) ? value : [value];
+}
+
 /**
  * Returns environment configs merged with global configs.
  *
  * @param config Config object.
- * @param env Environment name.
+ * @param envs Environment name.
  */
 export function getConfig(
   config: Config,
-  env: string
+  envs: string | string[]
 ): Required<EnvironmentConfig> {
   const { environments = {} } = config;
-  const envConfig = environments[env] || {};
+  const envConfigs = toArray(envs)
+    .map((env) => environments[env])
+    .filter(Boolean);
+
+  if (!envConfigs.length) {
+    return {
+      require: config.require ?? [],
+      components: config.components ?? [],
+      loaders: config.loaders ?? []
+    };
+  }
 
   return {
-    require: flatten(config.require, envConfig.require),
-    components: flatten(config.components, envConfig.components),
-    loaders: flatten(config.loaders, envConfig.loaders)
+    require: flatten(config.require, ...envConfigs.map((e) => e.require)),
+    components: flatten(
+      config.components,
+      ...envConfigs.map((e) => e.components)
+    ),
+    loaders: flatten(config.loaders, ...envConfigs.map((e) => e.loaders))
   };
 }
