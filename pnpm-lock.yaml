@@ -355,6 +355,7 @@ importers:
       '@kosko/jest-preset': workspace:^0.0.0
       '@types/cross-spawn': ^6.0.2
       cross-spawn: ^7.0.3
+      get-stdin: ^8.0.0
       tslib: ^2.4.0
     dependencies:
       cross-spawn: 7.0.3
@@ -362,6 +363,7 @@ importers:
     devDependencies:
       '@kosko/jest-preset': link:../../internal/jest-preset
       '@types/cross-spawn': 6.0.2
+      get-stdin: 8.0.0
 
   packages/generate:
     specifiers:

@@ -27,3 +27,12 @@ test("error", async () => {
     )
   );
 });
+
+test("input", async () => {
+  const input = `now is ${Date.now()}`;
+  const { stdout } = await spawn(join(FIXTURE_DIR, "input.js"), [], {
+    input
+  });
+
+  expect(stdout).toEqual(`input test\n${input}\n`);
+});

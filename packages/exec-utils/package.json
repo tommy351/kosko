@@ -33,7 +33,8 @@
   },
   "devDependencies": {
     "@kosko/jest-preset": "workspace:^0.0.0",
-    "@types/cross-spawn": "^6.0.2"
+    "@types/cross-spawn": "^6.0.2",
+    "get-stdin": "^8.0.0"
   },
   "jest": {
     "preset": "@kosko/jest-preset"
