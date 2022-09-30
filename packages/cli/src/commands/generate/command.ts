@@ -16,6 +16,11 @@ export function generateBuilder(
       describe: "Environment name",
       alias: "e"
     })
+    .option("config", {
+      type: "string",
+      describe: "Config path. Default to `kosko.toml` in current folder.",
+      alias: "c"
+    })
     .option("require", {
       type: "string",
       array: true,

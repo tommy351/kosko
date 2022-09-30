@@ -1,18 +1,23 @@
-import { getConfig, searchConfig } from "@kosko/config";
+import {
+  getConfig,
+  searchConfig,
+  loadConfig as loadConfigFile
+} from "@kosko/config";
+import { resolve } from "path";
 import { CLIError } from "../../cli/error";
 import { BaseGenerateArguments } from "./types";
 
 export async function loadConfig(args: BaseGenerateArguments) {
-  const base = await searchConfig(args.cwd);
-  const {
-    components = [],
-    require = [],
-    loaders = []
-  } = args.env ? getConfig(base, args.env) : base;
+  const base = args.config
+    ? await loadConfigFile(resolve(args.cwd, args.config))
+    : await searchConfig(args.cwd);
+  const envs = [base.baseEnvironment, args.env].filter(
+    (env): env is string => typeof env === "string"
+  );
+  const { components, require, loaders } = getConfig(base, envs);
   const config = {
     ...base,
-    components:
-      args.components && args.components.length ? args.components : components,
+    components: args.components?.length ? args.components : components,
     require: [...require, ...(args.require || [])],
     loaders: [...loaders, ...(args.loader || [])]
   };

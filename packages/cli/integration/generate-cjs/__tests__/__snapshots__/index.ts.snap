@@ -70,6 +70,8 @@ Global Options:
 
 Options:
   -e, --env       Environment name                                      [string]
+  -c, --config    Config path. Default to \`kosko.toml\` in current folder.
+                                                                        [string]
   -r, --require   Require modules. Modules set in config file will also be
                   required.                                [array] [default: []]
       --loader    Module loader. Loaders set in config file will also be loaded.
@@ -233,6 +235,8 @@ Global Options:
 
 Options:
   -e, --env       Environment name                                      [string]
+  -c, --config    Config path. Default to \`kosko.toml\` in current folder.
+                                                                        [string]
   -r, --require   Require modules. Modules set in config file will also be
                   required.                                [array] [default: []]
       --loader    Module loader. Loaders set in config file will also be loaded.
@@ -318,6 +322,8 @@ Global Options:
 
 Options:
   -e, --env       Environment name                                      [string]
+  -c, --config    Config path. Default to \`kosko.toml\` in current folder.
+                                                                        [string]
   -r, --require   Require modules. Modules set in config file will also be
                   required.                                [array] [default: []]
       --loader    Module loader. Loaders set in config file will also be loaded.

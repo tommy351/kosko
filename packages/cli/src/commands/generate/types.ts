@@ -9,6 +9,7 @@ export interface BaseGenerateArguments extends RootArguments {
   validate?: boolean;
   set?: SetOption[];
   loader?: string[];
+  config?: string;
 }
 
 export interface GenerateArguments extends BaseGenerateArguments {
