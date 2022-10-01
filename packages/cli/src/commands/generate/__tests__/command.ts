@@ -1,7 +1,7 @@
 import toml from "@iarna/toml";
 import { Config } from "@kosko/config";
 import { Environment } from "@kosko/env";
-import { generate, print, PrintFormat } from "@kosko/generate";
+import { generateAsync, printAsync, PrintFormat } from "@kosko/generate";
 import { requireDefault } from "@kosko/require";
 import assert from "assert";
 import fs from "fs/promises";
@@ -15,7 +15,7 @@ import { GenerateArguments } from "../types";
 jest.mock("@kosko/generate");
 jest.mock("@kosko/log");
 
-const mockedGenerate = jest.mocked(generate);
+const mockedGenerateAsync = jest.mocked(generateAsync);
 
 let tmpDir: tmp.DirectoryResult;
 let env: Environment;
@@ -48,8 +48,8 @@ async function execute(args: Partial<GenerateArguments> = {}): Promise<void> {
 }
 
 function mockGenerateSuccess() {
-  mockedGenerate.mockResolvedValueOnce({
-    manifests: [{ path: "", index: [0], data: {} }]
+  mockedGenerateAsync.mockImplementationOnce(async function* () {
+    yield { path: "", index: [0], data: {} };
   });
 }
 
@@ -108,11 +108,11 @@ describe("when components is specified in config", () => {
   });
 
   test("should call generate once", () => {
-    expect(generate).toHaveBeenCalledTimes(1);
+    expect(generateAsync).toHaveBeenCalledTimes(1);
   });
 
   test("should call generate with given components", () => {
-    expect(generate).toHaveBeenCalledWith({
+    expect(generateAsync).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
       components: ["a", "b"]
     });
@@ -139,7 +139,7 @@ describe("when components is specified in args", () => {
   });
 
   test("should call generate with given components", () => {
-    expect(generate).toHaveBeenCalledWith({
+    expect(generateAsync).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
       components: ["a", "b"]
     });
@@ -154,7 +154,7 @@ describe("when components is specified in both config and args", () => {
   });
 
   test("should call generate with components specified in args", () => {
-    expect(generate).toHaveBeenCalledWith({
+    expect(generateAsync).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
       components: ["c", "d"]
     });
@@ -169,11 +169,11 @@ describe("with output is specified", () => {
   });
 
   test("should call print once", () => {
-    expect(print).toHaveBeenCalledTimes(1);
+    expect(printAsync).toHaveBeenCalledTimes(1);
   });
 
   test("should call print with given format", () => {
-    expect(print).toHaveBeenCalledWith(
+    expect(printAsync).toHaveBeenCalledWith(
       {
         manifests: [{ path: "", index: [0], data: {} }]
       },
@@ -204,7 +204,7 @@ describe("when env is specified", () => {
   });
 
   test("should add environment specific components", () => {
-    expect(generate).toHaveBeenCalledWith({
+    expect(generateAsync).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
       components: ["a", "b", "c", "d"]
     });
@@ -234,7 +234,7 @@ describe("when baseEnvironment is specified and env is not", () => {
   });
 
   test("should add components from baseEnvironment", () => {
-    expect(generate).toHaveBeenCalledWith({
+    expect(generateAsync).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
       components: ["a", "b", "e", "f"]
     });
@@ -264,7 +264,7 @@ describe("when both baseEnvironment and env are specified", () => {
   });
 
   test("should add components from baseEnvironment", () => {
-    expect(generate).toHaveBeenCalledWith({
+    expect(generateAsync).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
       components: ["a", "b", "e", "f", "c", "d"]
     });
@@ -282,7 +282,7 @@ describe("when extensions is specified in config", () => {
   });
 
   test("should call generate with extensions", () => {
-    expect(generate).toHaveBeenCalledWith({
+    expect(generateAsync).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
       components: ["*"],
       extensions: ["a", "b"]
@@ -383,7 +383,9 @@ describe("when set is specified in args", () => {
 
 describe("when no manifests are exported", () => {
   beforeEach(async () => {
-    mockedGenerate.mockResolvedValueOnce({ manifests: [] });
+    mockedGenerateAsync.mockImplementationOnce(async function* () {
+      // yield nothing
+    });
     await writeConfigToDefaultPath({ components: ["*"] });
   });
 
@@ -402,7 +404,7 @@ describe("when config is a relative path", () => {
   });
 
   test("should call generate with components set in config", () => {
-    expect(generate).toHaveBeenCalledWith({
+    expect(generateAsync).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
       components: ["foo"]
     });
@@ -421,7 +423,7 @@ describe("when config is an absolute path", () => {
   });
 
   test("should call generate with components set in config", () => {
-    expect(generate).toHaveBeenCalledWith({
+    expect(generateAsync).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
       components: ["foo"]
     });

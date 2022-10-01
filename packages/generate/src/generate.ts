@@ -48,6 +48,22 @@ async function getComponentValue(id: string): Promise<unknown> {
  * to add support for `.ts` extension.
  */
 export async function generate(options: GenerateOptions): Promise<Result> {
+  const manifests: Manifest[] = [];
+
+  for await (const manifest of generateAsync(options)) {
+    manifests.push(manifest);
+  }
+
+  return { manifests };
+}
+
+/**
+ * This is function is same as `generate`, but returns an `AsyncIterable`
+ * instead.
+ */
+export async function* generateAsync(
+  options: GenerateOptions
+): AsyncIterable<Manifest> {
   const extensions =
     options.extensions || getRequireExtensions().map((ext) => ext.substring(1));
   const suffix = `?(.{${extensions.join(",")}})`;
@@ -60,8 +76,6 @@ export async function generate(options: GenerateOptions): Promise<Result> {
   });
   logger.log(LogLevel.Debug, "Found components", { data: ids });
 
-  const manifests: Manifest[] = [];
-
   for (const id of ids) {
     const path = await resolveModule(join(options.path, id), {
       extensions: extensions.map((ext) => `.${ext}`)
@@ -72,8 +86,6 @@ export async function generate(options: GenerateOptions): Promise<Result> {
       path
     });
 
-    manifests.push(...components);
+    yield* components;
   }
-
-  return { manifests };
 }

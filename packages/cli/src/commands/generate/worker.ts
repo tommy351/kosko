@@ -1,11 +1,24 @@
 import { Config, EnvironmentConfig } from "@kosko/config";
 import { spawn } from "@kosko/exec-utils";
-import { generate, print, PrintFormat } from "@kosko/generate";
+import {
+  generateAsync,
+  Manifest,
+  printAsync,
+  PrintFormat
+} from "@kosko/generate";
 import { join } from "path";
 import { CLIError } from "../../cli/error";
 import { setupEnv } from "./env";
 import { localRequireDefault } from "./require";
 import { BaseGenerateArguments } from "./types";
+
+async function* prependAsyncIterable<T>(
+  iterable: AsyncIterable<T>,
+  value: T
+): AsyncIterable<T> {
+  yield value;
+  yield* iterable;
+}
 
 export interface GenerateOptions {
   printFormat?: PrintFormat;
@@ -31,21 +44,28 @@ export async function handler(options: GenerateOptions) {
   }
 
   // Generate manifests
-  const result = await generate({
+  const manifests = generateAsync({
     path: join(args.cwd, "components"),
     components: config.components,
     extensions: config.extensions,
     validate: args.validate
   });
+  let first: Manifest | undefined;
 
-  if (!result.manifests.length) {
+  // Check if manifests is empty or not
+  for await (const manifest of manifests) {
+    first = manifest;
+    break;
+  }
+
+  if (!first) {
     throw new CLIError("No manifests are exported from components", {
       output: `No manifests are exported from components. Make sure there are exported manifests in components.`
     });
   }
 
   if (printFormat) {
-    print(result, {
+    printAsync(prependAsyncIterable(manifests, first), {
       format: printFormat,
       writer: process.stdout
     });

@@ -1,0 +1,232 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`print when format = JSON and multiple manifests should match snapshot 1`] = `
+"{
+  "apiVersion": "v1",
+  "kind": "List",
+  "items": [
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "name": "foo"
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "nginx",
+            "image": "nginx:foo"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "name": "bar"
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "nginx",
+            "image": "nginx:bar"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "name": "baz"
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "nginx",
+            "image": "nginx:baz"
+          }
+        ]
+      }
+    }
+  ]
+}"
+`;
+
+exports[`print when format = JSON and only one manifest should match snapshot 1`] = `
+"{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "name": "foo"
+  },
+  "spec": {
+    "containers": [
+      {
+        "name": "nginx",
+        "image": "nginx:foo"
+      }
+    ]
+  }
+}"
+`;
+
+exports[`print when format = YAML and multiple manifests should match snapshot 1`] = `
+"---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: foo
+spec:
+  containers:
+    - name: nginx
+      image: nginx:foo
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bar
+spec:
+  containers:
+    - name: nginx
+      image: nginx:bar
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: baz
+spec:
+  containers:
+    - name: nginx
+      image: nginx:baz
+"
+`;
+
+exports[`print when format = YAML and only one manifest should match snapshot 1`] = `
+"apiVersion: v1
+kind: Pod
+metadata:
+  name: foo
+spec:
+  containers:
+    - name: nginx
+      image: nginx:foo
+"
+`;
+
+exports[`printAsync when format = JSON and multiple manifests should match snapshot 1`] = `
+"{
+  "apiVersion": "v1",
+  "kind": "List",
+  "items": [
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "name": "foo"
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "nginx",
+            "image": "nginx:foo"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "name": "bar"
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "nginx",
+            "image": "nginx:bar"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "name": "baz"
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "nginx",
+            "image": "nginx:baz"
+          }
+        ]
+      }
+    }
+  ]
+}"
+`;
+
+exports[`printAsync when format = JSON and only one manifest should match snapshot 1`] = `
+"{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "name": "foo"
+  },
+  "spec": {
+    "containers": [
+      {
+        "name": "nginx",
+        "image": "nginx:foo"
+      }
+    ]
+  }
+}"
+`;
+
+exports[`printAsync when format = YAML and multiple manifests should match snapshot 1`] = `
+"---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: foo
+spec:
+  containers:
+    - name: nginx
+      image: nginx:foo
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bar
+spec:
+  containers:
+    - name: nginx
+      image: nginx:bar
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: baz
+spec:
+  containers:
+    - name: nginx
+      image: nginx:baz
+"
+`;
+
+exports[`printAsync when format = YAML and only one manifest should match snapshot 1`] = `
+"---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: foo
+spec:
+  containers:
+    - name: nginx
+      image: nginx:foo
+"
+`;
