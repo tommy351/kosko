@@ -29,7 +29,7 @@ async function createFakeModule(id: string): Promise<void> {
   );
 }
 
-async function getLoadedFakeModules(): Promise<ReadonlyArray<string>> {
+async function getLoadedFakeModules(): Promise<string[]> {
   try {
     const content = await fs.readFile(join(tmpDir.path, "fakeModules"), "utf8");
     return content.split(",").filter(Boolean);

@@ -64,7 +64,7 @@ export interface ResolveOptions {
 export async function resolve(
   value: unknown,
   options: ResolveOptions = {}
-): Promise<readonly Manifest[]> {
+): Promise<Manifest[]> {
   if (typeof value === "function") {
     return resolve(await value(), options);
   }

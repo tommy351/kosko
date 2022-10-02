@@ -3,7 +3,7 @@ import usePlaygroundContext from "./usePlaygroundContext";
 import { sep } from "@site/src/utils/path";
 import { COMPONENT_DIR, JS_EXT } from "../constants";
 
-export default function useComponentList(): readonly string[] {
+export default function useComponentList(): string[] {
   const {
     value: { files }
   } = usePlaygroundContext();

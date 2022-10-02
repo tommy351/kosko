@@ -3,7 +3,7 @@ import usePlaygroundContext from "./usePlaygroundContext";
 import { sep } from "@site/src/utils/path";
 import { ENVIRONMENT_DIR } from "../constants";
 
-export default function useEnvironmentList(): readonly string[] {
+export default function useEnvironmentList(): string[] {
   const {
     value: { files }
   } = usePlaygroundContext();

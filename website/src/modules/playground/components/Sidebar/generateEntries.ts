@@ -3,10 +3,7 @@ import { sep } from "@site/src/utils/path";
 import { Entry, EntryType, File, Directory } from "./types";
 import { DIRECTORY_PLACEHOLDER } from "../../constants";
 
-function doGenerateEntries(
-  paths: readonly string[],
-  prefix: string
-): readonly Entry[] {
+function doGenerateEntries(paths: readonly string[], prefix: string): Entry[] {
   const { "": files = [], ...dirs } = groupBy(paths, (path) => {
     const index = path.indexOf(sep);
     return index === -1 ? "" : path.substring(0, index);
@@ -47,9 +44,7 @@ function doGenerateEntries(
   });
 }
 
-export default function generateEntries(
-  paths: readonly string[]
-): readonly Entry[] {
+export default function generateEntries(paths: readonly string[]): Entry[] {
   return doGenerateEntries(
     paths.map((path) => path.substring(1)),
     sep

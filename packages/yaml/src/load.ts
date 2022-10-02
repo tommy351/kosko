@@ -57,7 +57,7 @@ async function getConstructor(
 export async function loadString(
   content: string,
   { transform = (x) => x }: LoadOptions = {}
-): Promise<readonly Manifest[]> {
+): Promise<Manifest[]> {
   const input = loadAll(content).filter((x) => x != null);
   const manifests: Manifest[] = [];
 
@@ -90,7 +90,7 @@ export async function loadString(
  * @param options
  */
 export function loadFile(path: string, options?: LoadOptions) {
-  return async (): Promise<readonly Manifest[]> => {
+  return async (): Promise<Manifest[]> => {
     const content = await fs.readFile(path, "utf-8");
     logger.log(LogLevel.Debug, `File loaded from: ${path}`);
 
@@ -107,7 +107,7 @@ export function loadFile(path: string, options?: LoadOptions) {
 export function loadUrl(
   url: RequestInfo,
   options: LoadOptions & RequestInit = {}
-): () => Promise<readonly Manifest[]> {
+): () => Promise<Manifest[]> {
   const { transform, ...init } = options;
 
   return async () => {

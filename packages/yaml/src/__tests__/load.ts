@@ -18,7 +18,7 @@ afterEach(() => {
 
 function testLoad(options: {
   setup: (content: string) => Promise<void>;
-  load: (options: LoadOptions) => () => Promise<readonly unknown[]>;
+  load: (options: LoadOptions) => () => Promise<unknown[]>;
 }) {
   let content: string;
   let loadOptions: LoadOptions;

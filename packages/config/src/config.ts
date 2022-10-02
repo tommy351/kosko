@@ -39,7 +39,7 @@ export async function searchConfig(
   }
 }
 
-function flatten<T>(...arrays: (ReadonlyArray<T> | undefined)[]): T[] {
+function flatten<T>(...arrays: (readonly T[] | undefined)[]): T[] {
   return arrays.reduce((acc = [], item = []) => acc.concat(item), []) as T[];
 }
 

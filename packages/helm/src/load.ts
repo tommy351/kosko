@@ -159,7 +159,7 @@ export function loadChart({
   version,
   transform
 }: ChartOptions) {
-  return async (): Promise<readonly Manifest[]> => {
+  return async (): Promise<Manifest[]> => {
     const args: string[] = [
       "template",
       ...(name ? [name] : []),

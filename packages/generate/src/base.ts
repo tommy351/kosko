@@ -2,7 +2,7 @@ export interface Result {
   /**
    * Generated manifests.
    */
-  readonly manifests: ReadonlyArray<Manifest>;
+  manifests: Manifest[];
 }
 
 export interface Manifest {

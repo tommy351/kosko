@@ -46,7 +46,7 @@ async function generateComponent(manifest: Manifest): Promise<Component> {
 
 async function generateForList(
   items: readonly Manifest[]
-): Promise<readonly Component[]> {
+): Promise<Component[]> {
   const result: Component[] = [];
 
   for (const data of items) {
@@ -60,9 +60,7 @@ async function generateForList(
   return result;
 }
 
-function uniqComponentName(
-  components: readonly Component[]
-): readonly Component[] {
+function uniqComponentName(components: readonly Component[]): Component[] {
   const nameMap: { [key: string]: number } = {};
 
   return components.map((component) => {
@@ -83,7 +81,7 @@ function uniqComponentName(
   });
 }
 
-function collectImports(components: readonly Component[]): readonly Import[] {
+function collectImports(components: readonly Component[]): Import[] {
   const importMap: { [key: string]: Set<string> } = {};
 
   for (const component of components) {
