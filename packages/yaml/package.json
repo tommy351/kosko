@@ -36,15 +36,13 @@
     "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@kosko/integration-test-utils": "workspace:^0.0.0",
+    "@kosko/test-utils": "workspace:^0.0.0",
     "@kosko/jest-preset": "workspace:^0.0.0",
     "@types/js-yaml": "^4.0.5",
     "@types/node-fetch": "^2.6.2",
     "execa": "^5.1.1",
     "fetch-mock": "^9.11.0",
-    "kubernetes-models": "^3.1.0",
-    "temp-dir": "^2.0.0",
-    "tmp-promise": "^3.0.3"
+    "kubernetes-models": "^3.1.0"
   },
   "peerDependencies": {
     "kubernetes-models": ">=1.0.3"

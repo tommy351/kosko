@@ -7,17 +7,16 @@ import assert from "assert";
 import fs from "fs/promises";
 import { dirname, join } from "path";
 import pkgDir from "pkg-dir";
-import tempDir from "temp-dir";
-import tmp from "tmp-promise";
 import { generateCmd } from "../command";
 import { GenerateArguments } from "../types";
+import { TempDir, makeTempDir } from "@kosko/test-utils";
 
 jest.mock("@kosko/generate");
 jest.mock("@kosko/log");
 
 const mockedGenerate = jest.mocked(generate);
 
-let tmpDir: tmp.DirectoryResult;
+let tmpDir: TempDir;
 let env: Environment;
 
 async function createFakeModule(id: string): Promise<void> {
@@ -73,7 +72,7 @@ beforeEach(async () => {
   const root = await pkgDir();
   assert(root);
 
-  tmpDir = await tmp.dir({ tmpdir: tempDir, unsafeCleanup: true });
+  tmpDir = await makeTempDir();
 
   // Install @kosko/env in the temp folder
   const envSrc = join(root, "packages", "env");

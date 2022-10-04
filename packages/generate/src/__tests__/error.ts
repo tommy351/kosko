@@ -1,163 +1,160 @@
 /// <reference types="jest-extended"/>
-import { ValidationError } from "../error";
+import extractStack from "extract-stack";
+import { ResolveError, toError } from "../error";
 
-let cause: Error;
-let err: ValidationError;
-let component: unknown;
+describe("when only message is given", () => {
+  const err = new ResolveError("test");
 
-function extractStack(stack: string): string {
-  const pos = stack.search(/(?:\n {4}at .*)+/);
-  return stack.substring(pos);
-}
+  test("should set name", () => {
+    expect(err.name).toEqual("ResolveError");
+  });
 
-beforeEach(() => {
-  err = new ValidationError({
-    path: __filename,
-    index: [4, 6],
-    cause,
-    component
+  test("should set message", () => {
+    expect(err.message).toEqual("test");
+  });
+
+  test("should keep stack as is", () => {
+    expect(err.stack).toEqual(`ResolveError: test
+${extractStack(err.stack)}`);
   });
 });
 
-describe("given cause with stack", () => {
-  beforeAll(() => {
-    cause = new Error("foo");
-    component = undefined;
+describe("when path is given but it is empty", () => {
+  const err = new ResolveError("test", { path: "" });
+
+  test("should not append path to stack", () => {
+    expect(err.stack).not.toEqual(expect.stringContaining("Path:"));
+  });
+});
+
+describe("when path is given and it is not empty", () => {
+  const err = new ResolveError("test", { path: "test path" });
+
+  test("should append path to stack", () => {
+    expect(err.stack).toEqual(`ResolveError: test
+    Path: test path
+${extractStack(err.stack)}`);
+  });
+});
+
+describe("when index is given but it is empty", () => {
+  const err = new ResolveError("test", { index: [] });
+
+  test("should not append index to stack", () => {
+    expect(err.stack).not.toEqual(expect.stringContaining("Index: []"));
+  });
+});
+
+describe("when index is given and it is not empty", () => {
+  const err = new ResolveError("test", { index: [1, 3, 6] });
+
+  test("should append index to stack", () => {
+    expect(err.stack).toEqual(`ResolveError: test
+    Index: [1, 3, 6]
+${extractStack(err.stack)}`);
+  });
+});
+
+describe("when value is given but it is not a component", () => {
+  const err = new ResolveError("test", { value: "value test" });
+
+  test("should not append value to stack", () => {
+    expect(err.stack).not.toEqual(expect.stringContaining("value test"));
+  });
+});
+
+describe("when value is given but apiVersion is not defined", () => {
+  const err = new ResolveError("test", {
+    value: {
+      kind: "Test",
+      metadata: { name: "test" }
+    }
   });
 
-  test("should add path and index to message", () => {
-    expect(err.message).toEqual(
-      `${cause.message} (path: ${JSON.stringify(
-        err.path
-      )}, index: [${err.index.join(", ")}])`
-    );
+  test("should not append value to stack", () => {
+    expect(err.stack).not.toEqual(expect.stringContaining("Name: test"));
+  });
+});
+
+describe("when value is given but kind is not defined", () => {
+  const err = new ResolveError("test", {
+    value: {
+      apiVersion: "kosko.dev/v1",
+      metadata: { name: "test" }
+    }
   });
 
-  test("should add path and index to stack", () => {
-    expect(err.stack).toEqual(
-      `ValidationError: ${cause.message}\n- path: ${JSON.stringify(
-        err.path
-      )}\n- index: [${err.index.join(", ")}]${extractStack(cause.stack!)}`
+  test("should not append value to stack", () => {
+    expect(err.stack).not.toEqual(expect.stringContaining("Name: test"));
+  });
+});
+
+describe("when value is given but metadata.name is not defined", () => {
+  const err = new ResolveError("test", {
+    value: {
+      apiVersion: "kosko.dev/v1",
+      kind: "Test"
+    }
+  });
+
+  test("should not append value to stack", () => {
+    expect(err.stack).not.toEqual(
+      expect.stringContaining("Kind: kosko.dev/v1/Test")
     );
   });
 });
 
-describe("given cause without stack", () => {
-  beforeAll(() => {
-    cause = new Error("foo");
-    delete cause.stack;
-    component = undefined;
-  });
-
-  test("should add path and index to stack", () => {
-    expect(err.stack).toEqual(
-      `ValidationError: ${cause.message}\n- path: ${JSON.stringify(
-        err.path
-      )}\n- index: [${err.index.join(", ")}]${extractStack(err.stack!)}`
-    );
-  });
-});
-
-describe("given cause with stack but without trace", () => {
-  beforeAll(() => {
-    cause = new Error("foo");
-    cause.stack = "bar";
-    component = undefined;
-  });
-
-  test("should add path and index to stack", () => {
-    expect(err.stack).toStartWith(
-      `ValidationError: ${cause.message}\n- path: ${JSON.stringify(
-        err.path
-      )}\n- index: [${err.index.join(", ")}]\n${cause.stack}`
-    );
-  });
-});
-
-describe("given component", () => {
-  beforeAll(() => {
-    cause = new Error("foo");
-    component = {
-      apiVersion: "v1",
-      kind: "Pod",
+describe("when value is given and it is like a component", () => {
+  const err = new ResolveError("test", {
+    value: {
+      apiVersion: "kosko.dev/v1",
+      kind: "Test",
       metadata: {
-        name: "example"
+        name: "resolve-error-test"
       }
-    };
+    }
   });
 
-  test("should add component to message", () => {
-    expect(err.message).toEqual(
-      `${cause.message} (path: ${JSON.stringify(
-        err.path
-      )}, index: [${err.index.join(", ")}], kind: "v1/Pod", name: "example")`
-    );
-  });
-
-  test("should add component to stack", () => {
-    expect(err.stack).toEqual(
-      `ValidationError: ${cause.message}\n- path: ${JSON.stringify(
-        err.path
-      )}\n- index: [${err.index.join(
-        ", "
-      )}]\n- kind: "v1/Pod"\n- name: "example"${extractStack(cause.stack!)}`
-    );
+  test("should append component info to stack", () => {
+    expect(err.stack).toEqual(`ResolveError: test
+    Kind: kosko.dev/v1/Test
+    Name: resolve-error-test
+${extractStack(err.stack)}`);
   });
 });
 
-describe("given component with namespace", () => {
-  beforeAll(() => {
-    cause = new Error("foo");
-    component = {
-      apiVersion: "v1",
-      kind: "Pod",
+describe("when value is given and it contains metadata.namespace", () => {
+  const err = new ResolveError("test", {
+    value: {
+      apiVersion: "kosko.dev/v1",
+      kind: "Test",
       metadata: {
-        namespace: "abc",
-        name: "def"
+        name: "resolve-error-test",
+        namespace: "namespace-test"
       }
-    };
+    }
   });
 
-  test("should add component to message", () => {
-    expect(err.message).toEqual(
-      `${cause.message} (path: ${JSON.stringify(
-        err.path
-      )}, index: [${err.index.join(
-        ", "
-      )}], kind: "v1/Pod", namespace: "abc", name: "def")`
-    );
-  });
-
-  test("should add component to stack", () => {
-    expect(err.stack).toEqual(
-      `ValidationError: ${cause.message}\n- path: ${JSON.stringify(
-        err.path
-      )}\n- index: [${err.index.join(
-        ", "
-      )}]\n- kind: "v1/Pod"\n- namespace: "abc"\n- name: "def"${extractStack(
-        cause.stack!
-      )}`
-    );
+  test("should append component info to stack", () => {
+    expect(err.stack).toEqual(`ResolveError: test
+    Kind: kosko.dev/v1/Test
+    Namespace: namespace-test
+    Name: resolve-error-test
+${extractStack(err.stack)}`);
   });
 });
 
-describe("given invalid component without apiVersion", () => {
-  beforeAll(() => {
-    cause = new Error("foo");
-    component = {
-      kind: "Pod",
-      metadata: {
-        namespace: "abc",
-        name: "def"
-      }
-    };
-  });
+describe("when cause is given", () => {
+  const cause = toError({ name: "TestError", message: "test message" });
+  const err = new ResolveError("test", { cause });
 
-  test("should not add component to message", () => {
-    expect(err.message).not.toInclude("apiVersion");
-  });
-
-  test("should not add component to stack", () => {
-    expect(err.stack).not.toInclude("apiVersion");
+  test("should append cause to stack", () => {
+    expect(err.stack).toEqual(`ResolveError: test
+    Cause: TestError: test message
+${extractStack(cause.stack)
+  .split("\n")
+  .map((line) => `    ${line}`)
+  .join("\n")}
+${extractStack(err.stack)}`);
   });
 });

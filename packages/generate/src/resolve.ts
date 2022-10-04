@@ -1,9 +1,9 @@
 import { Manifest } from "./base";
 import logger, { LogLevel } from "@kosko/log";
-import { ValidationError } from "./error";
+import { aggregateErrors, ResolveError, toError } from "./error";
 
 interface Validator {
-  validate(): Promise<void>;
+  validate(): void | Promise<void>;
 }
 
 function isValidator(value: unknown): value is Validator {
@@ -20,17 +20,20 @@ function isPromiseLike(value: unknown): value is PromiseLike<unknown> {
   );
 }
 
-function toErrorObject(value: unknown): Error {
-  if (value instanceof Error) return value;
+function isIterable(value: unknown): value is Iterable<unknown> {
+  return (
+    typeof value === "object" &&
+    value != null &&
+    typeof (value as any)[Symbol.iterator] === "function"
+  );
+}
 
-  const err: Partial<Error> =
-    typeof value === "object" && value != null ? value : {};
-
-  return {
-    ...err,
-    name: err.name ?? "Error",
-    message: err.message ?? ""
-  };
+function isAsyncIterable(value: unknown): value is AsyncIterable<unknown> {
+  return (
+    typeof value === "object" &&
+    value != null &&
+    typeof (value as any)[Symbol.asyncIterator] === "function"
+  );
 }
 
 export interface ResolveOptions {
@@ -48,6 +51,13 @@ export interface ResolveOptions {
    * Source index of a manifest.
    */
   index?: number[];
+
+  /**
+   * When this option is `true`, `resolve` will stop immediately if an error
+   * occurred.  Otherwise, it will collect all errors and return an
+   * `AggregateError`. By default, this option is `false`.
+   */
+  bail?: boolean;
 }
 
 /**
@@ -60,32 +70,110 @@ export interface ResolveOptions {
  *   - Promise
  *   - Function
  *   - Async function
+ *   - Iterable
+ *   - Async iterable
  */
 export async function resolve(
   value: unknown,
   options: ResolveOptions = {}
 ): Promise<Manifest[]> {
+  const { validate = true, index = [], path = "", bail } = options;
+
+  function createResolveError(message: string, err: unknown) {
+    if (err instanceof ResolveError) return err;
+
+    return new ResolveError(message, {
+      path,
+      index,
+      value,
+      cause: toError(err)
+    });
+  }
+
   if (typeof value === "function") {
-    return resolve(await value(), options);
+    try {
+      return resolve(await value(), options);
+    } catch (err) {
+      throw createResolveError("Input function value thrown an error", err);
+    }
   }
 
   if (isPromiseLike(value)) {
-    return resolve(await value, options);
+    try {
+      return resolve(await value, options);
+    } catch (err) {
+      throw createResolveError("Input promise value rejected", err);
+    }
   }
 
-  const { validate = true, index = [], path = "" } = options;
-
-  if (Array.isArray(value)) {
+  if (isIterable(value)) {
     const manifests: Manifest[] = [];
+    const errors: Error[] = [];
+    let i = 0;
 
-    for (let i = 0; i < value.length; i++) {
-      const result = await resolve(value[i], {
-        validate,
-        index: [...index, i],
-        path
-      });
+    try {
+      for (const entry of value) {
+        try {
+          const result = await resolve(entry, {
+            validate,
+            bail,
+            index: [...index, i++],
+            path
+          });
 
-      manifests.push(...result);
+          manifests.push(...result);
+        } catch (err) {
+          if (bail) {
+            throw err;
+          }
+
+          errors.push(toError(err));
+        }
+      }
+    } catch (err) {
+      throw createResolveError("Input iterable value thrown an error", err);
+    }
+
+    if (errors.length) {
+      throw aggregateErrors(errors);
+    }
+
+    return manifests;
+  }
+
+  if (isAsyncIterable(value)) {
+    const manifests: Manifest[] = [];
+    const errors: Error[] = [];
+    let i = 0;
+
+    try {
+      for await (const entry of value) {
+        try {
+          const result = await resolve(entry, {
+            validate,
+            bail,
+            index: [...index, i++],
+            path
+          });
+
+          manifests.push(...result);
+        } catch (err) {
+          if (bail) {
+            throw err;
+          }
+
+          errors.push(toError(err));
+        }
+      }
+    } catch (err) {
+      throw createResolveError(
+        "Input async iterable value thrown an error",
+        err
+      );
+    }
+
+    if (errors.length) {
+      throw aggregateErrors(errors);
     }
 
     return manifests;
@@ -100,12 +188,7 @@ export async function resolve(
         );
         await value.validate();
       } catch (err) {
-        throw new ValidationError({
-          path,
-          index,
-          cause: toErrorObject(err),
-          component: value
-        });
+        throw createResolveError("Validation error", err);
       }
     }
   }

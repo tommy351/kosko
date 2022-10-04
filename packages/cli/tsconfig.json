@@ -11,7 +11,7 @@
     { "path": "../migrate" },
     { "path": "../log" },
     { "path": "../exec-utils" },
-    { "path": "../../internal/integration-test-utils" }
+    { "path": "../../internal/test-utils" }
   ],
   "include": ["src"]
 }

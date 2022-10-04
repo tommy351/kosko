@@ -1,11 +1,10 @@
 /// <reference types="jest-extended"/>
 import { generate } from "../generate";
-import tmp from "tmp-promise";
-import { Result } from "../base";
-import fs from "fs/promises";
+import { mkdir, writeFile } from "fs/promises";
 import { dirname, join } from "path";
-import tempDir from "temp-dir";
-import { ValidationError } from "../error";
+import { GenerateError, ResolveError } from "../error";
+import { makeTempDir, TempDir } from "@kosko/test-utils";
+import AggregateError from "aggregate-error";
 
 jest.mock("@kosko/require", () => {
   const mod = jest.requireActual("@kosko/require");
@@ -16,274 +15,202 @@ jest.mock("@kosko/require", () => {
   };
 });
 
-interface File {
-  path: string;
-  content: string;
+let tmpDir: TempDir;
+
+async function createTempFiles(files: Record<string, string>) {
+  for (const [path, content] of Object.entries(files)) {
+    const fullPath = join(tmpDir.path, path);
+    await mkdir(dirname(fullPath), { recursive: true });
+    await writeFile(fullPath, content);
+  }
 }
 
-let tmpDir: tmp.DirectoryResult;
-let tmpFiles: File[];
-
 beforeEach(async () => {
-  tmpDir = await tmp.dir({ tmpdir: tempDir, unsafeCleanup: true });
-
-  for (const file of tmpFiles) {
-    const path = join(tmpDir.path, file.path);
-    await fs.mkdir(dirname(path), { recursive: true });
-    await fs.writeFile(path, file.content);
-  }
+  tmpDir = await makeTempDir();
 });
 
 afterEach(async () => {
   await tmpDir.cleanup();
 });
 
-describe("given the wildcard pattern", () => {
-  let result: Result;
-
+describe("single JS file", () => {
   beforeEach(async () => {
-    result = await generate({
+    await createTempFiles({
+      "foo.js": "module.exports = {foo: 'bar'}"
+    });
+  });
+
+  test("should load the file", async () => {
+    const result = await generate({
       components: ["*"],
       path: tmpDir.path
     });
-  });
-
-  describe("and one file", () => {
-    beforeAll(() => {
-      tmpFiles = [{ path: "foo.js", content: "module.exports = {foo: 'bar'}" }];
-    });
-
-    test("should load the one in the components folder", () => {
-      expect(result).toEqual({
-        manifests: [
-          {
-            path: join(tmpDir.path, "foo.js"),
-            index: [],
-            data: { foo: "bar" }
-          }
-        ]
-      });
-    });
-  });
-
-  describe("and one folder", () => {
-    beforeAll(() => {
-      tmpFiles = [
+    expect(result).toEqual({
+      manifests: [
         {
-          path: "foo/index.js",
-          content: "module.exports = {foo: 'bar'}"
+          path: join(tmpDir.path, "foo.js"),
+          index: [],
+          data: { foo: "bar" }
         }
-      ];
-    });
-
-    test("should load the one in the components folder", () => {
-      expect(result).toEqual({
-        manifests: [
-          {
-            path: join(tmpDir.path, "foo", "index.js"),
-            index: [],
-            data: { foo: "bar" }
-          }
-        ]
-      });
-    });
-  });
-
-  describe("when the script is a ES module", () => {
-    beforeAll(() => {
-      tmpFiles = [
-        {
-          path: "foo.js",
-          content: `
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = {foo: "bar"};`
-        }
-      ];
-    });
-
-    test("should return the default", () => {
-      expect(result).toEqual({
-        manifests: [
-          {
-            path: join(tmpDir.path, "foo.js"),
-            index: [],
-            data: { foo: "bar" }
-          }
-        ]
-      });
-    });
-  });
-
-  describe("when the script returns an array", () => {
-    beforeAll(() => {
-      tmpFiles = [
-        {
-          path: "foo.js",
-          content: "module.exports = [{foo: 1}, {bar: 2}]"
-        }
-      ];
-    });
-
-    test("should return the array", () => {
-      expect(result).toEqual({
-        manifests: [
-          {
-            path: join(tmpDir.path, "foo.js"),
-            index: [0],
-            data: { foo: 1 }
-          },
-          {
-            path: join(tmpDir.path, "foo.js"),
-            index: [1],
-            data: { bar: 2 }
-          }
-        ]
-      });
-    });
-  });
-
-  describe("when the script returns a function", () => {
-    beforeAll(() => {
-      tmpFiles = [
-        {
-          path: "foo.js",
-          content: 'module.exports = () => ({ foo: "bar" })'
-        }
-      ];
-    });
-
-    test("should return the function return value", () => {
-      expect(result).toEqual({
-        manifests: [
-          {
-            path: join(tmpDir.path, "foo.js"),
-            index: [],
-            data: { foo: "bar" }
-          }
-        ]
-      });
-    });
-  });
-
-  describe("when the script returns a promise", () => {
-    beforeAll(() => {
-      tmpFiles = [
-        {
-          path: "foo.js",
-          content: 'module.exports = () => Promise.resolve({ foo: "bar" })'
-        }
-      ];
-    });
-
-    test("should return the promise resolved value", () => {
-      expect(result).toEqual({
-        manifests: [
-          {
-            path: join(tmpDir.path, "foo.js"),
-            index: [],
-            data: { foo: "bar" }
-          }
-        ]
-      });
-    });
-  });
-
-  describe("when the script returns a nested array", () => {
-    beforeAll(() => {
-      tmpFiles = [
-        {
-          path: "foo.js",
-          content: `
-            module.exports = [
-              {a: 1},
-              [
-                {b: 2},
-                [{c: 3}, {d: 4}]
-              ],
-              {e: 5}
-            ];
-          `
-        }
-      ];
-    });
-
-    test("should return the flattened array", () => {
-      const path = join(tmpDir.path, "foo.js");
-
-      expect(result).toEqual({
-        manifests: [
-          { path, index: [0], data: { a: 1 } },
-          { path, index: [1, 0], data: { b: 2 } },
-          { path, index: [1, 1, 0], data: { c: 3 } },
-          { path, index: [1, 1, 1], data: { d: 4 } },
-          { path, index: [2], data: { e: 5 } }
-        ]
-      });
-    });
-  });
-
-  describe("when the script returns an array containing a function", () => {
-    beforeAll(() => {
-      tmpFiles = [
-        {
-          path: "foo.js",
-          content: `
-            module.exports = [
-              {a: 1},
-              // Returns an object
-              () => ({b: 2}),
-              // Returns an array
-              () => [{c: 3}, {d: 4}],
-              // Returns an promise
-              async () => ({e: 5}),
-              // Returns an promise returning an array
-              async () => [{f: 6}, {g: 7}]
-            ]`
-        }
-      ];
-    });
-
-    test("should return the flattened array", () => {
-      const path = join(tmpDir.path, "foo.js");
-
-      expect(result).toEqual({
-        manifests: [
-          { path, index: [0], data: { a: 1 } },
-          { path, index: [1], data: { b: 2 } },
-          { path, index: [2, 0], data: { c: 3 } },
-          { path, index: [2, 1], data: { d: 4 } },
-          { path, index: [3], data: { e: 5 } },
-          { path, index: [4, 0], data: { f: 6 } },
-          { path, index: [4, 1], data: { g: 7 } }
-        ]
-      });
+      ]
     });
   });
 });
 
-describe("given a pattern without an extension", () => {
-  let result: Result;
-
+describe("JS files in folder", () => {
   beforeEach(async () => {
-    result = await generate({
-      components: ["foo"],
-      path: tmpDir.path
+    await createTempFiles({
+      "foo/index.js": "module.exports = {foo: 'index'}",
+      "foo/bar.js": "module.exports = {foo: 'bar'}"
     });
   });
 
-  describe("and two JS files", () => {
-    beforeAll(() => {
-      tmpFiles = [
-        { path: "foo.js", content: "module.exports = {foo: 'bar'}" },
-        { path: "bar.js", content: "module.exports = {}" }
-      ];
+  test("should load index only", async () => {
+    const result = await generate({
+      components: ["*"],
+      path: tmpDir.path
     });
+    expect(result).toEqual({
+      manifests: [
+        {
+          path: join(tmpDir.path, "foo/index.js"),
+          index: [],
+          data: { foo: "index" }
+        }
+      ]
+    });
+  });
+});
 
-    test("should load the one matching the pattern", () => {
+describe("ES module", () => {
+  beforeEach(async () => {
+    await createTempFiles({
+      "foo.js": `
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = {foo: "bar"};`
+    });
+  });
+
+  test("should load default export", async () => {
+    const result = await generate({
+      components: ["*"],
+      path: tmpDir.path
+    });
+    expect(result).toEqual({
+      manifests: [
+        {
+          path: join(tmpDir.path, "foo.js"),
+          index: [],
+          data: { foo: "bar" }
+        }
+      ]
+    });
+  });
+});
+
+describe("when script exports an array", () => {
+  beforeEach(async () => {
+    await createTempFiles({
+      "foo.js": "module.exports = [{foo: 1}, {bar: 2}]"
+    });
+  });
+
+  test("should load the array", async () => {
+    const result = await generate({
+      components: ["*"],
+      path: tmpDir.path
+    });
+    expect(result).toEqual({
+      manifests: [
+        {
+          path: join(tmpDir.path, "foo.js"),
+          index: [0],
+          data: { foo: 1 }
+        },
+        {
+          path: join(tmpDir.path, "foo.js"),
+          index: [1],
+          data: { bar: 2 }
+        }
+      ]
+    });
+  });
+});
+
+describe("when script exports a nested array", () => {
+  beforeEach(async () => {
+    await createTempFiles({
+      "foo.js": `
+module.exports = [
+  {a: 1},
+  [
+    {b: 2},
+    [{c: 3}, {d: 4}]
+  ],
+  {e: 5}
+]`
+    });
+  });
+
+  test("should load the array", async () => {
+    const result = await generate({
+      components: ["*"],
+      path: tmpDir.path
+    });
+    const path = join(tmpDir.path, "foo.js");
+    expect(result).toEqual({
+      manifests: [
+        { path, index: [0], data: { a: 1 } },
+        { path, index: [1, 0], data: { b: 2 } },
+        { path, index: [1, 1, 0], data: { c: 3 } },
+        { path, index: [1, 1, 1], data: { d: 4 } },
+        { path, index: [2], data: { e: 5 } }
+      ]
+    });
+  });
+});
+
+describe("when file has syntax error", () => {
+  beforeEach(async () => {
+    await createTempFiles({
+      "foo.js": "1x"
+    });
+  });
+
+  test("should throw ResolveError", async () => {
+    await expect(
+      generate({ components: ["*"], path: tmpDir.path })
+    ).rejects.toThrowWithMessage(
+      GenerateError,
+      "Component value resolve failed"
+    );
+  });
+});
+
+describe("multiple files", () => {
+  beforeEach(async () => {
+    await createTempFiles({
+      "foo.js": "module.exports = {foo: 'bar'}",
+      "bar.js": "module.exports = {}",
+      "foo.json": JSON.stringify({ foo: "bar" })
+    });
+  });
+
+  describe("when components is not wildcard", () => {
+    test("should load files that match the pattern regardless the extension", async () => {
+      const result = await generate({
+        components: ["foo"],
+        path: tmpDir.path
+      });
       expect(result).toEqual({
         manifests: [
           {
             path: join(tmpDir.path, "foo.js"),
+            index: [],
+            data: { foo: "bar" }
+          },
+          {
+            path: join(tmpDir.path, "foo.json"),
             index: [],
             data: { foo: "bar" }
           }
@@ -292,12 +219,13 @@ describe("given a pattern without an extension", () => {
     });
   });
 
-  describe("and one JSON file", () => {
-    beforeAll(() => {
-      tmpFiles = [{ path: "foo.json", content: `{"foo": "bar"}` }];
-    });
-
-    test("should load the one matching the pattern", () => {
+  describe("when extensions are given", () => {
+    test("should only load files that match the extensions", async () => {
+      const result = await generate({
+        components: ["*"],
+        path: tmpDir.path,
+        extensions: ["json"]
+      });
       expect(result).toEqual({
         manifests: [
           {
@@ -311,208 +239,203 @@ describe("given a pattern without an extension", () => {
   });
 });
 
-describe("given multiple patterns", () => {
-  let result: Result;
+describe("when components is empty", () => {
+  test("should throw GenerateError", async () => {
+    await expect(
+      generate({
+        components: [],
+        path: tmpDir.path
+      })
+    ).rejects.toThrowWithMessage(GenerateError, "components must not be empty");
+  });
+});
 
+describe("when extensions is empty", () => {
+  test("should throw GenerateError", async () => {
+    await expect(
+      generate({
+        components: ["*"],
+        path: tmpDir.path,
+        extensions: []
+      })
+    ).rejects.toThrowWithMessage(GenerateError, "extensions must not be empty");
+  });
+});
+
+describe("when validate prop is not a function", () => {
   beforeEach(async () => {
-    result = await generate({
-      components: ["a*", "b*"],
-      path: tmpDir.path
+    await createTempFiles({
+      "a.js": "module.exports = {validate: 1}"
     });
   });
 
-  describe("and three files", () => {
-    beforeAll(() => {
-      tmpFiles = ["a", "b", "c"].map((x) => ({
-        path: `${x}.js`,
-        content: `module.exports = {value: '${x}'}`
-      }));
-    });
-
-    test("should load files matching the pattern", () => {
-      expect(result.manifests).toIncludeAllMembers([
+  test("should not execute validate function", async () => {
+    const result = await generate({ components: ["*"], path: tmpDir.path });
+    expect(result).toEqual({
+      manifests: [
         {
           path: join(tmpDir.path, "a.js"),
           index: [],
-          data: { value: "a" }
-        },
-        {
-          path: join(tmpDir.path, "b.js"),
-          index: [],
-          data: { value: "b" }
+          data: { validate: 1 }
         }
-      ]);
+      ]
     });
   });
 });
 
-describe("given extensions", () => {
-  beforeAll(() => {
-    tmpFiles = [
-      { path: "a.foo", content: "module.exports = {foo: 'a'}" },
-      { path: "b.bar", content: "module.exports = {bar: 'b'}" },
-      { path: "c.js", content: "module.exports = {}" }
-    ];
-  });
-
-  let result: Result;
-
+describe("when validate function succeeds", () => {
   beforeEach(async () => {
-    result = await generate({
-      components: ["*"],
-      extensions: ["foo", "bar"],
-      path: tmpDir.path
+    await createTempFiles({
+      "a.js": `
+const value = {};
+Object.defineProperty(value, "validate", {
+  enumerable: false,
+  value: () => {
+    value.data = 1;
+  },
+});
+module.exports = value;`
     });
   });
 
-  test("should load files with the given extensions", () => {
-    expect(result.manifests).toIncludeAllMembers([
-      {
-        path: join(tmpDir.path, "a.foo"),
-        index: [],
-        data: { foo: "a" }
-      },
-      {
-        path: join(tmpDir.path, "b.bar"),
-        index: [],
-        data: { bar: "b" }
-      }
-    ]);
+  test("should execute validate function", async () => {
+    const result = await generate({ components: ["*"], path: tmpDir.path });
+    expect(result).toEqual({
+      manifests: [
+        {
+          path: join(tmpDir.path, "a.js"),
+          index: [],
+          data: { data: 1 }
+        }
+      ]
+    });
   });
-});
 
-describe("given validate = true", () => {
-  function execute(): Promise<Result> {
-    return generate({
+  test("should not execute validate function if validate = false", async () => {
+    const result = await generate({
       components: ["*"],
       path: tmpDir.path,
-      validate: true
+      validate: false
     });
-  }
-
-  describe("when validate is undefined", () => {
-    beforeAll(() => {
-      tmpFiles = [{ path: "foo.js", content: "module.exports = {}" }];
-    });
-
-    test("should be ok", async () => {
-      expect(await execute()).toEqual({
-        manifests: [
-          {
-            path: join(tmpDir.path, "foo.js"),
-            index: [],
-            data: {}
-          }
-        ]
-      });
-    });
-  });
-
-  describe("when validate is not a function", () => {
-    beforeAll(() => {
-      tmpFiles = [
-        { path: "foo.js", content: "module.exports = {validate: 1}" }
-      ];
-    });
-
-    test("should be ok", async () => {
-      expect(await execute()).toEqual({
-        manifests: [
-          {
-            path: join(tmpDir.path, "foo.js"),
-            index: [],
-            data: { validate: 1 }
-          }
-        ]
-      });
-    });
-  });
-
-  describe("when validate is a function", () => {
-    beforeAll(() => {
-      tmpFiles = [
+    expect(result).toEqual({
+      manifests: [
         {
-          path: "foo.js",
-          content: `
-class Validator {
-  validate() { this.foo = 1; }
-}
-module.exports = new Validator();
-`
+          path: join(tmpDir.path, "a.js"),
+          index: [],
+          data: {}
         }
-      ];
+      ]
     });
+  });
+});
 
-    test("should be ok", async () => {
-      expect(await execute()).toEqual({
-        manifests: [
-          {
-            path: join(tmpDir.path, "foo.js"),
-            index: [],
-            data: { foo: 1 }
-          }
-        ]
-      });
+describe("when validate function throws an error", () => {
+  beforeEach(async () => {
+    await createTempFiles({
+      "a.js": `
+const value = {};
+Object.defineProperty(value, "validate", {
+  enumerable: false,
+  value: () => {
+    throw new Error("err");
+  },
+});
+module.exports = value;`
     });
   });
 
-  describe("when validate throws an error", () => {
-    beforeAll(() => {
-      tmpFiles = [
-        {
-          path: "foo.js",
-          content:
-            "module.exports = {validate: () => { throw new Error('err'); }}"
-        }
-      ];
-    });
+  test("should throw ResolveError", async () => {
+    await expect(
+      generate({ components: ["*"], path: tmpDir.path })
+    ).rejects.toThrowWithMessage(ResolveError, "Validation error");
+  });
 
-    test("should throw ValidationError", async () => {
-      await expect(execute()).rejects.toThrow(ValidationError);
+  test("should not execute validate function if validate = false", async () => {
+    const result = await generate({
+      components: ["*"],
+      path: tmpDir.path,
+      validate: false
+    });
+    expect(result).toEqual({
+      manifests: [
+        {
+          path: join(tmpDir.path, "a.js"),
+          index: [],
+          data: {}
+        }
+      ]
+    });
+  });
+});
+
+describe("when validate function returns a resolved promise", () => {
+  beforeEach(async () => {
+    await createTempFiles({
+      "a.js": `
+const value = {};
+Object.defineProperty(value, "validate", {
+  enumerable: false,
+  value: async () => {
+    value.data = 1;
+  },
+});
+module.exports = value;`
     });
   });
 
-  describe("when validate returns a promise", () => {
-    beforeAll(() => {
-      tmpFiles = [
+  test("should execute validate function", async () => {
+    const result = await generate({ components: ["*"], path: tmpDir.path });
+    expect(result).toEqual({
+      manifests: [
         {
-          path: "foo.js",
-          content: `
-class Validator {
-  async validate() { this.foo = 1; }
-}
-module.exports = new Validator();
-`
+          path: join(tmpDir.path, "a.js"),
+          index: [],
+          data: { data: 1 }
         }
-      ];
+      ]
     });
+  });
+});
 
-    test("should be ok", async () => {
-      expect(await execute()).toEqual({
-        manifests: [
-          {
-            path: join(tmpDir.path, "foo.js"),
-            index: [],
-            data: { foo: 1 }
-          }
-        ]
-      });
+describe("when validate function returns a rejected promise", () => {
+  beforeEach(async () => {
+    await createTempFiles({
+      "a.js": "module.exports = { async validate() { throw new Error('err'); }}"
     });
   });
 
-  describe("when validate returns a rejected promise", () => {
-    beforeAll(() => {
-      tmpFiles = [
-        {
-          path: "foo.js",
-          content:
-            "module.exports = {validate: () => Promise.reject(new Error('foo'))}"
-        }
-      ];
-    });
+  test("should throw ResolveError", async () => {
+    await expect(
+      generate({ components: ["*"], path: tmpDir.path })
+    ).rejects.toThrowWithMessage(ResolveError, "Validation error");
+  });
+});
 
-    test("should throw ValidationError", async () => {
-      await expect(execute()).rejects.toThrow(ValidationError);
+describe("when multiple components validation failed", () => {
+  beforeEach(async () => {
+    await createTempFiles({
+      "a.js": `module.exports = { foo: "a" }`,
+      "b.js": `module.exports = { validate: () => { throw new Error("b err"); } }`,
+      "c.js": `module.exports = { validate: () => { throw new Error("c err"); } }`
     });
+  });
+
+  test("should throw AggregateError", async () => {
+    await expect(
+      generate({
+        components: ["*"],
+        path: tmpDir.path
+      })
+    ).rejects.toThrow(AggregateError);
+  });
+
+  test("should throw ResolveError if bail = true", async () => {
+    await expect(
+      generate({
+        components: ["*"],
+        path: tmpDir.path,
+        bail: true
+      })
+    ).rejects.toThrowWithMessage(ResolveError, "Validation error");
   });
 });

@@ -1,11 +1,10 @@
 import { loadFile, LoadOptions, loadString, loadUrl } from "../load";
-import tmp from "tmp-promise";
-import tempDir from "temp-dir";
 import fs from "fs/promises";
 import { join } from "path";
 import fetch from "node-fetch";
 import type { FetchMockStatic } from "fetch-mock";
 import { Pod } from "kubernetes-models/v1/Pod";
+import { TempDir, makeTempDir } from "@kosko/test-utils";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 jest.mock("node-fetch", () => require("fetch-mock").sandbox());
@@ -235,11 +234,11 @@ describe("loadString", () => {
 });
 
 describe("loadFile", () => {
-  let tmpDir: tmp.DirectoryResult;
+  let tmpDir: TempDir;
   let path: string;
 
   beforeEach(async () => {
-    tmpDir = await tmp.dir({ tmpdir: tempDir, unsafeCleanup: true });
+    tmpDir = await makeTempDir();
     path = join(tmpDir.path, "test.yaml");
   });
 

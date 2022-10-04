@@ -1,7 +1,7 @@
 /// <reference types="jest-extended"/>
 import execa from "execa";
 import { dirname } from "path";
-import { runCLI, installPackage } from "@kosko/integration-test-utils";
+import { runCLI, installPackage } from "@kosko/test-utils";
 
 const testDir = dirname(__dirname);
 
@@ -32,7 +32,7 @@ describe("when validate is not set", () => {
 
   test("should print the error", () => {
     expect(result.stderr).toContain(
-      "ValidationError: data/spec must have required property 'containers'"
+      "Error: data/spec must have required property 'containers', data/spec must be null, data/spec must match exactly one schema in oneOf"
     );
   });
 });
@@ -49,7 +49,7 @@ describe("when validate is true", () => {
 
   test("should print the error", () => {
     expect(result.stderr).toContain(
-      "ValidationError: data/spec must have required property 'containers'"
+      "Error: data/spec must have required property 'containers', data/spec must be null, data/spec must match exactly one schema in oneOf"
     );
   });
 });

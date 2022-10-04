@@ -1,6 +1,6 @@
 import execa from "execa";
 import { dirname, join } from "path";
-import { installPackage } from "@kosko/integration-test-utils";
+import { installPackage } from "@kosko/test-utils";
 
 const testDir = dirname(__dirname);
 let result: execa.ExecaReturnValue;

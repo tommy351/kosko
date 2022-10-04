@@ -238,14 +238,6 @@ importers:
       webpack-cli: 4.10.0_vnmgq7jx5zjkzolvtfp7mdf5ri
       webpack-dev-server: 4.11.1_5v66e2inugklgvlh4huuavolfq
 
-  internal/integration-test-utils:
-    specifiers:
-      execa: ^5.1.1
-      tslib: ^2.4.0
-    dependencies:
-      execa: 5.1.1
-      tslib: 2.4.0
-
   internal/jest-preset:
     specifiers:
       jest: ^29.0.3
@@ -261,6 +253,20 @@ importers:
       jest: 29.0.3
       typescript: 4.8.3
 
+  internal/test-utils:
+    specifiers:
+      execa: ^5.1.1
+      temp-dir: ^2.0.0
+      tmp: ^0.2.1
+      tmp-promise: ^3.0.3
+      tslib: ^2.4.0
+    dependencies:
+      execa: 5.1.1
+      temp-dir: 2.0.0
+      tmp: 0.2.1
+      tmp-promise: 3.0.3
+      tslib: 2.4.0
+
   packages/cli:
     specifiers:
       '@iarna/toml': ^2.2.5
@@ -268,11 +274,11 @@ importers:
       '@kosko/env': workspace:^3.0.1
       '@kosko/exec-utils': workspace:^0.2.0
       '@kosko/generate': workspace:^2.0.1
-      '@kosko/integration-test-utils': workspace:^0.0.0
       '@kosko/jest-preset': workspace:^0.0.0
       '@kosko/log': workspace:^0.1.0
       '@kosko/migrate': workspace:^3.0.1
       '@kosko/require': workspace:^3.0.0
+      '@kosko/test-utils': workspace:^0.0.0
       '@types/exit': ^0.1.31
       '@types/jsonpath': ^0.2.0
       '@types/yargs': ^17.0.12
@@ -285,8 +291,6 @@ importers:
       kubernetes-models: ^3.1.0
       picocolors: ^1.0.0
       pkg-dir: ^5.0.0
-      temp-dir: ^2.0.0
-      tmp-promise: ^3.0.3
       tslib: ^2.4.0
       yargs: ^17.5.1
     dependencies:
@@ -306,8 +310,8 @@ importers:
     devDependencies:
       '@iarna/toml': 2.2.5
       '@kosko/env': link:../env
-      '@kosko/integration-test-utils': link:../../internal/integration-test-utils
       '@kosko/jest-preset': link:../../internal/jest-preset
+      '@kosko/test-utils': link:../../internal/test-utils
       '@types/exit': 0.1.31
       '@types/jsonpath': 0.2.0
       '@types/yargs': 17.0.12
@@ -315,8 +319,6 @@ importers:
       fast-glob: 3.2.12
       kubernetes-models: 3.1.0
       pkg-dir: 5.0.0
-      temp-dir: 2.0.0
-      tmp-promise: 3.0.3
 
   packages/config:
     specifiers:
@@ -367,36 +369,38 @@ importers:
 
   packages/generate:
     specifiers:
-      '@kosko/integration-test-utils': workspace:^0.0.0
       '@kosko/jest-preset': workspace:^0.0.0
       '@kosko/log': workspace:^0.1.0
       '@kosko/require': workspace:^3.0.0
+      '@kosko/test-utils': workspace:^0.0.0
       '@types/bl': ^5.0.2
       '@types/js-yaml': ^4.0.5
+      '@types/micromatch': ^4.0.2
+      aggregate-error: ^3.1.0
       bl: ^5.0.0
       execa: ^5.1.1
-      fast-glob: ^3.2.12
+      extract-stack: ^2.0.0
       js-yaml: ^4.1.0
       kubernetes-models: ^3.1.0
-      temp-dir: ^2.0.0
-      tmp-promise: ^3.0.3
+      micromatch: ^4.0.5
       tslib: ^2.4.0
     dependencies:
       '@kosko/log': link:../log
       '@kosko/require': link:../require
-      fast-glob: 3.2.12
+      aggregate-error: 3.1.0
+      extract-stack: 2.0.0
       js-yaml: 4.1.0
+      micromatch: 4.0.5
       tslib: 2.4.0
     devDependencies:
-      '@kosko/integration-test-utils': link:../../internal/integration-test-utils
       '@kosko/jest-preset': link:../../internal/jest-preset
+      '@kosko/test-utils': link:../../internal/test-utils
       '@types/bl': 5.0.2
       '@types/js-yaml': 4.0.5
+      '@types/micromatch': 4.0.2
       bl: 5.0.0
       execa: 5.1.1
       kubernetes-models: 3.1.0
-      temp-dir: 2.0.0
-      tmp-promise: 3.0.3
 
   packages/helm:
     specifiers:
@@ -474,15 +478,13 @@ importers:
 
   packages/template:
     specifiers:
-      '@kosko/integration-test-utils': workspace:^0.0.0
       '@kosko/jest-preset': workspace:^0.0.0
       '@kosko/log': workspace:^0.1.0
+      '@kosko/test-utils': workspace:^0.0.0
       '@types/exit': ^0.1.31
       '@types/yargs': ^17.0.12
       execa: ^5.1.1
       exit: ^0.1.2
-      temp-dir: ^2.0.0
-      tmp-promise: ^3.0.3
       tslib: ^2.4.0
       yargs: ^17.5.1
     dependencies:
@@ -491,13 +493,11 @@ importers:
       tslib: 2.4.0
       yargs: 17.5.1
     devDependencies:
-      '@kosko/integration-test-utils': link:../../internal/integration-test-utils
       '@kosko/jest-preset': link:../../internal/jest-preset
+      '@kosko/test-utils': link:../../internal/test-utils
       '@types/exit': 0.1.31
       '@types/yargs': 17.0.12
       execa: 5.1.1
-      temp-dir: 2.0.0
-      tmp-promise: 3.0.3
 
   packages/template-deployed-service:
     specifiers:
@@ -523,10 +523,10 @@ importers:
 
   packages/yaml:
     specifiers:
-      '@kosko/integration-test-utils': workspace:^0.0.0
       '@kosko/jest-preset': workspace:^0.0.0
       '@kosko/log': workspace:^0.1.0
       '@kosko/require': workspace:^3.0.0
+      '@kosko/test-utils': workspace:^0.0.0
       '@types/js-yaml': ^4.0.5
       '@types/node-fetch': ^2.6.2
       execa: ^5.1.1
@@ -534,8 +534,6 @@ importers:
       js-yaml: ^4.1.0
       kubernetes-models: ^3.1.0
       node-fetch: ^2.6.6
-      temp-dir: ^2.0.0
-      tmp-promise: ^3.0.3
       tslib: ^2.4.0
     dependencies:
       '@kosko/log': link:../log
@@ -544,15 +542,13 @@ importers:
       node-fetch: 2.6.7
       tslib: 2.4.0
     devDependencies:
-      '@kosko/integration-test-utils': link:../../internal/integration-test-utils
       '@kosko/jest-preset': link:../../internal/jest-preset
+      '@kosko/test-utils': link:../../internal/test-utils
       '@types/js-yaml': 4.0.5
       '@types/node-fetch': 2.6.2
       execa: 5.1.1
       fetch-mock: 9.11.0_node-fetch@2.6.7
       kubernetes-models: 3.1.0
-      temp-dir: 2.0.0
-      tmp-promise: 3.0.3
 
   website:
     specifiers:
@@ -4058,6 +4054,10 @@ packages:
     dependencies:
       '@types/node': 18.7.18
 
+  /@types/braces/3.0.1:
+    resolution: {integrity: sha512-+euflG6ygo4bn0JHtn4pYqcXwRtLvElQ7/nnjDu7iYG56H0+OhCd7d6Ug0IE3WcFpZozBKW2+80FUbv5QGk5AQ==}
+    dev: true
+
   /@types/codemirror/5.60.5:
     resolution: {integrity: sha512-TiECZmm8St5YxjFUp64LK0c8WU5bxMDt9YaAek1UqUb9swrSCoJhh92fWu1p3mTEqlHjhB5sY7OFBhWroJXZVg==}
     dependencies:
@@ -4213,6 +4213,12 @@ packages:
     dependencies:
       '@types/unist': 2.0.6
     dev: false
+
+  /@types/micromatch/4.0.2:
+    resolution: {integrity: sha512-oqXqVb0ci19GtH0vOA/U2TmHTcRY9kuZl4mqUxe0QmJAlIW13kzhuK5pi1i9+ngav8FjpSb9FVS/GE00GLX1VA==}
+    dependencies:
+      '@types/braces': 3.0.1
+    dev: true
 
   /@types/mime/3.0.1:
     resolution: {integrity: sha512-Y4XFY5VJAuw0FgAqPNd6NNoV44jbq9Bz2L7Rh/J6jLTiHBSBJa9fxqQIvkIld4GsoDOcCbvzOUAbLPsSKKg+uA==}
@@ -6970,6 +6976,11 @@ packages:
       iconv-lite: 0.4.24
       tmp: 0.0.33
     dev: true
+
+  /extract-stack/2.0.0:
+    resolution: {integrity: sha512-AEo4zm+TenK7zQorGK1f9mJ8L14hnTDi2ZQPR+Mub1NX8zimka1mXpV5LpH8x9HoUmFSHZCfLHqWvp0Y4FxxzQ==}
+    engines: {node: '>=8'}
+    dev: false
 
   /extract-zip/2.0.1:
     resolution: {integrity: sha512-GDhU9ntwuKyGXdZBUgTIe+vXnWj0fppUEtMDL0+idd5Sta8TGpHssn/eusA9mrPr9qNDym6SxAYZjNvCn/9RBg==}
@@ -12552,7 +12563,6 @@ packages:
   /temp-dir/2.0.0:
     resolution: {integrity: sha512-aoBAniQmmwtcKp/7BzsH8Cxzv8OL736p7v1ihGb5e9DJ9kTwGWHrQrVB5+lfVDzfGrdRzXch+ig7LHaY1JTOrg==}
     engines: {node: '>=8'}
-    dev: true
 
   /term-size/2.2.1:
     resolution: {integrity: sha512-wK0Ri4fOGjv/XPy8SBHZChl8CM7uMc5VML7SqiQ0zG7+J5Vr+RMQDoHa2CNT6KHUnTGIXH34UDMkPzAUyapBZg==}

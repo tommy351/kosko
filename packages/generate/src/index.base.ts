@@ -1,4 +1,9 @@
 export * from "./base";
-export { ValidationError } from "./error";
+export {
+  GenerateError,
+  GenerateErrorOptions,
+  ResolveError,
+  ResolveErrorOptions
+} from "./error";
 export * from "./print";
-export * from "./resolve";
+export { resolve, ResolveOptions } from "./resolve";

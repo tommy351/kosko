@@ -33,13 +33,11 @@
     "yargs": "^17.5.1"
   },
   "devDependencies": {
-    "@kosko/integration-test-utils": "workspace:^0.0.0",
+    "@kosko/test-utils": "workspace:^0.0.0",
     "@kosko/jest-preset": "workspace:^0.0.0",
     "@types/exit": "^0.1.31",
     "@types/yargs": "^17.0.12",
-    "execa": "^5.1.1",
-    "temp-dir": "^2.0.0",
-    "tmp-promise": "^3.0.3"
+    "execa": "^5.1.1"
   },
   "jest": {
     "preset": "@kosko/jest-preset"
