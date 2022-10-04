@@ -1,5 +1,5 @@
 import pc from "picocolors";
-import { Formatter } from "picocolors/types";
+import type { Formatter } from "picocolors/types";
 import cleanStack from "clean-stack";
 import stringify from "fast-safe-stringify";
 import { LogLevel } from "./LogLevel";
