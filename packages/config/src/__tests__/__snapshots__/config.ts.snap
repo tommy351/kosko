@@ -2,6 +2,7 @@
 
 exports[`loadConfig when file exists should load the config 1`] = `
 {
+  "bail": true,
   "baseEnvironment": "m",
   "components": [
     "b",
@@ -58,6 +59,7 @@ exports[`loadConfig when file exists should load the config 1`] = `
 
 exports[`searchConfig should return the config when kosko.toml exists 1`] = `
 {
+  "bail": true,
   "baseEnvironment": "m",
   "components": [
     "b",
