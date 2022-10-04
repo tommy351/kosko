@@ -1,9 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`when key in the set argument is invalid should print the error 1`] = `
-"[31merror[39m - Failed to override key "tolerations[?@.key=='key2'].value". Lexical error on line 1. Unrecognized text.
+"[31merror[39m - Component value resolve failed
+[90mGenerateError: Component value resolve failed
+    Path: <PROJECT_ROOT>/packages/cli/integration/generate-cjs/components/nginx.js
+    Cause: CLIError: Lexical error on line 1. Unrecognized text.
 $.tolerations[?@.key=='key2'].valu
---------------^"
+--------------^
+        at Object.reduce (~/Projects/kosko/packages/cli/dist/commands/generate/set-option.js:93:31)
+        at ~/Projects/kosko/packages/env/dist/reduce.js:5:57
+        at Array.reduce (<anonymous>)
+        at reduce (~/Projects/kosko/packages/env/dist/reduce.js:5:21)
+        at reduce (~/Projects/kosko/packages/env/dist/environment/base.js:75:56)
+        at Object.component (~/Projects/kosko/packages/env/dist/environment/base.js:18:30)
+        at Object.<anonymous> (~/Projects/kosko/packages/cli/integration/generate-cjs/components/nginx.js:3:38)
+    at getComponentValue (~/Projects/kosko/packages/generate/dist/generate.js:27:15)
+    at async generate (~/Projects/kosko/packages/generate/dist/generate.js:70:61)
+    at async handler (~/Projects/kosko/packages/cli/dist/commands/generate/worker.js:23:20)
+    at async Object.handler (~/Projects/kosko/packages/cli/dist/commands/generate/command.js:79:9)[39m"
 `;
 
 exports[`when multiple set arguments are provided should output YAML 1`] = `
@@ -76,6 +90,7 @@ Options:
                   required.                                [array] [default: []]
       --loader    Module loader. Loaders set in config file will also be loaded.
                                                            [array] [default: []]
+      --bail      Stop immediately when an error occurred.             [boolean]
   -s, --set       Set values on the command line KEY=VAL (can be used multiple
                   times)                                   [array] [default: []]
   -o, --output    Output format
@@ -241,6 +256,7 @@ Options:
                   required.                                [array] [default: []]
       --loader    Module loader. Loaders set in config file will also be loaded.
                                                            [array] [default: []]
+      --bail      Stop immediately when an error occurred.             [boolean]
   -s, --set       Set values on the command line KEY=VAL (can be used multiple
                   times)                                   [array] [default: []]
   -o, --output    Output format
@@ -328,6 +344,7 @@ Options:
                   required.                                [array] [default: []]
       --loader    Module loader. Loaders set in config file will also be loaded.
                                                            [array] [default: []]
+      --bail      Stop immediately when an error occurred.             [boolean]
   -s, --set       Set values on the command line KEY=VAL (can be used multiple
                   times)                                   [array] [default: []]
   -o, --output    Output format

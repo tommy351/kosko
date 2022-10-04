@@ -36,6 +36,10 @@ export function generateBuilder(
         "Module loader. Loaders set in config file will also be loaded.",
       default: []
     })
+    .option("bail", {
+      type: "boolean",
+      describe: "Stop immediately when an error occurred."
+    })
     .option("set", {
       type: "string",
       array: true,

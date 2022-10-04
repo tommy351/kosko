@@ -35,7 +35,8 @@ export async function handler(options: GenerateOptions) {
     path: join(args.cwd, "components"),
     components: config.components,
     extensions: config.extensions,
-    validate: args.validate
+    validate: args.validate,
+    bail: config.bail
   });
 
   if (!result.manifests.length) {

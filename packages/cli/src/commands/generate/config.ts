@@ -19,7 +19,8 @@ export async function loadConfig(args: BaseGenerateArguments) {
     ...base,
     components: args.components?.length ? args.components : components,
     require: [...require, ...(args.require || [])],
-    loaders: [...loaders, ...(args.loader || [])]
+    loaders: [...loaders, ...(args.loader || [])],
+    bail: args.bail ?? base.bail
   };
 
   if (!config.components.length) {
