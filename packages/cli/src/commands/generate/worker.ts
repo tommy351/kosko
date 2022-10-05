@@ -1,5 +1,5 @@
 import { Config, EnvironmentConfig } from "@kosko/config";
-import { spawn } from "@kosko/exec-utils";
+import { spawn, SpawnError } from "@kosko/exec-utils";
 import { generate, print, PrintFormat } from "@kosko/generate";
 import { join } from "path";
 import { CLIError } from "../../cli/error";
@@ -54,22 +54,35 @@ export async function handler(options: GenerateOptions) {
 }
 
 async function runWithLoaders(options: GenerateOptions) {
-  await spawn(
-    process.execPath,
-    [
-      // Node.js-specific CLI options
-      ...process.execArgv,
-      // ESM loaders
-      ...options.config.loaders.flatMap((loader) => ["--loader", loader]),
-      // Entry file
-      join(
-        process.env.KOSKO_CLI_BIN || process.argv[1],
-        "../../dist/commands/generate/worker-bin.js"
-      )
-    ],
-    {
-      stdio: ["pipe", "inherit", "inherit"],
-      input: JSON.stringify(options)
+  try {
+    await spawn(
+      process.execPath,
+      [
+        // Node.js-specific CLI options
+        ...process.execArgv,
+        // ESM loaders
+        ...options.config.loaders.flatMap((loader) => ["--loader", loader]),
+        // Entry file
+        join(
+          process.env.KOSKO_CLI_BIN || process.argv[1],
+          "../../dist/commands/generate/worker-bin.js"
+        )
+      ],
+      {
+        stdio: ["pipe", "inherit", "inherit"],
+        input: JSON.stringify(options)
+      }
+    );
+  } catch (err) {
+    if (err instanceof SpawnError) {
+      throw new CLIError(err.message, {
+        // Omit the output because it should be directly printed to stderr by
+        // `spawn` function.
+        output: "",
+        code: err.exitCode
+      });
     }
-  );
+
+    throw err;
+  }
 }

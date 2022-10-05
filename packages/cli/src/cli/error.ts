@@ -24,8 +24,10 @@ export function handleError(err: unknown): void {
       code = err.code;
     }
 
-    if (err.output) {
-      logger.log(LogLevel.Error, err.output);
+    if (typeof err.output === "string") {
+      if (err.output) {
+        logger.log(LogLevel.Error, err.output);
+      }
     } else {
       logger.log(LogLevel.Error, err.message, { error: err });
     }

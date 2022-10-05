@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should print the error 1`] = `
+"[31merror[39m - Validation error
+[90mResolveError: Validation error
+    Path: <PROJECT_ROOT>/packages/cli/integration/generate-loader-error/components/nginx.ts
+    Kind: v1/Pod
+    Name: test-pod
+    Cause: Error: data/spec must have required property 'containers', data/spec must be null, data/spec must match exactly one schema in oneOf
+        at validate (file://<PROJECT_ROOT>/node_modules/.pnpm/@kubernetes-models+validate@2.0.1/node_modules/@kubernetes-models/validate/src/validate.ts:6:17)
+        at Pod.validate (file://<PROJECT_ROOT>/node_modules/.pnpm/@kubernetes-models+base@3.0.0/node_modules/@kubernetes-models/base/src/model.ts:64:5)
+        at resolve (<PROJECT_ROOT>/packages/generate/src/resolve.ts:189:21)
+        at generate (<PROJECT_ROOT>/packages/generate/src/generate.ts:119:39)
+        at async handler (<PROJECT_ROOT>/packages/cli/src/commands/generate/worker.ts:34:18)
+        at async <PROJECT_ROOT>/packages/cli/src/commands/generate/worker-bin.ts:8:3
+    at createResolveError (<PROJECT_ROOT>/packages/generate/src/resolve.ts:85:12)
+    at resolve (<PROJECT_ROOT>/packages/generate/src/resolve.ts:191:15)
+    at generate (<PROJECT_ROOT>/packages/generate/src/generate.ts:119:39)
+    at async handler (<PROJECT_ROOT>/packages/cli/src/commands/generate/worker.ts:34:18)
+    at async <PROJECT_ROOT>/packages/cli/src/commands/generate/worker-bin.ts:8:3[39m"
+`;

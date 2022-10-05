@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should print the error 1`] = `
+"[31merror[39m - Validation error
+[90mResolveError: Validation error
+    Path: <PROJECT_ROOT>/packages/cli/integration/validate-failed/components/foo.js
+    Kind: v1/Pod
+    Name: foo
+    Cause: Error: data/spec must have required property 'containers', data/spec must be null, data/spec must match exactly one schema in oneOf
+        at validate (<PROJECT_ROOT>/node_modules/.pnpm/@kubernetes-models+validate@2.0.1/node_modules/@kubernetes-models/validate/dist/validate.js:9:21)
+        at Pod.validate (<PROJECT_ROOT>/node_modules/.pnpm/@kubernetes-models+base@3.0.0/node_modules/@kubernetes-models/base/dist/model.js:44:33)
+        at resolve (<PROJECT_ROOT>/packages/generate/dist/resolve.js:134:29)
+        at generate (<PROJECT_ROOT>/packages/generate/dist/generate.js:70:60)
+        at async handler (<PROJECT_ROOT>/packages/cli/dist/commands/generate/worker.js:23:20)
+        at async Object.handler (<PROJECT_ROOT>/packages/cli/dist/commands/validate.js:21:9)
+    at createResolveError (<PROJECT_ROOT>/packages/generate/dist/resolve.js:45:16)
+    at resolve (<PROJECT_ROOT>/packages/generate/dist/resolve.js:137:23)
+    at generate (<PROJECT_ROOT>/packages/generate/dist/generate.js:70:60)
+    at async handler (<PROJECT_ROOT>/packages/cli/dist/commands/generate/worker.js:23:20)
+    at async Object.handler (<PROJECT_ROOT>/packages/cli/dist/commands/validate.js:21:9)[39m"
+`;

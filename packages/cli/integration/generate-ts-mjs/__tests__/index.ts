@@ -1,11 +1,7 @@
 import { dirname } from "path";
-import { installPackage, runCLI } from "@kosko/test-utils";
+import { runCLI } from "@kosko/test-utils";
 
 const testDir = dirname(__dirname);
-
-beforeAll(async () => {
-  await installPackage(testDir, "env");
-});
 
 test("should load loaders specified in args", async () => {
   const result = await runCLI(["generate", "--loader", "ts-node/esm"], {

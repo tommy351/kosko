@@ -1,14 +1,10 @@
 import execa from "execa";
 import { dirname } from "path";
-import { runCLI, installPackage } from "@kosko/test-utils";
+import { runCLI } from "@kosko/test-utils";
 
 const testDir = dirname(__dirname);
 
 let result: execa.ExecaReturnValue;
-
-beforeAll(async () => {
-  await installPackage(testDir, "env");
-});
 
 beforeEach(async () => {
   result = await runCLI(["validate"], {

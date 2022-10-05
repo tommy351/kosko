@@ -1,10 +1,10 @@
 import { projectRoot } from "@kosko/test-utils";
 import { homedir } from "os";
-import { join, posix } from "path";
+import { join } from "path";
 
 function getProjectRootPathsToReplace() {
   const paths = [projectRoot];
-  const normalized = posix.normalize(projectRoot);
+  const normalized = projectRoot.replace(/\\/g, "/");
   const home = homedir();
 
   if (projectRoot.startsWith(home)) {

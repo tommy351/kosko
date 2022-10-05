@@ -1,25 +1,22 @@
-/// <reference types="jest-extended"/>
+import { runCLI } from "@kosko/test-utils";
 import execa from "execa";
 import { dirname } from "path";
-import { runCLI } from "@kosko/test-utils";
 
 const testDir = dirname(__dirname);
 
 let args: string[];
 let result: execa.ExecaReturnValue;
-let options: execa.Options;
 
 beforeEach(async () => {
   result = await runCLI(args, {
-    ...options,
-    cwd: testDir
+    cwd: testDir,
+    reject: false
   });
 });
 
-describe("when validate is not set", () => {
+describe("when bail is not set", () => {
   beforeAll(() => {
     args = ["generate"];
-    options = { reject: false };
   });
 
   test("should return status code 1", () => {
@@ -31,10 +28,9 @@ describe("when validate is not set", () => {
   });
 });
 
-describe("when validate is true", () => {
+describe("when bail is true", () => {
   beforeAll(() => {
-    args = ["generate", "--validate"];
-    options = { reject: false };
+    args = ["generate", "--bail"];
   });
 
   test("should return status code 1", () => {
@@ -43,20 +39,5 @@ describe("when validate is true", () => {
 
   test("should print the error", () => {
     expect(result.stderr).toMatchSnapshot();
-  });
-});
-
-describe("when validate is false", () => {
-  beforeAll(() => {
-    args = ["generate", "--validate", "false"];
-    options = {};
-  });
-
-  test("should return status code 0", () => {
-    expect(result.exitCode).toEqual(0);
-  });
-
-  test("should print the manifest", () => {
-    expect(result.stdout).toMatchSnapshot();
   });
 });

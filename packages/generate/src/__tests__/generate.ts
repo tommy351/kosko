@@ -262,6 +262,21 @@ describe("when extensions is empty", () => {
   });
 });
 
+describe("when extensions started with .", () => {
+  test("should throw GenerateError", async () => {
+    await expect(
+      generate({
+        components: ["*"],
+        path: tmpDir.path,
+        extensions: ["a", ".b", "c"]
+      })
+    ).rejects.toThrowWithMessage(
+      GenerateError,
+      `extension must not be started with ".": ".b"`
+    );
+  });
+});
+
 describe("when validate prop is not a function", () => {
   beforeEach(async () => {
     await createTempFiles({

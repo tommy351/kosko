@@ -10,5 +10,10 @@ test("should return files", async () => {
     replicas: 3
   });
 
-  expect(result).toMatchSnapshot();
+  expect(
+    result.files.map((file) => ({
+      ...file,
+      path: file.path.replace(/\\/g, "/")
+    }))
+  ).toMatchSnapshot();
 });
