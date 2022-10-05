@@ -1,0 +1,19 @@
+{
+  "name": "@kosko/jest-serializer-path",
+  "version": "0.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=14"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "exports": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js"
+  },
+  "dependencies": {
+    "@kosko/test-utils": "workspace:^0.0.0"
+  }
+}

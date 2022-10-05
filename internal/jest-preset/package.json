@@ -6,8 +6,8 @@
     "node": ">=14"
   },
   "dependencies": {
+    "@kosko/jest-serializer-path": "workspace:^0.0.0",
     "jest-extended": "^3.1.0",
-    "jest-serializer-path": "^0.1.15",
     "ts-jest": "^29.0.1"
   },
   "devDependencies": {
