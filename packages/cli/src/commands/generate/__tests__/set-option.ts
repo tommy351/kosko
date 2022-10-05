@@ -171,12 +171,10 @@ describe("CLI Variables Env Reducer", () => {
   });
 
   test("should fail on incorrect JSON path", () => {
-    const target = {
-      key: 1
-    };
-    const reducer = createCLIEnvReducer([
-      { key: "phoneNumbers[?@.type=='home'].number", value: "newHomeNumber" }
-    ]);
-    expect(() => reducer.reduce(target)).toThrowErrorMatchingSnapshot();
+    expect(() =>
+      createCLIEnvReducer([
+        { key: "phoneNumbers[?@.type=='home'].number", value: "newHomeNumber" }
+      ])
+    ).toThrowErrorMatchingSnapshot();
   });
 });

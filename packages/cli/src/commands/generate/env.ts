@@ -33,8 +33,9 @@ export async function setupEnv(
   }
 
   const paths = config.paths?.environment || {};
-  const setReducer =
-    args.set && args.set.length ? createCLIEnvReducer(args.set) : undefined;
+  const setReducer = args.set?.length
+    ? createCLIEnvReducer(args.set)
+    : undefined;
 
   // Initialize all environments
   for (const env of envs) {
