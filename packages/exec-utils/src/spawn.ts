@@ -1,6 +1,7 @@
 import crossSpawn from "cross-spawn";
 import { StdioOptions } from "child_process";
 import assert from "assert";
+import { SpawnError } from "./error";
 
 export interface SpawnResult {
   stdout: string;
@@ -45,17 +46,13 @@ export function spawn(
 
       if (code) {
         reject(
-          new Error(
-            [
-              `Command failed with exit code ${code}: ${command} ${args.join(
-                " "
-              )}`,
-              stderr.trim(),
-              stdout.trim()
-            ]
-              .filter(Boolean)
-              .join("\n")
-          )
+          new SpawnError({
+            exitCode: code,
+            command,
+            args,
+            stdout,
+            stderr
+          })
         );
       } else {
         resolve({ stdout, stderr });
