@@ -1,6 +1,7 @@
 import { projectRoot } from "@kosko/test-utils";
 import { homedir } from "os";
 import { join } from "path";
+import escapeStringRegExp from "escape-string-regexp";
 
 function getProjectRootPathsToReplace() {
   const paths = [projectRoot];
@@ -19,7 +20,11 @@ function getProjectRootPathsToReplace() {
 }
 
 function getProjectRootRegExp() {
-  return new RegExp(getProjectRootPathsToReplace().join("|"), "g");
+  const pathsRegExp = getProjectRootPathsToReplace()
+    .map(escapeStringRegExp)
+    .join("|");
+
+  return new RegExp(`(?:file:/+)?(${pathsRegExp})`, "g");
 }
 
 export function test(value: unknown) {

@@ -2,7 +2,6 @@ import exit from "exit";
 import logger, { LogLevel } from "@kosko/log";
 
 export class CLIError extends Error {
-  public readonly name = "CLIError";
   public readonly output?: string;
   public readonly code?: number;
 
@@ -15,6 +14,8 @@ export class CLIError extends Error {
     this.code = code;
   }
 }
+
+CLIError.prototype.name = "CLIError";
 
 export function handleError(err: unknown): void {
   let code = 1;

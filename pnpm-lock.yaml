@@ -256,8 +256,12 @@ importers:
   internal/jest-serializer-path:
     specifiers:
       '@kosko/test-utils': workspace:^0.0.0
+      escape-string-regexp: ^4.0.0
+      tslib: ^2.4.0
     dependencies:
       '@kosko/test-utils': link:../test-utils
+      escape-string-regexp: 4.0.0
+      tslib: 2.4.0
 
   internal/test-utils:
     specifiers:
