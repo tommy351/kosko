@@ -4,7 +4,7 @@ import { mkdir, writeFile } from "fs/promises";
 import { dirname, join } from "path";
 import { GenerateError, ResolveError } from "../error";
 import { makeTempDir, TempDir } from "@kosko/test-utils";
-import AggregateError from "aggregate-error";
+import AggregateError from "@kosko/aggregate-error";
 
 jest.mock("@kosko/require", () => {
   const mod = jest.requireActual("@kosko/require");

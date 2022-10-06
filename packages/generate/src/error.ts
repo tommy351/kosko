@@ -1,4 +1,4 @@
-import AggregateError from "aggregate-error";
+import AggregateError from "@kosko/aggregate-error";
 import extractStack from "extract-stack";
 
 const STACK_INDENT = "    ";

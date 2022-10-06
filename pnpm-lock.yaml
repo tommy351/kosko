@@ -277,6 +277,9 @@ importers:
       tmp-promise: 3.0.3
       tslib: 2.4.0
 
+  packages/aggregate-error:
+    specifiers: {}
+
   packages/cli:
     specifiers:
       '@iarna/toml': ^2.2.5
@@ -379,6 +382,7 @@ importers:
 
   packages/generate:
     specifiers:
+      '@kosko/aggregate-error': workspace:^0.0.0
       '@kosko/jest-preset': workspace:^0.0.0
       '@kosko/log': workspace:^0.1.0
       '@kosko/require': workspace:^3.0.0
@@ -386,7 +390,6 @@ importers:
       '@types/bl': ^5.0.2
       '@types/js-yaml': ^4.0.5
       '@types/micromatch': ^4.0.2
-      aggregate-error: ^3.1.0
       bl: ^5.0.0
       execa: ^5.1.1
       extract-stack: ^2.0.0
@@ -395,9 +398,9 @@ importers:
       micromatch: ^4.0.5
       tslib: ^2.4.0
     dependencies:
+      '@kosko/aggregate-error': link:../aggregate-error
       '@kosko/log': link:../log
       '@kosko/require': link:../require
-      aggregate-error: 3.1.0
       extract-stack: 2.0.0
       js-yaml: 4.1.0
       micromatch: 4.0.5

@@ -1,6 +1,6 @@
 /// <reference types="jest-extended" />
 import { getRejectedValue } from "@kosko/test-utils";
-import AggregateError from "aggregate-error";
+import AggregateError from "@kosko/aggregate-error";
 import assert from "assert";
 import { ResolveError } from "../error";
 import { resolve } from "../resolve";
@@ -258,7 +258,7 @@ test("should throw AggregateError when nested validate throws an error", async (
   ];
   let index = 0;
 
-  for (const e of err) {
+  for (const e of err.errors) {
     assert(e instanceof ResolveError);
     expect(e.message).toEqual("Validation error");
     expect(e.path).toEqual("test");
