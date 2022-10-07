@@ -1,5 +1,6 @@
 export * from "./base";
 export {
+  ComponentInfo,
   GenerateError,
   GenerateErrorOptions,
   ResolveError,

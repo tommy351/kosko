@@ -1,20 +1,35 @@
 import { Config, EnvironmentConfig } from "@kosko/config";
 import { spawn, SpawnError } from "@kosko/exec-utils";
-import { generate, print, PrintFormat } from "@kosko/generate";
+import { generate, GenerateOptions, print, PrintFormat } from "@kosko/generate";
 import { join } from "path";
 import { CLIError } from "../../cli/error";
 import { setupEnv } from "./env";
+import { handleGenerateError } from "./error";
 import { localRequireDefault } from "./require";
 import { BaseGenerateArguments } from "./types";
 
-export interface GenerateOptions {
+async function doGenerate({
+  cwd,
+  ...options
+}: Omit<GenerateOptions, "path"> & { cwd: string }) {
+  try {
+    return await generate({
+      ...options,
+      path: join(cwd, "components")
+    });
+  } catch (err) {
+    throw handleGenerateError(cwd, err);
+  }
+}
+
+export interface WorkerOptions {
   printFormat?: PrintFormat;
   args: BaseGenerateArguments;
   config: Config & Required<EnvironmentConfig>;
   ignoreLoaders?: boolean;
 }
 
-export async function handler(options: GenerateOptions) {
+export async function handler(options: WorkerOptions) {
   const { printFormat, args, config, ignoreLoaders } = options;
 
   if (!ignoreLoaders && config.loaders.length) {
@@ -31,8 +46,8 @@ export async function handler(options: GenerateOptions) {
   }
 
   // Generate manifests
-  const result = await generate({
-    path: join(args.cwd, "components"),
+  const result = await doGenerate({
+    cwd: args.cwd,
     components: config.components,
     extensions: config.extensions,
     validate: args.validate,
@@ -53,7 +68,7 @@ export async function handler(options: GenerateOptions) {
   }
 }
 
-async function runWithLoaders(options: GenerateOptions) {
+async function runWithLoaders(options: WorkerOptions) {
   try {
     await spawn(
       process.execPath,

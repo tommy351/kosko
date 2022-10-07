@@ -1,33 +1,71 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`when bail is not set should print the error 1`] = `
-"[31merror[39m -
-[90mAggregateError
-    at aggregateErrors (<PROJECT_ROOT>/packages/generate/dist/error.js:33:12)
-    at generate (<PROJECT_ROOT>/packages/generate/dist/generate.js:86:43)
-    at async handler (<PROJECT_ROOT>/packages/cli/dist/commands/generate/worker.js:23:20)
-    at async Object.handler (<PROJECT_ROOT>/packages/cli/dist/commands/generate/command.js:79:9)[39m"
-`;
+"[1mcomponents/foo.js[22m - 1 error
 
-exports[`when bail is true should print the error 1`] = `
-"[31merror[39m - Validation error
-[90mResolveError: Validation error
-    Path: <PROJECT_ROOT>/packages/cli/integration/generate-multi-errors/components/foo.js
+  [31m✖ ResolveError: Validation error[39m
     Index: [0]
     Kind: v1/Pod
     Name: foo
-    Cause: Error: data/spec must have required property 'containers', data/spec must be null, data/spec must match exactly one schema in oneOf
-        at validate (<PROJECT_ROOT>/node_modules/.pnpm/@kubernetes-models+validate@2.0.1/node_modules/@kubernetes-models/validate/dist/validate.js:9:21)
-        at Pod.validate (<PROJECT_ROOT>/node_modules/.pnpm/@kubernetes-models+base@3.0.0/node_modules/@kubernetes-models/base/dist/model.js:44:33)
-        at resolve (<PROJECT_ROOT>/packages/generate/dist/resolve.js:134:29)
-        at resolve (<PROJECT_ROOT>/packages/generate/dist/resolve.js:75:42)
-        at generate (<PROJECT_ROOT>/packages/generate/dist/generate.js:70:60)
-        at async handler (<PROJECT_ROOT>/packages/cli/dist/commands/generate/worker.js:23:20)
-        at async Object.handler (<PROJECT_ROOT>/packages/cli/dist/commands/generate/command.js:79:9)
-    at createResolveError (<PROJECT_ROOT>/packages/generate/dist/resolve.js:45:16)
-    at resolve (<PROJECT_ROOT>/packages/generate/dist/resolve.js:137:23)
-    at resolve (<PROJECT_ROOT>/packages/generate/dist/resolve.js:75:42)
-    at generate (<PROJECT_ROOT>/packages/generate/dist/generate.js:70:60)
-    at async handler (<PROJECT_ROOT>/packages/cli/dist/commands/generate/worker.js:23:20)
-    at async Object.handler (<PROJECT_ROOT>/packages/cli/dist/commands/generate/command.js:79:9)[39m"
+    Error: data/spec must have required property 'containers', data/spec must be null, data/spec must match exactly one schema in oneOf
+  [90m    at validate (<PROJECT_ROOT>/node_modules/.pnpm/@kubernetes-models+validate@2.0.1/node_modules/@kubernetes-models/validate/dist/validate.js:9:21)
+      at Pod.validate (<PROJECT_ROOT>/node_modules/.pnpm/@kubernetes-models+base@3.0.0/node_modules/@kubernetes-models/base/dist/model.js:44:33)
+      at resolve (<PROJECT_ROOT>/packages/generate/dist/resolve.js:134:29)
+      at resolve (<PROJECT_ROOT>/packages/generate/dist/resolve.js:75:42)
+      at generate (<PROJECT_ROOT>/packages/generate/dist/generate.js:70:60)
+      at async doGenerate (<PROJECT_ROOT>/packages/cli/dist/commands/generate/worker.js:13:16)
+      at async handler (<PROJECT_ROOT>/packages/cli/dist/commands/generate/worker.js:35:20)
+      at async Object.handler (<PROJECT_ROOT>/packages/cli/dist/commands/generate/command.js:79:9)[39m
+
+[1mcomponents/nginx.js[22m - 2 errors
+
+  [31m✖ ResolveError: Validation error[39m
+    Index: [0]
+    Kind: apps/v1/Deployment
+    Name: nginx
+    Error: data/spec must have required property 'selector', data/spec must be null, data/spec must match exactly one schema in oneOf
+  [90m    at validate (<PROJECT_ROOT>/node_modules/.pnpm/@kubernetes-models+validate@2.0.1/node_modules/@kubernetes-models/validate/dist/validate.js:9:21)
+      at Deployment.validate (<PROJECT_ROOT>/node_modules/.pnpm/@kubernetes-models+base@3.0.0/node_modules/@kubernetes-models/base/dist/model.js:44:33)
+      at resolve (<PROJECT_ROOT>/packages/generate/dist/resolve.js:134:29)
+      at resolve (<PROJECT_ROOT>/packages/generate/dist/resolve.js:75:42)
+      at generate (<PROJECT_ROOT>/packages/generate/dist/generate.js:70:60)
+      at async doGenerate (<PROJECT_ROOT>/packages/cli/dist/commands/generate/worker.js:13:16)
+      at async handler (<PROJECT_ROOT>/packages/cli/dist/commands/generate/worker.js:35:20)
+      at async Object.handler (<PROJECT_ROOT>/packages/cli/dist/commands/generate/command.js:79:9)[39m
+
+  [31m✖ ResolveError: Validation error[39m
+    Index: [1]
+    Kind: v1/Service
+    Name: nginx
+    Error: data/spec/type must be equal to one of the allowed values, data/spec must be null, data/spec must match exactly one schema in oneOf
+  [90m    at validate (<PROJECT_ROOT>/node_modules/.pnpm/@kubernetes-models+validate@2.0.1/node_modules/@kubernetes-models/validate/dist/validate.js:9:21)
+      at Service.validate (<PROJECT_ROOT>/node_modules/.pnpm/@kubernetes-models+base@3.0.0/node_modules/@kubernetes-models/base/dist/model.js:44:33)
+      at resolve (<PROJECT_ROOT>/packages/generate/dist/resolve.js:134:29)
+      at resolve (<PROJECT_ROOT>/packages/generate/dist/resolve.js:75:42)
+      at async generate (<PROJECT_ROOT>/packages/generate/dist/generate.js:70:32)
+      at async doGenerate (<PROJECT_ROOT>/packages/cli/dist/commands/generate/worker.js:13:16)
+      at async handler (<PROJECT_ROOT>/packages/cli/dist/commands/generate/worker.js:35:20)
+      at async Object.handler (<PROJECT_ROOT>/packages/cli/dist/commands/generate/command.js:79:9)[39m
+
+[31merror[39m - Generate failed (Total 3 errors)"
+`;
+
+exports[`when bail is true should print the error 1`] = `
+"[1mcomponents/foo.js[22m - 1 error
+
+  [31m✖ ResolveError: Validation error[39m
+    Index: [0]
+    Kind: v1/Pod
+    Name: foo
+    Error: data/spec must have required property 'containers', data/spec must be null, data/spec must match exactly one schema in oneOf
+  [90m    at validate (<PROJECT_ROOT>/node_modules/.pnpm/@kubernetes-models+validate@2.0.1/node_modules/@kubernetes-models/validate/dist/validate.js:9:21)
+      at Pod.validate (<PROJECT_ROOT>/node_modules/.pnpm/@kubernetes-models+base@3.0.0/node_modules/@kubernetes-models/base/dist/model.js:44:33)
+      at resolve (<PROJECT_ROOT>/packages/generate/dist/resolve.js:134:29)
+      at resolve (<PROJECT_ROOT>/packages/generate/dist/resolve.js:75:42)
+      at generate (<PROJECT_ROOT>/packages/generate/dist/generate.js:70:60)
+      at async doGenerate (<PROJECT_ROOT>/packages/cli/dist/commands/generate/worker.js:13:16)
+      at async handler (<PROJECT_ROOT>/packages/cli/dist/commands/generate/worker.js:35:20)
+      at async Object.handler (<PROJECT_ROOT>/packages/cli/dist/commands/generate/command.js:79:9)[39m
+
+[31merror[39m - Generate failed (Total 1 error)"
 `;

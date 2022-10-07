@@ -6,7 +6,7 @@ import {
 import { Result, Manifest } from "./base";
 import logger, { LogLevel } from "@kosko/log";
 import { resolve } from "./resolve";
-import { aggregateErrors, GenerateError, toError } from "./error";
+import { aggregateErrors, GenerateError } from "./error";
 import { glob } from "./glob";
 
 export interface GenerateOptions {
@@ -49,7 +49,7 @@ async function resolveComponentPath(
   } catch (err) {
     throw new GenerateError("Module path resolve failed", {
       path,
-      cause: toError(err)
+      cause: err
     });
   }
 }
@@ -62,7 +62,7 @@ async function getComponentValue(path: string): Promise<unknown> {
   } catch (err) {
     throw new GenerateError("Component value resolve failed", {
       path,
-      cause: toError(err)
+      cause: err
     });
   }
 }
@@ -102,7 +102,7 @@ export async function generate(options: GenerateOptions): Promise<Result> {
 
   const extensionsWithDot = extensions.map((ext) => "." + ext);
   const manifests: Manifest[] = [];
-  const errors: Error[] = [];
+  const errors: unknown[] = [];
 
   for await (const file of glob({
     path: options.path,
@@ -129,7 +129,7 @@ export async function generate(options: GenerateOptions): Promise<Result> {
         throw err;
       }
 
-      errors.push(toError(err));
+      errors.push(err);
     }
   }
 

@@ -12,6 +12,13 @@ interface Component {
   };
 }
 
+export interface ComponentInfo {
+  apiVersion: string;
+  kind: string;
+  name: string;
+  namespace?: string;
+}
+
 function isComponent(value: unknown): value is Component {
   if (value == null || typeof value !== "object") return false;
 
@@ -24,30 +31,7 @@ function isComponent(value: unknown): value is Component {
   );
 }
 
-export interface ResolveErrorOptions {
-  path?: string;
-  index?: number[];
-  cause?: Error;
-  value?: unknown;
-}
-
-export function toError(value: unknown): Error {
-  if (value instanceof Error) {
-    return value;
-  }
-
-  if (typeof value === "string") {
-    return new Error(value);
-  }
-
-  if (typeof value === "object" && value != null) {
-    return Object.assign(new Error((value as any).message), value);
-  }
-
-  return new Error();
-}
-
-export function aggregateErrors(errors: Error[]) {
+export function aggregateErrors(errors: unknown[]) {
   if (errors.length === 1) {
     return errors[0];
   }
@@ -55,43 +39,59 @@ export function aggregateErrors(errors: Error[]) {
   return new AggregateError(errors);
 }
 
-function decorateErrorStack(
-  err: Error,
-  values: Record<string, string>
-): string {
+function decorateErrorStack(err: Error, values: Record<string, string>) {
   const origStack = extractStack(err.stack);
-  let stack = `${err.name}: ${err.message}`;
+  err.stack = `${err.name}: ${err.message}`;
 
   for (const [key, value] of Object.entries(values)) {
-    stack += `\n${STACK_INDENT}${key}: ${value}`;
+    err.stack += `\n${STACK_INDENT}${key}: ${value}`;
   }
 
-  if (origStack) stack += "\n" + origStack;
-
-  return stack;
+  if (origStack) err.stack += "\n" + origStack;
 }
 
-function generateCauseMessage(cause: Error): string {
-  const causeStack = extractStack(cause);
-  let msg = `${cause.name}: ${cause.message}`;
+function generateCauseMessage(cause: unknown) {
+  if (typeof cause === "string") return cause;
 
-  if (causeStack) {
-    msg +=
-      "\n" +
-      causeStack
-        .split("\n")
-        .map((line) => STACK_INDENT + line)
-        .join("\n");
+  if (typeof cause === "object" && cause != null) {
+    const { name, message, stack } = cause as any;
+
+    if (typeof name !== "string" || typeof message !== "string") {
+      return;
+    }
+
+    let result = `${name}: ${message}`;
+
+    if (typeof stack === "string") {
+      const extracted = extractStack(stack);
+
+      if (extracted) {
+        result +=
+          "\n" +
+          extracted
+            .split("\n")
+            .map((line) => STACK_INDENT + line)
+            .join("\n");
+      }
+    }
+
+    return result;
   }
+}
 
-  return msg;
+export interface ResolveErrorOptions {
+  path?: string;
+  index?: number[];
+  cause?: unknown;
+  value?: unknown;
 }
 
 export class ResolveError extends Error {
   public readonly path?: string;
   public readonly index?: number[];
-  public readonly cause?: Error;
+  public readonly cause?: unknown;
   public readonly value?: unknown;
+  public readonly component?: ComponentInfo;
 
   public constructor(message: string, options: ResolveErrorOptions = {}) {
     super(message);
@@ -100,17 +100,29 @@ export class ResolveError extends Error {
     this.index = options.index;
     this.cause = options.cause;
     this.value = options.value;
-    this.stack = decorateErrorStack(this, {
+
+    if (isComponent(this.value)) {
+      this.component = {
+        apiVersion: this.value.apiVersion,
+        kind: this.value.kind,
+        name: this.value.metadata.name,
+        namespace: this.value.metadata.namespace
+      };
+    }
+
+    const cause = generateCauseMessage(this.cause);
+
+    decorateErrorStack(this, {
       ...(this.path && { Path: this.path }),
       ...(this.index?.length && { Index: `[${this.index.join(", ")}]` }),
-      ...(isComponent(this.value) && {
-        Kind: `${this.value.apiVersion}/${this.value.kind}`,
-        ...(typeof this.value.metadata.namespace === "string" && {
-          Namespace: this.value.metadata.namespace
+      ...(this.component && {
+        Kind: `${this.component.apiVersion}/${this.component.kind}`,
+        ...(this.component.namespace && {
+          Namespace: this.component.namespace
         }),
-        Name: this.value.metadata.name
+        Name: this.component.name
       }),
-      ...(this.cause && { Cause: generateCauseMessage(this.cause) })
+      ...(cause && { Cause: cause })
     });
   }
 }
@@ -119,21 +131,24 @@ ResolveError.prototype.name = "ResolveError";
 
 export interface GenerateErrorOptions {
   path?: string;
-  cause?: Error;
+  cause?: unknown;
 }
 
 export class GenerateError extends Error {
   public readonly path?: string;
-  public readonly cause?: Error;
+  public readonly cause?: unknown;
 
   constructor(message: string, options: GenerateErrorOptions = {}) {
     super(message);
 
     this.path = options.path;
     this.cause = options.cause;
-    this.stack = decorateErrorStack(this, {
+
+    const cause = generateCauseMessage(this.cause);
+
+    decorateErrorStack(this, {
       ...(this.path && { Path: this.path }),
-      ...(this.cause && { Cause: generateCauseMessage(this.cause) })
+      ...(cause && { Cause: cause })
     });
   }
 }

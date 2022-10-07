@@ -1,6 +1,6 @@
 import { Manifest } from "./base";
 import logger, { LogLevel } from "@kosko/log";
-import { aggregateErrors, ResolveError, toError } from "./error";
+import { aggregateErrors, ResolveError } from "./error";
 
 interface Validator {
   validate(): void | Promise<void>;
@@ -86,7 +86,7 @@ export async function resolve(
       path,
       index,
       value,
-      cause: toError(err)
+      cause: err
     });
   }
 
@@ -108,7 +108,7 @@ export async function resolve(
 
   if (isIterable(value)) {
     const manifests: Manifest[] = [];
-    const errors: Error[] = [];
+    const errors: unknown[] = [];
     let i = 0;
 
     try {
@@ -127,7 +127,7 @@ export async function resolve(
             throw err;
           }
 
-          errors.push(toError(err));
+          errors.push(err);
         }
       }
     } catch (err) {
@@ -143,7 +143,7 @@ export async function resolve(
 
   if (isAsyncIterable(value)) {
     const manifests: Manifest[] = [];
-    const errors: Error[] = [];
+    const errors: unknown[] = [];
     let i = 0;
 
     try {
@@ -162,7 +162,7 @@ export async function resolve(
             throw err;
           }
 
-          errors.push(toError(err));
+          errors.push(err);
         }
       }
     } catch (err) {

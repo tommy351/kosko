@@ -1,6 +1,6 @@
 /// <reference types="jest-extended"/>
 import extractStack from "extract-stack";
-import { ResolveError, toError } from "../error";
+import { ResolveError } from "../error";
 
 describe("when only message is given", () => {
   const err = new ResolveError("test");
@@ -145,7 +145,9 @@ ${extractStack(err.stack)}`);
 });
 
 describe("when cause is given", () => {
-  const cause = toError({ name: "TestError", message: "test message" });
+  const cause = new Error("test message");
+  cause.name = "TestError";
+
   const err = new ResolveError("test", { cause });
 
   test("should append cause to stack", () => {
