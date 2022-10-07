@@ -156,10 +156,10 @@ export function handleGenerateError(cwd: string, error: unknown) {
 
   function prettifyPath(path: string): string {
     if (path.startsWith(cwd)) {
-      return path.substring(cwd.length).replace(/^[/\\]+/, "");
+      path = path.substring(cwd.length).replace(/^[/\\]+/, "");
     }
 
-    return path;
+    return path.replace(/\\/g, "/");
   }
 
   for (const err of allErrors) {
