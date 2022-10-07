@@ -1,4 +1,5 @@
 import yaml from "js-yaml";
+import stringify from "fast-safe-stringify";
 import { Result } from "./base";
 
 export interface Writer {
@@ -23,7 +24,7 @@ function stringifyYAML(data: any): string {
 }
 
 function stringifyJSON(data: any): string {
-  return JSON.stringify(data, null, "  ");
+  return stringify(data, undefined, "  ");
 }
 
 const printers: PrinterMap<any> = {

@@ -4,6 +4,7 @@ import cleanStack from "clean-stack";
 import extractStack from "extract-stack";
 import pc from "picocolors";
 import { CLIError } from "../../cli/error";
+import stringify from "fast-safe-stringify";
 
 function flattenError(err: unknown): unknown[] {
   if (err instanceof AggregateError) {
@@ -43,6 +44,45 @@ function toErrorLike(err: unknown): ErrorLike | undefined {
   }
 }
 
+// https://github.com/ajv-validator/ajv/blob/v8.11.0/lib/types/index.ts#L85
+interface AjvErrorObject {
+  instancePath: string;
+  message?: string;
+  params: any;
+  keyword: "type" | "enum" | "oneOf";
+}
+
+// https://github.com/ajv-validator/ajv/blob/v8.11.0/lib/runtime/validation_error.ts
+interface AjvValidationErrorLike {
+  errors: readonly AjvErrorObject[];
+}
+
+function isAjvValidationErrorLike(
+  value: unknown
+): value is AjvValidationErrorLike {
+  return (
+    typeof value === "object" &&
+    value != null &&
+    (value as any).ajv === true &&
+    (value as any).validation === true &&
+    Array.isArray((value as any).errors)
+  );
+}
+
+function stringifyAjvErrorObject(err: AjvErrorObject) {
+  let msg = err.instancePath;
+
+  if (err.message) {
+    msg += ` ${err.message}`;
+  }
+
+  if (err.keyword === "enum" && Array.isArray(err.params.allowedValues)) {
+    msg += `: ${stringify(err.params.allowedValues)}`;
+  }
+
+  return msg;
+}
+
 function getFormattedErrorTitle(err: ErrorLike) {
   return "  " + pc.red(`✖ ${err.name}: ${err.message}`);
 }
@@ -61,6 +101,15 @@ function getFormattedErrorStack(err: ErrorLike, extraIndent = "") {
 }
 
 function stringifyCause(cause: unknown) {
+  if (isAjvValidationErrorLike(cause)) {
+    return (
+      "\n" +
+      cause.errors
+        .map((err) => `      ${stringifyAjvErrorObject(err)}`)
+        .join("\n")
+    );
+  }
+
   const err = toErrorLike(cause);
   if (!err) return;
 

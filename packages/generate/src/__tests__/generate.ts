@@ -5,6 +5,7 @@ import { dirname, join } from "path";
 import { GenerateError, ResolveError } from "../error";
 import { makeTempDir, TempDir } from "@kosko/test-utils";
 import AggregateError from "@kosko/aggregate-error";
+import stringify from "fast-safe-stringify";
 
 jest.mock("@kosko/require", () => {
   const mod = jest.requireActual("@kosko/require");
@@ -192,7 +193,7 @@ describe("multiple files", () => {
     await createTempFiles({
       "foo.js": "module.exports = {foo: 'bar'}",
       "bar.js": "module.exports = {}",
-      "foo.json": JSON.stringify({ foo: "bar" })
+      "foo.json": stringify({ foo: "bar" })
     });
   });
 

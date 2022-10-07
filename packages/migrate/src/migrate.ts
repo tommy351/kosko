@@ -1,5 +1,6 @@
 import camelcase from "camelcase";
 import { Manifest, loadString, getResourceModule } from "@kosko/yaml";
+import stringify from "fast-safe-stringify";
 
 export type { Manifest };
 
@@ -15,7 +16,7 @@ interface Import {
 }
 
 function jsonStringify(data: unknown): string {
-  return JSON.stringify(data, null, "  ");
+  return stringify(data, undefined, "  ");
 }
 
 async function generateComponent(manifest: Manifest): Promise<Component> {

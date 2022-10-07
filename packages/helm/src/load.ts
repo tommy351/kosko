@@ -7,11 +7,12 @@ import {
   stringArg,
   stringArrayArg
 } from "@kosko/exec-utils";
+import stringify from "fast-safe-stringify";
 
 async function writeValues(values: any) {
   const file = await tmp.file();
 
-  await fs.writeFile(file.path, JSON.stringify(values));
+  await fs.writeFile(file.path, stringify(values));
 
   return file;
 }

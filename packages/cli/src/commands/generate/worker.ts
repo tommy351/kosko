@@ -2,6 +2,7 @@ import { Config, EnvironmentConfig } from "@kosko/config";
 import { spawn, SpawnError } from "@kosko/exec-utils";
 import { generate, GenerateOptions, print, PrintFormat } from "@kosko/generate";
 import { join } from "path";
+import stringify from "fast-safe-stringify";
 import { CLIError } from "../../cli/error";
 import { setupEnv } from "./env";
 import { handleGenerateError } from "./error";
@@ -85,7 +86,7 @@ async function runWithLoaders(options: WorkerOptions) {
       ],
       {
         stdio: ["pipe", "inherit", "inherit"],
-        input: JSON.stringify(options)
+        input: stringify(options)
       }
     );
   } catch (err) {

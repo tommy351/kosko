@@ -29,6 +29,7 @@
   "dependencies": {
     "@kosko/yaml": "workspace:^2.0.1",
     "camelcase": "^6.2.1",
+    "fast-safe-stringify": "^2.1.1",
     "tslib": "^2.4.0"
   },
   "devDependencies": {

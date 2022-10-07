@@ -4,6 +4,7 @@ import fs from "fs/promises";
 import { join, posix } from "path";
 import glob from "fast-glob";
 import { spawn } from "@kosko/exec-utils";
+import stringify from "fast-safe-stringify";
 import {
   makeTempDir,
   makeTempFile,
@@ -73,7 +74,7 @@ describe("when the target exists and is not empty", () => {
 
     await fs.writeFile(
       packageJsonPath,
-      JSON.stringify(
+      stringify(
         {
           name: "foo",
           version: "1.2.3",
@@ -81,7 +82,7 @@ describe("when the target exists and is not empty", () => {
             debug: "3.2.1"
           }
         },
-        null,
+        undefined,
         "  "
       )
     );

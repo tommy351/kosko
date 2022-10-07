@@ -4,6 +4,7 @@ import fetch, { RequestInfo, RequestInit } from "node-fetch";
 import { getResourceModule, ResourceKind } from "./module";
 import logger, { LogLevel } from "@kosko/log";
 import { importPath } from "@kosko/require";
+import stringify from "fast-safe-stringify";
 
 export interface Manifest extends ResourceKind {
   [key: string]: any;
@@ -63,13 +64,11 @@ export async function loadString(
 
   for (const entry of input) {
     if (!isRecord(entry)) {
-      throw new Error(`The value must be an object: ${JSON.stringify(entry)}`);
+      throw new Error(`The value must be an object: ${stringify(entry)}`);
     }
 
     if (!isManifest(entry)) {
-      throw new Error(
-        `apiVersion and kind are required: ${JSON.stringify(entry)}`
-      );
+      throw new Error(`apiVersion and kind are required: ${stringify(entry)}`);
     }
 
     const Constructor = await getConstructor(entry);
