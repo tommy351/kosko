@@ -14,7 +14,7 @@
     "require": "./dist/index.js"
   },
   "dependencies": {
-    "@kosko/test-utils": "workspace:^0.0.0",
+    "@kosko/test-utils": "workspace:^",
     "escape-string-regexp": "^4.0.0",
     "tslib": "^2.4.0"
   }

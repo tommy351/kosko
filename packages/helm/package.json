@@ -30,14 +30,14 @@
     "node": ">=14"
   },
   "dependencies": {
-    "@kosko/exec-utils": "workspace:^0.2.0",
-    "@kosko/yaml": "workspace:^2.0.1",
+    "@kosko/exec-utils": "workspace:^",
+    "@kosko/yaml": "workspace:^",
     "fast-safe-stringify": "^2.1.1",
     "tmp-promise": "^3.0.3",
     "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@kosko/jest-preset": "workspace:^0.0.0"
+    "@kosko/jest-preset": "workspace:^"
   },
   "jest": {
     "preset": "@kosko/jest-preset"

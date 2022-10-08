@@ -27,14 +27,14 @@
     "node": ">=14"
   },
   "dependencies": {
-    "@kosko/log": "workspace:^0.1.0",
+    "@kosko/log": "workspace:^",
     "exit": "^0.1.2",
     "tslib": "^2.4.0",
     "yargs": "^17.5.1"
   },
   "devDependencies": {
-    "@kosko/test-utils": "workspace:^0.0.0",
-    "@kosko/jest-preset": "workspace:^0.0.0",
+    "@kosko/test-utils": "workspace:^",
+    "@kosko/jest-preset": "workspace:^",
     "@types/exit": "^0.1.31",
     "@types/yargs": "^17.0.12",
     "execa": "^5.1.1"
