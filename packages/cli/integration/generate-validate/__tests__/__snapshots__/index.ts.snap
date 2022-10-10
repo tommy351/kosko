@@ -16,8 +16,6 @@ exports[`when validate is not set should print the error 1`] = `
     Name: foo
 
       /spec must have required property 'containers'
-      /spec must be null
-      /spec must match exactly one schema in oneOf
 
 [31merror[39m - Generate failed (Total 1 error)"
 `;
@@ -30,8 +28,6 @@ exports[`when validate is true should print the error 1`] = `
     Name: foo
 
       /spec must have required property 'containers'
-      /spec must be null
-      /spec must match exactly one schema in oneOf
 
 [31merror[39m - Generate failed (Total 1 error)"
 `;

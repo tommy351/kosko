@@ -5,7 +5,7 @@
   "dependencies": {
     "@kosko/env": "workspace:^",
     "kosko": "workspace:^",
-    "kubernetes-models": "^3.1.0"
+    "kubernetes-models": "^4.1.0"
   },
   "devDependencies": {
     "@types/node": "^18.7.18",

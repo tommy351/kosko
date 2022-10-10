@@ -13,7 +13,8 @@ const service = new Service({
     name: "nginx"
   },
   spec: {
-    type: "Foo"
+    type: "Foo",
+    ports: [{ port: "x" }]
   }
 });
 

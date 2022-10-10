@@ -13,17 +13,14 @@ components/nginx.js - 2 errors
     Name: nginx
 
       /spec/replicas must be integer
-      /spec must be null
-      /spec must match exactly one schema in oneOf
 
   ✖ ResolveError: Validation error
     Index: [1]
     Kind: v1/Service
     Name: nginx
 
+      /spec/ports/0/port must be integer
       /spec/type must be equal to one of the allowed values: ["ClusterIP","ExternalName","LoadBalancer","NodePort"]
-      /spec must be null
-      /spec must match exactly one schema in oneOf
 
 error - Generate failed (Total 2 errors)
 ```

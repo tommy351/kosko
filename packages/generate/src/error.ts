@@ -56,11 +56,11 @@ function generateCauseMessage(cause: unknown) {
   if (typeof cause === "object" && cause != null) {
     const { name, message, stack } = cause as any;
 
-    if (typeof name !== "string" || typeof message !== "string") {
+    if (typeof message !== "string") {
       return;
     }
 
-    let result = `${name}: ${message}`;
+    let result = `${(typeof name === "string" && name) || "Error"}: ${message}`;
 
     if (typeof stack === "string") {
       const extracted = extractStack(stack);

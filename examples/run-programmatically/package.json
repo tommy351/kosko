@@ -6,6 +6,6 @@
     "@kosko/env": "workspace:^",
     "@kosko/generate": "workspace:^",
     "kosko": "workspace:^",
-    "kubernetes-models": "^3.1.0"
+    "kubernetes-models": "^4.1.0"
   }
 }

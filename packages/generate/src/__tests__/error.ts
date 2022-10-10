@@ -144,7 +144,7 @@ ${extractStack(err.stack)}`);
   });
 });
 
-describe("when cause is given", () => {
+describe("when cause is an Error instance", () => {
   const cause = new Error("test message");
   cause.name = "TestError";
 
@@ -157,6 +157,50 @@ ${extractStack(cause.stack)
   .split("\n")
   .map((line) => `    ${line}`)
   .join("\n")}
+${extractStack(err.stack)}`);
+  });
+});
+
+describe("when cause is an object with name and message", () => {
+  const cause = { name: "TestError", message: "test err" };
+
+  const err = new ResolveError("test", { cause });
+
+  test("should append cause to stack", () => {
+    expect(err.stack).toEqual(`ResolveError: test
+    Cause: TestError: test err
+${extractStack(err.stack)}`);
+  });
+});
+
+describe("when cause is an object with message only", () => {
+  const cause = { message: "test err" };
+
+  const err = new ResolveError("test", { cause });
+
+  test("should append cause to stack", () => {
+    expect(err.stack).toEqual(`ResolveError: test
+    Cause: Error: test err
+${extractStack(err.stack)}`);
+  });
+});
+
+describe("when cause is an empty object", () => {
+  const cause = {};
+
+  const err = new ResolveError("test", { cause });
+
+  test("should not append cause to stack", () => {
+    expect(err.stack).toEqual(`ResolveError: test
+${extractStack(err.stack)}`);
+  });
+});
+
+describe("when cause is null", () => {
+  const err = new ResolveError("test", { cause: null });
+
+  test("should not append cause to stack", () => {
+    expect(err.stack).toEqual(`ResolveError: test
 ${extractStack(err.stack)}`);
   });
 });

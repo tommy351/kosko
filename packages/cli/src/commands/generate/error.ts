@@ -34,8 +34,12 @@ function toErrorLike(err: unknown): ErrorLike | undefined {
   if (typeof err === "object" && err != null) {
     const { name, message, stack } = err as any;
 
-    if (typeof name === "string" && typeof message === "string") {
-      return { name, message, ...(typeof stack === "string" && { stack }) };
+    if (typeof message === "string") {
+      return {
+        name: (typeof name === "string" && name) || "Error",
+        message,
+        ...(typeof stack === "string" && { stack })
+      };
     }
   }
 
@@ -88,6 +92,8 @@ function getFormattedErrorTitle(err: ErrorLike) {
 }
 
 function getFormattedErrorStack(err: ErrorLike, extraIndent = "") {
+  if (typeof err.stack !== "string") return;
+
   let stack = cleanStack(extractStack(err));
 
   if (extraIndent) {
@@ -185,9 +191,10 @@ export function handleGenerateError(cwd: string, error: unknown) {
     print(pc.bold(`Other ${getErrorCount(unknownErrors.length)}\n`));
 
     for (const err of unknownErrors) {
-      print(
-        getFormattedErrorTitle(err) + "\n" + getFormattedErrorStack(err) + "\n"
-      );
+      const stack = getFormattedErrorStack(err);
+
+      print(`${getFormattedErrorTitle(err)}\n`);
+      if (stack) print(`${stack}\n`);
     }
   }
 

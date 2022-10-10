@@ -59,12 +59,14 @@
     "@kosko/env": "workspace:^",
     "@kosko/jest-preset": "workspace:^",
     "@kosko/test-utils": "workspace:^",
+    "@types/bl": "^5.0.2",
     "@types/exit": "^0.1.31",
     "@types/jsonpath": "^0.2.0",
     "@types/yargs": "^17.0.12",
+    "bl": "^5.0.0",
     "execa": "^5.1.1",
     "fast-glob": "^3.2.12",
-    "kubernetes-models": "^3.1.0",
+    "kubernetes-models": "^4.1.0",
     "pkg-dir": "^5.0.0"
   },
   "jest": {
