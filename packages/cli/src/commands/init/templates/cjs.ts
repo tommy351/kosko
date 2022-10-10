@@ -9,17 +9,22 @@ const TEMPLATE_FILES = [
   "environments/dev/nginx"
 ];
 
+export const baseDependencies = ["@kosko/env", "kosko", "kubernetes-models"];
+
 const cjsTemplate: Template = async (ctx) => {
-  return [
-    await generatePackageJson(ctx),
-    generateKoskoConfig(),
-    await generateReadme(),
-    ...(await Promise.all(
-      TEMPLATE_FILES.map((file) =>
-        generateFromTemplateFile(`${file}.js`, `cjs/${file}.js`)
-      )
-    ))
-  ];
+  return {
+    dependencies: baseDependencies,
+    files: [
+      await generatePackageJson(ctx),
+      generateKoskoConfig(),
+      await generateReadme(),
+      ...(await Promise.all(
+        TEMPLATE_FILES.map((file) =>
+          generateFromTemplateFile(`${file}.js`, `cjs/${file}.js`)
+        )
+      ))
+    ]
+  };
 };
 
 export default cjsTemplate;

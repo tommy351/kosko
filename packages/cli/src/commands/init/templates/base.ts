@@ -7,4 +7,10 @@ export interface TemplateContext {
   path: string;
 }
 
-export type Template = (ctx: TemplateContext) => Promise<File[]>;
+export interface TemplateResult {
+  dependencies?: string[];
+  devDependencies?: string[];
+  files: File[];
+}
+
+export type Template = (ctx: TemplateContext) => Promise<TemplateResult>;
