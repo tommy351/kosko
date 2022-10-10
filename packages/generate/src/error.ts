@@ -1,3 +1,8 @@
+import AggregateError from "@kosko/aggregate-error";
+import extractStack from "extract-stack";
+
+const STACK_INDENT = "    ";
+
 interface Component {
   apiVersion: string;
   kind: string;
@@ -5,6 +10,13 @@ interface Component {
     name: string;
     namespace?: string;
   };
+}
+
+export interface ComponentInfo {
+  apiVersion: string;
+  kind: string;
+  name: string;
+  namespace?: string;
 }
 
 function isComponent(value: unknown): value is Component {
@@ -19,72 +31,126 @@ function isComponent(value: unknown): value is Component {
   );
 }
 
-export interface ValidationErrorOptions {
-  path: string;
-  index: number[];
-  cause: Error;
-  component: unknown;
-}
-
-function generateAdditionalInfo(
-  { path, index, component }: ValidationErrorOptions,
-  { separator }: { separator: string }
-) {
-  const parts: string[] = [
-    `path: ${JSON.stringify(path)}`,
-    `index: [${index.join(", ")}]`
-  ];
-
-  if (isComponent(component)) {
-    const {
-      apiVersion,
-      kind,
-      metadata: { name, namespace }
-    } = component;
-
-    parts.push(`kind: ${JSON.stringify(`${apiVersion}/${kind}`)}`);
-
-    if (typeof namespace === "string" && namespace) {
-      parts.push(`namespace: ${JSON.stringify(namespace)}`);
-    }
-
-    parts.push(`name: ${JSON.stringify(name)}`);
+export function aggregateErrors(errors: unknown[]) {
+  if (errors.length === 1) {
+    return errors[0];
   }
 
-  return parts.join(separator);
+  return new AggregateError(errors);
 }
 
-export class ValidationError extends Error {
-  public readonly path: string;
-  public readonly index: number[];
-  public readonly cause: Error;
-  public readonly component: unknown;
+function decorateErrorStack(err: Error, values: Record<string, string>) {
+  const origStack = extractStack(err.stack);
+  err.stack = `${err.name}: ${err.message}`;
 
-  public constructor(options: ValidationErrorOptions) {
-    super(
-      `${options.cause.message} (${generateAdditionalInfo(options, {
-        separator: ", "
-      })})`
-    );
+  for (const [key, value] of Object.entries(values)) {
+    err.stack += `\n${STACK_INDENT}${key}: ${value}`;
+  }
+
+  if (origStack) err.stack += "\n" + origStack;
+}
+
+function generateCauseMessage(cause: unknown) {
+  if (typeof cause === "string") return cause;
+
+  if (typeof cause === "object" && cause != null) {
+    const { name, message, stack } = cause as any;
+
+    if (typeof message !== "string") {
+      return;
+    }
+
+    let result = `${(typeof name === "string" && name) || "Error"}: ${message}`;
+
+    if (typeof stack === "string") {
+      const extracted = extractStack(stack);
+
+      if (extracted) {
+        result +=
+          "\n" +
+          extracted
+            .split("\n")
+            .map((line) => STACK_INDENT + line)
+            .join("\n");
+      }
+    }
+
+    return result;
+  }
+}
+
+export interface ResolveErrorOptions {
+  path?: string;
+  index?: number[];
+  cause?: unknown;
+  value?: unknown;
+}
+
+export class ResolveError extends Error {
+  public readonly path?: string;
+  public readonly index?: number[];
+  public readonly cause?: unknown;
+  public readonly value?: unknown;
+  public readonly component?: ComponentInfo;
+
+  public constructor(message: string, options: ResolveErrorOptions = {}) {
+    super(message);
 
     this.path = options.path;
     this.index = options.index;
     this.cause = options.cause;
-    this.component = options.component;
+    this.value = options.value;
 
-    // Regular expression is from: https://github.com/sindresorhus/extract-stack
-    const stack = this.cause.stack || this.stack;
-    if (!stack) return;
+    if (isComponent(this.value)) {
+      this.component = {
+        apiVersion: this.value.apiVersion,
+        kind: this.value.kind,
+        name: this.value.metadata.name,
+        namespace: this.value.metadata.namespace
+      };
+    }
 
-    const pos = stack.search(/(?:\n {4}at .*)+/);
-    const separator = "\n- ";
+    const cause = generateCauseMessage(this.cause);
 
-    this.stack = `${this.name}: ${
-      this.cause.message
-    }${separator}${generateAdditionalInfo(options, { separator })}${
-      ~pos ? stack.substring(pos) : "\n" + stack
-    }`;
+    decorateErrorStack(this, {
+      ...(this.path && { Path: this.path }),
+      ...(this.index?.length && { Index: `[${this.index.join(", ")}]` }),
+      ...(this.component && {
+        Kind: `${this.component.apiVersion}/${this.component.kind}`,
+        ...(this.component.namespace && {
+          Namespace: this.component.namespace
+        }),
+        Name: this.component.name
+      }),
+      ...(cause && { Cause: cause })
+    });
   }
 }
 
-ValidationError.prototype.name = "ValidationError";
+ResolveError.prototype.name = "ResolveError";
+
+export interface GenerateErrorOptions {
+  path?: string;
+  cause?: unknown;
+}
+
+export class GenerateError extends Error {
+  public readonly path?: string;
+  public readonly cause?: unknown;
+
+  constructor(message: string, options: GenerateErrorOptions = {}) {
+    super(message);
+
+    this.path = options.path;
+    this.cause = options.cause;
+
+    const cause = generateCauseMessage(this.cause);
+
+    decorateErrorStack(this, {
+      ...(this.path && { Path: this.path }),
+      ...(cause && { Cause: cause })
+    });
+  }
+}
+
+GenerateError.prototype.name = "GenerateError";

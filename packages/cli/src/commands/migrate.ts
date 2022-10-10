@@ -6,7 +6,7 @@ import { Command, RootArguments } from "../cli/command";
 import { print } from "../cli/print";
 import logger, { LogLevel } from "@kosko/log";
 
-function concatFiles(arr: ReadonlyArray<string>): string {
+function concatFiles(arr: readonly string[]): string {
   if (!arr.length) return "";
   let output = "";
 
@@ -34,10 +34,7 @@ async function readFilesInDir(dir: string): Promise<string> {
   return concatFiles(contents);
 }
 
-function readFiles(
-  cwd: string,
-  files: ReadonlyArray<string>
-): Promise<ReadonlyArray<string>> {
+function readFiles(cwd: string, files: readonly string[]): Promise<string[]> {
   return Promise.all(
     files.map(async (file) => {
       if (file === "-") {

@@ -98,6 +98,18 @@ export function parseSetOptions(arg: unknown): SetOption[] {
  * @internal
  */
 export function createCLIEnvReducer(setOptions: SetOption[]): Reducer {
+  // Try to parse and see if the JSON path is invalid
+  for (const opt of setOptions) {
+    try {
+      jp.parse(opt.key);
+    } catch (err: any) {
+      throw new CLIError(err.message, {
+        code: 1,
+        output: `Invalid JSONPath expression "${opt.key}": ${err.message}`
+      });
+    }
+  }
+
   // reorder arguments to ensure that global overrides will be applied
   // before the component ones
   const argsOrdered = setOptions.sort((a, b) =>
@@ -111,14 +123,7 @@ export function createCLIEnvReducer(setOptions: SetOption[]): Reducer {
         const isGlobalVariable = !variable.componentName;
 
         if (isGlobalVariable || variable.componentName === componentName) {
-          try {
-            jp.apply(target, "$." + variable.key, () => variable.value);
-          } catch (e: any) {
-            throw new CLIError(e.message, {
-              code: 1,
-              output: `Failed to override key "${variable.key}". ${e.message}`
-            });
-          }
+          jp.apply(target, "$." + variable.key, () => variable.value);
         }
       }
 

@@ -31,11 +31,11 @@
     "node": ">=14"
   },
   "dependencies": {
-    "@kosko/template": "workspace:^2.0.1",
+    "@kosko/template": "workspace:^",
     "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@kosko/jest-preset": "workspace:^0.0.0"
+    "@kosko/jest-preset": "workspace:^"
   },
   "jest": {
     "preset": "@kosko/jest-preset"

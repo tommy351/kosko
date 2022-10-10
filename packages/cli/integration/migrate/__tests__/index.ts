@@ -1,5 +1,5 @@
 import execa from "execa";
-import { runCLI } from "@kosko/integration-test-utils";
+import { runCLI } from "@kosko/test-utils";
 import { join } from "path";
 import fs from "fs/promises";
 

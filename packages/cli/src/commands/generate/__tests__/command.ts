@@ -4,34 +4,33 @@ import { Environment } from "@kosko/env";
 import { generate, print, PrintFormat } from "@kosko/generate";
 import { requireDefault } from "@kosko/require";
 import assert from "assert";
-import fs from "fs/promises";
-import { dirname, join } from "path";
+import { mkdir, readFile, writeFile } from "fs/promises";
+import { join } from "path";
 import pkgDir from "pkg-dir";
-import tempDir from "temp-dir";
-import tmp from "tmp-promise";
 import { generateCmd } from "../command";
 import { GenerateArguments } from "../types";
+import { TempDir, makeTempDir, installPackage } from "@kosko/test-utils";
 
 jest.mock("@kosko/generate");
 jest.mock("@kosko/log");
 
 const mockedGenerate = jest.mocked(generate);
 
-let tmpDir: tmp.DirectoryResult;
+let tmpDir: TempDir;
 let env: Environment;
 
 async function createFakeModule(id: string): Promise<void> {
   const dir = join(tmpDir.path, "node_modules", id);
-  await fs.mkdir(dir, { recursive: true });
-  await fs.writeFile(
+  await mkdir(dir, { recursive: true });
+  await writeFile(
     join(dir, "index.js"),
     `require('fs').appendFileSync(__dirname + '/../../fakeModules', '${id},');`
   );
 }
 
-async function getLoadedFakeModules(): Promise<ReadonlyArray<string>> {
+async function getLoadedFakeModules(): Promise<string[]> {
   try {
-    const content = await fs.readFile(join(tmpDir.path, "fakeModules"), "utf8");
+    const content = await readFile(join(tmpDir.path, "fakeModules"), "utf8");
     return content.split(",").filter(Boolean);
   } catch (err: any) {
     if (err.code === "ENOENT") return [];
@@ -61,7 +60,7 @@ async function writeConfig(path: string, config: Config) {
     )
   ];
 
-  await fs.writeFile(path, toml.stringify(config as toml.JsonMap));
+  await writeFile(path, toml.stringify(config as toml.JsonMap));
   await Promise.all(requires.map((id) => createFakeModule(id)));
 }
 
@@ -73,16 +72,11 @@ beforeEach(async () => {
   const root = await pkgDir();
   assert(root);
 
-  tmpDir = await tmp.dir({ tmpdir: tempDir, unsafeCleanup: true });
+  tmpDir = await makeTempDir();
 
   // Install @kosko/env in the temp folder
-  const envSrc = join(root, "packages", "env");
-  const envDest = join(tmpDir.path, "node_modules", "@kosko", "env");
-
-  await fs.mkdir(dirname(envDest), { recursive: true });
-  await fs.symlink(envSrc, envDest, "dir");
-
-  env = requireDefault(envDest);
+  const envPath = await installPackage(tmpDir.path, "env");
+  env = requireDefault(envPath);
   env.setReducers = jest.fn();
 });
 
@@ -433,3 +427,31 @@ describe("when config does not exist", () => {
     await expect(execute({ config: "abc.toml" })).rejects.toThrow("ENOENT");
   });
 });
+
+describe.each([
+  { arg: undefined, config: undefined, expected: undefined },
+  { arg: true, config: undefined, expected: true },
+  { arg: undefined, config: true, expected: true },
+  { arg: false, config: true, expected: false },
+  { arg: true, config: false, expected: true }
+])(
+  "when arg.bail = $arg, config.bail = $config",
+  ({ arg, config, expected }) => {
+    beforeEach(async () => {
+      mockGenerateSuccess();
+      await writeConfigToDefaultPath({
+        components: ["*"],
+        bail: config
+      });
+      await execute({ bail: arg });
+    });
+
+    test(`should call generate with bail = ${expected}`, () => {
+      expect(generate).toHaveBeenCalledWith({
+        path: join(tmpDir.path, "components"),
+        components: ["*"],
+        bail: expected
+      });
+    });
+  }
+);

@@ -1,17 +1,15 @@
 import execa from "execa";
 import fs from "fs/promises";
 import { join } from "path";
-import tempDir from "temp-dir";
-import tmp from "tmp-promise";
-import { installPackage } from "@kosko/integration-test-utils";
+import { installPackage, makeTempDir, TempDir } from "@kosko/test-utils";
 
 let args: string[];
 let result: execa.ExecaReturnValue;
 let options: execa.Options;
-let tmpDir: tmp.DirectoryResult;
+let tmpDir: TempDir;
 
 beforeEach(async () => {
-  tmpDir = await tmp.dir({ tmpdir: tempDir, unsafeCleanup: true });
+  tmpDir = await makeTempDir();
 
   const src = join(__dirname, "..", "bin.js");
   const dst = join(tmpDir.path, "bin.js");

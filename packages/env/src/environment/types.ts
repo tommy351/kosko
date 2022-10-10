@@ -10,9 +10,7 @@ export interface ReducerList {
   /**
    * Sets list of reducers using the specified callback function.
    */
-  setReducers(
-    callback: (reducers: readonly Reducer[]) => readonly Reducer[]
-  ): void;
+  setReducers(callback: (reducers: readonly Reducer[]) => Reducer[]): void;
 
   /**
    * Resets reducers to the defaults.

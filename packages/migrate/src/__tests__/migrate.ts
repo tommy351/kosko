@@ -10,7 +10,7 @@ import { runInThisContext } from "vm";
 import { Manifest, migrate, migrateString } from "../migrate";
 
 describe("migrate", () => {
-  let data: ReadonlyArray<Manifest>;
+  let data: Manifest[];
   let code: string;
   let exported: any;
 

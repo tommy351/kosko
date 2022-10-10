@@ -2,6 +2,6 @@
 
 exports[`CLI Variables Env Reducer should fail on incorrect JSON path 1`] = `
 "Lexical error on line 1. Unrecognized text.
-$.phoneNumbers[?@.type=='home'].num
----------------^"
+phoneNumbers[?@.type=='home'].num
+-------------^"
 `;

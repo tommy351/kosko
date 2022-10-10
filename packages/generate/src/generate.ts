@@ -3,11 +3,11 @@ import {
   resolve as resolveModule,
   getRequireExtensions
 } from "@kosko/require";
-import glob from "fast-glob";
-import { join } from "path";
 import { Result, Manifest } from "./base";
 import logger, { LogLevel } from "@kosko/log";
 import { resolve } from "./resolve";
+import { aggregateErrors, GenerateError } from "./error";
+import { glob } from "./glob";
 
 export interface GenerateOptions {
   /**
@@ -17,24 +17,68 @@ export interface GenerateOptions {
 
   /**
    * Patterns of component names.
+   *
+   * @example ["*"]
    */
   components: readonly string[];
 
   /**
    * File extensions of components.
+   *
+   * @example ["js", "json"]
    */
   extensions?: readonly string[];
 
   /**
-   * Validate components.
+   * See {@link ResolveOptions.validate} for more info.
    */
   validate?: boolean;
+
+  /**
+   * See {@link ResolveOptions.bail} for more info.
+   */
+  bail?: boolean;
 }
 
-async function getComponentValue(id: string): Promise<unknown> {
-  const { default: mod } = await importPath(id);
+async function resolveComponentPath(
+  path: string,
+  extensions: readonly string[]
+) {
+  try {
+    return await resolveModule(path, { extensions });
+  } catch (err) {
+    throw new GenerateError("Module path resolve failed", {
+      path,
+      cause: err
+    });
+  }
+}
 
-  return mod;
+async function getComponentValue(path: string): Promise<unknown> {
+  try {
+    const { default: mod } = await importPath(path);
+
+    return mod;
+  } catch (err) {
+    throw new GenerateError("Component value resolve failed", {
+      path,
+      cause: err
+    });
+  }
+}
+
+function validateExtensions(extensions: readonly string[]) {
+  if (!extensions.length) {
+    throw new GenerateError("extensions must not be empty");
+  }
+
+  for (const ext of extensions) {
+    if (ext.startsWith(".")) {
+      throw new GenerateError(
+        `extension must not be started with ".": "${ext}"`
+      );
+    }
+  }
 }
 
 /**
@@ -48,31 +92,49 @@ async function getComponentValue(id: string): Promise<unknown> {
  * to add support for `.ts` extension.
  */
 export async function generate(options: GenerateOptions): Promise<Result> {
+  if (!options.components.length) {
+    throw new GenerateError("components must not be empty");
+  }
+
   const extensions =
     options.extensions || getRequireExtensions().map((ext) => ext.substring(1));
-  const suffix = `?(.{${extensions.join(",")}})`;
-  const patterns = options.components.map((x) => x + suffix);
-  logger.log(LogLevel.Debug, `Component patterns`, { data: patterns });
+  validateExtensions(extensions);
 
-  const ids = await glob(patterns, {
-    cwd: options.path,
-    onlyFiles: false
-  });
-  logger.log(LogLevel.Debug, "Found components", { data: ids });
-
+  const extensionsWithDot = extensions.map((ext) => "." + ext);
   const manifests: Manifest[] = [];
+  const errors: unknown[] = [];
 
-  for (const id of ids) {
-    const path = await resolveModule(join(options.path, id), {
-      extensions: extensions.map((ext) => `.${ext}`)
-    });
-    const components = await resolve(await getComponentValue(path), {
-      validate: options.validate,
-      index: [],
-      path
-    });
+  for await (const file of glob({
+    path: options.path,
+    extensions,
+    patterns: options.components
+  })) {
+    logger.log(LogLevel.Debug, `Found component "${file.relativePath}"`);
 
-    manifests.push(...components);
+    try {
+      const path = await resolveComponentPath(
+        file.absolutePath,
+        extensionsWithDot
+      );
+      const components = await resolve(await getComponentValue(path), {
+        validate: options.validate,
+        bail: options.bail,
+        index: [],
+        path
+      });
+
+      manifests.push(...components);
+    } catch (err) {
+      if (options.bail) {
+        throw err;
+      }
+
+      errors.push(err);
+    }
+  }
+
+  if (errors.length) {
+    throw aggregateErrors(errors);
   }
 
   return { manifests };

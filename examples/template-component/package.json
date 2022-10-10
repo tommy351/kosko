@@ -3,7 +3,7 @@
   "version": "0.0.3",
   "private": true,
   "dependencies": {
-    "@kosko/template": "workspace:^2.0.1",
-    "kubernetes-models": "^3.1.0"
+    "@kosko/template": "workspace:^",
+    "kubernetes-models": "^4.1.0"
   }
 }

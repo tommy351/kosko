@@ -1,4 +1,5 @@
 import getStdin from "get-stdin";
+import { handleError } from "../../cli/error";
 import { handler } from "./worker";
 
 (async () => {
@@ -9,7 +10,4 @@ import { handler } from "./worker";
     // Ignore loaders to avoid infinite loop
     ignoreLoaders: true
   });
-})().catch((err) => {
-  console.error(err);
-  process.exitCode = 1;
-});
+})().catch(handleError);

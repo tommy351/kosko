@@ -2,7 +2,7 @@
   "type": "module",
   "dependencies": {
     "@kosko/env": "*",
-    "@kosko/integration-test-utils": "*",
+    "@kosko/test-utils": "*",
     "execa": "*",
     "kubernetes-models": "*"
   }

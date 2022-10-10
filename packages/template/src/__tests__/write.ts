@@ -1,13 +1,12 @@
+import { makeTempDir, TempDir } from "@kosko/test-utils";
 import fs from "fs/promises";
 import { join } from "path";
-import tempDir from "temp-dir";
-import tmp from "tmp-promise";
 import { File } from "../template";
 import { writeFiles } from "../write";
 
 jest.mock("@kosko/log");
 
-let tmpDir: tmp.DirectoryResult;
+let tmpDir: TempDir;
 let files: File[];
 
 function readTmpFile(path: string): Promise<string> {
@@ -15,7 +14,7 @@ function readTmpFile(path: string): Promise<string> {
 }
 
 beforeEach(async () => {
-  tmpDir = await tmp.dir({ tmpdir: tempDir, unsafeCleanup: true });
+  tmpDir = await makeTempDir();
   await writeFiles(tmpDir.path, files);
 });
 

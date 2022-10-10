@@ -34,7 +34,7 @@ export function createEnvironment({
 export function createLoaderReducers(
   loader: Loader,
   mergeValues: (data: any[]) => any
-): readonly Reducer[] {
+): Reducer[] {
   return [
     {
       name: "global",
@@ -58,7 +58,7 @@ export function createLoaderReducers(
  * Returns the default reducers which load environment variables synchronously
  * using the specified `loader`.
  */
-export function createSyncLoaderReducers(loader: Loader): readonly Reducer[] {
+export function createSyncLoaderReducers(loader: Loader): Reducer[] {
   return createLoaderReducers(loader, merge);
 }
 
@@ -66,7 +66,7 @@ export function createSyncLoaderReducers(loader: Loader): readonly Reducer[] {
  * Returns the default reducers which load environment variables asynchronously
  * using the specified `loader`.
  */
-export function createAsyncLoaderReducers(loader: Loader): readonly Reducer[] {
+export function createAsyncLoaderReducers(loader: Loader): Reducer[] {
   return createLoaderReducers(loader, mergeAsync);
 }
 

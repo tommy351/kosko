@@ -4,4 +4,4 @@
  */
 
 export * from "./index.base";
-export * from "./generate";
+export { GenerateOptions, generate } from "./generate";

@@ -10,6 +10,7 @@ export interface BaseGenerateArguments extends RootArguments {
   set?: SetOption[];
   loader?: string[];
   config?: string;
+  bail?: boolean;
 }
 
 export interface GenerateArguments extends BaseGenerateArguments {

@@ -1,3 +1,4 @@
+import stringify from "fast-safe-stringify";
 import { File, Template } from "./base";
 import { generateKoskoConfig } from "./kosko-config";
 import { generatePackageJson } from "./package-json";
@@ -20,7 +21,7 @@ export function generateTsConfig({
 } = {}): File {
   return {
     path: "tsconfig.json",
-    content: JSON.stringify(
+    content: stringify(
       {
         extends: `${BASE_TSCONFIG}/tsconfig.json`,
         compilerOptions: {
@@ -30,7 +31,7 @@ export function generateTsConfig({
         },
         ...data
       },
-      null,
+      undefined,
       "  "
     )
   };

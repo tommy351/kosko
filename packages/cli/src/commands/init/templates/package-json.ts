@@ -1,6 +1,7 @@
 import logger, { LogLevel } from "@kosko/log";
 import { join } from "path";
 import fs from "fs/promises";
+import stringify from "fast-safe-stringify";
 import { File, TemplateContext } from "./base";
 
 export interface PackageJson {
@@ -68,7 +69,7 @@ export async function generatePackageJson(
 
   return {
     path: "package.json",
-    content: JSON.stringify(
+    content: stringify(
       mergePackageJson(
         mergePackageJson(base, {
           scripts: {
@@ -83,7 +84,7 @@ export async function generatePackageJson(
         }),
         data
       ),
-      null,
+      undefined,
       "  "
     )
   };

@@ -1,10 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should return files 1`] = `
-{
-  "files": [
-    {
-      "content": ""use strict";
+[
+  {
+    "content": ""use strict";
 
 const { Deployment } = require("kubernetes-models/apps/v1/Deployment");
 const { Service } = require("kubernetes-models/v1/Service");
@@ -54,8 +53,7 @@ const service = new Service({
 
 module.exports = [deployment, service];
 ",
-      "path": "components/foo.js",
-    },
-  ],
-}
+    "path": "components/foo.js",
+  },
+]
 `;

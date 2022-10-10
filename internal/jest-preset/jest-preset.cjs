@@ -8,6 +8,6 @@ module.exports = {
   roots: ["<rootDir>/src"],
   testEnvironment: "node",
   setupFilesAfterEnv: [require.resolve("jest-extended/all")],
-  snapshotSerializers: [require.resolve("jest-serializer-path")],
+  snapshotSerializers: [require.resolve("@kosko/jest-serializer-path")],
   resetMocks: true
 };

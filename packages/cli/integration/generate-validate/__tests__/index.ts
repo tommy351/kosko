@@ -1,17 +1,13 @@
 /// <reference types="jest-extended"/>
 import execa from "execa";
 import { dirname } from "path";
-import { runCLI, installPackage } from "@kosko/integration-test-utils";
+import { runCLI } from "@kosko/test-utils";
 
 const testDir = dirname(__dirname);
 
 let args: string[];
 let result: execa.ExecaReturnValue;
 let options: execa.Options;
-
-beforeAll(async () => {
-  await installPackage(testDir, "env");
-});
 
 beforeEach(async () => {
   result = await runCLI(args, {
@@ -31,9 +27,7 @@ describe("when validate is not set", () => {
   });
 
   test("should print the error", () => {
-    expect(result.stderr).toContain(
-      "ValidationError: data/spec must have required property 'containers'"
-    );
+    expect(result.stderr).toMatchSnapshot();
   });
 });
 
@@ -48,9 +42,7 @@ describe("when validate is true", () => {
   });
 
   test("should print the error", () => {
-    expect(result.stderr).toContain(
-      "ValidationError: data/spec must have required property 'containers'"
-    );
+    expect(result.stderr).toMatchSnapshot();
   });
 });
 

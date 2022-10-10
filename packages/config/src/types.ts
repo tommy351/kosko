@@ -5,7 +5,8 @@ import {
   Infer,
   assign,
   optional,
-  record
+  record,
+  boolean
 } from "superstruct";
 
 export const environmentConfigSchema = object({
@@ -31,7 +32,8 @@ export const configSchema = assign(
       })
     ),
     extensions: optional(array(string())),
-    baseEnvironment: optional(string())
+    baseEnvironment: optional(string()),
+    bail: optional(boolean())
   })
 );
 

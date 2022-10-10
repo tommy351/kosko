@@ -1,0 +1,26 @@
+{
+  "name": "@kosko/aggregate-error",
+  "version": "0.0.0",
+  "description": "AggregateError polyfill.",
+  "homepage": "https://kosko.dev",
+  "repository": "https://github.com/tommy351/kosko/tree/master/packages/aggregate-error",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "index.mjs",
+  "types": "index.d.ts",
+  "sideEffects": false,
+  "exports": {
+    "import": "./index.mjs",
+    "require": "./index.js"
+  },
+  "keywords": [
+    "kosko"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}

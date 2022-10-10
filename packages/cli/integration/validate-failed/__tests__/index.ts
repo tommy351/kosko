@@ -1,15 +1,11 @@
 /// <reference types="jest-extended"/>
 import execa from "execa";
 import { dirname } from "path";
-import { runCLI, installPackage } from "@kosko/integration-test-utils";
+import { runCLI } from "@kosko/test-utils";
 
 const testDir = dirname(__dirname);
 
 let result: execa.ExecaReturnValue;
-
-beforeAll(async () => {
-  await installPackage(testDir, "env");
-});
 
 beforeEach(async () => {
   result = await runCLI(["validate"], {
@@ -23,7 +19,5 @@ test("should return status code 1", () => {
 });
 
 test("should print the error", () => {
-  expect(result.stderr).toContain(
-    "ValidationError: data/spec must have required property 'containers'"
-  );
+  expect(result.stderr).toMatchSnapshot();
 });

@@ -1,13 +1,18 @@
 /// <reference types="jest-extended"/>
 import { InitArguments, initCmd } from "../index";
-import tempDir from "temp-dir";
-import tmp from "tmp-promise";
 import fs from "fs/promises";
 import { join, posix } from "path";
 import glob from "fast-glob";
 import { spawn } from "@kosko/exec-utils";
+import stringify from "fast-safe-stringify";
+import {
+  makeTempDir,
+  makeTempFile,
+  TempDir,
+  TempFile
+} from "@kosko/test-utils";
 
-let tmpDir: tmp.DirectoryResult;
+let tmpDir: TempDir;
 
 jest.mock("@kosko/log");
 jest.mock("@kosko/exec-utils");
@@ -28,16 +33,16 @@ async function listAllFiles(dir: string): Promise<Record<string, string>> {
 }
 
 beforeEach(async () => {
-  tmpDir = await tmp.dir({ tmpdir: tempDir, unsafeCleanup: true });
+  tmpDir = await makeTempDir();
 });
 
 afterEach(() => tmpDir.cleanup());
 
 describe("when the target exists and is not a directory", () => {
-  let tmpFile: tmp.FileResult;
+  let tmpFile: TempFile;
 
   beforeEach(async () => {
-    tmpFile = await tmp.file({ tmpdir: tempDir });
+    tmpFile = await makeTempFile();
   });
 
   afterEach(() => tmpFile.cleanup());
@@ -69,7 +74,7 @@ describe("when the target exists and is not empty", () => {
 
     await fs.writeFile(
       packageJsonPath,
-      JSON.stringify(
+      stringify(
         {
           name: "foo",
           version: "1.2.3",
@@ -77,7 +82,7 @@ describe("when the target exists and is not empty", () => {
             debug: "3.2.1"
           }
         },
-        null,
+        undefined,
         "  "
       )
     );

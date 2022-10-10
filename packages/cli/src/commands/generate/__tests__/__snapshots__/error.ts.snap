@@ -1,0 +1,193 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when error is a AggregateError should group errors by their path 1`] = `
+"[1ma/b.js[22m - 2 errors
+
+  [31m✖ ResolveError: first resolve err[39m
+
+  [31m✖ GenerateError: first generate err[39m
+
+[1mc/d.js[22m - 2 errors
+
+  [31m✖ ResolveError: second resolve err[39m
+
+  [31m✖ ResolveError: second generate err[39m
+
+[1mOther 2 errors
+[22m
+  [31m✖ Error: first other err[39m
+
+[90m    at new Promise (<anonymous>)[39m
+
+  [31m✖ Error: second other err[39m
+
+[90m    at new Promise (<anonymous>)[39m
+
+"
+`;
+
+exports[`when error is a GenerateError with cause should print index 1`] = `
+"[1ma.js[22m - 1 error
+
+  [31m✖ GenerateError: test err[39m
+    Error: test err cause
+[90m      at new Promise (<anonymous>)[39m
+
+"
+`;
+
+exports[`when error is a GenerateError with path not in cwd should print the full path 1`] = `
+"[1m/bar/a.js[22m - 1 error
+
+  [31m✖ GenerateError: test err[39m
+
+"
+`;
+
+exports[`when error is a GenerateError with path should treat as a normal error 1`] = `
+"[1ma.js[22m - 1 error
+
+  [31m✖ GenerateError: test err[39m
+
+"
+`;
+
+exports[`when error is a GenerateError without path should treat as a normal error 1`] = `
+"[1mOther 1 error
+[22m
+  [31m✖ GenerateError: test err[39m
+
+[90m    at new Promise (<anonymous>)[39m
+
+"
+`;
+
+exports[`when error is a ResolveError with ValidationError cause should print validation error 1`] = `
+"[1ma/b.js[22m - 1 error
+
+  [31m✖ ResolveError: validation err[39m
+
+      /a/b is required
+      /c/d must be an integer
+      /e/f must be one of enums: ["foo","bar"]
+
+"
+`;
+
+exports[`when error is a ResolveError with cause should print index 1`] = `
+"[1ma.js[22m - 1 error
+
+  [31m✖ ResolveError: test err[39m
+    Error: test err cause
+[90m      at new Promise (<anonymous>)[39m
+
+"
+`;
+
+exports[`when error is a ResolveError with component should print index 1`] = `
+"[1ma.js[22m - 1 error
+
+  [31m✖ ResolveError: test err[39m
+    Kind: kosko.dev/v1/Test
+    Name: bar
+
+"
+`;
+
+exports[`when error is a ResolveError with component.namespace should print index 1`] = `
+"[1ma.js[22m - 1 error
+
+  [31m✖ ResolveError: test err[39m
+    Kind: kosko.dev/v1/Test
+    Namespace: foo
+    Name: bar
+
+"
+`;
+
+exports[`when error is a ResolveError with index should print index 1`] = `
+"[1ma.js[22m - 1 error
+
+  [31m✖ ResolveError: test err[39m
+    Index: [1, 3, 5]
+
+"
+`;
+
+exports[`when error is a ResolveError with path not in cwd should print the full path 1`] = `
+"[1m/bar/a.js[22m - 1 error
+
+  [31m✖ ResolveError: test err[39m
+
+"
+`;
+
+exports[`when error is a ResolveError with path should treat as a normal error 1`] = `
+"[1ma.js[22m - 1 error
+
+  [31m✖ ResolveError: test err[39m
+
+"
+`;
+
+exports[`when error is a ResolveError without path should treat as a normal error 1`] = `
+"[1mOther 1 error
+[22m
+  [31m✖ ResolveError: test err[39m
+
+[90m    at new Promise (<anonymous>)[39m
+
+"
+`;
+
+exports[`when error is a nested AggregatedError should flatten errors 1`] = `
+"[1mOther 3 errors
+[22m
+  [31m✖ Error: root err[39m
+
+[90m    at new Promise (<anonymous>)[39m
+
+  [31m✖ Error: child err[39m
+
+[90m    at new Promise (<anonymous>)[39m
+
+  [31m✖ Error: grandchild err[39m
+
+[90m    at new Promise (<anonymous>)[39m
+
+"
+`;
+
+exports[`when error is a string should print as an error 1`] = `
+"[1mOther 1 error
+[22m
+  [31m✖ Error: test err[39m
+
+"
+`;
+
+exports[`when error is an Error should print in other error section 1`] = `
+"[1mOther 1 error
+[22m
+  [31m✖ Error: test err[39m
+
+[90m    at new Promise (<anonymous>)[39m
+
+"
+`;
+
+exports[`when error is an object with message only should print as an error 1`] = `
+"[1mOther 1 error
+[22m
+  [31m✖ Error: test err[39m
+
+"
+`;
+
+exports[`when error is an object with name and message should print as an error 1`] = `
+"[1mOther 1 error
+[22m
+  [31m✖ TestError: test err[39m
+
+"
+`;

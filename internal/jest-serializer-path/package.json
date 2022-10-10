@@ -1,5 +1,5 @@
 {
-  "name": "@kosko/integration-test-utils",
+  "name": "@kosko/jest-serializer-path",
   "version": "0.0.0",
   "private": true,
   "engines": {
@@ -14,7 +14,8 @@
     "require": "./dist/index.js"
   },
   "dependencies": {
-    "execa": "^5.1.1",
+    "@kosko/test-utils": "workspace:^",
+    "escape-string-regexp": "^4.0.0",
     "tslib": "^2.4.0"
   }
 }

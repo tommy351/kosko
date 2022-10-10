@@ -11,7 +11,7 @@ import { File } from "./template";
  */
 export async function writeFiles(
   path: string,
-  files: ReadonlyArray<File>
+  files: readonly File[]
 ): Promise<void> {
   for (const file of files) {
     const filePath = join(path, file.path);

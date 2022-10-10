@@ -6,14 +6,11 @@ export interface Template<T> {
   generate(options: T): Promise<Result>;
 }
 
-type OptionKeyRefs<T> =
-  | T
-  | ReadonlyArray<T>
-  | { [key: string]: T | ReadonlyArray<T> };
+type OptionKeyRefs<T> = T | readonly T[] | Record<string, T | readonly T[]>;
 
 type Options<T, O> = yargs.Options & {
   coerce?: (arg: any) => T;
-  choices?: ReadonlyArray<T>;
+  choices?: readonly T[];
   default?: T | (() => T | undefined);
   conflicts?: OptionKeyRefs<keyof O>;
   implies?: OptionKeyRefs<keyof O>;
@@ -28,7 +25,7 @@ type Options<T, O> = yargs.Options & {
     : unknown);
 
 export interface Result {
-  files: ReadonlyArray<File>;
+  files: readonly File[];
 }
 
 export interface File {

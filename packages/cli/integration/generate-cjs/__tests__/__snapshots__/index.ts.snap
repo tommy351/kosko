@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`when key in the set argument is invalid should print the error 1`] = `
-"[31merror[39m - Failed to override key "tolerations[?@.key=='key2'].value". Lexical error on line 1. Unrecognized text.
-$.tolerations[?@.key=='key2'].valu
---------------^"
+"[31merror[39m - Invalid JSONPath expression "tolerations[?@.key=='key2'].value": Lexical error on line 1. Unrecognized text.
+tolerations[?@.key=='key2'].valu
+------------^"
 `;
 
 exports[`when multiple set arguments are provided should output YAML 1`] = `
@@ -76,6 +76,7 @@ Options:
                   required.                                [array] [default: []]
       --loader    Module loader. Loaders set in config file will also be loaded.
                                                            [array] [default: []]
+      --bail      Stop immediately when an error occurred.             [boolean]
   -s, --set       Set values on the command line KEY=VAL (can be used multiple
                   times)                                   [array] [default: []]
   -o, --output    Output format
@@ -241,6 +242,7 @@ Options:
                   required.                                [array] [default: []]
       --loader    Module loader. Loaders set in config file will also be loaded.
                                                            [array] [default: []]
+      --bail      Stop immediately when an error occurred.             [boolean]
   -s, --set       Set values on the command line KEY=VAL (can be used multiple
                   times)                                   [array] [default: []]
   -o, --output    Output format
@@ -328,6 +330,7 @@ Options:
                   required.                                [array] [default: []]
       --loader    Module loader. Loaders set in config file will also be loaded.
                                                            [array] [default: []]
+      --bail      Stop immediately when an error occurred.             [boolean]
   -s, --set       Set values on the command line KEY=VAL (can be used multiple
                   times)                                   [array] [default: []]
   -o, --output    Output format

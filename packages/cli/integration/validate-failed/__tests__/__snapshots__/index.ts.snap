@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should print the error 1`] = `
+"[1mcomponents/foo.js[22m - 1 error
+
+  [31m✖ ResolveError: Validation error[39m
+    Kind: v1/Pod
+    Name: foo
+
+      /spec must have required property 'containers'
+
+[31merror[39m - Generate failed (Total 1 error)"
+`;

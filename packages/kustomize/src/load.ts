@@ -112,7 +112,7 @@ export function loadKustomize({
   transform,
   buildCommand
 }: KustomizeOptions) {
-  async function build(cmd: readonly string[]): Promise<readonly Manifest[]> {
+  async function build(cmd: readonly string[]): Promise<Manifest[]> {
     const [command, ...args]: string[] = [
       ...cmd,
       path,
