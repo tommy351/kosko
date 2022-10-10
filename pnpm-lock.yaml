@@ -278,7 +278,13 @@ importers:
       tslib: 2.4.0
 
   packages/aggregate-error:
-    specifiers: {}
+    specifiers:
+      '@kosko/jest-preset': workspace:^
+      tslib: ^2.4.0
+    dependencies:
+      tslib: 2.4.0
+    devDependencies:
+      '@kosko/jest-preset': link:../../internal/jest-preset
 
   packages/cli:
     specifiers:

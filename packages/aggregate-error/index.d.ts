@@ -1,12 +1,3 @@
-export default class AggregateError extends Error {
-  public readonly errors: unknown[];
-  public readonly cause?: unknown;
+import AggregateError from "./dist/AggregateError";
 
-  public constructor(
-    errors: Iterable<unknown>,
-    message?: string,
-    options?: {
-      cause?: unknown;
-    }
-  );
-}
+export default AggregateError;

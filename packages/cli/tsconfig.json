@@ -11,7 +11,8 @@
     { "path": "../migrate" },
     { "path": "../log" },
     { "path": "../exec-utils" },
-    { "path": "../../internal/test-utils" }
+    { "path": "../../internal/test-utils" },
+    { "path": "../aggregate-error" }
   ],
   "include": ["src"]
 }
