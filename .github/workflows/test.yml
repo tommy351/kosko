@@ -12,7 +12,7 @@ jobs:
   lint:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
         with:
           version: ${{ env.PNPM_VERSION }}
@@ -35,7 +35,7 @@ jobs:
         node-version: [14.x, 16.x, 18.x]
         os: [ubuntu-20.04, windows-latest]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
         with:
           version: ${{ env.PNPM_VERSION }}
@@ -85,7 +85,7 @@ jobs:
     needs:
       - lint
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
         with:
           version: ${{ env.PNPM_VERSION }}
