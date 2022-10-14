@@ -17,6 +17,76 @@ async function writeValues(values: any) {
   return file;
 }
 
+async function runHelm({
+  chart,
+  name,
+  apiVersions,
+  caFile,
+  certFile,
+  dependencyUpdate,
+  description,
+  devel,
+  generateName,
+  keyFile,
+  keyring,
+  nameTemplate,
+  namespace,
+  noHooks,
+  password,
+  repo,
+  includeCrds,
+  skipTests,
+  timeout,
+  username,
+  values,
+  verify,
+  version
+}: Omit<ChartOptions, "transform">) {
+  const args: string[] = [
+    "template",
+    ...(name ? [name] : []),
+    chart,
+    ...stringArrayArg("api-versions", apiVersions),
+    ...stringArg("ca-file", caFile),
+    ...stringArg("cert-file", certFile),
+    ...booleanArg("dependency-update", dependencyUpdate),
+    ...stringArg("description", description),
+    ...booleanArg("devel", devel),
+    ...booleanArg("generate-name", generateName),
+    ...stringArg("key-file", keyFile),
+    ...stringArg("keyring", keyring),
+    ...stringArg("name-template", nameTemplate),
+    ...stringArg("namespace", namespace),
+    ...booleanArg("no-hooks", noHooks),
+    ...stringArg("password", password),
+    ...stringArg("repo", repo),
+    ...booleanArg("include-crds", includeCrds),
+    ...booleanArg("skip-tests", skipTests),
+    ...stringArg("timeout", timeout),
+    ...stringArg("username", username),
+    ...booleanArg("verify", verify),
+    ...stringArg("version", version)
+  ];
+  let valueFile: tmp.FileResult | undefined;
+
+  if (values) {
+    valueFile = await writeValues(values);
+    args.push("--values", valueFile.path);
+  }
+
+  try {
+    return await spawn("helm", args);
+  } catch (err: any) {
+    if (err.code !== "ENOENT") throw err;
+
+    throw new Error(
+      `"loadChart" requires Helm CLI installed in your environment. More info: https://kosko.dev/docs/components/loading-helm-chart`
+    );
+  } finally {
+    await valueFile?.cleanup();
+  }
+}
+
 export interface ChartOptions extends LoadOptions {
   /**
    * The path of a local chart or the name of a remote chart.
@@ -134,74 +204,13 @@ export interface ChartOptions extends LoadOptions {
   version?: string;
 }
 
-export function loadChart({
-  chart,
-  name,
-  apiVersions,
-  caFile,
-  certFile,
-  dependencyUpdate,
-  description,
-  devel,
-  generateName,
-  keyFile,
-  keyring,
-  nameTemplate,
-  namespace,
-  noHooks,
-  password,
-  repo,
-  includeCrds,
-  skipTests,
-  timeout,
-  username,
-  values,
-  verify,
-  version,
-  transform
-}: ChartOptions) {
+export function loadChart({ transform, ...options }: ChartOptions) {
   return async (): Promise<Manifest[]> => {
-    const args: string[] = [
-      "template",
-      ...(name ? [name] : []),
-      chart,
-      ...stringArrayArg("api-versions", apiVersions),
-      ...stringArg("ca-file", caFile),
-      ...stringArg("cert-file", certFile),
-      ...booleanArg("dependency-update", dependencyUpdate),
-      ...stringArg("description", description),
-      ...booleanArg("devel", devel),
-      ...booleanArg("generate-name", generateName),
-      ...stringArg("key-file", keyFile),
-      ...stringArg("keyring", keyring),
-      ...stringArg("name-template", nameTemplate),
-      ...stringArg("namespace", namespace),
-      ...booleanArg("no-hooks", noHooks),
-      ...stringArg("password", password),
-      ...stringArg("repo", repo),
-      ...booleanArg("include-crds", includeCrds),
-      ...booleanArg("skip-tests", skipTests),
-      ...stringArg("timeout", timeout),
-      ...stringArg("username", username),
-      ...booleanArg("verify", verify),
-      ...stringArg("version", version)
-    ];
-    let valueFile: tmp.FileResult | undefined;
+    const { stdout } = await runHelm(options);
 
-    if (values) {
-      valueFile = await writeValues(values);
-      args.push("--values", valueFile.path);
-    }
+    // Find the first `---` in order to skip deprecation warnings
+    const index = stdout.indexOf("---\n");
 
-    try {
-      const { stdout } = await spawn("helm", args);
-
-      // Find the first `---` in order to skip deprecation warnings
-      const index = stdout.indexOf("---\n");
-
-      return loadString(stdout.substring(index), { transform });
-    } finally {
-      await valueFile?.cleanup();
-    }
+    return loadString(stdout.substring(index), { transform });
   };
 }
