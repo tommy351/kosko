@@ -1,11 +1,27 @@
 import { ChartOptions, loadChart } from "../load";
 import { join } from "path";
 import { Manifest } from "@kosko/yaml";
+import { spawn } from "@kosko/exec-utils";
+
+jest.mock("@kosko/exec-utils", () => {
+  const actual = jest.requireActual("@kosko/exec-utils");
+
+  return {
+    ...actual,
+    spawn: jest.fn()
+  };
+});
 
 const FIXTURE_DIR = join(__dirname, "../__fixtures__");
 const NGINX_CHART = join(FIXTURE_DIR, "nginx");
 
+const mockedSpawn = jest.mocked(spawn);
+
 jest.setTimeout(15000);
+
+beforeEach(() => {
+  mockedSpawn.mockImplementation(jest.requireActual("@kosko/exec-utils").spawn);
+});
 
 test("chart is a local path", async () => {
   const result = loadChart({ chart: NGINX_CHART });
@@ -78,4 +94,17 @@ describe("includeCrds option", () => {
 
     expect(pickCrds(await result())).not.toHaveLength(0);
   });
+});
+
+test("spawn throws ENOENT error", async () => {
+  const err = Object.assign(new Error("spawn helm ENOENT"), { code: "ENOENT" });
+  mockedSpawn.mockRejectedValue(err);
+
+  await expect(
+    loadChart({
+      chart: join(FIXTURE_DIR, "deprecated")
+    })
+  ).rejects.toThrow(
+    `"loadChart" requires Helm CLI installed in your environment. More info: https://kosko.dev/docs/components/loading-helm-chart`
+  );
 });

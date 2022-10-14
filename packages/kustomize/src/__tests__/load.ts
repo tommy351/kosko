@@ -1,8 +1,9 @@
+/// <reference types="jest-extended"/>
 import { join } from "path";
-import { loadKustomize } from "../load";
+import { loadKustomize, resetCachedBuildCommand } from "../load";
 import { spawn } from "@kosko/exec-utils";
 
-const mockSpawn = spawn as jest.MockedFunction<typeof spawn>;
+const mockedSpawn = jest.mocked(spawn);
 
 const FIXTURE_DIR = join(__dirname, "../__fixtures__");
 const HELLO_WORLD = join(FIXTURE_DIR, "hello-world");
@@ -19,11 +20,15 @@ jest.mock("@kosko/exec-utils", () => {
 });
 
 function useRealSpawn() {
-  mockSpawn.mockImplementation(jest.requireActual("@kosko/exec-utils").spawn);
+  mockedSpawn.mockImplementation(jest.requireActual("@kosko/exec-utils").spawn);
 }
 
 beforeEach(() => {
   useRealSpawn();
+});
+
+afterEach(() => {
+  resetCachedBuildCommand();
 });
 
 test("local path", async () => {
@@ -58,7 +63,7 @@ test("when path does not exist", async () => {
 
 describe("when buildCommand is given", () => {
   test("command exists", async () => {
-    mockSpawn.mockResolvedValueOnce({
+    mockedSpawn.mockResolvedValueOnce({
       stdout: `
 apiVersion: v1
 kind: Pod
@@ -78,7 +83,7 @@ metadata:
   });
 
   test("command does not exist", async () => {
-    mockSpawn.mockRejectedValue(
+    mockedSpawn.mockRejectedValue(
       Object.assign(new Error("spawn foo ENOENT"), {
         code: "ENOENT"
       })
@@ -88,7 +93,9 @@ metadata:
       buildCommand: ["foo", "abc", "def"]
     });
 
-    await expect(result()).rejects.toThrow("ENOENT");
+    await expect(result()).rejects.toThrow(
+      `"foo" is not installed in your environment`
+    );
     expect(spawn).toHaveBeenCalledTimes(1);
     expect(spawn).toHaveBeenCalledWith("foo", ["abc", "def", HELLO_WORLD]);
   });
@@ -98,7 +105,7 @@ describe("when buildCommand is not given", () => {
   function allowCommands(commands: readonly string[]) {
     const realSpawn = jest.requireActual("@kosko/exec-utils").spawn;
 
-    mockSpawn.mockImplementation(async (command, args) => {
+    mockedSpawn.mockImplementation(async (command, args) => {
       if (commands.includes(command)) {
         return realSpawn(command, args);
       }
@@ -146,5 +153,51 @@ describe("when buildCommand is not given", () => {
     await expect(result()).rejects.toThrow(
       `"loadKustomize" requires either kustomize or kubectl CLI installed in your environment. More info: https://kosko.dev/docs/components/loading-kustomize`
     );
+  });
+
+  test("should use cached build command after the first call", async () => {
+    allowCommands(["kubectl"]);
+
+    const result = loadKustomize({ path: HELLO_WORLD });
+
+    // First call
+    await result();
+
+    // Spawn should be called twice at first because we tried kustomize then kubectl
+    expect(spawn).toHaveBeenCalledTimes(2);
+
+    // Clear call history of the mock
+    mockedSpawn.mockClear();
+
+    // Second call
+    await result();
+
+    // Spawn should be called only once because cached build command is used
+    expect(spawn).toHaveBeenCalledOnce();
+  });
+
+  test("should reset cache if cached build command throws ENOENT", async () => {
+    const result = loadKustomize({ path: HELLO_WORLD });
+
+    // We want to use kustomize in first call
+    allowCommands(["kustomize"]);
+
+    // First call
+    await result();
+
+    // Clear call history of the mock
+    mockedSpawn.mockClear();
+
+    // Now we want to use kubectl
+    allowCommands(["kubectl"]);
+
+    // Second call
+    await result();
+
+    // Spawn should be called three times:
+    // 1. Try the cached build command (kustomize) and failed
+    // 2. Try kustomize and failed
+    // 3. Try kubectl and finally succeeded
+    expect(spawn).toHaveBeenCalledTimes(3);
   });
 });

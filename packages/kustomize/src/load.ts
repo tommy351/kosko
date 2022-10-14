@@ -1,15 +1,27 @@
-import { LoadOptions, loadString, Manifest } from "@kosko/yaml";
+import { LoadOptions, loadString } from "@kosko/yaml";
 import {
   spawn,
   booleanArg,
   stringArg,
   stringArrayArg
 } from "@kosko/exec-utils";
+import assert from "assert";
 
-const BUILD_COMMANDS = [
+const BUILD_COMMANDS: readonly (readonly string[])[] = [
   ["kustomize", "build"],
   ["kubectl", "kustomize"]
 ];
+
+let cachedBuildCommand: readonly string[] | undefined;
+
+/** @internal */
+export function resetCachedBuildCommand() {
+  cachedBuildCommand = undefined;
+}
+
+function isENOENTError(err: any) {
+  return err.code === "ENOENT";
+}
 
 export interface KustomizeOptions extends LoadOptions {
   /**
@@ -112,52 +124,81 @@ export function loadKustomize({
   transform,
   buildCommand
 }: KustomizeOptions) {
-  async function build(cmd: readonly string[]): Promise<Manifest[]> {
-    const [command, ...args]: string[] = [
-      ...cmd,
-      path,
-      ...booleanArg("as-current-user", asCurrentUser),
-      ...booleanArg("enable-alpha-plugins", enableAlphaPlugins),
-      ...booleanArg("enable-exec", enableExec),
-      ...booleanArg("enable-helm", enableHelm),
-      ...booleanArg("enable-managedby-label", enableManagedByLabel),
-      ...booleanArg("enable-star", enableStar),
-      ...(env
-        ? stringArrayArg(
-            "env",
-            Object.entries(env).map(([k, v]) => `${k}=${v}`)
-          )
-        : []),
-      ...stringArg("helm-command", helmCommand),
-      ...stringArg("load-restrictor", loadRestrictor),
-      ...stringArrayArg("mount", mount),
-      ...booleanArg("network", network),
-      ...stringArg("network-name", networkName),
-      ...stringArg("reorder", reorder)
-    ];
+  if (buildCommand) {
+    assert(buildCommand.length, "buildCommand must not be empty");
+  }
 
-    const { stdout } = await spawn(command, args);
+  const buildArgs = [
+    path,
+    ...booleanArg("as-current-user", asCurrentUser),
+    ...booleanArg("enable-alpha-plugins", enableAlphaPlugins),
+    ...booleanArg("enable-exec", enableExec),
+    ...booleanArg("enable-helm", enableHelm),
+    ...booleanArg("enable-managedby-label", enableManagedByLabel),
+    ...booleanArg("enable-star", enableStar),
+    ...(env
+      ? stringArrayArg(
+          "env",
+          Object.entries(env).map(([k, v]) => `${k}=${v}`)
+        )
+      : []),
+    ...stringArg("helm-command", helmCommand),
+    ...stringArg("load-restrictor", loadRestrictor),
+    ...stringArrayArg("mount", mount),
+    ...booleanArg("network", network),
+    ...stringArg("network-name", networkName),
+    ...stringArg("reorder", reorder)
+  ];
 
-    return loadString(stdout, { transform });
+  function runKustomize([command, ...rest]: readonly string[]) {
+    return spawn(command, [...rest, ...buildArgs]);
   }
 
   return async () => {
-    if (buildCommand) {
-      return build(buildCommand);
-    }
-
-    for (const cmd of BUILD_COMMANDS) {
-      try {
-        return await build(cmd);
-      } catch (err: any) {
-        if (err.code !== "ENOENT") {
-          throw err;
+    const { stdout } = await (async () => {
+      // Run with provided build command
+      if (buildCommand) {
+        try {
+          return await runKustomize(buildCommand);
+        } catch (err) {
+          if (!isENOENTError(err)) throw err;
+          throw new Error(
+            `"${buildCommand[0]}" is not installed in your environment`
+          );
         }
       }
-    }
 
-    throw new Error(
-      `"loadKustomize" requires either kustomize or kubectl CLI installed in your environment. More info: https://kosko.dev/docs/components/loading-kustomize`
-    );
+      // Run with cached build command
+      if (cachedBuildCommand) {
+        try {
+          return await runKustomize(cachedBuildCommand);
+        } catch (err: any) {
+          if (!isENOENTError(err)) throw err;
+
+          // Reset cached build command on ENOENT errors
+          resetCachedBuildCommand();
+        }
+      }
+
+      for (const cmd of BUILD_COMMANDS) {
+        try {
+          const result = await runKustomize(cmd);
+
+          // Store successful command in cache in order to make `loadKustomize`
+          // runs faster after the first call.
+          cachedBuildCommand = cmd;
+
+          return result;
+        } catch (err) {
+          if (!isENOENTError(err)) throw err;
+        }
+      }
+
+      throw new Error(
+        `"loadKustomize" requires either kustomize or kubectl CLI installed in your environment. More info: https://kosko.dev/docs/components/loading-kustomize`
+      );
+    })();
+
+    return loadString(stdout, { transform });
   };
 }
