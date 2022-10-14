@@ -1,15 +1,14 @@
 import stringify from "fast-safe-stringify";
+import os from "os";
 import { File, Template } from "./base";
+import { baseDependencies } from "./cjs";
 import { generateKoskoConfig } from "./kosko-config";
 import { generatePackageJson } from "./package-json";
 import { generateFromTemplateFile, generateReadme } from "./template";
 
 const BASE_TSCONFIG = "@tsconfig/recommended";
 
-export const tsDevDependencies = {
-  "ts-node": "^10.4.0",
-  typescript: "^4.5.3"
-};
+export const tsDevDependencies = ["ts-node", "typescript"];
 
 export function generateTsConfig({
   compilerOptions,
@@ -21,31 +20,21 @@ export function generateTsConfig({
 } = {}): File {
   return {
     path: "tsconfig.json",
-    content: stringify(
-      {
-        extends: `${BASE_TSCONFIG}/tsconfig.json`,
-        compilerOptions: {
-          typeRoots: ["./node_modules/@types", "./typings"],
-          moduleResolution: "node",
-          ...compilerOptions
+    content:
+      stringify(
+        {
+          extends: `${BASE_TSCONFIG}/tsconfig.json`,
+          compilerOptions: {
+            typeRoots: ["./node_modules/@types", "./typings"],
+            moduleResolution: "node",
+            ...compilerOptions
+          },
+          ...data
         },
-        ...data
-      },
-      undefined,
-      "  "
-    )
+        undefined,
+        "  "
+      ) + os.EOL
   };
-}
-
-export function generateKoskoConfigTs() {
-  return generateKoskoConfig(`require = ["ts-node/register"]`);
-}
-
-export function generateTypeDeclaration() {
-  return generateFromTemplateFile(
-    "typings/@kosko__env/index.d.ts",
-    "ts/typings/kosko-env.d.ts"
-  );
 }
 
 export function generateTsEnvFiles() {
@@ -62,23 +51,25 @@ export function generateTsEnvFiles() {
 }
 
 const tsTemplate: Template = async (ctx) => {
-  return [
-    await generatePackageJson(ctx, {
-      devDependencies: {
-        ...tsDevDependencies,
-        [BASE_TSCONFIG]: "^1.0.1"
-      }
-    }),
-    generateKoskoConfigTs(),
-    await generateReadme(),
-    generateTsConfig(),
-    await generateFromTemplateFile(
-      "components/nginx.ts",
-      "ts/components/nginx.ts"
-    ),
-    ...(await generateTsEnvFiles()),
-    await generateTypeDeclaration()
-  ];
+  return {
+    dependencies: baseDependencies,
+    devDependencies: [...tsDevDependencies, BASE_TSCONFIG],
+    files: [
+      await generatePackageJson(ctx),
+      generateKoskoConfig(`require = ["ts-node/register"]`),
+      await generateReadme(),
+      generateTsConfig(),
+      await generateFromTemplateFile(
+        "components/nginx.ts",
+        "ts/components/nginx.ts"
+      ),
+      ...(await generateTsEnvFiles()),
+      await generateFromTemplateFile(
+        "typings/@kosko__env/index.d.ts",
+        "ts/typings/kosko-env.d.cts"
+      )
+    ]
+  };
 };
 
 export default tsTemplate;

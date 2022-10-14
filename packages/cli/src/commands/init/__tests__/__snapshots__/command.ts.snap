@@ -92,17 +92,13 @@ export default [deployment, service];
   "kosko.toml": "components = ["*"]
 ",
   "package.json": "{
+  "type": "module",
   "scripts": {
     "generate": "kosko generate",
     "validate": "kosko validate"
-  },
-  "dependencies": {
-    "@kosko/env": "^3.0.0",
-    "kosko": "^2.0.0",
-    "kubernetes-models": "^3.0.0"
-  },
-  "type": "module"
-}",
+  }
+}
+",
 }
 `;
 
@@ -204,25 +200,16 @@ const env: ComponentEnvironment["nginx"] = {
 export default env;
 ",
   "kosko.toml": "components = ["*"]
-require = ["ts-node/register"]
+loaders = ["ts-node/esm"]
 ",
   "package.json": "{
-  "scripts": {
-    "generate": "NODE_OPTIONS='--loader=ts-node/esm' kosko generate",
-    "validate": "NODE_OPTIONS='--loader=ts-node/esm' kosko validate"
-  },
-  "dependencies": {
-    "@kosko/env": "^3.0.0",
-    "kosko": "^2.0.0",
-    "kubernetes-models": "^3.0.0"
-  },
   "type": "module",
-  "devDependencies": {
-    "@tsconfig/node16-strictest-esm": "^1.0.0",
-    "ts-node": "^10.4.0",
-    "typescript": "^4.5.3"
+  "scripts": {
+    "generate": "kosko generate",
+    "validate": "kosko validate"
   }
-}",
+}
+",
   "tsconfig.json": "{
   "extends": "@tsconfig/node16-strictest-esm/tsconfig.json",
   "compilerOptions": {
@@ -233,7 +220,8 @@ require = ["ts-node/register"]
     "moduleResolution": "node",
     "module": "esnext"
   }
-}",
+}
+",
   "typings/@kosko__env/index.d.ts": "import "@kosko/env";
 
 // Extend type declarations of "@kosko/env" module
@@ -256,11 +244,11 @@ declare module "@kosko/env" {
 
   // Extend Environment interface
   interface Environment {
-    global(): GlobalEnvironment;
+    global(): Promise<GlobalEnvironment>;
 
     component<K extends string>(
       name: K
-    ): GlobalEnvironment & ComponentEnvironment[K];
+    ): Promise<GlobalEnvironment & ComponentEnvironment[K]>;
   }
 }
 ",
@@ -371,18 +359,9 @@ require = ["ts-node/register"]
   "scripts": {
     "generate": "kosko generate",
     "validate": "kosko validate"
-  },
-  "dependencies": {
-    "@kosko/env": "^3.0.0",
-    "kosko": "^2.0.0",
-    "kubernetes-models": "^3.0.0"
-  },
-  "devDependencies": {
-    "@tsconfig/recommended": "^1.0.1",
-    "ts-node": "^10.4.0",
-    "typescript": "^4.5.3"
   }
-}",
+}
+",
   "tsconfig.json": "{
   "extends": "@tsconfig/recommended/tsconfig.json",
   "compilerOptions": {
@@ -392,7 +371,8 @@ require = ["ts-node/register"]
     ],
     "moduleResolution": "node"
   }
-}",
+}
+",
   "typings/@kosko__env/index.d.ts": "import "@kosko/env";
 
 // Extend type declarations of "@kosko/env" module
@@ -521,13 +501,9 @@ module.exports = [deployment, service];
   "scripts": {
     "generate": "kosko generate",
     "validate": "kosko validate"
-  },
-  "dependencies": {
-    "@kosko/env": "^3.0.0",
-    "kosko": "^2.0.0",
-    "kubernetes-models": "^3.0.0"
   }
-}",
+}
+",
 }
 `;
 
@@ -536,14 +512,12 @@ exports[`when the target exists and is not empty should update package.json 1`] 
   "name": "foo",
   "version": "1.2.3",
   "dependencies": {
-    "@kosko/env": "^3.0.0",
-    "debug": "3.2.1",
-    "kosko": "^2.0.0",
-    "kubernetes-models": "^3.0.0"
+    "debug": "3.2.1"
   },
   "scripts": {
     "generate": "kosko generate",
     "validate": "kosko validate"
   }
-}"
+}
+"
 `;

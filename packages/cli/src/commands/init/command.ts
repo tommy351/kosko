@@ -10,7 +10,11 @@ import cjsTemplate from "./templates/cjs";
 import tsTemplate from "./templates/ts";
 import esmTemplate from "./templates/esm";
 import tsEsmTemplate from "./templates/ts-esm";
-import { installDependencies } from "./install";
+import {
+  detectPackageManager,
+  getInstallCommand,
+  installDependencies
+} from "./install";
 
 async function checkPath(path: string, force?: boolean) {
   try {
@@ -18,7 +22,10 @@ async function checkPath(path: string, force?: boolean) {
     const stats = await fs.stat(path);
 
     if (!stats.isDirectory()) {
-      throw new CLIError("Path is not a directory");
+      throw new CLIError("Destination already exists and is not a directory", {
+        output:
+          "Destination already exists and is not a directory. Please delete it or try another path."
+      });
     }
 
     if (force) {
@@ -30,8 +37,8 @@ async function checkPath(path: string, force?: boolean) {
       return;
     }
 
-    throw new CLIError("Path already exists", {
-      output: `Path already exists. Use "--force" to overwrite existing files.`
+    throw new CLIError("Destination already exists", {
+      output: `Destination already exists. Please empty the directory or rerun with "--force" to proceed.`
     });
   } catch (err: any) {
     if (err.code !== "ENOENT") throw err;
@@ -69,6 +76,7 @@ export interface InitArguments extends RootArguments {
   typescript?: boolean;
   esm?: boolean;
   install?: boolean;
+  packageManager?: string;
 }
 
 export const initCmd: Command<InitArguments> = {
@@ -97,6 +105,11 @@ export const initCmd: Command<InitArguments> = {
         describe: "Install dependencies automatically",
         default: true
       })
+      .option("package-manager", {
+        type: "string",
+        describe: "Package manager (npm, yarn, pnpm)",
+        alias: "pm"
+      })
       .positional("path", { type: "string", describe: "Path to initialize" })
       .example("$0 init", "Initialize in current directory")
       .example("$0 init example", "Initialize in specified directory")
@@ -121,14 +134,38 @@ export const initCmd: Command<InitArguments> = {
       template = esmTemplate;
     }
 
-    const files = await template({ path });
+    const packageManager =
+      args.packageManager ?? (await detectPackageManager(path));
+    const { dependencies, devDependencies, files } = await template({ path });
 
     await writeFiles(path, files);
 
     const cdPath = getCDPath(args.cwd, path);
+    let installSuccessful = false;
 
     if (args.install) {
-      await installDependencies(path);
+      try {
+        if (dependencies?.length) {
+          await installDependencies({
+            cwd: path,
+            packageManager,
+            dependencies
+          });
+        }
+
+        if (devDependencies?.length) {
+          await installDependencies({
+            cwd: path,
+            packageManager,
+            dependencies: devDependencies,
+            dev: true
+          });
+        }
+
+        installSuccessful = true;
+      } catch (err) {
+        logger.log(LogLevel.Warn, "Install failed", { error: err });
+      }
     }
 
     logger.log(
@@ -138,10 +175,10 @@ export const initCmd: Command<InitArguments> = {
 Inside that directory, you can run several commands:
 ${[
   [
-    "npm run generate",
+    `${packageManager} run generate`,
     "Validate components and generate Kubernetes manifests."
   ],
-  ["npm run validate", "Only validate components."]
+  [`${packageManager} run validate`, "Only validate components."]
 ]
   .map(([cmd, desc]) => `\n  ${pc.cyan(cmd)}\n    ${desc}`)
   .join("\n")}
@@ -150,8 +187,21 @@ We suggest that you begin by typing:
 
 ${[
   ...(cdPath ? [`cd ${cdPath}`] : []),
-  ...(args.install ? [] : ["npm install"]),
-  `npm run generate`
+  ...(args.install && installSuccessful
+    ? []
+    : [
+        dependencies?.length
+          ? getInstallCommand({ packageManager, dependencies }).join(" ")
+          : "",
+        devDependencies?.length
+          ? getInstallCommand({
+              packageManager,
+              dependencies: devDependencies,
+              dev: true
+            }).join(" ")
+          : ""
+      ]),
+  `${packageManager} run generate`
 ]
   .filter(Boolean)
   .map((line) => `  ${pc.cyan(line)}`)

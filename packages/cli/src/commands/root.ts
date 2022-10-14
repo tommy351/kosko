@@ -1,7 +1,7 @@
 import { isAbsolute, resolve } from "path";
 import yargs from "yargs";
 import { generateCmd } from "./generate/command";
-import { initCmd } from "./init";
+import { initCmd } from "./init/command";
 import { validateCmd } from "./validate";
 import { migrateCmd } from "./migrate";
 import logger, {

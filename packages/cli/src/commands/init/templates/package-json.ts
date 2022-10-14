@@ -2,14 +2,8 @@ import logger, { LogLevel } from "@kosko/log";
 import { join } from "path";
 import fs from "fs/promises";
 import stringify from "fast-safe-stringify";
+import os from "os";
 import { File, TemplateContext } from "./base";
-
-export interface PackageJson {
-  dependencies?: Record<string, string>;
-  devDependencies?: Record<string, string>;
-  scripts?: Record<string, string>;
-  [key: string]: any;
-}
 
 async function readJson(path: string): Promise<any> {
   try {
@@ -21,46 +15,9 @@ async function readJson(path: string): Promise<any> {
   }
 }
 
-function sortKeys<T extends Record<string, unknown>>(data: T): T {
-  const result: any = {};
-
-  for (const key of Object.keys(data).sort()) {
-    result[key] = data[key];
-  }
-
-  return result;
-}
-
-function isEmptyObject(obj: Record<string, unknown>): boolean {
-  return Object.keys(obj).length === 0;
-}
-
-export function mergePackageJson(
-  base: PackageJson,
-  data: PackageJson
-): PackageJson {
-  const merged = { ...base, ...data };
-  const scripts = { ...base.scripts, ...data.scripts };
-
-  if (!isEmptyObject(scripts)) {
-    merged.scripts = scripts;
-  }
-
-  // Merge and sort dependencies
-  for (const key of ["dependencies", "devDependencies"]) {
-    const deps = sortKeys({ ...base[key], ...data[key] });
-
-    if (!isEmptyObject(deps)) {
-      merged[key] = deps;
-    }
-  }
-
-  return merged;
-}
-
 export async function generatePackageJson(
   ctx: TemplateContext,
-  data: PackageJson = {}
+  data: Record<string, any> = {}
 ): Promise<File> {
   const path = join(ctx.path, "package.json");
 
@@ -69,23 +26,20 @@ export async function generatePackageJson(
 
   return {
     path: "package.json",
-    content: stringify(
-      mergePackageJson(
-        mergePackageJson(base, {
+    content:
+      stringify(
+        {
+          ...base,
+          ...data,
           scripts: {
+            ...base.scripts,
             generate: "kosko generate",
-            validate: "kosko validate"
-          },
-          dependencies: {
-            "@kosko/env": "^3.0.0",
-            kosko: "^2.0.0",
-            "kubernetes-models": "^3.0.0"
+            validate: "kosko validate",
+            ...data.scripts
           }
-        }),
-        data
-      ),
-      undefined,
-      "  "
-    )
+        },
+        undefined,
+        "  "
+      ) + os.EOL
   };
 }
