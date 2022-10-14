@@ -3,4 +3,4 @@
  * @module @kosko/kustomize
  */
 
-export * from "./load";
+export { KustomizeOptions, loadKustomize } from "./load";
