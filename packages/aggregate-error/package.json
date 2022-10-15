@@ -43,5 +43,9 @@
   },
   "jest": {
     "preset": "@kosko/jest-preset"
+  },
+  "typedoc": {
+    "entryPoint": "index.d.ts",
+    "tsconfig": "tsconfig.typedoc.json"
   }
 }

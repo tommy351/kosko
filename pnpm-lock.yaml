@@ -636,7 +636,7 @@ importers:
       sass-loader: ^13.0.2
       serialize-error: ^11.0.0
       sucrase: ^3.27.0
-      typedoc: ~0.23.15
+      typedoc: ~0.23.16
       typedoc-plugin-markdown: ~3.13.6
       typescript: ^4.8.3
       unist-util-visit: ^2.0.2
@@ -685,7 +685,7 @@ importers:
       '@types/systemjs': 6.1.1
       '@types/webpack-env': 1.18.0
       babel-plugin-lodash: 3.3.4
-      docusaurus-plugin-typedoc: 0.17.5_7zab47scz53et6rw2zwvyhhfd4
+      docusaurus-plugin-typedoc: 0.17.5_v2e3gxkukk3kjuzoshpzmdw3iy
       lodash-webpack-plugin: 0.11.6_webpack@5.74.0
       raw-loader: 4.0.2_webpack@5.74.0
       read-pkg: 5.2.0
@@ -693,8 +693,8 @@ importers:
       rollup: 2.79.0
       sass: 1.54.9
       sass-loader: 13.0.2_sass@1.54.9+webpack@5.74.0
-      typedoc: 0.23.15_typescript@4.8.3
-      typedoc-plugin-markdown: 3.13.6_typedoc@0.23.15
+      typedoc: 0.23.16_typescript@4.8.3
+      typedoc-plugin-markdown: 3.13.6_typedoc@0.23.16
       typescript: 4.8.3
       webpack: 5.74.0
 
@@ -6401,14 +6401,14 @@ packages:
       - webpack
     dev: false
 
-  /docusaurus-plugin-typedoc/0.17.5_7zab47scz53et6rw2zwvyhhfd4:
+  /docusaurus-plugin-typedoc/0.17.5_v2e3gxkukk3kjuzoshpzmdw3iy:
     resolution: {integrity: sha512-mMTk4lRy2+wQ7fmMOv6RLfKkoGnHkBLE8qUoPfWFoqUYDDDInwVQKxz12FNnQx86eJSLgBiZmuY/zB/bYsZQlQ==}
     peerDependencies:
       typedoc: '>=0.22.0'
       typedoc-plugin-markdown: '>=3.11.10'
     dependencies:
-      typedoc: 0.23.15_typescript@4.8.3
-      typedoc-plugin-markdown: 3.13.6_typedoc@0.23.15
+      typedoc: 0.23.16_typescript@4.8.3
+      typedoc-plugin-markdown: 3.13.6_typedoc@0.23.16
     dev: true
 
   /dom-converter/0.2.0:
@@ -12978,17 +12978,17 @@ packages:
       is-typedarray: 1.0.0
     dev: false
 
-  /typedoc-plugin-markdown/3.13.6_typedoc@0.23.15:
+  /typedoc-plugin-markdown/3.13.6_typedoc@0.23.16:
     resolution: {integrity: sha512-ISSc9v3BK7HkokxSBuJPttXox4tJ6hP0N9wfSIk0fmLN67+eqtAxbk97gs2nDiuha+RTO5eW9gdeAb+RPP0mgg==}
     peerDependencies:
       typedoc: '>=0.23.0'
     dependencies:
       handlebars: 4.7.7
-      typedoc: 0.23.15_typescript@4.8.3
+      typedoc: 0.23.16_typescript@4.8.3
     dev: true
 
-  /typedoc/0.23.15_typescript@4.8.3:
-    resolution: {integrity: sha512-x9Zu+tTnwxb9YdVr+zvX7LYzyBl1nieOr6lrSHbHsA22/RJK2m4Y525WIg5Mj4jWCmfL47v6f4hUzY7EIuwS5w==}
+  /typedoc/0.23.16_typescript@4.8.3:
+    resolution: {integrity: sha512-rumYsCeNRXlyuZVzefD7050n7ptL2uudsCJg50dY0v/stKniqIlRpvx/F/6expC0/Q6Dbab+g/JpZuB7Sw90FA==}
     engines: {node: '>= 14.14'}
     hasBin: true
     peerDependencies:
