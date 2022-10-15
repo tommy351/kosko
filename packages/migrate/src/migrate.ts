@@ -2,8 +2,6 @@ import camelcase from "camelcase";
 import { Manifest, loadString, getResourceModule } from "@kosko/yaml";
 import stringify from "fast-safe-stringify";
 
-export type { Manifest };
-
 interface Component {
   readonly name: string;
   readonly text: string;
@@ -135,3 +133,5 @@ export async function migrate(data: readonly Manifest[]): Promise<string> {
 export async function migrateString(input: string): Promise<string> {
   return migrate(await loadString(input));
 }
+
+export { type Manifest } from "@kosko/yaml";

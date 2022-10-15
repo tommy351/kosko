@@ -1,4 +1,1 @@
-import { template, Options } from "./template";
-
-export default template;
-export { Options };
+export { template as default, Options } from "./template";

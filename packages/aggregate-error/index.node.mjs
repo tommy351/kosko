@@ -1,2 +1,1 @@
-import AggregateError from "./index.node.js";
-export default AggregateError;
+export { default } from "./index.node.js";

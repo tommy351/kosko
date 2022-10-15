@@ -38,7 +38,8 @@
         ]
       }
     ],
-    "unicorn/prefer-node-protocol": "error"
+    "unicorn/prefer-node-protocol": "error",
+    "unicorn/prefer-export-from": "error"
   },
   "parserOptions": {
     "ecmaVersion": 2018

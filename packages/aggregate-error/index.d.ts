@@ -1,3 +1,1 @@
-import AggregateError from "./dist/AggregateError";
-
-export default AggregateError;
+export { default } from "./dist/AggregateError";
