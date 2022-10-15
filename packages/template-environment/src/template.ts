@@ -1,7 +1,10 @@
 import { Template } from "@kosko/template";
 import { join } from "path";
 
-interface Options {
+/**
+ * @public
+ */
+export interface Options {
   name: string;
 }
 
@@ -10,6 +13,9 @@ export const INDEX_SCRIPT = `"use strict";
 module.exports = {};
 `;
 
+/**
+ * @public
+ */
 export const template: Template<Options> = {
   description: "Create a new environment",
   options: {

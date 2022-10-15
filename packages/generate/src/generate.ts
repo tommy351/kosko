@@ -9,6 +9,9 @@ import { resolve } from "./resolve";
 import { aggregateErrors, GenerateError } from "./error";
 import { glob } from "./glob";
 
+/**
+ * @public
+ */
 export interface GenerateOptions {
   /**
    * Path of the component folder.
@@ -86,10 +89,12 @@ function validateExtensions(extensions: readonly string[]) {
  * values from each components.
  *
  * Extension names is optional in `options.components` because it's appended
- * automatically. (e.g. `foo` => `foo?(.{js,json})`)
+ * automatically. (e.g. `foo` =\> `foo?(.{js,json})`)
  *
  * Extensions are from `require.extensions`. You can require `ts-node/register`
  * to add support for `.ts` extension.
+ *
+ * @public
  */
 export async function generate(options: GenerateOptions): Promise<Result> {
   if (!options.components.length) {

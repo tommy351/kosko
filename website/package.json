@@ -4,11 +4,14 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "docusaurus start",
-    "build": "docusaurus build",
+    "start": "pnpm run build-api-docs && docusaurus start",
+    "build": "pnpm run build-api-docs && docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
-    "serve": "docusaurus serve"
+    "serve": "docusaurus serve",
+    "build-api-docs": "pnpm run extract-api-models && pnpm run gen-api-docs",
+    "extract-api-models": "ts-node -P scripts/tsconfig.json scripts/extract-api-models.ts",
+    "gen-api-docs": "api-documenter markdown -i tmp/api-models -o tmp/api-docs && ts-node -P scripts/tsconfig.json scripts/process-api-docs.ts"
   },
   "engines": {
     "node": ">=14"
@@ -59,16 +62,20 @@
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "2.1.0",
+    "@microsoft/api-documenter": "^7.19.20",
+    "@microsoft/api-extractor": "^7.33.2",
     "@tsconfig/docusaurus": "^1.0.6",
     "@types/codemirror": "^5.60.5",
+    "@types/js-yaml": "^4.0.5",
     "@types/lodash": "^4.14.185",
+    "@types/node": "^18.7.18",
     "@types/react": "^18.0.20",
     "@types/react-helmet": "^6.1.5",
     "@types/react-router-dom": "^5.3.3",
     "@types/systemjs": "^6.1.1",
     "@types/webpack-env": "^1.18.0",
     "babel-plugin-lodash": "^3.3.4",
-    "docusaurus-plugin-typedoc": "~0.17.5",
+    "js-yaml": "^4.1.0",
     "lodash-webpack-plugin": "^0.11.6",
     "raw-loader": "^4.0.2",
     "read-pkg": "^5.2.0",
@@ -76,8 +83,7 @@
     "rollup": "^2.79.0",
     "sass": "^1.54.9",
     "sass-loader": "^13.0.2",
-    "typedoc": "~0.23.16",
-    "typedoc-plugin-markdown": "~3.13.6",
+    "ts-node": "^10.9.1",
     "typescript": "^4.8.3",
     "webpack": "^5.74.0"
   }

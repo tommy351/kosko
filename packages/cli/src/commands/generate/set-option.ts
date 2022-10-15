@@ -52,7 +52,7 @@ function parseKeyValuePair(s: unknown): SetOption {
  * Parses arguments provided by `yargs-parser` into a list of key-value pairs
  * for components.
  *
- * @param arg Arguments provided by `yargs-parser`.
+ * @param arg - Arguments provided by `yargs-parser`.
  * @internal
  */
 export function parseSetOptions(arg: unknown): SetOption[] {
@@ -94,7 +94,7 @@ export function parseSetOptions(arg: unknown): SetOption[] {
 /**
  * Creates a reducer from the specified set arguments.
  *
- * @param setOptions List of set arguments.
+ * @param setOptions - List of set arguments.
  * @internal
  */
 export function createCLIEnvReducer(setOptions: SetOption[]): Reducer {

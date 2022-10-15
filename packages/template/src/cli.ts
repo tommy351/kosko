@@ -8,8 +8,9 @@ import { writeFiles } from "./write";
 /**
  * Parse command line arguments and generate files with a template.
  *
- * @param template Template
- * @param argv Command line arguments
+ * @param template - Template
+ * @param argv - Command line arguments
+ * @public
  */
 export async function run(
   template: Template<any>,

@@ -1,11 +1,17 @@
 import logger, { LogLevel } from "@kosko/log";
 import { importPath } from "@kosko/require";
 
+/**
+ * @public
+ */
 export interface ResourceModule {
   readonly path: string;
   readonly export: string;
 }
 
+/**
+ * @public
+ */
 export interface ResourceKind {
   readonly apiVersion: string;
   readonly kind: string;
@@ -18,6 +24,9 @@ function getGroup(apiVersion: string): string {
   return arr.length === 1 ? "" : arr[0];
 }
 
+/**
+ * @public
+ */
 export function setResourceModule(
   res: ResourceKind,
   mod: ResourceModule
@@ -62,6 +71,9 @@ async function getKubernetesModels(
   }
 }
 
+/**
+ * @public
+ */
 export async function getResourceModule(
   res: ResourceKind
 ): Promise<ResourceModule | undefined> {
@@ -70,6 +82,9 @@ export async function getResourceModule(
   );
 }
 
+/**
+ * @public
+ */
 export function resetResourceModules(): void {
   moduleMap = {};
   logger.log(LogLevel.Debug, "Reset resource modules");

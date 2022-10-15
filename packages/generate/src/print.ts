@@ -2,15 +2,24 @@ import yaml from "js-yaml";
 import stringify from "fast-safe-stringify";
 import { Result } from "./base";
 
+/**
+ * @public
+ */
 export interface Writer {
   write(data: string): void;
 }
 
+/**
+ * @public
+ */
 export enum PrintFormat {
   YAML = "yaml",
   JSON = "json"
 }
 
+/**
+ * @public
+ */
 export interface PrintOptions {
   format: PrintFormat;
   writer: Writer;
@@ -51,8 +60,7 @@ const arrPrinters: PrinterMap<any[]> = {
 /**
  * Print result to a stream.
  *
- * @param result
- * @param options
+ * @public
  */
 export function print(result: Result, { format, writer }: PrintOptions): void {
   const data = result.manifests.map((manifest) => manifest.data);

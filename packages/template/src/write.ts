@@ -6,8 +6,9 @@ import { File } from "./template";
 /**
  * Write files to the specified path.
  *
- * @param path Destination path
- * @param files Files to write
+ * @param path - Destination path
+ * @param files - Files to write
+ * @public
  */
 export async function writeFiles(
   path: string,

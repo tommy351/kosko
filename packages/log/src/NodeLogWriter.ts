@@ -47,6 +47,9 @@ function formatError(err: any): string {
   return stack;
 }
 
+/**
+ * @public
+ */
 export default class NodeLogWriter implements LogWriter {
   public write(log: Log): void {
     const { level, time, message, error, data } = log;

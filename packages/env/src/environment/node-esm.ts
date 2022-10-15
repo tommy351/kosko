@@ -8,6 +8,8 @@ import { createAsyncReducerExecutor } from "./base";
 /**
  * Returns a new `Environment` which loads environment variables using ECMAScript
  * module (ESM) `import()` function.
+ *
+ * @public
  */
 export function createNodeESMEnvironment(
   options: NodeEnvironmentOptions = {}

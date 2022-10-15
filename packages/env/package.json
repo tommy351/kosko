@@ -43,8 +43,5 @@
   },
   "devDependencies": {
     "@kosko/jest-preset": "workspace:^"
-  },
-  "typedoc": {
-    "entryPoint": "src/index.node.ts"
   }
 }

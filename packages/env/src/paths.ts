@@ -1,5 +1,8 @@
 const rTemplate = /#\{(\w+)\}/g;
 
+/**
+ * @public
+ */
 export interface Paths {
   global: string;
   component: string;

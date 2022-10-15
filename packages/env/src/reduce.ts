@@ -1,5 +1,7 @@
 /**
  * Describes a step in the variables overriding chain.
+ *
+ * @public
  */
 export interface Reducer {
   /**

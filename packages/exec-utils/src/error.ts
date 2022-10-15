@@ -1,3 +1,6 @@
+/**
+ * @public
+ */
 export interface SpawnErrorOptions {
   exitCode: number;
   command: string;
@@ -6,6 +9,9 @@ export interface SpawnErrorOptions {
   stderr: string;
 }
 
+/**
+ * @public
+ */
 export class SpawnError extends Error {
   public readonly exitCode: number;
   public readonly command: string;

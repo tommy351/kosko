@@ -6,6 +6,9 @@ function defineNonEnumerableProp<T extends object, K extends keyof T>(
   Object.defineProperty(target, key, { value, enumerable: false });
 }
 
+/**
+ * @public
+ */
 export default class AggregateError extends Error {
   public readonly errors!: unknown[];
   public readonly cause?: unknown;

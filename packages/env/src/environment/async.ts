@@ -7,6 +7,8 @@ import { Environment } from "./types";
 
 /**
  * Returns a new asynchronized `Environment`.
+ *
+ * @public
  */
 export function createAsyncEnvironment(): Environment {
   const reducers = createReducerList();

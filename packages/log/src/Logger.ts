@@ -1,11 +1,17 @@
 import { LogLevel } from "./LogLevel";
 import { Log, LogWriter } from "./types";
 
+/**
+ * @public
+ */
 export interface LoggerOptions {
   level?: LogLevel;
   writer?: LogWriter;
 }
 
+/**
+ * @public
+ */
 export default class Logger {
   private level: LogLevel;
   private writer: LogWriter;

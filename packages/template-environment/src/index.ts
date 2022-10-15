@@ -1,7 +1,4 @@
-/**
- * @packageDocumentation
- * @module @kosko/template-environment
- */
+import { template, Options } from "./template";
 
-import { template } from "./template";
 export default template;
+export { Options };

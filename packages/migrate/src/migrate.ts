@@ -104,7 +104,8 @@ function collectImports(components: readonly Component[]): Import[] {
 /**
  * Migrate Kubernetes manifests into a kosko component.
  *
- * @param data Array of Kubernetes manifests
+ * @param data - Array of Kubernetes manifests
+ * @public
  */
 export async function migrate(data: readonly Manifest[]): Promise<string> {
   const components = uniqComponentName(await generateForList(data));
@@ -128,7 +129,8 @@ export async function migrate(data: readonly Manifest[]): Promise<string> {
 /**
  * Migrate Kubernetes YAML into a kosko component.
  *
- * @param input Kubernetes YAML string
+ * @param input - Kubernetes YAML string
+ * @public
  */
 export async function migrateString(input: string): Promise<string> {
   return migrate(await loadString(input));

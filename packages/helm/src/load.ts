@@ -87,6 +87,9 @@ async function runHelm({
   }
 }
 
+/**
+ * @public
+ */
 export interface ChartOptions extends LoadOptions {
   /**
    * The path of a local chart or the name of a remote chart.
@@ -124,7 +127,7 @@ export interface ChartOptions extends LoadOptions {
   description?: string;
 
   /**
-   * Use development versions, too. Equivalent to version '>0.0.0-0'. If `version` is set, this is ignored.
+   * Use development versions, too. Equivalent to version '\>0.0.0-0'. If `version` is set, this is ignored.
    */
   devel?: boolean;
 
@@ -204,6 +207,9 @@ export interface ChartOptions extends LoadOptions {
   version?: string;
 }
 
+/**
+ * @public
+ */
 export function loadChart({ transform, ...options }: ChartOptions) {
   return async (): Promise<Manifest[]> => {
     const { stdout } = await runHelm(options);

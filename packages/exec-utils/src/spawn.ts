@@ -3,17 +3,27 @@ import { StdioOptions } from "child_process";
 import assert from "assert";
 import { SpawnError } from "./error";
 
+/**
+ * @public
+ */
 export interface SpawnResult {
   stdout: string;
   stderr: string;
 }
 
+/**
+ * @public
+ */
 export interface SpawnOptions {
   cwd?: string;
   env?: Record<string, string>;
   stdio?: StdioOptions;
   input?: string;
 }
+
+/**
+ * @public
+ */
 
 export function spawn(
   command: string,

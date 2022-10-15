@@ -8,6 +8,8 @@ import logger, { LogLevel } from "@kosko/log";
 /**
  * Returns a new `Environment` which loads environment variables using Node.js's
  * `require()` function.
+ *
+ * @public
  */
 export function createNodeCJSEnvironment(
   options: NodeEnvironmentOptions = {}

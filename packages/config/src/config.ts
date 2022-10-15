@@ -8,7 +8,8 @@ import logger, { LogLevel } from "@kosko/log";
 /**
  * Parses and validates a config file from the specified path.
  *
- * @param path Path of the config file.
+ * @param path - Path of the config file.
+ * @public
  */
 export async function loadConfig(path: string): Promise<Config> {
   const content = await fs.readFile(path, "utf8");
@@ -22,7 +23,8 @@ export async function loadConfig(path: string): Promise<Config> {
  * Searchs config files in the specified directory. Returns an empty object when
  * config files does not exist in the directory.
  *
- * @param cwd Path to the working directory.
+ * @param cwd - Path to the working directory.
+ * @public
  */
 export async function searchConfig(
   cwd: string = process.cwd()
@@ -43,15 +45,16 @@ function flatten<T>(...arrays: (readonly T[] | undefined)[]): T[] {
   return arrays.reduce((acc = [], item = []) => acc.concat(item), []) as T[];
 }
 
-export function toArray<T>(value: T | T[]): T[] {
+function toArray<T>(value: T | T[]): T[] {
   return Array.isArray(value) ? value : [value];
 }
 
 /**
  * Returns environment configs merged with global configs.
  *
- * @param config Config object.
- * @param envs Environment name.
+ * @param config - Config object.
+ * @param envs - Environment name.
+ * @public
  */
 export function getConfig(
   config: Config,

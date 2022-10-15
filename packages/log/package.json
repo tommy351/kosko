@@ -42,8 +42,5 @@
   },
   "jest": {
     "preset": "@kosko/jest-preset"
-  },
-  "typedoc": {
-    "entryPoint": "src/index.node.ts"
   }
 }

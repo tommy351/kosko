@@ -12,6 +12,9 @@ interface Component {
   };
 }
 
+/**
+ * @public
+ */
 export interface ComponentInfo {
   apiVersion: string;
   kind: string;
@@ -79,6 +82,9 @@ function generateCauseMessage(cause: unknown) {
   }
 }
 
+/**
+ * @public
+ */
 export interface ResolveErrorOptions {
   path?: string;
   index?: number[];
@@ -86,6 +92,9 @@ export interface ResolveErrorOptions {
   value?: unknown;
 }
 
+/**
+ * @public
+ */
 export class ResolveError extends Error {
   public readonly path?: string;
   public readonly index?: number[];
@@ -129,11 +138,17 @@ export class ResolveError extends Error {
 
 ResolveError.prototype.name = "ResolveError";
 
+/**
+ * @public
+ */
 export interface GenerateErrorOptions {
   path?: string;
   cause?: unknown;
 }
 
+/**
+ * @public
+ */
 export class GenerateError extends Error {
   public readonly path?: string;
   public readonly cause?: unknown;
@@ -153,4 +168,7 @@ export class GenerateError extends Error {
   }
 }
 
+/**
+ * @public
+ */
 GenerateError.prototype.name = "GenerateError";

@@ -1,6 +1,9 @@
 import { LogLevel } from "./LogLevel";
 import { Log, LogWriter } from "./types";
 
+/**
+ * @public
+ */
 export default class ConsoleLogWriter implements LogWriter {
   public write(log: Log): void {
     const args = [log.message, log.data, log.error].filter(Boolean);

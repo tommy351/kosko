@@ -2,12 +2,20 @@ import {
   array,
   string,
   object,
-  Infer,
   assign,
   optional,
   record,
   boolean
 } from "superstruct";
+
+/**
+ * @public
+ */
+export interface EnvironmentConfig {
+  require?: string[];
+  components?: string[];
+  loaders?: string[];
+}
 
 export const environmentConfigSchema = object({
   require: optional(array(string())),
@@ -15,7 +23,21 @@ export const environmentConfigSchema = object({
   loaders: optional(array(string()))
 });
 
-export type EnvironmentConfig = Infer<typeof environmentConfigSchema>;
+/**
+ * @public
+ */
+export interface Config extends EnvironmentConfig {
+  environments?: Record<string, EnvironmentConfig>;
+  paths?: {
+    environment?: {
+      global?: string;
+      component?: string;
+    };
+  };
+  extensions?: string[];
+  baseEnvironment?: string;
+  bail?: boolean;
+}
 
 export const configSchema = assign(
   environmentConfigSchema,
@@ -36,5 +58,3 @@ export const configSchema = assign(
     bail: optional(boolean())
   })
 );
-
-export type Config = Infer<typeof configSchema>;

@@ -1,7 +1,10 @@
 import { Template } from "@kosko/template";
 import { join } from "path";
 
-interface Options {
+/**
+ * @public
+ */
+export interface Options {
   name: string;
   image: string;
   type: string;
@@ -10,6 +13,9 @@ interface Options {
   replicas: number;
 }
 
+/**
+ * @public
+ */
 export const template: Template<Options> = {
   description: "Create a new component including a deployment and a service",
   options: {

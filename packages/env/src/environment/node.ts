@@ -13,6 +13,9 @@ export function getNodeExtensions(): string[] {
   return getRequireExtensions().map((ext) => ext.substring(1));
 }
 
+/**
+ * @public
+ */
 export interface NodeEnvironmentOptions {
   /**
    * Current working directory.

@@ -1,6 +1,9 @@
 import { Paths } from "../paths";
 import { Reducer } from "../reduce";
 
+/**
+ * @public
+ */
 export interface ReducerList {
   /**
    * Returns a list of reducers.
@@ -22,6 +25,9 @@ export interface ReducerExecutor {
   reduce(componentName?: string): any;
 }
 
+/**
+ * @public
+ */
 export interface Environment
   extends Pick<ReducerList, "setReducers" | "resetReducers"> {
   /**
@@ -57,11 +63,14 @@ export interface Environment
   /**
    * Returns component variables merged with global variables.
    *
-   * @param name Component name
+   * @param name - Component name
    */
   component(name: string): any;
 }
 
+/**
+ * @public
+ */
 export interface Loader {
   /**
    * Returns global variables. If the returned value is an array, the
@@ -73,7 +82,7 @@ export interface Loader {
    * Returns component variables. If the returned value is an array,
    * the value will be flattened.
    *
-   * @param name Component name
+   * @param name - Component name
    */
   component(name: string): any;
 }

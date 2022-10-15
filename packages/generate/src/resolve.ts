@@ -36,6 +36,9 @@ function isAsyncIterable(value: unknown): value is AsyncIterable<unknown> {
   );
 }
 
+/**
+ * @public
+ */
 export interface ResolveOptions {
   /**
    * Execute `validate` method of each values. Default to `true`.
@@ -72,6 +75,8 @@ export interface ResolveOptions {
  *   - Async function
  *   - Iterable
  *   - Async iterable
+ *
+ * @public
  */
 export async function resolve(
   value: unknown,

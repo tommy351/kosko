@@ -1,14 +1,26 @@
 import yargs from "yargs";
 
+/**
+ * @public
+ */
 export interface Template<T> {
   description?: string;
   options?: { [P in keyof T]: Options<T[P], T> };
   generate(options: T): Promise<Result>;
 }
 
-type OptionKeyRefs<T> = T | readonly T[] | Record<string, T | readonly T[]>;
+/**
+ * @public
+ */
+export type OptionKeyRefs<T> =
+  | T
+  | readonly T[]
+  | Record<string, T | readonly T[]>;
 
-type Options<T, O> = yargs.Options & {
+/**
+ * @public
+ */
+export type Options<T, O> = yargs.Options & {
   coerce?: (arg: any) => T;
   choices?: readonly T[];
   default?: T | (() => T | undefined);
@@ -24,10 +36,16 @@ type Options<T, O> = yargs.Options & {
     ? { type: "array" } | { array: true }
     : unknown);
 
+/**
+ * @public
+ */
 export interface Result {
   files: readonly File[];
 }
 
+/**
+ * @public
+ */
 export interface File {
   /**
    * Destination path of a file.

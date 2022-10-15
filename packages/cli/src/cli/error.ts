@@ -17,6 +17,9 @@ export class CLIError extends Error {
 
 CLIError.prototype.name = "CLIError";
 
+/**
+ * @public
+ */
 export function handleError(err: unknown): void {
   let code = 1;
 

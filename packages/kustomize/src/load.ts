@@ -23,6 +23,9 @@ function isENOENTError(err: any) {
   return err.code === "ENOENT";
 }
 
+/**
+ * @public
+ */
 export interface KustomizeOptions extends LoadOptions {
   /**
    * The path to a directory containing `kustomization.yaml`, or a Git repository
@@ -106,6 +109,9 @@ export interface KustomizeOptions extends LoadOptions {
   buildCommand?: readonly string[];
 }
 
+/**
+ * @public
+ */
 export function loadKustomize({
   path,
   asCurrentUser,

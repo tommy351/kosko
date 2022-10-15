@@ -8,6 +8,9 @@ function formatErrors(failures: readonly Failure[]): string {
   ].join("\n");
 }
 
+/**
+ * @public
+ */
 export class ValidationError extends Error {
   constructor(public readonly errors: readonly Failure[]) {
     super(formatErrors(errors));
@@ -20,7 +23,7 @@ ValidationError.prototype.name = "ValidationError";
  * Validates data with kosko configuration schema. It throws a ValidationError
  * when validation failed.
  *
- * @param data
+ * @public
  */
 export function validate(data: unknown): Config {
   const result = sValidate(data, configSchema);

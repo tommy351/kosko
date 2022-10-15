@@ -1,3 +1,6 @@
+/**
+ * @public
+ */
 export interface Result {
   /**
    * Generated manifests.
@@ -5,6 +8,9 @@ export interface Result {
   manifests: Manifest[];
 }
 
+/**
+ * @public
+ */
 export interface Manifest {
   /**
    * Source path of a manifest.

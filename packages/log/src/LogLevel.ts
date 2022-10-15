@@ -1,3 +1,6 @@
+/**
+ * @public
+ */
 export enum LogLevel {
   Trace = 1,
   Debug = 2,
@@ -16,6 +19,9 @@ const LOG_LEVEL_MAP: Record<string, LogLevel> = {
   fatal: LogLevel.Fatal
 };
 
+/**
+ * @public
+ */
 export function logLevelFromString(level: string): LogLevel | undefined {
   return LOG_LEVEL_MAP[level];
 }

@@ -1,5 +1,8 @@
 import { LogLevel } from "./LogLevel";
 
+/**
+ * @public
+ */
 export interface Log {
   loggerLevel: LogLevel;
   level: LogLevel;
@@ -9,6 +12,9 @@ export interface Log {
   data?: unknown;
 }
 
+/**
+ * @public
+ */
 export interface LogWriter {
   write(log: Log): void;
 }

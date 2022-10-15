@@ -1,8 +1,5 @@
 "use strict";
 
-const globby = require("globby");
-const { dirname } = require("path");
-
 const organizationName = "tommy351";
 const projectName = "kosko";
 const githubUrl = `https://github.com/${organizationName}/${projectName}`;
@@ -91,23 +88,6 @@ module.exports = {
   plugins: [
     "docusaurus-plugin-sass",
     "@docusaurus/plugin-ideal-image",
-    require.resolve("./plugins/lodash-webpack-plugin"),
-    [
-      "docusaurus-plugin-typedoc",
-      {
-        entryPoints: globby
-          .sync("packages/*/tsconfig.json", {
-            cwd: dirname(__dirname),
-            absolute: true
-          })
-          .map((path) => dirname(path)),
-        entryPointStrategy: "packages",
-        sidebar: {
-          fullNames: true
-        },
-        readme: "none",
-        excludePrivate: true
-      }
-    ]
+    require.resolve("./plugins/lodash-webpack-plugin")
   ]
 };

@@ -6,12 +6,18 @@ import logger, { LogLevel } from "@kosko/log";
 import { importPath } from "@kosko/require";
 import stringify from "fast-safe-stringify";
 
+/**
+ * @public
+ */
 export interface Manifest extends ResourceKind {
   [key: string]: any;
 }
 
 type ManifestConstructor = new (data: Manifest) => Manifest;
 
+/**
+ * @public
+ */
 export interface LoadOptions {
   transform?(manifest: Manifest): Manifest | null | undefined;
 }
@@ -54,6 +60,8 @@ async function getConstructor(
 
 /**
  * Load a Kubernetes YAML file from a string.
+ *
+ * @public
  */
 export async function loadString(
   content: string,
@@ -85,8 +93,8 @@ export async function loadString(
 /**
  * Load a Kubernetes YAML file from path.
  *
- * @param path Path to the Kubernetes YAML file.
- * @param options
+ * @param path - Path to the Kubernetes YAML file.
+ * @public
  */
 export function loadFile(path: string, options?: LoadOptions) {
   return async (): Promise<Manifest[]> => {
@@ -100,8 +108,9 @@ export function loadFile(path: string, options?: LoadOptions) {
 /**
  * Load a Kubernetes YAML file from url.
  *
- * @param url URL to the Kubernetes YAML file.
- * @param options [Options](https://github.com/node-fetch/node-fetch#options) for the HTTP(S) request.
+ * @param url - URL to the Kubernetes YAML file.
+ * @param options - [Options](https://github.com/node-fetch/node-fetch#options) for the HTTP(S) request.
+ * @public
  */
 export function loadUrl(
   url: RequestInfo,
