@@ -1,7 +1,7 @@
 /// <reference types="jest-extended"/>
 import { InitArguments, initCmd } from "../command";
-import fs from "fs/promises";
-import { join, posix } from "path";
+import fs from "node:fs/promises";
+import { join, posix } from "node:path";
 import glob from "fast-glob";
 import { spawn } from "@kosko/exec-utils";
 import stringify from "fast-safe-stringify";

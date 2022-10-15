@@ -1,5 +1,5 @@
 import stringify from "fast-safe-stringify";
-import os from "os";
+import os from "node:os";
 import { File, Template } from "./base";
 import { baseDependencies } from "./cjs";
 import { generateKoskoConfig } from "./kosko-config";

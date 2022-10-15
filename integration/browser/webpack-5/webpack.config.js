@@ -1,7 +1,7 @@
 /* eslint-disable node/no-unpublished-require */
 "use strict";
 
-const path = require("path");
+const path = require("node:path");
 
 module.exports = {
   mode: "development",

@@ -1,7 +1,7 @@
 import { migrateString } from "@kosko/migrate";
-import fs from "fs/promises";
+import fs from "node:fs/promises";
 import getStdin from "get-stdin";
-import { join, resolve } from "path";
+import { join, resolve } from "node:path";
 import { Command, RootArguments } from "../cli/command";
 import { print } from "../cli/print";
 import logger, { LogLevel } from "@kosko/log";

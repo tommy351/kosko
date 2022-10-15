@@ -1,7 +1,7 @@
 import env from "@kosko/env";
 import { generate, print, PrintFormat } from "@kosko/generate";
-import { fileURLToPath } from "url";
-import { join } from "path";
+import { fileURLToPath } from "node:url";
+import { join } from "node:path";
 
 // Set environment
 env.env = "dev";

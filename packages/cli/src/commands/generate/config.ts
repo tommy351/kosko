@@ -3,7 +3,7 @@ import {
   searchConfig,
   loadConfig as loadConfigFile
 } from "@kosko/config";
-import { resolve } from "path";
+import { resolve } from "node:path";
 import { CLIError } from "../../cli/error";
 import { BaseGenerateArguments } from "./types";
 

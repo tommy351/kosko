@@ -14,7 +14,7 @@
     "gen-api-docs": "api-documenter markdown -i tmp/api-models -o tmp/api-docs && ts-node -P scripts/tsconfig.json scripts/process-api-docs.ts"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=14.18.0"
   },
   "browserslist": {
     "production": [

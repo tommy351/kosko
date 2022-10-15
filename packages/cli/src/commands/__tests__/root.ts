@@ -1,5 +1,5 @@
 import { rootCmd } from "../root";
-import { resolve } from "path";
+import { resolve } from "node:path";
 
 describe("rootCmd", () => {
   describe("cwd coerce", () => {

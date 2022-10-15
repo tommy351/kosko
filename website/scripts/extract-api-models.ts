@@ -1,7 +1,7 @@
 import { Extractor, ExtractorConfig } from "@microsoft/api-extractor";
-import { rm } from "fs/promises";
+import { rm } from "node:fs/promises";
 import globby from "globby";
-import { dirname, join } from "path";
+import { dirname, join } from "node:path";
 
 const DEST_DIR = join(__dirname, "../tmp/api-models");
 

@@ -1,5 +1,5 @@
 /// <reference types="jest-extended"/>
-import { join } from "path";
+import { join } from "node:path";
 import { loadKustomize, resetCachedBuildCommand } from "../load";
 import { spawn } from "@kosko/exec-utils";
 

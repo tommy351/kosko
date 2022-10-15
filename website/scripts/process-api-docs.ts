@@ -1,7 +1,7 @@
-import { mkdir, readFile, rm, writeFile } from "fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import globby from "globby";
-import { basename, dirname, extname, join } from "path";
-import { EOL } from "os";
+import { basename, dirname, extname, join } from "node:path";
+import { EOL } from "node:os";
 import { dump } from "js-yaml";
 
 const WEBSITE_ROOT = join(__dirname, "..");

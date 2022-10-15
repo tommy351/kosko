@@ -1,7 +1,7 @@
 /// <reference types="jest-extended"/>
 import { generate } from "../generate";
-import { mkdir, writeFile } from "fs/promises";
-import { dirname, join } from "path";
+import { mkdir, writeFile } from "node:fs/promises";
+import { dirname, join } from "node:path";
 import { GenerateError, ResolveError } from "../error";
 import { makeTempDir, TempDir } from "@kosko/test-utils";
 import AggregateError from "@kosko/aggregate-error";

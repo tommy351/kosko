@@ -21,7 +21,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=14.18.0"
   },
   "dependencies": {
     "resolve": "^1.22.1"

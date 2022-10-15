@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { join } from "path";
+import { join } from "node:path";
 import { merge } from "../../merge";
 import { Reducer } from "../../reduce";
 import { createNodeESMEnvironment } from "../node-esm";

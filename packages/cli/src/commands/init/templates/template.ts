@@ -1,5 +1,5 @@
-import fs from "fs/promises";
-import { join } from "path";
+import fs from "node:fs/promises";
+import { join } from "node:path";
 import { File } from "./base";
 
 const TEMPLATE_DIR = join(__dirname, "../../../../templates");

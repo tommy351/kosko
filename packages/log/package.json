@@ -29,7 +29,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=14.18.0"
   },
   "dependencies": {
     "clean-stack": "^3.0.1",

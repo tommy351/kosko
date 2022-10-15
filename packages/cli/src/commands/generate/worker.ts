@@ -1,7 +1,7 @@
 import { Config, EnvironmentConfig } from "@kosko/config";
 import { spawn, SpawnError } from "@kosko/exec-utils";
 import { generate, GenerateOptions, print, PrintFormat } from "@kosko/generate";
-import { join } from "path";
+import { join } from "node:path";
 import stringify from "fast-safe-stringify";
 import { CLIError } from "../../cli/error";
 import { setupEnv } from "./env";

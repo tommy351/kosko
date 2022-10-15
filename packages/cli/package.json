@@ -33,7 +33,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=14.18.0"
   },
   "dependencies": {
     "@kosko/aggregate-error": "workspace:^",

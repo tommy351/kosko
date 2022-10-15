@@ -1,5 +1,5 @@
 import execa from "execa";
-import { join } from "path";
+import { join } from "node:path";
 import { projectRoot } from "./projectRoot";
 
 export async function runCLI(

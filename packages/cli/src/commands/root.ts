@@ -1,4 +1,4 @@
-import { isAbsolute, resolve } from "path";
+import { isAbsolute, resolve } from "node:path";
 import yargs from "yargs";
 import { generateCmd } from "./generate/command";
 import { initCmd } from "./init/command";

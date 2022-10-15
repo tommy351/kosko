@@ -1,5 +1,5 @@
-import { readdir } from "fs/promises";
-import { join, posix } from "path";
+import { readdir } from "node:fs/promises";
+import { join, posix } from "node:path";
 import mm from "micromatch";
 
 function createMatcher(patterns: readonly string[], options?: mm.Options) {

@@ -1,5 +1,5 @@
 import { template, INDEX_SCRIPT } from "../template";
-import { join } from "path";
+import { join } from "node:path";
 
 test("should return files", async () => {
   const result = await template.generate({ name: "dev" });

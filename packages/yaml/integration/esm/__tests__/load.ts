@@ -1,5 +1,5 @@
 import execa from "execa";
-import { dirname, join } from "path";
+import { dirname, join } from "node:path";
 import { installPackage } from "@kosko/test-utils";
 
 const testDir = dirname(__dirname);

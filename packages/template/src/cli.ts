@@ -1,5 +1,5 @@
 import exit from "exit";
-import { isAbsolute, resolve } from "path";
+import { isAbsolute, resolve } from "node:path";
 import logger, { LogLevel } from "@kosko/log";
 import yargs from "yargs";
 import { Template } from "./template";

@@ -1,4 +1,4 @@
-import fs from "fs/promises";
+import fs from "node:fs/promises";
 
 // Based on:
 // - https://github.com/github/gitignore/blob/ce6f84024931408ce801808fe9f4587f7588b283/Node.gitignore

@@ -1,6 +1,6 @@
 import { makeTempDir, TempDir } from "@kosko/test-utils";
-import fs from "fs/promises";
-import { join } from "path";
+import fs from "node:fs/promises";
+import { join } from "node:path";
 import { File } from "../template";
 import { writeFiles } from "../write";
 

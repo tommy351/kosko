@@ -1,7 +1,7 @@
 import execa from "execa";
 import { runCLI } from "@kosko/test-utils";
-import { join } from "path";
-import fs from "fs/promises";
+import { join } from "node:path";
+import fs from "node:fs/promises";
 
 const fixtureDir = join(__dirname, "..", "__fixtures__");
 

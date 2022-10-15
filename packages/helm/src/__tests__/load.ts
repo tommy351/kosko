@@ -1,5 +1,5 @@
 import { ChartOptions, loadChart } from "../load";
-import { join } from "path";
+import { join } from "node:path";
 import { Manifest } from "@kosko/yaml";
 import { spawn } from "@kosko/exec-utils";
 

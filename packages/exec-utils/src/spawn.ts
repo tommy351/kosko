@@ -1,6 +1,6 @@
 import crossSpawn from "cross-spawn";
-import { StdioOptions } from "child_process";
-import assert from "assert";
+import { StdioOptions } from "node:child_process";
+import assert from "node:assert";
 import { SpawnError } from "./error";
 
 /**

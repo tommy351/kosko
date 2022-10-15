@@ -1,4 +1,4 @@
-import os from "os";
+import os from "node:os";
 import { File } from "./base";
 
 export function generateKoskoConfig(additionalConfig?: string): File {

@@ -2,7 +2,7 @@ import { run } from "../cli";
 import exit from "exit";
 import { Template } from "../template";
 import { writeFiles } from "../write";
-import { join } from "path";
+import { join } from "node:path";
 
 jest.spyOn(console, "error").mockImplementation(() => {
   // do nothing

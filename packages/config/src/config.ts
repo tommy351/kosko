@@ -1,6 +1,6 @@
 import toml from "@iarna/toml";
-import fs from "fs/promises";
-import { join } from "path";
+import fs from "node:fs/promises";
+import { join } from "node:path";
 import { Config, EnvironmentConfig } from "./types";
 import { validate } from "./validate";
 import logger, { LogLevel } from "@kosko/log";

@@ -1,7 +1,7 @@
 /// <reference types="jest-extended"/>
 import { makeTempDir, TempDir } from "@kosko/test-utils";
-import { mkdir, writeFile } from "fs/promises";
-import { dirname, join } from "path";
+import { mkdir, writeFile } from "node:fs/promises";
+import { dirname, join } from "node:path";
 import { glob } from "../glob";
 
 let tmpDir: TempDir;

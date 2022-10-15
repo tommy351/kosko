@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { createNodeCJSEnvironment } from "../node-cjs";
-import { join } from "path";
+import { join } from "node:path";
 import { merge } from "../../merge";
 import { Reducer } from "../../reduce";
 import { Environment } from "../types";

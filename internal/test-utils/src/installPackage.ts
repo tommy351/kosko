@@ -1,5 +1,5 @@
-import { dirname, join } from "path";
-import fs from "fs/promises";
+import { dirname, join } from "node:path";
+import fs from "node:fs/promises";
 import { projectRoot } from "./projectRoot";
 
 export async function installPackage(

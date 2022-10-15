@@ -1,5 +1,5 @@
-import fs from "fs/promises";
-import { dirname, join, relative, resolve, sep } from "path";
+import fs from "node:fs/promises";
+import { dirname, join, relative, resolve, sep } from "node:path";
 import pc from "picocolors";
 import { Command, RootArguments } from "../../cli/command";
 import { CLIError } from "../../cli/error";

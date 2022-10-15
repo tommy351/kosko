@@ -1,8 +1,8 @@
 // @ts-check
 "use strict";
 
-const { isAbsolute } = require("path");
-const { pathToFileURL } = require("url");
+const { isAbsolute } = require("node:path");
+const { pathToFileURL } = require("node:url");
 const _resolve = require("resolve");
 
 /** @type {Promise<boolean> | undefined} */

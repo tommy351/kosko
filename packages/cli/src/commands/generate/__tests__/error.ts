@@ -2,7 +2,7 @@ import { handleGenerateError } from "../error";
 import BufferList from "bl";
 import AggregateError from "@kosko/aggregate-error";
 import { GenerateError, ResolveError } from "@kosko/generate";
-import { join, normalize } from "path";
+import { join, normalize } from "node:path";
 import { CLIError } from "../../../cli/error";
 
 let stderr: BufferList;

@@ -1,4 +1,4 @@
-import { dirname, join } from "path";
+import { dirname, join } from "node:path";
 import execa from "execa";
 
 const testDir = dirname(__dirname);

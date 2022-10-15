@@ -2,7 +2,7 @@
 "use strict";
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const path = require("path");
+const path = require("node:path");
 
 module.exports = {
   mode: "development",

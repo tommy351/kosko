@@ -5,7 +5,7 @@ import {
   stringArg,
   stringArrayArg
 } from "@kosko/exec-utils";
-import assert from "assert";
+import assert from "node:assert";
 
 const BUILD_COMMANDS: readonly (readonly string[])[] = [
   ["kustomize", "build"],

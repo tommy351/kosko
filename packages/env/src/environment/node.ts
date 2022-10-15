@@ -1,5 +1,5 @@
 import { getRequireExtensions } from "@kosko/require";
-import { join } from "path";
+import { join } from "node:path";
 import { formatPath } from "../paths";
 import { toArray } from "../utils";
 import {

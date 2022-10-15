@@ -1,6 +1,6 @@
 import { LoadOptions, loadString, Manifest } from "@kosko/yaml";
 import tmp from "tmp-promise";
-import fs from "fs/promises";
+import fs from "node:fs/promises";
 import {
   spawn,
   booleanArg,

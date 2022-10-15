@@ -1,6 +1,6 @@
 import { loadFile, LoadOptions, loadString, loadUrl } from "../load";
-import fs from "fs/promises";
-import { join } from "path";
+import fs from "node:fs/promises";
+import { join } from "node:path";
 import fetch from "node-fetch";
 import type { FetchMockStatic } from "fetch-mock";
 import { Pod } from "kubernetes-models/v1/Pod";

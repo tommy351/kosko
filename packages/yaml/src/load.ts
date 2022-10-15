@@ -1,5 +1,5 @@
 import { loadAll } from "js-yaml";
-import fs from "fs/promises";
+import fs from "node:fs/promises";
 import fetch, { RequestInfo, RequestInit } from "node-fetch";
 import { getResourceModule, ResourceKind } from "./module";
 import logger, { LogLevel } from "@kosko/log";

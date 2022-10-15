@@ -1,6 +1,6 @@
 import { projectRoot } from "@kosko/test-utils";
-import { homedir } from "os";
-import { join } from "path";
+import { homedir } from "node:os";
+import { join } from "node:path";
 import escapeStringRegExp from "escape-string-regexp";
 
 function getProjectRootPathsToReplace() {

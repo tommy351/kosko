@@ -1,5 +1,5 @@
 import execa from "execa";
-import { dirname } from "path";
+import { dirname } from "node:path";
 import { runCLI } from "@kosko/test-utils";
 
 const testDir = dirname(__dirname);

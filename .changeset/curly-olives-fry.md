@@ -15,4 +15,4 @@
 "@kosko/yaml": major
 ---
 
-Drop support for Node.js 12.
+Drop support for Node.js 12. The minimum supported Node.js version is 14.18.0 now.

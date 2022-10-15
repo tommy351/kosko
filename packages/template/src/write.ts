@@ -1,5 +1,5 @@
-import fs from "fs/promises";
-import { dirname, join } from "path";
+import fs from "node:fs/promises";
+import { dirname, join } from "node:path";
 import logger, { LogLevel } from "@kosko/log";
 import { File } from "./template";
 

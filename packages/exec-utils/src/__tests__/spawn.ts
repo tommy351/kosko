@@ -1,4 +1,4 @@
-import { join } from "path";
+import { join } from "node:path";
 import { spawn } from "../spawn";
 
 const FIXTURE_DIR = join(__dirname, "../__fixtures__");

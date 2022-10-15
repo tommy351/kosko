@@ -2,7 +2,7 @@
 
 const env = require("@kosko/env");
 const { generate, print, PrintFormat } = require("@kosko/generate");
-const { join } = require("path");
+const { join } = require("node:path");
 
 (async () => {
   // Set environment

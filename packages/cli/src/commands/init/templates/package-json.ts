@@ -1,8 +1,8 @@
 import logger, { LogLevel } from "@kosko/log";
-import { join } from "path";
-import fs from "fs/promises";
+import { join } from "node:path";
+import fs from "node:fs/promises";
 import stringify from "fast-safe-stringify";
-import os from "os";
+import os from "node:os";
 import { File, TemplateContext } from "./base";
 
 async function readJson(path: string): Promise<any> {

@@ -1,4 +1,4 @@
-import { join } from "path";
+import { join } from "node:path";
 import { getConfig, loadConfig, searchConfig } from "../config";
 import { ValidationError } from "../validate";
 
