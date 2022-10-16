@@ -53,7 +53,7 @@ function toErrorLike(err: unknown): ErrorLike | undefined {
 interface AjvErrorObject {
   instancePath: string;
   message?: string;
-  params: any;
+  params: unknown;
   keyword: "type" | "enum" | "oneOf";
 }
 
@@ -80,7 +80,11 @@ function stringifyAjvErrorObject(err: AjvErrorObject) {
     msg += ` ${err.message}`;
   }
 
-  if (err.keyword === "enum" && Array.isArray(err.params.allowedValues)) {
+  if (
+    err.keyword === "enum" &&
+    isRecord(err.params) &&
+    Array.isArray(err.params.allowedValues)
+  ) {
     msg += `: ${stringify(err.params.allowedValues)}`;
   }
 

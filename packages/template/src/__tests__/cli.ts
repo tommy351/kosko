@@ -19,7 +19,7 @@ describe("when generate resolved", () => {
       foo: { type: "string", description: "option foo" },
       bar: { type: "number", description: "option bar" }
     },
-    generate: async ({ foo, bar }: any) => ({
+    generate: async ({ foo, bar }) => ({
       files: [
         { path: "foo", content: `${foo}` },
         { path: "bar", content: `${bar}` }

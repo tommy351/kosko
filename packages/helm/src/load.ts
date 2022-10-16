@@ -10,7 +10,7 @@ import {
 import stringify from "fast-safe-stringify";
 import { getErrorCode } from "@kosko/common-utils";
 
-async function writeValues(values: any) {
+async function writeValues(values: unknown) {
   const file = await tmp.file();
 
   await fs.writeFile(file.path, stringify(values));
@@ -195,7 +195,7 @@ export interface ChartOptions extends LoadOptions {
   /**
    * Specify values.
    */
-  values?: any;
+  values?: unknown;
 
   /**
    * Verify the package before using it.

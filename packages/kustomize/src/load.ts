@@ -179,7 +179,7 @@ export function loadKustomize({
       if (cachedBuildCommand) {
         try {
           return await runKustomize(cachedBuildCommand);
-        } catch (err: any) {
+        } catch (err) {
           if (!isENOENTError(err)) throw err;
 
           // Reset cached build command on ENOENT errors

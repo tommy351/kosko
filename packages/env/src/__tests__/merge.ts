@@ -38,7 +38,7 @@ describe("merge", () => {
 
   describe("non-plain objects", () => {
     class Props {
-      constructor(props: any) {
+      constructor(props: Record<string, unknown>) {
         Object.assign(this, props);
       }
     }
