@@ -1,6 +1,8 @@
 /**
  * Returns true when type of value is `object` and is not `null`, `undefined` or
  * an array.
+ *
+ * @public
  */
 export function isRecord(
   value: unknown
@@ -10,6 +12,8 @@ export function isRecord(
 
 /**
  * Transforms input into an array, or leave it as-is if input is already an array.
+ *
+ * @public
  */
 export function toArray<T>(input: T | T[]): T[] {
   return Array.isArray(input) ? input : [input];
@@ -17,6 +21,8 @@ export function toArray<T>(input: T | T[]): T[] {
 
 /**
  * Returns `code` in an error-like object.
+ *
+ * @public
  */
 export function getErrorCode(err: unknown): string | undefined {
   if (isRecord(err) && typeof err.code === "string") {
