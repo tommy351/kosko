@@ -15,7 +15,7 @@ async function isESMSupported() {
   if (!isESMSupportedCache) {
     isESMSupportedCache = (async () => {
       try {
-        // eslint-disable-next-line node/no-missing-import
+        // eslint-disable-next-line node/no-missing-import, node/no-unpublished-import
         await import("data:text/javascript,");
         return true;
       } catch {
