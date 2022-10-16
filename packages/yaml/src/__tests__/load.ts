@@ -5,6 +5,7 @@ import fetch from "node-fetch";
 import type { FetchMockStatic } from "fetch-mock";
 import { Pod } from "kubernetes-models/v1/Pod";
 import { TempDir, makeTempDir } from "@kosko/test-utils";
+import { isRecord } from "@kosko/common-utils";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 jest.mock("node-fetch", () => require("fetch-mock").sandbox());
@@ -182,7 +183,10 @@ metadata:
 `.trim();
       loadOptions = {
         transform(manifest) {
-          manifest.metadata.name = "abc";
+          if (isRecord(manifest.metadata)) {
+            manifest.metadata.name = "abc";
+          }
+
           return manifest;
         }
       };

@@ -5,6 +5,7 @@ import {
   resolveESM
 } from "@kosko/require";
 import logger, { LogLevel } from "@kosko/log";
+import { isRecord } from "@kosko/common-utils";
 
 export async function localRequireDefault(
   id: string,
@@ -25,6 +26,12 @@ export async function localImportDefault(
   });
 
   logger.log(LogLevel.Debug, `Importing ${id} from ${path}`);
+
   const mod = await importPath(path);
-  return mod.default;
+
+  if (isRecord(mod)) {
+    return mod.default;
+  }
+
+  return mod;
 }

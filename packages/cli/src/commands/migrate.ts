@@ -5,6 +5,7 @@ import { join, resolve } from "node:path";
 import { Command, RootArguments } from "../cli/command";
 import { print } from "../cli/print";
 import logger, { LogLevel } from "@kosko/log";
+import { toArray } from "@kosko/common-utils";
 
 function concatFiles(arr: readonly string[]): string {
   if (!arr.length) return "";
@@ -50,12 +51,8 @@ function readFiles(cwd: string, files: readonly string[]): Promise<string[]> {
   );
 }
 
-function toArray<T>(input: T): T[] {
-  return Array.isArray(input) ? input : [input];
-}
-
 export interface MigrateArguments extends RootArguments {
-  filename: any;
+  filename: string | string[];
 }
 
 export const migrateCmd: Command<MigrateArguments> = {

@@ -5,6 +5,7 @@ import {
   stringArg,
   stringArrayArg
 } from "@kosko/exec-utils";
+import { getErrorCode } from "@kosko/common-utils";
 import assert from "node:assert";
 
 const BUILD_COMMANDS: readonly (readonly string[])[] = [
@@ -19,8 +20,8 @@ export function resetCachedBuildCommand() {
   cachedBuildCommand = undefined;
 }
 
-function isENOENTError(err: any) {
-  return err.code === "ENOENT";
+function isENOENTError(err: unknown) {
+  return getErrorCode(err) === "ENOENT";
 }
 
 /**
@@ -178,7 +179,7 @@ export function loadKustomize({
       if (cachedBuildCommand) {
         try {
           return await runKustomize(cachedBuildCommand);
-        } catch (err: any) {
+        } catch (err) {
           if (!isENOENTError(err)) throw err;
 
           // Reset cached build command on ENOENT errors

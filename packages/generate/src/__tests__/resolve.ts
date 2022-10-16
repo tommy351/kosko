@@ -170,6 +170,24 @@ test("value is an async generator function that throws an error", async () => {
   // TODO: Assert `err.value`
 });
 
+test("value is undefined", async () => {
+  await expect(resolve(undefined)).resolves.toEqual([
+    { path: "", index: [], data: undefined }
+  ]);
+});
+
+test("value is null", async () => {
+  await expect(resolve(null)).resolves.toEqual([
+    { path: "", index: [], data: null }
+  ]);
+});
+
+test("value is a string", async () => {
+  await expect(resolve("foo")).resolves.toEqual([
+    { path: "", index: [], data: "foo" }
+  ]);
+});
+
 test("value is nested", async () => {
   await expect(
     resolve([

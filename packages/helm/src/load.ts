@@ -8,8 +8,9 @@ import {
   stringArrayArg
 } from "@kosko/exec-utils";
 import stringify from "fast-safe-stringify";
+import { getErrorCode } from "@kosko/common-utils";
 
-async function writeValues(values: any) {
+async function writeValues(values: unknown) {
   const file = await tmp.file();
 
   await fs.writeFile(file.path, stringify(values));
@@ -76,8 +77,8 @@ async function runHelm({
 
   try {
     return await spawn("helm", args);
-  } catch (err: any) {
-    if (err.code !== "ENOENT") throw err;
+  } catch (err) {
+    if (getErrorCode(err) !== "ENOENT") throw err;
 
     throw new Error(
       `"loadChart" requires Helm CLI installed in your environment. More info: https://kosko.dev/docs/components/loading-helm-chart`
@@ -194,7 +195,7 @@ export interface ChartOptions extends LoadOptions {
   /**
    * Specify values.
    */
-  values?: any;
+  values?: unknown;
 
   /**
    * Verify the package before using it.

@@ -1,6 +1,7 @@
 import { Manifest } from "./base";
 import logger, { LogLevel } from "@kosko/log";
 import { aggregateErrors, ResolveError } from "./error";
+import { isRecord } from "@kosko/common-utils";
 
 interface Validator {
   validate(): void | Promise<void>;
@@ -29,11 +30,7 @@ function isIterable(value: unknown): value is Iterable<unknown> {
 }
 
 function isAsyncIterable(value: unknown): value is AsyncIterable<unknown> {
-  return (
-    typeof value === "object" &&
-    value != null &&
-    typeof (value as any)[Symbol.asyncIterator] === "function"
-  );
+  return isRecord(value) && typeof value[Symbol.asyncIterator] === "function";
 }
 
 /**

@@ -49,8 +49,12 @@ async function generateForList(
   const result: Component[] = [];
 
   for (const data of items) {
-    if (data.apiVersion === "v1" && data.kind === "List") {
-      result.push(...(await generateForList(data.items as any)));
+    if (
+      data.apiVersion === "v1" &&
+      data.kind === "List" &&
+      Array.isArray(data.items)
+    ) {
+      result.push(...(await generateForList(data.items)));
     } else {
       result.push(await generateComponent(data));
     }

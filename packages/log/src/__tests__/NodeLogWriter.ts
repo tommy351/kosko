@@ -115,5 +115,5 @@ test("should serialize error for errors without message and stack", () => {
   writeInfo({ message: "test", error: "foo" });
   expect(process.stderr.write).toHaveBeenCalledTimes(1);
   expect(process.stderr.write).toHaveBeenCalledWith(`${pc.green("info ")} - test
-${pc.gray(`"foo"`)}\n`);
+${pc.gray("foo")}\n`);
 });

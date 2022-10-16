@@ -10,7 +10,7 @@ import stringify from "fast-safe-stringify";
  * @public
  */
 export interface Manifest extends ResourceKind {
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 type ManifestConstructor = new (data: Manifest) => Manifest;
