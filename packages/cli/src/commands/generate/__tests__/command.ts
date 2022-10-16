@@ -10,6 +10,7 @@ import pkgDir from "pkg-dir";
 import { generateCmd } from "../command";
 import { GenerateArguments } from "../types";
 import { TempDir, makeTempDir, installPackage } from "@kosko/test-utils";
+import { getErrorCode } from "@kosko/common-utils";
 
 jest.mock("@kosko/generate");
 jest.mock("@kosko/log");
@@ -32,8 +33,8 @@ async function getLoadedFakeModules(): Promise<string[]> {
   try {
     const content = await readFile(join(tmpDir.path, "fakeModules"), "utf8");
     return content.split(",").filter(Boolean);
-  } catch (err: any) {
-    if (err.code === "ENOENT") return [];
+  } catch (err) {
+    if (getErrorCode(err) === "ENOENT") return [];
     throw err;
   }
 }

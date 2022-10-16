@@ -32,6 +32,7 @@
     "node": ">=14.18.0"
   },
   "dependencies": {
+    "@kosko/common-utils": "workspace:^",
     "@kosko/log": "workspace:^",
     "@kosko/require": "workspace:^",
     "deepmerge": "^4.2.2",

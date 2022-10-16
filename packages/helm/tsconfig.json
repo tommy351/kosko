@@ -4,5 +4,9 @@
     "rootDir": "src",
     "outDir": "dist"
   },
-  "references": [{ "path": "../yaml" }, { "path": "../exec-utils" }]
+  "references": [
+    { "path": "../yaml" },
+    { "path": "../exec-utils" },
+    { "path": "../common-utils" }
+  ]
 }

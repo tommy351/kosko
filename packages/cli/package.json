@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "@kosko/aggregate-error": "workspace:^",
+    "@kosko/common-utils": "workspace:^",
     "@kosko/config": "workspace:^",
     "@kosko/exec-utils": "workspace:^",
     "@kosko/generate": "workspace:^",

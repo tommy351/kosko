@@ -29,6 +29,7 @@
     "node": ">=14.18.0"
   },
   "dependencies": {
+    "@kosko/common-utils": "workspace:^",
     "@kosko/exec-utils": "workspace:^",
     "@kosko/yaml": "workspace:^",
     "tslib": "^2.4.0"

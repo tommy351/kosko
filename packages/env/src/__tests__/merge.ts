@@ -39,9 +39,7 @@ describe("merge", () => {
   describe("non-plain objects", () => {
     class Props {
       constructor(props: any) {
-        for (const key of Object.keys(props)) {
-          (this as any)[key] = props[key];
-        }
+        Object.assign(this, props);
       }
     }
 

@@ -1,7 +1,7 @@
 import { Environment, Loader, ReducerExecutor, ReducerList } from "./types";
 import { reduce, reduceAsync, Reducer } from "../reduce";
 import { merge, mergeAsync } from "../merge";
-import { toArray } from "../utils";
+import { toArray } from "@kosko/common-utils";
 
 export type EnvironmentOptions = Pick<
   ReducerList,

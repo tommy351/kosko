@@ -29,6 +29,7 @@
     "node": ">=14.18.0"
   },
   "dependencies": {
+    "@kosko/common-utils": "workspace:^",
     "@kosko/log": "workspace:^",
     "@kosko/require": "workspace:^",
     "fast-safe-stringify": "^2.1.1",

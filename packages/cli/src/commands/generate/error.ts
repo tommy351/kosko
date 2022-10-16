@@ -5,6 +5,7 @@ import extractStack from "extract-stack";
 import pc from "picocolors";
 import { CLIError } from "../../cli/error";
 import stringify from "fast-safe-stringify";
+import { isRecord } from "@kosko/common-utils";
 
 function flattenError(err: unknown): unknown[] {
   if (err instanceof AggregateError) {
@@ -31,8 +32,8 @@ interface ErrorLike {
 function toErrorLike(err: unknown): ErrorLike | undefined {
   if (err instanceof Error) return err;
 
-  if (typeof err === "object" && err != null) {
-    const { name, message, stack } = err as any;
+  if (isRecord(err)) {
+    const { name, message, stack } = err;
 
     if (typeof message === "string") {
       return {
@@ -65,11 +66,10 @@ function isAjvValidationErrorLike(
   value: unknown
 ): value is AjvValidationErrorLike {
   return (
-    typeof value === "object" &&
-    value != null &&
-    (value as any).ajv === true &&
-    (value as any).validation === true &&
-    Array.isArray((value as any).errors)
+    isRecord(value) &&
+    value.ajv === true &&
+    value.validation === true &&
+    Array.isArray(value.errors)
   );
 }
 

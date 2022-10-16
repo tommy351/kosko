@@ -4,6 +4,7 @@ import cleanStack from "clean-stack";
 import stringify from "fast-safe-stringify";
 import { LogLevel } from "./LogLevel";
 import { Log, LogWriter } from "./types";
+import { isRecord } from "@kosko/common-utils";
 
 const COLOR_MAP: Record<LogLevel, Formatter> = {
   [LogLevel.Trace]: pc.gray,
@@ -33,18 +34,26 @@ function formatTime(time: Date): string {
   return `${h}:${m}:${s}.${ms}`;
 }
 
-function formatData(data: any): string {
+function formatData(data: unknown): string {
   return stringify(data, undefined, "  ");
 }
 
-function formatError(err: any): string {
-  if (!err.stack) {
-    if (err.message) return err.message;
-    return formatData(err);
+function formatError(err: unknown): string {
+  if (typeof err === "string") {
+    return err;
   }
 
-  const stack = cleanStack(err.stack, { pretty: true });
-  return stack;
+  if (isRecord(err)) {
+    if (typeof err.stack === "string") {
+      return cleanStack(err.stack, { pretty: true });
+    }
+
+    if (typeof err.message === "string") {
+      return err.message;
+    }
+  }
+
+  return formatData(err);
 }
 
 /**
@@ -61,8 +70,8 @@ export default class NodeLogWriter implements LogWriter {
 
     if (message) {
       content += ` ${message}`;
-    } else if (error && (error as any).message) {
-      content += ` ${(error as any).message}`;
+    } else if (isRecord(error) && typeof error.message === "string") {
+      content += ` ${error.message}`;
     }
 
     if (data != null) {
