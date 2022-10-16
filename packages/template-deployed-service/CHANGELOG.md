@@ -1,5 +1,16 @@
 # @kosko/template-deployed-service
 
+## 3.0.0
+
+### Major Changes
+
+- [#104](https://github.com/tommy351/kosko/pull/104) [`fef43bb`](https://github.com/tommy351/kosko/commit/fef43bbde55c5c2c48b0a81c71014513e83a7ad2) Thanks [@tommy351](https://github.com/tommy351)! - Drop support for Node.js 12. The minimum supported Node.js version is 14.18.0 now.
+
+### Patch Changes
+
+- Updated dependencies [[`fef43bb`](https://github.com/tommy351/kosko/commit/fef43bbde55c5c2c48b0a81c71014513e83a7ad2), [`affd063`](https://github.com/tommy351/kosko/commit/affd0632bc31033864cbc49620bee870d46437c8)]:
+  - @kosko/template@3.0.0
+
 ## 2.0.1
 
 ### Patch Changes

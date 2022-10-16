@@ -1,5 +1,29 @@
 # @kosko/config
 
+## 3.0.0
+
+### Major Changes
+
+- [#104](https://github.com/tommy351/kosko/pull/104) [`fef43bb`](https://github.com/tommy351/kosko/commit/fef43bbde55c5c2c48b0a81c71014513e83a7ad2) Thanks [@tommy351](https://github.com/tommy351)! - Drop support for Node.js 12. The minimum supported Node.js version is 14.18.0 now.
+
+### Minor Changes
+
+- [#106](https://github.com/tommy351/kosko/pull/106) [`4aff238`](https://github.com/tommy351/kosko/commit/4aff2388449a9887ca417db97296a6843854140b) Thanks [@tommy351](https://github.com/tommy351)! - Add `loaders` config. You can use this option to specify [ESM loader](https://nodejs.org/api/esm.html#loaders).
+
+- [#106](https://github.com/tommy351/kosko/pull/106) [`4aff238`](https://github.com/tommy351/kosko/commit/4aff2388449a9887ca417db97296a6843854140b) Thanks [@tommy351](https://github.com/tommy351)! - `Config` and `EnvironmentConfig` types are not readonly anymore.
+
+- [#108](https://github.com/tommy351/kosko/pull/108) [`affd063`](https://github.com/tommy351/kosko/commit/affd0632bc31033864cbc49620bee870d46437c8) Thanks [@tommy351](https://github.com/tommy351)! - Remove `readonly` attribute from return values.
+
+- [#108](https://github.com/tommy351/kosko/pull/108) [`c033b49`](https://github.com/tommy351/kosko/commit/c033b4949ae7456384370cc53a3e9caabbececb6) Thanks [@tommy351](https://github.com/tommy351)! - Add `bail` to config.
+
+- [#106](https://github.com/tommy351/kosko/pull/106) [`c667082`](https://github.com/tommy351/kosko/commit/c66708226949273b20c256533331987d3d638f3b) Thanks [@tommy351](https://github.com/tommy351)! - `getConfig` function can merge multiple environments now.
+
+### Patch Changes
+
+- Updated dependencies [[`fef43bb`](https://github.com/tommy351/kosko/commit/fef43bbde55c5c2c48b0a81c71014513e83a7ad2), [`dc6dfd5`](https://github.com/tommy351/kosko/commit/dc6dfd5918e57e2a0368333b1ced8190dfd801ee)]:
+  - @kosko/log@1.0.0
+  - @kosko/common-utils@0.1.0
+
 ## 2.0.1
 
 ### Patch Changes

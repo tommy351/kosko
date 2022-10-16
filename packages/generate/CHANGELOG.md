@@ -1,5 +1,47 @@
 # @kosko/generate
 
+## 3.0.0
+
+### Major Changes
+
+- [#104](https://github.com/tommy351/kosko/pull/104) [`fef43bb`](https://github.com/tommy351/kosko/commit/fef43bbde55c5c2c48b0a81c71014513e83a7ad2) Thanks [@tommy351](https://github.com/tommy351)! - Drop support for Node.js 12. The minimum supported Node.js version is 14.18.0 now.
+
+- [#108](https://github.com/tommy351/kosko/pull/108) [`2dc50bc`](https://github.com/tommy351/kosko/commit/2dc50bc7f7c9ac1fa474121e772c1789637506bf) Thanks [@tommy351](https://github.com/tommy351)! - - All errors in `resolve` function are wrapped with `ResolveError` for better access to context information (e.g. path, kind, name, etc.).
+
+  - Errors in `generate` function are wrapped with `GenerateError` for better access to context.
+  - `ValidationError` and `ValidationErrorOptions` are renamed as `ResolveError` and `ResolveErrorOptions` since it's not only used for validation now.
+  - All properties in `ResolveError` and `ResolveErrorOptions` are no longer required now.
+  - `ResolveError.message` no longer contains context information. You can access context from stack or direct access properties in the error value.
+  - The format of `ResolveError.stack` has been changed as below.
+
+    ```
+    ResolveError: Validation error
+        Path: /path/example
+        Index: [1, 2, 3]
+        Kind: apps/v1/Deployment
+        Name: nginx
+        Cause: ValidationError: data/spec is required
+            at ...
+        at ...
+    ```
+
+  - `generate` and `resolve` function now collect all errors rather than stop immediately when an error occurred. You can set `bail: true` to stop immediately. When there are more than one error, they will be wrapped with [`AggregateError`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError).
+  - `resolve` function now supports [`Iterable`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#the_iterable_protocol) (e.g. `Array`, `Set`, `Map`, generator) and [`AsyncIterable`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#the_async_iterator_and_async_iterable_protocols) (e.g. async generator).
+  - [`fast-glob`](https://github.com/mrmlnc/fast-glob) is replaced with a homemade glob function based on [`micromatch`](https://github.com/micromatch/micromatch). The behavior will be slightly different. Please submit an issue if you encounter any unexpected problems.
+  - Errors in `generate` function are wrapped with `GenerateError` for better access
+
+### Minor Changes
+
+- [#108](https://github.com/tommy351/kosko/pull/108) [`affd063`](https://github.com/tommy351/kosko/commit/affd0632bc31033864cbc49620bee870d46437c8) Thanks [@tommy351](https://github.com/tommy351)! - Remove `readonly` attribute from return values.
+
+### Patch Changes
+
+- Updated dependencies [[`fef43bb`](https://github.com/tommy351/kosko/commit/fef43bbde55c5c2c48b0a81c71014513e83a7ad2), [`dc6dfd5`](https://github.com/tommy351/kosko/commit/dc6dfd5918e57e2a0368333b1ced8190dfd801ee), [`8a6af40`](https://github.com/tommy351/kosko/commit/8a6af40da68fd3a3c8186e3ce008fc06955c4dc4)]:
+  - @kosko/log@1.0.0
+  - @kosko/require@4.0.0
+  - @kosko/common-utils@0.1.0
+  - @kosko/aggregate-error@0.1.0
+
 ## 2.0.1
 
 ### Patch Changes
