@@ -9,11 +9,11 @@ beforeEach(() => {
     ...reducers,
     {
       name: "a",
-      reduce: async (values, name) => ({ ...values, a: name || "" })
+      reduce: (values, name) => Promise.resolve({ ...values, a: name || "" })
     },
     {
       name: "b",
-      reduce: async (values, name) => ({ ...values, b: name || "" })
+      reduce: (values, name) => Promise.resolve({ ...values, b: name || "" })
     }
   ]);
 });

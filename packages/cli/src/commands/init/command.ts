@@ -15,6 +15,7 @@ import {
   getInstallCommand,
   installDependencies
 } from "./install";
+import { getErrorCode } from "@kosko/utils";
 
 async function checkPath(path: string, force?: boolean) {
   try {
@@ -40,8 +41,8 @@ async function checkPath(path: string, force?: boolean) {
     throw new CLIError("Destination already exists", {
       output: `Destination already exists. Please empty the directory or rerun with "--force" to proceed.`
     });
-  } catch (err: any) {
-    if (err.code !== "ENOENT") throw err;
+  } catch (err) {
+    if (getErrorCode(err) !== "ENOENT") throw err;
 
     logger.log(
       LogLevel.Trace,

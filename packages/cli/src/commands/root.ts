@@ -19,7 +19,7 @@ export const rootCmd = yargs
     global: true,
     default: process.cwd(),
     defaultDescription: "CWD",
-    coerce(arg) {
+    coerce(arg: string) {
       return isAbsolute(arg) ? arg : resolve(arg);
     }
   })

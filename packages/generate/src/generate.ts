@@ -8,6 +8,7 @@ import logger, { LogLevel } from "@kosko/log";
 import { resolve } from "./resolve";
 import { aggregateErrors, GenerateError } from "./error";
 import { glob } from "./glob";
+import { isRecord } from "@kosko/utils";
 
 /**
  * @public
@@ -59,9 +60,11 @@ async function resolveComponentPath(
 
 async function getComponentValue(path: string): Promise<unknown> {
   try {
-    const { default: mod } = await importPath(path);
+    const mod = await importPath(path);
 
-    return mod;
+    if (isRecord(mod)) {
+      return mod.default;
+    }
   } catch (err) {
     throw new GenerateError("Component value resolve failed", {
       path,

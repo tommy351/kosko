@@ -1,5 +1,6 @@
 import logger, { LogLevel } from "@kosko/log";
 import { importPath } from "@kosko/require";
+import { isRecord } from "@kosko/utils";
 
 /**
  * @public
@@ -59,9 +60,8 @@ async function getKubernetesModels(
   try {
     const path = `kubernetes-models/${apiVersion}/${kind}`;
     const mod = await importPath(path);
-    const ctor = mod[kind];
 
-    if (ctor) {
+    if (isRecord(mod) && typeof mod[kind] === "function") {
       const mod: ResourceModule = { path, export: kind };
       setResourceModule(res, mod);
       return mod;

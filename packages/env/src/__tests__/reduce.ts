@@ -42,10 +42,11 @@ describe("reduceAsync", () => {
         },
         {
           name: "async",
-          reduce: async (target, name) => ({
-            ...target,
-            async: name
-          })
+          reduce: (target, name) =>
+            Promise.resolve({
+              ...target,
+              async: name
+            })
         }
       ],
       "foo"

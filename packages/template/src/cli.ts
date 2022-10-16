@@ -21,7 +21,7 @@ export async function run(
     describe: "Path of working directory",
     default: process.cwd(),
     defaultDescription: "CWD",
-    coerce(arg): string {
+    coerce(arg: string): string {
       return isAbsolute(arg) ? arg : resolve(arg);
     }
   });

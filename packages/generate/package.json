@@ -35,6 +35,7 @@
     "@kosko/aggregate-error": "workspace:^",
     "@kosko/log": "workspace:^",
     "@kosko/require": "workspace:^",
+    "@kosko/utils": "workspace:^",
     "extract-stack": "^2.0.0",
     "fast-safe-stringify": "^2.1.1",
     "js-yaml": "^4.1.0",

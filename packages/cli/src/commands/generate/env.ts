@@ -21,7 +21,9 @@ export async function setupEnv(
   args: BaseGenerateArguments
 ): Promise<void> {
   const cwd = args.cwd;
-  const envs: Environment[] = [await localRequireDefault(KOSKO_ENV, cwd)];
+  const envs: Environment[] = [
+    (await localRequireDefault(KOSKO_ENV, cwd)) as Environment
+  ];
 
   if (await isESMSupported()) {
     // Why `@kosko/env` package has to be imported twice? Because the cache on
@@ -29,7 +31,7 @@ export async function setupEnv(
     // instances of `Environment`, and each of them must be initialized
     // in order to make sure users can access the environment in both CommonJS
     // and ESM environment.
-    envs.push(await localImportDefault(KOSKO_ENV, cwd));
+    envs.push((await localImportDefault(KOSKO_ENV, cwd)) as Environment);
   }
 
   const paths = config.paths?.environment || {};
@@ -46,11 +48,22 @@ export async function setupEnv(
 
     if (config.extensions) env.extensions = [...config.extensions];
 
-    if (paths.global) env.paths.global = paths.global;
-    if (paths.component) env.paths.component = paths.component;
+    if (paths.global) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      env.paths.global = paths.global;
+    }
+
+    if (paths.component) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      env.paths.component = paths.component;
+    }
 
     if (setReducer) {
-      env.setReducers((reducers) => [...reducers, setReducer]);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+      env.setReducers((reducers) => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-assignment
+        return [...reducers, setReducer];
+      });
     }
   }
 }

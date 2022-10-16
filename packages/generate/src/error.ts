@@ -1,5 +1,6 @@
 import AggregateError from "@kosko/aggregate-error";
 import extractStack from "extract-stack";
+import { isRecord } from "@kosko/utils";
 
 const STACK_INDENT = "    ";
 
@@ -23,13 +24,14 @@ export interface ComponentInfo {
 }
 
 function isComponent(value: unknown): value is Component {
-  if (value == null || typeof value !== "object") return false;
+  if (!isRecord(value)) return false;
 
-  const { apiVersion, kind, metadata = {} } = value as any;
+  const { apiVersion, kind, metadata } = value;
 
   return (
     typeof apiVersion === "string" &&
     typeof kind === "string" &&
+    isRecord(metadata) &&
     typeof metadata.name === "string"
   );
 }
@@ -56,8 +58,8 @@ function decorateErrorStack(err: Error, values: Record<string, string>) {
 function generateCauseMessage(cause: unknown) {
   if (typeof cause === "string") return cause;
 
-  if (typeof cause === "object" && cause != null) {
-    const { name, message, stack } = cause as any;
+  if (isRecord(cause)) {
+    const { name, message, stack } = cause;
 
     if (typeof message !== "string") {
       return;

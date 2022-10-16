@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    ".eslintrc.cjs",
+    "jest.config.ts",
+    "jest.integration.config.ts",
+    "examples",
+    "internal",
+    "integration",
+    "packages",
+    "website"
+  ]
+}

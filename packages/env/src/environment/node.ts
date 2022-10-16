@@ -1,7 +1,7 @@
 import { getRequireExtensions } from "@kosko/require";
 import { join } from "node:path";
 import { formatPath } from "../paths";
-import { toArray } from "../utils";
+import { toArray } from "@kosko/utils";
 import {
   createEnvironment,
   createLoaderReducers,
@@ -25,8 +25,8 @@ export interface NodeEnvironmentOptions {
 
 export interface InternalNodeEnvironmentOptions extends NodeEnvironmentOptions {
   createReducerExecutor(reducers: ReducerList): ReducerExecutor;
-  requireModule(environment: Environment, id: string): any;
-  mergeValues(data: any[]): any;
+  requireModule(environment: Environment, id: string): unknown;
+  mergeValues(data: unknown[]): unknown;
 }
 
 export function createNodeEnvironment({
@@ -59,8 +59,8 @@ export function createNodeEnvironment({
   const environment = createEnvironment({
     cwd,
     extensions: getNodeExtensions(),
-    setReducers: reducers.setReducers,
-    resetReducers: reducers.resetReducers,
+    setReducers: (cb) => reducers.setReducers(cb),
+    resetReducers: () => reducers.resetReducers(),
     reduce
   });
 

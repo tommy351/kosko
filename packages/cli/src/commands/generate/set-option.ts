@@ -1,5 +1,7 @@
 import { Reducer } from "@kosko/env";
+import { isRecord, toArray } from "@kosko/utils";
 import jp from "jsonpath";
+import stringify from "fast-safe-stringify";
 import { CLIError } from "../../cli/error";
 
 /**
@@ -17,9 +19,10 @@ export interface SetOption {
 // Splits strings like `something[a==b]=c` into `something[a==b]` and `c`
 const parseRegexp = /^(.*?[^=<>~])=([^=<>~].*?$)/;
 
-function parseSetOptionValue(value: string): any {
+function parseSetOptionValue(value: string): string {
   try {
-    return JSON.parse(value);
+    const parsed = JSON.parse(value) as unknown;
+    return typeof parsed === "string" ? parsed : value;
   } catch (e) {
     // if value is not a valid JSON, then it
     // is considered to be a plain string
@@ -31,7 +34,7 @@ function parseKeyValuePair(s: unknown): SetOption {
   // s has unknown type because yargs converts a string
   // to a number in case of nested objects
   if (typeof s !== "string") {
-    throw new Error(`The specified value "${s}" is not a string.`);
+    throw new Error(`The specified value ${stringify(s)} is not a string.`);
   }
 
   const matches = s.match(parseRegexp);
@@ -61,18 +64,12 @@ export function parseSetOptions(arg: unknown): SetOption[] {
 
   for (const argItem of argsArray) {
     // if item is an object then it contains component variables
-    if (typeof argItem === "object" && argItem !== null) {
+    if (isRecord(argItem)) {
       // for each component there is a key in the object
       for (const argKey of Object.keys(argItem)) {
         // if only one value is specified then argValues is a string
         // if multiple values are specified then argValues is an array
-        let argValues = (argItem as any)[argKey];
-
-        // wrap a single string value to the array so we can
-        // unify futher processing
-        if (!Array.isArray(argValues)) {
-          argValues = [argValues];
-        }
+        const argValues = toArray(argItem[argKey]);
 
         for (const value of argValues) {
           result.push({
@@ -102,10 +99,14 @@ export function createCLIEnvReducer(setOptions: SetOption[]): Reducer {
   for (const opt of setOptions) {
     try {
       jp.parse(opt.key);
-    } catch (err: any) {
-      throw new CLIError(err.message, {
+    } catch (err) {
+      const message = `Invalid JSONPath expression "${opt.key}"`;
+      const reason =
+        isRecord(err) && typeof err.message === "string" ? err.message : "";
+
+      throw new CLIError(message, {
         code: 1,
-        output: `Invalid JSONPath expression "${opt.key}": ${err.message}`
+        output: reason ? `${message}: ${reason}` : message
       });
     }
   }

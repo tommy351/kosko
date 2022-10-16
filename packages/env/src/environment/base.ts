@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Environment, Loader, ReducerExecutor, ReducerList } from "./types";
 import { reduce, reduceAsync, Reducer } from "../reduce";
 import { merge, mergeAsync } from "../merge";
-import { toArray } from "../utils";
+import { toArray } from "@kosko/utils";
 
 export type EnvironmentOptions = Pick<
   ReducerList,
@@ -26,7 +27,9 @@ export function createEnvironment({
     extensions,
     setReducers,
     resetReducers,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     global: () => reduce(),
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     component: (name) => reduce(name)
   };
 }
@@ -38,6 +41,7 @@ export function createLoaderReducers(
   return [
     {
       name: "global",
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       reduce: (values) => mergeValues([values, ...toArray(loader.global())])
     },
     {
@@ -45,8 +49,10 @@ export function createLoaderReducers(
       reduce: (values, componentName) => {
         if (!componentName) return values;
 
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return mergeValues([
           values,
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           ...toArray(loader.component(componentName))
         ]);
       }

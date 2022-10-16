@@ -31,10 +31,10 @@ test("value is a function that returns an array", async () => {
   ]);
 });
 
-test("value is a function that returns a Promise", async () => {
-  await expect(resolve(async () => ({ foo: "bar" }))).resolves.toEqual([
-    { path: "", index: [], data: { foo: "bar" } }
-  ]);
+test("value is a function that returns a resolved promise", async () => {
+  await expect(resolve(() => Promise.resolve({ foo: "bar" }))).resolves.toEqual(
+    [{ path: "", index: [], data: { foo: "bar" } }]
+  );
 });
 
 test("value is a function that throws an error", async () => {
@@ -56,10 +56,8 @@ test("value is a function that throws an error", async () => {
   expect(err.cause).toEqual(new Error("err"));
 });
 
-test("value is an async function that throws an error", async () => {
-  const value = async () => {
-    throw new Error("err");
-  };
+test("value is a function that returns a rejected promise", async () => {
+  const value = () => Promise.reject(new Error("err"));
   const err = await getRejectedValue(
     resolve(value, {
       path: "test",
@@ -139,6 +137,7 @@ test("value is a generator function that throws an error", async () => {
 });
 
 test("value is an async generator function", async () => {
+  // eslint-disable-next-line @typescript-eslint/require-await
   async function* value() {
     yield { a: "b" };
     yield { c: "d" };
@@ -151,6 +150,7 @@ test("value is an async generator function", async () => {
 });
 
 test("value is an async generator function that throws an error", async () => {
+  // eslint-disable-next-line @typescript-eslint/require-await
   async function* value() {
     yield { a: "b" };
     throw new Error("err");
@@ -178,10 +178,10 @@ test("value is nested", async () => {
       () => ({ b: 2 }),
       // Returns an array
       () => [{ c: 3 }, { d: 4 }],
-      // Returns an promise
-      async () => ({ e: 5 }),
-      // Returns an promise returning an array
-      async () => [{ f: 6 }, { g: 7 }]
+      // Returns a promise
+      () => Promise.resolve({ e: 5 }),
+      // Returns a promise which returns an array
+      () => Promise.resolve([{ f: 6 }, { g: 7 }])
     ])
   ).resolves.toEqual([
     { path: "", index: [0], data: { a: 1 } },
@@ -267,13 +267,11 @@ test("should throw AggregateError when nested validate throws an error", async (
   }
 });
 
-test("should throw ResolveError when validate throws an async error", async () => {
+test("should throw ResolveError when validate throws a rejected promise", async () => {
   await expect(
     resolve({
       foo: "bar",
-      async validate() {
-        throw new Error("err");
-      }
+      validate: () => Promise.reject(new Error("err"))
     })
   ).rejects.toThrowWithMessage(ResolveError, "Validation error");
 });

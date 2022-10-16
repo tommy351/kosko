@@ -50,7 +50,7 @@ export const template: Template<Options> = {
       default: 1
     }
   },
-  async generate({ name, image, type, servicePort, containerPort, replicas }) {
+  generate({ name, image, type, servicePort, containerPort, replicas }) {
     return {
       files: [
         {

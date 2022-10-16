@@ -34,6 +34,7 @@
   "dependencies": {
     "@kosko/log": "workspace:^",
     "@kosko/require": "workspace:^",
+    "@kosko/utils": "workspace:^",
     "deepmerge": "^4.2.2",
     "is-plain-object": "^5.0.0",
     "tslib": "^2.4.0"

@@ -4,9 +4,7 @@ import { Template } from "../template";
 import { writeFiles } from "../write";
 import { join } from "node:path";
 
-jest.spyOn(console, "error").mockImplementation(() => {
-  // do nothing
-});
+jest.spyOn(console, "error");
 
 jest.mock("exit");
 jest.mock("@kosko/log");
@@ -19,7 +17,7 @@ describe("when generate resolved", () => {
       foo: { type: "string", description: "option foo" },
       bar: { type: "number", description: "option bar" }
     },
-    generate: async ({ foo, bar }: any) => ({
+    generate: ({ foo, bar }: any) => ({
       files: [
         { path: "foo", content: `${foo}` },
         { path: "bar", content: `${bar}` }

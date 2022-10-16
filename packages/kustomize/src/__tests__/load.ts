@@ -105,7 +105,7 @@ describe("when buildCommand is not given", () => {
   function allowCommands(commands: readonly string[]) {
     const realSpawn = jest.requireActual("@kosko/exec-utils").spawn;
 
-    mockedSpawn.mockImplementation(async (command, args) => {
+    mockedSpawn.mockImplementation((command, args) => {
       if (commands.includes(command)) {
         return realSpawn(command, args);
       }

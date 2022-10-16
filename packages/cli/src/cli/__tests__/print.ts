@@ -21,9 +21,9 @@ describe("when write failed", () => {
   const err = new Error("some error");
 
   beforeEach(() => {
-    (process.stdout.write as jest.Mock).mockImplementation((data, cb) =>
-      cb(err)
-    );
+    (process.stdout.write as jest.Mock).mockImplementation((data, cb) => {
+      cb(err);
+    });
   });
 
   test("should throw the error", async () => {

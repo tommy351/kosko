@@ -7,6 +7,7 @@
   "references": [
     { "path": "../log" },
     { "path": "../../internal/test-utils" },
-    { "path": "../aggregate-error" }
+    { "path": "../aggregate-error" },
+    { "path": "../utils" }
   ]
 }

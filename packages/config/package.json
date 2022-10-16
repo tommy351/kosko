@@ -29,6 +29,7 @@
   "dependencies": {
     "@iarna/toml": "^2.2.5",
     "@kosko/log": "workspace:^",
+    "@kosko/utils": "workspace:^",
     "superstruct": "^0.15.3",
     "tslib": "^2.4.0"
   },

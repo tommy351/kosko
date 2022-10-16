@@ -267,12 +267,14 @@ importers:
 
   internal/test-utils:
     specifiers:
+      '@kosko/utils': workspace:^
       execa: ^5.1.1
       temp-dir: ^2.0.0
       tmp: ^0.2.1
       tmp-promise: ^3.0.3
       tslib: ^2.4.0
     dependencies:
+      '@kosko/utils': link:../../packages/utils
       execa: 5.1.1
       temp-dir: 2.0.0
       tmp: 0.2.1
@@ -301,6 +303,7 @@ importers:
       '@kosko/migrate': workspace:^
       '@kosko/require': workspace:^
       '@kosko/test-utils': workspace:^
+      '@kosko/utils': workspace:^
       '@types/bl': ^5.0.2
       '@types/exit': ^0.1.31
       '@types/jsonpath': ^0.2.0
@@ -328,6 +331,7 @@ importers:
       '@kosko/log': link:../log
       '@kosko/migrate': link:../migrate
       '@kosko/require': link:../require
+      '@kosko/utils': link:../utils
       clean-stack: 3.0.1
       exit: 0.1.2
       extract-stack: 2.0.0
@@ -358,11 +362,13 @@ importers:
       '@iarna/toml': ^2.2.5
       '@kosko/jest-preset': workspace:^
       '@kosko/log': workspace:^
+      '@kosko/utils': workspace:^
       superstruct: ^0.15.3
       tslib: ^2.4.0
     dependencies:
       '@iarna/toml': 2.2.5
       '@kosko/log': link:../log
+      '@kosko/utils': link:../utils
       superstruct: 0.15.5
       tslib: 2.4.0
     devDependencies:
@@ -373,12 +379,14 @@ importers:
       '@kosko/jest-preset': workspace:^
       '@kosko/log': workspace:^
       '@kosko/require': workspace:^
+      '@kosko/utils': workspace:^
       deepmerge: ^4.2.2
       is-plain-object: ^5.0.0
       tslib: ^2.4.0
     dependencies:
       '@kosko/log': link:../log
       '@kosko/require': link:../require
+      '@kosko/utils': link:../utils
       deepmerge: 4.2.2
       is-plain-object: 5.0.0
       tslib: 2.4.0
@@ -407,6 +415,7 @@ importers:
       '@kosko/log': workspace:^
       '@kosko/require': workspace:^
       '@kosko/test-utils': workspace:^
+      '@kosko/utils': workspace:^
       '@types/bl': ^5.0.2
       '@types/js-yaml': ^4.0.5
       '@types/micromatch': ^4.0.2
@@ -422,6 +431,7 @@ importers:
       '@kosko/aggregate-error': link:../aggregate-error
       '@kosko/log': link:../log
       '@kosko/require': link:../require
+      '@kosko/utils': link:../utils
       extract-stack: 2.0.0
       fast-safe-stringify: 2.1.1
       js-yaml: 4.1.0
@@ -441,12 +451,14 @@ importers:
     specifiers:
       '@kosko/exec-utils': workspace:^
       '@kosko/jest-preset': workspace:^
+      '@kosko/utils': workspace:^
       '@kosko/yaml': workspace:^
       fast-safe-stringify: ^2.1.1
       tmp-promise: ^3.0.3
       tslib: ^2.4.0
     dependencies:
       '@kosko/exec-utils': link:../exec-utils
+      '@kosko/utils': link:../utils
       '@kosko/yaml': link:../yaml
       fast-safe-stringify: 2.1.1
       tmp-promise: 3.0.3
@@ -466,10 +478,12 @@ importers:
     specifiers:
       '@kosko/exec-utils': workspace:^
       '@kosko/jest-preset': workspace:^
+      '@kosko/utils': workspace:^
       '@kosko/yaml': workspace:^
       tslib: ^2.4.0
     dependencies:
       '@kosko/exec-utils': link:../exec-utils
+      '@kosko/utils': link:../utils
       '@kosko/yaml': link:../yaml
       tslib: 2.4.0
     devDependencies:
@@ -478,11 +492,13 @@ importers:
   packages/log:
     specifiers:
       '@kosko/jest-preset': workspace:^
+      '@kosko/utils': workspace:^
       clean-stack: ^3.0.1
       fast-safe-stringify: ^2.1.1
       picocolors: ^1.0.0
       tslib: ^2.4.0
     dependencies:
+      '@kosko/utils': link:../utils
       clean-stack: 3.0.1
       fast-safe-stringify: 2.1.1
       picocolors: 1.0.0
@@ -566,6 +582,7 @@ importers:
       '@kosko/log': workspace:^
       '@kosko/require': workspace:^
       '@kosko/test-utils': workspace:^
+      '@kosko/utils': workspace:^
       '@types/js-yaml': ^4.0.5
       '@types/node-fetch': ^2.6.2
       execa: ^5.1.1
@@ -578,6 +595,7 @@ importers:
     dependencies:
       '@kosko/log': link:../log
       '@kosko/require': link:../require
+      '@kosko/utils': link:../utils
       fast-safe-stringify: 2.1.1
       js-yaml: 4.1.0
       node-fetch: 2.6.7

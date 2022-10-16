@@ -172,7 +172,7 @@ describe("when --install option is given", () => {
     await execute({ path: tmpDir.path, install: true });
   });
 
-  test("should run install in the folder", async () => {
+  test("should run install in the folder", () => {
     expect(spawn).toHaveBeenCalledTimes(1);
     expect(spawn).toHaveBeenCalledWith(
       "npm",

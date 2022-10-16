@@ -10,13 +10,13 @@ export function isESMSupported(): Promise<boolean>;
  * and ECMAScript modules. When a CommonJS module is imported, its `module.export`
  * is assigned to `default` in order to match the behavior of ECMAScript modules.
  */
-export function importPath(path: string): Promise<any>;
+export function importPath(path: string): Promise<unknown>;
 
 /**
  * Imports a module from the specified path and returns its default export.
  * This function is only compatible with CommonJS modules.
  */
-export function requireDefault(path: string): any;
+export function requireDefault(path: string): unknown;
 
 export interface ResolveOptions {
   /**

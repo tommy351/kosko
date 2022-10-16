@@ -25,7 +25,7 @@ export const template: Template<Options> = {
       required: true
     }
   },
-  async generate({ name }) {
+  generate({ name }) {
     return {
       files: [
         {

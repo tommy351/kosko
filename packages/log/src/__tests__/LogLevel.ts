@@ -9,6 +9,7 @@ describe.each([
   ["fatal", LogLevel.Fatal],
   ["foo", undefined]
 ])("logLevelFromString(%s)", (input, expected) => {
+  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   test(`should return ${expected}`, () => {
     expect(logLevelFromString(input)).toEqual(expected);
   });

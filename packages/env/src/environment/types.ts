@@ -22,7 +22,7 @@ export interface ReducerList {
 }
 
 export interface ReducerExecutor {
-  reduce(componentName?: string): any;
+  reduce(this: void, componentName?: string): any;
 }
 
 /**

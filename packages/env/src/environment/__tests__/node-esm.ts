@@ -77,6 +77,7 @@ describe("with additional reducers", () => {
 
   const customReducer: Reducer = {
     name: "custom",
+    // eslint-disable-next-line @typescript-eslint/require-await
     reduce: async (variables, componentName) => {
       return {
         ...variables,

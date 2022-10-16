@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { Config, EnvironmentConfig } from "./types";
 import { validate } from "./validate";
 import logger, { LogLevel } from "@kosko/log";
+import { getErrorCode, toArray } from "@kosko/utils";
 
 /**
  * Parses and validates a config file from the specified path.
@@ -33,8 +34,8 @@ export async function searchConfig(
 
   try {
     return await loadConfig(path);
-  } catch (err: any) {
-    if (err.code === "ENOENT") return {};
+  } catch (err) {
+    if (getErrorCode(err) === "ENOENT") return {};
 
     logger.log(LogLevel.Debug, "Config load failed", { error: err });
     throw err;
@@ -43,10 +44,6 @@ export async function searchConfig(
 
 function flatten<T>(...arrays: (readonly T[] | undefined)[]): T[] {
   return arrays.reduce((acc = [], item = []) => acc.concat(item), []) as T[];
-}
-
-function toArray<T>(value: T | T[]): T[] {
-  return Array.isArray(value) ? value : [value];
 }
 
 /**

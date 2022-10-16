@@ -1,9 +1,9 @@
 {
-  "name": "@kosko/kustomize",
-  "version": "0.2.2",
-  "description": "Load Kustomize in kosko.",
+  "name": "@kosko/utils",
+  "version": "0.0.0",
+  "description": "Common utilities used in Kosko.",
   "homepage": "https://kosko.dev",
-  "repository": "https://github.com/tommy351/kosko/tree/master/packages/kustomize",
+  "repository": "https://github.com/tommy351/kosko/tree/master/packages/yaml",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "main": "dist/index.js",
@@ -18,9 +18,7 @@
     "/dist/"
   ],
   "keywords": [
-    "kubernetes",
-    "kosko",
-    "kustomize"
+    "kosko"
   ],
   "publishConfig": {
     "access": "public"
@@ -29,9 +27,6 @@
     "node": ">=14.18.0"
   },
   "dependencies": {
-    "@kosko/exec-utils": "workspace:^",
-    "@kosko/utils": "workspace:^",
-    "@kosko/yaml": "workspace:^",
     "tslib": "^2.4.0"
   },
   "devDependencies": {

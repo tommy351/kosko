@@ -15,15 +15,15 @@ export interface Reducer {
    * global variables.
    */
   reduce(
-    target: Record<string, any>,
+    target: Record<string, unknown>,
     componentName?: string
-  ): Record<string, any>;
+  ): Record<string, unknown>;
 }
 
 export function reduce(
   reducers: readonly Reducer[],
   componentName?: string
-): any {
+): unknown {
   return reducers.reduce(
     (target, reducer) => reducer.reduce(target, componentName),
     {}
@@ -33,10 +33,11 @@ export function reduce(
 export async function reduceAsync(
   reducers: readonly Reducer[],
   componentName?: string
-): Promise<any> {
+): Promise<unknown> {
   let target = {};
 
   for (const reducer of reducers) {
+    // eslint-disable-next-line @typescript-eslint/await-thenable
     target = await reducer.reduce(target, componentName);
   }
 

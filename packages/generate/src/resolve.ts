@@ -1,39 +1,28 @@
 import { Manifest } from "./base";
 import logger, { LogLevel } from "@kosko/log";
 import { aggregateErrors, ResolveError } from "./error";
+import { isRecord } from "@kosko/utils";
 
 interface Validator {
   validate(): void | Promise<void>;
 }
 
 function isValidator(value: unknown): value is Validator {
-  return !!value && typeof (value as any).validate === "function";
+  return isRecord(value) && typeof value.validate === "function";
 }
 
 function isPromiseLike(value: unknown): value is PromiseLike<unknown> {
   if (value instanceof Promise) return true;
 
-  return (
-    !!value &&
-    (typeof value === "function" || typeof value === "object") &&
-    typeof (value as any).then === "function"
-  );
+  return isRecord(value) && typeof value.then === "function";
 }
 
 function isIterable(value: unknown): value is Iterable<unknown> {
-  return (
-    typeof value === "object" &&
-    value != null &&
-    typeof (value as any)[Symbol.iterator] === "function"
-  );
+  return isRecord(value) && typeof value[Symbol.iterator] === "function";
 }
 
 function isAsyncIterable(value: unknown): value is AsyncIterable<unknown> {
-  return (
-    typeof value === "object" &&
-    value != null &&
-    typeof (value as any)[Symbol.asyncIterator] === "function"
-  );
+  return isRecord(value) && typeof value[Symbol.asyncIterator] === "function";
 }
 
 /**
@@ -189,7 +178,9 @@ export async function resolve(
       try {
         logger.log(
           LogLevel.Debug,
-          `Validating manifests ${index.join(".")} in ${options.path}`
+          `Validating manifests ${index.join(".")}${
+            options.path ? ` in ${options.path}` : ""
+          }`
         );
         await value.validate();
       } catch (err) {

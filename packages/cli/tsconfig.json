@@ -12,7 +12,8 @@
     { "path": "../log" },
     { "path": "../exec-utils" },
     { "path": "../../internal/test-utils" },
-    { "path": "../aggregate-error" }
+    { "path": "../aggregate-error" },
+    { "path": "../utils" }
   ],
   "include": ["src"]
 }

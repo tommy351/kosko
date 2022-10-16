@@ -5,8 +5,9 @@ import fetch from "node-fetch";
 import type { FetchMockStatic } from "fetch-mock";
 import { Pod } from "kubernetes-models/v1/Pod";
 import { TempDir, makeTempDir } from "@kosko/test-utils";
+import { isRecord } from "@kosko/utils";
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
 jest.mock("node-fetch", () => require("fetch-mock").sandbox());
 
 const fetchMock = fetch as unknown as FetchMockStatic;
@@ -16,7 +17,7 @@ afterEach(() => {
 });
 
 function testLoad(options: {
-  setup: (content: string) => Promise<void>;
+  setup: (content: string) => Promise<void> | void;
   load: (options: LoadOptions) => () => Promise<unknown[]>;
 }) {
   let content: string;
@@ -182,7 +183,10 @@ metadata:
 `.trim();
       loadOptions = {
         transform(manifest) {
-          manifest.metadata.name = "abc";
+          if (isRecord(manifest) && isRecord(manifest.metadata)) {
+            manifest.metadata.name === "abc";
+          }
+
           return manifest;
         }
       };
@@ -224,7 +228,7 @@ describe("loadString", () => {
   let content: string;
 
   testLoad({
-    setup: async (input) => {
+    setup: (input) => {
       content = input;
     },
     load: (options) => {
@@ -257,7 +261,7 @@ describe("loadUrl", () => {
 
   describe("common tests", () => {
     testLoad({
-      setup: async (content) => {
+      setup: (content) => {
         fetchMock.getOnce(url, content, {
           sendAsJson: false
         });

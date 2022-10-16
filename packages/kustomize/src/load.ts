@@ -6,6 +6,7 @@ import {
   stringArrayArg
 } from "@kosko/exec-utils";
 import assert from "node:assert";
+import { getErrorCode } from "@kosko/utils";
 
 const BUILD_COMMANDS: readonly (readonly string[])[] = [
   ["kustomize", "build"],
@@ -19,8 +20,8 @@ export function resetCachedBuildCommand() {
   cachedBuildCommand = undefined;
 }
 
-function isENOENTError(err: any) {
-  return err.code === "ENOENT";
+function isENOENTError(err: unknown) {
+  return getErrorCode(err) === "ENOENT";
 }
 
 /**

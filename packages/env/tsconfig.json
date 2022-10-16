@@ -4,5 +4,5 @@
     "rootDir": "src",
     "outDir": "dist"
   },
-  "references": [{ "path": "../log" }]
+  "references": [{ "path": "../log" }, { "path": "../utils" }]
 }

@@ -6,7 +6,7 @@ import yargs from "yargs";
 export interface Template<T> {
   description?: string;
   options?: { [P in keyof T]: Options<T[P], T> };
-  generate(options: T): Promise<Result>;
+  generate(options: T): Promise<Result> | Result;
 }
 
 /**

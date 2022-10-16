@@ -31,6 +31,7 @@
   "dependencies": {
     "@kosko/log": "workspace:^",
     "@kosko/require": "workspace:^",
+    "@kosko/utils": "workspace:^",
     "fast-safe-stringify": "^2.1.1",
     "js-yaml": "^4.1.0",
     "node-fetch": "^2.6.6",

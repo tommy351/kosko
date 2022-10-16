@@ -1,6 +1,7 @@
 import { dirname, join } from "node:path";
 import fs from "node:fs/promises";
 import { projectRoot } from "./projectRoot";
+import { getErrorCode } from "@kosko/utils";
 
 export async function installPackage(
   path: string,
@@ -13,8 +14,8 @@ export async function installPackage(
 
   try {
     await fs.unlink(dest);
-  } catch (err: any) {
-    if (err.code !== "ENOENT") throw err;
+  } catch (err) {
+    if (getErrorCode(err) !== "ENOENT") throw err;
   }
 
   await fs.symlink(src, dest, "dir");

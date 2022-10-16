@@ -5,6 +5,7 @@ import { getResourceModule, ResourceKind } from "./module";
 import logger, { LogLevel } from "@kosko/log";
 import { importPath } from "@kosko/require";
 import stringify from "fast-safe-stringify";
+import { isRecord } from "@kosko/utils";
 
 /**
  * @public
@@ -19,11 +20,7 @@ type ManifestConstructor = new (data: Manifest) => Manifest;
  * @public
  */
 export interface LoadOptions {
-  transform?(manifest: Manifest): Manifest | null | undefined;
-}
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && !Array.isArray(value);
+  transform?(this: void, manifest: Manifest): Manifest | null | undefined;
 }
 
 function isManifest(value: Record<string, unknown>): value is Manifest {
@@ -49,7 +46,14 @@ async function getConstructor(
 
   try {
     const result = await importPath(mod.path);
-    return result[mod.export];
+
+    if (isRecord(result)) {
+      const ctor = result[mod.export];
+
+      if (typeof ctor === "function") {
+        return ctor as ManifestConstructor;
+      }
+    }
   } catch {
     logger.log(LogLevel.Debug, "Failed to import the resource module", {
       data: mod
@@ -125,7 +129,7 @@ export function loadUrl(
     });
 
     if (!res.ok) {
-      throw new Error(`Failed to fetch YAML file from: ${url}`);
+      throw new Error(`Failed to fetch YAML file from: ${url.toString()}`);
     }
 
     return loadString(await res.text(), { transform });

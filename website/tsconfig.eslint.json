@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "blog",
+    "docs",
+    "plugins",
+    "remark-plugins",
+    "scripts",
+    "src",
+    ".eslintrc.cjs"
+  ]
+}

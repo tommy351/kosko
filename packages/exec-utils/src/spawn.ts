@@ -39,11 +39,11 @@ export function spawn(
     proc.stdin.end(options.input);
   }
 
-  proc.stdout?.on("data", (chunk) => {
+  proc.stdout?.on("data", (chunk: string) => {
     stdoutChunks.push(chunk);
   });
 
-  proc.stderr?.on("data", (chunk) => {
+  proc.stderr?.on("data", (chunk: string) => {
     stderrChunks.push(chunk);
   });
 
