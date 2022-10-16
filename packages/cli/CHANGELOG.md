@@ -1,5 +1,62 @@
 # @kosko/cli
 
+## 3.0.0
+
+### Major Changes
+
+- [#104](https://github.com/tommy351/kosko/pull/104) [`fef43bb`](https://github.com/tommy351/kosko/commit/fef43bbde55c5c2c48b0a81c71014513e83a7ad2) Thanks [@tommy351](https://github.com/tommy351)! - Drop support for Node.js 12. The minimum supported Node.js version is 14.18.0 now.
+
+### Minor Changes
+
+- [#108](https://github.com/tommy351/kosko/pull/108) [`f2446ae`](https://github.com/tommy351/kosko/commit/f2446aece5570686ba5594812799cc59077d1986) Thanks [@tommy351](https://github.com/tommy351)! - More human-readable error message for `generate` and `validate` command. Below is an example of validation error message.
+
+  ```
+  components/nginx.js - 2 errors
+
+    ✖ ResolveError: Validation error
+      Index: [0]
+      Kind: apps/v1/Deployment
+      Name: nginx
+
+        /spec/replicas must be integer
+
+    ✖ ResolveError: Validation error
+      Index: [1]
+      Kind: v1/Service
+      Name: nginx
+
+        /spec/ports/0/port must be integer
+        /spec/type must be equal to one of the allowed values: ["ClusterIP","ExternalName","LoadBalancer","NodePort"]
+
+  error - Generate failed (Total 2 errors)
+  ```
+
+- [#108](https://github.com/tommy351/kosko/pull/108) [`affd063`](https://github.com/tommy351/kosko/commit/affd0632bc31033864cbc49620bee870d46437c8) Thanks [@tommy351](https://github.com/tommy351)! - Remove `readonly` attribute from return values.
+
+- [#106](https://github.com/tommy351/kosko/pull/106) [`3df37ee`](https://github.com/tommy351/kosko/commit/3df37ee25c79c892c4644ad91364544a2064203b) Thanks [@tommy351](https://github.com/tommy351)! - Add `--config` option to `generate` and `validate` command. When this option is specified, Kosko will load config file from the given path instead of the default `kosko.toml`.
+
+- [#106](https://github.com/tommy351/kosko/pull/106) [`4aff238`](https://github.com/tommy351/kosko/commit/4aff2388449a9887ca417db97296a6843854140b) Thanks [@tommy351](https://github.com/tommy351)! - Add `--loader` option to `generate` and `validate` command. When `--loader` option or `loaders` in `kosko.toml` is set, Kosko will load [ESM loader](https://nodejs.org/api/esm.html#loaders).
+
+- [#109](https://github.com/tommy351/kosko/pull/109) [`1e20936`](https://github.com/tommy351/kosko/commit/1e20936deaf0761ceeb99f5cbe5b69bc40658eb8) Thanks [@tommy351](https://github.com/tommy351)! - - When running `init` command, install latest dependencies instead of the given versions in `package.json`.
+
+  - Add `--package-manager` option to `init` command. If this option is not specified, Kosko will detect package manager based on the presence of `yarn.lock` or `pnpm-lock.yaml` in the target path.
+
+- [#108](https://github.com/tommy351/kosko/pull/108) [`46ed854`](https://github.com/tommy351/kosko/commit/46ed854bf270c265a0fd8664772b02ddaf16fd55) Thanks [@tommy351](https://github.com/tommy351)! - Add `--bail` option to `generate` and `validate` command. When `--bail` option or `bail` in `kosko.toml` is set to `true`, Kosko will stop immediately when an error occurred.
+
+### Patch Changes
+
+- [#106](https://github.com/tommy351/kosko/pull/106) [`3df37ee`](https://github.com/tommy351/kosko/commit/3df37ee25c79c892c4644ad91364544a2064203b) Thanks [@tommy351](https://github.com/tommy351)! - Fix the issue that `components` and `require` defined in `baseEnvironment` are not loaded.
+
+- Updated dependencies [[`4c34f5d`](https://github.com/tommy351/kosko/commit/4c34f5d1752eec320885ad479daeed7beab10c4a), [`fef43bb`](https://github.com/tommy351/kosko/commit/fef43bbde55c5c2c48b0a81c71014513e83a7ad2), [`dc6dfd5`](https://github.com/tommy351/kosko/commit/dc6dfd5918e57e2a0368333b1ced8190dfd801ee), [`4aff238`](https://github.com/tommy351/kosko/commit/4aff2388449a9887ca417db97296a6843854140b), [`4aff238`](https://github.com/tommy351/kosko/commit/4aff2388449a9887ca417db97296a6843854140b), [`affd063`](https://github.com/tommy351/kosko/commit/affd0632bc31033864cbc49620bee870d46437c8), [`c033b49`](https://github.com/tommy351/kosko/commit/c033b4949ae7456384370cc53a3e9caabbececb6), [`2dc50bc`](https://github.com/tommy351/kosko/commit/2dc50bc7f7c9ac1fa474121e772c1789637506bf), [`c667082`](https://github.com/tommy351/kosko/commit/c66708226949273b20c256533331987d3d638f3b), [`8a6af40`](https://github.com/tommy351/kosko/commit/8a6af40da68fd3a3c8186e3ce008fc06955c4dc4), [`4aff238`](https://github.com/tommy351/kosko/commit/4aff2388449a9887ca417db97296a6843854140b)]:
+  - @kosko/exec-utils@1.0.0
+  - @kosko/config@3.0.0
+  - @kosko/generate@3.0.0
+  - @kosko/log@1.0.0
+  - @kosko/migrate@4.0.0
+  - @kosko/require@4.0.0
+  - @kosko/common-utils@0.1.0
+  - @kosko/aggregate-error@0.1.0
+
 ## 2.1.1
 
 ### Patch Changes

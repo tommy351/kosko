@@ -1,5 +1,17 @@
 # @kosko/exec-utils
 
+## 1.0.0
+
+### Major Changes
+
+- [#104](https://github.com/tommy351/kosko/pull/104) [`fef43bb`](https://github.com/tommy351/kosko/commit/fef43bbde55c5c2c48b0a81c71014513e83a7ad2) Thanks [@tommy351](https://github.com/tommy351)! - Drop support for Node.js 12. The minimum supported Node.js version is 14.18.0 now.
+
+### Minor Changes
+
+- [#108](https://github.com/tommy351/kosko/pull/108) [`4c34f5d`](https://github.com/tommy351/kosko/commit/4c34f5d1752eec320885ad479daeed7beab10c4a) Thanks [@tommy351](https://github.com/tommy351)! - When `spawn` failed, it will throw a `SpawnError` instead of a `Error`.
+
+- [#106](https://github.com/tommy351/kosko/pull/106) [`4aff238`](https://github.com/tommy351/kosko/commit/4aff2388449a9887ca417db97296a6843854140b) Thanks [@tommy351](https://github.com/tommy351)! - Add `input` to `SpawnOptions`. When this option is provided, the value will be written to `stdin` of a child process.
+
 ## 0.2.0
 
 ### Minor Changes
