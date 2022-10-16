@@ -52,7 +52,7 @@ function readFiles(cwd: string, files: readonly string[]): Promise<string[]> {
 }
 
 export interface MigrateArguments extends RootArguments {
-  filename: string;
+  filename: string | string[];
 }
 
 export const migrateCmd: Command<MigrateArguments> = {
