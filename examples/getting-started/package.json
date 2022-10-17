@@ -1,6 +1,6 @@
 {
   "name": "@kosko-example/getting-started",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "private": true,
   "dependencies": {
     "@kosko/env": "workspace:^",

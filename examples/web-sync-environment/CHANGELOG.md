@@ -1,5 +1,12 @@
 # @kosko-example/web-sync-environment
 
+## 0.0.4
+
+### Patch Changes
+
+- Updated dependencies [[`7d253bc`](https://github.com/tommy351/kosko/commit/7d253bcb68c2cea52061178899eada2f1329290f)]:
+  - @kosko/generate@3.0.1
+
 ## 0.0.3
 
 ### Patch Changes
