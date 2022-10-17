@@ -5,6 +5,16 @@
 ### Major Changes
 
 - [#104](https://github.com/tommy351/kosko/pull/104) [`fef43bb`](https://github.com/tommy351/kosko/commit/fef43bbde55c5c2c48b0a81c71014513e83a7ad2) Thanks [@tommy351](https://github.com/tommy351)! - Drop support for Node.js 12. The minimum supported Node.js version is 14.18.0 now.
+- [#111](https://github.com/tommy351/kosko/pull/111) [`dc6dfd5`](https://github.com/tommy351/kosko/commit/dc6dfd5918e57e2a0368333b1ced8190dfd801ee) Thanks [@tommy351](https://github.com/tommy351)! - Value type in `Manifest` has been changed from `any` to `unknown`. You might need to modify `transform` function to fix type errors. For example:
+
+  ```ts
+  // Before
+  manifest.metadata.namespace = "foo";
+
+  // After
+  import { IObjectMeta } from "@kubernetes-models/apimachinery/apis/meta/v1/ObjectMeta";
+  (manifest.metadata as IObjectMeta).namespace = "foo";
+  ```
 
 ### Minor Changes
 
