@@ -1,5 +1,11 @@
 # @kosko/generate
 
+## 3.0.1
+
+### Patch Changes
+
+- [#112](https://github.com/tommy351/kosko/pull/112) [`7d253bc`](https://github.com/tommy351/kosko/commit/7d253bcb68c2cea52061178899eada2f1329290f) Thanks [@tommy351](https://github.com/tommy351)! - Respect negate glob patterns (e.g. `!abc`).
+
 ## 3.0.0
 
 ### Major Changes

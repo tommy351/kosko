@@ -1,5 +1,12 @@
 # @kosko/cli
 
+## 3.0.1
+
+### Patch Changes
+
+- Updated dependencies [[`7d253bc`](https://github.com/tommy351/kosko/commit/7d253bcb68c2cea52061178899eada2f1329290f)]:
+  - @kosko/generate@3.0.1
+
 ## 3.0.0
 
 ### Major Changes
