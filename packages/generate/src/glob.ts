@@ -2,9 +2,30 @@ import { readdir } from "node:fs/promises";
 import { join, posix } from "node:path";
 import mm from "micromatch";
 
-function createMatcher(patterns: readonly string[], options?: mm.Options) {
-  const matchers = patterns.map((pattern) => mm.matcher(pattern, options));
-  return (path: string): boolean => matchers.some((matcher) => matcher(path));
+function createMatcher(patterns: readonly string[], baseOptions: mm.Options) {
+  const positivePatterns: string[] = [];
+  const negativePatterns: string[] = [];
+
+  for (const pattern of patterns) {
+    const parsed = mm.parse(pattern, baseOptions) as [
+      { negated: boolean; consumed: string }
+    ];
+
+    if (parsed.length && parsed[0].negated) {
+      negativePatterns.push(parsed[0].consumed);
+    } else {
+      positivePatterns.push(pattern);
+    }
+  }
+
+  const options: mm.Options = {
+    ...baseOptions,
+    ignore: negativePatterns
+  };
+
+  return (path: string): boolean => {
+    return mm.isMatch(path, positivePatterns, options);
+  };
 }
 
 export interface GlobOptions {
@@ -24,11 +45,11 @@ export async function* glob(options: GlobOptions): AsyncIterable<GlobResult> {
     options.extensions.length > 1
       ? `.{${options.extensions.join(",")}}`
       : `.${options.extensions.join(",")}`;
+  const dirMatcher = createMatcher(options.patterns, matcherOptions);
   const fileMatcher = createMatcher(
     options.patterns.map((pattern) => pattern + suffix),
     matcherOptions
   );
-  const dirMatcher = createMatcher(options.patterns, matcherOptions);
 
   async function* walk(
     path: string,

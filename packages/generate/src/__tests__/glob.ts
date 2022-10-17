@@ -60,6 +60,21 @@ describe.each([
     patterns: ["d*/*"],
     extensions: ["js"],
     expected: ["def/abc.js", "def/xyz.js"]
+  },
+  {
+    patterns: ["*"],
+    extensions: ["js"],
+    expected: ["abc.js", "abd.js", "bcd.js", "cde.js", "def"]
+  },
+  {
+    patterns: ["*", "!bcd"],
+    extensions: ["js"],
+    expected: ["abc.js", "abd.js", "cde.js", "def"]
+  },
+  {
+    patterns: ["*", "!def"],
+    extensions: ["js"],
+    expected: ["abc.js", "abd.js", "bcd.js", "cde.js"]
   }
 ])(
   "patterns = $patterns, extensions = $extensions",
