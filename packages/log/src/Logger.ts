@@ -21,6 +21,31 @@ export default class Logger {
     this.writer = options.writer;
   }
 
+  /**
+   * @example
+   * Basic message
+   * ```ts
+   * logger.log(LogLevel.Info, "basic message");
+   * ```
+   *
+   * @example
+   * Error
+   * ```ts
+   * logger.log(LogLevel.Error, "error log", {
+   *   error: new Error("error cause")
+   * });
+   * ```
+   *
+   * @example
+   * Data
+   * ```ts
+   * logger.log(LogLevel.Info, "log with data", {
+   *   data: {
+   *     foo: "bar"
+   *   }
+   * });
+   * ```
+   */
   public log(
     level: LogLevel,
     message: string,
@@ -39,22 +64,37 @@ export default class Logger {
     }
   }
 
+  /**
+   * Returns logger level.
+   */
   public getLevel(): LogLevel {
     return this.level;
   }
 
+  /**
+   * Sets logger level.
+   */
   public setLevel(level: LogLevel): void {
     this.level = level;
   }
 
+  /**
+   * Returns true if the given `level` is enabled in logger.
+   */
   public enabled(level: LogLevel): boolean {
     return this.level <= level;
   }
 
+  /**
+   * Returns writer of logger.
+   */
   public getWriter(): LogWriter {
     return this.writer;
   }
 
+  /**
+   * Sets writer of logger.
+   */
   public setWriter(writer: LogWriter): void {
     this.writer = writer;
   }

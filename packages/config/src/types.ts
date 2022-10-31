@@ -9,6 +9,8 @@ import {
 } from "superstruct";
 
 /**
+ * Environment config type.
+ *
  * @public
  */
 export interface EnvironmentConfig {
@@ -24,6 +26,8 @@ export const environmentConfigSchema = object({
 });
 
 /**
+ * Global config type.
+ *
  * @public
  */
 export interface Config extends EnvironmentConfig {

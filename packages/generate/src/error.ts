@@ -170,7 +170,4 @@ export class GenerateError extends Error {
   }
 }
 
-/**
- * @public
- */
 GenerateError.prototype.name = "GenerateError";

@@ -15,30 +15,6 @@ Organize Kubernetes manifests in JavaScript.
 
 Learn more on [the official site](https://kosko.dev).
 
-## Packages
-
-### Core
-
-- [@kosko/cli](packages/cli) - CLI.
-- [@kosko/config](packages/config) - Load kosko configuration.
-- [@kosko/env](packages/env) - Manage environemnts in Kosko.
-- [@kosko/generate](packages/generate) - Find and print components.
-- [@kosko/helm](packages/helm) - Load Helm charts in Kosko.
-- [@kosko/log](packages/log) - Logging library for Kosko.
-- [@kosko/migrate](packages/migrate) - Migrate Kubernetes YAML into Kosko components.
-- [@kosko/require](packages/require) - Import and resolve modules.
-- [@kosko/template](packages/template) - Utilities for templates.
-- [@kosko/yaml](packages/yaml) - Load Kubernetes YAML files in Kosko.
-
-### Templates
-
-- [@kosko/template-deployed-service](packages/template-deployed-service) - Create a new component including a deployment and a service.
-- [@kosko/template-environment](packages/template-environment) - Create a new environment.
-
-### Related
-
-- [kubernetes-models-ts](https://github.com/tommy351/kubernetes-models-ts/) - Kubernetes models in TypeScript.
-
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).

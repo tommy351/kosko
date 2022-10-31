@@ -1,4 +1,10 @@
 /**
+ * Imports and resolves modules.
+ *
+ * @packageDocumentation
+ */
+
+/**
  * Returns true if ECMAScript modules are supported in the current environment.
  * If `ESM_IMPORT_DISABLED=true` environment variable is set, this function will
  * always return `false`.
@@ -49,9 +55,10 @@ export function resolve(id: string, options?: ResolveOptions): Promise<string>;
 
 /**
  * Resolves path to the specified module. Returns ECMAScript module path when
- * available. See `resolve` for more info.
+ * available.
  *
  * @public
+ * @see {@link resolve}
  */
 export function resolveESM(
   id: string,
@@ -62,7 +69,6 @@ export function resolveESM(
  * Returns file extensions which can be imported.
  *
  * @defaultValue
- *
  * ```js
  * [".cjs", ".mjs", ".js", ".json", ".node"]
  * ```

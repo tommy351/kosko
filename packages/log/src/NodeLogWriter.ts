@@ -57,6 +57,8 @@ function formatError(err: unknown): string {
 }
 
 /**
+ * Prints log to `process.stderr`.
+ *
  * @public
  */
 export default class NodeLogWriter implements LogWriter {

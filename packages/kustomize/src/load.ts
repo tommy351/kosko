@@ -1,4 +1,4 @@
-import { LoadOptions, loadString } from "@kosko/yaml";
+import { LoadOptions, loadString, Manifest } from "@kosko/yaml";
 import {
   spawn,
   booleanArg,
@@ -45,7 +45,8 @@ export interface KustomizeOptions extends LoadOptions {
   enableAlphaPlugins?: boolean;
 
   /**
-   * Enable support for exec functions (raw executables); do not use for untrusted configs! (Alpha)
+   * Enable support for exec functions (raw executables); do not use for
+   * untrusted configs! (Alpha)
    */
   enableExec?: boolean;
 
@@ -70,14 +71,18 @@ export interface KustomizeOptions extends LoadOptions {
   env?: Record<string, string>;
 
   /**
-   * Helm command (path to executable). (default `helm`)
+   * Helm command (path to executable).
+   *
+   * @defaultValue `helm`
    */
   helmCommand?: string;
 
   /**
    * If set to `LoadRestrictionsNone`, local kustomizations may load files from
    * outside their root. This does, however, break the relocatability of the
-   * kustomization. (default `LoadRestrictionsRootOnly`)
+   * kustomization.
+   *
+   * @defaultValue `LoadRestrictionsRootOnly`
    */
   loadRestrictor?: string;
 
@@ -92,20 +97,27 @@ export interface KustomizeOptions extends LoadOptions {
   network?: boolean;
 
   /**
-   * The docker network to run the container in. (default `bridge`)
+   * The docker network to run the container in.
+   *
+   * @defaultValue `bridge`
    */
   networkName?: string;
 
   /**
    * Reorder the resources just before output. Use `legacy` to apply a legacy
    * reordering (Namespaces first, Webhooks last, etc). Use `none` to suppress a
-   * final reordering. (default `legacy`)
+   * final reordering.
+   *
+   * @defaultValue `legacy`
    */
   reorder?: string;
 
   /**
-   * The command to build Kustomize files. By default, it uses `kustomize build`
-   * when the `kustomize` executable exists, otherwise fallback to `kubectl kustomize`.
+   * The command to build Kustomize files.
+   *
+   * @defaultValue
+   * It will try `kustomize build` first, and fallback to `kubectl kustomize` if
+   * `kustomize` executable does not exist.
    */
   buildCommand?: readonly string[];
 }
@@ -113,24 +125,28 @@ export interface KustomizeOptions extends LoadOptions {
 /**
  * @public
  */
-export function loadKustomize({
-  path,
-  asCurrentUser,
-  enableAlphaPlugins,
-  enableExec,
-  enableHelm,
-  enableManagedByLabel,
-  enableStar,
-  env,
-  helmCommand,
-  loadRestrictor,
-  mount,
-  network,
-  networkName,
-  reorder,
-  transform,
-  buildCommand
-}: KustomizeOptions) {
+export function loadKustomize(
+  options: KustomizeOptions
+): () => Promise<Manifest[]> {
+  const {
+    path,
+    asCurrentUser,
+    enableAlphaPlugins,
+    enableExec,
+    enableHelm,
+    enableManagedByLabel,
+    enableStar,
+    env,
+    helmCommand,
+    loadRestrictor,
+    mount,
+    network,
+    networkName,
+    reorder,
+    transform,
+    buildCommand
+  } = options;
+
   if (buildCommand) {
     assert(buildCommand.length, "buildCommand must not be empty");
   }

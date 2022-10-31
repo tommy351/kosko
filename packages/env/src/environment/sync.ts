@@ -6,7 +6,7 @@ import {
 import { Environment } from "./types";
 
 /**
- * Returns a new synchronized `Environment`.
+ * Returns a new synchronized {@link Environment}.
  *
  * @public
  */

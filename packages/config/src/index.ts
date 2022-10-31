@@ -1,3 +1,9 @@
+/**
+ * Contains config types and loaders.
+ *
+ * @packageDocumentation
+ */
+
 export * from "./config";
 export { EnvironmentConfig, Config } from "./types";
 export * from "./validate";

@@ -7,8 +7,8 @@ import logger, { LogLevel } from "@kosko/log";
 import { getErrorCode } from "@kosko/common-utils";
 
 /**
- * Returns a new `Environment` which loads environment variables using Node.js's
- * `require()` function.
+ * Returns a new {@link Environment} which loads environment variables using
+ * Node.js's `require()` function.
  *
  * @public
  */

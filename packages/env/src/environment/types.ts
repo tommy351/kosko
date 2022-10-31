@@ -2,6 +2,8 @@ import { Paths } from "../paths";
 import { Reducer } from "../reduce";
 
 /**
+ * A collection of {@link Reducer}.
+ *
  * @public
  */
 export interface ReducerList {
@@ -11,12 +13,12 @@ export interface ReducerList {
   getReducers(): readonly Reducer[];
 
   /**
-   * Sets list of reducers using the specified callback function.
+   * Updates reducer list with the return value of `callback`.
    */
   setReducers(callback: (reducers: readonly Reducer[]) => Reducer[]): void;
 
   /**
-   * Resets reducers to the defaults.
+   * Resets reducer list to the defaults.
    */
   resetReducers(): void;
 }
@@ -26,17 +28,16 @@ export interface ReducerExecutor {
 }
 
 /**
+ * Contains environment context and can be used to fetch environment variables.
+ *
  * @public
  */
 export interface Environment
   extends Pick<ReducerList, "setReducers" | "resetReducers"> {
   /**
-   * Current working directory.
+   * Current working directory (CWD).
    *
-   * Default values:
-   *
-   * - Node.js: `process.cwd()`
-   * - Browser: `/`
+   * @defaultValue `process.cwd()` on Node.js, or `/` on browsers.
    */
   cwd: string;
 
@@ -46,7 +47,7 @@ export interface Environment
   env?: string | string[];
 
   /**
-   * Paths of environment files.
+   * Path patterns of environment files.
    */
   paths: Paths;
 
@@ -69,6 +70,8 @@ export interface Environment
 }
 
 /**
+ * Loads environment variables.
+ *
  * @public
  */
 export interface Loader {

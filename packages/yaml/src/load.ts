@@ -5,8 +5,11 @@ import { getResourceModule, ResourceKind } from "./module";
 import logger, { LogLevel } from "@kosko/log";
 import { importPath } from "@kosko/require";
 import stringify from "fast-safe-stringify";
+import { isRecord } from "@kosko/common-utils";
 
 /**
+ * Describes an object which seems to be a Kubernetes manifest.
+ *
  * @public
  */
 export interface Manifest extends ResourceKind {
@@ -19,11 +22,7 @@ type ManifestConstructor = new (data: Manifest) => Manifest;
  * @public
  */
 export interface LoadOptions {
-  transform?(manifest: Manifest): Manifest | null | undefined;
-}
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && !Array.isArray(value);
+  transform?(this: void, manifest: Manifest): Manifest | null | undefined;
 }
 
 function isManifest(value: Record<string, unknown>): value is Manifest {
@@ -41,7 +40,7 @@ async function getConstructor(
   const mod = await getResourceModule(res);
 
   if (!mod) {
-    logger.log(LogLevel.Debug, `No resource modules`, {
+    logger.log(LogLevel.Debug, "No resource modules", {
       data: res
     });
     return;
@@ -59,14 +58,15 @@ async function getConstructor(
 }
 
 /**
- * Load a Kubernetes YAML file from a string.
+ * Loads a Kubernetes YAML file from a string.
  *
  * @public
  */
 export async function loadString(
   content: string,
-  { transform = (x) => x }: LoadOptions = {}
+  options: LoadOptions = {}
 ): Promise<Manifest[]> {
+  const { transform = (x) => x } = options;
   const input = loadAll(content).filter((x) => x != null);
   const manifests: Manifest[] = [];
 
@@ -91,9 +91,9 @@ export async function loadString(
 }
 
 /**
- * Load a Kubernetes YAML file from path.
+ * Loads a Kubernetes YAML file from path.
  *
- * @param path - Path to the Kubernetes YAML file.
+ * @param path - Path to a Kubernetes YAML file.
  * @public
  */
 export function loadFile(path: string, options?: LoadOptions) {
@@ -106,10 +106,10 @@ export function loadFile(path: string, options?: LoadOptions) {
 }
 
 /**
- * Load a Kubernetes YAML file from url.
+ * Loads a Kubernetes YAML file from url.
  *
- * @param url - URL to the Kubernetes YAML file.
- * @param options - [Options](https://github.com/node-fetch/node-fetch#options) for the HTTP(S) request.
+ * @param url - URL to a Kubernetes YAML file.
+ * @param options - {@link LoadOptions} and {@link https://github.com/node-fetch/node-fetch#options | node-fetch options}
  * @public
  */
 export function loadUrl(
