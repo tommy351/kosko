@@ -67,7 +67,7 @@ import { Kind } from "kubernetes-models/<apiVersion>/<kind>";
 import { IKind } from "kubernetes-models/<apiVersion>/<kind>";
 ```
 
-Kind can be omitted from the import path if you want to import multiple resources at a time. Noted that this might have impact on the module loading speed.
+Kind can be omitted from the import path if you want to import multiple resources at a time. Please note that this might have impact on the module loading speed.
 
 ```ts
 import { Pod, Service } from "kubernetes-models/v1";
@@ -138,35 +138,58 @@ kosko generate
 # (omitted)
 ```
 
+### Function
+
 You can also export a function that returns an array of manifests.
 
-```ts ts2js
-import { Deployment } from "kubernetes-models/apps/v1/Deployment";
-import { Service } from "kubernetes-models/v1/Service";
-
+```ts
 export default function () {
   return [new Deployment(), new Service()];
 }
 ```
 
-Async functions are also supported.
+### Async Function
 
-```ts ts2js
-import { Deployment } from "kubernetes-models/apps/v1/Deployment";
-import { Service } from "kubernetes-models/v1/Service";
-
+```ts
 export default async function () {
   return [new Deployment(), new Service()];
 }
 ```
 
+### Iterable
+
+Besides array, objects which implements [the iterable protocol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#the_iterable_protocol), such as `Set`, `Map` or generator functions, are also supported.
+
+```ts
+// Set
+export default new Set([new Deployment(), new Service()]);
+
+// Generator function
+function* gen() {
+  yield new Deployment();
+  yield new Service();
+}
+
+export default gen();
+```
+
+### Async Iterable
+
+```ts
+// Async generator function
+async function* gen() {
+  yield new Deployment();
+  yield new Service();
+}
+
+export default gen();
+```
+
 ## Nested Manifests
 
 :::info
-This feature is available since v1.0.0.
+Available since v1.0.0.
 :::
-
-[kubernetes-models]: https://github.com/tommy351/kubernetes-models-ts
 
 All of the patterns we just mentioned above can be combined together. It is very useful for reusing manifests across components.
 
@@ -212,3 +235,5 @@ kind: Service
 metadata:
   name: my-app
 ```
+
+[kubernetes-models]: https://github.com/tommy351/kubernetes-models-ts

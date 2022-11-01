@@ -2,6 +2,8 @@
 title: Loading Kustomize
 ---
 
+import DocCardList from "@theme/DocCardList";
+
 Kosko supports loading manifests from Kustomize files. You have to install either [`kustomize`](https://kubectl.docs.kubernetes.io/installation/kustomize/) or [`kubectl`](https://kubectl.docs.kubernetes.io/installation/kubectl/) CLI before using this package.
 
 `@kosko/kustomize` uses the `kustomize build` command to generate Kubernetes manifests. Most options of `kustomize build` command are supported. See [API documentation](api/kustomize.md) for available options.
@@ -54,3 +56,22 @@ loadKustomize({
   buildCommand: ["./path/to/kustomize", "build"]
 });
 ```
+
+## Related
+
+<DocCardList
+  items={[
+    {
+      type: "link",
+      label: "@kosko/kustomize",
+      href: "/docs/api/kustomize",
+      docId: "api/kustomize"
+    },
+    {
+      type: "link",
+      label: "Loading Kubernetes YAML",
+      href: "/docs/components/loading-kubernetes-yaml",
+      docId: "components/loading-kubernetes-yaml"
+    }
+  ]}
+/>

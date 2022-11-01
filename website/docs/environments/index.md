@@ -6,7 +6,7 @@ Environments are variables specific to different clusters or namespaces.
 
 ## Specify Environments
 
-When running [`kosko generate`](cli/generate.md) or [`kosko validate`](cli/validate.md), use [`-e,--env`](cli/generate.md#--env--e) to specify environments.
+When running [`kosko generate`](cli/generate.md) or [`kosko validate`](cli/validate.md), use [`--env, -e`](cli/generate.md#--env--e) to specify environments.
 
 ```shell
 kosko generate -e prod
@@ -70,7 +70,7 @@ const params = env.component("nginx");
 
 ## Get Current Environment
 
-You can fetch current environment from `env` property. Depending on the value of `-e/--env` and `baseEnvironment` option, it could be `string`, `string[]` or `undefined`.
+You can fetch current environment from `env` property. Depending on the value of [`--env, -e`](cli/generate.md#--env--e) and [`baseEnvironment`](configuration.md#baseenvironment) option, it could be `string`, `string[]` or `undefined`.
 
 ```ts ts2js
 import env from "@kosko/env";

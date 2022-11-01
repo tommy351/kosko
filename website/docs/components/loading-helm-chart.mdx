@@ -2,6 +2,8 @@
 title: Loading Helm Chart
 ---
 
+import DocCardList from "@theme/DocCardList";
+
 Kosko supports loading manifests from Helm charts. You have to [install the Helm CLI](https://helm.sh/docs/intro/install/) before using this package.
 
 `@kosko/helm` uses the [`helm template`](https://helm.sh/docs/helm/helm_template/) command to render Helm chart templates. Most options of `helm template` command are supported. See [API documentation](api/helm.md) for available options.
@@ -73,3 +75,22 @@ loadChart({
   includeCrds: true
 });
 ```
+
+## Related
+
+<DocCardList
+  items={[
+    {
+      type: "link",
+      label: "@kosko/helm",
+      href: "/docs/api/helm",
+      docId: "api/helm"
+    },
+    {
+      type: "link",
+      label: "Loading Kubernetes YAML",
+      href: "/docs/components/loading-kubernetes-yaml",
+      docId: "components/loading-kubernetes-yaml"
+    }
+  ]}
+/>

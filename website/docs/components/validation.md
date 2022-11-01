@@ -12,7 +12,10 @@ For example, when a manifest is invalid.
 import { Deployment } from "kubernetes-models/apps/v1/Deployment";
 
 const deployment = new Deployment({
-  metadata: { name: "nginx" },
+  metadata: {
+    name: "nginx",
+    namespace: "dev"
+  },
   spec: {
     replicas: "INVALID" // This should be a number
   }
@@ -23,22 +26,26 @@ export default [deployment];
 
 Kosko will throw an error as below, which includes error details and location of invalid manifests.
 
-```shell
-ValidationError: data/spec/replicas must be integer, data/spec must be null, data/spec must match exactly one schema in oneOf
-- path: "/home/tommy/Projects/kosko/examples/getting-started/components/nginx.js"
-- index: [0]
-- kind: "apps/v1/Deployment"
-- namespace: "default"
-- name: "nginx"
+```
+components/nginx.js - 1 error
+
+  ✖ ResolveError: Validation error
+    Index: [0]
+    Kind: apps/v1/Deployment
+    Namespace: dev
+    Name: nginx
+
+      /spec/replicas must be integer
+
+error - Generate failed (Total 1 error)
 ```
 
-| Name        | Description                                                                                                  |
-| ----------- | ------------------------------------------------------------------------------------------------------------ |
-| `path`      | Path of component file.                                                                                      |
-| `index`     | Location of manifest in a component. In this example, `[0]` means it is the first manifest in the component. |
-| `kind`      | `apiVersion` and `kind` of manifest.                                                                         |
-| `namespace` | `namespace` of manifest.                                                                                     |
-| `name`      | `name` of manifest.                                                                                          |
+Below are description of each field.
+
+- **Index**: Location of manifest in a component. In this example, `[0]` means it is the first manifest in the component.
+- **Kind**: `apiVersion` and `kind` of manifest.
+- **Namespace**: `metadata.namespace` of manifest.
+- **Name**: `metadata.name` of manifest.
 
 ## Built-in Validation
 

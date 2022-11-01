@@ -15,7 +15,7 @@ kosko generate [components..]
 Components to generate. It can be either a component's name or a [glob pattern]. This overrides components set in the config file.
 
 ```shell
-# Generate components set in kosko.toml
+# Generate components specified in kosko.toml
 kosko generate
 
 # Generate components with specified names
@@ -27,9 +27,51 @@ kosko generate nginx_*
 
 ## Options
 
+### `--bail`
+
+:::info
+Available since v3.0.0.
+:::
+
+Stop immediately when an error occurred.
+
+### `--config, -c`
+
+:::info
+Available since v3.0.0.
+:::
+
+Config path. Default to `kosko.toml` in current folder.
+
 ### `--env, -e`
 
 Environment name.
+
+### `--loader`
+
+:::info
+Available since v3.0.0.
+:::
+
+Use [module loaders](https://nodejs.org/dist/latest-v18.x/docs/api/esm.html#loaders). This option only works when ECMAScript modules (ESM) is enabled.
+
+```shell
+# Using TypeScript
+kosko generate --loader ts-node/esm
+```
+
+### `--require, -r`
+
+Require external modules. Modules set in the config file will also be required.
+
+```shell
+# Using TypeScript
+kosko generate -r ts-node/register
+```
+
+### `--output, -o`
+
+Output format. The value can be `yaml` or `json`. Default to `yaml`. This option is not available in [`kosko validate`](validate.md) command because it does not output manifests to terminal.
 
 ### `--set, -s`
 
@@ -71,31 +113,8 @@ Override variables of the specified component. Format is the same as in the `--s
 kosko generate --set.backend mysql.port=3308 --set mysql.port=3307
 ```
 
-### `--require, -r`
-
-Require external modules. Modules set in the config file will also be required.
-
-```shell
-# Using TypeScript
-kosko generate -r ts-node/register
-```
-
-### `--output, -o`
-
-Output format. The value can be `yaml` or `json`. Default to `yaml`.
-
 ### `--validate`
 
-Validate components. It is enabled by default. It can be disabled by setting `--validate=false`.
-
-## Examples
-
-```shell
-# Print components to console
-kosko generate
-
-# Apply to Kubernetes cluster
-kosko generate | kubectl apply -f -
-```
+Validate components. It is enabled by default. It can be disabled by setting `--validate=false`. This option is not available in [`kosko validate`](validate.md) command because validation is always enabled when running [`kosko validate`](validate.md) command.
 
 [glob pattern]: https://en.wikipedia.org/wiki/Glob_(programming)

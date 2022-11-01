@@ -6,7 +6,7 @@ import DocCardList from "@theme/DocCardList";
 
 Kosko supports ECMAScript modules (ESM). You can write components and environments in native ESM files.
 
-Node.js v12 or above is required for ESM. However, Node.js v14.8.0 or above is recommended because [top-level await](https://nodejs.org/dist/latest-v14.x/docs/api/esm.html#esm_top_level_await) is supported without flags in this version.
+Node.js v12 or above is required for ESM. However, Node.js v14.8.0 or above is recommended because [top-level await](https://nodejs.org/dist/latest-v14.x/docs/api/esm.html#esm_top_level_await) is supported without flags since this version.
 
 :::note Examples
 
@@ -45,8 +45,8 @@ You can use `@kosko/env` and `@kosko/generate` package directly. The following i
 ```js
 import env from "@kosko/env";
 import { generate, print, PrintFormat } from "@kosko/generate";
-import { fileURLToPath } from "url";
-import { join } from "path";
+import { fileURLToPath } from "node:url";
+import { join } from "node:path";
 
 // Set environment
 env.env = "dev";
@@ -77,13 +77,11 @@ function setupEnv(env) {
   env.cwd = __dirname;
 }
 
-(async () => {
-  // CommonJS
-  setupEnv(require("@kosko/env"));
+// CommonJS
+setupEnv(require("@kosko/env"));
 
-  // ESM
-  setupEnv((await import("@kosko/env")).default);
-})();
+// ESM
+setupEnv((await import("@kosko/env")).default);
 ```
 
 ## TypeScript
@@ -98,10 +96,37 @@ Set `compilerOptions.module` to `esnext` to allow TypeScript compile your code i
 }
 ```
 
-Currently Kosko can't set Node.js loader, and [`require`](configuration.md#require) option doesn't work with ESM. So you have to set `ts-node/esm` loader when running Kosko CLI.
+Then add [`loaders`](configuration.md#loaders) option to `kosko.toml`.
+
+```toml title="kosko.toml"
+loaders = ["ts-node/esm"]
+```
+
+Or run `kosko generate` with [`--loader`](cli/generate.md#--loader) option.
 
 ```shell
-NODE_OPTIONS='--loader=ts-node/esm' kosko generate
+kosko generate --loader ts-node/esm
+```
+
+Because `@kosko/env` is asynchronous in ESM, it's recommended to modify environment types in order to better reflect actual types.
+
+```ts title="typings/@kosko__env/index.d.ts"
+declare module "@kosko/env" {
+  interface Environment {
+    global(): Promise<GlobalEnvironment>;
+
+    component<K extends string>(
+      name: K
+    ): Promise<GlobalEnvironment & ComponentEnvironment[K]>;
+  }
+}
+```
+
+When loaders are specified, Kosko will run Node.js with [`--experimental-loader`](https://nodejs.org/dist/latest-v18.x/docs/api/cli.html#--experimental-loadermodule) option. You might see the following `ExperimentalWarning` message in console and it is totally fine. To hide such warning message, run Kosko with [`NODE_NO_WARNINGS=1`](https://nodejs.org/docs/latest-v18.x/api/cli.html#node_no_warnings1) environment variable.
+
+```
+(node:26303) ExperimentalWarning: --experimental-loader is an experimental feature. This feature could change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
 ```
 
 ## Related

@@ -96,7 +96,7 @@ import { IObjectMeta } from "@kubernetes-models/apimachinery/pkg/apis/meta/v1/Ob
 
 ## Type Guard
 
-All classes with `apiVersion` and `kind` now come with a new static method `is`, which can be used to narrow down object types. Noted that this function does **NOT** validate the object itself. It just checks whether `apiVersion` and `kind` match or not.
+All classes with `apiVersion` and `kind` now come with a new static method `is`, which can be used to narrow down object types. Please note that this function does **NOT** validate the object itself. It just checks whether `apiVersion` and `kind` match or not.
 
 ```ts
 import { Pod } from "kubernetes-models/v1/Pod";

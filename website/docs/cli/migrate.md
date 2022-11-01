@@ -21,9 +21,3 @@ kosko migrate -f path/to/file
 # Read from stdin
 kosko migrate -f -
 ```
-
-## Examples
-
-```shell
-kosko migrate -f nginx.yml > components/nginx.js
-```

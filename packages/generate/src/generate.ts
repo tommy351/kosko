@@ -19,12 +19,14 @@ export interface GenerateOptions {
   path: string;
 
   /**
-   * Patterns of component names.
+   * Glob patterns of component names.
    *
    * @example
    * ```js
    * ["*"]
    * ```
+   *
+   * @see {@link https://en.wikipedia.org/wiki/Glob_(programming) | glob pattern}
    */
   components: readonly string[];
 

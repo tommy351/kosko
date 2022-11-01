@@ -2,57 +2,43 @@
 title: Configuration
 ---
 
-## Example
-
-The following is the full example of `kosko.toml`. Config files must be written in [TOML](https://github.com/toml-lang/toml). All properties are optional.
-
-```toml
-# Global configs
-require = ["a"]
-components = ["b"]
-extensions = ["js", "json"]
-baseEnvironment = "c"
-
-# Environment configs
-[environments.dev]
-require = ["c"]
-components = ["d"]
-
-[environments.prod]
-require = ["e"]
-components = ["f"]
-
-[paths.environment]
-global = "environments/#{environment}"
-component = "environments/#{environment}/#{component}"
-```
-
 ## Global Configs
 
-Global configs are always applied.
+Global configs are always applied when running [`kosko generate`][kosko-generate] command.
 
-### `require`
+### `bail`
 
-Require external modules.
+:::info
+Available since v3.0.0.
+:::
 
-```toml
-# Using TypeScript
-require = ["ts-node/register"]
-```
+Default: `false`
+
+Stop immediately when an error occurred.
+
+### `baseEnvironment`
+
+Specify the base environment. You could define default or common variables in the base environment.
+
+This option can be used with or without [`--env, -e`][kosko-generate-env] option. When [`--env, -e`][kosko-generate-env] option is set, variables in the base environment will be merged with the specified environment.
 
 ### `components`
 
 Components to generate. It can be either a component's name or a [glob pattern](<https://en.wikipedia.org/wiki/Glob_(programming)>).
 
+If this value is not provided in `kosko.toml`, then you must provides components when running [`kosko generate`][kosko-generate] command.
+
+#### Examples {#global-components-example}
+
 ```toml
 # Generate all components in components folder
 components = ["*"]
 
-# Generate components with specified names
+# Generate components with the specified names
 components = ["foo", "bar"]
 
-# Generate components matched to the glob pattern
-components = ["nginx_*"]
+# Generate components matched to the glob patterns
+components = ["foo_*", "bar_*"]
 
 # Ignore components
 components = ["!foo", "!bar"]
@@ -60,34 +46,82 @@ components = ["!foo", "!bar"]
 
 ### `extensions`
 
-Extension names of components. You don't have to set this option. It's detected automatically from [require.extensions](https://nodejs.org/api/modules.html#modules_require_extensions).
+Extension names of components. It's unnecessary to manually set this option. It can be detected automatically via [`require.extensions`](https://nodejs.org/api/modules.html#modules_require_extensions).
 
-### `baseEnvironment`
+#### Examples {#global-extensions-example}
 
-Specify the base environment. You may define default or common variables in the base environment. The base environment can be used with or without `--env/e` option. When `--env/-e` option is set, variables in the base environment are overridden by the specified environment.
+```toml
+extensions = ["js", "json"]
+```
+
+### `loaders`
+
+:::info
+Available since v3.0.0.
+:::
+
+Use [module loaders](https://nodejs.org/dist/latest-v18.x/docs/api/esm.html#loaders). This option only works when ECMAScript modules (ESM) is enabled.
+
+#### Examples {#global-loaders-examples}
+
+```toml
+# Using TypeScript
+loaders = ["ts-node/esm"]
+```
+
+### `require`
+
+Require external modules.
+
+#### Examples {#global-require-examples}
+
+```toml
+# Using TypeScript
+require = ["ts-node/register"]
+```
 
 ## Environment Configs
 
-Environment configs are applied when you run [`kosko generate`](cli/generate.md) with `--env/-e` option. Environment configs are merged with global configs.
+Environment configs are applied when running [`kosko generate`][kosko-generate] with [`--env, -e`][kosko-generate-env] option. Environment configs are merged with global configs. Only `components`, `loaders` and `require` can be specified in environment configs.
+
+#### Examples {#environment-configs-examples}
 
 ```toml
 # Applied when env = "dev"
 [environments.dev]
-require = ["c"]
-components = ["d"]
+components = ["*_dev"]
 
 # Applied when env = "prod"
 [environments.prod]
-require = ["e"]
-components = ["f"]
+components = ["*_prod"]
 ```
 
 ## Paths
+
+### Tokens
+
+- `#{environment}` - Environment name
+- `#{component}` - Component name (Only available in `paths.environment.component`)
 
 ### `paths.environment.global`
 
 Specify path to global environment files.
 
+#### Default {#paths-environment-global-default}
+
+```
+environments/#{environment}
+```
+
 ### `paths.environment.component`
 
 Specify path to component environment files.
+
+#### Default {#paths-environment-component-default}
+
+```
+environments/#{environment}/#{component}
+```
+
+[kosko-generate]: cli/generate.md
+[kosko-generate-env]: cli/generate.md#--env--e
