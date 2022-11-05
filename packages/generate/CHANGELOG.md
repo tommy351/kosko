@@ -34,7 +34,6 @@
   - `generate` and `resolve` function now collect all errors rather than stop immediately when an error occurred. You can set `bail: true` to stop immediately. When there are more than one error, they will be wrapped with [`AggregateError`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError).
   - `resolve` function now supports [`Iterable`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#the_iterable_protocol) (e.g. `Array`, `Set`, `Map`, generator) and [`AsyncIterable`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#the_async_iterator_and_async_iterable_protocols) (e.g. async generator).
   - [`fast-glob`](https://github.com/mrmlnc/fast-glob) is replaced with a homemade glob function based on [`micromatch`](https://github.com/micromatch/micromatch). The behavior will be slightly different. Please submit an issue if you encounter any unexpected problems.
-  - Errors in `generate` function are wrapped with `GenerateError` for better access
 
 ### Minor Changes
 

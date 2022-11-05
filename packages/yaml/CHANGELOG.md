@@ -11,7 +11,14 @@
   // Before
   manifest.metadata.namespace = "foo";
 
-  // After
+  // After (Preferred)
+  import { Pod } from "kubernetes-models/v1/Pod";
+
+  if (Pod.is(manifest)) {
+    manifest.metadata.namespace = "foo";
+  }
+
+  // After (Another way)
   import { IObjectMeta } from "@kubernetes-models/apimachinery/apis/meta/v1/ObjectMeta";
   (manifest.metadata as IObjectMeta).namespace = "foo";
   ```
