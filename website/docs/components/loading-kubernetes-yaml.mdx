@@ -2,6 +2,8 @@
 title: Loading Kubernetes YAML
 ---
 
+import DocCardList from "@theme/DocCardList";
+
 If you already have lots of existing Kubernetes YAML files, you don't have to rewrite all of them in JavaScript. Kosko provides two ways for you to load Kubernetes YAML files.
 
 ## Load YAML Files
@@ -137,5 +139,24 @@ cat manifest.yaml | kosko migrate -f - > components/nginx.js
 ```
 
 See [kosko migrate](cli/migrate.md) for more information about available options.
+
+## Related
+
+<DocCardList
+  items={[
+    {
+      type: "link",
+      label: "@kosko/yaml",
+      href: "/docs/api/yaml",
+      docId: "api/yaml"
+    },
+    {
+      type: "link",
+      label: "kosko migrate",
+      href: "/docs/cli/migrate",
+      docId: "cli/migrate"
+    }
+  ]}
+/>
 
 [kubernetes-models]: https://github.com/tommy351/kubernetes-models-ts

@@ -21,10 +21,10 @@ export async function loadConfig(path: string): Promise<Config> {
 }
 
 /**
- * Searchs config files in the specified directory. Returns an empty object when
+ * Searches config files in the given directory. Returns an empty object when
  * config files does not exist in the directory.
  *
- * @param cwd - Path to the working directory.
+ * @param cwd - Path to the working directory. Default to current working directory (CWD).
  * @public
  */
 export async function searchConfig(

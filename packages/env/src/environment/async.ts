@@ -6,7 +6,7 @@ import {
 import { Environment } from "./types";
 
 /**
- * Returns a new asynchronized `Environment`.
+ * Returns a new asynchronized {@link Environment}.
  *
  * @public
  */

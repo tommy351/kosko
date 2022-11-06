@@ -38,40 +38,46 @@ function isAsyncIterable(value: unknown): value is AsyncIterable<unknown> {
  */
 export interface ResolveOptions {
   /**
-   * Execute `validate` method of each values. Default to `true`.
+   * Execute `validate` method of each values.
+   *
+   * @defaultValue `true`
    */
   validate?: boolean;
 
   /**
    * Source path of a manifest.
+   *
+   * @defaultValue `""`
    */
   path?: string;
 
   /**
    * Source index of a manifest.
+   *
+   * @defaultValue `[]`
    */
   index?: number[];
 
   /**
-   * When this option is `true`, `resolve` will stop immediately if an error
-   * occurred.  Otherwise, it will collect all errors and return an
-   * `AggregateError`. By default, this option is `false`.
+   * Stop immediately when an error occurred.
+   *
+   * @defaultValue `false`
    */
   bail?: boolean;
 }
 
 /**
- * Flattens the input value and validate each values. Throws `ValidationError`
- * when an error occurred during validation.
+ * Flattens the input value and validate each values.
  *
- * The `value` can be a:
- *   - Object
- *   - Array
- *   - Promise
- *   - Function
- *   - Async function
- *   - Iterable
- *   - Async iterable
+ * @remarks
+ * The `value` can be an object, an array, a `Promise`, a function, an async
+ * function, an iterable, or an async iterable.
+ *
+ * @throws {@link ResolveError}
+ * Thrown if an error occurred.
+ *
+ * @throws {@link @kosko/aggregate-error#AggregateError}
+ * Thrown if multiple errors occurred.
  *
  * @public
  */

@@ -2,6 +2,8 @@ import { LogLevel } from "./LogLevel";
 import { Log, LogWriter } from "./types";
 
 /**
+ * Prints logs to console.
+ *
  * @public
  */
 export default class ConsoleLogWriter implements LogWriter {

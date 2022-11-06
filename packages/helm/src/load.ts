@@ -128,7 +128,8 @@ export interface ChartOptions extends LoadOptions {
   description?: string;
 
   /**
-   * Use development versions, too. Equivalent to version '\>0.0.0-0'. If `version` is set, this is ignored.
+   * Use development versions, too. Equivalent to version '\>0.0.0-0'. If
+   * `version` is set, this is ignored.
    */
   devel?: boolean;
 
@@ -143,7 +144,9 @@ export interface ChartOptions extends LoadOptions {
   keyFile?: string;
 
   /**
-   * Location of public keys used for verification (default `~/.gnupg/pubring.gpg`).
+   * Location of public keys used for verification.
+   *
+   * @defaultValue `~/.gnupg/pubring.gpg`
    */
   keyring?: string;
 
@@ -183,7 +186,9 @@ export interface ChartOptions extends LoadOptions {
   skipTests?: boolean;
 
   /**
-   * Time to wait for any individual Kubernetes operation (like Jobs for hooks) (default 5m0s)
+   * Time to wait for any individual Kubernetes operation (like Jobs for hooks)
+   *
+   * @defaultValue `5m0s`
    */
   timeout?: string;
 
@@ -203,7 +208,8 @@ export interface ChartOptions extends LoadOptions {
   verify?: boolean;
 
   /**
-   * Specify the exact chart version to use. If this is not specified, the latest version is used.
+   * Specify the exact chart version to use. If this is not specified, the
+   * latest version is used.
    */
   version?: string;
 }
@@ -211,9 +217,11 @@ export interface ChartOptions extends LoadOptions {
 /**
  * @public
  */
-export function loadChart({ transform, ...options }: ChartOptions) {
-  return async (): Promise<Manifest[]> => {
-    const { stdout } = await runHelm(options);
+export function loadChart(options: ChartOptions): () => Promise<Manifest[]> {
+  const { transform, ...opts } = options;
+
+  return async () => {
+    const { stdout } = await runHelm(opts);
 
     // Find the first `---` in order to skip deprecation warnings
     const index = stdout.indexOf("---\n");

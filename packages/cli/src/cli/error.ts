@@ -18,6 +18,17 @@ export class CLIError extends Error {
 CLIError.prototype.name = "CLIError";
 
 /**
+ * Handles errors thrown by {@link run} function.
+ *
+ * @remarks
+ * This function prints error message to logger and terminates current process
+ * with status code specified in `err` object.
+ *
+ * @example
+ * ```ts
+ * run().catch(handleError);
+ * ```
+ *
  * @public
  */
 export function handleError(err: unknown): void {

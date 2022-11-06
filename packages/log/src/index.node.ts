@@ -1,3 +1,9 @@
+/**
+ * Logging library.
+ *
+ * @packageDocumentation
+ */
+
 import { createLoggerFactory } from "./Logger";
 import NodeLogWriter from "./NodeLogWriter";
 

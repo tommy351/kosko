@@ -102,7 +102,7 @@
 
 ### Minor Changes
 
-- 7e59095: Add support for ECMAScript modules. Noted that when you use `@kosko/env` as an ECMAScript module, it returns an `AsyncEnvironment` instead, so you **MUST** add `await` when using these two functions.
+- 7e59095: Add support for ECMAScript modules. Please note that when you use `@kosko/env` as an ECMAScript module, it returns an `AsyncEnvironment` instead, so you **MUST** add `await` when using these two functions.
 
   ```js
   // Before

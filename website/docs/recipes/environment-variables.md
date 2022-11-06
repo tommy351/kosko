@@ -6,7 +6,7 @@ This helper function can help you organize environment variables in a pod with a
 
 ```ts ts2js
 import { EnvVar } from "kubernetes-models/v1/EnvVar";
-import { EnvVarSource } from "kubernetes-models/v1/EnvVarSource";
+import { IEnvVarSource } from "kubernetes-models/v1/EnvVarSource";
 
 export function envVars(
   envs: Record<string, string | IEnvVarSource>

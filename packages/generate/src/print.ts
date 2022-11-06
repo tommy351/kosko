@@ -26,17 +26,17 @@ export interface PrintOptions {
 }
 
 type Printer<T> = (writer: Writer, data: T) => void;
-type PrinterMap<T> = { [key in PrintFormat]: Printer<T> };
+type PrinterMap<T> = Record<PrintFormat, Printer<T>>;
 
-function stringifyYAML(data: any): string {
+function stringifyYAML(data: unknown): string {
   return yaml.dump(data, { noRefs: true });
 }
 
-function stringifyJSON(data: any): string {
+function stringifyJSON(data: unknown): string {
   return stringify(data, undefined, "  ");
 }
 
-const printers: PrinterMap<any> = {
+const printers: PrinterMap<unknown> = {
   [PrintFormat.YAML](writer, data) {
     writer.write(stringifyYAML(data));
   },
@@ -45,7 +45,7 @@ const printers: PrinterMap<any> = {
   }
 };
 
-const arrPrinters: PrinterMap<any[]> = {
+const arrPrinters: PrinterMap<unknown[]> = {
   [PrintFormat.YAML](writer, data) {
     for (const item of data) {
       writer.write("---\n" + stringifyYAML(item));
@@ -58,7 +58,7 @@ const arrPrinters: PrinterMap<any[]> = {
 };
 
 /**
- * Print result to a stream.
+ * Prints `result` to a {@link Writer}.
  *
  * @public
  */

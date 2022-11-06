@@ -12,15 +12,22 @@ function formatErrors(failures: readonly Failure[]): string {
  * @public
  */
 export class ValidationError extends Error {
-  constructor(public readonly errors: readonly Failure[]) {
+  /**
+   * An array of {@link https://docs.superstructjs.org/api-reference/errors | superstruct error objects}.
+   */
+  public readonly errors: readonly Failure[];
+
+  constructor(errors: readonly Failure[]) {
     super(formatErrors(errors));
+
+    this.errors = errors;
   }
 }
 
 ValidationError.prototype.name = "ValidationError";
 
 /**
- * Validates data with kosko configuration schema. It throws a ValidationError
+ * Validates data against the configuration schema. It throws a {@link ValidationError}
  * when validation failed.
  *
  * @public

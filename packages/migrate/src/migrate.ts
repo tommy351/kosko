@@ -104,7 +104,7 @@ function collectImports(components: readonly Component[]): Import[] {
 }
 
 /**
- * Migrate Kubernetes manifests into a kosko component.
+ * Migrate Kubernetes manifests into a Kosko component.
  *
  * @param data - Array of Kubernetes manifests
  * @public

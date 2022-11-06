@@ -14,19 +14,23 @@ export function getNodeExtensions(): string[] {
 }
 
 /**
+ * Options for creating a Node.js environment.
+ *
  * @public
  */
 export interface NodeEnvironmentOptions {
   /**
-   * Current working directory.
+   * Current working directory (CWD).
+   *
+   * @defaultValue `process.cwd()`
    */
   cwd?: string;
 }
 
 export interface InternalNodeEnvironmentOptions extends NodeEnvironmentOptions {
-  createReducerExecutor(reducers: ReducerList): ReducerExecutor;
-  requireModule(environment: Environment, id: string): any;
-  mergeValues(data: any[]): any;
+  createReducerExecutor(this: void, reducers: ReducerList): ReducerExecutor;
+  requireModule(this: void, environment: Environment, id: string): any;
+  mergeValues(this: void, data: any[]): any;
 }
 
 export function createNodeEnvironment({

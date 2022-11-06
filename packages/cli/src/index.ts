@@ -1,4 +1,9 @@
-import { hideBin } from "yargs/helpers";
+/**
+ * CLI.
+ *
+ * @packageDocumentation
+ */
+
 import { parse } from "./cli/command";
 import { rootCmd } from "./commands/root";
 
@@ -10,7 +15,7 @@ export { handleError } from "./cli/error";
  * @public
  */
 export async function run(
-  argv: readonly string[] = hideBin(process.argv)
+  argv: readonly string[] = process.argv.slice(2)
 ): Promise<void> {
   await parse(rootCmd, argv);
 }

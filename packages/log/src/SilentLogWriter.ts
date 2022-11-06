@@ -1,6 +1,8 @@
 import { LogWriter } from "./types";
 
 /**
+ * Omits logs.
+ *
  * @public
  */
 export default class SilentLogWriter implements LogWriter {

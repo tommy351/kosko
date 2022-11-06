@@ -19,26 +19,34 @@ export interface GenerateOptions {
   path: string;
 
   /**
-   * Patterns of component names.
+   * Glob patterns of component names.
    *
-   * @example ["*"]
+   * @example
+   * ```js
+   * ["*"]
+   * ```
+   *
+   * @see {@link https://en.wikipedia.org/wiki/Glob_(programming) | glob pattern}
    */
   components: readonly string[];
 
   /**
    * File extensions of components.
    *
-   * @example ["js", "json"]
+   * @example
+   * ```js
+   * ["js", "json"]
+   * ```
    */
   extensions?: readonly string[];
 
   /**
-   * See {@link ResolveOptions.validate} for more info.
+   * {@inheritDoc ResolveOptions.validate}
    */
   validate?: boolean;
 
   /**
-   * See {@link ResolveOptions.bail} for more info.
+   * {@inheritDoc ResolveOptions.bail}
    */
   bail?: boolean;
 }
@@ -88,13 +96,23 @@ function validateExtensions(extensions: readonly string[]) {
  * Finds components with glob patterns in the specified path and returns exported
  * values from each components.
  *
+ * @remarks
  * Extension names is optional in `options.components` because it's appended
  * automatically. (e.g. `foo` =\> `foo?(.{js,json})`)
  *
  * Extensions are from `require.extensions`. You can require `ts-node/register`
  * to add support for `.ts` extension.
  *
+ * Note that this function currently is only available on Node.js.
+ *
+ * @throws {@link GenerateError}
+ * Thrown if an error occurred.
+ *
+ * @throws {@link @kosko/aggregate-error#AggregateError}
+ * Thrown if multiple errors occurred.
+ *
  * @public
+ * @see {@link resolve}
  */
 export async function generate(options: GenerateOptions): Promise<Result> {
   if (!options.components.length) {

@@ -40,7 +40,7 @@ export type Options<T, O> = yargs.Options & {
  * @public
  */
 export interface Result {
-  files: readonly File[];
+  files: File[];
 }
 
 /**

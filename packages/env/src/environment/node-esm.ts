@@ -6,9 +6,14 @@ import { Environment } from "./types";
 import { createAsyncReducerExecutor } from "./base";
 import { getErrorCode } from "@kosko/common-utils";
 
+const MODULE_NOT_FOUND_ERROR_CODES = new Set([
+  "ERR_MODULE_NOT_FOUND",
+  "MODULE_NOT_FOUND"
+]);
+
 /**
- * Returns a new `Environment` which loads environment variables using ECMAScript
- * module (ESM) `import()` function.
+ * Returns a new {@link Environment} which loads environment variables using
+ * ECMAScript module (ESM) `import()` function.
  *
  * @public
  */
@@ -50,10 +55,7 @@ export function createNodeESMEnvironment(
       } catch (err) {
         const code = getErrorCode(err);
 
-        if (
-          code &&
-          ["ERR_MODULE_NOT_FOUND", "MODULE_NOT_FOUND"].includes(code)
-        ) {
+        if (code && MODULE_NOT_FOUND_ERROR_CODES.has(code)) {
           logger.log(LogLevel.Debug, `Cannot import module: ${path}`);
           return {};
         }

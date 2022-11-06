@@ -7,10 +7,12 @@ function defineNonEnumerableProp<T extends object, K extends keyof T>(
 }
 
 /**
+ * This class implements the standard {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError | AggregateError} class.
+ *
  * @public
  */
 export default class AggregateError extends Error {
-  public readonly errors!: unknown[];
+  public readonly errors!: readonly unknown[];
   public readonly cause?: unknown;
 
   public constructor(

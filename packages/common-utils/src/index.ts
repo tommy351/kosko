@@ -1,5 +1,11 @@
 /**
- * Returns true when type of value is `object` and is not `null`, `undefined` or
+ * Common utilities used in Kosko.
+ *
+ * @packageDocumentation
+ */
+
+/**
+ * Returns true when type of `value` is `object` and is not `null`, `undefined` or
  * an array.
  *
  * @public
@@ -11,7 +17,7 @@ export function isRecord(
 }
 
 /**
- * Transforms input into an array, or leave it as-is if input is already an array.
+ * Transforms `input` into an array, or leave it as-is if `input` is already an array.
  *
  * @public
  */
@@ -20,7 +26,7 @@ export function toArray<T>(input: T | T[]): T[] {
 }
 
 /**
- * Returns `code` in an error-like object.
+ * Returns `code` of an error-like object.
  *
  * @public
  */

@@ -13,8 +13,8 @@ export interface ResourceModule {
  * @public
  */
 export interface ResourceKind {
-  readonly apiVersion: string;
-  readonly kind: string;
+  apiVersion: string;
+  kind: string;
 }
 
 let moduleMap: Record<string, Record<string, ResourceModule>> = {};
