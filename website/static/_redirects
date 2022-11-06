@@ -8,6 +8,5 @@
 /docs/commands/ /docs/cli 301
 /docs/typescript-support /docs/typescript 301
 /docs/typescript-support/ /docs/typescript 301
-/docs/api/classes/:name /docs/api/classes/:name/ 302
-/docs/api/enums/:name /docs/api/enums/:name/ 302
-/docs/api/interfaces/:name /docs/api/interfaces/:name/ 302
+/blog/2021/03/09/kosko-1.1 /blog/2021/03/09/kosko-1.1/ 301
+/blog/2022/11/06/kosko-3.0 /blog/2022/11/06/kosko-3.0/ 301
