@@ -1,5 +1,16 @@
 # @kosko/helm
 
+## 3.0.1
+
+### Patch Changes
+
+- [#114](https://github.com/tommy351/kosko/pull/114) [`7744bcd`](https://github.com/tommy351/kosko/commit/7744bcdb86bbfff60350638fe27d89781a6714f7) Thanks [@tommy351](https://github.com/tommy351)! - Update docs.
+
+- Updated dependencies [[`7744bcd`](https://github.com/tommy351/kosko/commit/7744bcdb86bbfff60350638fe27d89781a6714f7), [`7744bcd`](https://github.com/tommy351/kosko/commit/7744bcdb86bbfff60350638fe27d89781a6714f7)]:
+  - @kosko/common-utils@0.1.1
+  - @kosko/exec-utils@1.0.1
+  - @kosko/yaml@3.1.0
+
 ## 3.0.0
 
 ### Major Changes

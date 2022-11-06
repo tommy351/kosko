@@ -1,5 +1,12 @@
 # @kosko-example/template-component
 
+## 0.0.5
+
+### Patch Changes
+
+- Updated dependencies [[`7744bcd`](https://github.com/tommy351/kosko/commit/7744bcdb86bbfff60350638fe27d89781a6714f7)]:
+  - @kosko/template@3.0.1
+
 ## 0.0.4
 
 ### Patch Changes

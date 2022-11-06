@@ -1,5 +1,11 @@
 # @kosko/exec-utils
 
+## 1.0.1
+
+### Patch Changes
+
+- [#114](https://github.com/tommy351/kosko/pull/114) [`7744bcd`](https://github.com/tommy351/kosko/commit/7744bcdb86bbfff60350638fe27d89781a6714f7) Thanks [@tommy351](https://github.com/tommy351)! - Update docs.
+
 ## 1.0.0
 
 ### Major Changes
