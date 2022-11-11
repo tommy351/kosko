@@ -26,6 +26,9 @@
     "import": "./index.browser.mjs",
     "require": "./index.node.js"
   },
+  "scripts": {
+    "build": "tsup"
+  },
   "keywords": [
     "kosko"
   ],
@@ -35,11 +38,10 @@
   "engines": {
     "node": ">=14.18.0"
   },
-  "dependencies": {
-    "tslib": "^2.4.0"
-  },
   "devDependencies": {
-    "@kosko/jest-preset": "workspace:^"
+    "@kosko/jest-preset": "workspace:^",
+    "@kosko/tsup-config": "workspace:^",
+    "tsup": "^6.4.0"
   },
   "jest": {
     "preset": "@kosko/jest-preset"

@@ -14,6 +14,9 @@
     "import": "./dist/index.mjs",
     "require": "./dist/index.js"
   },
+  "scripts": {
+    "build": "tsup"
+  },
   "files": [
     "/dist/"
   ],
@@ -29,15 +32,16 @@
   "dependencies": {
     "@kosko/log": "workspace:^",
     "exit": "^0.1.2",
-    "tslib": "^2.4.0",
     "yargs": "^17.5.1"
   },
   "devDependencies": {
-    "@kosko/test-utils": "workspace:^",
     "@kosko/jest-preset": "workspace:^",
+    "@kosko/test-utils": "workspace:^",
+    "@kosko/tsup-config": "workspace:^",
     "@types/exit": "^0.1.31",
     "@types/yargs": "^17.0.12",
-    "execa": "^5.1.1"
+    "execa": "^5.1.1",
+    "tsup": "^6.4.0"
   },
   "jest": {
     "preset": "@kosko/jest-preset"

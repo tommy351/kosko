@@ -13,9 +13,15 @@
     "import": "./dist/index.mjs",
     "require": "./dist/index.js"
   },
+  "scripts": {
+    "build": "tsup"
+  },
   "dependencies": {
     "@kosko/test-utils": "workspace:^",
-    "escape-string-regexp": "^4.0.0",
-    "tslib": "^2.4.0"
+    "escape-string-regexp": "^4.0.0"
+  },
+  "devDependencies": {
+    "@kosko/tsup-config": "workspace:^",
+    "tsup": "^6.4.0"
   }
 }

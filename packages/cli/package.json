@@ -20,6 +20,9 @@
     },
     "./bin/kosko.js": "./bin/kosko.js"
   },
+  "scripts": {
+    "build": "tsup"
+  },
   "files": [
     "/bin/",
     "/dist/",
@@ -52,7 +55,6 @@
     "import-local": "^3.1.0",
     "jsonpath": "^1.1.1",
     "picocolors": "^1.0.0",
-    "tslib": "^2.4.0",
     "yargs": "^17.5.1"
   },
   "devDependencies": {
@@ -60,6 +62,7 @@
     "@kosko/env": "workspace:^",
     "@kosko/jest-preset": "workspace:^",
     "@kosko/test-utils": "workspace:^",
+    "@kosko/tsup-config": "workspace:^",
     "@types/bl": "^5.0.2",
     "@types/exit": "^0.1.31",
     "@types/jsonpath": "^0.2.0",
@@ -68,7 +71,8 @@
     "execa": "^5.1.1",
     "fast-glob": "^3.2.12",
     "kubernetes-models": "^4.1.0",
-    "pkg-dir": "^5.0.0"
+    "pkg-dir": "^5.0.0",
+    "tsup": "^6.4.0"
   },
   "jest": {
     "preset": "@kosko/jest-preset"

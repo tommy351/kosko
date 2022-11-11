@@ -14,6 +14,9 @@
     "import": "./dist/index.mjs",
     "require": "./dist/index.js"
   },
+  "scripts": {
+    "build": "tsup"
+  },
   "files": [
     "/dist/"
   ],
@@ -30,11 +33,12 @@
     "@iarna/toml": "^2.2.5",
     "@kosko/common-utils": "workspace:^",
     "@kosko/log": "workspace:^",
-    "superstruct": "^0.15.3",
-    "tslib": "^2.4.0"
+    "superstruct": "^0.15.3"
   },
   "devDependencies": {
-    "@kosko/jest-preset": "workspace:^"
+    "@kosko/jest-preset": "workspace:^",
+    "@kosko/tsup-config": "workspace:^",
+    "tsup": "^6.4.0"
   },
   "jest": {
     "preset": "@kosko/jest-preset"

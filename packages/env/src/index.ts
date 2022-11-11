@@ -1,4 +1,4 @@
-export * from "./index.base";
+export * from "./index-base";
 
 import { createAsyncEnvironment } from "./environment/async";
 import type { createNodeCJSEnvironment as _createNodeCJSEnvironment } from "./environment/node-cjs";

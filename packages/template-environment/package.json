@@ -14,6 +14,9 @@
     "import": "./dist/index.mjs",
     "require": "./dist/index.js"
   },
+  "scripts": {
+    "build": "tsup"
+  },
   "bin": {
     "template-environment": "bin/run.js"
   },
@@ -31,11 +34,12 @@
     "node": ">=14.18.0"
   },
   "dependencies": {
-    "@kosko/template": "workspace:^",
-    "tslib": "^2.4.0"
+    "@kosko/template": "workspace:^"
   },
   "devDependencies": {
-    "@kosko/jest-preset": "workspace:^"
+    "@kosko/jest-preset": "workspace:^",
+    "@kosko/tsup-config": "workspace:^",
+    "tsup": "^6.4.0"
   },
   "jest": {
     "preset": "@kosko/jest-preset"

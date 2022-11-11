@@ -1,0 +1,12 @@
+{
+  "name": "@kosko/tsup-config",
+  "version": "0.0.0",
+  "private": true,
+  "main": "index.cjs",
+  "engines": {
+    "node": ">=14.18.0"
+  },
+  "dependencies": {
+    "tsup": "^6.4.0"
+  }
+}

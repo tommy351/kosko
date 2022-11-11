@@ -19,6 +19,9 @@
     "require": "./dist/index.js",
     "default": "./dist/index.mjs"
   },
+  "scripts": {
+    "build": "tsup"
+  },
   "files": [
     "/dist/"
   ],
@@ -39,18 +42,19 @@
     "extract-stack": "^2.0.0",
     "fast-safe-stringify": "^2.1.1",
     "js-yaml": "^4.1.0",
-    "micromatch": "^4.0.5",
-    "tslib": "^2.4.0"
+    "micromatch": "^4.0.5"
   },
   "devDependencies": {
     "@kosko/jest-preset": "workspace:^",
     "@kosko/test-utils": "workspace:^",
+    "@kosko/tsup-config": "workspace:^",
     "@types/bl": "^5.0.2",
     "@types/js-yaml": "^4.0.5",
     "@types/micromatch": "^4.0.2",
     "bl": "^5.0.0",
     "execa": "^5.1.1",
-    "kubernetes-models": "^4.1.0"
+    "kubernetes-models": "^4.1.0",
+    "tsup": "^6.4.0"
   },
   "jest": {
     "preset": "@kosko/jest-preset"

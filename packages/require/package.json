@@ -30,5 +30,9 @@
   },
   "dependencies": {
     "resolve": "^1.22.1"
+  },
+  "devDependencies": {
+    "@kosko/tsup-config": "workspace:^",
+    "tsup": "^6.4.0"
   }
 }

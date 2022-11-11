@@ -6,18 +6,21 @@
   "repository": "https://github.com/tommy351/kosko/tree/master/packages/env",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
-  "main": "dist/index.node.js",
-  "module": "dist/index.node.esm.mjs",
+  "main": "dist/index-node.js",
+  "module": "dist/index-node-esm.mjs",
   "browser": "dist/index.mjs",
-  "types": "dist/index.node.d.ts",
+  "types": "dist/index-node.d.ts",
   "sideEffects": false,
   "exports": {
     "node": {
-      "import": "./dist/index.node.esm.mjs",
-      "require": "./dist/index.node.js"
+      "import": "./dist/index-node-esm.mjs",
+      "require": "./dist/index-node.js"
     },
     "require": "./dist/index.js",
     "default": "./dist/index.mjs"
+  },
+  "scripts": {
+    "build": "tsup"
   },
   "files": [
     "/dist/"
@@ -36,13 +39,14 @@
     "@kosko/log": "workspace:^",
     "@kosko/require": "workspace:^",
     "deepmerge": "^4.2.2",
-    "is-plain-object": "^5.0.0",
-    "tslib": "^2.4.0"
+    "is-plain-object": "^5.0.0"
   },
   "jest": {
     "preset": "@kosko/jest-preset"
   },
   "devDependencies": {
-    "@kosko/jest-preset": "workspace:^"
+    "@kosko/jest-preset": "workspace:^",
+    "@kosko/tsup-config": "workspace:^",
+    "tsup": "^6.4.0"
   }
 }

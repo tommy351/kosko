@@ -14,6 +14,9 @@
     "import": "./dist/index.mjs",
     "require": "./dist/index.js"
   },
+  "scripts": {
+    "build": "tsup"
+  },
   "files": [
     "/dist/"
   ],
@@ -34,17 +37,18 @@
     "@kosko/require": "workspace:^",
     "fast-safe-stringify": "^2.1.1",
     "js-yaml": "^4.1.0",
-    "node-fetch": "^2.6.6",
-    "tslib": "^2.4.0"
+    "node-fetch": "^2.6.6"
   },
   "devDependencies": {
     "@kosko/jest-preset": "workspace:^",
     "@kosko/test-utils": "workspace:^",
+    "@kosko/tsup-config": "workspace:^",
     "@types/js-yaml": "^4.0.5",
     "@types/node-fetch": "^2.6.2",
     "execa": "^5.1.1",
     "fetch-mock": "^9.11.0",
-    "kubernetes-models": "^4.1.0"
+    "kubernetes-models": "^4.1.0",
+    "tsup": "^6.4.0"
   },
   "peerDependencies": {
     "kubernetes-models": ">=1.0.3"
