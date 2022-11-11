@@ -79,10 +79,7 @@ async function runWithLoaders(options: WorkerOptions) {
         // ESM loaders
         ...options.config.loaders.flatMap((loader) => ["--loader", loader]),
         // Entry file
-        join(
-          process.env.KOSKO_CLI_BIN || process.argv[1],
-          "../../dist/commands/generate/worker-bin.js"
-        )
+        join(__dirname, "worker-bin.js")
       ],
       {
         stdio: ["pipe", "inherit", "inherit"],

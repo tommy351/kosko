@@ -2,7 +2,10 @@ import fs from "node:fs/promises";
 import { join } from "node:path";
 import { File } from "./base";
 
-const TEMPLATE_DIR = join(__dirname, "../../../../templates");
+const TEMPLATE_DIR =
+  process.env.NODE_ENV === "production"
+    ? join(__dirname, "..")
+    : join(__dirname, "../../../../templates");
 
 export async function generateFromTemplateFile(
   path: string,

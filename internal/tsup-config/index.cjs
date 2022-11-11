@@ -14,6 +14,11 @@ function extend(options) {
     outDir: "dist",
     format: ["esm", "cjs"],
     dts: true,
+    shims: true,
+    minifySyntax: true,
+    env: {
+      NODE_ENV: "production"
+    },
     ...options
   });
 }
