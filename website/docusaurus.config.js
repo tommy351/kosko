@@ -13,6 +13,7 @@ module.exports = {
   favicon: "img/favicon.ico",
   organizationName,
   projectName,
+  trailingSlash: false,
   themeConfig: {
     image: "img/logo.png",
     metadata: [{ name: "twitter:card", content: "summary" }],
