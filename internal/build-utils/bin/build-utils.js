@@ -89,6 +89,7 @@ async function buildDts() {
     input: entryFiles,
     external: Object.keys(pkgJson.dependencies ?? {}),
     plugins: [
+      nodeResolve({ extensions: [".ts"] }),
       dts({
         compilerOptions: config?.options
       })
