@@ -3,7 +3,10 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { File } from "./base";
 
-const TEMPLATE_DIR = join(fileURLToPath(import.meta.url), "../../templates");
+const TEMPLATE_DIR = join(
+  fileURLToPath(import.meta.url),
+  process.env.BUILD_PROD ? "../../templates" : "../../../../../templates"
+);
 
 export async function generateFromTemplateFile(
   path: string,

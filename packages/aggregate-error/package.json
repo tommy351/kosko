@@ -25,7 +25,8 @@
       "require": "./index.node.cjs"
     },
     "types": "./index.d.ts",
-    "default": "./index.browser.mjs"
+    "import": "./index.browser.mjs",
+    "require": "./index.node.cjs"
   },
   "scripts": {
     "build": "build-utils"

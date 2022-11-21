@@ -63,8 +63,7 @@ async function buildBundle(options) {
       entryFileNames: `[name].${options.output}`,
       chunkFileNames: `[name]-[hash].${options.output}`,
       format: options.format,
-      exports: "auto",
-      generatedCode: "es2015"
+      exports: "auto"
     });
   } finally {
     await bundle.close();
@@ -73,7 +72,7 @@ async function buildBundle(options) {
 
 async function buildDts() {
   const config = ts.getParsedCommandLineOfConfigFile(
-    join(fileURLToPath(import.meta.url), "../../../../tsconfig.build.json"),
+    join(fileURLToPath(import.meta.url), "../../../../tsconfig.json"),
     undefined,
     {
       ...ts.sys,
