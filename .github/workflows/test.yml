@@ -26,6 +26,8 @@ jobs:
         run: pnpm run build
       - name: Lint files
         run: pnpm run lint
+      - name: Type check
+        run: pnpm run type-check
   test:
     runs-on: ${{ matrix.os }}
     needs:

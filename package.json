@@ -21,7 +21,8 @@
     "test:integration": "jest --config jest.integration.config.ts",
     "test:browser": "jest --config integration/browser/jest.config.js",
     "preinstall": "npx only-allow pnpm",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "type-check": "tsc --noEmit"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx,.cjs,.mjs}": "eslint --fix"

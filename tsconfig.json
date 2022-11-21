@@ -3,5 +3,6 @@
   "compilerOptions": {
     "moduleResolution": "node",
     "module": "esnext"
-  }
+  },
+  "include": ["integration", "internal/*/src", "packages/*/src"]
 }
