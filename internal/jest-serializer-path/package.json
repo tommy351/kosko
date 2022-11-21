@@ -10,7 +10,7 @@
   "types": "dist/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "build": "build-utils"
+    "build": "build-scripts"
   },
   "exports": {
     "node": {
@@ -27,6 +27,6 @@
     "escape-string-regexp": "^4.0.0"
   },
   "devDependencies": {
-    "@kosko/build-utils": "workspace:^"
+    "@kosko/build-scripts": "workspace:^"
   }
 }

@@ -11,7 +11,7 @@
   "types": "dist/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "build": "build-utils"
+    "build": "build-scripts"
   },
   "exports": {
     "node": {
@@ -40,7 +40,7 @@
     "cross-spawn": "^7.0.3"
   },
   "devDependencies": {
-    "@kosko/build-utils": "workspace:^",
+    "@kosko/build-scripts": "workspace:^",
     "@kosko/jest-preset": "workspace:^",
     "@types/cross-spawn": "^6.0.2",
     "get-stdin": "^8.0.0"

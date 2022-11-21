@@ -14,7 +14,7 @@
   "types": "dist/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "build": "build-utils src/index.ts src/worker-bin.ts"
+    "build": "build-scripts src/index.ts src/worker-bin.ts"
   },
   "exports": {
     "./bin/kosko.js": "./bin/kosko.js",
@@ -64,7 +64,7 @@
   },
   "devDependencies": {
     "@iarna/toml": "^2.2.5",
-    "@kosko/build-utils": "workspace:^",
+    "@kosko/build-scripts": "workspace:^",
     "@kosko/env": "workspace:^",
     "@kosko/jest-preset": "workspace:^",
     "@kosko/test-utils": "workspace:^",

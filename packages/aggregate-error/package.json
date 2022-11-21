@@ -29,7 +29,7 @@
     "require": "./index.node.cjs"
   },
   "scripts": {
-    "build": "build-utils"
+    "build": "build-scripts"
   },
   "keywords": [
     "kosko"
@@ -41,7 +41,7 @@
     "node": ">=14.18.0"
   },
   "devDependencies": {
-    "@kosko/build-utils": "workspace:^",
+    "@kosko/build-scripts": "workspace:^",
     "@kosko/jest-preset": "workspace:^"
   },
   "jest": {

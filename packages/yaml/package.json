@@ -11,7 +11,7 @@
   "types": "dist/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "build": "build-utils"
+    "build": "build-scripts"
   },
   "exports": {
     "node": {
@@ -46,7 +46,7 @@
     "node-fetch": "^2.6.6"
   },
   "devDependencies": {
-    "@kosko/build-utils": "workspace:^",
+    "@kosko/build-scripts": "workspace:^",
     "@kosko/jest-preset": "workspace:^",
     "@kosko/test-utils": "workspace:^",
     "@types/js-yaml": "^4.0.5",

@@ -240,7 +240,7 @@ importers:
       webpack-cli: 4.10.0_vnmgq7jx5zjkzolvtfp7mdf5ri
       webpack-dev-server: 4.11.1_5v66e2inugklgvlh4huuavolfq
 
-  internal/build-utils:
+  internal/build-scripts:
     specifiers:
       '@rollup/plugin-node-resolve': ^15.0.1
       '@rollup/plugin-replace': ^5.0.1
@@ -275,18 +275,18 @@ importers:
 
   internal/jest-serializer-path:
     specifiers:
-      '@kosko/build-utils': workspace:^
+      '@kosko/build-scripts': workspace:^
       '@kosko/test-utils': workspace:^
       escape-string-regexp: ^4.0.0
     dependencies:
       '@kosko/test-utils': link:../test-utils
       escape-string-regexp: 4.0.0
     devDependencies:
-      '@kosko/build-utils': link:../build-utils
+      '@kosko/build-scripts': link:../build-scripts
 
   internal/test-utils:
     specifiers:
-      '@kosko/build-utils': workspace:^
+      '@kosko/build-scripts': workspace:^
       execa: ^5.1.1
       temp-dir: ^2.0.0
       tmp: ^0.2.1
@@ -297,21 +297,21 @@ importers:
       tmp: 0.2.1
       tmp-promise: 3.0.3
     devDependencies:
-      '@kosko/build-utils': link:../build-utils
+      '@kosko/build-scripts': link:../build-scripts
 
   packages/aggregate-error:
     specifiers:
-      '@kosko/build-utils': workspace:^
+      '@kosko/build-scripts': workspace:^
       '@kosko/jest-preset': workspace:^
     devDependencies:
-      '@kosko/build-utils': link:../../internal/build-utils
+      '@kosko/build-scripts': link:../../internal/build-scripts
       '@kosko/jest-preset': link:../../internal/jest-preset
 
   packages/cli:
     specifiers:
       '@iarna/toml': ^2.2.5
       '@kosko/aggregate-error': workspace:^
-      '@kosko/build-utils': workspace:^
+      '@kosko/build-scripts': workspace:^
       '@kosko/common-utils': workspace:^
       '@kosko/config': workspace:^
       '@kosko/env': workspace:^
@@ -360,7 +360,7 @@ importers:
       yargs: 17.5.1
     devDependencies:
       '@iarna/toml': 2.2.5
-      '@kosko/build-utils': link:../../internal/build-utils
+      '@kosko/build-scripts': link:../../internal/build-scripts
       '@kosko/env': link:../env
       '@kosko/jest-preset': link:../../internal/jest-preset
       '@kosko/test-utils': link:../../internal/test-utils
@@ -376,16 +376,16 @@ importers:
 
   packages/common-utils:
     specifiers:
-      '@kosko/build-utils': workspace:^
+      '@kosko/build-scripts': workspace:^
       '@kosko/jest-preset': workspace:^
     devDependencies:
-      '@kosko/build-utils': link:../../internal/build-utils
+      '@kosko/build-scripts': link:../../internal/build-scripts
       '@kosko/jest-preset': link:../../internal/jest-preset
 
   packages/config:
     specifiers:
       '@iarna/toml': ^2.2.5
-      '@kosko/build-utils': workspace:^
+      '@kosko/build-scripts': workspace:^
       '@kosko/common-utils': workspace:^
       '@kosko/jest-preset': workspace:^
       '@kosko/log': workspace:^
@@ -396,12 +396,12 @@ importers:
       '@kosko/log': link:../log
       superstruct: 0.15.5
     devDependencies:
-      '@kosko/build-utils': link:../../internal/build-utils
+      '@kosko/build-scripts': link:../../internal/build-scripts
       '@kosko/jest-preset': link:../../internal/jest-preset
 
   packages/env:
     specifiers:
-      '@kosko/build-utils': workspace:^
+      '@kosko/build-scripts': workspace:^
       '@kosko/common-utils': workspace:^
       '@kosko/jest-preset': workspace:^
       '@kosko/log': workspace:^
@@ -415,12 +415,12 @@ importers:
       deepmerge: 4.2.2
       is-plain-object: 5.0.0
     devDependencies:
-      '@kosko/build-utils': link:../../internal/build-utils
+      '@kosko/build-scripts': link:../../internal/build-scripts
       '@kosko/jest-preset': link:../../internal/jest-preset
 
   packages/exec-utils:
     specifiers:
-      '@kosko/build-utils': workspace:^
+      '@kosko/build-scripts': workspace:^
       '@kosko/jest-preset': workspace:^
       '@types/cross-spawn': ^6.0.2
       cross-spawn: ^7.0.3
@@ -428,7 +428,7 @@ importers:
     dependencies:
       cross-spawn: 7.0.3
     devDependencies:
-      '@kosko/build-utils': link:../../internal/build-utils
+      '@kosko/build-scripts': link:../../internal/build-scripts
       '@kosko/jest-preset': link:../../internal/jest-preset
       '@types/cross-spawn': 6.0.2
       get-stdin: 8.0.0
@@ -436,7 +436,7 @@ importers:
   packages/generate:
     specifiers:
       '@kosko/aggregate-error': workspace:^
-      '@kosko/build-utils': workspace:^
+      '@kosko/build-scripts': workspace:^
       '@kosko/common-utils': workspace:^
       '@kosko/jest-preset': workspace:^
       '@kosko/log': workspace:^
@@ -462,7 +462,7 @@ importers:
       js-yaml: 4.1.0
       micromatch: 4.0.5
     devDependencies:
-      '@kosko/build-utils': link:../../internal/build-utils
+      '@kosko/build-scripts': link:../../internal/build-scripts
       '@kosko/jest-preset': link:../../internal/jest-preset
       '@kosko/test-utils': link:../../internal/test-utils
       '@types/bl': 5.0.2
@@ -474,7 +474,7 @@ importers:
 
   packages/helm:
     specifiers:
-      '@kosko/build-utils': workspace:^
+      '@kosko/build-scripts': workspace:^
       '@kosko/common-utils': workspace:^
       '@kosko/exec-utils': workspace:^
       '@kosko/jest-preset': workspace:^
@@ -488,7 +488,7 @@ importers:
       fast-safe-stringify: 2.1.1
       tmp-promise: 3.0.3
     devDependencies:
-      '@kosko/build-utils': link:../../internal/build-utils
+      '@kosko/build-scripts': link:../../internal/build-scripts
       '@kosko/jest-preset': link:../../internal/jest-preset
 
   packages/kosko:
@@ -501,7 +501,7 @@ importers:
 
   packages/kustomize:
     specifiers:
-      '@kosko/build-utils': workspace:^
+      '@kosko/build-scripts': workspace:^
       '@kosko/common-utils': workspace:^
       '@kosko/exec-utils': workspace:^
       '@kosko/jest-preset': workspace:^
@@ -511,12 +511,12 @@ importers:
       '@kosko/exec-utils': link:../exec-utils
       '@kosko/yaml': link:../yaml
     devDependencies:
-      '@kosko/build-utils': link:../../internal/build-utils
+      '@kosko/build-scripts': link:../../internal/build-scripts
       '@kosko/jest-preset': link:../../internal/jest-preset
 
   packages/log:
     specifiers:
-      '@kosko/build-utils': workspace:^
+      '@kosko/build-scripts': workspace:^
       '@kosko/common-utils': workspace:^
       '@kosko/jest-preset': workspace:^
       clean-stack: ^3.0.1
@@ -528,12 +528,12 @@ importers:
       fast-safe-stringify: 2.1.1
       picocolors: 1.0.0
     devDependencies:
-      '@kosko/build-utils': link:../../internal/build-utils
+      '@kosko/build-scripts': link:../../internal/build-scripts
       '@kosko/jest-preset': link:../../internal/jest-preset
 
   packages/migrate:
     specifiers:
-      '@kosko/build-utils': workspace:^
+      '@kosko/build-scripts': workspace:^
       '@kosko/jest-preset': workspace:^
       '@kosko/yaml': workspace:^
       camelcase: ^6.2.1
@@ -545,7 +545,7 @@ importers:
       camelcase: 6.3.0
       fast-safe-stringify: 2.1.1
     devDependencies:
-      '@kosko/build-utils': link:../../internal/build-utils
+      '@kosko/build-scripts': link:../../internal/build-scripts
       '@kosko/jest-preset': link:../../internal/jest-preset
       is-plain-object: 5.0.0
       kubernetes-models: 4.1.0
@@ -558,7 +558,7 @@ importers:
 
   packages/template:
     specifiers:
-      '@kosko/build-utils': workspace:^
+      '@kosko/build-scripts': workspace:^
       '@kosko/jest-preset': workspace:^
       '@kosko/log': workspace:^
       '@kosko/test-utils': workspace:^
@@ -572,7 +572,7 @@ importers:
       exit: 0.1.2
       yargs: 17.5.1
     devDependencies:
-      '@kosko/build-utils': link:../../internal/build-utils
+      '@kosko/build-scripts': link:../../internal/build-scripts
       '@kosko/jest-preset': link:../../internal/jest-preset
       '@kosko/test-utils': link:../../internal/test-utils
       '@types/exit': 0.1.31
@@ -581,29 +581,29 @@ importers:
 
   packages/template-deployed-service:
     specifiers:
-      '@kosko/build-utils': workspace:^
+      '@kosko/build-scripts': workspace:^
       '@kosko/jest-preset': workspace:^
       '@kosko/template': workspace:^
     dependencies:
       '@kosko/template': link:../template
     devDependencies:
-      '@kosko/build-utils': link:../../internal/build-utils
+      '@kosko/build-scripts': link:../../internal/build-scripts
       '@kosko/jest-preset': link:../../internal/jest-preset
 
   packages/template-environment:
     specifiers:
-      '@kosko/build-utils': workspace:^
+      '@kosko/build-scripts': workspace:^
       '@kosko/jest-preset': workspace:^
       '@kosko/template': workspace:^
     dependencies:
       '@kosko/template': link:../template
     devDependencies:
-      '@kosko/build-utils': link:../../internal/build-utils
+      '@kosko/build-scripts': link:../../internal/build-scripts
       '@kosko/jest-preset': link:../../internal/jest-preset
 
   packages/yaml:
     specifiers:
-      '@kosko/build-utils': workspace:^
+      '@kosko/build-scripts': workspace:^
       '@kosko/common-utils': workspace:^
       '@kosko/jest-preset': workspace:^
       '@kosko/log': workspace:^
@@ -625,7 +625,7 @@ importers:
       js-yaml: 4.1.0
       node-fetch: 2.6.7
     devDependencies:
-      '@kosko/build-utils': link:../../internal/build-utils
+      '@kosko/build-scripts': link:../../internal/build-scripts
       '@kosko/jest-preset': link:../../internal/jest-preset
       '@kosko/test-utils': link:../../internal/test-utils
       '@types/js-yaml': 4.0.5

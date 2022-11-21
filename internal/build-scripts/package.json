@@ -1,11 +1,11 @@
 {
-  "name": "@kosko/build-utils",
+  "name": "@kosko/build-scripts",
   "version": "0.0.0",
   "private": true,
   "engines": {
     "node": ">=14.18.0"
   },
-  "bin": "bin/build-utils.js",
+  "bin": "bin/build-scripts.js",
   "type": "module",
   "dependencies": {
     "@rollup/plugin-node-resolve": "^15.0.1",

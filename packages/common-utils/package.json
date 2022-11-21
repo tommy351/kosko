@@ -11,7 +11,7 @@
   "types": "dist/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "build": "build-utils"
+    "build": "build-scripts"
   },
   "exports": {
     "node": {
@@ -36,7 +36,7 @@
     "node": ">=14.18.0"
   },
   "devDependencies": {
-    "@kosko/build-utils": "workspace:^",
+    "@kosko/build-scripts": "workspace:^",
     "@kosko/jest-preset": "workspace:^"
   },
   "jest": {
