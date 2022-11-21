@@ -6,7 +6,7 @@
   "repository": "https://github.com/tommy351/kosko/tree/master/packages/aggregate-error",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
-  "main": "index.node.js",
+  "main": "index.node.cjs",
   "module": "index.node.mjs",
   "browser": "index.browser.mjs",
   "types": "index.d.ts",
@@ -15,16 +15,20 @@
     "dist",
     "index.d.ts",
     "index.browser.mjs",
-    "index.node.js",
+    "index.node.cjs",
     "index.node.mjs"
   ],
   "exports": {
     "node": {
+      "types": "./index.d.ts",
       "import": "./index.node.mjs",
-      "require": "./index.node.js"
+      "require": "./index.node.cjs"
     },
-    "import": "./index.browser.mjs",
-    "require": "./index.node.js"
+    "types": "./index.d.ts",
+    "default": "./index.browser.mjs"
+  },
+  "scripts": {
+    "build": "build-utils"
   },
   "keywords": [
     "kosko"
@@ -35,10 +39,8 @@
   "engines": {
     "node": ">=14.18.0"
   },
-  "dependencies": {
-    "tslib": "^2.4.0"
-  },
   "devDependencies": {
+    "@kosko/build-utils": "workspace:^",
     "@kosko/jest-preset": "workspace:^"
   },
   "jest": {

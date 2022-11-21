@@ -3,7 +3,7 @@ import {
   resolve as resolveModule,
   getRequireExtensions
 } from "@kosko/require";
-import { Result, Manifest } from "./base";
+import type { Result, Manifest } from "./base";
 import logger, { LogLevel } from "@kosko/log";
 import { resolve } from "./resolve";
 import { aggregateErrors, GenerateError } from "./error";

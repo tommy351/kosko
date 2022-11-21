@@ -1,7 +1,17 @@
-import type { generate as _generate } from "./generate";
+/**
+ * Finds and prints components.
+ *
+ * @packageDocumentation
+ */
 
-export * from "./index.base";
-
-export const generate: typeof _generate = () => {
-  throw new Error("generate is only supported on Node.js");
-};
+export * from "./base";
+export {
+  type ComponentInfo,
+  GenerateError,
+  type GenerateErrorOptions,
+  ResolveError,
+  type ResolveErrorOptions
+} from "./error";
+export * from "./print";
+export { resolve, type ResolveOptions } from "./resolve";
+export * from "./generate-export";

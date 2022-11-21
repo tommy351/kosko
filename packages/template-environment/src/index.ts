@@ -4,4 +4,4 @@
  * @packageDocumentation
  */
 
-export { template as default, Options } from "./template";
+export { template as default, type Options } from "./template";

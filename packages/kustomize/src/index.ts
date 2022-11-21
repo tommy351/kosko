@@ -4,4 +4,4 @@
  * @packageDocumentation
  */
 
-export { KustomizeOptions, loadKustomize } from "./load";
+export { type KustomizeOptions, loadKustomize } from "./load";

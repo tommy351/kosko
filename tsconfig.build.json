@@ -1,9 +1,9 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "composite": true,
+    "module": "esnext",
     "declaration": true,
-    "sourceMap": true
+    "emitDeclarationOnly": true
   },
   "exclude": [
     "**/__tests__/**",

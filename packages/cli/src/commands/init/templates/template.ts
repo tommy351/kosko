@@ -1,8 +1,9 @@
 import fs from "node:fs/promises";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { File } from "./base";
 
-const TEMPLATE_DIR = join(__dirname, "../../../../templates");
+const TEMPLATE_DIR = join(fileURLToPath(import.meta.url), "../../templates");
 
 export async function generateFromTemplateFile(
   path: string,
