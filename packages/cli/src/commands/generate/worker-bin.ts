@@ -1,9 +1,12 @@
 import getStdin from "get-stdin";
 import { handleError } from "../../cli/error";
-import { handler } from "./worker";
+import { setupLogger } from "../../cli/logger";
+import { handler, WorkerOptions } from "./worker";
 
 (async () => {
-  const options = JSON.parse(await getStdin());
+  const options: WorkerOptions = JSON.parse(await getStdin());
+
+  setupLogger(options.args);
 
   await handler({
     ...options,

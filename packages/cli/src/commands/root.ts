@@ -4,11 +4,7 @@ import { generateCmd } from "./generate/command";
 import { initCmd } from "./init/command";
 import { validateCmd } from "./validate";
 import { migrateCmd } from "./migrate";
-import logger, {
-  LogLevel,
-  logLevelFromString,
-  SilentLogWriter
-} from "@kosko/log";
+import { setupLogger } from "../cli/logger";
 
 export const rootCmd = yargs
   .scriptName("kosko")
@@ -36,15 +32,7 @@ export const rootCmd = yargs
     default: false
   })
   .group(["cwd", "log-level", "silent", "help", "version"], "Global Options:")
-  .middleware((args) => {
-    if (args.silent) {
-      logger.setWriter(new SilentLogWriter());
-    } else {
-      const level = args["log-level"];
-
-      logger.setLevel((level && logLevelFromString(level)) || LogLevel.Info);
-    }
-  })
+  .middleware(setupLogger)
   .command(initCmd)
   .command(generateCmd)
   .command(validateCmd)
