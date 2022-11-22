@@ -1,5 +1,12 @@
 # @kosko-example/getting-started
 
+## 0.0.15
+
+### Patch Changes
+
+- Updated dependencies []:
+  - kosko@3.0.3
+
 ## 0.0.14
 
 ### Patch Changes
