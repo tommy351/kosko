@@ -1,6 +1,6 @@
 {
   "name": "@kosko-example/run-programmatically",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "private": true,
   "dependencies": {
     "@kosko/env": "workspace:^",
