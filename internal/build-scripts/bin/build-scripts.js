@@ -49,7 +49,10 @@ async function buildBundle(options) {
         jsc: {
           // Node.js 14
           target: "es2020",
-          parser: { syntax: "typescript" }
+          parser: { syntax: "typescript" },
+          minify: {
+            compress: true
+          }
         },
         sourceMaps: true
       })
