@@ -15,6 +15,10 @@ import { getErrorCode } from "@kosko/common-utils";
 export function createNodeCJSEnvironment(
   options: NodeEnvironmentOptions = {}
 ): Environment {
+  if (process.env.BUILD_TARGET !== "node") {
+    throw new Error("createNodeCJSEnvironment is only supported on Node.js");
+  }
+
   return createNodeEnvironment({
     ...options,
     createReducerExecutor: createSyncReducerExecutor,

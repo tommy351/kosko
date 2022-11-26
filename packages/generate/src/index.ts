@@ -14,4 +14,4 @@ export {
 } from "./error";
 export * from "./print";
 export { resolve, type ResolveOptions } from "./resolve";
-export * from "./generate-export";
+export { generate, type GenerateOptions } from "./generate";

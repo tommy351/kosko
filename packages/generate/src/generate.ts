@@ -115,6 +115,10 @@ function validateExtensions(extensions: readonly string[]) {
  * @see {@link resolve}
  */
 export async function generate(options: GenerateOptions): Promise<Result> {
+  if (process.env.BUILD_TARGET !== "node") {
+    throw new Error("generate is only supported on Node.js");
+  }
+
   if (!options.components.length) {
     throw new GenerateError("components must not be empty");
   }

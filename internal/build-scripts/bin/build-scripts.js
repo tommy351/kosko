@@ -7,15 +7,15 @@ import { rollup } from "rollup";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import swc from "rollup-plugin-swc";
-import dts from "rollup-plugin-dts";
+import typescript from "@rollup/plugin-typescript";
 import ts from "typescript";
 import moduleSuffixes from "../plugins/module-suffixes.js";
-import { fileURLToPath } from "node:url";
 
 const cwd = process.cwd();
 const distDir = "dist";
 const fullDistPath = join(cwd, distDir);
 const pkgJson = JSON.parse(await readFile(join(cwd, "package.json"), "utf-8"));
+const tsConfigPath = ts.findConfigFile(cwd, ts.sys.fileExists);
 
 const args = process.argv.slice(2);
 const entryFiles = args.length ? args : ["src/index.ts"];
@@ -26,12 +26,19 @@ const entryFiles = args.length ? args : ["src/index.ts"];
  *   output: string;
  *   format: import("rollup").ModuleFormat;
  *   importMetaUrlShim?: boolean;
+ *   target: 'browser' | 'node';
  * }} options
  */
 async function buildBundle(options) {
   const bundle = await rollup({
     input: entryFiles,
     external: Object.keys(pkgJson.dependencies ?? {}),
+    treeshake: {
+      preset: "recommended",
+      // Assume all modules has no side effects in order to remove all unused
+      // imports.
+      moduleSideEffects: false
+    },
     plugins: [
       ...(options.suffixes ? [moduleSuffixes(options.suffixes)] : []),
       nodeResolve({ extensions: [".ts"] }),
@@ -39,6 +46,7 @@ async function buildBundle(options) {
         preventAssignment: true,
         values: {
           "process.env.BUILD_PROD": "true",
+          "process.env.BUILD_TARGET": JSON.stringify(options.target),
           "process.env.TARGET_SUFFIX": JSON.stringify(options.output),
           ...(options.importMetaUrlShim && {
             "import.meta.url": "new URL(`file:${__filename}`).href"
@@ -55,6 +63,15 @@ async function buildBundle(options) {
           }
         },
         sourceMaps: true
+      }),
+      // TypeScript is only used for building declaration files only.
+      typescript({
+        tsconfig: tsConfigPath,
+        compilerOptions: {
+          outDir: distDir,
+          declaration: true,
+          emitDeclarationOnly: true
+        }
       })
     ]
   });
@@ -73,59 +90,14 @@ async function buildBundle(options) {
   }
 }
 
-async function buildDts() {
-  const config = ts.getParsedCommandLineOfConfigFile(
-    join(fileURLToPath(import.meta.url), "../../../../tsconfig.json"),
-    undefined,
-    {
-      ...ts.sys,
-      onUnRecoverableConfigFileDiagnostic(diagnostic) {
-        ts.formatDiagnostic(diagnostic, {
-          getCurrentDirectory: () => cwd,
-          getCanonicalFileName: (fileName) => fileName,
-          getNewLine: () => ts.sys.newLine
-        });
-      }
-    }
-  );
-
-  /** @type {import('rollup').InputOptions} */
-  const inputOptions = {
-    external: Object.keys(pkgJson.dependencies ?? {}),
-    plugins: [
-      nodeResolve({ extensions: [".ts"] }),
-      dts({
-        compilerOptions: config?.options
-      })
-    ]
-  };
-
-  // dts files must be generated one by one otherwise output path of multiple
-  // input would be like `dist/src/foo.d.ts`.
-  await Promise.all(
-    entryFiles.map(async (input) => {
-      const bundle = await rollup({ ...inputOptions, input });
-
-      try {
-        await bundle.write({
-          dir: distDir,
-          entryFileNames: `[name].d.ts`,
-          format: "es"
-        });
-      } finally {
-        await bundle.close();
-      }
-    })
-  );
-}
-
 await rm(fullDistPath, { recursive: true, force: true });
 await Promise.all([
   // Base
   buildBundle({
     output: "base.mjs",
     format: "esm",
-    suffixes: [".esm"]
+    suffixes: [".esm"],
+    target: "browser"
   }),
 
   // Node.js
@@ -133,14 +105,13 @@ await Promise.all([
     output: "node.cjs",
     format: "cjs",
     suffixes: [".node.cjs", ".node", ".cjs"],
-    importMetaUrlShim: true
+    importMetaUrlShim: true,
+    target: "node"
   }),
   buildBundle({
     output: "node.mjs",
     format: "esm",
-    suffixes: [".node.esm", ".node", ".esm"]
-  }),
-
-  // Type declaration
-  buildDts()
+    suffixes: [".node.esm", ".node", ".esm"],
+    target: "node"
+  })
 ]);

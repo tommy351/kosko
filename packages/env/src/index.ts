@@ -14,5 +14,6 @@ export {
 export type { NodeEnvironmentOptions } from "./environment/node";
 export { createAsyncEnvironment } from "./environment/async";
 export { createSyncEnvironment } from "./environment/sync";
-export * from "./environment/entry";
-export { default } from "./environment/entry";
+export { createNodeCJSEnvironment } from "./environment/node-cjs";
+export { createNodeESMEnvironment } from "./environment/node-esm";
+export { env as default } from "./environment/entry";
