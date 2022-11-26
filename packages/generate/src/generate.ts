@@ -115,6 +115,7 @@ function validateExtensions(extensions: readonly string[]) {
  * @see {@link resolve}
  */
 export async function generate(options: GenerateOptions): Promise<Result> {
+  /* istanbul ignore next */
   if (process.env.BUILD_TARGET !== "node") {
     throw new Error("generate is only supported on Node.js");
   }
