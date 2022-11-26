@@ -85,8 +85,9 @@ async function buildDts() {
       }
     }
   );
-  const bundle = await rollup({
-    input: entryFiles,
+
+  /** @type {import('rollup').InputOptions} */
+  const inputOptions = {
     external: Object.keys(pkgJson.dependencies ?? {}),
     plugins: [
       nodeResolve({ extensions: [".ts"] }),
@@ -94,17 +95,25 @@ async function buildDts() {
         compilerOptions: config?.options
       })
     ]
-  });
+  };
 
-  try {
-    await bundle.write({
-      dir: distDir,
-      entryFileNames: `[name].d.ts`,
-      format: "es"
-    });
-  } finally {
-    await bundle.close();
-  }
+  // dts files must be generated one by one otherwise output path of multiple
+  // input would be like `dist/src/foo.d.ts`.
+  await Promise.all(
+    entryFiles.map(async (input) => {
+      const bundle = await rollup({ ...inputOptions, input });
+
+      try {
+        await bundle.write({
+          dir: distDir,
+          entryFileNames: `[name].d.ts`,
+          format: "es"
+        });
+      } finally {
+        await bundle.close();
+      }
+    })
+  );
 }
 
 await rm(fullDistPath, { recursive: true, force: true });
