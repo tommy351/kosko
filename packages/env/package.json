@@ -8,6 +8,7 @@
   "license": "MIT",
   "main": "index.node.cjs",
   "module": "dist/index.node.mjs",
+  "browser": "dist/index.base.mjs",
   "types": "dist/index.d.ts",
   "sideEffects": false,
   "scripts": {
