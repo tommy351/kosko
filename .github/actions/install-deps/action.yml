@@ -1,0 +1,26 @@
+name: Install Node.js dependencies
+
+inputs:
+  node-version:
+    description: Node.js version
+    required: true
+    default: 18.x
+  pnpm-version:
+    description: pnpm version
+    required: true
+    default: 7.12.1
+
+runs:
+  using: composite
+  steps:
+    - uses: pnpm/action-setup@v2
+      with:
+        version: ${{ inputs.pnpm-version }}
+    - uses: actions/setup-node@v3
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: pnpm
+        registry-url: https://registry.npmjs.org
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install
