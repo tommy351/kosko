@@ -27,6 +27,7 @@ const entryFiles = args.length ? args : ["src/index.ts"];
  *   format: import("rollup").ModuleFormat;
  *   importMetaUrlShim?: boolean;
  *   target: 'browser' | 'node';
+ *   dts?: boolean;
  * }} options
  */
 async function buildBundle(options) {
@@ -64,15 +65,19 @@ async function buildBundle(options) {
         },
         sourceMaps: true
       }),
-      // TypeScript is only used for building declaration files only.
-      typescript({
-        tsconfig: tsConfigPath,
-        compilerOptions: {
-          outDir: distDir,
-          declaration: true,
-          emitDeclarationOnly: true
-        }
-      })
+      ...(options.dts
+        ? [
+            // TypeScript is only used for building declaration files only.
+            typescript({
+              tsconfig: tsConfigPath,
+              compilerOptions: {
+                outDir: distDir,
+                declaration: true,
+                emitDeclarationOnly: true
+              }
+            })
+          ]
+        : [])
     ]
   });
 
@@ -97,7 +102,8 @@ await Promise.all([
     output: "base.mjs",
     format: "esm",
     suffixes: [".esm"],
-    target: "browser"
+    target: "browser",
+    dts: true
   }),
 
   // Node.js
