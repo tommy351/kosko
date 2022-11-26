@@ -3,7 +3,6 @@
 const importLocal = require("import-local");
 
 if (!importLocal(__filename)) {
-  process.env.KOSKO_CLI_BIN = __filename;
-  const cli = require("../dist");
+  const cli = require("../dist/index.node.cjs");
   cli.run().catch(cli.handleError);
 }

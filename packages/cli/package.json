@@ -9,16 +9,24 @@
   "bin": {
     "kosko": "bin/kosko.js"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "main": "dist/node.cjs",
+  "module": "dist/node.mjs",
   "types": "dist/index.d.ts",
   "sideEffects": false,
+  "scripts": {
+    "build": "build-scripts src/index.ts src/worker-bin.ts"
+  },
   "exports": {
+    "./bin/kosko.js": "./bin/kosko.js",
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
-    },
-    "./bin/kosko.js": "./bin/kosko.js"
+      "node": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/node.mjs",
+        "require": "./dist/node.cjs"
+      },
+      "types": "./dist/index.d.ts",
+      "default": "./dist/base.mjs"
+    }
   },
   "files": [
     "/bin/",
@@ -52,11 +60,11 @@
     "import-local": "^3.1.0",
     "jsonpath": "^1.1.1",
     "picocolors": "^1.0.0",
-    "tslib": "^2.4.0",
     "yargs": "^17.5.1"
   },
   "devDependencies": {
     "@iarna/toml": "^2.2.5",
+    "@kosko/build-scripts": "workspace:^",
     "@kosko/env": "workspace:^",
     "@kosko/jest-preset": "workspace:^",
     "@kosko/test-utils": "workspace:^",

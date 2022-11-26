@@ -20,6 +20,11 @@ const MODULE_NOT_FOUND_ERROR_CODES = new Set([
 export function createNodeESMEnvironment(
   options: NodeEnvironmentOptions = {}
 ): Environment {
+  /* istanbul ignore next */
+  if (process.env.BUILD_TARGET !== "node") {
+    throw new Error("createNodeESMEnvironment is only supported on Node.js");
+  }
+
   return createNodeEnvironment({
     ...options,
     createReducerExecutor: createAsyncReducerExecutor,

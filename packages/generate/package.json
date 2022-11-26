@@ -6,18 +6,23 @@
   "repository": "https://github.com/tommy351/kosko/tree/master/packages/generate",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
-  "main": "dist/index.node.js",
+  "main": "dist/index.node.cjs",
   "module": "dist/index.node.mjs",
-  "browser": "dist/index.mjs",
-  "types": "dist/index.node.d.ts",
+  "browser": "dist/index.base.mjs",
+  "types": "dist/index.d.ts",
   "sideEffects": false,
+  "scripts": {
+    "build": "build-scripts"
+  },
   "exports": {
     "node": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.node.mjs",
-      "require": "./dist/index.node.js"
+      "require": "./dist/index.node.cjs"
     },
-    "require": "./dist/index.js",
-    "default": "./dist/index.mjs"
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.base.mjs",
+    "require": "./dist/index.node.cjs"
   },
   "files": [
     "/dist/"
@@ -39,10 +44,10 @@
     "extract-stack": "^2.0.0",
     "fast-safe-stringify": "^2.1.1",
     "js-yaml": "^4.1.0",
-    "micromatch": "^4.0.5",
-    "tslib": "^2.4.0"
+    "micromatch": "^4.0.5"
   },
   "devDependencies": {
+    "@kosko/build-scripts": "workspace:^",
     "@kosko/jest-preset": "workspace:^",
     "@kosko/test-utils": "workspace:^",
     "@types/bl": "^5.0.2",

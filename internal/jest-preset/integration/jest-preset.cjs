@@ -1,6 +1,6 @@
 "use strict";
 
-const { join } = require("path");
+const { join } = require("node:path");
 const preset = require("../jest-preset.cjs");
 
 /** @type import("jest").Config */

@@ -4,4 +4,4 @@
  * @packageDocumentation
  */
 
-export { default } from "./dist/AggregateError";
+export { AggregateError as default } from "./dist/index.d";

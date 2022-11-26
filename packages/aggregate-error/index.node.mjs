@@ -1,1 +1,1 @@
-export { default } from "./index.node.js";
+export { default } from "./index.node.cjs";

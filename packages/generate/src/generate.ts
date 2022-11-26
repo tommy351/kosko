@@ -3,7 +3,7 @@ import {
   resolve as resolveModule,
   getRequireExtensions
 } from "@kosko/require";
-import { Result, Manifest } from "./base";
+import type { Result, Manifest } from "./base";
 import logger, { LogLevel } from "@kosko/log";
 import { resolve } from "./resolve";
 import { aggregateErrors, GenerateError } from "./error";
@@ -115,6 +115,11 @@ function validateExtensions(extensions: readonly string[]) {
  * @see {@link resolve}
  */
 export async function generate(options: GenerateOptions): Promise<Result> {
+  /* istanbul ignore next */
+  if (process.env.BUILD_TARGET !== "node") {
+    throw new Error("generate is only supported on Node.js");
+  }
+
   if (!options.components.length) {
     throw new GenerateError("components must not be empty");
   }

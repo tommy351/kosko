@@ -11,3 +11,9 @@ dist/
 
 # pnpm store dir on GitHub actions
 /.pnpm-store/
+
+# Rollup
+.rollup.cache
+
+# Turbo
+.turbo

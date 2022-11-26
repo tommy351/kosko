@@ -6,18 +6,23 @@
   "repository": "https://github.com/tommy351/kosko/tree/master/packages/env",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
-  "main": "dist/index.node.js",
-  "module": "dist/index.node.esm.mjs",
-  "browser": "dist/index.mjs",
-  "types": "dist/index.node.d.ts",
+  "main": "index.node.cjs",
+  "module": "dist/index.node.mjs",
+  "browser": "dist/index.base.mjs",
+  "types": "dist/index.d.ts",
   "sideEffects": false,
+  "scripts": {
+    "build": "build-scripts"
+  },
   "exports": {
     "node": {
-      "import": "./dist/index.node.esm.mjs",
-      "require": "./dist/index.node.js"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.node.mjs",
+      "require": "./index.node.cjs"
     },
-    "require": "./dist/index.js",
-    "default": "./dist/index.mjs"
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.base.mjs",
+    "require": "./index.node.cjs"
   },
   "files": [
     "/dist/"
@@ -36,13 +41,13 @@
     "@kosko/log": "workspace:^",
     "@kosko/require": "workspace:^",
     "deepmerge": "^4.2.2",
-    "is-plain-object": "^5.0.0",
-    "tslib": "^2.4.0"
+    "is-plain-object": "^5.0.0"
   },
   "jest": {
     "preset": "@kosko/jest-preset"
   },
   "devDependencies": {
+    "@kosko/build-scripts": "workspace:^",
     "@kosko/jest-preset": "workspace:^"
   }
 }

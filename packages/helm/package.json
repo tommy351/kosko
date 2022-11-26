@@ -6,13 +6,22 @@
   "repository": "https://github.com/tommy351/kosko/tree/master/packages/helm",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "main": "dist/index.node.cjs",
+  "module": "dist/index.node.mjs",
   "types": "dist/index.d.ts",
   "sideEffects": false,
+  "scripts": {
+    "build": "build-scripts"
+  },
   "exports": {
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.js"
+    "node": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.node.mjs",
+      "require": "./dist/index.node.cjs"
+    },
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.base.mjs",
+    "require": "./dist/index.node.cjs"
   },
   "files": [
     "/dist/"
@@ -34,10 +43,10 @@
     "@kosko/exec-utils": "workspace:^",
     "@kosko/yaml": "workspace:^",
     "fast-safe-stringify": "^2.1.1",
-    "tmp-promise": "^3.0.3",
-    "tslib": "^2.4.0"
+    "tmp-promise": "^3.0.3"
   },
   "devDependencies": {
+    "@kosko/build-scripts": "workspace:^",
     "@kosko/jest-preset": "workspace:^"
   },
   "jest": {

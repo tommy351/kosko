@@ -2,8 +2,7 @@
   "extends": "@tsconfig/node14/tsconfig.json",
   "compilerOptions": {
     "moduleResolution": "node",
-    "preserveConstEnums": true,
-    "noEmitHelpers": true,
-    "importHelpers": true
-  }
+    "module": "esnext"
+  },
+  "include": ["integration", "internal/*/src", "packages/*/src"]
 }

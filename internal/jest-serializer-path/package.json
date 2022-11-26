@@ -5,17 +5,28 @@
   "engines": {
     "node": ">=14.18.0"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "main": "dist/index.node.cjs",
+  "module": "dist/index.node.mjs",
   "types": "dist/index.d.ts",
   "sideEffects": false,
+  "scripts": {
+    "build": "build-scripts"
+  },
   "exports": {
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.js"
+    "node": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.node.mjs",
+      "require": "./dist/index.node.cjs"
+    },
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.base.mjs",
+    "require": "./dist/index.node.cjs"
   },
   "dependencies": {
     "@kosko/test-utils": "workspace:^",
-    "escape-string-regexp": "^4.0.0",
-    "tslib": "^2.4.0"
+    "escape-string-regexp": "^4.0.0"
+  },
+  "devDependencies": {
+    "@kosko/build-scripts": "workspace:^"
   }
 }

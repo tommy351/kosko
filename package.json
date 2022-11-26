@@ -11,20 +11,21 @@
   "license": "MIT",
   "scripts": {
     "lint": "npm-run-all lint:*",
-    "lint:eslint": "eslint . --ext .js,.ts,.jsx,.tsx,.cjs.,mjs",
+    "lint:eslint": "eslint . --ext .{js,ts,jsx,tsx,cjs,mjs,cts,mts}",
     "lint:syncpack": "syncpack list-mismatches --workspace false",
-    "build": "tsc-multi",
-    "clean": "rm -rf packages/*/dist && npm run build -- --clean",
+    "build": "turbo run build --filter=./internal/* --filter=./packages/*",
+    "clean": "rm -rf internal/*/dist packages/*/dist",
     "watch": "npm run build -- --watch",
     "test": "npm-run-all test:*",
-    "test:unit": "cross-env ESM_IMPORT_DISABLED=true jest",
+    "test:unit": "cross-env ESM_IMPORT_DISABLED=true BUILD_TARGET=node jest",
     "test:integration": "jest --config jest.integration.config.ts",
     "test:browser": "jest --config integration/browser/jest.config.js",
     "preinstall": "npx only-allow pnpm",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "type-check": "tsc --noEmit"
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx,.cjs,.mjs}": "eslint --fix"
+    "*.{js,ts,jsx,tsx,cjs,mjs,cts,mts}": "eslint --fix"
   },
   "engines": {
     "node": ">=14.18.0"
@@ -69,6 +70,7 @@
     "ts-jest": "^29.0.1",
     "ts-node": "^10.9.1",
     "tsc-multi": "^0.6.1",
+    "turbo": "^1.6.3",
     "typescript": "^4.8.3",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0"

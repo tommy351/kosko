@@ -8,6 +8,7 @@ import { setupEnv } from "./env";
 import { handleGenerateError } from "./error";
 import { localRequireDefault } from "./require";
 import { BaseGenerateArguments } from "./types";
+import { fileURLToPath } from "node:url";
 
 async function doGenerate({
   cwd,
@@ -80,8 +81,8 @@ async function runWithLoaders(options: WorkerOptions) {
         ...options.config.loaders.flatMap((loader) => ["--loader", loader]),
         // Entry file
         join(
-          process.env.KOSKO_CLI_BIN || process.argv[1],
-          "../../dist/commands/generate/worker-bin.js"
+          fileURLToPath(import.meta.url),
+          "../worker-bin." + process.env.TARGET_SUFFIX
         )
       ],
       {

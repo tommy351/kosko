@@ -1,12 +1,3 @@
 {
-  "extends": "../../tsconfig.build.json",
-  "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "dist"
-  },
-  "references": [
-    { "path": "../yaml" },
-    { "path": "../exec-utils" },
-    { "path": "../common-utils" }
-  ]
+  "extends": "../../tsconfig.json"
 }
