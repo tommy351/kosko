@@ -3,5 +3,5 @@
 
 module.exports =
   typeof AggregateError === "undefined"
-    ? require("./dist/AggregateError.cjs").default
+    ? require("./dist/index.node.cjs").AggregateError
     : AggregateError;

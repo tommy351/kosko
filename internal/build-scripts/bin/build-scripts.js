@@ -63,7 +63,7 @@ async function buildBundle(options) {
       entryFileNames: `[name].${options.output}`,
       chunkFileNames: `[name]-[hash].${options.output}`,
       format: options.format,
-      exports: "auto"
+      interop: "auto"
     });
   } finally {
     await bundle.close();
