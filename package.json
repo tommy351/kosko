@@ -25,7 +25,7 @@
     "type-check": "tsc --noEmit"
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx,.cjs,.mjs}": "eslint --fix"
+    "*.{js,ts,jsx,tsx,cjs,mjs}": "eslint --fix"
   },
   "engines": {
     "node": ">=14.18.0"
