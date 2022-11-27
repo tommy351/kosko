@@ -8,6 +8,7 @@ import {
   createReducerList
 } from "./base";
 import { Environment, Loader, ReducerExecutor, ReducerList } from "./types";
+import { cwd as getCwd } from "node:process";
 
 export function getNodeExtensions(): string[] {
   return getRequireExtensions().map((ext) => ext.substring(1));
@@ -34,7 +35,7 @@ export interface InternalNodeEnvironmentOptions extends NodeEnvironmentOptions {
 }
 
 export function createNodeEnvironment({
-  cwd = process.cwd(),
+  cwd = getCwd(),
   createReducerExecutor,
   requireModule,
   mergeValues

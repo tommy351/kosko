@@ -16,6 +16,7 @@ export function createNodeCJSEnvironment(
   options: NodeEnvironmentOptions = {}
 ): Environment {
   /* istanbul ignore next */
+  // eslint-disable-next-line no-restricted-globals
   if (process.env.BUILD_TARGET !== "node") {
     throw new Error("createNodeCJSEnvironment is only supported on Node.js");
   }

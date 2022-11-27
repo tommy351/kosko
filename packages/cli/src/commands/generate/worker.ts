@@ -9,6 +9,7 @@ import { handleGenerateError } from "./error";
 import { localRequireDefault } from "./require";
 import { BaseGenerateArguments } from "./types";
 import { fileURLToPath } from "node:url";
+import { stdout, execPath, execArgv } from "node:process";
 
 async function doGenerate({
   cwd,
@@ -34,7 +35,12 @@ export interface WorkerOptions {
 export async function handler(options: WorkerOptions) {
   const { printFormat, args, config, ignoreLoaders } = options;
 
-  if (!ignoreLoaders && config.loaders.length) {
+  if (
+    // eslint-disable-next-line no-restricted-globals
+    process.env.BUILD_TARGET === "node" &&
+    !ignoreLoaders &&
+    config.loaders.length
+  ) {
     await runWithLoaders(options);
     return;
   }
@@ -65,7 +71,7 @@ export async function handler(options: WorkerOptions) {
   if (printFormat) {
     print(result, {
       format: printFormat,
-      writer: process.stdout
+      writer: stdout
     });
   }
 }
@@ -73,15 +79,16 @@ export async function handler(options: WorkerOptions) {
 async function runWithLoaders(options: WorkerOptions) {
   try {
     await spawn(
-      process.execPath,
+      execPath,
       [
         // Node.js-specific CLI options
-        ...process.execArgv,
+        ...execArgv,
         // ESM loaders
         ...options.config.loaders.flatMap((loader) => ["--loader", loader]),
         // Entry file
         join(
           fileURLToPath(import.meta.url),
+          // eslint-disable-next-line no-restricted-globals
           "../worker-bin." + process.env.TARGET_SUFFIX
         )
       ],

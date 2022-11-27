@@ -5,6 +5,7 @@ import { Config, EnvironmentConfig } from "./types";
 import { validate } from "./validate";
 import logger, { LogLevel } from "@kosko/log";
 import { getErrorCode, toArray } from "@kosko/common-utils";
+import { cwd } from "node:process";
 
 /**
  * Parses and validates a config file from the specified path.
@@ -24,16 +25,14 @@ export async function loadConfig(path: string): Promise<Config> {
  * Searches config files in the given directory. Returns an empty object when
  * config files does not exist in the directory.
  *
- * @param cwd - Path to the working directory. Default to current working directory (CWD).
+ * @param path - Path to the working directory. Default to current working directory (CWD).
  * @public
  */
-export async function searchConfig(
-  cwd: string = process.cwd()
-): Promise<Config> {
-  const path = join(cwd, "kosko.toml");
+export async function searchConfig(path: string = cwd()): Promise<Config> {
+  const configPath = join(path, "kosko.toml");
 
   try {
-    return await loadConfig(path);
+    return await loadConfig(configPath);
   } catch (err) {
     if (getErrorCode(err) === "ENOENT") return {};
 

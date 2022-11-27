@@ -116,6 +116,7 @@ function validateExtensions(extensions: readonly string[]) {
  */
 export async function generate(options: GenerateOptions): Promise<Result> {
   /* istanbul ignore next */
+  // eslint-disable-next-line no-restricted-globals
   if (process.env.BUILD_TARGET !== "node") {
     throw new Error("generate is only supported on Node.js");
   }

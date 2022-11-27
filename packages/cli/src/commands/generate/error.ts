@@ -6,6 +6,7 @@ import pc from "picocolors";
 import { CLIError } from "../../cli/error";
 import stringify from "fast-safe-stringify";
 import { isRecord } from "@kosko/common-utils";
+import { stderr } from "node:process";
 
 function flattenError(err: unknown): unknown[] {
   if (err instanceof AggregateError) {
@@ -16,7 +17,7 @@ function flattenError(err: unknown): unknown[] {
 }
 
 function print(line: string): void {
-  process.stderr.write(line + "\n");
+  stderr.write(line + "\n");
 }
 
 function getErrorCount(n: number): string {

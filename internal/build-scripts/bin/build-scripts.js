@@ -10,12 +10,14 @@ import swc from "rollup-plugin-swc";
 import typescript from "@rollup/plugin-typescript";
 import ts from "typescript";
 import moduleSuffixes from "../plugins/module-suffixes.js";
+import replaceDenoImport from "../plugins/replace-deno-import.js";
 
 const cwd = process.cwd();
 const distDir = "dist";
 const fullDistPath = join(cwd, distDir);
 const pkgJson = JSON.parse(await readFile(join(cwd, "package.json"), "utf-8"));
 const tsConfigPath = ts.findConfigFile(cwd, ts.sys.fileExists);
+const dependencies = pkgJson.dependencies ?? {};
 
 const args = process.argv.slice(2);
 const entryFiles = args.length ? args : ["src/index.ts"];
@@ -26,14 +28,17 @@ const entryFiles = args.length ? args : ["src/index.ts"];
  *   output: string;
  *   format: import("rollup").ModuleFormat;
  *   importMetaUrlShim?: boolean;
- *   target: 'browser' | 'node';
+ *   target: 'browser' | 'node' | 'deno';
  *   dts?: boolean;
+ *   replaceDenoImport?: boolean;
  * }} options
  */
 async function buildBundle(options) {
   const bundle = await rollup({
     input: entryFiles,
-    external: Object.keys(pkgJson.dependencies ?? {}),
+    ...(!options.replaceDenoImport && {
+      external: Object.keys(dependencies)
+    }),
     treeshake: {
       preset: "recommended",
       // Assume all modules has no side effects in order to remove all unused
@@ -41,6 +46,7 @@ async function buildBundle(options) {
       moduleSideEffects: false
     },
     plugins: [
+      ...(options.replaceDenoImport ? [replaceDenoImport(dependencies)] : []),
       ...(options.suffixes ? [moduleSuffixes(options.suffixes)] : []),
       nodeResolve({ extensions: [".ts"] }),
       replace({
@@ -74,7 +80,8 @@ async function buildBundle(options) {
                 outDir: distDir,
                 declaration: true,
                 emitDeclarationOnly: true
-              }
+              },
+              exclude: ["**/__tests__/**", "**/__fixtures__/**"]
             })
           ]
         : [])
@@ -119,5 +126,14 @@ await Promise.all([
     format: "esm",
     suffixes: [".node.esm", ".node", ".esm"],
     target: "node"
+  }),
+
+  // Deno
+  buildBundle({
+    output: "deno.mjs",
+    format: "esm",
+    suffixes: [".deno", ".esm"],
+    target: "deno",
+    replaceDenoImport: true
   })
 ]);

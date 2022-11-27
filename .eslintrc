@@ -90,6 +90,10 @@
           {
             "name": "__filename",
             "message": "Use import.meta.url instead."
+          },
+          {
+            "name": "process",
+            "message": "Import node:process module instead."
           }
         ]
       }

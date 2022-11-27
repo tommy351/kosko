@@ -4,6 +4,7 @@ import logger, { LogLevel } from "@kosko/log";
 import yargs from "yargs";
 import { Template } from "./template";
 import { writeFiles } from "./write";
+import { argv, cwd } from "node:process";
 
 /**
  * Parses command line arguments and generates files with a {@link Template}.
@@ -14,17 +15,17 @@ import { writeFiles } from "./write";
  * process.
  *
  * @param template - Template
- * @param argv - Command line arguments
+ * @param args - Command line arguments
  * @public
  */
 export async function run(
   template: Template<any>,
-  argv: readonly string[] = process.argv.slice(2)
+  args: readonly string[] = argv.slice(2)
 ): Promise<void> {
   const cmd = yargs.option("cwd", {
     type: "string",
     describe: "Path of working directory",
-    default: process.cwd(),
+    default: cwd(),
     defaultDescription: "CWD",
     coerce(arg): string {
       return isAbsolute(arg) ? arg : resolve(arg);
@@ -42,10 +43,10 @@ export async function run(
   }
 
   try {
-    const args = await cmd.parse(argv);
-    const result = await template.generate(args);
+    const options = await cmd.parse(args);
+    const result = await template.generate(options);
 
-    await writeFiles(args.cwd, result.files);
+    await writeFiles(options.cwd, result.files);
     logger.log(LogLevel.Info, `${result.files.length} files are generated`);
   } catch (err) {
     logger.log(LogLevel.Error, "Generate failed", { error: err });

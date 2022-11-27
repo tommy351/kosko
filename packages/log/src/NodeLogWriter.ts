@@ -5,6 +5,7 @@ import stringify from "fast-safe-stringify";
 import { LogLevel } from "./LogLevel";
 import { Log, LogWriter } from "./types";
 import { isRecord } from "@kosko/common-utils";
+import { stderr } from "node:process";
 
 const COLOR_MAP: Record<LogLevel, Formatter> = {
   [LogLevel.Trace]: pc.gray,
@@ -84,6 +85,6 @@ export default class NodeLogWriter implements LogWriter {
       content += `\n${pc.gray(formatError(error))}`;
     }
 
-    process.stderr.write(content + "\n");
+    stderr.write(content + "\n");
   }
 }
