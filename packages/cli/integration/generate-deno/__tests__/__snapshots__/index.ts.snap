@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should generate components 1`] = `
+"---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: file-esm
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: folder-esm"
+`;

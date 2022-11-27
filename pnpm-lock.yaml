@@ -326,7 +326,6 @@ importers:
       '@kosko/jest-preset': workspace:^
       '@kosko/log': workspace:^
       '@kosko/migrate': workspace:^
-      '@kosko/require': workspace:^
       '@kosko/test-utils': workspace:^
       '@types/bl': ^5.0.2
       '@types/exit': ^0.1.31
@@ -335,7 +334,6 @@ importers:
       bl: ^5.0.0
       clean-stack: ^3.0.1
       execa: ^5.1.1
-      exit: ^0.1.2
       extract-stack: ^2.0.0
       fast-glob: ^3.2.12
       fast-safe-stringify: ^2.1.1
@@ -345,6 +343,7 @@ importers:
       kubernetes-models: ^4.1.0
       picocolors: ^1.0.0
       pkg-dir: ^5.0.0
+      resolve-from: ^5.0.0
       yargs: ^17.5.1
     dependencies:
       '@kosko/aggregate-error': link:../aggregate-error
@@ -354,15 +353,15 @@ importers:
       '@kosko/generate': link:../generate
       '@kosko/log': link:../log
       '@kosko/migrate': link:../migrate
-      '@kosko/require': link:../require
       clean-stack: 3.0.1
-      exit: 0.1.2
       extract-stack: 2.0.0
       fast-safe-stringify: 2.1.1
       get-stdin: 8.0.0
       import-local: 3.1.0
       jsonpath: 1.1.1
       picocolors: 1.0.0
+      pkg-dir: 5.0.0
+      resolve-from: 5.0.0
       yargs: 17.5.1
     devDependencies:
       '@iarna/toml': 2.2.5
@@ -378,7 +377,6 @@ importers:
       execa: 5.1.1
       fast-glob: 3.2.12
       kubernetes-models: 4.1.0
-      pkg-dir: 5.0.0
 
   packages/common-utils:
     specifiers:
@@ -558,9 +556,12 @@ importers:
 
   packages/require:
     specifiers:
-      resolve: ^1.22.1
+      '@kosko/build-scripts': workspace:^
+      '@kosko/common-utils': workspace:^
     dependencies:
-      resolve: 1.22.1
+      '@kosko/common-utils': link:../common-utils
+    devDependencies:
+      '@kosko/build-scripts': link:../../internal/build-scripts
 
   packages/template:
     specifiers:
@@ -613,7 +614,6 @@ importers:
       '@kosko/common-utils': workspace:^
       '@kosko/jest-preset': workspace:^
       '@kosko/log': workspace:^
-      '@kosko/require': workspace:^
       '@kosko/test-utils': workspace:^
       '@types/js-yaml': ^4.0.5
       '@types/node-fetch': ^2.6.2
@@ -626,7 +626,6 @@ importers:
     dependencies:
       '@kosko/common-utils': link:../common-utils
       '@kosko/log': link:../log
-      '@kosko/require': link:../require
       fast-safe-stringify: 2.1.1
       js-yaml: 4.1.0
       node-fetch: 2.6.7
@@ -10813,7 +10812,6 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       find-up: 5.0.0
-    dev: true
 
   /pkg-up/3.1.0:
     resolution: {integrity: sha512-nDywThFk1i4BQK4twPQ6TA4RT8bDY96yeuCVBWL3ePARCiEKDRSrNGbFIgUJpLp+XeIR65v8ra7WuJOFUBtkMA==}

@@ -74,15 +74,11 @@
       }
     },
     {
-      "files": ["packages/**/*.ts"],
+      "files": ["packages/*/src/**/*.ts"],
       "excludedFiles": ["**/__tests__/**/*.ts"],
       "rules": {
         "no-restricted-globals": [
           "error",
-          {
-            "name": "require",
-            "message": "Use @kosko/require instead."
-          },
           {
             "name": "__dirname",
             "message": "Use import.meta.url instead."

@@ -1,7 +1,7 @@
 import execa from "execa";
-import { runCLI } from "@kosko/test-utils";
 import { join } from "node:path";
 import fs from "node:fs/promises";
+import { runNodeCLI } from "../../utils/run";
 
 const fixtureDir = join(__dirname, "..", "__fixtures__");
 
@@ -10,7 +10,7 @@ let result: execa.ExecaReturnValue;
 let options: execa.Options;
 
 beforeEach(async () => {
-  result = await runCLI(args, {
+  result = await runNodeCLI(args, {
     ...options,
     cwd: fixtureDir
   });

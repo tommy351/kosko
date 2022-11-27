@@ -1,8 +1,4 @@
-import {
-  importPath,
-  resolve as resolveModule,
-  getRequireExtensions
-} from "@kosko/require";
+import { resolve as resolveModule, getRequireExtensions } from "@kosko/require";
 import type { Result, Manifest } from "./base";
 import logger, { LogLevel } from "@kosko/log";
 import { resolve } from "./resolve";
@@ -55,19 +51,29 @@ async function resolveComponentPath(
   path: string,
   extensions: readonly string[]
 ) {
+  let result: string | undefined;
+
   try {
-    return await resolveModule(path, { extensions });
+    result = await resolveModule(path, { extensions });
   } catch (err) {
     throw new GenerateError("Module path resolve failed", {
       path,
       cause: err
     });
   }
+
+  if (!result) {
+    throw new GenerateError("Module not found", {
+      path
+    });
+  }
+
+  return result;
 }
 
 async function getComponentValue(path: string): Promise<unknown> {
   try {
-    const { default: mod } = await importPath(path);
+    const { default: mod } = await import(path);
 
     return mod;
   } catch (err) {
@@ -117,8 +123,8 @@ function validateExtensions(extensions: readonly string[]) {
 export async function generate(options: GenerateOptions): Promise<Result> {
   /* istanbul ignore next */
   // eslint-disable-next-line no-restricted-globals
-  if (process.env.BUILD_TARGET !== "node") {
-    throw new Error("generate is only supported on Node.js");
+  if (process.env.BUILD_TARGET === "browser") {
+    throw new Error("generate is only supported on Node.js and Deno");
   }
 
   if (!options.components.length) {

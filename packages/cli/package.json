@@ -51,15 +51,15 @@
     "@kosko/generate": "workspace:^",
     "@kosko/log": "workspace:^",
     "@kosko/migrate": "workspace:^",
-    "@kosko/require": "workspace:^",
     "clean-stack": "^3.0.1",
-    "exit": "^0.1.2",
     "extract-stack": "^2.0.0",
     "fast-safe-stringify": "^2.1.1",
     "get-stdin": "^8.0.0",
     "import-local": "^3.1.0",
     "jsonpath": "^1.1.1",
     "picocolors": "^1.0.0",
+    "pkg-dir": "^5.0.0",
+    "resolve-from": "^5.0.0",
     "yargs": "^17.5.1"
   },
   "devDependencies": {
@@ -75,8 +75,7 @@
     "bl": "^5.0.0",
     "execa": "^5.1.1",
     "fast-glob": "^3.2.12",
-    "kubernetes-models": "^4.1.0",
-    "pkg-dir": "^5.0.0"
+    "kubernetes-models": "^4.1.0"
   },
   "jest": {
     "preset": "@kosko/jest-preset"

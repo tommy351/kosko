@@ -3,7 +3,6 @@ import fs from "node:fs/promises";
 import fetch, { RequestInfo, RequestInit } from "node-fetch";
 import { getResourceModule, ResourceKind } from "./module";
 import logger, { LogLevel } from "@kosko/log";
-import { importPath } from "@kosko/require";
 import stringify from "fast-safe-stringify";
 import { isRecord } from "@kosko/common-utils";
 
@@ -47,7 +46,7 @@ async function getConstructor(
   }
 
   try {
-    const result = await importPath(mod.path);
+    const result = await import(mod.path);
     return result[mod.export];
   } catch {
     logger.log(LogLevel.Debug, "Failed to import the resource module", {

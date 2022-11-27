@@ -2,7 +2,6 @@ import toml from "@iarna/toml";
 import { Config } from "@kosko/config";
 import { Environment } from "@kosko/env";
 import { generate, print, PrintFormat } from "@kosko/generate";
-import { requireDefault } from "@kosko/require";
 import assert from "node:assert";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
@@ -77,7 +76,7 @@ beforeEach(async () => {
 
   // Install @kosko/env in the temp folder
   const envPath = await installPackage(tmpDir.path, "env");
-  env = requireDefault(envPath);
+  env = require(envPath);
   env.setReducers = jest.fn();
 });
 

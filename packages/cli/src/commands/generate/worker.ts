@@ -6,10 +6,10 @@ import stringify from "fast-safe-stringify";
 import { CLIError } from "../../cli/error";
 import { setupEnv } from "./env";
 import { handleGenerateError } from "./error";
-import { localRequireDefault } from "./require";
 import { BaseGenerateArguments } from "./types";
 import { fileURLToPath } from "node:url";
 import { stdout, execPath, execArgv } from "node:process";
+import { createRequire } from "node:module";
 
 async function doGenerate({
   cwd,
@@ -49,8 +49,13 @@ export async function handler(options: WorkerOptions) {
   await setupEnv(config, args);
 
   // Require external modules
-  for (const id of config.require) {
-    await localRequireDefault(id, args.cwd);
+  // eslint-disable-next-line no-restricted-globals
+  if (process.env.BUILD_TARGET === "node") {
+    const req = createRequire(args.cwd);
+
+    for (const id of config.require) {
+      req(id);
+    }
   }
 
   // Generate manifests

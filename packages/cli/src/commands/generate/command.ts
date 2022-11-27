@@ -27,7 +27,9 @@ export function generateBuilder(
       describe:
         "Require modules. Modules set in config file will also be required.",
       default: [],
-      alias: "r"
+      alias: "r",
+      // eslint-disable-next-line no-restricted-globals
+      hidden: process.env.BUILD_TARGET !== "node"
     })
     .option("loader", {
       type: "string",
@@ -78,8 +80,7 @@ export const generateCmd: Command<GenerateArguments> = {
       .example("$0 generate", "Generate manifests")
       .example("$0 generate foo bar", "Specify components")
       .example("$0 generate foo_*", "Use glob pattern")
-      .example("$0 generate --env foo", "Set environment")
-      .example("$0 generate -r ts-node/register", "Require external modules");
+      .example("$0 generate --env foo", "Set environment");
   },
   async handler(args) {
     const config = await loadConfig(args);

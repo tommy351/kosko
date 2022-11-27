@@ -1,11 +1,13 @@
 import { Config } from "@kosko/config";
 import { Environment } from "@kosko/env";
-import { localImportDefault, localRequireDefault } from "./require";
 import { BaseGenerateArguments } from "./types";
-import { isESMSupported } from "@kosko/require";
 import { createCLIEnvReducer } from "./set-option";
+import pkgDir from "pkg-dir";
+import resolveFrom from "resolve-from";
 
-const KOSKO_ENV = "@kosko/env";
+const KOSKO_ENV =
+  // eslint-disable-next-line no-restricted-globals
+  process.env.BUILD_TARGET === "deno" ? "npm:@kosko/env@^4" : "@kosko/env";
 
 function excludeFalsyInArray<T>(input: (T | undefined | null)[]): T[] {
   return input.filter(Boolean) as T[];
@@ -21,15 +23,31 @@ export async function setupEnv(
   args: BaseGenerateArguments
 ): Promise<void> {
   const cwd = args.cwd;
-  const envs: Environment[] = [await localRequireDefault(KOSKO_ENV, cwd)];
+  const envs: Environment[] = [];
 
-  if (await isESMSupported()) {
-    // Why `@kosko/env` package has to be imported twice? Because the cache on
-    // CommonJS and ESM are separated, which means we have two isolated
-    // instances of `Environment`, and each of them must be initialized
-    // in order to make sure users can access the environment in both CommonJS
-    // and ESM environment.
-    envs.push(await localImportDefault(KOSKO_ENV, cwd));
+  // eslint-disable-next-line no-restricted-globals
+  switch (process.env.BUILD_TARGET) {
+    case "node": {
+      const envPath = resolveFrom(cwd, KOSKO_ENV);
+      const envDir = await pkgDir(envPath);
+
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      envs.push(require(envPath));
+
+      // Why `@kosko/env` package has to be imported twice? Because the cache on
+      // CommonJS and ESM are separated, which means we have two isolated
+      // instances of `Environment`, and each of them must be initialized
+      // in order to make sure users can access the environment in both CommonJS
+      // and ESM environment.
+      if (envDir) {
+        envs.push(await import(envDir).then((mod) => mod.default));
+      }
+
+      break;
+    }
+    case "deno":
+      envs.push(await import(KOSKO_ENV).then((mod) => mod.default));
+      break;
   }
 
   const paths = config.paths?.environment || {};
