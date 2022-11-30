@@ -51,7 +51,7 @@ export async function handler(options: WorkerOptions) {
   // Require external modules
   // eslint-disable-next-line no-restricted-globals
   if (process.env.BUILD_TARGET === "node") {
-    const req = createRequire(args.cwd);
+    const req = createRequire(join(args.cwd, "noop.js"));
 
     for (const id of config.require) {
       req(id);
