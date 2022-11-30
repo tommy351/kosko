@@ -10,7 +10,7 @@ import { handler } from "./worker";
 export function generateBuilder(
   argv: Argv<RootArguments>
 ): Argv<BaseGenerateArguments> {
-  return argv
+  let base = argv
     .option("env", {
       type: "string",
       describe: "Environment name",
@@ -20,23 +20,6 @@ export function generateBuilder(
       type: "string",
       describe: "Config path. Default to `kosko.toml` in current folder.",
       alias: "c"
-    })
-    .option("require", {
-      type: "string",
-      array: true,
-      describe:
-        "Require modules. Modules set in config file will also be required.",
-      default: [],
-      alias: "r",
-      // eslint-disable-next-line no-restricted-globals
-      hidden: process.env.BUILD_TARGET !== "node"
-    })
-    .option("loader", {
-      type: "string",
-      array: true,
-      describe:
-        "Module loader. Loaders set in config file will also be loaded.",
-      default: []
     })
     .option("bail", {
       type: "boolean",
@@ -57,6 +40,26 @@ export function generateBuilder(
       describe:
         "Components to generate. This overrides components set in config file."
     });
+
+  // eslint-disable-next-line no-restricted-globals
+  if (process.env.BUILD_TARGET === "node") {
+    base = base
+      .option("require", {
+        type: "string",
+        array: true,
+        describe:
+          "Require modules. Modules set in config file will also be required.",
+        alias: "r"
+      })
+      .option("loader", {
+        type: "string",
+        array: true,
+        describe:
+          "Module loader. Loaders set in config file will also be loaded."
+      });
+  }
+
+  return base;
 }
 
 export const generateCmd: Command<GenerateArguments> = {
