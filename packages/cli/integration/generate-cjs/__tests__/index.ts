@@ -1,6 +1,5 @@
 import execa from "execa";
 import { dirname } from "node:path";
-import { installPackage } from "@kosko/test-utils";
 import { runNodeCLI } from "../../utils/run";
 
 const testDir = dirname(__dirname);
@@ -8,10 +7,6 @@ const testDir = dirname(__dirname);
 let args: string[];
 let result: execa.ExecaReturnValue;
 let options: execa.Options;
-
-beforeAll(async () => {
-  await installPackage(testDir, "env");
-});
 
 beforeEach(async () => {
   result = await runNodeCLI(args, {

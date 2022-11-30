@@ -331,6 +331,7 @@ importers:
       kubernetes-models: ^4.1.0
       picocolors: ^1.0.0
       pkg-dir: ^5.0.0
+      pkg-up: ^3.1.0
       resolve-from: ^5.0.0
       yargs: ^17.5.1
     dependencies:
@@ -348,7 +349,7 @@ importers:
       import-local: 3.1.0
       jsonpath: 1.1.1
       picocolors: 1.0.0
-      pkg-dir: 5.0.0
+      pkg-up: 3.1.0
       resolve-from: 5.0.0
       yargs: 17.5.1
     devDependencies:
@@ -365,6 +366,7 @@ importers:
       execa: 5.1.1
       fast-glob: 3.2.12
       kubernetes-models: 4.1.0
+      pkg-dir: 5.0.0
 
   packages/common-utils:
     specifiers:
@@ -11713,7 +11715,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       find-up: 5.0.0
-    dev: false
+    dev: true
 
   /pkg-up/3.1.0:
     resolution: {integrity: sha512-nDywThFk1i4BQK4twPQ6TA4RT8bDY96yeuCVBWL3ePARCiEKDRSrNGbFIgUJpLp+XeIR65v8ra7WuJOFUBtkMA==}
