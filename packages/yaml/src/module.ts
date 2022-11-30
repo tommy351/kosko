@@ -1,4 +1,5 @@
 import logger, { LogLevel } from "@kosko/log";
+import { importModule } from "./import";
 
 /**
  * @public
@@ -55,15 +56,15 @@ async function getKubernetesModels(
     return;
   }
 
-  try {
-    const path =
-      // eslint-disable-next-line no-restricted-globals
-      (process.env.BUILD_TARGET === "deno" ? "npm:" : "") +
-      `kubernetes-models/${apiVersion}/${kind}`;
-    const mod = await import(path);
-    const ctor = mod[kind];
+  const path =
+    // eslint-disable-next-line no-restricted-globals
+    (process.env.BUILD_TARGET === "deno" ? "npm:" : "") +
+    `kubernetes-models/${apiVersion}/${kind}`;
 
-    if (ctor) {
+  try {
+    const result = await importModule(path);
+
+    if (result?.[kind]) {
       const mod: ResourceModule = { path, export: kind };
       setResourceModule(res, mod);
       return mod;

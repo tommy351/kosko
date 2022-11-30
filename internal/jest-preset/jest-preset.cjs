@@ -4,9 +4,8 @@
 
 /** @type import("jest").Config */
 const config = {
-  extensionsToTreatAsEsm: [".ts"],
   transform: {
-    "^.+\\.(t|j)sx?$": "@swc/jest"
+    "^.+\\.(t|j)sx?$": require.resolve("@swc/jest")
   },
   roots: ["<rootDir>/src"],
   testEnvironment: "node",

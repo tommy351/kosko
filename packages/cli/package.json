@@ -9,8 +9,8 @@
   "bin": {
     "kosko": "bin/kosko.js"
   },
-  "main": "dist/node.cjs",
-  "module": "dist/node.mjs",
+  "main": "dist/index.node.cjs",
+  "module": "dist/index.node.mjs",
   "types": "dist/index.d.ts",
   "sideEffects": false,
   "scripts": {
@@ -18,14 +18,16 @@
   },
   "exports": {
     "./bin/kosko.js": "./bin/kosko.js",
+    "./deno.js": "./deno.js",
     ".": {
       "node": {
         "types": "./dist/index.d.ts",
-        "import": "./dist/node.mjs",
-        "require": "./dist/node.cjs"
+        "import": "./dist/index.node.mjs",
+        "require": "./dist/index.node.cjs"
       },
       "types": "./dist/index.d.ts",
-      "default": "./dist/base.mjs"
+      "import": "./dist/index.base.mjs",
+      "require": "./index.node.cjs"
     }
   },
   "files": [

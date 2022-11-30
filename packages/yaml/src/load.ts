@@ -5,6 +5,7 @@ import { getResourceModule, ResourceKind } from "./module";
 import logger, { LogLevel } from "@kosko/log";
 import stringify from "fast-safe-stringify";
 import { isRecord } from "@kosko/common-utils";
+import { importModule } from "./import";
 
 /**
  * Describes an object which seems to be a Kubernetes manifest.
@@ -46,7 +47,7 @@ async function getConstructor(
   }
 
   try {
-    const result = await import(mod.path);
+    const result = await importModule(mod.path);
     return result[mod.export];
   } catch {
     logger.log(LogLevel.Debug, "Failed to import the resource module", {

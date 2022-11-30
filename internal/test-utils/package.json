@@ -29,6 +29,7 @@
     "tmp-promise": "^3.0.3"
   },
   "devDependencies": {
-    "@kosko/build-scripts": "workspace:^"
+    "@kosko/build-scripts": "workspace:^",
+    "@types/tmp": "^0.2.3"
   }
 }

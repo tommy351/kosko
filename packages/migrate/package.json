@@ -46,6 +46,9 @@
     "is-plain-object": "^5.0.0",
     "kubernetes-models": "^4.1.0"
   },
+  "peerDependencies": {
+    "kubernetes-models": ">=1.0.3"
+  },
   "jest": {
     "preset": "@kosko/jest-preset"
   }
