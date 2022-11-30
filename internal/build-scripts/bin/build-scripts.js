@@ -54,6 +54,7 @@ async function buildBundle(options) {
         values: {
           "process.env.BUILD_PROD": "true",
           "process.env.BUILD_TARGET": JSON.stringify(options.target),
+          "process.env.BUILD_FORMAT": JSON.stringify(options.format),
           "process.env.TARGET_SUFFIX": JSON.stringify(options.output),
           ...(options.importMetaUrlShim && {
             "import.meta.url": "new URL(`file:${__filename}`).href"

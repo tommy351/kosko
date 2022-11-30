@@ -1,3 +1,5 @@
+import { createRequire } from "node:module";
+
 /**
  * Returns file extensions which can be imported.
  *
@@ -11,10 +13,15 @@
 export function getRequireExtensions(): string[] {
   // eslint-disable-next-line no-restricted-globals
   switch (process.env.BUILD_TARGET) {
-    case "node":
-      // eslint-disable-next-line node/no-deprecated-api
-      return [".cjs", ".mjs", ...Object.keys(require.extensions)];
+    case "node": {
+      const req =
+        // eslint-disable-next-line no-restricted-globals
+        process.env.BUILD_FORMAT === "esm"
+          ? createRequire(import.meta.url)
+          : require;
 
+      return [".cjs", ".mjs", ...req("../node-extensions.cjs")()];
+    }
     case "deno":
       return [".ts", ".js", ".json"];
 
