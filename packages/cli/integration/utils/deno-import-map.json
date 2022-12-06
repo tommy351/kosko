@@ -2,7 +2,7 @@
   "imports": {
     "npm:@kosko/cli/deno.js": "../../../../packages/cli/deno.js",
     "npm:@kosko/generate@^3.0.2": "../../../../packages/generate/dist/index.deno.mjs",
-    "npm:@kosko/env@*": "../../../../packages/env/dist/index.deno.mjs",
+    "npm:@kosko/env": "../../../../packages/env/dist/index.deno.mjs",
     "npm:@kosko/require@^4.0.1": "../../../../packages/require/dist/index.deno.mjs"
   }
 }

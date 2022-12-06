@@ -4,7 +4,6 @@ import logger, { LogLevel } from "@kosko/log";
 import { resolve } from "./resolve";
 import { aggregateErrors, GenerateError } from "./error";
 import { glob } from "./glob";
-import { isAbsolute } from "node:path";
 import { pathToFileURL } from "node:url";
 import { getErrorCode } from "@kosko/common-utils";
 
@@ -80,10 +79,10 @@ async function importDefault(path: string) {
 }
 
 async function importPath(path: string) {
-  // eslint-disable-next-line no-restricted-globals
-  if (process.env.BUILD_TARGET !== "node") return importDefault(path);
+  const url = pathToFileURL(path).toString();
 
-  const url = isAbsolute(path) ? pathToFileURL(path).toString() : path;
+  // eslint-disable-next-line no-restricted-globals
+  if (process.env.BUILD_TARGET !== "node") return importDefault(url);
 
   try {
     return await importDefault(url);

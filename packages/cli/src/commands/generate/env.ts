@@ -6,6 +6,8 @@ import resolveFrom from "resolve-from";
 import pkgUp from "pkg-up";
 import { dirname, join } from "node:path";
 import { readFile } from "node:fs/promises";
+import { pathToFileURL } from "node:url";
+import { env } from "node:process";
 
 const KOSKO_ENV =
   // eslint-disable-next-line no-restricted-globals
@@ -32,12 +34,13 @@ async function getESMEntry(cwd: string) {
   const pkg = JSON.parse(await readFile(pkgPath, "utf-8"));
   if (!pkg.module) return;
 
-  return join(pkgPath, "..", pkg.module);
+  const path = join(pkgPath, "..", pkg.module);
+  return pathToFileURL(path).toString();
 }
 
 async function importEnvNode(cwd: string): Promise<Environment[]> {
   const envPath = resolveFrom(cwd, KOSKO_ENV);
-  const envModulePath = await getESMEntry(dirname(envPath));
+  const envModUrl = await getESMEntry(dirname(envPath));
   const envs: Environment[] = [];
 
   // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -48,8 +51,8 @@ async function importEnvNode(cwd: string): Promise<Environment[]> {
   // instances of `Environment`, and each of them must be initialized
   // in order to make sure users can access the environment in both CommonJS
   // and ESM environment.
-  if (envModulePath) {
-    envs.push(await importDefault(envModulePath));
+  if (envModUrl && env.KOSKO_DISABLE_ENV_ESM !== "1") {
+    envs.push(await importDefault(envModUrl));
   }
 
   return envs;

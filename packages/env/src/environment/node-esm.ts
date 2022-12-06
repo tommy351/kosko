@@ -5,6 +5,7 @@ import { mergeAsync } from "../merge";
 import { Environment } from "./types";
 import { createAsyncReducerExecutor } from "./base";
 import { getErrorCode } from "@kosko/common-utils";
+import { pathToFileURL } from "node:url";
 
 const MODULE_NOT_FOUND_ERROR_CODES = new Set([
   "ERR_MODULE_NOT_FOUND",
@@ -52,7 +53,9 @@ export function createNodeESMEnvironment(
 
       try {
         logger.log(LogLevel.Debug, `Importing ${path}`);
-        const mod = await import(path);
+
+        const url = pathToFileURL(path).toString();
+        const mod = await import(url);
         return mod.default;
       } catch (err) {
         const code = getErrorCode(err);
