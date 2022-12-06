@@ -4,8 +4,8 @@ on:
   pull_request:
 
 env:
-  HELM_VERSION: 3.5.3
-  KUSTOMIZE_VERSION: 4.4.1
+  HELM_VERSION: 3.10.2
+  KUSTOMIZE_VERSION: 4.5.7
 
 jobs:
   lint:

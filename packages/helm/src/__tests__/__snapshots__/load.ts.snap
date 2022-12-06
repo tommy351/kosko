@@ -7,13 +7,13 @@ exports[`chart is a local path 1`] = `
     "kind": "ServiceAccount",
     "metadata": {
       "labels": {
-        "app.kubernetes.io/instance": "RELEASE-NAME",
+        "app.kubernetes.io/instance": "release-name",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "nginx",
         "app.kubernetes.io/version": "1.16.0",
         "helm.sh/chart": "nginx-0.1.0",
       },
-      "name": "RELEASE-NAME-nginx",
+      "name": "release-name-nginx",
     },
   },
   {
@@ -21,13 +21,13 @@ exports[`chart is a local path 1`] = `
     "kind": "Service",
     "metadata": {
       "labels": {
-        "app.kubernetes.io/instance": "RELEASE-NAME",
+        "app.kubernetes.io/instance": "release-name",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "nginx",
         "app.kubernetes.io/version": "1.16.0",
         "helm.sh/chart": "nginx-0.1.0",
       },
-      "name": "RELEASE-NAME-nginx",
+      "name": "release-name-nginx",
     },
     "spec": {
       "ports": [
@@ -39,7 +39,7 @@ exports[`chart is a local path 1`] = `
         },
       ],
       "selector": {
-        "app.kubernetes.io/instance": "RELEASE-NAME",
+        "app.kubernetes.io/instance": "release-name",
         "app.kubernetes.io/name": "nginx",
       },
       "type": "ClusterIP",
@@ -50,26 +50,26 @@ exports[`chart is a local path 1`] = `
     "kind": "Deployment",
     "metadata": {
       "labels": {
-        "app.kubernetes.io/instance": "RELEASE-NAME",
+        "app.kubernetes.io/instance": "release-name",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "nginx",
         "app.kubernetes.io/version": "1.16.0",
         "helm.sh/chart": "nginx-0.1.0",
       },
-      "name": "RELEASE-NAME-nginx",
+      "name": "release-name-nginx",
     },
     "spec": {
       "replicas": 1,
       "selector": {
         "matchLabels": {
-          "app.kubernetes.io/instance": "RELEASE-NAME",
+          "app.kubernetes.io/instance": "release-name",
           "app.kubernetes.io/name": "nginx",
         },
       },
       "template": {
         "metadata": {
           "labels": {
-            "app.kubernetes.io/instance": "RELEASE-NAME",
+            "app.kubernetes.io/instance": "release-name",
             "app.kubernetes.io/name": "nginx",
           },
         },
@@ -103,7 +103,7 @@ exports[`chart is a local path 1`] = `
             },
           ],
           "securityContext": {},
-          "serviceAccountName": "RELEASE-NAME-nginx",
+          "serviceAccountName": "release-name-nginx",
         },
       },
     },
@@ -134,12 +134,12 @@ exports[`chart is remote 1`] = `
     "kind": "ServiceAccount",
     "metadata": {
       "labels": {
-        "app.kubernetes.io/instance": "RELEASE-NAME",
+        "app.kubernetes.io/instance": "release-name",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "kube-state-metrics",
         "helm.sh/chart": "kube-state-metrics-2.13.0",
       },
-      "name": "RELEASE-NAME-kube-state-metrics",
+      "name": "release-name-kube-state-metrics",
       "namespace": "default",
     },
   },
@@ -153,9 +153,9 @@ exports[`chart is remote 1`] = `
         "chart": "prometheus-13.6.0",
         "component": "alertmanager",
         "heritage": "Helm",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
-      "name": "RELEASE-NAME-prometheus-alertmanager",
+      "name": "release-name-prometheus-alertmanager",
       "namespace": "default",
     },
   },
@@ -169,9 +169,9 @@ exports[`chart is remote 1`] = `
         "chart": "prometheus-13.6.0",
         "component": "node-exporter",
         "heritage": "Helm",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
-      "name": "RELEASE-NAME-prometheus-node-exporter",
+      "name": "release-name-prometheus-node-exporter",
       "namespace": "default",
     },
   },
@@ -185,9 +185,9 @@ exports[`chart is remote 1`] = `
         "chart": "prometheus-13.6.0",
         "component": "pushgateway",
         "heritage": "Helm",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
-      "name": "RELEASE-NAME-prometheus-pushgateway",
+      "name": "release-name-prometheus-pushgateway",
       "namespace": "default",
     },
   },
@@ -201,9 +201,9 @@ exports[`chart is remote 1`] = `
         "chart": "prometheus-13.6.0",
         "component": "server",
         "heritage": "Helm",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
-      "name": "RELEASE-NAME-prometheus-server",
+      "name": "release-name-prometheus-server",
       "namespace": "default",
     },
   },
@@ -227,9 +227,9 @@ route:
         "chart": "prometheus-13.6.0",
         "component": "alertmanager",
         "heritage": "Helm",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
-      "name": "RELEASE-NAME-prometheus-alertmanager",
+      "name": "release-name-prometheus-alertmanager",
       "namespace": "default",
     },
   },
@@ -538,9 +538,9 @@ alerting:
         "chart": "prometheus-13.6.0",
         "component": "server",
         "heritage": "Helm",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
-      "name": "RELEASE-NAME-prometheus-server",
+      "name": "release-name-prometheus-server",
       "namespace": "default",
     },
   },
@@ -553,9 +553,9 @@ alerting:
         "chart": "prometheus-13.6.0",
         "component": "alertmanager",
         "heritage": "Helm",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
-      "name": "RELEASE-NAME-prometheus-alertmanager",
+      "name": "release-name-prometheus-alertmanager",
       "namespace": "default",
     },
     "spec": {
@@ -578,9 +578,9 @@ alerting:
         "chart": "prometheus-13.6.0",
         "component": "server",
         "heritage": "Helm",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
-      "name": "RELEASE-NAME-prometheus-server",
+      "name": "release-name-prometheus-server",
       "namespace": "default",
     },
     "spec": {
@@ -599,12 +599,12 @@ alerting:
     "kind": "ClusterRole",
     "metadata": {
       "labels": {
-        "app.kubernetes.io/instance": "RELEASE-NAME",
+        "app.kubernetes.io/instance": "release-name",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "kube-state-metrics",
         "helm.sh/chart": "kube-state-metrics-2.13.0",
       },
-      "name": "RELEASE-NAME-kube-state-metrics",
+      "name": "release-name-kube-state-metrics",
     },
     "rules": [
       {
@@ -946,9 +946,9 @@ alerting:
         "chart": "prometheus-13.6.0",
         "component": "alertmanager",
         "heritage": "Helm",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
-      "name": "RELEASE-NAME-prometheus-alertmanager",
+      "name": "release-name-prometheus-alertmanager",
     },
     "rules": [],
   },
@@ -961,9 +961,9 @@ alerting:
         "chart": "prometheus-13.6.0",
         "component": "pushgateway",
         "heritage": "Helm",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
-      "name": "RELEASE-NAME-prometheus-pushgateway",
+      "name": "release-name-prometheus-pushgateway",
     },
     "rules": [],
   },
@@ -976,9 +976,9 @@ alerting:
         "chart": "prometheus-13.6.0",
         "component": "server",
         "heritage": "Helm",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
-      "name": "RELEASE-NAME-prometheus-server",
+      "name": "release-name-prometheus-server",
     },
     "rules": [
       {
@@ -1031,22 +1031,22 @@ alerting:
     "kind": "ClusterRoleBinding",
     "metadata": {
       "labels": {
-        "app.kubernetes.io/instance": "RELEASE-NAME",
+        "app.kubernetes.io/instance": "release-name",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "kube-state-metrics",
         "helm.sh/chart": "kube-state-metrics-2.13.0",
       },
-      "name": "RELEASE-NAME-kube-state-metrics",
+      "name": "release-name-kube-state-metrics",
     },
     "roleRef": {
       "apiGroup": "rbac.authorization.k8s.io",
       "kind": "ClusterRole",
-      "name": "RELEASE-NAME-kube-state-metrics",
+      "name": "release-name-kube-state-metrics",
     },
     "subjects": [
       {
         "kind": "ServiceAccount",
-        "name": "RELEASE-NAME-kube-state-metrics",
+        "name": "release-name-kube-state-metrics",
         "namespace": "default",
       },
     ],
@@ -1060,19 +1060,19 @@ alerting:
         "chart": "prometheus-13.6.0",
         "component": "alertmanager",
         "heritage": "Helm",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
-      "name": "RELEASE-NAME-prometheus-alertmanager",
+      "name": "release-name-prometheus-alertmanager",
     },
     "roleRef": {
       "apiGroup": "rbac.authorization.k8s.io",
       "kind": "ClusterRole",
-      "name": "RELEASE-NAME-prometheus-alertmanager",
+      "name": "release-name-prometheus-alertmanager",
     },
     "subjects": [
       {
         "kind": "ServiceAccount",
-        "name": "RELEASE-NAME-prometheus-alertmanager",
+        "name": "release-name-prometheus-alertmanager",
         "namespace": "default",
       },
     ],
@@ -1086,19 +1086,19 @@ alerting:
         "chart": "prometheus-13.6.0",
         "component": "pushgateway",
         "heritage": "Helm",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
-      "name": "RELEASE-NAME-prometheus-pushgateway",
+      "name": "release-name-prometheus-pushgateway",
     },
     "roleRef": {
       "apiGroup": "rbac.authorization.k8s.io",
       "kind": "ClusterRole",
-      "name": "RELEASE-NAME-prometheus-pushgateway",
+      "name": "release-name-prometheus-pushgateway",
     },
     "subjects": [
       {
         "kind": "ServiceAccount",
-        "name": "RELEASE-NAME-prometheus-pushgateway",
+        "name": "release-name-prometheus-pushgateway",
         "namespace": "default",
       },
     ],
@@ -1112,19 +1112,19 @@ alerting:
         "chart": "prometheus-13.6.0",
         "component": "server",
         "heritage": "Helm",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
-      "name": "RELEASE-NAME-prometheus-server",
+      "name": "release-name-prometheus-server",
     },
     "roleRef": {
       "apiGroup": "rbac.authorization.k8s.io",
       "kind": "ClusterRole",
-      "name": "RELEASE-NAME-prometheus-server",
+      "name": "release-name-prometheus-server",
     },
     "subjects": [
       {
         "kind": "ServiceAccount",
-        "name": "RELEASE-NAME-prometheus-server",
+        "name": "release-name-prometheus-server",
         "namespace": "default",
       },
     ],
@@ -1137,12 +1137,12 @@ alerting:
         "prometheus.io/scrape": "true",
       },
       "labels": {
-        "app.kubernetes.io/instance": "RELEASE-NAME",
+        "app.kubernetes.io/instance": "release-name",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "kube-state-metrics",
         "helm.sh/chart": "kube-state-metrics-2.13.0",
       },
-      "name": "RELEASE-NAME-kube-state-metrics",
+      "name": "release-name-kube-state-metrics",
       "namespace": "default",
     },
     "spec": {
@@ -1155,7 +1155,7 @@ alerting:
         },
       ],
       "selector": {
-        "app.kubernetes.io/instance": "RELEASE-NAME",
+        "app.kubernetes.io/instance": "release-name",
         "app.kubernetes.io/name": "kube-state-metrics",
       },
       "type": "ClusterIP",
@@ -1170,9 +1170,9 @@ alerting:
         "chart": "prometheus-13.6.0",
         "component": "alertmanager",
         "heritage": "Helm",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
-      "name": "RELEASE-NAME-prometheus-alertmanager",
+      "name": "release-name-prometheus-alertmanager",
       "namespace": "default",
     },
     "spec": {
@@ -1187,7 +1187,7 @@ alerting:
       "selector": {
         "app": "prometheus",
         "component": "alertmanager",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
       "sessionAffinity": "None",
       "type": "ClusterIP",
@@ -1205,9 +1205,9 @@ alerting:
         "chart": "prometheus-13.6.0",
         "component": "node-exporter",
         "heritage": "Helm",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
-      "name": "RELEASE-NAME-prometheus-node-exporter",
+      "name": "release-name-prometheus-node-exporter",
       "namespace": "default",
     },
     "spec": {
@@ -1223,7 +1223,7 @@ alerting:
       "selector": {
         "app": "prometheus",
         "component": "node-exporter",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
       "type": "ClusterIP",
     },
@@ -1240,9 +1240,9 @@ alerting:
         "chart": "prometheus-13.6.0",
         "component": "pushgateway",
         "heritage": "Helm",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
-      "name": "RELEASE-NAME-prometheus-pushgateway",
+      "name": "release-name-prometheus-pushgateway",
       "namespace": "default",
     },
     "spec": {
@@ -1257,7 +1257,7 @@ alerting:
       "selector": {
         "app": "prometheus",
         "component": "pushgateway",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
       "type": "ClusterIP",
     },
@@ -1271,9 +1271,9 @@ alerting:
         "chart": "prometheus-13.6.0",
         "component": "server",
         "heritage": "Helm",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
-      "name": "RELEASE-NAME-prometheus-server",
+      "name": "release-name-prometheus-server",
       "namespace": "default",
     },
     "spec": {
@@ -1288,7 +1288,7 @@ alerting:
       "selector": {
         "app": "prometheus",
         "component": "server",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
       "sessionAffinity": "None",
       "type": "ClusterIP",
@@ -1303,9 +1303,9 @@ alerting:
         "chart": "prometheus-13.6.0",
         "component": "node-exporter",
         "heritage": "Helm",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
-      "name": "RELEASE-NAME-prometheus-node-exporter",
+      "name": "release-name-prometheus-node-exporter",
       "namespace": "default",
     },
     "spec": {
@@ -1313,7 +1313,7 @@ alerting:
         "matchLabels": {
           "app": "prometheus",
           "component": "node-exporter",
-          "release": "RELEASE-NAME",
+          "release": "release-name",
         },
       },
       "template": {
@@ -1323,7 +1323,7 @@ alerting:
             "chart": "prometheus-13.6.0",
             "component": "node-exporter",
             "heritage": "Helm",
-            "release": "RELEASE-NAME",
+            "release": "release-name",
           },
         },
         "spec": {
@@ -1374,7 +1374,7 @@ alerting:
             "runAsNonRoot": true,
             "runAsUser": 65534,
           },
-          "serviceAccountName": "RELEASE-NAME-prometheus-node-exporter",
+          "serviceAccountName": "release-name-prometheus-node-exporter",
           "volumes": [
             {
               "hostPath": {
@@ -1407,13 +1407,13 @@ alerting:
     "kind": "Deployment",
     "metadata": {
       "labels": {
-        "app.kubernetes.io/instance": "RELEASE-NAME",
+        "app.kubernetes.io/instance": "release-name",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "kube-state-metrics",
         "app.kubernetes.io/version": "1.9.8",
         "helm.sh/chart": "kube-state-metrics-2.13.0",
       },
-      "name": "RELEASE-NAME-kube-state-metrics",
+      "name": "release-name-kube-state-metrics",
       "namespace": "default",
     },
     "spec": {
@@ -1426,7 +1426,7 @@ alerting:
       "template": {
         "metadata": {
           "labels": {
-            "app.kubernetes.io/instance": "RELEASE-NAME",
+            "app.kubernetes.io/instance": "release-name",
             "app.kubernetes.io/name": "kube-state-metrics",
           },
         },
@@ -1495,7 +1495,7 @@ alerting:
             "runAsGroup": 65534,
             "runAsUser": 65534,
           },
-          "serviceAccountName": "RELEASE-NAME-kube-state-metrics",
+          "serviceAccountName": "release-name-kube-state-metrics",
         },
       },
     },
@@ -1509,9 +1509,9 @@ alerting:
         "chart": "prometheus-13.6.0",
         "component": "alertmanager",
         "heritage": "Helm",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
-      "name": "RELEASE-NAME-prometheus-alertmanager",
+      "name": "release-name-prometheus-alertmanager",
       "namespace": "default",
     },
     "spec": {
@@ -1520,7 +1520,7 @@ alerting:
         "matchLabels": {
           "app": "prometheus",
           "component": "alertmanager",
-          "release": "RELEASE-NAME",
+          "release": "release-name",
         },
       },
       "template": {
@@ -1530,7 +1530,7 @@ alerting:
             "chart": "prometheus-13.6.0",
             "component": "alertmanager",
             "heritage": "Helm",
-            "release": "RELEASE-NAME",
+            "release": "release-name",
           },
         },
         "spec": {
@@ -1606,18 +1606,18 @@ alerting:
             "runAsNonRoot": true,
             "runAsUser": 65534,
           },
-          "serviceAccountName": "RELEASE-NAME-prometheus-alertmanager",
+          "serviceAccountName": "release-name-prometheus-alertmanager",
           "volumes": [
             {
               "configMap": {
-                "name": "RELEASE-NAME-prometheus-alertmanager",
+                "name": "release-name-prometheus-alertmanager",
               },
               "name": "config-volume",
             },
             {
               "name": "storage-volume",
               "persistentVolumeClaim": {
-                "claimName": "RELEASE-NAME-prometheus-alertmanager",
+                "claimName": "release-name-prometheus-alertmanager",
               },
             },
           ],
@@ -1634,9 +1634,9 @@ alerting:
         "chart": "prometheus-13.6.0",
         "component": "pushgateway",
         "heritage": "Helm",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
-      "name": "RELEASE-NAME-prometheus-pushgateway",
+      "name": "release-name-prometheus-pushgateway",
       "namespace": "default",
     },
     "spec": {
@@ -1645,7 +1645,7 @@ alerting:
         "matchLabels": {
           "app": "prometheus",
           "component": "pushgateway",
-          "release": "RELEASE-NAME",
+          "release": "release-name",
         },
       },
       "template": {
@@ -1655,7 +1655,7 @@ alerting:
             "chart": "prometheus-13.6.0",
             "component": "pushgateway",
             "heritage": "Helm",
-            "release": "RELEASE-NAME",
+            "release": "release-name",
           },
         },
         "spec": {
@@ -1693,7 +1693,7 @@ alerting:
             "runAsNonRoot": true,
             "runAsUser": 65534,
           },
-          "serviceAccountName": "RELEASE-NAME-prometheus-pushgateway",
+          "serviceAccountName": "release-name-prometheus-pushgateway",
         },
       },
     },
@@ -1707,9 +1707,9 @@ alerting:
         "chart": "prometheus-13.6.0",
         "component": "server",
         "heritage": "Helm",
-        "release": "RELEASE-NAME",
+        "release": "release-name",
       },
-      "name": "RELEASE-NAME-prometheus-server",
+      "name": "release-name-prometheus-server",
       "namespace": "default",
     },
     "spec": {
@@ -1718,7 +1718,7 @@ alerting:
         "matchLabels": {
           "app": "prometheus",
           "component": "server",
-          "release": "RELEASE-NAME",
+          "release": "release-name",
         },
       },
       "template": {
@@ -1728,7 +1728,7 @@ alerting:
             "chart": "prometheus-13.6.0",
             "component": "server",
             "heritage": "Helm",
-            "release": "RELEASE-NAME",
+            "release": "release-name",
           },
         },
         "spec": {
@@ -1811,19 +1811,19 @@ alerting:
             "runAsNonRoot": true,
             "runAsUser": 65534,
           },
-          "serviceAccountName": "RELEASE-NAME-prometheus-server",
+          "serviceAccountName": "release-name-prometheus-server",
           "terminationGracePeriodSeconds": 300,
           "volumes": [
             {
               "configMap": {
-                "name": "RELEASE-NAME-prometheus-server",
+                "name": "release-name-prometheus-server",
               },
               "name": "config-volume",
             },
             {
               "name": "storage-volume",
               "persistentVolumeClaim": {
-                "claimName": "RELEASE-NAME-prometheus-server",
+                "claimName": "release-name-prometheus-server",
               },
             },
           ],
@@ -1952,13 +1952,13 @@ exports[`values are specified 1`] = `
     "kind": "Service",
     "metadata": {
       "labels": {
-        "app.kubernetes.io/instance": "RELEASE-NAME",
+        "app.kubernetes.io/instance": "release-name",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "good-day",
         "app.kubernetes.io/version": "1.16.0",
         "helm.sh/chart": "nginx-0.1.0",
       },
-      "name": "RELEASE-NAME-good-day",
+      "name": "release-name-good-day",
     },
     "spec": {
       "ports": [
@@ -1970,7 +1970,7 @@ exports[`values are specified 1`] = `
         },
       ],
       "selector": {
-        "app.kubernetes.io/instance": "RELEASE-NAME",
+        "app.kubernetes.io/instance": "release-name",
         "app.kubernetes.io/name": "good-day",
       },
       "type": "ClusterIP",
@@ -1981,26 +1981,26 @@ exports[`values are specified 1`] = `
     "kind": "Deployment",
     "metadata": {
       "labels": {
-        "app.kubernetes.io/instance": "RELEASE-NAME",
+        "app.kubernetes.io/instance": "release-name",
         "app.kubernetes.io/managed-by": "Helm",
         "app.kubernetes.io/name": "good-day",
         "app.kubernetes.io/version": "1.16.0",
         "helm.sh/chart": "nginx-0.1.0",
       },
-      "name": "RELEASE-NAME-good-day",
+      "name": "release-name-good-day",
     },
     "spec": {
       "replicas": 5,
       "selector": {
         "matchLabels": {
-          "app.kubernetes.io/instance": "RELEASE-NAME",
+          "app.kubernetes.io/instance": "release-name",
           "app.kubernetes.io/name": "good-day",
         },
       },
       "template": {
         "metadata": {
           "labels": {
-            "app.kubernetes.io/instance": "RELEASE-NAME",
+            "app.kubernetes.io/instance": "release-name",
             "app.kubernetes.io/name": "good-day",
           },
         },
