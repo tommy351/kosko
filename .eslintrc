@@ -119,6 +119,12 @@
           ]
         }
       }
+    },
+    {
+      "files": ["packages/cli/integration/generate-deno/**/*"],
+      "rules": {
+        "node/no-missing-import": "off"
+      }
     }
   ]
 }

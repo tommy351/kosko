@@ -10,5 +10,23 @@ metadata:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: folder-esm"
+  name: folder-esm
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: env
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: env
+  template:
+    containers: []
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: file-ts"
 `;
