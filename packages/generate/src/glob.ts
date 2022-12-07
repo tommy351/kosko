@@ -28,6 +28,22 @@ function createMatcher(patterns: readonly string[], baseOptions: mm.Options) {
   };
 }
 
+async function readDir(path: string) {
+  const files = await readdir(path, { withFileTypes: true });
+
+  return files.sort((a, b) => {
+    if (a.name > b.name) {
+      return 1;
+    }
+
+    if (a.name < b.name) {
+      return -1;
+    }
+
+    return 0;
+  });
+}
+
 export interface GlobOptions {
   path: string;
   patterns: readonly string[];
@@ -55,7 +71,7 @@ export async function* glob(options: GlobOptions): AsyncIterable<GlobResult> {
     path: string,
     parent: string
   ): AsyncIterable<GlobResult> {
-    for (const file of await readdir(path, { withFileTypes: true })) {
+    for (const file of await readDir(path)) {
       const result: GlobResult = {
         relativePath: posix.join(parent, file.name),
         absolutePath: join(path, file.name)

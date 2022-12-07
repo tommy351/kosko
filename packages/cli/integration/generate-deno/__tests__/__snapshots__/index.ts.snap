@@ -2,16 +2,6 @@
 
 exports[`should generate components 1`] = `
 "---
-apiVersion: v1
-kind: Pod
-metadata:
-  name: file-esm
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: folder-esm
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -28,5 +18,15 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: file-ts"
+  name: file-esm
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: file-ts
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: folder-esm"
 `;
