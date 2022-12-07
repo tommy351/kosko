@@ -1,0 +1,5 @@
+{
+  "compilerOptions": {
+    "types": ["./environments/types.d.ts"]
+  }
+}

@@ -16,6 +16,7 @@ import {
   installDependencies
 } from "./install";
 import { getErrorCode } from "@kosko/common-utils";
+import denoTemplate from "./templates/deno";
 
 async function checkPath(path: string, force?: boolean) {
   try {
@@ -72,7 +73,7 @@ function getCDPath(cwd: string, path: string): string | undefined {
 }
 
 export interface InitArguments extends RootArguments {
-  force: boolean;
+  force?: boolean;
   path?: string;
   typescript?: boolean;
   esm?: boolean;
@@ -85,36 +86,42 @@ export const initCmd: Command<InitArguments> = {
   describe: "Set up a new Kosko directory",
   builder(argv) {
     /* istanbul ignore next */
-    return argv
+    let base = argv
       .option("force", {
         type: "boolean",
         describe: "Overwrite existing files",
-        default: false,
         alias: "f"
-      })
-      .option("typescript", {
-        type: "boolean",
-        describe: "Generate TypeScript files",
-        alias: "ts"
-      })
-      .option("esm", {
-        type: "boolean",
-        describe: "Generate ECMAScript module (ESM) files"
-      })
-      .option("install", {
-        type: "boolean",
-        describe: "Install dependencies automatically",
-        default: true
-      })
-      .option("package-manager", {
-        type: "string",
-        describe: "Package manager (npm, yarn, pnpm)",
-        alias: "pm"
       })
       .positional("path", { type: "string", describe: "Path to initialize" })
       .example("$0 init", "Initialize in current directory")
-      .example("$0 init example", "Initialize in specified directory")
-      .example("$0 init --typescript", "Setup a TypeScript project");
+      .example("$0 init example", "Initialize in specified directory");
+
+    // eslint-disable-next-line no-restricted-globals
+    if (process.env.BUILD_TARGET === "node") {
+      base = base
+        .option("typescript", {
+          type: "boolean",
+          describe: "Generate TypeScript files",
+          alias: "ts"
+        })
+        .option("esm", {
+          type: "boolean",
+          describe: "Generate ECMAScript module (ESM) files"
+        })
+        .option("install", {
+          type: "boolean",
+          describe: "Install dependencies automatically",
+          default: true
+        })
+        .option("package-manager", {
+          type: "string",
+          describe: "Package manager (npm, yarn, pnpm)",
+          alias: "pm"
+        })
+        .example("$0 init --typescript", "Setup a TypeScript project");
+    }
+
+    return base;
   },
   async handler(args) {
     const path = args.path ? resolve(args.cwd, args.path) : args.cwd;
@@ -122,21 +129,32 @@ export const initCmd: Command<InitArguments> = {
     await checkPath(path, args.force);
 
     logger.log(LogLevel.Info, `Creating a Kosko project in "${path}"`);
+    const template: Template = (() => {
+      // eslint-disable-next-line no-restricted-globals
+      switch (process.env.BUILD_TARGET) {
+        case "deno":
+          return denoTemplate;
 
-    let template: Template = cjsTemplate;
+        case "node":
+          if (args.typescript) {
+            return args.esm ? tsEsmTemplate : tsTemplate;
+          }
 
-    if (args.typescript) {
-      if (args.esm) {
-        template = tsEsmTemplate;
-      } else {
-        template = tsTemplate;
+          if (args.esm) {
+            return esmTemplate;
+          }
+
+          return cjsTemplate;
       }
-    } else if (args.esm) {
-      template = esmTemplate;
-    }
+
+      throw new Error("Template is unavailable on current platform");
+    })();
 
     const packageManager =
-      args.packageManager ?? (await detectPackageManager(path));
+      // eslint-disable-next-line no-restricted-globals
+      process.env.BUILD_TARGET === "deno"
+        ? "deno run --allow-env --allow-read npm:kosko/deno.js"
+        : args.packageManager ?? (await detectPackageManager(path));
     const { dependencies, devDependencies, files } = await template({ path });
 
     await writeFiles(path, files);
@@ -144,7 +162,8 @@ export const initCmd: Command<InitArguments> = {
     const cdPath = getCDPath(args.cwd, path);
     let installSuccessful = false;
 
-    if (args.install) {
+    // eslint-disable-next-line no-restricted-globals
+    if (process.env.BUILD_TARGET === "node" && args.install) {
       try {
         if (dependencies?.length) {
           await installDependencies({
@@ -188,7 +207,8 @@ We suggest that you begin by typing:
 
 ${[
   ...(cdPath ? [`cd ${cdPath}`] : []),
-  ...(args.install && installSuccessful
+  // eslint-disable-next-line no-restricted-globals
+  ...(process.env.BUILD_TARGET !== "node" || (args.install && installSuccessful)
     ? []
     : [
         dependencies?.length

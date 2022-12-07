@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should setup a new folder 1`] = `
+{
+  "README.md": "This is a [Kosko] project bootstrapped with [\`kosko init\`][kosko] command.
+
+## Getting Started
+
+Generate Kubernetes manifests with the following command.
+
+\`\`\`sh
+deno run --allow-read --allow-env npm:kosko/deno.js generate
+\`\`\`
+
+The result will be printed in the console. You can pipe the output to \`kubectl\` to apply generated manifests on Kubernetes.
+
+\`\`\`sh
+deno run --allow-read --allow-env npm:kosko/deno.js generate | kubectl apply -f -
+\`\`\`
+
+When \`--env\` option is set, Kosko will read variables from environment files. Then you can fetch variables with \`@kosko/env\` package.
+
+\`\`\`sh
+deno run --allow-read --allow-env npm:kosko/deno.js generate --env dev
+\`\`\`
+
+You can try editing files in \`components\` and \`environments\` folder and re-run \`npm run generate\` to see changes.
+
+## Learn More
+
+Check [Kosko docs](https://kosko.dev/docs/) for more information about Kosko.
+
+[kosko]: https://kosko.dev/
+",
+  "components/nginx.ts": "import { Deployment } from "npm:kubernetes-models/apps/v1/Deployment";
+import { Service } from "npm:kubernetes-models/v1/Service";
+import env from "npm:@kosko/env";
+
+const params = await env.component("nginx");
+
+const name = "nginx";
+const labels = { app: name };
+const port = 80;
+
+const deployment = new Deployment({
+  metadata: {
+    name,
+    namespace: params.namespace
+  },
+  spec: {
+    replicas: params.replicas,
+    selector: {
+      matchLabels: labels
+    },
+    template: {
+      metadata: { labels },
+      spec: {
+        containers: [
+          {
+            name: "nginx",
+            image: "nginx:stable",
+            ports: [{ containerPort: port }],
+            env: [{ name: "NGINX_PORT", value: \`\${port}\` }]
+          }
+        ]
+      }
+    }
+  }
+});
+
+const service = new Service({
+  metadata: {
+    name,
+    namespace: params.namespace
+  },
+  spec: {
+    selector: labels,
+    ports: [{ port }]
+  }
+});
+
+export default [deployment, service];
+",
+  "environments/dev/index.ts": "import { GlobalEnvironment } from "npm:@kosko/env";
+
+const env: GlobalEnvironment = {
+  namespace: "dev"
+};
+
+export default env;
+",
+  "environments/dev/nginx.ts": "import { ComponentEnvironment } from "npm:@kosko/env";
+
+const env: ComponentEnvironment["nginx"] = {
+  replicas: 3
+};
+
+export default env;
+",
+  "environments/types.d.ts": "import "npm:@kosko/env";
+
+// Extend type declarations of "@kosko/env" module
+declare module "npm:@kosko/env" {
+  // Declare types for global environment variables
+  interface GlobalEnvironment {
+    namespace: string;
+  }
+
+  // Declare types for component environment variables
+  interface ComponentEnvironment {
+    // Fallback type of all other component variables which are not specified below
+    [key: string]: unknown;
+
+    // Specify types for each component
+    nginx: {
+      replicas: number;
+    };
+  }
+
+  // Extend Environment interface
+  interface Environment {
+    global(): Promise<GlobalEnvironment>;
+
+    component<K extends string>(
+      name: K
+    ): Promise<GlobalEnvironment & ComponentEnvironment[K]>;
+  }
+}
+",
+  "kosko.toml": "components = ["*"]
+",
+  "tsconfig.json": "{
+  "compilerOptions": {
+    "types": ["./environments/types.d.ts"]
+  }
+}
+",
+}
+`;

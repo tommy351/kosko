@@ -24,6 +24,7 @@ export async function runDenoCLI(
     [
       "run",
       "--allow-read",
+      "--allow-write",
       "--allow-env",
       "--import-map",
       join(__dirname, "deno-import-map.json"),
