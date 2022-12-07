@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should print migrated manifests 1`] = `
+"import { Pod } from "kubernetes-models/v1/Pod";
+
+const pod = new Pod({
+  "metadata": {
+    "name": "test-pod"
+  },
+  "spec": {
+    "containers": []
+  }
+});
+
+export default [pod];"
+`;

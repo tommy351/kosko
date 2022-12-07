@@ -1,4 +1,4 @@
-import { migrateString } from "@kosko/migrate";
+import { MigrateFormat, migrateString } from "@kosko/migrate";
 import fs from "node:fs/promises";
 import getStdin from "get-stdin";
 import { join } from "node:path";
@@ -112,6 +112,25 @@ describe("given multiple files", () => {
       )
     );
     const expected = await migrateString("---\n" + contents.join("\n"));
+
+    expect(print).toHaveBeenCalledWith(expected);
+  });
+});
+
+describe("when --esm option is given", () => {
+  beforeEach(async () => {
+    await execute({ filename: ["only-deployment.yaml"], esm: true });
+  });
+
+  test("should call print once", () => {
+    expect(print).toHaveBeenCalledTimes(1);
+  });
+
+  test("should call print with result", async () => {
+    const expected = await migrateString(
+      await fs.readFile(join(fixturePath, "only-deployment.yaml"), "utf8"),
+      { format: MigrateFormat.ESM }
+    );
 
     expect(print).toHaveBeenCalledWith(expected);
   });
