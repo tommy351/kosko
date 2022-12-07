@@ -273,6 +273,22 @@ module.exports = [pod];
 "
 `;
 
+exports[`migrate when format = ESM should generate code in ESM format 1`] = `
+"import { Pod } from "kubernetes-models/v1/Pod";
+
+const pod = new Pod({
+  "metadata": {
+    "name": "test-pod"
+  },
+  "spec": {
+    "containers": []
+  }
+});
+
+export default [pod];
+"
+`;
+
 exports[`migrateString given empty objects in YAML should ignore them 1`] = `
 ""use strict";
 
@@ -321,5 +337,21 @@ const pod = new Pod({
 });
 
 module.exports = [pod];
+"
+`;
+
+exports[`migrateString when format = ESM should generate code in ESM format 1`] = `
+"import { Pod } from "kubernetes-models/v1/Pod";
+
+const pod = new Pod({
+  "metadata": {
+    "name": "test-pod"
+  },
+  "spec": {
+    "containers": []
+  }
+});
+
+export default [pod];
 "
 `;
