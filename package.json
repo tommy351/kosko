@@ -18,7 +18,7 @@
     "watch": "npm run build -- --watch",
     "test": "npm-run-all test:*",
     "test:unit": "cross-env BUILD_TARGET=node KOSKO_DISABLE_ENV_ESM=1 jest",
-    "test:integration": "jest --config jest.integration.config.ts",
+    "test:integration": "ts-node-esm scripts/generate-deno-import-map.mts && jest --config jest.integration.config.ts",
     "test:browser": "jest --config integration/browser/jest.config.js",
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky install",
