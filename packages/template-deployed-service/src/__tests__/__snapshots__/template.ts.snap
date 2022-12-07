@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should return files 1`] = `
+exports[`when esm = false should return files in CJS format 1`] = `
 [
   {
     "content": ""use strict";
@@ -52,6 +52,62 @@ const service = new Service({
 });
 
 module.exports = [deployment, service];
+",
+    "path": "components/foo.js",
+  },
+]
+`;
+
+exports[`when esm = true should return files in ESM format 1`] = `
+[
+  {
+    "content": "import { Deployment } from "kubernetes-models/apps/v1/Deployment";
+import { Service } from "kubernetes-models/v1/Service";
+
+const metadata = { name: "foo" };
+const labels = { app: "foo" };
+
+const deployment = new Deployment({
+  metadata,
+  spec: {
+    replicas: 3,
+    selector: {
+      matchLabels: labels
+    },
+    template: {
+      metadata: {
+        labels
+      },
+      spec: {
+        containers: [
+          {
+            image: "foo:bar",
+            name: "foo",
+            ports: [{
+              containerPort: 5678
+            }]
+          }
+        ]
+      }
+    }
+  }
+});
+
+const service = new Service({
+  metadata,
+  spec: {
+    selector: labels,
+    type: "NodePort",
+    ports: [
+      {
+        port: 1234,
+        targetPort: 5678
+      }
+    ]
+  }
+});
+
+export default [deployment, service];
 ",
     "path": "components/foo.js",
   },

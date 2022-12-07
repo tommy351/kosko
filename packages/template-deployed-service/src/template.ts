@@ -11,7 +11,16 @@ export interface Options {
   servicePort: number;
   containerPort: number;
   replicas: number;
+  esm: boolean;
 }
+
+const esmHeader = `import { Deployment } from "kubernetes-models/apps/v1/Deployment";
+import { Service } from "kubernetes-models/v1/Service";`;
+
+const cjsHeader = `"use strict";
+
+const { Deployment } = require("kubernetes-models/apps/v1/Deployment");
+const { Service } = require("kubernetes-models/v1/Service");`;
 
 /**
  * @public
@@ -48,17 +57,28 @@ export const template: Template<Options> = {
       type: "number",
       description: "Number of replicas",
       default: 1
+    },
+    esm: {
+      type: "boolean",
+      description: "Generate ECMAScript module (ESM) files",
+      // eslint-disable-next-line no-restricted-globals
+      default: process.env.BUILD_TARGET !== "node"
     }
   },
-  async generate({ name, image, type, servicePort, containerPort, replicas }) {
+  async generate({
+    name,
+    image,
+    type,
+    servicePort,
+    containerPort,
+    replicas,
+    esm
+  }) {
     return {
       files: [
         {
           path: join("components", name + ".js"),
-          content: `"use strict";
-
-const { Deployment } = require("kubernetes-models/apps/v1/Deployment");
-const { Service } = require("kubernetes-models/v1/Service");
+          content: `${esm ? esmHeader : cjsHeader}
 
 const metadata = { name: "${name}" };
 const labels = { app: "${name}" };
@@ -103,7 +123,7 @@ const service = new Service({
   }
 });
 
-module.exports = [deployment, service];
+${esm ? "export default" : "module.exports ="} [deployment, service];
 `
         }
       ]
