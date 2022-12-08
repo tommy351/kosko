@@ -56,10 +56,7 @@ async function getKubernetesModels(
     return;
   }
 
-  const path =
-    // eslint-disable-next-line no-restricted-globals
-    (process.env.BUILD_TARGET === "deno" ? "npm:" : "") +
-    `kubernetes-models/${apiVersion}/${kind}`;
+  const path = `kubernetes-models/${apiVersion}/${kind}`;
 
   try {
     const result = await importModule(path);
