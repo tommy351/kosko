@@ -23,9 +23,7 @@ export async function runDenoCLI(
     "deno",
     [
       "run",
-      "--allow-read",
-      "--allow-write",
-      "--allow-env",
+      "-A",
       "--import-map",
       join(projectRoot, "integration/deno-import-map.json"),
       join(projectRoot, "packages/kosko/deno.js"),

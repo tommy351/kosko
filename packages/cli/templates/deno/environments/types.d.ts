@@ -1,7 +1,7 @@
-import "npm:@kosko/env";
+import "@kosko/env";
 
 // Extend type declarations of "@kosko/env" module
-declare module "npm:@kosko/env" {
+declare module "@kosko/env" {
   // Declare types for global environment variables
   interface GlobalEnvironment {
     namespace: string;

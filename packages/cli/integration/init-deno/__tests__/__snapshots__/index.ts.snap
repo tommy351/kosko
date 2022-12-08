@@ -1,21 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should print usage guide to console 1`] = `
-"info  - Creating a Kosko project in "<INIT_PATH>"
-info  - Project created at "<INIT_PATH>"
+"[32minfo [39m - Creating a Kosko project in "<INIT_PATH>"
+[32minfo [39m - Project created at "<INIT_PATH>"
 
 Inside that directory, you can run several commands:
 
-  deno task kosko generate
+  [36mdeno task kosko generate[39m
     Validate components and generate Kubernetes manifests.
 
-  deno task kosko validate
+  [36mdeno task kosko validate[39m
     Only validate components.
 
 We suggest that you begin by typing:
 
-  cd <INIT_PATH>
-  deno task kosko generate"
+  [36mcd <INIT_PATH>[39m
+  [36mdeno task kosko generate[39m"
 `;
 
 exports[`should setup a new folder 1`] = `
@@ -50,9 +50,9 @@ Check [Kosko docs](https://kosko.dev/docs/) for more information about Kosko.
 
 [kosko]: https://kosko.dev/
 ",
-  "components/nginx.ts": "import { Deployment } from "npm:kubernetes-models/apps/v1/Deployment";
-import { Service } from "npm:kubernetes-models/v1/Service";
-import env from "npm:@kosko/env";
+  "components/nginx.ts": "import { Deployment } from "kubernetes-models/apps/v1/Deployment";
+import { Service } from "kubernetes-models/v1/Service";
+import env from "@kosko/env";
 
 const params = await env.component("nginx");
 
@@ -103,12 +103,13 @@ export default [deployment, service];
   "compilerOptions": {
     "types": ["./environments/types.d.ts"]
   },
+  "importMap": "./import_map.json",
   "tasks": {
     "kosko": "deno run -A npm:kosko/deno.js"
   }
 }
 ",
-  "environments/dev/index.ts": "import { GlobalEnvironment } from "npm:@kosko/env";
+  "environments/dev/index.ts": "import { GlobalEnvironment } from "@kosko/env";
 
 const env: GlobalEnvironment = {
   namespace: "dev"
@@ -116,7 +117,7 @@ const env: GlobalEnvironment = {
 
 export default env;
 ",
-  "environments/dev/nginx.ts": "import { ComponentEnvironment } from "npm:@kosko/env";
+  "environments/dev/nginx.ts": "import { ComponentEnvironment } from "@kosko/env";
 
 const env: ComponentEnvironment["nginx"] = {
   replicas: 3
@@ -124,10 +125,10 @@ const env: ComponentEnvironment["nginx"] = {
 
 export default env;
 ",
-  "environments/types.d.ts": "import "npm:@kosko/env";
+  "environments/types.d.ts": "import "@kosko/env";
 
 // Extend type declarations of "@kosko/env" module
-declare module "npm:@kosko/env" {
+declare module "@kosko/env" {
   // Declare types for global environment variables
   interface GlobalEnvironment {
     namespace: string;
@@ -151,6 +152,13 @@ declare module "npm:@kosko/env" {
     component<K extends string>(
       name: K
     ): Promise<GlobalEnvironment & ComponentEnvironment[K]>;
+  }
+}
+",
+  "import_map.json": "{
+  "imports": {
+    "@kosko/env": "npm:@kosko/env",
+    "kubernetes-models/": "https://esm.sh/kubernetes-models/"
   }
 }
 ",

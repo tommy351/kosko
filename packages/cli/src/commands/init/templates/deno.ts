@@ -1,13 +1,12 @@
 import { Template } from "./base";
 import { generateKoskoConfig } from "./kosko-config";
 import { generateFromTemplateFile } from "./template";
+import { generateTsEnvFiles } from "./ts";
 
 const TEMPLATE_FILES = [
-  "components/nginx.ts",
-  "environments/dev/index.ts",
-  "environments/dev/nginx.ts",
   "environments/types.d.ts",
   "deno.json",
+  "import_map.json",
   "README.md"
 ];
 
@@ -19,7 +18,12 @@ const denoTemplate: Template = async () => {
         TEMPLATE_FILES.map((file) =>
           generateFromTemplateFile(`${file}`, `deno/${file}`)
         )
-      ))
+      )),
+      await generateFromTemplateFile(
+        "components/nginx.ts",
+        "esm/components/nginx.js"
+      ),
+      ...(await generateTsEnvFiles())
     ]
   };
 };

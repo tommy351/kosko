@@ -9,9 +9,7 @@ import { readFile } from "node:fs/promises";
 import { pathToFileURL } from "node:url";
 import { env } from "node:process";
 
-const KOSKO_ENV =
-  // eslint-disable-next-line no-restricted-globals
-  process.env.BUILD_TARGET === "deno" ? "npm:@kosko/env" : "@kosko/env";
+const KOSKO_ENV = "@kosko/env";
 
 function excludeFalsyInArray<T>(input: (T | undefined | null)[]): T[] {
   return input.filter(Boolean) as T[];
