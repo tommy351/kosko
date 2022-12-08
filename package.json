@@ -11,7 +11,7 @@
   "license": "MIT",
   "scripts": {
     "lint": "npm-run-all lint:*",
-    "lint:eslint": "eslint . --ext .{js,ts,jsx,tsx,cjs,mjs,cts,mts}",
+    "lint:eslint": "eslint . --ext .js,.ts,.jsx,.tsx,.cjs,.mjs,.cts,.mts",
     "lint:syncpack": "syncpack list-mismatches --workspace false",
     "build": "turbo run build --filter=./internal/* --filter=./packages/*",
     "clean": "rm -rf internal/*/dist packages/*/dist",

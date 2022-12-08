@@ -9,6 +9,9 @@ const INIT_IMPORT_MAP_PATH = join(
   ROOT_DIR,
   "packages/cli/templates/deno/import_map.json"
 );
+const CLI_VERSION = JSON.parse(
+  await readFile(join(PACKAGES_DIR, "cli/package.json"), "utf8")
+).version;
 
 async function fileExists(path: string) {
   try {
@@ -21,11 +24,13 @@ async function fileExists(path: string) {
 
 const imports: Record<string, string> = {
   ...JSON.parse(await readFile(INIT_IMPORT_MAP_PATH, "utf8")).imports,
-  "npm:@kosko/cli/deno.js": "../packages/cli/deno.js",
 
   // Override the value of `@kosko/env` to fix the`ERR_INVALID_FILE_URL_HOST`
   // error when importing `@kosko/env`.
-  "@kosko/env": "../packages/env/dist/index.deno.mjs"
+  "@kosko/env": "../packages/env/dist/index.deno.mjs",
+
+  // For `packages/kosko/deno.js`.
+  [`npm:@kosko/cli@${CLI_VERSION}/deno.js`]: "../packages/cli/deno.js"
 };
 
 for (const name of await readdir(PACKAGES_DIR)) {
