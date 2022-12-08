@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
     "types": ["./environments/types.d.ts"]
+  },
+  "tasks": {
+    "kosko": "deno run -A npm:kosko/deno.js"
   }
 }

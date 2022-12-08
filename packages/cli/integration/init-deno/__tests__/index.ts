@@ -3,11 +3,15 @@ import glob from "fast-glob";
 import { join, posix } from "node:path";
 import { readFile } from "node:fs/promises";
 import { runDenoCLI } from "../../utils/run";
+import { ExecaReturnValue } from "execa";
+import replaceString from "replace-string";
 
 let tmpDir: TempDir;
+let result: ExecaReturnValue;
 
 beforeEach(async () => {
   tmpDir = await makeTempDir();
+  result = await runDenoCLI(["init", tmpDir.path]);
 });
 
 afterEach(async () => {
@@ -15,8 +19,6 @@ afterEach(async () => {
 });
 
 test("should setup a new folder", async () => {
-  await runDenoCLI(["init", tmpDir.path]);
-
   const paths = await glob("**/*", { cwd: tmpDir.path });
   const files: Record<string, string> = {};
 
@@ -28,4 +30,10 @@ test("should setup a new folder", async () => {
   }
 
   expect(files).toMatchSnapshot();
+});
+
+test("should print usage guide to console", () => {
+  expect(
+    replaceString(result.stderr, tmpDir.path, "<INIT_PATH>")
+  ).toMatchSnapshot();
 });

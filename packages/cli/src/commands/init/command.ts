@@ -151,10 +151,12 @@ export const initCmd: Command<InitArguments> = {
     })();
 
     const packageManager =
+      args.packageManager ?? (await detectPackageManager(path));
+    const runCmd =
       // eslint-disable-next-line no-restricted-globals
       process.env.BUILD_TARGET === "deno"
-        ? "deno run --allow-env --allow-read npm:kosko/deno.js"
-        : args.packageManager ?? (await detectPackageManager(path));
+        ? "deno task kosko"
+        : `${packageManager} run`;
     const { dependencies, devDependencies, files } = await template({ path });
 
     await writeFiles(path, files);
@@ -195,10 +197,10 @@ export const initCmd: Command<InitArguments> = {
 Inside that directory, you can run several commands:
 ${[
   [
-    `${packageManager} run generate`,
+    `${runCmd} generate`,
     "Validate components and generate Kubernetes manifests."
   ],
-  [`${packageManager} run validate`, "Only validate components."]
+  [`${runCmd} validate`, "Only validate components."]
 ]
   .map(([cmd, desc]) => `\n  ${pc.cyan(cmd)}\n    ${desc}`)
   .join("\n")}
@@ -222,7 +224,7 @@ ${[
             }).join(" ")
           : ""
       ]),
-  `${packageManager} run generate`
+  `${runCmd} generate`
 ]
   .filter(Boolean)
   .map((line) => `  ${pc.cyan(line)}`)

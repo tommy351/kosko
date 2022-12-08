@@ -1,5 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`should print usage guide to console 1`] = `
+"info  - Creating a Kosko project in "<INIT_PATH>"
+info  - Project created at "<INIT_PATH>"
+
+Inside that directory, you can run several commands:
+
+  deno task kosko generate
+    Validate components and generate Kubernetes manifests.
+
+  deno task kosko validate
+    Only validate components.
+
+We suggest that you begin by typing:
+
+  cd <INIT_PATH>
+  deno task kosko generate"
+`;
+
 exports[`should setup a new folder 1`] = `
 {
   "README.md": "This is a [Kosko] project bootstrapped with [\`kosko init\`][kosko] command.
@@ -9,19 +27,19 @@ exports[`should setup a new folder 1`] = `
 Generate Kubernetes manifests with the following command.
 
 \`\`\`sh
-deno run --allow-read --allow-env npm:kosko/deno.js generate
+deno task kosko generate
 \`\`\`
 
 The result will be printed in the console. You can pipe the output to \`kubectl\` to apply generated manifests on Kubernetes.
 
 \`\`\`sh
-deno run --allow-read --allow-env npm:kosko/deno.js generate | kubectl apply -f -
+deno task kosko generate | kubectl apply -f -
 \`\`\`
 
 When \`--env\` option is set, Kosko will read variables from environment files. Then you can fetch variables with \`@kosko/env\` package.
 
 \`\`\`sh
-deno run --allow-read --allow-env npm:kosko/deno.js generate --env dev
+deno task kosko generate --env dev
 \`\`\`
 
 You can try editing files in \`components\` and \`environments\` folder and re-run \`npm run generate\` to see changes.
@@ -81,6 +99,15 @@ const service = new Service({
 
 export default [deployment, service];
 ",
+  "deno.json": "{
+  "compilerOptions": {
+    "types": ["./environments/types.d.ts"]
+  },
+  "tasks": {
+    "kosko": "deno run -A npm:kosko/deno.js"
+  }
+}
+",
   "environments/dev/index.ts": "import { GlobalEnvironment } from "npm:@kosko/env";
 
 const env: GlobalEnvironment = {
@@ -128,12 +155,6 @@ declare module "npm:@kosko/env" {
 }
 ",
   "kosko.toml": "components = ["*"]
-",
-  "tsconfig.json": "{
-  "compilerOptions": {
-    "types": ["./environments/types.d.ts"]
-  }
-}
 ",
 }
 `;

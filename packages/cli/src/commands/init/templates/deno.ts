@@ -7,7 +7,7 @@ const TEMPLATE_FILES = [
   "environments/dev/index.ts",
   "environments/dev/nginx.ts",
   "environments/types.d.ts",
-  "tsconfig.json",
+  "deno.json",
   "README.md"
 ];
 

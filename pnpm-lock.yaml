@@ -332,6 +332,7 @@ importers:
       picocolors: ^1.0.0
       pkg-dir: ^5.0.0
       pkg-up: ^3.1.0
+      replace-string: ^3.1.0
       resolve-from: ^5.0.0
       yargs: ^17.5.1
     dependencies:
@@ -367,6 +368,7 @@ importers:
       fast-glob: 3.2.12
       kubernetes-models: 4.1.0
       pkg-dir: 5.0.0
+      replace-string: 3.1.0
 
   packages/common-utils:
     specifiers:
@@ -12952,6 +12954,11 @@ packages:
     engines: {node: '>=0.10'}
     dev: false
 
+  /replace-string/3.1.0:
+    resolution: {integrity: sha512-yPpxc4ZR2makceA9hy/jHNqc7QVkd4Je/N0WRHm6bs3PtivPuPynxE5ejU/mp5EhnCv8+uZL7vhz8rkluSlx+Q==}
+    engines: {node: '>=8'}
+    dev: true
+
   /require-directory/2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
     engines: {node: '>=0.10.0'}
@@ -14074,7 +14081,7 @@ packages:
       schema-utils: 3.1.1
       serialize-javascript: 6.0.0
       terser: 5.15.0
-      webpack: 5.74.0
+      webpack: 5.74.0_webpack-cli@4.10.0
 
   /terser/5.15.0:
     resolution: {integrity: sha512-L1BJiXVmheAQQy+as0oF3Pwtlo4s3Wi1X2zNZ2NxOB4wx9bdS9Vk67XQENLFdLYGCK/Z2di53mTj/hBafR+dTA==}
