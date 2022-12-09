@@ -1,5 +1,5 @@
 import { MigrateFormat, migrateString } from "@kosko/migrate";
-import fs from "node:fs/promises";
+import { readdir, readFile, stat } from "node:fs/promises";
 import getStdin from "get-stdin";
 import { join, resolve } from "node:path";
 import { Command, RootArguments } from "../cli/command";
@@ -21,13 +21,13 @@ function concatFiles(arr: readonly string[]): string {
 
 function readFileString(path: string): Promise<string> {
   logger.log(LogLevel.Debug, `Reading file "${path}"`);
-  return fs.readFile(path, "utf8");
+  return readFile(path, "utf8");
 }
 
 async function readFilesInDir(dir: string): Promise<string> {
   logger.log(LogLevel.Debug, `Reading directory "${dir}"`);
 
-  const files = await fs.readdir(dir);
+  const files = await readdir(dir);
   const contents = await Promise.all(
     files.map((file) => readFileString(join(dir, file)))
   );
@@ -44,7 +44,7 @@ function readFiles(cwd: string, files: readonly string[]): Promise<string[]> {
       }
 
       const path = resolve(cwd, file);
-      const stats = await fs.stat(path);
+      const stats = await stat(path);
 
       return stats.isDirectory() ? readFilesInDir(path) : readFileString(path);
     })

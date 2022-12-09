@@ -1,4 +1,4 @@
-import os from "node:os";
+import { EOL } from "node:os";
 import { File } from "./base";
 
 export function generateKoskoConfig(additionalConfig?: string): File {
@@ -8,6 +8,6 @@ export function generateKoskoConfig(additionalConfig?: string): File {
       [
         `components = ["*"]`,
         ...(additionalConfig ? [additionalConfig] : [])
-      ].join(os.EOL) + os.EOL
+      ].join(EOL) + EOL
   };
 }

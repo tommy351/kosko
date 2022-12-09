@@ -1,10 +1,10 @@
 "use strict";
 
 const prettier = require("prettier");
-const fs = require("node:fs");
-const path = require("node:path");
+const { readFileSync } = require("node:fs");
+const { join } = require("node:path");
 const config = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "../../../.prettierrc"), "utf8")
+  readFileSync(join(__dirname, "../../../.prettierrc"), "utf8")
 );
 
 config.parser = "babel";

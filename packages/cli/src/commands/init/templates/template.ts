@@ -1,4 +1,4 @@
-import fs from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { File } from "./base";
@@ -15,7 +15,7 @@ export async function generateFromTemplateFile(
 ): Promise<File> {
   return {
     path,
-    content: await fs.readFile(join(TEMPLATE_DIR, template), "utf8")
+    content: await readFile(join(TEMPLATE_DIR, template), "utf8")
   };
 }
 

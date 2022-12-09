@@ -1,5 +1,5 @@
 import { makeTempDir, TempDir } from "@kosko/test-utils";
-import fs from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { File } from "../template";
 import { writeFiles } from "../write";
@@ -10,7 +10,7 @@ let tmpDir: TempDir;
 let files: File[];
 
 function readTmpFile(path: string): Promise<string> {
-  return fs.readFile(join(tmpDir.path, path), "utf8");
+  return readFile(join(tmpDir.path, path), "utf8");
 }
 
 beforeEach(async () => {

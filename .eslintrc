@@ -39,7 +39,18 @@
       }
     ],
     "unicorn/prefer-node-protocol": "error",
-    "unicorn/prefer-export-from": "error"
+    "unicorn/prefer-export-from": "error",
+    "unicorn/import-style": [
+      "error",
+      {
+        "styles": {
+          "node:fs": { "named": true },
+          "node:fs/promises": { "named": true },
+          "node:os": { "named": true },
+          "node:path": { "named": true }
+        }
+      }
+    ]
   },
   "parserOptions": {
     "ecmaVersion": 2018

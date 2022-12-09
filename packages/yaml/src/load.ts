@@ -1,5 +1,5 @@
 import { loadAll } from "js-yaml";
-import fs from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import fetch, { RequestInfo, RequestInit } from "node-fetch";
 import { getResourceModule, ResourceKind } from "./module";
 import logger, { LogLevel } from "@kosko/log";
@@ -98,7 +98,7 @@ export async function loadString(
  */
 export function loadFile(path: string, options?: LoadOptions) {
   return async (): Promise<Manifest[]> => {
-    const content = await fs.readFile(path, "utf-8");
+    const content = await readFile(path, "utf-8");
     logger.log(LogLevel.Debug, `File loaded from: ${path}`);
 
     return loadString(content, options);

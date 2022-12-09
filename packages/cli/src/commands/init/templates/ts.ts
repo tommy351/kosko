@@ -1,5 +1,5 @@
 import stringify from "fast-safe-stringify";
-import os from "node:os";
+import { EOL } from "node:os";
 import { File, Template } from "./base";
 import { baseDependencies } from "./cjs";
 import { generateKoskoConfig } from "./kosko-config";
@@ -33,7 +33,7 @@ export function generateTsConfig({
         },
         undefined,
         "  "
-      ) + os.EOL
+      ) + EOL
   };
 }
 

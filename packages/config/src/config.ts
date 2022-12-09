@@ -1,5 +1,5 @@
 import toml from "@iarna/toml";
-import fs from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { Config, EnvironmentConfig } from "./types";
 import { validate } from "./validate";
@@ -14,7 +14,7 @@ import { cwd } from "node:process";
  * @public
  */
 export async function loadConfig(path: string): Promise<Config> {
-  const content = await fs.readFile(path, "utf8");
+  const content = await readFile(path, "utf8");
   const data = await toml.parse.async(content);
 
   logger.log(LogLevel.Debug, `Found config at "${path}"`);

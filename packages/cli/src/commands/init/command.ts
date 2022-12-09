@@ -1,4 +1,4 @@
-import fs from "node:fs/promises";
+import { mkdir, stat, writeFile } from "node:fs/promises";
 import { dirname, join, relative, resolve, sep } from "node:path";
 import pc from "picocolors";
 import { Command, RootArguments } from "../../cli/command";
@@ -21,7 +21,7 @@ import denoTemplate from "./templates/deno";
 async function checkPath(path: string, force?: boolean) {
   try {
     logger.log(LogLevel.Debug, `Checking stats of "${path}"`);
-    const stats = await fs.stat(path);
+    const stats = await stat(path);
 
     if (!stats.isDirectory()) {
       throw new CLIError("Destination already exists and is not a directory", {
@@ -57,8 +57,8 @@ async function writeFiles(path: string, files: readonly File[]) {
     const filePath = join(path, file.path);
 
     logger.log(LogLevel.Debug, `Writing file: "${file.path}"`);
-    await fs.mkdir(dirname(filePath), { recursive: true });
-    await fs.writeFile(filePath, file.content);
+    await mkdir(dirname(filePath), { recursive: true });
+    await writeFile(filePath, file.content);
   }
 }
 

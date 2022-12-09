@@ -1,5 +1,5 @@
 import { dirname, join } from "node:path";
-import fs from "node:fs/promises";
+import { mkdir, symlink, unlink } from "node:fs/promises";
 import { projectRoot } from "./projectRoot";
 
 export async function installPackage(
@@ -9,15 +9,15 @@ export async function installPackage(
   const src = join(projectRoot, "packages", name);
   const dest = join(path, "node_modules/@kosko", name);
 
-  await fs.mkdir(dirname(dest), { recursive: true });
+  await mkdir(dirname(dest), { recursive: true });
 
   try {
-    await fs.unlink(dest);
+    await unlink(dest);
   } catch (err: any) {
     if (err.code !== "ENOENT") throw err;
   }
 
-  await fs.symlink(src, dest, "dir");
+  await symlink(src, dest, "dir");
 
   return dest;
 }

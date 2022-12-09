@@ -1,5 +1,5 @@
 import { MigrateFormat, migrateString } from "@kosko/migrate";
-import fs from "node:fs/promises";
+import { readdir, readFile } from "node:fs/promises";
 import getStdin from "get-stdin";
 import { join } from "node:path";
 import { print } from "../../cli/print";
@@ -51,7 +51,7 @@ describe("given a file", () => {
 
   test("should call print with result", async () => {
     const expected = await migrateString(
-      await fs.readFile(join(fixturePath, "only-deployment.yaml"), "utf8")
+      await readFile(join(fixturePath, "only-deployment.yaml"), "utf8")
     );
 
     expect(print).toHaveBeenCalledWith(expected);
@@ -70,7 +70,7 @@ describe("given an absolute path", () => {
   });
 
   test("should call print with result", async () => {
-    const expected = await migrateString(await fs.readFile(path, "utf8"));
+    const expected = await migrateString(await readFile(path, "utf8"));
     expect(print).toHaveBeenCalledWith(expected);
   });
 });
@@ -85,9 +85,9 @@ describe("given a directory", () => {
   });
 
   test("should call print with result", async () => {
-    const files = await fs.readdir(fixturePath);
+    const files = await readdir(fixturePath);
     const contents = await Promise.all(
-      files.map((file) => fs.readFile(join(fixturePath, file), "utf8"))
+      files.map((file) => readFile(join(fixturePath, file), "utf8"))
     );
     const expected = await migrateString(contents.join("---\n"));
     expect(print).toHaveBeenCalledWith(expected);
@@ -108,7 +108,7 @@ describe("given multiple files", () => {
   test("should call print with result", async () => {
     const contents = await Promise.all(
       ["only-deployment.yaml", "deployment-and-service.yaml"].map((file) =>
-        fs.readFile(join(fixturePath, file), "utf8")
+        readFile(join(fixturePath, file), "utf8")
       )
     );
     const expected = await migrateString("---\n" + contents.join("\n"));
@@ -128,7 +128,7 @@ describe("when --esm option is given", () => {
 
   test("should call print with result", async () => {
     const expected = await migrateString(
-      await fs.readFile(join(fixturePath, "only-deployment.yaml"), "utf8"),
+      await readFile(join(fixturePath, "only-deployment.yaml"), "utf8"),
       { format: MigrateFormat.ESM }
     );
 

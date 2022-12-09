@@ -1,6 +1,6 @@
 import execa from "execa";
 import { join } from "node:path";
-import fs from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import { runNodeCLI } from "../../utils/run";
 
 const fixtureDir = join(__dirname, "..", "__fixtures__");
@@ -35,7 +35,7 @@ describe("when path is -", () => {
   beforeAll(async () => {
     args = ["migrate", "-f", "-"];
     options = {
-      input: await fs.readFile(join(fixtureDir, "only-deployment.yaml"))
+      input: await readFile(join(fixtureDir, "only-deployment.yaml"))
     };
   });
 

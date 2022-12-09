@@ -1,6 +1,6 @@
 import { LoadOptions, loadString, Manifest } from "@kosko/yaml";
 import tmp from "tmp-promise";
-import fs from "node:fs/promises";
+import { writeFile } from "node:fs/promises";
 import {
   spawn,
   booleanArg,
@@ -13,7 +13,7 @@ import { getErrorCode } from "@kosko/common-utils";
 async function writeValues(values: unknown) {
   const file = await tmp.file();
 
-  await fs.writeFile(file.path, stringify(values));
+  await writeFile(file.path, stringify(values));
 
   return file;
 }
