@@ -6,6 +6,7 @@ import stringify from "fast-safe-stringify";
 import { isRecord } from "@kosko/common-utils";
 import { importModule } from "./import";
 import fetch from "./fetch";
+import { RequestInit } from "./fetch-types";
 
 /**
  * Describes an object which seems to be a Kubernetes manifest.

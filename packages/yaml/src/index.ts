@@ -6,3 +6,4 @@
 
 export * from "./load";
 export * from "./module";
+export * from "./fetch-types";

@@ -2,6 +2,9 @@ import camelcase from "camelcase";
 import { Manifest, loadString, getResourceModule } from "@kosko/yaml";
 import stringify from "fast-safe-stringify";
 
+/**
+ * @public
+ */
 export enum MigrateFormat {
   /**
    * CommonJS.
@@ -14,6 +17,9 @@ export enum MigrateFormat {
   ESM = "esm"
 }
 
+/**
+ * @public
+ */
 export interface MigrateOptions {
   /**
    * Output format.
