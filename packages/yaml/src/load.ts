@@ -1,11 +1,11 @@
 import { loadAll } from "js-yaml";
 import { readFile } from "node:fs/promises";
-import fetch, { RequestInfo, RequestInit } from "node-fetch";
 import { getResourceModule, ResourceKind } from "./module";
 import logger, { LogLevel } from "@kosko/log";
 import stringify from "fast-safe-stringify";
 import { isRecord } from "@kosko/common-utils";
 import { importModule } from "./import";
+import fetch from "./fetch";
 
 /**
  * Describes an object which seems to be a Kubernetes manifest.

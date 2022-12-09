@@ -1,3 +1,4 @@
+import "cross-fetch/polyfill";
 import { loadFile, LoadOptions, loadString, loadUrl } from "../load";
 import { writeFile } from "node:fs/promises";
 import { join } from "node:path";

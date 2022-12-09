@@ -616,6 +616,7 @@ importers:
       '@kosko/test-utils': workspace:^
       '@types/js-yaml': ^4.0.5
       '@types/node-fetch': ^2.6.2
+      cross-fetch: ^3.1.5
       execa: ^5.1.1
       fast-safe-stringify: ^2.1.1
       fetch-mock: ^9.11.0
@@ -627,6 +628,7 @@ importers:
       '@kosko/log': link:../log
       fast-safe-stringify: 2.1.1
       js-yaml: 4.1.0
+    optionalDependencies:
       node-fetch: 2.6.7
     devDependencies:
       '@kosko/build-scripts': link:../../internal/build-scripts
@@ -634,6 +636,7 @@ importers:
       '@kosko/test-utils': link:../../internal/test-utils
       '@types/js-yaml': 4.0.5
       '@types/node-fetch': 2.6.2
+      cross-fetch: 3.1.5
       execa: 5.1.1
       fetch-mock: 9.11.0_node-fetch@2.6.7
       kubernetes-models: 4.1.0
