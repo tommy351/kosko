@@ -61,7 +61,9 @@ export function createNodeESMEnvironment(
         const code = getErrorCode(err);
 
         if (code && MODULE_NOT_FOUND_ERROR_CODES.has(code)) {
-          logger.log(LogLevel.Debug, `Cannot import module: ${path}`);
+          logger.log(LogLevel.Debug, `Cannot import module: ${path}`, {
+            error: err
+          });
           return {};
         }
 

@@ -33,7 +33,9 @@ export function createNodeCJSEnvironment(
         return mod && mod.__esModule ? mod.default : mod;
       } catch (err) {
         if (getErrorCode(err) === "MODULE_NOT_FOUND") {
-          logger.log(LogLevel.Debug, `Cannot find module: ${id}`);
+          logger.log(LogLevel.Debug, `Cannot find module: ${id}`, {
+            error: err
+          });
           return {};
         }
 

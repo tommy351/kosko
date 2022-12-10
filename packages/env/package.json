@@ -21,6 +21,7 @@
       "require": "./index.node.cjs"
     },
     "types": "./dist/index.d.ts",
+    "deno": "./dist/index.deno.mjs",
     "import": "./dist/index.base.mjs",
     "require": "./index.node.cjs"
   },
