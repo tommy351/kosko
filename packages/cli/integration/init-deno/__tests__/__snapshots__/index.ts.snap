@@ -100,14 +100,40 @@ const service = new Service({
 export default [deployment, service];
 ",
   "deno.json": "{
-  "compilerOptions": {
-    "types": ["./environments/types.d.ts"]
-  },
   "importMap": "./import_map.json",
   "tasks": {
     "kosko": "deno run -A npm:kosko/deno.js"
   }
 }
+",
+  "env.ts": "import env, { Environment as BaseEnvironment } from "npm:@kosko/env";
+
+// Declare types for global environment variables
+export interface GlobalEnvironment {
+  namespace: string;
+}
+
+// Declare types for component environment variables
+export interface ComponentEnvironment {
+  // Fallback type of all other component variables which are not specified below
+  [key: string]: unknown;
+
+  // Specify types for each component
+  nginx: {
+    replicas: number;
+  };
+}
+
+// Extend Environment interface
+export interface Environment extends BaseEnvironment {
+  global(): Promise<GlobalEnvironment>;
+
+  component<K extends string>(
+    name: K
+  ): Promise<GlobalEnvironment & ComponentEnvironment[K]>;
+}
+
+export default env as Environment;
 ",
   "environments/dev/index.ts": "import { GlobalEnvironment } from "@kosko/env";
 
@@ -125,39 +151,9 @@ const env: ComponentEnvironment["nginx"] = {
 
 export default env;
 ",
-  "environments/types.d.ts": "import "@kosko/env";
-
-// Extend type declarations of "@kosko/env" module
-declare module "@kosko/env" {
-  // Declare types for global environment variables
-  interface GlobalEnvironment {
-    namespace: string;
-  }
-
-  // Declare types for component environment variables
-  interface ComponentEnvironment {
-    // Fallback type of all other component variables which are not specified below
-    [key: string]: unknown;
-
-    // Specify types for each component
-    nginx: {
-      replicas: number;
-    };
-  }
-
-  // Extend Environment interface
-  interface Environment {
-    global(): Promise<GlobalEnvironment>;
-
-    component<K extends string>(
-      name: K
-    ): Promise<GlobalEnvironment & ComponentEnvironment[K]>;
-  }
-}
-",
   "import_map.json": "{
   "imports": {
-    "@kosko/env": "npm:@kosko/env",
+    "@kosko/env": "./env.ts",
     "kubernetes-models/": "https://esm.sh/kubernetes-models/"
   }
 }

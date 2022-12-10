@@ -3,12 +3,7 @@ import { generateKoskoConfig } from "./kosko-config";
 import { generateFromTemplateFile } from "./template";
 import { generateTsEnvFiles } from "./ts";
 
-const TEMPLATE_FILES = [
-  "environments/types.d.ts",
-  "deno.json",
-  "import_map.json",
-  "README.md"
-];
+const TEMPLATE_FILES = ["deno.json", "env.ts", "import_map.json", "README.md"];
 
 const denoTemplate: Template = async () => {
   return {
