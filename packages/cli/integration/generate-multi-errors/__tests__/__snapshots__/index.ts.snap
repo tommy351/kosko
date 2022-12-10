@@ -41,5 +41,5 @@ exports[`when bail is true should print the error 1`] = `
 
       /spec must have required property 'containers'
 
-[31merror[39m - Generate failed (Total 1 error)"
+[31merror[39m - Generate failed (Only the first error is displayed because \`bail\` option is enabled)"
 `;

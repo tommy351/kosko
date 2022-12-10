@@ -48,7 +48,8 @@ describe("when error is a AggregateError", () => {
         // Other errors
         newError("first other err"),
         newError("second other err")
-      ])
+      ]),
+      {}
     );
 
     expect(result).toBeInstanceOf(CLIError);
@@ -68,7 +69,8 @@ describe("when error is a nested AggregatedError", () => {
           newError("child err"),
           new AggregateError([newError("grandchild err")])
         ])
-      ])
+      ]),
+      {}
     );
     expect(result.output).toEqual(`Generate failed (Total 3 errors)`);
     expect(stderr.toString()).toMatchSnapshot();
@@ -79,7 +81,7 @@ describe("when error is a ResolveError without path", () => {
   test("should treat as a normal error", () => {
     const err = new ResolveError("test err");
     cleanErrorStack(err);
-    handleGenerateError("", err);
+    handleGenerateError("", err, {});
     expect(stderr.toString()).toMatchSnapshot();
   });
 });
@@ -89,7 +91,8 @@ describe("when error is a ResolveError with path", () => {
     const cwd = normalize("/foo");
     handleGenerateError(
       cwd,
-      new ResolveError("test err", { path: join(cwd, "a.js") })
+      new ResolveError("test err", { path: join(cwd, "a.js") }),
+      {}
     );
     expect(stderr.toString()).toMatchSnapshot();
   });
@@ -100,7 +103,8 @@ describe("when error is a ResolveError with path not in cwd", () => {
     const cwd = normalize("/foo");
     handleGenerateError(
       cwd,
-      new ResolveError("test err", { path: join("/bar", "a.js") })
+      new ResolveError("test err", { path: join("/bar", "a.js") }),
+      {}
     );
     expect(stderr.toString()).toMatchSnapshot();
   });
@@ -114,7 +118,8 @@ describe("when error is a ResolveError with index", () => {
       new ResolveError("test err", {
         path: join(cwd, "a.js"),
         index: [1, 3, 5]
-      })
+      }),
+      {}
     );
     expect(stderr.toString()).toMatchSnapshot();
   });
@@ -128,7 +133,8 @@ describe("when error is a ResolveError with cause", () => {
       new ResolveError("test err", {
         path: join(cwd, "a.js"),
         cause: newError("test err cause")
-      })
+      }),
+      {}
     );
     expect(stderr.toString()).toMatchSnapshot();
   });
@@ -148,7 +154,8 @@ describe("when error is a ResolveError with component", () => {
             name: "bar"
           }
         }
-      })
+      }),
+      {}
     );
     expect(stderr.toString()).toMatchSnapshot();
   });
@@ -169,7 +176,8 @@ describe("when error is a ResolveError with component.namespace", () => {
             name: "bar"
           }
         }
-      })
+      }),
+      {}
     );
     expect(stderr.toString()).toMatchSnapshot();
   });
@@ -197,7 +205,8 @@ describe("when error is a ResolveError with ValidationError cause", () => {
       new ResolveError("validation err", {
         path: join(cwd, "a/b.js"),
         cause
-      })
+      }),
+      {}
     );
     expect(stderr.toString()).toMatchSnapshot();
   });
@@ -207,7 +216,7 @@ describe("when error is a GenerateError without path", () => {
   test("should treat as a normal error", () => {
     const err = new GenerateError("test err");
     cleanErrorStack(err);
-    handleGenerateError("", err);
+    handleGenerateError("", err, {});
     expect(stderr.toString()).toMatchSnapshot();
   });
 });
@@ -217,7 +226,8 @@ describe("when error is a GenerateError with path", () => {
     const cwd = normalize("/foo");
     handleGenerateError(
       cwd,
-      new GenerateError("test err", { path: join(cwd, "a.js") })
+      new GenerateError("test err", { path: join(cwd, "a.js") }),
+      {}
     );
     expect(stderr.toString()).toMatchSnapshot();
   });
@@ -228,7 +238,8 @@ describe("when error is a GenerateError with path not in cwd", () => {
     const cwd = normalize("/foo");
     handleGenerateError(
       cwd,
-      new GenerateError("test err", { path: join("/bar", "a.js") })
+      new GenerateError("test err", { path: join("/bar", "a.js") }),
+      {}
     );
     expect(stderr.toString()).toMatchSnapshot();
   });
@@ -242,7 +253,8 @@ describe("when error is a GenerateError with cause", () => {
       new GenerateError("test err", {
         path: join(cwd, "a.js"),
         cause: newError("test err cause")
-      })
+      }),
+      {}
     );
     expect(stderr.toString()).toMatchSnapshot();
   });
@@ -250,42 +262,52 @@ describe("when error is a GenerateError with cause", () => {
 
 describe("when error is an Error", () => {
   test("should print in other error section", () => {
-    handleGenerateError("", newError("test err"));
+    handleGenerateError("", newError("test err"), {});
     expect(stderr.toString()).toMatchSnapshot();
   });
 });
 
 describe("when error is a string", () => {
   test("should print as an error", () => {
-    handleGenerateError("", "test err");
+    handleGenerateError("", "test err", {});
     expect(stderr.toString()).toMatchSnapshot();
   });
 });
 
 describe("when error is an object with name and message", () => {
   test("should print as an error", () => {
-    handleGenerateError("", { name: "TestError", message: "test err" });
+    handleGenerateError("", { name: "TestError", message: "test err" }, {});
     expect(stderr.toString()).toMatchSnapshot();
   });
 });
 
 describe("when error is an object with message only", () => {
   test("should print as an error", () => {
-    handleGenerateError("", { message: "test err" });
+    handleGenerateError("", { message: "test err" }, {});
     expect(stderr.toString()).toMatchSnapshot();
   });
 });
 
 describe("when error is an empty object", () => {
   test("should ignore the error", () => {
-    handleGenerateError("", {});
+    handleGenerateError("", {}, {});
     expect(stderr.toString()).toEqual("");
   });
 });
 
 describe("when error is null", () => {
   test("should ignore the error", () => {
-    handleGenerateError("", null);
+    handleGenerateError("", null, {});
     expect(stderr.toString()).toEqual("");
+  });
+});
+
+describe("when bail = true", () => {
+  test("should print bail hint", () => {
+    const result = handleGenerateError("", new Error("test"), { bail: true });
+
+    expect(result.output).toEqual(
+      "Generate failed (Only the first error is displayed because `bail` option is enabled)"
+    );
   });
 });

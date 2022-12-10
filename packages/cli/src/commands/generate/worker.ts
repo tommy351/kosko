@@ -21,7 +21,7 @@ async function doGenerate({
       path: join(cwd, "components")
     });
   } catch (err) {
-    throw handleGenerateError(cwd, err);
+    throw handleGenerateError(cwd, err, options);
   }
 }
 
