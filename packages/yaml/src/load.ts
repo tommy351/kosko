@@ -6,7 +6,6 @@ import stringify from "fast-safe-stringify";
 import { isRecord } from "@kosko/common-utils";
 import { importModule } from "./import";
 import fetch from "./fetch";
-import { RequestInit } from "./fetch-types";
 
 /**
  * Describes an object which seems to be a Kubernetes manifest.
@@ -92,7 +91,7 @@ export async function loadString(
 }
 
 /**
- * Loads a Kubernetes YAML file from path.
+ * Loads a Kubernetes YAML file from `path`.
  *
  * @param path - Path to a Kubernetes YAML file.
  * @public
@@ -107,10 +106,15 @@ export function loadFile(path: string, options?: LoadOptions) {
 }
 
 /**
- * Loads a Kubernetes YAML file from url.
+ * Loads a Kubernetes YAML file from `url`.
+ *
+ * @remarks
+ * By default, this function uses `fetch` API defined in the global scope.
+ * On Node.js, if `global.fetch` is undefined, {@link https://github.com/node-fetch/node-fetch | node-fetch}
+ * will be used instead.
  *
  * @param url - URL to a Kubernetes YAML file.
- * @param options - {@link LoadOptions} and {@link https://github.com/node-fetch/node-fetch#options | node-fetch options}
+ * @param options - {@link LoadOptions} and properties defined in {@link https://developer.mozilla.org/en-US/docs/Web/API/Request | Request} class.
  * @public
  */
 export function loadUrl(
