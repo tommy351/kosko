@@ -1,6 +1,6 @@
 import { access, readdir, readFile, writeFile } from "node:fs/promises";
-import { dirname, join, posix, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { join, resolve } from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 const ROOT_DIR = join(fileURLToPath(import.meta.url), "../..");
 const PACKAGES_DIR = join(ROOT_DIR, "packages");
@@ -27,10 +27,14 @@ const imports: Record<string, string> = {
 
   // Override the value of `@kosko/env` to fix the`ERR_INVALID_FILE_URL_HOST`
   // error when importing `@kosko/env`.
-  "@kosko/env": "../packages/env/dist/index.deno.mjs",
+  "@kosko/env": pathToFileURL(
+    join(PACKAGES_DIR, "env/dist/index.deno.mjs")
+  ).toString(),
 
   // For `packages/kosko/deno.js`.
-  [`npm:@kosko/cli@${CLI_VERSION}/deno.js`]: "../packages/cli/deno.js"
+  [`npm:@kosko/cli@${CLI_VERSION}/deno.js`]: pathToFileURL(
+    join(PACKAGES_DIR, "cli/deno.js")
+  ).toString()
 };
 
 for (const name of await readdir(PACKAGES_DIR)) {
@@ -48,10 +52,8 @@ for (const name of await readdir(PACKAGES_DIR)) {
 
   const denoEntryPath = resolve(pkgDirPath, denoEntry);
 
-  imports[`npm:${pkg.name}@^${pkg.version}`] = posix.relative(
-    dirname(IMPORT_MAP_PATH),
-    denoEntryPath
-  );
+  imports[`npm:${pkg.name}@^${pkg.version}`] =
+    pathToFileURL(denoEntryPath).toString();
 }
 
 await writeFile(IMPORT_MAP_PATH, JSON.stringify({ imports }, null, "  "));
