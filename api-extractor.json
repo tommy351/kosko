@@ -7,10 +7,11 @@
   },
   "docModel": {
     "enabled": true,
-    "apiJsonFilePath": "./website/tmp/api-models/<unscopedPackageName>.api.json"
+    "apiJsonFilePath": "<projectFolder>/out/api-model.json"
   },
   "dtsRollup": {
-    "enabled": false
+    "enabled": true,
+    "untrimmedFilePath": "<projectFolder>/dist/types.d.ts"
   },
   "tsdocMetadata": {
     "enabled": false

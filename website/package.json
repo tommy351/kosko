@@ -9,9 +9,8 @@
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
-    "build-api-docs": "pnpm run extract-api-models && pnpm run gen-api-docs",
-    "extract-api-models": "ts-node -P scripts/tsconfig.json scripts/extract-api-models.ts",
-    "gen-api-docs": "api-documenter markdown -i tmp/api-models -o tmp/api-docs && ts-node -P scripts/tsconfig.json scripts/process-api-docs.ts"
+    "run-ts-script": "ts-node -P scripts/tsconfig.json",
+    "build-api-docs": "pnpm run-ts-script scripts/collect-api-models.ts && api-documenter markdown -i tmp/api-models -o tmp/api-docs && pnpm run-ts-script scripts/process-api-docs.ts"
   },
   "engines": {
     "node": ">=14.18.0"
@@ -63,7 +62,6 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "2.2.0",
     "@microsoft/api-documenter": "^7.19.20",
-    "@microsoft/api-extractor": "^7.33.2",
     "@tsconfig/docusaurus": "^1.0.6",
     "@types/codemirror": "^5.60.5",
     "@types/js-yaml": "^4.0.5",

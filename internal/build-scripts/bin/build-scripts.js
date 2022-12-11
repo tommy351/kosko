@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 // @ts-check
 
-import { readFile, rm } from "node:fs/promises";
+import { readFile, rm, unlink } from "node:fs/promises";
 import { join } from "node:path";
 import { rollup } from "rollup";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import swc from "rollup-plugin-swc";
 import typescript from "@rollup/plugin-typescript";
+import { Extractor, ExtractorConfig } from "@microsoft/api-extractor";
+import globby from "globby";
 import ts from "typescript";
 import moduleSuffixes from "../plugins/module-suffixes.js";
 import replaceDenoImport from "../plugins/replace-deno-import.js";
@@ -34,6 +36,8 @@ const entryFiles = args.length ? args : ["src/index.ts"];
  * }} options
  */
 async function buildBundle(options) {
+  console.log("Building bundle:", options.output);
+
   const bundle = await rollup({
     input: entryFiles,
     ...(!options.replaceDenoImport && {
@@ -103,6 +107,52 @@ async function buildBundle(options) {
   }
 }
 
+async function runApiExtractor() {
+  console.log("Running API extractor");
+
+  const prepareOptions = ExtractorConfig.tryLoadForFolder({
+    startingFolder: cwd
+  });
+
+  if (!prepareOptions) {
+    console.log("API extractor config not found");
+    return;
+  }
+
+  const config = ExtractorConfig.prepare(prepareOptions);
+  const result = Extractor.invoke(config, {});
+
+  if (!result.succeeded) {
+    throw new Error("API extractor failed");
+  }
+
+  if (!config.rollupEnabled) {
+    return;
+  }
+
+  console.log("Removing rolled-up type declaration files");
+
+  const dtsFiles = await globby("**/*.d.ts", {
+    cwd: join(cwd, "dist"),
+    absolute: true
+  });
+  const dtsFilesToKeep = new Set(
+    [
+      config.alphaTrimmedFilePath,
+      config.betaTrimmedFilePath,
+      config.publicTrimmedFilePath,
+      config.untrimmedFilePath
+    ].filter(Boolean)
+  );
+
+  for (const file of dtsFiles) {
+    if (!dtsFilesToKeep.has(file)) {
+      console.log("Deleting:", file);
+      await unlink(file);
+    }
+  }
+}
+
 await rm(fullDistPath, { recursive: true, force: true });
 await Promise.all([
   // Base
@@ -138,3 +188,6 @@ await Promise.all([
     replaceDenoImport: true
   })
 ]);
+
+await rm(join(cwd, "out"), { recursive: true, force: true });
+await runApiExtractor();

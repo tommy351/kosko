@@ -1,3 +1,5 @@
 dist/
+out/
+tmp/
 node_modules/
 /packages/kosko/deno.js

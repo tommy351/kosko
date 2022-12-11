@@ -9,18 +9,18 @@
   "main": "index.node.cjs",
   "module": "dist/index.node.mjs",
   "browser": "dist/index.base.mjs",
-  "types": "dist/index.d.ts",
+  "types": "dist/types.d.ts",
   "sideEffects": false,
   "scripts": {
     "build": "build-scripts"
   },
   "exports": {
     "node": {
-      "types": "./dist/index.d.ts",
+      "types": "./dist/types.d.ts",
       "import": "./dist/index.node.mjs",
       "require": "./index.node.cjs"
     },
-    "types": "./dist/index.d.ts",
+    "types": "./dist/types.d.ts",
     "deno": "./dist/index.deno.mjs",
     "import": "./dist/index.base.mjs",
     "require": "./index.node.cjs"

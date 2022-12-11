@@ -3,12 +3,12 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**"]
+      "outputs": ["dist/**", "out/**"]
     },
     "kosko#build": {
       "dependsOn": ["^build"],
       "outputs": ["deno.js"]
     }
   },
-  "globalDependencies": ["tsconfig.json"]
+  "globalDependencies": ["api-extractor.json", "tsconfig.json"]
 }
