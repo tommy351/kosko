@@ -1,12 +1,13 @@
 import logger, { LogLevel } from "@kosko/log";
 import { spawn } from "@kosko/exec-utils";
-import fs from "node:fs/promises";
+import { access } from "node:fs/promises";
 import { join } from "node:path";
 import pc from "picocolors";
+import { env } from "node:process";
 
 async function fileExists(path: string) {
   try {
-    await fs.access(path);
+    await access(path);
     return true;
   } catch {
     return false;
@@ -70,7 +71,7 @@ export async function installDependencies({
     stdio: "inherit",
     cwd,
     env: {
-      ...process.env,
+      ...env,
       ADBLOCK: "1",
       DISABLE_OPENCOLLECTIVE: "1"
     }

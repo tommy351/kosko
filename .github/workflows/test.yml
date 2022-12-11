@@ -4,8 +4,8 @@ on:
   pull_request:
 
 env:
-  HELM_VERSION: 3.5.3
-  KUSTOMIZE_VERSION: 4.4.1
+  HELM_VERSION: 3.10.2
+  KUSTOMIZE_VERSION: 4.5.7
 
 jobs:
   lint:
@@ -31,6 +31,9 @@ jobs:
       - uses: ./.github/actions/install-deps
         with:
           node-version: ${{ matrix.node-version }}
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
       - uses: ./.github/actions/build-packages
       # https://github.com/actions/virtual-environments/issues/712#issuecomment-613004302
       - name: Set TEMP on Windows

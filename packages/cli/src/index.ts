@@ -5,7 +5,8 @@
  */
 
 import { parse } from "./cli/command";
-import { rootCmd } from "./commands/root";
+import { createRootCommand } from "./commands/root";
+import { argv } from "node:process";
 
 export { handleError } from "./cli/error";
 
@@ -15,7 +16,7 @@ export { handleError } from "./cli/error";
  * @public
  */
 export async function run(
-  argv: readonly string[] = process.argv.slice(2)
+  args: readonly string[] = argv.slice(2)
 ): Promise<void> {
-  await parse(rootCmd, argv);
+  await parse(createRootCommand(args), args);
 }

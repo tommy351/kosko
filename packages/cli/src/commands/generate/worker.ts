@@ -6,9 +6,10 @@ import stringify from "fast-safe-stringify";
 import { CLIError } from "../../cli/error";
 import { setupEnv } from "./env";
 import { handleGenerateError } from "./error";
-import { localRequireDefault } from "./require";
 import { BaseGenerateArguments } from "./types";
 import { fileURLToPath } from "node:url";
+import { stdout, execPath, execArgv } from "node:process";
+import { createRequire } from "node:module";
 
 async function doGenerate({
   cwd,
@@ -20,7 +21,7 @@ async function doGenerate({
       path: join(cwd, "components")
     });
   } catch (err) {
-    throw handleGenerateError(cwd, err);
+    throw handleGenerateError(cwd, err, options);
   }
 }
 
@@ -34,7 +35,12 @@ export interface WorkerOptions {
 export async function handler(options: WorkerOptions) {
   const { printFormat, args, config, ignoreLoaders } = options;
 
-  if (!ignoreLoaders && config.loaders.length) {
+  if (
+    // eslint-disable-next-line no-restricted-globals
+    process.env.BUILD_TARGET === "node" &&
+    !ignoreLoaders &&
+    config.loaders.length
+  ) {
     await runWithLoaders(options);
     return;
   }
@@ -43,8 +49,13 @@ export async function handler(options: WorkerOptions) {
   await setupEnv(config, args);
 
   // Require external modules
-  for (const id of config.require) {
-    await localRequireDefault(id, args.cwd);
+  // eslint-disable-next-line no-restricted-globals
+  if (process.env.BUILD_TARGET === "node" && config.require.length) {
+    const req = createRequire(join(args.cwd, "noop.js"));
+
+    for (const id of config.require) {
+      req(id);
+    }
   }
 
   // Generate manifests
@@ -65,7 +76,7 @@ export async function handler(options: WorkerOptions) {
   if (printFormat) {
     print(result, {
       format: printFormat,
-      writer: process.stdout
+      writer: stdout
     });
   }
 }
@@ -73,15 +84,16 @@ export async function handler(options: WorkerOptions) {
 async function runWithLoaders(options: WorkerOptions) {
   try {
     await spawn(
-      process.execPath,
+      execPath,
       [
         // Node.js-specific CLI options
-        ...process.execArgv,
+        ...execArgv,
         // ESM loaders
         ...options.config.loaders.flatMap((loader) => ["--loader", loader]),
         // Entry file
         join(
           fileURLToPath(import.meta.url),
+          // eslint-disable-next-line no-restricted-globals
           "../worker-bin." + process.env.TARGET_SUFFIX
         )
       ],

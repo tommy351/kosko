@@ -1,5 +1,5 @@
 import logger, { LogLevel } from "@kosko/log";
-import { importPath } from "@kosko/require";
+import { importModule } from "./import";
 
 /**
  * @public
@@ -56,12 +56,12 @@ async function getKubernetesModels(
     return;
   }
 
-  try {
-    const path = `kubernetes-models/${apiVersion}/${kind}`;
-    const mod = await importPath(path);
-    const ctor = mod[kind];
+  const path = `kubernetes-models/${apiVersion}/${kind}`;
 
-    if (ctor) {
+  try {
+    const result = await importModule(path);
+
+    if (result?.[kind]) {
       const mod: ResourceModule = { path, export: kind };
       setResourceModule(res, mod);
       return mod;

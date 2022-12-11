@@ -6,9 +6,12 @@ import { join } from "node:path";
  */
 export interface Options {
   name: string;
+  esm: boolean;
 }
 
-export const INDEX_SCRIPT = `"use strict";
+const esmContent = `export default {}`;
+
+const cjsContent = `"use strict";
 
 module.exports = {};
 `;
@@ -23,14 +26,20 @@ export const template: Template<Options> = {
       type: "string",
       description: "Environment name",
       required: true
+    },
+    esm: {
+      type: "boolean",
+      description: "Generate ECMAScript module (ESM) files",
+      // eslint-disable-next-line no-restricted-globals
+      default: process.env.BUILD_TARGET !== "node"
     }
   },
-  async generate({ name }) {
+  async generate({ name, esm }) {
     return {
       files: [
         {
           path: join("environments", name, "index.js"),
-          content: INDEX_SCRIPT
+          content: esm ? esmContent : cjsContent
         }
       ]
     };

@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when esm = false should return files in CJS format 1`] = `
+[
+  {
+    "content": ""use strict";
+
+module.exports = {};
+",
+    "path": "environments/dev/index.js",
+  },
+]
+`;
+
+exports[`when esm = true should return files in ESM format 1`] = `
+[
+  {
+    "content": "export default {}",
+    "path": "environments/dev/index.js",
+  },
+]
+`;

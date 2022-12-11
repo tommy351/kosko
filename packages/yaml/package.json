@@ -20,6 +20,7 @@
       "require": "./dist/index.node.cjs"
     },
     "types": "./dist/index.d.ts",
+    "deno": "./dist/index.deno.mjs",
     "import": "./dist/index.base.mjs",
     "require": "./dist/index.node.cjs"
   },
@@ -40,10 +41,8 @@
   "dependencies": {
     "@kosko/common-utils": "workspace:^",
     "@kosko/log": "workspace:^",
-    "@kosko/require": "workspace:^",
     "fast-safe-stringify": "^2.1.1",
-    "js-yaml": "^4.1.0",
-    "node-fetch": "^2.6.6"
+    "js-yaml": "^4.1.0"
   },
   "devDependencies": {
     "@kosko/build-scripts": "workspace:^",
@@ -51,12 +50,16 @@
     "@kosko/test-utils": "workspace:^",
     "@types/js-yaml": "^4.0.5",
     "@types/node-fetch": "^2.6.2",
+    "cross-fetch": "^3.1.5",
     "execa": "^5.1.1",
     "fetch-mock": "^9.11.0",
     "kubernetes-models": "^4.1.0"
   },
   "peerDependencies": {
     "kubernetes-models": ">=1.0.3"
+  },
+  "optionalDependencies": {
+    "node-fetch": "^2.6.6"
   },
   "jest": {
     "preset": "@kosko/jest-preset"

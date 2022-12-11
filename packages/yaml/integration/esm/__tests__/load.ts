@@ -3,18 +3,15 @@ import { dirname, join } from "node:path";
 import { installPackage } from "@kosko/test-utils";
 
 const testDir = dirname(__dirname);
-let result: execa.ExecaReturnValue;
 
 beforeAll(async () => {
   await installPackage(testDir, "yaml");
 });
 
-beforeEach(async () => {
-  result = await execa.node(join(testDir, "index.mjs"), {
+test("should load Kubernetes objects", async () => {
+  const result = await execa.node(join(testDir, "index.mjs"), {
     cwd: testDir
   });
-});
 
-test("should load Kubernetes objects", () => {
   expect(result.stdout).toMatchSnapshot();
 });

@@ -20,6 +20,7 @@
       "require": "./dist/index.node.cjs"
     },
     "types": "./dist/index.d.ts",
+    "deno": "./dist/index.deno.mjs",
     "import": "./dist/index.base.mjs",
     "require": "./dist/index.node.cjs"
   },
@@ -44,7 +45,11 @@
   },
   "devDependencies": {
     "@kosko/build-scripts": "workspace:^",
-    "@kosko/jest-preset": "workspace:^"
+    "@kosko/jest-preset": "workspace:^",
+    "kubernetes-models": "^4.1.0"
+  },
+  "peerDependencies": {
+    "kubernetes-models": ">=1.0.3"
   },
   "jest": {
     "preset": "@kosko/jest-preset"

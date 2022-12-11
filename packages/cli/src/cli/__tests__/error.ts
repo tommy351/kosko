@@ -1,4 +1,3 @@
-import exit from "exit";
 import { CLIError, handleError } from "../error";
 import logger, { LogLevel } from "@kosko/log";
 
@@ -11,7 +10,8 @@ class YError extends Error {
 YError.prototype.name = "YError";
 
 jest.mock("@kosko/log");
-jest.mock("exit");
+
+const exit = jest.spyOn(process, "exit");
 
 describe("handleError", () => {
   let err: any;

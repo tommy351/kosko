@@ -7,7 +7,7 @@ import { Service } from "kubernetes-models/v1/Service";
 import { ClusterRoleBinding } from "kubernetes-models/rbac.authorization.k8s.io/v1/ClusterRoleBinding";
 import Module from "node:module";
 import { runInThisContext } from "node:vm";
-import { Manifest, migrate, migrateString } from "../migrate";
+import { Manifest, migrate, MigrateFormat, migrateString } from "../migrate";
 
 describe("migrate", () => {
   let data: Manifest[];
@@ -260,6 +260,26 @@ describe("migrate", () => {
       expect(exported).toSatisfyAll(isPlainObject);
     });
   });
+
+  describe("when format = ESM", () => {
+    test("should generate code in ESM format", async () => {
+      await expect(
+        migrate(
+          [
+            {
+              apiVersion: "v1",
+              kind: "Pod",
+              metadata: { name: "test-pod" },
+              spec: {
+                containers: []
+              }
+            }
+          ],
+          { format: MigrateFormat.ESM }
+        )
+      ).resolves.toMatchSnapshot();
+    });
+  });
 });
 
 describe("migrateString", () => {
@@ -307,6 +327,24 @@ metadata:
   "containers": []
 }
       }`)
+      ).resolves.toMatchSnapshot();
+    });
+  });
+
+  describe("when format = ESM", () => {
+    test("should generate code in ESM format", async () => {
+      await expect(
+        migrateString(
+          `---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pod
+spec:
+  containers: []
+`,
+          { format: MigrateFormat.ESM }
+        )
       ).resolves.toMatchSnapshot();
     });
   });

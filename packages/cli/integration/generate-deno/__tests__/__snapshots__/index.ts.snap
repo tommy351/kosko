@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should generate components 1`] = `
+"---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: env
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: env
+  template:
+    containers: []
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: file-esm
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: file-ts
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: folder-esm"
+`;

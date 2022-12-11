@@ -1,5 +1,5 @@
-import exit from "exit";
 import logger, { LogLevel } from "@kosko/log";
+import { exit } from "node:process";
 
 export class CLIError extends Error {
   public readonly output?: string;

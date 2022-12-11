@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when fetch is not polyfilled should be able to fetch 1`] = `
+"[
+  Pod { apiVersion: 'v1', kind: 'Pod', metadata: { name: 'test-pod' } }
+]"
+`;
+
+exports[`when fetch is polyfilled should be able to fetch 1`] = `
+"[
+  Pod { apiVersion: 'v1', kind: 'Pod', metadata: { name: 'test-pod' } }
+]"
+`;

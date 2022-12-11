@@ -1,9 +1,13 @@
 import { Config } from "@kosko/config";
 import { Environment } from "@kosko/env";
-import { localImportDefault, localRequireDefault } from "./require";
 import { BaseGenerateArguments } from "./types";
-import { isESMSupported } from "@kosko/require";
 import { createCLIEnvReducer } from "./set-option";
+import resolveFrom from "resolve-from";
+import pkgUp from "pkg-up";
+import { dirname, join } from "node:path";
+import { readFile } from "node:fs/promises";
+import { pathToFileURL } from "node:url";
+import { env } from "node:process";
 
 const KOSKO_ENV = "@kosko/env";
 
@@ -16,21 +20,56 @@ function pickEnvArray(envs: string[]): string | string[] | undefined {
   return envs[0];
 }
 
+async function importDefault(id: string) {
+  const mod = await import(id);
+  return mod.default;
+}
+
+async function getESMEntry(cwd: string) {
+  const pkgPath = await pkgUp({ cwd });
+  if (!pkgPath) return;
+
+  const pkg = JSON.parse(await readFile(pkgPath, "utf-8"));
+  if (!pkg.module) return;
+
+  const path = join(pkgPath, "..", pkg.module);
+  return pathToFileURL(path).toString();
+}
+
+async function importEnvNode(cwd: string): Promise<Environment[]> {
+  const envPath = resolveFrom(cwd, KOSKO_ENV);
+  const envModUrl = await getESMEntry(dirname(envPath));
+  const envs: Environment[] = [];
+
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  envs.push(require(envPath));
+
+  // Why `@kosko/env` package has to be imported twice? Because the cache on
+  // CommonJS and ESM are separated, which means we have two isolated
+  // instances of `Environment`, and each of them must be initialized
+  // in order to make sure users can access the environment in both CommonJS
+  // and ESM environment.
+  if (envModUrl && env.KOSKO_DISABLE_ENV_ESM !== "1") {
+    envs.push(await importDefault(envModUrl));
+  }
+
+  return envs;
+}
+
+async function importEnvGeneric(): Promise<Environment[]> {
+  return [await importDefault(KOSKO_ENV)];
+}
+
 export async function setupEnv(
   config: Config,
   args: BaseGenerateArguments
 ): Promise<void> {
   const cwd = args.cwd;
-  const envs: Environment[] = [await localRequireDefault(KOSKO_ENV, cwd)];
-
-  if (await isESMSupported()) {
-    // Why `@kosko/env` package has to be imported twice? Because the cache on
-    // CommonJS and ESM are separated, which means we have two isolated
-    // instances of `Environment`, and each of them must be initialized
-    // in order to make sure users can access the environment in both CommonJS
-    // and ESM environment.
-    envs.push(await localImportDefault(KOSKO_ENV, cwd));
-  }
+  const envs =
+    // eslint-disable-next-line no-restricted-globals
+    process.env.BUILD_TARGET === "node"
+      ? await importEnvNode(cwd)
+      : await importEnvGeneric();
 
   const paths = config.paths?.environment || {};
   const setReducer = args.set?.length

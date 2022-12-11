@@ -1,5 +1,6 @@
+import "cross-fetch/polyfill";
 import { loadFile, LoadOptions, loadString, loadUrl } from "../load";
-import fs from "node:fs/promises";
+import { writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import fetch from "node-fetch";
 import type { FetchMockStatic } from "fetch-mock";
@@ -251,7 +252,7 @@ describe("loadFile", () => {
   });
 
   testLoad({
-    setup: (content) => fs.writeFile(path, content),
+    setup: (content) => writeFile(path, content),
     load: (options) => loadFile(path, options)
   });
 });

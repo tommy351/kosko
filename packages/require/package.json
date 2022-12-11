@@ -6,18 +6,26 @@
   "repository": "https://github.com/tommy351/kosko/tree/master/packages/require",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
-  "main": "index.js",
-  "module": "index.mjs",
-  "types": "index.d.ts",
+  "main": "dist/index.node.cjs",
+  "module": "dist/index.node.mjs",
+  "types": "dist/index.d.ts",
   "sideEffects": false,
+  "scripts": {
+    "build": "build-scripts"
+  },
   "exports": {
-    "import": "./index.mjs",
-    "require": "./index.js"
+    "node": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.node.mjs",
+      "require": "./dist/index.node.cjs"
+    },
+    "types": "./dist/index.d.ts",
+    "deno": "./dist/index.deno.mjs",
+    "import": "./dist/index.base.mjs",
+    "require": "./dist/index.node.cjs"
   },
   "files": [
-    "index.d.ts",
-    "index.js",
-    "index.mjs"
+    "/dist/"
   ],
   "keywords": [
     "kosko"
@@ -29,6 +37,18 @@
     "node": ">=14.18.0"
   },
   "dependencies": {
-    "resolve": "^1.22.1"
+    "@kosko/common-utils": "workspace:^"
+  },
+  "devDependencies": {
+    "@kosko/build-scripts": "workspace:^",
+    "@kosko/jest-preset": "workspace:^",
+    "@kosko/test-utils": "workspace:^",
+    "@types/node": "^18.11.9",
+    "execa": "^5.1.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.3"
+  },
+  "jest": {
+    "preset": "@kosko/jest-preset"
   }
 }

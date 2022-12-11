@@ -2,6 +2,38 @@ import camelcase from "camelcase";
 import { Manifest, loadString, getResourceModule } from "@kosko/yaml";
 import stringify from "fast-safe-stringify";
 
+/**
+ * @public
+ */
+export enum MigrateFormat {
+  /**
+   * CommonJS.
+   */
+  CJS = "cjs",
+
+  /**
+   * ECMAScript modules (ESM).
+   */
+  ESM = "esm"
+}
+
+/**
+ * @public
+ */
+export interface MigrateOptions {
+  /**
+   * Output format.
+   *
+   * @defaultValue Node.js `cjs`
+   * @defaultValue Others `esm`
+   */
+  format?: MigrateFormat;
+}
+
+const DEFAULT_FORMAT: MigrateFormat =
+  // eslint-disable-next-line no-restricted-globals
+  process.env.BUILD_TARGET === "node" ? MigrateFormat.CJS : MigrateFormat.ESM;
+
 interface Component {
   readonly name: string;
   readonly text: string;
@@ -109,21 +141,37 @@ function collectImports(components: readonly Component[]): Import[] {
  * @param data - Array of Kubernetes manifests
  * @public
  */
-export async function migrate(data: readonly Manifest[]): Promise<string> {
+export async function migrate(
+  data: readonly Manifest[],
+  options: MigrateOptions = {}
+): Promise<string> {
+  const { format = DEFAULT_FORMAT } = options;
   const components = uniqComponentName(await generateForList(data));
-  let output = `"use strict";\n\n`;
+  let output = "";
+
+  if (format === MigrateFormat.CJS) {
+    output += `"use strict";\n\n`;
+  }
 
   for (const { path, names } of collectImports(components)) {
-    output += `const { ${names.join(", ")} } = require("${path}");\n`;
+    if (format === MigrateFormat.CJS) {
+      output += `const { ${names.join(", ")} } = require("${path}");\n`;
+    } else {
+      output += `import { ${names.join(", ")} } from "${path}";\n`;
+    }
   }
 
   for (const { name, text } of components) {
     output += `\nconst ${name} = ${text};\n`;
   }
 
-  output += `\nmodule.exports = [${components
-    .map((c) => c.name)
-    .join(", ")}];\n`;
+  const names = components.map((c) => c.name).join(", ");
+
+  if (format === MigrateFormat.CJS) {
+    output += `\nmodule.exports = [${names}];\n`;
+  } else {
+    output += `\nexport default [${names}];\n`;
+  }
 
   return output;
 }
@@ -134,8 +182,11 @@ export async function migrate(data: readonly Manifest[]): Promise<string> {
  * @param input - Kubernetes YAML string
  * @public
  */
-export async function migrateString(input: string): Promise<string> {
-  return migrate(await loadString(input));
+export async function migrateString(
+  input: string,
+  options?: MigrateOptions
+): Promise<string> {
+  return migrate(await loadString(input), options);
 }
 
 export { type Manifest } from "@kosko/yaml";

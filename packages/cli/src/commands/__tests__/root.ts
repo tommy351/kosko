@@ -1,4 +1,4 @@
-import { rootCmd } from "../root";
+import { createRootCommand } from "../root";
 import { resolve } from "node:path";
 
 describe("rootCmd", () => {
@@ -7,7 +7,7 @@ describe("rootCmd", () => {
     let args: any;
 
     beforeEach(() => {
-      args = rootCmd.demandCommand(0).parse(argv);
+      args = createRootCommand(argv).demandCommand(0).parse();
     });
 
     describe("when cwd is specified", () => {

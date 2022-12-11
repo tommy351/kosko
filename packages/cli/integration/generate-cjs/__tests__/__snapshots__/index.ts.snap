@@ -72,23 +72,22 @@ Options:
   -e, --env       Environment name                                      [string]
   -c, --config    Config path. Default to \`kosko.toml\` in current folder.
                                                                         [string]
-  -r, --require   Require modules. Modules set in config file will also be
-                  required.                                [array] [default: []]
-      --loader    Module loader. Loaders set in config file will also be loaded.
-                                                           [array] [default: []]
       --bail      Stop immediately when an error occurred.             [boolean]
   -s, --set       Set values on the command line KEY=VAL (can be used multiple
                   times)                                   [array] [default: []]
+  -r, --require   Require modules. Modules set in config file will also be
+                  required.                                              [array]
+      --loader    Module loader. Loaders set in config file will also be loaded.
+                                                                         [array]
   -o, --output    Output format
                             [string] [choices: "yaml", "json"] [default: "yaml"]
       --validate  Validate components                  [boolean] [default: true]
 
 Examples:
-  kosko generate                      Generate manifests
-  kosko generate foo bar              Specify components
-  kosko generate foo_*                Use glob pattern
-  kosko generate --env foo            Set environment
-  kosko generate -r ts-node/register  Require external modules
+  kosko generate            Generate manifests
+  kosko generate foo bar    Specify components
+  kosko generate foo_*      Use glob pattern
+  kosko generate --env foo  Set environment
 
 The specified value "3" is not a string."
 `;
@@ -238,23 +237,22 @@ Options:
   -e, --env       Environment name                                      [string]
   -c, --config    Config path. Default to \`kosko.toml\` in current folder.
                                                                         [string]
-  -r, --require   Require modules. Modules set in config file will also be
-                  required.                                [array] [default: []]
-      --loader    Module loader. Loaders set in config file will also be loaded.
-                                                           [array] [default: []]
       --bail      Stop immediately when an error occurred.             [boolean]
   -s, --set       Set values on the command line KEY=VAL (can be used multiple
                   times)                                   [array] [default: []]
+  -r, --require   Require modules. Modules set in config file will also be
+                  required.                                              [array]
+      --loader    Module loader. Loaders set in config file will also be loaded.
+                                                                         [array]
   -o, --output    Output format
                             [string] [choices: "yaml", "json"] [default: "yaml"]
       --validate  Validate components                  [boolean] [default: true]
 
 Examples:
-  kosko generate                      Generate manifests
-  kosko generate foo bar              Specify components
-  kosko generate foo_*                Use glob pattern
-  kosko generate --env foo            Set environment
-  kosko generate -r ts-node/register  Require external modules
+  kosko generate            Generate manifests
+  kosko generate foo bar    Specify components
+  kosko generate foo_*      Use glob pattern
+  kosko generate --env foo  Set environment
 
 Invalid values:
   Argument: output, Given: "foo", Choices: "yaml", "json""
@@ -326,23 +324,22 @@ Options:
   -e, --env       Environment name                                      [string]
   -c, --config    Config path. Default to \`kosko.toml\` in current folder.
                                                                         [string]
-  -r, --require   Require modules. Modules set in config file will also be
-                  required.                                [array] [default: []]
-      --loader    Module loader. Loaders set in config file will also be loaded.
-                                                           [array] [default: []]
       --bail      Stop immediately when an error occurred.             [boolean]
   -s, --set       Set values on the command line KEY=VAL (can be used multiple
                   times)                                   [array] [default: []]
+  -r, --require   Require modules. Modules set in config file will also be
+                  required.                                              [array]
+      --loader    Module loader. Loaders set in config file will also be loaded.
+                                                                         [array]
   -o, --output    Output format
                             [string] [choices: "yaml", "json"] [default: "yaml"]
       --validate  Validate components                  [boolean] [default: true]
 
 Examples:
-  kosko generate                      Generate manifests
-  kosko generate foo bar              Specify components
-  kosko generate foo_*                Use glob pattern
-  kosko generate --env foo            Set environment
-  kosko generate -r ts-node/register  Require external modules
+  kosko generate            Generate manifests
+  kosko generate foo bar    Specify components
+  kosko generate foo_*      Use glob pattern
+  kosko generate --env foo  Set environment
 
 Cannot parse string "image.registry nginx.io". Expected format is "<key>=<value>"."
 `;

@@ -14,6 +14,7 @@ Global Options:
 
 Options:
   -f, --filename  File, directory to migrate                 [string] [required]
+      --esm       Generate ECMAScript module (ESM) files               [boolean]
 
 Examples:
   kosko migrate -f path/to/file  Read from the path

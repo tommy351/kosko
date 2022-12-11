@@ -1,13 +1,11 @@
-import {
-  importPath,
-  resolve as resolveModule,
-  getRequireExtensions
-} from "@kosko/require";
+import { resolve as resolveModule, getRequireExtensions } from "@kosko/require";
 import type { Result, Manifest } from "./base";
 import logger, { LogLevel } from "@kosko/log";
 import { resolve } from "./resolve";
 import { aggregateErrors, GenerateError } from "./error";
 import { glob } from "./glob";
+import { pathToFileURL } from "node:url";
+import { getErrorCode } from "@kosko/common-utils";
 
 /**
  * @public
@@ -55,21 +53,53 @@ async function resolveComponentPath(
   path: string,
   extensions: readonly string[]
 ) {
+  let result: string | undefined;
+
   try {
-    return await resolveModule(path, { extensions });
+    result = await resolveModule(path, { extensions });
   } catch (err) {
     throw new GenerateError("Module path resolve failed", {
       path,
       cause: err
     });
   }
+
+  if (!result) {
+    throw new GenerateError("Module not found", {
+      path
+    });
+  }
+
+  return result;
+}
+
+async function importDefault(path: string) {
+  const mod = await import(path);
+  return mod.default;
+}
+
+async function importPath(path: string) {
+  const url = pathToFileURL(path).toString();
+
+  // eslint-disable-next-line no-restricted-globals
+  if (process.env.BUILD_TARGET !== "node") return importDefault(url);
+
+  try {
+    return await importDefault(url);
+  } catch (err) {
+    if (getErrorCode(err) !== "ERR_UNKNOWN_FILE_EXTENSION") {
+      throw err;
+    }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const mod = require(path);
+  return mod && mod.__esModule ? mod.default : mod;
 }
 
 async function getComponentValue(path: string): Promise<unknown> {
   try {
-    const { default: mod } = await importPath(path);
-
-    return mod;
+    return await importPath(path);
   } catch (err) {
     throw new GenerateError("Component value resolve failed", {
       path,
@@ -116,8 +146,9 @@ function validateExtensions(extensions: readonly string[]) {
  */
 export async function generate(options: GenerateOptions): Promise<Result> {
   /* istanbul ignore next */
-  if (process.env.BUILD_TARGET !== "node") {
-    throw new Error("generate is only supported on Node.js");
+  // eslint-disable-next-line no-restricted-globals
+  if (process.env.BUILD_TARGET === "browser") {
+    throw new Error("generate is only supported on Node.js and Deno");
   }
 
   if (!options.components.length) {

@@ -10,7 +10,7 @@ import { handler } from "./worker";
 export function generateBuilder(
   argv: Argv<RootArguments>
 ): Argv<BaseGenerateArguments> {
-  return argv
+  let base = argv
     .option("env", {
       type: "string",
       describe: "Environment name",
@@ -20,21 +20,6 @@ export function generateBuilder(
       type: "string",
       describe: "Config path. Default to `kosko.toml` in current folder.",
       alias: "c"
-    })
-    .option("require", {
-      type: "string",
-      array: true,
-      describe:
-        "Require modules. Modules set in config file will also be required.",
-      default: [],
-      alias: "r"
-    })
-    .option("loader", {
-      type: "string",
-      array: true,
-      describe:
-        "Module loader. Loaders set in config file will also be loaded.",
-      default: []
     })
     .option("bail", {
       type: "boolean",
@@ -55,6 +40,26 @@ export function generateBuilder(
       describe:
         "Components to generate. This overrides components set in config file."
     });
+
+  // eslint-disable-next-line no-restricted-globals
+  if (process.env.BUILD_TARGET === "node") {
+    base = base
+      .option("require", {
+        type: "string",
+        array: true,
+        describe:
+          "Require modules. Modules set in config file will also be required.",
+        alias: "r"
+      })
+      .option("loader", {
+        type: "string",
+        array: true,
+        describe:
+          "Module loader. Loaders set in config file will also be loaded."
+      });
+  }
+
+  return base;
 }
 
 export const generateCmd: Command<GenerateArguments> = {
@@ -78,8 +83,7 @@ export const generateCmd: Command<GenerateArguments> = {
       .example("$0 generate", "Generate manifests")
       .example("$0 generate foo bar", "Specify components")
       .example("$0 generate foo_*", "Use glob pattern")
-      .example("$0 generate --env foo", "Set environment")
-      .example("$0 generate -r ts-node/register", "Require external modules");
+      .example("$0 generate --env foo", "Set environment");
   },
   async handler(args) {
     const config = await loadConfig(args);

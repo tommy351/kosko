@@ -1,11 +1,11 @@
 import { loadAll } from "js-yaml";
-import fs from "node:fs/promises";
-import fetch, { RequestInfo, RequestInit } from "node-fetch";
+import { readFile } from "node:fs/promises";
 import { getResourceModule, ResourceKind } from "./module";
 import logger, { LogLevel } from "@kosko/log";
-import { importPath } from "@kosko/require";
 import stringify from "fast-safe-stringify";
 import { isRecord } from "@kosko/common-utils";
+import { importModule } from "./import";
+import fetch from "./fetch";
 
 /**
  * Describes an object which seems to be a Kubernetes manifest.
@@ -47,7 +47,7 @@ async function getConstructor(
   }
 
   try {
-    const result = await importPath(mod.path);
+    const result = await importModule(mod.path);
     return result[mod.export];
   } catch {
     logger.log(LogLevel.Debug, "Failed to import the resource module", {
@@ -91,14 +91,14 @@ export async function loadString(
 }
 
 /**
- * Loads a Kubernetes YAML file from path.
+ * Loads a Kubernetes YAML file from `path`.
  *
  * @param path - Path to a Kubernetes YAML file.
  * @public
  */
 export function loadFile(path: string, options?: LoadOptions) {
   return async (): Promise<Manifest[]> => {
-    const content = await fs.readFile(path, "utf-8");
+    const content = await readFile(path, "utf-8");
     logger.log(LogLevel.Debug, `File loaded from: ${path}`);
 
     return loadString(content, options);
@@ -106,10 +106,15 @@ export function loadFile(path: string, options?: LoadOptions) {
 }
 
 /**
- * Loads a Kubernetes YAML file from url.
+ * Loads a Kubernetes YAML file from `url`.
+ *
+ * @remarks
+ * By default, this function uses `fetch` API defined in the global scope.
+ * On Node.js, if `global.fetch` is undefined, {@link https://github.com/node-fetch/node-fetch | node-fetch}
+ * will be used instead.
  *
  * @param url - URL to a Kubernetes YAML file.
- * @param options - {@link LoadOptions} and {@link https://github.com/node-fetch/node-fetch#options | node-fetch options}
+ * @param options - {@link LoadOptions} and properties defined in {@link https://developer.mozilla.org/en-US/docs/Web/API/Request | Request} class.
  * @public
  */
 export function loadUrl(

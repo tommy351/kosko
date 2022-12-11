@@ -1,10 +1,11 @@
-import { importPath, resolve } from "@kosko/require";
+import { resolve } from "@kosko/require";
 import { createNodeEnvironment, NodeEnvironmentOptions } from "./node";
 import logger, { LogLevel } from "@kosko/log";
 import { mergeAsync } from "../merge";
 import { Environment } from "./types";
 import { createAsyncReducerExecutor } from "./base";
 import { getErrorCode } from "@kosko/common-utils";
+import { pathToFileURL } from "node:url";
 
 const MODULE_NOT_FOUND_ERROR_CODES = new Set([
   "ERR_MODULE_NOT_FOUND",
@@ -21,8 +22,11 @@ export function createNodeESMEnvironment(
   options: NodeEnvironmentOptions = {}
 ): Environment {
   /* istanbul ignore next */
-  if (process.env.BUILD_TARGET !== "node") {
-    throw new Error("createNodeESMEnvironment is only supported on Node.js");
+  // eslint-disable-next-line no-restricted-globals
+  if (process.env.BUILD_TARGET === "browser") {
+    throw new Error(
+      "createNodeESMEnvironment is only supported on Node.js and Deno"
+    );
   }
 
   return createNodeEnvironment({
@@ -30,8 +34,6 @@ export function createNodeESMEnvironment(
     createReducerExecutor: createAsyncReducerExecutor,
     mergeValues: mergeAsync,
     requireModule: async (env, id) => {
-      let path: string | undefined;
-
       // Resolve path before importing ESM modules because file extensions are
       // mandatory for `import()`. Import paths which are used in `require()`
       // must be resolved as below.
@@ -40,28 +42,28 @@ export function createNodeESMEnvironment(
       // - File: `./file` -> `./file.js`
       //
       // https://nodejs.org/api/esm.html#esm_mandatory_file_extensions
-      try {
-        path = await resolve(id, {
-          extensions: env.extensions.map((ext) => `.${ext}`)
-        });
-      } catch (err) {
-        if (getErrorCode(err) === "MODULE_NOT_FOUND") {
-          logger.log(LogLevel.Debug, `Cannot resolve module: ${id}`);
-          return {};
-        }
+      const path = await resolve(id, {
+        extensions: env.extensions.map((ext) => `.${ext}`)
+      });
 
-        throw err;
+      if (!path) {
+        logger.log(LogLevel.Debug, `Module not found: ${id}`);
+        return {};
       }
 
       try {
         logger.log(LogLevel.Debug, `Importing ${path}`);
-        const mod = await importPath(path);
+
+        const url = pathToFileURL(path).toString();
+        const mod = await import(url);
         return mod.default;
       } catch (err) {
         const code = getErrorCode(err);
 
         if (code && MODULE_NOT_FOUND_ERROR_CODES.has(code)) {
-          logger.log(LogLevel.Debug, `Cannot import module: ${path}`);
+          logger.log(LogLevel.Debug, `Cannot import module: ${path}`, {
+            error: err
+          });
           return {};
         }
 

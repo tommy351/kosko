@@ -1,7 +1,7 @@
 /// <reference types="jest-extended"/>
 import execa from "execa";
 import { dirname } from "node:path";
-import { runCLI } from "@kosko/test-utils";
+import { runNodeCLI } from "../../utils/run";
 
 const testDir = dirname(__dirname);
 
@@ -10,7 +10,7 @@ let result: execa.ExecaReturnValue;
 let options: execa.Options;
 
 beforeEach(async () => {
-  result = await runCLI(args, {
+  result = await runNodeCLI(args, {
     ...options,
     cwd: testDir
   });

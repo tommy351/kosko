@@ -17,3 +17,7 @@ dist/
 
 # Turbo
 .turbo
+
+# Deno integration tests
+/integration/deno-import-map.json
+/packages/kosko/deno.js

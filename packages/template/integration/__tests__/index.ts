@@ -1,5 +1,5 @@
 import execa from "execa";
-import fs from "node:fs/promises";
+import { copyFile, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { installPackage, makeTempDir, TempDir } from "@kosko/test-utils";
 
@@ -13,7 +13,7 @@ beforeEach(async () => {
 
   const src = join(__dirname, "..", "bin.js");
   const dst = join(tmpDir.path, "bin.js");
-  await fs.copyFile(src, dst);
+  await copyFile(src, dst);
   await installPackage(tmpDir.path, "template");
 
   result = await execa(dst, args, {
@@ -31,7 +31,7 @@ afterEach(async () => {
 
 async function readFiles(cwd: string): Promise<string[]> {
   return Promise.all(
-    ["foo", "bar/baz"].map((path) => fs.readFile(join(cwd, path), "utf8"))
+    ["foo", "bar/baz"].map((path) => readFile(join(cwd, path), "utf8"))
   );
 }
 

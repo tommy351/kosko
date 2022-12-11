@@ -1,4 +1,4 @@
-import fs from "node:fs/promises";
+import { mkdir, stat, writeFile } from "node:fs/promises";
 import { dirname, join, relative, resolve, sep } from "node:path";
 import pc from "picocolors";
 import { Command, RootArguments } from "../../cli/command";
@@ -16,11 +16,12 @@ import {
   installDependencies
 } from "./install";
 import { getErrorCode } from "@kosko/common-utils";
+import denoTemplate from "./templates/deno";
 
 async function checkPath(path: string, force?: boolean) {
   try {
     logger.log(LogLevel.Debug, `Checking stats of "${path}"`);
-    const stats = await fs.stat(path);
+    const stats = await stat(path);
 
     if (!stats.isDirectory()) {
       throw new CLIError("Destination already exists and is not a directory", {
@@ -56,8 +57,8 @@ async function writeFiles(path: string, files: readonly File[]) {
     const filePath = join(path, file.path);
 
     logger.log(LogLevel.Debug, `Writing file: "${file.path}"`);
-    await fs.mkdir(dirname(filePath), { recursive: true });
-    await fs.writeFile(filePath, file.content);
+    await mkdir(dirname(filePath), { recursive: true });
+    await writeFile(filePath, file.content);
   }
 }
 
@@ -72,7 +73,7 @@ function getCDPath(cwd: string, path: string): string | undefined {
 }
 
 export interface InitArguments extends RootArguments {
-  force: boolean;
+  force?: boolean;
   path?: string;
   typescript?: boolean;
   esm?: boolean;
@@ -85,36 +86,42 @@ export const initCmd: Command<InitArguments> = {
   describe: "Set up a new Kosko directory",
   builder(argv) {
     /* istanbul ignore next */
-    return argv
+    let base = argv
       .option("force", {
         type: "boolean",
         describe: "Overwrite existing files",
-        default: false,
         alias: "f"
-      })
-      .option("typescript", {
-        type: "boolean",
-        describe: "Generate TypeScript files",
-        alias: "ts"
-      })
-      .option("esm", {
-        type: "boolean",
-        describe: "Generate ECMAScript module (ESM) files"
-      })
-      .option("install", {
-        type: "boolean",
-        describe: "Install dependencies automatically",
-        default: true
-      })
-      .option("package-manager", {
-        type: "string",
-        describe: "Package manager (npm, yarn, pnpm)",
-        alias: "pm"
       })
       .positional("path", { type: "string", describe: "Path to initialize" })
       .example("$0 init", "Initialize in current directory")
-      .example("$0 init example", "Initialize in specified directory")
-      .example("$0 init --typescript", "Setup a TypeScript project");
+      .example("$0 init example", "Initialize in specified directory");
+
+    // eslint-disable-next-line no-restricted-globals
+    if (process.env.BUILD_TARGET === "node") {
+      base = base
+        .option("typescript", {
+          type: "boolean",
+          describe: "Generate TypeScript files",
+          alias: "ts"
+        })
+        .option("esm", {
+          type: "boolean",
+          describe: "Generate ECMAScript module (ESM) files"
+        })
+        .option("install", {
+          type: "boolean",
+          describe: "Install dependencies automatically",
+          default: true
+        })
+        .option("package-manager", {
+          type: "string",
+          describe: "Package manager (npm, yarn, pnpm)",
+          alias: "pm"
+        })
+        .example("$0 init --typescript", "Setup a TypeScript project");
+    }
+
+    return base;
   },
   async handler(args) {
     const path = args.path ? resolve(args.cwd, args.path) : args.cwd;
@@ -122,21 +129,34 @@ export const initCmd: Command<InitArguments> = {
     await checkPath(path, args.force);
 
     logger.log(LogLevel.Info, `Creating a Kosko project in "${path}"`);
+    const template: Template = (() => {
+      // eslint-disable-next-line no-restricted-globals
+      switch (process.env.BUILD_TARGET) {
+        case "deno":
+          return denoTemplate;
 
-    let template: Template = cjsTemplate;
+        case "node":
+          if (args.typescript) {
+            return args.esm ? tsEsmTemplate : tsTemplate;
+          }
 
-    if (args.typescript) {
-      if (args.esm) {
-        template = tsEsmTemplate;
-      } else {
-        template = tsTemplate;
+          if (args.esm) {
+            return esmTemplate;
+          }
+
+          return cjsTemplate;
       }
-    } else if (args.esm) {
-      template = esmTemplate;
-    }
+
+      throw new Error("Template is unavailable on current platform");
+    })();
 
     const packageManager =
       args.packageManager ?? (await detectPackageManager(path));
+    const runCmd =
+      // eslint-disable-next-line no-restricted-globals
+      process.env.BUILD_TARGET === "deno"
+        ? "deno task kosko"
+        : `${packageManager} run`;
     const { dependencies, devDependencies, files } = await template({ path });
 
     await writeFiles(path, files);
@@ -144,7 +164,8 @@ export const initCmd: Command<InitArguments> = {
     const cdPath = getCDPath(args.cwd, path);
     let installSuccessful = false;
 
-    if (args.install) {
+    // eslint-disable-next-line no-restricted-globals
+    if (process.env.BUILD_TARGET === "node" && args.install) {
       try {
         if (dependencies?.length) {
           await installDependencies({
@@ -176,10 +197,10 @@ export const initCmd: Command<InitArguments> = {
 Inside that directory, you can run several commands:
 ${[
   [
-    `${packageManager} run generate`,
+    `${runCmd} generate`,
     "Validate components and generate Kubernetes manifests."
   ],
-  [`${packageManager} run validate`, "Only validate components."]
+  [`${runCmd} validate`, "Only validate components."]
 ]
   .map(([cmd, desc]) => `\n  ${pc.cyan(cmd)}\n    ${desc}`)
   .join("\n")}
@@ -188,7 +209,8 @@ We suggest that you begin by typing:
 
 ${[
   ...(cdPath ? [`cd ${cdPath}`] : []),
-  ...(args.install && installSuccessful
+  // eslint-disable-next-line no-restricted-globals
+  ...(process.env.BUILD_TARGET !== "node" || (args.install && installSuccessful)
     ? []
     : [
         dependencies?.length
@@ -202,7 +224,7 @@ ${[
             }).join(" ")
           : ""
       ]),
-  `${packageManager} run generate`
+  `${runCmd} generate`
 ]
   .filter(Boolean)
   .map((line) => `  ${pc.cyan(line)}`)

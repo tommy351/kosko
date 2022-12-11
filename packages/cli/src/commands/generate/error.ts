@@ -6,6 +6,8 @@ import pc from "picocolors";
 import { CLIError } from "../../cli/error";
 import stringify from "fast-safe-stringify";
 import { isRecord } from "@kosko/common-utils";
+import { stderr } from "node:process";
+import { BaseGenerateArguments } from "./types";
 
 function flattenError(err: unknown): unknown[] {
   if (err instanceof AggregateError) {
@@ -16,7 +18,7 @@ function flattenError(err: unknown): unknown[] {
 }
 
 function print(line: string): void {
-  process.stderr.write(line + "\n");
+  stderr.write(line + "\n");
 }
 
 function getErrorCount(n: number): string {
@@ -154,7 +156,11 @@ function stringifyResolveError(err: ResolveError): string {
   return lines.join("\n");
 }
 
-export function handleGenerateError(cwd: string, error: unknown) {
+export function handleGenerateError(
+  cwd: string,
+  error: unknown,
+  options: Pick<BaseGenerateArguments, "bail">
+) {
   const allErrors = flattenError(error);
   const pathErrorsMap: Record<string, string[]> = {};
   const unknownErrors: ErrorLike[] = [];
@@ -203,6 +209,10 @@ export function handleGenerateError(cwd: string, error: unknown) {
   }
 
   return new CLIError("Generate failed", {
-    output: `Generate failed (Total ${getErrorCount(allErrors.length)})`
+    output: `Generate failed (${
+      options.bail
+        ? "Only the first error is displayed because `bail` option is enabled"
+        : `Total ${getErrorCount(allErrors.length)}`
+    })`
   });
 }

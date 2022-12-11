@@ -1,14 +1,14 @@
 import logger, { LogLevel } from "@kosko/log";
 import { join } from "node:path";
-import fs from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import stringify from "fast-safe-stringify";
-import os from "node:os";
+import { EOL } from "node:os";
 import { File, TemplateContext } from "./base";
 import { getErrorCode } from "@kosko/common-utils";
 
 async function readJson(path: string): Promise<any> {
   try {
-    const content = await fs.readFile(path, "utf8");
+    const content = await readFile(path, "utf8");
     return JSON.parse(content);
   } catch (err) {
     if (getErrorCode(err) !== "ENOENT") throw err;
@@ -41,6 +41,6 @@ export async function generatePackageJson(
         },
         undefined,
         "  "
-      ) + os.EOL
+      ) + EOL
   };
 }

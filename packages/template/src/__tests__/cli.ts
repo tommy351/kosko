@@ -1,5 +1,4 @@
 import { run } from "../cli";
-import exit from "exit";
 import { Template } from "../template";
 import { writeFiles } from "../write";
 import { join } from "node:path";
@@ -8,9 +7,10 @@ jest.spyOn(console, "error").mockImplementation(() => {
   // do nothing
 });
 
-jest.mock("exit");
 jest.mock("@kosko/log");
 jest.mock("../write.ts");
+
+const exit = jest.spyOn(process, "exit");
 
 describe("when generate resolved", () => {
   const template: Template<{ foo: string; bar: number }> = {

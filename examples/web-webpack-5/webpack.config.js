@@ -2,7 +2,7 @@
 "use strict";
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const path = require("node:path");
+const { resolve } = require("node:path");
 
 module.exports = {
   mode: "development",
@@ -10,7 +10,7 @@ module.exports = {
     index: "./src/index.js"
   },
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: resolve(__dirname, "dist"),
     filename: "[name].js"
   },
   experiments: {

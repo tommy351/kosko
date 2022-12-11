@@ -1,0 +1,6 @@
+{
+  "imports": {
+    "@kosko/env": "./env.ts",
+    "kubernetes-models/": "https://esm.sh/kubernetes-models/"
+  }
+}
