@@ -20,7 +20,7 @@ export function getRequireExtensions(): string[] {
           ? createRequire(import.meta.url)
           : require;
 
-      return [".cjs", ".mjs", ...req("../node-extensions.cjs")()];
+      return [".cjs", ".mjs", ...req("../lib/node-extensions.cjs")()];
     }
     case "deno":
       return [".ts", ".js", ".json"];

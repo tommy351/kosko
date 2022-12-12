@@ -6,3 +6,4 @@
 
 export * from "./extensions";
 export * from "./resolve";
+export * from "./import";

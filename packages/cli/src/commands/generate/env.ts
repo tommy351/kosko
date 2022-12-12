@@ -38,7 +38,6 @@ async function getESMEntry(cwd: string) {
 
 async function importEnvNode(cwd: string): Promise<Environment[]> {
   const envPath = resolveFrom(cwd, KOSKO_ENV);
-  const envModUrl = await getESMEntry(dirname(envPath));
   const envs: Environment[] = [];
 
   // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -49,8 +48,12 @@ async function importEnvNode(cwd: string): Promise<Environment[]> {
   // instances of `Environment`, and each of them must be initialized
   // in order to make sure users can access the environment in both CommonJS
   // and ESM environment.
-  if (envModUrl && env.KOSKO_DISABLE_ENV_ESM !== "1") {
-    envs.push(await importDefault(envModUrl));
+  if (env.ESM_IMPORT_DISABLED !== "1") {
+    const envModUrl = await getESMEntry(dirname(envPath));
+
+    if (envModUrl) {
+      envs.push(await importDefault(envModUrl));
+    }
   }
 
   return envs;

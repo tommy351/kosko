@@ -49,6 +49,8 @@
   },
   "devDependencies": {
     "@kosko/build-scripts": "workspace:^",
-    "@kosko/jest-preset": "workspace:^"
+    "@kosko/jest-preset": "workspace:^",
+    "@kosko/test-utils": "workspace:^",
+    "execa": "^5.1.1"
   }
 }

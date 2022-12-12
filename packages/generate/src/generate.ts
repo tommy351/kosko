@@ -1,11 +1,13 @@
-import { resolve as resolveModule, getRequireExtensions } from "@kosko/require";
+import {
+  importPath,
+  resolve as resolveModule,
+  getRequireExtensions
+} from "@kosko/require";
 import type { Result, Manifest } from "./base";
 import logger, { LogLevel } from "@kosko/log";
 import { resolve } from "./resolve";
 import { aggregateErrors, GenerateError } from "./error";
 import { glob } from "./glob";
-import { pathToFileURL } from "node:url";
-import { getErrorCode } from "@kosko/common-utils";
 
 /**
  * @public
@@ -73,33 +75,10 @@ async function resolveComponentPath(
   return result;
 }
 
-async function importDefault(path: string) {
-  const mod = await import(path);
-  return mod.default;
-}
-
-async function importPath(path: string) {
-  const url = pathToFileURL(path).toString();
-
-  // eslint-disable-next-line no-restricted-globals
-  if (process.env.BUILD_TARGET !== "node") return importDefault(url);
-
-  try {
-    return await importDefault(url);
-  } catch (err) {
-    if (getErrorCode(err) !== "ERR_UNKNOWN_FILE_EXTENSION") {
-      throw err;
-    }
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const mod = require(path);
-  return mod && mod.__esModule ? mod.default : mod;
-}
-
 async function getComponentValue(path: string): Promise<unknown> {
   try {
-    return await importPath(path);
+    const mod = await importPath(path);
+    return mod.default;
   } catch (err) {
     throw new GenerateError("Component value resolve failed", {
       path,
