@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should load CJS file 1`] = `"{ type: 'file', ext: 'cjs' }"`;
+
+exports[`should load JS file 1`] = `"{ type: 'file', ext: 'js' }"`;
+
+exports[`should load JS file in folder 1`] = `"{ type: 'folder', ext: 'js' }"`;
+
+exports[`should load JSON file 1`] = `"{ type: 'file', ext: 'json' }"`;
+
+exports[`should load MJS file 1`] = `"{ type: 'file', ext: 'mjs' }"`;
+
+exports[`should load TS file 1`] = `"{ type: 'file', ext: 'ts' }"`;

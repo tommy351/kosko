@@ -9,7 +9,9 @@ beforeAll(async () => {
 });
 
 test("should print YAML", async () => {
-  const result = await execa.node(join(testDir, "index.mjs"));
+  const result = await execa.node(join(testDir, "index.mjs"), [], {
+    nodeOptions: ["--loader", "ts-node/esm"]
+  });
 
   expect(result.stdout).toMatchSnapshot();
 });

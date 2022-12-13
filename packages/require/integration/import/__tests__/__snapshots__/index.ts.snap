@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Deno should import JS file 1`] = `"{"ext":"js"}"`;
+
+exports[`Deno should import JSON file 1`] = `"{"default":{"ext":"json"}}"`;
+
+exports[`Deno should import TS file 1`] = `"{"ext":"ts"}"`;
+
+exports[`Node.js CJS should import CJS file 1`] = `"{"default":{"ext":"mjs"},"ext":"mjs"}"`;
+
+exports[`Node.js CJS should import JS file in package whose type = commonjs 1`] = `"{"default":{"ext":"js"},"ext":"js"}"`;
+
+exports[`Node.js CJS should import JS file in package whose type = module 1`] = `"{"ext":"js"}"`;
+
+exports[`Node.js CJS should import JSON file 1`] = `"{"default":{"ext":"json"}}"`;
+
+exports[`Node.js CJS should import MJS file 1`] = `"{"ext":"mjs"}"`;
+
+exports[`Node.js CJS should import MTS file 1`] = `"{"ext":"mts"}"`;
+
+exports[`Node.js CJS should import TS file in package whose type = module 1`] = `"{"ext":"ts"}"`;
+
+exports[`Node.js ESM should import CJS file 1`] = `"{"default":{"ext":"mjs"},"ext":"mjs"}"`;
+
+exports[`Node.js ESM should import JS file in package whose type = commonjs 1`] = `"{"default":{"ext":"js"},"ext":"js"}"`;
+
+exports[`Node.js ESM should import JS file in package whose type = module 1`] = `"{"ext":"js"}"`;
+
+exports[`Node.js ESM should import JSON file 1`] = `"{"default":{"ext":"json"}}"`;
+
+exports[`Node.js ESM should import MJS file 1`] = `"{"ext":"mjs"}"`;
+
+exports[`Node.js ESM should import MTS file 1`] = `"{"ext":"mts"}"`;
+
+exports[`Node.js ESM should import TS file in package whose type = module 1`] = `"{"ext":"ts"}"`;
