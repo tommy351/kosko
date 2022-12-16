@@ -25,7 +25,8 @@
     "require": "./dist/index.node.cjs"
   },
   "files": [
-    "/dist/"
+    "/dist/",
+    "/lib/"
   ],
   "keywords": [
     "kosko"

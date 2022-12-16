@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should print YAML 1`] = `
+"---
+type: file
+ext: cjs
+---
+type: file
+ext: js
+---
+type: file
+ext: json
+---
+type: file
+ext: mjs
+---
+type: file
+ext: ts
+---
+type: folder
+ext: js"
+`;

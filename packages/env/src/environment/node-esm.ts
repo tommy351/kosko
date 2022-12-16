@@ -1,11 +1,10 @@
-import { resolve } from "@kosko/require";
+import { importPath, resolve } from "@kosko/require";
 import { createNodeEnvironment, NodeEnvironmentOptions } from "./node";
 import logger, { LogLevel } from "@kosko/log";
 import { mergeAsync } from "../merge";
 import { Environment } from "./types";
 import { createAsyncReducerExecutor } from "./base";
 import { getErrorCode } from "@kosko/common-utils";
-import { pathToFileURL } from "node:url";
 
 const MODULE_NOT_FOUND_ERROR_CODES = new Set([
   "ERR_MODULE_NOT_FOUND",
@@ -54,8 +53,7 @@ export function createNodeESMEnvironment(
       try {
         logger.log(LogLevel.Debug, `Importing ${path}`);
 
-        const url = pathToFileURL(path).toString();
-        const mod = await import(url);
+        const mod = await importPath(path);
         return mod.default;
       } catch (err) {
         const code = getErrorCode(err);

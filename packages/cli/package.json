@@ -34,7 +34,8 @@
   "files": [
     "/bin/",
     "/dist/",
-    "/templates/"
+    "/templates/",
+    "/deno.js"
   ],
   "keywords": [
     "kubernetes",
