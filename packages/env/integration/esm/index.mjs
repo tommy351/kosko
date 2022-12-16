@@ -1,4 +1,4 @@
-import env from "@kosko/env";
+import env from "../../dist/index.node.mjs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 

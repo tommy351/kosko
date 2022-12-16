@@ -1,4 +1,4 @@
-import { generate, print, PrintFormat } from "@kosko/generate";
+import { generate, print, PrintFormat } from "../../dist/index.node.mjs";
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 

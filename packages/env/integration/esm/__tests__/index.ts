@@ -1,4 +1,3 @@
-import { installPackage } from "@kosko/test-utils";
 import { dirname, join } from "node:path";
 import execa, { NodeOptions } from "execa";
 
@@ -7,10 +6,6 @@ const testDir = dirname(__dirname);
 async function execute(options: NodeOptions) {
   return execa.node(join(testDir, "index.mjs"), [], options);
 }
-
-beforeAll(async () => {
-  await installPackage(testDir, "env");
-});
 
 test("should load JS file", async () => {
   const result = await execute({
