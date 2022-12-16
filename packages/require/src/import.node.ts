@@ -48,7 +48,7 @@ const req =
 
 function requireModule(path: string) {
   const mod = req(path);
-  return mod && mod.__esModule ? mod : { ...mod, default: mod };
+  return mod && mod.__esModule ? mod : { default: mod };
 }
 
 async function tryImport<T>(
@@ -71,9 +71,12 @@ async function tryImport<T>(
 
 async function importJson(path: string) {
   const importFn = await importWithOpts;
-  const url = pathToFileURL(path).toString();
 
-  return importFn?.(url, { assert: { type: "json" } }) ?? requireModule(path);
+  if (!importFn) {
+    return requireModule(path);
+  }
+
+  return tryImport(path, (url) => importFn(url, { assert: { type: "json" } }));
 }
 
 export async function importPath(path: string) {
