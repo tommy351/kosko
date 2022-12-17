@@ -19,15 +19,14 @@
   "exports": {
     "./bin/kosko.js": "./bin/kosko.js",
     ".": {
+      "types": "./dist/types.d.ts",
+      "deno": "./dist/index.deno.mjs",
       "node": {
-        "types": "./dist/types.d.ts",
         "import": "./dist/index.node.mjs",
         "require": "./dist/index.node.cjs"
       },
-      "types": "./dist/types.d.ts",
-      "deno": "./dist/index.deno.mjs",
       "import": "./dist/index.base.mjs",
-      "require": "./index.index.node.cjs"
+      "require": "./dist/index.node.cjs"
     }
   },
   "files": [

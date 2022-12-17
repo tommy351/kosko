@@ -13,13 +13,12 @@
     "build": "build-scripts"
   },
   "exports": {
+    "types": "./dist/index.d.ts",
+    "deno": "./dist/index.deno.mjs",
     "node": {
-      "types": "./dist/index.d.ts",
       "import": "./dist/index.node.mjs",
       "require": "./dist/index.node.cjs"
     },
-    "types": "./dist/index.d.ts",
-    "deno": "./dist/index.deno.mjs",
     "import": "./dist/index.base.mjs",
     "require": "./dist/index.node.cjs"
   },
