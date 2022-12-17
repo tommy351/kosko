@@ -55,24 +55,14 @@ async function resolveComponentPath(
   path: string,
   extensions: readonly string[]
 ) {
-  let result: string | undefined;
-
   try {
-    result = await resolveModule(path, { extensions });
+    return await resolveModule(path, { extensions });
   } catch (err) {
     throw new GenerateError("Module path resolve failed", {
       path,
       cause: err
     });
   }
-
-  if (!result) {
-    throw new GenerateError("Module not found", {
-      path
-    });
-  }
-
-  return result;
 }
 
 async function getComponentValue(path: string): Promise<unknown> {
@@ -154,6 +144,17 @@ export async function generate(options: GenerateOptions): Promise<Result> {
         file.absolutePath,
         extensionsWithDot
       );
+
+      if (!path) {
+        logger.log(LogLevel.Debug, "Module not found", {
+          data: {
+            path: file.absolutePath,
+            extensions: extensionsWithDot
+          }
+        });
+        continue;
+      }
+
       const components = await resolve(await getComponentValue(path), {
         validate: options.validate,
         bail: options.bail,

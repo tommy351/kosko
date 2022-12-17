@@ -83,6 +83,36 @@ describe("JS files in folder", () => {
   });
 });
 
+describe("empty folder", () => {
+  beforeEach(async () => {
+    await mkdir(join(tmpDir.path, "foo"), { recursive: true });
+  });
+
+  test("should ignore the folder", async () => {
+    const result = await generate({
+      components: ["*"],
+      path: tmpDir.path
+    });
+    expect(result).toEqual({ manifests: [] });
+  });
+});
+
+describe("folder without index file", () => {
+  beforeEach(async () => {
+    await createTempFiles({
+      "foo/bar.js": "module.exports = {foo: 'bar'}"
+    });
+  });
+
+  test("should ignore the folder", async () => {
+    const result = await generate({
+      components: ["*"],
+      path: tmpDir.path
+    });
+    expect(result).toEqual({ manifests: [] });
+  });
+});
+
 describe("ES module", () => {
   beforeEach(async () => {
     await createTempFiles({

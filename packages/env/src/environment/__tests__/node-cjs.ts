@@ -90,6 +90,42 @@ describe("when env is set", () => {
     });
   });
 
+  describe("empty folder", () => {
+    beforeEach(() => {
+      env.env = "empty";
+    });
+
+    describe("global", () => {
+      test("should return empty object", () => {
+        expect(env.global()).toEqual({});
+      });
+    });
+
+    describe("component", () => {
+      test("should return empty object", () => {
+        expect(env.component("foo")).toEqual({});
+      });
+    });
+  });
+
+  describe("folder without index file", () => {
+    beforeEach(() => {
+      env.env = "without-index";
+    });
+
+    describe("global", () => {
+      test("should return empty object", () => {
+        expect(env.global()).toEqual({});
+      });
+    });
+
+    describe("component", () => {
+      test("should return empty object", () => {
+        expect(env.component("foo")).toEqual({});
+      });
+    });
+  });
+
   describe("with custom paths", () => {
     beforeEach(() => {
       env.env = "dev";
