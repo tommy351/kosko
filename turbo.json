@@ -4,10 +4,6 @@
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**", "out/**"]
-    },
-    "kosko#build": {
-      "dependsOn": ["^build"],
-      "outputs": ["deno.js"]
     }
   },
   "globalDependencies": ["api-extractor.json", "tsconfig.json"]

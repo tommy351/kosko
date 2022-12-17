@@ -10,14 +10,11 @@
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "bin": {
-    "kosko": "bin/kosko.js"
-  },
-  "scripts": {
-    "build": "node --experimental-import-meta-resolve scripts/generate-deno.mjs"
+    "kosko": "bin/kosko.mjs"
   },
   "files": [
     "/bin/",
-    "/deno.js"
+    "/lib/"
   ],
   "keywords": [
     "kubernetes",
@@ -32,8 +29,5 @@
   "dependencies": {
     "@kosko/cli": "workspace:*",
     "import-local": "^3.1.0"
-  },
-  "devDependencies": {
-    "read-pkg-up": "^9.1.0"
   }
 }

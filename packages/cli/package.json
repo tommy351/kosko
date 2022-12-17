@@ -18,7 +18,6 @@
   },
   "exports": {
     "./bin/kosko.js": "./bin/kosko.js",
-    "./deno.js": "./deno.js",
     ".": {
       "node": {
         "types": "./dist/types.d.ts",
@@ -34,8 +33,7 @@
   "files": [
     "/bin/",
     "/dist/",
-    "/templates/",
-    "/deno.js"
+    "/templates/"
   ],
   "keywords": [
     "kubernetes",

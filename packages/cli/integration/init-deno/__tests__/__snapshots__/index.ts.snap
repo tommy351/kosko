@@ -102,7 +102,7 @@ export default [deployment, service];
   "deno.json": "{
   "importMap": "./import_map.json",
   "tasks": {
-    "kosko": "deno run -A npm:kosko/deno.js"
+    "kosko": "deno run -A npm:kosko"
   }
 }
 ",

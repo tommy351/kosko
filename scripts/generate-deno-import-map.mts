@@ -9,9 +9,6 @@ const INIT_IMPORT_MAP_PATH = join(
   ROOT_DIR,
   "packages/cli/templates/deno/import_map.json"
 );
-const CLI_VERSION = JSON.parse(
-  await readFile(join(PACKAGES_DIR, "cli/package.json"), "utf8")
-).version;
 
 async function fileExists(path: string) {
   try {
@@ -31,9 +28,9 @@ const imports: Record<string, string> = {
     join(PACKAGES_DIR, "env/dist/index.deno.mjs")
   ).toString(),
 
-  // For `packages/kosko/deno.js`.
-  [`npm:@kosko/cli@${CLI_VERSION}/deno.js`]: pathToFileURL(
-    join(PACKAGES_DIR, "cli/deno.js")
+  // For `kosko` package.
+  "@kosko/cli": pathToFileURL(
+    join(PACKAGES_DIR, "cli/dist/index.deno.mjs")
   ).toString()
 };
 

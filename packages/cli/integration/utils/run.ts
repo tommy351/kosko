@@ -2,11 +2,13 @@ import execa from "execa";
 import { join } from "node:path";
 import { projectRoot } from "@kosko/test-utils";
 
+const BIN_PATH = join(projectRoot, "packages/kosko/bin/kosko.mjs");
+
 export async function runNodeCLI(
   args: string[],
   options: execa.Options = {}
 ): Promise<execa.ExecaReturnValue> {
-  return execa(join(projectRoot, "packages/kosko/bin/kosko.js"), args, {
+  return execa(BIN_PATH, args, {
     ...options,
     env: {
       LC_ALL: "en_US",
@@ -26,7 +28,7 @@ export async function runDenoCLI(
       "-A",
       "--import-map",
       join(projectRoot, "integration/deno-import-map.json"),
-      join(projectRoot, "packages/kosko/deno.js"),
+      BIN_PATH,
       ...args
     ],
     {
