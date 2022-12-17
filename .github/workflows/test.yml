@@ -48,10 +48,7 @@ jobs:
             export HELM_INSTALL_DIR=/c/Windows
           fi
 
-          curl -H 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' \
-            -fsSL \
-            https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | \
-          bash -s -- --version v${{ env.HELM_VERSION }} --no-sudo
+          curl -fsSL https://cdn.jsdelivr.net/gh/helm/helm@v${{ env.HELM_VERSION }}/scripts/get-helm-3 | bash -s -- --version v${{ env.HELM_VERSION }} --no-sudo
         shell: bash
       - name: Install Kustomize
         run: |
@@ -62,10 +59,7 @@ jobs:
           fi
 
           rm -rf $bin_path/kustomize
-          curl -H 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' \
-            -s \
-            https://raw.githubusercontent.com/kubernetes-sigs/kustomize/kustomize/v${{ env.KUSTOMIZE_VERSION }}/hack/install_kustomize.sh | \
-          bash -s -- ${{ env.KUSTOMIZE_VERSION }} $bin_path
+          curl -s https://cdn.jsdelivr.net/gh/kubernetes-sigs/kustomize@kustomize/v${{ env.KUSTOMIZE_VERSION }}/hack/install_kustomize.sh | bash -s -- ${{ env.KUSTOMIZE_VERSION }} $bin_path
         shell: bash
       - name: Run unit tests
         run: pnpm run test:unit --coverage
