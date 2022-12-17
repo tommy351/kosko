@@ -4,12 +4,6 @@ import logger, { LogLevel } from "@kosko/log";
 import { mergeAsync } from "../merge";
 import { Environment } from "./types";
 import { createAsyncReducerExecutor } from "./base";
-import { getErrorCode } from "@kosko/common-utils";
-
-const MODULE_NOT_FOUND_ERROR_CODES = new Set([
-  "ERR_MODULE_NOT_FOUND",
-  "MODULE_NOT_FOUND"
-]);
 
 /**
  * Returns a new {@link Environment} which loads environment variables using
@@ -46,27 +40,19 @@ export function createNodeESMEnvironment(
       });
 
       if (!path) {
-        logger.log(LogLevel.Debug, `Module not found: ${id}`);
+        logger.log(LogLevel.Debug, "Module not found", {
+          data: {
+            path: id,
+            extensions: env.extensions
+          }
+        });
         return {};
       }
 
-      try {
-        logger.log(LogLevel.Debug, `Importing ${path}`);
+      logger.log(LogLevel.Debug, `Importing ${path}`);
 
-        const mod = await importPath(path);
-        return mod.default;
-      } catch (err) {
-        const code = getErrorCode(err);
-
-        if (code && MODULE_NOT_FOUND_ERROR_CODES.has(code)) {
-          logger.log(LogLevel.Debug, `Cannot import module: ${path}`, {
-            error: err
-          });
-          return {};
-        }
-
-        throw err;
-      }
+      const mod = await importPath(path);
+      return mod.default;
     }
   });
 }
