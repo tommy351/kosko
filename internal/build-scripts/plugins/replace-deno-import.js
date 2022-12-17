@@ -7,6 +7,14 @@ import { readPackageUp } from "read-pkg-up";
 const resolveAsync = promisify(resolve);
 
 /**
+ * @param {string} version
+ * @returns {boolean}
+ */
+function isSnapshotVersion(version) {
+  return version.startsWith("0.0.0-");
+}
+
+/**
  * @param {Record<string, string>} dependencies
  * @returns {import('rollup').Plugin}
  */
@@ -30,7 +38,7 @@ export default function replaceDenoImport(dependencies) {
         packageJson: { version }
       } = pkg;
 
-      if (symbol === "*") {
+      if (isSnapshotVersion(version) || symbol === "*") {
         return version;
       }
 
