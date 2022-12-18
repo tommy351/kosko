@@ -6,5 +6,6 @@
       "outputs": ["dist/**", "out/**"]
     }
   },
-  "globalDependencies": ["api-extractor.json", "tsconfig.json"]
+  "globalDependencies": ["api-extractor.json", "tsconfig.json"],
+  "globalEnv": ["DENO_BUILD_PROD"]
 }

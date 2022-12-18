@@ -13,6 +13,7 @@ import globby from "globby";
 import ts from "typescript";
 import moduleSuffixes from "../plugins/module-suffixes.js";
 import replaceDenoImport from "../plugins/replace-deno-import.js";
+import { env } from "node:process";
 
 const cwd = process.cwd();
 const distDir = "dist";
@@ -185,7 +186,7 @@ await Promise.all([
     format: "esm",
     suffixes: [".deno", ".esm"],
     target: "deno",
-    replaceDenoImport: true
+    replaceDenoImport: env.DENO_BUILD_PROD !== "1"
   })
 ]);
 

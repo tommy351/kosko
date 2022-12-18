@@ -18,6 +18,8 @@ jobs:
       - run: pnpm install --lockfile-only
       - run: pnpm ts-node-esm scripts/replace-exact-workspace-version.mts
       - run: pnpm run build
+        env:
+          DENO_BUILD_PROD: "1"
       - run: pnpm changeset publish --tag snapshot --no-git-tag
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
