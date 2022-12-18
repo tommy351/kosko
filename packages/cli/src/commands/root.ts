@@ -6,10 +6,12 @@ import { validateCmd } from "./validate";
 import { migrateCmd } from "./migrate";
 import { setupLogger } from "../cli/logger";
 import { cwd } from "node:process";
+import { version } from "../../package.json";
 
 export function createRootCommand(args: readonly string[]) {
   return yargs(args)
     .scriptName("kosko")
+    .version(version)
     .exitProcess(false)
     .option("cwd", {
       type: "string",

@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true
+  },
+  "exclude": [
+    "internal/*/dist",
+    "packages/*/dist",
+    "packages/*/lib",
+    "packages/*/integration",
+    "**/__tests__/**",
+    "**/__fixtures/**"
+  ]
+}

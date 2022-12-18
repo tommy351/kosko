@@ -2,7 +2,14 @@
   "extends": "@tsconfig/node14/tsconfig.json",
   "compilerOptions": {
     "moduleResolution": "node",
-    "module": "esnext"
+    "module": "esnext",
+    "resolveJsonModule": true
   },
-  "include": ["integration", "internal/*/src", "packages/*/src"]
+  "exclude": [
+    "internal/*/dist",
+    "packages/*/dist",
+    "packages/cli/templates",
+    "examples",
+    "website"
+  ]
 }

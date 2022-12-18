@@ -2,24 +2,28 @@
 // @ts-check
 
 import { readFile, rm, unlink } from "node:fs/promises";
-import { join } from "node:path";
+import { join, normalize } from "node:path";
 import { rollup } from "rollup";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import swc from "rollup-plugin-swc";
-import typescript from "@rollup/plugin-typescript";
+import json from "@rollup/plugin-json";
 import { Extractor, ExtractorConfig } from "@microsoft/api-extractor";
 import globby from "globby";
-import ts from "typescript";
+import execa from "execa";
 import moduleSuffixes from "../plugins/module-suffixes.js";
 import replaceDenoImport from "../plugins/replace-deno-import.js";
 import { env } from "node:process";
+import resolveBin from "resolve-bin";
+import { promisify } from "node:util";
+
+const resolveBinPromise = promisify(resolveBin);
 
 const cwd = process.cwd();
 const distDir = "dist";
 const fullDistPath = join(cwd, distDir);
+const tsc = await resolveBinPromise("typescript", { executable: "tsc" });
 const pkgJson = JSON.parse(await readFile(join(cwd, "package.json"), "utf-8"));
-const tsConfigPath = ts.findConfigFile(cwd, ts.sys.fileExists);
 const dependencies = pkgJson.dependencies ?? {};
 
 const args = process.argv.slice(2);
@@ -32,7 +36,6 @@ const entryFiles = args.length ? args : ["src/index.ts"];
  *   format: import("rollup").ModuleFormat;
  *   importMetaUrlShim?: boolean;
  *   target: 'browser' | 'node' | 'deno';
- *   dts?: boolean;
  *   replaceDenoImport?: boolean;
  * }} options
  */
@@ -53,6 +56,7 @@ async function buildBundle(options) {
     plugins: [
       ...(options.replaceDenoImport ? [replaceDenoImport(dependencies)] : []),
       ...(options.suffixes ? [moduleSuffixes(options.suffixes)] : []),
+      json({ compact: true, preferConst: true }),
       nodeResolve({ extensions: [".ts"] }),
       replace({
         preventAssignment: true,
@@ -76,21 +80,7 @@ async function buildBundle(options) {
           }
         },
         sourceMaps: true
-      }),
-      ...(options.dts
-        ? [
-            // TypeScript is only used for building declaration files only.
-            typescript({
-              tsconfig: tsConfigPath,
-              compilerOptions: {
-                outDir: distDir,
-                declaration: true,
-                emitDeclarationOnly: true
-              },
-              exclude: ["**/__tests__/**", "**/__fixtures__/**"]
-            })
-          ]
-        : [])
+      })
     ]
   });
 
@@ -143,13 +133,17 @@ async function runApiExtractor() {
       config.betaTrimmedFilePath,
       config.publicTrimmedFilePath,
       config.untrimmedFilePath
-    ].filter(Boolean)
+    ]
+      .filter(Boolean)
+      .map(normalize)
   );
 
   for (const file of dtsFiles) {
-    if (!dtsFilesToKeep.has(file)) {
-      console.log("Deleting:", file);
-      await unlink(file);
+    const normalizedPath = normalize(file);
+
+    if (!dtsFilesToKeep.has(normalizedPath)) {
+      console.log("Deleting:", normalizedPath);
+      await unlink(normalizedPath);
     }
   }
 }
@@ -161,8 +155,7 @@ await Promise.all([
     output: "base.mjs",
     format: "esm",
     suffixes: [".esm"],
-    target: "browser",
-    dts: true
+    target: "browser"
   }),
 
   // Node.js
@@ -190,5 +183,6 @@ await Promise.all([
   })
 ]);
 
+await execa(tsc, ["--outDir", distDir]);
 await rm(join(cwd, "out"), { recursive: true, force: true });
 await runApiExtractor();
