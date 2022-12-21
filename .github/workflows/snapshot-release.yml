@@ -3,10 +3,12 @@ on:
   push:
     branches:
       - snapshot
+  pull_request:
 
 jobs:
   release:
     runs-on: ubuntu-20.04
+    if: ${{ github.event_name == 'push' || contains(github.event.pull_request.labels.*.name, 'snapshot') }}
     steps:
       - uses: actions/checkout@v3
         with:
