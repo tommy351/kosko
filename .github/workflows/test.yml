@@ -5,7 +5,6 @@ on:
 
 env:
   HELM_VERSION: 3.10.2
-  KUSTOMIZE_VERSION: 4.5.7
 
 jobs:
   lint:
@@ -50,17 +49,7 @@ jobs:
 
           curl -fsSL https://cdn.jsdelivr.net/gh/helm/helm@v${{ env.HELM_VERSION }}/scripts/get-helm-3 | bash -s -- --version v${{ env.HELM_VERSION }} --no-sudo
         shell: bash
-      - name: Install Kustomize
-        run: |
-          bin_path=/usr/local/bin
-
-          if [ $RUNNER_OS = 'Windows' ]; then
-            bin_path=/c/Windows
-          fi
-
-          rm -rf $bin_path/kustomize
-          curl -s https://cdn.jsdelivr.net/gh/kubernetes-sigs/kustomize@kustomize/v${{ env.KUSTOMIZE_VERSION }}/hack/install_kustomize.sh | bash -s -- ${{ env.KUSTOMIZE_VERSION }} $bin_path
-        shell: bash
+      - uses: ./.github/actions/install-kustomize
       - name: Run unit tests
         run: pnpm run test:unit --coverage
       - name: Run integration tests

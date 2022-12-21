@@ -1,0 +1,24 @@
+name: Install Kustomize
+
+inputs:
+  version:
+    description: Kustomize version
+    required: true
+    default: 4.5.7
+
+runs:
+  using: composite
+  steps:
+    - name: Install Kustomize
+      shell: bash
+      run: |
+        bin_path=/usr/local/bin
+        os=linux
+
+        if [ $RUNNER_OS = 'Windows' ]; then
+          bin_path=/c/Windows
+          os=windows
+        fi
+
+        mkdir -p $bin_path
+        curl -L "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${{ inputs.version }}/kustomize_v${{ inputs.version }}_${os}_amd64.tar.gz" | tar -xz -C $bin_path
