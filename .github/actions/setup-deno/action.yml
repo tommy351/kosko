@@ -1,0 +1,25 @@
+name: Setup Deno
+
+inputs:
+  version:
+    description: Deno version
+    required: true
+    default: v1.x
+
+runs:
+  using: composite
+  steps:
+    - uses: denoland/setup-deno@v1
+      id: setup-deno
+      with:
+        deno-version: v1.x
+    - name: Get Deno info
+      id: deno-info
+      shell: bash
+      run: |
+        echo "deno-dir=$(deno info --json | jq -r '.denoDir')" >> $GITHUB_OUTPUT
+    - name: Set up Deno cache
+      uses: actions/cache@v3
+      with:
+        path: ${{ steps.deno-info.outputs.deno-dir }}
+        key: deno-${{ runner.os }}-${{ steps.setup-deno.outputs.deno-version }}-${{ hashFiles('**/pnpm-lock.yaml', 'internal/build-scripts/plugins/**') }}

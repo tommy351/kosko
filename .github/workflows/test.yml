@@ -3,9 +3,6 @@ on:
   push:
   pull_request:
 
-env:
-  HELM_VERSION: 3.10.2
-
 jobs:
   lint:
     runs-on: ubuntu-20.04
@@ -30,9 +27,7 @@ jobs:
       - uses: ./.github/actions/install-deps
         with:
           node-version: ${{ matrix.node-version }}
-      - uses: denoland/setup-deno@v1
-        with:
-          deno-version: v1.x
+      - uses: ./.github/actions/setup-deno
       - uses: ./.github/actions/build-packages
       # https://github.com/actions/virtual-environments/issues/712#issuecomment-613004302
       - name: Set TEMP on Windows
@@ -41,15 +36,11 @@ jobs:
       - uses: azure/setup-kubectl@v3
         with:
           version: v1.23.1
-      - name: Install Helm
-        run: |
-          if [ $RUNNER_OS = 'Windows' ]; then
-            export HELM_INSTALL_DIR=/c/Windows
-          fi
-
-          curl -fsSL https://cdn.jsdelivr.net/gh/helm/helm@v${{ env.HELM_VERSION }}/scripts/get-helm-3 | bash -s -- --version v${{ env.HELM_VERSION }} --no-sudo
-        shell: bash
-      - uses: ./.github/actions/install-kustomize
+      - uses: azure/setup-helm@v3
+        with:
+          version: 3.10.2
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: ./.github/actions/setup-kustomize
       - name: Run unit tests
         run: pnpm run test:unit --coverage
       - name: Run integration tests

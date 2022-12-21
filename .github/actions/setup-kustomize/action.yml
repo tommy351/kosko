@@ -1,4 +1,4 @@
-name: Install Kustomize
+name: Setup Kustomize
 
 inputs:
   version:
