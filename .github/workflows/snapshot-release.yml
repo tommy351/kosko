@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - snapshot
+      - snapshots/**
   pull_request:
 
 jobs:
