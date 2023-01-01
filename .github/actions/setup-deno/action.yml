@@ -1,18 +1,12 @@
 name: Setup Deno
 
-inputs:
-  version:
-    description: Deno version
-    required: true
-    default: v1.x
-
 runs:
   using: composite
   steps:
     - uses: denoland/setup-deno@v1
       id: setup-deno
       with:
-        deno-version: v1.x
+        deno-version: "~1.29"
     - name: Get Deno info
       id: deno-info
       shell: bash

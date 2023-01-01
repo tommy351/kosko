@@ -1,4 +1,5 @@
-import { loadString } from "../../dist/index.deno.mjs";
+/* eslint-disable node/no-missing-import */
+import { loadString } from "npm:@kosko/yaml";
 
 const result = await loadString(`
 apiVersion: v1

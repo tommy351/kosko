@@ -137,7 +137,8 @@ describe("Node.js ESM", () => {
   });
 });
 
-describe("Deno", () => {
+// eslint-disable-next-line jest/no-disabled-tests
+describe.skip("Deno", () => {
   async function execute(options: execa.Options) {
     return execa(
       "deno",

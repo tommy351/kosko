@@ -27,8 +27,8 @@ export async function runDenoCLI(
       "run",
       "-A",
       "--import-map",
-      join(projectRoot, "integration/deno-import-map.json"),
-      BIN_PATH,
+      join(projectRoot, "packages/cli/templates/deno/import_map.json"),
+      "npm:kosko",
       ...args
     ],
     {

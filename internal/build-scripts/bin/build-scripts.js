@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // @ts-check
 
-import { readFile, rm, unlink } from "node:fs/promises";
+import { mkdir, readFile, rm, unlink } from "node:fs/promises";
 import { join, normalize } from "node:path";
 import { rollup } from "rollup";
 import nodeResolve from "@rollup/plugin-node-resolve";
@@ -12,16 +12,21 @@ import { Extractor, ExtractorConfig } from "@microsoft/api-extractor";
 import globby from "globby";
 import execa from "execa";
 import moduleSuffixes from "../plugins/module-suffixes.js";
-import replaceDenoImport from "../plugins/replace-deno-import.js";
-import { env } from "node:process";
 import resolveBin from "resolve-bin";
 import { promisify } from "node:util";
 
 const resolveBinPromise = promisify(resolveBin);
 
 const cwd = process.cwd();
+
+// distDir stores files that will be published.
 const distDir = "dist";
 const fullDistPath = join(cwd, distDir);
+
+// outDir stores files for internal usage.
+const outDir = "out";
+const fullOutPath = join(cwd, outDir);
+
 const tsc = await resolveBinPromise("typescript", { executable: "tsc" });
 const pkgJson = JSON.parse(await readFile(join(cwd, "package.json"), "utf-8"));
 const dependencies = pkgJson.dependencies ?? {};
@@ -36,7 +41,6 @@ const entryFiles = args.length ? args : ["src/index.ts"];
  *   format: import("rollup").ModuleFormat;
  *   importMetaUrlShim?: boolean;
  *   target: 'browser' | 'node' | 'deno';
- *   replaceDenoImport?: boolean;
  * }} options
  */
 async function buildBundle(options) {
@@ -44,9 +48,7 @@ async function buildBundle(options) {
 
   const bundle = await rollup({
     input: entryFiles,
-    ...(!options.replaceDenoImport && {
-      external: Object.keys(dependencies)
-    }),
+    external: Object.keys(dependencies),
     treeshake: {
       preset: "recommended",
       // Assume all modules has no side effects in order to remove all unused
@@ -54,7 +56,6 @@ async function buildBundle(options) {
       moduleSideEffects: false
     },
     plugins: [
-      ...(options.replaceDenoImport ? [replaceDenoImport(dependencies)] : []),
       ...(options.suffixes ? [moduleSuffixes(options.suffixes)] : []),
       json({ compact: true, preferConst: true }),
       nodeResolve({ extensions: [".ts"] }),
@@ -148,7 +149,13 @@ async function runApiExtractor() {
   }
 }
 
+async function generatePack() {
+  await execa("pnpm", ["pack", "--pack-destination", fullOutPath]);
+}
+
 await rm(fullDistPath, { recursive: true, force: true });
+await rm(fullOutPath, { recursive: true, force: true });
+
 await Promise.all([
   // Base
   buildBundle({
@@ -178,11 +185,11 @@ await Promise.all([
     output: "deno.mjs",
     format: "esm",
     suffixes: [".deno", ".esm"],
-    target: "deno",
-    replaceDenoImport: env.DENO_BUILD_PROD !== "1"
+    target: "deno"
   })
 ]);
 
 await execa(tsc, ["--outDir", distDir]);
-await rm(join(cwd, "out"), { recursive: true, force: true });
+await mkdir(fullOutPath, { recursive: true });
 await runApiExtractor();
+await generatePack();

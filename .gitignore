@@ -19,6 +19,3 @@ tmp/
 
 # Turbo
 .turbo
-
-# Deno integration tests
-/integration/deno-import-map.json
