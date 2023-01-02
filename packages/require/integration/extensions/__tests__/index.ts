@@ -52,11 +52,3 @@ describe("Node.js ESM", () => {
     ).resolves.toEqual([".cjs", ".mjs", ".js", ".json", ".node", ".ts"]);
   });
 });
-
-describe("Deno", () => {
-  test("should return a constant", async () => {
-    const result = await execa("deno", ["run", join(testDir, "deno.js")]);
-
-    expect(JSON.parse(result.stdout)).toEqual([".ts", ".js", ".json"]);
-  });
-});

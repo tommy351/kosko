@@ -27,7 +27,6 @@ jobs:
       - uses: ./.github/actions/install-deps
         with:
           node-version: ${{ matrix.node-version }}
-      - uses: ./.github/actions/setup-deno
       - uses: ./.github/actions/build-packages
       # https://github.com/actions/virtual-environments/issues/712#issuecomment-613004302
       - name: Set TEMP on Windows
@@ -58,3 +57,17 @@ jobs:
       - uses: ./.github/actions/build-packages
       - name: Run browser tests
         run: pnpm run test:browser
+  test-deno:
+    runs-on: ${{ matrix.os }}
+    needs:
+      - lint
+    strategy:
+      matrix:
+        os: [ubuntu-20.04, windows-latest]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/install-deps
+      - uses: ./.github/actions/setup-deno
+      - uses: ./.github/actions/build-packages
+      - name: Run Deno tests
+        run: pnpm run test:deno

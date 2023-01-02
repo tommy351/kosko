@@ -15,6 +15,9 @@ const REGISTRY_URL = `http://localhost:${VERDACCIO_PORT}/`;
 
 const server = await startVerdaccio();
 
+/**
+ * @param {string} storagePath
+ */
 async function removePackagesFromVerdaccio(storagePath) {
   const paths = await globby("packages/*/package.json");
 
@@ -28,6 +31,9 @@ async function removePackagesFromVerdaccio(storagePath) {
   }
 }
 
+/**
+ * @param {string} storagePath
+ */
 async function resetVerdaccioDb(storagePath) {
   const path = join(storagePath, ".verdaccio-db.json");
 
@@ -79,6 +85,10 @@ async function startVerdaccio() {
   return server;
 }
 
+/**
+ * @param {readonly string[]} args
+ * @param {execa.Options} options
+ */
 function execNpm(args, options = {}) {
   return execa("npm", args, {
     ...options,
@@ -120,7 +130,7 @@ async function runIntegrationTests() {
     "jest",
     [
       "--config",
-      join(ROOT_DIR, "jest.integration.config.ts"),
+      join(ROOT_DIR, "jest.integration-deno.config.ts"),
       ...process.argv.slice(2)
     ],
     {

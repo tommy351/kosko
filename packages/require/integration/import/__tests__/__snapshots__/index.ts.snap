@@ -1,11 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Deno should import JS file 1`] = `"{"ext":"js"}"`;
-
-exports[`Deno should import JSON file 1`] = `"{"default":{"ext":"json"}}"`;
-
-exports[`Deno should import TS file 1`] = `"{"ext":"ts"}"`;
-
 exports[`Node.js CJS should import CJS file 1`] = `"{"default":{"ext":"mjs"},"ext":"mjs"}"`;
 
 exports[`Node.js CJS should import JS file in package whose type = commonjs 1`] = `"{"default":{"ext":"js"},"ext":"js"}"`;
