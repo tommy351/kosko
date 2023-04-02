@@ -53,15 +53,8 @@ export default function replaceDenoImport(dependencies) {
     async resolveId(source, importer) {
       if (!importer) return null;
 
-      if (source.startsWith("npm:")) {
+      if (source.startsWith("npm:") || source.startsWith("node:")) {
         return { id: source, external: true };
-      }
-
-      if (source.startsWith("node:")) {
-        return {
-          id: `https://deno.land/std@0.166.0/node/${source.substring(5)}.ts`,
-          external: true
-        };
       }
 
       if (source === "yargs") {
