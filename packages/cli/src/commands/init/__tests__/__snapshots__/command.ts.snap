@@ -211,14 +211,14 @@ loaders = ["ts-node/esm"]
 }
 ",
   "tsconfig.json": "{
-  "extends": "@tsconfig/node16-strictest-esm/tsconfig.json",
+  "extends": "@tsconfig/node14/tsconfig.json",
   "compilerOptions": {
     "typeRoots": [
       "./node_modules/@types",
       "./typings"
     ],
-    "moduleResolution": "node",
-    "module": "esnext"
+    "module": "nodenext",
+    "moduleResolution": "nodenext"
   }
 }
 ",
@@ -363,13 +363,12 @@ require = ["ts-node/register"]
 }
 ",
   "tsconfig.json": "{
-  "extends": "@tsconfig/recommended/tsconfig.json",
+  "extends": "@tsconfig/node14/tsconfig.json",
   "compilerOptions": {
     "typeRoots": [
       "./node_modules/@types",
       "./typings"
-    ],
-    "moduleResolution": "node"
+    ]
   }
 }
 ",

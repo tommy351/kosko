@@ -6,9 +6,9 @@ import { generateKoskoConfig } from "./kosko-config";
 import { generatePackageJson } from "./package-json";
 import { generateFromTemplateFile, generateReadme } from "./template";
 
-const BASE_TSCONFIG = "@tsconfig/recommended";
+const BASE_TSCONFIG = "@tsconfig/node14";
 
-export const tsDevDependencies = ["ts-node", "typescript"];
+export const tsDevDependencies = ["ts-node", "typescript", BASE_TSCONFIG];
 
 export function generateTsConfig({
   compilerOptions,
@@ -26,7 +26,6 @@ export function generateTsConfig({
           extends: `${BASE_TSCONFIG}/tsconfig.json`,
           compilerOptions: {
             typeRoots: ["./node_modules/@types", "./typings"],
-            moduleResolution: "node",
             ...compilerOptions
           },
           ...data
@@ -53,7 +52,7 @@ export function generateTsEnvFiles() {
 const tsTemplate: Template = async (ctx) => {
   return {
     dependencies: baseDependencies,
-    devDependencies: [...tsDevDependencies, BASE_TSCONFIG],
+    devDependencies: tsDevDependencies,
     files: [
       await generatePackageJson(ctx),
       generateKoskoConfig(`require = ["ts-node/register"]`),

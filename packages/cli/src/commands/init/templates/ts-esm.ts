@@ -5,12 +5,10 @@ import { generatePackageJson } from "./package-json";
 import { generateFromTemplateFile, generateReadme } from "./template";
 import { generateTsConfig, generateTsEnvFiles, tsDevDependencies } from "./ts";
 
-const BASE_TSCONFIG = "@tsconfig/node16-strictest-esm";
-
 const tsEsmTemplate: Template = async (ctx) => {
   return {
     dependencies: baseDependencies,
-    devDependencies: [...tsDevDependencies, BASE_TSCONFIG],
+    devDependencies: tsDevDependencies,
     files: [
       await generatePackageJson(ctx, {
         type: "module"
@@ -18,9 +16,9 @@ const tsEsmTemplate: Template = async (ctx) => {
       generateKoskoConfig(`loaders = ["ts-node/esm"]`),
       await generateReadme(),
       generateTsConfig({
-        extends: `${BASE_TSCONFIG}/tsconfig.json`,
         compilerOptions: {
-          module: "esnext"
+          module: "nodenext",
+          moduleResolution: "nodenext"
         }
       }),
       await generateFromTemplateFile(

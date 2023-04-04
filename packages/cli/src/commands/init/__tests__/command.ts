@@ -229,7 +229,7 @@ describe("when --typescript option is given", () => {
     expect(logger.log).toHaveBeenCalledWith(
       LogLevel.Info,
       expect.stringContaining(
-        "npm install ts-node typescript @tsconfig/recommended --save-dev"
+        "npm install ts-node typescript @tsconfig/node14 --save-dev"
       )
     );
   });
@@ -252,7 +252,7 @@ describe("when --typescript and --esm option is given", () => {
     expect(logger.log).toHaveBeenCalledWith(
       LogLevel.Info,
       expect.stringContaining(
-        "npm install ts-node typescript @tsconfig/node16-strictest-esm --save-dev"
+        "npm install ts-node typescript @tsconfig/node14 --save-dev"
       )
     );
   });
@@ -289,7 +289,7 @@ describe.each([
         expect(logger.log).toHaveBeenCalledWith(
           LogLevel.Info,
           expect.stringContaining(
-            `${packageManager} ${installCommand} ts-node typescript @tsconfig/recommended ${devFlag}`
+            `${packageManager} ${installCommand} ts-node typescript @tsconfig/node14 ${devFlag}`
           )
         );
       });
@@ -325,7 +325,7 @@ describe.each([
             installCommand,
             "ts-node",
             "typescript",
-            "@tsconfig/recommended",
+            "@tsconfig/node14",
             devFlag
           ],
           spawnOptions
