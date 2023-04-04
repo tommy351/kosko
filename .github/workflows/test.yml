@@ -57,17 +57,17 @@ jobs:
       - uses: ./.github/actions/build-packages
       - name: Run browser tests
         run: pnpm run test:browser
-  test-deno:
-    runs-on: ${{ matrix.os }}
-    needs:
-      - lint
-    strategy:
-      matrix:
-        os: [ubuntu-20.04, windows-latest]
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/actions/install-deps
-      - uses: ./.github/actions/setup-deno
-      - uses: ./.github/actions/build-packages
-      - name: Run Deno tests
-        run: pnpm run test:deno
+  # test-deno:
+  #   runs-on: ${{ matrix.os }}
+  #   needs:
+  #     - lint
+  #   strategy:
+  #     matrix:
+  #       os: [ubuntu-20.04, windows-latest]
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: ./.github/actions/install-deps
+  #     - uses: ./.github/actions/setup-deno
+  #     - uses: ./.github/actions/build-packages
+  #     - name: Run Deno tests
+  #       run: pnpm run test:deno

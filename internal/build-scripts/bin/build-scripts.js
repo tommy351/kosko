@@ -178,15 +178,15 @@ await Promise.all([
     format: "esm",
     suffixes: [".node.esm", ".node", ".esm"],
     target: "node"
-  }),
+  })
 
   // Deno
-  buildBundle({
-    output: "deno.mjs",
-    format: "esm",
-    suffixes: [".deno", ".esm"],
-    target: "deno"
-  })
+  // buildBundle({
+  //   output: "deno.mjs",
+  //   format: "esm",
+  //   suffixes: [".deno", ".esm"],
+  //   target: "deno"
+  // })
 ]);
 
 await execa(tsc, ["--outDir", distDir]);

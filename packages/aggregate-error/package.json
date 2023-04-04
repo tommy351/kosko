@@ -19,7 +19,6 @@
     "index.node.mjs"
   ],
   "exports": {
-    "types": "./index.d.ts",
     "node": {
       "import": "./index.node.mjs",
       "require": "./index.node.cjs"

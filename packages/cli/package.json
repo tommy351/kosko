@@ -19,8 +19,6 @@
   "exports": {
     "./bin/kosko.js": "./bin/kosko.js",
     ".": {
-      "types": "./dist/types.d.ts",
-      "deno": "./dist/index.deno.mjs",
       "node": {
         "import": "./dist/index.node.mjs",
         "require": "./dist/index.node.cjs"

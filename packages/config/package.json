@@ -14,8 +14,6 @@
     "build": "build-scripts"
   },
   "exports": {
-    "types": "./dist/index.d.ts",
-    "deno": "./dist/index.deno.mjs",
     "node": {
       "import": "./dist/index.node.mjs",
       "require": "./dist/index.node.cjs"
