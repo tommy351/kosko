@@ -23,7 +23,7 @@ function testLoad(options: {
 }) {
   let content: string;
   let loadOptions: LoadOptions;
-  let result: ReturnType<typeof options["load"]>;
+  let result: ReturnType<(typeof options)["load"]>;
 
   beforeEach(async () => {
     await options.setup(content);
