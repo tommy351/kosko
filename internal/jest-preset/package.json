@@ -8,6 +8,7 @@
   "dependencies": {
     "@kosko/jest-serializer-path": "workspace:^",
     "@swc/core": "^1.3.19",
+    "@swc/helpers": "^0.5.0",
     "@swc/jest": "^0.2.23",
     "jest-extended": "^3.1.0"
   },

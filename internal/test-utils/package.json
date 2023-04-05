@@ -17,6 +17,7 @@
       "import": "./dist/index.node.mjs",
       "require": "./dist/index.node.cjs"
     },
+    "types": "./dist/types.d.ts",
     "import": "./dist/index.base.mjs",
     "require": "./dist/index.node.cjs"
   },

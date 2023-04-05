@@ -23,6 +23,7 @@
       "import": "./index.node.mjs",
       "require": "./index.node.cjs"
     },
+    "types": "./index.d.ts",
     "import": "./index.browser.mjs",
     "require": "./index.node.cjs"
   },
