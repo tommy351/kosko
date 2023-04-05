@@ -1,10 +1,8 @@
 {
-  "name": "@kosko-example/getting-started",
-  "version": "0.0.15",
   "private": true,
   "dependencies": {
-    "@kosko/env": "workspace:^",
-    "kosko": "workspace:^",
+    "@kosko/env": "^4.0.1",
+    "kosko": "^3.0.3",
     "kubernetes-models": "^4.1.0"
   }
 }

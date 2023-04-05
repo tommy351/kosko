@@ -1,14 +1,12 @@
 {
-  "name": "@kosko-example/web-sync-environment",
-  "version": "0.0.5",
   "private": true,
   "scripts": {
     "start": "webpack serve",
     "build": "webpack"
   },
   "dependencies": {
-    "@kosko/env": "workspace:^",
-    "@kosko/generate": "workspace:^",
+    "@kosko/env": "^4.0.1",
+    "@kosko/generate": "^3.0.2",
     "kubernetes-models": "^4.1.0"
   },
   "devDependencies": {
