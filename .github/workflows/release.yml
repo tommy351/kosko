@@ -12,6 +12,7 @@ jobs:
         with:
           fetch-depth: 0
       - uses: ./.github/actions/install-deps
+      - uses: ./.github/actions/build-packages
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
