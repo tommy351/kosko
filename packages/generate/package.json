@@ -16,11 +16,18 @@
   },
   "exports": {
     "node": {
-      "import": "./dist/index.node.mjs",
+      "import": {
+        "types": "./dist/types.d.mts",
+        "default": "./dist/index.node.mjs"
+      },
+      "types": "./dist/types.d.ts",
       "require": "./dist/index.node.cjs"
     },
+    "import": {
+      "types": "./dist/types.d.mts",
+      "default": "./dist/index.base.mjs"
+    },
     "types": "./dist/types.d.ts",
-    "import": "./dist/index.base.mjs",
     "require": "./dist/index.node.cjs"
   },
   "files": [

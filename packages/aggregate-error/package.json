@@ -14,17 +14,25 @@
   "files": [
     "dist",
     "index.d.ts",
+    "index.d.mts",
     "index.browser.mjs",
     "index.node.cjs",
     "index.node.mjs"
   ],
   "exports": {
     "node": {
-      "import": "./index.node.mjs",
+      "import": {
+        "types": "./index.d.mts",
+        "default": "./index.node.mjs"
+      },
+      "types": "./index.d.ts",
       "require": "./index.node.cjs"
     },
+    "import": {
+      "types": "./index.d.mts",
+      "default": "./index.browser.mjs"
+    },
     "types": "./index.d.ts",
-    "import": "./index.browser.mjs",
     "require": "./index.node.cjs"
   },
   "scripts": {

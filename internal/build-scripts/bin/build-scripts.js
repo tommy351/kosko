@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // @ts-check
 
-import { mkdir, readFile, rm, unlink } from "node:fs/promises";
+import { copyFile, mkdir, readFile, rm, unlink } from "node:fs/promises";
 import { join, normalize } from "node:path";
 import { rollup } from "rollup";
 import nodeResolve from "@rollup/plugin-node-resolve";
@@ -149,6 +149,19 @@ async function runApiExtractor() {
   }
 }
 
+async function copyEsmDts() {
+  const paths = await globby("**/*.d.ts", {
+    cwd: join(cwd, "dist"),
+    absolute: true
+  });
+
+  for (const path of paths) {
+    const dst = path.replace(/\.d\.ts$/, ".d.mts");
+    console.log("Copying:", dst);
+    await copyFile(path, dst);
+  }
+}
+
 async function generatePack() {
   await execa("pnpm", ["pack", "--pack-destination", fullOutPath]);
 }
@@ -192,4 +205,5 @@ await Promise.all([
 await execa(tsc, ["--outDir", distDir]);
 await mkdir(fullOutPath, { recursive: true });
 await runApiExtractor();
+await copyEsmDts();
 await generatePack();
