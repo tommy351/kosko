@@ -7,7 +7,7 @@ import type { Result, Manifest } from "./base";
 import logger, { LogLevel } from "@kosko/log";
 import { resolve } from "./resolve";
 import { aggregateErrors, GenerateError } from "./error";
-import { glob } from "./glob";
+import { glob, GlobResult } from "./glob";
 
 /**
  * @public
@@ -91,6 +91,11 @@ function validateExtensions(extensions: readonly string[]) {
   }
 }
 
+interface ResolveResult {
+  manifests?: Manifest[];
+  error?: unknown;
+}
+
 /**
  * Finds components with glob patterns in the specified path and returns exported
  * values from each components.
@@ -129,14 +134,9 @@ export async function generate(options: GenerateOptions): Promise<Result> {
   validateExtensions(extensions);
 
   const extensionsWithDot = extensions.map((ext) => "." + ext);
-  const manifests: Manifest[] = [];
-  const errors: unknown[] = [];
+  const promises: Promise<ResolveResult>[] = [];
 
-  for await (const file of glob({
-    path: options.path,
-    extensions,
-    patterns: options.components
-  })) {
+  async function resolveFile(file: GlobResult): Promise<ResolveResult> {
     logger.log(LogLevel.Debug, `Found component "${file.relativePath}"`);
 
     try {
@@ -152,29 +152,43 @@ export async function generate(options: GenerateOptions): Promise<Result> {
             extensions: extensionsWithDot
           }
         });
-        continue;
+
+        return {};
       }
 
-      const components = await resolve(await getComponentValue(path), {
+      const manifests = await resolve(await getComponentValue(path), {
         validate: options.validate,
         bail: options.bail,
         index: [],
         path
       });
 
-      manifests.push(...components);
-    } catch (err) {
+      return { manifests };
+    } catch (error) {
       if (options.bail) {
-        throw err;
+        throw error;
       }
 
-      errors.push(err);
+      return { error };
     }
   }
+
+  for await (const file of glob({
+    path: options.path,
+    extensions,
+    patterns: options.components
+  })) {
+    promises.push(resolveFile(file));
+  }
+
+  const results = await Promise.all(promises);
+  const errors = results.flatMap((r) => (r.error ? [r.error] : []));
 
   if (errors.length) {
     throw aggregateErrors(errors);
   }
 
-  return { manifests };
+  return {
+    manifests: results.flatMap((r) => r.manifests ?? [])
+  };
 }
