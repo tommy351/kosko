@@ -1,5 +1,7 @@
 import { createRequire } from "node:module";
 
+const BASE_EXTENSIONS = [".js", ".json"];
+
 /**
  * Returns file extensions which can be imported.
  *
@@ -20,12 +22,22 @@ export function getRequireExtensions(): string[] {
           ? createRequire(import.meta.url)
           : require;
 
-      return [".cjs", ".mjs", ...req("../lib/node-extensions.cjs")()];
+      const extensions = new Set([
+        ".cjs",
+        ".mjs",
+        ...BASE_EXTENSIONS,
+        // The global `require` function includes extensions registered by
+        // other package (e.g. ts-node).
+        // However, this function always returns an empty array on Node.js 20+.
+        ...req("../lib/node-extensions.cjs")()
+      ]);
+
+      return [...extensions];
     }
     case "deno":
-      return [".ts", ".js", ".json"];
+      return [".ts", ...BASE_EXTENSIONS];
 
     default:
-      return [".js", ".json"];
+      return BASE_EXTENSIONS;
   }
 }

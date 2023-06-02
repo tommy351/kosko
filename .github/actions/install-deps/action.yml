@@ -4,11 +4,11 @@ inputs:
   node-version:
     description: Node.js version
     required: true
-    default: 18.x
+    default: 20.x
   pnpm-version:
     description: pnpm version
     required: true
-    default: 7.31.0
+    default: 7.33.0
 
 runs:
   using: composite

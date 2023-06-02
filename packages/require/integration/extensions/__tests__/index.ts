@@ -43,12 +43,4 @@ describe("Node.js ESM", () => {
       ".node"
     ]);
   });
-
-  test("should include extensions from loaders", async () => {
-    await expect(
-      execute({
-        nodeOptions: ["--loader", "ts-node/esm"]
-      })
-    ).resolves.toEqual([".cjs", ".mjs", ".js", ".json", ".node", ".ts"]);
-  });
 });

@@ -4,7 +4,8 @@ import { join } from "node:path";
 
 const result = await generate({
   path: join(fileURLToPath(import.meta.url), "../components"),
-  components: ["*"]
+  components: ["*"],
+  extensions: ["js", "json", "cjs", "mjs", "ts"]
 });
 
 print(result, {

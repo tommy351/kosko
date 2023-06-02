@@ -201,6 +201,7 @@ export default env;
 ",
   "kosko.toml": "components = ["*"]
 loaders = ["ts-node/esm"]
+extensions = ["ts", "mts", "cjs", "mjs", "js", "json"]
 ",
   "package.json": "{
   "type": "module",

@@ -4,8 +4,17 @@ import { generateKoskoConfig } from "./kosko-config";
 import { generatePackageJson } from "./package-json";
 import { generateFromTemplateFile, generateReadme } from "./template";
 import { generateTsConfig, generateTsEnvFiles, tsDevDependencies } from "./ts";
+import { getRequireExtensions } from "@kosko/require";
 
 const tsEsmTemplate: Template = async (ctx) => {
+  const extensions = [
+    "ts",
+    "mts",
+    ...getRequireExtensions().map((x) => x.substring(1))
+  ]
+    .map((x) => `"${x}"`)
+    .join(", ");
+
   return {
     dependencies: baseDependencies,
     devDependencies: tsDevDependencies,
@@ -13,7 +22,8 @@ const tsEsmTemplate: Template = async (ctx) => {
       await generatePackageJson(ctx, {
         type: "module"
       }),
-      generateKoskoConfig(`loaders = ["ts-node/esm"]`),
+      generateKoskoConfig(`loaders = ["ts-node/esm"]
+extensions = [${extensions}]`),
       await generateReadme(),
       generateTsConfig({
         compilerOptions: {

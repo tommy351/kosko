@@ -1,2 +1,3 @@
 components = ["*"]
 loaders = ["ts-node/esm"]
+extensions = ["ts"]
