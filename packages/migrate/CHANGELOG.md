@@ -1,5 +1,28 @@
 # @kosko/migrate
 
+## 4.1.0
+
+### Minor Changes
+
+- [#118](https://github.com/tommy351/kosko/pull/118) [`9923210`](https://github.com/tommy351/kosko/commit/9923210d7cb465c787966dc55e7755619a921552) Thanks [@tommy351](https://github.com/tommy351)! - Build bundles with Rollup.
+
+- [#120](https://github.com/tommy351/kosko/pull/120) [`f8861b5`](https://github.com/tommy351/kosko/commit/f8861b59f0db4bc2873d7fa82cd43baf4e047f3a) Thanks [@tommy351](https://github.com/tommy351)! - Add support for ESM format. Output format is CommonJS (`cjs`) on Node.js and ESM (`esm`) on other platforms by default. You can provide `format` option to override the default value.
+
+  ```ts
+  // CommonJS
+  migrate([], { format: MigrateFormat.CJS });
+
+  // ESM
+  migrate([], { format: MigrateFormat.ESM });
+  ```
+
+- [`69729f8`](https://github.com/tommy351/kosko/commit/69729f869caa8f89c88ff29b8675467e0826000d) Thanks [@tommy351](https://github.com/tommy351)! - Support TypeScript `nodenext` module resolution.
+
+### Patch Changes
+
+- Updated dependencies [[`9923210`](https://github.com/tommy351/kosko/commit/9923210d7cb465c787966dc55e7755619a921552), [`8f4d82f`](https://github.com/tommy351/kosko/commit/8f4d82f1ceab3f246414f0527ca02f97ae6bd292), [`69729f8`](https://github.com/tommy351/kosko/commit/69729f869caa8f89c88ff29b8675467e0826000d)]:
+  - @kosko/yaml@3.2.0
+
 ## 4.0.1
 
 ### Patch Changes

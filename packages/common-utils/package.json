@@ -1,6 +1,6 @@
 {
   "name": "@kosko/common-utils",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Common utilities used in Kosko.",
   "homepage": "https://kosko.dev",
   "repository": "https://github.com/tommy351/kosko/tree/master/packages/common-utils",

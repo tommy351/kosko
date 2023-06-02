@@ -1,5 +1,20 @@
 # @kosko/template-deployed-service
 
+## 3.1.0
+
+### Minor Changes
+
+- [#120](https://github.com/tommy351/kosko/pull/120) [`b14f05f`](https://github.com/tommy351/kosko/commit/b14f05ff023137f8556e6f9f9dd4d0f18212a8a3) Thanks [@tommy351](https://github.com/tommy351)! - Add `--esm` option. This option is disabled on Node.js and enabled on other platforms by default.
+
+- [#118](https://github.com/tommy351/kosko/pull/118) [`9923210`](https://github.com/tommy351/kosko/commit/9923210d7cb465c787966dc55e7755619a921552) Thanks [@tommy351](https://github.com/tommy351)! - Build bundles with Rollup.
+
+- [`69729f8`](https://github.com/tommy351/kosko/commit/69729f869caa8f89c88ff29b8675467e0826000d) Thanks [@tommy351](https://github.com/tommy351)! - Support TypeScript `nodenext` module resolution.
+
+### Patch Changes
+
+- Updated dependencies [[`9923210`](https://github.com/tommy351/kosko/commit/9923210d7cb465c787966dc55e7755619a921552), [`69729f8`](https://github.com/tommy351/kosko/commit/69729f869caa8f89c88ff29b8675467e0826000d)]:
+  - @kosko/template@3.1.0
+
 ## 3.0.1
 
 ### Patch Changes

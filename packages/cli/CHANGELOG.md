@@ -1,5 +1,27 @@
 # @kosko/cli
 
+## 3.1.0
+
+### Minor Changes
+
+- [#120](https://github.com/tommy351/kosko/pull/120) [`9341c64`](https://github.com/tommy351/kosko/commit/9341c64718f2fac7e406bf64cc8901b92b35f1b3) Thanks [@tommy351](https://github.com/tommy351)! - Add `--esm` option to `kosko migrate` command. This option is disabled on Node.js and always enabled on other platforms.
+
+- [#118](https://github.com/tommy351/kosko/pull/118) [`9923210`](https://github.com/tommy351/kosko/commit/9923210d7cb465c787966dc55e7755619a921552) Thanks [@tommy351](https://github.com/tommy351)! - Build bundles with Rollup.
+
+- [`69729f8`](https://github.com/tommy351/kosko/commit/69729f869caa8f89c88ff29b8675467e0826000d) Thanks [@tommy351](https://github.com/tommy351)! - Support TypeScript `nodenext` module resolution.
+
+### Patch Changes
+
+- Updated dependencies [[`3e29eea`](https://github.com/tommy351/kosko/commit/3e29eea15da2969213c105c0b5248a7756a98dbb), [`9923210`](https://github.com/tommy351/kosko/commit/9923210d7cb465c787966dc55e7755619a921552), [`a2385ca`](https://github.com/tommy351/kosko/commit/a2385cad9e754844c2c036dfab5832f4b15f7d7d), [`f8861b5`](https://github.com/tommy351/kosko/commit/f8861b59f0db4bc2873d7fa82cd43baf4e047f3a), [`e95b118`](https://github.com/tommy351/kosko/commit/e95b11833433f91a37fe483a91b21bcab13fa101), [`2d5d8ca`](https://github.com/tommy351/kosko/commit/2d5d8ca664b8bdf26d940e60787ed8035262dae6), [`69729f8`](https://github.com/tommy351/kosko/commit/69729f869caa8f89c88ff29b8675467e0826000d)]:
+  - @kosko/generate@3.1.0
+  - @kosko/aggregate-error@0.3.0
+  - @kosko/common-utils@0.2.0
+  - @kosko/config@3.1.0
+  - @kosko/exec-utils@1.1.0
+  - @kosko/log@1.1.0
+  - @kosko/migrate@4.1.0
+  - @kosko/require@5.0.0
+
 ## 3.0.3
 
 ### Patch Changes
