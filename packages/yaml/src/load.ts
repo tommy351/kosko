@@ -106,6 +106,18 @@ export function loadFile(path: string, options?: LoadOptions) {
 }
 
 /**
+ * {@link LoadOptions} and properties defined in {@link https://developer.mozilla.org/en-US/docs/Web/API/Request | Request} class.
+ *
+ * @privateRemarks
+ * This type exists because sometimes `RequestInit` is `any` when `DOM` type
+ * is not loaded. Using an interface instead of `LoadOptions & RequestInit`
+ * allows us to ignoring `RequestInit` when it is `any`.
+ *
+ * @public
+ */
+export interface LoadUrlOptions extends LoadOptions, RequestInit {}
+
+/**
  * Loads a Kubernetes YAML file from `url`.
  *
  * @remarks
@@ -114,12 +126,11 @@ export function loadFile(path: string, options?: LoadOptions) {
  * will be used instead.
  *
  * @param url - URL to a Kubernetes YAML file.
- * @param options - {@link LoadOptions} and properties defined in {@link https://developer.mozilla.org/en-US/docs/Web/API/Request | Request} class.
  * @public
  */
 export function loadUrl(
   url: RequestInfo,
-  options: LoadOptions & RequestInit = {}
+  options: LoadUrlOptions = {}
 ): () => Promise<Manifest[]> {
   const { transform, ...init } = options;
 
