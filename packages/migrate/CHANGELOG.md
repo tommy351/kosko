@@ -1,5 +1,12 @@
 # @kosko/migrate
 
+## 4.1.1
+
+### Patch Changes
+
+- Updated dependencies [[`ef5e8c0`](https://github.com/tommy351/kosko/commit/ef5e8c00f6a430bb6bad2e55e286d36ee26ad18f)]:
+  - @kosko/yaml@3.2.1
+
 ## 4.1.0
 
 ### Minor Changes
