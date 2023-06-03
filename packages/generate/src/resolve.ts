@@ -33,6 +33,33 @@ function isAsyncIterable(value: unknown): value is AsyncIterable<unknown> {
   return isRecord(value) && typeof value[Symbol.asyncIterator] === "function";
 }
 
+export interface PartialResolveResult {
+  manifests?: Manifest[];
+  error?: unknown;
+}
+
+function collectErrors(results: readonly PartialResolveResult[]): unknown[] {
+  return results.flatMap((r) => (r.error ? [r.error] : []));
+}
+
+function collectManifests(
+  results: readonly PartialResolveResult[]
+): Manifest[] {
+  return results.flatMap((r) => r.manifests ?? []);
+}
+
+export function handlePartialResolveResults(
+  results: readonly PartialResolveResult[]
+) {
+  const errors = collectErrors(results);
+
+  if (errors.length) {
+    throw aggregateErrors(errors);
+  }
+
+  return collectManifests(results);
+}
+
 /**
  * @public
  */
@@ -98,6 +125,32 @@ export async function resolve(
     });
   }
 
+  async function resolveArrayItem(
+    value: unknown,
+    currentIndex: number
+  ): Promise<PartialResolveResult> {
+    const manifests: Manifest[] = [];
+
+    try {
+      const result = await resolve(value, {
+        validate,
+        bail,
+        index: [...index, currentIndex],
+        path
+      });
+
+      manifests.push(...result);
+    } catch (error) {
+      if (bail) {
+        throw error;
+      }
+
+      return { error };
+    }
+
+    return { manifests };
+  }
+
   if (typeof value === "function") {
     try {
       return resolve(await value(), options);
@@ -115,63 +168,27 @@ export async function resolve(
   }
 
   if (isIterable(value)) {
-    const manifests: Manifest[] = [];
-    const errors: unknown[] = [];
+    const promises: Promise<PartialResolveResult>[] = [];
     let i = 0;
 
     try {
       for (const entry of value) {
-        try {
-          const result = await resolve(entry, {
-            validate,
-            bail,
-            index: [...index, i++],
-            path
-          });
-
-          manifests.push(...result);
-        } catch (err) {
-          if (bail) {
-            throw err;
-          }
-
-          errors.push(err);
-        }
+        promises.push(resolveArrayItem(entry, i++));
       }
     } catch (err) {
       throw createResolveError("Input iterable value thrown an error", err);
     }
 
-    if (errors.length) {
-      throw aggregateErrors(errors);
-    }
-
-    return manifests;
+    return handlePartialResolveResults(await Promise.all(promises));
   }
 
   if (isAsyncIterable(value)) {
-    const manifests: Manifest[] = [];
-    const errors: unknown[] = [];
+    const promises: Promise<PartialResolveResult>[] = [];
     let i = 0;
 
     try {
       for await (const entry of value) {
-        try {
-          const result = await resolve(entry, {
-            validate,
-            bail,
-            index: [...index, i++],
-            path
-          });
-
-          manifests.push(...result);
-        } catch (err) {
-          if (bail) {
-            throw err;
-          }
-
-          errors.push(err);
-        }
+        promises.push(resolveArrayItem(entry, i++));
       }
     } catch (err) {
       throw createResolveError(
@@ -180,11 +197,7 @@ export async function resolve(
       );
     }
 
-    if (errors.length) {
-      throw aggregateErrors(errors);
-    }
-
-    return manifests;
+    return handlePartialResolveResults(await Promise.all(promises));
   }
 
   if (validate) {

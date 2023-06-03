@@ -3,10 +3,14 @@ import {
   resolve as resolveModule,
   getRequireExtensions
 } from "@kosko/require";
-import type { Result, Manifest } from "./base";
+import type { Result } from "./base";
 import logger, { LogLevel } from "@kosko/log";
-import { resolve } from "./resolve";
-import { aggregateErrors, GenerateError } from "./error";
+import {
+  PartialResolveResult,
+  handlePartialResolveResults,
+  resolve
+} from "./resolve";
+import { GenerateError } from "./error";
 import { glob, GlobResult } from "./glob";
 
 /**
@@ -91,11 +95,6 @@ function validateExtensions(extensions: readonly string[]) {
   }
 }
 
-interface ResolveResult {
-  manifests?: Manifest[];
-  error?: unknown;
-}
-
 /**
  * Finds components with glob patterns in the specified path and returns exported
  * values from each components.
@@ -134,9 +133,9 @@ export async function generate(options: GenerateOptions): Promise<Result> {
   validateExtensions(extensions);
 
   const extensionsWithDot = extensions.map((ext) => "." + ext);
-  const promises: Promise<ResolveResult>[] = [];
+  const promises: Promise<PartialResolveResult>[] = [];
 
-  async function resolveFile(file: GlobResult): Promise<ResolveResult> {
+  async function resolveFile(file: GlobResult): Promise<PartialResolveResult> {
     logger.log(LogLevel.Debug, `Found component "${file.relativePath}"`);
 
     try {
@@ -182,13 +181,8 @@ export async function generate(options: GenerateOptions): Promise<Result> {
   }
 
   const results = await Promise.all(promises);
-  const errors = results.flatMap((r) => (r.error ? [r.error] : []));
-
-  if (errors.length) {
-    throw aggregateErrors(errors);
-  }
 
   return {
-    manifests: results.flatMap((r) => r.manifests ?? [])
+    manifests: handlePartialResolveResults(results)
   };
 }
