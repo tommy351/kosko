@@ -4,10 +4,13 @@ import AggregateError from "@kosko/aggregate-error";
 import { GenerateError, ResolveError } from "@kosko/generate";
 import { join, normalize } from "node:path";
 import { CLIError } from "../../../cli/error";
+import { getStderr } from "../process";
+
+jest.mock("../process");
+
+const mockGetStderr = jest.mocked(getStderr);
 
 let stderr: BufferList;
-
-jest.spyOn(process.stderr, "write");
 
 // Returns a new Error without Jest in stack.
 function newError(message: string) {
@@ -27,9 +30,7 @@ function cleanErrorStack(err: Error) {
 
 beforeEach(() => {
   stderr = new BufferList();
-  (process.stderr.write as jest.Mock).mockImplementation((chunk) => {
-    stderr.write(chunk);
-  });
+  mockGetStderr.mockReturnValue(stderr);
 });
 
 describe("when error is a AggregateError", () => {

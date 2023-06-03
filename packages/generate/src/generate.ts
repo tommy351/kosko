@@ -5,14 +5,14 @@ import {
 } from "@kosko/require";
 import type { Result, Manifest } from "./base";
 import logger, { LogLevel } from "@kosko/log";
-import { resolve } from "./resolve";
+import { resolveAsync } from "./resolve";
 import { aggregateErrors, GenerateError } from "./error";
-import { glob, GlobResult } from "./glob";
+import { glob } from "./glob";
 
 /**
  * @public
  */
-export interface GenerateOptions {
+export interface AsyncGenerateOptions {
   /**
    * Path of the component folder.
    */
@@ -41,10 +41,22 @@ export interface GenerateOptions {
   extensions?: readonly string[];
 
   /**
-   * {@inheritDoc ResolveOptions.validate}
+   * {@inheritDoc AsyncResolveOptions.validate}
    */
   validate?: boolean;
+}
 
+/**
+ * @public
+ */
+export type AsyncGenerateResult =
+  | { type: "success"; manifest: Manifest }
+  | { type: "error"; error: unknown };
+
+/**
+ * @public
+ */
+export interface GenerateOptions extends AsyncGenerateOptions {
   /**
    * {@inheritDoc ResolveOptions.bail}
    */
@@ -91,9 +103,61 @@ function validateExtensions(extensions: readonly string[]) {
   }
 }
 
-interface ResolveResult {
-  manifests?: Manifest[];
-  error?: unknown;
+/**
+ * @public
+ */
+export async function* generateAsync(
+  options: AsyncGenerateOptions
+): AsyncIterable<AsyncGenerateResult> {
+  /* istanbul ignore next */
+  // eslint-disable-next-line no-restricted-globals
+  if (process.env.BUILD_TARGET === "browser") {
+    throw new Error("generate is only supported on Node.js and Deno");
+  }
+
+  if (!options.components.length) {
+    throw new GenerateError("components must not be empty");
+  }
+
+  const extensions =
+    options.extensions || getRequireExtensions().map((ext) => ext.substring(1));
+  validateExtensions(extensions);
+
+  const extensionsWithDot = extensions.map((ext) => "." + ext);
+
+  for await (const file of glob({
+    path: options.path,
+    extensions,
+    patterns: options.components
+  })) {
+    logger.log(LogLevel.Debug, `Found component "${file.relativePath}"`);
+
+    try {
+      const path = await resolveComponentPath(
+        file.absolutePath,
+        extensionsWithDot
+      );
+
+      if (!path) {
+        logger.log(LogLevel.Debug, "Module not found", {
+          data: {
+            path: file.absolutePath,
+            extensions: extensionsWithDot
+          }
+        });
+
+        continue;
+      }
+
+      yield* resolveAsync(await getComponentValue(path), {
+        validate: options.validate,
+        index: [],
+        path
+      });
+    } catch (error) {
+      yield { type: "error", error };
+    }
+  }
 }
 
 /**
@@ -119,76 +183,22 @@ interface ResolveResult {
  * @see {@link resolve}
  */
 export async function generate(options: GenerateOptions): Promise<Result> {
-  /* istanbul ignore next */
-  // eslint-disable-next-line no-restricted-globals
-  if (process.env.BUILD_TARGET === "browser") {
-    throw new Error("generate is only supported on Node.js and Deno");
-  }
+  const { bail, ...opts } = options;
+  const manifests: Manifest[] = [];
+  const errors: unknown[] = [];
 
-  if (!options.components.length) {
-    throw new GenerateError("components must not be empty");
-  }
-
-  const extensions =
-    options.extensions || getRequireExtensions().map((ext) => ext.substring(1));
-  validateExtensions(extensions);
-
-  const extensionsWithDot = extensions.map((ext) => "." + ext);
-  const promises: Promise<ResolveResult>[] = [];
-
-  async function resolveFile(file: GlobResult): Promise<ResolveResult> {
-    logger.log(LogLevel.Debug, `Found component "${file.relativePath}"`);
-
-    try {
-      const path = await resolveComponentPath(
-        file.absolutePath,
-        extensionsWithDot
-      );
-
-      if (!path) {
-        logger.log(LogLevel.Debug, "Module not found", {
-          data: {
-            path: file.absolutePath,
-            extensions: extensionsWithDot
-          }
-        });
-
-        return {};
-      }
-
-      const manifests = await resolve(await getComponentValue(path), {
-        validate: options.validate,
-        bail: options.bail,
-        index: [],
-        path
-      });
-
-      return { manifests };
-    } catch (error) {
-      if (options.bail) {
-        throw error;
-      }
-
-      return { error };
+  for await (const result of generateAsync(opts)) {
+    if (result.type === "error") {
+      if (bail) throw result.error;
+      errors.push(result.error);
+    } else {
+      manifests.push(result.manifest);
     }
   }
-
-  for await (const file of glob({
-    path: options.path,
-    extensions,
-    patterns: options.components
-  })) {
-    promises.push(resolveFile(file));
-  }
-
-  const results = await Promise.all(promises);
-  const errors = results.flatMap((r) => (r.error ? [r.error] : []));
 
   if (errors.length) {
     throw aggregateErrors(errors);
   }
 
-  return {
-    manifests: results.flatMap((r) => r.manifests ?? [])
-  };
+  return { manifests };
 }

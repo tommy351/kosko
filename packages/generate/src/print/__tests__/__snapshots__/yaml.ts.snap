@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`print a single value 1`] = `
+"foo: bar
+"
+`;
+
+exports[`print multiple values 1`] = `
+"---
+a: b
+---
+c: d
+---
+e: f
+"
+`;
+
+exports[`should not convert duplicate objects into references 1`] = `
+"foo:
+  a: b
+bar:
+  a: b
+"
+`;

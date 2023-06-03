@@ -1,7 +1,8 @@
 import BufferList from "bl";
 import yaml from "js-yaml";
-import { Result } from "../base";
-import { print, PrintFormat, PrintOptions } from "../print";
+import { Result } from "../../base";
+import { print } from "../print";
+import { PrintFormat, PrintOptions } from "../types";
 
 let result: Result;
 let options: Pick<PrintOptions, Exclude<keyof PrintOptions, "writer">>;

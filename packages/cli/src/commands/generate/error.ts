@@ -6,8 +6,9 @@ import pc from "picocolors";
 import { CLIError } from "../../cli/error";
 import stringify from "fast-safe-stringify";
 import { isRecord } from "@kosko/common-utils";
-import { stderr } from "node:process";
 import { BaseGenerateArguments } from "./types";
+import { Writable } from "node:stream";
+import { getStderr } from "./process";
 
 function flattenError(err: unknown): unknown[] {
   if (err instanceof AggregateError) {
@@ -17,8 +18,8 @@ function flattenError(err: unknown): unknown[] {
   return [err];
 }
 
-function print(line: string): void {
-  stderr.write(line + "\n");
+function println(writer: Writable, line: string): void {
+  writer.write(line + "\n");
 }
 
 function getErrorCount(n: number): string {
@@ -161,6 +162,7 @@ export function handleGenerateError(
   error: unknown,
   options: Pick<BaseGenerateArguments, "bail">
 ) {
+  const writer = getStderr();
   const allErrors = flattenError(error);
   const pathErrorsMap: Record<string, string[]> = {};
   const unknownErrors: ErrorLike[] = [];
@@ -190,21 +192,24 @@ export function handleGenerateError(
   }
 
   for (const [path, errors] of Object.entries(pathErrorsMap)) {
-    print(`${pc.bold(prettifyPath(path))} - ${getErrorCount(errors.length)}\n`);
+    println(
+      writer,
+      `${pc.bold(prettifyPath(path))} - ${getErrorCount(errors.length)}\n`
+    );
 
     for (const err of errors) {
-      print(err + "\n");
+      println(writer, err + "\n");
     }
   }
 
   if (unknownErrors.length) {
-    print(pc.bold(`Other ${getErrorCount(unknownErrors.length)}\n`));
+    println(writer, pc.bold(`Other ${getErrorCount(unknownErrors.length)}\n`));
 
     for (const err of unknownErrors) {
       const stack = getFormattedErrorStack(err);
 
-      print(`${getFormattedErrorTitle(err)}\n`);
-      if (stack) print(`${stack}\n`);
+      println(writer, `${getFormattedErrorTitle(err)}\n`);
+      if (stack) println(writer, `${stack}\n`);
     }
   }
 

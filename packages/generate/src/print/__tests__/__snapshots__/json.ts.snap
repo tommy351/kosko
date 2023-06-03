@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`print a single value 1`] = `
+"{
+  "foo": "bar"
+}"
+`;
+
+exports[`print multiple values 1`] = `
+"{
+  "apiVersion": "v1",
+  "kind": "List",
+  "items": [
+    {
+      "a": "b"
+    },
+    {
+      "c": "d"
+    },
+    {
+      "e": "f"
+    }
+  ]
+}"
+`;

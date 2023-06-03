@@ -315,6 +315,9 @@ importers:
       '@types/exit':
         specifier: ^0.1.31
         version: 0.1.31
+      '@types/js-yaml':
+        specifier: ^4.0.5
+        version: 4.0.5
       '@types/jsonpath':
         specifier: ^0.2.0
         version: 0.2.0
@@ -330,6 +333,9 @@ importers:
       fast-glob:
         specifier: ^3.2.12
         version: 3.2.12
+      js-yaml:
+        specifier: ^4.1.0
+        version: 4.1.0
       kubernetes-models:
         specifier: ^4.1.0
         version: 4.1.0

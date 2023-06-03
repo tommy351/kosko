@@ -131,7 +131,7 @@ test("value is a generator function that throws an error", async () => {
   );
 
   assert(err instanceof ResolveError);
-  expect(err.message).toEqual("Input iterable value thrown an error");
+  expect(err.message).toEqual("Input function value thrown an error");
   expect(err.path).toEqual("test");
   expect(err.index).toEqual([5]);
   expect(err.cause).toEqual(new Error("err"));
@@ -163,7 +163,7 @@ test("value is an async generator function that throws an error", async () => {
   );
 
   assert(err instanceof ResolveError);
-  expect(err.message).toEqual("Input async iterable value thrown an error");
+  expect(err.message).toEqual("Input function value thrown an error");
   expect(err.path).toEqual("test");
   expect(err.index).toEqual([5]);
   expect(err.cause).toEqual(new Error("err"));

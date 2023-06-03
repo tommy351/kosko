@@ -1,23 +1,30 @@
 import toml from "@iarna/toml";
 import { Config } from "@kosko/config";
 import { Environment } from "@kosko/env";
-import { generate, print, PrintFormat } from "@kosko/generate";
 import assert from "node:assert";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import pkgDir from "pkg-dir";
 import { generateCmd } from "../command";
 import { GenerateArguments } from "../types";
 import { TempDir, makeTempDir, installPackage } from "@kosko/test-utils";
 import { getErrorCode } from "@kosko/common-utils";
+import { PrintFormat } from "@kosko/generate";
+import BufferList from "bl";
+import yaml from "js-yaml";
+import { getStdout, getStderr } from "../process";
+import { CLIError } from "../../../cli/error";
 
-jest.mock("@kosko/generate");
 jest.mock("@kosko/log");
+jest.mock("../process");
 
-const mockedGenerate = jest.mocked(generate);
+const mockGetStdout = jest.mocked(getStdout);
+const mockGetStderr = jest.mocked(getStderr);
 
 let tmpDir: TempDir;
 let env: Environment;
+let stdout: BufferList;
+let stderr: BufferList;
 
 async function createFakeModule(id: string): Promise<void> {
   const dir = join(tmpDir.path, "node_modules", id);
@@ -43,13 +50,11 @@ async function execute(args: Partial<GenerateArguments> = {}): Promise<void> {
     await Promise.all(args.require.map((id) => createFakeModule(id)));
   }
 
-  await generateCmd.handler({ cwd: tmpDir.path, ...args } as any);
-}
-
-function mockGenerateSuccess() {
-  mockedGenerate.mockResolvedValueOnce({
-    manifests: [{ path: "", index: [0], data: {} }]
-  });
+  await generateCmd.handler({
+    cwd: tmpDir.path,
+    output: PrintFormat.YAML,
+    ...args
+  } as any);
 }
 
 async function writeConfig(path: string, config: Config) {
@@ -68,6 +73,19 @@ function writeConfigToDefaultPath(config: Config = {}) {
   return writeConfig(join(tmpDir.path, "kosko.toml"), config);
 }
 
+async function writeComponents(files: Record<string, string>) {
+  const dir = join(tmpDir.path, "components");
+
+  await mkdir(dir, { recursive: true });
+
+  for (const [name, content] of Object.entries(files)) {
+    const path = join(dir, name);
+
+    await mkdir(dirname(path), { recursive: true });
+    await writeFile(path, content);
+  }
+}
+
 beforeEach(async () => {
   const root = await pkgDir();
   assert(root);
@@ -78,6 +96,12 @@ beforeEach(async () => {
   const envPath = await installPackage(tmpDir.path, "env");
   env = require(envPath);
   env.setReducers = jest.fn();
+
+  stdout = new BufferList();
+  mockGetStdout.mockReturnValue(stdout);
+
+  stderr = new BufferList();
+  mockGetStderr.mockReturnValue(stderr);
 });
 
 afterEach(async () => {
@@ -96,20 +120,17 @@ describe("when components is neither specified in config nor args", () => {
 
 describe("when components is specified in config", () => {
   beforeEach(async () => {
-    mockGenerateSuccess();
     await writeConfigToDefaultPath({ components: ["a", "b"] });
+    await writeComponents({
+      "a.js": "module.exports = {a: 1}",
+      "b.js": "module.exports = {b: 2}",
+      "c.js": "module.exports = {c: 3}"
+    });
     await execute();
   });
 
-  test("should call generate once", () => {
-    expect(generate).toHaveBeenCalledTimes(1);
-  });
-
-  test("should call generate with given components", () => {
-    expect(generate).toHaveBeenCalledWith({
-      path: join(tmpDir.path, "components"),
-      components: ["a", "b"]
-    });
+  test("should print specified components", () => {
+    expect(yaml.loadAll(stdout.toString())).toEqual([{ a: 1 }, { b: 2 }]);
   });
 
   test("should not set env", () => {
@@ -127,61 +148,53 @@ describe("when components is specified in config", () => {
 
 describe("when components is specified in args", () => {
   beforeEach(async () => {
-    mockGenerateSuccess();
     await writeConfigToDefaultPath();
+    await writeComponents({
+      "a.js": "module.exports = {a: 1}",
+      "b.js": "module.exports = {b: 2}",
+      "c.js": "module.exports = {c: 3}"
+    });
     await execute({ components: ["a", "b"] });
   });
 
-  test("should call generate with given components", () => {
-    expect(generate).toHaveBeenCalledWith({
-      path: join(tmpDir.path, "components"),
-      components: ["a", "b"]
-    });
+  test("should print specified components", async () => {
+    expect(yaml.loadAll(stdout.toString())).toEqual([{ a: 1 }, { b: 2 }]);
   });
 });
 
 describe("when components is specified in both config and args", () => {
   beforeEach(async () => {
-    mockGenerateSuccess();
     await writeConfigToDefaultPath({ components: ["a", "b"] });
+    await writeComponents({
+      "a.js": "module.exports = {a: 1}",
+      "b.js": "module.exports = {b: 2}",
+      "c.js": "module.exports = {c: 3}",
+      "d.js": "module.exports = {d: 4}"
+    });
     await execute({ components: ["c", "d"] });
   });
 
-  test("should call generate with components specified in args", () => {
-    expect(generate).toHaveBeenCalledWith({
-      path: join(tmpDir.path, "components"),
-      components: ["c", "d"]
-    });
+  test("should print components specified in args", async () => {
+    expect(yaml.loadAll(stdout.toString())).toEqual([{ c: 3 }, { d: 4 }]);
   });
 });
 
-describe("with output is specified", () => {
+describe("when output = json", () => {
   beforeEach(async () => {
-    mockGenerateSuccess();
     await writeConfigToDefaultPath({ components: ["*"] });
-    await execute({ output: PrintFormat.YAML });
+    await writeComponents({
+      "a.js": "module.exports = {a: 1}"
+    });
+    await execute({ output: PrintFormat.JSON });
   });
 
-  test("should call print once", () => {
-    expect(print).toHaveBeenCalledTimes(1);
-  });
-
-  test("should call print with given format", () => {
-    expect(print).toHaveBeenCalledWith(
-      {
-        manifests: [{ path: "", index: [0], data: {} }]
-      },
-      {
-        format: PrintFormat.YAML,
-        writer: process.stdout
-      }
-    );
+  test("should print in JSON format", async () => {
+    expect(JSON.parse(stdout.toString())).toEqual({ a: 1 });
   });
 });
 
 describe("when env is specified", () => {
   beforeEach(async () => {
-    mockGenerateSuccess();
     await writeConfigToDefaultPath({
       components: ["a", "b"],
       environments: {
@@ -190,6 +203,13 @@ describe("when env is specified", () => {
         }
       }
     });
+    await writeComponents({
+      "a.js": "module.exports = {a: 1}",
+      "b.js": "module.exports = {b: 2}",
+      "c.js": "module.exports = {c: 3}",
+      "d.js": "module.exports = {d: 4}",
+      "e.js": "module.exports = {e: 5}"
+    });
     await execute({ env: "dev" });
   });
 
@@ -197,17 +217,18 @@ describe("when env is specified", () => {
     expect(env.env).toEqual("dev");
   });
 
-  test("should add environment specific components", () => {
-    expect(generate).toHaveBeenCalledWith({
-      path: join(tmpDir.path, "components"),
-      components: ["a", "b", "c", "d"]
-    });
+  test("should add environment-specific components", () => {
+    expect(yaml.loadAll(stdout.toString())).toEqual([
+      { a: 1 },
+      { b: 2 },
+      { c: 3 },
+      { d: 4 }
+    ]);
   });
 });
 
 describe("when baseEnvironment is specified and env is not", () => {
   beforeEach(async () => {
-    mockGenerateSuccess();
     await writeConfigToDefaultPath({
       components: ["a", "b"],
       baseEnvironment: "base",
@@ -219,6 +240,15 @@ describe("when baseEnvironment is specified and env is not", () => {
           components: ["e", "f"]
         }
       }
+    });
+    await writeComponents({
+      "a.js": "module.exports = {a: 1}",
+      "b.js": "module.exports = {b: 2}",
+      "c.js": "module.exports = {c: 3}",
+      "d.js": "module.exports = {d: 4}",
+      "e.js": "module.exports = {e: 5}",
+      "f.js": "module.exports = {f: 6}",
+      "g.js": "module.exports = {g: 7}"
     });
     await execute();
   });
@@ -228,16 +258,17 @@ describe("when baseEnvironment is specified and env is not", () => {
   });
 
   test("should add components from baseEnvironment", () => {
-    expect(generate).toHaveBeenCalledWith({
-      path: join(tmpDir.path, "components"),
-      components: ["a", "b", "e", "f"]
-    });
+    expect(yaml.loadAll(stdout.toString())).toEqual([
+      { a: 1 },
+      { b: 2 },
+      { e: 5 },
+      { f: 6 }
+    ]);
   });
 });
 
 describe("when both baseEnvironment and env are specified", () => {
   beforeEach(async () => {
-    mockGenerateSuccess();
     await writeConfigToDefaultPath({
       components: ["a", "b"],
       baseEnvironment: "base",
@@ -250,6 +281,15 @@ describe("when both baseEnvironment and env are specified", () => {
         }
       }
     });
+    await writeComponents({
+      "a.js": "module.exports = {a: 1}",
+      "b.js": "module.exports = {b: 2}",
+      "c.js": "module.exports = {c: 3}",
+      "d.js": "module.exports = {d: 4}",
+      "e.js": "module.exports = {e: 5}",
+      "f.js": "module.exports = {f: 6}",
+      "g.js": "module.exports = {g: 7}"
+    });
     await execute({ env: "dev" });
   });
 
@@ -257,36 +297,38 @@ describe("when both baseEnvironment and env are specified", () => {
     expect(env.env).toEqual(["base", "dev"]);
   });
 
-  test("should add components from baseEnvironment", () => {
-    expect(generate).toHaveBeenCalledWith({
-      path: join(tmpDir.path, "components"),
-      components: ["a", "b", "e", "f", "c", "d"]
-    });
+  test("should add components from baseEnvironment and env", () => {
+    expect(yaml.loadAll(stdout.toString())).toEqual([
+      { a: 1 },
+      { b: 2 },
+      { c: 3 },
+      { d: 4 },
+      { e: 5 },
+      { f: 6 }
+    ]);
   });
 });
 
 describe("when extensions is specified in config", () => {
   beforeEach(async () => {
-    mockGenerateSuccess();
     await writeConfigToDefaultPath({
       components: ["*"],
-      extensions: ["a", "b"]
+      extensions: ["custom.js"]
+    });
+    await writeComponents({
+      "a.js": "module.exports = {a: 1}",
+      "a.custom.js": 'module.exports = {a: "custom"}'
     });
     await execute();
   });
 
-  test("should call generate with extensions", () => {
-    expect(generate).toHaveBeenCalledWith({
-      path: join(tmpDir.path, "components"),
-      components: ["*"],
-      extensions: ["a", "b"]
-    });
+  test("should load the specified extensions", async () => {
+    expect(yaml.loadAll(stdout.toString())).toEqual([{ a: "custom" }]);
   });
 });
 
 describe("when require is specified in config", () => {
   beforeEach(async () => {
-    mockGenerateSuccess();
     await writeConfigToDefaultPath({
       components: ["*"],
       require: ["fake1", "fake2"],
@@ -295,6 +337,9 @@ describe("when require is specified in config", () => {
           require: ["fake3", "fake4"]
         }
       }
+    });
+    await writeComponents({
+      "a.js": "module.exports = {a: 1}"
     });
     await execute();
   });
@@ -306,9 +351,11 @@ describe("when require is specified in config", () => {
 
 describe("when require is specified in args", () => {
   beforeEach(async () => {
-    mockGenerateSuccess();
     await writeConfigToDefaultPath({
       components: ["*"]
+    });
+    await writeComponents({
+      "a.js": "module.exports = {a: 1}"
     });
     await execute({ require: ["fake1", "fake2"] });
   });
@@ -320,10 +367,12 @@ describe("when require is specified in args", () => {
 
 describe("when require is specified in both config and args", () => {
   beforeEach(async () => {
-    mockGenerateSuccess();
     await writeConfigToDefaultPath({
       components: ["*"],
       require: ["fake1", "fake2"]
+    });
+    await writeComponents({
+      "a.js": "module.exports = {a: 1}"
     });
     await execute({ require: ["fake3", "fake4"] });
   });
@@ -340,7 +389,6 @@ describe("when require is specified in both config and args", () => {
 
 describe("when require is specified in env", () => {
   beforeEach(async () => {
-    mockGenerateSuccess();
     await writeConfigToDefaultPath({
       components: ["*"],
       require: ["fake1", "fake2"],
@@ -349,6 +397,9 @@ describe("when require is specified in env", () => {
           require: ["fake3", "fake4"]
         }
       }
+    });
+    await writeComponents({
+      "a.js": "module.exports = {a: 1}"
     });
     await execute({ env: "dev" });
   });
@@ -365,8 +416,10 @@ describe("when require is specified in env", () => {
 
 describe("when set is specified in args", () => {
   beforeEach(async () => {
-    mockGenerateSuccess();
     await writeConfigToDefaultPath({ components: ["*"] });
+    await writeComponents({
+      "a.js": `module.exports = {}`
+    });
     await execute({ set: [{ key: "a", value: "b" }] });
   });
 
@@ -377,7 +430,7 @@ describe("when set is specified in args", () => {
 
 describe("when no manifests are exported", () => {
   beforeEach(async () => {
-    mockedGenerate.mockResolvedValueOnce({ manifests: [] });
+    await writeComponents({});
     await writeConfigToDefaultPath({ components: ["*"] });
   });
 
@@ -388,18 +441,17 @@ describe("when no manifests are exported", () => {
 
 describe("when config is a relative path", () => {
   beforeEach(async () => {
-    mockGenerateSuccess();
     await writeConfig(join(tmpDir.path, "kosko-relative.toml"), {
       components: ["foo"]
+    });
+    await writeComponents({
+      "foo.js": "module.exports = { foo: 1 }"
     });
     await execute({ config: "kosko-relative.toml" });
   });
 
   test("should call generate with components set in config", () => {
-    expect(generate).toHaveBeenCalledWith({
-      path: join(tmpDir.path, "components"),
-      components: ["foo"]
-    });
+    expect(yaml.loadAll(stdout.toString())).toEqual([{ foo: 1 }]);
   });
 });
 
@@ -407,18 +459,17 @@ describe("when config is an absolute path", () => {
   beforeEach(async () => {
     const configPath = join(tmpDir.path, "kosko-absolute.toml");
 
-    mockGenerateSuccess();
     await writeConfig(configPath, {
       components: ["foo"]
+    });
+    await writeComponents({
+      "foo.js": "module.exports = { foo: 1 }"
     });
     await execute({ config: configPath });
   });
 
   test("should call generate with components set in config", () => {
-    expect(generate).toHaveBeenCalledWith({
-      path: join(tmpDir.path, "components"),
-      components: ["foo"]
-    });
+    expect(yaml.loadAll(stdout.toString())).toEqual([{ foo: 1 }]);
   });
 });
 
@@ -438,20 +489,30 @@ describe.each([
   "when arg.bail = $arg, config.bail = $config",
   ({ arg, config, expected }) => {
     beforeEach(async () => {
-      mockGenerateSuccess();
       await writeConfigToDefaultPath({
         components: ["*"],
         bail: config
       });
-      await execute({ bail: arg });
+      await writeComponents({
+        "a.js": `throw new Error("a")`,
+        "b.js": `throw new Error("b")`
+      });
     });
 
-    test(`should call generate with bail = ${expected}`, () => {
-      expect(generate).toHaveBeenCalledWith({
-        path: join(tmpDir.path, "components"),
-        components: ["*"],
-        bail: expected
+    test(`should set bail = ${expected}`, async () => {
+      const err = new CLIError("Generate failed", {
+        output: `Generate failed (${
+          expected
+            ? "Only the first error is displayed because `bail` option is enabled"
+            : `Total 2 errors`
+        })`
       });
+
+      await expect(
+        execute({
+          bail: arg
+        })
+      ).rejects.toThrow(err);
     });
   }
 );

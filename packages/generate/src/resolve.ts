@@ -36,7 +36,7 @@ function isAsyncIterable(value: unknown): value is AsyncIterable<unknown> {
 /**
  * @public
  */
-export interface ResolveOptions {
+export interface AsyncResolveOptions {
   /**
    * Execute `validate` method of each values.
    *
@@ -57,14 +57,14 @@ export interface ResolveOptions {
    * @defaultValue `[]`
    */
   index?: number[];
-
-  /**
-   * Stop immediately when an error occurred.
-   *
-   * @defaultValue `false`
-   */
-  bail?: boolean;
 }
+
+/**
+ * @public
+ */
+export type AsyncResolveResult =
+  | { type: "success"; manifest: Manifest }
+  | { type: "error"; error: ResolveError };
 
 /**
  * Flattens the input value and validate each values.
@@ -73,19 +73,13 @@ export interface ResolveOptions {
  * The `value` can be an object, an array, a `Promise`, a function, an async
  * function, an iterable, or an async iterable.
  *
- * @throws {@link ResolveError}
- * Thrown if an error occurred.
- *
- * @throws {@link @kosko/aggregate-error#AggregateError}
- * Thrown if multiple errors occurred.
- *
  * @public
  */
-export async function resolve(
+export async function* resolveAsync(
   value: unknown,
-  options: ResolveOptions = {}
-): Promise<Manifest[]> {
-  const { validate = true, index = [], path = "", bail } = options;
+  options: AsyncResolveOptions = {}
+): AsyncIterable<AsyncResolveResult> {
+  const { validate = true, index = [], path = "" } = options;
 
   function createResolveError(message: string, err: unknown) {
     if (err instanceof ResolveError) return err;
@@ -100,91 +94,73 @@ export async function resolve(
 
   if (typeof value === "function") {
     try {
-      return resolve(await value(), options);
+      yield* resolveAsync(await value(), options);
     } catch (err) {
-      throw createResolveError("Input function value thrown an error", err);
+      yield {
+        type: "error",
+        error: createResolveError("Input function value thrown an error", err)
+      };
     }
+
+    return;
   }
 
   if (isPromiseLike(value)) {
     try {
-      return resolve(await value, options);
+      yield* resolveAsync(await value, options);
     } catch (err) {
-      throw createResolveError("Input promise value rejected", err);
+      yield {
+        type: "error",
+        error: createResolveError("Input promise value rejected", err)
+      };
     }
+
+    return;
   }
 
   if (isIterable(value)) {
-    const manifests: Manifest[] = [];
-    const errors: unknown[] = [];
     let i = 0;
 
-    try {
-      for (const entry of value) {
-        try {
-          const result = await resolve(entry, {
-            validate,
-            bail,
-            index: [...index, i++],
-            path
-          });
-
-          manifests.push(...result);
-        } catch (err) {
-          if (bail) {
-            throw err;
-          }
-
-          errors.push(err);
-        }
+    for (const entry of value) {
+      try {
+        yield* resolveAsync(entry, {
+          validate,
+          index: [...index, i++],
+          path
+        });
+      } catch (err) {
+        yield {
+          type: "error",
+          error: createResolveError("Input iterable value thrown an error", err)
+        };
       }
-    } catch (err) {
-      throw createResolveError("Input iterable value thrown an error", err);
     }
 
-    if (errors.length) {
-      throw aggregateErrors(errors);
-    }
-
-    return manifests;
+    return;
   }
 
   if (isAsyncIterable(value)) {
-    const manifests: Manifest[] = [];
-    const errors: unknown[] = [];
     let i = 0;
 
-    try {
-      for await (const entry of value) {
-        try {
-          const result = await resolve(entry, {
-            validate,
-            bail,
-            index: [...index, i++],
-            path
-          });
-
-          manifests.push(...result);
-        } catch (err) {
-          if (bail) {
-            throw err;
-          }
-
-          errors.push(err);
-        }
+    for await (const entry of value) {
+      try {
+        yield* resolveAsync(entry, {
+          validate,
+          index: [...index, i++],
+          path
+        });
+      } catch (err) {
+        yield {
+          type: "error",
+          error: createResolveError(
+            "Input async iterable value thrown an error",
+            err
+          )
+        };
       }
-    } catch (err) {
-      throw createResolveError(
-        "Input async iterable value thrown an error",
-        err
-      );
     }
 
-    if (errors.length) {
-      throw aggregateErrors(errors);
-    }
-
-    return manifests;
+    return;
   }
 
   if (validate) {
@@ -196,7 +172,12 @@ export async function resolve(
         );
         await value.validate();
       } catch (err) {
-        throw createResolveError("Validation error", err);
+        yield {
+          type: "error",
+          error: createResolveError("Validation error", err)
+        };
+
+        return;
       }
     }
   }
@@ -207,5 +188,51 @@ export async function resolve(
     data: value
   };
 
-  return [manifest];
+  yield { type: "success", manifest };
+}
+
+/**
+ * @public
+ */
+export interface ResolveOptions extends AsyncResolveOptions {
+  /**
+   * Stop immediately when an error occurred.
+   *
+   * @defaultValue `false`
+   */
+  bail?: boolean;
+}
+
+/**
+ * @throws {@link ResolveError}
+ * Thrown if an error occurred.
+ *
+ * @throws {@link @kosko/aggregate-error#AggregateError}
+ * Thrown if multiple errors occurred.
+ *
+ * @public
+ * {@inheritDoc resolveAsync}
+ */
+export async function resolve(
+  value: unknown,
+  options: ResolveOptions = {}
+): Promise<Manifest[]> {
+  const { bail, ...opts } = options;
+  const manifests: Manifest[] = [];
+  const errors: unknown[] = [];
+
+  for await (const result of resolveAsync(value, opts)) {
+    if (result.type === "error") {
+      if (bail) throw result.error;
+      errors.push(result.error);
+    } else {
+      manifests.push(result.manifest);
+    }
+  }
+
+  if (errors.length) {
+    throw aggregateErrors(errors);
+  }
+
+  return manifests;
 }
