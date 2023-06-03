@@ -1,5 +1,21 @@
 # @kosko/yaml
 
+## 3.2.0
+
+### Minor Changes
+
+- [#118](https://github.com/tommy351/kosko/pull/118) [`9923210`](https://github.com/tommy351/kosko/commit/9923210d7cb465c787966dc55e7755619a921552) Thanks [@tommy351](https://github.com/tommy351)! - Build bundles with Rollup.
+
+- [#120](https://github.com/tommy351/kosko/pull/120) [`8f4d82f`](https://github.com/tommy351/kosko/commit/8f4d82f1ceab3f246414f0527ca02f97ae6bd292) Thanks [@tommy351](https://github.com/tommy351)! - `node-fetch` is an optional dependency now. Node.js provides global `fetch` API since v18.0.0. You can also provide your own fetch polyfill (e.g. `isomorphic-fetch`, `cross-fetch`) instead. If `global.fetch` is undefined, `node-fetch` will be used automatically.
+
+- [`69729f8`](https://github.com/tommy351/kosko/commit/69729f869caa8f89c88ff29b8675467e0826000d) Thanks [@tommy351](https://github.com/tommy351)! - Support TypeScript `nodenext` module resolution.
+
+### Patch Changes
+
+- Updated dependencies [[`9923210`](https://github.com/tommy351/kosko/commit/9923210d7cb465c787966dc55e7755619a921552), [`69729f8`](https://github.com/tommy351/kosko/commit/69729f869caa8f89c88ff29b8675467e0826000d)]:
+  - @kosko/common-utils@0.2.0
+  - @kosko/log@1.1.0
+
 ## 3.1.0
 
 ### Minor Changes

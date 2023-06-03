@@ -1,5 +1,12 @@
 # kosko
 
+## 3.1.0
+
+### Patch Changes
+
+- Updated dependencies [[`9341c64`](https://github.com/tommy351/kosko/commit/9341c64718f2fac7e406bf64cc8901b92b35f1b3), [`9923210`](https://github.com/tommy351/kosko/commit/9923210d7cb465c787966dc55e7755619a921552), [`69729f8`](https://github.com/tommy351/kosko/commit/69729f869caa8f89c88ff29b8675467e0826000d)]:
+  - @kosko/cli@3.1.0
+
 ## 3.0.3
 
 ### Patch Changes

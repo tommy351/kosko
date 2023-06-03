@@ -1,5 +1,22 @@
 # @kosko/require
 
+## 5.0.0
+
+### Major Changes
+
+- [#120](https://github.com/tommy351/kosko/pull/120) [`2d5d8ca`](https://github.com/tommy351/kosko/commit/2d5d8ca664b8bdf26d940e60787ed8035262dae6) Thanks [@tommy351](https://github.com/tommy351)! - - `isESMSupported` function is removed because all supported Node.js version supports ESM dynamic import (`import()` function) now.
+  - `resolveESM` function is removed.
+  - The behavior of `resolve` function has been changed. Now it only supports file or directory resolution, Node.js modules resolution is removed.
+
+### Minor Changes
+
+- [`69729f8`](https://github.com/tommy351/kosko/commit/69729f869caa8f89c88ff29b8675467e0826000d) Thanks [@tommy351](https://github.com/tommy351)! - Support TypeScript `nodenext` module resolution.
+
+### Patch Changes
+
+- Updated dependencies [[`9923210`](https://github.com/tommy351/kosko/commit/9923210d7cb465c787966dc55e7755619a921552), [`69729f8`](https://github.com/tommy351/kosko/commit/69729f869caa8f89c88ff29b8675467e0826000d)]:
+  - @kosko/common-utils@0.2.0
+
 ## 4.0.1
 
 ### Patch Changes
