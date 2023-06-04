@@ -1,4 +1,3 @@
-import assert from "node:assert";
 import { cpus } from "node:os";
 
 function getCPUCores(): number {
@@ -11,7 +10,9 @@ function getCPUCores(): number {
 }
 
 export function validateConcurrency(value = getCPUCores()): number {
-  assert(value > 0, "Concurrency must be greater than 0");
+  if (value < 1) {
+    throw new Error("Concurrency must be greater than 0");
+  }
 
   return value;
 }
