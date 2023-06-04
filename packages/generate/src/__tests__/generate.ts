@@ -485,3 +485,15 @@ describe("when multiple components validation failed", () => {
     ).rejects.toThrowWithMessage(ResolveError, "Validation error");
   });
 });
+
+describe("when concurrency < 1", () => {
+  test("should throw an error", async () => {
+    await expect(
+      generate({
+        components: ["*"],
+        path: tmpDir.path,
+        concurrency: 0
+      })
+    ).rejects.toThrow("Concurrency must be greater than 0");
+  });
+});

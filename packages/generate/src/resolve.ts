@@ -2,7 +2,7 @@ import { Manifest } from "./base";
 import logger, { LogLevel } from "@kosko/log";
 import { aggregateErrors, ResolveError } from "./error";
 import { isRecord } from "@kosko/common-utils";
-import pLimit, { Limit } from "p-limit";
+import pLimit from "p-limit";
 import { validateConcurrency } from "./utils";
 
 interface Validator {
@@ -103,16 +103,27 @@ export interface ResolveOptions {
   concurrency?: number;
 }
 
-export interface InternalResolveOptions
-  extends Omit<ResolveOptions, "concurrency"> {
-  limit: Limit;
-}
-
-export async function doResolve(
+/**
+ * Flattens the input value and validate each values.
+ *
+ * @remarks
+ * The `value` can be an object, an array, a `Promise`, a function, an async
+ * function, an iterable, or an async iterable.
+ *
+ * @throws {@link ResolveError}
+ * Thrown if an error occurred.
+ *
+ * @throws {@link @kosko/aggregate-error#AggregateError}
+ * Thrown if multiple errors occurred.
+ *
+ * @public
+ */
+export async function resolve(
   value: unknown,
-  options: InternalResolveOptions
+  options: ResolveOptions = {}
 ): Promise<Manifest[]> {
-  const { validate = true, index = [], path = "", bail, limit } = options;
+  const { validate = true, index = [], path = "", bail, concurrency } = options;
+  const limit = pLimit(validateConcurrency(concurrency));
 
   function createResolveError(message: string, err: unknown) {
     if (err instanceof ResolveError) return err;
@@ -127,7 +138,7 @@ export async function doResolve(
 
   if (typeof value === "function") {
     try {
-      return doResolve(await value(), options);
+      return resolve(await value(), options);
     } catch (err) {
       throw createResolveError("Input function value thrown an error", err);
     }
@@ -135,7 +146,7 @@ export async function doResolve(
 
   if (isPromiseLike(value)) {
     try {
-      return doResolve(await value, options);
+      return resolve(await value, options);
     } catch (err) {
       throw createResolveError("Input promise value rejected", err);
     }
@@ -149,7 +160,7 @@ export async function doResolve(
       for (const entry of value) {
         promises.push(
           limit(() =>
-            doResolve(entry, {
+            resolve(entry, {
               ...options,
               index: [...index, i++]
             })
@@ -171,7 +182,7 @@ export async function doResolve(
       for await (const entry of value) {
         promises.push(
           limit(() =>
-            doResolve(entry, {
+            resolve(entry, {
               ...options,
               index: [...index, i++]
             })
@@ -209,29 +220,4 @@ export async function doResolve(
   };
 
   return [manifest];
-}
-
-/**
- * Flattens the input value and validate each values.
- *
- * @remarks
- * The `value` can be an object, an array, a `Promise`, a function, an async
- * function, an iterable, or an async iterable.
- *
- * @throws {@link ResolveError}
- * Thrown if an error occurred.
- *
- * @throws {@link @kosko/aggregate-error#AggregateError}
- * Thrown if multiple errors occurred.
- *
- * @public
- */
-export async function resolve(
-  value: unknown,
-  options: ResolveOptions = {}
-): Promise<Manifest[]> {
-  const { concurrency, ...opts } = options;
-  const limit = pLimit(validateConcurrency(concurrency));
-
-  return doResolve(value, { ...opts, limit });
 }

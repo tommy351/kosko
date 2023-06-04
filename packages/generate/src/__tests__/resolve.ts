@@ -345,3 +345,38 @@ test("should stop on the first error when bail = true", async () => {
   expect(err.value).toEqual(values[1]);
   expect(err.cause).toEqual(new Error("first err"));
 });
+
+test("throws error if concurrency < 1", async () => {
+  await expect(resolve({}, { concurrency: 0 })).rejects.toThrow(
+    "Concurrency must be greater than 0"
+  );
+});
+
+describe("when concurrency = 1", () => {
+  test("value is nested", async () => {
+    await expect(
+      resolve(
+        [
+          { a: 1 },
+          // Returns an object
+          () => ({ b: 2 }),
+          // Returns an array
+          () => [{ c: 3 }, { d: 4 }],
+          // Returns an promise
+          async () => ({ e: 5 }),
+          // Returns an promise returning an array
+          async () => [{ f: 6 }, { g: 7 }]
+        ],
+        { concurrency: 1 }
+      )
+    ).resolves.toEqual([
+      { path: "", index: [0], data: { a: 1 } },
+      { path: "", index: [1], data: { b: 2 } },
+      { path: "", index: [2, 0], data: { c: 3 } },
+      { path: "", index: [2, 1], data: { d: 4 } },
+      { path: "", index: [3], data: { e: 5 } },
+      { path: "", index: [4, 0], data: { f: 6 } },
+      { path: "", index: [4, 1], data: { g: 7 } }
+    ]);
+  });
+});

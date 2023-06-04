@@ -5,7 +5,7 @@ import {
 } from "@kosko/require";
 import type { Manifest, Result } from "./base";
 import logger, { LogLevel } from "@kosko/log";
-import { doResolve, handleResolvePromises } from "./resolve";
+import { handleResolvePromises, resolve } from "./resolve";
 import { GenerateError } from "./error";
 import { glob, GlobResult } from "./glob";
 import pLimit from "p-limit";
@@ -141,8 +141,7 @@ export async function generate(options: GenerateOptions): Promise<Result> {
   const extensions = validateExtensions(options.extensions);
   const extensionsWithDot = extensions.map((ext) => "." + ext);
   const promises: Promise<Manifest[]>[] = [];
-  const fileLimit = pLimit(concurrency);
-  const resolveLimit = pLimit(concurrency);
+  const limit = pLimit(concurrency);
 
   async function resolveFile(file: GlobResult): Promise<Manifest[]> {
     logger.log(LogLevel.Debug, `Found component "${file.relativePath}"`);
@@ -163,12 +162,12 @@ export async function generate(options: GenerateOptions): Promise<Result> {
       return [];
     }
 
-    return doResolve(await getComponentValue(path), {
+    return resolve(await getComponentValue(path), {
       validate: options.validate,
       bail: options.bail,
+      concurrency: options.concurrency,
       index: [],
-      path,
-      limit: resolveLimit
+      path
     });
   }
 
@@ -177,7 +176,7 @@ export async function generate(options: GenerateOptions): Promise<Result> {
     extensions,
     patterns: options.components
   })) {
-    promises.push(fileLimit(() => resolveFile(file)));
+    promises.push(limit(() => resolveFile(file)));
   }
 
   return {
