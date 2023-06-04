@@ -5,7 +5,9 @@ import {
   assign,
   optional,
   record,
-  boolean
+  boolean,
+  integer,
+  min
 } from "superstruct";
 
 /**
@@ -41,6 +43,7 @@ export interface Config extends EnvironmentConfig {
   extensions?: string[];
   baseEnvironment?: string;
   bail?: boolean;
+  concurrency?: number;
 }
 
 export const configSchema = assign(
@@ -59,6 +62,7 @@ export const configSchema = assign(
     ),
     extensions: optional(array(string())),
     baseEnvironment: optional(string()),
-    bail: optional(boolean())
+    bail: optional(boolean()),
+    concurrency: optional(min(integer(), 1))
   })
 );

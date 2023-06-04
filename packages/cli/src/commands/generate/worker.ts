@@ -64,7 +64,8 @@ export async function handler(options: WorkerOptions) {
     components: config.components,
     extensions: config.extensions,
     validate: args.validate,
-    bail: config.bail
+    bail: config.bail,
+    concurrency: config.concurrency
   });
 
   if (!result.manifests.length) {
