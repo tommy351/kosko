@@ -98,7 +98,7 @@ export interface ResolveOptions {
   /**
    * Maximum number of concurrent tasks.
    *
-   * @defaultValue The number of CPU cores.
+   * @defaultValue `10`
    */
   concurrency?: number;
 }
