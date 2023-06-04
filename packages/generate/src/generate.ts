@@ -3,15 +3,13 @@ import {
   resolve as resolveModule,
   getRequireExtensions
 } from "@kosko/require";
-import type { Result } from "./base";
+import type { Manifest, Result } from "./base";
 import logger, { LogLevel } from "@kosko/log";
-import {
-  PartialResolveResult,
-  handlePartialResolveResults,
-  resolve
-} from "./resolve";
+import { doResolve, handleResolvePromises } from "./resolve";
 import { GenerateError } from "./error";
 import { glob, GlobResult } from "./glob";
+import pLimit from "p-limit";
+import { validateConcurrency } from "./utils";
 
 /**
  * @public
@@ -53,6 +51,11 @@ export interface GenerateOptions {
    * {@inheritDoc ResolveOptions.bail}
    */
   bail?: boolean;
+
+  /**
+   * {@inheritDoc ResolveOptions.concurrency}
+   */
+  concurrency?: number;
 }
 
 async function resolveComponentPath(
@@ -81,7 +84,11 @@ async function getComponentValue(path: string): Promise<unknown> {
   }
 }
 
-function validateExtensions(extensions: readonly string[]) {
+function validateExtensions(
+  extensions: readonly string[] = getRequireExtensions().map((ext) =>
+    ext.substring(1)
+  )
+) {
   if (!extensions.length) {
     throw new GenerateError("extensions must not be empty");
   }
@@ -93,6 +100,8 @@ function validateExtensions(extensions: readonly string[]) {
       );
     }
   }
+
+  return extensions;
 }
 
 /**
@@ -128,48 +137,39 @@ export async function generate(options: GenerateOptions): Promise<Result> {
     throw new GenerateError("components must not be empty");
   }
 
-  const extensions =
-    options.extensions || getRequireExtensions().map((ext) => ext.substring(1));
-  validateExtensions(extensions);
-
+  const concurrency = validateConcurrency(options.concurrency);
+  const extensions = validateExtensions(options.extensions);
   const extensionsWithDot = extensions.map((ext) => "." + ext);
-  const promises: Promise<PartialResolveResult>[] = [];
+  const promises: Promise<Manifest[]>[] = [];
+  const fileLimit = pLimit(concurrency);
+  const resolveLimit = pLimit(concurrency);
 
-  async function resolveFile(file: GlobResult): Promise<PartialResolveResult> {
+  async function resolveFile(file: GlobResult): Promise<Manifest[]> {
     logger.log(LogLevel.Debug, `Found component "${file.relativePath}"`);
 
-    try {
-      const path = await resolveComponentPath(
-        file.absolutePath,
-        extensionsWithDot
-      );
+    const path = await resolveComponentPath(
+      file.absolutePath,
+      extensionsWithDot
+    );
 
-      if (!path) {
-        logger.log(LogLevel.Debug, "Module not found", {
-          data: {
-            path: file.absolutePath,
-            extensions: extensionsWithDot
-          }
-        });
-
-        return {};
-      }
-
-      const manifests = await resolve(await getComponentValue(path), {
-        validate: options.validate,
-        bail: options.bail,
-        index: [],
-        path
+    if (!path) {
+      logger.log(LogLevel.Debug, "Module not found", {
+        data: {
+          path: file.absolutePath,
+          extensions: extensionsWithDot
+        }
       });
 
-      return { manifests };
-    } catch (error) {
-      if (options.bail) {
-        throw error;
-      }
-
-      return { error };
+      return [];
     }
+
+    return doResolve(await getComponentValue(path), {
+      validate: options.validate,
+      bail: options.bail,
+      index: [],
+      path,
+      limit: resolveLimit
+    });
   }
 
   for await (const file of glob({
@@ -177,12 +177,10 @@ export async function generate(options: GenerateOptions): Promise<Result> {
     extensions,
     patterns: options.components
   })) {
-    promises.push(resolveFile(file));
+    promises.push(fileLimit(() => resolveFile(file)));
   }
 
-  const results = await Promise.all(promises);
-
   return {
-    manifests: handlePartialResolveResults(results)
+    manifests: await handleResolvePromises(promises, options.bail)
   };
 }

@@ -2,6 +2,8 @@ import { Manifest } from "./base";
 import logger, { LogLevel } from "@kosko/log";
 import { aggregateErrors, ResolveError } from "./error";
 import { isRecord } from "@kosko/common-utils";
+import pLimit, { Limit } from "p-limit";
+import { validateConcurrency } from "./utils";
 
 interface Validator {
   validate(): void | Promise<void>;
@@ -33,31 +35,32 @@ function isAsyncIterable(value: unknown): value is AsyncIterable<unknown> {
   return isRecord(value) && typeof value[Symbol.asyncIterator] === "function";
 }
 
-export interface PartialResolveResult {
-  manifests?: Manifest[];
-  error?: unknown;
-}
+export async function handleResolvePromises(
+  promises: readonly Promise<Manifest[]>[],
+  bail?: boolean
+): Promise<Manifest[]> {
+  if (bail) {
+    const results = await Promise.all(promises);
+    return results.flatMap((values) => values);
+  }
 
-function collectErrors(results: readonly PartialResolveResult[]): unknown[] {
-  return results.flatMap((r) => (r.error ? [r.error] : []));
-}
+  const results = await Promise.allSettled(promises);
+  const errors: unknown[] = [];
+  const manifests: Manifest[] = [];
 
-function collectManifests(
-  results: readonly PartialResolveResult[]
-): Manifest[] {
-  return results.flatMap((r) => r.manifests ?? []);
-}
-
-export function handlePartialResolveResults(
-  results: readonly PartialResolveResult[]
-) {
-  const errors = collectErrors(results);
+  for (const result of results) {
+    if (result.status === "fulfilled") {
+      manifests.push(...result.value);
+    } else {
+      errors.push(result.reason);
+    }
+  }
 
   if (errors.length) {
     throw aggregateErrors(errors);
   }
 
-  return collectManifests(results);
+  return manifests;
 }
 
 /**
@@ -91,28 +94,25 @@ export interface ResolveOptions {
    * @defaultValue `false`
    */
   bail?: boolean;
+
+  /**
+   * Maximum number of concurrent tasks.
+   *
+   * @defaultValue The number of CPU cores.
+   */
+  concurrency?: number;
 }
 
-/**
- * Flattens the input value and validate each values.
- *
- * @remarks
- * The `value` can be an object, an array, a `Promise`, a function, an async
- * function, an iterable, or an async iterable.
- *
- * @throws {@link ResolveError}
- * Thrown if an error occurred.
- *
- * @throws {@link @kosko/aggregate-error#AggregateError}
- * Thrown if multiple errors occurred.
- *
- * @public
- */
-export async function resolve(
+export interface InternalResolveOptions
+  extends Omit<ResolveOptions, "concurrency"> {
+  limit: Limit;
+}
+
+export async function doResolve(
   value: unknown,
-  options: ResolveOptions = {}
+  options: InternalResolveOptions
 ): Promise<Manifest[]> {
-  const { validate = true, index = [], path = "", bail } = options;
+  const { validate = true, index = [], path = "", bail, limit } = options;
 
   function createResolveError(message: string, err: unknown) {
     if (err instanceof ResolveError) return err;
@@ -125,35 +125,9 @@ export async function resolve(
     });
   }
 
-  async function resolveArrayItem(
-    value: unknown,
-    currentIndex: number
-  ): Promise<PartialResolveResult> {
-    const manifests: Manifest[] = [];
-
-    try {
-      const result = await resolve(value, {
-        validate,
-        bail,
-        index: [...index, currentIndex],
-        path
-      });
-
-      manifests.push(...result);
-    } catch (error) {
-      if (bail) {
-        throw error;
-      }
-
-      return { error };
-    }
-
-    return { manifests };
-  }
-
   if (typeof value === "function") {
     try {
-      return resolve(await value(), options);
+      return doResolve(await value(), options);
     } catch (err) {
       throw createResolveError("Input function value thrown an error", err);
     }
@@ -161,34 +135,48 @@ export async function resolve(
 
   if (isPromiseLike(value)) {
     try {
-      return resolve(await value, options);
+      return doResolve(await value, options);
     } catch (err) {
       throw createResolveError("Input promise value rejected", err);
     }
   }
 
   if (isIterable(value)) {
-    const promises: Promise<PartialResolveResult>[] = [];
+    const promises: Promise<Manifest[]>[] = [];
     let i = 0;
 
     try {
       for (const entry of value) {
-        promises.push(resolveArrayItem(entry, i++));
+        promises.push(
+          limit(() =>
+            doResolve(entry, {
+              ...options,
+              index: [...index, i++]
+            })
+          )
+        );
       }
     } catch (err) {
       throw createResolveError("Input iterable value thrown an error", err);
     }
 
-    return handlePartialResolveResults(await Promise.all(promises));
+    return handleResolvePromises(promises, bail);
   }
 
   if (isAsyncIterable(value)) {
-    const promises: Promise<PartialResolveResult>[] = [];
+    const promises: Promise<Manifest[]>[] = [];
     let i = 0;
 
     try {
       for await (const entry of value) {
-        promises.push(resolveArrayItem(entry, i++));
+        promises.push(
+          limit(() =>
+            doResolve(entry, {
+              ...options,
+              index: [...index, i++]
+            })
+          )
+        );
       }
     } catch (err) {
       throw createResolveError(
@@ -197,7 +185,7 @@ export async function resolve(
       );
     }
 
-    return handlePartialResolveResults(await Promise.all(promises));
+    return handleResolvePromises(promises, bail);
   }
 
   if (validate) {
@@ -221,4 +209,29 @@ export async function resolve(
   };
 
   return [manifest];
+}
+
+/**
+ * Flattens the input value and validate each values.
+ *
+ * @remarks
+ * The `value` can be an object, an array, a `Promise`, a function, an async
+ * function, an iterable, or an async iterable.
+ *
+ * @throws {@link ResolveError}
+ * Thrown if an error occurred.
+ *
+ * @throws {@link @kosko/aggregate-error#AggregateError}
+ * Thrown if multiple errors occurred.
+ *
+ * @public
+ */
+export async function resolve(
+  value: unknown,
+  options: ResolveOptions = {}
+): Promise<Manifest[]> {
+  const { concurrency, ...opts } = options;
+  const limit = pLimit(validateConcurrency(concurrency));
+
+  return doResolve(value, { ...opts, limit });
 }
