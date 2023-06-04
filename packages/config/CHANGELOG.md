@@ -1,5 +1,11 @@
 # @kosko/config
 
+## 3.2.0
+
+### Minor Changes
+
+- [`1f3c72b`](https://github.com/tommy351/kosko/commit/1f3c72bc0bfd155d5684a61f2856ca76524dd161) Thanks [@tommy351](https://github.com/tommy351)! - Add `concurrency` option, which limits the maximum number of concurrent files loaded in `kosko generate` and `kosko validate` command. The default value is `10`.
+
 ## 3.1.0
 
 ### Minor Changes
