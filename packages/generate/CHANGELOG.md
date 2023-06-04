@@ -1,5 +1,13 @@
 # @kosko/generate
 
+## 3.2.0
+
+### Minor Changes
+
+- [`8f73504`](https://github.com/tommy351/kosko/commit/8f735043737152ea807dd2131e3d72ea78aabe47) Thanks [@tommy351](https://github.com/tommy351)! - Resolve iterable values (e.g. array, generator) in parallel.
+
+- [`f3f14ab`](https://github.com/tommy351/kosko/commit/f3f14ab268d84d322cd3890bfcb0827d140dc4bb) Thanks [@tommy351](https://github.com/tommy351)! - Add `concurrency` option to `generate` and `resolve` function. The default value is `10`.
+
 ## 3.1.0
 
 ### Minor Changes
