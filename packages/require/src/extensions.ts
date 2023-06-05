@@ -34,8 +34,6 @@ export function getRequireExtensions(): string[] {
 
       return [...extensions];
     }
-    case "deno":
-      return [".ts", ...BASE_EXTENSIONS];
 
     default:
       return BASE_EXTENSIONS;

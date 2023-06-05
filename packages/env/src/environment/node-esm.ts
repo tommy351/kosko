@@ -17,9 +17,7 @@ export function createNodeESMEnvironment(
   /* istanbul ignore next */
   // eslint-disable-next-line no-restricted-globals
   if (process.env.BUILD_TARGET === "browser") {
-    throw new Error(
-      "createNodeESMEnvironment is only supported on Node.js and Deno"
-    );
+    throw new Error("createNodeESMEnvironment is only supported on Node.js");
   }
 
   return createNodeEnvironment({

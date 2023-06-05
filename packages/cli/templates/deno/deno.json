@@ -1,6 +1,0 @@
-{
-  "importMap": "./import_map.json",
-  "tasks": {
-    "kosko": "deno run -A npm:kosko"
-  }
-}

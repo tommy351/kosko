@@ -40,7 +40,7 @@ const entryFiles = args.length ? args : ["src/index.ts"];
  *   output: string;
  *   format: import("rollup").ModuleFormat;
  *   importMetaUrlShim?: boolean;
- *   target: 'browser' | 'node' | 'deno';
+ *   target: 'browser' | 'node';
  * }} options
  */
 async function buildBundle(options) {
@@ -192,14 +192,6 @@ await Promise.all([
     suffixes: [".node.esm", ".node", ".esm"],
     target: "node"
   })
-
-  // Deno
-  // buildBundle({
-  //   output: "deno.mjs",
-  //   format: "esm",
-  //   suffixes: [".deno", ".esm"],
-  //   target: "deno"
-  // })
 ]);
 
 await execa(tsc, ["--outDir", distDir]);

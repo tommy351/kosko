@@ -16,7 +16,6 @@ import {
   installDependencies
 } from "./install";
 import { getErrorCode } from "@kosko/common-utils";
-import denoTemplate from "./templates/deno";
 
 async function checkPath(path: string, force?: boolean) {
   try {
@@ -130,33 +129,20 @@ export const initCmd: Command<InitArguments> = {
 
     logger.log(LogLevel.Info, `Creating a Kosko project in "${path}"`);
     const template: Template = (() => {
-      // eslint-disable-next-line no-restricted-globals
-      switch (process.env.BUILD_TARGET) {
-        case "deno":
-          return denoTemplate;
-
-        case "node":
-          if (args.typescript) {
-            return args.esm ? tsEsmTemplate : tsTemplate;
-          }
-
-          if (args.esm) {
-            return esmTemplate;
-          }
-
-          return cjsTemplate;
+      if (args.typescript) {
+        return args.esm ? tsEsmTemplate : tsTemplate;
       }
 
-      throw new Error("Template is unavailable on current platform");
+      if (args.esm) {
+        return esmTemplate;
+      }
+
+      return cjsTemplate;
     })();
 
     const packageManager =
       args.packageManager ?? (await detectPackageManager(path));
-    const runCmd =
-      // eslint-disable-next-line no-restricted-globals
-      process.env.BUILD_TARGET === "deno"
-        ? "deno task kosko"
-        : `${packageManager} run`;
+    const runCmd = `${packageManager} run`;
     const { dependencies, devDependencies, files } = await template({ path });
 
     await writeFiles(path, files);
