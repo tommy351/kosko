@@ -5,7 +5,7 @@ import logger, { LogLevel } from "@kosko/log";
 import stringify from "fast-safe-stringify";
 import { isRecord } from "@kosko/common-utils";
 import { importModule } from "./import";
-import fetch from "./fetch";
+import defaultFetch from "./fetch";
 
 /**
  * Describes an object which seems to be a Kubernetes manifest.
@@ -115,7 +115,9 @@ export function loadFile(path: string, options?: LoadOptions) {
  *
  * @public
  */
-export interface LoadUrlOptions extends LoadOptions, RequestInit {}
+export interface LoadUrlOptions extends LoadOptions, RequestInit {
+  fetch?: typeof fetch;
+}
 
 /**
  * Loads a Kubernetes YAML file from `url`.
@@ -132,7 +134,7 @@ export function loadUrl(
   url: RequestInfo,
   options: LoadUrlOptions = {}
 ): () => Promise<Manifest[]> {
-  const { transform, ...init } = options;
+  const { transform, fetch = defaultFetch, ...init } = options;
 
   return async () => {
     const res = await fetch(url, init);

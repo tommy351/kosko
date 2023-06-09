@@ -7,6 +7,7 @@ import type { FetchMockStatic } from "fetch-mock";
 import { Pod } from "kubernetes-models/v1/Pod";
 import { TempDir, makeTempDir } from "@kosko/test-utils";
 import { isRecord } from "@kosko/common-utils";
+import yaml from "js-yaml";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 jest.mock("../fetch", () => require("fetch-mock").sandbox());
@@ -326,6 +327,29 @@ describe("loadUrl", () => {
       await expect(result()).resolves.toEqual([
         { apiVersion: "v1", kind: "Pod" }
       ]);
+    });
+  });
+
+  describe("provide fetch function", () => {
+    test("should use provided fetch function", async () => {
+      const data = {
+        apiVersion: "v1",
+        kind: "Pod",
+        metadata: {
+          name: "foo"
+        }
+      };
+      const fetchFn = jest.fn().mockResolvedValue(
+        new Response(yaml.dump(data), {
+          headers: {
+            "Content-Type": "application/yaml"
+          }
+        })
+      );
+      const result = loadUrl(url, { fetch: fetchFn });
+
+      await expect(result()).resolves.toEqual([data]);
+      expect(fetchFn).toHaveBeenCalledTimes(1);
     });
   });
 });
