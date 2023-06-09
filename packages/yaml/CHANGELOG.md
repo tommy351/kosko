@@ -1,5 +1,11 @@
 # @kosko/yaml
 
+## 3.3.0
+
+### Minor Changes
+
+- [`782a9d3`](https://github.com/tommy351/kosko/commit/782a9d3b79529d04c8a01addc6ef9fb59df8a545) Thanks [@tommy351](https://github.com/tommy351)! - Add `fetch` to `loadUrl` options, which allows users to customize the `fetch` function instead of using the global `fetch`.
+
 ## 3.2.1
 
 ### Patch Changes
