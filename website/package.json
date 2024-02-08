@@ -30,7 +30,7 @@
   "dependencies": {
     "@algolia/client-search": "^4.14.2",
     "@babel/core": "^7.19.1",
-    "@babel/traverse": "^7.19.1",
+    "@babel/traverse": "^7.23.2",
     "@docusaurus/core": "2.2.0",
     "@docusaurus/plugin-ideal-image": "2.2.0",
     "@docusaurus/preset-classic": "2.2.0",
