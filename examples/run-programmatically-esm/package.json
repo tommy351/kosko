@@ -2,7 +2,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=14.18.0"
+    "node": ">=18"
   },
   "dependencies": {
     "@kosko/env": "^4.0.1",

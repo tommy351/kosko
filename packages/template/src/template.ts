@@ -29,12 +29,12 @@ export type Options<T, O> = yargs.Options & {
 } & (T extends string
     ? { type: "string" } | { string: true }
     : T extends number
-    ? { type: "number" | "count" } | { number: true } | { count: true }
-    : T extends boolean
-    ? { type: "boolean" } | { boolean: true }
-    : T extends any[]
-    ? { type: "array" } | { array: true }
-    : unknown);
+      ? { type: "number" | "count" } | { number: true } | { count: true }
+      : T extends boolean
+        ? { type: "boolean" } | { boolean: true }
+        : T extends any[]
+          ? { type: "array" } | { array: true }
+          : unknown);
 
 /**
  * @public
