@@ -603,6 +603,16 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0
 
+  packages/plugin:
+    dependencies:
+      '@kosko/generate':
+        specifier: workspace:^
+        version: link:../generate
+    devDependencies:
+      '@kosko/build-scripts':
+        specifier: workspace:^
+        version: link:../../internal/build-scripts
+
   packages/require:
     dependencies:
       '@kosko/common-utils':

@@ -1,0 +1,51 @@
+{
+  "name": "@kosko/plugin",
+  "version": "0.0.0",
+  "description": "Plugin types for Kosko.",
+  "homepage": "https://kosko.dev",
+  "repository": "https://github.com/tommy351/kosko/tree/master/packages/plugin",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "main": "dist/index.node.cjs",
+  "module": "dist/index.node.mjs",
+  "browser": "dist/index.base.mjs",
+  "types": "dist/types.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "build-scripts"
+  },
+  "exports": {
+    "node": {
+      "import": {
+        "types": "./dist/types.d.mts",
+        "default": "./dist/index.node.mjs"
+      },
+      "types": "./dist/types.d.ts",
+      "require": "./dist/index.node.cjs"
+    },
+    "import": {
+      "types": "./dist/types.d.mts",
+      "default": "./dist/index.base.mjs"
+    },
+    "types": "./dist/types.d.ts",
+    "require": "./dist/index.node.cjs"
+  },
+  "files": [
+    "/dist/"
+  ],
+  "keywords": [
+    "kosko"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@kosko/generate": "workspace:^"
+  },
+  "devDependencies": {
+    "@kosko/build-scripts": "workspace:^"
+  }
+}
