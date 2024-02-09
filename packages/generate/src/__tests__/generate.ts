@@ -497,3 +497,28 @@ describe("when concurrency < 1", () => {
     ).rejects.toThrow("Concurrency must be greater than 0");
   });
 });
+
+describe("when transform is given", () => {
+  beforeEach(async () => {
+    await createTempFiles({
+      "a.js": "module.exports = {a: 1}"
+    });
+  });
+
+  test("should transform the value", async () => {
+    const result = await generate({
+      components: ["*"],
+      path: tmpDir.path,
+      transform: (manifest) => ({ ...(manifest.data as any), b: 2 })
+    });
+    expect(result).toEqual({
+      manifests: [
+        {
+          path: join(tmpDir.path, "a.js"),
+          index: [],
+          data: { a: 1, b: 2 }
+        }
+      ]
+    });
+  });
+});

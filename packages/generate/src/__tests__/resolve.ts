@@ -380,3 +380,69 @@ describe("when concurrency = 1", () => {
     ]);
   });
 });
+
+test("transform a manifest", async () => {
+  const transform = jest.fn((manifest) => (manifest.data as number) + 1);
+
+  await expect(
+    resolve(1, { path: "foo", index: [5], transform })
+  ).resolves.toEqual([{ path: "foo", index: [5], data: 2 }]);
+  expect(transform).toHaveBeenCalledWith({ path: "foo", index: [5], data: 1 });
+  expect(transform).toHaveBeenCalledOnce();
+});
+
+test("transform multiple manifests", async () => {
+  await expect(
+    resolve([1, 2, 3], {
+      transform: (manifest) => (manifest.data as number) + 1
+    })
+  ).resolves.toEqual([
+    { path: "", index: [0], data: 2 },
+    { path: "", index: [1], data: 3 },
+    { path: "", index: [2], data: 4 }
+  ]);
+});
+
+test("transform returns a Promise", async () => {
+  await expect(
+    resolve(1, {
+      transform: async (manifest) => (manifest.data as number) + 1
+    })
+  ).resolves.toEqual([{ path: "", index: [], data: 2 }]);
+});
+
+test("transform returns null", async () => {
+  await expect(
+    resolve(1, {
+      transform: () => null
+    })
+  ).resolves.toEqual([]);
+});
+
+test("transform returns undefined", async () => {
+  await expect(
+    resolve(1, {
+      transform: () => undefined
+    })
+  ).resolves.toEqual([]);
+});
+
+test("should throw ResolveError when the transform function throws an error", async () => {
+  const cause = new Error("err");
+  const err = await getRejectedValue(
+    resolve(1, {
+      path: "test",
+      index: [5],
+      transform: () => {
+        throw cause;
+      }
+    })
+  );
+
+  assert(err instanceof ResolveError);
+  expect(err.message).toEqual("Transform function thrown an error");
+  expect(err.path).toEqual("test");
+  expect(err.index).toEqual([5]);
+  expect(err.cause).toEqual(cause);
+  expect(err.value).toEqual(1);
+});

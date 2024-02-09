@@ -1,4 +1,4 @@
-import type { Manifest } from "@kosko/generate";
+import type { ResolveOptions } from "@kosko/generate";
 
 /**
  * Plugin factory.
@@ -33,10 +33,7 @@ export interface PluginContext {
  */
 export interface Plugin {
   /**
-   * Transform a manifest. This function is called when a new manifest is
-   * resolved, and before validation. The return value will override the
-   * data of the manifest. If the return value is `undefined` or `null`, the
-   * manifest will be removed from the result.
+   * {@inheritDoc @kosko/generate#ResolveOptions.transform}
    */
-  transformManifest?(manifest: Manifest): unknown | Promise<unknown>;
+  transformManifest?: ResolveOptions["transform"];
 }

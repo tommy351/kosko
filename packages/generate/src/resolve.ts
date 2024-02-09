@@ -101,6 +101,14 @@ export interface ResolveOptions {
    * @defaultValue `10`
    */
   concurrency?: number;
+
+  /**
+   * Transform a manifest. This function is called when a new manifest is found,
+   * and before the validation. The return value will override the data of the
+   * manifest. If the return value is `undefined` or `null`, the manifest will
+   * be removed from the result.
+   */
+  transform?(manifest: Manifest): unknown | Promise<unknown>;
 }
 
 /**
@@ -122,7 +130,14 @@ export async function resolve(
   value: unknown,
   options: ResolveOptions = {}
 ): Promise<Manifest[]> {
-  const { validate = true, index = [], path = "", bail, concurrency } = options;
+  const {
+    validate = true,
+    index = [],
+    path = "",
+    bail,
+    concurrency,
+    transform
+  } = options;
   const limit = pLimit(validateConcurrency(concurrency));
 
   function createResolveError(message: string, err: unknown) {
@@ -199,25 +214,37 @@ export async function resolve(
     return handleResolvePromises(promises, bail);
   }
 
-  if (validate) {
-    if (isValidator(value)) {
-      try {
-        logger.log(
-          LogLevel.Debug,
-          `Validating manifests ${index.join(".")} in ${options.path}`
-        );
-        await value.validate();
-      } catch (err) {
-        throw createResolveError("Validation error", err);
-      }
-    }
-  }
-
-  const manifest: Manifest = {
+  let manifest: Manifest = {
     path,
     index,
     data: value
   };
+
+  if (typeof transform === "function") {
+    try {
+      const newValue = await transform(manifest);
+
+      // Remove the manifest if the return value is undefined or null
+      if (newValue == null) return [];
+
+      // Create a new object to avoid mutation
+      manifest = { ...manifest, data: newValue };
+    } catch (err) {
+      throw createResolveError("Transform function thrown an error", err);
+    }
+  }
+
+  if (validate && isValidator(manifest.data)) {
+    try {
+      logger.log(
+        LogLevel.Debug,
+        `Validating manifests ${index.join(".")} in ${options.path}`
+      );
+      await manifest.data.validate();
+    } catch (err) {
+      throw createResolveError("Validation error", err);
+    }
+  }
 
   return [manifest];
 }
