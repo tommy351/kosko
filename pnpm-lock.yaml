@@ -306,6 +306,9 @@ importers:
       '@kosko/jest-preset':
         specifier: workspace:^
         version: link:../../internal/jest-preset
+      '@kosko/plugin':
+        specifier: workspace:^
+        version: link:../plugin
       '@kosko/test-utils':
         specifier: workspace:^
         version: link:../../internal/test-utils

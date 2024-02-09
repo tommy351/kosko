@@ -75,6 +75,7 @@
     "@kosko/build-scripts": "workspace:^",
     "@kosko/env": "workspace:^",
     "@kosko/jest-preset": "workspace:^",
+    "@kosko/plugin": "workspace:^",
     "@kosko/test-utils": "workspace:^",
     "@types/bl": "^5.0.2",
     "@types/exit": "^0.1.31",

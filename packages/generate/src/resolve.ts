@@ -108,7 +108,7 @@ export interface ResolveOptions {
    * manifest. If the return value is `undefined` or `null`, the manifest will
    * be removed from the result.
    */
-  transform?(manifest: Manifest): unknown | Promise<unknown>;
+  transform?(manifest: Manifest): unknown;
 }
 
 /**

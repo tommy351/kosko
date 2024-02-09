@@ -10,6 +10,7 @@ import { BaseGenerateArguments } from "./types";
 import { fileURLToPath } from "node:url";
 import { stdout, execPath, execArgv } from "node:process";
 import { createRequire } from "node:module";
+import { loadPlugins } from "./plugin";
 
 async function doGenerate({
   cwd,
@@ -58,6 +59,9 @@ export async function handler(options: WorkerOptions) {
     }
   }
 
+  // Load plugins
+  const plugin = await loadPlugins(args.cwd, config.plugins);
+
   // Generate manifests
   const result = await doGenerate({
     cwd: args.cwd,
@@ -65,7 +69,8 @@ export async function handler(options: WorkerOptions) {
     extensions: config.extensions,
     validate: args.validate,
     bail: config.bail,
-    concurrency: config.concurrency
+    concurrency: config.concurrency,
+    transform: plugin.transformManifest
   });
 
   if (!result.manifests.length) {
