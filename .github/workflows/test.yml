@@ -5,10 +5,12 @@ on:
 
 jobs:
   lint:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/install-deps
+      - name: Check duplication in lockfile
+        run: pnpm dedupe --check
       - uses: ./.github/actions/build-packages
       - name: Lint files
         run: pnpm run lint
@@ -21,9 +23,9 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x, 20.x, 21.x]
-        os: [ubuntu-20.04, windows-latest]
+        os: [ubuntu-latest, windows-latest]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/install-deps
         with:
           node-version: ${{ matrix.node-version }}
@@ -44,15 +46,15 @@ jobs:
         run: pnpm run test:unit --coverage
       - name: Run integration tests
         run: pnpm run test:integration
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
   test-browser:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     needs:
       - lint
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/install-deps
       - uses: ./.github/actions/build-packages
       - name: Run browser tests
