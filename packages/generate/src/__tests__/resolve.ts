@@ -49,7 +49,7 @@ test("value is a function that throws an error", async () => {
   );
 
   assert(err instanceof ResolveError);
-  expect(err.message).toEqual("Input function value thrown an error");
+  expect(err.message).toEqual("Input function value threw an error");
   expect(err.path).toEqual("test");
   expect(err.index).toEqual([5]);
   expect(err.value).toEqual(value);
@@ -68,7 +68,7 @@ test("value is an async function that throws an error", async () => {
   );
 
   assert(err instanceof ResolveError);
-  expect(err.message).toEqual("Input function value thrown an error");
+  expect(err.message).toEqual("Input function value threw an error");
   expect(err.path).toEqual("test");
   expect(err.index).toEqual([5]);
   expect(err.value).toEqual(value);
@@ -131,7 +131,7 @@ test("value is a generator function that throws an error", async () => {
   );
 
   assert(err instanceof ResolveError);
-  expect(err.message).toEqual("Input iterable value thrown an error");
+  expect(err.message).toEqual("Input iterable value threw an error");
   expect(err.path).toEqual("test");
   expect(err.index).toEqual([5]);
   expect(err.cause).toEqual(new Error("err"));
@@ -163,7 +163,7 @@ test("value is an async generator function that throws an error", async () => {
   );
 
   assert(err instanceof ResolveError);
-  expect(err.message).toEqual("Input async iterable value thrown an error");
+  expect(err.message).toEqual("Input async iterable value threw an error");
   expect(err.path).toEqual("test");
   expect(err.index).toEqual([5]);
   expect(err.cause).toEqual(new Error("err"));
@@ -440,7 +440,7 @@ test("should throw ResolveError when the transform function throws an error", as
   );
 
   assert(err instanceof ResolveError);
-  expect(err.message).toEqual("Transform function thrown an error");
+  expect(err.message).toEqual("An error occurred in transform function");
   expect(err.path).toEqual("test");
   expect(err.index).toEqual([5]);
   expect(err.cause).toEqual(cause);

@@ -3,32 +3,39 @@ import type { Plugin, PluginContext } from "@kosko/plugin";
 import { importPath } from "@kosko/require";
 import logger, { LogLevel } from "@kosko/log";
 import resolveFrom from "resolve-from";
-import { excludeFalsyInArray } from "../../utils";
+import { isRecord } from "@kosko/common-utils";
+import { CLIError } from "../../cli/error";
+import pc from "picocolors";
 
 type UnknownPluginFactory = (ctx: PluginContext) => unknown;
 
-class PluginLoadError extends Error {
-  public readonly name = "PluginLoadError";
+interface PluginSource {
+  name: string;
+  path: string;
 }
 
-function assertPluginFactory(
+function createError(message: string, cause?: unknown): CLIError {
+  let output = message;
+
+  if (isRecord(cause) && typeof cause.stack === "string") {
+    output += `\n${pc.gray(cause.stack)}`;
+  }
+
+  return new CLIError(message, { output });
+}
+
+function assertFactory(
   name: string,
   value: unknown
 ): asserts value is UnknownPluginFactory {
   if (typeof value !== "function") {
-    throw new PluginLoadError(
-      `Plugin "${name}" must export a default function`
-    );
+    throw createError(`Plugin "${name}" must export a default function`);
   }
 }
 
-function isObject(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && value != null;
-}
-
 function assertPlugin(name: string, value: unknown): asserts value is Plugin {
-  if (!isObject(value)) {
-    throw new PluginLoadError(
+  if (!isRecord(value)) {
+    throw createError(
       `Plugin "${name}" must return an object in the factory function`
     );
   }
@@ -37,7 +44,7 @@ function assertPlugin(name: string, value: unknown): asserts value is Plugin {
     value.transformManifest != null &&
     typeof value.transformManifest !== "function"
   ) {
-    throw new PluginLoadError(
+    throw createError(
       `Expected "transformManifest" to be a function in plugin "${name}"`
     );
   }
@@ -47,31 +54,56 @@ async function loadPlugin({
   name,
   path,
   ...ctx
-}: PluginContext & { name: string; path: string }): Promise<Plugin> {
-  const { default: mod } = await importPath(path);
-  assertPluginFactory(name, mod);
+}: PluginContext & PluginSource): Promise<Plugin> {
+  let factory: unknown;
 
-  const plugin = await mod(ctx);
+  try {
+    const mod = await importPath(path);
+    factory = mod.default;
+  } catch (err) {
+    throw createError(`Failed to load plugin "${name}"`, err);
+  }
+
+  assertFactory(name, factory);
+
+  let plugin: unknown;
+
+  try {
+    plugin = await factory(ctx);
+  } catch (err) {
+    throw createError(`Failed to construct plugin "${name}"`, err);
+  }
+
   assertPlugin(name, plugin);
 
   return plugin;
 }
 
-function composeTransforms(
-  transformers: readonly Required<Plugin>["transformManifest"][]
-): Plugin["transformManifest"] {
-  return async (manifest) => {
-    let data = manifest.data;
+function composePlugins(plugins: readonly Plugin[]): Plugin {
+  return {
+    ...(plugins.some((p) => p.transformManifest) && {
+      transformManifest: async ({ data, ...manifest }) => {
+        for (const plugin of plugins) {
+          if (typeof plugin.transformManifest !== "function") continue;
 
-    for (const transform of transformers) {
-      data = await transform({ ...manifest, data });
+          data = await plugin.transformManifest({ ...manifest, data });
 
-      // Stop if the return value is undefined or null
-      if (data == null) return data;
-    }
+          // Stop if the return value is undefined or null
+          if (data == null) return data;
+        }
 
-    return data;
+        return data;
+      }
+    })
   };
+}
+
+function resolvePath(cwd: string, name: string): string {
+  try {
+    return resolveFrom(cwd, name);
+  } catch (err) {
+    throw createError(`Failed to resolve path for plugin "${name}"`, err);
+  }
 }
 
 export async function loadPlugins(
@@ -88,7 +120,7 @@ export async function loadPlugins(
   const plugins: Plugin[] = [];
 
   for (const conf of configs) {
-    const path = resolveFrom(cwd, conf.name);
+    const path = resolvePath(cwd, conf.name);
 
     logger.log(LogLevel.Debug, `Loading plugin "${conf.name}" from "${path}"`);
 
@@ -97,11 +129,5 @@ export async function loadPlugins(
     plugins.push(plugin);
   }
 
-  const transformers = excludeFalsyInArray(
-    plugins.map((p) => p.transformManifest)
-  );
-
-  return {
-    transformManifest: composeTransforms(transformers)
-  };
+  return composePlugins(plugins);
 }

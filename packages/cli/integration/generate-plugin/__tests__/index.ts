@@ -130,7 +130,9 @@ describe("when plugin does not exist", () => {
     );
 
     expect(result.exitCode).toEqual(1);
-    expect(result.stderr).toContain(`Cannot find module 'test-plugin'`);
+    expect(result.stderr).toContain(
+      `Failed to resolve path for plugin "test-plugin"`
+    );
   });
 });
 
@@ -145,5 +147,34 @@ describe("when plugin is a TS file", () => {
     );
 
     expect(result.stdout).toMatchSnapshot();
+  });
+});
+
+describe("when plugin is a directory", () => {
+  test("should transform manifests", async () => {
+    const result = await runNodeCLI(
+      ["generate", "--config", "./kosko-dir.toml"],
+      { cwd: testDir }
+    );
+
+    expect(result.stdout).toMatchSnapshot();
+  });
+});
+
+describe("when transformManifest throws an error", () => {
+  beforeEach(async () => {
+    await linkModule("test-plugin", "transform-error");
+  });
+
+  test("should throw an error", async () => {
+    const result = await runNodeCLI(
+      ["generate", "--config", "./kosko-package.toml"],
+      { cwd: testDir, reject: false }
+    );
+
+    expect(result.exitCode).toEqual(1);
+    expect(result.stderr).toContain(
+      `ResolveError: An error occurred in transform function`
+    );
   });
 });

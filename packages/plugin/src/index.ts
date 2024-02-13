@@ -1,4 +1,4 @@
-import type { ResolveOptions } from "@kosko/generate";
+import type { Manifest } from "@kosko/generate";
 
 /**
  * Plugin factory.
@@ -27,6 +27,13 @@ export interface PluginContext {
 }
 
 /**
+ * @public
+ */
+export interface TransformManifest {
+  (manifest: Manifest): unknown;
+}
+
+/**
  * Plugin type.
  *
  * @public
@@ -35,5 +42,5 @@ export interface Plugin {
   /**
    * {@inheritDoc @kosko/generate#ResolveOptions.transform}
    */
-  transformManifest?: ResolveOptions["transform"];
+  transformManifest?: TransformManifest;
 }

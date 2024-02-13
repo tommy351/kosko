@@ -11,7 +11,10 @@ export async function runNodeCLI(
   return execa(BIN_PATH, args, {
     ...options,
     env: {
+      // Set locale to en_US to make sure the output is consistent
       LC_ALL: "en_US",
+      // Always enable console colors to make sure the output is consistent
+      FORCE_COLOR: "1",
       ...options.env
     }
   });

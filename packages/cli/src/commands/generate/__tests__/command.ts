@@ -516,7 +516,9 @@ describe("when plugin name is a non-existing package", () => {
   });
 
   test("should throw an error", async () => {
-    await expect(execute()).rejects.toThrow(`Cannot find module 'test-plugin'`);
+    await expect(execute()).rejects.toThrow(
+      `Failed to resolve path for plugin "test-plugin"`
+    );
   });
 });
 
@@ -555,7 +557,7 @@ describe("when plugin name is a non-existing relative path", () => {
 
   test("should throw an error", async () => {
     await expect(execute()).rejects.toThrow(
-      `Cannot find module './test-plugin.js'`
+      `Failed to resolve path for plugin "./test-plugin.js"`
     );
   });
 });
@@ -597,7 +599,7 @@ describe("when plugin name is a non-existing absolute path", () => {
 
   test("should throw an error", async () => {
     await expect(execute()).rejects.toThrow(
-      `Cannot find module '${join(tmpDir.path, "test-plugin.js")}'`
+      `Failed to resolve path for plugin "${join(tmpDir.path, "test-plugin.js")}"`
     );
   });
 });
@@ -689,7 +691,9 @@ describe("when plugin factory throws an error", () => {
   });
 
   test("should throw an error", async () => {
-    await expect(execute()).rejects.toThrow(`foo`);
+    await expect(execute()).rejects.toThrow(
+      `Failed to construct plugin "test-plugin"`
+    );
   });
 });
 
@@ -723,7 +727,9 @@ describe("when plugin factory returns a rejected promise", () => {
   });
 
   test("should throw an error", async () => {
-    await expect(execute()).rejects.toThrow("foo");
+    await expect(execute()).rejects.toThrow(
+      `Failed to construct plugin "test-plugin"`
+    );
   });
 });
 

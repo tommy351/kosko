@@ -155,7 +155,7 @@ export async function resolve(
     try {
       return resolve(await value(), options);
     } catch (err) {
-      throw createResolveError("Input function value thrown an error", err);
+      throw createResolveError("Input function value threw an error", err);
     }
   }
 
@@ -183,7 +183,7 @@ export async function resolve(
         );
       }
     } catch (err) {
-      throw createResolveError("Input iterable value thrown an error", err);
+      throw createResolveError("Input iterable value threw an error", err);
     }
 
     return handleResolvePromises(promises, bail);
@@ -206,7 +206,7 @@ export async function resolve(
       }
     } catch (err) {
       throw createResolveError(
-        "Input async iterable value thrown an error",
+        "Input async iterable value threw an error",
         err
       );
     }
@@ -230,7 +230,7 @@ export async function resolve(
       // Create a new object to avoid mutation
       manifest = { ...manifest, data: newValue };
     } catch (err) {
-      throw createResolveError("Transform function thrown an error", err);
+      throw createResolveError("An error occurred in transform function", err);
     }
   }
 
