@@ -1,0 +1,7 @@
+components = ["*"]
+
+[[plugins]]
+name = "./modules/mjs/main.js"
+
+[plugins.config]
+namespace = "foo"

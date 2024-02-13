@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when multiple plugins are specified should transform manifests 1`] = `
+"apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test
+  labels:
+    a: '1'
+  annotations:
+    b: '2'"
+`;
+
+exports[`when plugin is a CJS file should transform manifests 1`] = `
+"apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test
+  namespace: foo"
+`;
+
+exports[`when plugin is a CJS package should transform manifests 1`] = `
+"apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test
+  namespace: foo"
+`;
+
+exports[`when plugin is a ESM file should transform manifests 1`] = `
+"apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test
+  namespace: foo"
+`;
+
+exports[`when plugin is a ESM package should transform manifests 1`] = `
+"apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test
+  namespace: foo"
+`;
+
+exports[`when plugin is a TS file should transform manifests 1`] = `
+"apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test
+  namespace: foo"
+`;

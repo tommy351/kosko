@@ -19,13 +19,19 @@ const mockedGenerate = jest.mocked(generate);
 let tmpDir: TempDir;
 let env: Environment;
 
-async function createFakeModule(id: string): Promise<void> {
+async function createFakeModule(
+  id: string,
+  additionalContent?: string
+): Promise<void> {
   const dir = join(tmpDir.path, "node_modules", id);
+  let content = `require("node:fs").appendFileSync(__dirname + "/../../fakeModules", '${id},');`;
+
+  if (additionalContent) {
+    content += `\n${additionalContent}`;
+  }
+
   await mkdir(dir, { recursive: true });
-  await writeFile(
-    join(dir, "index.js"),
-    `require('fs').appendFileSync(__dirname + '/../../fakeModules', '${id},');`
-  );
+  await writeFile(join(dir, "index.js"), content);
 }
 
 async function getLoadedFakeModules(): Promise<string[]> {
@@ -455,3 +461,313 @@ describe.each([
     });
   }
 );
+
+describe("when plugin name is a package", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: "test-plugin" }]
+    });
+    await createFakeModule("test-plugin", `module.exports = () => ({});`);
+    await execute();
+  });
+
+  test("should load the plugin", async () => {
+    expect(await getLoadedFakeModules()).toEqual(["test-plugin"]);
+  });
+});
+
+describe("when plugin config is specified in a plugin", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: "test-plugin", config: { foo: "bar" } }]
+    });
+    await createFakeModule(
+      "test-plugin",
+      `module.exports = async (ctx) => {
+  require("node:fs").writeFileSync(__dirname + "/../../pluginCtx", JSON.stringify(ctx));
+  return {};
+};`
+    );
+    await execute();
+  });
+
+  test("should pass the config to the plugin", async () => {
+    const ctx = JSON.parse(
+      await readFile(join(tmpDir.path, "pluginCtx"), "utf8")
+    );
+    expect(ctx).toEqual({
+      cwd: tmpDir.path,
+      config: { foo: "bar" }
+    });
+  });
+});
+
+describe("when plugin name is a non-existing package", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: "test-plugin" }]
+    });
+  });
+
+  test("should throw an error", async () => {
+    await expect(execute()).rejects.toThrow(`Cannot find module 'test-plugin'`);
+  });
+});
+
+describe("when plugin name is a relative path", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: "./test-plugin.js" }]
+    });
+    await writeFile(
+      join(tmpDir.path, "test-plugin.js"),
+      `
+require("node:fs").writeFileSync(__dirname + "/pluginLoaded", "");
+module.exports = () => ({});
+`
+    );
+    await execute();
+  });
+
+  test("should load the plugin", async () => {
+    await expect(
+      readFile(join(tmpDir.path, "pluginLoaded"), "utf8")
+    ).resolves.toEqual("");
+  });
+});
+
+describe("when plugin name is a non-existing relative path", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: "./test-plugin.js" }]
+    });
+  });
+
+  test("should throw an error", async () => {
+    await expect(execute()).rejects.toThrow(
+      `Cannot find module './test-plugin.js'`
+    );
+  });
+});
+
+describe("when plugin name is an absolute path", () => {
+  beforeEach(async () => {
+    const path = join(tmpDir.path, "test-plugin.js");
+
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: path }]
+    });
+    await writeFile(
+      path,
+      `
+require("node:fs").writeFileSync(__dirname + "/pluginLoaded", "");
+module.exports = () => ({});
+`
+    );
+    await execute();
+  });
+
+  test("should load the plugin", async () => {
+    await expect(
+      readFile(join(tmpDir.path, "pluginLoaded"), "utf8")
+    ).resolves.toEqual("");
+  });
+});
+
+describe("when plugin name is a non-existing absolute path", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: join(tmpDir.path, "test-plugin.js") }]
+    });
+  });
+
+  test("should throw an error", async () => {
+    await expect(execute()).rejects.toThrow(
+      `Cannot find module '${join(tmpDir.path, "test-plugin.js")}'`
+    );
+  });
+});
+
+describe("when plugin does not export a function", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: "test-plugin" }]
+    });
+    await createFakeModule("test-plugin", `module.exports = "foo";`);
+  });
+
+  test("should throw an error", async () => {
+    await expect(execute()).rejects.toThrow(
+      `Plugin "test-plugin" must export a default function`
+    );
+  });
+});
+
+describe("when plugin factory does not return an object", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: "test-plugin" }]
+    });
+    await createFakeModule("test-plugin", `module.exports = () => "foo";`);
+  });
+
+  test("should throw an error", async () => {
+    await expect(execute()).rejects.toThrow(
+      `Plugin "test-plugin" must return an object in the factory function`
+    );
+  });
+});
+
+describe("when transformManifest a function", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: "test-plugin" }]
+    });
+    await createFakeModule(
+      "test-plugin",
+      `module.exports = () => ({ transformManifest: () => {} });`
+    );
+    await execute();
+  });
+
+  test("should load the plugin", async () => {
+    expect(await getLoadedFakeModules()).toEqual(["test-plugin"]);
+  });
+});
+
+describe("when transformManifest is defined but not a function", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: "test-plugin" }]
+    });
+    await createFakeModule(
+      "test-plugin",
+      `module.exports = () => ({ transformManifest: "foo" });`
+    );
+  });
+
+  test("should throw an error", async () => {
+    await expect(execute()).rejects.toThrow(
+      `Expected "transformManifest" to be a function in plugin "test-plugin"`
+    );
+  });
+});
+
+describe("when plugin factory throws an error", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: "test-plugin" }]
+    });
+    await createFakeModule(
+      "test-plugin",
+      `module.exports = () => { throw new Error("foo") };`
+    );
+  });
+
+  test("should throw an error", async () => {
+    await expect(execute()).rejects.toThrow(`foo`);
+  });
+});
+
+describe("when plugin factory returns a resolved promise", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: "test-plugin" }]
+    });
+    await createFakeModule("test-plugin", `module.exports = async () => ({});`);
+    await execute();
+  });
+
+  test("should throw an error", async () => {
+    expect(await getLoadedFakeModules()).toEqual(["test-plugin"]);
+  });
+});
+
+describe("when plugin factory returns a rejected promise", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: "test-plugin" }]
+    });
+    await createFakeModule(
+      "test-plugin",
+      `module.exports = async () => { throw new Error("foo") };`
+    );
+  });
+
+  test("should throw an error", async () => {
+    await expect(execute()).rejects.toThrow("foo");
+  });
+});
+
+describe("when plugin is specified for an environment", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      environments: {
+        dev: {
+          plugins: [{ name: "test-plugin" }]
+        }
+      }
+    });
+    await createFakeModule("test-plugin", `module.exports = () => ({});`);
+  });
+
+  test("should load the plugin when env matches", async () => {
+    await execute({ env: "dev" });
+    expect(await getLoadedFakeModules()).toEqual(["test-plugin"]);
+  });
+
+  test("should not load the plugin when env does not match", async () => {
+    await execute({ env: "prod" });
+    expect(await getLoadedFakeModules()).toEqual([]);
+  });
+});
+
+describe("when multiple plugins are specified", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: "test-plugin1" }, { name: "test-plugin2" }]
+    });
+    await createFakeModule("test-plugin1", `module.exports = () => ({});`);
+    await createFakeModule("test-plugin2", `module.exports = () => ({});`);
+    await execute();
+  });
+
+  test("should load all plugins", async () => {
+    expect(await getLoadedFakeModules()).toEqual([
+      "test-plugin1",
+      "test-plugin2"
+    ]);
+  });
+});

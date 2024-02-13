@@ -142,4 +142,38 @@ describe("getConfig", () => {
       plugins: [{ name: "a" }, { name: "ad" }, { name: "cd" }]
     });
   });
+
+  test("should allow plugin configs", () => {
+    const input = {
+      components: ["foo"],
+      plugins: [{ name: "a", config: { foo: "bar" } }]
+    };
+
+    expect(getConfig(input, "")).toEqual({
+      components: ["foo"],
+      loaders: [],
+      require: [],
+      plugins: [{ name: "a", config: { foo: "bar" } }]
+    });
+  });
+
+  test("should allow duplicate plugin names", () => {
+    const input = {
+      components: ["foo"],
+      plugins: [
+        { name: "a", config: { a: 1 } },
+        { name: "a", config: { a: 2 } }
+      ]
+    };
+
+    expect(getConfig(input, "")).toEqual({
+      components: ["foo"],
+      loaders: [],
+      require: [],
+      plugins: [
+        { name: "a", config: { a: 1 } },
+        { name: "a", config: { a: 2 } }
+      ]
+    });
+  });
 });

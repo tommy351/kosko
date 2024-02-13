@@ -1,0 +1,13 @@
+components = ["*"]
+
+[[plugins]]
+name = "test-plugin"
+
+[plugins.config]
+labels = { a = "1" }
+
+[[plugins]]
+name = "test-plugin"
+
+[plugins.config]
+annotations = { b = "2" }
