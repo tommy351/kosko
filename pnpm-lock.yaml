@@ -748,6 +748,28 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0
 
+  plugins/set-metadata:
+    dependencies:
+      '@kosko/common-utils':
+        specifier: workspace:^
+        version: link:../../packages/common-utils
+      superstruct:
+        specifier: ^1.0.3
+        version: 1.0.3
+    devDependencies:
+      '@kosko/build-scripts':
+        specifier: workspace:^
+        version: link:../../internal/build-scripts
+      '@kosko/jest-preset':
+        specifier: workspace:^
+        version: link:../../internal/jest-preset
+      '@kosko/plugin':
+        specifier: workspace:^
+        version: link:../../packages/plugin
+      type-fest:
+        specifier: ^4.10.2
+        version: 4.10.2
+
   website:
     dependencies:
       '@algolia/client-search':
@@ -14675,6 +14697,11 @@ packages:
     resolution: {integrity: sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==}
     engines: {node: '>=12.20'}
     dev: false
+
+  /type-fest@4.10.2:
+    resolution: {integrity: sha512-anpAG63wSpdEbLwOqH8L84urkL6PiVIov3EMmgIhhThevh9aiMQov+6Btx0wldNcvm4wV+e2/Rt1QdDwKHFbHw==}
+    engines: {node: '>=16'}
+    dev: true
 
   /type-is@1.6.18:
     resolution: {integrity: sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g==}

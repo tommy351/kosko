@@ -2,7 +2,7 @@
 import type { Config } from "jest";
 
 const config: Config = {
-  projects: ["<rootDir>/packages/*"]
+  projects: ["<rootDir>/packages/*", "<rootDir>/plugins/*"]
 };
 
 export default config;
