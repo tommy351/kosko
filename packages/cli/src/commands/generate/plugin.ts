@@ -48,6 +48,15 @@ function assertPlugin(name: string, value: unknown): asserts value is Plugin {
       `Expected "transformManifest" to be a function in plugin "${name}"`
     );
   }
+
+  if (
+    value.validateAllManifests != null &&
+    typeof value.validateAllManifests !== "function"
+  ) {
+    throw createError(
+      `Expected "validateAllManifests" to be a function in plugin "${name}"`
+    );
+  }
 }
 
 async function loadPlugin({
@@ -79,7 +88,7 @@ async function loadPlugin({
   return plugin;
 }
 
-function composePlugins(plugins: readonly Plugin[]): Plugin {
+export function composePlugins(plugins: readonly Plugin[]): Plugin {
   return {
     ...(plugins.some((p) => p.transformManifest) && {
       transformManifest: async ({ data, ...manifest }) => {
@@ -93,6 +102,15 @@ function composePlugins(plugins: readonly Plugin[]): Plugin {
         }
 
         return data;
+      }
+    }),
+    ...(plugins.some((p) => p.validateAllManifests) && {
+      validateAllManifests: async (result) => {
+        for (const plugin of plugins) {
+          if (typeof plugin.validateAllManifests !== "function") continue;
+
+          await plugin.validateAllManifests(result);
+        }
       }
     })
   };

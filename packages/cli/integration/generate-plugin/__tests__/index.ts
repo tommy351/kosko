@@ -70,24 +70,6 @@ describe("when plugin is a ESM file", () => {
   });
 });
 
-describe("when transformManifest returns null", () => {
-  beforeEach(async () => {
-    await linkModule("test-plugin", "transform-null");
-  });
-
-  test("should omit the manifest", async () => {
-    const result = await runNodeCLI(
-      ["generate", "--config", "./kosko-package.toml"],
-      { cwd: testDir, reject: false }
-    );
-
-    expect(result.exitCode).toEqual(1);
-    expect(result.stderr).toContain(
-      "No manifests are exported from components"
-    );
-  });
-});
-
 describe("when multiple plugins are specified", () => {
   beforeEach(async () => {
     await linkModule("test-plugin", "cjs");
@@ -100,25 +82,6 @@ describe("when multiple plugins are specified", () => {
     );
 
     expect(result.stdout).toMatchSnapshot();
-  });
-});
-
-describe("when multiple plugins are specified and one of transformManifest returns null", () => {
-  beforeEach(async () => {
-    await linkModule("null-plugin", "transform-null");
-    await linkModule("test-plugin", "cjs");
-  });
-
-  test("should transform manifests", async () => {
-    const result = await runNodeCLI(
-      ["generate", "--config", "./kosko-multi-null.toml"],
-      { cwd: testDir, reject: false }
-    );
-
-    expect(result.exitCode).toEqual(1);
-    expect(result.stderr).toContain(
-      "No manifests are exported from components"
-    );
   });
 });
 

@@ -677,6 +677,26 @@ describe("when transformManifest is defined but not a function", () => {
   });
 });
 
+describe("when validateAllManifests is defined but not a function", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: "test-plugin" }]
+    });
+    await createFakeModule(
+      "test-plugin",
+      `module.exports = () => ({ validateAllManifests: "foo" });`
+    );
+  });
+
+  test("should throw an error", async () => {
+    await expect(execute()).rejects.toThrow(
+      `Expected "validateAllManifests" to be a function in plugin "test-plugin"`
+    );
+  });
+});
+
 describe("when plugin factory throws an error", () => {
   beforeEach(async () => {
     mockGenerateSuccess();
