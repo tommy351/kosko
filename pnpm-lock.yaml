@@ -748,6 +748,31 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0
 
+  plugins/lint:
+    dependencies:
+      '@kosko/common-utils':
+        specifier: workspace:^
+        version: link:../../packages/common-utils
+      kubernetes-models:
+        specifier: ^4.1.0
+        version: 4.1.0
+      superstruct:
+        specifier: ^1.0.3
+        version: 1.0.3
+    devDependencies:
+      '@kosko/build-scripts':
+        specifier: workspace:^
+        version: link:../../internal/build-scripts
+      '@kosko/jest-preset':
+        specifier: workspace:^
+        version: link:../../internal/jest-preset
+      '@kosko/plugin':
+        specifier: workspace:^
+        version: link:../../packages/plugin
+      type-fest:
+        specifier: ^4.10.2
+        version: 4.10.2
+
   plugins/set-metadata:
     dependencies:
       '@kosko/common-utils':
@@ -3813,7 +3838,6 @@ packages:
       '@kubernetes-models/base': 4.0.0
       '@kubernetes-models/validate': 3.0.0
       tslib: 2.6.2
-    dev: true
 
   /@kubernetes-models/base@4.0.0:
     resolution: {integrity: sha512-wOQuIJk04urKwvOH2ybja8GeRNDljrq+f3yxWCdFPpsQ94UgxzWk0c3UeE5Tq+VX0hm1mNLaJZG6Upj+uIutjQ==}
@@ -3822,7 +3846,6 @@ packages:
       '@kubernetes-models/validate': 3.0.0
       is-plain-object: 5.0.0
       tslib: 2.6.2
-    dev: true
 
   /@kubernetes-models/validate@3.0.0:
     resolution: {integrity: sha512-XQhuCn6KpZ2poeQWcN6C5bQYXXazEHcOLMEsQ35Cg5SN+nm9caDfI6MHCCCRSgoTW7jvP6UiWAG0kfEO86Z2xw==}
@@ -3831,7 +3854,6 @@ packages:
       ajv: 8.11.0
       ajv-formats: 2.1.1
       tslib: 2.6.2
-    dev: true
 
   /@leichtgewicht/ip-codec@2.0.4:
     resolution: {integrity: sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==}
@@ -10417,7 +10439,6 @@ packages:
       '@kubernetes-models/base': 4.0.0
       '@kubernetes-models/validate': 3.0.0
       tslib: 2.6.2
-    dev: true
 
   /latest-version@5.1.0:
     resolution: {integrity: sha512-weT+r0kTkRQdCdYCNtkMwWXQTMEswKrFBkm4ckQOMVhhqhIMI1UT2hMj+1iigIhgSZm5gTmrRXBNoGUgaTY1xA==}
