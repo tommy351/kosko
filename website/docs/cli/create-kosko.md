@@ -1,11 +1,19 @@
 ---
-title: kosko init
+title: create-kosko
 ---
 
 Create a new Kosko project.
 
 ```shell
-kosko init [path]
+create-kosko [path]
+```
+
+It's also possible to execute `create-kosko` via a package manager.
+
+```shell
+npm create kosko [path]
+yarn create kosko [path]
+pnpm create kosko [path]
 ```
 
 ## Positionals
