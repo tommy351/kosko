@@ -570,9 +570,6 @@ importers:
       '@kosko/exec-utils':
         specifier: workspace:^
         version: link:../exec-utils
-      '@kosko/yaml':
-        specifier: workspace:^
-        version: link:../yaml
       fast-safe-stringify:
         specifier: ^2.1.1
         version: 2.1.1
@@ -586,6 +583,9 @@ importers:
       '@kosko/jest-preset':
         specifier: workspace:^
         version: link:../../internal/jest-preset
+      '@kosko/yaml':
+        specifier: workspace:^
+        version: link:../yaml
       kubernetes-models:
         specifier: ^4.1.0
         version: 4.1.0
@@ -607,9 +607,6 @@ importers:
       '@kosko/exec-utils':
         specifier: workspace:^
         version: link:../exec-utils
-      '@kosko/yaml':
-        specifier: workspace:^
-        version: link:../yaml
     devDependencies:
       '@kosko/build-scripts':
         specifier: workspace:^
@@ -617,6 +614,9 @@ importers:
       '@kosko/jest-preset':
         specifier: workspace:^
         version: link:../../internal/jest-preset
+      '@kosko/yaml':
+        specifier: workspace:^
+        version: link:../yaml
       kubernetes-models:
         specifier: ^4.1.0
         version: 4.1.0
@@ -645,9 +645,6 @@ importers:
 
   packages/migrate:
     dependencies:
-      '@kosko/yaml':
-        specifier: workspace:^
-        version: link:../yaml
       camelcase:
         specifier: ^6.2.1
         version: 6.3.0
@@ -661,6 +658,9 @@ importers:
       '@kosko/jest-preset':
         specifier: workspace:^
         version: link:../../internal/jest-preset
+      '@kosko/yaml':
+        specifier: workspace:^
+        version: link:../yaml
       is-plain-object:
         specifier: ^5.0.0
         version: 5.0.0
