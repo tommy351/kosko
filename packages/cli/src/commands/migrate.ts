@@ -1,4 +1,4 @@
-import { MigrateFormat, migrateString } from "@kosko/migrate";
+import type * as migratePkg from "@kosko/migrate";
 import { readdir, readFile, stat } from "node:fs/promises";
 import getStdin from "get-stdin";
 import { join, resolve } from "node:path";
@@ -6,6 +6,8 @@ import type { Command, RootArguments } from "@kosko/cli-utils";
 import { print } from "../cli/print";
 import logger, { LogLevel } from "@kosko/log";
 import { toArray } from "@kosko/common-utils";
+
+const KOSKO_MIGRATE = "@kosko/migrate";
 
 function concatFiles(arr: readonly string[]): string {
   if (!arr.length) return "";
@@ -85,6 +87,14 @@ export const migrateCmd: Command<MigrateArguments> = {
     return base;
   },
   async handler(args) {
+    // Lazy load `@kosko/migrate` package because `@kosko/yaml` is not installed
+    // by default.
+    const { MigrateFormat, migrateString }: typeof migratePkg =
+      // eslint-disable-next-line no-restricted-globals
+      process.env.BUILD_FORMAT === "cjs"
+        ? require(KOSKO_MIGRATE)
+        : await import(KOSKO_MIGRATE);
+
     const file = concatFiles(await readFiles(args.cwd, toArray(args.filename)));
     const content = await migrateString(file, {
       ...(args.esm && { format: MigrateFormat.ESM })
