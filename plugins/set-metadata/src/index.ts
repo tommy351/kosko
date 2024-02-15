@@ -43,27 +43,30 @@ interface Metadata {
 }
 
 interface Transformer {
-  (metadata: ReadonlyDeep<Metadata>): Metadata;
+  (metadata: Metadata): void;
 }
 
 function transformNamespace(
   config: Infer<typeof namespaceSchema>
 ): Transformer {
-  return (metadata) => ({
-    ...metadata,
-    namespace: config.override
+  return (metadata) => {
+    metadata.namespace = config.override
       ? config.value
-      : metadata.namespace ?? config.value
-  });
+      : metadata.namespace || config.value;
+  };
 }
 
 function transformName(config: Infer<typeof nameSchema>): Transformer {
-  return (metadata) => ({
-    ...metadata,
-    ...(typeof metadata.name === "string" && {
-      name: `${config.prefix ?? ""}${metadata.name}${config.suffix ?? ""}`
-    })
-  });
+  // If both prefix and suffix are not defined, return a noop function
+  if (!config.prefix && !config.suffix) {
+    return () => {};
+  }
+
+  return (metadata) => {
+    if (typeof metadata.name !== "string") return;
+
+    metadata.name = `${config.prefix ?? ""}${metadata.name}${config.suffix ?? ""}`;
+  };
 }
 
 function setKeyValueList(data: unknown, list: ReadonlyDeep<KeyValueList>) {
@@ -83,24 +86,18 @@ function setKeyValueList(data: unknown, list: ReadonlyDeep<KeyValueList>) {
 }
 
 function transformLabels(config: ReadonlyDeep<KeyValueList>): Transformer {
-  return (metadata) => ({
-    ...metadata,
-    labels: setKeyValueList(metadata.labels, config)
-  });
+  if (!config.length) return () => {};
+
+  return (metadata) => {
+    metadata.labels = setKeyValueList(metadata.labels, config);
+  };
 }
 
 function transformAnnotations(config: ReadonlyDeep<KeyValueList>): Transformer {
-  return (metadata) => ({
-    ...metadata,
-    annotations: setKeyValueList(metadata.annotations, config)
-  });
-}
+  if (!config.length) return () => {};
 
-function composeTransformers(
-  transformers: readonly Transformer[]
-): Transformer {
   return (metadata) => {
-    return transformers.reduce((data, fn) => fn(data), metadata);
+    metadata.annotations = setKeyValueList(metadata.annotations, config);
   };
 }
 
@@ -133,20 +130,17 @@ export default function (ctx: PluginContext): Plugin {
     return {};
   }
 
-  const transform = composeTransformers(transformers);
-
   return {
     transformManifest(result) {
       if (!isRecord(result.data) || !isRecord(result.data.metadata)) {
         return result.data;
       }
 
-      const { metadata, ...data } = result.data;
+      for (const transform of transformers) {
+        transform(result.data.metadata);
+      }
 
-      return {
-        ...data,
-        metadata: transform(metadata)
-      };
+      return result.data;
     }
   };
 }

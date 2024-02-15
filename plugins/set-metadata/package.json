@@ -50,6 +50,8 @@
     "@kosko/build-scripts": "workspace:^",
     "@kosko/jest-preset": "workspace:^",
     "@kosko/plugin": "workspace:^",
+    "@kubernetes-models/apimachinery": "^1.2.1",
+    "kubernetes-models": "^4.1.0",
     "type-fest": "^4.10.2"
   },
   "jest": {

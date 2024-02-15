@@ -766,6 +766,12 @@ importers:
       '@kosko/plugin':
         specifier: workspace:^
         version: link:../../packages/plugin
+      '@kubernetes-models/apimachinery':
+        specifier: ^1.2.1
+        version: 1.2.1
+      kubernetes-models:
+        specifier: ^4.1.0
+        version: 4.1.0
       type-fest:
         specifier: ^4.10.2
         version: 4.10.2
@@ -3806,30 +3812,31 @@ packages:
       '@jridgewell/resolve-uri': 3.1.1
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  /@kubernetes-models/apimachinery@1.1.0:
-    resolution: {integrity: sha512-DvCNeou3+M5ESJluVs8daVp7g03/hWnwXHou9Se8qNRZpqH6lQHvRjXy6HWSqBV9fKZOnWcOExmkUPQGbVIa6A==}
+  /@kubernetes-models/apimachinery@1.2.1:
+    resolution: {integrity: sha512-mURvFnel3gaMXFchp8YeFmPBWuYifakuJnmRK1ad0Y7bxcPbcEntcb1rjdwitnHE0qTq3JZ2kBzpNqGO3+YJUw==}
     engines: {node: '>=14'}
     dependencies:
-      '@kubernetes-models/base': 4.0.0
-      '@kubernetes-models/validate': 3.0.0
+      '@kubernetes-models/base': 4.0.3
+      '@kubernetes-models/validate': 3.1.1
       tslib: 2.6.2
     dev: true
 
-  /@kubernetes-models/base@4.0.0:
-    resolution: {integrity: sha512-wOQuIJk04urKwvOH2ybja8GeRNDljrq+f3yxWCdFPpsQ94UgxzWk0c3UeE5Tq+VX0hm1mNLaJZG6Upj+uIutjQ==}
+  /@kubernetes-models/base@4.0.3:
+    resolution: {integrity: sha512-9Uo/RzB1ZvvPmnnpAE6yWPaFerMkpBxIHLuObexVDF813ZwVPdn56mmOOFfA6RyZtPdIT1AlhMozlHKOX16AGQ==}
     engines: {node: '>=14'}
     dependencies:
-      '@kubernetes-models/validate': 3.0.0
+      '@kubernetes-models/validate': 3.1.1
       is-plain-object: 5.0.0
       tslib: 2.6.2
     dev: true
 
-  /@kubernetes-models/validate@3.0.0:
-    resolution: {integrity: sha512-XQhuCn6KpZ2poeQWcN6C5bQYXXazEHcOLMEsQ35Cg5SN+nm9caDfI6MHCCCRSgoTW7jvP6UiWAG0kfEO86Z2xw==}
+  /@kubernetes-models/validate@3.1.1:
+    resolution: {integrity: sha512-s1YMn5+9jLG0S0441Tca8aukt05UqyqlloW6seJ43gdjBHWOYhfaG7ppw8Lmw0jvxF69yNV6wtYfXCTULXIfLw==}
     engines: {node: '>=14'}
     dependencies:
-      ajv: 8.11.0
+      ajv: 8.12.0
       ajv-formats: 2.1.1
+      ajv-formats-draft2019: 1.6.1(ajv@8.12.0)
       tslib: 2.6.2
     dev: true
 
@@ -5333,13 +5340,25 @@ packages:
       clean-stack: 2.2.0
       indent-string: 4.0.0
 
+  /ajv-formats-draft2019@1.6.1(ajv@8.12.0):
+    resolution: {integrity: sha512-JQPvavpkWDvIsBp2Z33UkYCtXCSpW4HD3tAZ+oL4iEFOk9obQZffx0yANwECt6vzr6ET+7HN5czRyqXbnq/u0Q==}
+    peerDependencies:
+      ajv: '*'
+    dependencies:
+      ajv: 8.12.0
+      punycode: 2.1.1
+      schemes: 1.4.0
+      smtp-address-parser: 1.0.10
+      uri-js: 4.4.1
+    dev: true
+
   /ajv-formats@2.1.1:
     resolution: {integrity: sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA==}
     peerDependenciesMeta:
       ajv:
         optional: true
     dependencies:
-      ajv: 8.11.0
+      ajv: 8.12.0
 
   /ajv-keywords@3.5.2(ajv@6.12.6):
     resolution: {integrity: sha512-5p6WTN0DdTGVQk6VjcEju19IgaHudalcfabD7yhDGeA6bcQnmL+CpveLJq/3hvfwd1aof6L386Ougkx6RfyMIQ==}
@@ -5348,12 +5367,12 @@ packages:
     dependencies:
       ajv: 6.12.6
 
-  /ajv-keywords@5.1.0(ajv@8.11.0):
+  /ajv-keywords@5.1.0(ajv@8.12.0):
     resolution: {integrity: sha512-YCS/JNFAUyr5vAuhk1DWm1CBxRHW9LbJ2ozWeemrIqpbsqKjHVxYPyi5GC0rjZIT5JxJ3virVTS8wk4i/Z+krw==}
     peerDependencies:
       ajv: ^8.8.2
     dependencies:
-      ajv: 8.11.0
+      ajv: 8.12.0
       fast-deep-equal: 3.1.3
     dev: false
 
@@ -5365,8 +5384,8 @@ packages:
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
 
-  /ajv@8.11.0:
-    resolution: {integrity: sha512-wGgprdCvMalC0BztXvitD2hC04YffAvtsUn93JbGXYLAtCUO4xd17mCCZQxUOItiBwZvJScWo8NIvQMQ71rdpg==}
+  /ajv@8.12.0:
+    resolution: {integrity: sha512-sRu1kpcO9yLtYxBKvqfTeh9KzZEwO3STyX1HT+4CaDzC6HpTGYhIhPIzj9XuKU7KYDwnaeh5hcOwjy1QuJzBPA==}
     dependencies:
       fast-deep-equal: 3.1.3
       json-schema-traverse: 1.0.0
@@ -7171,6 +7190,10 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       path-type: 4.0.0
+
+  /discontinuous-range@1.0.0:
+    resolution: {integrity: sha512-c68LpLbO+7kP/b1Hr1qs8/BJ09F5khZGTxqxZuhzxpmwJKOgRFHJWIb9/KmqnqHhLdO55aOxFH/EGBvUQbL/RQ==}
+    dev: true
 
   /dns-equal@1.0.0:
     resolution: {integrity: sha512-z+paD6YUQsk+AbGCEM4PrOXSss5gd66QfcVBFTKR/HpFL9jCqikS94HYwKww6fQyO7IxrIIyUu+g0Ka9tUS2Cg==}
@@ -10413,9 +10436,9 @@ packages:
     resolution: {integrity: sha512-OlT0qgHj0W7hJQdc0HzbdYUpK3LcMaKg43yqeEsUsq1gCAldfzEaMyhifNylMud3dWglPQ+5Jt6sFyIr3XTdvg==}
     engines: {node: '>=14'}
     dependencies:
-      '@kubernetes-models/apimachinery': 1.1.0
-      '@kubernetes-models/base': 4.0.0
-      '@kubernetes-models/validate': 3.0.0
+      '@kubernetes-models/apimachinery': 1.2.1
+      '@kubernetes-models/base': 4.0.3
+      '@kubernetes-models/validate': 3.1.1
       tslib: 2.6.2
     dev: true
 
@@ -10999,6 +11022,10 @@ packages:
     hasBin: true
     dev: true
 
+  /moo@0.5.2:
+    resolution: {integrity: sha512-iSAJLHYKnX41mKcJKjqvnAN9sf0LMDTXDEvFv+ffuRR9a1MIuXLjMNL6EsnDHSkKLTWNqQQ5uo61P4EbU4NU+Q==}
+    dev: true
+
   /mrmime@1.0.1:
     resolution: {integrity: sha512-hzzEagAgDyoU1Q6yg5uI+AorQgdvMCur3FcKf7NhMKWsaYg+RnbTyHRa/9IlLF9rf455MOCtcqqrQQ83pPP7Uw==}
     engines: {node: '>=10'}
@@ -11072,6 +11099,16 @@ packages:
   /ncp@2.0.0:
     resolution: {integrity: sha512-zIdGUrPRFTUELUvr3Gmc7KZ2Sw/h1PiVM0Af/oHB6zgnV1ikqSfRk+TOufi79aHYCW3NiOXmr1BP5nWbzojLaA==}
     hasBin: true
+    dev: true
+
+  /nearley@2.20.1:
+    resolution: {integrity: sha512-+Mc8UaAebFzgV+KpI5n7DasuuQCHA89dmwm7JXw3TV43ukfNQ9DnBH3Mdb2g/I4Fdxc26pwimBWvjIw0UAILSQ==}
+    hasBin: true
+    dependencies:
+      commander: 2.20.3
+      moo: 0.5.2
+      railroad-diagrams: 1.0.0
+      randexp: 0.4.6
     dev: true
 
   /negotiator@0.6.3:
@@ -12419,6 +12456,18 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /railroad-diagrams@1.0.0:
+    resolution: {integrity: sha512-cz93DjNeLY0idrCNOH6PviZGRN9GJhsdm9hpn1YCS879fj4W+x5IFJhhkRZcwVgMmFF7R82UA/7Oh+R8lLZg6A==}
+    dev: true
+
+  /randexp@0.4.6:
+    resolution: {integrity: sha512-80WNmd9DA0tmZrw9qQa62GPPWfuXJknrmVmLcxvq4uZBdYqb1wYoKTmnlGUchvVWe0XiLupYkBoXVOxz3C8DYQ==}
+    engines: {node: '>=0.12'}
+    dependencies:
+      discontinuous-range: 1.0.0
+      ret: 0.1.15
+    dev: true
+
   /randombytes@2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
     dependencies:
@@ -13171,6 +13220,11 @@ packages:
       signal-exit: 3.0.7
     dev: true
 
+  /ret@0.1.15:
+    resolution: {integrity: sha512-TTlYpa+OL+vMMNG24xSlQGEJ3B/RzEfUlLct7b5G/ytav+wPrplCpVMFuwzXbkecJrb6IYo1iFb0S9v37754mg==}
+    engines: {node: '>=0.12'}
+    dev: true
+
   /retry@0.13.1:
     resolution: {integrity: sha512-XQBQ3I8W1Cge0Seh+6gjj03LbmRFWuoszgK9ooCpwYIrhhoO80pfq4cUkU5DkknwfOfFteRwlZ56PYOGYyFWdg==}
     engines: {node: '>= 4'}
@@ -13389,10 +13443,16 @@ packages:
     engines: {node: '>= 12.13.0'}
     dependencies:
       '@types/json-schema': 7.0.15
-      ajv: 8.11.0
+      ajv: 8.12.0
       ajv-formats: 2.1.1
-      ajv-keywords: 5.1.0(ajv@8.11.0)
+      ajv-keywords: 5.1.0(ajv@8.12.0)
     dev: false
+
+  /schemes@1.4.0:
+    resolution: {integrity: sha512-ImFy9FbCsQlVgnE3TCWmLPCFnVzx0lHL/l+umHplDqAKd0dzFpnS6lFZIpagBlYhKwzVmlV36ec0Y1XTu8JBAQ==}
+    dependencies:
+      extend: 3.0.2
+    dev: true
 
   /screenfull@5.2.0:
     resolution: {integrity: sha512-9BakfsO2aUQN2K9Fdbj87RJIEZ82Q9IGim7FqM5OsebfoFC6ZHXgDq/KvniuLTPdeM8wY2o6Dj3WQ7KeQCj3cA==}
@@ -13743,6 +13803,13 @@ packages:
       strip-ansi: 6.0.1
       wcwidth: 1.0.1
       yargs: 15.4.1
+    dev: true
+
+  /smtp-address-parser@1.0.10:
+    resolution: {integrity: sha512-Osg9LmvGeAG/hyao4mldbflLOkkr3a+h4m1lwKCK5U8M6ZAr7tdXEz/+/vr752TSGE4MNUlUl9cIK2cB8cgzXg==}
+    engines: {node: '>=0.10'}
+    dependencies:
+      nearley: 2.20.1
     dev: true
 
   /sockjs@0.3.24:

@@ -1,5 +1,7 @@
 import assert from "node:assert";
 import factory from "../index";
+import { Pod } from "kubernetes-models/v1/Pod";
+import { ObjectMeta } from "@kubernetes-models/apimachinery/apis/meta/v1/ObjectMeta";
 
 function transformManifest(config: unknown, data: unknown) {
   const plugin = factory({ cwd: "", config });
@@ -31,8 +33,8 @@ test("ignores undefined data", () => {
   ).toBeUndefined();
 });
 
-test("ignores empty data", () => {
-  expect(transformManifest({ namespace: { value: "foo" } }, {})).toEqual({});
+test("ignores null data", () => {
+  expect(transformManifest({ namespace: { value: "foo" } }, null)).toBeNull();
 });
 
 test("ignores non-object data", () => {
@@ -51,6 +53,33 @@ test("ignore non-object metadata", () => {
   expect(
     transformManifest({ namespace: { value: "foo" } }, { metadata: "foo" })
   ).toEqual({ metadata: "foo" });
+});
+
+test("does not convert data into a plain object", () => {
+  const data = new Pod({ metadata: { name: "foo" } });
+  const actual = transformManifest({ namespace: { value: "bar" } }, data);
+
+  expect(actual).toBeInstanceOf(Pod);
+});
+
+test("does not convert metadata into a plain object", () => {
+  const data = new Pod({ metadata: new ObjectMeta({ name: "foo" }) });
+  const actual = transformManifest({ namespace: { value: "bar" } }, data);
+
+  expect((actual as any).metadata).toBeInstanceOf(ObjectMeta);
+});
+
+test("keeps key order", () => {
+  const data = { a: 1, metadata: { name: "foo" }, b: 2 };
+  const actual = transformManifest({ namespace: { value: "bar" } }, data);
+
+  expect(JSON.stringify(actual)).toEqual(
+    JSON.stringify({
+      a: 1,
+      metadata: { name: "foo", namespace: "bar" },
+      b: 2
+    })
+  );
 });
 
 describe("namespace", () => {
@@ -85,6 +114,26 @@ describe("namespace", () => {
         { metadata: { namespace: "bar" } }
       )
     ).toEqual({ metadata: { namespace: "bar" } });
+  });
+
+  test("sets namespace when namespace is an empty string", () => {
+    expect(
+      transformManifest(
+        { namespace: { value: "foo" } },
+        { metadata: { namespace: "" } }
+      )
+    ).toEqual({ metadata: { namespace: "foo" } });
+  });
+
+  test("keeps key order", () => {
+    const actual = transformManifest(
+      { namespace: { value: "foo", override: true } },
+      { metadata: { a: 1, namespace: "bar", b: 2 } }
+    );
+
+    expect(JSON.stringify(actual)).toEqual(
+      JSON.stringify({ metadata: { a: 1, namespace: "foo", b: 2 } })
+    );
   });
 });
 
@@ -126,6 +175,17 @@ describe("name", () => {
         { metadata: { name: "b" } }
       )
     ).toEqual({ metadata: { name: "abc" } });
+  });
+
+  test("keeps key order", () => {
+    const actual = transformManifest(
+      { name: { prefix: "a", suffix: "c" } },
+      { metadata: { a: 1, name: "b", b: 2 } }
+    );
+
+    expect(JSON.stringify(actual)).toEqual(
+      JSON.stringify({ metadata: { a: 1, name: "abc", b: 2 } })
+    );
   });
 });
 
@@ -188,6 +248,24 @@ describe("labels", () => {
       )
     ).toEqual({ metadata: { labels: { a: "b", c: "d" } } });
   });
+
+  test("keeps key order", () => {
+    const actual = transformManifest(
+      {
+        labels: [
+          { name: "d", value: "new", override: true },
+          { name: "foo", value: "bar" }
+        ]
+      },
+      { metadata: { a: 1, labels: { c: 3, d: 4, e: 5 }, b: 2 } }
+    );
+
+    expect(JSON.stringify(actual)).toEqual(
+      JSON.stringify({
+        metadata: { a: 1, labels: { c: 3, d: "new", e: 5, foo: "bar" }, b: 2 }
+      })
+    );
+  });
 });
 
 describe("annotations", () => {
@@ -248,5 +326,27 @@ describe("annotations", () => {
         { metadata: {} }
       )
     ).toEqual({ metadata: { annotations: { a: "b", c: "d" } } });
+  });
+
+  test("keeps key order", () => {
+    const actual = transformManifest(
+      {
+        annotations: [
+          { name: "d", value: "new", override: true },
+          { name: "foo", value: "bar" }
+        ]
+      },
+      { metadata: { a: 1, annotations: { c: 3, d: 4, e: 5 }, b: 2 } }
+    );
+
+    expect(JSON.stringify(actual)).toEqual(
+      JSON.stringify({
+        metadata: {
+          a: 1,
+          annotations: { c: 3, d: "new", e: 5, foo: "bar" },
+          b: 2
+        }
+      })
+    );
   });
 });
