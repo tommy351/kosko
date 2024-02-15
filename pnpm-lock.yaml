@@ -361,6 +361,9 @@ importers:
       '@types/yargs':
         specifier: ^17.0.12
         version: 17.0.32
+      yargs:
+        specifier: ^17.5.1
+        version: 17.7.2
 
   packages/common-utils:
     devDependencies:

@@ -47,7 +47,8 @@
   "devDependencies": {
     "@kosko/build-scripts": "workspace:^",
     "@kosko/jest-preset": "workspace:^",
-    "@types/yargs": "^17.0.12"
+    "@types/yargs": "^17.0.12",
+    "yargs": "^17.5.1"
   },
   "peerDependencies": {
     "yargs": "^17.0.0"
