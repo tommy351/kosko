@@ -1,7 +1,6 @@
 "use strict";
 
 const { transform } = require("sucrase");
-const prettier = require("./prettier");
 
 function tsToEsm(input) {
   const result = transform(input, {
@@ -9,7 +8,7 @@ function tsToEsm(input) {
     disableESTransforms: true
   });
 
-  return prettier(result.code);
+  return result.code.trim();
 }
 
 module.exports = tsToEsm;

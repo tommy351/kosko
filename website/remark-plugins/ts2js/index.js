@@ -39,13 +39,16 @@ function renderTabItem(label, meta, value) {
 }
 
 function transformNode(node) {
+  const esm = tsToEsm(node.value);
+  const cjs = esmToCjs(esm);
   const contents = [
     {
       type: "jsx",
       value: `<Tabs groupId="ts2js">`
     },
     ...renderTabItem("TypeScript", node.meta, node.value),
-    ...renderTabItem("JavaScript", node.meta, esmToCjs(tsToEsm(node.value))),
+    ...renderTabItem("JavaScript (ESM)", node.meta, esm),
+    ...renderTabItem("JavaScript (CJS)", node.meta, cjs),
     {
       type: "jsx",
       value: "</Tabs>"

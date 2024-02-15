@@ -51,5 +51,9 @@ export interface Plugin {
    */
   transformManifest?: TransformManifest;
 
+  /**
+   * Validate all manifests. This function is called after all manifests are
+   * resolved, transformed, and validated.
+   */
   validateAllManifests?: ValidateAllManifests;
 }

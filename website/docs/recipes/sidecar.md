@@ -7,7 +7,7 @@ This helper function can help you inject sidecar with less code.
 For example, if you want to inject an Envoy container to your deployment, you can define a helper function as below.
 
 ```ts ts2js
-import { IPodSpec } from "kubernetes-models/v1";
+import type { IPodSpec } from "kubernetes-models/v1";
 
 export function withEnvoy(spec: IPodSpec): IPodSpec {
   return {
