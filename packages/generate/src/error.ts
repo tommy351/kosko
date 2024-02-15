@@ -1,4 +1,3 @@
-import AggregateError from "@kosko/aggregate-error";
 import { isRecord } from "@kosko/common-utils";
 import extractStack from "extract-stack";
 

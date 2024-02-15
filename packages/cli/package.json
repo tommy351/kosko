@@ -51,7 +51,6 @@
     "node": ">=18"
   },
   "dependencies": {
-    "@kosko/aggregate-error": "workspace:^",
     "@kosko/cli-utils": "workspace:^",
     "@kosko/common-utils": "workspace:^",
     "@kosko/config": "workspace:^",
