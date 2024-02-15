@@ -48,7 +48,10 @@ async function buildBundle(options) {
 
   const bundle = await rollup({
     input: entryFiles,
-    external: Object.keys(dependencies),
+    external: [
+      ...Object.keys(dependencies),
+      ...Object.keys(pkgJson.peerDependencies ?? {})
+    ],
     treeshake: {
       preset: "recommended",
       // Assume all modules has no side effects in order to remove all unused
