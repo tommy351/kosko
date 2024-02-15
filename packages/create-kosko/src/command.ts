@@ -91,8 +91,8 @@ export const command: Command<Arguments> = {
         alias: "f"
       })
       .positional("path", { type: "string", describe: "Path to initialize" })
-      .example("$0 init", "Initialize in current directory")
-      .example("$0 init example", "Initialize in specified directory");
+      .example("$0", "Initialize in current directory")
+      .example("$0 example", "Initialize in specified directory");
 
     // eslint-disable-next-line no-restricted-globals
     if (process.env.BUILD_TARGET === "node") {
@@ -116,7 +116,7 @@ export const command: Command<Arguments> = {
           describe: "Package manager (npm, yarn, pnpm)",
           alias: "pm"
         })
-        .example("$0 init --typescript", "Setup a TypeScript project");
+        .example("$0 --typescript", "Setup a TypeScript project");
     }
 
     return base;
