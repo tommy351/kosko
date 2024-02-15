@@ -3,7 +3,7 @@ import { GenerateError, ResolveError } from "@kosko/generate";
 import cleanStack from "clean-stack";
 import extractStack from "extract-stack";
 import pc from "picocolors";
-import { CLIError } from "../../cli/error";
+import { CLIError } from "@kosko/cli-utils";
 import stringify from "fast-safe-stringify";
 import { isRecord } from "@kosko/common-utils";
 import { stderr } from "node:process";

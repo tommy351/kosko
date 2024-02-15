@@ -242,6 +242,9 @@ importers:
       '@kosko/aggregate-error':
         specifier: workspace:^
         version: link:../aggregate-error
+      '@kosko/cli-utils':
+        specifier: workspace:^
+        version: link:../cli-utils
       '@kosko/common-utils':
         specifier: workspace:^
         version: link:../common-utils
@@ -343,6 +346,22 @@ importers:
         specifier: ^3.1.0
         version: 3.1.0
 
+  packages/cli-utils:
+    dependencies:
+      '@kosko/log':
+        specifier: workspace:^
+        version: link:../log
+    devDependencies:
+      '@kosko/build-scripts':
+        specifier: workspace:^
+        version: link:../../internal/build-scripts
+      '@kosko/jest-preset':
+        specifier: workspace:^
+        version: link:../../internal/jest-preset
+      '@types/yargs':
+        specifier: ^17.0.12
+        version: 17.0.32
+
   packages/common-utils:
     devDependencies:
       '@kosko/build-scripts':
@@ -373,6 +392,46 @@ importers:
       '@kosko/jest-preset':
         specifier: workspace:^
         version: link:../../internal/jest-preset
+
+  packages/create-kosko:
+    dependencies:
+      '@kosko/cli-utils':
+        specifier: workspace:^
+        version: link:../cli-utils
+      '@kosko/common-utils':
+        specifier: workspace:^
+        version: link:../common-utils
+      '@kosko/exec-utils':
+        specifier: workspace:^
+        version: link:../exec-utils
+      '@kosko/log':
+        specifier: workspace:^
+        version: link:../log
+      '@kosko/require':
+        specifier: workspace:^
+        version: link:../require
+      fast-safe-stringify:
+        specifier: ^2.1.1
+        version: 2.1.1
+      picocolors:
+        specifier: ^1.0.0
+        version: 1.0.0
+      yargs:
+        specifier: ^17.5.1
+        version: 17.7.2
+    devDependencies:
+      '@kosko/build-scripts':
+        specifier: workspace:^
+        version: link:../../internal/build-scripts
+      '@kosko/jest-preset':
+        specifier: workspace:^
+        version: link:../../internal/jest-preset
+      '@kosko/test-utils':
+        specifier: workspace:^
+        version: link:../../internal/test-utils
+      fast-glob:
+        specifier: ^3.2.12
+        version: 3.2.12
 
   packages/env:
     dependencies:

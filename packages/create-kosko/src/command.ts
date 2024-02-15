@@ -1,8 +1,7 @@
 import { mkdir, stat, writeFile } from "node:fs/promises";
 import { dirname, join, relative, resolve, sep } from "node:path";
 import pc from "picocolors";
-import { Command, RootArguments } from "../../cli/command";
-import { CLIError } from "../../cli/error";
+import { type Command, type RootArguments, CLIError } from "@kosko/cli-utils";
 import logger, { LogLevel } from "@kosko/log";
 import isFolderEmpty from "./isFolderEmpty";
 import { File, Template } from "./templates/base";
@@ -71,7 +70,7 @@ function getCDPath(cwd: string, path: string): string | undefined {
   return path;
 }
 
-export interface InitArguments extends RootArguments {
+export interface Arguments extends RootArguments {
   force?: boolean;
   path?: string;
   typescript?: boolean;
@@ -80,8 +79,8 @@ export interface InitArguments extends RootArguments {
   packageManager?: string;
 }
 
-export const initCmd: Command<InitArguments> = {
-  command: "init [path]",
+export const command: Command<Arguments> = {
+  command: "$0 [path]",
   describe: "Set up a new Kosko directory",
   builder(argv) {
     /* istanbul ignore next */

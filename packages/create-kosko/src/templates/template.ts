@@ -6,7 +6,7 @@ import { File } from "./base";
 const TEMPLATE_DIR = join(
   fileURLToPath(import.meta.url),
   // eslint-disable-next-line no-restricted-globals
-  process.env.BUILD_PROD ? "../../templates" : "../../../../../templates"
+  process.env.BUILD_PROD ? "../../templates" : "../../../templates"
 );
 
 export async function generateFromTemplateFile(

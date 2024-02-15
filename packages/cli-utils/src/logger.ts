@@ -5,6 +5,9 @@ import logger, {
 } from "@kosko/log";
 import { RootArguments } from "./command";
 
+/**
+ * @public
+ */
 export function setupLogger(args: Pick<RootArguments, "silent" | "log-level">) {
   if (args.silent) {
     logger.setWriter(new SilentLogWriter());

@@ -2,7 +2,7 @@ import { MigrateFormat, migrateString } from "@kosko/migrate";
 import { readdir, readFile, stat } from "node:fs/promises";
 import getStdin from "get-stdin";
 import { join, resolve } from "node:path";
-import { Command, RootArguments } from "../cli/command";
+import type { Command, RootArguments } from "@kosko/cli-utils";
 import { print } from "../cli/print";
 import logger, { LogLevel } from "@kosko/log";
 import { toArray } from "@kosko/common-utils";

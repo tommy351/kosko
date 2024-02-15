@@ -1,9 +1,9 @@
 import { PrintFormat } from "@kosko/generate";
-import { Argv } from "yargs";
-import { Command, RootArguments } from "../../cli/command";
+import type { Argv } from "yargs";
+import type { Command, RootArguments } from "@kosko/cli-utils";
 import { loadConfig } from "./config";
 import { SetOption, parseSetOptions } from "./set-option";
-import { BaseGenerateArguments, GenerateArguments } from "./types";
+import type { BaseGenerateArguments, GenerateArguments } from "./types";
 import { handler } from "./worker";
 
 /* istanbul ignore next */

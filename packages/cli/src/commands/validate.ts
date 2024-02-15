@@ -1,4 +1,4 @@
-import { Command } from "../cli/command";
+import type { Command } from "@kosko/cli-utils";
 import logger, { LogLevel } from "@kosko/log";
 import { handler } from "./generate/worker";
 import { BaseGenerateArguments } from "./generate/types";

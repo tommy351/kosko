@@ -1,5 +1,5 @@
 /// <reference types="jest-extended"/>
-import { InitArguments, initCmd } from "../command";
+import { type Arguments, command } from "../command";
 import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import { join, posix } from "node:path";
 import glob from "fast-glob";
@@ -18,8 +18,8 @@ let tmpDir: TempDir;
 jest.mock("@kosko/log");
 jest.mock("@kosko/exec-utils");
 
-async function execute(args: Partial<InitArguments>): Promise<void> {
-  await initCmd.handler(args as any);
+async function execute(args: Partial<Arguments>): Promise<void> {
+  await command.handler(args as any);
 }
 
 async function listAllFiles(dir: string): Promise<Record<string, string>> {

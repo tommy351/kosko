@@ -1,5 +1,5 @@
 import { PrintFormat } from "@kosko/generate";
-import { RootArguments } from "../../cli/command";
+import type { RootArguments } from "@kosko/cli-utils";
 import { SetOption } from "./set-option";
 
 export interface BaseGenerateArguments extends RootArguments {

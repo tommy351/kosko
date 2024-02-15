@@ -9,7 +9,7 @@
     "internal/*/dist",
     "packages/*/dist",
     "plugins/*/dist",
-    "packages/cli/templates",
+    "packages/create-kosko/templates",
     "examples",
     "website"
   ]
