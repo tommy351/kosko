@@ -15,6 +15,9 @@ export async function runNodeCLI(
       LC_ALL: "en_US",
       // Always enable console colors to make sure the output is consistent
       FORCE_COLOR: "1",
+      // Disable DeprecationWarning, because ajv-formats-draft2019 still uses
+      // the deprecated `punycode` module.
+      NODE_OPTIONS: "--no-deprecation",
       ...options.env
     }
   });
