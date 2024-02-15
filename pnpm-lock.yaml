@@ -432,6 +432,9 @@ importers:
       '@kosko/test-utils':
         specifier: workspace:^
         version: link:../../internal/test-utils
+      execa:
+        specifier: ^5.1.1
+        version: 5.1.1
       fast-glob:
         specifier: ^3.2.12
         version: 3.2.12

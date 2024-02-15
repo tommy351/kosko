@@ -2,7 +2,7 @@
 
 exports[`when --esm option is given should generate files 1`] = `
 {
-  "README.md": "This is a [Kosko] project bootstrapped with [\`kosko init\`][kosko] command.
+  "README.md": "This is a [Kosko] project bootstrapped with \`create-kosko\` command.
 
 ## Getting Started
 
@@ -104,7 +104,7 @@ export default [deployment, service];
 
 exports[`when --typescript and --esm option is given should generate files 1`] = `
 {
-  "README.md": "This is a [Kosko] project bootstrapped with [\`kosko init\`][kosko] command.
+  "README.md": "This is a [Kosko] project bootstrapped with \`create-kosko\` command.
 
 ## Getting Started
 
@@ -258,7 +258,7 @@ declare module "@kosko/env" {
 
 exports[`when --typescript option is given should generate files 1`] = `
 {
-  "README.md": "This is a [Kosko] project bootstrapped with [\`kosko init\`][kosko] command.
+  "README.md": "This is a [Kosko] project bootstrapped with \`create-kosko\` command.
 
 ## Getting Started
 
@@ -408,7 +408,7 @@ declare module "@kosko/env" {
 
 exports[`when no options are given should generate files 1`] = `
 {
-  "README.md": "This is a [Kosko] project bootstrapped with [\`kosko init\`][kosko] command.
+  "README.md": "This is a [Kosko] project bootstrapped with \`create-kosko\` command.
 
 ## Getting Started
 

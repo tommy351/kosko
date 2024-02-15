@@ -1,8 +1,7 @@
 /// <reference types="jest-extended"/>
 import { type Arguments, command } from "../command";
 import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
-import { join, posix } from "node:path";
-import glob from "fast-glob";
+import { join } from "node:path";
 import { spawn } from "@kosko/exec-utils";
 import stringify from "fast-safe-stringify";
 import {
@@ -12,6 +11,7 @@ import {
   TempFile
 } from "@kosko/test-utils";
 import logger, { LogLevel } from "@kosko/log";
+import { listAllFiles } from "../test-utils";
 
 let tmpDir: TempDir;
 
@@ -20,17 +20,6 @@ jest.mock("@kosko/exec-utils");
 
 async function execute(args: Partial<Arguments>): Promise<void> {
   await command.handler(args as any);
-}
-
-async function listAllFiles(dir: string): Promise<Record<string, string>> {
-  const paths = await glob("**/*", { cwd: dir });
-  const files: Record<string, string> = {};
-
-  for (const path of paths) {
-    files[posix.normalize(path)] = await readFile(join(dir, path), "utf8");
-  }
-
-  return files;
 }
 
 beforeEach(async () => {
