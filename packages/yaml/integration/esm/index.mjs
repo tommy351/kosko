@@ -1,4 +1,11 @@
 import { loadString } from "@kosko/yaml";
+import { Console } from "node:console";
+
+const logger = new Console({
+  stdout: process.stdout,
+  stderr: process.stderr,
+  colorMode: false
+});
 
 const result = await loadString(`
 apiVersion: v1
@@ -7,4 +14,4 @@ metadata:
   name: test-pod
 `);
 
-console.log(result);
+logger.log(result);

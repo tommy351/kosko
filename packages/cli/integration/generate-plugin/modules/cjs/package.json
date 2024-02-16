@@ -1,0 +1,6 @@
+{
+  "main": "main.js",
+  "engines": {
+    "node": ">=18"
+  }
+}

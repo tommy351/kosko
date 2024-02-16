@@ -1,5 +1,5 @@
 {
-  "extends": "@tsconfig/node14/tsconfig.json",
+  "extends": "@tsconfig/node18/tsconfig.json",
   "compilerOptions": {
     "moduleResolution": "node",
     "module": "esnext",
@@ -8,6 +8,7 @@
   "exclude": [
     "internal/*/dist",
     "packages/*/dist",
+    "plugins/*/dist",
     "packages/cli/templates",
     "examples",
     "website"

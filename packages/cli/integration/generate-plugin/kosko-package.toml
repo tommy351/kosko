@@ -1,0 +1,7 @@
+components = ["*"]
+
+[[plugins]]
+name = "test-plugin"
+
+[plugins.config]
+namespace = "foo"

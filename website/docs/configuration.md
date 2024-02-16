@@ -80,9 +80,25 @@ Require external modules.
 require = ["ts-node/register"]
 ```
 
+### `plugins`
+
+:::info
+Available since v4.0.0.
+:::
+
+Plugin configurations.
+
+#### Examples {#global-plugins-examples}
+
+```toml
+[[plugins]]
+name = "@kosko/plugin-set-metadata"
+config.namespace.value = "default"
+```
+
 ## Environment Configs
 
-Environment configs are applied when running [`kosko generate`][kosko-generate] with [`--env, -e`][kosko-generate-env] option. Environment configs are merged with global configs. Only `components`, `loaders` and `require` can be specified in environment configs.
+Environment configs are applied when running [`kosko generate`][kosko-generate] with [`--env, -e`][kosko-generate-env] option. Environment configs are merged with global configs. Only `components`, `loaders`, `require` and `plugins` can be specified in environment configs.
 
 #### Examples {#environment-configs-examples}
 

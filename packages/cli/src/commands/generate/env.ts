@@ -8,12 +8,9 @@ import { dirname, join } from "node:path";
 import { readFile } from "node:fs/promises";
 import { pathToFileURL } from "node:url";
 import { env } from "node:process";
+import { excludeFalsyInArray } from "../../utils";
 
 const KOSKO_ENV = "@kosko/env";
-
-function excludeFalsyInArray<T>(input: (T | undefined | null)[]): T[] {
-  return input.filter(Boolean) as T[];
-}
 
 function pickEnvArray(envs: string[]): string | string[] | undefined {
   if (envs.length > 1) return envs;

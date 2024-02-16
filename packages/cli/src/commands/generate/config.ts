@@ -14,9 +14,10 @@ export async function loadConfig(args: BaseGenerateArguments) {
   const envs = [base.baseEnvironment, args.env].filter(
     (env): env is string => typeof env === "string"
   );
-  const { components, require, loaders } = getConfig(base, envs);
+  const { components, require, loaders, plugins } = getConfig(base, envs);
   const config = {
     ...base,
+    plugins,
     components: args.components?.length ? args.components : components,
     require: [...require, ...(args.require || [])],
     loaders: [...loaders, ...(args.loader || [])],

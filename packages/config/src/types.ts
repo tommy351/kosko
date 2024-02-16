@@ -7,8 +7,24 @@ import {
   record,
   boolean,
   integer,
-  min
+  min,
+  unknown
 } from "superstruct";
+
+/**
+ * Plugin config type.
+ *
+ * @public
+ */
+export interface PluginConfig {
+  name: string;
+  config?: unknown;
+}
+
+export const pluginConfigSchema = object({
+  name: string(),
+  config: optional(unknown())
+});
 
 /**
  * Environment config type.
@@ -19,12 +35,14 @@ export interface EnvironmentConfig {
   require?: string[];
   components?: string[];
   loaders?: string[];
+  plugins?: PluginConfig[];
 }
 
 export const environmentConfigSchema = object({
   require: optional(array(string())),
   components: optional(array(string())),
-  loaders: optional(array(string()))
+  loaders: optional(array(string())),
+  plugins: optional(array(pluginConfigSchema))
 });
 
 /**

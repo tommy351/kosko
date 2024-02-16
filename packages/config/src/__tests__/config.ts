@@ -51,7 +51,8 @@ describe("getConfig", () => {
     expect(getConfig({}, "dev")).toEqual({
       components: [],
       require: [],
-      loaders: []
+      loaders: [],
+      plugins: []
     });
   });
 
@@ -59,7 +60,8 @@ describe("getConfig", () => {
     const input = {
       components: ["foo"],
       require: ["bar"],
-      loaders: ["baz"]
+      loaders: ["baz"],
+      plugins: [{ name: "a" }]
     };
 
     expect(getConfig(input, "dev")).toEqual(input);
@@ -69,7 +71,8 @@ describe("getConfig", () => {
     const globalConf = {
       components: ["foo"],
       require: ["bar"],
-      loaders: ["baz"]
+      loaders: ["baz"],
+      plugins: [{ name: "a" }]
     };
     const input = {
       ...globalConf,
@@ -77,7 +80,8 @@ describe("getConfig", () => {
         prod: {
           components: ["aaa"],
           require: ["bbb"],
-          loaders: ["ccc"]
+          loaders: ["ccc"],
+          plugins: [{ name: "b" }]
         }
       }
     };
@@ -90,11 +94,13 @@ describe("getConfig", () => {
       components: ["foo"],
       require: ["bar"],
       loaders: ["baz"],
+      plugins: [{ name: "a" }],
       environments: {
         dev: {
           components: ["aaa"],
           require: ["bbb"],
-          loaders: ["ccc"]
+          loaders: ["ccc"],
+          plugins: [{ name: "b" }]
         }
       }
     };
@@ -102,7 +108,8 @@ describe("getConfig", () => {
     expect(getConfig(input, "dev")).toEqual({
       components: ["foo", "aaa"],
       require: ["bar", "bbb"],
-      loaders: ["baz", "ccc"]
+      loaders: ["baz", "ccc"],
+      plugins: [{ name: "a" }, { name: "b" }]
     });
   });
 
@@ -111,16 +118,19 @@ describe("getConfig", () => {
       components: ["foo"],
       require: ["bar"],
       loaders: ["baz"],
+      plugins: [{ name: "a" }],
       environments: {
         a: {
           components: ["aa"],
           require: ["ab"],
-          loaders: ["ac"]
+          loaders: ["ac"],
+          plugins: [{ name: "ad" }]
         },
         c: {
           components: ["ca"],
           require: ["cb"],
-          loaders: ["cc"]
+          loaders: ["cc"],
+          plugins: [{ name: "cd" }]
         }
       }
     };
@@ -128,7 +138,42 @@ describe("getConfig", () => {
     expect(getConfig(input, ["a", "b", "c"])).toEqual({
       components: ["foo", "aa", "ca"],
       require: ["bar", "ab", "cb"],
-      loaders: ["baz", "ac", "cc"]
+      loaders: ["baz", "ac", "cc"],
+      plugins: [{ name: "a" }, { name: "ad" }, { name: "cd" }]
+    });
+  });
+
+  test("should allow plugin configs", () => {
+    const input = {
+      components: ["foo"],
+      plugins: [{ name: "a", config: { foo: "bar" } }]
+    };
+
+    expect(getConfig(input, "")).toEqual({
+      components: ["foo"],
+      loaders: [],
+      require: [],
+      plugins: [{ name: "a", config: { foo: "bar" } }]
+    });
+  });
+
+  test("should allow duplicate plugin names", () => {
+    const input = {
+      components: ["foo"],
+      plugins: [
+        { name: "a", config: { a: 1 } },
+        { name: "a", config: { a: 2 } }
+      ]
+    };
+
+    expect(getConfig(input, "")).toEqual({
+      components: ["foo"],
+      loaders: [],
+      require: [],
+      plugins: [
+        { name: "a", config: { a: 1 } },
+        { name: "a", config: { a: 2 } }
+      ]
     });
   });
 });

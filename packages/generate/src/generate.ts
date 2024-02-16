@@ -5,7 +5,7 @@ import {
 } from "@kosko/require";
 import type { Manifest, Result } from "./base";
 import logger, { LogLevel } from "@kosko/log";
-import { handleResolvePromises, resolve } from "./resolve";
+import { ResolveOptions, handleResolvePromises, resolve } from "./resolve";
 import { GenerateError } from "./error";
 import { glob, GlobResult } from "./glob";
 import pLimit from "p-limit";
@@ -56,6 +56,11 @@ export interface GenerateOptions {
    * {@inheritDoc ResolveOptions.concurrency}
    */
   concurrency?: number;
+
+  /**
+   * {@inheritdoc ResolveOptions.transform}
+   */
+  transform?: ResolveOptions["transform"];
 }
 
 async function resolveComponentPath(
@@ -166,6 +171,7 @@ export async function generate(options: GenerateOptions): Promise<Result> {
       validate: options.validate,
       bail: options.bail,
       concurrency: options.concurrency,
+      transform: options.transform,
       index: [],
       path
     });

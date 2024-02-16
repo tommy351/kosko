@@ -39,7 +39,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=14.18.0"
+    "node": ">=18"
   },
   "devDependencies": {
     "@kosko/build-scripts": "workspace:^",

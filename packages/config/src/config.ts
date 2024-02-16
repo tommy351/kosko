@@ -61,20 +61,13 @@ export function getConfig(
     .map((env) => environments[env])
     .filter(Boolean);
 
-  if (!envConfigs.length) {
-    return {
-      require: config.require ?? [],
-      components: config.components ?? [],
-      loaders: config.loaders ?? []
-    };
-  }
-
   return {
     require: flatten(config.require, ...envConfigs.map((e) => e.require)),
     components: flatten(
       config.components,
       ...envConfigs.map((e) => e.components)
     ),
-    loaders: flatten(config.loaders, ...envConfigs.map((e) => e.loaders))
+    loaders: flatten(config.loaders, ...envConfigs.map((e) => e.loaders)),
+    plugins: flatten(config.plugins, ...envConfigs.map((e) => e.plugins))
   };
 }

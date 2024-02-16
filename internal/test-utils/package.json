@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "engines": {
-    "node": ">=14.18.0"
+    "node": ">=18"
   },
   "main": "dist/index.node.cjs",
   "module": "dist/index.node.mjs",

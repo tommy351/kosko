@@ -39,13 +39,13 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=14.18.0"
+    "node": ">=18"
   },
   "dependencies": {
     "@iarna/toml": "^2.2.5",
     "@kosko/common-utils": "workspace:^",
     "@kosko/log": "workspace:^",
-    "superstruct": "^0.15.3"
+    "superstruct": "^1.0.3"
   },
   "devDependencies": {
     "@kosko/build-scripts": "workspace:^",

@@ -1,0 +1,7 @@
+components = ["*"]
+
+[[plugins]]
+name = "./modules/dir"
+
+[plugins.config]
+namespace = "foo"

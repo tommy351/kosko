@@ -1,0 +1,9 @@
+{
+  "type": "module",
+  "exports": {
+    ".": "./main.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
