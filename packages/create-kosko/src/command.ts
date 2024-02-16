@@ -1,7 +1,7 @@
 import { mkdir, stat, writeFile } from "node:fs/promises";
 import { dirname, join, relative, resolve, sep } from "node:path";
 import pc from "picocolors";
-import { type Command, type RootArguments, CLIError } from "@kosko/cli-utils";
+import { type GlobalArguments, CLIError } from "@kosko/cli-utils";
 import logger, { LogLevel } from "@kosko/log";
 import isFolderEmpty from "./isFolderEmpty";
 import { File, Template } from "./templates/base";
@@ -15,6 +15,7 @@ import {
   installDependencies
 } from "./install";
 import { getErrorCode } from "@kosko/common-utils";
+import type { CommandModule } from "yargs";
 
 async function checkPath(path: string, force?: boolean) {
   try {
@@ -70,7 +71,7 @@ function getCDPath(cwd: string, path: string): string | undefined {
   return path;
 }
 
-export interface Arguments extends RootArguments {
+export interface Arguments extends GlobalArguments {
   force?: boolean;
   path?: string;
   typescript?: boolean;
@@ -79,7 +80,7 @@ export interface Arguments extends RootArguments {
   packageManager?: string;
 }
 
-export const command: Command<Arguments> = {
+export const command: CommandModule<GlobalArguments, Arguments> = {
   command: "$0 [path]",
   describe: "Set up a new Kosko directory",
   builder(argv) {

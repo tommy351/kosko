@@ -432,6 +432,9 @@ importers:
       '@kosko/test-utils':
         specifier: workspace:^
         version: link:../../internal/test-utils
+      '@types/yargs':
+        specifier: ^17.0.12
+        version: 17.0.32
       execa:
         specifier: ^5.1.1
         version: 5.1.1

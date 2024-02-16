@@ -2,10 +2,11 @@ import type * as migratePkg from "@kosko/migrate";
 import { readdir, readFile, stat } from "node:fs/promises";
 import getStdin from "get-stdin";
 import { join, resolve } from "node:path";
-import type { Command, RootArguments } from "@kosko/cli-utils";
+import type { GlobalArguments } from "@kosko/cli-utils";
 import { print } from "../cli/print";
 import logger, { LogLevel } from "@kosko/log";
 import { toArray } from "@kosko/common-utils";
+import { CommandModule } from "yargs";
 
 const KOSKO_MIGRATE = "@kosko/migrate";
 
@@ -53,12 +54,12 @@ function readFiles(cwd: string, files: readonly string[]): Promise<string[]> {
   );
 }
 
-export interface MigrateArguments extends RootArguments {
+export interface MigrateArguments extends GlobalArguments {
   filename: string | string[];
   esm?: boolean;
 }
 
-export const migrateCmd: Command<MigrateArguments> = {
+export const migrateCmd: CommandModule<GlobalArguments, MigrateArguments> = {
   command: "migrate",
   describe: "Migrate YAML into components",
   builder(argv) {

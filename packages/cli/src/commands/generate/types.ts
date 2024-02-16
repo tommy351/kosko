@@ -1,8 +1,8 @@
 import { PrintFormat } from "@kosko/generate";
-import type { RootArguments } from "@kosko/cli-utils";
+import type { GlobalArguments } from "@kosko/cli-utils";
 import { SetOption } from "./set-option";
 
-export interface BaseGenerateArguments extends RootArguments {
+export interface BaseGenerateArguments extends GlobalArguments {
   env?: string;
   require?: string[];
   components?: string[];

@@ -1,6 +1,7 @@
-import { CLIError, Command, RootArguments } from "@kosko/cli-utils";
+import { CLIError } from "@kosko/cli-utils";
+import { CommandModule } from "yargs";
 
-export const initCmd: Command<RootArguments> = {
+export const initCmd: CommandModule = {
   command: "init",
   describe: false,
   handler() {

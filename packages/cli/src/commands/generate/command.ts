@@ -1,6 +1,6 @@
 import { PrintFormat } from "@kosko/generate";
-import type { Argv } from "yargs";
-import type { Command, RootArguments } from "@kosko/cli-utils";
+import type { Argv, CommandModule } from "yargs";
+import type { GlobalArguments } from "@kosko/cli-utils";
 import { loadConfig } from "./config";
 import { SetOption, parseSetOptions } from "./set-option";
 import type { BaseGenerateArguments, GenerateArguments } from "./types";
@@ -8,7 +8,7 @@ import { handler } from "./worker";
 
 /* istanbul ignore next */
 export function generateBuilder(
-  argv: Argv<RootArguments>
+  argv: Argv<GlobalArguments>
 ): Argv<BaseGenerateArguments> {
   let base = argv
     .option("env", {
@@ -62,7 +62,7 @@ export function generateBuilder(
   return base;
 }
 
-export const generateCmd: Command<GenerateArguments> = {
+export const generateCmd: CommandModule<GlobalArguments, GenerateArguments> = {
   command: "generate [components..]",
   describe: "Generate Kubernetes manifests",
   builder(argv) {

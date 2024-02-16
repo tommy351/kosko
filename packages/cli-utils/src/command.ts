@@ -1,10 +1,11 @@
-// eslint-disable-next-line node/no-missing-import
-import { Argv, CommandModule } from "yargs";
+import type { Argv } from "yargs";
+import { cwd } from "node:process";
+import { isAbsolute, resolve } from "node:path";
 
 /**
  * @public
  */
-export interface RootArguments {
+export interface GlobalArguments {
   cwd: string;
   "log-level": string;
   silent: boolean;
@@ -13,7 +14,30 @@ export interface RootArguments {
 /**
  * @public
  */
-export type Command<T> = CommandModule<RootArguments, T>;
+export const globalOptions = {
+  cwd: {
+    type: "string",
+    describe: "Path of working directory",
+    global: true,
+    default: cwd,
+    defaultDescription: "CWD",
+    coerce(arg: string) {
+      return isAbsolute(arg) ? arg : resolve(arg);
+    }
+  },
+  "log-level": {
+    type: "string",
+    describe: "Set log level",
+    global: true,
+    default: "info"
+  },
+  silent: {
+    type: "boolean",
+    describe: "Disable log output",
+    global: true,
+    default: false
+  }
+} as const;
 
 /**
  * @public
