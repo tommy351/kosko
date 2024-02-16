@@ -110,7 +110,7 @@ extensions = ["ts", "mts", "cjs", "mjs", "js", "json"]
 }
 ",
   "tsconfig.json": "{
-  "extends": "@tsconfig/node18/tsconfig.json",
+  "extends": "@tsconfig/node-lts/tsconfig.json",
   "compilerOptions": {
     "typeRoots": [
       "./node_modules/@types",
@@ -364,7 +364,7 @@ require = ["ts-node/register"]
 }
 ",
   "tsconfig.json": "{
-  "extends": "@tsconfig/node18/tsconfig.json",
+  "extends": "@tsconfig/node-lts/tsconfig.json",
   "compilerOptions": {
     "typeRoots": [
       "./node_modules/@types",
@@ -514,7 +514,7 @@ require = ["ts-node/register"]
 }
 ",
   "tsconfig.json": "{
-  "extends": "@tsconfig/node18/tsconfig.json",
+  "extends": "@tsconfig/node-lts/tsconfig.json",
   "compilerOptions": {
     "typeRoots": [
       "./node_modules/@types",
@@ -664,7 +664,7 @@ require = ["ts-node/register"]
 }
 ",
   "tsconfig.json": "{
-  "extends": "@tsconfig/node18/tsconfig.json",
+  "extends": "@tsconfig/node-lts/tsconfig.json",
   "compilerOptions": {
     "typeRoots": [
       "./node_modules/@types",

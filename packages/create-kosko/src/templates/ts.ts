@@ -6,7 +6,7 @@ import { generateKoskoConfig } from "./kosko-config";
 import { generatePackageJson } from "./package-json";
 import { generateFromTemplateFile, generateReadme } from "./template";
 
-const BASE_TSCONFIG = "@tsconfig/node18";
+const BASE_TSCONFIG = "@tsconfig/node-lts";
 
 export const tsDevDependencies = ["ts-node", "typescript", BASE_TSCONFIG];
 

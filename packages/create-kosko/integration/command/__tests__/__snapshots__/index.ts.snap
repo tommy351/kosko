@@ -108,7 +108,7 @@ require = ["ts-node/register"]
 }
 ",
   "tsconfig.json": "{
-  "extends": "@tsconfig/node18/tsconfig.json",
+  "extends": "@tsconfig/node-lts/tsconfig.json",
   "compilerOptions": {
     "typeRoots": [
       "./node_modules/@types",
