@@ -3,21 +3,58 @@ import { dirname, join, relative, resolve, sep } from "node:path";
 import pc from "picocolors";
 import { type GlobalArguments, CLIError } from "@kosko/cli-utils";
 import logger, { LogLevel } from "@kosko/log";
-import isFolderEmpty from "./isFolderEmpty";
+import isFolderEmpty from "./is-folder-empty";
 import { File, Template } from "./templates/base";
 import cjsTemplate from "./templates/cjs";
 import tsTemplate from "./templates/ts";
 import esmTemplate from "./templates/esm";
 import tsEsmTemplate from "./templates/ts-esm";
 import {
-  detectPackageManager,
+  getPackageManager,
   getInstallCommand,
   installDependencies
 } from "./install";
 import { getErrorCode } from "@kosko/common-utils";
 import type { CommandModule } from "yargs";
+import prompts from "prompts";
+import isInteractive from "is-interactive";
+import { exit, stdout } from "node:process";
 
-async function checkPath(path: string, force?: boolean) {
+function onPromptState({ aborted }: { aborted: boolean }) {
+  if (aborted) {
+    // Re-enable terminal cursor otherwise it will remain hidden after exit.
+    stdout.write("\x1B[?25h");
+    stdout.write("\n");
+    exit(1);
+  }
+}
+
+async function getPath(
+  args: Pick<Arguments, "path" | "interactive">
+): Promise<string | undefined> {
+  if (typeof args.path === "string") return args.path;
+  if (!args.interactive) return;
+
+  const res = await prompts({
+    onState: onPromptState,
+    type: "text",
+    name: "path",
+    message: "Project path",
+    initial: "kosko-project"
+  });
+
+  return res.path;
+}
+
+async function checkPath({
+  path,
+  force,
+  interactive
+}: {
+  path: string;
+  force?: boolean;
+  interactive?: boolean;
+}): Promise<void> {
   try {
     logger.log(LogLevel.Debug, `Checking stats of "${path}"`);
     const stats = await stat(path);
@@ -30,13 +67,21 @@ async function checkPath(path: string, force?: boolean) {
     }
 
     if (force) {
-      return true;
+      return;
     }
 
     if (await isFolderEmpty(path)) {
       logger.log(LogLevel.Trace, "Path can be initialized because it is empty");
       return;
     }
+
+    const overwrite = await confirm({
+      interactive,
+      message: "Destination already exists. Do you want to overwrite it?",
+      fallback: false
+    });
+
+    if (overwrite) return;
 
     throw new CLIError("Destination already exists", {
       output: `Destination already exists. Please empty the directory or rerun with "--force" to proceed.`
@@ -51,7 +96,48 @@ async function checkPath(path: string, force?: boolean) {
   }
 }
 
-async function writeFiles(path: string, files: readonly File[]) {
+async function confirm({
+  message,
+  interactive,
+  initial,
+  fallback
+}: {
+  /**
+   * Prompt message.
+   */
+  message: string;
+  /**
+   * Enable interactive mode. When the value is undefined, and interactive is
+   * false, it will return the fallback value.
+   */
+  interactive?: boolean;
+  /**
+   * Default value for the prompt.
+   */
+  initial?: boolean;
+  /**
+   * Fallback value when interactive mode is disabled.
+   */
+  fallback: boolean;
+}): Promise<boolean> {
+  if (!interactive) return fallback;
+
+  const res = await prompts({
+    onState: onPromptState,
+    type: "confirm",
+    name: "confirm",
+    message,
+    initial
+  });
+
+  return res.confirm;
+}
+
+function resolvePath(cwd: string, path?: string): string {
+  return path ? resolve(cwd, path) : cwd;
+}
+
+async function writeFiles(path: string, files: readonly File[]): Promise<void> {
   for (const file of files) {
     const filePath = join(path, file.path);
 
@@ -78,70 +164,87 @@ export interface Arguments extends GlobalArguments {
   esm?: boolean;
   install?: boolean;
   packageManager?: string;
+  interactive: boolean;
 }
 
 export const command: CommandModule<GlobalArguments, Arguments> = {
   command: "$0 [path]",
-  describe: "Set up a new Kosko directory",
+  describe: "Set up a new Kosko project",
   builder(argv) {
-    /* istanbul ignore next */
-    let base = argv
+    return argv
+      .positional("path", { type: "string", describe: "Path to initialize" })
       .option("force", {
         type: "boolean",
         describe: "Overwrite existing files",
         alias: "f"
       })
-      .positional("path", { type: "string", describe: "Path to initialize" })
-      .example("$0", "Initialize in current directory")
-      .example("$0 example", "Initialize in specified directory");
-
-    // eslint-disable-next-line no-restricted-globals
-    if (process.env.BUILD_TARGET === "node") {
-      base = base
-        .option("typescript", {
-          type: "boolean",
-          describe: "Generate TypeScript files",
-          alias: "ts"
-        })
-        .option("esm", {
-          type: "boolean",
-          describe: "Generate ECMAScript module (ESM) files"
-        })
-        .option("install", {
-          type: "boolean",
-          describe: "Install dependencies automatically",
-          default: true
-        })
-        .option("package-manager", {
-          type: "string",
-          describe: "Package manager (npm, yarn, pnpm)",
-          alias: "pm"
-        })
-        .example("$0 --typescript", "Setup a TypeScript project");
-    }
-
-    return base;
+      .option("typescript", {
+        type: "boolean",
+        describe: "Generate TypeScript files",
+        alias: "ts"
+      })
+      .option("esm", {
+        type: "boolean",
+        describe: "Generate ECMAScript module (ESM) files"
+      })
+      .option("install", {
+        type: "boolean",
+        describe: "Install dependencies automatically"
+      })
+      .option("package-manager", {
+        type: "string",
+        describe: "Package manager (npm, yarn, pnpm)",
+        alias: "pm",
+        defaultDescription: "auto"
+      })
+      .option("interactive", {
+        type: "boolean",
+        describe: "Run in interactive mode",
+        default: isInteractive(),
+        defaultDescription: "auto"
+      });
   },
   async handler(args) {
-    const path = args.path ? resolve(args.cwd, args.path) : args.cwd;
+    const path = resolvePath(args.cwd, await getPath(args));
 
-    await checkPath(path, args.force);
+    await checkPath({ path, force: args.force, interactive: args.interactive });
+
+    args.typescript ??= await confirm({
+      message: "Would you like to use TypeScript?",
+      interactive: args.interactive,
+      // Set to true because we prefer to use TypeScript.
+      initial: true,
+      fallback: false
+    });
+
+    args.esm ??= await confirm({
+      interactive: args.interactive,
+      message: "Would you like to use ECMAScript module (ESM)?",
+      fallback: false
+    });
+
+    args.install ??= await confirm({
+      interactive: args.interactive,
+      message: "Would you like to install dependencies automatically?",
+      // Set to true because we prefer to install dependencies
+      // automatically.
+      initial: true,
+      // Set to false because users probably don't want to install dependencies
+      // automatically when they are running in non-interactive mode.
+      fallback: false
+    });
 
     logger.log(LogLevel.Info, `Creating a Kosko project in "${path}"`);
+
     const template: Template = (() => {
       if (args.typescript) {
         return args.esm ? tsEsmTemplate : tsTemplate;
       }
 
-      if (args.esm) {
-        return esmTemplate;
-      }
-
-      return cjsTemplate;
+      return args.esm ? esmTemplate : cjsTemplate;
     })();
 
-    const packageManager =
-      args.packageManager ?? (await detectPackageManager(path));
+    const packageManager = args.packageManager || getPackageManager();
     const runCmd = `${packageManager} run`;
     const { dependencies, devDependencies, files } = await template({ path });
 
@@ -150,8 +253,7 @@ export const command: CommandModule<GlobalArguments, Arguments> = {
     const cdPath = getCDPath(args.cwd, path);
     let installSuccessful = false;
 
-    // eslint-disable-next-line no-restricted-globals
-    if (process.env.BUILD_TARGET === "node" && args.install) {
+    if (args.install) {
       try {
         if (dependencies?.length) {
           await installDependencies({
@@ -195,8 +297,7 @@ We suggest that you begin by typing:
 
 ${[
   ...(cdPath ? [`cd ${cdPath}`] : []),
-  // eslint-disable-next-line no-restricted-globals
-  ...(process.env.BUILD_TARGET !== "node" || (args.install && installSuccessful)
+  ...(args.install && installSuccessful
     ? []
     : [
         dependencies?.length

@@ -416,9 +416,15 @@ importers:
       fast-safe-stringify:
         specifier: ^2.1.1
         version: 2.1.1
+      is-interactive:
+        specifier: ^1.0.0
+        version: 1.0.0
       picocolors:
         specifier: ^1.0.0
         version: 1.0.0
+      prompts:
+        specifier: ^2.4.2
+        version: 2.4.2
       yargs:
         specifier: ^17.5.1
         version: 17.7.2
@@ -432,6 +438,9 @@ importers:
       '@kosko/test-utils':
         specifier: workspace:^
         version: link:../../internal/test-utils
+      '@types/prompts':
+        specifier: ^2.4.9
+        version: 2.4.9
       '@types/yargs':
         specifier: ^17.0.12
         version: 17.0.32
@@ -4849,6 +4858,13 @@ packages:
   /@types/parse5@5.0.3:
     resolution: {integrity: sha512-kUNnecmtkunAoQ3CnjmMkzNU/gtxG8guhi+Fk2U/kOpIKjIMKnXGp4IJCgQJrXSgMsWYimYG4TGjz/UzbGEBTw==}
     dev: false
+
+  /@types/prompts@2.4.9:
+    resolution: {integrity: sha512-qTxFi6Buiu8+50/+3DGIWLHM6QuWsEKugJnnP6iv2Mc4ncxE4A/OJkjuVOA+5X0X1S/nq5VJRa8Lu+nwcvbrKA==}
+    dependencies:
+      '@types/node': 18.11.14
+      kleur: 3.0.3
+    dev: true
 
   /@types/prop-types@15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
@@ -9530,6 +9546,11 @@ packages:
     dependencies:
       global-dirs: 3.0.0
       is-path-inside: 3.0.3
+    dev: false
+
+  /is-interactive@1.0.0:
+    resolution: {integrity: sha512-2HvIEKRoqS62guEC+qBjpvRubdX910WCMuJTZ+I9yvqKU2/12eSL549HMwtabb4oupdj2sMP50k+XJfB/8JE6w==}
+    engines: {node: '>=8'}
     dev: false
 
   /is-map@2.0.2:

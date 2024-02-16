@@ -18,8 +18,25 @@ let tmpDir: TempDir;
 jest.mock("@kosko/log");
 jest.mock("@kosko/exec-utils");
 
+function setNpmUserAgent(value: string) {
+  let origValue: string | undefined;
+
+  beforeEach(() => {
+    origValue = process.env.npm_config_user_agent;
+    process.env.npm_config_user_agent = value;
+  });
+
+  afterEach(() => {
+    process.env.npm_config_user_agent = origValue;
+  });
+}
+
 async function execute(args: Partial<Arguments>): Promise<void> {
-  await command.handler(args as any);
+  await command.handler({
+    // Disable interactive mode by default
+    interactive: false,
+    ...(args as any)
+  });
 }
 
 beforeEach(async () => {
@@ -155,6 +172,8 @@ describe("when no options are given", () => {
 });
 
 describe("when --install option is given", () => {
+  setNpmUserAgent("npm");
+
   beforeEach(async () => {
     await execute({ path: tmpDir.path, install: true });
   });
@@ -324,14 +343,12 @@ describe.each([
   }
 );
 
-describe.each([
-  { file: "yarn.lock", packageManager: "yarn" },
-  { file: "pnpm-lock.yaml", packageManager: "pnpm" }
-])(
-  "when --package-manager is not given but file $file exists",
-  ({ file, packageManager }) => {
+describe.each(["npm", "yarn", "pnpm"])(
+  "when --package-manager is not given and npm user agent is set to %s",
+  (packageManager) => {
+    setNpmUserAgent(packageManager);
+
     beforeEach(async () => {
-      await writeFile(join(tmpDir.path, file), "");
       await execute({ path: tmpDir.path, install: true, force: true });
     });
 

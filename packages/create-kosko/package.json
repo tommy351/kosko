@@ -51,13 +51,16 @@
     "@kosko/log": "workspace:^",
     "@kosko/require": "workspace:^",
     "fast-safe-stringify": "^2.1.1",
+    "is-interactive": "^1.0.0",
     "picocolors": "^1.0.0",
+    "prompts": "^2.4.2",
     "yargs": "^17.5.1"
   },
   "devDependencies": {
     "@kosko/build-scripts": "workspace:^",
     "@kosko/jest-preset": "workspace:^",
     "@kosko/test-utils": "workspace:^",
+    "@types/prompts": "^2.4.9",
     "@types/yargs": "^17.0.12",
     "execa": "^5.1.1",
     "fast-glob": "^3.2.12"

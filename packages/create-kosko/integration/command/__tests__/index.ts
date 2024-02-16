@@ -19,7 +19,7 @@ afterEach(() => tmpDir.cleanup());
 
 describe("when target is an empty folder", () => {
   test("should write files to the target path", async () => {
-    await run([tmpDir.path, "--install", "false"]);
+    await run([tmpDir.path, "--install", "false", "--interactive", "false"]);
 
     const files = await listAllFiles(tmpDir.path);
     expect(files).toMatchSnapshot();
