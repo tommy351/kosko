@@ -521,3 +521,28 @@ describe("when transform is given", () => {
     });
   });
 });
+
+describe("when afterValidate is given", () => {
+  beforeEach(async () => {
+    await createTempFiles({
+      "a.js": "module.exports = {a: 1}"
+    });
+  });
+
+  test("should call afterValidate", async () => {
+    const afterValidate = jest.fn();
+
+    await generate({
+      components: ["*"],
+      path: tmpDir.path,
+      afterValidate
+    });
+
+    expect(afterValidate).toHaveBeenCalledTimes(1);
+    expect(afterValidate).toHaveBeenCalledWith({
+      path: join(tmpDir.path, "a.js"),
+      index: [],
+      data: { a: 1 }
+    });
+  });
+});

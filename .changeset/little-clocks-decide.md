@@ -2,4 +2,4 @@
 "@kosko/generate": minor
 ---
 
-Add `transform` option to `generate` and `resolve` function.
+Add `transform` and `validateAfter` option to `generate` and `resolve` function.

@@ -61,6 +61,11 @@ export interface GenerateOptions {
    * {@inheritdoc ResolveOptions.transform}
    */
   transform?: ResolveOptions["transform"];
+
+  /**
+   * {@inheritdoc ResolveOptions.afterValidate}
+   */
+  afterValidate?: ResolveOptions["afterValidate"];
 }
 
 async function resolveComponentPath(
@@ -172,6 +177,7 @@ export async function generate(options: GenerateOptions): Promise<Result> {
       bail: options.bail,
       concurrency: options.concurrency,
       transform: options.transform,
+      afterValidate: options.afterValidate,
       index: [],
       path
     });

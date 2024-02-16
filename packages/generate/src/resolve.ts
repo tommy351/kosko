@@ -109,6 +109,12 @@ export interface ResolveOptions {
    * be removed from the result.
    */
   transform?(manifest: Manifest): unknown;
+
+  /**
+   * Execute after a manifest is validated, no matter if a manifest implements
+   * a `validate` method or not.
+   */
+  afterValidate?(manifest: Manifest): void | Promise<void>;
 }
 
 /**
@@ -136,7 +142,8 @@ export async function resolve(
     path = "",
     bail,
     concurrency,
-    transform
+    transform,
+    afterValidate
   } = options;
   const limit = pLimit(validateConcurrency(concurrency));
 
@@ -234,15 +241,28 @@ export async function resolve(
     }
   }
 
-  if (validate && isValidator(manifest.data)) {
-    try {
-      logger.log(
-        LogLevel.Debug,
-        `Validating manifests ${index.join(".")} in ${options.path}`
-      );
-      await manifest.data.validate();
-    } catch (err) {
-      throw createResolveError("Validation error", err);
+  if (validate) {
+    if (isValidator(manifest.data)) {
+      try {
+        logger.log(
+          LogLevel.Debug,
+          `Validating manifests ${index.join(".")} in ${options.path}`
+        );
+        await manifest.data.validate();
+      } catch (err) {
+        throw createResolveError("Validation error", err);
+      }
+    }
+
+    if (typeof afterValidate === "function") {
+      try {
+        await afterValidate(manifest);
+      } catch (err) {
+        throw createResolveError(
+          "An error occurred in afterValidate function",
+          err
+        );
+      }
     }
   }
 

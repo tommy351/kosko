@@ -445,3 +445,93 @@ test("should throw ResolveError when the transform function throws an error", as
   expect(err.cause).toEqual(cause);
   expect(err.value).toEqual(1);
 });
+
+test("should call afterValidate when validate method is implemented", async () => {
+  const data = {
+    validate: jest.fn()
+  };
+  const afterValidate = jest.fn();
+
+  await resolve(data, { path: "test", index: [5], afterValidate });
+  expect(data.validate).toHaveBeenCalled();
+  expect(data.validate).toHaveBeenCalledOnce();
+  expect(afterValidate).toHaveBeenCalled();
+  expect(afterValidate).toHaveBeenCalledOnce();
+  expect(afterValidate).toHaveBeenCalledWith({
+    path: "test",
+    index: [5],
+    data
+  });
+  expect(afterValidate).toHaveBeenCalledAfter(data.validate);
+});
+
+test("should call afterValidate when validate method is not implemented", async () => {
+  const data = { foo: "bar" };
+  const afterValidate = jest.fn();
+
+  await resolve(data, { path: "test", index: [5], afterValidate });
+  expect(afterValidate).toHaveBeenCalled();
+  expect(afterValidate).toHaveBeenCalledOnce();
+  expect(afterValidate).toHaveBeenCalledWith({
+    path: "test",
+    index: [5],
+    data
+  });
+});
+
+test("should not call afterValidate when validate = false", async () => {
+  const afterValidate = jest.fn();
+
+  await resolve({}, { afterValidate, validate: false });
+  expect(afterValidate).not.toHaveBeenCalled();
+});
+
+test("should not call afterValidate when validation fails", async () => {
+  const afterValidate = jest.fn();
+
+  await expect(
+    resolve(
+      {
+        validate() {
+          throw new Error("err");
+        }
+      },
+      { afterValidate }
+    )
+  ).rejects.toThrow();
+  expect(afterValidate).not.toHaveBeenCalled();
+});
+
+test("afterValidate throws an error", async () => {
+  const data = { foo: "bar" };
+  const afterValidate = jest.fn(() => {
+    throw new Error("err");
+  });
+
+  const err = await getRejectedValue(
+    resolve(data, { afterValidate, path: "test", index: [5] })
+  );
+
+  assert(err instanceof ResolveError);
+  expect(err.message).toEqual("An error occurred in afterValidate function");
+  expect(err.path).toEqual("test");
+  expect(err.index).toEqual([5]);
+  expect(err.value).toEqual(data);
+  expect(err.cause).toEqual(new Error("err"));
+});
+
+test("afterValidate returns a rejected promise", async () => {
+  const data = { foo: "bar" };
+  const afterValidate = jest.fn().mockRejectedValue(new Error("err"));
+
+  const err = await getRejectedValue(
+    resolve(data, { afterValidate, path: "test", index: [5] })
+  );
+
+  assert(err instanceof ResolveError);
+  expect(err.message).toEqual("An error occurred in afterValidate function");
+  expect(err.path).toEqual("test");
+  expect(err.index).toEqual([5]);
+  expect(err.value).toEqual(data);
+  expect(err.cause).toEqual(new Error("err"));
+});
