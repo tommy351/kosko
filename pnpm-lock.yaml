@@ -281,6 +281,9 @@ importers:
       resolve-from:
         specifier: ^5.0.0
         version: 5.0.0
+      superstruct:
+        specifier: ^1.0.3
+        version: 1.0.3
       yargs:
         specifier: ^17.5.1
         version: 17.7.2

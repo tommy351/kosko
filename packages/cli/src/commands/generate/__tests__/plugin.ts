@@ -9,7 +9,7 @@ describe("composePlugins", () => {
         { validateAllManifests: () => {} },
         { validateAllManifests: () => {} }
       ]);
-      expect(plugin).not.toHaveProperty("transformManifest");
+      expect(plugin.transformManifest).toBeUndefined();
     });
 
     test("compose functions", async () => {
@@ -165,7 +165,7 @@ describe("composePlugins", () => {
         { transformManifest: () => {} },
         { transformManifest: () => {} }
       ]);
-      expect(plugin).not.toHaveProperty("validateAllManifests");
+      expect(plugin.validateAllManifests).toBeUndefined();
     });
 
     test("compose functions", async () => {

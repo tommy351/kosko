@@ -70,7 +70,8 @@ export async function handler(options: WorkerOptions) {
     validate: args.validate,
     bail: config.bail,
     concurrency: config.concurrency,
-    transform: plugin.transformManifest
+    transform: plugin.transformManifest,
+    afterValidate: plugin.validateManifest
   });
 
   if (!result.manifests.length) {

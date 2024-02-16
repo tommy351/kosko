@@ -6,6 +6,8 @@ import resolveFrom from "resolve-from";
 import { isRecord } from "@kosko/common-utils";
 import { CLIError } from "@kosko/cli-utils";
 import pc from "picocolors";
+import { type, func, optional, validate } from "superstruct";
+import { excludeFalsyInArray } from "../../utils";
 
 type UnknownPluginFactory = (ctx: PluginContext) => unknown;
 
@@ -33,30 +35,17 @@ function assertFactory(
   }
 }
 
+const pluginSchema = type({
+  transformManifest: optional(func()),
+  validateManifest: optional(func()),
+  validateAllManifests: optional(func())
+});
+
 function assertPlugin(name: string, value: unknown): asserts value is Plugin {
-  if (!isRecord(value)) {
-    throw createError(
-      `Plugin "${name}" must return an object in the factory function`
-    );
-  }
+  const [err] = validate(value, pluginSchema);
+  if (!err) return;
 
-  if (
-    value.transformManifest != null &&
-    typeof value.transformManifest !== "function"
-  ) {
-    throw createError(
-      `Expected "transformManifest" to be a function in plugin "${name}"`
-    );
-  }
-
-  if (
-    value.validateAllManifests != null &&
-    typeof value.validateAllManifests !== "function"
-  ) {
-    throw createError(
-      `Expected "validateAllManifests" to be a function in plugin "${name}"`
-    );
-  }
+  throw createError(`Invalid plugin "${name}": ${err.message}`);
 }
 
 async function loadPlugin({
@@ -88,6 +77,22 @@ async function loadPlugin({
   return plugin;
 }
 
+type MaybePromiseFunc<Args extends unknown[]> = (
+  ...args: Args
+) => void | Promise<void>;
+
+function composeMaybePromiseFuncs<Args extends unknown[]>(
+  fns: readonly MaybePromiseFunc<Args>[]
+): MaybePromiseFunc<Args> | undefined {
+  if (!fns.length) return;
+
+  return async (...args) => {
+    for (const fn of fns) {
+      await fn(...args);
+    }
+  };
+}
+
 export function composePlugins(plugins: readonly Plugin[]): Plugin {
   return {
     ...(plugins.some((p) => p.transformManifest) && {
@@ -104,15 +109,12 @@ export function composePlugins(plugins: readonly Plugin[]): Plugin {
         return data;
       }
     }),
-    ...(plugins.some((p) => p.validateAllManifests) && {
-      validateAllManifests: async (result) => {
-        for (const plugin of plugins) {
-          if (typeof plugin.validateAllManifests !== "function") continue;
-
-          await plugin.validateAllManifests(result);
-        }
-      }
-    })
+    validateManifest: composeMaybePromiseFuncs(
+      excludeFalsyInArray(plugins.map((p) => p.validateManifest))
+    ),
+    validateAllManifests: composeMaybePromiseFuncs(
+      excludeFalsyInArray(plugins.map((p) => p.validateAllManifests))
+    )
   };
 }
 

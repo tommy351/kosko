@@ -23,7 +23,7 @@ describe("when plugin is a CJS package", () => {
 
   test("should transform manifests", async () => {
     const result = await runNodeCLI(
-      ["generate", "--config", "./kosko-package.toml"],
+      ["generate", "--config", "./package.toml"],
       { cwd: testDir }
     );
 
@@ -34,7 +34,7 @@ describe("when plugin is a CJS package", () => {
 describe("when plugin is a CJS file", () => {
   test("should transform manifests", async () => {
     const result = await runNodeCLI(
-      ["generate", "--config", "./kosko-file-cjs.toml"],
+      ["generate", "--config", "./file-cjs.toml"],
       {
         cwd: testDir
       }
@@ -51,7 +51,7 @@ describe("when plugin is a ESM package", () => {
 
   test("should transform manifests", async () => {
     const result = await runNodeCLI(
-      ["generate", "--config", "./kosko-package.toml"],
+      ["generate", "--config", "./package.toml"],
       { cwd: testDir }
     );
 
@@ -62,7 +62,7 @@ describe("when plugin is a ESM package", () => {
 describe("when plugin is a ESM file", () => {
   test("should transform manifests", async () => {
     const result = await runNodeCLI(
-      ["generate", "--config", "./kosko-file-mjs.toml"],
+      ["generate", "--config", "./file-mjs.toml"],
       { cwd: testDir }
     );
 
@@ -76,10 +76,9 @@ describe("when multiple plugins are specified", () => {
   });
 
   test("should transform manifests", async () => {
-    const result = await runNodeCLI(
-      ["generate", "--config", "./kosko-multi.toml"],
-      { cwd: testDir }
-    );
+    const result = await runNodeCLI(["generate", "--config", "./multi.toml"], {
+      cwd: testDir
+    });
 
     expect(result.stdout).toMatchSnapshot();
   });
@@ -88,7 +87,7 @@ describe("when multiple plugins are specified", () => {
 describe("when plugin does not exist", () => {
   test("should throw an error", async () => {
     const result = await runNodeCLI(
-      ["generate", "--config", "./kosko-package.toml"],
+      ["generate", "--config", "./package.toml"],
       { cwd: testDir, reject: false }
     );
 
@@ -102,7 +101,7 @@ describe("when plugin does not exist", () => {
 describe("when plugin is a TS file", () => {
   test("should transform manifests", async () => {
     const result = await runNodeCLI(
-      ["generate", "--config", "./kosko-file-ts-cjs.toml"],
+      ["generate", "--config", "./file-ts-cjs.toml"],
       {
         cwd: testDir,
         env: { TS_NODE_PROJECT: join(testDir, "modules/ts-cjs/tsconfig.json") }
@@ -115,10 +114,9 @@ describe("when plugin is a TS file", () => {
 
 describe("when plugin is a directory", () => {
   test("should transform manifests", async () => {
-    const result = await runNodeCLI(
-      ["generate", "--config", "./kosko-dir.toml"],
-      { cwd: testDir }
-    );
+    const result = await runNodeCLI(["generate", "--config", "./dir.toml"], {
+      cwd: testDir
+    });
 
     expect(result.stdout).toMatchSnapshot();
   });
@@ -131,7 +129,7 @@ describe("when transformManifest throws an error", () => {
 
   test("should throw an error", async () => {
     const result = await runNodeCLI(
-      ["generate", "--config", "./kosko-package.toml"],
+      ["generate", "--config", "./package.toml"],
       { cwd: testDir, reject: false }
     );
 
@@ -139,5 +137,75 @@ describe("when transformManifest throws an error", () => {
     expect(result.stderr).toContain(
       `ResolveError: An error occurred in transform function`
     );
+  });
+});
+
+describe("when validateManifest succeeds", () => {
+  test("should not throw an error", async () => {
+    const result = await runNodeCLI(
+      ["generate", "--config", "./validate.toml"],
+      { cwd: testDir }
+    );
+
+    expect(result.stdout).toContain("Validation succeeded");
+  });
+});
+
+describe("when validationManifest throws an error", () => {
+  test("should throw an error", async () => {
+    const result = await runNodeCLI(
+      ["generate", "--config", "./validate-sync-error.toml"],
+      { cwd: testDir, reject: false }
+    );
+
+    expect(result.exitCode).toEqual(1);
+    expect(result.stderr).toContain("Sync error");
+  });
+});
+
+describe("when validationManifest throws an async error", () => {
+  test("should throw an error", async () => {
+    const result = await runNodeCLI(
+      ["generate", "--config", "./validate-async-error.toml"],
+      { cwd: testDir, reject: false }
+    );
+
+    expect(result.exitCode).toEqual(1);
+    expect(result.stderr).toContain("Async error");
+  });
+});
+
+describe("when validateAllManifest succeeds", () => {
+  test("should not throw an error", async () => {
+    const result = await runNodeCLI(
+      ["generate", "--config", "./validate-all.toml"],
+      { cwd: testDir }
+    );
+
+    expect(result.stdout).toContain("Validation succeeded");
+  });
+});
+
+describe("when validationAllManifest throws an error", () => {
+  test("should throw an error", async () => {
+    const result = await runNodeCLI(
+      ["generate", "--config", "./validate-all-sync-error.toml"],
+      { cwd: testDir, reject: false }
+    );
+
+    expect(result.exitCode).toEqual(1);
+    expect(result.stderr).toContain("Sync error");
+  });
+});
+
+describe("when validationAllManifest throws an async error", () => {
+  test("should throw an error", async () => {
+    const result = await runNodeCLI(
+      ["generate", "--config", "./validate-all-async-error.toml"],
+      { cwd: testDir, reject: false }
+    );
+
+    expect(result.exitCode).toEqual(1);
+    expect(result.stderr).toContain("Async error");
   });
 });

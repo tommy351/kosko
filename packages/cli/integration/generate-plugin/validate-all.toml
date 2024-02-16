@@ -1,0 +1,7 @@
+components = ["*"]
+
+[[plugins]]
+name = "./modules/validate/main.js"
+
+[plugins.config]
+test = "validateAll"

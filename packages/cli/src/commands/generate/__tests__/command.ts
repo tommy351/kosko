@@ -3,7 +3,7 @@ import { Config } from "@kosko/config";
 import { Environment } from "@kosko/env";
 import { generate, print, PrintFormat } from "@kosko/generate";
 import assert from "node:assert";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import pkgDir from "pkg-dir";
 import { generateCmd } from "../command";
@@ -633,7 +633,7 @@ describe("when plugin factory does not return an object", () => {
 
   test("should throw an error", async () => {
     await expect(execute()).rejects.toThrow(
-      `Plugin "test-plugin" must return an object in the factory function`
+      `Invalid plugin "test-plugin": Expected an object, but received: "foo"`
     );
   });
 });
@@ -672,7 +672,27 @@ describe("when transformManifest is defined but not a function", () => {
 
   test("should throw an error", async () => {
     await expect(execute()).rejects.toThrow(
-      `Expected "transformManifest" to be a function in plugin "test-plugin"`
+      `Invalid plugin "test-plugin": At path: transformManifest -- Expected a function, but received: "foo"`
+    );
+  });
+});
+
+describe("when validateManifest is defined but not a function", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: "test-plugin" }]
+    });
+    await createFakeModule(
+      "test-plugin",
+      `module.exports = () => ({ validateManifest: "foo" });`
+    );
+  });
+
+  test("should throw an error", async () => {
+    await expect(execute()).rejects.toThrow(
+      `Invalid plugin "test-plugin": At path: validateManifest -- Expected a function, but received: "foo"`
     );
   });
 });
@@ -692,7 +712,107 @@ describe("when validateAllManifests is defined but not a function", () => {
 
   test("should throw an error", async () => {
     await expect(execute()).rejects.toThrow(
-      `Expected "validateAllManifests" to be a function in plugin "test-plugin"`
+      `Invalid plugin "test-plugin": At path: validateAllManifests -- Expected a function, but received: "foo"`
+    );
+  });
+});
+
+describe("when validateAllManifests is defined and validate = true", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: "test-plugin" }]
+    });
+    await createFakeModule(
+      "test-plugin",
+      `module.exports = () => ({
+  validateAllManifests(result) {
+    require("node:fs").writeFileSync(__dirname + "/../../validateAllManifests", JSON.stringify(result));
+  }
+});`
+    );
+    await execute({ validate: true });
+  });
+
+  test("should call validateAllManifests", async () => {
+    const result = JSON.parse(
+      await readFile(join(tmpDir.path, "validateAllManifests"), "utf8")
+    );
+
+    expect(result).toEqual({ manifests: [{ path: "", index: [0], data: {} }] });
+  });
+});
+
+describe("when validateAllManifests is defined but validate = false", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: "test-plugin" }]
+    });
+    await createFakeModule(
+      "test-plugin",
+      `module.exports = () => ({
+  validateAllManifests() {
+    require("node:fs").writeFileSync(__dirname + "/../../validateAllManifests", "");
+  }
+});`
+    );
+    await execute({ validate: false });
+  });
+
+  test("should not call validateAllManifests", async () => {
+    await expect(
+      access(join(tmpDir.path, "validateAllManifests"))
+    ).rejects.toThrow("ENOENT");
+  });
+});
+
+describe("when validateAllManifests throws an error", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: "test-plugin" }]
+    });
+    await createFakeModule(
+      "test-plugin",
+      `module.exports = () => ({
+  validateAllManifests(result) {
+    throw new Error("afterValidate err");
+  }
+});`
+    );
+  });
+
+  test("should throw an error", async () => {
+    await expect(execute({ validate: true })).rejects.toThrow(
+      "afterValidate err"
+    );
+  });
+});
+
+describe("when validataeAllManifests returns a rejected promise", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: "test-plugin" }]
+    });
+    await createFakeModule(
+      "test-plugin",
+      `module.exports = () => ({
+  validateAllManifests(result) {
+    return Promise.reject(new Error("afterValidate err"));
+  }
+});`
+    );
+  });
+
+  test("should throw an error", async () => {
+    await expect(execute({ validate: true })).rejects.toThrow(
+      "afterValidate err"
     );
   });
 });
