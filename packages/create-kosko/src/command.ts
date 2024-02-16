@@ -171,6 +171,8 @@ export const command: CommandModule<GlobalArguments, Arguments> = {
   command: "$0 [path]",
   describe: "Set up a new Kosko project",
   builder(argv) {
+    // Don't set the default value if we are going to prompt the user. Set the
+    // defaultDescription instead.
     return argv
       .positional("path", { type: "string", describe: "Path to initialize" })
       .option("force", {
@@ -181,7 +183,8 @@ export const command: CommandModule<GlobalArguments, Arguments> = {
       .option("typescript", {
         type: "boolean",
         describe: "Generate TypeScript files",
-        alias: "ts"
+        alias: "ts",
+        defaultDescription: "true"
       })
       .option("esm", {
         type: "boolean",
@@ -214,7 +217,7 @@ export const command: CommandModule<GlobalArguments, Arguments> = {
       interactive: args.interactive,
       // Set to true because we prefer to use TypeScript.
       initial: true,
-      fallback: false
+      fallback: true
     });
 
     args.esm ??= await confirm({

@@ -179,6 +179,44 @@ describe("when --install option is given", () => {
   });
 
   test("should run install in the folder", async () => {
+    const spawnOptions = {
+      cwd: tmpDir.path,
+      stdio: "inherit",
+      env: {
+        ...process.env,
+        ADBLOCK: "1",
+        DISABLE_OPENCOLLECTIVE: "1"
+      }
+    };
+    expect(spawn).toHaveBeenCalledTimes(2);
+    expect(spawn).toHaveBeenCalledWith(
+      "npm",
+      ["install", "@kosko/env", "kosko", "kubernetes-models"],
+      spawnOptions
+    );
+    expect(spawn).toHaveBeenCalledWith(
+      "npm",
+      ["install", "ts-node", "typescript", "@tsconfig/node18", "--save-dev"],
+      spawnOptions
+    );
+  });
+
+  test("should not print install command in log", () => {
+    expect(logger.log).not.toHaveBeenCalledWith(
+      LogLevel.Info,
+      expect.stringContaining("npm install")
+    );
+  });
+});
+
+describe("when --typescript = false and --install option is given", () => {
+  setNpmUserAgent("npm");
+
+  beforeEach(async () => {
+    await execute({ path: tmpDir.path, typescript: false, install: true });
+  });
+
+  test("should run install in the folder", async () => {
     expect(spawn).toHaveBeenCalledTimes(1);
     expect(spawn).toHaveBeenCalledWith(
       "npm",
@@ -203,9 +241,9 @@ describe("when --install option is given", () => {
   });
 });
 
-describe("when --esm option is given", () => {
+describe("when --typescript = false and --esm option is given", () => {
   beforeEach(async () => {
-    await execute({ path: tmpDir.path, esm: true });
+    await execute({ path: tmpDir.path, typescript: false, esm: true });
   });
 
   test("should generate files", async () => {
@@ -220,7 +258,7 @@ describe("when --esm option is given", () => {
   });
 });
 
-describe("when --typescript option is given", () => {
+describe("when --typescript = true", () => {
   beforeEach(async () => {
     await execute({ path: tmpDir.path, typescript: true });
   });
@@ -243,9 +281,26 @@ describe("when --typescript option is given", () => {
   });
 });
 
-describe("when --typescript and --esm option is given", () => {
+describe("when --typescript = false", () => {
   beforeEach(async () => {
-    await execute({ path: tmpDir.path, typescript: true, esm: true });
+    await execute({ path: tmpDir.path, typescript: true });
+  });
+
+  test("should generate files", async () => {
+    await expect(listAllFiles(tmpDir.path)).resolves.toMatchSnapshot();
+  });
+
+  test("should print install command in log", () => {
+    expect(logger.log).toHaveBeenCalledWith(
+      LogLevel.Info,
+      expect.stringContaining("npm install @kosko/env kosko kubernetes-models")
+    );
+  });
+});
+
+describe("when --esm option is given", () => {
+  beforeEach(async () => {
+    await execute({ path: tmpDir.path, esm: true });
   });
 
   test("should generate files", async () => {
