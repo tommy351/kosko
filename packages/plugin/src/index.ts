@@ -36,6 +36,13 @@ export interface TransformManifest {
 /**
  * @public
  */
+export interface ValidateManifest {
+  (manifest: Manifest): void | Promise<void>;
+}
+
+/**
+ * @public
+ */
 export interface ValidateAllManifests {
   (result: Result): void | Promise<void>;
 }
@@ -50,6 +57,11 @@ export interface Plugin {
    * {@inheritDoc @kosko/generate#ResolveOptions.transform}
    */
   transformManifest?: TransformManifest;
+
+  /**
+   * {@inheritDoc @kosko/generate#ResolveOptions.afterValidate}
+   */
+  validateManifest?: ValidateManifest;
 
   /**
    * Validate all manifests. This function is called after all manifests are
