@@ -237,7 +237,7 @@ describe("when --typescript option is given", () => {
     expect(logger.log).toHaveBeenCalledWith(
       LogLevel.Info,
       expect.stringContaining(
-        "npm install ts-node typescript @tsconfig/node14 --save-dev"
+        "npm install ts-node typescript @tsconfig/node18 --save-dev"
       )
     );
   });
@@ -260,7 +260,7 @@ describe("when --typescript and --esm option is given", () => {
     expect(logger.log).toHaveBeenCalledWith(
       LogLevel.Info,
       expect.stringContaining(
-        "npm install ts-node typescript @tsconfig/node14 --save-dev"
+        "npm install ts-node typescript @tsconfig/node18 --save-dev"
       )
     );
   });
@@ -297,7 +297,7 @@ describe.each([
         expect(logger.log).toHaveBeenCalledWith(
           LogLevel.Info,
           expect.stringContaining(
-            `${packageManager} ${installCommand} ts-node typescript @tsconfig/node14 ${devFlag}`
+            `${packageManager} ${installCommand} ts-node typescript @tsconfig/node18 ${devFlag}`
           )
         );
       });
@@ -333,7 +333,7 @@ describe.each([
             installCommand,
             "ts-node",
             "typescript",
-            "@tsconfig/node14",
+            "@tsconfig/node18",
             devFlag
           ],
           spawnOptions

@@ -102,7 +102,8 @@ export default [deployment, service];
 }
 `;
 
-exports[`when --typescript and --esm option is given should generate files 1`] = `
+exports[`when --typescript and --esm option is given should generate files 1`] =
+  `
 {
   "README.md": "This is a [Kosko] project bootstrapped with \`create-kosko\` command.
 
@@ -212,7 +213,7 @@ extensions = ["ts", "mts", "cjs", "mjs", "js", "json"]
 }
 ",
   "tsconfig.json": "{
-  "extends": "@tsconfig/node14/tsconfig.json",
+  "extends": "@tsconfig/node18/tsconfig.json",
   "compilerOptions": {
     "typeRoots": [
       "./node_modules/@types",
@@ -364,7 +365,7 @@ require = ["ts-node/register"]
 }
 ",
   "tsconfig.json": "{
-  "extends": "@tsconfig/node14/tsconfig.json",
+  "extends": "@tsconfig/node18/tsconfig.json",
   "compilerOptions": {
     "typeRoots": [
       "./node_modules/@types",
@@ -507,7 +508,9 @@ module.exports = [deployment, service];
 }
 `;
 
-exports[`when the target exists and is not empty should update package.json 1`] = `
+exports[
+  `when the target exists and is not empty should update package.json 1`
+] = `
 "{
   "name": "foo",
   "version": "1.2.3",
