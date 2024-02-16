@@ -4,7 +4,7 @@ import {
   loadConfig as loadConfigFile
 } from "@kosko/config";
 import { resolve } from "node:path";
-import { CLIError } from "../../cli/error";
+import { CLIError } from "@kosko/cli-utils";
 import { BaseGenerateArguments } from "./types";
 
 export async function loadConfig(args: BaseGenerateArguments) {

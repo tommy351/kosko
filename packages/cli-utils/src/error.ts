@@ -1,6 +1,9 @@
 import logger, { LogLevel } from "@kosko/log";
 import { exit } from "node:process";
 
+/**
+ * @public
+ */
 export class CLIError extends Error {
   public readonly output?: string;
   public readonly code?: number;
@@ -18,7 +21,7 @@ export class CLIError extends Error {
 CLIError.prototype.name = "CLIError";
 
 /**
- * Handles errors thrown by {@link run} function.
+ * Handles CLI errors.
  *
  * @remarks
  * This function prints error message to logger and terminates current process

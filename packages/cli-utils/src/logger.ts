@@ -3,9 +3,14 @@ import logger, {
   logLevelFromString,
   SilentLogWriter
 } from "@kosko/log";
-import { RootArguments } from "./command";
+import type { GlobalArguments } from "./command";
 
-export function setupLogger(args: Pick<RootArguments, "silent" | "log-level">) {
+/**
+ * @public
+ */
+export function setupLogger(
+  args: Pick<GlobalArguments, "silent" | "log-level">
+) {
   if (args.silent) {
     logger.setWriter(new SilentLogWriter());
   } else {

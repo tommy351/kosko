@@ -9,48 +9,12 @@ Welcome to the Kosko documentation! Before we start, make sure your computer mee
 
 - Node.js 18 or later.
 
-## Install
-
-First, install Kosko globally.
-
-```shell
-npm install kosko -g
-```
-
-:::caution
-
-If the following error occurred during installation.
-
-```
-Error: EACCES: permission denied
-```
-
-Try running `npm install` again with `sudo`.
-
-```shell
-sudo npm install kosko -g
-```
-
-Or, you can skip global installation and run `kosko` with `npx`.
-
-```shell
-npx kosko
-```
-
-:::
-
 ## Automatic Setup
 
-It's recommended to setup a Kosko project with [`kosko init`](cli/init.md) command, which sets up basic folder structure and installs everything you need automatically.
+It's recommended to setup a Kosko project with [`create-kosko`](cli/create-kosko.md) command, which sets up basic folder structure and installs everything you need automatically.
 
 ```shell
-kosko init example
-```
-
-We also recommend using TypeScript, which can improve user experience in IDE and make debugging much easier. To set up a TypeScript project, run:
-
-```shell
-kosko init example --typescript
+npm create kosko example
 ```
 
 After installation complete, the command will generate following files in `example` folder.
@@ -88,19 +52,19 @@ npx @kosko/template-deployed-service --name nginx --image nginx
 Run [`kosko generate`](cli/generate.md) to print Kubernetes manifests in the console.
 
 ```shell
-kosko generate
+npx kosko generate
 ```
 
 Pipe the output to kubectl to apply to a cluster.
 
 ```shell
-kosko generate | kubectl apply -f -
+npx kosko generate | kubectl apply -f -
 ```
 
 If you don't want to print manifests to console, run [`kosko validate`](cli/validate.md).
 
 ```shell
-kosko validate
+npx kosko validate
 ```
 
 ## Learn More

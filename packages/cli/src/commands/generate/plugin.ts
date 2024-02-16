@@ -4,7 +4,7 @@ import { importPath } from "@kosko/require";
 import logger, { LogLevel } from "@kosko/log";
 import resolveFrom from "resolve-from";
 import { isRecord } from "@kosko/common-utils";
-import { CLIError } from "../../cli/error";
+import { CLIError } from "@kosko/cli-utils";
 import pc from "picocolors";
 
 type UnknownPluginFactory = (ctx: PluginContext) => unknown;

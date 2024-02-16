@@ -1,13 +1,14 @@
-import { Command } from "../cli/command";
 import logger, { LogLevel } from "@kosko/log";
 import { handler } from "./generate/worker";
 import { BaseGenerateArguments } from "./generate/types";
 import { generateBuilder } from "./generate/command";
 import { loadConfig } from "./generate/config";
+import type { CommandModule } from "yargs";
+import { GlobalArguments } from "@kosko/cli-utils";
 
 export type ValidateArguments = BaseGenerateArguments;
 
-export const validateCmd: Command<ValidateArguments> = {
+export const validateCmd: CommandModule<GlobalArguments, ValidateArguments> = {
   command: "validate [components..]",
   describe: "Validate components",
   builder(argv) {

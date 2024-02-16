@@ -1,0 +1,59 @@
+{
+  "name": "@kosko/cli-utils",
+  "version": "0.0.0",
+  "description": "CLI utilities used in Kosko.",
+  "homepage": "https://kosko.dev",
+  "repository": "https://github.com/tommy351/kosko/tree/master/packages/cli-utils",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "main": "dist/index.node.cjs",
+  "module": "dist/index.node.mjs",
+  "types": "dist/types.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "build-scripts"
+  },
+  "exports": {
+    "node": {
+      "import": {
+        "types": "./dist/types.d.mts",
+        "default": "./dist/index.node.mjs"
+      },
+      "types": "./dist/types.d.ts",
+      "require": "./dist/index.node.cjs"
+    },
+    "import": {
+      "types": "./dist/types.d.mts",
+      "default": "./dist/index.base.mjs"
+    },
+    "types": "./dist/types.d.ts",
+    "require": "./dist/index.node.cjs"
+  },
+  "files": [
+    "/dist/"
+  ],
+  "keywords": [
+    "kosko"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@kosko/log": "workspace:^"
+  },
+  "devDependencies": {
+    "@kosko/build-scripts": "workspace:^",
+    "@kosko/jest-preset": "workspace:^",
+    "@types/yargs": "^17.0.12",
+    "yargs": "^17.5.1"
+  },
+  "peerDependencies": {
+    "yargs": "^17.0.0"
+  },
+  "jest": {
+    "preset": "@kosko/jest-preset"
+  }
+}

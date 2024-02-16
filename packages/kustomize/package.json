@@ -45,15 +45,16 @@
   },
   "dependencies": {
     "@kosko/common-utils": "workspace:^",
-    "@kosko/exec-utils": "workspace:^",
-    "@kosko/yaml": "workspace:^"
+    "@kosko/exec-utils": "workspace:^"
   },
   "devDependencies": {
     "@kosko/build-scripts": "workspace:^",
     "@kosko/jest-preset": "workspace:^",
+    "@kosko/yaml": "workspace:^",
     "kubernetes-models": "^4.1.0"
   },
   "peerDependencies": {
+    "@kosko/yaml": "workspace:^",
     "kubernetes-models": ">=1.0.3"
   },
   "jest": {

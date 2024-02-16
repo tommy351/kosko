@@ -1,4 +1,4 @@
-This is a [Kosko] project bootstrapped with [`kosko init`][kosko] command.
+This is a [Kosko] project bootstrapped with `create-kosko` command.
 
 ## Getting Started
 

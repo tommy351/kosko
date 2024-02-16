@@ -1,6 +1,6 @@
 import { Reducer } from "@kosko/env";
 import jp from "jsonpath";
-import { CLIError } from "../../cli/error";
+import { CLIError } from "@kosko/cli-utils";
 
 /**
  * Contains a value to override a variable of the specified component

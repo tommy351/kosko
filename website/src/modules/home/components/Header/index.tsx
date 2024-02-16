@@ -18,7 +18,7 @@ export default function Header() {
         <LinkButton color="info" size="lg" to={useBaseUrl("play")}>
           Playground
         </LinkButton>
-        <div className={styles.install}>npm install kosko -g</div>
+        <div className={styles.install}>npm create kosko</div>
       </div>
     </header>
   );

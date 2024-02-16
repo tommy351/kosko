@@ -3,7 +3,7 @@ import { spawn, SpawnError } from "@kosko/exec-utils";
 import { generate, GenerateOptions, print, PrintFormat } from "@kosko/generate";
 import { join } from "node:path";
 import stringify from "fast-safe-stringify";
-import { CLIError } from "../../cli/error";
+import { CLIError } from "@kosko/cli-utils";
 import { setupEnv } from "./env";
 import { handleGenerateError } from "./error";
 import { BaseGenerateArguments } from "./types";

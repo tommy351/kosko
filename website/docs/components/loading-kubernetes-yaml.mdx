@@ -130,6 +130,14 @@ loadFile("manifest.yaml", {
 
 If you want to maximize the power of kosko, you can try to migrate your existing Kubernetes YAML files into JavaScript files.
 
+First, install `@kosko/yaml` package.
+
+```shell
+npm install @kosko/yaml
+```
+
+Then, use `kosko migrate` command to migrate Kubernetes YAML files.
+
 ```shell
 # Read from file or a directory
 kosko migrate -f manifest.yaml > components/nginx.js

@@ -4,11 +4,11 @@
  * @packageDocumentation
  */
 
-import { parse } from "./cli/command";
+import { parse } from "@kosko/cli-utils";
 import { createRootCommand } from "./commands/root";
 import { argv } from "node:process";
 
-export { handleError } from "./cli/error";
+export { handleError } from "@kosko/cli-utils";
 
 /**
  * Runs CLI with the given arguments.

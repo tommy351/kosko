@@ -1,0 +1,71 @@
+{
+  "name": "create-kosko",
+  "version": "0.0.0",
+  "description": "A CLI tool for creating new Kosko projects.",
+  "homepage": "https://kosko.dev",
+  "repository": "https://github.com/tommy351/kosko/tree/master/packages/create-kosko",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "main": "dist/index.node.cjs",
+  "module": "dist/index.node.mjs",
+  "types": "dist/types.d.ts",
+  "bin": "bin/create-kosko.js",
+  "sideEffects": false,
+  "scripts": {
+    "build": "build-scripts"
+  },
+  "exports": {
+    "node": {
+      "import": {
+        "types": "./dist/types.d.mts",
+        "default": "./dist/index.node.mjs"
+      },
+      "types": "./dist/types.d.ts",
+      "require": "./dist/index.node.cjs"
+    },
+    "import": {
+      "types": "./dist/types.d.mts",
+      "default": "./dist/index.base.mjs"
+    },
+    "types": "./dist/types.d.ts",
+    "require": "./dist/index.node.cjs"
+  },
+  "files": [
+    "/bin/",
+    "/dist/",
+    "/templates/"
+  ],
+  "keywords": [
+    "kosko"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@kosko/cli-utils": "workspace:^",
+    "@kosko/common-utils": "workspace:^",
+    "@kosko/exec-utils": "workspace:^",
+    "@kosko/log": "workspace:^",
+    "@kosko/require": "workspace:^",
+    "fast-safe-stringify": "^2.1.1",
+    "is-interactive": "^1.0.0",
+    "picocolors": "^1.0.0",
+    "prompts": "^2.4.2",
+    "yargs": "^17.5.1"
+  },
+  "devDependencies": {
+    "@kosko/build-scripts": "workspace:^",
+    "@kosko/jest-preset": "workspace:^",
+    "@kosko/test-utils": "workspace:^",
+    "@types/prompts": "^2.4.9",
+    "@types/yargs": "^17.0.12",
+    "execa": "^5.1.1",
+    "fast-glob": "^3.2.12"
+  },
+  "jest": {
+    "preset": "@kosko/jest-preset"
+  }
+}

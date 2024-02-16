@@ -1,8 +1,7 @@
 /// <reference types="jest-extended"/>
-import { InitArguments, initCmd } from "../command";
+import { type Arguments, command } from "../command";
 import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
-import { join, posix } from "node:path";
-import glob from "fast-glob";
+import { join } from "node:path";
 import { spawn } from "@kosko/exec-utils";
 import stringify from "fast-safe-stringify";
 import {
@@ -12,25 +11,32 @@ import {
   TempFile
 } from "@kosko/test-utils";
 import logger, { LogLevel } from "@kosko/log";
+import { listAllFiles } from "../test-utils";
 
 let tmpDir: TempDir;
 
 jest.mock("@kosko/log");
 jest.mock("@kosko/exec-utils");
 
-async function execute(args: Partial<InitArguments>): Promise<void> {
-  await initCmd.handler(args as any);
+function setNpmUserAgent(value: string) {
+  let origValue: string | undefined;
+
+  beforeEach(() => {
+    origValue = process.env.npm_config_user_agent;
+    process.env.npm_config_user_agent = value;
+  });
+
+  afterEach(() => {
+    process.env.npm_config_user_agent = origValue;
+  });
 }
 
-async function listAllFiles(dir: string): Promise<Record<string, string>> {
-  const paths = await glob("**/*", { cwd: dir });
-  const files: Record<string, string> = {};
-
-  for (const path of paths) {
-    files[posix.normalize(path)] = await readFile(join(dir, path), "utf8");
-  }
-
-  return files;
+async function execute(args: Partial<Arguments>): Promise<void> {
+  await command.handler({
+    // Disable interactive mode by default
+    interactive: false,
+    ...(args as any)
+  });
 }
 
 beforeEach(async () => {
@@ -166,8 +172,48 @@ describe("when no options are given", () => {
 });
 
 describe("when --install option is given", () => {
+  setNpmUserAgent("npm");
+
   beforeEach(async () => {
     await execute({ path: tmpDir.path, install: true });
+  });
+
+  test("should run install in the folder", async () => {
+    const spawnOptions = {
+      cwd: tmpDir.path,
+      stdio: "inherit",
+      env: {
+        ...process.env,
+        ADBLOCK: "1",
+        DISABLE_OPENCOLLECTIVE: "1"
+      }
+    };
+    expect(spawn).toHaveBeenCalledTimes(2);
+    expect(spawn).toHaveBeenCalledWith(
+      "npm",
+      ["install", "@kosko/env", "kosko", "kubernetes-models"],
+      spawnOptions
+    );
+    expect(spawn).toHaveBeenCalledWith(
+      "npm",
+      ["install", "ts-node", "typescript", "@tsconfig/node-lts", "--save-dev"],
+      spawnOptions
+    );
+  });
+
+  test("should not print install command in log", () => {
+    expect(logger.log).not.toHaveBeenCalledWith(
+      LogLevel.Info,
+      expect.stringContaining("npm install")
+    );
+  });
+});
+
+describe("when --typescript = false and --install option is given", () => {
+  setNpmUserAgent("npm");
+
+  beforeEach(async () => {
+    await execute({ path: tmpDir.path, typescript: false, install: true });
   });
 
   test("should run install in the folder", async () => {
@@ -195,9 +241,9 @@ describe("when --install option is given", () => {
   });
 });
 
-describe("when --esm option is given", () => {
+describe("when --typescript = false and --esm option is given", () => {
   beforeEach(async () => {
-    await execute({ path: tmpDir.path, esm: true });
+    await execute({ path: tmpDir.path, typescript: false, esm: true });
   });
 
   test("should generate files", async () => {
@@ -212,7 +258,7 @@ describe("when --esm option is given", () => {
   });
 });
 
-describe("when --typescript option is given", () => {
+describe("when --typescript = true", () => {
   beforeEach(async () => {
     await execute({ path: tmpDir.path, typescript: true });
   });
@@ -229,15 +275,32 @@ describe("when --typescript option is given", () => {
     expect(logger.log).toHaveBeenCalledWith(
       LogLevel.Info,
       expect.stringContaining(
-        "npm install ts-node typescript @tsconfig/node14 --save-dev"
+        "npm install ts-node typescript @tsconfig/node-lts --save-dev"
       )
     );
   });
 });
 
-describe("when --typescript and --esm option is given", () => {
+describe("when --typescript = false", () => {
   beforeEach(async () => {
-    await execute({ path: tmpDir.path, typescript: true, esm: true });
+    await execute({ path: tmpDir.path, typescript: true });
+  });
+
+  test("should generate files", async () => {
+    await expect(listAllFiles(tmpDir.path)).resolves.toMatchSnapshot();
+  });
+
+  test("should print install command in log", () => {
+    expect(logger.log).toHaveBeenCalledWith(
+      LogLevel.Info,
+      expect.stringContaining("npm install @kosko/env kosko kubernetes-models")
+    );
+  });
+});
+
+describe("when --esm option is given", () => {
+  beforeEach(async () => {
+    await execute({ path: tmpDir.path, esm: true });
   });
 
   test("should generate files", async () => {
@@ -252,7 +315,7 @@ describe("when --typescript and --esm option is given", () => {
     expect(logger.log).toHaveBeenCalledWith(
       LogLevel.Info,
       expect.stringContaining(
-        "npm install ts-node typescript @tsconfig/node14 --save-dev"
+        "npm install ts-node typescript @tsconfig/node-lts --save-dev"
       )
     );
   });
@@ -289,7 +352,7 @@ describe.each([
         expect(logger.log).toHaveBeenCalledWith(
           LogLevel.Info,
           expect.stringContaining(
-            `${packageManager} ${installCommand} ts-node typescript @tsconfig/node14 ${devFlag}`
+            `${packageManager} ${installCommand} ts-node typescript @tsconfig/node-lts ${devFlag}`
           )
         );
       });
@@ -325,7 +388,7 @@ describe.each([
             installCommand,
             "ts-node",
             "typescript",
-            "@tsconfig/node14",
+            "@tsconfig/node-lts",
             devFlag
           ],
           spawnOptions
@@ -335,14 +398,12 @@ describe.each([
   }
 );
 
-describe.each([
-  { file: "yarn.lock", packageManager: "yarn" },
-  { file: "pnpm-lock.yaml", packageManager: "pnpm" }
-])(
-  "when --package-manager is not given but file $file exists",
-  ({ file, packageManager }) => {
+describe.each(["npm", "yarn", "pnpm"])(
+  "when --package-manager is not given and npm user agent is set to %s",
+  (packageManager) => {
+    setNpmUserAgent(packageManager);
+
     beforeEach(async () => {
-      await writeFile(join(tmpDir.path, file), "");
       await execute({ path: tmpDir.path, install: true, force: true });
     });
 
