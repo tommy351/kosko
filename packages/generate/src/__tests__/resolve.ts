@@ -1,6 +1,5 @@
 /// <reference types="jest-extended" />
 import { getRejectedValue } from "@kosko/test-utils";
-import AggregateError from "@kosko/aggregate-error";
 import assert from "node:assert";
 import { ResolveError } from "../error";
 import { resolve } from "../resolve";

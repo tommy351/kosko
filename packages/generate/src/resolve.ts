@@ -121,7 +121,7 @@ export interface ResolveOptions {
  * @throws {@link ResolveError}
  * Thrown if an error occurred.
  *
- * @throws {@link @kosko/aggregate-error#AggregateError}
+ * @throws AggregateError
  * Thrown if multiple errors occurred.
  *
  * @public

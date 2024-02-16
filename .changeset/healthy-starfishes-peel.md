@@ -1,5 +1,4 @@
 ---
-"@kosko/aggregate-error": major
 "@kosko/cli": major
 "@kosko/common-utils": major
 "@kosko/config": major

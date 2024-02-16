@@ -228,20 +228,8 @@ importers:
         specifier: ^0.2.3
         version: 0.2.3
 
-  packages/aggregate-error:
-    devDependencies:
-      '@kosko/build-scripts':
-        specifier: workspace:^
-        version: link:../../internal/build-scripts
-      '@kosko/jest-preset':
-        specifier: workspace:^
-        version: link:../../internal/jest-preset
-
   packages/cli:
     dependencies:
-      '@kosko/aggregate-error':
-        specifier: workspace:^
-        version: link:../aggregate-error
       '@kosko/cli-utils':
         specifier: workspace:^
         version: link:../cli-utils
@@ -512,9 +500,6 @@ importers:
 
   packages/generate:
     dependencies:
-      '@kosko/aggregate-error':
-        specifier: workspace:^
-        version: link:../aggregate-error
       '@kosko/common-utils':
         specifier: workspace:^
         version: link:../common-utils

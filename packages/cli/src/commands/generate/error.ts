@@ -1,4 +1,3 @@
-import AggregateError from "@kosko/aggregate-error";
 import { GenerateError, ResolveError } from "@kosko/generate";
 import cleanStack from "clean-stack";
 import extractStack from "extract-stack";

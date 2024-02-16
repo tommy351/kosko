@@ -4,7 +4,6 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { GenerateError, ResolveError } from "../error";
 import { makeTempDir, TempDir } from "@kosko/test-utils";
-import AggregateError from "@kosko/aggregate-error";
 import stringify from "fast-safe-stringify";
 
 jest.mock("@kosko/require", () => {

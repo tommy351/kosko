@@ -125,7 +125,7 @@ function validateExtensions(
  * @throws {@link GenerateError}
  * Thrown if an error occurred.
  *
- * @throws {@link @kosko/aggregate-error#AggregateError}
+ * @throws AggregateError
  * Thrown if multiple errors occurred.
  *
  * @public
