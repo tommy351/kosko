@@ -48,15 +48,6 @@ function assertPlugin(name: string, value: unknown): asserts value is Plugin {
       `Expected "transformManifest" to be a function in plugin "${name}"`
     );
   }
-
-  if (
-    value.validateAllManifests != null &&
-    typeof value.validateAllManifests !== "function"
-  ) {
-    throw createError(
-      `Expected "validateAllManifests" to be a function in plugin "${name}"`
-    );
-  }
 }
 
 async function loadPlugin({
@@ -102,15 +93,6 @@ export function composePlugins(plugins: readonly Plugin[]): Plugin {
         }
 
         return data;
-      }
-    }),
-    ...(plugins.some((p) => p.validateAllManifests) && {
-      validateAllManifests: async (result) => {
-        for (const plugin of plugins) {
-          if (typeof plugin.validateAllManifests !== "function") continue;
-
-          await plugin.validateAllManifests(result);
-        }
       }
     })
   };

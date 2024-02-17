@@ -5,10 +5,7 @@ import { composePlugins } from "../plugin";
 describe("composePlugins", () => {
   describe("transformManifest", () => {
     test("should not set the property when no plugin has it", () => {
-      const plugin = composePlugins([
-        { validateAllManifests: () => {} },
-        { validateAllManifests: () => {} }
-      ]);
+      const plugin = composePlugins([{}, {}]);
       expect(plugin).not.toHaveProperty("transformManifest");
     });
 
@@ -156,100 +153,6 @@ describe("composePlugins", () => {
       expect(plugins[0].transformManifest).toHaveBeenCalledTimes(1);
       expect(plugins[1].transformManifest).toHaveBeenCalledTimes(1);
       expect(plugins[2].transformManifest).not.toHaveBeenCalled();
-    });
-  });
-
-  describe("validateAllManifests", () => {
-    test("should not set the property when no plugin has it", () => {
-      const plugin = composePlugins([
-        { transformManifest: () => {} },
-        { transformManifest: () => {} }
-      ]);
-      expect(plugin).not.toHaveProperty("validateAllManifests");
-    });
-
-    test("compose functions", async () => {
-      const plugins = [
-        { validateAllManifests: jest.fn() },
-        { validateAllManifests: jest.fn() }
-      ];
-      const plugin = composePlugins(plugins);
-      assert(plugin.validateAllManifests);
-
-      const result = { manifests: [] };
-
-      await expect(plugin.validateAllManifests(result)).toResolve();
-
-      expect(plugins[0].validateAllManifests).toHaveBeenCalledWith(result);
-      expect(plugins[1].validateAllManifests).toHaveBeenCalledWith(result);
-    });
-
-    test("async function", async () => {
-      const plugin = composePlugins([{ validateAllManifests: async () => {} }]);
-      assert(plugin.validateAllManifests);
-
-      const result = { manifests: [] };
-
-      await expect(plugin.validateAllManifests(result)).toResolve();
-    });
-
-    test('skips plugins without "validateAllManifests"', async () => {
-      const plugin = composePlugins([
-        { validateAllManifests: () => {} },
-        {},
-        { validateAllManifests: () => {} }
-      ]);
-      assert(plugin.validateAllManifests);
-
-      const result = { manifests: [] };
-
-      await expect(plugin.validateAllManifests(result)).toResolve();
-    });
-
-    test("throws error when one of the function threw an error", async () => {
-      const plugins = [
-        { validateAllManifests: jest.fn() },
-        {
-          validateAllManifests: jest.fn(() => {
-            throw new Error("test error");
-          })
-        },
-        { validateAllManifests: jest.fn() }
-      ];
-      const plugin = composePlugins(plugins);
-      assert(plugin.validateAllManifests);
-
-      const result = { manifests: [] };
-
-      await expect(plugin.validateAllManifests(result)).rejects.toThrow(
-        "test error"
-      );
-      expect(plugins[0].validateAllManifests).toHaveBeenCalledTimes(1);
-      expect(plugins[1].validateAllManifests).toHaveBeenCalledTimes(1);
-      expect(plugins[2].validateAllManifests).not.toHaveBeenCalled();
-    });
-
-    test("throws error when one of the function return a rejected promise", async () => {
-      const plugins = [
-        { validateAllManifests: jest.fn() },
-        {
-          validateAllManifests: jest
-            .fn()
-            .mockRejectedValue(new Error("test error"))
-        },
-        { validateAllManifests: jest.fn() }
-      ];
-      const plugin = composePlugins(plugins);
-      assert(plugin.validateAllManifests);
-
-      const result = { manifests: [] };
-
-      await expect(plugin.validateAllManifests(result)).rejects.toThrow(
-        "test error"
-      );
-      expect(plugins[0].validateAllManifests).toHaveBeenCalledTimes(1);
-      expect(plugins[1].validateAllManifests).toHaveBeenCalledTimes(1);
-      expect(plugins[2].validateAllManifests).not.toHaveBeenCalled();
     });
   });
 });

@@ -79,10 +79,6 @@ export async function handler(options: WorkerOptions) {
     });
   }
 
-  if (args.validate && typeof plugin.validateAllManifests === "function") {
-    await plugin.validateAllManifests(result);
-  }
-
   if (printFormat) {
     print(result, {
       format: printFormat,

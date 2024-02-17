@@ -1,4 +1,4 @@
-import type { Manifest, Result } from "@kosko/generate";
+import type { Manifest } from "@kosko/generate";
 
 /**
  * Plugin factory.
@@ -34,13 +34,6 @@ export interface TransformManifest {
 }
 
 /**
- * @public
- */
-export interface ValidateAllManifests {
-  (result: Result): void | Promise<void>;
-}
-
-/**
  * Plugin type.
  *
  * @public
@@ -50,10 +43,4 @@ export interface Plugin {
    * {@inheritDoc @kosko/generate#ResolveOptions.transform}
    */
   transformManifest?: TransformManifest;
-
-  /**
-   * Validate all manifests. This function is called after all manifests are
-   * resolved, transformed, and validated.
-   */
-  validateAllManifests?: ValidateAllManifests;
 }
