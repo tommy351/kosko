@@ -11,9 +11,7 @@ function transformManifest(config: unknown, data: unknown) {
 }
 
 test("throws an error when config is undefined", () => {
-  expect(() => factory({ cwd: "" })).toThrow(
-    "Expected an object, but received: undefined"
-  );
+  expect(() => factory({ cwd: "" })).toThrow("Invalid config");
 });
 
 test("returns an empty object when config is an empty object", () => {
@@ -23,7 +21,7 @@ test("returns an empty object when config is an empty object", () => {
 
 test("throws an error when config.namespace is {}", () => {
   expect(() => factory({ cwd: "", config: { namespace: {} } })).toThrow(
-    "At path: namespace.value -- Expected a string, but received: undefined"
+    "Invalid config"
   );
 });
 

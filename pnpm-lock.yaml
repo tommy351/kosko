@@ -673,6 +673,9 @@ importers:
       '@kosko/generate':
         specifier: workspace:^
         version: link:../generate
+      superstruct:
+        specifier: ^1.0.3
+        version: 1.0.3
     devDependencies:
       '@kosko/build-scripts':
         specifier: workspace:^

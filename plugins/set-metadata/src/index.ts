@@ -1,14 +1,6 @@
 import { isRecord } from "@kosko/common-utils";
-import type { Plugin, PluginContext } from "@kosko/plugin";
-import {
-  Infer,
-  array,
-  assert,
-  boolean,
-  object,
-  optional,
-  string
-} from "superstruct";
+import { type Plugin, type PluginContext, validateConfig } from "@kosko/plugin";
+import { Infer, array, boolean, object, optional, string } from "superstruct";
 import type { ReadonlyDeep } from "type-fest";
 
 const keyValuePairSchema = object({
@@ -105,9 +97,7 @@ function transformAnnotations(config: ReadonlyDeep<KeyValueList>): Transformer {
  * @public
  */
 export default function (ctx: PluginContext): Plugin {
-  const config = ctx.config;
-  assert(config, configSchema);
-
+  const config = validateConfig(ctx.config, configSchema);
   const transformers: Transformer[] = [];
 
   if (config.namespace) {

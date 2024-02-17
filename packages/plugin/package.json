@@ -43,7 +43,8 @@
     "node": ">=18"
   },
   "dependencies": {
-    "@kosko/generate": "workspace:^"
+    "@kosko/generate": "workspace:^",
+    "superstruct": "^1.0.3"
   },
   "devDependencies": {
     "@kosko/build-scripts": "workspace:^"
