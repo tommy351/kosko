@@ -4,7 +4,7 @@ import { Environment } from "@kosko/env";
 import { generate, print, PrintFormat } from "@kosko/generate";
 import assert from "node:assert";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import pkgDir from "pkg-dir";
 import { generateCmd } from "../command";
 import { GenerateArguments } from "../types";
@@ -24,7 +24,7 @@ async function createFakeModule(
   additionalContent?: string
 ): Promise<void> {
   const dir = join(tmpDir.path, "node_modules", id);
-  let content = `require("node:fs").appendFileSync(__dirname + "/../../fakeModules", '${id},');`;
+  let content = `require("node:fs").appendFileSync(${JSON.stringify(join(tmpDir.path, "fakeModules"))}, "${id},");`;
 
   if (additionalContent) {
     content += `\n${additionalContent}`;
@@ -38,6 +38,38 @@ async function getLoadedFakeModules(): Promise<string[]> {
   try {
     const content = await readFile(join(tmpDir.path, "fakeModules"), "utf8");
     return content.split(",").filter(Boolean);
+  } catch (err) {
+    if (getErrorCode(err) === "ENOENT") return [];
+    throw err;
+  }
+}
+
+async function createPluginFile(path: string, content: string = "return {}") {
+  await mkdir(dirname(path), { recursive: true });
+  await writeFile(
+    path,
+    `
+const { appendFile } = require("node:fs/promises");
+
+module.exports = async (ctx) => {
+  await appendFile(${JSON.stringify(join(tmpDir.path, "loadedPlugins"))}, __filename + "\\n");
+  ${content};
+}`
+  );
+}
+
+function getPluginPackagePath(name: string) {
+  return join(tmpDir.path, "node_modules", name, "index.js");
+}
+
+async function createPluginPackage(name: string, content?: string) {
+  await createPluginFile(getPluginPackagePath(name), content);
+}
+
+async function getLoadedPlugins(): Promise<string[]> {
+  try {
+    const content = await readFile(join(tmpDir.path, "loadedPlugins"), "utf8");
+    return content.split("\n").filter(Boolean);
   } catch (err) {
     if (getErrorCode(err) === "ENOENT") return [];
     throw err;
@@ -469,12 +501,14 @@ describe("when plugin name is a package", () => {
       components: ["*"],
       plugins: [{ name: "test-plugin" }]
     });
-    await createFakeModule("test-plugin", `module.exports = () => ({});`);
+    await createPluginPackage("test-plugin");
     await execute();
   });
 
   test("should load the plugin", async () => {
-    expect(await getLoadedFakeModules()).toEqual(["test-plugin"]);
+    expect(await getLoadedPlugins()).toEqual([
+      getPluginPackagePath("test-plugin")
+    ]);
   });
 });
 
@@ -485,12 +519,12 @@ describe("when plugin config is specified in a plugin", () => {
       components: ["*"],
       plugins: [{ name: "test-plugin", config: { foo: "bar" } }]
     });
-    await createFakeModule(
+    await createPluginPackage(
       "test-plugin",
-      `module.exports = async (ctx) => {
-  require("node:fs").writeFileSync(__dirname + "/../../pluginCtx", JSON.stringify(ctx));
-  return {};
-};`
+      `
+await require("node:fs/promises").writeFile(${JSON.stringify(join(tmpDir.path, "pluginCtx"))}, JSON.stringify(ctx));
+return {};
+`
     );
     await execute();
   });
@@ -529,20 +563,14 @@ describe("when plugin name is a relative path", () => {
       components: ["*"],
       plugins: [{ name: "./test-plugin.js" }]
     });
-    await writeFile(
-      join(tmpDir.path, "test-plugin.js"),
-      `
-require("node:fs").writeFileSync(__dirname + "/pluginLoaded", "");
-module.exports = () => ({});
-`
-    );
+    await createPluginFile(join(tmpDir.path, "test-plugin.js"));
     await execute();
   });
 
   test("should load the plugin", async () => {
-    await expect(
-      readFile(join(tmpDir.path, "pluginLoaded"), "utf8")
-    ).resolves.toEqual("");
+    expect(await getLoadedPlugins()).toEqual([
+      join(tmpDir.path, "test-plugin.js")
+    ]);
   });
 });
 
@@ -563,43 +591,41 @@ describe("when plugin name is a non-existing relative path", () => {
 });
 
 describe("when plugin name is an absolute path", () => {
+  let path: string;
+
   beforeEach(async () => {
-    const path = join(tmpDir.path, "test-plugin.js");
+    path = join(tmpDir.path, "test-plugin.js");
 
     mockGenerateSuccess();
     await writeConfigToDefaultPath({
       components: ["*"],
       plugins: [{ name: path }]
     });
-    await writeFile(
-      path,
-      `
-require("node:fs").writeFileSync(__dirname + "/pluginLoaded", "");
-module.exports = () => ({});
-`
-    );
+    await createPluginFile(path);
     await execute();
   });
 
   test("should load the plugin", async () => {
-    await expect(
-      readFile(join(tmpDir.path, "pluginLoaded"), "utf8")
-    ).resolves.toEqual("");
+    expect(await getLoadedPlugins()).toEqual([path]);
   });
 });
 
 describe("when plugin name is a non-existing absolute path", () => {
+  let path: string;
+
   beforeEach(async () => {
+    path = join(tmpDir.path, "test-plugin.js");
+
     mockGenerateSuccess();
     await writeConfigToDefaultPath({
       components: ["*"],
-      plugins: [{ name: join(tmpDir.path, "test-plugin.js") }]
+      plugins: [{ name: path }]
     });
   });
 
   test("should throw an error", async () => {
     await expect(execute()).rejects.toThrow(
-      `Failed to resolve path for plugin "${join(tmpDir.path, "test-plugin.js")}"`
+      `Failed to resolve path for plugin "${path}"`
     );
   });
 });
@@ -628,7 +654,7 @@ describe("when plugin factory does not return an object", () => {
       components: ["*"],
       plugins: [{ name: "test-plugin" }]
     });
-    await createFakeModule("test-plugin", `module.exports = () => "foo";`);
+    await createPluginPackage("test-plugin", 'return "foo"');
   });
 
   test("should throw an error", async () => {
@@ -645,15 +671,17 @@ describe("when transformManifest a function", () => {
       components: ["*"],
       plugins: [{ name: "test-plugin" }]
     });
-    await createFakeModule(
+    await createPluginPackage(
       "test-plugin",
-      `module.exports = () => ({ transformManifest: () => {} });`
+      "return { transformManifest: () => {} }"
     );
     await execute();
   });
 
   test("should load the plugin", async () => {
-    expect(await getLoadedFakeModules()).toEqual(["test-plugin"]);
+    expect(await getLoadedPlugins()).toEqual([
+      getPluginPackagePath("test-plugin")
+    ]);
   });
 });
 
@@ -664,9 +692,9 @@ describe("when transformManifest is defined but not a function", () => {
       components: ["*"],
       plugins: [{ name: "test-plugin" }]
     });
-    await createFakeModule(
+    await createPluginPackage(
       "test-plugin",
-      `module.exports = () => ({ transformManifest: "foo" });`
+      `return { transformManifest: "foo" };`
     );
   });
 
@@ -684,10 +712,7 @@ describe("when plugin factory throws an error", () => {
       components: ["*"],
       plugins: [{ name: "test-plugin" }]
     });
-    await createFakeModule(
-      "test-plugin",
-      `module.exports = () => { throw new Error("foo") };`
-    );
+    await createPluginPackage("test-plugin", `throw new Error("foo");`);
   });
 
   test("should throw an error", async () => {
@@ -697,18 +722,18 @@ describe("when plugin factory throws an error", () => {
   });
 });
 
-describe("when plugin factory returns a resolved promise", () => {
+describe("when plugin factory is a sync function", () => {
   beforeEach(async () => {
     mockGenerateSuccess();
     await writeConfigToDefaultPath({
       components: ["*"],
       plugins: [{ name: "test-plugin" }]
     });
-    await createFakeModule("test-plugin", `module.exports = async () => ({});`);
+    await createFakeModule("test-plugin", `module.exports = () => ({});`);
     await execute();
   });
 
-  test("should throw an error", async () => {
+  test("should load the plugin", async () => {
     expect(await getLoadedFakeModules()).toEqual(["test-plugin"]);
   });
 });
@@ -738,23 +763,37 @@ describe("when plugin is specified for an environment", () => {
     mockGenerateSuccess();
     await writeConfigToDefaultPath({
       components: ["*"],
+      plugins: [{ name: "base-plugin" }],
       environments: {
         dev: {
-          plugins: [{ name: "test-plugin" }]
+          plugins: [{ name: "env-plugin" }]
         }
       }
     });
-    await createFakeModule("test-plugin", `module.exports = () => ({});`);
+    await createPluginPackage("base-plugin");
+    await createPluginPackage("env-plugin");
   });
 
-  test("should load the plugin when env matches", async () => {
+  test("should not load env plugin when env is not specified", async () => {
+    await execute();
+    expect(await getLoadedPlugins()).toEqual([
+      getPluginPackagePath("base-plugin")
+    ]);
+  });
+
+  test("should load env plugin when env matches", async () => {
     await execute({ env: "dev" });
-    expect(await getLoadedFakeModules()).toEqual(["test-plugin"]);
+    expect(await getLoadedPlugins()).toEqual([
+      getPluginPackagePath("base-plugin"),
+      getPluginPackagePath("env-plugin")
+    ]);
   });
 
-  test("should not load the plugin when env does not match", async () => {
+  test("should not load env plugin when env does not match", async () => {
     await execute({ env: "prod" });
-    expect(await getLoadedFakeModules()).toEqual([]);
+    expect(await getLoadedPlugins()).toEqual([
+      getPluginPackagePath("base-plugin")
+    ]);
   });
 });
 
@@ -765,15 +804,15 @@ describe("when multiple plugins are specified", () => {
       components: ["*"],
       plugins: [{ name: "test-plugin1" }, { name: "test-plugin2" }]
     });
-    await createFakeModule("test-plugin1", `module.exports = () => ({});`);
-    await createFakeModule("test-plugin2", `module.exports = () => ({});`);
+    await createPluginPackage("test-plugin1");
+    await createPluginPackage("test-plugin2");
     await execute();
   });
 
   test("should load all plugins", async () => {
-    expect(await getLoadedFakeModules()).toEqual([
-      "test-plugin1",
-      "test-plugin2"
+    expect(await getLoadedPlugins()).toEqual([
+      getPluginPackagePath("test-plugin1"),
+      getPluginPackagePath("test-plugin2")
     ]);
   });
 });

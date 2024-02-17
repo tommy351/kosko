@@ -14,7 +14,7 @@ interface PluginSource {
   path: string;
 }
 
-function createError(message: string, cause?: unknown): CLIError {
+function wrapError(cause: unknown, message: string): CLIError {
   let output = message;
 
   if (isRecord(cause) && typeof cause.stack === "string") {
@@ -29,13 +29,13 @@ function assertFactory(
   value: unknown
 ): asserts value is UnknownPluginFactory {
   if (typeof value !== "function") {
-    throw createError(`Plugin "${name}" must export a default function`);
+    throw new CLIError(`Plugin "${name}" must export a default function`);
   }
 }
 
 function assertPlugin(name: string, value: unknown): asserts value is Plugin {
   if (!isRecord(value)) {
-    throw createError(
+    throw new CLIError(
       `Plugin "${name}" must return an object in the factory function`
     );
   }
@@ -44,7 +44,7 @@ function assertPlugin(name: string, value: unknown): asserts value is Plugin {
     value.transformManifest != null &&
     typeof value.transformManifest !== "function"
   ) {
-    throw createError(
+    throw new CLIError(
       `Expected "transformManifest" to be a function in plugin "${name}"`
     );
   }
@@ -61,7 +61,7 @@ async function loadPlugin({
     const mod = await importPath(path);
     factory = mod.default;
   } catch (err) {
-    throw createError(`Failed to load plugin "${name}"`, err);
+    throw wrapError(err, `Failed to load plugin "${name}"`);
   }
 
   assertFactory(name, factory);
@@ -71,7 +71,7 @@ async function loadPlugin({
   try {
     plugin = await factory(ctx);
   } catch (err) {
-    throw createError(`Failed to construct plugin "${name}"`, err);
+    throw wrapError(err, `Failed to construct plugin "${name}"`);
   }
 
   assertPlugin(name, plugin);
@@ -102,7 +102,7 @@ function resolvePath(cwd: string, name: string): string {
   try {
     return resolveFrom(cwd, name);
   } catch (err) {
-    throw createError(`Failed to resolve path for plugin "${name}"`, err);
+    throw wrapError(err, `Failed to resolve path for plugin "${name}"`);
   }
 }
 
