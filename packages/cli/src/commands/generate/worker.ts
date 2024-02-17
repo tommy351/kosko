@@ -80,7 +80,15 @@ export async function handler(options: WorkerOptions) {
     });
   }
 
-  if (args.validate && typeof plugin.validateAllManifests === "function") {
+  // validateAllManifests is executed only when no components are specified
+  // in the CLI arguments, because some plugins might need access to all
+  // manifests in order to work properly. (e.g. check if a resource reference
+  // exists or not)
+  if (
+    args.validate &&
+    !args.components?.length &&
+    typeof plugin.validateAllManifests === "function"
+  ) {
     await plugin.validateAllManifests(result);
   }
 

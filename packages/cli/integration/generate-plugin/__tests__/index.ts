@@ -93,7 +93,7 @@ describe("when plugin does not exist", () => {
 
     expect(result.exitCode).toEqual(1);
     expect(result.stderr).toContain(
-      `Failed to resolve path for plugin "test-plugin"`
+      `Failed to resolve path for the plugin "test-plugin"`
     );
   });
 });

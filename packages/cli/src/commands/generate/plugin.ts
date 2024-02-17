@@ -3,9 +3,7 @@ import type { Plugin, PluginContext } from "@kosko/plugin";
 import { importPath } from "@kosko/require";
 import logger, { LogLevel } from "@kosko/log";
 import resolveFrom from "resolve-from";
-import { isRecord } from "@kosko/common-utils";
 import { CLIError } from "@kosko/cli-utils";
-import pc from "picocolors";
 import { type, func, optional, validate } from "superstruct";
 import { excludeFalsyInArray } from "../../utils";
 
@@ -16,22 +14,12 @@ interface PluginSource {
   path: string;
 }
 
-function createError(message: string, cause?: unknown): CLIError {
-  let output = message;
-
-  if (isRecord(cause) && typeof cause.stack === "string") {
-    output += `\n${pc.gray(cause.stack)}`;
-  }
-
-  return new CLIError(message, { output });
-}
-
 function assertFactory(
   name: string,
   value: unknown
 ): asserts value is UnknownPluginFactory {
   if (typeof value !== "function") {
-    throw createError(`Plugin "${name}" must export a default function`);
+    throw new CLIError(`Plugin "${name}" must export a default function`);
   }
 }
 
@@ -45,7 +33,7 @@ function assertPlugin(name: string, value: unknown): asserts value is Plugin {
   const [err] = validate(value, pluginSchema);
   if (!err) return;
 
-  throw createError(`Invalid plugin "${name}": ${err.message}`);
+  throw new CLIError(`Invalid plugin "${name}": ${err.message}`);
 }
 
 async function loadPlugin({
@@ -59,7 +47,8 @@ async function loadPlugin({
     const mod = await importPath(path);
     factory = mod.default;
   } catch (err) {
-    throw createError(`Failed to load plugin "${name}"`, err);
+    logger.log(LogLevel.Error, `Failed to load the plugin "${name}"`);
+    throw err;
   }
 
   assertFactory(name, factory);
@@ -69,7 +58,8 @@ async function loadPlugin({
   try {
     plugin = await factory(ctx);
   } catch (err) {
-    throw createError(`Failed to construct plugin "${name}"`, err);
+    logger.log(LogLevel.Error, `Failed to construct the plugin "${name}"`);
+    throw err;
   }
 
   assertPlugin(name, plugin);
@@ -122,7 +112,11 @@ function resolvePath(cwd: string, name: string): string {
   try {
     return resolveFrom(cwd, name);
   } catch (err) {
-    throw createError(`Failed to resolve path for plugin "${name}"`, err);
+    logger.log(
+      LogLevel.Error,
+      `Failed to resolve path for the plugin "${name}"`
+    );
+    throw err;
   }
 }
 
