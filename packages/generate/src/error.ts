@@ -170,3 +170,12 @@ export class GenerateError extends Error {
 }
 
 GenerateError.prototype.name = "GenerateError";
+
+export interface ValidateResult {
+  message: string;
+  path?: string;
+  index?: number[];
+  key?: string;
+  value?: unknown;
+  severity?: "error" | "warning";
+}

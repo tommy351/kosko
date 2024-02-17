@@ -1,14 +1,13 @@
 {
-  "name": "@kosko/plugin",
+  "name": "@kosko/plugin-lint",
   "version": "0.0.0",
-  "description": "Plugin types for Kosko.",
+  "description": "A Kosko plugin which lints Kubernetes manifests.",
   "homepage": "https://kosko.dev",
-  "repository": "https://github.com/tommy351/kosko/tree/master/packages/plugin",
+  "repository": "https://github.com/tommy351/kosko/tree/master/plugins/lint",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "main": "dist/index.node.cjs",
   "module": "dist/index.node.mjs",
-  "browser": "dist/index.base.mjs",
   "types": "dist/types.d.ts",
   "sideEffects": false,
   "scripts": {
@@ -34,7 +33,9 @@
     "/dist/"
   ],
   "keywords": [
-    "kosko"
+    "kosko",
+    "kosko-plugin",
+    "lint"
   ],
   "publishConfig": {
     "access": "public"
@@ -43,10 +44,17 @@
     "node": ">=18"
   },
   "dependencies": {
-    "@kosko/generate": "workspace:^",
+    "@kosko/common-utils": "workspace:^",
     "superstruct": "^1.0.3"
   },
   "devDependencies": {
-    "@kosko/build-scripts": "workspace:^"
+    "@kosko/build-scripts": "workspace:^",
+    "@kosko/generate": "workspace:^",
+    "@kosko/jest-preset": "workspace:^",
+    "@kosko/plugin": "workspace:^",
+    "kubernetes-models": "^4.1.0"
+  },
+  "jest": {
+    "preset": "@kosko/jest-preset"
   }
 }

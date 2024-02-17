@@ -5,7 +5,9 @@ import logger, { LogLevel } from "@kosko/log";
 import resolveFrom from "resolve-from";
 import { CLIError } from "@kosko/cli-utils";
 import { type, func, optional, validate } from "superstruct";
+import pc from "picocolors";
 import { excludeFalsyInArray } from "../../utils";
+import { isRecord } from "@kosko/common-utils";
 
 type UnknownPluginFactory = (ctx: PluginContext) => unknown;
 
@@ -21,6 +23,26 @@ function assertFactory(
   if (typeof value !== "function") {
     throw new CLIError(`Plugin "${name}" must export a default function`);
   }
+}
+
+function wrapError(message: string, err: unknown) {
+  let output = message;
+
+  if (isRecord(err)) {
+    let cause: string | undefined;
+
+    if (typeof err.stack === "string") {
+      cause = err.stack;
+    } else if (typeof err.message === "string") {
+      cause = err.message;
+    }
+
+    if (cause) {
+      output += `\n${pc.gray(cause)}`;
+    }
+  }
+
+  return new CLIError(message, { output });
 }
 
 const pluginSchema = type({
@@ -47,8 +69,7 @@ async function loadPlugin({
     const mod = await importPath(path);
     factory = mod.default;
   } catch (err) {
-    logger.log(LogLevel.Error, `Failed to load the plugin "${name}"`);
-    throw err;
+    throw wrapError(`Failed to load the plugin "${name}"`, err);
   }
 
   assertFactory(name, factory);
@@ -58,8 +79,7 @@ async function loadPlugin({
   try {
     plugin = await factory(ctx);
   } catch (err) {
-    logger.log(LogLevel.Error, `Failed to construct the plugin "${name}"`);
-    throw err;
+    throw wrapError(`Failed to construct the plugin "${name}"`, err);
   }
 
   assertPlugin(name, plugin);
@@ -112,11 +132,7 @@ function resolvePath(cwd: string, name: string): string {
   try {
     return resolveFrom(cwd, name);
   } catch (err) {
-    logger.log(
-      LogLevel.Error,
-      `Failed to resolve path for the plugin "${name}"`
-    );
-    throw err;
+    throw wrapError(`Failed to resolve path for the plugin "${name}"`, err);
   }
 }
 

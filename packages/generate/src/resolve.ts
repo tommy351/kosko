@@ -1,6 +1,6 @@
 import { Manifest } from "./base";
 import logger, { LogLevel } from "@kosko/log";
-import { aggregateErrors, ResolveError } from "./error";
+import { aggregateErrors, ResolveError, ValidateResult } from "./error";
 import { isRecord } from "@kosko/common-utils";
 import pLimit from "p-limit";
 import { validateConcurrency } from "./utils";
@@ -114,7 +114,9 @@ export interface ResolveOptions {
    * Execute after a manifest is validated, no matter if a manifest implements
    * a `validate` method or not.
    */
-  afterValidate?(manifest: Manifest): void | Promise<void>;
+  afterValidate?(
+    manifest: Manifest
+  ): ValidateResult[] | Promise<ValidateResult[]>;
 }
 
 /**
@@ -147,8 +149,13 @@ export async function resolve(
   } = options;
   const limit = pLimit(validateConcurrency(concurrency));
 
-  function createResolveError(message: string, err: unknown) {
+  function wrapError(err: unknown, fallbackMsg: string) {
     if (err instanceof ResolveError) return err;
+
+    const message =
+      isRecord(err) && typeof err.message === "string"
+        ? err.message
+        : fallbackMsg;
 
     return new ResolveError(message, {
       path,
@@ -162,7 +169,7 @@ export async function resolve(
     try {
       return resolve(await value(), options);
     } catch (err) {
-      throw createResolveError("Input function value threw an error", err);
+      throw wrapError(err, "Input function value threw an error");
     }
   }
 
@@ -170,7 +177,7 @@ export async function resolve(
     try {
       return resolve(await value, options);
     } catch (err) {
-      throw createResolveError("Input promise value rejected", err);
+      throw wrapError(err, "Input promise value rejected");
     }
   }
 
@@ -190,7 +197,7 @@ export async function resolve(
         );
       }
     } catch (err) {
-      throw createResolveError("Input iterable value threw an error", err);
+      throw wrapError(err, "Input iterable value threw an error");
     }
 
     return handleResolvePromises(promises, bail);
@@ -212,10 +219,7 @@ export async function resolve(
         );
       }
     } catch (err) {
-      throw createResolveError(
-        "Input async iterable value threw an error",
-        err
-      );
+      throw wrapError(err, "Input async iterable value threw an error");
     }
 
     return handleResolvePromises(promises, bail);
@@ -237,7 +241,7 @@ export async function resolve(
       // Create a new object to avoid mutation
       manifest = { ...manifest, data: newValue };
     } catch (err) {
-      throw createResolveError("An error occurred in transform function", err);
+      throw wrapError(err, "An error occurred in transform function");
     }
   }
 
@@ -250,7 +254,7 @@ export async function resolve(
         );
         await manifest.data.validate();
       } catch (err) {
-        throw createResolveError("Validation error", err);
+        throw wrapError(err, "Validation error");
       }
     }
 
@@ -258,10 +262,7 @@ export async function resolve(
       try {
         await afterValidate(manifest);
       } catch (err) {
-        throw createResolveError(
-          "An error occurred in afterValidate function",
-          err
-        );
+        throw wrapError(err, "An error occurred in afterValidate function");
       }
     }
   }
