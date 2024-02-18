@@ -9,15 +9,11 @@
   },
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
-  "scripts": {
-    "build": "rm -rf out && mkdir -p out && pnpm pack --pack-destination out"
-  },
   "bin": {
     "kosko": "bin/kosko.js"
   },
   "files": [
-    "/bin/",
-    "/lib/"
+    "/bin/"
   ],
   "keywords": [
     "kubernetes",

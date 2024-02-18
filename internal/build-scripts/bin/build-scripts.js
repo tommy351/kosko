@@ -165,10 +165,6 @@ async function copyEsmDts() {
   }
 }
 
-async function generatePack() {
-  await execa("pnpm", ["pack", "--pack-destination", fullOutPath]);
-}
-
 await rm(fullDistPath, { recursive: true, force: true });
 await rm(fullOutPath, { recursive: true, force: true });
 
@@ -201,4 +197,3 @@ await execa(tsc, ["--outDir", distDir]);
 await mkdir(fullOutPath, { recursive: true });
 await runApiExtractor();
 await copyEsmDts();
-await generatePack();
