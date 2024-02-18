@@ -1,5 +1,16 @@
 # kosko
 
+## 4.0.0
+
+### Major Changes
+
+- [#129](https://github.com/tommy351/kosko/pull/129) [`d627995`](https://github.com/tommy351/kosko/commit/d62799577863ec561978a1ce430be38e0c5dbb9d) Thanks [@tommy351](https://github.com/tommy351)! - Drop support for Node.js 14. The minimum supported Node.js version is 18 now.
+
+### Patch Changes
+
+- Updated dependencies [[`d627995`](https://github.com/tommy351/kosko/commit/d62799577863ec561978a1ce430be38e0c5dbb9d), [`4d09600`](https://github.com/tommy351/kosko/commit/4d096009b6699e9378cc2d667d06bc666a0b25ec), [`44f0831`](https://github.com/tommy351/kosko/commit/44f0831554a86e9653061a614a70dd75ae6217f3)]:
+  - @kosko/cli@4.0.0
+
 ## 3.1.3
 
 ### Patch Changes

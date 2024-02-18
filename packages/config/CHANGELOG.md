@@ -1,5 +1,21 @@
 # @kosko/config
 
+## 4.0.0
+
+### Major Changes
+
+- [#129](https://github.com/tommy351/kosko/pull/129) [`d627995`](https://github.com/tommy351/kosko/commit/d62799577863ec561978a1ce430be38e0c5dbb9d) Thanks [@tommy351](https://github.com/tommy351)! - Drop support for Node.js 14. The minimum supported Node.js version is 18 now.
+
+### Minor Changes
+
+- [#129](https://github.com/tommy351/kosko/pull/129) [`5a2e9b2`](https://github.com/tommy351/kosko/commit/5a2e9b28a29c67c98656e0c6ce7e097123ee0013) Thanks [@tommy351](https://github.com/tommy351)! - Add `plugins` option.
+
+### Patch Changes
+
+- Updated dependencies [[`d627995`](https://github.com/tommy351/kosko/commit/d62799577863ec561978a1ce430be38e0c5dbb9d)]:
+  - @kosko/common-utils@1.0.0
+  - @kosko/log@2.0.0
+
 ## 3.2.0
 
 ### Minor Changes

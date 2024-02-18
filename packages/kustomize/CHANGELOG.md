@@ -1,5 +1,20 @@
 # @kosko/kustomize
 
+## 2.0.0
+
+### Major Changes
+
+- [#130](https://github.com/tommy351/kosko/pull/130) [`e10f038`](https://github.com/tommy351/kosko/commit/e10f0389d2e80574f03b7827f683e68c1f83e333) Thanks [@tommy351](https://github.com/tommy351)! - `@kosko/yaml` is a peer dependency now. It means users must install `@kosko/yaml` alongside this package manually. This change should prevent duplicated `@kosko/yaml` instances.
+
+- [#129](https://github.com/tommy351/kosko/pull/129) [`d627995`](https://github.com/tommy351/kosko/commit/d62799577863ec561978a1ce430be38e0c5dbb9d) Thanks [@tommy351](https://github.com/tommy351)! - Drop support for Node.js 14. The minimum supported Node.js version is 18 now.
+
+### Patch Changes
+
+- Updated dependencies [[`d627995`](https://github.com/tommy351/kosko/commit/d62799577863ec561978a1ce430be38e0c5dbb9d)]:
+  - @kosko/common-utils@1.0.0
+  - @kosko/exec-utils@2.0.0
+  - @kosko/yaml@4.0.0
+
 ## 1.1.2
 
 ### Patch Changes

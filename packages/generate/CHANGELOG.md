@@ -1,5 +1,24 @@
 # @kosko/generate
 
+## 4.0.0
+
+### Major Changes
+
+- [#129](https://github.com/tommy351/kosko/pull/129) [`d627995`](https://github.com/tommy351/kosko/commit/d62799577863ec561978a1ce430be38e0c5dbb9d) Thanks [@tommy351](https://github.com/tommy351)! - Drop support for Node.js 14. The minimum supported Node.js version is 18 now.
+
+- [#131](https://github.com/tommy351/kosko/pull/131) [`99f4d51`](https://github.com/tommy351/kosko/commit/99f4d51b9b7391dc255b43842172638bc16c2b02) Thanks [@tommy351](https://github.com/tommy351)! - Replace the `@kosko/aggregate-error` package with the standard `AggregateError` class.
+
+### Minor Changes
+
+- [#129](https://github.com/tommy351/kosko/pull/129) [`a375679`](https://github.com/tommy351/kosko/commit/a3756793f15fb76cbf79df70f394b8eb0195099b) Thanks [@tommy351](https://github.com/tommy351)! - Add `transform` option to `generate` and `resolve` function.
+
+### Patch Changes
+
+- Updated dependencies [[`d627995`](https://github.com/tommy351/kosko/commit/d62799577863ec561978a1ce430be38e0c5dbb9d)]:
+  - @kosko/common-utils@1.0.0
+  - @kosko/log@2.0.0
+  - @kosko/require@6.0.0
+
 ## 3.2.0
 
 ### Minor Changes
