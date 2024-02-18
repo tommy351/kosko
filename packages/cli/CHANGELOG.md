@@ -1,5 +1,29 @@
 # @kosko/cli
 
+## 4.0.0
+
+### Major Changes
+
+- [#129](https://github.com/tommy351/kosko/pull/129) [`d627995`](https://github.com/tommy351/kosko/commit/d62799577863ec561978a1ce430be38e0c5dbb9d) Thanks [@tommy351](https://github.com/tommy351)! - Drop support for Node.js 14. The minimum supported Node.js version is 18 now.
+
+- [#130](https://github.com/tommy351/kosko/pull/130) [`44f0831`](https://github.com/tommy351/kosko/commit/44f0831554a86e9653061a614a70dd75ae6217f3) Thanks [@tommy351](https://github.com/tommy351)! - `kosko init` command is removed. Please use `npm create kosko` instead.
+
+### Minor Changes
+
+- [#129](https://github.com/tommy351/kosko/pull/129) [`4d09600`](https://github.com/tommy351/kosko/commit/4d096009b6699e9378cc2d667d06bc666a0b25ec) Thanks [@tommy351](https://github.com/tommy351)! - Implement the plugin system.
+
+### Patch Changes
+
+- Updated dependencies [[`5a2e9b2`](https://github.com/tommy351/kosko/commit/5a2e9b28a29c67c98656e0c6ce7e097123ee0013), [`e10f038`](https://github.com/tommy351/kosko/commit/e10f0389d2e80574f03b7827f683e68c1f83e333), [`d627995`](https://github.com/tommy351/kosko/commit/d62799577863ec561978a1ce430be38e0c5dbb9d), [`a375679`](https://github.com/tommy351/kosko/commit/a3756793f15fb76cbf79df70f394b8eb0195099b), [`44f0831`](https://github.com/tommy351/kosko/commit/44f0831554a86e9653061a614a70dd75ae6217f3), [`99f4d51`](https://github.com/tommy351/kosko/commit/99f4d51b9b7391dc255b43842172638bc16c2b02)]:
+  - @kosko/config@4.0.0
+  - @kosko/migrate@5.0.0
+  - @kosko/common-utils@1.0.0
+  - @kosko/exec-utils@2.0.0
+  - @kosko/generate@4.0.0
+  - @kosko/log@2.0.0
+  - @kosko/require@6.0.0
+  - @kosko/cli-utils@0.1.0
+
 ## 3.1.3
 
 ### Patch Changes

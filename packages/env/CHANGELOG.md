@@ -1,5 +1,18 @@
 # @kosko/env
 
+## 5.0.0
+
+### Major Changes
+
+- [#129](https://github.com/tommy351/kosko/pull/129) [`d627995`](https://github.com/tommy351/kosko/commit/d62799577863ec561978a1ce430be38e0c5dbb9d) Thanks [@tommy351](https://github.com/tommy351)! - Drop support for Node.js 14. The minimum supported Node.js version is 18 now.
+
+### Patch Changes
+
+- Updated dependencies [[`d627995`](https://github.com/tommy351/kosko/commit/d62799577863ec561978a1ce430be38e0c5dbb9d)]:
+  - @kosko/common-utils@1.0.0
+  - @kosko/log@2.0.0
+  - @kosko/require@6.0.0
+
 ## 4.1.0
 
 ### Minor Changes
@@ -96,8 +109,8 @@
       global: () =>
         import("./environments/dev/index.js").then((mod) => mod.default),
       component: (name) =>
-        import(`./environments/dev/${name}.js`).then((mod) => mod.default)
-    })
+        import(`./environments/dev/${name}.js`).then((mod) => mod.default),
+    }),
   ]);
   ```
 
