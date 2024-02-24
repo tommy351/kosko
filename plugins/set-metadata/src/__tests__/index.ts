@@ -7,7 +7,7 @@ function transformManifest(config: unknown, data: unknown) {
   const plugin = factory({ cwd: "", config });
   assert(plugin.transformManifest);
 
-  return plugin.transformManifest({ path: "", index: [], data });
+  return plugin.transformManifest({ path: "", index: [], data, issues: [] });
 }
 
 test("throws an error when config is undefined", () => {

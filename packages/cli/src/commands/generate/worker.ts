@@ -70,7 +70,9 @@ export async function handler(options: WorkerOptions) {
     validate: args.validate,
     bail: config.bail,
     concurrency: config.concurrency,
-    transform: plugin.transformManifest
+    transform: plugin.transformManifest,
+    // TODO: Remove this when error handling is refactored
+    throwOnError: true
   });
 
   if (!result.manifests.length) {

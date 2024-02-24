@@ -35,14 +35,6 @@ function isComponent(value: unknown): value is Component {
   );
 }
 
-export function aggregateErrors(errors: unknown[]) {
-  if (errors.length === 1) {
-    return errors[0];
-  }
-
-  return new AggregateError(errors);
-}
-
 function decorateErrorStack(err: Error, values: Record<string, string>) {
   const origStack = extractStack(err.stack);
   err.stack = `${err.name}: ${err.message}`;

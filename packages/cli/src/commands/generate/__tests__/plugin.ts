@@ -20,18 +20,21 @@ describe("composePlugins", () => {
       const actual = await plugin.transformManifest({
         path: "foo",
         index: [1, 2, 3],
-        data: 1
+        data: 1,
+        issues: []
       });
       expect(actual).toEqual(6);
       expect(plugins[0].transformManifest).toHaveBeenCalledWith({
         path: "foo",
         index: [1, 2, 3],
-        data: 1
+        data: 1,
+        issues: []
       });
       expect(plugins[1].transformManifest).toHaveBeenCalledWith({
         path: "foo",
         index: [1, 2, 3],
-        data: 3
+        data: 3,
+        issues: []
       });
     });
 
@@ -44,7 +47,8 @@ describe("composePlugins", () => {
       const actual = await plugin.transformManifest({
         path: "",
         index: [],
-        data: 1
+        data: 1,
+        issues: []
       });
       expect(actual).toEqual(3);
     });
@@ -60,7 +64,8 @@ describe("composePlugins", () => {
       const actual = await plugin.transformManifest({
         path: "",
         index: [],
-        data: 1
+        data: 1,
+        issues: []
       });
       expect(actual).toEqual(6);
     });
@@ -82,7 +87,8 @@ describe("composePlugins", () => {
         plugin.transformManifest({
           path: "",
           index: [],
-          data: 1
+          data: 1,
+          issues: []
         })
       ).rejects.toThrow("test error");
       expect(plugins[0].transformManifest).toHaveBeenCalledTimes(1);
@@ -107,7 +113,8 @@ describe("composePlugins", () => {
         plugin.transformManifest({
           path: "",
           index: [],
-          data: 1
+          data: 1,
+          issues: []
         })
       ).rejects.toThrow("test error");
       expect(plugins[0].transformManifest).toHaveBeenCalledTimes(1);
@@ -127,7 +134,8 @@ describe("composePlugins", () => {
       const actual = await plugin.transformManifest({
         path: "",
         index: [],
-        data: 1
+        data: 1,
+        issues: []
       });
       expect(actual).toBeNull();
       expect(plugins[0].transformManifest).toHaveBeenCalledTimes(1);
@@ -147,7 +155,8 @@ describe("composePlugins", () => {
       const actual = await plugin.transformManifest({
         path: "",
         index: [],
-        data: 1
+        data: 1,
+        issues: []
       });
       expect(actual).toBeUndefined();
       expect(plugins[0].transformManifest).toHaveBeenCalledTimes(1);

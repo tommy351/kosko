@@ -3,10 +3,16 @@ import {
   resolve as resolveModule,
   getRequireExtensions
 } from "@kosko/require";
-import type { Manifest, Result } from "./base";
+import type { Manifest, ManifestToValidate, Result } from "./base";
 import logger, { LogLevel } from "@kosko/log";
-import { ResolveOptions, handleResolvePromises, resolve } from "./resolve";
-import { GenerateError } from "./error";
+import {
+  ResolveOptions,
+  ValidationInterrupt,
+  handleResolvePromises,
+  reportManifestIssue,
+  resolve
+} from "./resolve";
+import { GenerateError, ResolveError } from "./error";
 import { glob, GlobResult } from "./glob";
 import pLimit from "p-limit";
 import { validateConcurrency } from "./utils";
@@ -61,6 +67,23 @@ export interface GenerateOptions {
    * {@inheritdoc ResolveOptions.transform}
    */
   transform?: ResolveOptions["transform"];
+
+  /**
+   * {@inheritdoc ResolveOptions.throwOnError}
+   */
+  throwOnError?: boolean;
+
+  /**
+   * {@inheritdoc ResolveOptions.validateManifest}
+   */
+  validateManifest?: ResolveOptions["validateManifest"];
+
+  /**
+   * Validate all manifests after resolving.
+   */
+  validateAllManifests?(
+    manifests: readonly ManifestToValidate[]
+  ): void | Promise<void>;
 }
 
 async function resolveComponentPath(
@@ -125,6 +148,9 @@ function validateExtensions(
  * @throws {@link GenerateError}
  * Thrown if an error occurred.
  *
+ * @throws {@link ResolveError}
+ * Propagated from {@link resolve} function.
+ *
  * @throws AggregateError
  * Thrown if multiple errors occurred.
  *
@@ -172,6 +198,8 @@ export async function generate(options: GenerateOptions): Promise<Result> {
       bail: options.bail,
       concurrency: options.concurrency,
       transform: options.transform,
+      throwOnError: options.throwOnError,
+      validateManifest: options.validateManifest,
       index: [],
       path
     });
@@ -185,7 +213,39 @@ export async function generate(options: GenerateOptions): Promise<Result> {
     promises.push(limit(() => resolveFile(file)));
   }
 
-  return {
-    manifests: await handleResolvePromises(promises, options.bail)
-  };
+  const manifests = await handleResolvePromises(promises, options.bail);
+
+  if (typeof options.validateAllManifests === "function") {
+    logger.log(LogLevel.Debug, "Validating all manifests");
+
+    try {
+      await options.validateAllManifests(
+        manifests.map((manifest) => ({
+          ...manifest,
+          report(issue) {
+            reportManifestIssue({
+              manifest,
+              issue,
+              bail: options.bail,
+              throwOnError: options.throwOnError
+            });
+          }
+        }))
+      );
+    } catch (err) {
+      // Propagate ResolveError and AggregateError
+      if (err instanceof ResolveError || err instanceof AggregateError) {
+        throw err;
+      }
+
+      if (!(err instanceof ValidationInterrupt)) {
+        throw new GenerateError(
+          "An error occurred in validateAllManifests function",
+          { cause: err }
+        );
+      }
+    }
+  }
+
+  return { manifests };
 }

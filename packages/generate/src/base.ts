@@ -11,7 +11,7 @@ export interface Result {
 /**
  * @public
  */
-export interface Manifest {
+export interface BaseManifest {
   /**
    * Source path of a manifest.
    */
@@ -26,4 +26,34 @@ export interface Manifest {
    * Manifest data.
    */
   data: unknown;
+}
+
+/**
+ * @public
+ */
+export interface ManifestToValidate extends BaseManifest {
+  /**
+   * Report an issue for a manifest. Please always use this method instead of
+   * directly modifying the `issues` array to ensure better error handling.
+   */
+  report(issue: Issue): void;
+}
+
+/**
+ * @public
+ */
+export interface Manifest extends BaseManifest {
+  /**
+   * Issues found in the manifest.
+   */
+  issues: Issue[];
+}
+
+/**
+ * @public
+ */
+export interface Issue {
+  severity: "error" | "warning";
+  message: string;
+  cause?: unknown;
 }

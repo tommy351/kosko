@@ -86,7 +86,7 @@ async function execute(args: Partial<GenerateArguments> = {}): Promise<void> {
 
 function mockGenerateSuccess() {
   mockedGenerate.mockResolvedValueOnce({
-    manifests: [{ path: "", index: [0], data: {} }]
+    manifests: [{ path: "", index: [0], data: {}, issues: [] }]
   });
 }
 
@@ -146,7 +146,8 @@ describe("when components is specified in config", () => {
   test("should call generate with given components", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
-      components: ["a", "b"]
+      components: ["a", "b"],
+      throwOnError: true
     });
   });
 
@@ -173,7 +174,8 @@ describe("when components is specified in args", () => {
   test("should call generate with given components", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
-      components: ["a", "b"]
+      components: ["a", "b"],
+      throwOnError: true
     });
   });
 });
@@ -188,7 +190,8 @@ describe("when components is specified in both config and args", () => {
   test("should call generate with components specified in args", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
-      components: ["c", "d"]
+      components: ["c", "d"],
+      throwOnError: true
     });
   });
 });
@@ -207,7 +210,7 @@ describe("with output is specified", () => {
   test("should call print with given format", () => {
     expect(print).toHaveBeenCalledWith(
       {
-        manifests: [{ path: "", index: [0], data: {} }]
+        manifests: [{ path: "", index: [0], data: {}, issues: [] }]
       },
       {
         format: PrintFormat.YAML,
@@ -238,7 +241,8 @@ describe("when env is specified", () => {
   test("should add environment specific components", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
-      components: ["a", "b", "c", "d"]
+      components: ["a", "b", "c", "d"],
+      throwOnError: true
     });
   });
 });
@@ -268,7 +272,8 @@ describe("when baseEnvironment is specified and env is not", () => {
   test("should add components from baseEnvironment", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
-      components: ["a", "b", "e", "f"]
+      components: ["a", "b", "e", "f"],
+      throwOnError: true
     });
   });
 });
@@ -298,7 +303,8 @@ describe("when both baseEnvironment and env are specified", () => {
   test("should add components from baseEnvironment", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
-      components: ["a", "b", "e", "f", "c", "d"]
+      components: ["a", "b", "e", "f", "c", "d"],
+      throwOnError: true
     });
   });
 });
@@ -317,7 +323,8 @@ describe("when extensions is specified in config", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
       components: ["*"],
-      extensions: ["a", "b"]
+      extensions: ["a", "b"],
+      throwOnError: true
     });
   });
 });
@@ -436,7 +443,8 @@ describe("when config is a relative path", () => {
   test("should call generate with components set in config", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
-      components: ["foo"]
+      components: ["foo"],
+      throwOnError: true
     });
   });
 });
@@ -455,7 +463,8 @@ describe("when config is an absolute path", () => {
   test("should call generate with components set in config", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
-      components: ["foo"]
+      components: ["foo"],
+      throwOnError: true
     });
   });
 });
@@ -488,7 +497,8 @@ describe.each([
       expect(generate).toHaveBeenCalledWith({
         path: join(tmpDir.path, "components"),
         components: ["*"],
-        bail: expected
+        bail: expected,
+        throwOnError: true
       });
     });
   }

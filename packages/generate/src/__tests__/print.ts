@@ -36,7 +36,7 @@ describe("when format = YAML", () => {
 
     beforeAll(() => {
       result = {
-        manifests: [{ path: "", index: [0], data }]
+        manifests: [{ path: "", index: [0], data, issues: [] }]
       };
     });
 
@@ -50,7 +50,12 @@ describe("when format = YAML", () => {
 
     beforeAll(() => {
       result = {
-        manifests: data.map((x) => ({ path: "", index: [0], data: x }))
+        manifests: data.map((x) => ({
+          path: "",
+          index: [0],
+          data: x,
+          issues: []
+        }))
       };
     });
 
@@ -69,7 +74,7 @@ describe("when format = JSON", () => {
     const data = { foo: "bar" };
 
     beforeAll(() => {
-      result = { manifests: [{ path: "", index: [0], data }] };
+      result = { manifests: [{ path: "", index: [0], data, issues: [] }] };
     });
 
     test("should write JSON", () => {
@@ -82,7 +87,12 @@ describe("when format = JSON", () => {
 
     beforeAll(() => {
       result = {
-        manifests: data.map((x) => ({ path: "", index: [0], data: x }))
+        manifests: data.map((x) => ({
+          path: "",
+          index: [0],
+          data: x,
+          issues: []
+        }))
       };
     });
 
