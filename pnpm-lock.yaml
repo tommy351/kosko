@@ -546,6 +546,9 @@ importers:
       '@types/node':
         specifier: ^18.11.14
         version: 18.11.14
+      ajv:
+        specifier: ^8.12.0
+        version: 8.12.0
       bl:
         specifier: ^5.0.0
         version: 5.0.0

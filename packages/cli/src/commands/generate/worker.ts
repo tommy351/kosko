@@ -71,8 +71,9 @@ export async function handler(options: WorkerOptions) {
     bail: config.bail,
     concurrency: config.concurrency,
     transform: plugin.transformManifest,
-    // TODO: Remove this when error handling is refactored
-    throwOnError: true
+    // TODO: Remove these options when error handling is refactored
+    throwOnError: true,
+    keepAjvErrors: true
   });
 
   if (!result.manifests.length) {

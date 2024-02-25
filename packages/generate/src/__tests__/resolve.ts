@@ -3,6 +3,7 @@ import { getRejectedValue, sleep } from "@kosko/test-utils";
 import assert from "node:assert";
 import { ResolveError } from "../error";
 import { ResolveOptions, resolve } from "../resolve";
+import { ValidationError } from "ajv";
 
 test("value is an object", async () => {
   await expect(resolve({ foo: "bar" })).resolves.toEqual([
@@ -1029,4 +1030,58 @@ test("when validateManifest is called on multiple values", async () => {
       data: 3
     }
   ]);
+});
+
+describe("when validate method throws an ajv validation error", () => {
+  const err = new ValidationError([
+    { instancePath: "foo.a", message: "is required" },
+    {
+      instancePath: "foo.b",
+      keyword: "enum",
+      message: "must be one of",
+      params: { allowedValues: ["a", "b", "c"] }
+    }
+  ]);
+  const value = {
+    validate() {
+      throw err;
+    }
+  };
+
+  test("should add issues", async () => {
+    await expect(resolve(value)).resolves.toEqual([
+      {
+        path: "",
+        index: [],
+        data: value,
+        issues: [
+          {
+            severity: "error",
+            message: "foo.a is required"
+          },
+          {
+            severity: "error",
+            message: `foo.b must be one of: ["a","b","c"]`
+          }
+        ]
+      }
+    ]);
+  });
+
+  test("should keep the original error when keepAjvErrors = true", async () => {
+    await expect(resolve(value, { keepAjvErrors: true })).resolves.toEqual([
+      {
+        path: "",
+        index: [],
+        data: value,
+        issues: [
+          {
+            severity: "error",
+            message: "Validation error",
+            cause: err
+          }
+        ]
+      }
+    ]);
+  });
 });

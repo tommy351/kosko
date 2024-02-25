@@ -20,7 +20,8 @@ import { validateConcurrency } from "./utils";
 /**
  * @public
  */
-export interface GenerateOptions {
+export interface GenerateOptions
+  extends Omit<ResolveOptions, "path" | "index"> {
   /**
    * Path of the component folder.
    */
@@ -47,36 +48,6 @@ export interface GenerateOptions {
    * ```
    */
   extensions?: readonly string[];
-
-  /**
-   * {@inheritDoc ResolveOptions.validate}
-   */
-  validate?: boolean;
-
-  /**
-   * {@inheritDoc ResolveOptions.bail}
-   */
-  bail?: boolean;
-
-  /**
-   * {@inheritDoc ResolveOptions.concurrency}
-   */
-  concurrency?: number;
-
-  /**
-   * {@inheritdoc ResolveOptions.transform}
-   */
-  transform?: ResolveOptions["transform"];
-
-  /**
-   * {@inheritdoc ResolveOptions.throwOnError}
-   */
-  throwOnError?: boolean;
-
-  /**
-   * {@inheritdoc ResolveOptions.validateManifest}
-   */
-  validateManifest?: ResolveOptions["validateManifest"];
 
   /**
    * Validate all manifests after resolving.
@@ -196,10 +167,11 @@ export async function generate(options: GenerateOptions): Promise<Result> {
     return resolve(await getComponentValue(path), {
       validate: options.validate,
       bail: options.bail,
-      concurrency: options.concurrency,
+      concurrency,
       transform: options.transform,
       throwOnError: options.throwOnError,
       validateManifest: options.validateManifest,
+      keepAjvErrors: options.keepAjvErrors,
       index: [],
       path
     });

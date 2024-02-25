@@ -4,6 +4,7 @@ import { ResolveError } from "./error";
 import { isRecord } from "@kosko/common-utils";
 import pLimit from "p-limit";
 import { validateConcurrency } from "./utils";
+import { ajvValidationErrorToIssues, isAjvValidationError } from "./ajv";
 
 interface Validator {
   validate(): void | Promise<void>;
@@ -197,6 +198,11 @@ export interface ResolveOptions {
    * will not be called.
    */
   validateManifest?(manifest: ManifestToValidate): void | Promise<void>;
+
+  /**
+   * Do not transform Ajv errors to issues.
+   */
+  keepAjvErrors?: boolean;
 }
 
 async function doResolve(value: unknown, options: ResolveOptions) {
@@ -208,7 +214,8 @@ async function doResolve(value: unknown, options: ResolveOptions) {
     concurrency,
     transform,
     throwOnError,
-    validateManifest
+    validateManifest,
+    keepAjvErrors
   } = options;
   const limit = pLimit(validateConcurrency(concurrency));
 
@@ -341,11 +348,17 @@ async function doResolve(value: unknown, options: ResolveOptions) {
       try {
         await manifest.data.validate();
       } catch (err) {
-        reportIssue({
-          severity: "error",
-          message: "Validation error",
-          cause: err
-        });
+        if (!keepAjvErrors && isAjvValidationError(err)) {
+          for (const issue of ajvValidationErrorToIssues(err)) {
+            reportIssue(issue);
+          }
+        } else {
+          reportIssue({
+            severity: "error",
+            message: "Validation error",
+            cause: err
+          });
+        }
       }
     }
 

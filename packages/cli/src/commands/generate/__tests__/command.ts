@@ -147,7 +147,8 @@ describe("when components is specified in config", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
       components: ["a", "b"],
-      throwOnError: true
+      throwOnError: true,
+      keepAjvErrors: true
     });
   });
 
@@ -175,7 +176,8 @@ describe("when components is specified in args", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
       components: ["a", "b"],
-      throwOnError: true
+      throwOnError: true,
+      keepAjvErrors: true
     });
   });
 });
@@ -191,7 +193,8 @@ describe("when components is specified in both config and args", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
       components: ["c", "d"],
-      throwOnError: true
+      throwOnError: true,
+      keepAjvErrors: true
     });
   });
 });
@@ -242,7 +245,8 @@ describe("when env is specified", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
       components: ["a", "b", "c", "d"],
-      throwOnError: true
+      throwOnError: true,
+      keepAjvErrors: true
     });
   });
 });
@@ -273,7 +277,8 @@ describe("when baseEnvironment is specified and env is not", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
       components: ["a", "b", "e", "f"],
-      throwOnError: true
+      throwOnError: true,
+      keepAjvErrors: true
     });
   });
 });
@@ -304,7 +309,8 @@ describe("when both baseEnvironment and env are specified", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
       components: ["a", "b", "e", "f", "c", "d"],
-      throwOnError: true
+      throwOnError: true,
+      keepAjvErrors: true
     });
   });
 });
@@ -324,7 +330,8 @@ describe("when extensions is specified in config", () => {
       path: join(tmpDir.path, "components"),
       components: ["*"],
       extensions: ["a", "b"],
-      throwOnError: true
+      throwOnError: true,
+      keepAjvErrors: true
     });
   });
 });
@@ -444,7 +451,8 @@ describe("when config is a relative path", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
       components: ["foo"],
-      throwOnError: true
+      throwOnError: true,
+      keepAjvErrors: true
     });
   });
 });
@@ -464,7 +472,8 @@ describe("when config is an absolute path", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
       components: ["foo"],
-      throwOnError: true
+      throwOnError: true,
+      keepAjvErrors: true
     });
   });
 });
@@ -498,7 +507,8 @@ describe.each([
         path: join(tmpDir.path, "components"),
         components: ["*"],
         bail: expected,
-        throwOnError: true
+        throwOnError: true,
+        keepAjvErrors: true
       });
     });
   }
