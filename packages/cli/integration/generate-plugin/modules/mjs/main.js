@@ -1,10 +1,10 @@
 /** @type import("@kosko/plugin").PluginFactory */
 export default (ctx) => ({
-  transformManifest(result) {
+  transformManifest(manifest) {
     return {
-      ...result.data,
+      ...manifest.data,
       metadata: {
-        ...result.data.metadata,
+        ...manifest.data.metadata,
         ...ctx.config
       }
     };

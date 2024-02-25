@@ -56,7 +56,11 @@ export async function handler(options: WorkerOptions) {
     validate: args.validate,
     bail: config.bail,
     concurrency: config.concurrency,
-    transform: plugin.transformManifest
+    transform: plugin.transformManifest,
+    validateManifest: plugin.validateManifest,
+    ...(!args.components?.length && {
+      validateAllManifests: plugin.validateAllManifests
+    })
   });
 
   if (!result.manifests.length) {

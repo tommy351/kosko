@@ -1,6 +1,6 @@
 /** @type import("@kosko/plugin").PluginFactory */
 module.exports = () => ({
-  transformManifest() {
+  validateAllManifests() {
     throw new Error("oops");
   }
 });

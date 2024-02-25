@@ -107,7 +107,7 @@ function stringifyIssueStats(stats: IssueStats): string {
     }
   }
 
-  return chunks.join(", ");
+  return chunks.join(" ");
 }
 
 function printIssueStats(path: string, stats: IssueStats): void {
@@ -163,12 +163,10 @@ export function printIssues(cwd: string, result: Result): void {
 
   for (const [path, manifests] of Object.entries(manifestsByPath)) {
     const stats = getIssueStats(manifests);
+    totalStats.error += stats.error;
+    totalStats.warning += stats.warning;
 
-    if (stats.error) {
-      totalStats.error += stats.error;
-      totalStats.warning += stats.warning;
-    }
-
+    print("");
     printIssueStats(prettifyPath(cwd, path), stats);
 
     for (const manifest of manifests) {
@@ -177,16 +175,16 @@ export function printIssues(cwd: string, result: Result): void {
       for (const issue of manifest.issues) {
         printIssue(issue);
       }
-
-      print("");
     }
   }
 
   if (totalStats.error) {
+    print("");
     throw new CLIError("Generate failed", {
       output: `Generate failed (Total ${stringifyIssueStats(totalStats)})`
     });
   } else if (totalStats.warning) {
+    print("");
     logger.log(
       LogLevel.Warn,
       `Generate completed with warnings (Total ${stringifyIssueStats(totalStats)})`

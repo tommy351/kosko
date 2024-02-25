@@ -1,0 +1,8 @@
+components = ["*"]
+
+[[plugins]]
+name = "./modules/validate/all.js"
+
+[[plugins.config.issues]]
+severity = "warning"
+message = "Test warning message"

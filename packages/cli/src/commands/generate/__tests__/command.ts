@@ -664,7 +664,7 @@ describe("when plugin factory does not return an object", () => {
   });
 });
 
-describe("when transformManifest a function", () => {
+describe("when transformManifest is a function", () => {
   beforeEach(async () => {
     mockGenerateSuccess();
     await writeConfigToDefaultPath({
@@ -682,6 +682,14 @@ describe("when transformManifest a function", () => {
     expect(await getLoadedPlugins()).toEqual([
       getPluginPackagePath("test-plugin")
     ]);
+  });
+
+  test("should call generate with transform", () => {
+    expect(generate).toHaveBeenCalledWith({
+      path: join(tmpDir.path, "components"),
+      components: ["*"],
+      transform: expect.any(Function)
+    });
   });
 });
 
@@ -702,6 +710,126 @@ describe("when transformManifest is defined but not a function", () => {
     await expect(execute()).rejects.toThrow(
       `Plugin "test-plugin" is invalid: At path: transformManifest -- Expected a function, but received: "foo"`
     );
+  });
+});
+
+describe("when validateManifest is a function", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: "test-plugin" }]
+    });
+    await createPluginPackage(
+      "test-plugin",
+      "return { validateManifest: () => {} }"
+    );
+    await execute();
+  });
+
+  test("should load the plugin", async () => {
+    expect(await getLoadedPlugins()).toEqual([
+      getPluginPackagePath("test-plugin")
+    ]);
+  });
+
+  test("should call generate with validateManifest", () => {
+    expect(generate).toHaveBeenCalledWith({
+      path: join(tmpDir.path, "components"),
+      components: ["*"],
+      validateManifest: expect.any(Function)
+    });
+  });
+});
+
+describe("when validateManifest is defined but not a function", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: "test-plugin" }]
+    });
+    await createPluginPackage(
+      "test-plugin",
+      `return { validateManifest: "foo" };`
+    );
+  });
+
+  test("should throw an error", async () => {
+    await expect(execute()).rejects.toThrow(
+      `Plugin "test-plugin" is invalid: At path: validateManifest -- Expected a function, but received: "foo"`
+    );
+  });
+});
+
+describe("when validateAllManifests is a function", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: "test-plugin" }]
+    });
+    await createPluginPackage(
+      "test-plugin",
+      "return { validateAllManifests: () => {} }"
+    );
+    await execute();
+  });
+
+  test("should load the plugin", async () => {
+    expect(await getLoadedPlugins()).toEqual([
+      getPluginPackagePath("test-plugin")
+    ]);
+  });
+
+  test("should call generate with validateAllManifests", () => {
+    expect(generate).toHaveBeenCalledWith({
+      path: join(tmpDir.path, "components"),
+      components: ["*"],
+      validateAllManifests: expect.any(Function)
+    });
+  });
+});
+
+describe("when validateAllManifests is defined but not a function", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: "test-plugin" }]
+    });
+    await createPluginPackage(
+      "test-plugin",
+      `return { validateAllManifests: "foo" };`
+    );
+  });
+
+  test("should throw an error", async () => {
+    await expect(execute()).rejects.toThrow(
+      `Plugin "test-plugin" is invalid: At path: validateAllManifests -- Expected a function, but received: "foo"`
+    );
+  });
+});
+
+describe("when validateAllManifests is a function, but components is defined in CLI args", () => {
+  beforeEach(async () => {
+    mockGenerateSuccess();
+    await writeConfigToDefaultPath({
+      components: ["*"],
+      plugins: [{ name: "test-plugin" }]
+    });
+    await createPluginPackage(
+      "test-plugin",
+      "return { validateAllManifests: () => {} }"
+    );
+    await execute({ components: ["foo"] });
+  });
+
+  test("should not call generate with validateAllManifests", async () => {
+    expect(generate).toHaveBeenCalledWith({
+      path: join(tmpDir.path, "components"),
+      components: ["foo"]
+    });
   });
 });
 

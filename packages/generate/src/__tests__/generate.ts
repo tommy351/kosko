@@ -612,6 +612,19 @@ describe("when validateManifest is given", () => {
       ]
     });
   });
+
+  test("should not call validateManifest when validate is false", async () => {
+    const validate = jest.fn();
+
+    await generate({
+      components: ["*"],
+      path: tmpDir.path,
+      validate: false,
+      validateManifest: validate
+    });
+
+    expect(validate).not.toHaveBeenCalled();
+  });
 });
 
 describe("when validateAllManifests is given", () => {
@@ -697,5 +710,18 @@ describe("when validateAllManifests is given", () => {
     expect(err.path).toEqual(join(tmpDir.path, "a.js"));
     expect(err.index).toEqual([]);
     expect(err.value).toEqual({ a: 1 });
+  });
+
+  test("should not call validateAllManifests when validate is false", async () => {
+    const validate = jest.fn();
+
+    await generate({
+      components: ["*"],
+      path: tmpDir.path,
+      validate: false,
+      validateAllManifests: validate
+    });
+
+    expect(validate).not.toHaveBeenCalled();
   });
 });

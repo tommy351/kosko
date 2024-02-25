@@ -11,7 +11,9 @@ import { type, func, optional, validate } from "superstruct";
 type UnknownPluginFactory = (ctx: PluginContext) => unknown;
 
 const pluginSchema = type({
-  transformManifest: optional(func())
+  transformManifest: optional(func()),
+  validateManifest: optional(func()),
+  validateAllManifests: optional(func())
 });
 
 interface PluginSource {
@@ -89,6 +91,24 @@ export function composePlugins(plugins: readonly Plugin[]): Plugin {
         }
 
         return data;
+      }
+    }),
+    ...(plugins.some((p) => p.validateManifest) && {
+      validateManifest: async (manifest) => {
+        for (const plugin of plugins) {
+          if (typeof plugin.validateManifest !== "function") continue;
+
+          await plugin.validateManifest(manifest);
+        }
+      }
+    }),
+    ...(plugins.some((p) => p.validateAllManifests) && {
+      validateAllManifests: async (manifests) => {
+        for (const plugin of plugins) {
+          if (typeof plugin.validateAllManifests !== "function") continue;
+
+          await plugin.validateAllManifests(manifests);
+        }
       }
     })
   };

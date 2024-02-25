@@ -186,8 +186,9 @@ export async function generate(options: GenerateOptions): Promise<Result> {
   }
 
   const manifests = await handleResolvePromises(promises, options.bail);
+  const validateEnabled = options.validate ?? true;
 
-  if (typeof options.validateAllManifests === "function") {
+  if (validateEnabled && typeof options.validateAllManifests === "function") {
     logger.log(LogLevel.Debug, "Validating all manifests");
 
     try {

@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`cause is a empty object 1`] = `
-"[1mcomponents/foo.ts[22m - [31m✖ 1[39m
+"
+[1mcomponents/foo.ts[22m - [31m✖ 1[39m
 
     [31m✖[39m Error message
 
@@ -9,7 +10,8 @@ exports[`cause is a empty object 1`] = `
 `;
 
 exports[`component info and index are present 1`] = `
-"[1mcomponents/foo.ts[22m - [31m✖ 1[39m
+"
+[1mcomponents/foo.ts[22m - [31m✖ 1[39m
 
   Kind: v1/Pod, Name: foo, Index: [2, 4]
     [31m✖[39m Error message
@@ -18,7 +20,8 @@ exports[`component info and index are present 1`] = `
 `;
 
 exports[`component info contains namespace 1`] = `
-"[1mcomponents/foo.ts[22m - [31m✖ 1[39m
+"
+[1mcomponents/foo.ts[22m - [31m✖ 1[39m
 
   Kind: v1/Pod, Name: default/foo
     [31m✖[39m Error message
@@ -27,7 +30,8 @@ exports[`component info contains namespace 1`] = `
 `;
 
 exports[`cwd is not empty 1`] = `
-"[1mcomponents/foo.ts[22m - [31m✖ 1[39m
+"
+[1mcomponents/foo.ts[22m - [31m✖ 1[39m
 
     [31m✖[39m Error message
 
@@ -39,7 +43,8 @@ exports[`cwd is not empty 1`] = `
 `;
 
 exports[`ignore manifests without issues 1`] = `
-"[1mcomponents/bar.ts[22m - [31m✖ 1[39m
+"
+[1mcomponents/bar.ts[22m - [31m✖ 1[39m
 
     [31m✖[39m Error message
 
@@ -47,7 +52,8 @@ exports[`ignore manifests without issues 1`] = `
 `;
 
 exports[`index is not empty 1`] = `
-"[1mcomponents/foo.ts[22m - [31m✖ 1[39m
+"
+[1mcomponents/foo.ts[22m - [31m✖ 1[39m
 
   Index: [2, 4]
     [31m✖[39m Error message
@@ -56,7 +62,8 @@ exports[`index is not empty 1`] = `
 `;
 
 exports[`issue contains a Error class cause 1`] = `
-"[1mcomponents/foo.ts[22m - [31m✖ 1[39m
+"
+[1mcomponents/foo.ts[22m - [31m✖ 1[39m
 
     [31m✖[39m Error message
 [90m      Error: foobar
@@ -66,7 +73,8 @@ exports[`issue contains a Error class cause 1`] = `
 `;
 
 exports[`issue contains a string cause 1`] = `
-"[1mcomponents/foo.ts[22m - [31m✖ 1[39m
+"
+[1mcomponents/foo.ts[22m - [31m✖ 1[39m
 
     [31m✖[39m Error message
 [90m      Error: Cause message[39m
@@ -75,7 +83,8 @@ exports[`issue contains a string cause 1`] = `
 `;
 
 exports[`issue contains an object cause 1`] = `
-"[1mcomponents/foo.ts[22m - [31m✖ 1[39m
+"
+[1mcomponents/foo.ts[22m - [31m✖ 1[39m
 
     [31m✖[39m Error message
 [90m      FooError: foobar[39m
@@ -84,7 +93,8 @@ exports[`issue contains an object cause 1`] = `
 `;
 
 exports[`manifest contains component info 1`] = `
-"[1mcomponents/foo.ts[22m - [31m✖ 1[39m
+"
+[1mcomponents/foo.ts[22m - [31m✖ 1[39m
 
   Kind: v1/Pod, Name: foo
     [31m✖[39m Error message
@@ -93,7 +103,8 @@ exports[`manifest contains component info 1`] = `
 `;
 
 exports[`multiple issues 1`] = `
-"[1mcomponents/foo.ts[22m - [31m✖ 2[39m, [33m⚠ 1[39m
+"
+[1mcomponents/foo.ts[22m - [31m✖ 2[39m [33m⚠ 1[39m
 
     [31m✖[39m Error 1
     [33m⚠[39m Warning 1
@@ -107,7 +118,8 @@ exports[`multiple issues 1`] = `
 `;
 
 exports[`single error issue 1`] = `
-"[1mcomponents/foo.ts[22m - [31m✖ 1[39m
+"
+[1mcomponents/foo.ts[22m - [31m✖ 1[39m
 
     [31m✖[39m Error message
 
@@ -115,9 +127,11 @@ exports[`single error issue 1`] = `
 `;
 
 exports[`single warning issue 1`] = `
-"[1mcomponents/foo.ts[22m - [33m⚠ 1[39m
+"
+[1mcomponents/foo.ts[22m - [33m⚠ 1[39m
 
     [33m⚠[39m Warning message
 
+[33mwarn [39m - Generate completed with warnings (Total [33m⚠ 1[39m)
 "
 `;
