@@ -1,9 +1,9 @@
 {
-  "name": "@kosko/plugin-set-metadata",
-  "version": "0.1.0",
-  "description": "A Kosko plugin which set metadata for manifests.",
+  "name": "@kosko/plugin-lint",
+  "version": "0.0.0",
+  "description": "A Kosko plugin which lints Kubernetes manifests.",
   "homepage": "https://kosko.dev",
-  "repository": "https://github.com/tommy351/kosko/tree/master/plugins/set-metadata",
+  "repository": "https://github.com/tommy351/kosko/tree/master/plugins/lint",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "main": "dist/index.node.cjs",
@@ -49,6 +49,7 @@
   },
   "devDependencies": {
     "@kosko/build-scripts": "workspace:^",
+    "@kosko/generate": "workspace:^",
     "@kosko/jest-preset": "workspace:^",
     "@kubernetes-models/apimachinery": "^1.2.1",
     "kubernetes-models": "^4.1.0",

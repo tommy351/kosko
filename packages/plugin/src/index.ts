@@ -6,4 +6,4 @@ export type {
   ValidateAllManifests,
   Plugin
 } from "./plugin";
-export { validateConfig } from "./config";
+export { ConfigError, validateConfig } from "./config";

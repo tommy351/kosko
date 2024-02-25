@@ -1,6 +1,9 @@
 import { Struct, StructError, validate } from "superstruct";
 
-class ConfigError extends Error {
+/**
+ * @public
+ */
+export class ConfigError extends Error {
   public constructor(err: StructError) {
     super("Invalid config");
 

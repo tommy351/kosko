@@ -816,11 +816,45 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0
 
+  plugins/lint:
+    dependencies:
+      '@kosko/common-utils':
+        specifier: workspace:^
+        version: link:../../packages/common-utils
+      '@kosko/plugin':
+        specifier: workspace:^
+        version: link:../../packages/plugin
+      superstruct:
+        specifier: ^1.0.3
+        version: 1.0.3
+    devDependencies:
+      '@kosko/build-scripts':
+        specifier: workspace:^
+        version: link:../../internal/build-scripts
+      '@kosko/generate':
+        specifier: workspace:^
+        version: link:../../packages/generate
+      '@kosko/jest-preset':
+        specifier: workspace:^
+        version: link:../../internal/jest-preset
+      '@kubernetes-models/apimachinery':
+        specifier: ^1.2.1
+        version: 1.2.1
+      kubernetes-models:
+        specifier: ^4.1.0
+        version: 4.1.0
+      type-fest:
+        specifier: ^4.10.2
+        version: 4.10.2
+
   plugins/set-metadata:
     dependencies:
       '@kosko/common-utils':
         specifier: workspace:^
         version: link:../../packages/common-utils
+      '@kosko/plugin':
+        specifier: workspace:^
+        version: link:../../packages/plugin
       superstruct:
         specifier: ^1.0.3
         version: 1.0.3
@@ -831,9 +865,6 @@ importers:
       '@kosko/jest-preset':
         specifier: workspace:^
         version: link:../../internal/jest-preset
-      '@kosko/plugin':
-        specifier: workspace:^
-        version: link:../../packages/plugin
       '@kubernetes-models/apimachinery':
         specifier: ^1.2.1
         version: 1.2.1
