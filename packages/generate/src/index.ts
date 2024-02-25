@@ -6,7 +6,6 @@
 
 export * from "./base";
 export {
-  type ComponentInfo,
   GenerateError,
   type GenerateErrorOptions,
   ResolveError,

@@ -1085,3 +1085,77 @@ describe("when validate method throws an ajv validation error", () => {
     ]);
   });
 });
+
+describe.each([
+  { value: {} },
+  { value: { apiVersion: "foo" } },
+  { value: { apiVersion: "foo", kind: "bar" } },
+  {
+    value: { apiVersion: "foo", kind: "bar", metadata: {} }
+  },
+  {
+    value: { apiVersion: "foo", kind: "bar", metadata: { name: "a" } },
+    expected: {
+      apiVersion: "foo",
+      kind: "bar",
+      name: "a"
+    }
+  },
+  {
+    value: { apiVersion: "foo", kind: "bar", metadata: { a: "b" } }
+  },
+  {
+    value: {
+      apiVersion: "foo",
+      kind: "bar",
+      metadata: { name: "a", namespace: "b" }
+    },
+    expected: {
+      apiVersion: "foo",
+      kind: "bar",
+      name: "a",
+      namespace: "b"
+    }
+  }
+])("when value is $value", ({ value, expected }) => {
+  test(`should set component = ${JSON.stringify(expected)}`, async () => {
+    await expect(resolve(value)).resolves.toEqual([
+      {
+        path: "",
+        index: [],
+        data: value,
+        issues: [],
+        component: expected
+      }
+    ]);
+  });
+});
+
+test("should update component after transform", async () => {
+  await expect(
+    resolve(
+      { apiVersion: "v1", kind: "bar", metadata: { name: "abc" } },
+      {
+        transform() {
+          return {
+            apiVersion: "v2",
+            kind: "foo",
+            metadata: { name: "def" }
+          };
+        }
+      }
+    )
+  ).resolves.toEqual([
+    {
+      path: "",
+      index: [],
+      data: { apiVersion: "v2", kind: "foo", metadata: { name: "def" } },
+      issues: [],
+      component: {
+        apiVersion: "v2",
+        kind: "foo",
+        name: "def"
+      }
+    }
+  ]);
+});

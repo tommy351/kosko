@@ -1,39 +1,9 @@
 import { isRecord } from "@kosko/common-utils";
 import extractStack from "extract-stack";
+import { ComponentInfo } from "./base";
+import { buildComponentInfo } from "./component";
 
 const STACK_INDENT = "    ";
-
-interface Component {
-  apiVersion: string;
-  kind: string;
-  metadata: {
-    name: string;
-    namespace?: string;
-  };
-}
-
-/**
- * @public
- */
-export interface ComponentInfo {
-  apiVersion: string;
-  kind: string;
-  name: string;
-  namespace?: string;
-}
-
-function isComponent(value: unknown): value is Component {
-  if (!isRecord(value)) return false;
-
-  const { apiVersion, kind, metadata } = value;
-
-  return (
-    typeof apiVersion === "string" &&
-    typeof kind === "string" &&
-    isRecord(metadata) &&
-    typeof metadata.name === "string"
-  );
-}
 
 function decorateErrorStack(err: Error, values: Record<string, string>) {
   const origStack = extractStack(err.stack);
@@ -102,15 +72,7 @@ export class ResolveError extends Error {
     this.index = options.index;
     this.cause = options.cause;
     this.value = options.value;
-
-    if (isComponent(this.value)) {
-      this.component = {
-        apiVersion: this.value.apiVersion,
-        kind: this.value.kind,
-        name: this.value.metadata.name,
-        namespace: this.value.metadata.namespace
-      };
-    }
+    this.component = buildComponentInfo(this.value);
 
     const cause = generateCauseMessage(this.cause);
 

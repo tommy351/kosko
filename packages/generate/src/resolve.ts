@@ -5,6 +5,7 @@ import { isRecord } from "@kosko/common-utils";
 import pLimit from "p-limit";
 import { validateConcurrency } from "./utils";
 import { ajvValidationErrorToIssues, isAjvValidationError } from "./ajv";
+import { buildComponentInfo } from "./component";
 
 interface Validator {
   validate(): void | Promise<void>;
@@ -312,6 +313,7 @@ async function doResolve(value: unknown, options: ResolveOptions) {
     path,
     index,
     data: value,
+    component: buildComponentInfo(value),
     issues: []
   };
 
@@ -332,7 +334,11 @@ async function doResolve(value: unknown, options: ResolveOptions) {
       if (newValue == null) return [];
 
       // Create a new object to avoid mutation
-      manifest = { ...manifest, data: newValue };
+      manifest = {
+        ...manifest,
+        data: newValue,
+        component: buildComponentInfo(newValue)
+      };
     } catch (err) {
       return handleError(err, "An error occurred in transform function");
     }

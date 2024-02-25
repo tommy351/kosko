@@ -11,6 +11,16 @@ export interface Result {
 /**
  * @public
  */
+export interface ComponentInfo {
+  apiVersion: string;
+  kind: string;
+  name: string;
+  namespace?: string;
+}
+
+/**
+ * @public
+ */
 export interface BaseManifest {
   /**
    * Source path of a manifest.
@@ -26,6 +36,11 @@ export interface BaseManifest {
    * Manifest data.
    */
   data: unknown;
+
+  /**
+   * Component info.
+   */
+  component?: ComponentInfo;
 }
 
 /**
@@ -52,8 +67,13 @@ export interface Manifest extends BaseManifest {
 /**
  * @public
  */
+export type Severity = "error" | "warning";
+
+/**
+ * @public
+ */
 export interface Issue {
-  severity: "error" | "warning";
+  severity: Severity;
   message: string;
   cause?: unknown;
 }
