@@ -1,27 +1,24 @@
-import { GenerateError, ResolveError } from "@kosko/generate";
+import { Issue, Manifest, Result, Severity } from "@kosko/generate";
 import cleanStack from "clean-stack";
-import extractStack from "extract-stack";
 import pc from "picocolors";
 import { CLIError } from "@kosko/cli-utils";
-import stringify from "fast-safe-stringify";
 import { isRecord } from "@kosko/common-utils";
 import { stderr } from "node:process";
-import { BaseGenerateArguments } from "./types";
+import type { Formatter } from "picocolors/types";
+import logger, { LogLevel } from "@kosko/log";
 
-function flattenError(err: unknown): unknown[] {
-  if (err instanceof AggregateError) {
-    return err.errors.flatMap(flattenError);
-  }
+const severityFormats: Record<Severity, Formatter> = {
+  error: pc.red,
+  warning: pc.yellow
+};
 
-  return [err];
-}
+const severityIcons: Record<Severity, string> = {
+  error: "✖",
+  warning: "⚠"
+};
 
 function print(line: string): void {
   stderr.write(line + "\n");
-}
-
-function getErrorCount(n: number): string {
-  return `${n} error${n === 1 ? "" : "s"}`;
 }
 
 interface ErrorLike {
@@ -50,168 +47,149 @@ function toErrorLike(err: unknown): ErrorLike | undefined {
   }
 }
 
-// https://github.com/ajv-validator/ajv/blob/v8.11.0/lib/types/index.ts#L85
-interface AjvErrorObject {
-  instancePath: string;
-  message?: string;
-  params: unknown;
-  keyword: "type" | "enum" | "oneOf";
-}
-
-// https://github.com/ajv-validator/ajv/blob/v8.11.0/lib/runtime/validation_error.ts
-interface AjvValidationErrorLike {
-  errors: readonly AjvErrorObject[];
-}
-
-function isAjvValidationErrorLike(
-  value: unknown
-): value is AjvValidationErrorLike {
-  return (
-    isRecord(value) &&
-    value.ajv === true &&
-    value.validation === true &&
-    Array.isArray(value.errors)
+export function resultHasError(result: Result): boolean {
+  return result.manifests.some((manifest) =>
+    manifest.issues.some((issue) => issue.severity === "error")
   );
 }
 
-function stringifyAjvErrorObject(err: AjvErrorObject) {
-  let msg = err.instancePath;
-
-  if (err.message) {
-    msg += ` ${err.message}`;
+function prettifyPath(cwd: string, path: string): string {
+  if (path.startsWith(cwd)) {
+    path = path.substring(cwd.length).replace(/^[/\\]+/, "");
   }
 
-  if (
-    err.keyword === "enum" &&
-    isRecord(err.params) &&
-    Array.isArray(err.params.allowedValues)
-  ) {
-    msg += `: ${stringify(err.params.allowedValues)}`;
+  return path.replace(/\\/g, "/");
+}
+
+function groupManifestsByPath(
+  manifests: readonly Manifest[]
+): Record<string, Manifest[]> {
+  const groups: Record<string, Manifest[]> = {};
+
+  // Group manifests by path
+  for (const manifest of manifests) {
+    if (manifest.issues.length) {
+      groups[manifest.path] ??= [];
+      groups[manifest.path].push(manifest);
+    }
   }
 
-  return msg;
+  return groups;
 }
 
-function getFormattedErrorTitle(err: ErrorLike) {
-  return "  " + pc.red(`✖ ${err.name}: ${err.message}`);
+interface IssueStats {
+  error: number;
+  warning: number;
 }
 
-function getFormattedErrorStack(err: ErrorLike, extraIndent = "") {
-  if (typeof err.stack !== "string") return;
+function getIssueStats(manifests: Manifest[]): IssueStats {
+  const stats: IssueStats = { error: 0, warning: 0 };
 
-  let stack = cleanStack(extractStack(err));
-
-  if (extraIndent) {
-    stack = stack
-      .split("\n")
-      .map((line) => extraIndent + line)
-      .join("\n");
+  for (const manifest of manifests) {
+    for (const issue of manifest.issues) {
+      stats[issue.severity]++;
+    }
   }
 
-  return pc.gray(stack);
+  return stats;
 }
 
-function stringifyCause(cause: unknown) {
-  if (isAjvValidationErrorLike(cause)) {
-    return (
-      "\n" +
-      cause.errors
-        .map((err) => `      ${stringifyAjvErrorObject(err)}`)
-        .join("\n")
+function stringifyIssueStats(stats: IssueStats): string {
+  const chunks: string[] = [];
+
+  for (const severity of ["error", "warning"] as const) {
+    const count = stats[severity];
+
+    if (count) {
+      chunks.push(
+        severityFormats[severity](`${severityIcons[severity]} ${count}`)
+      );
+    }
+  }
+
+  return chunks.join(", ");
+}
+
+function printIssueStats(path: string, stats: IssueStats): void {
+  print(`${pc.bold(path)} - ${stringifyIssueStats(stats)}\n`);
+}
+
+function printManifestHeader(manifest: Manifest): void {
+  const { component, index } = manifest;
+  const chunks: string[] = [];
+
+  if (component) {
+    chunks.push(`Kind: ${component.apiVersion}/${component.kind}`);
+    chunks.push(
+      `Name: ${component.namespace ? component.namespace + "/" : ""}${component.name}`
     );
   }
 
-  const err = toErrorLike(cause);
-  if (!err) return;
+  if (index.length) {
+    chunks.push(`Index: [${index.join(", ")}]`);
+  }
 
-  return [
-    `    ${err.name}: ${err.message}`,
-    getFormattedErrorStack(err, "  ")
-  ].join("\n");
+  if (chunks.length) {
+    print("  " + chunks.join(", "));
+  }
 }
 
-function stringifyResolveError(err: ResolveError): string {
-  const lines: string[] = [getFormattedErrorTitle(err)];
+function printIssue(issue: Issue): void {
+  const format = severityFormats[issue.severity];
+  const icon = severityIcons[issue.severity];
 
-  function appendMeta(name: string, value: string) {
-    lines.push(`    ${name}: ${value}`);
+  print(`    ${format(icon)} ${issue.message}`);
+
+  if (issue.cause) {
+    const err = toErrorLike(issue.cause);
+    if (!err) return;
+
+    let stack = err.stack
+      ? cleanStack(err.stack)
+      : `${err.name}: ${err.message}`;
+
+    stack = stack
+      .split("\n")
+      .map((line) => "      " + line)
+      .join("\n");
+
+    print(pc.gray(stack));
   }
-
-  if (err.index?.length) {
-    appendMeta("Index", `[${err.index.join(", ")}]`);
-  }
-
-  if (err.component) {
-    const { apiVersion, kind, name, namespace } = err.component;
-
-    appendMeta("Kind", `${apiVersion}/${kind}`);
-    if (namespace) appendMeta("Namespace", namespace);
-    appendMeta("Name", name);
-  }
-
-  const cause = stringifyCause(err.cause);
-  if (cause) lines.push(cause);
-
-  return lines.join("\n");
 }
 
-export function handleGenerateError(
-  cwd: string,
-  error: unknown,
-  options: Pick<BaseGenerateArguments, "bail">
-) {
-  const allErrors = flattenError(error);
-  const pathErrorsMap: Record<string, string[]> = {};
-  const unknownErrors: ErrorLike[] = [];
+export function printIssues(cwd: string, result: Result): void {
+  const manifestsByPath = groupManifestsByPath(result.manifests);
+  const totalStats: IssueStats = { error: 0, warning: 0 };
 
-  function pushToPathErrorsMap(path: string, value: string) {
-    pathErrorsMap[path] ??= [];
-    pathErrorsMap[path].push(value);
-  }
+  for (const [path, manifests] of Object.entries(manifestsByPath)) {
+    const stats = getIssueStats(manifests);
 
-  function prettifyPath(path: string): string {
-    if (path.startsWith(cwd)) {
-      path = path.substring(cwd.length).replace(/^[/\\]+/, "");
+    if (stats.error) {
+      totalStats.error += stats.error;
+      totalStats.warning += stats.warning;
     }
 
-    return path.replace(/\\/g, "/");
-  }
+    printIssueStats(prettifyPath(cwd, path), stats);
 
-  for (const err of allErrors) {
-    if (err instanceof ResolveError && err.path) {
-      pushToPathErrorsMap(err.path, stringifyResolveError(err));
-    } else if (err instanceof GenerateError && err.path) {
-      pushToPathErrorsMap(err.path, stringifyResolveError(err));
-    } else {
-      const e = toErrorLike(err);
-      if (e) unknownErrors.push(e);
+    for (const manifest of manifests) {
+      printManifestHeader(manifest);
+
+      for (const issue of manifest.issues) {
+        printIssue(issue);
+      }
+
+      print("");
     }
   }
 
-  for (const [path, errors] of Object.entries(pathErrorsMap)) {
-    print(`${pc.bold(prettifyPath(path))} - ${getErrorCount(errors.length)}\n`);
-
-    for (const err of errors) {
-      print(err + "\n");
-    }
+  if (totalStats.error) {
+    throw new CLIError("Generate failed", {
+      output: `Generate failed (Total ${stringifyIssueStats(totalStats)})`
+    });
+  } else if (totalStats.warning) {
+    logger.log(
+      LogLevel.Warn,
+      `Generate completed with warnings (Total ${stringifyIssueStats(totalStats)})`
+    );
   }
-
-  if (unknownErrors.length) {
-    print(pc.bold(`Other ${getErrorCount(unknownErrors.length)}\n`));
-
-    for (const err of unknownErrors) {
-      const stack = getFormattedErrorStack(err);
-
-      print(`${getFormattedErrorTitle(err)}\n`);
-      if (stack) print(`${stack}\n`);
-    }
-  }
-
-  return new CLIError("Generate failed", {
-    output: `Generate failed (${
-      options.bail
-        ? "Only the first error is displayed because `bail` option is enabled"
-        : `Total ${getErrorCount(allErrors.length)}`
-    })`
-  });
 }

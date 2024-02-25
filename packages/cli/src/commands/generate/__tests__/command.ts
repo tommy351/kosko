@@ -146,9 +146,7 @@ describe("when components is specified in config", () => {
   test("should call generate with given components", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
-      components: ["a", "b"],
-      throwOnError: true,
-      keepAjvErrors: true
+      components: ["a", "b"]
     });
   });
 
@@ -175,9 +173,7 @@ describe("when components is specified in args", () => {
   test("should call generate with given components", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
-      components: ["a", "b"],
-      throwOnError: true,
-      keepAjvErrors: true
+      components: ["a", "b"]
     });
   });
 });
@@ -192,9 +188,7 @@ describe("when components is specified in both config and args", () => {
   test("should call generate with components specified in args", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
-      components: ["c", "d"],
-      throwOnError: true,
-      keepAjvErrors: true
+      components: ["c", "d"]
     });
   });
 });
@@ -244,9 +238,7 @@ describe("when env is specified", () => {
   test("should add environment specific components", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
-      components: ["a", "b", "c", "d"],
-      throwOnError: true,
-      keepAjvErrors: true
+      components: ["a", "b", "c", "d"]
     });
   });
 });
@@ -276,9 +268,7 @@ describe("when baseEnvironment is specified and env is not", () => {
   test("should add components from baseEnvironment", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
-      components: ["a", "b", "e", "f"],
-      throwOnError: true,
-      keepAjvErrors: true
+      components: ["a", "b", "e", "f"]
     });
   });
 });
@@ -308,9 +298,7 @@ describe("when both baseEnvironment and env are specified", () => {
   test("should add components from baseEnvironment", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
-      components: ["a", "b", "e", "f", "c", "d"],
-      throwOnError: true,
-      keepAjvErrors: true
+      components: ["a", "b", "e", "f", "c", "d"]
     });
   });
 });
@@ -329,9 +317,7 @@ describe("when extensions is specified in config", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
       components: ["*"],
-      extensions: ["a", "b"],
-      throwOnError: true,
-      keepAjvErrors: true
+      extensions: ["a", "b"]
     });
   });
 });
@@ -450,9 +436,7 @@ describe("when config is a relative path", () => {
   test("should call generate with components set in config", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
-      components: ["foo"],
-      throwOnError: true,
-      keepAjvErrors: true
+      components: ["foo"]
     });
   });
 });
@@ -471,9 +455,7 @@ describe("when config is an absolute path", () => {
   test("should call generate with components set in config", () => {
     expect(generate).toHaveBeenCalledWith({
       path: join(tmpDir.path, "components"),
-      components: ["foo"],
-      throwOnError: true,
-      keepAjvErrors: true
+      components: ["foo"]
     });
   });
 });
@@ -506,9 +488,7 @@ describe.each([
       expect(generate).toHaveBeenCalledWith({
         path: join(tmpDir.path, "components"),
         components: ["*"],
-        bail: expected,
-        throwOnError: true,
-        keepAjvErrors: true
+        bail: expected
       });
     });
   }
@@ -679,7 +659,7 @@ describe("when plugin factory does not return an object", () => {
 
   test("should throw an error", async () => {
     await expect(execute()).rejects.toThrow(
-      `Plugin "test-plugin" must return an object in the factory function`
+      `Plugin "test-plugin" is invalid: Expected an object, but received: "foo"`
     );
   });
 });
@@ -720,7 +700,7 @@ describe("when transformManifest is defined but not a function", () => {
 
   test("should throw an error", async () => {
     await expect(execute()).rejects.toThrow(
-      `Expected "transformManifest" to be a function in plugin "test-plugin"`
+      `Plugin "test-plugin" is invalid: At path: transformManifest -- Expected a function, but received: "foo"`
     );
   });
 });

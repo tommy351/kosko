@@ -6,8 +6,13 @@ import resolveFrom from "resolve-from";
 import { isRecord } from "@kosko/common-utils";
 import { CLIError } from "@kosko/cli-utils";
 import pc from "picocolors";
+import { type, func, optional, validate } from "superstruct";
 
 type UnknownPluginFactory = (ctx: PluginContext) => unknown;
+
+const pluginSchema = type({
+  transformManifest: optional(func())
+});
 
 interface PluginSource {
   name: string;
@@ -34,19 +39,10 @@ function assertFactory(
 }
 
 function assertPlugin(name: string, value: unknown): asserts value is Plugin {
-  if (!isRecord(value)) {
-    throw new CLIError(
-      `Plugin "${name}" must return an object in the factory function`
-    );
-  }
+  const [err] = validate(value, pluginSchema);
 
-  if (
-    value.transformManifest != null &&
-    typeof value.transformManifest !== "function"
-  ) {
-    throw new CLIError(
-      `Expected "transformManifest" to be a function in plugin "${name}"`
-    );
+  if (err) {
+    throw new CLIError(`Plugin "${name}" is invalid: ${err.message}`);
   }
 }
 

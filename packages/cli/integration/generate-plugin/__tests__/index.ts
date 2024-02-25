@@ -136,8 +136,7 @@ describe("when transformManifest throws an error", () => {
     );
 
     expect(result.exitCode).toEqual(1);
-    expect(result.stderr).toContain(
-      `ResolveError: An error occurred in transform function`
-    );
+    expect(result.stderr).toContain(`An error occurred in transform function`);
+    expect(result.stderr).toContain(`Error: oops`);
   });
 });

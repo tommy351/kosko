@@ -1,30 +1,16 @@
 import { Config, EnvironmentConfig } from "@kosko/config";
 import { spawn, SpawnError } from "@kosko/exec-utils";
-import { generate, GenerateOptions, print, PrintFormat } from "@kosko/generate";
+import { generate, print, PrintFormat } from "@kosko/generate";
 import { join } from "node:path";
 import stringify from "fast-safe-stringify";
 import { CLIError } from "@kosko/cli-utils";
 import { setupEnv } from "./env";
-import { handleGenerateError } from "./error";
+import { printIssues, resultHasError } from "./error";
 import { BaseGenerateArguments } from "./types";
 import { fileURLToPath } from "node:url";
 import { stdout, execPath, execArgv } from "node:process";
 import { createRequire } from "node:module";
 import { loadPlugins } from "./plugin";
-
-async function doGenerate({
-  cwd,
-  ...options
-}: Omit<GenerateOptions, "path"> & { cwd: string }) {
-  try {
-    return await generate({
-      ...options,
-      path: join(cwd, "components")
-    });
-  } catch (err) {
-    throw handleGenerateError(cwd, err, options);
-  }
-}
 
 export interface WorkerOptions {
   printFormat?: PrintFormat;
@@ -63,17 +49,14 @@ export async function handler(options: WorkerOptions) {
   const plugin = await loadPlugins(args.cwd, config.plugins);
 
   // Generate manifests
-  const result = await doGenerate({
-    cwd: args.cwd,
+  const result = await generate({
+    path: join(args.cwd, "components"),
     components: config.components,
     extensions: config.extensions,
     validate: args.validate,
     bail: config.bail,
     concurrency: config.concurrency,
-    transform: plugin.transformManifest,
-    // TODO: Remove these options when error handling is refactored
-    throwOnError: true,
-    keepAjvErrors: true
+    transform: plugin.transformManifest
   });
 
   if (!result.manifests.length) {
@@ -82,12 +65,14 @@ export async function handler(options: WorkerOptions) {
     });
   }
 
-  if (printFormat) {
+  if (printFormat && !resultHasError(result)) {
     print(result, {
       format: printFormat,
       writer: stdout
     });
   }
+
+  printIssues(args.cwd, result);
 }
 
 async function runWithLoaders(options: WorkerOptions) {

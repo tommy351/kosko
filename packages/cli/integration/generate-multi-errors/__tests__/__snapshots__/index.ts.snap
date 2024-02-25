@@ -1,45 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`when bail is not set should print the error 1`] = `
-"[1mcomponents/foo.js[22m - 1 error
+"[1mcomponents/foo.js[22m - [31m✖ 1[39m
 
-  [31m✖ ResolveError: Validation error[39m
-    Index: [0]
-    Kind: v1/Pod
-    Name: foo
+  Kind: v1/Pod, Name: foo, Index: [0]
+    [31m✖[39m /spec must have required property 'containers'
 
-      /spec must have required property 'containers'
+[1mcomponents/nginx.js[22m - [31m✖ 4[39m
 
-[1mcomponents/nginx.js[22m - 2 errors
+  Kind: apps/v1/Deployment, Name: nginx, Index: [0]
+    [31m✖[39m /spec must have required property 'selector'
+    [31m✖[39m /spec must have required property 'template'
 
-  [31m✖ ResolveError: Validation error[39m
-    Index: [0]
-    Kind: apps/v1/Deployment
-    Name: nginx
+  Kind: v1/Service, Name: nginx, Index: [1]
+    [31m✖[39m /spec/ports/0/port must be integer
+    [31m✖[39m /spec/type must be equal to one of the allowed values: ["ClusterIP","ExternalName","LoadBalancer","NodePort"]
 
-      /spec must have required property 'selector'
-      /spec must have required property 'template'
-
-  [31m✖ ResolveError: Validation error[39m
-    Index: [1]
-    Kind: v1/Service
-    Name: nginx
-
-      /spec/ports/0/port must be integer
-      /spec/type must be equal to one of the allowed values: ["ClusterIP","ExternalName","LoadBalancer","NodePort"]
-
-[31merror[39m - Generate failed (Total 3 errors)"
+[31merror[39m - Generate failed (Total [31m✖ 5[39m)"
 `;
 
 exports[`when bail is true should print the error 1`] = `
-"[1mcomponents/foo.js[22m - 1 error
+"[1mcomponents/foo.js[22m - [31m✖ 1[39m
 
-  [31m✖ ResolveError: Validation error[39m
-    Index: [0]
-    Kind: v1/Pod
-    Name: foo
+  Kind: v1/Pod, Name: foo, Index: [0]
+    [31m✖[39m /spec must have required property 'containers'
 
-      /spec must have required property 'containers'
+[1mcomponents/nginx.js[22m - [31m✖ 1[39m
 
-[31merror[39m - Generate failed (Only the first error is displayed because \`bail\` option is enabled)"
+  Kind: apps/v1/Deployment, Name: nginx, Index: [0]
+    [31m✖[39m /spec must have required property 'selector'
+
+[31merror[39m - Generate failed (Total [31m✖ 2[39m)"
 `;
