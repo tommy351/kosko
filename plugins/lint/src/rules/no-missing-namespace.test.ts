@@ -2,6 +2,16 @@ import rule from "./no-missing-namespace";
 import { createManifest, validateAll } from "../test-utils";
 import { Namespace } from "kubernetes-models/v1";
 
+test("should pass when data is undefined", () => {
+  const manifest = createManifest(undefined);
+  expect(validateAll(rule, {}, [manifest])).toBeEmpty();
+});
+
+test("should pass when data is an empty object", () => {
+  const manifest = createManifest({});
+  expect(validateAll(rule, {}, [manifest])).toBeEmpty();
+});
+
 test("should pass when namespace is empty", () => {
   const manifest = createManifest({
     metadata: { namespace: "" }
