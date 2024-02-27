@@ -1,7 +1,10 @@
-import { isRecord } from "@kosko/common-utils";
+import {
+  isRecord,
+  getManifestMeta,
+  type ManifestMeta
+} from "@kosko/common-utils";
 import extractStack from "extract-stack";
-import { ComponentInfo } from "./base";
-import { buildComponentInfo } from "./component";
+import type { ManifestPosition } from "./base";
 
 const STACK_INDENT = "    ";
 
@@ -49,8 +52,7 @@ function generateCauseMessage(cause: unknown) {
  * @public
  */
 export interface ResolveErrorOptions {
-  path?: string;
-  index?: number[];
+  position?: ManifestPosition;
   cause?: unknown;
   value?: unknown;
 }
@@ -59,32 +61,34 @@ export interface ResolveErrorOptions {
  * @public
  */
 export class ResolveError extends Error {
-  public readonly path?: string;
-  public readonly index?: number[];
+  public readonly position?: ManifestPosition;
+  public readonly metadata?: ManifestMeta;
   public readonly cause?: unknown;
   public readonly value?: unknown;
-  public readonly component?: ComponentInfo;
 
   public constructor(message: string, options: ResolveErrorOptions = {}) {
     super(message);
 
-    this.path = options.path;
-    this.index = options.index;
+    this.position = options.position;
     this.cause = options.cause;
     this.value = options.value;
-    this.component = buildComponentInfo(this.value);
+    this.metadata = getManifestMeta(this.value);
 
     const cause = generateCauseMessage(this.cause);
 
     decorateErrorStack(this, {
-      ...(this.path && { Path: this.path }),
-      ...(this.index?.length && { Index: `[${this.index.join(", ")}]` }),
-      ...(this.component && {
-        Kind: `${this.component.apiVersion}/${this.component.kind}`,
-        ...(this.component.namespace && {
-          Namespace: this.component.namespace
+      ...(this.position && {
+        Path: this.position.path,
+        ...(this.position.index.length && {
+          Index: `[${this.position.index.join(", ")}]`
+        })
+      }),
+      ...(this.metadata && {
+        Kind: `${this.metadata.apiVersion}/${this.metadata.kind}`,
+        ...(this.metadata.namespace && {
+          Namespace: this.metadata.namespace
         }),
-        Name: this.component.name
+        Name: this.metadata.name
       }),
       ...(cause && { Cause: cause })
     });

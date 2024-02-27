@@ -50,8 +50,7 @@ describe("single JS file", () => {
     expect(result).toEqual({
       manifests: [
         {
-          path: join(tmpDir.path, "foo.js"),
-          index: [],
+          position: { path: join(tmpDir.path, "foo.js"), index: [] },
           issues: [],
           data: { foo: "bar" }
         }
@@ -76,8 +75,7 @@ describe("JS files in folder", () => {
     expect(result).toEqual({
       manifests: [
         {
-          path: join(tmpDir.path, "foo/index.js"),
-          index: [],
+          position: { path: join(tmpDir.path, "foo/index.js"), index: [] },
           issues: [],
           data: { foo: "index" }
         }
@@ -133,8 +131,7 @@ exports.default = {foo: "bar"};`
     expect(result).toEqual({
       manifests: [
         {
-          path: join(tmpDir.path, "foo.js"),
-          index: [],
+          position: { path: join(tmpDir.path, "foo.js"), index: [] },
           issues: [],
           data: { foo: "bar" }
         }
@@ -158,14 +155,12 @@ describe("when script exports an array", () => {
     expect(result).toEqual({
       manifests: [
         {
-          path: join(tmpDir.path, "foo.js"),
-          index: [0],
+          position: { path: join(tmpDir.path, "foo.js"), index: [0] },
           issues: [],
           data: { foo: 1 }
         },
         {
-          path: join(tmpDir.path, "foo.js"),
-          index: [1],
+          position: { path: join(tmpDir.path, "foo.js"), index: [1] },
           issues: [],
           data: { bar: 2 }
         }
@@ -197,11 +192,11 @@ module.exports = [
     const path = join(tmpDir.path, "foo.js");
     expect(result).toEqual({
       manifests: [
-        { path, index: [0], issues: [], data: { a: 1 } },
-        { path, index: [1, 0], issues: [], data: { b: 2 } },
-        { path, index: [1, 1, 0], issues: [], data: { c: 3 } },
-        { path, index: [1, 1, 1], issues: [], data: { d: 4 } },
-        { path, index: [2], issues: [], data: { e: 5 } }
+        { position: { path, index: [0] }, issues: [], data: { a: 1 } },
+        { position: { path, index: [1, 0] }, issues: [], data: { b: 2 } },
+        { position: { path, index: [1, 1, 0] }, issues: [], data: { c: 3 } },
+        { position: { path, index: [1, 1, 1] }, issues: [], data: { d: 4 } },
+        { position: { path, index: [2] }, issues: [], data: { e: 5 } }
       ]
     });
   });
@@ -242,14 +237,12 @@ describe("multiple files", () => {
       expect(result).toEqual({
         manifests: [
           {
-            path: join(tmpDir.path, "foo.js"),
-            index: [],
+            position: { path: join(tmpDir.path, "foo.js"), index: [] },
             issues: [],
             data: { foo: "bar" }
           },
           {
-            path: join(tmpDir.path, "foo.json"),
-            index: [],
+            position: { path: join(tmpDir.path, "foo.json"), index: [] },
             issues: [],
             data: { foo: "bar" }
           }
@@ -268,8 +261,7 @@ describe("multiple files", () => {
       expect(result).toEqual({
         manifests: [
           {
-            path: join(tmpDir.path, "foo.json"),
-            index: [],
+            position: { path: join(tmpDir.path, "foo.json"), index: [] },
             issues: [],
             data: { foo: "bar" }
           }
@@ -329,8 +321,7 @@ describe("when validate prop is not a function", () => {
     expect(result).toEqual({
       manifests: [
         {
-          path: join(tmpDir.path, "a.js"),
-          index: [],
+          position: { path: join(tmpDir.path, "a.js"), index: [] },
           issues: [],
           data: { validate: 1 }
         }
@@ -359,8 +350,7 @@ module.exports = value;`
     expect(result).toEqual({
       manifests: [
         {
-          path: join(tmpDir.path, "a.js"),
-          index: [],
+          position: { path: join(tmpDir.path, "a.js"), index: [] },
           issues: [],
           data: { data: 1 }
         }
@@ -377,8 +367,7 @@ module.exports = value;`
     expect(result).toEqual({
       manifests: [
         {
-          path: join(tmpDir.path, "a.js"),
-          index: [],
+          position: { path: join(tmpDir.path, "a.js"), index: [] },
           issues: [],
           data: {}
         }
@@ -408,8 +397,7 @@ module.exports = value;`
     expect(result).toEqual({
       manifests: [
         {
-          path: join(tmpDir.path, "a.js"),
-          index: [],
+          position: { path: join(tmpDir.path, "a.js"), index: [] },
           issues: [
             {
               severity: "error",
@@ -438,8 +426,7 @@ module.exports = value;`
     expect(result).toEqual({
       manifests: [
         {
-          path: join(tmpDir.path, "a.js"),
-          index: [],
+          position: { path: join(tmpDir.path, "a.js"), index: [] },
           issues: [],
           data: {}
         }
@@ -468,8 +455,7 @@ module.exports = value;`
     expect(result).toEqual({
       manifests: [
         {
-          path: join(tmpDir.path, "a.js"),
-          index: [],
+          position: { path: join(tmpDir.path, "a.js"), index: [] },
           issues: [],
           data: { data: 1 }
         }
@@ -573,8 +559,7 @@ describe("when transform is given", () => {
     expect(result).toEqual({
       manifests: [
         {
-          path: join(tmpDir.path, "a.js"),
-          index: [],
+          position: { path: join(tmpDir.path, "a.js"), index: [] },
           issues: [],
           data: { a: 1, b: 2 }
         }
@@ -604,8 +589,7 @@ describe("when validateManifest is given", () => {
     expect(result).toEqual({
       manifests: [
         {
-          path: join(tmpDir.path, "a.js"),
-          index: [],
+          position: { path: join(tmpDir.path, "a.js"), index: [] },
           issues: [{ severity: "error", message: "oops" }],
           data: { a: 1 }
         }
@@ -654,14 +638,12 @@ describe("when validateAllManifests is given", () => {
     expect(result).toEqual({
       manifests: [
         {
-          path: join(tmpDir.path, "a.js"),
-          index: [],
+          position: { path: join(tmpDir.path, "a.js"), index: [] },
           issues: [{ severity: "error", message: "validate error" }],
           data: { a: 1 }
         },
         {
-          path: join(tmpDir.path, "b.js"),
-          index: [],
+          position: { path: join(tmpDir.path, "b.js"), index: [] },
           issues: [{ severity: "error", message: "validate error" }],
           data: { b: 2 }
         }
@@ -680,14 +662,12 @@ describe("when validateAllManifests is given", () => {
     expect(result).toEqual({
       manifests: [
         {
-          path: join(tmpDir.path, "a.js"),
-          index: [],
+          position: { path: join(tmpDir.path, "a.js"), index: [] },
           issues: [{ severity: "error", message: "validate error" }],
           data: { a: 1 }
         },
         {
-          path: join(tmpDir.path, "b.js"),
-          index: [],
+          position: { path: join(tmpDir.path, "b.js"), index: [] },
           issues: [],
           data: { b: 2 }
         }
@@ -707,8 +687,10 @@ describe("when validateAllManifests is given", () => {
 
     assert(err instanceof ResolveError);
     expect(err.message).toEqual("validate error");
-    expect(err.path).toEqual(join(tmpDir.path, "a.js"));
-    expect(err.index).toEqual([]);
+    expect(err.position).toEqual({
+      path: join(tmpDir.path, "a.js"),
+      index: []
+    });
     expect(err.value).toEqual({ a: 1 });
   });
 

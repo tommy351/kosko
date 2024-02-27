@@ -1,6 +1,8 @@
-import { Issue, Manifest, type ManifestToValidate } from "@kosko/generate";
+import type { Issue, Manifest, ManifestToValidate } from "@kosko/generate";
 import type { RuleContext, RuleFactory } from "./rules/types";
 import assert from "node:assert";
+import { ManifestStore } from "./utils/manifest-store";
+import { getManifestMeta } from "@kosko/common-utils";
 
 export interface ReportedIssue {
   manifest: ManifestToValidate;
@@ -30,10 +32,10 @@ export function createManifest(
   const issues: Issue[] = [];
 
   return {
-    path: "",
-    index: [],
+    position: { path: "", index: [] },
     data: value,
     issues,
+    metadata: getManifestMeta(value),
     report(issue) {
       issues.push(issue);
     }
@@ -42,7 +44,7 @@ export function createManifest(
 
 export function validate<T>(
   rule: RuleFactory<T>,
-  config: T,
+  config: T | undefined,
   manifest: ManifestToValidate
 ): ReportedIssue[] {
   const ctx = createTestContext(config);
@@ -56,14 +58,16 @@ export function validate<T>(
 
 export function validateAll<T>(
   rule: RuleFactory<T>,
-  config: T,
+  config: T | undefined,
   manifests: readonly ManifestToValidate[]
 ): ReportedIssue[] {
   const ctx = createTestContext(config);
   const { validateAll } = rule.factory(ctx);
 
   assert(typeof validateAll === "function");
-  validateAll(manifests);
+
+  const store = new ManifestStore(manifests);
+  validateAll(store);
 
   return ctx.issues;
 }

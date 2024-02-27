@@ -1,5 +1,5 @@
 import { createManifest, validate } from "../test-utils";
-import rule from "./no-empty-namespace";
+import rule from "./require-namespace";
 
 test("should pass when data is undefined", () => {
   const manifest = createManifest(undefined);

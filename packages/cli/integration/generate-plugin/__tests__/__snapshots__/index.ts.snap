@@ -61,7 +61,7 @@ metadata:
 
 exports[`when validateAllManifests reports a error should throw an error 1`] = `
 "
-[4mcomponents/pod.js[24m - Kind: v1/ConfigMap, Name: test
+[4mcomponents/pod.js[24m - v1/ConfigMap test
 
 [31m✖ Test error message[39m
 
@@ -78,7 +78,7 @@ metadata:
 
 exports[`when validateAllManifests reports a warning should not throw an error 2`] = `
 "
-[4mcomponents/pod.js[24m - Kind: v1/ConfigMap, Name: test
+[4mcomponents/pod.js[24m - v1/ConfigMap test
 
 [33m⚠ Test warning message[39m
 
@@ -87,7 +87,7 @@ exports[`when validateAllManifests reports a warning should not throw an error 2
 
 exports[`when validateManifest reports a error should throw an error 1`] = `
 "
-[4mcomponents/pod.js[24m - Kind: v1/ConfigMap, Name: test
+[4mcomponents/pod.js[24m - v1/ConfigMap test
 
 [31m✖ Test error message[39m
 
@@ -104,7 +104,7 @@ metadata:
 
 exports[`when validateManifest reports a warning should not throw an error 2`] = `
 "
-[4mcomponents/pod.js[24m - Kind: v1/ConfigMap, Name: test
+[4mcomponents/pod.js[24m - v1/ConfigMap test
 
 [33m⚠ Test warning message[39m
 
@@ -113,7 +113,7 @@ exports[`when validateManifest reports a warning should not throw an error 2`] =
 
 exports[`when validateManifest reports multiple issues should throw an error 1`] = `
 "
-[4mcomponents/pod.js[24m - Kind: v1/ConfigMap, Name: test
+[4mcomponents/pod.js[24m - v1/ConfigMap test
 
 [33m⚠ Test warning 1[39m
 

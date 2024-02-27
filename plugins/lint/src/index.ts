@@ -1,25 +1,27 @@
-import {
-  type PluginContext,
-  type Plugin,
-  ValidateManifest,
-  ValidateAllManifests
-} from "@kosko/plugin";
-import type { RuleContext, RuleFactory } from "./rules/types";
+import type { PluginContext, Plugin } from "@kosko/plugin";
+import type {
+  RuleContext,
+  RuleFactory,
+  ValidateAllFunc,
+  ValidateFunc
+} from "./rules/types";
 import { rules } from "./rules/registry";
 import { validateConfig } from "./config";
+import { ManifestStore } from "./utils/manifest-store";
 
 /**
  * @public
  */
-export default function (ctx: PluginContext): Plugin {
-  const config = validateConfig(ctx.config);
-  const validateRules: ValidateManifest[] = [];
-  const validateAllRules: ValidateAllManifests[] = [];
+export default async function (ctx: PluginContext): Promise<Plugin> {
+  const config = await validateConfig(ctx);
+  const validateRules: ValidateFunc[] = [];
+  const validateAllRules: ValidateAllFunc[] = [];
+  const ruleConfigs = config.rules ?? {};
 
   for (const [key, rule] of Object.entries(
     rules as Record<string, RuleFactory<any>>
   )) {
-    const ruleConfig = config.rules[key];
+    const ruleConfig = ruleConfigs[key];
     if (!ruleConfig) continue;
 
     const severity = ruleConfig.severity ?? "off";
@@ -57,8 +59,10 @@ export default function (ctx: PluginContext): Plugin {
     }),
     ...(validateAllRules.length && {
       validateAllManifests(manifests) {
+        const store = new ManifestStore(manifests);
+
         for (const validate of validateAllRules) {
-          validate(manifests);
+          validate(store);
         }
       }
     })

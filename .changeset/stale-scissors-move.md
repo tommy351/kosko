@@ -2,4 +2,4 @@
 "@kosko/generate": minor
 ---
 
-Add `component` property to `Manifest` interface.
+Add `metadata` property to `Manifest` interface.

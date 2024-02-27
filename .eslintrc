@@ -50,7 +50,8 @@
           "node:path": { "named": true }
         }
       }
-    ]
+    ],
+    "@typescript-eslint/ban-ts-comment": "off"
   },
   "parserOptions": {
     "ecmaVersion": 2018

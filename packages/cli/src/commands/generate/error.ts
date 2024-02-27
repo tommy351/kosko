@@ -77,23 +77,23 @@ function getIssueStats(manifest: Manifest): IssueStats {
 }
 
 function printManifestHeader(cwd: string, manifest: Manifest): void {
-  const { component, index } = manifest;
+  const { metadata, position } = manifest;
   const chunks: string[] = [];
 
-  if (component) {
-    chunks.push(`Kind: ${component.apiVersion}/${component.kind}`);
+  if (metadata) {
+    chunks.push(`${metadata.apiVersion}/${metadata.kind}`);
     chunks.push(
-      `Name: ${component.namespace ? component.namespace + "/" : ""}${component.name}`
+      `${metadata.namespace ? metadata.namespace + "/" : ""}${metadata.name}`
     );
   }
 
-  if (index.length) {
-    chunks.push(`Index: [${index.join(", ")}]`);
+  if (position.index.length) {
+    chunks.push(`[${position.index.join(", ")}]`);
   }
 
   print(
-    pc.underline(prettifyPath(cwd, manifest.path)) +
-      (chunks.length ? ` - ${chunks.join(", ")}` : "")
+    pc.underline(prettifyPath(cwd, position.path)) +
+      (chunks.length ? ` - ${chunks.join(" ")}` : "")
   );
 }
 

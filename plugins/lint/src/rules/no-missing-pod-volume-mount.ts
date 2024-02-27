@@ -1,4 +1,5 @@
-import { getPodSpec } from "../utils/pod";
+import { isStatefulSet } from "../utils/manifest";
+import { collectPodContainers, getPodSpec } from "../utils/pod";
 import { createRule } from "./types";
 
 export default createRule({
@@ -6,11 +7,20 @@ export default createRule({
     return {
       validate(manifest) {
         const podSpec = getPodSpec(manifest.data);
-        if (!podSpec || !podSpec.containers?.length) return;
+        if (!podSpec) return;
 
         const volumeNames = new Set(podSpec.volumes?.map((v) => v.name));
 
-        for (const container of podSpec.containers) {
+        if (isStatefulSet(manifest)) {
+          const volumes = manifest.data.spec?.volumeClaimTemplates ?? [];
+
+          for (const volume of volumes) {
+            const name = volume.metadata?.name;
+            if (name) volumeNames.add(name);
+          }
+        }
+
+        for (const container of collectPodContainers(podSpec)) {
           if (!container.volumeMounts?.length) continue;
 
           for (const volumeMount of container.volumeMounts) {

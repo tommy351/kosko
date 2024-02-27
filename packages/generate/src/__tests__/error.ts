@@ -19,39 +19,26 @@ ${extractStack(err.stack)}`);
   });
 });
 
-describe("when path is given but it is empty", () => {
-  const err = new ResolveError("test", { path: "" });
-
-  test("should not append path to stack", () => {
-    expect(err.stack).not.toEqual(expect.stringContaining("Path:"));
+describe("when position is given", () => {
+  const err = new ResolveError("test", {
+    position: { path: "test path", index: [1, 3, 6] }
   });
-});
 
-describe("when path is given and it is not empty", () => {
-  const err = new ResolveError("test", { path: "test path" });
-
-  test("should append path to stack", () => {
+  test("should append position to stack", () => {
     expect(err.stack).toEqual(`ResolveError: test
     Path: test path
+    Index: [1, 3, 6]
 ${extractStack(err.stack)}`);
   });
 });
 
-describe("when index is given but it is empty", () => {
-  const err = new ResolveError("test", { index: [] });
+describe("when position.index is empty", () => {
+  const err = new ResolveError("test", {
+    position: { path: "test path", index: [] }
+  });
 
   test("should not append index to stack", () => {
     expect(err.stack).not.toEqual(expect.stringContaining("Index: []"));
-  });
-});
-
-describe("when index is given and it is not empty", () => {
-  const err = new ResolveError("test", { index: [1, 3, 6] });
-
-  test("should append index to stack", () => {
-    expect(err.stack).toEqual(`ResolveError: test
-    Index: [1, 3, 6]
-${extractStack(err.stack)}`);
   });
 });
 

@@ -2,17 +2,17 @@
 
 exports[`when bail is not set should print the error 1`] = `
 "
-[4mcomponents/foo.js[24m - Kind: v1/Pod, Name: foo, Index: [0]
+[4mcomponents/foo.js[24m - v1/Pod foo [0]
 
 [31m✖ /spec must have required property 'containers'[39m
 
-[4mcomponents/nginx.js[24m - Kind: apps/v1/Deployment, Name: nginx, Index: [0]
+[4mcomponents/nginx.js[24m - apps/v1/Deployment nginx [0]
 
 [31m✖ /spec must have required property 'selector'[39m
 
 [31m✖ /spec must have required property 'template'[39m
 
-[4mcomponents/nginx.js[24m - Kind: v1/Service, Name: nginx, Index: [1]
+[4mcomponents/nginx.js[24m - v1/Service nginx [1]
 
 [31m✖ /spec/ports/0/port must be integer[39m
 
@@ -24,11 +24,11 @@ exports[`when bail is not set should print the error 1`] = `
 
 exports[`when bail is true should print the error 1`] = `
 "
-[4mcomponents/foo.js[24m - Kind: v1/Pod, Name: foo, Index: [0]
+[4mcomponents/foo.js[24m - v1/Pod foo [0]
 
 [31m✖ /spec must have required property 'containers'[39m
 
-[4mcomponents/nginx.js[24m - Kind: apps/v1/Deployment, Name: nginx, Index: [0]
+[4mcomponents/nginx.js[24m - apps/v1/Deployment nginx [0]
 
 [31m✖ /spec must have required property 'selector'[39m
 

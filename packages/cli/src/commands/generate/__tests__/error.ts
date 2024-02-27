@@ -18,8 +18,7 @@ test("single error issue", () => {
     printIssues("", {
       manifests: [
         {
-          path: "components/foo.ts",
-          index: [],
+          position: { path: "components/foo.ts", index: [] },
           data: {},
           issues: [
             {
@@ -39,8 +38,7 @@ test("single warning issue", () => {
   printIssues("", {
     manifests: [
       {
-        path: "components/foo.ts",
-        index: [],
+        position: { path: "components/foo.ts", index: [] },
         data: {},
         issues: [
           {
@@ -55,13 +53,12 @@ test("single warning issue", () => {
   expect(stderr.toString()).toMatchSnapshot();
 });
 
-test("manifest contains component info", () => {
+test("manifest contains metadata", () => {
   expect(() => {
     printIssues("", {
       manifests: [
         {
-          path: "components/foo.ts",
-          index: [],
+          position: { path: "components/foo.ts", index: [] },
           data: {},
           issues: [
             {
@@ -69,7 +66,7 @@ test("manifest contains component info", () => {
               message: "Error message"
             }
           ],
-          component: {
+          metadata: {
             apiVersion: "v1",
             kind: "Pod",
             name: "foo"
@@ -82,13 +79,12 @@ test("manifest contains component info", () => {
   expect(stderr.toString()).toMatchSnapshot();
 });
 
-test("component info contains namespace", () => {
+test("metadata contains namespace", () => {
   expect(() => {
     printIssues("", {
       manifests: [
         {
-          path: "components/foo.ts",
-          index: [],
+          position: { path: "components/foo.ts", index: [] },
           data: {},
           issues: [
             {
@@ -96,7 +92,7 @@ test("component info contains namespace", () => {
               message: "Error message"
             }
           ],
-          component: {
+          metadata: {
             apiVersion: "v1",
             kind: "Pod",
             namespace: "default",
@@ -115,8 +111,7 @@ test("index is not empty", () => {
     printIssues("", {
       manifests: [
         {
-          path: "components/foo.ts",
-          index: [2, 4],
+          position: { path: "components/foo.ts", index: [2, 4] },
           data: {},
           issues: [
             {
@@ -132,13 +127,12 @@ test("index is not empty", () => {
   expect(stderr.toString()).toMatchSnapshot();
 });
 
-test("component info and index are present", () => {
+test("metadata and index are present", () => {
   expect(() => {
     printIssues("", {
       manifests: [
         {
-          path: "components/foo.ts",
-          index: [2, 4],
+          position: { path: "components/foo.ts", index: [2, 4] },
           data: {},
           issues: [
             {
@@ -146,7 +140,7 @@ test("component info and index are present", () => {
               message: "Error message"
             }
           ],
-          component: {
+          metadata: {
             apiVersion: "v1",
             kind: "Pod",
             name: "foo"
@@ -164,14 +158,12 @@ test("ignore manifests without issues", () => {
     printIssues("", {
       manifests: [
         {
-          path: "components/foo.ts",
-          index: [],
+          position: { path: "components/foo.ts", index: [] },
           data: {},
           issues: []
         },
         {
-          path: "components/bar.ts",
-          index: [],
+          position: { path: "components/bar.ts", index: [] },
           data: {},
           issues: [
             {
@@ -192,8 +184,7 @@ test("issue contains a string cause", () => {
     printIssues("", {
       manifests: [
         {
-          path: "components/foo.ts",
-          index: [],
+          position: { path: "components/foo.ts", index: [] },
           data: {},
           issues: [
             {
@@ -215,8 +206,7 @@ test("issue contains an object cause", () => {
     printIssues("", {
       manifests: [
         {
-          path: "components/foo.ts",
-          index: [],
+          position: { path: "components/foo.ts", index: [] },
           data: {},
           issues: [
             {
@@ -245,8 +235,7 @@ test("issue contains a Error class cause", () => {
     printIssues("", {
       manifests: [
         {
-          path: "components/foo.ts",
-          index: [],
+          position: { path: "components/foo.ts", index: [] },
           data: {},
           issues: [
             {
@@ -268,8 +257,7 @@ test("cause is a empty object", () => {
     printIssues("", {
       manifests: [
         {
-          path: "components/foo.ts",
-          index: [],
+          position: { path: "components/foo.ts", index: [] },
           data: {},
           issues: [
             {
@@ -291,8 +279,7 @@ test("multiple issues", () => {
     printIssues("", {
       manifests: [
         {
-          path: "components/foo.ts",
-          index: [],
+          position: { path: "components/foo.ts", index: [] },
           data: {},
           issues: [
             {
@@ -310,8 +297,7 @@ test("multiple issues", () => {
           ]
         },
         {
-          path: "components/bar.ts",
-          index: [],
+          position: { path: "components/bar.ts", index: [] },
           data: {},
           issues: [
             {
@@ -332,8 +318,7 @@ test("cwd is not empty", () => {
     printIssues("/foo/bar", {
       manifests: [
         {
-          path: "/foo/bar/components/foo.ts",
-          index: [],
+          position: { path: "/foo/bar/components/foo.ts", index: [] },
           data: {},
           issues: [
             {
@@ -343,8 +328,7 @@ test("cwd is not empty", () => {
           ]
         },
         {
-          path: "/abc/def/components/bar.ts",
-          index: [],
+          position: { path: "/abc/def/components/bar.ts", index: [] },
           data: {},
           issues: [
             {

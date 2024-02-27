@@ -1,11 +1,10 @@
 import type { Issue, Manifest, ManifestToValidate } from "./base";
 import logger, { LogLevel } from "@kosko/log";
 import { ResolveError } from "./error";
-import { isRecord } from "@kosko/common-utils";
+import { isRecord, getManifestMeta } from "@kosko/common-utils";
 import pLimit from "p-limit";
 import { validateConcurrency } from "./utils";
 import { ajvValidationErrorToIssues, isAjvValidationError } from "./ajv";
-import { buildComponentInfo } from "./component";
 
 interface Validator {
   validate(): void | Promise<void>;
@@ -125,8 +124,7 @@ export function reportManifestIssue({
     }
 
     throw new ResolveError(issue.message, {
-      path: manifest.path,
-      index: manifest.index,
+      position: manifest.position,
       value: manifest.data,
       cause: issue.cause
     });
@@ -228,8 +226,7 @@ async function doResolve(value: unknown, options: ResolveOptions) {
       if (cause instanceof ResolveError) throw cause;
 
       throw new ResolveError(message, {
-        path,
-        index,
+        position: { path, index },
         value,
         cause
       });
@@ -237,8 +234,7 @@ async function doResolve(value: unknown, options: ResolveOptions) {
 
     return [
       {
-        path,
-        index,
+        position: { path, index },
         data: value,
         issues: [
           {
@@ -310,10 +306,9 @@ async function doResolve(value: unknown, options: ResolveOptions) {
   }
 
   let manifest: Manifest = {
-    path,
-    index,
+    position: { path, index },
+    metadata: getManifestMeta(value),
     data: value,
-    component: buildComponentInfo(value),
     issues: []
   };
 
@@ -337,7 +332,7 @@ async function doResolve(value: unknown, options: ResolveOptions) {
       manifest = {
         ...manifest,
         data: newValue,
-        component: buildComponentInfo(newValue)
+        metadata: getManifestMeta(newValue)
       };
     } catch (err) {
       return handleError(err, "An error occurred in transform function");

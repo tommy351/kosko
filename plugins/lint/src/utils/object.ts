@@ -10,3 +10,13 @@ export function getObjectValue(obj: unknown, keys: readonly string[]): unknown {
 
   return value;
 }
+
+export function shallowObjectEqual(
+  a: Record<string, unknown>,
+  b: Record<string, unknown>
+): boolean {
+  return (
+    Object.keys(a).length === Object.keys(b).length &&
+    Object.keys(a).every((k) => a[k] === b[k])
+  );
+}

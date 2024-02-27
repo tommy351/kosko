@@ -2,10 +2,12 @@ import { createManifest, validate } from "../test-utils";
 import rule from "./no-missing-pod-volume-mount";
 import { Pod } from "kubernetes-models/v1/Pod";
 import { Deployment } from "kubernetes-models/apps/v1/Deployment";
+import { StatefulSet } from "kubernetes-models/apps/v1/StatefulSet";
 
 test("should pass when containers is empty", () => {
   const manifest = createManifest(
     new Pod({
+      metadata: { name: "test" },
       spec: {
         containers: []
       }
@@ -18,7 +20,7 @@ test("should pass when containers is empty", () => {
 test("should pass when containers is undefined", () => {
   const manifest = createManifest(
     new Pod({
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      metadata: { name: "test" },
       // @ts-expect-error
       spec: {}
     })
@@ -30,6 +32,7 @@ test("should pass when containers is undefined", () => {
 test("should report when volumeMounts is defined but volumes is empty", () => {
   const manifest = createManifest(
     new Pod({
+      metadata: { name: "test" },
       spec: {
         containers: [
           {
@@ -53,6 +56,7 @@ test("should report when volumeMounts is defined but volumes is empty", () => {
 test("should report when volumeMounts is defined but volumes does not contain the volume", () => {
   const manifest = createManifest(
     new Pod({
+      metadata: { name: "test" },
       spec: {
         containers: [
           {
@@ -77,6 +81,7 @@ test("should report when volumeMounts is defined but volumes does not contain th
 test("should support multiple containers", () => {
   const manifest = createManifest(
     new Pod({
+      metadata: { name: "test" },
       spec: {
         containers: [
           {
@@ -125,6 +130,7 @@ test("should validate Pod-like objects", () => {
   const manifest = createManifest({
     apiVersion: "v1",
     kind: "Pod",
+    metadata: { name: "test" },
     spec: {
       containers: [
         {
@@ -147,6 +153,7 @@ test("should validate Pod-like objects", () => {
 test("should validate Deployment", () => {
   const manifest = createManifest(
     new Deployment({
+      metadata: { name: "test" },
       spec: {
         selector: {},
         template: {
@@ -170,4 +177,32 @@ test("should validate Deployment", () => {
       message: `Volume "foo" is not defined in volumes.`
     }
   ]);
+});
+
+describe("StatefulSet", () => {
+  test("should pass when volumeClaimTemplates includes the volume name", () => {
+    const manifest = createManifest(
+      new StatefulSet({
+        metadata: { name: "test" },
+        spec: {
+          selector: {},
+          serviceName: "test",
+          template: {
+            spec: {
+              containers: [
+                {
+                  name: "test",
+                  image: "test",
+                  volumeMounts: [{ name: "foo", mountPath: "/test" }]
+                }
+              ]
+            }
+          },
+          volumeClaimTemplates: [{ metadata: { name: "foo" } }]
+        }
+      })
+    );
+
+    expect(validate(rule, undefined, manifest)).toBeEmpty();
+  });
 });

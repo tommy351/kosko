@@ -1,62 +1,26 @@
-import { isRecord } from "@kosko/common-utils";
+import { apiVersionToGroup, isRecord } from "@kosko/common-utils";
 import type { IPodSpec } from "kubernetes-models/v1/PodSpec";
 import { getObjectValue } from "./object";
+import type { PartialDeep } from "type-fest";
+import type { IContainer } from "kubernetes-models/v1/Container";
+import type { ResourcePath } from "./manifest";
+import { getDeploymentLikeSpec } from "./deployment";
 
-interface PodSpecResource {
-  apiVersion: string;
-  kind: string;
-  keys: readonly string[];
-}
-
-const podSpecResources: PodSpecResource[] = [
+const podSpecResources: ResourcePath[] = [
   {
-    apiVersion: "v1",
+    apiGroup: "",
     kind: "Pod",
     keys: ["spec"]
-  },
-  {
-    apiVersion: "v1",
-    kind: "ReplicationController",
-    keys: ["spec", "template", "spec"]
-  },
-  {
-    apiVersion: "apps/v1",
-    kind: "Deployment",
-    keys: ["spec", "template", "spec"]
-  },
-  {
-    apiVersion: "apps/v1",
-    kind: "StatefulSet",
-    keys: ["spec", "template", "spec"]
-  },
-  {
-    apiVersion: "apps/v1",
-    kind: "DaemonSet",
-    keys: ["spec", "template", "spec"]
-  },
-  {
-    apiVersion: "apps/v1",
-    kind: "ReplicaSet",
-    keys: ["spec", "template", "spec"]
-  },
-  {
-    apiVersion: "batch/v1",
-    kind: "Job",
-    keys: ["spec", "template", "spec"]
-  },
-  {
-    apiVersion: "batch/v1",
-    kind: "CronJob",
-    keys: ["spec", "jobTemplate", "spec", "template", "spec"]
   }
 ];
 
-export function getPodSpec(value: unknown): IPodSpec | undefined {
+export function getPodSpec(value: unknown): PartialDeep<IPodSpec> | undefined {
   if (!isRecord(value)) return;
 
   for (const resource of podSpecResources) {
     if (
-      value.apiVersion === resource.apiVersion &&
+      typeof value.apiVersion === "string" &&
+      apiVersionToGroup(value.apiVersion) === resource.apiGroup &&
       value.kind === resource.kind
     ) {
       const podSpec = getObjectValue(value, resource.keys);
@@ -66,4 +30,20 @@ export function getPodSpec(value: unknown): IPodSpec | undefined {
       }
     }
   }
+
+  const deployment = getDeploymentLikeSpec(value);
+
+  if (deployment) {
+    return deployment.template?.spec;
+  }
+}
+
+export function collectPodContainers(
+  podSpec: PartialDeep<IPodSpec>
+): PartialDeep<IContainer>[] {
+  return [
+    ...(podSpec.containers ?? []),
+    ...(podSpec.initContainers ?? []),
+    ...(podSpec.ephemeralContainers ?? [])
+  ];
 }

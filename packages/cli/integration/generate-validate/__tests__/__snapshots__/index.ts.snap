@@ -10,7 +10,7 @@ spec: {}"
 
 exports[`when validate is not set should print the error 1`] = `
 "
-[4mcomponents/foo.js[24m - Kind: v1/Pod, Name: foo
+[4mcomponents/foo.js[24m - v1/Pod foo
 
 [31m✖ /spec must have required property 'containers'[39m
 
@@ -20,7 +20,7 @@ exports[`when validate is not set should print the error 1`] = `
 
 exports[`when validate is true should print the error 1`] = `
 "
-[4mcomponents/foo.js[24m - Kind: v1/Pod, Name: foo
+[4mcomponents/foo.js[24m - v1/Pod foo
 
 [31m✖ /spec must have required property 'containers'[39m
 

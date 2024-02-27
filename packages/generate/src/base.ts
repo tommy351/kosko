@@ -1,3 +1,5 @@
+import type { ManifestMeta } from "@kosko/common-utils";
+
 /**
  * @public
  */
@@ -11,11 +13,16 @@ export interface Result {
 /**
  * @public
  */
-export interface ComponentInfo {
-  apiVersion: string;
-  kind: string;
-  name: string;
-  namespace?: string;
+export interface ManifestPosition {
+  /**
+   * Path of the source file.
+   */
+  path: string;
+
+  /**
+   * Index of the manifest in the source file.
+   */
+  index: number[];
 }
 
 /**
@@ -23,24 +30,20 @@ export interface ComponentInfo {
  */
 export interface BaseManifest {
   /**
-   * Source path of a manifest.
+   * Manifest position.
    */
-  path: string;
+  position: ManifestPosition;
 
   /**
-   * Source index of a manifest.
+   * Manifest metadata. This value is undefined when data is not a valid
+   * Kubernetes object.
    */
-  index: number[];
+  metadata?: ManifestMeta;
 
   /**
    * Manifest data.
    */
   data: unknown;
-
-  /**
-   * Component info.
-   */
-  component?: ComponentInfo;
 }
 
 /**

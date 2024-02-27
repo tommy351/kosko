@@ -7,33 +7,33 @@ import { ValidationError } from "ajv";
 
 test("value is an object", async () => {
   await expect(resolve({ foo: "bar" })).resolves.toEqual([
-    { path: "", index: [], issues: [], data: { foo: "bar" } }
+    { position: { path: "", index: [] }, issues: [], data: { foo: "bar" } }
   ]);
 });
 
 test("value is an array", async () => {
   await expect(resolve([{ a: "b" }, { c: "d" }])).resolves.toEqual([
-    { path: "", index: [0], issues: [], data: { a: "b" } },
-    { path: "", index: [1], issues: [], data: { c: "d" } }
+    { position: { path: "", index: [0] }, issues: [], data: { a: "b" } },
+    { position: { path: "", index: [1] }, issues: [], data: { c: "d" } }
   ]);
 });
 
 test("value is a function that returns an object", async () => {
   await expect(resolve(() => ({ foo: "bar" }))).resolves.toEqual([
-    { path: "", index: [], issues: [], data: { foo: "bar" } }
+    { position: { path: "", index: [] }, issues: [], data: { foo: "bar" } }
   ]);
 });
 
 test("value is a function that returns an array", async () => {
   await expect(resolve(() => [{ a: "b" }, { c: "d" }])).resolves.toEqual([
-    { path: "", index: [0], issues: [], data: { a: "b" } },
-    { path: "", index: [1], issues: [], data: { c: "d" } }
+    { position: { path: "", index: [0] }, issues: [], data: { a: "b" } },
+    { position: { path: "", index: [1] }, issues: [], data: { c: "d" } }
   ]);
 });
 
 test("value is a function that returns a Promise", async () => {
   await expect(resolve(async () => ({ foo: "bar" }))).resolves.toEqual([
-    { path: "", index: [], issues: [], data: { foo: "bar" } }
+    { position: { path: "", index: [] }, issues: [], data: { foo: "bar" } }
   ]);
 });
 
@@ -50,8 +50,7 @@ describe("when value is a function that throws an error", () => {
       })
     ).resolves.toEqual([
       {
-        path: "test",
-        index: [5],
+        position: { path: "test", index: [5] },
         data: value,
         issues: [
           {
@@ -71,8 +70,7 @@ describe("when value is a function that throws an error", () => {
 
     assert(err instanceof ResolveError);
     expect(err.message).toEqual("Input function value threw an error");
-    expect(err.path).toEqual("test");
-    expect(err.index).toEqual([5]);
+    expect(err.position).toEqual({ path: "test", index: [5] });
     expect(err.value).toEqual(value);
     expect(err.cause).toEqual(new Error("err"));
   });
@@ -85,8 +83,7 @@ describe("when value is a function that returns a rejected promise", () => {
     await expect(resolve(value, { path: "test", index: [5] })).resolves.toEqual(
       [
         {
-          path: "test",
-          index: [5],
+          position: { path: "test", index: [5] },
           data: value,
           issues: [
             {
@@ -111,8 +108,7 @@ describe("when value is a function that returns a rejected promise", () => {
 
     assert(err instanceof ResolveError);
     expect(err.message).toEqual("Input function value threw an error");
-    expect(err.path).toEqual("test");
-    expect(err.index).toEqual([5]);
+    expect(err.position).toEqual({ path: "test", index: [5] });
     expect(err.value).toEqual(value);
     expect(err.cause).toEqual(new Error("err"));
   });
@@ -120,7 +116,7 @@ describe("when value is a function that returns a rejected promise", () => {
 
 test("value is a resolved Promise", async () => {
   await expect(resolve(Promise.resolve({ foo: "bar" }))).resolves.toEqual([
-    { path: "", index: [], issues: [], data: { foo: "bar" } }
+    { position: { path: "", index: [] }, issues: [], data: { foo: "bar" } }
   ]);
 });
 
@@ -131,8 +127,7 @@ describe("when value is a rejected promise", () => {
     await expect(resolve(value, { path: "test", index: [5] })).resolves.toEqual(
       [
         {
-          path: "test",
-          index: [5],
+          position: { path: "test", index: [5] },
           data: value,
           issues: [
             {
@@ -153,8 +148,7 @@ describe("when value is a rejected promise", () => {
 
     assert(err instanceof ResolveError);
     expect(err.message).toEqual("Input promise value rejected");
-    expect(err.path).toEqual("test");
-    expect(err.index).toEqual([5]);
+    expect(err.position).toEqual({ path: "test", index: [5] });
     expect(err.value).toEqual(value);
     expect(err.cause).toEqual(new Error("err"));
   });
@@ -162,8 +156,8 @@ describe("when value is a rejected promise", () => {
 
 test("value is a Set", async () => {
   await expect(resolve(new Set([{ a: "b" }, { c: "d" }]))).resolves.toEqual([
-    { path: "", index: [0], issues: [], data: { a: "b" } },
-    { path: "", index: [1], issues: [], data: { c: "d" } }
+    { position: { path: "", index: [0] }, issues: [], data: { a: "b" } },
+    { position: { path: "", index: [1] }, issues: [], data: { c: "d" } }
   ]);
 });
 
@@ -174,8 +168,8 @@ test("value is a generator function", async () => {
   }
 
   await expect(resolve(value)).resolves.toEqual([
-    { path: "", index: [0], issues: [], data: { a: "b" } },
-    { path: "", index: [1], issues: [], data: { c: "d" } }
+    { position: { path: "", index: [0] }, issues: [], data: { a: "b" } },
+    { position: { path: "", index: [1] }, issues: [], data: { c: "d" } }
   ]);
 });
 
@@ -192,8 +186,7 @@ describe("when value is a generator function that throws an error", () => {
     });
 
     expect(result).toHaveLength(1);
-    expect(result[0].path).toEqual("test");
-    expect(result[0].index).toEqual([5]);
+    expect(result[0].position).toEqual({ path: "test", index: [5] });
     expect(result[0].issues).toEqual([
       {
         severity: "error",
@@ -214,8 +207,7 @@ describe("when value is a generator function that throws an error", () => {
 
     assert(err instanceof ResolveError);
     expect(err.message).toEqual("Input iterable value threw an error");
-    expect(err.path).toEqual("test");
-    expect(err.index).toEqual([5]);
+    expect(err.position).toEqual({ path: "test", index: [5] });
     expect(err.cause).toEqual(new Error("err"));
     // TODO: Assert `err.value`
   });
@@ -228,8 +220,8 @@ test("value is an async generator function", async () => {
   }
 
   await expect(resolve(value)).resolves.toEqual([
-    { path: "", index: [0], issues: [], data: { a: "b" } },
-    { path: "", index: [1], issues: [], data: { c: "d" } }
+    { position: { path: "", index: [0] }, issues: [], data: { a: "b" } },
+    { position: { path: "", index: [1] }, issues: [], data: { c: "d" } }
   ]);
 });
 
@@ -246,8 +238,7 @@ describe("when value is an async generator function that throws an error", () =>
     });
 
     expect(result).toHaveLength(1);
-    expect(result[0].path).toEqual("test");
-    expect(result[0].index).toEqual([5]);
+    expect(result[0].position).toEqual({ path: "test", index: [5] });
     expect(result[0].issues).toEqual([
       {
         severity: "error",
@@ -273,8 +264,7 @@ describe("when value is an async generator function that throws an error", () =>
 
     assert(err instanceof ResolveError);
     expect(err.message).toEqual("Input async iterable value threw an error");
-    expect(err.path).toEqual("test");
-    expect(err.index).toEqual([5]);
+    expect(err.position).toEqual({ path: "test", index: [5] });
     expect(err.cause).toEqual(new Error("err"));
     // TODO: Assert `err.value`
   });
@@ -282,19 +272,19 @@ describe("when value is an async generator function that throws an error", () =>
 
 test("value is undefined", async () => {
   await expect(resolve(undefined)).resolves.toEqual([
-    { path: "", index: [], issues: [], data: undefined }
+    { position: { path: "", index: [] }, issues: [], data: undefined }
   ]);
 });
 
 test("value is null", async () => {
   await expect(resolve(null)).resolves.toEqual([
-    { path: "", index: [], issues: [], data: null }
+    { position: { path: "", index: [] }, issues: [], data: null }
   ]);
 });
 
 test("value is a string", async () => {
   await expect(resolve("foo")).resolves.toEqual([
-    { path: "", index: [], issues: [], data: "foo" }
+    { position: { path: "", index: [] }, issues: [], data: "foo" }
   ]);
 });
 
@@ -312,13 +302,13 @@ test("value is nested", async () => {
       async () => [{ f: 6 }, { g: 7 }]
     ])
   ).resolves.toEqual([
-    { path: "", index: [0], issues: [], data: { a: 1 } },
-    { path: "", index: [1], issues: [], data: { b: 2 } },
-    { path: "", index: [2, 0], issues: [], data: { c: 3 } },
-    { path: "", index: [2, 1], issues: [], data: { d: 4 } },
-    { path: "", index: [3], issues: [], data: { e: 5 } },
-    { path: "", index: [4, 0], issues: [], data: { f: 6 } },
-    { path: "", index: [4, 1], issues: [], data: { g: 7 } }
+    { position: { path: "", index: [0] }, issues: [], data: { a: 1 } },
+    { position: { path: "", index: [1] }, issues: [], data: { b: 2 } },
+    { position: { path: "", index: [2, 0] }, issues: [], data: { c: 3 } },
+    { position: { path: "", index: [2, 1] }, issues: [], data: { d: 4 } },
+    { position: { path: "", index: [3] }, issues: [], data: { e: 5 } },
+    { position: { path: "", index: [4, 0] }, issues: [], data: { f: 6 } },
+    { position: { path: "", index: [4, 1] }, issues: [], data: { g: 7 } }
   ]);
 });
 
@@ -346,8 +336,7 @@ describe("when validate method throws an error", () => {
     await expect(resolve(value, { path: "test", index: [5] })).resolves.toEqual(
       [
         {
-          path: "test",
-          index: [5],
+          position: { path: "test", index: [5] },
           data: value,
           issues: [
             {
@@ -368,8 +357,7 @@ describe("when validate method throws an error", () => {
 
     assert(err instanceof ResolveError);
     expect(err.message).toEqual("Validation error");
-    expect(err.path).toEqual("test");
-    expect(err.index).toEqual([5]);
+    expect(err.position).toEqual({ path: "test", index: [5] });
     expect(err.value).toEqual(value);
     expect(err.cause).toEqual(new Error("err"));
   });
@@ -387,8 +375,7 @@ describe("when validate returns a rejected promise", () => {
     await expect(resolve(value, { path: "test", index: [5] })).resolves.toEqual(
       [
         {
-          path: "test",
-          index: [5],
+          position: { path: "test", index: [5] },
           data: value,
           issues: [
             {
@@ -409,8 +396,7 @@ describe("when validate returns a rejected promise", () => {
 
     assert(err instanceof ResolveError);
     expect(err.message).toEqual("Validation error");
-    expect(err.path).toEqual("test");
-    expect(err.index).toEqual([5]);
+    expect(err.position).toEqual({ path: "test", index: [5] });
     expect(err.value).toEqual(value);
     expect(err.cause).toEqual(new Error("err"));
   });
@@ -435,8 +421,16 @@ test("set path and index", async () => {
   await expect(
     resolve([{ a: "b" }, { c: "d" }], { path: "foo", index: [9, 8] })
   ).resolves.toEqual([
-    { path: "foo", index: [9, 8, 0], issues: [], data: { a: "b" } },
-    { path: "foo", index: [9, 8, 1], issues: [], data: { c: "d" } }
+    {
+      position: { path: "foo", index: [9, 8, 0] },
+      issues: [],
+      data: { a: "b" }
+    },
+    {
+      position: { path: "foo", index: [9, 8, 1] },
+      issues: [],
+      data: { c: "d" }
+    }
   ]);
 });
 
@@ -464,10 +458,9 @@ describe("when multiple validation errors occur", () => {
 
   test("should add issues", async () => {
     await expect(resolve(values)).resolves.toEqual([
-      { path: "", index: [0], issues: [], data: values[0] },
+      { position: { path: "", index: [0] }, issues: [], data: values[0] },
       {
-        path: "",
-        index: [1],
+        position: { path: "", index: [1] },
         issues: [
           {
             severity: "error",
@@ -477,10 +470,9 @@ describe("when multiple validation errors occur", () => {
         ],
         data: values[1]
       },
-      { path: "", index: [2], issues: [], data: values[2] },
+      { position: { path: "", index: [2] }, issues: [], data: values[2] },
       {
-        path: "",
-        index: [3],
+        position: { path: "", index: [3] },
         issues: [
           {
             severity: "error",
@@ -490,16 +482,15 @@ describe("when multiple validation errors occur", () => {
         ],
         data: values[3]
       },
-      { path: "", index: [4], issues: [], data: values[4] }
+      { position: { path: "", index: [4] }, issues: [], data: values[4] }
     ]);
   });
 
   test("should stop on the first error when bail = true", async () => {
     await expect(resolve(values, { bail: true })).resolves.toEqual([
-      { path: "", index: [0], issues: [], data: values[0] },
+      { position: { path: "", index: [0] }, issues: [], data: values[0] },
       {
-        path: "",
-        index: [1],
+        position: { path: "", index: [1] },
         issues: [
           {
             severity: "error",
@@ -509,8 +500,8 @@ describe("when multiple validation errors occur", () => {
         ],
         data: values[1]
       },
-      { path: "", index: [2], issues: [], data: values[2] },
-      { path: "", index: [4], issues: [], data: values[4] }
+      { position: { path: "", index: [2] }, issues: [], data: values[2] },
+      { position: { path: "", index: [4] }, issues: [], data: values[4] }
     ]);
   });
 
@@ -521,20 +512,25 @@ describe("when multiple validation errors occur", () => {
 
     assert(err instanceof AggregateError);
 
-    const expected = [
+    const expectations = [
       { value: values[1], index: [9, 8, 1], cause: new Error("first err") },
       { value: values[3], index: [9, 8, 3], cause: new Error("second err") }
     ];
 
-    expect(err.errors).toHaveLength(expected.length);
+    expect(err.errors).toHaveLength(expectations.length);
 
-    for (let index = 0; index < expected.length; index++) {
+    for (let index = 0; index < expectations.length; index++) {
       const actual = err.errors[index];
+      const expected = expectations[index];
 
       assert(actual instanceof ResolveError);
       expect(actual.message).toEqual("Validation error");
-      expect(actual.path).toEqual("test");
-      expect(actual).toEqual(expect.objectContaining(expected[index]));
+      expect(actual.position).toEqual({
+        path: "test",
+        index: expected.index
+      });
+      expect(actual.value).toEqual(expected.value);
+      expect(actual.cause).toEqual(expected.cause);
     }
   });
 
@@ -574,13 +570,13 @@ describe("when concurrency = 1", () => {
         { concurrency: 1 }
       )
     ).resolves.toEqual([
-      { path: "", index: [0], issues: [], data: { a: 1 } },
-      { path: "", index: [1], issues: [], data: { b: 2 } },
-      { path: "", index: [2, 0], issues: [], data: { c: 3 } },
-      { path: "", index: [2, 1], issues: [], data: { d: 4 } },
-      { path: "", index: [3], issues: [], data: { e: 5 } },
-      { path: "", index: [4, 0], issues: [], data: { f: 6 } },
-      { path: "", index: [4, 1], issues: [], data: { g: 7 } }
+      { position: { path: "", index: [0] }, issues: [], data: { a: 1 } },
+      { position: { path: "", index: [1] }, issues: [], data: { b: 2 } },
+      { position: { path: "", index: [2, 0] }, issues: [], data: { c: 3 } },
+      { position: { path: "", index: [2, 1] }, issues: [], data: { d: 4 } },
+      { position: { path: "", index: [3] }, issues: [], data: { e: 5 } },
+      { position: { path: "", index: [4, 0] }, issues: [], data: { f: 6 } },
+      { position: { path: "", index: [4, 1] }, issues: [], data: { g: 7 } }
     ]);
   });
 });
@@ -590,10 +586,11 @@ test("transform a manifest", async () => {
 
   await expect(
     resolve(1, { path: "foo", index: [5], transform })
-  ).resolves.toEqual([{ path: "foo", index: [5], issues: [], data: 2 }]);
+  ).resolves.toEqual([
+    { position: { path: "foo", index: [5] }, issues: [], data: 2 }
+  ]);
   expect(transform).toHaveBeenCalledWith({
-    path: "foo",
-    index: [5],
+    position: { path: "foo", index: [5] },
     issues: [],
     data: 1
   });
@@ -606,9 +603,9 @@ test("transform multiple manifests", async () => {
       transform: (manifest) => (manifest.data as number) + 1
     })
   ).resolves.toEqual([
-    { path: "", index: [0], issues: [], data: 2 },
-    { path: "", index: [1], issues: [], data: 3 },
-    { path: "", index: [2], issues: [], data: 4 }
+    { position: { path: "", index: [0] }, issues: [], data: 2 },
+    { position: { path: "", index: [1] }, issues: [], data: 3 },
+    { position: { path: "", index: [2] }, issues: [], data: 4 }
   ]);
 });
 
@@ -617,7 +614,9 @@ test("transform returns a Promise", async () => {
     resolve(1, {
       transform: async (manifest) => (manifest.data as number) + 1
     })
-  ).resolves.toEqual([{ path: "", index: [], issues: [], data: 2 }]);
+  ).resolves.toEqual([
+    { position: { path: "", index: [] }, issues: [], data: 2 }
+  ]);
 });
 
 test("transform returns null", async () => {
@@ -649,8 +648,7 @@ test("should add an issue when the transform function throws an error", async ()
     })
   ).resolves.toEqual([
     {
-      path: "test",
-      index: [5],
+      position: { path: "test", index: [5] },
       data: 1,
       issues: [
         {
@@ -678,8 +676,7 @@ test("should throw ResolveError when the transform function throws an error and 
 
   assert(err instanceof ResolveError);
   expect(err.message).toEqual("An error occurred in transform function");
-  expect(err.path).toEqual("test");
-  expect(err.index).toEqual([5]);
+  expect(err.position).toEqual({ path: "test", index: [5] });
   expect(err.cause).toEqual(cause);
   expect(err.value).toEqual(1);
 });
@@ -697,8 +694,7 @@ test("should not run validate method when transform fails", async () => {
     })
   ).resolves.toEqual([
     {
-      path: "",
-      index: [],
+      position: { path: "", index: [] },
       data: value,
       issues: [
         {
@@ -716,7 +712,7 @@ test("when validateManifest does not report any issue", async () => {
   const value = { foo: "bar" };
 
   await expect(resolve(value, { validateManifest: () => {} })).resolves.toEqual(
-    [{ path: "", index: [], issues: [], data: value }]
+    [{ position: { path: "", index: [] }, issues: [], data: value }]
   );
 });
 
@@ -737,8 +733,7 @@ test("when validateManifest reports a warning", async () => {
     })
   ).resolves.toEqual([
     {
-      path: "test",
-      index: [5],
+      position: { path: "test", index: [5] },
       data: value,
       issues: [
         {
@@ -768,8 +763,7 @@ describe("when validateManifest reports an error", () => {
   test("should add an issue", async () => {
     await expect(resolve(value, options)).resolves.toEqual([
       {
-        path: options.path,
-        index: options.index,
+        position: { path: options.path, index: options.index },
         data: value,
         issues: [
           {
@@ -789,8 +783,7 @@ describe("when validateManifest reports an error", () => {
 
     assert(err instanceof ResolveError);
     expect(err.message).toEqual("test error");
-    expect(err.path).toEqual(options.path);
-    expect(err.index).toEqual(options.index);
+    expect(err.position).toEqual({ path: options.path, index: options.index });
     expect(err.value).toEqual(value);
     expect(err.cause).toEqual(new ResolveError("err"));
   });
@@ -823,8 +816,7 @@ describe("when validateManifest reports a warning, an error, then a warning", ()
   test("should add issues", async () => {
     await expect(resolve(value, options)).resolves.toEqual([
       {
-        path: options.path,
-        index: options.index,
+        position: { path: options.path, index: options.index },
         data: value,
         issues: [
           {
@@ -854,8 +846,7 @@ describe("when validateManifest reports a warning, an error, then a warning", ()
 
     assert(err instanceof ResolveError);
     expect(err.message).toEqual("error one");
-    expect(err.path).toEqual(options.path);
-    expect(err.index).toEqual(options.index);
+    expect(err.position).toEqual({ path: options.path, index: options.index });
     expect(err.value).toEqual(value);
     expect(err.cause).toEqual(new ResolveError("error 1"));
   });
@@ -863,8 +854,7 @@ describe("when validateManifest reports a warning, an error, then a warning", ()
   test("should stop on the first error when bail = true", async () => {
     await expect(resolve(value, { ...options, bail: true })).resolves.toEqual([
       {
-        path: options.path,
-        index: options.index,
+        position: { path: options.path, index: options.index },
         data: value,
         issues: [
           {
@@ -900,8 +890,7 @@ test("when validateManifest is an async function", async () => {
     })
   ).resolves.toEqual([
     {
-      path: "test",
-      index: [5],
+      position: { path: "test", index: [5] },
       data: value,
       issues: [
         {
@@ -920,7 +909,7 @@ test("when validateManifest is defined but validate = false", async () => {
   await expect(
     resolve({ foo: "bar" }, { validate: false, validateManifest })
   ).resolves.toEqual([
-    { path: "", index: [], issues: [], data: { foo: "bar" } }
+    { position: { path: "", index: [] }, issues: [], data: { foo: "bar" } }
   ]);
   expect(validateManifest).not.toHaveBeenCalled();
 });
@@ -938,8 +927,7 @@ describe("when validateManifest throws an error", () => {
   test("should add an issue", async () => {
     await expect(resolve(value, options)).resolves.toEqual([
       {
-        path: options.path,
-        index: options.index,
+        position: { path: options.path, index: options.index },
         data: value,
         issues: [
           {
@@ -961,8 +949,7 @@ describe("when validateManifest throws an error", () => {
     expect(err.message).toEqual(
       "An error occurred in validateManifest function"
     );
-    expect(err.path).toEqual(options.path);
-    expect(err.index).toEqual(options.index);
+    expect(err.position).toEqual({ path: options.path, index: options.index });
     expect(err.value).toEqual(value);
     expect(err.cause).toEqual(new Error("err"));
   });
@@ -985,8 +972,7 @@ test("when validateManifest reports an issue without a cause", async () => {
     })
   ).resolves.toEqual([
     {
-      path: "test",
-      index: [5],
+      position: { path: "test", index: [5] },
       data: value,
       issues: [
         {
@@ -1012,20 +998,17 @@ test("when validateManifest is called on multiple values", async () => {
     })
   ).resolves.toEqual([
     {
-      path: "",
-      index: [0],
+      position: { path: "", index: [0] },
       issues: [{ severity: "error", message: "test error 1" }],
       data: 1
     },
     {
-      path: "",
-      index: [1],
+      position: { path: "", index: [1] },
       data: 2,
       issues: []
     },
     {
-      path: "",
-      index: [2],
+      position: { path: "", index: [2] },
       issues: [{ severity: "error", message: "test error 3" }],
       data: 3
     }
@@ -1051,8 +1034,7 @@ describe("when validate method throws an ajv validation error", () => {
   test("should add issues", async () => {
     await expect(resolve(value)).resolves.toEqual([
       {
-        path: "",
-        index: [],
+        position: { path: "", index: [] },
         data: value,
         issues: [
           {
@@ -1071,8 +1053,7 @@ describe("when validate method throws an ajv validation error", () => {
   test("should keep the original error when keepAjvErrors = true", async () => {
     await expect(resolve(value, { keepAjvErrors: true })).resolves.toEqual([
       {
-        path: "",
-        index: [],
+        position: { path: "", index: [] },
         data: value,
         issues: [
           {
@@ -1118,14 +1099,13 @@ describe.each([
     }
   }
 ])("when value is $value", ({ value, expected }) => {
-  test(`should set component = ${JSON.stringify(expected)}`, async () => {
+  test(`should set metadata = ${JSON.stringify(expected)}`, async () => {
     await expect(resolve(value)).resolves.toEqual([
       {
-        path: "",
-        index: [],
+        position: { path: "", index: [] },
         data: value,
         issues: [],
-        component: expected
+        metadata: expected
       }
     ]);
   });
@@ -1147,11 +1127,10 @@ test("should update component after transform", async () => {
     )
   ).resolves.toEqual([
     {
-      path: "",
-      index: [],
+      position: { path: "", index: [] },
       data: { apiVersion: "v2", kind: "foo", metadata: { name: "def" } },
       issues: [],
-      component: {
+      metadata: {
         apiVersion: "v2",
         kind: "foo",
         name: "def"

@@ -19,25 +19,25 @@ function createInvalidPod() {
   );
 }
 
-test("should return an empty object when rules is empty", () => {
-  expect(plugin({ cwd: "", config: { rules: {} } })).toEqual({});
+test("should return an empty object when rules is empty", async () => {
+  await expect(plugin({ cwd: "", config: { rules: {} } })).resolves.toEqual({});
 });
 
-test("should return an empty object when rule config is empty", () => {
-  expect(
+test("should disable the rule when rule config is false", async () => {
+  await expect(
     plugin({
       cwd: "",
       config: {
         rules: {
-          "no-missing-pod-volume-mount": {}
+          "no-missing-pod-volume-mount": false
         }
       }
     })
-  ).toEqual({});
+  ).resolves.toEqual({});
 });
 
-test('should disable the rule when severity is "off"', () => {
-  expect(
+test('should disable the rule when severity is "off"', async () => {
+  await expect(
     plugin({
       cwd: "",
       config: {
@@ -46,13 +46,13 @@ test('should disable the rule when severity is "off"', () => {
         }
       }
     })
-  ).toEqual({});
+  ).resolves.toEqual({});
 });
 
 describe.each(["error", "warning"])("when severity is %s", (severity) => {
-  test("should report issues with the given severity", () => {
+  test("should report issues with the given severity", async () => {
     const manifest = createInvalidPod();
-    const { validateManifest } = plugin({
+    const { validateManifest } = await plugin({
       cwd: "",
       config: {
         rules: {
@@ -72,8 +72,8 @@ describe.each(["error", "warning"])("when severity is %s", (severity) => {
   });
 });
 
-test("should set validateAllManifests when corresponding rule is enabled", () => {
-  const { validateAllManifests } = plugin({
+test("should set validateAllManifests when corresponding rule is enabled", async () => {
+  const { validateAllManifests } = await plugin({
     cwd: "",
     config: {
       rules: {
@@ -83,9 +83,11 @@ test("should set validateAllManifests when corresponding rule is enabled", () =>
   });
   assert(typeof validateAllManifests === "function");
 
-  const manifest = createManifest({
-    metadata: { namespace: "test" }
-  });
+  const manifest = createManifest(
+    new Pod({
+      metadata: { namespace: "test", name: "foo" }
+    })
+  );
   validateAllManifests([manifest]);
 
   expect(manifest.issues).toEqual([

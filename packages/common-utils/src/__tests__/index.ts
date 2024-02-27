@@ -1,4 +1,4 @@
-import { getErrorCode, isRecord, toArray } from "../index";
+import { apiVersionToGroup, getErrorCode, isRecord, toArray } from "../index";
 
 class Empty {}
 
@@ -44,3 +44,13 @@ test.each([
 ])("getErrorCode($value) -> $expected", ({ value, expected }) => {
   expect(getErrorCode(value)).toEqual(expected);
 });
+
+test.each([
+  { apiVersion: "apps/v1", expected: "apps" },
+  { apiVersion: "v1", expected: "" }
+])(
+  `apiVersionToGroup($apiVersion) -> $expected`,
+  ({ apiVersion, expected }) => {
+    expect(apiVersionToGroup(apiVersion)).toEqual(expected);
+  }
+);

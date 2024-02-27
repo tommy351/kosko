@@ -10,26 +10,6 @@ exports[`cause is a empty object 1`] = `
 "
 `;
 
-exports[`component info and index are present 1`] = `
-"
-[4mcomponents/foo.ts[24m - Kind: v1/Pod, Name: foo, Index: [2, 4]
-
-[31m✖ Error message[39m
-
-[31merror[39m - Found 1 error in total
-"
-`;
-
-exports[`component info contains namespace 1`] = `
-"
-[4mcomponents/foo.ts[24m - Kind: v1/Pod, Name: default/foo
-
-[31m✖ Error message[39m
-
-[31merror[39m - Found 1 error in total
-"
-`;
-
 exports[`cwd is not empty 1`] = `
 "
 [4mcomponents/foo.ts[24m
@@ -56,7 +36,7 @@ exports[`ignore manifests without issues 1`] = `
 
 exports[`index is not empty 1`] = `
 "
-[4mcomponents/foo.ts[24m - Index: [2, 4]
+[4mcomponents/foo.ts[24m - [2, 4]
 
 [31m✖ Error message[39m
 
@@ -98,9 +78,29 @@ exports[`issue contains an object cause 1`] = `
 "
 `;
 
-exports[`manifest contains component info 1`] = `
+exports[`manifest contains metadata 1`] = `
 "
-[4mcomponents/foo.ts[24m - Kind: v1/Pod, Name: foo
+[4mcomponents/foo.ts[24m - v1/Pod foo
+
+[31m✖ Error message[39m
+
+[31merror[39m - Found 1 error in total
+"
+`;
+
+exports[`metadata and index are present 1`] = `
+"
+[4mcomponents/foo.ts[24m - v1/Pod foo [2, 4]
+
+[31m✖ Error message[39m
+
+[31merror[39m - Found 1 error in total
+"
+`;
+
+exports[`metadata contains namespace 1`] = `
+"
+[4mcomponents/foo.ts[24m - v1/Pod default/foo
 
 [31m✖ Error message[39m
 

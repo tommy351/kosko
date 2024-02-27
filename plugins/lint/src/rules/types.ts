@@ -1,15 +1,28 @@
 import type { ManifestToValidate, Severity } from "@kosko/generate";
 import { Struct } from "superstruct";
+import { ManifestStore } from "../utils/manifest-store";
+
+export interface Manifest<T = unknown> extends ManifestToValidate {
+  data: T;
+}
 
 export interface RuleContext<T> {
-  config: T;
+  config?: T;
   severity: Severity;
-  report(manifest: ManifestToValidate, message: string): void;
+  report(manifest: Manifest, message: string): void;
+}
+
+export interface ValidateFunc {
+  (manifest: Manifest): void;
+}
+
+export interface ValidateAllFunc {
+  (store: ManifestStore): void;
 }
 
 export interface Rule {
-  validate?(manifest: ManifestToValidate): void;
-  validateAll?(manifests: readonly ManifestToValidate[]): void;
+  validate?: ValidateFunc;
+  validateAll?: ValidateAllFunc;
 }
 
 export interface RuleFactory<T> {

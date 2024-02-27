@@ -2,7 +2,7 @@
 
 exports[`should print the error 1`] = `
 "
-[4mcomponents/nginx.ts[24m - Kind: v1/Pod, Name: test-pod
+[4mcomponents/nginx.ts[24m - v1/Pod test-pod
 
 [31m✖ /spec must have required property 'containers'[39m
 

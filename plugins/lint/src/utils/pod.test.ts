@@ -1,5 +1,5 @@
 import { Pod } from "kubernetes-models/v1/Pod";
-import { getPodSpec } from "./pod";
+import { collectPodContainers, getPodSpec } from "./pod";
 import { ReplicationController } from "kubernetes-models/v1/ReplicationController";
 import { Deployment } from "kubernetes-models/apps/v1/Deployment";
 import { StatefulSet } from "kubernetes-models/apps/v1/StatefulSet";
@@ -7,6 +7,7 @@ import { DaemonSet } from "kubernetes-models/apps/v1/DaemonSet";
 import { ReplicaSet } from "kubernetes-models/apps/v1/ReplicaSet";
 import { Job } from "kubernetes-models/batch/v1/Job";
 import { CronJob } from "kubernetes-models/batch/v1/CronJob";
+import { IPodSpec } from "kubernetes-models/v1";
 
 describe("getPodSpec", () => {
   test("should return undefined when value is undefined", () => {
@@ -243,5 +244,25 @@ describe("getPodSpec", () => {
     });
 
     expect(getPodSpec(value)).toBe(value.spec!.jobTemplate.spec!.template.spec);
+  });
+});
+
+describe("collectPodContainers", () => {
+  test("should returns all containers in a pod spec", () => {
+    const podSpec: IPodSpec = {
+      containers: [{ name: "a" }, { name: "b" }],
+      initContainers: [{ name: "c" }, { name: "d" }],
+      ephemeralContainers: [{ name: "e" }, { name: "f" }]
+    };
+
+    expect(collectPodContainers(podSpec)).toEqual([
+      ...podSpec.containers,
+      ...podSpec.initContainers!,
+      ...podSpec.ephemeralContainers!
+    ]);
+  });
+
+  test("should return an empty array when containers are undefined", () => {
+    expect(collectPodContainers({})).toEqual([]);
   });
 });

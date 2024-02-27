@@ -824,6 +824,12 @@ importers:
       '@kosko/plugin':
         specifier: workspace:^
         version: link:../../packages/plugin
+      '@kosko/require':
+        specifier: workspace:^
+        version: link:../../packages/require
+      resolve-from:
+        specifier: ^5.0.0
+        version: 5.0.0
       superstruct:
         specifier: ^1.0.3
         version: 1.0.3
@@ -837,6 +843,9 @@ importers:
       '@kosko/jest-preset':
         specifier: workspace:^
         version: link:../../internal/jest-preset
+      '@kosko/test-utils':
+        specifier: workspace:^
+        version: link:../../internal/test-utils
       '@kubernetes-models/apimachinery':
         specifier: ^1.2.1
         version: 1.2.1
