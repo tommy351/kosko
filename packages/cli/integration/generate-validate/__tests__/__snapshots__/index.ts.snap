@@ -10,20 +10,20 @@ spec: {}"
 
 exports[`when validate is not set should print the error 1`] = `
 "
-[1mcomponents/foo.js[22m - [31m✖ 1[39m
+[4mcomponents/foo.js[24m - Kind: v1/Pod, Name: foo
 
-  Kind: v1/Pod, Name: foo
-    [31m✖[39m /spec must have required property 'containers'
+[31m✖ /spec must have required property 'containers'[39m
 
-[31merror[39m - Generate failed (Total [31m✖ 1[39m)"
+[31merror[39m - Found 1 error in total
+[31merror[39m - Generate failed"
 `;
 
 exports[`when validate is true should print the error 1`] = `
 "
-[1mcomponents/foo.js[22m - [31m✖ 1[39m
+[4mcomponents/foo.js[24m - Kind: v1/Pod, Name: foo
 
-  Kind: v1/Pod, Name: foo
-    [31m✖[39m /spec must have required property 'containers'
+[31m✖ /spec must have required property 'containers'[39m
 
-[31merror[39m - Generate failed (Total [31m✖ 1[39m)"
+[31merror[39m - Found 1 error in total
+[31merror[39m - Generate failed"
 `;

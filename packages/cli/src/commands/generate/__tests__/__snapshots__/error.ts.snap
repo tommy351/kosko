@@ -2,136 +2,146 @@
 
 exports[`cause is a empty object 1`] = `
 "
-[1mcomponents/foo.ts[22m - [31m✖ 1[39m
+[4mcomponents/foo.ts[24m
 
-    [31m✖[39m Error message
+[31m✖ Error message[39m
 
+[31merror[39m - Found 1 error in total
 "
 `;
 
 exports[`component info and index are present 1`] = `
 "
-[1mcomponents/foo.ts[22m - [31m✖ 1[39m
+[4mcomponents/foo.ts[24m - Kind: v1/Pod, Name: foo, Index: [2, 4]
 
-  Kind: v1/Pod, Name: foo, Index: [2, 4]
-    [31m✖[39m Error message
+[31m✖ Error message[39m
 
+[31merror[39m - Found 1 error in total
 "
 `;
 
 exports[`component info contains namespace 1`] = `
 "
-[1mcomponents/foo.ts[22m - [31m✖ 1[39m
+[4mcomponents/foo.ts[24m - Kind: v1/Pod, Name: default/foo
 
-  Kind: v1/Pod, Name: default/foo
-    [31m✖[39m Error message
+[31m✖ Error message[39m
 
+[31merror[39m - Found 1 error in total
 "
 `;
 
 exports[`cwd is not empty 1`] = `
 "
-[1mcomponents/foo.ts[22m - [31m✖ 1[39m
+[4mcomponents/foo.ts[24m
 
-    [31m✖[39m Error message
+[31m✖ Error message[39m
 
-[1m/abc/def/components/bar.ts[22m - [31m✖ 1[39m
+[4m/abc/def/components/bar.ts[24m
 
-    [31m✖[39m Error message
+[31m✖ Error message[39m
 
+[31merror[39m - Found 2 errors in total
 "
 `;
 
 exports[`ignore manifests without issues 1`] = `
 "
-[1mcomponents/bar.ts[22m - [31m✖ 1[39m
+[4mcomponents/bar.ts[24m
 
-    [31m✖[39m Error message
+[31m✖ Error message[39m
 
+[31merror[39m - Found 1 error in total
 "
 `;
 
 exports[`index is not empty 1`] = `
 "
-[1mcomponents/foo.ts[22m - [31m✖ 1[39m
+[4mcomponents/foo.ts[24m - Index: [2, 4]
 
-  Index: [2, 4]
-    [31m✖[39m Error message
+[31m✖ Error message[39m
 
+[31merror[39m - Found 1 error in total
 "
 `;
 
 exports[`issue contains a Error class cause 1`] = `
 "
-[1mcomponents/foo.ts[22m - [31m✖ 1[39m
+[4mcomponents/foo.ts[24m
 
-    [31m✖[39m Error message
-[90m      Error: foobar
-        at foo.ts:1:1[39m
+[31m✖ Error message[39m
+[90m  Error: foobar
+    at foo.ts:1:1[39m
 
+[31merror[39m - Found 1 error in total
 "
 `;
 
 exports[`issue contains a string cause 1`] = `
 "
-[1mcomponents/foo.ts[22m - [31m✖ 1[39m
+[4mcomponents/foo.ts[24m
 
-    [31m✖[39m Error message
-[90m      Error: Cause message[39m
+[31m✖ Error message[39m
+[90m  Error: Cause message[39m
 
+[31merror[39m - Found 1 error in total
 "
 `;
 
 exports[`issue contains an object cause 1`] = `
 "
-[1mcomponents/foo.ts[22m - [31m✖ 1[39m
+[4mcomponents/foo.ts[24m
 
-    [31m✖[39m Error message
-[90m      FooError: foobar[39m
+[31m✖ Error message[39m
+[90m  FooError: foobar[39m
 
+[31merror[39m - Found 1 error in total
 "
 `;
 
 exports[`manifest contains component info 1`] = `
 "
-[1mcomponents/foo.ts[22m - [31m✖ 1[39m
+[4mcomponents/foo.ts[24m - Kind: v1/Pod, Name: foo
 
-  Kind: v1/Pod, Name: foo
-    [31m✖[39m Error message
+[31m✖ Error message[39m
 
+[31merror[39m - Found 1 error in total
 "
 `;
 
 exports[`multiple issues 1`] = `
 "
-[1mcomponents/foo.ts[22m - [31m✖ 2[39m [33m⚠ 1[39m
+[4mcomponents/foo.ts[24m
 
-    [31m✖[39m Error 1
-    [33m⚠[39m Warning 1
-    [31m✖[39m Error 2
+[31m✖ Error 1[39m
 
-[1mcomponents/bar.ts[22m - [31m✖ 1[39m
+[33m⚠ Warning 1[39m
 
-    [31m✖[39m Error 3
+[31m✖ Error 2[39m
 
+[4mcomponents/bar.ts[24m
+
+[31m✖ Error 3[39m
+
+[31merror[39m - Found 3 errors and 1 warning in total
 "
 `;
 
 exports[`single error issue 1`] = `
 "
-[1mcomponents/foo.ts[22m - [31m✖ 1[39m
+[4mcomponents/foo.ts[24m
 
-    [31m✖[39m Error message
+[31m✖ Error message[39m
 
+[31merror[39m - Found 1 error in total
 "
 `;
 
 exports[`single warning issue 1`] = `
 "
-[1mcomponents/foo.ts[22m - [33m⚠ 1[39m
+[4mcomponents/foo.ts[24m
 
-    [33m⚠[39m Warning message
+[33m⚠ Warning message[39m
 
-[33mwarn [39m - Generate completed with warnings (Total [33m⚠ 1[39m)
+[33mwarn [39m - Found 1 warning in total
 "
 `;

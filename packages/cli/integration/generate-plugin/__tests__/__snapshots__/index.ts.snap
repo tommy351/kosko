@@ -61,12 +61,12 @@ metadata:
 
 exports[`when validateAllManifests reports a error should throw an error 1`] = `
 "
-[1mcomponents/pod.js[22m - [31m✖ 1[39m
+[4mcomponents/pod.js[24m - Kind: v1/ConfigMap, Name: test
 
-  Kind: v1/ConfigMap, Name: test
-    [31m✖[39m Test error message
+[31m✖ Test error message[39m
 
-[31merror[39m - Generate failed (Total [31m✖ 1[39m)"
+[31merror[39m - Found 1 error in total
+[31merror[39m - Generate failed"
 `;
 
 exports[`when validateAllManifests reports a warning should not throw an error 1`] = `
@@ -78,22 +78,21 @@ metadata:
 
 exports[`when validateAllManifests reports a warning should not throw an error 2`] = `
 "
-[1mcomponents/pod.js[22m - [33m⚠ 1[39m
+[4mcomponents/pod.js[24m - Kind: v1/ConfigMap, Name: test
 
-  Kind: v1/ConfigMap, Name: test
-    [33m⚠[39m Test warning message
+[33m⚠ Test warning message[39m
 
-[33mwarn [39m - Generate completed with warnings (Total [33m⚠ 1[39m)"
+[33mwarn [39m - Found 1 warning in total"
 `;
 
 exports[`when validateManifest reports a error should throw an error 1`] = `
 "
-[1mcomponents/pod.js[22m - [31m✖ 1[39m
+[4mcomponents/pod.js[24m - Kind: v1/ConfigMap, Name: test
 
-  Kind: v1/ConfigMap, Name: test
-    [31m✖[39m Test error message
+[31m✖ Test error message[39m
 
-[31merror[39m - Generate failed (Total [31m✖ 1[39m)"
+[31merror[39m - Found 1 error in total
+[31merror[39m - Generate failed"
 `;
 
 exports[`when validateManifest reports a warning should not throw an error 1`] = `
@@ -105,22 +104,23 @@ metadata:
 
 exports[`when validateManifest reports a warning should not throw an error 2`] = `
 "
-[1mcomponents/pod.js[22m - [33m⚠ 1[39m
+[4mcomponents/pod.js[24m - Kind: v1/ConfigMap, Name: test
 
-  Kind: v1/ConfigMap, Name: test
-    [33m⚠[39m Test warning message
+[33m⚠ Test warning message[39m
 
-[33mwarn [39m - Generate completed with warnings (Total [33m⚠ 1[39m)"
+[33mwarn [39m - Found 1 warning in total"
 `;
 
 exports[`when validateManifest reports multiple issues should throw an error 1`] = `
 "
-[1mcomponents/pod.js[22m - [31m✖ 1[39m [33m⚠ 2[39m
+[4mcomponents/pod.js[24m - Kind: v1/ConfigMap, Name: test
 
-  Kind: v1/ConfigMap, Name: test
-    [33m⚠[39m Test warning 1
-    [31m✖[39m Test error 1
-    [33m⚠[39m Test warning 2
+[33m⚠ Test warning 1[39m
 
-[31merror[39m - Generate failed (Total [31m✖ 1[39m [33m⚠ 2[39m)"
+[31m✖ Test error 1[39m
+
+[33m⚠ Test warning 2[39m
+
+[31merror[39m - Found 1 error and 2 warnings in total
+[31merror[39m - Generate failed"
 `;

@@ -61,60 +61,22 @@ function prettifyPath(cwd: string, path: string): string {
   return path.replace(/\\/g, "/");
 }
 
-function groupManifestsByPath(
-  manifests: readonly Manifest[]
-): Record<string, Manifest[]> {
-  const groups: Record<string, Manifest[]> = {};
-
-  // Group manifests by path
-  for (const manifest of manifests) {
-    if (manifest.issues.length) {
-      groups[manifest.path] ??= [];
-      groups[manifest.path].push(manifest);
-    }
-  }
-
-  return groups;
-}
-
 interface IssueStats {
   error: number;
   warning: number;
 }
 
-function getIssueStats(manifests: Manifest[]): IssueStats {
+function getIssueStats(manifest: Manifest): IssueStats {
   const stats: IssueStats = { error: 0, warning: 0 };
 
-  for (const manifest of manifests) {
-    for (const issue of manifest.issues) {
-      stats[issue.severity]++;
-    }
+  for (const issue of manifest.issues) {
+    stats[issue.severity]++;
   }
 
   return stats;
 }
 
-function stringifyIssueStats(stats: IssueStats): string {
-  const chunks: string[] = [];
-
-  for (const severity of ["error", "warning"] as const) {
-    const count = stats[severity];
-
-    if (count) {
-      chunks.push(
-        severityFormats[severity](`${severityIcons[severity]} ${count}`)
-      );
-    }
-  }
-
-  return chunks.join(" ");
-}
-
-function printIssueStats(path: string, stats: IssueStats): void {
-  print(`${pc.bold(path)} - ${stringifyIssueStats(stats)}\n`);
-}
-
-function printManifestHeader(manifest: Manifest): void {
+function printManifestHeader(cwd: string, manifest: Manifest): void {
   const { component, index } = manifest;
   const chunks: string[] = [];
 
@@ -129,16 +91,17 @@ function printManifestHeader(manifest: Manifest): void {
     chunks.push(`Index: [${index.join(", ")}]`);
   }
 
-  if (chunks.length) {
-    print("  " + chunks.join(", "));
-  }
+  print(
+    pc.underline(prettifyPath(cwd, manifest.path)) +
+      (chunks.length ? ` - ${chunks.join(", ")}` : "")
+  );
 }
 
 function printIssue(issue: Issue): void {
   const format = severityFormats[issue.severity];
   const icon = severityIcons[issue.severity];
 
-  print(`    ${format(icon)} ${issue.message}`);
+  print(format(`${icon} ${issue.message}`));
 
   if (issue.cause) {
     const err = toErrorLike(issue.cause);
@@ -150,44 +113,60 @@ function printIssue(issue: Issue): void {
 
     stack = stack
       .split("\n")
-      .map((line) => "      " + line)
+      .map((line) => "  " + line)
       .join("\n");
 
     print(pc.gray(stack));
   }
 }
 
+function pluralize(count: number, word: string): string {
+  return count === 1 ? word : word + "s";
+}
+
+function printSummary(stats: IssueStats): void {
+  const chunks: string[] = [];
+
+  if (stats.error) {
+    chunks.push(`${stats.error} ${pluralize(stats.error, "error")}`);
+  }
+
+  if (stats.warning) {
+    chunks.push(`${stats.warning} ${pluralize(stats.warning, "warning")}`);
+  }
+
+  if (!chunks.length) return;
+
+  print("");
+
+  logger.log(
+    stats.error ? LogLevel.Error : LogLevel.Warn,
+    `Found ${chunks.join(" and ")} in total`
+  );
+}
+
 export function printIssues(cwd: string, result: Result): void {
-  const manifestsByPath = groupManifestsByPath(result.manifests);
   const totalStats: IssueStats = { error: 0, warning: 0 };
 
-  for (const [path, manifests] of Object.entries(manifestsByPath)) {
-    const stats = getIssueStats(manifests);
+  for (const manifest of result.manifests) {
+    if (!manifest.issues.length) continue;
+
+    const stats = getIssueStats(manifest);
     totalStats.error += stats.error;
     totalStats.warning += stats.warning;
 
     print("");
-    printIssueStats(prettifyPath(cwd, path), stats);
+    printManifestHeader(cwd, manifest);
 
-    for (const manifest of manifests) {
-      printManifestHeader(manifest);
-
-      for (const issue of manifest.issues) {
-        printIssue(issue);
-      }
+    for (const issue of manifest.issues) {
+      print("");
+      printIssue(issue);
     }
   }
 
+  printSummary(totalStats);
+
   if (totalStats.error) {
-    print("");
-    throw new CLIError("Generate failed", {
-      output: `Generate failed (Total ${stringifyIssueStats(totalStats)})`
-    });
-  } else if (totalStats.warning) {
-    print("");
-    logger.log(
-      LogLevel.Warn,
-      `Generate completed with warnings (Total ${stringifyIssueStats(totalStats)})`
-    );
+    throw new CLIError("Generate failed", { output: "Generate failed" });
   }
 }
