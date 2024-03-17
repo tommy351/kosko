@@ -1,20 +1,21 @@
-import type { IContainerPort } from "kubernetes-models/v1/ContainerPort";
 import { getPodSpec } from "../utils/pod";
 import { createRule } from "./types";
+import type { IContainer } from "kubernetes-models/v1/Container";
 
 export default createRule({
   factory(ctx) {
     return {
       validate(manifest) {
-        function checkPort(ports: IContainerPort[], port: number | string) {
-          if (typeof port === "string") {
-            if (!ports.some((p) => p.name === port)) {
-              ctx.report(manifest, `Port "${port}" is not defined`);
-            }
-          } else {
-            if (!ports.some((p) => p.containerPort === port)) {
-              ctx.report(manifest, `Port ${port} is not defined`);
-            }
+        function checkPort(container: IContainer, port: number | string) {
+          if (typeof port !== "string") return;
+
+          const ports = container.ports ?? [];
+
+          if (!ports.some((p) => p.name === port)) {
+            ctx.report(
+              manifest,
+              `Port "${port}" is not defined in container "${container.name}".`
+            );
           }
         }
 
@@ -22,8 +23,6 @@ export default createRule({
         if (!podSpec || !podSpec.containers?.length) return;
 
         for (const container of podSpec.containers) {
-          const ports = container.ports ?? [];
-
           for (const probe of [
             container.livenessProbe,
             container.readinessProbe,
@@ -34,11 +33,11 @@ export default createRule({
             const { httpGet, tcpSocket, grpc } = probe;
 
             if (httpGet) {
-              checkPort(ports, httpGet.port);
+              checkPort(container, httpGet.port);
             } else if (tcpSocket) {
-              checkPort(ports, tcpSocket.port);
+              checkPort(container, tcpSocket.port);
             } else if (grpc) {
-              checkPort(ports, grpc.port);
+              checkPort(container, grpc.port);
             }
           }
         }

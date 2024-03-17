@@ -58,27 +58,6 @@ test("should pass when probe is undefined", () => {
 describe.each(["liveness", "readiness", "startup"] as const)(
   "when %sProbe is defined",
   (probeType) => {
-    test("should pass when port number is defined", () => {
-      const manifest = createManifest(
-        new Pod({
-          metadata: { name: "test" },
-          spec: {
-            containers: [
-              {
-                name: "test",
-                ports: [{ containerPort: 80 }],
-                [`${probeType}Probe`]: {
-                  httpGet: { port: 80 }
-                }
-              }
-            ]
-          }
-        })
-      );
-
-      expect(validate(rule, undefined, manifest)).toBeEmpty();
-    });
-
     test("should pass when port name is defined", () => {
       const manifest = createManifest(
         new Pod({
@@ -109,7 +88,7 @@ describe.each(["liveness", "readiness", "startup"] as const)(
               {
                 name: "test",
                 [`${probeType}Probe`]: {
-                  httpGet: { port: 80 }
+                  httpGet: { port: "http" }
                 }
               }
             ]
@@ -120,12 +99,12 @@ describe.each(["liveness", "readiness", "startup"] as const)(
       expect(validate(rule, undefined, manifest)).toEqual([
         {
           manifest,
-          message: "Port 80 is not defined"
+          message: `Port "http" is not defined in container "test".`
         }
       ]);
     });
 
-    test("should report when port number is not defined", () => {
+    test("should pass when port number is not defined", () => {
       const manifest = createManifest(
         new Pod({
           metadata: { name: "test" },
@@ -143,12 +122,7 @@ describe.each(["liveness", "readiness", "startup"] as const)(
         })
       );
 
-      expect(validate(rule, undefined, manifest)).toEqual([
-        {
-          manifest,
-          message: "Port 80 is not defined"
-        }
-      ]);
+      expect(validate(rule, undefined, manifest)).toBeEmpty();
     });
 
     test("should report when port name is not defined", () => {
@@ -172,7 +146,7 @@ describe.each(["liveness", "readiness", "startup"] as const)(
       expect(validate(rule, undefined, manifest)).toEqual([
         {
           manifest,
-          message: `Port "https" is not defined`
+          message: `Port "https" is not defined in container "test".`
         }
       ]);
     });
@@ -202,7 +176,7 @@ describe.each(["liveness", "readiness", "startup"] as const)(
       expect(validate(rule, undefined, manifest)).toEqual([
         {
           manifest,
-          message: `Port "https" is not defined`
+          message: `Port "https" is not defined in container "test".`
         }
       ]);
     });
@@ -216,7 +190,7 @@ describe.each(["liveness", "readiness", "startup"] as const)(
               {
                 name: "test",
                 [`${probeType}Probe`]: {
-                  tcpSocket: { port: 80 }
+                  tcpSocket: { port: "foo" }
                 }
               }
             ]
@@ -227,7 +201,7 @@ describe.each(["liveness", "readiness", "startup"] as const)(
       expect(validate(rule, undefined, manifest)).toEqual([
         {
           manifest,
-          message: `Port 80 is not defined`
+          message: `Port "foo" is not defined in container "test".`
         }
       ]);
     });
@@ -241,7 +215,7 @@ describe.each(["liveness", "readiness", "startup"] as const)(
               {
                 name: "test",
                 [`${probeType}Probe`]: {
-                  grpc: { port: 80 }
+                  grpc: { port: "foo" }
                 }
               }
             ]
@@ -252,7 +226,7 @@ describe.each(["liveness", "readiness", "startup"] as const)(
       expect(validate(rule, undefined, manifest)).toEqual([
         {
           manifest,
-          message: `Port 80 is not defined`
+          message: `Port "foo" is not defined in container "test".`
         }
       ]);
     });
