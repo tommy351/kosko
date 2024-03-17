@@ -108,3 +108,18 @@ test("should pass when selector matches template labels", () => {
 
   expect(validate(rule, undefined, manifest)).toBeEmpty();
 });
+
+test("should pass when selector contains subset of template labels", () => {
+  const manifest = createManifest(
+    new Deployment({
+      spec: {
+        selector: { matchLabels: { a: "b" } },
+        template: {
+          metadata: { labels: { a: "b", c: "d" } }
+        }
+      }
+    })
+  );
+
+  expect(validate(rule, undefined, manifest)).toBeEmpty();
+});
