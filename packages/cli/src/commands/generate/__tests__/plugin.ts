@@ -1,6 +1,7 @@
 /// <reference types="jest-extended" />
 import assert from "node:assert";
 import { composePlugins } from "../plugin";
+import { ManifestToValidate } from "@kosko/generate";
 
 describe("composePlugins", () => {
   describe("transformManifest", () => {
@@ -18,8 +19,7 @@ describe("composePlugins", () => {
       assert(plugin.transformManifest);
 
       const actual = await plugin.transformManifest({
-        path: "foo",
-        index: [1, 2, 3],
+        position: { path: "foo", index: [1, 2, 3] },
         data: 1,
         issues: []
       });
@@ -30,14 +30,12 @@ describe("composePlugins", () => {
       }
 
       expect(plugins[0].transformManifest).toHaveBeenCalledWith({
-        path: "foo",
-        index: [1, 2, 3],
+        position: { path: "foo", index: [1, 2, 3] },
         data: 1,
         issues: []
       });
       expect(plugins[1].transformManifest).toHaveBeenCalledWith({
-        path: "foo",
-        index: [1, 2, 3],
+        position: { path: "foo", index: [1, 2, 3] },
         data: 3,
         issues: []
       });
@@ -50,8 +48,7 @@ describe("composePlugins", () => {
       assert(plugin.transformManifest);
 
       const actual = await plugin.transformManifest({
-        path: "",
-        index: [],
+        position: { path: "", index: [] },
         data: 1,
         issues: []
       });
@@ -67,8 +64,7 @@ describe("composePlugins", () => {
       assert(plugin.transformManifest);
 
       const actual = await plugin.transformManifest({
-        path: "",
-        index: [],
+        position: { path: "", index: [] },
         data: 1,
         issues: []
       });
@@ -90,8 +86,7 @@ describe("composePlugins", () => {
 
       await expect(
         plugin.transformManifest({
-          path: "",
-          index: [],
+          position: { path: "", index: [] },
           data: 1,
           issues: []
         })
@@ -116,8 +111,7 @@ describe("composePlugins", () => {
 
       await expect(
         plugin.transformManifest({
-          path: "",
-          index: [],
+          position: { path: "", index: [] },
           data: 1,
           issues: []
         })
@@ -137,8 +131,7 @@ describe("composePlugins", () => {
       assert(plugin.transformManifest);
 
       const actual = await plugin.transformManifest({
-        path: "",
-        index: [],
+        position: { path: "", index: [] },
         data: 1,
         issues: []
       });
@@ -158,8 +151,7 @@ describe("composePlugins", () => {
       assert(plugin.transformManifest);
 
       const actual = await plugin.transformManifest({
-        path: "",
-        index: [],
+        position: { path: "", index: [] },
         data: 1,
         issues: []
       });
@@ -184,11 +176,9 @@ describe("composePlugins", () => {
       const plugin = composePlugins(plugins);
       assert(plugin.validateManifest);
 
-      const manifest = {
-        path: "foo",
-        index: [1, 2, 3],
+      const manifest: ManifestToValidate = {
+        position: { path: "foo", index: [1, 2, 3] },
         data: 1,
-        issues: [],
         report() {}
       };
       await plugin.validateManifest(manifest);
@@ -203,11 +193,9 @@ describe("composePlugins", () => {
       const plugin = composePlugins([{ validateManifest: async () => {} }]);
       assert(plugin.validateManifest);
 
-      const manifest = {
-        path: "",
-        index: [],
+      const manifest: ManifestToValidate = {
+        position: { path: "", index: [] },
         data: 1,
-        issues: [],
         report() {}
       };
 
@@ -223,11 +211,9 @@ describe("composePlugins", () => {
       const plugin = composePlugins(plugins);
       assert(plugin.validateManifest);
 
-      const manifest = {
-        path: "",
-        index: [],
+      const manifest: ManifestToValidate = {
+        position: { path: "", index: [] },
         data: 1,
-        issues: [],
         report() {}
       };
       await plugin.validateManifest(manifest);
@@ -250,11 +236,9 @@ describe("composePlugins", () => {
       const plugin = composePlugins(plugins);
       assert(plugin.validateManifest);
 
-      const manifest = {
-        path: "",
-        index: [],
+      const manifest: ManifestToValidate = {
+        position: { path: "", index: [] },
         data: 1,
-        issues: [],
         report() {}
       };
       await expect(plugin.validateManifest(manifest)).rejects.toThrow(err);
@@ -276,11 +260,9 @@ describe("composePlugins", () => {
       const plugin = composePlugins(plugins);
       assert(plugin.validateManifest);
 
-      const manifest = {
-        path: "",
-        index: [],
+      const manifest: ManifestToValidate = {
+        position: { path: "", index: [] },
         data: 1,
-        issues: [],
         report() {}
       };
       await expect(plugin.validateManifest(manifest)).rejects.toThrow(err);
@@ -305,12 +287,10 @@ describe("composePlugins", () => {
       const plugin = composePlugins(plugins);
       assert(plugin.validateAllManifests);
 
-      const manifests = [
+      const manifests: ManifestToValidate[] = [
         {
-          path: "foo",
-          index: [1, 2, 3],
+          position: { path: "foo", index: [1, 2, 3] },
           data: 1,
-          issues: [],
           report() {}
         }
       ];
@@ -328,8 +308,7 @@ describe("composePlugins", () => {
 
       const manifests = [
         {
-          path: "",
-          index: [],
+          position: { path: "", index: [] },
           data: 1,
           issues: [],
           report() {}
@@ -348,12 +327,10 @@ describe("composePlugins", () => {
       const plugin = composePlugins(plugins);
       assert(plugin.validateAllManifests);
 
-      const manifests = [
+      const manifests: ManifestToValidate[] = [
         {
-          path: "",
-          index: [],
+          position: { path: "", index: [] },
           data: 1,
-          issues: [],
           report() {}
         }
       ];
@@ -377,12 +354,10 @@ describe("composePlugins", () => {
       const plugin = composePlugins(plugins);
       assert(plugin.validateAllManifests);
 
-      const manifests = [
+      const manifests: ManifestToValidate[] = [
         {
-          path: "",
-          index: [],
+          position: { path: "", index: [] },
           data: 1,
-          issues: [],
           report() {}
         }
       ];
@@ -405,12 +380,10 @@ describe("composePlugins", () => {
       const plugin = composePlugins(plugins);
       assert(plugin.validateAllManifests);
 
-      const manifests = [
+      const manifests: ManifestToValidate[] = [
         {
-          path: "",
-          index: [],
+          position: { path: "", index: [] },
           data: 1,
-          issues: [],
           report() {}
         }
       ];

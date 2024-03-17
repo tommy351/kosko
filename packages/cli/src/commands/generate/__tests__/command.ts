@@ -86,7 +86,7 @@ async function execute(args: Partial<GenerateArguments> = {}): Promise<void> {
 
 function mockGenerateSuccess() {
   mockedGenerate.mockResolvedValueOnce({
-    manifests: [{ path: "", index: [0], data: {}, issues: [] }]
+    manifests: [{ position: { path: "", index: [0] }, data: {}, issues: [] }]
   });
 }
 
@@ -207,7 +207,9 @@ describe("with output is specified", () => {
   test("should call print with given format", () => {
     expect(print).toHaveBeenCalledWith(
       {
-        manifests: [{ path: "", index: [0], data: {}, issues: [] }]
+        manifests: [
+          { position: { path: "", index: [0] }, data: {}, issues: [] }
+        ]
       },
       {
         format: PrintFormat.YAML,
