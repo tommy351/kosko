@@ -5,13 +5,11 @@ import {
   buildMissingResourceMessage,
   containNamespacedName,
   isIngress,
-  isStatefulSet,
   namespacedNameArraySchema
 } from "../utils/manifest";
 import type { IIngress } from "kubernetes-models/networking.k8s.io/v1/Ingress";
 import { PartialDeep } from "type-fest";
 import { IIngressBackend } from "kubernetes-models/networking.k8s.io/v1/IngressBackend";
-import { IStatefulSet } from "kubernetes-models/apps/v1/StatefulSet";
 
 export default createRule({
   config: object({
@@ -71,22 +69,9 @@ export default createRule({
           }
         }
 
-        function checkStatefulSet(
-          manifest: Manifest,
-          statefulSet: PartialDeep<IStatefulSet>
-        ) {
-          const serviceName = statefulSet.spec?.serviceName;
-
-          if (serviceName) {
-            checkName(manifest, serviceName);
-          }
-        }
-
         manifests.forEach((manifest) => {
           if (isIngress(manifest)) {
             checkIngress(manifest, manifest.data);
-          } else if (isStatefulSet(manifest)) {
-            checkStatefulSet(manifest, manifest.data);
           }
         });
       }

@@ -3,7 +3,6 @@ import { Service } from "kubernetes-models/v1/Service";
 import { createManifest, validateAll } from "../test-utils";
 import rule from "./no-missing-service";
 import { Ingress } from "kubernetes-models/networking.k8s.io/v1";
-import { StatefulSet } from "kubernetes-models/apps/v1";
 
 test("should pass when data is undefined", () => {
   const manifest = createManifest(undefined);
@@ -66,25 +65,6 @@ test("should pass when service is in the allow list", () => {
   expect(
     validateAll(rule, { allow: [{ name: "foo", namespace: "a" }] }, [ingress])
   ).toBeEmpty();
-});
-
-test("should check StatefulSet", () => {
-  const manifest = createManifest(
-    new StatefulSet({
-      metadata: { name: "foo" },
-      spec: {
-        serviceName: "bar",
-        selector: {},
-        template: {}
-      }
-    })
-  );
-  expect(validateAll(rule, undefined, [manifest])).toEqual([
-    {
-      manifest,
-      message: `Service "bar" does not exist.`
-    }
-  ]);
 });
 
 test("should check http path rule in ingress", () => {
