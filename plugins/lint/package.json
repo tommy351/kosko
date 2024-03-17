@@ -11,23 +11,32 @@
   "types": "dist/types.d.ts",
   "sideEffects": false,
   "scripts": {
-    "build": "build-scripts"
+    "build": "build-scripts index.ts presets/recommended.ts"
   },
   "exports": {
-    "node": {
+    "./presets/recommended": {
+      "node": {
+        "import": "./dist/presets/recommended.node.mjs",
+        "require": "./dist/presets/recommended.node.cjs"
+      },
+      "import": "./dist/presets/recommended.base.mjs"
+    },
+    ".": {
+      "node": {
+        "import": {
+          "types": "./dist/types.d.mts",
+          "default": "./dist/index.node.mjs"
+        },
+        "types": "./dist/types.d.ts",
+        "require": "./dist/index.node.cjs"
+      },
       "import": {
         "types": "./dist/types.d.mts",
-        "default": "./dist/index.node.mjs"
+        "default": "./dist/index.base.mjs"
       },
       "types": "./dist/types.d.ts",
       "require": "./dist/index.node.cjs"
-    },
-    "import": {
-      "types": "./dist/types.d.mts",
-      "default": "./dist/index.base.mjs"
-    },
-    "types": "./dist/types.d.ts",
-    "require": "./dist/index.node.cjs"
+    }
   },
   "files": [
     "/dist/"
