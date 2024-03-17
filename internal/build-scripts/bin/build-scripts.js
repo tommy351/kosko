@@ -2,7 +2,7 @@
 // @ts-check
 
 import { copyFile, mkdir, readFile, rm, unlink } from "node:fs/promises";
-import { join, normalize } from "node:path";
+import { extname, join, normalize } from "node:path";
 import { rollup } from "rollup";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
@@ -19,6 +19,10 @@ const resolveBinPromise = promisify(resolveBin);
 
 const cwd = process.cwd();
 
+// srcDir stores source files.
+const srcDir = "src";
+const fullSrcPath = join(cwd, srcDir);
+
 // distDir stores files that will be published.
 const distDir = "dist";
 const fullDistPath = join(cwd, distDir);
@@ -32,7 +36,7 @@ const pkgJson = JSON.parse(await readFile(join(cwd, "package.json"), "utf-8"));
 const dependencies = pkgJson.dependencies ?? {};
 
 const args = process.argv.slice(2);
-const entryFiles = args.length ? args : ["src/index.ts"];
+const entryFiles = args.length ? args : ["index.ts"];
 
 /**
  * @param {{
@@ -47,7 +51,16 @@ async function buildBundle(options) {
   console.log("Building bundle:", options.output);
 
   const bundle = await rollup({
-    input: entryFiles,
+    input: Object.fromEntries(
+      entryFiles.map((path) => {
+        const ext = extname(path);
+
+        return [
+          path.substring(0, path.length - ext.length),
+          join(fullSrcPath, path)
+        ];
+      })
+    ),
     external: [
       ...Object.keys(dependencies),
       ...Object.keys(pkgJson.peerDependencies ?? {})
@@ -76,8 +89,8 @@ async function buildBundle(options) {
       }),
       swc.default({
         jsc: {
-          // Node.js 14
-          target: "es2020",
+          // Node.js 18
+          target: "es2022",
           parser: { syntax: "typescript" },
           minify: {
             compress: true
