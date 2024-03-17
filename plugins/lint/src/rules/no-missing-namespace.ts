@@ -2,12 +2,14 @@ import { array, object, optional, string } from "superstruct";
 import { createRule } from "./types";
 import { isNamespace } from "../utils/manifest";
 
+const builtinNamespaces = new Set(["default", "kube-system"]);
+
 export default createRule({
   config: object({
     allow: optional(array(string()))
   }),
   factory(ctx) {
-    const allowed = new Set(ctx.config?.allow ?? ["default", "kube-system"]);
+    const allowed = new Set(ctx.config?.allow);
 
     return {
       validateAll(manifests) {
@@ -17,7 +19,9 @@ export default createRule({
           const namespace = manifest.metadata?.namespace;
           if (!namespace) return;
 
-          if (allowed.has(namespace)) return;
+          if (builtinNamespaces.has(namespace) || allowed.has(namespace)) {
+            return;
+          }
 
           if (
             manifests.find({

@@ -81,21 +81,6 @@ test("should pass when namespace is allowed", () => {
   expect(validateAll(rule, { allow: ["test"] }, [manifest])).toBeEmpty();
 });
 
-test(`should override allowed namespaces when "allow" is defined`, () => {
-  const manifest = createManifest(
-    new Pod({
-      metadata: { namespace: "default", name: "foo" }
-    })
-  );
-
-  expect(validateAll(rule, { allow: ["test"] }, [manifest])).toEqual([
-    {
-      manifest,
-      message: `Namespace "default" does not exist or is not allowed.`
-    }
-  ]);
-});
-
 test("should pass when namespace exists", () => {
   const namespace = createManifest(
     new Namespace({ metadata: { name: "test" } })
