@@ -262,3 +262,110 @@ test("should pass when cluster role is in allow list", () => {
     ])
   ).toBeEmpty();
 });
+
+test(`should pass when name starts with "system:"`, () => {
+  const binding = createManifest(
+    new RoleBinding({
+      metadata: { name: "test" },
+      roleRef: {
+        apiGroup: "rbac.authorization.k8s.io",
+        kind: "Role",
+        name: "system:foo"
+      },
+      subjects: []
+    })
+  );
+  expect(validateAll(rule, undefined, [binding])).toBeEmpty();
+});
+
+describe("when role is extension-apiserver-authentication-reader", () => {
+  test("should pass when namespace is kube-system", () => {
+    const manifest = createManifest(
+      new RoleBinding({
+        metadata: { name: "test", namespace: "kube-system" },
+        roleRef: {
+          apiGroup: "rbac.authorization.k8s.io",
+          kind: "Role",
+          name: "extension-apiserver-authentication-reader"
+        }
+      })
+    );
+    expect(validateAll(rule, undefined, [manifest])).toBeEmpty();
+  });
+
+  test("should report when namespace is not kube-system", () => {
+    const manifest = createManifest(
+      new RoleBinding({
+        metadata: { name: "test", namespace: "foo" },
+        roleRef: {
+          apiGroup: "rbac.authorization.k8s.io",
+          kind: "Role",
+          name: "extension-apiserver-authentication-reader"
+        }
+      })
+    );
+    expect(validateAll(rule, undefined, [manifest])).toEqual([
+      {
+        manifest,
+        message: `Role "extension-apiserver-authentication-reader" does not exist in namespace "foo".`
+      }
+    ]);
+  });
+
+  test("should report when namespace is undefined", () => {
+    const manifest = createManifest(
+      new RoleBinding({
+        metadata: { name: "test" },
+        roleRef: {
+          apiGroup: "rbac.authorization.k8s.io",
+          kind: "Role",
+          name: "extension-apiserver-authentication-reader"
+        }
+      })
+    );
+    expect(validateAll(rule, undefined, [manifest])).toEqual([
+      {
+        manifest,
+        message: `Role "extension-apiserver-authentication-reader" does not exist.`
+      }
+    ]);
+  });
+});
+
+describe.each(["admin", "cluster-admin", "edit", "view"])(
+  "when role name is %s",
+  (name) => {
+    test("should pass when kind is ClusterRole", () => {
+      const manifest = createManifest(
+        new ClusterRoleBinding({
+          metadata: { name: "test" },
+          roleRef: {
+            apiGroup: "rbac.authorization.k8s.io",
+            kind: "ClusterRole",
+            name
+          }
+        })
+      );
+      expect(validateAll(rule, undefined, [manifest])).toBeEmpty();
+    });
+
+    test("should report when kind is Role", () => {
+      const manifest = createManifest(
+        new RoleBinding({
+          metadata: { name: "test" },
+          roleRef: {
+            apiGroup: "rbac.authorization.k8s.io",
+            kind: "Role",
+            name
+          }
+        })
+      );
+      expect(validateAll(rule, undefined, [manifest])).toEqual([
+        {
+          manifest,
+          message: `Role "${name}" does not exist.`
+        }
+      ]);
+    });
+  }
+);

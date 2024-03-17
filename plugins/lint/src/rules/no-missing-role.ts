@@ -9,6 +9,12 @@ import {
   namespacedNameSchema
 } from "../utils/manifest";
 
+// https://github.com/kubernetes/kubernetes/blob/656cb1028ea5af837e69b5c9c614b008d747ab63/plugin/pkg/auth/authorizer/rbac/bootstrappolicy/policy.go#L194
+const systemClusterRoles = new Set(["admin", "cluster-admin", "edit", "view"]);
+
+// https://github.com/kubernetes/kubernetes/blob/656cb1028ea5af837e69b5c9c614b008d747ab63/plugin/pkg/auth/authorizer/rbac/bootstrappolicy/namespace_policy.go#L74
+const systemRoles = new Set(["extension-apiserver-authentication-reader"]);
+
 export default createRule({
   config: object({
     allow: optional(
@@ -45,9 +51,23 @@ export default createRule({
             name: roleRef.name
           };
 
+          if (roleRef.name.startsWith("system:")) return;
+
           if (isClusterRole) {
-            if (allowClusterRoles.has(roleRef.name)) return;
+            if (
+              systemClusterRoles.has(roleRef.name) ||
+              allowClusterRoles.has(roleRef.name)
+            ) {
+              return;
+            }
           } else {
+            if (
+              name.namespace === "kube-system" &&
+              systemRoles.has(roleRef.name)
+            ) {
+              return;
+            }
+
             if (containNamespacedName(allowRoles, name)) return;
           }
 
