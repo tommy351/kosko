@@ -1,4 +1,4 @@
-import { importPath, resolve } from "@kosko/require";
+import { importPath, resolvePath } from "@kosko/require";
 import { createNodeEnvironment, NodeEnvironmentOptions } from "./node";
 import logger, { LogLevel } from "@kosko/log";
 import { mergeAsync } from "../merge";
@@ -33,7 +33,7 @@ export function createNodeESMEnvironment(
       // - File: `./file` -> `./file.js`
       //
       // https://nodejs.org/api/esm.html#esm_mandatory_file_extensions
-      const path = await resolve(id, {
+      const path = await resolvePath(id, {
         extensions: env.extensions.map((ext) => `.${ext}`)
       });
 

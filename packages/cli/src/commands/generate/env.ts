@@ -2,13 +2,13 @@ import { Config } from "@kosko/config";
 import { Environment } from "@kosko/env";
 import { BaseGenerateArguments } from "./types";
 import { createCLIEnvReducer } from "./set-option";
-import resolveFrom from "resolve-from";
 import pkgUp from "pkg-up";
 import { dirname, join } from "node:path";
 import { readFile } from "node:fs/promises";
 import { pathToFileURL } from "node:url";
 import { env } from "node:process";
 import { excludeFalsyInArray } from "../../utils";
+import { resolveModule } from "@kosko/require";
 
 const KOSKO_ENV = "@kosko/env";
 
@@ -34,7 +34,12 @@ async function getESMEntry(cwd: string) {
 }
 
 async function importEnvNode(cwd: string): Promise<Environment[]> {
-  const envPath = resolveFrom(cwd, KOSKO_ENV);
+  const envPath = await resolveModule(KOSKO_ENV, { baseDir: cwd });
+
+  if (!envPath) {
+    throw new Error(`Failed to resolve path for "${KOSKO_ENV}"`);
+  }
+
   const envs: Environment[] = [];
 
   // eslint-disable-next-line @typescript-eslint/no-var-requires

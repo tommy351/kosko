@@ -1,4 +1,4 @@
-import { resolve } from "../resolve";
+import { resolvePath } from "../resolve";
 import { makeTempDir, TempDir } from "@kosko/test-utils";
 import { dirname, join } from "node:path";
 import { mkdir, writeFile } from "node:fs/promises";
@@ -47,7 +47,7 @@ describe.each([
     });
 
     test(`returns ${JSON.stringify(expected)}`, async () => {
-      const actual = await resolve(input, { baseDir: tmpDir.path });
+      const actual = await resolvePath(input, { baseDir: tmpDir.path });
       const absExpected = expected && join(tmpDir.path, expected);
 
       expect(actual).toEqual(absExpected);
@@ -71,7 +71,7 @@ describe("when extensions are given", () => {
   });
 
   test("returns path with custom extensions", async () => {
-    const actual = await resolve("foo", {
+    const actual = await resolvePath("foo", {
       baseDir: tmpDir.path,
       extensions: [".abc"]
     });

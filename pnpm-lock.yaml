@@ -275,9 +275,6 @@ importers:
       pkg-up:
         specifier: ^3.1.0
         version: 3.1.0
-      resolve-from:
-        specifier: ^5.0.0
-        version: 5.0.0
       superstruct:
         specifier: ^1.0.3
         version: 1.0.3
@@ -689,6 +686,9 @@ importers:
       '@kosko/common-utils':
         specifier: workspace:^
         version: link:../common-utils
+      resolve-from:
+        specifier: ^5.0.0
+        version: 5.0.0
     devDependencies:
       '@kosko/build-scripts':
         specifier: workspace:^
@@ -827,9 +827,6 @@ importers:
       '@kosko/require':
         specifier: workspace:^
         version: link:../../packages/require
-      resolve-from:
-        specifier: ^5.0.0
-        version: 5.0.0
       superstruct:
         specifier: ^1.0.3
         version: 1.0.3

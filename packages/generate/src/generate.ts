@@ -1,8 +1,4 @@
-import {
-  importPath,
-  resolve as resolveModule,
-  getRequireExtensions
-} from "@kosko/require";
+import { importPath, resolvePath, getRequireExtensions } from "@kosko/require";
 import type { Manifest, ManifestToValidate, Result } from "./base";
 import logger, { LogLevel } from "@kosko/log";
 import {
@@ -62,7 +58,7 @@ async function resolveComponentPath(
   extensions: readonly string[]
 ) {
   try {
-    return await resolveModule(path, { extensions });
+    return await resolvePath(path, { extensions });
   } catch (err) {
     throw new GenerateError("Module path resolve failed", {
       path,

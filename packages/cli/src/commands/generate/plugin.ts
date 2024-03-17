@@ -1,8 +1,7 @@
 import type { PluginConfig } from "@kosko/config";
 import type { Plugin, PluginContext } from "@kosko/plugin";
-import { importPath } from "@kosko/require";
+import { importPath, resolveModule } from "@kosko/require";
 import logger, { LogLevel } from "@kosko/log";
-import resolveFrom from "resolve-from";
 import { isRecord } from "@kosko/common-utils";
 import { CLIError } from "@kosko/cli-utils";
 import pc from "picocolors";
@@ -114,14 +113,6 @@ export function composePlugins(plugins: readonly Plugin[]): Plugin {
   };
 }
 
-function resolvePath(cwd: string, name: string): string {
-  try {
-    return resolveFrom(cwd, name);
-  } catch (err) {
-    throw wrapError(err, `Failed to resolve path for plugin "${name}"`);
-  }
-}
-
 export async function loadPlugins(
   cwd: string,
   configs: readonly PluginConfig[]
@@ -136,7 +127,11 @@ export async function loadPlugins(
   const plugins: Plugin[] = [];
 
   for (const conf of configs) {
-    const path = resolvePath(cwd, conf.name);
+    const path = await resolveModule(conf.name, { baseDir: cwd });
+
+    if (!path) {
+      throw new Error(`Failed to resolve path for plugin "${conf.name}"`);
+    }
 
     logger.log(LogLevel.Debug, `Loading plugin "${conf.name}" from "${path}"`);
 

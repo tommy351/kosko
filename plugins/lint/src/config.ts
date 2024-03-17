@@ -15,9 +15,8 @@ import {
 import { rules } from "./rules/registry";
 import type { RuleFactory } from "./rules/types";
 import type { Severity } from "@kosko/generate";
-import { importPath } from "@kosko/require";
+import { importPath, resolveModule } from "@kosko/require";
 import { dirname } from "node:path";
-import resolveFrom from "resolve-from";
 
 export type SeverityAndOff = Severity | "off";
 
@@ -72,16 +71,6 @@ const configSchema = object({
   rules: optional(partial(rulesSchema))
 });
 
-function resolvePath(cwd: string, path: string) {
-  try {
-    return resolveFrom(cwd, path);
-  } catch (err) {
-    throw new Error(`Failed to resolve config path "${path}"`, {
-      cause: err
-    });
-  }
-}
-
 async function loadConfig(path: string) {
   try {
     return await importPath(path);
@@ -97,7 +86,12 @@ export async function validateConfig(
   const rules = {};
 
   for (const extend of config.extends ?? []) {
-    const path = resolvePath(ctx.cwd, extend);
+    const path = await resolveModule(extend, { baseDir: ctx.cwd });
+
+    if (!path) {
+      throw new Error(`Failed to resolve config path "${extend}"`);
+    }
+
     const mod = await loadConfig(path);
     const extendConf = await validateConfig({
       cwd: dirname(path),
