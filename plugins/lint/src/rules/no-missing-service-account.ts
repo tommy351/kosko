@@ -23,7 +23,9 @@ export default createRule({
     return {
       validateAll(manifests) {
         function checkName(manifest: Manifest, name: NamespacedName) {
-          if (containNamespacedName(allow, name)) return;
+          if (name.name === "default" || containNamespacedName(allow, name)) {
+            return;
+          }
 
           if (
             manifests.find({

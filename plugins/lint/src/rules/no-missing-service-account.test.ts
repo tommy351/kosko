@@ -236,3 +236,16 @@ test("should pass when service account is in the allow list", () => {
     validateAll(rule, { allow: [{ name: "bar", namespace: "a" }] }, [manifest])
   ).toBeEmpty();
 });
+
+test(`should pass when service account name is "default"`, () => {
+  const manifest = createManifest(
+    new Pod({
+      metadata: { name: "foo", namespace: "a" },
+      spec: {
+        serviceAccount: "default",
+        containers: []
+      }
+    })
+  );
+  expect(validateAll(rule, undefined, [manifest])).toBeEmpty();
+});
