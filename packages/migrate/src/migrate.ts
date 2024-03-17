@@ -1,6 +1,7 @@
 import camelcase from "camelcase";
 import { Manifest, loadString, getResourceModule } from "@kosko/yaml";
 import stringify from "fast-safe-stringify";
+import { BUILD_TARGET } from "@kosko/build-scripts";
 
 /**
  * @public
@@ -31,8 +32,7 @@ export interface MigrateOptions {
 }
 
 const DEFAULT_FORMAT: MigrateFormat =
-  // eslint-disable-next-line no-restricted-globals
-  process.env.BUILD_TARGET === "node" ? MigrateFormat.CJS : MigrateFormat.ESM;
+  BUILD_TARGET === "node" ? MigrateFormat.CJS : MigrateFormat.ESM;
 
 interface Component {
   readonly name: string;

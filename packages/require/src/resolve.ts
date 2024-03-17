@@ -4,6 +4,7 @@ import { cwd } from "node:process";
 import { getRequireExtensions } from "./extensions";
 import { getErrorCode } from "@kosko/common-utils";
 import resolveFrom from "resolve-from";
+import { BUILD_TARGET } from "@kosko/build-scripts";
 
 /**
  * @public
@@ -106,8 +107,7 @@ export async function resolveModule(id: string, options: ResolveOptions = {}) {
     return resolvePath(id, options);
   }
 
-  // eslint-disable-next-line no-restricted-globals
-  if (process.env.BUILD_TARGET !== "node") {
+  if (BUILD_TARGET !== "node") {
     return;
   }
 

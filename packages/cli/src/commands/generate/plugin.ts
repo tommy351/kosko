@@ -6,6 +6,7 @@ import { isRecord } from "@kosko/common-utils";
 import { CLIError } from "@kosko/cli-utils";
 import pc from "picocolors";
 import { type, func, optional, validate } from "superstruct";
+import { BUILD_TARGET } from "@kosko/build-scripts";
 
 type UnknownPluginFactory = (ctx: PluginContext) => unknown;
 
@@ -119,8 +120,7 @@ export async function loadPlugins(
 ): Promise<Plugin> {
   if (!configs.length) return {};
 
-  // eslint-disable-next-line no-restricted-globals
-  if (process.env.BUILD_TARGET !== "node") {
+  if (BUILD_TARGET !== "node") {
     throw new Error("Plugins are only supported on Node.js");
   }
 

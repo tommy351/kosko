@@ -4,6 +4,7 @@ import logger, { LogLevel } from "@kosko/log";
 import { mergeAsync } from "../merge";
 import { Environment } from "./types";
 import { createAsyncReducerExecutor } from "./base";
+import { BUILD_TARGET } from "@kosko/build-scripts";
 
 /**
  * Returns a new {@link Environment} which loads environment variables using
@@ -15,8 +16,7 @@ export function createNodeESMEnvironment(
   options: NodeEnvironmentOptions = {}
 ): Environment {
   /* istanbul ignore next */
-  // eslint-disable-next-line no-restricted-globals
-  if (process.env.BUILD_TARGET === "browser") {
+  if (BUILD_TARGET === "browser") {
     throw new Error("createNodeESMEnvironment is only supported on Node.js");
   }
 

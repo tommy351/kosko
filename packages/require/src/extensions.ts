@@ -1,4 +1,5 @@
 import { createRequire } from "node:module";
+import { BUILD_FORMAT, BUILD_TARGET } from "@kosko/build-scripts";
 
 const BASE_EXTENSIONS = [".js", ".json"];
 
@@ -13,14 +14,10 @@ const BASE_EXTENSIONS = [".js", ".json"];
  * @public
  */
 export function getRequireExtensions(): string[] {
-  // eslint-disable-next-line no-restricted-globals
-  switch (process.env.BUILD_TARGET) {
+  switch (BUILD_TARGET) {
     case "node": {
       const req =
-        // eslint-disable-next-line no-restricted-globals
-        process.env.BUILD_FORMAT === "esm"
-          ? createRequire(import.meta.url)
-          : require;
+        BUILD_FORMAT === "esm" ? createRequire(import.meta.url) : require;
 
       const extensions = new Set([
         ".cjs",

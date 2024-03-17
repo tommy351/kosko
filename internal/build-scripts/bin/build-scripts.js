@@ -8,6 +8,7 @@ import nodeResolve from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import swc from "rollup-plugin-swc";
 import json from "@rollup/plugin-json";
+import virtual from "@rollup/plugin-virtual";
 import { Extractor, ExtractorConfig } from "@microsoft/api-extractor";
 import globby from "globby";
 import execa from "execa";
@@ -75,13 +76,17 @@ async function buildBundle(options) {
       ...(options.suffixes ? [moduleSuffixes(options.suffixes)] : []),
       json({ compact: true, preferConst: true }),
       nodeResolve({ extensions: [".ts"] }),
+      virtual({
+        "@kosko/build-scripts": `
+export const BUILD_PROD = true;
+export const BUILD_TARGET = ${JSON.stringify(options.target)};
+export const BUILD_FORMAT = ${JSON.stringify(options.format)};
+export const TARGET_SUFFIX = ${JSON.stringify(options.output)};
+`
+      }),
       replace({
         preventAssignment: true,
         values: {
-          "process.env.BUILD_PROD": "true",
-          "process.env.BUILD_TARGET": JSON.stringify(options.target),
-          "process.env.BUILD_FORMAT": JSON.stringify(options.format),
-          "process.env.TARGET_SUFFIX": JSON.stringify(options.output),
           ...(options.importMetaUrlShim && {
             "import.meta.url": "new URL(`file:${__filename}`).href"
           })

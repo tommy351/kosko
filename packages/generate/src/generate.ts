@@ -12,6 +12,7 @@ import { GenerateError, ResolveError } from "./error";
 import { glob, GlobResult } from "./glob";
 import pLimit from "p-limit";
 import { validateConcurrency } from "./utils";
+import { BUILD_TARGET } from "@kosko/build-scripts";
 
 /**
  * @public
@@ -126,8 +127,7 @@ function validateExtensions(
  */
 export async function generate(options: GenerateOptions): Promise<Result> {
   /* istanbul ignore next */
-  // eslint-disable-next-line no-restricted-globals
-  if (process.env.BUILD_TARGET === "browser") {
+  if (BUILD_TARGET === "browser") {
     throw new Error("generate is only supported on Node.js");
   }
 

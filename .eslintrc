@@ -68,7 +68,7 @@
         ".json",
         ".node"
       ],
-      "allowModules": ["type-fest"]
+      "allowModules": ["type-fest", "@kosko/build-scripts"]
     }
   },
   "overrides": [

@@ -9,6 +9,7 @@ import { pathToFileURL } from "node:url";
 import { env } from "node:process";
 import { excludeFalsyInArray } from "../../utils";
 import { resolveModule } from "@kosko/require";
+import { BUILD_TARGET } from "@kosko/build-scripts";
 
 const KOSKO_ENV = "@kosko/env";
 
@@ -71,8 +72,7 @@ export async function setupEnv(
 ): Promise<void> {
   const cwd = args.cwd;
   const envs =
-    // eslint-disable-next-line no-restricted-globals
-    process.env.BUILD_TARGET === "node"
+    BUILD_TARGET === "node"
       ? await importEnvNode(cwd)
       : await importEnvGeneric();
 

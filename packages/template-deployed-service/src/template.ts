@@ -1,5 +1,6 @@
 import { Template } from "@kosko/template";
 import { join } from "node:path";
+import { BUILD_TARGET } from "@kosko/build-scripts";
 
 /**
  * @public
@@ -61,8 +62,7 @@ export const template: Template<Options> = {
     esm: {
       type: "boolean",
       description: "Generate ECMAScript module (ESM) files",
-      // eslint-disable-next-line no-restricted-globals
-      default: process.env.BUILD_TARGET !== "node"
+      default: BUILD_TARGET !== "node"
     }
   },
   async generate({

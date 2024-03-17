@@ -4,6 +4,7 @@ import { createSyncReducerExecutor } from "./base";
 import { merge } from "../merge";
 import logger, { LogLevel } from "@kosko/log";
 import { getErrorCode } from "@kosko/common-utils";
+import { BUILD_TARGET } from "@kosko/build-scripts";
 
 /**
  * Returns a new {@link Environment} which loads environment variables using
@@ -15,8 +16,7 @@ export function createNodeCJSEnvironment(
   options: NodeEnvironmentOptions = {}
 ): Environment {
   /* istanbul ignore next */
-  // eslint-disable-next-line no-restricted-globals
-  if (process.env.BUILD_TARGET !== "node") {
+  if (BUILD_TARGET !== "node") {
     throw new Error("createNodeCJSEnvironment is only supported on Node.js");
   }
 
