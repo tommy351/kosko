@@ -21,6 +21,7 @@ import type { IGRPCRoute } from "@kubernetes-models/gateway-api/gateway.networki
 import type { ITCPRoute } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1alpha2/TCPRoute";
 import type { ITLSRoute } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1alpha2/TLSRoute";
 import type { IUDPRoute } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1alpha2/UDPRoute";
+import type { IGateway } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1/Gateway";
 import { Manifest } from "../rules/types";
 import { Matcher, compilePattern } from "./pattern";
 
@@ -32,6 +33,8 @@ export type GatewayRoute =
   | ITCPRoute
   | ITLSRoute
   | IUDPRoute;
+
+export const GATEWAY_GROUP = "gateway.networking.k8s.io";
 
 const GATEWAY_ROUTE_KINDS = new Set([
   "HTTPRoute",
@@ -138,6 +141,7 @@ export const isCronJob = groupKindPredicate<ICronJob>("batch", "CronJob");
 export const isHPA = groupKindPredicate<
   IHPAV1 | IHPAV2Beta1 | IHPAV2Beta2 | IHPAV2
 >("autoscaling", "HorizontalPodAutoscaler");
+export const isGateway = groupKindPredicate<IGateway>(GATEWAY_GROUP, "Gateway");
 
 export function isGatewayRoute(
   manifest: Manifest
@@ -146,7 +150,7 @@ export function isGatewayRoute(
 
   return (
     typeof meta?.apiVersion === "string" &&
-    apiVersionToGroup(meta.apiVersion) === "gateway.networking.k8s.io" &&
+    apiVersionToGroup(meta.apiVersion) === GATEWAY_GROUP &&
     GATEWAY_ROUTE_KINDS.has(meta.kind)
   );
 }

@@ -6,10 +6,10 @@ import {
   buildMissingResourceMessage,
   compileNamespacedNamePattern,
   namespacedNameArraySchema,
-  isGatewayRoute
+  isGatewayRoute,
+  GATEWAY_GROUP
 } from "../utils/manifest";
 
-const GATEWAY_GROUP = "gateway.networking.k8s.io";
 const GATEWAY_KIND = "Gateway";
 
 export default createRule({
