@@ -14,8 +14,16 @@ import type { IHorizontalPodAutoscaler as IHPAV1 } from "kubernetes-models/autos
 import type { IHorizontalPodAutoscaler as IHPAV2Beta1 } from "kubernetes-models/autoscaling/v2beta1/HorizontalPodAutoscaler";
 import type { IHorizontalPodAutoscaler as IHPAV2Beta2 } from "kubernetes-models/autoscaling/v2beta2/HorizontalPodAutoscaler";
 import type { IHorizontalPodAutoscaler as IHPAV2 } from "kubernetes-models/autoscaling/v2/HorizontalPodAutoscaler";
+import type { IHTTPRoute as IHTTPRouteV1Alpha2 } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1alpha2/HTTPRoute";
+import type { IHTTPRoute as IHTTPRouteV1Beta1 } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1beta1/HTTPRoute";
+import type { IHTTPRoute as IHTTPRouteV1 } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1/HTTPRoute";
+import type { IGRPCRoute } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1alpha2/GRPCRoute";
 import { Manifest } from "../rules/types";
 import { Matcher, compilePattern } from "./pattern";
+
+export type HttpRoute = IHTTPRouteV1Alpha2 | IHTTPRouteV1Beta1 | IHTTPRouteV1;
+
+export type GrpcRoute = IGRPCRoute;
 
 export interface NamespacedName {
   namespace?: string;
@@ -114,3 +122,11 @@ export const isCronJob = groupKindPredicate<ICronJob>("batch", "CronJob");
 export const isHPA = groupKindPredicate<
   IHPAV1 | IHPAV2Beta1 | IHPAV2Beta2 | IHPAV2
 >("autoscaling", "HorizontalPodAutoscaler");
+export const isHttpRoute = groupKindPredicate<HttpRoute>(
+  "gateway.networking.k8s.io",
+  "HTTPRoute"
+);
+export const isGrpcRoute = groupKindPredicate<GrpcRoute>(
+  "gateway.networking.k8s.io",
+  "GRPCRoute"
+);

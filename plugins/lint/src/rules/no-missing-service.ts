@@ -1,15 +1,19 @@
 import { object, optional } from "superstruct";
 import { type Manifest, createRule } from "./types";
 import {
+  type HttpRoute,
   NamespacedName,
   buildMissingResourceMessage,
   compileNamespacedNamePattern,
+  isHttpRoute,
   isIngress,
-  namespacedNameArraySchema
+  namespacedNameArraySchema,
+  isGrpcRoute,
+  type GrpcRoute
 } from "../utils/manifest";
 import type { IIngress } from "kubernetes-models/networking.k8s.io/v1/Ingress";
-import { PartialDeep } from "type-fest";
-import { IIngressBackend } from "kubernetes-models/networking.k8s.io/v1/IngressBackend";
+import type { PartialDeep } from "type-fest";
+import type { IIngressBackend } from "kubernetes-models/networking.k8s.io/v1/IngressBackend";
 import { matchAny } from "../utils/pattern";
 
 export default createRule({
@@ -23,12 +27,7 @@ export default createRule({
 
     return {
       validateAll(manifests) {
-        function checkName(manifest: Manifest, serviceName: string) {
-          const name: NamespacedName = {
-            namespace: manifest.metadata?.namespace,
-            name: serviceName
-          };
-
+        function checkName(manifest: Manifest, name: NamespacedName) {
           if (isAllowed(name)) return;
 
           if (
@@ -50,14 +49,14 @@ export default createRule({
         ) {
           if (!backend.service?.name) return;
 
-          checkName(manifest, backend.service.name);
+          checkName(manifest, {
+            namespace: manifest.metadata?.namespace,
+            name: backend.service.name
+          });
         }
 
-        function checkIngress(
-          manifest: Manifest,
-          ingress: PartialDeep<IIngress>
-        ) {
-          const { defaultBackend, rules } = ingress.spec ?? {};
+        function checkIngress(manifest: Manifest<PartialDeep<IIngress>>) {
+          const { defaultBackend, rules } = manifest.data.spec ?? {};
 
           if (defaultBackend) {
             checkIngressBackend(manifest, defaultBackend);
@@ -72,9 +71,26 @@ export default createRule({
           }
         }
 
+        function checkRoute(
+          manifest: Manifest<PartialDeep<HttpRoute | GrpcRoute>>
+        ) {
+          for (const rule of manifest.data.spec?.rules ?? []) {
+            for (const ref of rule.backendRefs ?? []) {
+              if (!ref.group && ref.kind === "Service") {
+                checkName(manifest, {
+                  namespace: ref.namespace ?? manifest.metadata?.namespace,
+                  name: ref.name
+                });
+              }
+            }
+          }
+        }
+
         manifests.forEach((manifest) => {
           if (isIngress(manifest)) {
-            checkIngress(manifest, manifest.data);
+            checkIngress(manifest);
+          } else if (isHttpRoute(manifest) || isGrpcRoute(manifest)) {
+            checkRoute(manifest);
           }
         });
       }
