@@ -1,6 +1,7 @@
 import banImage from "./ban-image";
 import banServiceType from "./ban-service-type";
 import noMissingConfigMap from "./no-missing-config-map";
+import noMissingGateway from "./no-missing-gateway";
 import noMissingNamespace from "./no-missing-namespace";
 import noMissingPodVolumeMount from "./no-missing-pod-volume-mount";
 import noMissingPv from "./no-missing-pv";
@@ -33,6 +34,7 @@ export const rules = {
   "ban-image": banImage,
   "ban-service-type": banServiceType,
   "no-missing-config-map": noMissingConfigMap,
+  "no-missing-gateway": noMissingGateway,
   "no-missing-namespace": noMissingNamespace,
   "no-missing-pod-volume-mount": noMissingPodVolumeMount,
   "no-missing-pv": noMissingPv,

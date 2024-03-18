@@ -3,6 +3,7 @@ import { Preset } from "./types";
 const preset: Preset = {
   rules: {
     "no-missing-config-map": { severity: "error" },
+    "no-missing-gateway": { severity: "error" },
     "no-missing-namespace": { severity: "error" },
     "no-missing-pod-volume-mount": { severity: "error" },
     "no-missing-pv": { severity: "error" },
