@@ -15,19 +15,11 @@ import type { IHorizontalPodAutoscaler as IHPAV2Beta1 } from "kubernetes-models/
 import type { IHorizontalPodAutoscaler as IHPAV2Beta2 } from "kubernetes-models/autoscaling/v2beta2/HorizontalPodAutoscaler";
 import type { IHorizontalPodAutoscaler as IHPAV2 } from "kubernetes-models/autoscaling/v2/HorizontalPodAutoscaler";
 import { Manifest } from "../rules/types";
+import { Matcher, compilePattern } from "./pattern";
 
 export interface NamespacedName {
   namespace?: string;
   name: string;
-}
-
-export function containNamespacedName(
-  arr: readonly NamespacedName[],
-  name: NamespacedName
-): boolean {
-  return arr.some(
-    (n) => n.namespace === name.namespace && n.name === name.name
-  );
 }
 
 export const namespacedNameSchema = object({
@@ -36,6 +28,21 @@ export const namespacedNameSchema = object({
 });
 
 export const namespacedNameArraySchema = array(namespacedNameSchema);
+
+export function compileNamespacedNamePattern(
+  arr: NamespacedName
+): Matcher<NamespacedName> {
+  const nameMatcher = compilePattern(arr.name);
+  const baseNamespaceMatcher =
+    typeof arr.namespace === "string" && compilePattern(arr.namespace);
+  const namespaceMatcher: Matcher<string | undefined> = (value) => {
+    if (!baseNamespaceMatcher) return value == null;
+    return typeof value === "string" ? baseNamespaceMatcher(value) : false;
+  };
+
+  return (value) =>
+    nameMatcher(value.name) && namespaceMatcher(value.namespace);
+}
 
 export function buildMissingResourceMessage(
   resource: string,

@@ -5,22 +5,25 @@ import type { PartialDeep } from "type-fest";
 import type { IPodSpec } from "kubernetes-models/v1/PodSpec";
 import {
   type NamespacedName,
-  containNamespacedName,
   namespacedNameArraySchema,
-  buildMissingResourceMessage
+  buildMissingResourceMessage,
+  compileNamespacedNamePattern
 } from "../utils/manifest";
+import { matchAny } from "../utils/pattern";
 
 export default createRule({
   config: object({
     allow: optional(namespacedNameArraySchema)
   }),
   factory(ctx) {
-    const allow = ctx.config?.allow ?? [];
+    const isAllowed = matchAny(
+      (ctx.config?.allow ?? []).map(compileNamespacedNamePattern)
+    );
 
     return {
       validateAll(manifests) {
         function checkName(manifest: Manifest, name: NamespacedName) {
-          if (containNamespacedName(allow, name)) return;
+          if (isAllowed(name)) return;
 
           if (
             manifests.find({

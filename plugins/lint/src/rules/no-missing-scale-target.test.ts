@@ -99,13 +99,13 @@ test("should report when scale target does not exist", () => {
 test("should pass when scale target is in the allow list", () => {
   const hpa = createManifest(
     new HorizontalPodAutoscaler({
-      metadata: { name: "test", namespace: "a" },
+      metadata: { name: "test", namespace: "xyz" },
       spec: {
         maxReplicas: 1,
         scaleTargetRef: {
           apiVersion: "apps/v1",
           kind: "Deployment",
-          name: "foo"
+          name: "abc"
         }
       }
     })
@@ -118,8 +118,8 @@ test("should pass when scale target is in the allow list", () => {
           {
             apiVersion: "apps/v1",
             kind: "Deployment",
-            name: "foo",
-            namespace: "a"
+            name: "a*",
+            namespace: "x*"
           }
         ]
       },

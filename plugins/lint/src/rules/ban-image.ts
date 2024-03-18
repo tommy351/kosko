@@ -1,13 +1,14 @@
 import { array, object, optional, string } from "superstruct";
 import { collectPodContainers, getPodSpec } from "../utils/pod";
 import { createRule } from "./types";
+import { compilePattern, matchAny } from "../utils/pattern";
 
 export default createRule({
   config: object({
-    tags: optional(array(string()))
+    images: optional(array(string()))
   }),
   factory(ctx) {
-    const tags = new Set(ctx.config?.tags ?? []);
+    const match = matchAny((ctx.config?.images ?? []).map(compilePattern));
 
     return {
       validate(manifest) {
@@ -16,17 +17,11 @@ export default createRule({
 
         for (const container of collectPodContainers(podSpec)) {
           const image = container.image;
-          if (!image) return;
 
-          const parts = image.split(":");
-          if (parts.length === 1) return;
-
-          const tag = parts.slice(1).join(":");
-
-          if (tags.has(tag)) {
+          if (image && match(image)) {
             ctx.report(
               manifest,
-              `Image in container "${container.name}" must not use the "${tag}" tag`
+              `Container "${container.name}" uses the banned image "${image}".`
             );
           }
         }

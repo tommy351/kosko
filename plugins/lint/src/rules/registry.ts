@@ -1,4 +1,4 @@
-import banImageTag from "./ban-image-tag";
+import banImage from "./ban-image";
 import banServiceType from "./ban-service-type";
 import noMissingConfigMap from "./no-missing-config-map";
 import noMissingNamespace from "./no-missing-namespace";
@@ -30,7 +30,7 @@ import validPodSelector from "./valid-pod-selector";
 import validProbePort from "./valid-probe-port";
 
 export const rules = {
-  "ban-image-tag": banImageTag,
+  "ban-image": banImage,
   "ban-service-type": banServiceType,
   "no-missing-config-map": noMissingConfigMap,
   "no-missing-namespace": noMissingNamespace,

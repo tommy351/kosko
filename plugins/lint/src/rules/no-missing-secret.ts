@@ -5,26 +5,29 @@ import type { PartialDeep } from "type-fest";
 import type { IPodSpec } from "kubernetes-models/v1/PodSpec";
 import {
   type NamespacedName,
-  containNamespacedName,
   namespacedNameArraySchema,
   buildMissingResourceMessage,
   isIngress,
-  isServiceAccount
+  isServiceAccount,
+  compileNamespacedNamePattern
 } from "../utils/manifest";
 import type { IIngress } from "kubernetes-models/networking.k8s.io/v1/Ingress";
 import { IServiceAccount } from "kubernetes-models/v1/ServiceAccount";
+import { matchAny } from "../utils/pattern";
 
 export default createRule({
   config: object({
     allow: optional(namespacedNameArraySchema)
   }),
   factory(ctx) {
-    const allow = ctx.config?.allow ?? [];
+    const isAllowed = matchAny(
+      (ctx.config?.allow ?? []).map(compileNamespacedNamePattern)
+    );
 
     return {
       validateAll(manifests) {
         function checkName(manifest: Manifest, name: NamespacedName) {
-          if (containNamespacedName(allow, name)) return;
+          if (isAllowed(name)) return;
 
           if (
             manifests.find({

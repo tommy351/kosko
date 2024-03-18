@@ -224,11 +224,11 @@ test("should pass when cluster role exists in other namespace", () => {
 test("should pass when role is in allow list", () => {
   const binding = createManifest(
     new RoleBinding({
-      metadata: { name: "test", namespace: "a" },
+      metadata: { name: "test", namespace: "abc" },
       roleRef: {
         apiGroup: "rbac.authorization.k8s.io",
         kind: "Role",
-        name: "foo"
+        name: "xyz"
       },
       subjects: []
     })
@@ -237,7 +237,7 @@ test("should pass when role is in allow list", () => {
   expect(
     validateAll(
       rule,
-      { allow: [{ kind: "Role", namespace: "a", name: "foo" }] },
+      { allow: [{ kind: "Role", namespace: "a*", name: "x*" }] },
       [binding]
     )
   ).toBeEmpty();
@@ -246,18 +246,18 @@ test("should pass when role is in allow list", () => {
 test("should pass when cluster role is in allow list", () => {
   const binding = createManifest(
     new RoleBinding({
-      metadata: { name: "test", namespace: "a" },
+      metadata: { name: "test", namespace: "xyz" },
       roleRef: {
         apiGroup: "rbac.authorization.k8s.io",
         kind: "ClusterRole",
-        name: "foo"
+        name: "abc"
       },
       subjects: []
     })
   );
 
   expect(
-    validateAll(rule, { allow: [{ kind: "ClusterRole", name: "foo" }] }, [
+    validateAll(rule, { allow: [{ kind: "ClusterRole", name: "a*" }] }, [
       binding
     ])
   ).toBeEmpty();

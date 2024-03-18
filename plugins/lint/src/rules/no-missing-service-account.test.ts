@@ -225,15 +225,15 @@ test("should pass when role binding subjects is empty", () => {
 test("should pass when service account is in the allow list", () => {
   const manifest = createManifest(
     new Pod({
-      metadata: { name: "foo", namespace: "a" },
+      metadata: { name: "foo", namespace: "xyz" },
       spec: {
-        serviceAccount: "bar",
+        serviceAccount: "abc",
         containers: []
       }
     })
   );
   expect(
-    validateAll(rule, { allow: [{ name: "bar", namespace: "a" }] }, [manifest])
+    validateAll(rule, { allow: [{ name: "a*", namespace: "x*" }] }, [manifest])
   ).toBeEmpty();
 });
 

@@ -195,14 +195,14 @@ test("should pass when projected config map is optional", () => {
 test("should pass when config map is allowed", () => {
   const manifest = createManifest(
     new Pod({
-      metadata: { name: "foo", namespace: "a" },
+      metadata: { name: "foo", namespace: "abc" },
       spec: {
         containers: [],
-        volumes: [{ name: "abc", configMap: { name: "bar" } }]
+        volumes: [{ name: "abc", configMap: { name: "xyz" } }]
       }
     })
   );
   expect(
-    validateAll(rule, { allow: [{ name: "bar", namespace: "a" }] }, [manifest])
+    validateAll(rule, { allow: [{ name: "x*", namespace: "a*" }] }, [manifest])
   ).toBeEmpty();
 });

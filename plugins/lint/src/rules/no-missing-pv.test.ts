@@ -81,12 +81,12 @@ test("should report when volume does not exist in the same namespace", () => {
 test("should pass when volume is in allow list", () => {
   const pvc = createManifest(
     new PersistentVolumeClaim({
-      metadata: { name: "test", namespace: "a" },
-      spec: { volumeName: "foo" }
+      metadata: { name: "test", namespace: "xyz" },
+      spec: { volumeName: "abc" }
     })
   );
 
   expect(
-    validateAll(rule, { allow: [{ name: "foo", namespace: "a" }] }, [pvc])
+    validateAll(rule, { allow: [{ name: "a*", namespace: "x*" }] }, [pvc])
   ).toBeEmpty();
 });

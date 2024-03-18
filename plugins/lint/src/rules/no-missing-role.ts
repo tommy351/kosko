@@ -3,17 +3,22 @@ import { createRule } from "./types";
 import {
   type NamespacedName,
   buildMissingResourceMessage,
-  containNamespacedName,
   isClusterRoleBinding,
   isRoleBinding,
-  namespacedNameSchema
+  namespacedNameSchema,
+  compileNamespacedNamePattern
 } from "../utils/manifest";
+import { compilePattern, matchAny } from "../utils/pattern";
 
 // https://github.com/kubernetes/kubernetes/blob/656cb1028ea5af837e69b5c9c614b008d747ab63/plugin/pkg/auth/authorizer/rbac/bootstrappolicy/policy.go#L194
-const systemClusterRoles = new Set(["admin", "cluster-admin", "edit", "view"]);
+const builtinClusterRoles = new Set(["admin", "cluster-admin", "edit", "view"]);
 
 // https://github.com/kubernetes/kubernetes/blob/656cb1028ea5af837e69b5c9c614b008d747ab63/plugin/pkg/auth/authorizer/rbac/bootstrappolicy/namespace_policy.go#L74
-const systemRoles = new Set(["extension-apiserver-authentication-reader"]);
+const builtinRoles = new Set(["extension-apiserver-authentication-reader"]);
+
+function isSystemRole(name: string): boolean {
+  return name.startsWith("system:");
+}
 
 export default createRule({
   config: object({
@@ -30,10 +35,22 @@ export default createRule({
   }),
   factory(ctx) {
     const allow = ctx.config?.allow ?? [];
-    const allowRoles = allow.filter((a) => a.kind === "Role");
-    const allowClusterRoles = new Set(
-      allow.filter((a) => a.kind === "ClusterRole").map((v) => v.name)
-    );
+
+    const isRoleAllowed = matchAny<NamespacedName>([
+      (name) => isSystemRole(name.name),
+      (name) => name.namespace === "kube-system" && builtinRoles.has(name.name),
+      ...allow
+        .filter((a) => a.kind === "Role")
+        .map(compileNamespacedNamePattern)
+    ]);
+
+    const isClusterRoleAllowed = matchAny<string>([
+      isSystemRole,
+      (name) => builtinClusterRoles.has(name),
+      ...allow
+        .filter((a) => a.kind === "ClusterRole")
+        .map((v) => compilePattern(v.name))
+    ]);
 
     return {
       validateAll(manifests) {
@@ -51,24 +68,10 @@ export default createRule({
             name: roleRef.name
           };
 
-          if (roleRef.name.startsWith("system:")) return;
-
           if (isClusterRole) {
-            if (
-              systemClusterRoles.has(roleRef.name) ||
-              allowClusterRoles.has(roleRef.name)
-            ) {
-              return;
-            }
+            if (isClusterRoleAllowed(roleRef.name)) return;
           } else {
-            if (
-              name.namespace === "kube-system" &&
-              systemRoles.has(roleRef.name)
-            ) {
-              return;
-            }
-
-            if (containNamespacedName(allowRoles, name)) return;
+            if (isRoleAllowed(name)) return;
           }
 
           if (

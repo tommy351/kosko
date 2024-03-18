@@ -56,6 +56,24 @@ test("should report when image does not have a tag", () => {
   ]);
 });
 
+test("should report when tag is empty", () => {
+  const manifest = createManifest(
+    new Pod({
+      metadata: { name: "foo" },
+      spec: {
+        containers: [{ name: "foo", image: "nginx:" }]
+      }
+    })
+  );
+
+  expect(validate(rule, undefined, manifest)).toEqual([
+    {
+      manifest,
+      message: `Image in container "foo" must use a tag`
+    }
+  ]);
+});
+
 test("should report when initContainer image does not have a tag", () => {
   const manifest = createManifest(
     new Pod({

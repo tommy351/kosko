@@ -2,28 +2,32 @@ import { object, optional } from "superstruct";
 import { type Manifest, createRule } from "./types";
 import {
   type NamespacedName,
-  containNamespacedName,
   isClusterRoleBinding,
   isRoleBinding,
   namespacedNameArraySchema,
-  buildMissingResourceMessage
+  buildMissingResourceMessage,
+  compileNamespacedNamePattern
 } from "../utils/manifest";
 import { getPodSpec } from "../utils/pod";
 import type { PartialDeep } from "type-fest";
 import type { IPodSpec } from "kubernetes-models/v1/PodSpec";
 import type { IRoleBinding } from "kubernetes-models/rbac.authorization.k8s.io/v1/RoleBinding";
+import { matchAny } from "../utils/pattern";
 
 export default createRule({
   config: object({
     allow: optional(namespacedNameArraySchema)
   }),
   factory(ctx) {
-    const allow = ctx.config?.allow ?? [];
+    const isAllowed = matchAny<NamespacedName>([
+      (name) => name.name === "default",
+      ...(ctx.config?.allow ?? []).map(compileNamespacedNamePattern)
+    ]);
 
     return {
       validateAll(manifests) {
         function checkName(manifest: Manifest, name: NamespacedName) {
-          if (name.name === "default" || containNamespacedName(allow, name)) {
+          if (isAllowed(name)) {
             return;
           }
 

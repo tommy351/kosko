@@ -88,15 +88,15 @@ test("should report when secret is not in the same namespace", () => {
 test("should pass when secret is in the allow list", () => {
   const pod = createManifest(
     new Pod({
-      metadata: { name: "bar", namespace: "a" },
+      metadata: { name: "bar", namespace: "abc" },
       spec: {
         containers: [],
-        volumes: [{ name: "abc", secret: { secretName: "foo" } }]
+        volumes: [{ name: "abc", secret: { secretName: "xyz" } }]
       }
     })
   );
   expect(
-    validateAll(rule, { allow: [{ name: "foo", namespace: "a" }] }, [pod])
+    validateAll(rule, { allow: [{ name: "x*", namespace: "a*" }] }, [pod])
   ).toBeEmpty();
 });
 

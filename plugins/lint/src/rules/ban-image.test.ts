@@ -1,6 +1,6 @@
 import { Pod } from "kubernetes-models/v1/Pod";
 import { createManifest, validate } from "../test-utils";
-import rule from "./ban-image-tag";
+import rule from "./ban-image";
 
 test("should pass when data is undefined", () => {
   const manifest = createManifest(undefined);
@@ -38,38 +38,7 @@ test("should pass when config is an empty object", () => {
   expect(validate(rule, {}, manifest)).toBeEmpty();
 });
 
-test("should report when tag is banned", () => {
-  const manifest = createManifest(
-    new Pod({
-      metadata: { name: "foo" },
-      spec: {
-        containers: [{ name: "foo", image: "nginx:latest" }]
-      }
-    })
-  );
-
-  expect(validate(rule, { tags: ["latest"] }, manifest)).toEqual([
-    {
-      manifest,
-      message: `Image in container "foo" must not use the "latest" tag`
-    }
-  ]);
-});
-
-test("should pass when tag is not banned", () => {
-  const manifest = createManifest(
-    new Pod({
-      metadata: { name: "foo" },
-      spec: {
-        containers: [{ name: "foo", image: "nginx:1.19.6" }]
-      }
-    })
-  );
-
-  expect(validate(rule, { tags: ["latest"] }, manifest)).toBeEmpty();
-});
-
-test("should pass when tag is not specified", () => {
+test("should report when image is banned", () => {
   const manifest = createManifest(
     new Pod({
       metadata: { name: "foo" },
@@ -79,7 +48,43 @@ test("should pass when tag is not specified", () => {
     })
   );
 
-  expect(validate(rule, { tags: ["latest"] }, manifest)).toBeEmpty();
+  expect(validate(rule, { images: ["nginx"] }, manifest)).toEqual([
+    {
+      manifest,
+      message: `Container "foo" uses the banned image "nginx".`
+    }
+  ]);
+});
+
+test("should report when image matches a pattern", () => {
+  const manifest = createManifest(
+    new Pod({
+      metadata: { name: "foo" },
+      spec: {
+        containers: [{ name: "foo", image: "nginx:latest" }]
+      }
+    })
+  );
+
+  expect(validate(rule, { images: ["*:latest"] }, manifest)).toEqual([
+    {
+      manifest,
+      message: `Container "foo" uses the banned image "nginx:latest".`
+    }
+  ]);
+});
+
+test("should pass when image does not match any pattern", () => {
+  const manifest = createManifest(
+    new Pod({
+      metadata: { name: "foo" },
+      spec: {
+        containers: [{ name: "foo", image: "nginx" }]
+      }
+    })
+  );
+
+  expect(validate(rule, { images: ["foo", "bar"] }, manifest)).toBeEmpty();
 });
 
 test("should pass when image is undefined", () => {
@@ -92,24 +97,37 @@ test("should pass when image is undefined", () => {
     })
   );
 
-  expect(validate(rule, { tags: ["latest"] }, manifest)).toBeEmpty();
+  expect(validate(rule, { images: ["nginx"] }, manifest)).toBeEmpty();
 });
 
-test("should report when initContainer uses banned tag", () => {
+test("should pass when image is empty", () => {
   const manifest = createManifest(
     new Pod({
       metadata: { name: "foo" },
       spec: {
-        initContainers: [{ name: "foo", image: "nginx:latest" }],
+        containers: [{ name: "foo", image: "" }]
+      }
+    })
+  );
+
+  expect(validate(rule, { images: ["nginx"] }, manifest)).toBeEmpty();
+});
+
+test("should report when initContainer uses banned image", () => {
+  const manifest = createManifest(
+    new Pod({
+      metadata: { name: "foo" },
+      spec: {
+        initContainers: [{ name: "foo", image: "nginx" }],
         containers: []
       }
     })
   );
 
-  expect(validate(rule, { tags: ["latest"] }, manifest)).toEqual([
+  expect(validate(rule, { images: ["nginx"] }, manifest)).toEqual([
     {
       manifest,
-      message: `Image in container "foo" must not use the "latest" tag`
+      message: `Container "foo" uses the banned image "nginx".`
     }
   ]);
 });
@@ -119,16 +137,16 @@ test("should report when ephemeralContainer uses banned tag", () => {
     new Pod({
       metadata: { name: "foo" },
       spec: {
-        ephemeralContainers: [{ name: "foo", image: "nginx:latest" }],
+        ephemeralContainers: [{ name: "foo", image: "nginx" }],
         containers: []
       }
     })
   );
 
-  expect(validate(rule, { tags: ["latest"] }, manifest)).toEqual([
+  expect(validate(rule, { images: ["nginx"] }, manifest)).toEqual([
     {
       manifest,
-      message: `Image in container "foo" must not use the "latest" tag`
+      message: `Container "foo" uses the banned image "nginx".`
     }
   ]);
 });

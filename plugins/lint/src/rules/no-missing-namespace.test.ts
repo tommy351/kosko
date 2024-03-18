@@ -74,11 +74,11 @@ test("should report when namespace does not exist", () => {
 test("should pass when namespace is allowed", () => {
   const manifest = createManifest(
     new Pod({
-      metadata: { namespace: "test", name: "foo" }
+      metadata: { namespace: "abc", name: "foo" }
     })
   );
 
-  expect(validateAll(rule, { allow: ["test"] }, [manifest])).toBeEmpty();
+  expect(validateAll(rule, { allow: ["a*"] }, [manifest])).toBeEmpty();
 });
 
 test("should pass when namespace exists", () => {

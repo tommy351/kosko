@@ -56,14 +56,14 @@ test("should report when service is not in the same namespace", () => {
 test("should pass when service is in the allow list", () => {
   const ingress = createManifest(
     new Ingress({
-      metadata: { name: "bar", namespace: "a" },
+      metadata: { name: "bar", namespace: "xyz" },
       spec: {
-        defaultBackend: { service: { name: "foo" } }
+        defaultBackend: { service: { name: "abc" } }
       }
     })
   );
   expect(
-    validateAll(rule, { allow: [{ name: "foo", namespace: "a" }] }, [ingress])
+    validateAll(rule, { allow: [{ name: "a*", namespace: "x*" }] }, [ingress])
   ).toBeEmpty();
 });
 

@@ -4,16 +4,19 @@ import {
   type NamespacedName,
   isPVC,
   namespacedNameArraySchema,
-  containNamespacedName,
-  buildMissingResourceMessage
+  buildMissingResourceMessage,
+  compileNamespacedNamePattern
 } from "../utils/manifest";
+import { matchAny } from "../utils/pattern";
 
 export default createRule({
   config: object({
     allow: optional(namespacedNameArraySchema)
   }),
   factory(ctx) {
-    const allow = ctx.config?.allow ?? [];
+    const isAllowed = matchAny(
+      (ctx.config?.allow ?? []).map(compileNamespacedNamePattern)
+    );
 
     return {
       validateAll(manifests) {
@@ -28,7 +31,7 @@ export default createRule({
             name: volumeName
           };
 
-          if (containNamespacedName(allow, name)) return;
+          if (isAllowed(name)) return;
 
           if (
             manifests.find({

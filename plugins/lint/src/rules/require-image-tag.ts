@@ -13,7 +13,7 @@ export default createRule({
 
           const parts = container.image.split(":");
 
-          if (parts.length < 2) {
+          if (parts.length < 2 || !parts[1]) {
             ctx.report(
               manifest,
               `Image in container "${container.name}" must use a tag`

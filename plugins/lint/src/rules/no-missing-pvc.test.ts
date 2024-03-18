@@ -91,14 +91,14 @@ test("should report when volume does not exist in the same namespace", () => {
 test("should pass when PVC is in the allow list", () => {
   const pod = createManifest(
     new Pod({
-      metadata: { name: "test", namespace: "a" },
+      metadata: { name: "test", namespace: "abc" },
       spec: {
         containers: [],
-        volumes: [{ name: "abc", persistentVolumeClaim: { claimName: "foo" } }]
+        volumes: [{ name: "abc", persistentVolumeClaim: { claimName: "xyz" } }]
       }
     })
   );
   expect(
-    validateAll(rule, { allow: [{ namespace: "a", name: "foo" }] }, [pod])
+    validateAll(rule, { allow: [{ namespace: "a*", name: "x*" }] }, [pod])
   ).toBeEmpty();
 });

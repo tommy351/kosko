@@ -1,26 +1,26 @@
 import { object, optional } from "superstruct";
 import {
-  containNamespacedName,
+  compileNamespacedNamePattern,
   isService,
   namespacedNameArraySchema
 } from "../utils/manifest";
 import { createRule } from "./types";
+import { matchAny } from "../utils/pattern";
 
 export default createRule({
   config: object({
     allow: optional(namespacedNameArraySchema)
   }),
   factory(ctx) {
-    const allow = ctx.config?.allow ?? [];
+    const isAllowed = matchAny(
+      (ctx.config?.allow ?? []).map(compileNamespacedNamePattern)
+    );
 
     return {
       validate(manifest) {
         if (!isService(manifest)) return;
 
-        if (
-          manifest.metadata &&
-          containNamespacedName(allow, manifest.metadata)
-        ) {
+        if (manifest.metadata && isAllowed(manifest.metadata)) {
           return;
         }
 

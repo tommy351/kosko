@@ -1,6 +1,12 @@
 import { array, assign, object, optional, string } from "superstruct";
 import { createRule } from "./types";
-import { isHPA, namespacedNameSchema } from "../utils/manifest";
+import {
+  compileNamespacedNamePattern,
+  isHPA,
+  namespacedNameSchema
+} from "../utils/manifest";
+import { matchAny } from "../utils/pattern";
+import { ICrossVersionObjectReference } from "kubernetes-models/autoscaling/v1/CrossVersionObjectReference";
 
 export default createRule({
   config: object({
@@ -9,7 +15,7 @@ export default createRule({
         assign(
           namespacedNameSchema,
           object({
-            apiVersion: string(),
+            apiVersion: optional(string()),
             kind: string()
           })
         )
@@ -17,7 +23,21 @@ export default createRule({
     )
   }),
   factory(ctx) {
-    const allow = ctx.config?.allow ?? [];
+    const isAllowed = matchAny(
+      (ctx.config?.allow ?? []).map((value) => {
+        const match = compileNamespacedNamePattern(value);
+
+        return (
+          ref: Partial<ICrossVersionObjectReference> & { namespace?: string }
+        ) => {
+          return (
+            ref.apiVersion === value.apiVersion &&
+            ref.kind === value.kind &&
+            match({ name: ref.name || "", namespace: ref.namespace })
+          );
+        };
+      })
+    );
 
     return {
       validateAll(manifests) {
@@ -29,15 +49,7 @@ export default createRule({
 
           const namespace = manifest.metadata?.namespace;
 
-          if (
-            allow.some(
-              (a) =>
-                a.apiVersion === ref.apiVersion &&
-                a.kind === ref.kind &&
-                a.name === ref.name &&
-                a.namespace === namespace
-            )
-          ) {
+          if (isAllowed({ ...ref, namespace })) {
             return;
           }
 
