@@ -5,9 +5,8 @@ import {
   type NamespacedName,
   buildMissingResourceMessage,
   compileNamespacedNamePattern,
-  isGrpcRoute,
-  isHttpRoute,
-  namespacedNameArraySchema
+  namespacedNameArraySchema,
+  isGatewayRoute
 } from "../utils/manifest";
 
 const GATEWAY_GROUP = "gateway.networking.k8s.io";
@@ -25,7 +24,7 @@ export default createRule({
     return {
       validateAll(manifests) {
         manifests.forEach((manifest) => {
-          if (!isHttpRoute(manifest) && !isGrpcRoute(manifest)) return;
+          if (!isGatewayRoute(manifest)) return;
 
           for (const ref of manifest.data.spec?.parentRefs ?? []) {
             const group = ref.group ?? GATEWAY_GROUP;

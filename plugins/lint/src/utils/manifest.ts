@@ -18,12 +18,28 @@ import type { IHTTPRoute as IHTTPRouteV1Alpha2 } from "@kubernetes-models/gatewa
 import type { IHTTPRoute as IHTTPRouteV1Beta1 } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1beta1/HTTPRoute";
 import type { IHTTPRoute as IHTTPRouteV1 } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1/HTTPRoute";
 import type { IGRPCRoute } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1alpha2/GRPCRoute";
+import type { ITCPRoute } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1alpha2/TCPRoute";
+import type { ITLSRoute } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1alpha2/TLSRoute";
+import type { IUDPRoute } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1alpha2/UDPRoute";
 import { Manifest } from "../rules/types";
 import { Matcher, compilePattern } from "./pattern";
 
-export type HttpRoute = IHTTPRouteV1Alpha2 | IHTTPRouteV1Beta1 | IHTTPRouteV1;
+export type GatewayRoute =
+  | IHTTPRouteV1Alpha2
+  | IHTTPRouteV1Beta1
+  | IHTTPRouteV1
+  | IGRPCRoute
+  | ITCPRoute
+  | ITLSRoute
+  | IUDPRoute;
 
-export type GrpcRoute = IGRPCRoute;
+const GATEWAY_ROUTE_KINDS = new Set([
+  "HTTPRoute",
+  "GRPCRoute",
+  "TCPRoute",
+  "TLSRoute",
+  "UDPRoute"
+]);
 
 export interface NamespacedName {
   namespace?: string;
@@ -122,11 +138,15 @@ export const isCronJob = groupKindPredicate<ICronJob>("batch", "CronJob");
 export const isHPA = groupKindPredicate<
   IHPAV1 | IHPAV2Beta1 | IHPAV2Beta2 | IHPAV2
 >("autoscaling", "HorizontalPodAutoscaler");
-export const isHttpRoute = groupKindPredicate<HttpRoute>(
-  "gateway.networking.k8s.io",
-  "HTTPRoute"
-);
-export const isGrpcRoute = groupKindPredicate<GrpcRoute>(
-  "gateway.networking.k8s.io",
-  "GRPCRoute"
-);
+
+export function isGatewayRoute(
+  manifest: Manifest
+): manifest is Manifest<PartialDeep<GatewayRoute>> {
+  const meta = manifest.metadata;
+
+  return (
+    typeof meta?.apiVersion === "string" &&
+    apiVersionToGroup(meta.apiVersion) === "gateway.networking.k8s.io" &&
+    GATEWAY_ROUTE_KINDS.has(meta.kind)
+  );
+}

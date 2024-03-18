@@ -1,15 +1,13 @@
 import { object, optional } from "superstruct";
 import { type Manifest, createRule } from "./types";
 import {
-  type HttpRoute,
+  type GatewayRoute,
   NamespacedName,
   buildMissingResourceMessage,
   compileNamespacedNamePattern,
-  isHttpRoute,
   isIngress,
   namespacedNameArraySchema,
-  isGrpcRoute,
-  type GrpcRoute
+  isGatewayRoute
 } from "../utils/manifest";
 import type { IIngress } from "kubernetes-models/networking.k8s.io/v1/Ingress";
 import type { PartialDeep } from "type-fest";
@@ -71,8 +69,8 @@ export default createRule({
           }
         }
 
-        function checkRoute(
-          manifest: Manifest<PartialDeep<HttpRoute | GrpcRoute>>
+        function checkGatewayRoute(
+          manifest: Manifest<PartialDeep<GatewayRoute>>
         ) {
           for (const rule of manifest.data.spec?.rules ?? []) {
             for (const ref of rule.backendRefs ?? []) {
@@ -89,8 +87,8 @@ export default createRule({
         manifests.forEach((manifest) => {
           if (isIngress(manifest)) {
             checkIngress(manifest);
-          } else if (isHttpRoute(manifest) || isGrpcRoute(manifest)) {
-            checkRoute(manifest);
+          } else if (isGatewayRoute(manifest)) {
+            checkGatewayRoute(manifest);
           }
         });
       }

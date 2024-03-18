@@ -4,6 +4,9 @@ import { Gateway } from "@kubernetes-models/gateway-api/gateway.networking.k8s.i
 import { createManifest, validateAll } from "../test-utils";
 import rule from "./no-missing-gateway";
 import { GRPCRoute } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1alpha2/GRPCRoute";
+import { TCPRoute } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1alpha2/TCPRoute";
+import { UDPRoute } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1alpha2/UDPRoute";
+import { TLSRoute } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1alpha2/TLSRoute";
 
 test("should pass when data is undefined", () => {
   const manifest = createManifest(undefined);
@@ -161,12 +164,66 @@ test(`should check when ref group is "gateway.networking.k8s.io"`, () => {
   ]);
 });
 
-test("should check grpc route", () => {
+test("should check GRPCRoute", () => {
   const manifest = createManifest(
     new GRPCRoute({
       metadata: { name: "foo" },
       spec: {
         parentRefs: [{ name: "bar" }]
+      }
+    })
+  );
+  expect(validateAll(rule, undefined, [manifest])).toEqual([
+    {
+      manifest,
+      message: `Gateway "bar" does not exist.`
+    }
+  ]);
+});
+
+test("should check TCPRoute", () => {
+  const manifest = createManifest(
+    new TCPRoute({
+      metadata: { name: "foo" },
+      spec: {
+        parentRefs: [{ name: "bar" }],
+        rules: []
+      }
+    })
+  );
+  expect(validateAll(rule, undefined, [manifest])).toEqual([
+    {
+      manifest,
+      message: `Gateway "bar" does not exist.`
+    }
+  ]);
+});
+
+test("should check TLSRoute", () => {
+  const manifest = createManifest(
+    new TLSRoute({
+      metadata: { name: "foo" },
+      spec: {
+        parentRefs: [{ name: "bar" }],
+        rules: []
+      }
+    })
+  );
+  expect(validateAll(rule, undefined, [manifest])).toEqual([
+    {
+      manifest,
+      message: `Gateway "bar" does not exist.`
+    }
+  ]);
+});
+
+test("should check UDPRoute", () => {
+  const manifest = createManifest(
+    new UDPRoute({
+      metadata: { name: "foo" },
+      spec: {
+        parentRefs: [{ name: "bar" }],
+        rules: []
       }
     })
   );

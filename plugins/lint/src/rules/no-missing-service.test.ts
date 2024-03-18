@@ -5,6 +5,9 @@ import rule from "./no-missing-service";
 import { Ingress } from "kubernetes-models/networking.k8s.io/v1";
 import { HTTPRoute } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1/HTTPRoute";
 import { GRPCRoute } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1alpha2/GRPCRoute";
+import { TCPRoute } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1alpha2/TCPRoute";
+import { TLSRoute } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1alpha2/TLSRoute";
+import { UDPRoute } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1alpha2/UDPRoute";
 
 test("should pass when data is undefined", () => {
   const manifest = createManifest(undefined);
@@ -94,7 +97,7 @@ test("should check http path rule in ingress", () => {
   ]);
 });
 
-test("should check backend ref in http route", () => {
+test("should check backendRefs in HTTPRoute", () => {
   const manifest = createManifest(
     new HTTPRoute({
       metadata: { name: "foo" },
@@ -127,7 +130,7 @@ test("should pass when backend ref in http route is undefined", () => {
   expect(validateAll(rule, undefined, [manifest])).toBeEmpty();
 });
 
-test(`should pass when backend ref kind is not "Service"`, () => {
+test(`should pass when backendRefs.kind is not "Service"`, () => {
   const manifest = createManifest(
     new HTTPRoute({
       metadata: { name: "foo" },
@@ -143,7 +146,7 @@ test(`should pass when backend ref kind is not "Service"`, () => {
   expect(validateAll(rule, undefined, [manifest])).toBeEmpty();
 });
 
-test("should pass when backend ref group is not empty", () => {
+test("should pass when backendRefs.group is not empty", () => {
   const manifest = createManifest(
     new HTTPRoute({
       metadata: { name: "foo" },
@@ -161,7 +164,7 @@ test("should pass when backend ref group is not empty", () => {
   expect(validateAll(rule, undefined, [manifest])).toBeEmpty();
 });
 
-test("should check when backend ref group is empty", () => {
+test("should check when backendRefs.group is empty", () => {
   const manifest = createManifest(
     new HTTPRoute({
       metadata: { name: "foo" },
@@ -182,7 +185,7 @@ test("should check when backend ref group is empty", () => {
   ]);
 });
 
-test("should prefer backend ref namespace over manifest namespace", () => {
+test("should prefer backendRefs.namespace over manifest namespace", () => {
   const service = createManifest(
     new Service({
       metadata: { name: "foo", namespace: "a" }
@@ -208,9 +211,72 @@ test("should prefer backend ref namespace over manifest namespace", () => {
   ]);
 });
 
-test("should check backend ref in grpc route", () => {
+test("should check backendRefs in GRPCRoute", () => {
   const manifest = createManifest(
     new GRPCRoute({
+      metadata: { name: "foo" },
+      spec: {
+        rules: [
+          {
+            backendRefs: [{ kind: "Service", name: "bar" }]
+          }
+        ]
+      }
+    })
+  );
+  expect(validateAll(rule, undefined, [manifest])).toEqual([
+    {
+      manifest,
+      message: `Service "bar" does not exist.`
+    }
+  ]);
+});
+
+test("should check backendRefs in TCPRoute", () => {
+  const manifest = createManifest(
+    new TCPRoute({
+      metadata: { name: "foo" },
+      spec: {
+        rules: [
+          {
+            backendRefs: [{ kind: "Service", name: "bar" }]
+          }
+        ]
+      }
+    })
+  );
+  expect(validateAll(rule, undefined, [manifest])).toEqual([
+    {
+      manifest,
+      message: `Service "bar" does not exist.`
+    }
+  ]);
+});
+
+test("should check backendRefs in TLSRoute", () => {
+  const manifest = createManifest(
+    new TLSRoute({
+      metadata: { name: "foo" },
+      spec: {
+        rules: [
+          {
+            backendRefs: [{ kind: "Service", name: "bar" }]
+          }
+        ]
+      }
+    })
+  );
+  expect(validateAll(rule, undefined, [manifest])).toEqual([
+    {
+      manifest,
+      message: `Service "bar" does not exist.`
+    }
+  ]);
+});
+
+test("should check backendRefs in UDPRoute", () => {
+  const manifest = createManifest(
+    new UDPRoute({
       metadata: { name: "foo" },
       spec: {
         rules: [
