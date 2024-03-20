@@ -3,7 +3,11 @@
   "version": "2.0.0",
   "description": "Load Kustomize in kosko.",
   "homepage": "https://kosko.dev",
-  "repository": "https://github.com/tommy351/kosko/tree/master/packages/kustomize",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kosko.git",
+    "directory": "packages/kustomize"
+  },
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "main": "dist/index.node.cjs",

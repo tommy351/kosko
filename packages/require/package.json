@@ -3,7 +3,11 @@
   "version": "6.0.0",
   "description": "Import and resolve modules.",
   "homepage": "https://kosko.dev",
-  "repository": "https://github.com/tommy351/kosko/tree/master/packages/require",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kosko.git",
+    "directory": "packages/require"
+  },
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "main": "dist/index.node.cjs",

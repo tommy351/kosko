@@ -10,10 +10,9 @@ export const initCmd: CommandModule = {
 
 To set up a new project, please use one of the following commands.
 
-- npm init kosko [path]
+- npm create kosko@latest [path]
 - yarn create kosko [path]
 - pnpm create kosko [path]
-- npx create-kosko [path]
 
 For more information, please visit: https://kosko.dev/docs`
     });

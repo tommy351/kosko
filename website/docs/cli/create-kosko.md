@@ -11,7 +11,7 @@ create-kosko [path]
 It's also possible to execute `create-kosko` via a package manager.
 
 ```shell
-npm init kosko [path]
+npm create kosko@latest [path]
 yarn create kosko [path]
 pnpm create kosko [path]
 ```

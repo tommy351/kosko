@@ -2,8 +2,12 @@
   "name": "@kosko/plugin-lint",
   "version": "0.0.0",
   "description": "A Kosko plugin which lints Kubernetes manifests.",
-  "homepage": "https://kosko.dev",
-  "repository": "https://github.com/tommy351/kosko/tree/master/plugins/lint",
+  "homepage": "https://kosko.dev/docs/plugins/lint",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kosko.git",
+    "directory": "plugins/lint"
+  },
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "main": "dist/index.node.cjs",

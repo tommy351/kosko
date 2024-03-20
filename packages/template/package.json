@@ -3,7 +3,11 @@
   "version": "4.0.0",
   "description": "Utilities for kosko templates.",
   "homepage": "https://kosko.dev",
-  "repository": "https://github.com/tommy351/kosko/tree/master/packages/template",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kosko.git",
+    "directory": "packages/template"
+  },
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "main": "dist/index.node.cjs",

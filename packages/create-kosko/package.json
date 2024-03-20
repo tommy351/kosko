@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "description": "A CLI tool for creating new Kosko projects.",
   "homepage": "https://kosko.dev",
-  "repository": "https://github.com/tommy351/kosko/tree/master/packages/create-kosko",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kosko.git",
+    "directory": "packages/create-kosko"
+  },
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "main": "dist/index.node.cjs",
