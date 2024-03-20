@@ -1,3 +1,14 @@
 {
-  "jest.jestCommandLine": "pnpm run test:unit"
+  "jest.virtualFolders": [
+    {
+      "name": "unit-tests",
+      "jestCommandLine": "pnpm run test:unit",
+      "runMode": "watch"
+    },
+    {
+      "name": "integration-tests",
+      "jestCommandLine": "pnpm run test:integration",
+      "runMode": "on-demand"
+    }
+  ]
 }
