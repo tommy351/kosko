@@ -14,6 +14,7 @@
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-replace": "^5.0.5",
+    "@rollup/plugin-swc": "^0.3.0",
     "@rollup/plugin-virtual": "^3.0.2",
     "@swc/core": "^1.4.8",
     "@swc/helpers": "^0.5.6",
@@ -23,7 +24,6 @@
     "resolve": "^1.22.1",
     "resolve-bin": "^1.0.1",
     "rollup": "^4.13.0",
-    "rollup-plugin-swc": "^0.2.1",
     "tslib": "^2.4.1",
     "typescript": "^5.3.3"
   }

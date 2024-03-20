@@ -1,12 +1,19 @@
 #!/usr/bin/env node
 // @ts-check
 
-import { copyFile, mkdir, readFile, rm, unlink } from "node:fs/promises";
-import { extname, join, normalize } from "node:path";
+import {
+  copyFile,
+  mkdir,
+  readFile,
+  rm,
+  unlink,
+  writeFile
+} from "node:fs/promises";
+import { dirname, extname, join, normalize, relative } from "node:path";
 import { rollup } from "rollup";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
-import swc from "rollup-plugin-swc";
+import swc from "@rollup/plugin-swc";
 import json from "@rollup/plugin-json";
 import virtual from "@rollup/plugin-virtual";
 import { Extractor, ExtractorConfig } from "@microsoft/api-extractor";
@@ -46,22 +53,24 @@ const entryFiles = args.length ? args : ["index.ts"];
  *   format: import("rollup").ModuleFormat;
  *   importMetaUrlShim?: boolean;
  *   target: 'browser' | 'node';
+ *   reuse?: string;
  * }} options
  */
 async function buildBundle(options) {
   console.log("Building bundle:", options.output);
 
-  const bundle = await rollup({
-    input: Object.fromEntries(
-      entryFiles.map((path) => {
-        const ext = extname(path);
+  const entries = Object.fromEntries(
+    entryFiles.map((path) => {
+      const ext = extname(path);
 
-        return [
-          path.substring(0, path.length - ext.length),
-          join(fullSrcPath, path)
-        ];
-      })
-    ),
+      return [
+        path.substring(0, path.length - ext.length),
+        join(fullSrcPath, path)
+      ];
+    })
+  );
+  const bundle = await rollup({
+    input: entries,
     external: [
       ...Object.keys(dependencies),
       ...Object.keys(pkgJson.peerDependencies ?? {})
@@ -92,16 +101,18 @@ export const TARGET_SUFFIX = ${JSON.stringify(options.output)};
           })
         }
       }),
-      swc.default({
-        jsc: {
-          // Node.js 18
-          target: "es2022",
-          parser: { syntax: "typescript" },
-          minify: {
-            compress: true
-          }
-        },
-        sourceMaps: true
+      swc({
+        swc: {
+          jsc: {
+            // Node.js 18
+            target: "es2022",
+            parser: { syntax: "typescript" },
+            minify: {
+              compress: true
+            }
+          },
+          sourceMaps: true
+        }
       })
     ]
   });
@@ -118,6 +129,62 @@ export const TARGET_SUFFIX = ${JSON.stringify(options.output)};
   } finally {
     await bundle.close();
   }
+
+  if (options.reuse) {
+    await reuseBundle({
+      reuse: options.reuse,
+      output: options.output,
+      entries: Object.keys(entries)
+    });
+  }
+}
+
+/**
+ * @param {{
+ *   reuse: string;
+ *   output: string;
+ *   entries: readonly string[];
+ * }} options
+ */
+async function reuseBundle(options) {
+  for (const entry of options.entries) {
+    const outputName = `${entry}.${options.output}`;
+    const reuseName = `${entry}.${options.reuse}`;
+    const outputPath = join(fullDistPath, outputName);
+    const reusePath = join(fullDistPath, reuseName);
+    const outputContent = await readFile(outputPath, "utf-8");
+    const reuseContent = await readFile(reusePath, "utf-8");
+
+    if (
+      stripSourceMapLine(outputContent) !== stripSourceMapLine(reuseContent)
+    ) {
+      continue;
+    }
+
+    console.log(`Reusing: ${outputName} -> ${reuseName}`);
+
+    let importPath = relative(dirname(outputPath), reusePath);
+
+    if (!importPath.startsWith(".")) {
+      importPath = `./${importPath}`;
+    }
+
+    // Replace file content
+    await writeFile(outputPath, `export * from "${importPath}";`);
+
+    // Remove source map file
+    await unlink(`${outputPath}.map`);
+  }
+}
+
+/**
+ * @param {string} content
+ */
+function stripSourceMapLine(content) {
+  return content
+    .split("\n")
+    .map((line) => !line.startsWith("//# sourceMappingURL="))
+    .join("\n");
 }
 
 async function runApiExtractor() {
@@ -186,16 +253,16 @@ async function copyEsmDts() {
 await rm(fullDistPath, { recursive: true, force: true });
 await rm(fullOutPath, { recursive: true, force: true });
 
-await Promise.all([
-  // Base
-  buildBundle({
-    output: "base.mjs",
-    format: "esm",
-    suffixes: [".esm"],
-    target: "browser"
-  }),
+// Build base bundle first
+await buildBundle({
+  output: "base.mjs",
+  format: "esm",
+  suffixes: [".esm"],
+  target: "browser"
+});
 
-  // Node.js
+// Build Node.js bundles
+await Promise.all([
   buildBundle({
     output: "node.cjs",
     format: "cjs",
@@ -207,7 +274,8 @@ await Promise.all([
     output: "node.mjs",
     format: "esm",
     suffixes: [".node.esm", ".node", ".esm"],
-    target: "node"
+    target: "node",
+    reuse: "base.mjs"
   })
 ]);
 
