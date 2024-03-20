@@ -1,8 +1,8 @@
 ---
 title: Templates
+related:
+  - api/template
 ---
-
-import DocCardList from "@theme/DocCardList";
 
 A template helps you generate code easily so you don't have to build from scratch every time.
 
@@ -68,16 +68,3 @@ module.exports = new HorizontalPodAutoscaler({
   }
 });
 ```
-
-## Related
-
-<DocCardList
-  items={[
-    {
-      type: "link",
-      label: "@kosko/template",
-      href: "/docs/api/template",
-      docId: "api/template"
-    }
-  ]}
-/>

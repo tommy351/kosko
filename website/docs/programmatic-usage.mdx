@@ -1,8 +1,11 @@
 ---
 title: Programmatic Usage
+related:
+  - api/env
+  - api/generate
 ---
 
-import DocCardList from "@theme/DocCardList";
+import NpmInstallCommand from "@site/src/modules/doc/components/NpmInstallCommand";
 
 Kosko provides a programmatic API. You can generate manifests directly from Node.js.
 
@@ -15,11 +18,7 @@ Kosko provides a programmatic API. You can generate manifests directly from Node
 
 ## Install
 
-In order to use the programmatic API, you have to install `@kosko/env` and `@kosko/generate` package.
-
-```shell
-npm install @kosko/env @kosko/generate
-```
+<NpmInstallCommand>@kosko/env @kosko/generate</NpmInstallCommand>
 
 ## Example
 
@@ -48,22 +47,3 @@ import path from "node:path";
   });
 })();
 ```
-
-## Related
-
-<DocCardList
-  items={[
-    {
-      type: "link",
-      label: "@kosko/env",
-      href: "/docs/api/env",
-      docId: "api/env"
-    },
-    {
-      type: "link",
-      label: "@kosko/generate",
-      href: "/docs/api/generate",
-      docId: "api/generate"
-    }
-  ]}
-/>

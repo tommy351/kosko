@@ -1,0 +1,24 @@
+---
+title: Default Namespace
+available_since:
+  kosko: 4.0.0
+related:
+  - plugins/index
+  - plugins/set-metadata
+---
+
+import NpmInstallCommand from "@site/src/modules/doc/components/NpmInstallCommand";
+
+You can use `@kosko/plugin-set-metadata` to set a default namespace for all Kubernetes manifests.
+
+## Install
+
+<NpmInstallCommand>@kosko/plugin-set-metadata</NpmInstallCommand>
+
+## Configuration
+
+```toml title="kosko.toml"
+[[plugins]]
+name = "@kosko/plugin-set-metadata"
+config.namespace.value = "dev"
+```

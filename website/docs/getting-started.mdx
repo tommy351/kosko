@@ -1,9 +1,12 @@
 ---
 title: Getting Started
 slug: /
+related:
+  - components/index
+  - environments/index
 ---
 
-import DocCardList from "@theme/DocCardList";
+import NpmInstallCommand from "@site/src/modules/doc/components/NpmInstallCommand";
 
 Welcome to the Kosko documentation! Before we start, make sure your computer meets the following system requirements.
 
@@ -11,7 +14,7 @@ Welcome to the Kosko documentation! Before we start, make sure your computer mee
 
 ## Automatic Setup
 
-It's recommended to setup a Kosko project with [`create-kosko`](cli/create-kosko.md) command, which sets up basic folder structure and installs everything you need automatically.
+It's recommended to setup a Kosko project with [`create-kosko`](./cli/create-kosko.md) command, which sets up basic folder structure and installs everything you need automatically.
 
 ```shell
 npm create kosko@latest example
@@ -37,9 +40,7 @@ After installation complete, the command will generate following files in `examp
 
 Install `kosko`, `@kosko/env` and `kubernetes-models`.
 
-```shell
-npm install kosko @kosko/env kubernetes-models
-```
+<NpmInstallCommand>kosko @kosko/env kubernetes-models</NpmInstallCommand>
 
 Create a new component with `@kosko/template-deployed-service` template.
 
@@ -49,7 +50,7 @@ npx @kosko/template-deployed-service --name nginx --image nginx
 
 ## Generate YAML
 
-Run [`kosko generate`](cli/generate.md) to print Kubernetes manifests in the console.
+Run [`kosko generate`](./cli/generate.mdx) to print Kubernetes manifests in the console.
 
 ```shell
 npx kosko generate
@@ -61,27 +62,8 @@ Pipe the output to kubectl to apply to a cluster.
 npx kosko generate | kubectl apply -f -
 ```
 
-If you don't want to print manifests to console, run [`kosko validate`](cli/validate.md).
+If you don't want to print manifests to console, run [`kosko validate`](./cli/validate.md).
 
 ```shell
 npx kosko validate
 ```
-
-## Learn More
-
-<DocCardList
-  items={[
-    {
-      type: "link",
-      label: "Components",
-      href: "/docs/components",
-      docId: "components/index"
-    },
-    {
-      type: "link",
-      href: "/docs/environments",
-      label: "Environments",
-      docId: "environments/index"
-    }
-  ]}
-/>

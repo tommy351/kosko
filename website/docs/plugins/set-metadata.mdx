@@ -1,0 +1,73 @@
+---
+title: Set Metadata
+available_since:
+  kosko: 4.0.0
+---
+
+import NpmInstallCommand from "@site/src/modules/doc/components/NpmInstallCommand";
+
+Set metadata for Kubernetes manifests.
+
+## Install
+
+<NpmInstallCommand>@kosko/plugin-set-metadata</NpmInstallCommand>
+
+## Usage
+
+```toml
+[[plugins]]
+name = "@kosko/plugin-set-metadata"
+```
+
+## Configuration
+
+### `namespace.value`
+
+Set namespace for manifests.
+
+#### Examples {#namespace-value-examples}
+
+```toml
+namespace.value = "dev"
+```
+
+### `namespace.override`
+
+Override namespace even if it's already set on manifests. This option is disabled by default.
+
+### `name.prefix`
+
+Add a prefix to the name of manifests. Ignored if `metadata.name` is undefined.
+
+#### Examples {#name-prefix-examples}
+
+```toml
+name.prefix = "dev-"
+```
+
+### `name.suffix`
+
+Add a suffix to the name of manifests. Ignored if `metadata.name` is undefined.
+
+#### Examples {#name-suffix-examples}
+
+```toml
+name.suffix = "-dev"
+```
+
+### `labels` / `annotations`
+
+Add labels or annotations to manifests. Ignored if a label or an annotation with the same name is already defined. You can override them by setting `override` to `true`.
+
+#### Examples {#labels-annotations-examples}
+
+```toml
+[[labels]]
+name = "environment"
+value = "dev"
+
+[[annotations]]
+name = "managed-by"
+value = "kosko"
+override = true
+```

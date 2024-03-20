@@ -904,12 +904,18 @@ importers:
       '@docusaurus/core':
         specifier: 2.4.3
         version: 2.4.3(@docusaurus/types@2.4.3)(eslint@8.56.0)(react-dom@17.0.2)(react@17.0.2)(typescript@5.3.3)(webpack-cli@4.10.0)
+      '@docusaurus/plugin-content-docs':
+        specifier: 2.4.3
+        version: 2.4.3(eslint@8.56.0)(react-dom@17.0.2)(react@17.0.2)(typescript@5.3.3)(webpack-cli@4.10.0)
       '@docusaurus/plugin-ideal-image':
         specifier: 2.4.3
         version: 2.4.3(eslint@8.56.0)(prop-types@15.8.1)(react-dom@17.0.2)(react@17.0.2)(typescript@5.3.3)(webpack-cli@4.10.0)
       '@docusaurus/preset-classic':
         specifier: 2.4.3
         version: 2.4.3(@algolia/client-search@4.14.2)(@docusaurus/theme-common@2.4.3)(@types/react@18.0.21)(eslint@8.56.0)(react-dom@17.0.2)(react@17.0.2)(typescript@5.3.3)(webpack-cli@4.10.0)
+      '@docusaurus/theme-classic':
+        specifier: 2.4.3
+        version: 2.4.3(@docusaurus/theme-common@2.4.3)(eslint@8.56.0)(react-dom@17.0.2)(react@17.0.2)(typescript@5.3.3)(webpack-cli@4.10.0)
       '@docusaurus/theme-common':
         specifier: 2.4.3
         version: 2.4.3(eslint@8.56.0)(react-dom@17.0.2)(react@17.0.2)(typescript@5.3.3)(webpack-cli@4.10.0)

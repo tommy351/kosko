@@ -1,8 +1,12 @@
 ---
 title: Using in Browser
+related:
+  - ecmascript-modules
+  - programmatic-usage
+available_since:
+  "@kosko/env": 2.0.0
+  "@kosko/generate": 1.2.0
 ---
-
-import DocCardList from "@theme/DocCardList";
 
 Kosko can be used in browsers via the programmatic API. Currently only `@kosko/env` and `@kosko/generate` packages are browser-ready.
 
@@ -13,13 +17,6 @@ Kosko can be used in browsers via the programmatic API. Currently only `@kosko/e
 - [Sync Environment](https://github.com/tommy351/kosko/tree/master/examples/web-sync-environment)
 
 :::
-
-## Prerequisites
-
-The browser support was introduced in the following versions. Make sure to update these packages before getting started.
-
-- `@kosko/env` - 2.0.0
-- `@kosko/generate` - 1.2.0
 
 ## Entry File
 
@@ -164,22 +161,3 @@ You can also use [import maps](https://github.com/WICG/import-maps) so you don't
   }
 </script>
 ```
-
-## Related
-
-<DocCardList
-  items={[
-    {
-      type: "link",
-      label: "ECMAScript Modules",
-      href: "/docs/ecmascript-modules",
-      docId: "ecmascript-modules"
-    },
-    {
-      type: "link",
-      label: "Programmatic Usage",
-      href: "/docs/programmatic-usage",
-      docId: "programmatic-usage"
-    }
-  ]}
-/>

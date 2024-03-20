@@ -13,3 +13,7 @@ declare module "!!raw-loader!*" {
 declare module "rollup/dist/rollup.browser" {
   export * from "rollup";
 }
+
+declare module "@docusaurus/theme-common/internal" {
+  export * from "@docusaurus/theme-common/lib/internal.d.ts";
+}

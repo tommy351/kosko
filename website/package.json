@@ -4,13 +4,17 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "pnpm run build-api-docs && docusaurus start",
-    "build": "pnpm run build-api-docs && docusaurus build",
+    "start": "pnpm run prepare-build && docusaurus start",
+    "build": "pnpm run prepare-build && docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
+    "prepare-build": "pnpm run collect-api-models && pnpm run generate-api-docs && pnpm run process-api-docs && pnpm run build-lint-rules-metadata",
     "run-ts-script": "ts-node -P scripts/tsconfig.json",
-    "build-api-docs": "pnpm run-ts-script scripts/collect-api-models.ts && api-documenter markdown -i tmp/api-models -o tmp/api-docs && pnpm run-ts-script scripts/process-api-docs.ts"
+    "collect-api-models": "pnpm run-ts-script scripts/collect-api-models.ts",
+    "generate-api-docs": "api-documenter markdown -i tmp/api-models -o tmp/api-docs",
+    "process-api-docs": "pnpm run-ts-script scripts/process-api-docs.ts",
+    "build-lint-rules-metadata": "pnpm run-ts-script scripts/build-lint-rules-metadata.ts"
   },
   "engines": {
     "node": ">=18"
@@ -32,8 +36,10 @@
     "@babel/core": "^7.19.1",
     "@babel/traverse": "^7.23.2",
     "@docusaurus/core": "2.4.3",
+    "@docusaurus/plugin-content-docs": "2.4.3",
     "@docusaurus/plugin-ideal-image": "2.4.3",
     "@docusaurus/preset-classic": "2.4.3",
+    "@docusaurus/theme-classic": "2.4.3",
     "@docusaurus/theme-common": "2.4.3",
     "@mdx-js/react": "^1.6.22",
     "clsx": "^1.2.1",

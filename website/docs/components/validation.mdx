@@ -2,7 +2,9 @@
 title: Validation
 ---
 
-When you run [`kosko generate`](cli/generate.md) or [`kosko validate`](cli/validate.md), Kosko will run `validate()` method of every exported manifests.
+import AvailabilityInfo from "@site/src/modules/doc/components/AvailabilityInfo";
+
+When you run [`kosko generate`](../cli/generate.mdx) or [`kosko validate`](../cli/validate.md), Kosko will run `validate()` method of every exported manifests.
 
 ## Error
 
@@ -27,25 +29,22 @@ export default [deployment];
 Kosko will throw an error as below, which includes error details and location of invalid manifests.
 
 ```
-components/nginx.js - 1 error
+components/nginx.ts - apps/v1/Deployment dev/nginx [0]
 
-  ✖ ResolveError: Validation error
-    Index: [0]
-    Kind: apps/v1/Deployment
-    Namespace: dev
-    Name: nginx
+✖ /spec/replicas must be integer
 
-      /spec/replicas must be integer
-
-error - Generate failed (Total 1 error)
+error - Found 1 error in total
+error - Generate failed
 ```
 
-Below are description of each field.
+The first line is the location of the invalid manifest.
 
-- **Index**: Location of manifest in a component. In this example, `[0]` means it is the first manifest in the component.
-- **Kind**: `apiVersion` and `kind` of manifest.
-- **Namespace**: `metadata.namespace` of manifest.
-- **Name**: `metadata.name` of manifest.
+- `components/nginx.ts` is the file path.
+- `apps/v1/Deployment` is the `apiVersion` and `kind`.
+- `dev/nginx` is the `metadata.namespace` and `metadata.name`.
+- `[0]` is the index of the invalid manifest in the file.
+
+The last line shows the total number of errors and warnings.
 
 ## Built-in Validation
 
@@ -96,8 +95,14 @@ new Pod().toJSON();
 }
 ```
 
-To disable validation on all manifests, run [`kosko generate`](cli/generate.md) with `--validate=false` option.
+To disable validation on all manifests, run [`kosko generate`](../cli/generate.mdx) with `--validate=false` option.
 
 ```shell
 kosko generate --validate=false
 ```
+
+## Lint
+
+<AvailabilityInfo availability={{ kosko: "4.1.0" }} />
+
+Validation only checks types and formats of a field. You can use [lint plugin](../plugins/lint/index.mdx) to enforce more sophisticated rules.

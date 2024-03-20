@@ -2,15 +2,15 @@
 title: Configuration
 ---
 
+import AvailabilityInfo from "@site/src/modules/doc/components/AvailabilityInfo";
+
 ## Global Configs
 
 Global configs are always applied when running [`kosko generate`][kosko-generate] command.
 
 ### `bail`
 
-:::info
-Available since v3.0.0.
-:::
+<AvailabilityInfo availability={{ kosko: "3.0.0" }} />
 
 Default: `false`
 
@@ -56,9 +56,7 @@ extensions = ["js", "json"]
 
 ### `loaders`
 
-:::info
-Available since v3.0.0.
-:::
+<AvailabilityInfo availability={{ kosko: "3.0.0" }} />
 
 Use [module loaders](https://nodejs.org/dist/latest-v18.x/docs/api/esm.html#loaders). This option only works when ECMAScript modules (ESM) is enabled.
 
@@ -82,11 +80,9 @@ require = ["ts-node/register"]
 
 ### `plugins`
 
-:::info
-Available since v4.0.0.
-:::
+<AvailabilityInfo availability={{ kosko: "4.0.0" }} />
 
-Plugin configurations.
+Plugin configurations. See [Plugins](./plugins/index.md) for more details.
 
 #### Examples {#global-plugins-examples}
 
@@ -139,5 +135,5 @@ Specify path to component environment files.
 environments/#{environment}/#{component}
 ```
 
-[kosko-generate]: cli/generate.md
-[kosko-generate-env]: cli/generate.md#--env--e
+[kosko-generate]: ./cli/generate.mdx
+[kosko-generate-env]: ./cli/generate.mdx#--env--e

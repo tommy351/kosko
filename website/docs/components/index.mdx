@@ -2,6 +2,8 @@
 title: Components
 ---
 
+import AvailabilityInfo from "@site/src/modules/doc/components/AvailabilityInfo";
+
 A component is a collection of Kubernetes manifests including all resources needed for an application, such as a `Deployment`, a `Service` or a `Secret`.
 
 ## Folder Structure
@@ -16,7 +18,7 @@ A component should be placed in `components/<name>.js` or `components/<name>/ind
     └── nginx.js
 ```
 
-When you run [`kosko generate`](cli/generate.md), Kosko will find all files or folders in `components` folder that matching the pattern set in [`components`](configuration.md#components) configuration (it is `*` by default, which means everything in components folder). You can add component names or patterns to the command to specify which components to generate.
+When you run [`kosko generate`](../cli/generate.mdx), Kosko will find all files or folders in `components` folder that matching the pattern set in [`components`](../configuration.mdx#components) configuration (it is `*` by default, which means everything in components folder). You can add component names or patterns to the command to specify which components to generate.
 
 ```shell
 # Use `components` in `kosko.toml`.
@@ -43,18 +45,17 @@ const pod = new Pod({
 export default pod;
 ```
 
-Then you can run [`kosko generate`](cli/generate.md) to print YAML.
+Then you can run [`kosko generate`](../cli/generate.mdx) to print YAML.
 
-```shell
-kosko generate
-# apiVersion: v1
-# kind: Pod
-# metadata:
-#   name: busybox
-# spec:
-#   containers:
-#     - name: busybox
-#       image: busybox
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+spec:
+  containers:
+    - name: busybox
+      image: busybox
 ```
 
 At the first line, we import `Pod` class from [kubernetes-models] package. This is a separated package which is generated automatically from [Kubernetes OpenAPI Specification](https://github.com/kubernetes/kubernetes/tree/master/api/openapi-spec). It provides type definitions and validation. You can import corresponding resources as below.
@@ -124,18 +125,17 @@ const service = new Service({
 export default [deployment, service];
 ```
 
-At the last line, we replace the export value with an array. So when you run [`kosko generate`](cli/generate.md), it will print YAML as below.
+At the last line, we replace the export value with an array. So when you run [`kosko generate`](../cli/generate.mdx), it will print YAML as below.
 
-```shell
-kosko generate
-# ---
-# apiVersion: apps/v1
-# kind: Deployment
-# (omitted)
-# ---
-# apiVersion: v1
-# kind: Service
-# (omitted)
+```yaml
+---
+apiVersion: apps/v1
+kind: Deployment
+(omitted)
+---
+apiVersion: v1
+kind: Service
+(omitted)
 ```
 
 ### Function
@@ -187,9 +187,7 @@ export default gen();
 
 ## Nested Manifests
 
-:::info
-Available since v1.0.0.
-:::
+<AvailabilityInfo availability={{ kosko: "1.0.0" }} />
 
 All of the patterns we just mentioned above can be combined together. It is very useful for reusing manifests across components.
 

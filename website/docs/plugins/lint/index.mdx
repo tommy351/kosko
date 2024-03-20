@@ -1,0 +1,118 @@
+---
+title: Lint
+available_since:
+  kosko: 4.1.0
+---
+
+import NpmInstallCommand from "@site/src/modules/doc/components/NpmInstallCommand";
+import LintRuleList from "@site/src/modules/doc/components/LintRuleList";
+import RecommendedBadge from "@site/src/modules/doc/components/LintRuleList/RecommendedBadge";
+import AllBadge from "@site/src/modules/doc/components/LintRuleList/AllBadge";
+
+## Install
+
+<NpmInstallCommand>@kosko/plugin-lint</NpmInstallCommand>
+
+## Usage
+
+Enable the plugin with the recommended preset.
+
+```toml
+[[plugins]]
+name = "@kosko/plugin-lint"
+config.extends = ["@kosko/plugin-lint/presets/recommended"]
+```
+
+Enable lint rules.
+
+```toml
+[[plugins]]
+name = "@kosko/plugin-lint"
+
+[plugins.config.rules.no-missing-namespace]
+severity = "error"
+
+[plugins.config.rules.ban-image]
+severity = "error"
+config.images = ["*:latest"]
+```
+
+## Configuration
+
+### `extends`
+
+Load configuration from another file. The value could be a package name or a path to a JavaScript or JSON file.
+
+#### Examples {#extends-examples}
+
+```toml
+# Preset
+extends = ["@kosko/plugin-lint/presets/recommended"]
+
+# Local file
+extends = ["./lint-config.js"]
+```
+
+### `rules`
+
+Configure a lint rule. Every rule has two properties: `config` and `severity`. The `config` property is specific to each rule, and the `severity` property can be one of the following values:
+
+- `"off"`, `0`, `false` - Disable the rule. (Default)
+- `"warning"`, `"warn"`, `1` - Enable the rule as a warning. When the rule is violated, a warning will be reported, but the validation won't fail.
+- `"error"`, `2`, `true` - Enable the rule as an error. When the rule is violated, an error will be reported, and the validation will fail.
+
+#### Examples {#rules-examples}
+
+```toml
+[rules.ban-image]
+severity = "error"
+config.images = ["*:latest"]
+```
+
+## Preset
+
+Currently there is only one preset available: `@kosko/plugin-lint/presets/recommended`. This preset contains recommended rules, which are listed below with a <RecommendedBadge/> badge.
+
+You can enable it by adding `extends` to the configuration.
+
+```toml
+[[plugins]]
+name = "@kosko/plugin-lint"
+config.extends = ["@kosko/plugin-lint/presets/recommended"]
+```
+
+### Creating a Preset
+
+A preset is a JavaScript or JSON file that exports an configuration object.
+
+```js
+export default {
+  rules: {
+    "no-missing-namespace": { severity: "error" }
+  }
+};
+```
+
+You can use `extends` in a preset. For example, you can create a preset based on the recommended preset.
+
+```js
+export default {
+  extends: ["@kosko/plugin-lint/presets/recommended"],
+  rules: {
+    "ban-image": {
+      severity: "error",
+      config: { images: ["*:latest"] }
+    }
+  }
+};
+```
+
+## Caveats
+
+- This plugin does not validate manifests against OpenAPI schema. That is what [kubernetes-models](https://github.com/tommy351/kubernetes-models-ts) does. See [validation](../../components/validation.mdx) for more details.
+- This plugin only executes when validation is enabled.
+- Rules with a <AllBadge/> badge are disabled when `components` is provided in `kosko generate` or `kosko validate` command, because these rules need to access all components to validate.
+
+## Rules
+
+<LintRuleList />

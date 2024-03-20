@@ -1,12 +1,13 @@
 ---
 title: ECMAScript Modules
+available_since:
+  kosko: 3.0.0
+related:
+  - programmatic-usage
+  - api/env
 ---
 
-import DocCardList from "@theme/DocCardList";
-
 Kosko supports ECMAScript modules (ESM). You can write components and environments in native ESM files.
-
-Node.js v12 or above is required for ESM. However, Node.js v14.8.0 or above is recommended because [top-level await](https://nodejs.org/dist/latest-v14.x/docs/api/esm.html#esm_top_level_await) is supported without flags since this version.
 
 :::note Examples
 
@@ -96,14 +97,14 @@ Set `compilerOptions.module` to `esnext` to allow TypeScript compile your code i
 }
 ```
 
-Then add [`loaders`](configuration.md#loaders) option to `kosko.toml`.
+Then add [`loaders`](./configuration.mdx#loaders) option to `kosko.toml`.
 
 ```toml title="kosko.toml"
 loaders = ["ts-node/esm"]
 extensions = ["ts", "mts", "cjs", "mjs", "js", "json"]
 ```
 
-Or run `kosko generate` with [`--loader`](cli/generate.md#--loader) option.
+Or run `kosko generate` with [`--loader`](./cli/generate.mdx#--loader) option.
 
 ```shell
 kosko generate --loader ts-node/esm
@@ -129,22 +130,3 @@ When loaders are specified, Kosko will run Node.js with [`--experimental-loader`
 (node:26303) ExperimentalWarning: --experimental-loader is an experimental feature. This feature could change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
 ```
-
-## Related
-
-<DocCardList
-  items={[
-    {
-      type: "link",
-      label: "Programmatic Usage",
-      href: "/docs/programmatic-usage",
-      docId: "programmatic-usage"
-    },
-    {
-      type: "link",
-      label: "@kosko/env",
-      href: "/docs/api/env",
-      docId: "api/env"
-    }
-  ]}
-/>

@@ -31,6 +31,12 @@ module.exports = {
           docId: "getting-started"
         },
         {
+          type: "docSidebar",
+          label: "Plugins",
+          position: "left",
+          sidebarId: "plugins"
+        },
+        {
           type: "doc",
           label: "API",
           position: "left",
@@ -67,7 +73,8 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           editUrl: `${githubUrl}/edit/master/website/`,
-          remarkPlugins: [require("./remark-plugins/ts2js")]
+          remarkPlugins: [require("./remark-plugins/ts2js")],
+          docItemComponent: "@site/src/modules/doc/components/DocItem"
         },
         pages: {
           remarkPlugins: [require("./remark-plugins/ts2js")]
@@ -89,6 +96,7 @@ module.exports = {
   plugins: [
     "docusaurus-plugin-sass",
     "@docusaurus/plugin-ideal-image",
-    require.resolve("./plugins/lodash-webpack-plugin")
+    require.resolve("./plugins/lodash-webpack-plugin"),
+    require.resolve("./plugins/lint-rules-metadata-plugin")
   ]
 };

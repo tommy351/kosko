@@ -37,7 +37,7 @@ If you have tens or hundreds of components, moving environment files closer to y
 
 ### Configuration
 
-You can configure [`paths.environment.component`](configuration.md#pathsenvironmentcomponent) in `kosko.toml` to change the path of component environment files as below.
+You can configure [`paths.environment.component`](../configuration.mdx#pathsenvironmentcomponent) in `kosko.toml` to change the path of component environment files as below.
 
 ```toml title="kosko.toml"
 [paths.environment]

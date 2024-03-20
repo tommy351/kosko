@@ -19,11 +19,11 @@ function matchNode(node) {
   return meta.includes("ts2js");
 }
 
-function renderTabItem(label, meta, value) {
+function renderTabItem({ tabLabel, tabValue, meta, value }) {
   return [
     {
       type: "jsx",
-      value: `<TabItem value="${label}">`
+      value: `<TabItem value=${JSON.stringify(tabValue)} label=${JSON.stringify(tabLabel)}>`
     },
     {
       type: "code",
@@ -46,9 +46,24 @@ function transformNode(node) {
       type: "jsx",
       value: `<Tabs groupId="ts2js">`
     },
-    ...renderTabItem("TypeScript", node.meta, node.value),
-    ...renderTabItem("JavaScript (ESM)", node.meta, esm),
-    ...renderTabItem("JavaScript (CJS)", node.meta, cjs),
+    ...renderTabItem({
+      tabValue: "ts",
+      tabLabel: "TypeScript",
+      meta: node.meta,
+      value: node.value
+    }),
+    ...renderTabItem({
+      tabValue: "esm",
+      tabLabel: "JavaScript (ESM)",
+      meta: node.meta,
+      value: esm
+    }),
+    ...renderTabItem({
+      tabValue: "cjs",
+      tabLabel: "JavaScript (CJS)",
+      meta: node.meta,
+      value: cjs
+    }),
     {
       type: "jsx",
       value: "</Tabs>"
