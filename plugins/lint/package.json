@@ -72,6 +72,14 @@
     "kubernetes-models": "^4.1.0",
     "type-fest": "^4.10.2"
   },
+  "peerDependencies": {
+    "@kosko/cli": ">=4.1.0"
+  },
+  "peerDependenciesMeta": {
+    "@kosko/cli": {
+      "optional": true
+    }
+  },
   "jest": {
     "preset": "@kosko/jest-preset"
   }
