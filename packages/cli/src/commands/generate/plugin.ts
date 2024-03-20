@@ -1,13 +1,20 @@
 import type { PluginConfig } from "@kosko/config";
 import type { Plugin, PluginContext } from "@kosko/plugin";
-import { importPath } from "@kosko/require";
+import { importPath, resolveModule } from "@kosko/require";
 import logger, { LogLevel } from "@kosko/log";
-import resolveFrom from "resolve-from";
 import { isRecord } from "@kosko/common-utils";
 import { CLIError } from "@kosko/cli-utils";
 import pc from "picocolors";
+import { type, func, optional, validate } from "superstruct";
+import { BUILD_TARGET } from "@kosko/build-scripts";
 
 type UnknownPluginFactory = (ctx: PluginContext) => unknown;
+
+const pluginSchema = type({
+  transformManifest: optional(func()),
+  validateManifest: optional(func()),
+  validateAllManifests: optional(func())
+});
 
 interface PluginSource {
   name: string;
@@ -34,19 +41,10 @@ function assertFactory(
 }
 
 function assertPlugin(name: string, value: unknown): asserts value is Plugin {
-  if (!isRecord(value)) {
-    throw new CLIError(
-      `Plugin "${name}" must return an object in the factory function`
-    );
-  }
+  const [err] = validate(value, pluginSchema);
 
-  if (
-    value.transformManifest != null &&
-    typeof value.transformManifest !== "function"
-  ) {
-    throw new CLIError(
-      `Expected "transformManifest" to be a function in plugin "${name}"`
-    );
+  if (err) {
+    throw new CLIError(`Plugin "${name}" is invalid: ${err.message}`);
   }
 }
 
@@ -94,16 +92,26 @@ export function composePlugins(plugins: readonly Plugin[]): Plugin {
 
         return data;
       }
+    }),
+    ...(plugins.some((p) => p.validateManifest) && {
+      validateManifest: async (manifest) => {
+        for (const plugin of plugins) {
+          if (typeof plugin.validateManifest !== "function") continue;
+
+          await plugin.validateManifest(manifest);
+        }
+      }
+    }),
+    ...(plugins.some((p) => p.validateAllManifests) && {
+      validateAllManifests: async (manifests) => {
+        for (const plugin of plugins) {
+          if (typeof plugin.validateAllManifests !== "function") continue;
+
+          await plugin.validateAllManifests(manifests);
+        }
+      }
     })
   };
-}
-
-function resolvePath(cwd: string, name: string): string {
-  try {
-    return resolveFrom(cwd, name);
-  } catch (err) {
-    throw wrapError(err, `Failed to resolve path for plugin "${name}"`);
-  }
 }
 
 export async function loadPlugins(
@@ -112,15 +120,18 @@ export async function loadPlugins(
 ): Promise<Plugin> {
   if (!configs.length) return {};
 
-  // eslint-disable-next-line no-restricted-globals
-  if (process.env.BUILD_TARGET !== "node") {
+  if (BUILD_TARGET !== "node") {
     throw new Error("Plugins are only supported on Node.js");
   }
 
   const plugins: Plugin[] = [];
 
   for (const conf of configs) {
-    const path = resolvePath(cwd, conf.name);
+    const path = await resolveModule(conf.name, { baseDir: cwd });
+
+    if (!path) {
+      throw new Error(`Failed to resolve path for plugin "${conf.name}"`);
+    }
 
     logger.log(LogLevel.Debug, `Loading plugin "${conf.name}" from "${path}"`);
 

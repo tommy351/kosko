@@ -1,0 +1,4 @@
+components = ["*"]
+
+[[plugins]]
+name = "./modules/validate/single-error.js"

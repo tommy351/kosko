@@ -58,3 +58,69 @@ metadata:
   name: test
   namespace: foo"
 `;
+
+exports[`when validateAllManifests reports a error should throw an error 1`] = `
+"
+[4mcomponents/pod.js[24m - v1/ConfigMap test
+
+[31m✖ Test error message[39m
+
+[31merror[39m - Found 1 error in total
+[31merror[39m - Generate failed"
+`;
+
+exports[`when validateAllManifests reports a warning should not throw an error 1`] = `
+"apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test"
+`;
+
+exports[`when validateAllManifests reports a warning should not throw an error 2`] = `
+"
+[4mcomponents/pod.js[24m - v1/ConfigMap test
+
+[33m⚠ Test warning message[39m
+
+[33mwarn [39m - Found 1 warning in total"
+`;
+
+exports[`when validateManifest reports a error should throw an error 1`] = `
+"
+[4mcomponents/pod.js[24m - v1/ConfigMap test
+
+[31m✖ Test error message[39m
+
+[31merror[39m - Found 1 error in total
+[31merror[39m - Generate failed"
+`;
+
+exports[`when validateManifest reports a warning should not throw an error 1`] = `
+"apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test"
+`;
+
+exports[`when validateManifest reports a warning should not throw an error 2`] = `
+"
+[4mcomponents/pod.js[24m - v1/ConfigMap test
+
+[33m⚠ Test warning message[39m
+
+[33mwarn [39m - Found 1 warning in total"
+`;
+
+exports[`when validateManifest reports multiple issues should throw an error 1`] = `
+"
+[4mcomponents/pod.js[24m - v1/ConfigMap test
+
+[33m⚠ Test warning 1[39m
+
+[31m✖ Test error 1[39m
+
+[33m⚠ Test warning 2[39m
+
+[31merror[39m - Found 1 error and 2 warnings in total
+[31merror[39m - Generate failed"
+`;

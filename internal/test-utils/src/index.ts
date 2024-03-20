@@ -1,6 +1,5 @@
-export * from "./getRejectedValue";
 export * from "./installPackage";
-export * from "./makeTempDir";
-export * from "./makeTempFile";
 export * from "./projectRoot";
 export * from "./runCLI";
+export { sleep, getRejectedValue } from "./promise";
+export { makeTempDir, makeTempFile, type TempDir, type TempFile } from "./temp";

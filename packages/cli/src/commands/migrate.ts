@@ -7,6 +7,7 @@ import { print } from "../cli/print";
 import logger, { LogLevel } from "@kosko/log";
 import { toArray } from "@kosko/common-utils";
 import { CommandModule } from "yargs";
+import { BUILD_FORMAT, BUILD_TARGET } from "@kosko/build-scripts";
 
 const KOSKO_MIGRATE = "@kosko/migrate";
 
@@ -77,8 +78,7 @@ export const migrateCmd: CommandModule<GlobalArguments, MigrateArguments> = {
       .example("$0 migrate -f path/to/file", "Read from the path")
       .example("$0 migrate -f -", "Read from stdin");
 
-    // eslint-disable-next-line no-restricted-globals
-    if (process.env.BUILD_TARGET === "node") {
+    if (BUILD_TARGET === "node") {
       base = base.option("esm", {
         type: "boolean",
         describe: "Generate ECMAScript module (ESM) files"
@@ -91,8 +91,7 @@ export const migrateCmd: CommandModule<GlobalArguments, MigrateArguments> = {
     // Lazy load `@kosko/migrate` package because `@kosko/yaml` is not installed
     // by default.
     const { MigrateFormat, migrateString }: typeof migratePkg =
-      // eslint-disable-next-line no-restricted-globals
-      process.env.BUILD_FORMAT === "cjs"
+      BUILD_FORMAT === "cjs"
         ? require(KOSKO_MIGRATE)
         : await import(KOSKO_MIGRATE);
 

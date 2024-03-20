@@ -1,20 +1,24 @@
-import {
-  importPath,
-  resolve as resolveModule,
-  getRequireExtensions
-} from "@kosko/require";
-import type { Manifest, Result } from "./base";
+import { importPath, resolvePath, getRequireExtensions } from "@kosko/require";
+import type { Manifest, ManifestToValidate, Result } from "./base";
 import logger, { LogLevel } from "@kosko/log";
-import { ResolveOptions, handleResolvePromises, resolve } from "./resolve";
-import { GenerateError } from "./error";
+import {
+  ResolveOptions,
+  ValidationInterrupt,
+  handleResolvePromises,
+  reportManifestIssue,
+  resolve
+} from "./resolve";
+import { GenerateError, ResolveError } from "./error";
 import { glob, GlobResult } from "./glob";
 import pLimit from "p-limit";
 import { validateConcurrency } from "./utils";
+import { BUILD_TARGET } from "@kosko/build-scripts";
 
 /**
  * @public
  */
-export interface GenerateOptions {
+export interface GenerateOptions
+  extends Omit<ResolveOptions, "path" | "index"> {
   /**
    * Path of the component folder.
    */
@@ -43,24 +47,11 @@ export interface GenerateOptions {
   extensions?: readonly string[];
 
   /**
-   * {@inheritDoc ResolveOptions.validate}
+   * Validate all manifests after resolving.
    */
-  validate?: boolean;
-
-  /**
-   * {@inheritDoc ResolveOptions.bail}
-   */
-  bail?: boolean;
-
-  /**
-   * {@inheritDoc ResolveOptions.concurrency}
-   */
-  concurrency?: number;
-
-  /**
-   * {@inheritdoc ResolveOptions.transform}
-   */
-  transform?: ResolveOptions["transform"];
+  validateAllManifests?(
+    manifests: readonly ManifestToValidate[]
+  ): void | Promise<void>;
 }
 
 async function resolveComponentPath(
@@ -68,7 +59,7 @@ async function resolveComponentPath(
   extensions: readonly string[]
 ) {
   try {
-    return await resolveModule(path, { extensions });
+    return await resolvePath(path, { extensions });
   } catch (err) {
     throw new GenerateError("Module path resolve failed", {
       path,
@@ -125,6 +116,9 @@ function validateExtensions(
  * @throws {@link GenerateError}
  * Thrown if an error occurred.
  *
+ * @throws {@link ResolveError}
+ * Propagated from {@link resolve} function.
+ *
  * @throws AggregateError
  * Thrown if multiple errors occurred.
  *
@@ -133,8 +127,7 @@ function validateExtensions(
  */
 export async function generate(options: GenerateOptions): Promise<Result> {
   /* istanbul ignore next */
-  // eslint-disable-next-line no-restricted-globals
-  if (process.env.BUILD_TARGET === "browser") {
+  if (BUILD_TARGET === "browser") {
     throw new Error("generate is only supported on Node.js");
   }
 
@@ -170,8 +163,11 @@ export async function generate(options: GenerateOptions): Promise<Result> {
     return resolve(await getComponentValue(path), {
       validate: options.validate,
       bail: options.bail,
-      concurrency: options.concurrency,
+      concurrency,
       transform: options.transform,
+      throwOnError: options.throwOnError,
+      validateManifest: options.validateManifest,
+      keepAjvErrors: options.keepAjvErrors,
       index: [],
       path
     });
@@ -185,7 +181,40 @@ export async function generate(options: GenerateOptions): Promise<Result> {
     promises.push(limit(() => resolveFile(file)));
   }
 
-  return {
-    manifests: await handleResolvePromises(promises, options.bail)
-  };
+  const manifests = await handleResolvePromises(promises, options.bail);
+  const validateEnabled = options.validate ?? true;
+
+  if (validateEnabled && typeof options.validateAllManifests === "function") {
+    logger.log(LogLevel.Debug, "Validating all manifests");
+
+    try {
+      await options.validateAllManifests(
+        manifests.map((manifest) => ({
+          ...manifest,
+          report(issue) {
+            reportManifestIssue({
+              manifest,
+              issue,
+              bail: options.bail,
+              throwOnError: options.throwOnError
+            });
+          }
+        }))
+      );
+    } catch (err) {
+      // Propagate ResolveError and AggregateError
+      if (err instanceof ResolveError || err instanceof AggregateError) {
+        throw err;
+      }
+
+      if (!(err instanceof ValidationInterrupt)) {
+        throw new GenerateError(
+          "An error occurred in validateAllManifests function",
+          { cause: err }
+        );
+      }
+    }
+  }
+
+  return { manifests };
 }

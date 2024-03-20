@@ -1,0 +1,5 @@
+components = ["*"]
+
+[[plugins]]
+name = "./modules/validate/single.js"
+config.issues = []

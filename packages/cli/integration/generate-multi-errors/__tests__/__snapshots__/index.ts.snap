@@ -1,45 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`when bail is not set should print the error 1`] = `
-"[1mcomponents/foo.js[22m - 1 error
+"
+[4mcomponents/foo.js[24m - v1/Pod foo [0]
 
-  [31m✖ ResolveError: Validation error[39m
-    Index: [0]
-    Kind: v1/Pod
-    Name: foo
+[31m✖ /spec must have required property 'containers'[39m
 
-      /spec must have required property 'containers'
+[4mcomponents/nginx.js[24m - apps/v1/Deployment nginx [0]
 
-[1mcomponents/nginx.js[22m - 2 errors
+[31m✖ /spec must have required property 'selector'[39m
 
-  [31m✖ ResolveError: Validation error[39m
-    Index: [0]
-    Kind: apps/v1/Deployment
-    Name: nginx
+[31m✖ /spec must have required property 'template'[39m
 
-      /spec must have required property 'selector'
-      /spec must have required property 'template'
+[4mcomponents/nginx.js[24m - v1/Service nginx [1]
 
-  [31m✖ ResolveError: Validation error[39m
-    Index: [1]
-    Kind: v1/Service
-    Name: nginx
+[31m✖ /spec/ports/0/port must be integer[39m
 
-      /spec/ports/0/port must be integer
-      /spec/type must be equal to one of the allowed values: ["ClusterIP","ExternalName","LoadBalancer","NodePort"]
+[31m✖ /spec/type must be equal to one of the allowed values: ["ClusterIP","ExternalName","LoadBalancer","NodePort"][39m
 
-[31merror[39m - Generate failed (Total 3 errors)"
+[31merror[39m - Found 5 errors in total
+[31merror[39m - Generate failed"
 `;
 
 exports[`when bail is true should print the error 1`] = `
-"[1mcomponents/foo.js[22m - 1 error
+"
+[4mcomponents/foo.js[24m - v1/Pod foo [0]
 
-  [31m✖ ResolveError: Validation error[39m
-    Index: [0]
-    Kind: v1/Pod
-    Name: foo
+[31m✖ /spec must have required property 'containers'[39m
 
-      /spec must have required property 'containers'
+[4mcomponents/nginx.js[24m - apps/v1/Deployment nginx [0]
 
-[31merror[39m - Generate failed (Only the first error is displayed because \`bail\` option is enabled)"
+[31m✖ /spec must have required property 'selector'[39m
+
+[31merror[39m - Found 2 errors in total
+[31merror[39m - Generate failed"
 `;

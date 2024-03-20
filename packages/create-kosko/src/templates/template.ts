@@ -2,11 +2,11 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { File } from "./base";
+import { BUILD_PROD } from "@kosko/build-scripts";
 
 const TEMPLATE_DIR = join(
   fileURLToPath(import.meta.url),
-  // eslint-disable-next-line no-restricted-globals
-  process.env.BUILD_PROD ? "../../templates" : "../../../templates"
+  BUILD_PROD ? "../../templates" : "../../../templates"
 );
 
 export async function generateFromTemplateFile(

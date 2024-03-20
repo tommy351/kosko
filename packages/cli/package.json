@@ -14,7 +14,7 @@
   "types": "dist/types.d.ts",
   "sideEffects": false,
   "scripts": {
-    "build": "build-scripts src/index.ts src/worker-bin.ts"
+    "build": "build-scripts index.ts worker-bin.ts"
   },
   "exports": {
     "./bin/kosko.js": "./bin/kosko.js",
@@ -59,14 +59,13 @@
     "@kosko/migrate": "workspace:^",
     "@kosko/require": "workspace:^",
     "clean-stack": "^3.0.1",
-    "extract-stack": "^2.0.0",
     "fast-safe-stringify": "^2.1.1",
     "get-stdin": "^8.0.0",
     "import-local": "^3.1.0",
     "jsonpath": "^1.1.1",
     "picocolors": "^1.0.0",
     "pkg-up": "^3.1.0",
-    "resolve-from": "^5.0.0",
+    "superstruct": "^1.0.3",
     "yargs": "^17.5.1"
   },
   "devDependencies": {

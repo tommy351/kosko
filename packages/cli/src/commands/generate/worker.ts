@@ -1,30 +1,17 @@
 import { Config, EnvironmentConfig } from "@kosko/config";
 import { spawn, SpawnError } from "@kosko/exec-utils";
-import { generate, GenerateOptions, print, PrintFormat } from "@kosko/generate";
+import { generate, print, PrintFormat } from "@kosko/generate";
 import { join } from "node:path";
 import stringify from "fast-safe-stringify";
 import { CLIError } from "@kosko/cli-utils";
 import { setupEnv } from "./env";
-import { handleGenerateError } from "./error";
+import { printIssues, resultHasError } from "./error";
 import { BaseGenerateArguments } from "./types";
 import { fileURLToPath } from "node:url";
 import { stdout, execPath, execArgv } from "node:process";
 import { createRequire } from "node:module";
 import { loadPlugins } from "./plugin";
-
-async function doGenerate({
-  cwd,
-  ...options
-}: Omit<GenerateOptions, "path"> & { cwd: string }) {
-  try {
-    return await generate({
-      ...options,
-      path: join(cwd, "components")
-    });
-  } catch (err) {
-    throw handleGenerateError(cwd, err, options);
-  }
-}
+import { BUILD_TARGET, TARGET_SUFFIX } from "@kosko/build-scripts";
 
 export interface WorkerOptions {
   printFormat?: PrintFormat;
@@ -36,12 +23,7 @@ export interface WorkerOptions {
 export async function handler(options: WorkerOptions) {
   const { printFormat, args, config, ignoreLoaders } = options;
 
-  if (
-    // eslint-disable-next-line no-restricted-globals
-    process.env.BUILD_TARGET === "node" &&
-    !ignoreLoaders &&
-    config.loaders.length
-  ) {
+  if (BUILD_TARGET === "node" && !ignoreLoaders && config.loaders.length) {
     await runWithLoaders(options);
     return;
   }
@@ -50,8 +32,7 @@ export async function handler(options: WorkerOptions) {
   await setupEnv(config, args);
 
   // Require external modules
-  // eslint-disable-next-line no-restricted-globals
-  if (process.env.BUILD_TARGET === "node" && config.require.length) {
+  if (BUILD_TARGET === "node" && config.require.length) {
     const req = createRequire(join(args.cwd, "noop.js"));
 
     for (const id of config.require) {
@@ -63,14 +44,18 @@ export async function handler(options: WorkerOptions) {
   const plugin = await loadPlugins(args.cwd, config.plugins);
 
   // Generate manifests
-  const result = await doGenerate({
-    cwd: args.cwd,
+  const result = await generate({
+    path: join(args.cwd, "components"),
     components: config.components,
     extensions: config.extensions,
     validate: args.validate,
     bail: config.bail,
     concurrency: config.concurrency,
-    transform: plugin.transformManifest
+    transform: plugin.transformManifest,
+    validateManifest: plugin.validateManifest,
+    ...(!args.components?.length && {
+      validateAllManifests: plugin.validateAllManifests
+    })
   });
 
   if (!result.manifests.length) {
@@ -79,12 +64,14 @@ export async function handler(options: WorkerOptions) {
     });
   }
 
-  if (printFormat) {
+  if (printFormat && !resultHasError(result)) {
     print(result, {
       format: printFormat,
       writer: stdout
     });
   }
+
+  printIssues(args.cwd, result);
 }
 
 async function runWithLoaders(options: WorkerOptions) {
@@ -97,11 +84,7 @@ async function runWithLoaders(options: WorkerOptions) {
         // ESM loaders
         ...options.config.loaders.flatMap((loader) => ["--loader", loader]),
         // Entry file
-        join(
-          fileURLToPath(import.meta.url),
-          // eslint-disable-next-line no-restricted-globals
-          "../worker-bin." + process.env.TARGET_SUFFIX
-        )
+        join(fileURLToPath(import.meta.url), "../worker-bin." + TARGET_SUFFIX)
       ],
       {
         stdio: ["pipe", "inherit", "inherit"],

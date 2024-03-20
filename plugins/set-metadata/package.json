@@ -44,12 +44,12 @@
   },
   "dependencies": {
     "@kosko/common-utils": "workspace:^",
+    "@kosko/plugin": "workspace:^",
     "superstruct": "^1.0.3"
   },
   "devDependencies": {
     "@kosko/build-scripts": "workspace:^",
     "@kosko/jest-preset": "workspace:^",
-    "@kosko/plugin": "workspace:^",
     "@kubernetes-models/apimachinery": "^1.2.1",
     "kubernetes-models": "^4.1.0",
     "type-fest": "^4.10.2"

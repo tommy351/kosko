@@ -2,12 +2,13 @@
 // @ts-check
 
 import { copyFile, mkdir, readFile, rm, unlink } from "node:fs/promises";
-import { join, normalize } from "node:path";
+import { extname, join, normalize } from "node:path";
 import { rollup } from "rollup";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import swc from "rollup-plugin-swc";
 import json from "@rollup/plugin-json";
+import virtual from "@rollup/plugin-virtual";
 import { Extractor, ExtractorConfig } from "@microsoft/api-extractor";
 import globby from "globby";
 import execa from "execa";
@@ -18,6 +19,10 @@ import { promisify } from "node:util";
 const resolveBinPromise = promisify(resolveBin);
 
 const cwd = process.cwd();
+
+// srcDir stores source files.
+const srcDir = "src";
+const fullSrcPath = join(cwd, srcDir);
 
 // distDir stores files that will be published.
 const distDir = "dist";
@@ -32,7 +37,7 @@ const pkgJson = JSON.parse(await readFile(join(cwd, "package.json"), "utf-8"));
 const dependencies = pkgJson.dependencies ?? {};
 
 const args = process.argv.slice(2);
-const entryFiles = args.length ? args : ["src/index.ts"];
+const entryFiles = args.length ? args : ["index.ts"];
 
 /**
  * @param {{
@@ -47,7 +52,16 @@ async function buildBundle(options) {
   console.log("Building bundle:", options.output);
 
   const bundle = await rollup({
-    input: entryFiles,
+    input: Object.fromEntries(
+      entryFiles.map((path) => {
+        const ext = extname(path);
+
+        return [
+          path.substring(0, path.length - ext.length),
+          join(fullSrcPath, path)
+        ];
+      })
+    ),
     external: [
       ...Object.keys(dependencies),
       ...Object.keys(pkgJson.peerDependencies ?? {})
@@ -62,13 +76,17 @@ async function buildBundle(options) {
       ...(options.suffixes ? [moduleSuffixes(options.suffixes)] : []),
       json({ compact: true, preferConst: true }),
       nodeResolve({ extensions: [".ts"] }),
+      virtual({
+        "@kosko/build-scripts": `
+export const BUILD_PROD = true;
+export const BUILD_TARGET = ${JSON.stringify(options.target)};
+export const BUILD_FORMAT = ${JSON.stringify(options.format)};
+export const TARGET_SUFFIX = ${JSON.stringify(options.output)};
+`
+      }),
       replace({
         preventAssignment: true,
         values: {
-          "process.env.BUILD_PROD": "true",
-          "process.env.BUILD_TARGET": JSON.stringify(options.target),
-          "process.env.BUILD_FORMAT": JSON.stringify(options.format),
-          "process.env.TARGET_SUFFIX": JSON.stringify(options.output),
           ...(options.importMetaUrlShim && {
             "import.meta.url": "new URL(`file:${__filename}`).href"
           })
@@ -76,8 +94,8 @@ async function buildBundle(options) {
       }),
       swc.default({
         jsc: {
-          // Node.js 14
-          target: "es2020",
+          // Node.js 18
+          target: "es2022",
           parser: { syntax: "typescript" },
           minify: {
             compress: true

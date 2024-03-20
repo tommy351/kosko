@@ -3,8 +3,10 @@ import { generate } from "../generate";
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { GenerateError, ResolveError } from "../error";
-import { makeTempDir, TempDir } from "@kosko/test-utils";
+import { getRejectedValue, makeTempDir, TempDir } from "@kosko/test-utils";
 import stringify from "fast-safe-stringify";
+import { ManifestToValidate } from "../base";
+import assert from "node:assert";
 
 jest.mock("@kosko/require", () => {
   const mod = jest.requireActual("@kosko/require");
@@ -48,8 +50,8 @@ describe("single JS file", () => {
     expect(result).toEqual({
       manifests: [
         {
-          path: join(tmpDir.path, "foo.js"),
-          index: [],
+          position: { path: join(tmpDir.path, "foo.js"), index: [] },
+          issues: [],
           data: { foo: "bar" }
         }
       ]
@@ -73,8 +75,8 @@ describe("JS files in folder", () => {
     expect(result).toEqual({
       manifests: [
         {
-          path: join(tmpDir.path, "foo/index.js"),
-          index: [],
+          position: { path: join(tmpDir.path, "foo/index.js"), index: [] },
+          issues: [],
           data: { foo: "index" }
         }
       ]
@@ -129,8 +131,8 @@ exports.default = {foo: "bar"};`
     expect(result).toEqual({
       manifests: [
         {
-          path: join(tmpDir.path, "foo.js"),
-          index: [],
+          position: { path: join(tmpDir.path, "foo.js"), index: [] },
+          issues: [],
           data: { foo: "bar" }
         }
       ]
@@ -153,13 +155,13 @@ describe("when script exports an array", () => {
     expect(result).toEqual({
       manifests: [
         {
-          path: join(tmpDir.path, "foo.js"),
-          index: [0],
+          position: { path: join(tmpDir.path, "foo.js"), index: [0] },
+          issues: [],
           data: { foo: 1 }
         },
         {
-          path: join(tmpDir.path, "foo.js"),
-          index: [1],
+          position: { path: join(tmpDir.path, "foo.js"), index: [1] },
+          issues: [],
           data: { bar: 2 }
         }
       ]
@@ -190,11 +192,11 @@ module.exports = [
     const path = join(tmpDir.path, "foo.js");
     expect(result).toEqual({
       manifests: [
-        { path, index: [0], data: { a: 1 } },
-        { path, index: [1, 0], data: { b: 2 } },
-        { path, index: [1, 1, 0], data: { c: 3 } },
-        { path, index: [1, 1, 1], data: { d: 4 } },
-        { path, index: [2], data: { e: 5 } }
+        { position: { path, index: [0] }, issues: [], data: { a: 1 } },
+        { position: { path, index: [1, 0] }, issues: [], data: { b: 2 } },
+        { position: { path, index: [1, 1, 0] }, issues: [], data: { c: 3 } },
+        { position: { path, index: [1, 1, 1] }, issues: [], data: { d: 4 } },
+        { position: { path, index: [2] }, issues: [], data: { e: 5 } }
       ]
     });
   });
@@ -235,13 +237,13 @@ describe("multiple files", () => {
       expect(result).toEqual({
         manifests: [
           {
-            path: join(tmpDir.path, "foo.js"),
-            index: [],
+            position: { path: join(tmpDir.path, "foo.js"), index: [] },
+            issues: [],
             data: { foo: "bar" }
           },
           {
-            path: join(tmpDir.path, "foo.json"),
-            index: [],
+            position: { path: join(tmpDir.path, "foo.json"), index: [] },
+            issues: [],
             data: { foo: "bar" }
           }
         ]
@@ -259,8 +261,8 @@ describe("multiple files", () => {
       expect(result).toEqual({
         manifests: [
           {
-            path: join(tmpDir.path, "foo.json"),
-            index: [],
+            position: { path: join(tmpDir.path, "foo.json"), index: [] },
+            issues: [],
             data: { foo: "bar" }
           }
         ]
@@ -319,8 +321,8 @@ describe("when validate prop is not a function", () => {
     expect(result).toEqual({
       manifests: [
         {
-          path: join(tmpDir.path, "a.js"),
-          index: [],
+          position: { path: join(tmpDir.path, "a.js"), index: [] },
+          issues: [],
           data: { validate: 1 }
         }
       ]
@@ -348,8 +350,8 @@ module.exports = value;`
     expect(result).toEqual({
       manifests: [
         {
-          path: join(tmpDir.path, "a.js"),
-          index: [],
+          position: { path: join(tmpDir.path, "a.js"), index: [] },
+          issues: [],
           data: { data: 1 }
         }
       ]
@@ -365,8 +367,8 @@ module.exports = value;`
     expect(result).toEqual({
       manifests: [
         {
-          path: join(tmpDir.path, "a.js"),
-          index: [],
+          position: { path: join(tmpDir.path, "a.js"), index: [] },
+          issues: [],
           data: {}
         }
       ]
@@ -389,9 +391,29 @@ module.exports = value;`
     });
   });
 
-  test("should throw ResolveError", async () => {
+  test("should report an issue", async () => {
+    const result = await generate({ components: ["*"], path: tmpDir.path });
+
+    expect(result).toEqual({
+      manifests: [
+        {
+          position: { path: join(tmpDir.path, "a.js"), index: [] },
+          issues: [
+            {
+              severity: "error",
+              message: "Validation error",
+              cause: new Error("err")
+            }
+          ],
+          data: {}
+        }
+      ]
+    });
+  });
+
+  test("should throw ResolveError when throwOnError = true", async () => {
     await expect(
-      generate({ components: ["*"], path: tmpDir.path })
+      generate({ components: ["*"], path: tmpDir.path, throwOnError: true })
     ).rejects.toThrowWithMessage(ResolveError, "Validation error");
   });
 
@@ -404,8 +426,8 @@ module.exports = value;`
     expect(result).toEqual({
       manifests: [
         {
-          path: join(tmpDir.path, "a.js"),
-          index: [],
+          position: { path: join(tmpDir.path, "a.js"), index: [] },
+          issues: [],
           data: {}
         }
       ]
@@ -433,8 +455,8 @@ module.exports = value;`
     expect(result).toEqual({
       manifests: [
         {
-          path: join(tmpDir.path, "a.js"),
-          index: [],
+          position: { path: join(tmpDir.path, "a.js"), index: [] },
+          issues: [],
           data: { data: 1 }
         }
       ]
@@ -449,9 +471,21 @@ describe("when validate function returns a rejected promise", () => {
     });
   });
 
-  test("should throw ResolveError", async () => {
+  test("should report an issue", async () => {
+    const result = await generate({ components: ["*"], path: tmpDir.path });
+
+    expect(result.manifests[0].issues).toEqual([
+      {
+        severity: "error",
+        message: "Validation error",
+        cause: new Error("err")
+      }
+    ]);
+  });
+
+  test("should throw ResolveError when throwOnError = true", async () => {
     await expect(
-      generate({ components: ["*"], path: tmpDir.path })
+      generate({ components: ["*"], path: tmpDir.path, throwOnError: true })
     ).rejects.toThrowWithMessage(ResolveError, "Validation error");
   });
 });
@@ -465,23 +499,35 @@ describe("when multiple components validation failed", () => {
     });
   });
 
-  test("should throw AggregateError", async () => {
-    await expect(
-      generate({
-        components: ["*"],
-        path: tmpDir.path
-      })
-    ).rejects.toThrow(AggregateError);
+  test("should report an issue for each component", async () => {
+    const result = await generate({ components: ["*"], path: tmpDir.path });
+
+    expect(result.manifests).toHaveLength(3);
+    expect(result.manifests[0].issues).toBeEmpty();
+    expect(result.manifests[1].issues).toEqual([
+      {
+        severity: "error",
+        message: "Validation error",
+        cause: new Error("b err")
+      }
+    ]);
+    expect(result.manifests[2].issues).toEqual([
+      {
+        severity: "error",
+        message: "Validation error",
+        cause: new Error("c err")
+      }
+    ]);
   });
 
-  test("should throw ResolveError if bail = true", async () => {
+  test("should throw AggregateError when throwOnError = true", async () => {
     await expect(
       generate({
         components: ["*"],
         path: tmpDir.path,
-        bail: true
+        throwOnError: true
       })
-    ).rejects.toThrowWithMessage(ResolveError, "Validation error");
+    ).rejects.toThrow(AggregateError);
   });
 });
 
@@ -513,11 +559,151 @@ describe("when transform is given", () => {
     expect(result).toEqual({
       manifests: [
         {
-          path: join(tmpDir.path, "a.js"),
-          index: [],
+          position: { path: join(tmpDir.path, "a.js"), index: [] },
+          issues: [],
           data: { a: 1, b: 2 }
         }
       ]
     });
+  });
+});
+
+describe("when validateManifest is given", () => {
+  beforeEach(async () => {
+    await createTempFiles({
+      "a.js": "module.exports = {a: 1}"
+    });
+  });
+
+  test("should call validateManifest", async () => {
+    const validateManifest = jest.fn((manifest: ManifestToValidate) => {
+      manifest.report({ severity: "error", message: "oops" });
+    });
+    const result = await generate({
+      components: ["*"],
+      path: tmpDir.path,
+      validateManifest
+    });
+
+    expect(validateManifest).toHaveBeenCalledOnce();
+    expect(result).toEqual({
+      manifests: [
+        {
+          position: { path: join(tmpDir.path, "a.js"), index: [] },
+          issues: [{ severity: "error", message: "oops" }],
+          data: { a: 1 }
+        }
+      ]
+    });
+  });
+
+  test("should not call validateManifest when validate is false", async () => {
+    const validate = jest.fn();
+
+    await generate({
+      components: ["*"],
+      path: tmpDir.path,
+      validate: false,
+      validateManifest: validate
+    });
+
+    expect(validate).not.toHaveBeenCalled();
+  });
+});
+
+describe("when validateAllManifests is given", () => {
+  function validateAllManifests(manifests: readonly ManifestToValidate[]) {
+    for (const manifest of manifests) {
+      manifest.report({
+        severity: "error",
+        message: `validate error`
+      });
+    }
+  }
+
+  beforeEach(async () => {
+    await createTempFiles({
+      "a.js": "module.exports = {a: 1}",
+      "b.js": "module.exports = {b: 2}"
+    });
+  });
+
+  test("should call validateManifest", async () => {
+    const result = await generate({
+      components: ["*"],
+      path: tmpDir.path,
+      validateAllManifests
+    });
+
+    expect(result).toEqual({
+      manifests: [
+        {
+          position: { path: join(tmpDir.path, "a.js"), index: [] },
+          issues: [{ severity: "error", message: "validate error" }],
+          data: { a: 1 }
+        },
+        {
+          position: { path: join(tmpDir.path, "b.js"), index: [] },
+          issues: [{ severity: "error", message: "validate error" }],
+          data: { b: 2 }
+        }
+      ]
+    });
+  });
+
+  test("should stop on the first issue when bail = true", async () => {
+    const result = await generate({
+      components: ["*"],
+      path: tmpDir.path,
+      validateAllManifests,
+      bail: true
+    });
+
+    expect(result).toEqual({
+      manifests: [
+        {
+          position: { path: join(tmpDir.path, "a.js"), index: [] },
+          issues: [{ severity: "error", message: "validate error" }],
+          data: { a: 1 }
+        },
+        {
+          position: { path: join(tmpDir.path, "b.js"), index: [] },
+          issues: [],
+          data: { b: 2 }
+        }
+      ]
+    });
+  });
+
+  test("should throw a ResolveError when throwOnError = true", async () => {
+    const err = await getRejectedValue(
+      generate({
+        components: ["*"],
+        path: tmpDir.path,
+        validateAllManifests,
+        throwOnError: true
+      })
+    );
+
+    assert(err instanceof ResolveError);
+    expect(err.message).toEqual("validate error");
+    expect(err.position).toEqual({
+      path: join(tmpDir.path, "a.js"),
+      index: []
+    });
+    expect(err.value).toEqual({ a: 1 });
+  });
+
+  test("should not call validateAllManifests when validate is false", async () => {
+    const validate = jest.fn();
+
+    await generate({
+      components: ["*"],
+      path: tmpDir.path,
+      validate: false,
+      validateAllManifests: validate
+    });
+
+    expect(validate).not.toHaveBeenCalled();
   });
 });

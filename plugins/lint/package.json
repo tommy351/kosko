@@ -1,0 +1,74 @@
+{
+  "name": "@kosko/plugin-lint",
+  "version": "0.0.0",
+  "description": "A Kosko plugin which lints Kubernetes manifests.",
+  "homepage": "https://kosko.dev",
+  "repository": "https://github.com/tommy351/kosko/tree/master/plugins/lint",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "main": "dist/index.node.cjs",
+  "module": "dist/index.node.mjs",
+  "types": "dist/types.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "build-scripts index.ts presets/recommended.ts"
+  },
+  "exports": {
+    "./presets/recommended": {
+      "node": {
+        "import": "./dist/presets/recommended.node.mjs",
+        "require": "./dist/presets/recommended.node.cjs"
+      },
+      "import": "./dist/presets/recommended.base.mjs"
+    },
+    ".": {
+      "node": {
+        "import": {
+          "types": "./dist/types.d.mts",
+          "default": "./dist/index.node.mjs"
+        },
+        "types": "./dist/types.d.ts",
+        "require": "./dist/index.node.cjs"
+      },
+      "import": {
+        "types": "./dist/types.d.mts",
+        "default": "./dist/index.base.mjs"
+      },
+      "types": "./dist/types.d.ts",
+      "require": "./dist/index.node.cjs"
+    }
+  },
+  "files": [
+    "/dist/"
+  ],
+  "keywords": [
+    "kosko",
+    "kosko-plugin"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@kosko/common-utils": "workspace:^",
+    "@kosko/plugin": "workspace:^",
+    "@kosko/require": "workspace:^",
+    "escape-string-regexp": "^4.0.0",
+    "superstruct": "^1.0.3"
+  },
+  "devDependencies": {
+    "@kosko/build-scripts": "workspace:^",
+    "@kosko/generate": "workspace:^",
+    "@kosko/jest-preset": "workspace:^",
+    "@kosko/test-utils": "workspace:^",
+    "@kubernetes-models/apimachinery": "^1.2.1",
+    "@kubernetes-models/gateway-api": "^0.5.0",
+    "kubernetes-models": "^4.1.0",
+    "type-fest": "^4.10.2"
+  },
+  "jest": {
+    "preset": "@kosko/jest-preset"
+  }
+}

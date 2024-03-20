@@ -1,9 +1,10 @@
-import { Manifest } from "./base";
+import type { Issue, Manifest, ManifestToValidate } from "./base";
 import logger, { LogLevel } from "@kosko/log";
-import { aggregateErrors, ResolveError } from "./error";
-import { isRecord } from "@kosko/common-utils";
+import { ResolveError } from "./error";
+import { isRecord, getManifestMeta } from "@kosko/common-utils";
 import pLimit from "p-limit";
 import { validateConcurrency } from "./utils";
+import { ajvValidationErrorToIssues, isAjvValidationError } from "./ajv";
 
 interface Validator {
   validate(): void | Promise<void>;
@@ -35,32 +36,106 @@ function isAsyncIterable(value: unknown): value is AsyncIterable<unknown> {
   return isRecord(value) && typeof value[Symbol.asyncIterator] === "function";
 }
 
+export class ValidationInterrupt {
+  constructor(public readonly manifest: Manifest) {}
+}
+
+type ResolvePromiseResult =
+  | {
+      ok: true;
+      manifests: Manifest[];
+    }
+  | {
+      ok: false;
+      error: unknown;
+    };
+
 export async function handleResolvePromises(
   promises: readonly Promise<Manifest[]>[],
   bail?: boolean
 ): Promise<Manifest[]> {
-  if (bail) {
-    const results = await Promise.all(promises);
-    return results.flatMap((values) => values);
+  // Use a map to avoid sparse array
+  const resultMap = new Map<number, ResolvePromiseResult>();
+
+  try {
+    await Promise.all(
+      promises.map(async (promise, index) => {
+        try {
+          resultMap.set(index, { ok: true, manifests: await promise });
+        } catch (err) {
+          if (err instanceof ValidationInterrupt) {
+            resultMap.set(index, { ok: true, manifests: [err.manifest] });
+
+            // Propagate ValidationInterrupt
+            throw err;
+          }
+
+          // Throw the error to stop the loop
+          if (bail) throw err;
+
+          resultMap.set(index, { ok: false, error: err });
+        }
+      })
+    );
+  } catch (err) {
+    // Propagate errors
+    if (!(err instanceof ValidationInterrupt)) throw err;
   }
 
-  const results = await Promise.allSettled(promises);
-  const errors: unknown[] = [];
-  const manifests: Manifest[] = [];
+  const resultArr = [...resultMap.entries()]
+    // Sort by index
+    .sort((a, b) => a[0] - b[0])
+    .map(([, value]) => value);
 
-  for (const result of results) {
-    if (result.status === "fulfilled") {
-      manifests.push(...result.value);
+  const manifests: Manifest[] = [];
+  const errors: unknown[] = [];
+
+  for (const result of resultArr) {
+    if (result.ok) {
+      manifests.push(...result.manifests);
     } else {
-      errors.push(result.reason);
+      errors.push(result.error);
     }
   }
 
-  if (errors.length) {
-    throw aggregateErrors(errors);
+  if (errors.length === 1) {
+    throw errors[0];
+  } else if (errors.length) {
+    throw new AggregateError(errors);
   }
 
   return manifests;
+}
+
+export function reportManifestIssue({
+  manifest,
+  issue,
+  bail,
+  throwOnError
+}: {
+  manifest: Manifest;
+  issue: Issue;
+} & Pick<ResolveOptions, "bail" | "throwOnError">): void {
+  const isError = issue.severity === "error";
+
+  if (isError && throwOnError) {
+    if (issue.cause instanceof ResolveError) {
+      throw issue.cause;
+    }
+
+    throw new ResolveError(issue.message, {
+      position: manifest.position,
+      value: manifest.data,
+      cause: issue.cause
+    });
+  }
+
+  manifest.issues.push(issue);
+
+  // Throw to stop validation
+  if (isError && bail) {
+    throw new ValidationInterrupt(manifest);
+  }
 }
 
 /**
@@ -68,7 +143,7 @@ export async function handleResolvePromises(
  */
 export interface ResolveOptions {
   /**
-   * Execute `validate` method of each values.
+   * Enable validation.
    *
    * @defaultValue `true`
    */
@@ -90,8 +165,6 @@ export interface ResolveOptions {
 
   /**
    * Stop immediately when an error occurred.
-   *
-   * @defaultValue `false`
    */
   bail?: boolean;
 
@@ -109,6 +182,204 @@ export interface ResolveOptions {
    * be removed from the result.
    */
   transform?(manifest: Manifest): unknown;
+
+  /**
+   * Throw an error when an issue with `error` severity is found.
+   */
+  throwOnError?: boolean;
+
+  /**
+   * Validate a manifest. This function is called after `validate` method of
+   * a manifest. No matter `validate` method exists or not, this function will
+   * be called.
+   *
+   * If the `bail` option is `true`, and `validate` method failed, this function
+   * will not be called.
+   */
+  validateManifest?(manifest: ManifestToValidate): void | Promise<void>;
+
+  /**
+   * Do not transform Ajv errors to issues.
+   */
+  keepAjvErrors?: boolean;
+}
+
+async function doResolve(value: unknown, options: ResolveOptions) {
+  const {
+    validate = true,
+    index = [],
+    path = "",
+    bail,
+    concurrency,
+    transform,
+    throwOnError,
+    validateManifest,
+    keepAjvErrors
+  } = options;
+  const limit = pLimit(validateConcurrency(concurrency));
+
+  /**
+   * Handle unrecoverable errors that should be thrown immediately.
+   */
+  function handleError(cause: unknown, message: string): Manifest[] {
+    if (throwOnError) {
+      if (cause instanceof ResolveError) throw cause;
+
+      throw new ResolveError(message, {
+        position: { path, index },
+        value,
+        cause
+      });
+    }
+
+    return [
+      {
+        position: { path, index },
+        data: value,
+        issues: [
+          {
+            severity: "error",
+            message,
+            cause
+          }
+        ]
+      }
+    ];
+  }
+
+  if (typeof value === "function") {
+    let val: unknown;
+
+    try {
+      val = await value();
+    } catch (err) {
+      return handleError(err, "Input function value threw an error");
+    }
+
+    return doResolve(val, options);
+  }
+
+  if (isPromiseLike(value)) {
+    let val: unknown;
+
+    try {
+      val = await value;
+    } catch (err) {
+      return handleError(err, "Input promise value rejected");
+    }
+
+    return doResolve(val, options);
+  }
+
+  if (isIterable(value)) {
+    const promises: Promise<Manifest[]>[] = [];
+    let i = 0;
+
+    try {
+      for (const entry of value) {
+        promises.push(
+          limit(() => doResolve(entry, { ...options, index: [...index, i++] }))
+        );
+      }
+    } catch (err) {
+      return handleError(err, "Input iterable value threw an error");
+    }
+
+    return handleResolvePromises(promises, bail);
+  }
+
+  if (isAsyncIterable(value)) {
+    const promises: Promise<Manifest[]>[] = [];
+    let i = 0;
+
+    try {
+      for await (const entry of value) {
+        promises.push(
+          limit(() => doResolve(entry, { ...options, index: [...index, i++] }))
+        );
+      }
+    } catch (err) {
+      return handleError(err, "Input async iterable value threw an error");
+    }
+
+    return handleResolvePromises(promises, bail);
+  }
+
+  let manifest: Manifest = {
+    position: { path, index },
+    metadata: getManifestMeta(value),
+    data: value,
+    issues: []
+  };
+
+  function reportIssue(issue: Issue) {
+    reportManifestIssue({
+      manifest,
+      issue,
+      bail,
+      throwOnError
+    });
+  }
+
+  if (typeof transform === "function") {
+    try {
+      const newValue = await transform(manifest);
+
+      // Remove the manifest if the return value is undefined or null
+      if (newValue == null) return [];
+
+      // Create a new object to avoid mutation
+      manifest = {
+        ...manifest,
+        data: newValue,
+        metadata: getManifestMeta(newValue)
+      };
+    } catch (err) {
+      return handleError(err, "An error occurred in transform function");
+    }
+  }
+
+  if (validate) {
+    logger.log(
+      LogLevel.Debug,
+      `Validating manifests ${index.join(".")} in ${path}`
+    );
+
+    if (isValidator(manifest.data)) {
+      try {
+        await manifest.data.validate();
+      } catch (err) {
+        if (!keepAjvErrors && isAjvValidationError(err)) {
+          for (const issue of ajvValidationErrorToIssues(err)) {
+            reportIssue(issue);
+          }
+        } else {
+          reportIssue({
+            severity: "error",
+            message: "Validation error",
+            cause: err
+          });
+        }
+      }
+    }
+
+    if (typeof validateManifest === "function") {
+      try {
+        await validateManifest({ ...manifest, report: reportIssue });
+      } catch (err) {
+        // Propagate ValidationInterrupt thrown by reportIssue
+        if (err instanceof ValidationInterrupt) throw err;
+
+        reportIssue({
+          severity: "error",
+          message: "An error occurred in validateManifest function",
+          cause: err
+        });
+      }
+    }
+  }
+
+  return [manifest];
 }
 
 /**
@@ -130,121 +401,10 @@ export async function resolve(
   value: unknown,
   options: ResolveOptions = {}
 ): Promise<Manifest[]> {
-  const {
-    validate = true,
-    index = [],
-    path = "",
-    bail,
-    concurrency,
-    transform
-  } = options;
-  const limit = pLimit(validateConcurrency(concurrency));
-
-  function createResolveError(message: string, err: unknown) {
-    if (err instanceof ResolveError) return err;
-
-    return new ResolveError(message, {
-      path,
-      index,
-      value,
-      cause: err
-    });
+  try {
+    return await doResolve(value, options);
+  } catch (err) {
+    if (err instanceof ValidationInterrupt) return [err.manifest];
+    throw err;
   }
-
-  if (typeof value === "function") {
-    try {
-      return resolve(await value(), options);
-    } catch (err) {
-      throw createResolveError("Input function value threw an error", err);
-    }
-  }
-
-  if (isPromiseLike(value)) {
-    try {
-      return resolve(await value, options);
-    } catch (err) {
-      throw createResolveError("Input promise value rejected", err);
-    }
-  }
-
-  if (isIterable(value)) {
-    const promises: Promise<Manifest[]>[] = [];
-    let i = 0;
-
-    try {
-      for (const entry of value) {
-        promises.push(
-          limit(() =>
-            resolve(entry, {
-              ...options,
-              index: [...index, i++]
-            })
-          )
-        );
-      }
-    } catch (err) {
-      throw createResolveError("Input iterable value threw an error", err);
-    }
-
-    return handleResolvePromises(promises, bail);
-  }
-
-  if (isAsyncIterable(value)) {
-    const promises: Promise<Manifest[]>[] = [];
-    let i = 0;
-
-    try {
-      for await (const entry of value) {
-        promises.push(
-          limit(() =>
-            resolve(entry, {
-              ...options,
-              index: [...index, i++]
-            })
-          )
-        );
-      }
-    } catch (err) {
-      throw createResolveError(
-        "Input async iterable value threw an error",
-        err
-      );
-    }
-
-    return handleResolvePromises(promises, bail);
-  }
-
-  let manifest: Manifest = {
-    path,
-    index,
-    data: value
-  };
-
-  if (typeof transform === "function") {
-    try {
-      const newValue = await transform(manifest);
-
-      // Remove the manifest if the return value is undefined or null
-      if (newValue == null) return [];
-
-      // Create a new object to avoid mutation
-      manifest = { ...manifest, data: newValue };
-    } catch (err) {
-      throw createResolveError("An error occurred in transform function", err);
-    }
-  }
-
-  if (validate && isValidator(manifest.data)) {
-    try {
-      logger.log(
-        LogLevel.Debug,
-        `Validating manifests ${index.join(".")} in ${options.path}`
-      );
-      await manifest.data.validate();
-    } catch (err) {
-      throw createResolveError("Validation error", err);
-    }
-  }
-
-  return [manifest];
 }

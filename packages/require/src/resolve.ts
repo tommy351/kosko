@@ -1,8 +1,10 @@
 import { stat } from "node:fs/promises";
-import { join, resolve as resolvePath } from "node:path";
+import { join, resolve } from "node:path";
 import { cwd } from "node:process";
 import { getRequireExtensions } from "./extensions";
 import { getErrorCode } from "@kosko/common-utils";
+import resolveFrom from "resolve-from";
+import { BUILD_TARGET } from "@kosko/build-scripts";
 
 /**
  * @public
@@ -34,28 +36,83 @@ async function fileExists(path: string) {
 }
 
 /**
- * Resolves path to the specified module.
+ * This function is implemented based on LOAD_AS_FILE in:
+ * https://nodejs.org/api/modules.html#all-together
+ */
+async function resolveFile(
+  path: string,
+  extensions: readonly string[]
+): Promise<string | undefined> {
+  if (await fileExists(path)) {
+    return path;
+  }
+
+  for (const ext of extensions) {
+    const value = path + ext;
+
+    if (await fileExists(value)) {
+      return value;
+    }
+  }
+}
+
+/**
+ * This function is implemented based on LOAD_INDEX in:
+ * https://nodejs.org/api/modules.html#all-together
+ */
+async function resolveIndex(
+  path: string,
+  extensions: readonly string[]
+): Promise<string | undefined> {
+  for (const ext of extensions) {
+    const file = join(path, `index${ext}`);
+
+    if (await fileExists(file)) {
+      return file;
+    }
+  }
+}
+
+/**
+ * Returns full file path of the given path. This function only supports
+ * relative or absolute paths of files or directories.
  *
  * @public
  */
-export async function resolve(
-  id: string,
+export async function resolvePath(
+  path: string,
   options: ResolveOptions = {}
 ): Promise<string | undefined> {
-  // Implementation is based on: https://nodejs.org/api/modules.html#all-together
   const { baseDir = cwd(), extensions = getRequireExtensions() } = options;
-  const resolved = resolvePath(baseDir, id);
-  const index = join(resolved, "index");
+  const resolved = resolve(baseDir, path);
 
-  const possiblePaths = [
-    resolved,
-    ...extensions.map((ext) => resolved + ext),
-    ...extensions.map((ext) => index + ext)
-  ];
+  return (
+    (await resolveFile(resolved, extensions)) ||
+    (await resolveIndex(resolved, extensions))
+  );
+}
 
-  for (const path of possiblePaths) {
-    if (await fileExists(path)) {
-      return path;
-    }
+function isFilePath(id: string): boolean {
+  return id.startsWith("/") || id.startsWith("./") || id.startsWith("../");
+}
+
+/**
+ * Returns full file path of the given module id.
+ *
+ * @param id - A relative or absolute path to a file or directory, or a module name.
+ * @public
+ */
+export async function resolveModule(
+  id: string,
+  options: Pick<ResolveOptions, "baseDir"> = {}
+) {
+  if (isFilePath(id)) {
+    return resolvePath(id, options);
   }
+
+  if (BUILD_TARGET !== "node") {
+    return;
+  }
+
+  return resolveFrom.silent(options.baseDir ?? cwd(), id);
 }

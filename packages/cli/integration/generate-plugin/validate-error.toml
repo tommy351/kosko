@@ -1,0 +1,8 @@
+components = ["*"]
+
+[[plugins]]
+name = "./modules/validate/single.js"
+
+[[plugins.config.issues]]
+severity = "error"
+message = "Test error message"

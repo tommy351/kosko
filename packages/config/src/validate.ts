@@ -27,8 +27,10 @@ export class ValidationError extends Error {
 ValidationError.prototype.name = "ValidationError";
 
 /**
- * Validates data against the configuration schema. It throws a {@link ValidationError}
- * when validation failed.
+ * Validates data against the configuration schema.
+ *
+ * @throws {@link ValidationError}
+ * Thrown if validation failed.
  *
  * @public
  */

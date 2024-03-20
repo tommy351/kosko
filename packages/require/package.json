@@ -43,7 +43,8 @@
     "node": ">=18"
   },
   "dependencies": {
-    "@kosko/common-utils": "workspace:^"
+    "@kosko/common-utils": "workspace:^",
+    "resolve-from": "^5.0.0"
   },
   "devDependencies": {
     "@kosko/build-scripts": "workspace:^",

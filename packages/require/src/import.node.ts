@@ -1,3 +1,4 @@
+import { BUILD_FORMAT } from "@kosko/build-scripts";
 import { getErrorCode } from "@kosko/common-utils";
 import { createRequire } from "node:module";
 import { env } from "node:process";
@@ -5,9 +6,7 @@ import { pathToFileURL } from "node:url";
 
 const ESM_IMPORT_DISABLED = env.ESM_IMPORT_DISABLED === "1";
 
-const req =
-  // eslint-disable-next-line no-restricted-globals
-  process.env.BUILD_FORMAT === "cjs" ? require : createRequire(import.meta.url);
+const req = BUILD_FORMAT === "cjs" ? require : createRequire(import.meta.url);
 
 function requireModule(path: string) {
   const mod = req(path);
@@ -24,8 +23,7 @@ export async function importPath(path: string) {
   if (path.endsWith(".json")) {
     // Fix `ERR_IMPORT_ASSERTION_TYPE_MISSING` error when importing `.json` files
     // in CJS mode.
-    // eslint-disable-next-line no-restricted-globals
-    if (process.env.BUILD_FORMAT === "cjs") {
+    if (BUILD_FORMAT === "cjs") {
       return requireModule(path);
     }
 

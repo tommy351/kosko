@@ -1,47 +1,12 @@
-import { isRecord } from "@kosko/common-utils";
+import {
+  isRecord,
+  getManifestMeta,
+  type ManifestMeta
+} from "@kosko/common-utils";
 import extractStack from "extract-stack";
+import type { ManifestPosition } from "./base";
 
 const STACK_INDENT = "    ";
-
-interface Component {
-  apiVersion: string;
-  kind: string;
-  metadata: {
-    name: string;
-    namespace?: string;
-  };
-}
-
-/**
- * @public
- */
-export interface ComponentInfo {
-  apiVersion: string;
-  kind: string;
-  name: string;
-  namespace?: string;
-}
-
-function isComponent(value: unknown): value is Component {
-  if (!isRecord(value)) return false;
-
-  const { apiVersion, kind, metadata } = value;
-
-  return (
-    typeof apiVersion === "string" &&
-    typeof kind === "string" &&
-    isRecord(metadata) &&
-    typeof metadata.name === "string"
-  );
-}
-
-export function aggregateErrors(errors: unknown[]) {
-  if (errors.length === 1) {
-    return errors[0];
-  }
-
-  return new AggregateError(errors);
-}
 
 function decorateErrorStack(err: Error, values: Record<string, string>) {
   const origStack = extractStack(err.stack);
@@ -87,8 +52,7 @@ function generateCauseMessage(cause: unknown) {
  * @public
  */
 export interface ResolveErrorOptions {
-  path?: string;
-  index?: number[];
+  position?: ManifestPosition;
   cause?: unknown;
   value?: unknown;
 }
@@ -97,40 +61,34 @@ export interface ResolveErrorOptions {
  * @public
  */
 export class ResolveError extends Error {
-  public readonly path?: string;
-  public readonly index?: number[];
+  public readonly position?: ManifestPosition;
+  public readonly metadata?: ManifestMeta;
   public readonly cause?: unknown;
   public readonly value?: unknown;
-  public readonly component?: ComponentInfo;
 
   public constructor(message: string, options: ResolveErrorOptions = {}) {
     super(message);
 
-    this.path = options.path;
-    this.index = options.index;
+    this.position = options.position;
     this.cause = options.cause;
     this.value = options.value;
-
-    if (isComponent(this.value)) {
-      this.component = {
-        apiVersion: this.value.apiVersion,
-        kind: this.value.kind,
-        name: this.value.metadata.name,
-        namespace: this.value.metadata.namespace
-      };
-    }
+    this.metadata = getManifestMeta(this.value);
 
     const cause = generateCauseMessage(this.cause);
 
     decorateErrorStack(this, {
-      ...(this.path && { Path: this.path }),
-      ...(this.index?.length && { Index: `[${this.index.join(", ")}]` }),
-      ...(this.component && {
-        Kind: `${this.component.apiVersion}/${this.component.kind}`,
-        ...(this.component.namespace && {
-          Namespace: this.component.namespace
+      ...(this.position && {
+        Path: this.position.path,
+        ...(this.position.index.length && {
+          Index: `[${this.position.index.join(", ")}]`
+        })
+      }),
+      ...(this.metadata && {
+        Kind: `${this.metadata.apiVersion}/${this.metadata.kind}`,
+        ...(this.metadata.namespace && {
+          Namespace: this.metadata.namespace
         }),
-        Name: this.component.name
+        Name: this.metadata.name
       }),
       ...(cause && { Cause: cause })
     });

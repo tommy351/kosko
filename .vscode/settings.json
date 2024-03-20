@@ -1,0 +1,3 @@
+{
+  "jest.jestCommandLine": "pnpm run test:unit"
+}

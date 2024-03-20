@@ -5,6 +5,7 @@ import { loadConfig } from "./config";
 import { SetOption, parseSetOptions } from "./set-option";
 import type { BaseGenerateArguments, GenerateArguments } from "./types";
 import { handler } from "./worker";
+import { BUILD_TARGET } from "@kosko/build-scripts";
 
 /* istanbul ignore next */
 export function generateBuilder(
@@ -41,8 +42,7 @@ export function generateBuilder(
         "Components to generate. This overrides components set in config file."
     });
 
-  // eslint-disable-next-line no-restricted-globals
-  if (process.env.BUILD_TARGET === "node") {
+  if (BUILD_TARGET === "node") {
     base = base
       .option("require", {
         type: "string",
