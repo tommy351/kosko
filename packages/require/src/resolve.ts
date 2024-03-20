@@ -102,7 +102,10 @@ function isFilePath(id: string): boolean {
  * @param id - A relative or absolute path to a file or directory, or a module name.
  * @public
  */
-export async function resolveModule(id: string, options: ResolveOptions = {}) {
+export async function resolveModule(
+  id: string,
+  options: Pick<ResolveOptions, "baseDir"> = {}
+) {
   if (isFilePath(id)) {
     return resolvePath(id, options);
   }
