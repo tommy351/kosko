@@ -2,7 +2,7 @@
 
 Lint Kubernetes manifests.
 
-## Installation
+## Install
 
 ```sh
 npm install @kosko/plugin-lint

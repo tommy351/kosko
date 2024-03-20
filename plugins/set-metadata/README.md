@@ -2,7 +2,7 @@
 
 Set metadata for Kubernetes manifests.
 
-## Installation
+## Install
 
 ```sh
 npm install @kosko/plugin-set-metadata
