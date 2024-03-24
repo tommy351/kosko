@@ -1,15 +1,13 @@
 ---
 title: Loading Kustomize
-related:
-  - api/kustomize
-  - components/loading-kubernetes-yaml
 ---
 
+import DocCardList from "@theme/DocCardList";
 import NpmInstallCommand from "@site/src/modules/doc/components/NpmInstallCommand";
 
 Kosko supports loading manifests from Kustomize files. You have to install either [`kustomize`](https://kubectl.docs.kubernetes.io/installation/kustomize/) or [`kubectl`](https://kubectl.docs.kubernetes.io/installation/kubectl/) CLI before using this package.
 
-`@kosko/kustomize` uses the `kustomize build` command to generate Kubernetes manifests. Most options of `kustomize build` command are supported. See [API documentation](api/kustomize.md) for available options.
+`@kosko/kustomize` uses the `kustomize build` command to generate Kubernetes manifests. Most options of `kustomize build` command are supported. See [API documentation](/api/kustomize) for available options.
 
 Under the hood, `@kosko/kustomize` uses `@kosko/yaml` to load YAML, which means the `loadKustomize` function supports all options of the `loadString` function. See [loading Kubernetes YAML](./loading-kubernetes-yaml.mdx) for more details.
 
@@ -55,3 +53,22 @@ loadKustomize({
   buildCommand: ["./path/to/kustomize", "build"]
 });
 ```
+
+## Related
+
+<DocCardList
+  items={[
+    {
+      type: "link",
+      label: "@kosko/kustomize",
+      href: "/api/kustomize",
+      description: "@kosko/kustomize package"
+    },
+    {
+      type: "link",
+      label: "Loading Kubernetes YAML",
+      href: "/docs/components/loading-kubernetes-yaml",
+      docId: "components/loading-kubernetes-yaml"
+    }
+  ]}
+/>

@@ -9,14 +9,13 @@ import {
   unlink,
   writeFile
 } from "node:fs/promises";
-import { dirname, extname, join, normalize, relative } from "node:path";
+import { dirname, extname, join, relative } from "node:path";
 import { rollup } from "rollup";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import swc from "@rollup/plugin-swc";
 import json from "@rollup/plugin-json";
 import virtual from "@rollup/plugin-virtual";
-import { Extractor, ExtractorConfig } from "@microsoft/api-extractor";
 import globby from "globby";
 import execa from "execa";
 import moduleSuffixes from "../plugins/module-suffixes.js";
@@ -187,56 +186,6 @@ function stripSourceMapLine(content) {
     .join("\n");
 }
 
-async function runApiExtractor() {
-  console.log("Running API extractor");
-
-  const prepareOptions = ExtractorConfig.tryLoadForFolder({
-    startingFolder: cwd
-  });
-
-  if (!prepareOptions) {
-    console.log("API extractor config not found");
-    return;
-  }
-
-  const config = ExtractorConfig.prepare(prepareOptions);
-  const result = Extractor.invoke(config, {});
-
-  if (!result.succeeded) {
-    throw new Error("API extractor failed");
-  }
-
-  if (!config.rollupEnabled) {
-    return;
-  }
-
-  console.log("Removing rolled-up type declaration files");
-
-  const dtsFiles = await globby("**/*.d.ts", {
-    cwd: join(cwd, "dist"),
-    absolute: true
-  });
-  const dtsFilesToKeep = new Set(
-    [
-      config.alphaTrimmedFilePath,
-      config.betaTrimmedFilePath,
-      config.publicTrimmedFilePath,
-      config.untrimmedFilePath
-    ]
-      .filter(Boolean)
-      .map(normalize)
-  );
-
-  for (const file of dtsFiles) {
-    const normalizedPath = normalize(file);
-
-    if (!dtsFilesToKeep.has(normalizedPath)) {
-      console.log("Deleting:", normalizedPath);
-      await unlink(normalizedPath);
-    }
-  }
-}
-
 async function copyEsmDts() {
   const paths = await globby("**/*.d.ts", {
     cwd: join(cwd, "dist"),
@@ -281,5 +230,4 @@ await Promise.all([
 
 await execa(tsc, ["--outDir", distDir]);
 await mkdir(fullOutPath, { recursive: true });
-await runApiExtractor();
 await copyEsmDts();

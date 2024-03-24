@@ -3,7 +3,6 @@ import type { DocFrontMatter } from "@docusaurus/plugin-content-docs";
 
 interface FrontMatter extends DocFrontMatter {
   available_since?: Record<string, string>;
-  related?: string[];
 }
 
 export default function useFrontMatter() {

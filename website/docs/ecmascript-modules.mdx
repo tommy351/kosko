@@ -2,10 +2,9 @@
 title: ECMAScript Modules
 available_since:
   kosko: 3.0.0
-related:
-  - programmatic-usage
-  - api/env
 ---
+
+import DocCardList from "@theme/DocCardList";
 
 Kosko supports ECMAScript modules (ESM). You can write components and environments in native ESM files.
 
@@ -130,3 +129,22 @@ When loaders are specified, Kosko will run Node.js with [`--experimental-loader`
 (node:26303) ExperimentalWarning: --experimental-loader is an experimental feature. This feature could change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
 ```
+
+## Related
+
+<DocCardList
+  items={[
+    {
+      type: "link",
+      label: "Programmatic Usage",
+      href: "/docs/programmatic-usage",
+      docId: "programmatic-usage"
+    },
+    {
+      type: "link",
+      label: "@kosko/env",
+      href: "/api/env",
+      description: "@kosko/env package"
+    }
+  ]}
+/>

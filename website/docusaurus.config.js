@@ -1,5 +1,9 @@
 "use strict";
 
+const { dirname } = require("node:path");
+const globby = require("globby");
+
+const workspaceRoot = dirname(__dirname);
 const organizationName = "tommy351";
 const projectName = "kosko";
 const githubUrl = `https://github.com/${organizationName}/${projectName}`;
@@ -36,12 +40,7 @@ module.exports = {
           position: "left",
           sidebarId: "plugins"
         },
-        {
-          type: "doc",
-          label: "API",
-          position: "left",
-          docId: "api/index"
-        },
+        { to: "api", label: "API", position: "left" },
         { to: "blog", label: "Blog", position: "left" },
         { to: "play", label: "Playground", position: "left" },
         {
@@ -96,6 +95,19 @@ module.exports = {
   plugins: [
     "docusaurus-plugin-sass",
     "@docusaurus/plugin-ideal-image",
+    [
+      "docusaurus-plugin-typedoc-api",
+      {
+        projectRoot: workspaceRoot,
+        packages: globby
+          .sync("packages/*/tsconfig.json", { cwd: workspaceRoot })
+          .map((path) => dirname(path)),
+        gitRefName:
+          process.env.CF_PAGES_COMMIT_SHA ||
+          process.env.CF_PAGES_BRANCH ||
+          "master"
+      }
+    ],
     require.resolve("./plugins/lodash-webpack-plugin"),
     require.resolve("./plugins/lint-rules-metadata-plugin")
   ]

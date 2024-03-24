@@ -1,8 +1,5 @@
 "use strict";
 
-const { readFileSync } = require("node:fs");
-const { join } = require("node:path");
-
 module.exports = {
   docs: [
     "getting-started",
@@ -75,8 +72,5 @@ module.exports = {
         "plugins/set-metadata"
       ]
     }
-  ],
-  api: JSON.parse(
-    readFileSync(join(__dirname, "tmp/api-sidebar.json"), "utf-8")
-  )
+  ]
 };

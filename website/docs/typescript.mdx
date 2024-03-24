@@ -1,11 +1,9 @@
 ---
 title: TypeScript
-related:
-  - ecmascript-modules
-  - api/env
 ---
 
 import NpmInstallCommand from "@site/src/modules/doc/components/NpmInstallCommand";
+import DocCardList from "@theme/DocCardList";
 
 Kosko and [kubernetes-models](https://github.com/tommy351/kubernetes-models-ts) are written in TypeScript, so you don't have to install any additional type declaration files.
 
@@ -78,3 +76,22 @@ declare module "@kosko/env" {
   }
 }
 ```
+
+## Related
+
+<DocCardList
+  items={[
+    {
+      type: "link",
+      label: "ECMAScript Modules",
+      href: "/docs/ecmascript-modules",
+      docId: "ecmascript-modules"
+    },
+    {
+      type: "link",
+      label: "@kosko/env",
+      href: "/api/env",
+      description: "@kosko/env package"
+    }
+  ]}
+/>

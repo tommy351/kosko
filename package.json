@@ -14,7 +14,7 @@
     "lint:eslint": "eslint . --ext .js,.ts,.jsx,.tsx,.cjs,.mjs,.cts,.mts",
     "lint:syncpack": "syncpack list-mismatches --workspace false",
     "build": "turbo run build --filter=./{internal,packages,plugins}/*",
-    "clean": "rm -rf internal/*/dist packages/*/dist plugins/*/dist",
+    "clean": "rm -rf internal/*/dist packages/*/dist plugins/*/dist internal/*/out packages/*/out plugins/*/out",
     "watch": "npm run build -- --watch",
     "test": "npm-run-all test:*",
     "test:unit": "cross-env BUILD_TARGET=node ESM_IMPORT_DISABLED=1 jest",

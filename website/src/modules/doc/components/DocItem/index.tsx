@@ -5,10 +5,9 @@ import DocItemMetadata from "@theme/DocItem/Metadata";
 import DocItemLayout from "@theme/DocItem/Layout";
 import type { Props } from "@theme/DocItem";
 import AvailabilityInfo from "../AvailabilityInfo";
-import RelatedDoc from "./RelatedDoc";
 import useFrontMatter from "@site/src/utils/useFrontMatter";
 
-function DocAvailability() {
+function Availability() {
   const frontMatter = useFrontMatter();
   if (!frontMatter.available_since) return null;
 
@@ -25,9 +24,8 @@ export default function DocItem(props: Props) {
         <DocItemMetadata />
         <DocItemLayout>
           <>
-            <DocAvailability />
+            <Availability />
             <MDXComponent />
-            <RelatedDoc />
           </>
         </DocItemLayout>
       </HtmlClassNameProvider>

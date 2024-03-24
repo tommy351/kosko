@@ -1,12 +1,10 @@
 ---
 title: Getting Started
 slug: /
-related:
-  - components/index
-  - environments/index
 ---
 
 import NpmInstallCommand from "@site/src/modules/doc/components/NpmInstallCommand";
+import DocCardList from "@theme/DocCardList";
 
 Welcome to the Kosko documentation! Before we start, make sure your computer meets the following system requirements.
 
@@ -67,3 +65,22 @@ If you don't want to print manifests to console, run [`kosko validate`](./cli/va
 ```shell
 npx kosko validate
 ```
+
+## Related
+
+<DocCardList
+  items={[
+    {
+      type: "link",
+      label: "Components",
+      href: "/docs/components",
+      docId: "components/index"
+    },
+    {
+      type: "link",
+      href: "/docs/environments",
+      label: "Environments",
+      docId: "environments/index"
+    }
+  ]}
+/>

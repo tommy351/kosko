@@ -13,7 +13,7 @@
   "main": "index.node.cjs",
   "module": "dist/index.node.mjs",
   "browser": "dist/index.base.mjs",
-  "types": "dist/types.d.ts",
+  "types": "dist/index.d.ts",
   "sideEffects": false,
   "scripts": {
     "build": "build-scripts"
@@ -21,17 +21,17 @@
   "exports": {
     "node": {
       "import": {
-        "types": "./dist/types.d.mts",
+        "types": "./dist/index.d.mts",
         "default": "./dist/index.node.mjs"
       },
-      "types": "./dist/types.d.ts",
+      "types": "./dist/index.d.ts",
       "require": "./index.node.cjs"
     },
     "import": {
-      "types": "./dist/types.d.mts",
+      "types": "./dist/index.d.mts",
       "default": "./dist/index.base.mjs"
     },
-    "types": "./dist/types.d.ts",
+    "types": "./dist/index.d.ts",
     "require": "./index.node.cjs"
   },
   "files": [
