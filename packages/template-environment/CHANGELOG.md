@@ -1,5 +1,12 @@
 # @kosko/template-environment
 
+## 4.0.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @kosko/template@4.0.1
+
 ## 4.0.0
 
 ### Major Changes

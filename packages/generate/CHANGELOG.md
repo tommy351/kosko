@@ -1,5 +1,67 @@
 # @kosko/generate
 
+## 5.0.0
+
+### Major Changes
+
+- [#133](https://github.com/tommy351/kosko/pull/133) [`8492249`](https://github.com/tommy351/kosko/commit/849224919992923d285cbfb75bf8f5c99d1b552f) Thanks [@tommy351](https://github.com/tommy351)! - Add `keepAjvErrors` option. Ajv validation errors are transformed into issues automatically by default now. This could be a breaking change if you expect `generate` and `resolve` function to throw Ajv validation errors. You can disable this behavior by setting `keepAjvErrors` to `true`.
+
+- [#133](https://github.com/tommy351/kosko/pull/133) [`c6b5645`](https://github.com/tommy351/kosko/commit/c6b5645ad98f9121c555e5749f2c5ca95ba861a2) Thanks [@tommy351](https://github.com/tommy351)! - Add `throwOnError` option to `generate` and `resolve` function. This is a breaking change because errors are not thrown by default anymore. You can either fetch errors from the `issues` array of the result, or set the `throwOnError` option to `true`.
+
+- [#133](https://github.com/tommy351/kosko/pull/133) [`e904ce3`](https://github.com/tommy351/kosko/commit/e904ce313295d4737ed9bf0d711c26c53f63fd88) Thanks [@tommy351](https://github.com/tommy351)! - `path` and `index` properties are replaced by `position` property in `Manifest` type, `ResolveErrorOptions` type and `ResolveError` class.'
+
+  ```ts
+  // Before
+  {
+    path: string;
+    index: number[];
+    data: unknown;
+  }
+
+  // After
+  {
+    position: {
+      path: string;
+      index: number[];
+    };
+    data: unknown;
+  }
+  ```
+
+- [#133](https://github.com/tommy351/kosko/pull/133) [`e904ce3`](https://github.com/tommy351/kosko/commit/e904ce313295d4737ed9bf0d711c26c53f63fd88) Thanks [@tommy351](https://github.com/tommy351)! - `ComponentInfo` is replaced by `ManifestMeta` type in `@kosko/common-utils` package.
+
+- [#133](https://github.com/tommy351/kosko/pull/133) [`e904ce3`](https://github.com/tommy351/kosko/commit/e904ce313295d4737ed9bf0d711c26c53f63fd88) Thanks [@tommy351](https://github.com/tommy351)! - In `ResolveError` class, `component` property is replaced by `metadata`.
+
+### Minor Changes
+
+- [#133](https://github.com/tommy351/kosko/pull/133) [`c6b5645`](https://github.com/tommy351/kosko/commit/c6b5645ad98f9121c555e5749f2c5ca95ba861a2) Thanks [@tommy351](https://github.com/tommy351)! - Add `validateAllManifests` option to `generate` function. You can use this option to run a custom validation function for all manifests. This function will be called after all manifests are resolved.
+
+- [#133](https://github.com/tommy351/kosko/pull/133) [`c6b5645`](https://github.com/tommy351/kosko/commit/c6b5645ad98f9121c555e5749f2c5ca95ba861a2) Thanks [@tommy351](https://github.com/tommy351)! - Add `validateManifest` option to `generate` and `resolve` function. You can use this option to run a custom validation function for each manifest. This function will be called after the `transform` function and the `validate` method of a manifest.
+
+  The following example shows how to use this option to check if a manifest has a namespace or not.
+
+  ```ts
+  resolve(values, {
+    validateManifest(manifest) {
+      if (!manifest.data.metadata.namespace) {
+        manifest.report({
+          severity: "error",
+          message: "Namespace is required",
+        });
+      }
+    },
+  });
+  ```
+
+- [#133](https://github.com/tommy351/kosko/pull/133) [`2682a05`](https://github.com/tommy351/kosko/commit/2682a05297de6170af0bd4ffd1087a4b054a399e) Thanks [@tommy351](https://github.com/tommy351)! - Add `metadata` property to `Manifest` interface.
+
+### Patch Changes
+
+- Updated dependencies [[`51e93b1`](https://github.com/tommy351/kosko/commit/51e93b134a0f1bf4e05e5d7b9684f1e1cf068edb), [`e904ce3`](https://github.com/tommy351/kosko/commit/e904ce313295d4737ed9bf0d711c26c53f63fd88), [`51e93b1`](https://github.com/tommy351/kosko/commit/51e93b134a0f1bf4e05e5d7b9684f1e1cf068edb), [`e904ce3`](https://github.com/tommy351/kosko/commit/e904ce313295d4737ed9bf0d711c26c53f63fd88)]:
+  - @kosko/require@7.0.0
+  - @kosko/common-utils@1.1.0
+  - @kosko/log@2.0.1
+
 ## 4.0.0
 
 ### Major Changes

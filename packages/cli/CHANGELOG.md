@@ -1,5 +1,22 @@
 # @kosko/cli
 
+## 4.1.0
+
+### Minor Changes
+
+- [#133](https://github.com/tommy351/kosko/pull/133) [`6b6ef9a`](https://github.com/tommy351/kosko/commit/6b6ef9ac242725bd25ddb98a57e59e8710fb3ce9) Thanks [@tommy351](https://github.com/tommy351)! - Support `validateManifest` and `validateAllManifests` plugin hooks.
+
+### Patch Changes
+
+- Updated dependencies [[`c6b5645`](https://github.com/tommy351/kosko/commit/c6b5645ad98f9121c555e5749f2c5ca95ba861a2), [`51e93b1`](https://github.com/tommy351/kosko/commit/51e93b134a0f1bf4e05e5d7b9684f1e1cf068edb), [`e904ce3`](https://github.com/tommy351/kosko/commit/e904ce313295d4737ed9bf0d711c26c53f63fd88), [`8492249`](https://github.com/tommy351/kosko/commit/849224919992923d285cbfb75bf8f5c99d1b552f), [`51e93b1`](https://github.com/tommy351/kosko/commit/51e93b134a0f1bf4e05e5d7b9684f1e1cf068edb), [`c6b5645`](https://github.com/tommy351/kosko/commit/c6b5645ad98f9121c555e5749f2c5ca95ba861a2), [`c6b5645`](https://github.com/tommy351/kosko/commit/c6b5645ad98f9121c555e5749f2c5ca95ba861a2), [`e904ce3`](https://github.com/tommy351/kosko/commit/e904ce313295d4737ed9bf0d711c26c53f63fd88), [`e904ce3`](https://github.com/tommy351/kosko/commit/e904ce313295d4737ed9bf0d711c26c53f63fd88), [`e904ce3`](https://github.com/tommy351/kosko/commit/e904ce313295d4737ed9bf0d711c26c53f63fd88), [`2682a05`](https://github.com/tommy351/kosko/commit/2682a05297de6170af0bd4ffd1087a4b054a399e), [`e904ce3`](https://github.com/tommy351/kosko/commit/e904ce313295d4737ed9bf0d711c26c53f63fd88)]:
+  - @kosko/generate@5.0.0
+  - @kosko/require@7.0.0
+  - @kosko/common-utils@1.1.0
+  - @kosko/config@4.0.1
+  - @kosko/log@2.0.1
+  - @kosko/cli-utils@0.1.1
+  - @kosko/migrate@5.0.1
+
 ## 4.0.0
 
 ### Major Changes

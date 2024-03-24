@@ -1,5 +1,13 @@
 # @kosko/config
 
+## 4.0.1
+
+### Patch Changes
+
+- Updated dependencies [[`e904ce3`](https://github.com/tommy351/kosko/commit/e904ce313295d4737ed9bf0d711c26c53f63fd88), [`e904ce3`](https://github.com/tommy351/kosko/commit/e904ce313295d4737ed9bf0d711c26c53f63fd88)]:
+  - @kosko/common-utils@1.1.0
+  - @kosko/log@2.0.1
+
 ## 4.0.0
 
 ### Major Changes
