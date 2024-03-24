@@ -16,7 +16,7 @@
   "bin": "bin/create-kosko.js",
   "sideEffects": false,
   "scripts": {
-    "build": "build-scripts"
+    "build": "build-scripts --types dist/src"
   },
   "exports": {
     "node": {

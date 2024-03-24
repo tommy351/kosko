@@ -18,7 +18,7 @@
   "types": "dist/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "build": "build-scripts index.ts worker-bin.ts"
+    "build": "build-scripts index.ts worker-bin.ts --types dist/src"
   },
   "exports": {
     "./bin/kosko.js": "./bin/kosko.js",

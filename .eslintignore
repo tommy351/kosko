@@ -1,5 +1,4 @@
 dist/
-out/
 tmp/
 /coverage/
 node_modules/

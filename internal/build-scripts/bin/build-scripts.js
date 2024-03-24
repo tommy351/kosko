@@ -1,26 +1,21 @@
 #!/usr/bin/env node
 // @ts-check
 
-import {
-  copyFile,
-  mkdir,
-  readFile,
-  rm,
-  unlink,
-  writeFile
-} from "node:fs/promises";
-import { dirname, extname, join, relative } from "node:path";
+import { copyFile, readFile, rm, unlink, writeFile } from "node:fs/promises";
+import { dirname, extname, join, relative, normalize } from "node:path";
 import { rollup } from "rollup";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import swc from "@rollup/plugin-swc";
 import json from "@rollup/plugin-json";
 import virtual from "@rollup/plugin-virtual";
+import dts from "rollup-plugin-dts";
 import globby from "globby";
 import execa from "execa";
 import moduleSuffixes from "../plugins/module-suffixes.js";
 import resolveBin from "resolve-bin";
 import { promisify } from "node:util";
+import yargs from "yargs";
 
 const resolveBinPromise = promisify(resolveBin);
 
@@ -34,16 +29,18 @@ const fullSrcPath = join(cwd, srcDir);
 const distDir = "dist";
 const fullDistPath = join(cwd, distDir);
 
-// outDir stores files for internal usage.
-const outDir = "out";
-const fullOutPath = join(cwd, outDir);
-
 const tsc = await resolveBinPromise("typescript", { executable: "tsc" });
 const pkgJson = JSON.parse(await readFile(join(cwd, "package.json"), "utf-8"));
 const dependencies = pkgJson.dependencies ?? {};
 
-const args = process.argv.slice(2);
-const entryFiles = args.length ? args : ["index.ts"];
+const args = await yargs(process.argv.slice(2))
+  .parserConfiguration({
+    "parse-positional-numbers": false
+  })
+  .string("types")
+  .parseAsync();
+const entryFiles = args._.length ? args._ : ["index.ts"];
+const typesPath = args.types ? join(cwd, args.types) : fullDistPath;
 
 /**
  * @param {{
@@ -186,13 +183,53 @@ function stripSourceMapLine(content) {
     .join("\n");
 }
 
-async function copyEsmDts() {
-  const paths = await globby("**/*.d.ts", {
-    cwd: join(cwd, "dist"),
-    absolute: true
+async function buildDeclarationFile() {
+  console.log("Building declaration files");
+
+  await execa(tsc, ["--outDir", distDir]);
+
+  const entries = Object.fromEntries(
+    entryFiles.map((path) => {
+      const ext = extname(path);
+      const name = path.substring(0, path.length - ext.length);
+
+      return [name, join(typesPath, `${name}.d.ts`)];
+    })
+  );
+  const bundle = await rollup({
+    input: entries,
+    plugins: [dts()]
   });
 
-  for (const path of paths) {
+  try {
+    await bundle.write({
+      sourcemap: true,
+      dir: distDir
+    });
+  } finally {
+    await bundle.close();
+  }
+
+  const dtsFiles = (
+    await globby("**/*.d.ts", {
+      cwd: fullDistPath,
+      absolute: true
+    })
+  ).map(normalize);
+  const dtsFilesToKeep = new Set(
+    Object.keys(entries).map((name) => join(fullDistPath, `${name}.d.ts`))
+  );
+
+  for (const path of dtsFiles) {
+    if (dtsFilesToKeep.has(path)) {
+      continue;
+    }
+
+    console.log("Removing:", path);
+    await rm(path);
+  }
+
+  for (const path of dtsFilesToKeep) {
     const dst = path.replace(/\.d\.ts$/, ".d.mts");
     console.log("Copying:", dst);
     await copyFile(path, dst);
@@ -200,7 +237,6 @@ async function copyEsmDts() {
 }
 
 await rm(fullDistPath, { recursive: true, force: true });
-await rm(fullOutPath, { recursive: true, force: true });
 
 // Build base bundle first
 await buildBundle({
@@ -228,6 +264,4 @@ await Promise.all([
   })
 ]);
 
-await execa(tsc, ["--outDir", distDir]);
-await mkdir(fullOutPath, { recursive: true });
-await copyEsmDts();
+await buildDeclarationFile();

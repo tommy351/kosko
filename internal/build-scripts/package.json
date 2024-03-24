@@ -23,7 +23,9 @@
     "resolve": "^1.22.1",
     "resolve-bin": "^1.0.1",
     "rollup": "^4.13.0",
+    "rollup-plugin-dts": "^6.1.0",
     "tslib": "^2.4.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "yargs": "^17.5.1"
   }
 }
