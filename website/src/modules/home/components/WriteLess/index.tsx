@@ -26,11 +26,6 @@ export default function WriteLess() {
       <FeatureExample>
         <div className={styles.example}>
           <CodeBlock
-            className={styles.topCodeBlock}
-            language="javascript"
-            code={`const labels = { app: "my-app" };`}
-          />
-          <CodeBlock
             className={styles.codeBlock}
             language="yaml"
             highlightLines={[5, 6, 9, 10]}

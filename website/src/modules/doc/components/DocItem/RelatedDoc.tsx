@@ -1,7 +1,8 @@
-import React, { useMemo } from "react";
+import React from "react";
 import DocCard from "@theme/DocCard";
 import useFrontMatter from "@site/src/utils/useFrontMatter";
 import { useDocById } from "@docusaurus/theme-common/internal";
+import useBaseUrl from "@docusaurus/useBaseUrl";
 
 const INDEX_SUFFIX = "/index";
 
@@ -11,20 +12,18 @@ function getDocLink(id: string) {
 
 function DocCardContainer({ id }: { id: string }) {
   const doc = useDocById(id);
-  const item = useMemo(
-    () =>
-      ({
-        type: "link",
-        href: getDocLink(doc.id),
-        label: doc.title,
-        description: doc.description
-      }) as const,
-    [doc]
-  );
+  const href = useBaseUrl(getDocLink(doc.id));
 
   return (
     <div className="col col--6 margin-bottom--lg">
-      <DocCard item={item} />
+      <DocCard
+        item={{
+          type: "link",
+          href,
+          label: doc.title,
+          description: doc.description
+        }}
+      />
     </div>
   );
 }

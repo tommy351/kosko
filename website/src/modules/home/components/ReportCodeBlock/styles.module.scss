@@ -1,0 +1,39 @@
+.container {
+  border-radius: var(--ifm-global-radius);
+  overflow: hidden;
+  font-size: 0.875rem;
+}
+
+.codeBlock {
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.issueContainer {
+  padding: 1em;
+  border-top: 1px solid rgba(#fff, 0.2);
+}
+
+.issue {
+  display: flex;
+  font-family: var(--ifm-font-family-monospace);
+}
+
+.issueIcon {
+  color: var(--ifm-color-danger);
+  display: inline-flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.issueDetail {
+  padding-left: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.issueReason {
+  padding-left: 0.5rem;
+  color: rgba(#fff, 0.5);
+}

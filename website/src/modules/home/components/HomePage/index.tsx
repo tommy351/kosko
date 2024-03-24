@@ -4,6 +4,7 @@ import Header from "../Header";
 import WriteLess from "../WriteLess";
 import DeployEverywhere from "../DeployEverywhere";
 import TypeSafe from "../TypeSafe";
+import FindIssues from "../FindIssues";
 
 export default function HomePage() {
   return (
@@ -13,6 +14,7 @@ export default function HomePage() {
         <WriteLess />
         <DeployEverywhere />
         <TypeSafe />
+        <FindIssues />
       </main>
     </Layout>
   );

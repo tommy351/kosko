@@ -1,5 +1,5 @@
 import React from "react";
-import CodeBlock, {
+import {
   defaultTokenRenderer,
   TokenRenderer
 } from "@site/src/modules/common/components/CodeBlock";
@@ -12,8 +12,7 @@ import {
 import component from "!!raw-loader!./examples/component.js";
 import styles from "./styles.module.scss";
 import clsx from "clsx";
-import { VscError } from "react-icons/vsc";
-import { usePrismTheme } from "@docusaurus/theme-common";
+import ReportCodeBlock from "../ReportCodeBlock";
 
 const tokenRenderer: TokenRenderer = (props) => {
   if (props.token.content === `"wrong_replicas"`) {
@@ -35,43 +34,6 @@ const tokenRenderer: TokenRenderer = (props) => {
   return defaultTokenRenderer(props);
 };
 
-function Problem({ detail, reason }: { reason: string; detail: string }) {
-  return (
-    <div className={styles.problem}>
-      <div className={styles.problemIcon}>
-        <VscError />
-      </div>
-      <div className={styles.problemDetail}>{detail}</div>
-      <div className={styles.problemReason}>{reason}</div>
-    </div>
-  );
-}
-
-function Example() {
-  const prismTheme = usePrismTheme();
-
-  return (
-    <FeatureExample>
-      <div className={styles.codeBlockContainer}>
-        <CodeBlock
-          className={styles.codeBlock}
-          language="javascript"
-          code={component}
-          hideLines={[1]}
-          highlightLines={[7]}
-          tokenRenderer={tokenRenderer}
-        />
-        <div className={styles.problemContainer} style={prismTheme.plain}>
-          <Problem
-            reason="ts(2322)"
-            detail={`Type 'string' is not assignable to type 'number'.`}
-          />
-        </div>
-      </div>
-    </FeatureExample>
-  );
-}
-
 export default function TypeSafe() {
   return (
     <Feature id="type-safe">
@@ -88,7 +50,22 @@ export default function TypeSafe() {
           autocomplete suggestions and more right in your editors.
         </p>
       </FeatureDescription>
-      <Example />
+      {/* <Example /> */}
+      <FeatureExample>
+        <ReportCodeBlock
+          language="javascript"
+          code={component}
+          hideLines={[1]}
+          highlightLines={[7]}
+          tokenRenderer={tokenRenderer}
+          issues={[
+            {
+              reason: "ts(2322)",
+              detail: `Type 'string' is not assignable to type 'number'.`
+            }
+          ]}
+        />
+      </FeatureExample>
     </Feature>
   );
 }
