@@ -2,15 +2,11 @@ import React, { ReactNode } from "react";
 import { useDocById } from "@docusaurus/theme-common/internal";
 import styles from "./styles.module.scss";
 import clsx from "clsx";
-import { usePluginData } from "@docusaurus/useGlobalData";
 import Link from "@docusaurus/Link";
-import RecommendedBadge from "./RecommendedBadge";
+import RecommendedBadge from "../RecommendedBadge";
 import { LinkItem } from "./LinkItem";
-import AllBadge from "./AllBadge";
-
-function includesDocId(list: readonly string[], docId: string): boolean {
-  return list.some((id) => docId === `plugins/lint/rules/${id}`);
-}
+import AllBadge from "../AllBadge";
+import { includesDocId, useLintRulesMetadata } from "./useLintRulesMetadata";
 
 function BadgeContainer({ children }: { children: ReactNode }) {
   return (
@@ -22,12 +18,7 @@ function BadgeContainer({ children }: { children: ReactNode }) {
 
 export default function RuleCard({ item }: { item: LinkItem }) {
   const doc = useDocById(item.docId);
-  const rulesMetadata = usePluginData("lint-rules-metadata-plugin") as {
-    validateAll: readonly string[];
-    presets: {
-      recommended: readonly string[];
-    };
-  };
+  const metadata = useLintRulesMetadata();
 
   return (
     <Link className={clsx("card", styles.cardContainer)} to={item.href}>
@@ -37,12 +28,12 @@ export default function RuleCard({ item }: { item: LinkItem }) {
           <p className={styles.cardDescription}>{doc.description}</p>
         </div>
         <div className={styles.cardRight}>
-          {includesDocId(rulesMetadata.presets.recommended, item.docId) && (
+          {includesDocId(metadata.presets.recommended, item.docId) && (
             <BadgeContainer>
               <RecommendedBadge />
             </BadgeContainer>
           )}
-          {includesDocId(rulesMetadata.validateAll, item.docId) && (
+          {includesDocId(metadata.validateAll, item.docId) && (
             <BadgeContainer>
               <AllBadge />
             </BadgeContainer>

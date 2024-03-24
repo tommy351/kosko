@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { useCurrentSidebarCategory } from "@docusaurus/theme-common";
 import clsx from "clsx";
-import BadgeList from "./BadgeList";
+import LintRuleBadges from "../LintRuleBadges";
 import { isLinkItem } from "./LinkItem";
 import RuleCard from "./RuleCard";
 
@@ -11,7 +11,7 @@ export default function LintRuleList() {
 
   return (
     <div>
-      <BadgeList />
+      <LintRuleBadges />
       {links.map((item, index) => (
         <div key={item.docId} className={clsx({ "padding-top--md": index })}>
           <RuleCard item={item} />

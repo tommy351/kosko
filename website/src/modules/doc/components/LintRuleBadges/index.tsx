@@ -1,30 +1,41 @@
 import React from "react";
-import RecommendedBadge from "./RecommendedBadge";
+import RecommendedBadge from "../RecommendedBadge";
 import styles from "./styles.module.scss";
 import clsx from "clsx";
-import AllBadge from "./AllBadge";
+import AllBadge from "../AllBadge";
 
-const BADGES = [
-  {
+const BADGES = {
+  recommended: {
     badge: <RecommendedBadge />,
     description: "Enabled in recommended preset."
   },
-  {
+  all: {
     badge: <AllBadge />,
     description: "Disabled when components are given in CLI."
   }
-];
+};
 
-export default function BadgeList() {
+export default function LintRuleBadges({
+  enabled
+}: {
+  enabled?: (keyof typeof BADGES)[];
+}) {
+  const entries = Object.entries(BADGES);
+  const badges = enabled
+    ? entries.filter(([key]) => (enabled as string[]).includes(key))
+    : entries;
+
+  if (!badges.length) return null;
+
   return (
-    <div className={clsx("padding-bottom--md", styles.badgeList)}>
-      {BADGES.map((badge, index) => (
+    <div className={clsx("padding-bottom--md", styles.list)}>
+      {badges.map(([key, badge]) => (
         <div
-          key={index}
+          key={key}
           className={clsx(
             "padding-right--lg",
             "padding-bottom--md",
-            styles.badgeListItem
+            styles.item
           )}
         >
           <div>{badge.badge}</div>

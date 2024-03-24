@@ -6,6 +6,7 @@ import DocItemLayout from "@theme/DocItem/Layout";
 import type { Props } from "@theme/DocItem";
 import AvailabilityInfo from "../AvailabilityInfo";
 import useFrontMatter from "@site/src/utils/useFrontMatter";
+import LintRuleBadges from "./LintRuleBadges";
 
 function Availability() {
   const frontMatter = useFrontMatter();
@@ -25,6 +26,7 @@ export default function DocItem(props: Props) {
         <DocItemLayout>
           <>
             <Availability />
+            <LintRuleBadges />
             <MDXComponent />
           </>
         </DocItemLayout>
