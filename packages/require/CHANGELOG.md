@@ -1,5 +1,20 @@
 # @kosko/require
 
+## 7.0.0
+
+### Major Changes
+
+- [#133](https://github.com/tommy351/kosko/pull/133) [`51e93b1`](https://github.com/tommy351/kosko/commit/51e93b134a0f1bf4e05e5d7b9684f1e1cf068edb) Thanks [@tommy351](https://github.com/tommy351)! - `resolve` function is renamed as `resolvePath`.
+
+### Minor Changes
+
+- [#133](https://github.com/tommy351/kosko/pull/133) [`51e93b1`](https://github.com/tommy351/kosko/commit/51e93b134a0f1bf4e05e5d7b9684f1e1cf068edb) Thanks [@tommy351](https://github.com/tommy351)! - Add `resolveModule` function. This function supports both module name and path resolution. Unlike `resolvePath` function which only supports path resolution.
+
+### Patch Changes
+
+- Updated dependencies [[`e904ce3`](https://github.com/tommy351/kosko/commit/e904ce313295d4737ed9bf0d711c26c53f63fd88), [`e904ce3`](https://github.com/tommy351/kosko/commit/e904ce313295d4737ed9bf0d711c26c53f63fd88)]:
+  - @kosko/common-utils@1.1.0
+
 ## 6.0.0
 
 ### Major Changes

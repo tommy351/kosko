@@ -1,5 +1,13 @@
 # @kosko/common-utils
 
+## 1.1.0
+
+### Minor Changes
+
+- [#133](https://github.com/tommy351/kosko/pull/133) [`e904ce3`](https://github.com/tommy351/kosko/commit/e904ce313295d4737ed9bf0d711c26c53f63fd88) Thanks [@tommy351](https://github.com/tommy351)! - Add `apiVersionToGroup` function.
+
+- [#133](https://github.com/tommy351/kosko/pull/133) [`e904ce3`](https://github.com/tommy351/kosko/commit/e904ce313295d4737ed9bf0d711c26c53f63fd88) Thanks [@tommy351](https://github.com/tommy351)! - Add `ManifestMeta` type and `getManifestMeta` function.
+
 ## 1.0.0
 
 ### Major Changes

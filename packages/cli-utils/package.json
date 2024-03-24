@@ -1,6 +1,6 @@
 {
   "name": "@kosko/cli-utils",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "CLI utilities used in Kosko.",
   "homepage": "https://kosko.dev",
   "repository": {
