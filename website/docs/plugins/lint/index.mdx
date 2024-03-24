@@ -5,7 +5,6 @@ available_since:
 ---
 
 import NpmInstallCommand from "@site/src/modules/doc/components/NpmInstallCommand";
-import LintRuleList from "@site/src/modules/doc/components/LintRuleList";
 import RecommendedBadge from "@site/src/modules/doc/components/RecommendedBadge";
 import AllBadge from "@site/src/modules/doc/components/AllBadge";
 
@@ -23,7 +22,7 @@ name = "@kosko/plugin-lint"
 config.extends = ["@kosko/plugin-lint/presets/recommended"]
 ```
 
-Enable lint rules.
+Enable specific rules.
 
 ```toml
 [[plugins]]
@@ -71,7 +70,7 @@ config.images = ["*:latest"]
 
 ## Preset
 
-Currently there is only one preset available: `@kosko/plugin-lint/presets/recommended`. This preset contains recommended rules, which are listed below with a <RecommendedBadge/> badge.
+Currently there is only one preset available: `@kosko/plugin-lint/presets/recommended`. This preset contains rules with <RecommendedBadge/> badge.
 
 You can enable it by adding `extends` to the configuration.
 
@@ -81,38 +80,8 @@ name = "@kosko/plugin-lint"
 config.extends = ["@kosko/plugin-lint/presets/recommended"]
 ```
 
-### Creating a Preset
-
-A preset is a JavaScript or JSON file that exports an configuration object.
-
-```js
-export default {
-  rules: {
-    "no-missing-namespace": { severity: "error" }
-  }
-};
-```
-
-You can use `extends` in a preset. For example, you can create a preset based on the recommended preset.
-
-```js
-export default {
-  extends: ["@kosko/plugin-lint/presets/recommended"],
-  rules: {
-    "ban-image": {
-      severity: "error",
-      config: { images: ["*:latest"] }
-    }
-  }
-};
-```
-
 ## Caveats
 
 - This plugin does not validate manifests against OpenAPI schema. That is what [kubernetes-models](https://github.com/tommy351/kubernetes-models-ts) does. See [validation](../../components/validation.mdx) for more details.
 - This plugin only executes when validation is enabled.
-- Rules with a <AllBadge/> badge are disabled when `components` is provided in `kosko generate` or `kosko validate` command, because these rules need to access all components to validate.
-
-## Rules
-
-<LintRuleList />
+- Rules with <AllBadge/> badge are disabled when `components` is provided in `kosko generate` or `kosko validate` command, because these rules need to access all components to validate.

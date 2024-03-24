@@ -1,0 +1,27 @@
+---
+title: Creating Preset
+---
+
+A preset is a JavaScript or JSON file that exports an configuration object.
+
+```ts ts2js
+export default {
+  rules: {
+    "no-missing-namespace": { severity: "error" }
+  }
+};
+```
+
+You can use `extends` in a preset. For example, you can create a preset based on the recommended preset.
+
+```ts ts2js
+export default {
+  extends: ["@kosko/plugin-lint/presets/recommended"],
+  rules: {
+    "ban-image": {
+      severity: "error",
+      config: { images: ["*:latest"] }
+    }
+  }
+};
+```

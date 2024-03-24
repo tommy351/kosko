@@ -1,0 +1,129 @@
+---
+title: Creating Plugin
+---
+
+import AvailabilityInfo from "@site/src/modules/doc/components/AvailabilityInfo";
+
+A plugin is a function returning a function that takes a context and returns an object containing hooks. We call it "**factory function**". The returned hooks are executed during the lifecycle of manifest generation.
+
+Below is an example of a simple plugin that does not return any hooks.
+
+```ts ts2js
+import type { Plugin, PluginContext } from "@kosko/plugin";
+
+export default function (ctx: PluginContext): Plugin {
+  return {};
+}
+```
+
+## Configuration
+
+A context contains `config` property that holds the configuration object passed to the plugin. You can create a configuration schema using [Superstruct](https://docs.superstructjs.org/), and use [validateConfig](/api/plugin/function/validateConfig) function to validate the configuration.
+
+```ts ts2js
+import { type Plugin, type PluginContext, validateConfig } from "@kosko/plugin";
+import { object, string } from "superstruct";
+
+const schema = object({
+  foo: string()
+});
+
+export default function (ctx: PluginContext): Plugin {
+  const config = validateConfig(ctx.config, schema);
+
+  return {};
+}
+```
+
+## Hooks
+
+### `transformManifest`
+
+<AvailabilityInfo availability={{ kosko: "4.0.0" }} />
+
+This hook is called after a manifest is loaded from filesystem, and before validation. You can use this hook to modify a manifest.
+
+Below is an example of a plugin that modifies the namespace of each manifest. Please don't forget to return the modified manifest. Returning `null` or `undefined` will remove the manifest from the result.
+
+```ts ts2js
+import type { Plugin, PluginContext } from "@kosko/plugin";
+
+export default function (ctx: PluginContext): Plugin {
+  return {
+    transformManifest(manifest) {
+      manifest.data.metadata.namespace = "test";
+      return manifest;
+    }
+  };
+}
+```
+
+### `validateManifest`
+
+<AvailabilityInfo availability={{ kosko: "4.1.0" }} />
+
+This hook is called after a manifest is loaded from filesystem, transformed. If a manifest implements `validate` method, it will be called first before this hook.
+
+This hook is called no matter `validate` method fails or not by default, so please keep in mind that input manifest might be invalid. If [`bail`](../configuration.mdx#bail) option is set to `true`, the validation process will stop immediately when an error is reported.
+
+Please note that you should not modify manifest in this hook. Don't modify the `issues` array directly, use `report` method instead.
+
+Below is an example of a plugin that checks if the `metadata.name` field is set. The `severity` field can be either `error` or `warning`.
+
+```ts ts2js
+import type { Plugin, PluginContext } from "@kosko/plugin";
+
+export default function (ctx: PluginContext): Plugin {
+  return {
+    validateManifest(manifest) {
+      if (!manifest.data.metadata.name) {
+        manifest.report({
+          severity: "error",
+          message: "Name is required"
+        });
+      }
+    }
+  };
+}
+```
+
+### `validateAllManifests`
+
+<AvailabilityInfo availability={{ kosko: "4.1.0" }} />
+
+This hook is similar to `validateManifest`, but instead of a single manifest, it receives all manifests. It is called after all manifests are loaded from filesystem, transformed, and validated.
+
+Again, this hook is called no matter validation fails or not by default. You should expect that some manifests might be invalid. If [`bail`](../configuration.mdx#bail) option is set to `true`, the validation process will stop immediately when an error is reported.
+
+Below is an example of a plugin that checks if a namespace defined in `metadata.namespace` field has a corresponding namespace resource.
+
+```ts ts2js
+import type { Plugin, PluginContext } from "@kosko/plugin";
+
+export default function (ctx: PluginContext): Plugin {
+  return {
+    validateAllManifests(manifests) {
+      const namespaces = new Set<string>();
+
+      // Collect namespaces
+      for (const manifest of manifests) {
+        if (manifest.data.kind === "Namespace") {
+          namespaces.add(manifest.data.metadata.name);
+        }
+      }
+
+      // Check if all namespaces are defined
+      for (const manifest of manifests) {
+        const namespace = manifest.data.metadata.namespace;
+
+        if (namespace && !namespaces.has(namespace)) {
+          manifest.report({
+            severity: "error",
+            message: `Namespace "${namespace}" is not defined`
+          });
+        }
+      }
+    }
+  };
+}
+```
