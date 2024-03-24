@@ -1,6 +1,6 @@
 import { Preset } from "./types";
 
-const preset: Preset = {
+const preset = {
   rules: {
     "no-missing-config-map": { severity: "error" },
     "no-missing-gateway-class": { severity: "error" },
@@ -26,6 +26,6 @@ const preset: Preset = {
     "valid-pod-selector": { severity: "error" },
     "valid-probe-port": { severity: "error" }
   }
-};
+} satisfies Preset;
 
 export default preset;
