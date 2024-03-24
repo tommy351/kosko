@@ -202,10 +202,7 @@ async function buildDeclarationFile() {
   });
 
   try {
-    await bundle.write({
-      sourcemap: true,
-      dir: distDir
-    });
+    await bundle.write({ dir: distDir, format: "es" });
   } finally {
     await bundle.close();
   }
