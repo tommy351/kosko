@@ -1,4 +1,3 @@
-import React from "react";
 import { ToolbarContainer, ToolbarTitle } from "../Toolbar";
 import ComponentSelect from "./ComponentSelect";
 import { usePreviewContext } from "./context";

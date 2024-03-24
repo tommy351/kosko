@@ -10,7 +10,8 @@ module.exports = {
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "node/no-unpublished-import": "off",
     "node/no-missing-import": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off"
   },
   settings: {
     react: {

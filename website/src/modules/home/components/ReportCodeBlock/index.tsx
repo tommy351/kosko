@@ -1,4 +1,3 @@
-import React from "react";
 import CodeBlock, {
   CodeBlockProps
 } from "@site/src/modules/common/components/CodeBlock";

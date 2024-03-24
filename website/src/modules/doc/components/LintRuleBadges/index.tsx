@@ -1,4 +1,3 @@
-import React from "react";
 import RecommendedBadge from "../RecommendedBadge";
 import styles from "./styles.module.scss";
 import clsx from "clsx";

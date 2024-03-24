@@ -1,4 +1,3 @@
-import React from "react";
 import { ActionButton, ActionContainer } from "./Action";
 import { VscNewFolder, VscNewFile, VscEdit, VscTrash } from "react-icons/vsc";
 import usePlaygroundContext from "../../hooks/usePlaygroundContext";

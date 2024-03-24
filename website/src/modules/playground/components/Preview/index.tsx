@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./styles.module.scss";
 import { PreviewContextProvider } from "./context";
 import { Section } from "react-simple-resizer";

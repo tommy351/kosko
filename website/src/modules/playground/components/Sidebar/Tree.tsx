@@ -1,4 +1,3 @@
-import React from "react";
 import { Entry, EntryType } from "./types";
 import DirectoryCell from "./DirectoryCell";
 import FileCell from "./FileCell";

@@ -1,4 +1,3 @@
-import React from "react";
 import Layout from "@theme/Layout";
 import Header from "../Header";
 import WriteLess from "../WriteLess";

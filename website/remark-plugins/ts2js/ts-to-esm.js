@@ -1,8 +1,12 @@
-"use strict";
+// @ts-check
 
-const { transform } = require("sucrase");
+import { transform } from "sucrase";
 
-function tsToEsm(input) {
+/**
+ * @param {string} input
+ * @returns {string}
+ */
+export default function tsToEsm(input) {
   const result = transform(input, {
     transforms: ["typescript"],
     disableESTransforms: true
@@ -10,5 +14,3 @@ function tsToEsm(input) {
 
   return result.code.trim();
 }
-
-module.exports = tsToEsm;

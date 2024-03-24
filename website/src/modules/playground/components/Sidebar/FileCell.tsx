@@ -1,4 +1,3 @@
-import React from "react";
 import usePlaygroundContext from "../../hooks/usePlaygroundContext";
 import { File } from "./types";
 import { FcFile } from "react-icons/fc";

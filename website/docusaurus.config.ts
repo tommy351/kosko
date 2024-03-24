@@ -1,14 +1,19 @@
-"use strict";
+import { fileURLToPath } from "node:url";
+import { dirname } from "node:path";
+import globby from "globby";
+import ts2js from "./remark-plugins/ts2js/index.js";
+import { themes as prismThemes } from "prism-react-renderer";
+import type { Config } from "@docusaurus/types";
+import type * as Preset from "@docusaurus/preset-classic";
 
-const { dirname } = require("node:path");
-const globby = require("globby");
-
-const workspaceRoot = dirname(__dirname);
+const workspaceRoot = fileURLToPath(new URL("..", import.meta.url));
 const organizationName = "tommy351";
 const projectName = "kosko";
 const githubUrl = `https://github.com/${organizationName}/${projectName}`;
+const commitRef =
+  process.env.CF_PAGES_COMMIT_SHA || process.env.CF_PAGES_BRANCH || "master";
 
-module.exports = {
+export default {
   title: "Kosko",
   tagline: "Organize Kubernetes manifests in JavaScript.",
   url: "https://kosko.dev",
@@ -57,39 +62,39 @@ module.exports = {
     },
     prism: {
       additionalLanguages: ["toml"],
-      theme: require("prism-react-renderer/themes/oceanicNext")
+      theme: prismThemes.oceanicNext
     },
     algolia: {
       appId: "DAH00NTYY8",
       apiKey: "7e5f9782393bd0e6a947b2de73f4f1de",
       indexName: "kosko"
     }
-  },
+  } satisfies Preset.ThemeConfig,
   presets: [
     [
       "@docusaurus/preset-classic",
       {
         docs: {
-          sidebarPath: require.resolve("./sidebars.js"),
+          sidebarPath: "./sidebars.js",
           editUrl: `${githubUrl}/edit/master/website/`,
-          remarkPlugins: [require("./remark-plugins/ts2js")],
+          remarkPlugins: [ts2js],
           docItemComponent: "@site/src/modules/doc/components/DocItem"
         },
         pages: {
-          remarkPlugins: [require("./remark-plugins/ts2js")]
+          remarkPlugins: [ts2js]
         },
         blog: {
           showReadingTime: true,
           editUrl: `${githubUrl}/edit/master/website/blog/`
         },
         theme: {
-          customCss: require.resolve("./src/css/custom.scss")
+          customCss: "./src/css/custom.scss"
         },
         gtag: {
           trackingID: "G-2CPELJ4990",
           anonymizeIP: true
         }
-      }
+      } satisfies Preset.Options
     ]
   ],
   plugins: [
@@ -102,13 +107,10 @@ module.exports = {
         packages: globby
           .sync("packages/*/tsconfig.json", { cwd: workspaceRoot })
           .map((path) => dirname(path)),
-        gitRefName:
-          process.env.CF_PAGES_COMMIT_SHA ||
-          process.env.CF_PAGES_BRANCH ||
-          "master"
+        gitRefName: commitRef
       }
     ],
-    require.resolve("./plugins/lodash-webpack-plugin"),
-    require.resolve("./plugins/lint-rules-metadata-plugin")
+    "./plugins/lodash-webpack-plugin",
+    "./plugins/lint-rules-metadata-plugin"
   ]
-};
+} satisfies Config;

@@ -78,13 +78,5 @@
       "packages/*/package.json"
     ]
   },
-  "pnpm": {
-    "peerDependencyRules": {
-      "allowedVersions": {
-        "react": "17",
-        "react-dom": "17"
-      }
-    }
-  },
   "packageManager": "pnpm@8.15.1"
 }

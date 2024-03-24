@@ -1,4 +1,3 @@
-import React from "react";
 import Select from "./Select";
 import usePlaygroundContext from "../../hooks/usePlaygroundContext";
 import useComponentList from "../../hooks/useComponentList";

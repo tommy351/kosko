@@ -1,4 +1,3 @@
-import React from "react";
 import { Directory } from "./types";
 import { FcFolder } from "react-icons/fc";
 import Cell from "./Cell";

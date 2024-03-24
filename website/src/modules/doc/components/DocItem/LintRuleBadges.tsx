@@ -1,4 +1,3 @@
-import React from "react";
 import { useDoc } from "@docusaurus/theme-common/internal";
 import BadgeList from "../LintRuleBadges";
 import {

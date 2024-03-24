@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import clsx from "clsx";
-import Highlight, { defaultProps, Language } from "prism-react-renderer";
+import { Highlight, Language } from "prism-react-renderer";
 import styles from "./styles.module.scss";
 import { usePrismTheme } from "@docusaurus/theme-common";
 
@@ -74,12 +74,7 @@ export default function CodeBlock({
   }, [code, trimStart, trimEnd]);
 
   return (
-    <Highlight
-      {...defaultProps}
-      theme={prismTheme}
-      code={trimmedCode}
-      language={language}
-    >
+    <Highlight theme={prismTheme} code={trimmedCode} language={language}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <div className={clsx(className, styles.container, containerClassName)}>
           <div className={styles.lines} style={style}>

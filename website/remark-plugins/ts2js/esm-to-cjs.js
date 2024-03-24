@@ -1,10 +1,14 @@
-"use strict";
+// @ts-check
 
-const MagicString = require("magic-string");
-const babel = require("@babel/core");
-const traverse = require("@babel/traverse").default;
+import MagicString from "magic-string";
+import * as babel from "@babel/core";
+import traverse from "@babel/traverse";
 
-function esmToCjs(input) {
+/**
+ * @param {string} input
+ * @returns {string}
+ */
+export default function esmToCjs(input) {
   const ast = babel.parseSync(input, {
     filename: "file.js",
     sourceType: "module"
@@ -108,5 +112,3 @@ function esmToCjs(input) {
 
   return source.toString();
 }
-
-module.exports = esmToCjs;

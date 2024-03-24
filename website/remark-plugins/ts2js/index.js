@@ -1,85 +1,151 @@
-"use strict";
+// @ts-check
 
-const visit = require("unist-util-visit");
-const esmToCjs = require("./esm-to-cjs");
-const tsToEsm = require("./ts-to-esm");
+import { visit } from "unist-util-visit";
+import esmToCjs from "./esm-to-cjs.js";
+import tsToEsm from "./ts-to-esm.js";
 
-function isImport(node) {
-  return node.type === "import";
-}
-
+/**
+ * @param {import('unist').Node} node
+ * @returns {node is import('unist').Parent}
+ */
 function isParent(node) {
   return Array.isArray(node.children);
 }
 
-function matchNode(node) {
-  if (node.type !== "code" || !node.meta) return false;
-
-  const meta = node.meta.split(/\s+/g);
-  return meta.includes("ts2js");
+/**
+ * @param {import('unist').Node} node
+ * @returns {node is import('mdast').Literal}
+ */
+function isMdxEsmLiteral(node) {
+  return node.type === "mdxJsEsm";
 }
 
-function renderTabItem({ tabLabel, tabValue, meta, value }) {
-  return [
-    {
-      type: "jsx",
-      value: `<TabItem value=${JSON.stringify(tabValue)} label=${JSON.stringify(tabLabel)}>`
-    },
-    {
-      type: "code",
-      lang: "typescript",
-      meta,
-      value
-    },
-    {
-      type: "jsx",
-      value: "</TabItem>"
+/**
+ * @param {import('unist').Node} node
+ * @returns {boolean}
+ */
+function isTabsImport(node) {
+  return isMdxEsmLiteral(node) && node.value.includes("@theme/Tabs");
+}
+
+/**
+ * @param {import('unist').Node} node
+ * @returns {node is import('mdast').Code}
+ */
+function isCode(node) {
+  return node.type === "code";
+}
+
+/**
+ * @param {string} name
+ * @param {string} path
+ */
+function newImportDefaultNode(name, path) {
+  return {
+    type: "mdxjsEsm",
+    value: `import ${name} from ${JSON.stringify(path)}`,
+    data: {
+      estree: {
+        type: "Program",
+        body: [
+          {
+            type: "ImportDeclaration",
+            specifiers: [
+              {
+                type: "ImportDefaultSpecifier",
+                local: { type: "Identifier", name }
+              }
+            ],
+            source: {
+              type: "Literal",
+              value: path,
+              raw: JSON.stringify(path)
+            }
+          }
+        ],
+        sourceType: "module"
+      }
     }
-  ];
+  };
 }
 
+/**
+ * @param {string} name
+ * @param {string} value
+ */
+function newJsxAttribute(name, value) {
+  return { type: "mdxJsxAttribute", name, value };
+}
+
+/**
+ *
+ * @param {{
+ *   tabLabel: string;
+ *   tabValue: string;
+ *   value: string;
+ * }} options
+ */
+function newTabItem({ tabLabel, tabValue, value }) {
+  return {
+    type: "mdxJsxFlowElement",
+    name: "TabItem",
+    attributes: [
+      newJsxAttribute("value", tabValue),
+      newJsxAttribute("label", tabLabel)
+    ],
+    children: [
+      {
+        type: "code",
+        lang: "typescript",
+        value
+      }
+    ]
+  };
+}
+
+/**
+ * @param {import('mdast').Code} node
+ */
 function transformNode(node) {
   const esm = tsToEsm(node.value);
   const cjs = esmToCjs(esm);
-  const contents = [
+
+  return [
     {
-      type: "jsx",
-      value: `<Tabs groupId="ts2js">`
-    },
-    ...renderTabItem({
-      tabValue: "ts",
-      tabLabel: "TypeScript",
-      meta: node.meta,
-      value: node.value
-    }),
-    ...renderTabItem({
-      tabValue: "esm",
-      tabLabel: "JavaScript (ESM)",
-      meta: node.meta,
-      value: esm
-    }),
-    ...renderTabItem({
-      tabValue: "cjs",
-      tabLabel: "JavaScript (CJS)",
-      meta: node.meta,
-      value: cjs
-    }),
-    {
-      type: "jsx",
-      value: "</Tabs>"
+      type: "mdxJsxFlowElement",
+      name: "Tabs",
+      attributes: [newJsxAttribute("groupId", "ts2js")],
+      children: [
+        newTabItem({
+          tabValue: "ts",
+          tabLabel: "TypeScript",
+          value: node.value
+        }),
+        newTabItem({
+          tabValue: "esm",
+          tabLabel: "JavaScript (ESM)",
+          value: esm
+        }),
+        newTabItem({
+          tabValue: "cjs",
+          tabLabel: "JavaScript (CJS)",
+          value: cjs
+        })
+      ]
     }
   ];
-
-  return contents;
 }
 
-const plugin = () => {
-  let transformed = false;
-  let alreadyImported = false;
+/**
+ * @returns {import('unified').Transformer}
+ */
+export default function () {
+  return (root) => {
+    let transformed = false;
+    let alreadyImported = false;
 
-  const transformer = (root) => {
     visit(root, (node) => {
-      if (isImport(node) && node.value.includes("@theme/Tabs")) {
+      if (isTabsImport(node)) {
         alreadyImported = true;
       }
 
@@ -89,7 +155,7 @@ const plugin = () => {
         while (index < node.children.length) {
           const child = node.children[index];
 
-          if (matchNode(child)) {
+          if (isCode(child) && child.meta?.includes("ts2js")) {
             const result = transformNode(child);
             node.children.splice(index, 1, ...result);
             index += result.length;
@@ -102,14 +168,10 @@ const plugin = () => {
     });
 
     if (transformed && !alreadyImported) {
-      root.children.unshift({
-        type: "import",
-        value: `import Tabs from '@theme/Tabs';\nimport TabItem from '@theme/TabItem';`
-      });
+      root.children.unshift(
+        newImportDefaultNode("Tabs", "@theme/Tabs"),
+        newImportDefaultNode("TabItem", "@theme/TabItem")
+      );
     }
   };
-
-  return transformer;
-};
-
-module.exports = plugin;
+}
