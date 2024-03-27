@@ -66,7 +66,7 @@ export default {
     },
     algolia: {
       appId: "DAH00NTYY8",
-      apiKey: "7e5f9782393bd0e6a947b2de73f4f1de",
+      apiKey: "12c13b7df74f9fe6724e69765e489572",
       indexName: "kosko"
     }
   } satisfies Preset.ThemeConfig,
