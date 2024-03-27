@@ -30,6 +30,8 @@ Kosko will throw an error as below, which includes error details and location of
 
 ```
 components/nginx.ts - apps/v1/Deployment dev/nginx [0]
+-------------------   ------- ---------- --- ----- ---
+(1)                   (2)     (3)        (4) (5)   (6)
 
 ✖ /spec/replicas must be integer
 
@@ -39,10 +41,12 @@ error - Generate failed
 
 The first line is the location of the invalid manifest.
 
-- `components/nginx.ts` is the file path.
-- `apps/v1/Deployment` is the `apiVersion` and `kind`.
-- `dev/nginx` is the `metadata.namespace` and `metadata.name`.
-- `[0]` is the index of the invalid manifest in the file.
+1. `components/nginx.ts` is the file path.
+2. `apps/v1` is the API version.
+3. `Deployment` is the kind.
+4. `dev` is the namespace.
+5. `nginx` is the name.
+6. `[0]` is the index of the invalid manifest in a file.
 
 The last line shows the total number of errors and warnings.
 
