@@ -1,6 +1,6 @@
 import { LoadOptions, loadString, Manifest } from "@kosko/yaml";
 import tmp from "tmp-promise";
-import { writeFile, stat, mkdir } from "node:fs/promises";
+import { writeFile, stat, rename, mkdir } from "node:fs/promises";
 import {
   spawn,
   booleanArg,
@@ -148,7 +148,7 @@ export interface TemplateOptions {
 }
 
 function hashPullOptions(options: PullOptions): string {
-  const hash = createHash("sha256");
+  const hash = createHash("sha1");
 
   hash.write(
     JSON.stringify({
@@ -159,7 +159,7 @@ function hashPullOptions(options: PullOptions): string {
     })
   );
 
-  return hash.digest("hex");
+  return hash.digest("base64url").replace(/=+$/, "");
 }
 
 async function runHelm(args: readonly string[]) {
@@ -182,11 +182,13 @@ async function maybeStat(path: string): Promise<Stats | undefined> {
   }
 }
 
-async function isLocalChart(options: PullOptions): Promise<boolean> {
-  if (options.repo) return false;
-
-  const stats = await maybeStat(join(options.chart, "Chart.yaml"));
+async function chartExists(chart: string): Promise<boolean> {
+  const stats = await maybeStat(join(chart, "Chart.yaml"));
   return stats?.isFile() ?? false;
+}
+
+async function isLocalChart(options: PullOptions): Promise<boolean> {
+  return !options.repo && (await chartExists(options.chart));
 }
 
 function getChartBaseName(chart: string): string {
@@ -195,28 +197,9 @@ function getChartBaseName(chart: string): string {
   return index === -1 ? chart : chart.substring(index + 1);
 }
 
-async function pullChart(options: PullOptions): Promise<string> {
-  if (await isLocalChart(options)) {
-    return options.chart;
-  }
-
-  const hash = hashPullOptions(options);
-  const cachePath = join(cacheDir, hash);
-  const name = getChartBaseName(options.chart);
-  const chartPath = join(cachePath, name);
-
-  // Check if cache exists
-  const stats = await maybeStat(cachePath);
-  if (stats?.isDirectory()) return chartPath;
-
-  await mkdir(cachePath, { recursive: true });
-
-  await runHelm([
-    "pull",
+function getPullArgs(options: PullOptions): string[] {
+  return [
     options.chart,
-    "--untar",
-    "--untardir",
-    cachePath,
     ...stringArg("ca-file", options.caFile),
     ...stringArg("cert-file", options.certFile),
     ...booleanArg("devel", options.devel),
@@ -227,9 +210,58 @@ async function pullChart(options: PullOptions): Promise<string> {
     ...stringArg("username", options.username),
     ...booleanArg("verify", options.verify),
     ...stringArg("version", options.version)
-  ]);
+  ];
+}
 
-  return chartPath;
+async function pullChart(options: PullOptions): Promise<string> {
+  if (await isLocalChart(options)) {
+    return options.chart;
+  }
+
+  const hash = hashPullOptions(options);
+  const cachePath = join(cacheDir, hash);
+
+  // Return cache if exists
+  if (await chartExists(cachePath)) {
+    return cachePath;
+  }
+
+  // Create a temporary directory for the chart, because when there are multiple
+  // processes pulling the same chart, sometimes Helm fails because files already
+  // exist in the cache directory.
+  const tmpDir = await tmp.dir({ prefix: "kosko-helm", unsafeCleanup: true });
+
+  try {
+    // Pull the chart
+    await runHelm([
+      "pull",
+      ...getPullArgs(options),
+      "--untar",
+      "--untardir",
+      tmpDir.path
+    ]);
+
+    // Create the cache directory
+    await mkdir(cacheDir, { recursive: true });
+
+    // Move the chart to the cache directory
+    try {
+      await rename(
+        join(tmpDir.path, getChartBaseName(options.chart)),
+        cachePath
+      );
+    } catch (err) {
+      // If the cache directory already exists, it probably means that another
+      // process has already pulled the chart. In this case, we can ignore the
+      // error and return the cache path.
+      if (getErrorCode(err) !== "ENOTEMPTY") throw err;
+    }
+
+    return cachePath;
+  } finally {
+    // Clean up the temporary directory
+    await tmpDir.cleanup();
+  }
 }
 
 async function writeValues(values: unknown) {
@@ -278,13 +310,7 @@ async function renderChart({
   }
 
   try {
-    return await spawn("helm", args);
-  } catch (err) {
-    if (getErrorCode(err) !== "ENOENT") throw err;
-
-    throw new Error(
-      `"loadChart" requires Helm CLI installed in your environment. More info: https://kosko.dev/docs/components/loading-helm-chart`
-    );
+    return await runHelm(args);
   } finally {
     await valueFile?.cleanup();
   }
