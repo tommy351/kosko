@@ -108,3 +108,12 @@ test("spawn throws ENOENT error", async () => {
     `"loadChart" requires Helm CLI installed in your environment. More info: https://kosko.dev/docs/components/loading-helm-chart`
   );
 });
+
+test("OCI chart", async () => {
+  const result = loadChart({
+    chart: "oci://ghcr.io/prometheus-community/charts/prometheus",
+    version: "25.1.0"
+  });
+
+  await expect(result()).resolves.toMatchSnapshot();
+});
