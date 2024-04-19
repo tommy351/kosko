@@ -36,7 +36,9 @@ describe("when format = YAML", () => {
 
     beforeAll(() => {
       result = {
-        manifests: [{ position: { path: "", index: [0] }, data, issues: [] }]
+        manifests: [
+          { position: { path: "", index: [0] }, data, issues: [], report() {} }
+        ]
       };
     });
 
@@ -53,7 +55,8 @@ describe("when format = YAML", () => {
         manifests: data.map((x) => ({
           position: { path: "", index: [0] },
           data: x,
-          issues: []
+          issues: [],
+          report() {}
         }))
       };
     });
@@ -74,7 +77,9 @@ describe("when format = JSON", () => {
 
     beforeAll(() => {
       result = {
-        manifests: [{ position: { path: "", index: [0] }, data, issues: [] }]
+        manifests: [
+          { position: { path: "", index: [0] }, data, issues: [], report() {} }
+        ]
       };
     });
 
@@ -91,7 +96,8 @@ describe("when format = JSON", () => {
         manifests: data.map((x) => ({
           position: { path: "", index: [0] },
           data: x,
-          issues: []
+          issues: [],
+          report() {}
         }))
       };
     });

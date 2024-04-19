@@ -86,7 +86,9 @@ async function execute(args: Partial<GenerateArguments> = {}): Promise<void> {
 
 function mockGenerateSuccess() {
   mockedGenerate.mockResolvedValueOnce({
-    manifests: [{ position: { path: "", index: [0] }, data: {}, issues: [] }]
+    manifests: [
+      { position: { path: "", index: [0] }, data: {}, issues: [], report() {} }
+    ]
   });
 }
 
@@ -208,7 +210,12 @@ describe("with output is specified", () => {
     expect(print).toHaveBeenCalledWith(
       {
         manifests: [
-          { position: { path: "", index: [0] }, data: {}, issues: [] }
+          {
+            position: { path: "", index: [0] },
+            data: {},
+            issues: [],
+            report: expect.toBeFunction()
+          }
         ]
       },
       {

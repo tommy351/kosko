@@ -1,11 +1,10 @@
 import { importPath, resolvePath, getRequireExtensions } from "@kosko/require";
-import type { Manifest, ManifestToValidate, Result } from "./base";
+import type { Manifest, Result } from "./base";
 import logger, { LogLevel } from "@kosko/log";
 import {
   ResolveOptions,
-  ValidationInterrupt,
+  ReportInterrupt,
   handleResolvePromises,
-  reportManifestIssue,
   resolve
 } from "./resolve";
 import { GenerateError, ResolveError } from "./error";
@@ -49,9 +48,7 @@ export interface GenerateOptions
   /**
    * Validate all manifests after resolving.
    */
-  validateAllManifests?(
-    manifests: readonly ManifestToValidate[]
-  ): void | Promise<void>;
+  validateAllManifests?(manifests: readonly Manifest[]): void | Promise<void>;
 }
 
 async function resolveComponentPath(
@@ -188,26 +185,14 @@ export async function generate(options: GenerateOptions): Promise<Result> {
     logger.log(LogLevel.Debug, "Validating all manifests");
 
     try {
-      await options.validateAllManifests(
-        manifests.map((manifest) => ({
-          ...manifest,
-          report(issue) {
-            reportManifestIssue({
-              manifest,
-              issue,
-              bail: options.bail,
-              throwOnError: options.throwOnError
-            });
-          }
-        }))
-      );
+      await options.validateAllManifests(manifests);
     } catch (err) {
       // Propagate ResolveError and AggregateError
       if (err instanceof ResolveError || err instanceof AggregateError) {
         throw err;
       }
 
-      if (!(err instanceof ValidationInterrupt)) {
+      if (!(err instanceof ReportInterrupt)) {
         throw new GenerateError(
           "An error occurred in validateAllManifests function",
           { cause: err }

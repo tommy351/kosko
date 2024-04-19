@@ -1,3 +1,4 @@
+/// <reference types="jest-extended" />
 import { CLIError } from "@kosko/cli-utils";
 import { printIssues } from "../error";
 import BufferList from "bl";
@@ -25,7 +26,8 @@ test("single error issue", () => {
               severity: "error",
               message: "Error message"
             }
-          ]
+          ],
+          report() {}
         }
       ]
     });
@@ -45,7 +47,8 @@ test("single warning issue", () => {
             severity: "warning",
             message: "Warning message"
           }
-        ]
+        ],
+        report() {}
       }
     ]
   });
@@ -70,7 +73,8 @@ test("manifest contains metadata", () => {
             apiVersion: "v1",
             kind: "Pod",
             name: "foo"
-          }
+          },
+          report() {}
         }
       ]
     });
@@ -97,7 +101,8 @@ test("metadata contains namespace", () => {
             kind: "Pod",
             namespace: "default",
             name: "foo"
-          }
+          },
+          report() {}
         }
       ]
     });
@@ -118,7 +123,8 @@ test("index is not empty", () => {
               severity: "error",
               message: "Error message"
             }
-          ]
+          ],
+          report() {}
         }
       ]
     });
@@ -144,7 +150,8 @@ test("metadata and index are present", () => {
             apiVersion: "v1",
             kind: "Pod",
             name: "foo"
-          }
+          },
+          report() {}
         }
       ]
     });
@@ -160,7 +167,8 @@ test("ignore manifests without issues", () => {
         {
           position: { path: "components/foo.ts", index: [] },
           data: {},
-          issues: []
+          issues: [],
+          report() {}
         },
         {
           position: { path: "components/bar.ts", index: [] },
@@ -170,7 +178,8 @@ test("ignore manifests without issues", () => {
               severity: "error",
               message: "Error message"
             }
-          ]
+          ],
+          report() {}
         }
       ]
     });
@@ -192,7 +201,8 @@ test("issue contains a string cause", () => {
               message: "Error message",
               cause: "Cause message"
             }
-          ]
+          ],
+          report() {}
         }
       ]
     });
@@ -217,7 +227,8 @@ test("issue contains an object cause", () => {
                 message: "foobar"
               }
             }
-          ]
+          ],
+          report() {}
         }
       ]
     });
@@ -243,7 +254,8 @@ test("issue contains a Error class cause", () => {
               message: "Error message",
               cause: err
             }
-          ]
+          ],
+          report() {}
         }
       ]
     });
@@ -265,7 +277,8 @@ test("cause is a empty object", () => {
               message: "Error message",
               cause: {}
             }
-          ]
+          ],
+          report() {}
         }
       ]
     });
@@ -294,7 +307,8 @@ test("multiple issues", () => {
               severity: "error",
               message: "Error 2"
             }
-          ]
+          ],
+          report() {}
         },
         {
           position: { path: "components/bar.ts", index: [] },
@@ -304,7 +318,8 @@ test("multiple issues", () => {
               severity: "error",
               message: "Error 3"
             }
-          ]
+          ],
+          report() {}
         }
       ]
     });
@@ -325,7 +340,8 @@ test("cwd is not empty", () => {
               severity: "error",
               message: "Error message"
             }
-          ]
+          ],
+          report() {}
         },
         {
           position: { path: "/abc/def/components/bar.ts", index: [] },
@@ -335,7 +351,8 @@ test("cwd is not empty", () => {
               severity: "error",
               message: "Error message"
             }
-          ]
+          ],
+          report() {}
         }
       ]
     });

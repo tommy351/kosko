@@ -1,4 +1,4 @@
-import type { Manifest, ManifestToValidate } from "@kosko/generate";
+import type { Manifest } from "@kosko/generate";
 
 /**
  * Plugin factory.
@@ -37,14 +37,14 @@ export interface TransformManifest {
  * @public
  */
 export interface ValidateManifest {
-  (manifest: ManifestToValidate): void | Promise<void>;
+  (manifest: Manifest): void | Promise<void>;
 }
 
 /**
  * @public
  */
 export interface ValidateAllManifests {
-  (manifests: readonly ManifestToValidate[]): void | Promise<void>;
+  (manifests: readonly Manifest[]): void | Promise<void>;
 }
 
 /**
