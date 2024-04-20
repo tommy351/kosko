@@ -5,7 +5,8 @@ import {
   ResolveOptions,
   ReportInterrupt,
   handleResolvePromises,
-  resolve
+  resolve,
+  createManifest
 } from "./resolve";
 import { GenerateError, ResolveError } from "./error";
 import { glob, GlobResult } from "./glob";
@@ -49,32 +50,6 @@ export interface GenerateOptions
    * Validate all manifests after resolving.
    */
   validateAllManifests?(manifests: readonly Manifest[]): void | Promise<void>;
-}
-
-async function resolveComponentPath(
-  path: string,
-  extensions: readonly string[]
-) {
-  try {
-    return await resolvePath(path, { extensions });
-  } catch (err) {
-    throw new GenerateError("Module path resolve failed", {
-      path,
-      cause: err
-    });
-  }
-}
-
-async function getComponentValue(path: string): Promise<unknown> {
-  try {
-    const mod = await importPath(path);
-    return mod.default;
-  } catch (err) {
-    throw new GenerateError("Component value resolve failed", {
-      path,
-      cause: err
-    });
-  }
 }
 
 function validateExtensions(
@@ -123,7 +98,6 @@ function validateExtensions(
  * @see {@link resolve}
  */
 export async function generate(options: GenerateOptions): Promise<Result> {
-  /* istanbul ignore next */
   if (BUILD_TARGET === "browser") {
     throw new Error("generate is only supported on Node.js");
   }
@@ -138,13 +112,47 @@ export async function generate(options: GenerateOptions): Promise<Result> {
   const promises: Promise<Manifest[]>[] = [];
   const limit = pLimit(concurrency);
 
+  function reportResolveError({
+    path,
+    message,
+    cause
+  }: {
+    path: string;
+    message: string;
+    cause: unknown;
+  }): Manifest[] {
+    const manifest = createManifest({
+      position: { path, index: [] },
+      data: undefined,
+      bail: options.bail,
+      throwOnError: options.throwOnError
+    });
+
+    manifest.report({
+      severity: "error",
+      message,
+      cause
+    });
+
+    return [manifest];
+  }
+
   async function resolveFile(file: GlobResult): Promise<Manifest[]> {
     logger.log(LogLevel.Debug, `Found component "${file.relativePath}"`);
 
-    const path = await resolveComponentPath(
-      file.absolutePath,
-      extensionsWithDot
-    );
+    let path: string | undefined;
+
+    try {
+      path = await resolvePath(file.absolutePath, {
+        extensions: extensionsWithDot
+      });
+    } catch (err) {
+      return reportResolveError({
+        path: file.absolutePath,
+        message: "Module path resolve failed",
+        cause: err
+      });
+    }
 
     if (!path) {
       logger.log(LogLevel.Debug, "Module not found", {
@@ -157,7 +165,20 @@ export async function generate(options: GenerateOptions): Promise<Result> {
       return [];
     }
 
-    return resolve(await getComponentValue(path), {
+    let value: unknown;
+
+    try {
+      const mod = await importPath(path);
+      value = mod.default;
+    } catch (err) {
+      return reportResolveError({
+        path,
+        message: "Component value resolve failed",
+        cause: err
+      });
+    }
+
+    return resolve(value, {
       validate: options.validate,
       bail: options.bail,
       concurrency,
@@ -187,8 +208,8 @@ export async function generate(options: GenerateOptions): Promise<Result> {
     try {
       await options.validateAllManifests(manifests);
     } catch (err) {
-      // Propagate ResolveError and AggregateError
-      if (err instanceof ResolveError || err instanceof AggregateError) {
+      // Propagate ResolveError
+      if (err instanceof ResolveError) {
         throw err;
       }
 

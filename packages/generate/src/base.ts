@@ -41,7 +41,7 @@ export interface Manifest {
   metadata?: ManifestMeta;
 
   /**
-   * Manifest data.
+   * Manifest data. The value could be undefined when a component is invalid.
    */
   data: unknown;
 

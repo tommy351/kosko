@@ -8,15 +8,19 @@ import stringify from "fast-safe-stringify";
 import { Manifest } from "../base";
 import assert from "node:assert";
 import { matchManifests } from "../test-utils";
+import { resolvePath } from "@kosko/require";
 
 jest.mock("@kosko/require", () => {
   const mod = jest.requireActual("@kosko/require");
 
   return {
     ...mod,
-    getRequireExtensions: () => [".js", ".json"]
+    getRequireExtensions: () => [".js", ".json"],
+    resolvePath: jest.fn()
   };
 });
+
+const mockedResolvePath = jest.mocked(resolvePath);
 
 let tmpDir: TempDir;
 
@@ -30,6 +34,9 @@ async function createTempFiles(files: Record<string, string>) {
 
 beforeEach(async () => {
   tmpDir = await makeTempDir();
+  mockedResolvePath.mockImplementation(
+    jest.requireActual("@kosko/require").resolvePath
+  );
 });
 
 afterEach(async () => {
@@ -199,6 +206,48 @@ module.exports = [
   });
 });
 
+describe("when file throws an error", () => {
+  beforeEach(async () => {
+    await createTempFiles({
+      "foo.js": `throw new Error("file error");`
+    });
+  });
+
+  test("should report an issue by default", async () => {
+    const result = await generate({ components: ["*"], path: tmpDir.path });
+
+    expect(result).toEqual({
+      manifests: matchManifests([
+        {
+          position: { path: join(tmpDir.path, "foo.js"), index: [] },
+          issues: [
+            {
+              severity: "error",
+              message: "Component value resolve failed",
+              cause: new Error("file error")
+            }
+          ],
+          data: undefined
+        }
+      ])
+    });
+  });
+
+  test("should throw an error when throwOnError = true", async () => {
+    const err = await getRejectedValue(
+      generate({ components: ["*"], path: tmpDir.path, throwOnError: true })
+    );
+
+    assert(err instanceof ResolveError);
+    expect(err.message).toEqual("Component value resolve failed");
+    expect(err.position).toEqual({
+      path: join(tmpDir.path, "foo.js"),
+      index: []
+    });
+    expect(err.cause).toEqual(new Error("file error"));
+  });
+});
+
 describe("when file has syntax error", () => {
   beforeEach(async () => {
     await createTempFiles({
@@ -206,13 +255,77 @@ describe("when file has syntax error", () => {
     });
   });
 
-  test("should throw GenerateError", async () => {
+  test("should report an issue", async () => {
     await expect(
       generate({ components: ["*"], path: tmpDir.path })
-    ).rejects.toThrowWithMessage(
-      GenerateError,
-      "Component value resolve failed"
+    ).resolves.toEqual({
+      manifests: matchManifests([
+        {
+          position: { path: join(tmpDir.path, "foo.js"), index: [] },
+          data: undefined,
+          issues: [
+            {
+              severity: "error",
+              message: "Component value resolve failed",
+              cause: expect.toBeObject()
+            }
+          ]
+        }
+      ])
+    });
+  });
+});
+
+describe("when module path resolve failed", () => {
+  beforeEach(async () => {
+    mockedResolvePath.mockRejectedValue(new Error("resolve error"));
+    await createTempFiles({ "foo.js": "" });
+  });
+
+  test("should report an issue", async () => {
+    const result = await generate({ components: ["*"], path: tmpDir.path });
+
+    expect(result).toEqual({
+      manifests: matchManifests([
+        {
+          position: { path: join(tmpDir.path, "foo.js"), index: [] },
+          issues: [
+            {
+              severity: "error",
+              message: "Module path resolve failed",
+              cause: new Error("resolve error")
+            }
+          ],
+          data: undefined
+        }
+      ])
+    });
+  });
+
+  test("should throw an error when throwOnError = true", async () => {
+    const err = await getRejectedValue(
+      generate({ components: ["*"], path: tmpDir.path, throwOnError: true })
     );
+
+    assert(err instanceof ResolveError);
+    expect(err.message).toEqual("Module path resolve failed");
+    expect(err.position).toEqual({
+      path: join(tmpDir.path, "foo.js"),
+      index: []
+    });
+    expect(err.cause).toEqual(new Error("resolve error"));
+  });
+});
+
+describe("when module path resolve returns undefined", () => {
+  beforeEach(async () => {
+    mockedResolvePath.mockResolvedValue(undefined);
+    await createTempFiles({ "foo.js": "" });
+  });
+
+  test("should ignore the file", async () => {
+    const result = await generate({ components: ["*"], path: tmpDir.path });
+    expect(result).toEqual({ manifests: [] });
   });
 });
 
