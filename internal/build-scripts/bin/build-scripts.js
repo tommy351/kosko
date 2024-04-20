@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // @ts-check
 
-import { copyFile, readFile, rm, unlink, writeFile } from "node:fs/promises";
+import { readFile, rm, unlink, writeFile } from "node:fs/promises";
 import { dirname, extname, join, relative, normalize } from "node:path";
 import { rollup } from "rollup";
 import nodeResolve from "@rollup/plugin-node-resolve";
@@ -224,12 +224,6 @@ async function buildDeclarationFile() {
 
     console.log("Removing:", path);
     await rm(path);
-  }
-
-  for (const path of dtsFilesToKeep) {
-    const dst = path.replace(/\.d\.ts$/, ".d.mts");
-    console.log("Copying:", dst);
-    await copyFile(path, dst);
   }
 }
 
