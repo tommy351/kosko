@@ -1,11 +1,11 @@
-import type { Issue, Manifest, ManifestToValidate } from "@kosko/generate";
+import type { Issue, Manifest } from "@kosko/generate";
 import type { RuleContext, RuleFactory } from "./rules/types";
 import assert from "node:assert";
 import { ManifestStore } from "./utils/manifest-store";
 import { getManifestMeta } from "@kosko/common-utils";
 
 export interface ReportedIssue {
-  manifest: ManifestToValidate;
+  manifest: Manifest;
   message: string;
 }
 
@@ -28,7 +28,7 @@ export function createTestContext<T>(config: T): TestContext<T> {
 
 export function createManifest(
   value: unknown
-): ManifestToValidate & Pick<Manifest, "issues"> {
+): Manifest & Pick<Manifest, "issues"> {
   const issues: Issue[] = [];
 
   return {
@@ -45,7 +45,7 @@ export function createManifest(
 export function validate<T>(
   rule: RuleFactory<T>,
   config: T | undefined,
-  manifest: ManifestToValidate
+  manifest: Manifest
 ): ReportedIssue[] {
   const ctx = createTestContext(config);
   const { validate } = rule.factory(ctx);
@@ -59,7 +59,7 @@ export function validate<T>(
 export function validateAll<T>(
   rule: RuleFactory<T>,
   config: T | undefined,
-  manifests: readonly ManifestToValidate[]
+  manifests: readonly Manifest[]
 ): ReportedIssue[] {
   const ctx = createTestContext(config);
   const { validateAll } = rule.factory(ctx);

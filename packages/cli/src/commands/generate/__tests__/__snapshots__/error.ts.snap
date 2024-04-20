@@ -1,6 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`cause is a empty object 1`] = `
+exports[`handleGenerateError AggregateError 1`] = `
+"
+[31m✖ Error: foo[39m
+[90m    at foo.ts:1:1[39m
+
+[31m✖ Error: bar[39m
+[90m    at foo.ts:1:1[39m
+
+[31merror[39m - Found 2 errors in total
+"
+`;
+
+exports[`handleGenerateError nested AggregateError 1`] = `
+"
+[31m✖ Error: foo[39m
+[90m    at foo.ts:1:1[39m
+
+[31m✖ Error: bar[39m
+[90m    at foo.ts:1:1[39m
+
+[31m✖ Error: baz[39m
+[90m    at foo.ts:1:1[39m
+
+[31merror[39m - Found 3 errors in total
+"
+`;
+
+exports[`handleGenerateError normal error 1`] = `
+"
+[31m✖ Error: foo[39m
+[90m    at foo.ts:1:1[39m
+
+[31merror[39m - Found 1 error in total
+"
+`;
+
+exports[`printIssues cause is a empty object 1`] = `
 "
 [4mcomponents/foo.ts[24m
 
@@ -10,7 +46,7 @@ exports[`cause is a empty object 1`] = `
 "
 `;
 
-exports[`cwd is not empty 1`] = `
+exports[`printIssues cwd is not empty 1`] = `
 "
 [4mcomponents/foo.ts[24m
 
@@ -24,7 +60,7 @@ exports[`cwd is not empty 1`] = `
 "
 `;
 
-exports[`ignore manifests without issues 1`] = `
+exports[`printIssues ignore manifests without issues 1`] = `
 "
 [4mcomponents/bar.ts[24m
 
@@ -34,7 +70,7 @@ exports[`ignore manifests without issues 1`] = `
 "
 `;
 
-exports[`index is not empty 1`] = `
+exports[`printIssues index is not empty 1`] = `
 "
 [4mcomponents/foo.ts[24m - [2, 4]
 
@@ -44,19 +80,19 @@ exports[`index is not empty 1`] = `
 "
 `;
 
-exports[`issue contains a Error class cause 1`] = `
+exports[`printIssues issue contains a Error class cause 1`] = `
 "
 [4mcomponents/foo.ts[24m
 
 [31m✖ Error message[39m
 [90m  Error: foobar
-    at foo.ts:1:1[39m
+      at foo.ts:1:1[39m
 
 [31merror[39m - Found 1 error in total
 "
 `;
 
-exports[`issue contains a string cause 1`] = `
+exports[`printIssues issue contains a string cause 1`] = `
 "
 [4mcomponents/foo.ts[24m
 
@@ -67,7 +103,7 @@ exports[`issue contains a string cause 1`] = `
 "
 `;
 
-exports[`issue contains an object cause 1`] = `
+exports[`printIssues issue contains an object cause 1`] = `
 "
 [4mcomponents/foo.ts[24m
 
@@ -78,7 +114,7 @@ exports[`issue contains an object cause 1`] = `
 "
 `;
 
-exports[`manifest contains metadata 1`] = `
+exports[`printIssues manifest contains metadata 1`] = `
 "
 [4mcomponents/foo.ts[24m - v1/Pod foo
 
@@ -88,7 +124,7 @@ exports[`manifest contains metadata 1`] = `
 "
 `;
 
-exports[`metadata and index are present 1`] = `
+exports[`printIssues metadata and index are present 1`] = `
 "
 [4mcomponents/foo.ts[24m - v1/Pod foo [2, 4]
 
@@ -98,7 +134,7 @@ exports[`metadata and index are present 1`] = `
 "
 `;
 
-exports[`metadata contains namespace 1`] = `
+exports[`printIssues metadata contains namespace 1`] = `
 "
 [4mcomponents/foo.ts[24m - v1/Pod default/foo
 
@@ -108,7 +144,7 @@ exports[`metadata contains namespace 1`] = `
 "
 `;
 
-exports[`multiple issues 1`] = `
+exports[`printIssues multiple issues 1`] = `
 "
 [4mcomponents/foo.ts[24m
 
@@ -126,7 +162,7 @@ exports[`multiple issues 1`] = `
 "
 `;
 
-exports[`single error issue 1`] = `
+exports[`printIssues single error issue 1`] = `
 "
 [4mcomponents/foo.ts[24m
 
@@ -136,7 +172,7 @@ exports[`single error issue 1`] = `
 "
 `;
 
-exports[`single warning issue 1`] = `
+exports[`printIssues single warning issue 1`] = `
 "
 [4mcomponents/foo.ts[24m
 

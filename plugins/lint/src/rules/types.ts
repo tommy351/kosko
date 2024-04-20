@@ -1,8 +1,8 @@
-import type { ManifestToValidate, Severity } from "@kosko/generate";
+import type { Manifest as BaseManifest, Severity } from "@kosko/generate";
 import { Struct } from "superstruct";
 import { ManifestStore } from "../utils/manifest-store";
 
-export interface Manifest<T = unknown> extends ManifestToValidate {
+export interface Manifest<T = unknown> extends BaseManifest {
   data: T;
 }
 

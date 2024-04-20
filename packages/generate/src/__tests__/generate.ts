@@ -5,17 +5,22 @@ import { dirname, join } from "node:path";
 import { GenerateError, ResolveError } from "../error";
 import { getRejectedValue, makeTempDir, TempDir } from "@kosko/test-utils";
 import stringify from "fast-safe-stringify";
-import { ManifestToValidate } from "../base";
+import { Manifest } from "../base";
 import assert from "node:assert";
+import { matchManifests } from "../test-utils";
+import { resolvePath } from "@kosko/require";
 
 jest.mock("@kosko/require", () => {
   const mod = jest.requireActual("@kosko/require");
 
   return {
     ...mod,
-    getRequireExtensions: () => [".js", ".json"]
+    getRequireExtensions: () => [".js", ".json"],
+    resolvePath: jest.fn()
   };
 });
+
+const mockedResolvePath = jest.mocked(resolvePath);
 
 let tmpDir: TempDir;
 
@@ -29,6 +34,9 @@ async function createTempFiles(files: Record<string, string>) {
 
 beforeEach(async () => {
   tmpDir = await makeTempDir();
+  mockedResolvePath.mockImplementation(
+    jest.requireActual("@kosko/require").resolvePath
+  );
 });
 
 afterEach(async () => {
@@ -48,13 +56,12 @@ describe("single JS file", () => {
       path: tmpDir.path
     });
     expect(result).toEqual({
-      manifests: [
+      manifests: matchManifests([
         {
           position: { path: join(tmpDir.path, "foo.js"), index: [] },
-          issues: [],
           data: { foo: "bar" }
         }
-      ]
+      ])
     });
   });
 });
@@ -73,13 +80,12 @@ describe("JS files in folder", () => {
       path: tmpDir.path
     });
     expect(result).toEqual({
-      manifests: [
+      manifests: matchManifests([
         {
           position: { path: join(tmpDir.path, "foo/index.js"), index: [] },
-          issues: [],
           data: { foo: "index" }
         }
-      ]
+      ])
     });
   });
 });
@@ -129,13 +135,13 @@ exports.default = {foo: "bar"};`
       path: tmpDir.path
     });
     expect(result).toEqual({
-      manifests: [
+      manifests: matchManifests([
         {
           position: { path: join(tmpDir.path, "foo.js"), index: [] },
-          issues: [],
+
           data: { foo: "bar" }
         }
-      ]
+      ])
     });
   });
 });
@@ -153,18 +159,16 @@ describe("when script exports an array", () => {
       path: tmpDir.path
     });
     expect(result).toEqual({
-      manifests: [
+      manifests: matchManifests([
         {
           position: { path: join(tmpDir.path, "foo.js"), index: [0] },
-          issues: [],
           data: { foo: 1 }
         },
         {
           position: { path: join(tmpDir.path, "foo.js"), index: [1] },
-          issues: [],
           data: { bar: 2 }
         }
-      ]
+      ])
     });
   });
 });
@@ -191,14 +195,56 @@ module.exports = [
     });
     const path = join(tmpDir.path, "foo.js");
     expect(result).toEqual({
-      manifests: [
-        { position: { path, index: [0] }, issues: [], data: { a: 1 } },
-        { position: { path, index: [1, 0] }, issues: [], data: { b: 2 } },
-        { position: { path, index: [1, 1, 0] }, issues: [], data: { c: 3 } },
-        { position: { path, index: [1, 1, 1] }, issues: [], data: { d: 4 } },
-        { position: { path, index: [2] }, issues: [], data: { e: 5 } }
-      ]
+      manifests: matchManifests([
+        { position: { path, index: [0] }, data: { a: 1 } },
+        { position: { path, index: [1, 0] }, data: { b: 2 } },
+        { position: { path, index: [1, 1, 0] }, data: { c: 3 } },
+        { position: { path, index: [1, 1, 1] }, data: { d: 4 } },
+        { position: { path, index: [2] }, data: { e: 5 } }
+      ])
     });
+  });
+});
+
+describe("when file throws an error", () => {
+  beforeEach(async () => {
+    await createTempFiles({
+      "foo.js": `throw new Error("file error");`
+    });
+  });
+
+  test("should report an issue by default", async () => {
+    const result = await generate({ components: ["*"], path: tmpDir.path });
+
+    expect(result).toEqual({
+      manifests: matchManifests([
+        {
+          position: { path: join(tmpDir.path, "foo.js"), index: [] },
+          issues: [
+            {
+              severity: "error",
+              message: "Component value resolve failed",
+              cause: new Error("file error")
+            }
+          ],
+          data: undefined
+        }
+      ])
+    });
+  });
+
+  test("should throw an error when throwOnError = true", async () => {
+    const err = await getRejectedValue(
+      generate({ components: ["*"], path: tmpDir.path, throwOnError: true })
+    );
+
+    assert(err instanceof ResolveError);
+    expect(err.message).toEqual("Component value resolve failed");
+    expect(err.position).toEqual({
+      path: join(tmpDir.path, "foo.js"),
+      index: []
+    });
+    expect(err.cause).toEqual(new Error("file error"));
   });
 });
 
@@ -209,13 +255,77 @@ describe("when file has syntax error", () => {
     });
   });
 
-  test("should throw ResolveError", async () => {
+  test("should report an issue", async () => {
     await expect(
       generate({ components: ["*"], path: tmpDir.path })
-    ).rejects.toThrowWithMessage(
-      GenerateError,
-      "Component value resolve failed"
+    ).resolves.toEqual({
+      manifests: matchManifests([
+        {
+          position: { path: join(tmpDir.path, "foo.js"), index: [] },
+          data: undefined,
+          issues: [
+            {
+              severity: "error",
+              message: "Component value resolve failed",
+              cause: expect.toBeObject()
+            }
+          ]
+        }
+      ])
+    });
+  });
+});
+
+describe("when module path resolve failed", () => {
+  beforeEach(async () => {
+    mockedResolvePath.mockRejectedValue(new Error("resolve error"));
+    await createTempFiles({ "foo.js": "" });
+  });
+
+  test("should report an issue", async () => {
+    const result = await generate({ components: ["*"], path: tmpDir.path });
+
+    expect(result).toEqual({
+      manifests: matchManifests([
+        {
+          position: { path: join(tmpDir.path, "foo.js"), index: [] },
+          issues: [
+            {
+              severity: "error",
+              message: "Module path resolve failed",
+              cause: new Error("resolve error")
+            }
+          ],
+          data: undefined
+        }
+      ])
+    });
+  });
+
+  test("should throw an error when throwOnError = true", async () => {
+    const err = await getRejectedValue(
+      generate({ components: ["*"], path: tmpDir.path, throwOnError: true })
     );
+
+    assert(err instanceof ResolveError);
+    expect(err.message).toEqual("Module path resolve failed");
+    expect(err.position).toEqual({
+      path: join(tmpDir.path, "foo.js"),
+      index: []
+    });
+    expect(err.cause).toEqual(new Error("resolve error"));
+  });
+});
+
+describe("when module path resolve returns undefined", () => {
+  beforeEach(async () => {
+    mockedResolvePath.mockResolvedValue(undefined);
+    await createTempFiles({ "foo.js": "" });
+  });
+
+  test("should ignore the file", async () => {
+    const result = await generate({ components: ["*"], path: tmpDir.path });
+    expect(result).toEqual({ manifests: [] });
   });
 });
 
@@ -235,18 +345,16 @@ describe("multiple files", () => {
         path: tmpDir.path
       });
       expect(result).toEqual({
-        manifests: [
+        manifests: matchManifests([
           {
             position: { path: join(tmpDir.path, "foo.js"), index: [] },
-            issues: [],
             data: { foo: "bar" }
           },
           {
             position: { path: join(tmpDir.path, "foo.json"), index: [] },
-            issues: [],
             data: { foo: "bar" }
           }
-        ]
+        ])
       });
     });
   });
@@ -259,13 +367,12 @@ describe("multiple files", () => {
         extensions: ["json"]
       });
       expect(result).toEqual({
-        manifests: [
+        manifests: matchManifests([
           {
             position: { path: join(tmpDir.path, "foo.json"), index: [] },
-            issues: [],
             data: { foo: "bar" }
           }
-        ]
+        ])
       });
     });
   });
@@ -319,13 +426,12 @@ describe("when validate prop is not a function", () => {
   test("should not execute validate function", async () => {
     const result = await generate({ components: ["*"], path: tmpDir.path });
     expect(result).toEqual({
-      manifests: [
+      manifests: matchManifests([
         {
           position: { path: join(tmpDir.path, "a.js"), index: [] },
-          issues: [],
           data: { validate: 1 }
         }
-      ]
+      ])
     });
   });
 });
@@ -348,13 +454,12 @@ module.exports = value;`
   test("should execute validate function", async () => {
     const result = await generate({ components: ["*"], path: tmpDir.path });
     expect(result).toEqual({
-      manifests: [
+      manifests: matchManifests([
         {
           position: { path: join(tmpDir.path, "a.js"), index: [] },
-          issues: [],
           data: { data: 1 }
         }
-      ]
+      ])
     });
   });
 
@@ -365,13 +470,12 @@ module.exports = value;`
       validate: false
     });
     expect(result).toEqual({
-      manifests: [
+      manifests: matchManifests([
         {
           position: { path: join(tmpDir.path, "a.js"), index: [] },
-          issues: [],
           data: {}
         }
-      ]
+      ])
     });
   });
 });
@@ -395,7 +499,7 @@ module.exports = value;`
     const result = await generate({ components: ["*"], path: tmpDir.path });
 
     expect(result).toEqual({
-      manifests: [
+      manifests: matchManifests([
         {
           position: { path: join(tmpDir.path, "a.js"), index: [] },
           issues: [
@@ -407,7 +511,7 @@ module.exports = value;`
           ],
           data: {}
         }
-      ]
+      ])
     });
   });
 
@@ -424,13 +528,12 @@ module.exports = value;`
       validate: false
     });
     expect(result).toEqual({
-      manifests: [
+      manifests: matchManifests([
         {
           position: { path: join(tmpDir.path, "a.js"), index: [] },
-          issues: [],
           data: {}
         }
-      ]
+      ])
     });
   });
 });
@@ -453,13 +556,12 @@ module.exports = value;`
   test("should execute validate function", async () => {
     const result = await generate({ components: ["*"], path: tmpDir.path });
     expect(result).toEqual({
-      manifests: [
+      manifests: matchManifests([
         {
           position: { path: join(tmpDir.path, "a.js"), index: [] },
-          issues: [],
           data: { data: 1 }
         }
-      ]
+      ])
     });
   });
 });
@@ -557,13 +659,12 @@ describe("when transform is given", () => {
       transform: (manifest) => ({ ...(manifest.data as any), b: 2 })
     });
     expect(result).toEqual({
-      manifests: [
+      manifests: matchManifests([
         {
           position: { path: join(tmpDir.path, "a.js"), index: [] },
-          issues: [],
           data: { a: 1, b: 2 }
         }
-      ]
+      ])
     });
   });
 });
@@ -576,7 +677,7 @@ describe("when validateManifest is given", () => {
   });
 
   test("should call validateManifest", async () => {
-    const validateManifest = jest.fn((manifest: ManifestToValidate) => {
+    const validateManifest = jest.fn((manifest: Manifest) => {
       manifest.report({ severity: "error", message: "oops" });
     });
     const result = await generate({
@@ -587,13 +688,13 @@ describe("when validateManifest is given", () => {
 
     expect(validateManifest).toHaveBeenCalledOnce();
     expect(result).toEqual({
-      manifests: [
+      manifests: matchManifests([
         {
           position: { path: join(tmpDir.path, "a.js"), index: [] },
           issues: [{ severity: "error", message: "oops" }],
           data: { a: 1 }
         }
-      ]
+      ])
     });
   });
 
@@ -612,7 +713,7 @@ describe("when validateManifest is given", () => {
 });
 
 describe("when validateAllManifests is given", () => {
-  function validateAllManifests(manifests: readonly ManifestToValidate[]) {
+  function validateAllManifests(manifests: readonly Manifest[]) {
     for (const manifest of manifests) {
       manifest.report({
         severity: "error",
@@ -636,7 +737,7 @@ describe("when validateAllManifests is given", () => {
     });
 
     expect(result).toEqual({
-      manifests: [
+      manifests: matchManifests([
         {
           position: { path: join(tmpDir.path, "a.js"), index: [] },
           issues: [{ severity: "error", message: "validate error" }],
@@ -647,7 +748,7 @@ describe("when validateAllManifests is given", () => {
           issues: [{ severity: "error", message: "validate error" }],
           data: { b: 2 }
         }
-      ]
+      ])
     });
   });
 
@@ -660,7 +761,7 @@ describe("when validateAllManifests is given", () => {
     });
 
     expect(result).toEqual({
-      manifests: [
+      manifests: matchManifests([
         {
           position: { path: join(tmpDir.path, "a.js"), index: [] },
           issues: [{ severity: "error", message: "validate error" }],
@@ -668,10 +769,9 @@ describe("when validateAllManifests is given", () => {
         },
         {
           position: { path: join(tmpDir.path, "b.js"), index: [] },
-          issues: [],
           data: { b: 2 }
         }
-      ]
+      ])
     });
   });
 

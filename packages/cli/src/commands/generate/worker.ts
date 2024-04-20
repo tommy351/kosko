@@ -1,11 +1,11 @@
 import { Config, EnvironmentConfig } from "@kosko/config";
 import { spawn, SpawnError } from "@kosko/exec-utils";
-import { generate, print, PrintFormat } from "@kosko/generate";
+import { generate, print, PrintFormat, Result } from "@kosko/generate";
 import { join } from "node:path";
 import stringify from "fast-safe-stringify";
 import { CLIError } from "@kosko/cli-utils";
 import { setupEnv } from "./env";
-import { printIssues, resultHasError } from "./error";
+import { handleGenerateError, printIssues, resultHasError } from "./error";
 import { BaseGenerateArguments } from "./types";
 import { fileURLToPath } from "node:url";
 import { stdout, execPath, execArgv } from "node:process";
@@ -44,19 +44,26 @@ export async function handler(options: WorkerOptions) {
   const plugin = await loadPlugins(args.cwd, config.plugins);
 
   // Generate manifests
-  const result = await generate({
-    path: join(args.cwd, "components"),
-    components: config.components,
-    extensions: config.extensions,
-    validate: args.validate,
-    bail: config.bail,
-    concurrency: config.concurrency,
-    transform: plugin.transformManifest,
-    validateManifest: plugin.validateManifest,
-    ...(!args.components?.length && {
-      validateAllManifests: plugin.validateAllManifests
-    })
-  });
+  let result: Result;
+
+  try {
+    result = await generate({
+      path: join(args.cwd, "components"),
+      components: config.components,
+      extensions: config.extensions,
+      validate: args.validate,
+      bail: config.bail,
+      concurrency: config.concurrency,
+      transform: plugin.transformManifest,
+      validateManifest: plugin.validateManifest,
+      ...(!args.components?.length && {
+        validateAllManifests: plugin.validateAllManifests
+      })
+    });
+  } catch (err) {
+    handleGenerateError(err);
+    return;
+  }
 
   if (!result.manifests.length) {
     throw new CLIError("No manifests are exported from components", {

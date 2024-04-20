@@ -1,4 +1,4 @@
-import type { ManifestMeta } from "@kosko/common-utils";
+import { type ManifestMeta } from "@kosko/common-utils";
 
 /**
  * @public
@@ -28,7 +28,7 @@ export interface ManifestPosition {
 /**
  * @public
  */
-export interface BaseManifest {
+export interface Manifest {
   /**
    * Manifest position.
    */
@@ -41,31 +41,35 @@ export interface BaseManifest {
   metadata?: ManifestMeta;
 
   /**
-   * Manifest data.
+   * Manifest data. The value could be undefined when a component is invalid.
    */
   data: unknown;
-}
 
-/**
- * @public
- */
-export interface ManifestToValidate extends BaseManifest {
   /**
    * Report an issue for a manifest. Please always use this method instead of
    * directly modifying the `issues` array to ensure better error handling.
    */
   report(issue: Issue): void;
-}
 
-/**
- * @public
- */
-export interface Manifest extends BaseManifest {
   /**
    * Issues found in the manifest.
    */
   issues: Issue[];
 }
+
+export {
+  /**
+   * @deprecated Use `Manifest` instead.
+   * @public
+   */
+  Manifest as BaseManifest,
+
+  /**
+   * @deprecated Use `Manifest` instead.
+   * @public
+   */
+  Manifest as ManifestToValidate
+};
 
 /**
  * @public

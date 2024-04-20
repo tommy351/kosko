@@ -10,7 +10,8 @@ function transformManifest(config: unknown, data: unknown) {
   return plugin.transformManifest({
     position: { path: "", index: [] },
     data,
-    issues: []
+    issues: [],
+    report() {}
   });
 }
 
