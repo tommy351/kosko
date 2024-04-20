@@ -145,6 +145,10 @@ function printSummary(stats: IssueStats): void {
   );
 }
 
+function createGenerateFailedError(): CLIError {
+  return new CLIError("Generate failed", { output: "Generate failed" });
+}
+
 export function printIssues(cwd: string, result: Result): void {
   const totalStats: IssueStats = { error: 0, warning: 0 };
 
@@ -167,6 +171,42 @@ export function printIssues(cwd: string, result: Result): void {
   printSummary(totalStats);
 
   if (totalStats.error) {
-    throw new CLIError("Generate failed", { output: "Generate failed" });
+    throw createGenerateFailedError();
   }
+}
+
+function flattenError(err: unknown): unknown[] {
+  if (err instanceof AggregateError) {
+    return err.errors.flatMap(flattenError);
+  }
+
+  return [err];
+}
+
+export function handleGenerateError(err: unknown): void {
+  const allErrors = flattenError(err);
+  let count = 0;
+
+  for (const value of allErrors) {
+    const err = toErrorLike(value);
+    if (!err) continue;
+
+    count++;
+
+    print("");
+    print(
+      severityFormats.error(
+        `${severityIcons.error} ${err.name}: ${err.message}`
+      )
+    );
+
+    if (err.stack) {
+      const stack = cleanStack(err.stack).split("\n").slice(1).join("\n");
+
+      print(pc.gray(stack));
+    }
+  }
+
+  printSummary({ error: count, warning: 0 });
+  throw createGenerateFailedError();
 }

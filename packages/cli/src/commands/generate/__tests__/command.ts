@@ -10,9 +10,11 @@ import { generateCmd } from "../command";
 import { GenerateArguments } from "../types";
 import { TempDir, makeTempDir, installPackage } from "@kosko/test-utils";
 import { getErrorCode } from "@kosko/common-utils";
+import { CLIError } from "@kosko/cli-utils";
 
 jest.mock("@kosko/generate");
 jest.mock("@kosko/log");
+jest.spyOn(process.stderr, "write");
 
 const mockedGenerate = jest.mocked(generate);
 
@@ -951,5 +953,18 @@ describe("when multiple plugins are specified", () => {
       getPluginPackagePath("test-plugin1"),
       getPluginPackagePath("test-plugin2")
     ]);
+  });
+});
+
+describe("when generate throws an error", () => {
+  beforeEach(async () => {
+    mockedGenerate.mockRejectedValueOnce(new Error("foo"));
+    await writeConfigToDefaultPath({ components: ["*"] });
+  });
+
+  test("should throw an error", async () => {
+    await expect(execute()).rejects.toThrow(
+      new CLIError("Generate failed", { output: "Generate failed" })
+    );
   });
 });
