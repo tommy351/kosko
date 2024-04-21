@@ -40,6 +40,21 @@ const deploymentLikeResources: ResourcePath[] = [
     apiGroup: "batch",
     kind: "CronJob",
     keys: ["spec", "jobTemplate", "spec"]
+  },
+  {
+    apiGroup: "argoproj.io",
+    kind: "Rollout",
+    keys: ["spec"]
+  },
+  {
+    apiGroup: "serving.knative.dev",
+    kind: "Service",
+    keys: ["spec"]
+  },
+  {
+    apiGroup: "serving.knative.dev",
+    kind: "Configuration",
+    keys: ["spec"]
   }
 ];
 

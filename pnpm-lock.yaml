@@ -855,9 +855,15 @@ importers:
       '@kubernetes-models/apimachinery':
         specifier: ^1.2.1
         version: 1.2.1
+      '@kubernetes-models/argo-rollouts':
+        specifier: ^0.3.1
+        version: 0.3.1
       '@kubernetes-models/gateway-api':
         specifier: ^0.5.0
         version: 0.5.0
+      '@kubernetes-models/knative':
+        specifier: ^2.3.1
+        version: 2.3.1
       kubernetes-models:
         specifier: ^4.1.0
         version: 4.1.0
@@ -3888,6 +3894,16 @@ packages:
       tslib: 2.6.2
     dev: true
 
+  /@kubernetes-models/argo-rollouts@0.3.1:
+    resolution: {integrity: sha512-x4Z2Uc5M0H5H9nMFCj7zVxBTg2eHeUL3zqX0yDVQMbjCMCHXs9zDBmYzNSCqLrSxC/vXft+GrYge73Y6deR+Jg==}
+    engines: {node: '>=14'}
+    dependencies:
+      '@kubernetes-models/apimachinery': 1.2.1
+      '@kubernetes-models/base': 4.0.3
+      '@kubernetes-models/validate': 3.1.1
+      tslib: 2.6.2
+    dev: true
+
   /@kubernetes-models/base@4.0.3:
     resolution: {integrity: sha512-9Uo/RzB1ZvvPmnnpAE6yWPaFerMkpBxIHLuObexVDF813ZwVPdn56mmOOFfA6RyZtPdIT1AlhMozlHKOX16AGQ==}
     engines: {node: '>=14'}
@@ -3899,6 +3915,16 @@ packages:
 
   /@kubernetes-models/gateway-api@0.5.0:
     resolution: {integrity: sha512-gy71uiSdk2hVjxYWs2Hu2VXZKajN7J+JZKpnMJVo3n2b4UebMiEtwhb4G09XegREOzpIKKX2y6CfSCOtpLMjMQ==}
+    engines: {node: '>=14'}
+    dependencies:
+      '@kubernetes-models/apimachinery': 1.2.1
+      '@kubernetes-models/base': 4.0.3
+      '@kubernetes-models/validate': 3.1.1
+      tslib: 2.6.2
+    dev: true
+
+  /@kubernetes-models/knative@2.3.1:
+    resolution: {integrity: sha512-SmMAUjp3PgBcIKShP0vUrGvcKQmUjLMcv4jGXw1XZNucDJsU5UMvIWi2Bum+QKhgd4DWQR62mte8CNC8nFi7nA==}
     engines: {node: '>=14'}
     dependencies:
       '@kubernetes-models/apimachinery': 1.2.1
