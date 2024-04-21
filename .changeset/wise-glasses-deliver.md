@@ -1,8 +1,4 @@
 ---
-"@kosko/build-scripts": patch
-"@kosko/jest-preset": patch
-"@kosko/jest-serializer-path": patch
-"@kosko/test-utils": patch
 "@kosko/cli": patch
 "@kosko/cli-utils": patch
 "@kosko/common-utils": patch
@@ -23,7 +19,6 @@
 "@kosko/yaml": patch
 "@kosko/plugin-lint": patch
 "@kosko/plugin-set-metadata": patch
-"@kosko/website": patch
 ---
 
 Remove `.d.mts` files because their contents are as same as `.d.ts` files.
