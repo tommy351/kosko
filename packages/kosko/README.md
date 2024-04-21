@@ -1,23 +1,20 @@
 # Kosko
 
-[![](https://img.shields.io/npm/v/kosko.svg)](https://www.npmjs.com/package/kosko) ![Test](https://github.com/tommy351/kosko/workflows/Test/badge.svg) [![codecov](https://codecov.io/gh/tommy351/kosko/branch/master/graph/badge.svg)](https://codecov.io/gh/tommy351/kosko) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://prettier.io)
+[![](https://img.shields.io/npm/v/kosko.svg)](https://www.npmjs.com/package/kosko) ![Test](https://github.com/tommy351/kosko/workflows/Test/badge.svg) [![codecov](https://codecov.io/gh/tommy351/kosko/branch/master/graph/badge.svg)](https://codecov.io/gh/tommy351/kosko)
 
-Organize Kubernetes manifests in JavaScript.
+Organize Kubernetes manifests in TypeScript.
 
 ## Features
 
-- Use JavaScript or any languages compiled to JavaScript. (e.g. [TypeScript])
+- Use JavaScript or any language compiled to JavaScript. (e.g. [TypeScript])
 - Manage multiple environments.
 - Validate against Kubernetes OpenAPI definitions.
 - Reuse variables and functions across components.
+- Find issues such as missing namespaces, invalid pod selectors, require container probes, and much more.
 
 ## Documentation
 
 Learn more on [the official site](https://kosko.dev).
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
