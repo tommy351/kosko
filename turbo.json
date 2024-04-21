@@ -6,9 +6,5 @@
       "outputs": ["dist/**"]
     }
   },
-  "globalDependencies": [
-    "api-extractor.json",
-    "tsconfig.json",
-    "tsconfig.build.json"
-  ]
+  "globalDependencies": ["tsconfig.json", "tsconfig.build.json"]
 }
