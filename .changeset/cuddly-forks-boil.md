@@ -9,4 +9,4 @@ File resolution errors are now reported in issues too. This kind of errors inclu
 - TypeScript compilation errors.
 - Module import errors.
 
-This could be a breaking change if you expect the `generate` function to throw a `GenerateError` on these cases. You can set the `throwOnError` option to `false` to disable this behavior.
+This could be a breaking change if you expect the `generate` function to throw a `GenerateError` on these cases. You can set the `throwOnError` option to `true` to restore the previous behavior.
