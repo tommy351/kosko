@@ -8,7 +8,6 @@
 "@kosko/common-utils": patch
 "@kosko/config": patch
 "create-kosko": patch
-"@kosko/env": patch
 "@kosko/exec-utils": patch
 "@kosko/generate": patch
 "@kosko/helm": patch
