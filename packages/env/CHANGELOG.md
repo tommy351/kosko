@@ -1,5 +1,14 @@
 # @kosko/env
 
+## 5.0.2
+
+### Patch Changes
+
+- Updated dependencies [[`c98b372`](https://github.com/tommy351/kosko/commit/c98b372430983a66c4a78e9358ac26c2cd342718)]:
+  - @kosko/common-utils@1.1.1
+  - @kosko/log@2.0.2
+  - @kosko/require@7.0.1
+
 ## 5.0.1
 
 ### Patch Changes

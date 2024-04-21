@@ -1,6 +1,6 @@
 {
   "name": "@kosko/helm",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "Load Helm charts in kosko.",
   "homepage": "https://kosko.dev",
   "repository": {

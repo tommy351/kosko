@@ -1,5 +1,14 @@
 # @kosko/plugin
 
+## 0.2.1
+
+### Patch Changes
+
+- [`c98b372`](https://github.com/tommy351/kosko/commit/c98b372430983a66c4a78e9358ac26c2cd342718) Thanks [@tommy351](https://github.com/tommy351)! - Remove `.d.mts` files because their contents are as same as `.d.ts` files.
+
+- Updated dependencies [[`641b36b`](https://github.com/tommy351/kosko/commit/641b36bba528b53f8c6aa1cec3ffc276fc66cbe2), [`5f047ad`](https://github.com/tommy351/kosko/commit/5f047adfe612cf7cb26e530200af9034b2ec62b6), [`5f047ad`](https://github.com/tommy351/kosko/commit/5f047adfe612cf7cb26e530200af9034b2ec62b6), [`c98b372`](https://github.com/tommy351/kosko/commit/c98b372430983a66c4a78e9358ac26c2cd342718)]:
+  - @kosko/generate@5.1.0
+
 ## 0.2.0
 
 ### Minor Changes
