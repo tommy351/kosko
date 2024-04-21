@@ -1,5 +1,31 @@
 # @kosko/generate
 
+## 5.1.0
+
+### Minor Changes
+
+- [#136](https://github.com/tommy351/kosko/pull/136) [`641b36b`](https://github.com/tommy351/kosko/commit/641b36bba528b53f8c6aa1cec3ffc276fc66cbe2) Thanks [@tommy351](https://github.com/tommy351)! - File resolution errors are now reported in issues too. This kind of errors includes:
+
+  - Unable to resolve individual component paths.
+  - A component file throws an error.
+  - TypeScript compilation errors.
+  - Module import errors.
+
+  This could be a breaking change if you expect the `generate` function to throw a `GenerateError` on these cases. You can set the `throwOnError` option to `true` to restore the previous behavior.
+
+- [#136](https://github.com/tommy351/kosko/pull/136) [`5f047ad`](https://github.com/tommy351/kosko/commit/5f047adfe612cf7cb26e530200af9034b2ec62b6) Thanks [@tommy351](https://github.com/tommy351)! - `BaseManifest` and `ManifestToValidate` types are deprecated. Please use `Manifest` instead. Now you can access the `report` function in the transform function, and the result returned from the `generate` function.
+
+### Patch Changes
+
+- [#136](https://github.com/tommy351/kosko/pull/136) [`5f047ad`](https://github.com/tommy351/kosko/commit/5f047adfe612cf7cb26e530200af9034b2ec62b6) Thanks [@tommy351](https://github.com/tommy351)! - Performance is slightly improved by reusing manifest objects and transforming manifest objects in-place.
+
+- [`c98b372`](https://github.com/tommy351/kosko/commit/c98b372430983a66c4a78e9358ac26c2cd342718) Thanks [@tommy351](https://github.com/tommy351)! - Remove `.d.mts` files because their contents are as same as `.d.ts` files.
+
+- Updated dependencies [[`c98b372`](https://github.com/tommy351/kosko/commit/c98b372430983a66c4a78e9358ac26c2cd342718)]:
+  - @kosko/common-utils@1.1.1
+  - @kosko/log@2.0.2
+  - @kosko/require@7.0.1
+
 ## 5.0.0
 
 ### Major Changes

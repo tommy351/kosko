@@ -1,5 +1,65 @@
 # @kosko/cli
 
+## 4.1.1
+
+### Patch Changes
+
+- [#136](https://github.com/tommy351/kosko/pull/136) [`bf44f80`](https://github.com/tommy351/kosko/commit/bf44f8088664f3da037a70a02174cdb9a21d11b5) Thanks [@tommy351](https://github.com/tommy351)! - Fix the issue that multiple generation errors are not properly formatted.
+
+  ```sh
+  # Before
+  error -
+  AggregateError
+      at handleResolvePromises (/project/node_modules/@kosko/generate/src/resolve.ts:104:11)
+      at async Object.generate (/project/node_modules/@kosko/generate/src/generate.ts:184:21)
+      at async Object.handler (/project/node_modules/@kosko/cli/src/commands/generate/worker.ts:47:18)
+      at async Object.handler (/project/node_modules/@kosko/cli/src/commands/validate.ts:24:5)
+
+  # After
+  components/mysql.ts
+
+  ✖ Component value resolve failed
+    TSError: ⨯ Unable to compile TypeScript:
+    components/mysql.ts:11:1 - error TS2588: Cannot assign to 'port' because it is a constant.
+    11 port = 81;
+       ~~~~
+        at createTSError (/project/node_modules/ts-node/src/index.ts:859:12)
+        at reportTSError (/project/node_modules/ts-node/src/index.ts:863:19)
+        at getOutput (/project/node_modules/ts-node/src/index.ts:1077:36)
+        at Object.compile (/project/node_modules/ts-node/src/index.ts:1433:41)
+        at Module.m._compile (/project/node_modules/ts-node/src/index.ts:1617:30)
+        at Object.require.extensions.<computed> [as .ts] (/project/node_modules/ts-node/src/index.ts:1621:12)
+
+  components/nginx.ts
+
+  ✖ Component value resolve failed
+    TSError: ⨯ Unable to compile TypeScript:
+    components/nginx.ts:11:1 - error TS2588: Cannot assign to 'port' because it is a constant.
+    11 port = 81;
+       ~~~~
+        at createTSError (/project/node_modules/ts-node/src/index.ts:859:12)
+        at reportTSError (/project/node_modules/ts-node/src/index.ts:863:19)
+        at getOutput (/project/node_modules/ts-node/src/index.ts:1077:36)
+        at Object.compile (/project/node_modules/ts-node/src/index.ts:1433:41)
+        at Module.m._compile (/project/node_modules/ts-node/src/index.ts:1617:30)
+        at Object.require.extensions.<computed> [as .ts] (/project/node_modules/ts-node/src/index.ts:1621:12)
+
+  error - Found 2 errors in total
+  error - Generate failed
+  ```
+
+- [`c98b372`](https://github.com/tommy351/kosko/commit/c98b372430983a66c4a78e9358ac26c2cd342718) Thanks [@tommy351](https://github.com/tommy351)! - Remove `.d.mts` files because their contents are as same as `.d.ts` files.
+
+- Updated dependencies [[`641b36b`](https://github.com/tommy351/kosko/commit/641b36bba528b53f8c6aa1cec3ffc276fc66cbe2), [`5f047ad`](https://github.com/tommy351/kosko/commit/5f047adfe612cf7cb26e530200af9034b2ec62b6), [`5f047ad`](https://github.com/tommy351/kosko/commit/5f047adfe612cf7cb26e530200af9034b2ec62b6), [`c98b372`](https://github.com/tommy351/kosko/commit/c98b372430983a66c4a78e9358ac26c2cd342718)]:
+  - @kosko/generate@5.1.0
+  - @kosko/cli-utils@0.1.2
+  - @kosko/common-utils@1.1.1
+  - @kosko/config@4.0.2
+  - @kosko/exec-utils@2.0.1
+  - @kosko/log@2.0.2
+  - @kosko/migrate@5.0.2
+  - @kosko/require@7.0.1
+
 ## 4.1.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # @kosko/exec-utils
 
+## 2.0.1
+
+### Patch Changes
+
+- [`c98b372`](https://github.com/tommy351/kosko/commit/c98b372430983a66c4a78e9358ac26c2cd342718) Thanks [@tommy351](https://github.com/tommy351)! - Remove `.d.mts` files because their contents are as same as `.d.ts` files.
+
 ## 2.0.0
 
 ### Major Changes
