@@ -1,11 +1,12 @@
 import { array, object, optional } from "superstruct";
-import { createRule } from "./types";
 import { isHPA } from "../utils/manifest";
-import { matchAny } from "../utils/pattern";
+import { createRule } from "./types";
 import {
   buildObjectReferenceMatcher,
   objectReferenceSchema
 } from "../utils/object-reference";
+import { matchAny } from "../utils/pattern";
+import { isRecord } from "@kosko/common-utils";
 
 export default createRule({
   config: object({
@@ -30,14 +31,19 @@ export default createRule({
             return;
           }
 
-          if (manifests.find({ ...ref, namespace })) {
-            return;
-          }
+          const target = manifests.find({ ...ref, namespace });
+          if (!target) return;
 
-          ctx.report(
-            manifest,
-            `Scale target "${ref.apiVersion} ${ref.kind} ${ref.name}" does not exist${namespace ? ` in namespace "${namespace}"` : ""}.`
-          );
+          if (
+            isRecord(target.data) &&
+            isRecord(target.data.spec) &&
+            typeof target.data.spec.replicas === "number"
+          ) {
+            ctx.report(
+              target,
+              `Replicas should be removed because it is managed by HPA.`
+            );
+          }
         });
       }
     };

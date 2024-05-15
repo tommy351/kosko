@@ -61,6 +61,7 @@ const deploymentLikeResources: ResourcePath[] = [
 export interface DeploymentLikeSpec {
   template?: PartialDeep<IPodTemplateSpec>;
   selector?: ILabelSelector;
+  replicas?: number;
 }
 
 export function getDeploymentLikeSpec(

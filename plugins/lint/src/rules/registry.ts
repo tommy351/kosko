@@ -12,6 +12,7 @@ import noMissingScaleTarget from "./no-missing-scale-target";
 import noMissingSecret from "./no-missing-secret";
 import noMissingService from "./no-missing-service";
 import noMissingServiceAccount from "./no-missing-service-account";
+import noReplicasWithHpa from "./no-replicas-with-hpa";
 import requireContainerImage from "./require-container-image";
 import requireContainerPortName from "./require-container-port-name";
 import requireContainerResources from "./require-container-resources";
@@ -46,6 +47,7 @@ export const rules = {
   "no-missing-secret": noMissingSecret,
   "no-missing-service": noMissingService,
   "no-missing-service-account": noMissingServiceAccount,
+  "no-replicas-with-hpa": noReplicasWithHpa,
   "require-container-image": requireContainerImage,
   "require-container-port-name": requireContainerPortName,
   "require-container-resources": requireContainerResources,

@@ -14,6 +14,7 @@ const preset = {
     "no-missing-secret": { severity: "error" },
     "no-missing-service-account": { severity: "error" },
     "no-missing-service": { severity: "error" },
+    "no-replicas-with-hpa": { severity: "warning" },
     "require-container-image": { severity: "error" },
     "require-env-name": { severity: "error" },
     "require-service-port-name": { severity: "error" },
