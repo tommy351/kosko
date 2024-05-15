@@ -147,6 +147,70 @@ describe("composePlugins", () => {
       expect(plugins[1].transformManifest).toHaveBeenCalledTimes(1);
       expect(plugins[2].transformManifest).not.toHaveBeenCalled();
     });
+
+    test("updates metadata when a new value is returned", async () => {
+      const plugins = [
+        {
+          transformManifest: jest.fn(() => ({
+            apiVersion: "a1",
+            kind: "b1",
+            metadata: { name: "c1", namespace: "d1" }
+          }))
+        },
+        {
+          transformManifest: jest.fn(() => ({
+            apiVersion: "a2",
+            kind: "b2",
+            metadata: { name: "c2", namespace: "d2" }
+          }))
+        }
+      ];
+
+      const plugin = composePlugins(plugins);
+      assert(plugin.transformManifest);
+
+      const baseParam = {
+        position: { path: "", index: [] },
+        issues: [],
+        report: expect.toBeFunction()
+      };
+      const actual = await plugin.transformManifest(
+        createManifest({
+          data: {
+            apiVersion: "a0",
+            kind: "b0",
+            metadata: { name: "c0", namespace: "d0" }
+          }
+        })
+      );
+      expect(actual).toEqual({
+        apiVersion: "a2",
+        kind: "b2",
+        metadata: { name: "c2", namespace: "d2" }
+      });
+      expect(plugins[0].transformManifest).toHaveBeenCalledWith({
+        ...baseParam,
+        data: {
+          apiVersion: "a0",
+          kind: "b0",
+          metadata: { name: "c0", namespace: "d0" }
+        }
+      });
+      expect(plugins[1].transformManifest).toHaveBeenCalledWith({
+        ...baseParam,
+        data: {
+          apiVersion: "a1",
+          kind: "b1",
+          metadata: { name: "c1", namespace: "d1" }
+        },
+        metadata: {
+          apiVersion: "a1",
+          kind: "b1",
+          name: "c1",
+          namespace: "d1"
+        }
+      });
+    });
   });
 
   describe("validateManifest", () => {

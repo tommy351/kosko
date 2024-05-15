@@ -2,7 +2,7 @@ import type { PluginConfig } from "@kosko/config";
 import type { Plugin, PluginContext } from "@kosko/plugin";
 import { importPath, resolveModule } from "@kosko/require";
 import logger, { LogLevel } from "@kosko/log";
-import { isRecord } from "@kosko/common-utils";
+import { getManifestMeta, isRecord } from "@kosko/common-utils";
 import { CLIError } from "@kosko/cli-utils";
 import pc from "picocolors";
 import { type, func, optional, validate } from "superstruct";
@@ -80,14 +80,20 @@ async function loadPlugin({
 export function composePlugins(plugins: readonly Plugin[]): Plugin {
   return {
     ...(plugins.some((p) => p.transformManifest) && {
-      transformManifest: async ({ data, ...manifest }) => {
+      transformManifest: async ({ data, metadata, ...manifest }) => {
         for (const plugin of plugins) {
           if (typeof plugin.transformManifest !== "function") continue;
 
-          data = await plugin.transformManifest({ ...manifest, data });
+          data = await plugin.transformManifest({
+            ...manifest,
+            data,
+            metadata
+          });
 
           // Stop if the return value is undefined or null
           if (data == null) return data;
+
+          metadata = getManifestMeta(data);
         }
 
         return data;
