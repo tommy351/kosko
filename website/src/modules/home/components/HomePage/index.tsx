@@ -7,7 +7,7 @@ import FindIssues from "../FindIssues";
 
 export default function HomePage() {
   return (
-    <Layout description="Organize Kubernetes manifests in JavaScript.">
+    <Layout description="Organize Kubernetes manifests in TypeScript.">
       <Header />
       <main>
         <WriteLess />

@@ -8,7 +8,7 @@ export default function Header() {
     <header className={clsx("container", styles.container)}>
       <h1 className={styles.title}>
         Organize <strong>Kubernetes</strong> manifests in{" "}
-        <strong>JavaScript</strong>.
+        <strong>TypeScript</strong>.
       </h1>
       <div className={styles.actions}>
         <LinkButton color="primary" size="lg" to={useBaseUrl("docs/")}>

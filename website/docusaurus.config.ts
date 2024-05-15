@@ -15,7 +15,7 @@ const commitRef =
 
 export default {
   title: "Kosko",
-  tagline: "Organize Kubernetes manifests in JavaScript.",
+  tagline: "Organize Kubernetes manifests in TypeScript.",
   url: "https://kosko.dev",
   baseUrl: "/",
   onBrokenLinks: "throw",

@@ -6,7 +6,7 @@ Organize Kubernetes manifests in TypeScript.
 
 ## Features
 
-- Use JavaScript or any language compiled to JavaScript. (e.g. [TypeScript])
+- Use TypeScript or any language compiled into JavaScript.
 - Manage multiple environments.
 - Validate against Kubernetes OpenAPI definitions.
 - Reuse variables and functions across components.
