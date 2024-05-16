@@ -1,5 +1,11 @@
 # @kosko/plugin-lint
 
+## 0.3.0
+
+### Minor Changes
+
+- [`46870ab`](https://github.com/tommy351/kosko/commit/46870ab0bd137fa4c70d9ee74fee45ed12c1e4a2) Thanks [@tommy351](https://github.com/tommy351)! - Add `no-replicas-with-hpa` rule.
+
 ## 0.2.0
 
 ### Minor Changes
