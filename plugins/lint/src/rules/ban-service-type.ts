@@ -16,7 +16,7 @@ export default createRule({
         const type = manifest.data.spec?.type;
 
         if (type && types.has(type)) {
-          ctx.report(manifest, `Service type "${type}" is banned`);
+          ctx.report(manifest, `Service type "${type}" is banned.`);
         }
       }
     };

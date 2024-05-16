@@ -80,7 +80,7 @@ test("should report when type is banned", () => {
   expect(validate(rule, { types: ["LoadBalancer"] }, manifest)).toEqual([
     {
       manifest,
-      message: `Service type "LoadBalancer" is banned`
+      message: `Service type "LoadBalancer" is banned.`
     }
   ]);
 });

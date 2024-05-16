@@ -1,4 +1,5 @@
 import banImage from "./ban-image";
+import banNamespace from "./ban-namespace";
 import banServiceType from "./ban-service-type";
 import noMissingConfigMap from "./no-missing-config-map";
 import noMissingGateway from "./no-missing-gateway";
@@ -34,6 +35,7 @@ import validProbePort from "./valid-probe-port";
 
 export const rules = {
   "ban-image": banImage,
+  "ban-namespace": banNamespace,
   "ban-service-type": banServiceType,
   "no-missing-config-map": noMissingConfigMap,
   "no-missing-gateway-class": noMissingGatewayClass,
