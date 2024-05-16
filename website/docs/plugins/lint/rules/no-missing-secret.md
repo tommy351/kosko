@@ -6,6 +6,14 @@ Disallow missing Secret references.
 
 This rule ensures that all Secret references are defined by checking if the corresponding manifests are present or not.
 
+Besides `Secret`, the following resources are also supported:
+
+| API Group             | Kind             |
+| --------------------- | ---------------- |
+| `bitnami.com`         | `SealedSecret`   |
+| `external-secrets.io` | `ExternalSecret` |
+| `seals.kinko.dev`     | `Asset`          |
+
 ## Configuration
 
 ### `allow`

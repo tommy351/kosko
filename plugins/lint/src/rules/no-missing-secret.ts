@@ -14,6 +14,24 @@ import {
 import type { IIngress } from "kubernetes-models/networking.k8s.io/v1/Ingress";
 import { IServiceAccount } from "kubernetes-models/v1/ServiceAccount";
 import { matchAny } from "../utils/pattern";
+import { ManifestStore } from "../utils/manifest-store";
+
+const secretTypes: { apiGroup: string; kind: string }[] = [
+  { apiGroup: "", kind: "Secret" },
+  { apiGroup: "bitnami.com", kind: "SealedSecret" },
+  { apiGroup: "external-secrets.io", kind: "ExternalSecret" },
+  { apiGroup: "seals.kinko.dev", kind: "Asset" }
+];
+
+function findSecret(
+  manifests: ManifestStore,
+  name: NamespacedName
+): Manifest | undefined {
+  for (const type of secretTypes) {
+    const manifest = manifests.find({ ...type, ...name });
+    if (manifest) return manifest;
+  }
+}
 
 export default createRule({
   config: object({
@@ -28,16 +46,7 @@ export default createRule({
       validateAll(manifests) {
         function checkName(manifest: Manifest, name: NamespacedName) {
           if (isAllowed(name)) return;
-
-          if (
-            manifests.find({
-              apiGroup: "",
-              kind: "Secret",
-              ...name
-            })
-          ) {
-            return;
-          }
+          if (findSecret(manifests, name)) return;
 
           ctx.report(manifest, buildMissingResourceMessage("Secret", name));
         }

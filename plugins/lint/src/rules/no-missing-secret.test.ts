@@ -481,3 +481,57 @@ test("should check pod imagePullSecrets", () => {
     }
   ]);
 });
+
+test("should pass when a matching SealedSecret exists", () => {
+  const secret = createManifest({
+    apiVersion: "bitnami.com/v1alpha1",
+    kind: "SealedSecret",
+    metadata: { name: "foo", namespace: "a" }
+  });
+  const pod = createManifest(
+    new Pod({
+      metadata: { name: "bar", namespace: "a" },
+      spec: {
+        containers: [],
+        volumes: [{ name: "abc", secret: { secretName: "foo" } }]
+      }
+    })
+  );
+  expect(validateAll(rule, undefined, [secret, pod])).toBeEmpty();
+});
+
+test("should pass when a matching ExternalSecret exists", () => {
+  const secret = createManifest({
+    apiVersion: "external-secrets.io/v1beta1",
+    kind: "ExternalSecret",
+    metadata: { name: "foo", namespace: "a" }
+  });
+  const pod = createManifest(
+    new Pod({
+      metadata: { name: "bar", namespace: "a" },
+      spec: {
+        containers: [],
+        volumes: [{ name: "abc", secret: { secretName: "foo" } }]
+      }
+    })
+  );
+  expect(validateAll(rule, undefined, [secret, pod])).toBeEmpty();
+});
+
+test("should pass when a matching Kinko Asset exists", () => {
+  const asset = createManifest({
+    apiVersion: "seals.kinko.dev/v1alpha1",
+    kind: "Asset",
+    metadata: { name: "foo", namespace: "a" }
+  });
+  const pod = createManifest(
+    new Pod({
+      metadata: { name: "bar", namespace: "a" },
+      spec: {
+        containers: [],
+        volumes: [{ name: "abc", secret: { secretName: "foo" } }]
+      }
+    })
+  );
+  expect(validateAll(rule, undefined, [asset, pod])).toBeEmpty();
+});
