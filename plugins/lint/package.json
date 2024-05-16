@@ -1,6 +1,6 @@
 {
   "name": "@kosko/plugin-lint",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A Kosko plugin which lints Kubernetes manifests.",
   "homepage": "https://kosko.dev/docs/plugins/lint",
   "repository": {

@@ -1,5 +1,11 @@
 # @kosko/cli
 
+## 4.1.2
+
+### Patch Changes
+
+- [`62a3934`](https://github.com/tommy351/kosko/commit/62a393471c5d3a14f97cc5398cde82e5b2b4bc91) Thanks [@tommy351](https://github.com/tommy351)! - Fix an issue when using multiple `transformManifest` plugins, changes of a manifest do not reflect in `Manifest.metadata`.
+
 ## 4.1.1
 
 ### Patch Changes
