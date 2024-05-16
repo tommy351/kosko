@@ -4,6 +4,7 @@ import { ManifestStore } from "../utils/manifest-store";
 
 export interface Manifest<T = unknown> extends BaseManifest {
   data: T;
+  isRuleDisabled(rule: string): boolean;
 }
 
 export interface RuleContext<T> {

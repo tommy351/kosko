@@ -2,6 +2,7 @@ import plugin from "./index";
 import assert from "node:assert";
 import { createManifest } from "./test-utils";
 import { Pod } from "kubernetes-models/v1/Pod";
+import type { ValidateAllManifests, ValidateManifest } from "@kosko/plugin";
 
 function createInvalidPod() {
   return createManifest(
@@ -96,4 +97,153 @@ test("should set validateAllManifests when corresponding rule is enabled", async
       message: `no-missing-namespace: Namespace "test" does not exist or is not allowed.`
     }
   ]);
+});
+
+describe("Disable lint annotation", () => {
+  describe("validate", () => {
+    let validateManifest: ValidateManifest;
+
+    beforeAll(async () => {
+      const result = await plugin({
+        cwd: "",
+        config: {
+          rules: {
+            "require-container-image": "error"
+          }
+        }
+      });
+      assert(typeof result.validateManifest === "function");
+      validateManifest = result.validateManifest;
+    });
+
+    test("should report issues when annotation is not set", () => {
+      const manifest = createManifest(
+        new Pod({
+          metadata: { namespace: "foo", name: "bar" },
+          spec: { containers: [{ name: "foo" }] }
+        })
+      );
+      validateManifest(manifest);
+      expect(manifest.issues).not.toEqual([]);
+    });
+
+    test('should not report issues when annotation is set to "*"', () => {
+      const manifest = createManifest(
+        new Pod({
+          metadata: {
+            namespace: "foo",
+            name: "bar",
+            annotations: { "kosko.dev/disable-lint": "*" }
+          },
+          spec: { containers: [{ name: "foo" }] }
+        })
+      );
+      validateManifest(manifest);
+      expect(manifest.issues).toEqual([]);
+    });
+
+    test("should not report issues when annotation = rule name", () => {
+      const manifest = createManifest(
+        new Pod({
+          metadata: {
+            namespace: "foo",
+            name: "bar",
+            annotations: { "kosko.dev/disable-lint": "require-container-image" }
+          },
+          spec: { containers: [{ name: "foo" }] }
+        })
+      );
+      validateManifest(manifest);
+      expect(manifest.issues).toEqual([]);
+    });
+
+    test("should not report issues when annotation includes rule name", () => {
+      const manifest = createManifest(
+        new Pod({
+          metadata: {
+            namespace: "foo",
+            name: "bar",
+            annotations: {
+              "kosko.dev/disable-lint": "foo, require-container-image, bar"
+            }
+          },
+          spec: { containers: [{ name: "foo" }] }
+        })
+      );
+      validateManifest(manifest);
+      expect(manifest.issues).toEqual([]);
+    });
+
+    test("should report issues when substring of annotation equals rule name", () => {
+      const manifest = createManifest(
+        new Pod({
+          metadata: {
+            namespace: "foo",
+            name: "bar",
+            annotations: {
+              "kosko.dev/disable-lint": "foo-require-container-image-bar"
+            }
+          },
+          spec: { containers: [{ name: "foo" }] }
+        })
+      );
+      validateManifest(manifest);
+      expect(manifest.issues).not.toEqual([]);
+    });
+  });
+
+  describe("validateAll", () => {
+    let validateAllManifests: ValidateAllManifests;
+
+    beforeAll(async () => {
+      const result = await plugin({
+        cwd: "",
+        config: {
+          rules: {
+            "no-missing-namespace": "error"
+          }
+        }
+      });
+      assert(typeof result.validateAllManifests === "function");
+      validateAllManifests = result.validateAllManifests;
+    });
+
+    test("should report issues when annotation is not set", () => {
+      const manifest = createManifest(
+        new Pod({
+          metadata: { namespace: "test", name: "foo" }
+        })
+      );
+      validateAllManifests([manifest]);
+      expect(manifest.issues).not.toEqual([]);
+    });
+
+    test('should not report issues when annotation is set to "*"', () => {
+      const manifest = createManifest(
+        new Pod({
+          metadata: {
+            namespace: "test",
+            name: "foo",
+            annotations: { "kosko.dev/disable-lint": "*" }
+          }
+        })
+      );
+      validateAllManifests([manifest]);
+      expect(manifest.issues).toEqual([]);
+    });
+
+    test("should not report issues when annotation = rule name", () => {
+      const manifest = createManifest(
+        new Pod({
+          metadata: {
+            namespace: "test",
+            name: "foo",
+            annotations: { "kosko.dev/disable-lint": "no-missing-namespace" }
+          }
+        })
+      );
+      validateAllManifests([manifest]);
+      expect(manifest.issues).toEqual([]);
+    });
+  });
 });

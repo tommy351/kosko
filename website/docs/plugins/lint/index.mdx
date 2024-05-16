@@ -80,6 +80,25 @@ name = "@kosko/plugin-lint"
 config.extends = ["@kosko/plugin-lint/presets/recommended"]
 ```
 
+## Disabling Rules
+
+There are several ways to disable a lint rule. The simplest way is to set the `severity` to `"off"`. However, it disables the rule for all manifests. To disable a rule for a specific manifest, you can use the config provided by some rules. For examples, the `no-missing-*` rules have an `allow` config which lets you allow some patterns to be missing.
+
+Some rules don't have this kind of config. In this case, you can add `kosko.dev/disable-lint` annotation to a manifest to disable specific rules. The value should be a comma-separated list of rule names. You can also use `*` to disable all rules.
+
+```ts
+new Pod({
+  metadata: {
+    annotations: {
+      // Disable specific lint rules
+      "kosko.dev/disable-lint": "no-missing-pvc, require-namespace",
+      // Disable all lint rules
+      "kosko.dev/disable-lint": "*"
+    }
+  }
+});
+```
+
 ## Caveats
 
 - This plugin does not validate manifests against OpenAPI schema. That is what [kubernetes-models](https://github.com/tommy351/kubernetes-models-ts) does. See [validation](../../components/validation.mdx) for more details.

@@ -1,8 +1,9 @@
-import type { Issue, Manifest } from "@kosko/generate";
-import type { RuleContext, RuleFactory } from "./rules/types";
+import type { Manifest as BaseManifest, Issue } from "@kosko/generate";
+import type { Manifest, RuleContext, RuleFactory } from "./rules/types";
 import assert from "node:assert";
 import { ManifestStore } from "./utils/manifest-store";
 import { getManifestMeta } from "@kosko/common-utils";
+import { buildDisabledRuleMatcher } from "./utils/manifest";
 
 export interface ReportedIssue {
   manifest: Manifest;
@@ -26,12 +27,9 @@ export function createTestContext<T>(config: T): TestContext<T> {
   };
 }
 
-export function createManifest(
-  value: unknown
-): Manifest & Pick<Manifest, "issues"> {
+export function createManifest(value: unknown): Manifest {
   const issues: Issue[] = [];
-
-  return {
+  const manifest: BaseManifest = {
     position: { path: "", index: [] },
     data: value,
     issues,
@@ -39,6 +37,11 @@ export function createManifest(
     report(issue) {
       issues.push(issue);
     }
+  };
+
+  return {
+    ...manifest,
+    isRuleDisabled: buildDisabledRuleMatcher(manifest)
   };
 }
 

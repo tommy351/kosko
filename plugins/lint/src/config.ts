@@ -18,9 +18,11 @@ import type { Severity } from "@kosko/generate";
 import { importPath, resolveModule } from "@kosko/require";
 import { dirname } from "node:path";
 
-export type SeverityAndOff = Severity | "off";
+export const SEVERITY_OFF = "off";
 
-const severityEnum = enums(["error", "warning", "off"]);
+export type SeverityAndOff = Severity | typeof SEVERITY_OFF;
+
+const severityEnum = enums(["error", "warning", SEVERITY_OFF]);
 
 const severityCoerceEnum = union([
   enums(["warn"]),
@@ -34,7 +36,7 @@ function severityCoerce(
   switch (value) {
     case 0:
     case false:
-      return "off";
+      return SEVERITY_OFF;
     case "warn":
     case 1:
       return "warning";

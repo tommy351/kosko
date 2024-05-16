@@ -55,3 +55,7 @@ export function matchAny<T>(matchers: readonly Matcher<T>[]): Matcher<T> {
 export function matchAll<T>(matchers: readonly Matcher<T>[]): Matcher<T> {
   return (value) => matchers.every((matcher) => matcher(value));
 }
+
+export const neverMatch: Matcher<any> = () => false;
+
+export const alwaysMatch: Matcher<any> = () => true;

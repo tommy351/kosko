@@ -1,4 +1,5 @@
 import { apiVersionToGroup } from "@kosko/common-utils";
+import type { Manifest as BaseManifest } from "@kosko/generate";
 import { array, object, optional, string } from "superstruct";
 import type { PartialDeep } from "type-fest";
 import type { INamespace } from "kubernetes-models/v1/Namespace";
@@ -23,7 +24,8 @@ import type { ITLSRoute } from "@kubernetes-models/gateway-api/gateway.networkin
 import type { IUDPRoute } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1alpha2/UDPRoute";
 import type { IGateway } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1/Gateway";
 import { Manifest } from "../rules/types";
-import { Matcher, compilePattern } from "./pattern";
+import { Matcher, alwaysMatch, compilePattern, neverMatch } from "./pattern";
+import { getObjectValue } from "./object";
 
 export type GatewayRoute =
   | IHTTPRouteV1Alpha2
@@ -82,6 +84,23 @@ export interface ResourcePath {
   apiGroup: string;
   kind: string;
   keys: readonly string[];
+}
+
+export function buildDisabledRuleMatcher(
+  manifest: BaseManifest
+): Matcher<string> {
+  const annotation = getObjectValue(manifest.data, [
+    "metadata",
+    "annotations",
+    "kosko.dev/disable-lint"
+  ]);
+  if (typeof annotation !== "string") return neverMatch;
+
+  const rules = new Set(annotation.split(",").map((rule) => rule.trim()));
+
+  if (rules.has("*")) return alwaysMatch;
+
+  return (rule) => rules.has(rule);
 }
 
 type ManifestPredicate<T> = (
