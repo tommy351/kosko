@@ -1,5 +1,19 @@
 # @kosko/plugin-lint
 
+## 0.4.0
+
+### Minor Changes
+
+- [`b5760c5`](https://github.com/tommy351/kosko/commit/b5760c56ae18039ae52d55fd01306f50ff36ef0b) Thanks [@tommy351](https://github.com/tommy351)! - Support `VerticalPodAutoscaler` (VPA), `MultidimPodAutoscaler` (MPA), and [KEDA](https://keda.sh/) in `no-missing-scale-target` rule.
+
+- [`40b7ab7`](https://github.com/tommy351/kosko/commit/40b7ab7691e2e1995f4d2d58fafea31044c9b894) Thanks [@tommy351](https://github.com/tommy351)! - Support disabling lint rules on a specific manifest.
+
+- [`6996f81`](https://github.com/tommy351/kosko/commit/6996f8190ff47e633b5fecb41c00f39bad6aaf66) Thanks [@tommy351](https://github.com/tommy351)! - Add `ban-namespace` rule.
+
+- [`7be3794`](https://github.com/tommy351/kosko/commit/7be3794ccc67ebc54a1f87568fe5cd083f716eeb) Thanks [@tommy351](https://github.com/tommy351)! - Support more secret types in `no-missing-secret` rule.
+
+- [`3f38921`](https://github.com/tommy351/kosko/commit/3f38921fee4a0c5d4baddfdcb61afb5bd746ded3) Thanks [@tommy351](https://github.com/tommy351)! - Allow users to specify keys of `requests` and `limits` that must be defined in container resources in `require-container-resources` rule.
+
 ## 0.3.0
 
 ### Minor Changes
