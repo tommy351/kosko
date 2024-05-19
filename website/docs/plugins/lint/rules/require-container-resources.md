@@ -48,3 +48,23 @@ Require resources to be specified for init containers.
 ### `ephemeral`
 
 Require resources to be specified for ephemeral containers.
+
+### `requests`
+
+Require resources to contain specified requests.
+
+#### Examples {#requests-examples}
+
+```toml
+requests = ["cpu", "memory"]
+```
+
+### `limits`
+
+Require resources to contain specified limits.
+
+#### Examples {#limits-examples}
+
+```toml
+limits = ["cpu", "memory"]
+```
