@@ -3,6 +3,9 @@ import { HorizontalPodAutoscaler } from "kubernetes-models/autoscaling/v1/Horizo
 import { Deployment } from "kubernetes-models/apps/v1/Deployment";
 import { createManifest, validateAll } from "../test-utils";
 import rule from "./no-missing-scale-target";
+import { VerticalPodAutoscaler } from "@kubernetes-models/autoscaler/autoscaling.k8s.io/v1/VerticalPodAutoscaler";
+import { MultidimPodAutoscaler } from "@kubernetes-models/gke/autoscaling.gke.io/v1beta1/MultidimPodAutoscaler";
+import { ScaledObject } from "@kubernetes-models/keda/keda.sh/v1alpha1/ScaledObject";
 
 test("should pass when data is undefined", () => {
   const manifest = createManifest(undefined);
@@ -126,4 +129,74 @@ test("should pass when scale target is in the allow list", () => {
       [hpa]
     )
   ).toBeEmpty();
+});
+
+test("should check VPA", () => {
+  const manifest = createManifest(
+    new VerticalPodAutoscaler({
+      metadata: { name: "test" },
+      spec: {
+        targetRef: {
+          apiVersion: "apps/v1",
+          kind: "Deployment",
+          name: "foo"
+        }
+      }
+    })
+  );
+  expect(validateAll(rule, undefined, [manifest])).toEqual([
+    {
+      manifest,
+      message: `Scale target "apps/v1 Deployment foo" does not exist.`
+    }
+  ]);
+});
+
+test("should check MPA", () => {
+  const manifest = createManifest(
+    new MultidimPodAutoscaler({
+      metadata: { name: "test" },
+      spec: {
+        constraints: {
+          containerControlledResources: []
+        },
+        goals: {
+          metrics: []
+        },
+        scaleTargetRef: {
+          apiVersion: "apps/v1",
+          kind: "Deployment",
+          name: "foo"
+        }
+      }
+    })
+  );
+  expect(validateAll(rule, undefined, [manifest])).toEqual([
+    {
+      manifest,
+      message: `Scale target "apps/v1 Deployment foo" does not exist.`
+    }
+  ]);
+});
+
+test("should check KEDA ScaledObject", () => {
+  const manifest = createManifest(
+    new ScaledObject({
+      metadata: { name: "test" },
+      spec: {
+        triggers: [],
+        scaleTargetRef: {
+          apiVersion: "apps/v1",
+          kind: "Deployment",
+          name: "foo"
+        }
+      }
+    })
+  );
+  expect(validateAll(rule, undefined, [manifest])).toEqual([
+    {
+      manifest,
+      message: `Scale target "apps/v1 Deployment foo" does not exist.`
+    }
+  ]);
 });

@@ -858,9 +858,18 @@ importers:
       '@kubernetes-models/argo-rollouts':
         specifier: ^0.3.1
         version: 0.3.1
+      '@kubernetes-models/autoscaler':
+        specifier: ^3.2.1
+        version: 3.2.1
       '@kubernetes-models/gateway-api':
         specifier: ^0.5.0
         version: 0.5.0
+      '@kubernetes-models/gke':
+        specifier: ^4.3.0
+        version: 4.3.0
+      '@kubernetes-models/keda':
+        specifier: ^0.3.1
+        version: 0.3.1
       '@kubernetes-models/knative':
         specifier: ^2.3.1
         version: 2.3.1
@@ -3904,6 +3913,16 @@ packages:
       tslib: 2.6.2
     dev: true
 
+  /@kubernetes-models/autoscaler@3.2.1:
+    resolution: {integrity: sha512-t0S1sx/vH4YELSZuXGDBF1/jvJN7eQ5TBc4++q3qr7/K9Mm13xwNuRYqJEg/I+RvGiQkF5sRu7uD8ta6GFz1JQ==}
+    engines: {node: '>=14'}
+    dependencies:
+      '@kubernetes-models/apimachinery': 1.2.1
+      '@kubernetes-models/base': 4.0.3
+      '@kubernetes-models/validate': 3.1.1
+      tslib: 2.6.2
+    dev: true
+
   /@kubernetes-models/base@4.0.3:
     resolution: {integrity: sha512-9Uo/RzB1ZvvPmnnpAE6yWPaFerMkpBxIHLuObexVDF813ZwVPdn56mmOOFfA6RyZtPdIT1AlhMozlHKOX16AGQ==}
     engines: {node: '>=14'}
@@ -3915,6 +3934,26 @@ packages:
 
   /@kubernetes-models/gateway-api@0.5.0:
     resolution: {integrity: sha512-gy71uiSdk2hVjxYWs2Hu2VXZKajN7J+JZKpnMJVo3n2b4UebMiEtwhb4G09XegREOzpIKKX2y6CfSCOtpLMjMQ==}
+    engines: {node: '>=14'}
+    dependencies:
+      '@kubernetes-models/apimachinery': 1.2.1
+      '@kubernetes-models/base': 4.0.3
+      '@kubernetes-models/validate': 3.1.1
+      tslib: 2.6.2
+    dev: true
+
+  /@kubernetes-models/gke@4.3.0:
+    resolution: {integrity: sha512-WdNjNAqqcEMLiV+RiO/5zuvEP6qpLWMMTD7ffW7cNnQWZd2ojXWiD4ihDSxMUWS/moFPWxkNYifdeI0qSrEoug==}
+    engines: {node: '>=14'}
+    dependencies:
+      '@kubernetes-models/apimachinery': 1.2.1
+      '@kubernetes-models/base': 4.0.3
+      '@kubernetes-models/validate': 3.1.1
+      tslib: 2.6.2
+    dev: true
+
+  /@kubernetes-models/keda@0.3.1:
+    resolution: {integrity: sha512-6B9D0WOiJWGGkB8UH1J9pB1bb4l2B8Ve30n/BxgCzB9EGexr/gK8/JXkizE4CE2/dJ8Aso3b+yXIHLbTHhBzCg==}
     engines: {node: '>=14'}
     dependencies:
       '@kubernetes-models/apimachinery': 1.2.1

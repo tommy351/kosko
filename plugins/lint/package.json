@@ -63,7 +63,10 @@
     "@kosko/test-utils": "workspace:^",
     "@kubernetes-models/apimachinery": "^1.2.1",
     "@kubernetes-models/argo-rollouts": "^0.3.1",
+    "@kubernetes-models/autoscaler": "^3.2.1",
     "@kubernetes-models/gateway-api": "^0.5.0",
+    "@kubernetes-models/gke": "^4.3.0",
+    "@kubernetes-models/keda": "^0.3.1",
     "@kubernetes-models/knative": "^2.3.1",
     "kubernetes-models": "^4.1.0",
     "type-fest": "^4.10.2"

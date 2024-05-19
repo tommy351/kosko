@@ -1,6 +1,6 @@
 import { array, object, optional } from "superstruct";
-import { createRule } from "./types";
-import { isHPA } from "../utils/manifest";
+import { Manifest, createRule } from "./types";
+import { isHPA, isMPA, isScaledObject, isVPA } from "../utils/manifest";
 import { matchAny } from "../utils/pattern";
 import {
   buildObjectReferenceMatcher,
@@ -18,10 +18,10 @@ export default createRule({
 
     return {
       validateAll(manifests) {
-        manifests.forEach((manifest) => {
-          if (!isHPA(manifest)) return;
-
-          const ref = manifest.data.spec?.scaleTargetRef;
+        function checkRef(
+          manifest: Manifest,
+          ref?: { apiVersion?: string; kind?: string; name?: string }
+        ) {
           if (!ref || !ref.apiVersion || !ref.kind || !ref.name) return;
 
           const namespace = manifest.metadata?.namespace;
@@ -38,6 +38,14 @@ export default createRule({
             manifest,
             `Scale target "${ref.apiVersion} ${ref.kind} ${ref.name}" does not exist${namespace ? ` in namespace "${namespace}"` : ""}.`
           );
+        }
+
+        manifests.forEach((manifest) => {
+          if (isHPA(manifest) || isMPA(manifest) || isScaledObject(manifest)) {
+            checkRef(manifest, manifest.data.spec?.scaleTargetRef);
+          } else if (isVPA(manifest)) {
+            checkRef(manifest, manifest.data.spec?.targetRef);
+          }
         });
       }
     };

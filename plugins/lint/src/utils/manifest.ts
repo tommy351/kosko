@@ -23,9 +23,23 @@ import type { ITCPRoute } from "@kubernetes-models/gateway-api/gateway.networkin
 import type { ITLSRoute } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1alpha2/TLSRoute";
 import type { IUDPRoute } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1alpha2/UDPRoute";
 import type { IGateway } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1/Gateway";
-import { Manifest } from "../rules/types";
-import { Matcher, alwaysMatch, compilePattern, neverMatch } from "./pattern";
+import type { IVerticalPodAutoscaler as IVPAV1 } from "@kubernetes-models/autoscaler/autoscaling.k8s.io/v1/VerticalPodAutoscaler";
+import type { IVerticalPodAutoscaler as IVPAV1Beta1 } from "@kubernetes-models/autoscaler/autoscaling.k8s.io/v1beta1/VerticalPodAutoscaler";
+import type { IVerticalPodAutoscaler as IVPAV1Beta2 } from "@kubernetes-models/autoscaler/autoscaling.k8s.io/v1beta2/VerticalPodAutoscaler";
+import type { IMultidimPodAutoscaler } from "@kubernetes-models/gke/autoscaling.gke.io/v1beta1/MultidimPodAutoscaler";
+import type { IScaledObject } from "@kubernetes-models/keda/keda.sh/v1alpha1/ScaledObject";
+import type { Manifest } from "../rules/types";
+import {
+  type Matcher,
+  alwaysMatch,
+  compilePattern,
+  neverMatch
+} from "./pattern";
 import { getObjectValue } from "./object";
+
+export type HPA = IHPAV1 | IHPAV2Beta1 | IHPAV2Beta2 | IHPAV2;
+
+export type VPA = IVPAV1 | IVPAV1Beta1 | IVPAV1Beta2;
 
 export type GatewayRoute =
   | IHTTPRouteV1Alpha2
@@ -157,10 +171,23 @@ export const isStatefulSet = groupKindPredicate<IStatefulSet>(
   "StatefulSet"
 );
 export const isCronJob = groupKindPredicate<ICronJob>("batch", "CronJob");
-export const isHPA = groupKindPredicate<
-  IHPAV1 | IHPAV2Beta1 | IHPAV2Beta2 | IHPAV2
->("autoscaling", "HorizontalPodAutoscaler");
+export const isHPA = groupKindPredicate<HPA>(
+  "autoscaling",
+  "HorizontalPodAutoscaler"
+);
 export const isGateway = groupKindPredicate<IGateway>(GATEWAY_GROUP, "Gateway");
+export const isVPA = groupKindPredicate<VPA>(
+  "autoscaling.k8s.io",
+  "VerticalPodAutoscaler"
+);
+export const isMPA = groupKindPredicate<IMultidimPodAutoscaler>(
+  "autoscaling.gke.io",
+  "MultidimPodAutoscaler"
+);
+export const isScaledObject = groupKindPredicate<IScaledObject>(
+  "keda.sh",
+  "ScaledObject"
+);
 
 export function isGatewayRoute(
   manifest: Manifest

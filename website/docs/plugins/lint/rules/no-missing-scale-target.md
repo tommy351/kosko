@@ -2,9 +2,18 @@
 title: no-missing-scale-target
 ---
 
-Disallow missing scale target references defined in HPAs.
+Disallow missing scale target references defined in auto scalers (e.g. HPA, VPA).
 
-This rule ensures that all scale target references defined in HPAs are present by checking if the corresponding manifests are present or not.
+This rule ensures that all scale target references defined in auto scalers are present by checking if the corresponding manifests are present or not.
+
+Currently this rule supports the following resources:
+
+| API Group            | Kind                      |
+| -------------------- | ------------------------- |
+| `autoscaling`        | `HorizontalPodAutoscaler` |
+| `autoscaling.k8s.io` | `VerticalPodAutoscaler`   |
+| `autoscaling.gke.io` | `MultidimPodAutoscaler`   |
+| `keda.sh`            | `ScaledObject`            |
 
 ## Configuration
 
