@@ -1,5 +1,11 @@
 # @kosko/plugin-lint
 
+## 0.5.0
+
+### Minor Changes
+
+- [`a3df843`](https://github.com/tommy351/kosko/commit/a3df84318b440a357c3e5f18eee18521dfa05065) Thanks [@tommy351](https://github.com/tommy351)! - Support cert-manager's `Certificate` in `no-missing-secret` rule.
+
 ## 0.4.0
 
 ### Minor Changes
