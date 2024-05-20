@@ -1,5 +1,6 @@
 import type { Manifest } from "../rules/types";
 import { apiVersionToGroup } from "@kosko/common-utils";
+import { isCertificate } from "./manifest";
 
 export interface Predicate {
   apiVersion?: string;
@@ -7,6 +8,7 @@ export interface Predicate {
   kind?: string;
   namespace?: string;
   name?: string;
+  certSecret?: string;
 }
 
 function getIndexKeys(manifest: Manifest): string[] {
@@ -32,6 +34,13 @@ function getIndexKeys(manifest: Manifest): string[] {
 
   if (typeof metadata.name === "string") {
     keys.push(`name=${metadata.name}`);
+  }
+
+  if (
+    isCertificate(manifest) &&
+    typeof manifest.data.spec?.secretName === "string"
+  ) {
+    keys.push(`certSecret=${manifest.data.spec.secretName}`);
   }
 
   return keys;

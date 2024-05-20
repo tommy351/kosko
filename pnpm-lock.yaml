@@ -863,6 +863,9 @@ importers:
       '@kubernetes-models/autoscaler':
         specifier: ^3.2.1
         version: 3.2.1
+      '@kubernetes-models/cert-manager':
+        specifier: ^4.3.1
+        version: 4.3.1
       '@kubernetes-models/gateway-api':
         specifier: ^0.5.0
         version: 0.5.0
@@ -2259,6 +2262,10 @@ packages:
 
   '@kubernetes-models/base@4.0.3':
     resolution: {integrity: sha512-9Uo/RzB1ZvvPmnnpAE6yWPaFerMkpBxIHLuObexVDF813ZwVPdn56mmOOFfA6RyZtPdIT1AlhMozlHKOX16AGQ==}
+    engines: {node: '>=14'}
+
+  '@kubernetes-models/cert-manager@4.3.1':
+    resolution: {integrity: sha512-TPSQxSOWv3iCkvQFm0/ffRHc978SlbI1pMyaKGtLQvY5GqZxGpxiT2uYfwZGs4X18ZGCI4Zb869cjQmRKx34iA==}
     engines: {node: '>=14'}
 
   '@kubernetes-models/gateway-api@0.5.0':
@@ -7321,6 +7328,7 @@ packages:
   puppeteer@22.0.0:
     resolution: {integrity: sha512-zYVnjwJngnSB4dbkWp7DHFSIc3nqHvZzrdHyo9+ugV1nq1Lm8obOMcmCFaGfR3PJs0EmYNz+/skBeO45yvASCQ==}
     engines: {node: '>=18'}
+    deprecated: < 22.5.0 is no longer supported
     hasBin: true
 
   pure-rand@6.0.4:
@@ -11197,6 +11205,13 @@ snapshots:
     dependencies:
       '@kubernetes-models/validate': 3.1.1
       is-plain-object: 5.0.0
+      tslib: 2.6.2
+
+  '@kubernetes-models/cert-manager@4.3.1':
+    dependencies:
+      '@kubernetes-models/apimachinery': 1.2.1
+      '@kubernetes-models/base': 4.0.3
+      '@kubernetes-models/validate': 3.1.1
       tslib: 2.6.2
 
   '@kubernetes-models/gateway-api@0.5.0':

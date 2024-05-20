@@ -13,6 +13,7 @@ Besides `Secret`, the following resources are also supported:
 | `bitnami.com`         | `SealedSecret`   |
 | `external-secrets.io` | `ExternalSecret` |
 | `seals.kinko.dev`     | `Asset`          |
+| `cert-manager.io`     | `Certificate`    |
 
 ## Configuration
 

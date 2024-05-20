@@ -5,6 +5,7 @@ import { ServiceAccount } from "kubernetes-models/v1/ServiceAccount";
 import { Ingress } from "kubernetes-models/networking.k8s.io/v1/Ingress";
 import { createManifest, validateAll } from "../test-utils";
 import rule from "./no-missing-secret";
+import { Certificate } from "@kubernetes-models/cert-manager/cert-manager.io/v1/Certificate";
 
 test("should pass when data is undefined", () => {
   const manifest = createManifest(undefined);
@@ -534,4 +535,77 @@ test("should pass when a matching Kinko Asset exists", () => {
     })
   );
   expect(validateAll(rule, undefined, [asset, pod])).toBeEmpty();
+});
+
+test("should pass when a matching Certificate exists", () => {
+  const cert = createManifest(
+    new Certificate({
+      metadata: { name: "foo", namespace: "a" },
+      spec: {
+        secretName: "foo-cert",
+        issuerRef: { name: "test" }
+      }
+    })
+  );
+  const pod = createManifest(
+    new Pod({
+      metadata: { name: "bar", namespace: "a" },
+      spec: {
+        containers: [],
+        volumes: [{ name: "abc", secret: { secretName: "foo-cert" } }]
+      }
+    })
+  );
+  expect(validateAll(rule, undefined, [cert, pod])).toBeEmpty();
+});
+
+test("should report when secret name is certificate name instead of secret name", () => {
+  const cert = createManifest(
+    new Certificate({
+      metadata: { name: "foo", namespace: "a" },
+      spec: {
+        secretName: "foo-cert",
+        issuerRef: { name: "test" }
+      }
+    })
+  );
+  const pod = createManifest(
+    new Pod({
+      metadata: { name: "bar", namespace: "a" },
+      spec: {
+        containers: [],
+        volumes: [{ name: "abc", secret: { secretName: "foo" } }]
+      }
+    })
+  );
+  expect(validateAll(rule, undefined, [cert, pod])).toEqual([
+    { manifest: pod, message: `Secret "foo" does not exist in namespace "a".` }
+  ]);
+});
+
+test("should report when certificate is in a different namespace", () => {
+  const cert = createManifest(
+    new Certificate({
+      metadata: { name: "foo", namespace: "a" },
+      spec: {
+        secretName: "foo-cert",
+        issuerRef: { name: "test" }
+      }
+    })
+  );
+  const pod = createManifest(
+    new Pod({
+      metadata: { name: "bar", namespace: "b" },
+      spec: {
+        containers: [],
+        volumes: [{ name: "abc", secret: { secretName: "foo-cert" } }]
+      }
+    })
+  );
+  expect(validateAll(rule, undefined, [cert, pod])).toEqual([
+    {
+      manifest: pod,
+      message: `Secret "foo-cert" does not exist in namespace "b".`
+    }
+  ]);
 });

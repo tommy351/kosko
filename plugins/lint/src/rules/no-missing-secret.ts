@@ -31,6 +31,14 @@ function findSecret(
     const manifest = manifests.find({ ...type, ...name });
     if (manifest) return manifest;
   }
+
+  const cert = manifests.find({
+    apiGroup: "cert-manager.io",
+    kind: "Certificate",
+    namespace: name.namespace,
+    certSecret: name.name
+  });
+  if (cert) return cert;
 }
 
 export default createRule({

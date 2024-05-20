@@ -28,6 +28,7 @@ import type { IVerticalPodAutoscaler as IVPAV1Beta1 } from "@kubernetes-models/a
 import type { IVerticalPodAutoscaler as IVPAV1Beta2 } from "@kubernetes-models/autoscaler/autoscaling.k8s.io/v1beta2/VerticalPodAutoscaler";
 import type { IMultidimPodAutoscaler } from "@kubernetes-models/gke/autoscaling.gke.io/v1beta1/MultidimPodAutoscaler";
 import type { IScaledObject } from "@kubernetes-models/keda/keda.sh/v1alpha1/ScaledObject";
+import type { ICertificate } from "@kubernetes-models/cert-manager/cert-manager.io/v1/Certificate";
 import type { Manifest } from "../rules/types";
 import {
   type Matcher,
@@ -187,6 +188,10 @@ export const isMPA = groupKindPredicate<IMultidimPodAutoscaler>(
 export const isScaledObject = groupKindPredicate<IScaledObject>(
   "keda.sh",
   "ScaledObject"
+);
+export const isCertificate = groupKindPredicate<ICertificate>(
+  "cert-manager.io",
+  "Certificate"
 );
 
 export function isGatewayRoute(

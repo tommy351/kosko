@@ -3,6 +3,7 @@ import { createManifest } from "../test-utils";
 import { Pod } from "kubernetes-models/v1/Pod";
 import { Service } from "kubernetes-models/v1/Service";
 import { Ingress } from "kubernetes-models/networking.k8s.io/v1/Ingress";
+import { Certificate } from "@kubernetes-models/cert-manager/cert-manager.io/v1/Certificate";
 
 const manifests = [
   // Resource without a namespace
@@ -21,6 +22,18 @@ const manifests = [
   createManifest(
     new Ingress({
       metadata: { name: "c" }
+    })
+  ),
+  // Certificate
+  createManifest(
+    new Certificate({
+      metadata: { name: "d", namespace: "foo" },
+      spec: {
+        secretName: "d-cert-secret",
+        issuerRef: {
+          name: "test"
+        }
+      }
     })
   ),
   // Empty object
@@ -91,6 +104,20 @@ describe("find", () => {
 
     test("should return undefined when apiGroup does not match", () => {
       expect(store.find({ apiGroup: "apps" })).toBeUndefined();
+    });
+  });
+
+  describe("certSecret predicate", () => {
+    test("should return resource when certSecret matches", () => {
+      expect(store.find({ certSecret: "d-cert-secret" })).toEqual(manifests[3]);
+    });
+
+    test("should return undefined when the value is certificate name instead of secret name", () => {
+      expect(store.find({ certSecret: "d" })).toBeUndefined();
+    });
+
+    test("should return undefined when certSecret does not match", () => {
+      expect(store.find({ certSecret: "z" })).toBeUndefined();
     });
   });
 
