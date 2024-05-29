@@ -7,7 +7,7 @@ import type { FetchMockStatic } from "fetch-mock";
 import { Pod } from "kubernetes-models/v1/Pod";
 import { TempDir, makeTempDir } from "@kosko/test-utils";
 import { isRecord } from "@kosko/common-utils";
-import yaml from "js-yaml";
+import yaml from "yaml";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 jest.mock("../fetch", () => require("fetch-mock").sandbox());
@@ -340,7 +340,7 @@ describe("loadUrl", () => {
         }
       };
       const fetchFn = jest.fn().mockResolvedValue(
-        new Response(yaml.dump(data), {
+        new Response(yaml.stringify(data), {
           headers: {
             "Content-Type": "application/yaml"
           }

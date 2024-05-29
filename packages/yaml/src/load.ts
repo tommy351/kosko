@@ -1,4 +1,4 @@
-import { loadAll } from "js-yaml";
+import { parse } from "./yaml";
 import { readFile } from "node:fs/promises";
 import { getResourceModule, ResourceKind } from "./module";
 import logger, { LogLevel } from "@kosko/log";
@@ -67,7 +67,7 @@ export async function loadString(
   options: LoadOptions = {}
 ): Promise<Manifest[]> {
   const { transform = (x) => x } = options;
-  const input = loadAll(content).filter((x) => x != null);
+  const input = parse(content).filter((x) => x != null);
   const manifests: Manifest[] = [];
 
   for (const entry of input) {
