@@ -1,5 +1,12 @@
 # @kosko/migrate
 
+## 6.0.0
+
+### Patch Changes
+
+- Updated dependencies [[`3485f8a`](https://github.com/tommy351/kosko/commit/3485f8a92129a3b300fae026ea41a9701e523c5f)]:
+  - @kosko/yaml@5.0.0
+
 ## 5.0.2
 
 ### Patch Changes

@@ -1,5 +1,20 @@
 # @kosko/helm
 
+## 5.0.0
+
+### Major Changes
+
+- [#141](https://github.com/tommy351/kosko/pull/141) [`3485f8a`](https://github.com/tommy351/kosko/commit/3485f8a92129a3b300fae026ea41a9701e523c5f) Thanks [@tommy351](https://github.com/tommy351)! - Support the following YAML 1.1 features to match the behavior of [sigs.k8s.io/yaml](https://pkg.go.dev/sigs.k8s.io/yaml).
+
+  - Numbers starting with `0` (e.g. `0777`) are interpreted as octal numbers, instead of decimal numbers.
+  - YAML 1.2 octal number `0o` prefix is still supported.
+  - YAML 1.1 booleans (`yes`, `no`, `on`, `off`, `y`, `n`) are interpreted as booleans, instead of strings.
+
+### Patch Changes
+
+- Updated dependencies [[`3485f8a`](https://github.com/tommy351/kosko/commit/3485f8a92129a3b300fae026ea41a9701e523c5f)]:
+  - @kosko/yaml@5.0.0
+
 ## 4.0.2
 
 ### Patch Changes

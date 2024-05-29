@@ -1,5 +1,12 @@
 # @kosko/cli
 
+## 4.1.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @kosko/migrate@6.0.0
+
 ## 4.1.2
 
 ### Patch Changes
