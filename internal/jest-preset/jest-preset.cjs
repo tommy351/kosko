@@ -8,7 +8,7 @@ const config = {
     "^.+\\.(t|j)sx?$": require.resolve("@swc/jest")
   },
   roots: ["<rootDir>/src"],
-  testEnvironment: "node",
+  testEnvironment: require.resolve("jest-environment-node"),
   setupFilesAfterEnv: [require.resolve("jest-extended/all")],
   snapshotSerializers: [require.resolve("@kosko/jest-serializer-path")],
   resetMocks: true,
