@@ -45,13 +45,12 @@
     "@kosko/common-utils": "workspace:^",
     "@kosko/log": "workspace:^",
     "fast-safe-stringify": "^2.1.1",
-    "js-yaml": "^4.1.0"
+    "yaml": "^2.4.2"
   },
   "devDependencies": {
     "@kosko/build-scripts": "workspace:^",
     "@kosko/jest-preset": "workspace:^",
     "@kosko/test-utils": "workspace:^",
-    "@types/js-yaml": "^4.0.5",
     "@types/node-fetch": "^2.6.2",
     "cross-fetch": "^3.1.5",
     "execa": "^5.1.1",
