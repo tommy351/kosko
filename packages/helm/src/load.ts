@@ -14,6 +14,8 @@ import { createHash } from "node:crypto";
 import { join } from "node:path";
 import { Stats } from "node:fs";
 
+const FILE_EXIST_ERROR_CODES = new Set(["EEXIST", "ENOTEMPTY"]);
+
 const cacheDir = getCacheDir("kosko-helm");
 
 /**
@@ -254,7 +256,8 @@ async function pullChart(options: PullOptions): Promise<string> {
       // If the cache directory already exists, it probably means that another
       // process has already pulled the chart. In this case, we can ignore the
       // error and return the cache path.
-      if (getErrorCode(err) !== "ENOTEMPTY") throw err;
+      const code = getErrorCode(err);
+      if (!code || !FILE_EXIST_ERROR_CODES.has(code)) throw err;
     }
 
     return cachePath;
