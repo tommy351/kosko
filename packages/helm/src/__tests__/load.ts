@@ -1,7 +1,11 @@
-import { ChartOptions, loadChart } from "../load";
+/// <reference types="jest-extended" />
+import { loadChart } from "../load";
 import { join } from "node:path";
-import { Manifest } from "@kosko/yaml";
 import { spawn } from "@kosko/exec-utils";
+import tmp from "tmp-promise";
+import { readdir } from "node:fs/promises";
+import { Pod } from "kubernetes-models/v1/Pod";
+import { Manifest } from "@kosko/yaml";
 
 jest.mock("@kosko/exec-utils", () => {
   const actual = jest.requireActual("@kosko/exec-utils");
@@ -70,30 +74,216 @@ test("values are specified", async () => {
 });
 
 describe("includeCrds option", () => {
-  const baseOptions: ChartOptions = {
-    chart: "traefik",
-    repo: "https://helm.traefik.io/traefik",
-    version: "v10.6.1"
-  };
-
-  function pickCrds(manifests: readonly Manifest[]): Manifest[] {
-    return manifests.filter((m) => m.kind === "CustomResourceDefinition");
-  }
-
   test("should not include CRDs when includeCrds is not set", async () => {
-    const result = loadChart(baseOptions);
+    const result = loadChart({
+      chart: join(FIXTURE_DIR, "crd")
+    });
 
-    expect(pickCrds(await result())).toHaveLength(0);
+    await expect(result()).resolves.toBeEmpty();
   });
 
-  test("should include CRDs when includeCrds is set", async () => {
+  test("should not include CRDs when includeCrds is false", async () => {
     const result = loadChart({
-      ...baseOptions,
+      chart: join(FIXTURE_DIR, "crd"),
+      includeCrds: false
+    });
+
+    await expect(result()).resolves.toBeEmpty();
+  });
+
+  test("should include CRDs when includeCrds is true", async () => {
+    const result = loadChart({
+      chart: join(FIXTURE_DIR, "crd"),
       includeCrds: true
     });
 
-    expect(pickCrds(await result())).not.toHaveLength(0);
+    await expect(result()).resolves.not.toBeEmpty();
   });
+});
+
+describe("skipTests option", () => {
+  test("should include tests by default", async () => {
+    const result = loadChart({
+      chart: join(FIXTURE_DIR, "tests")
+    });
+
+    await expect(result()).resolves.not.toBeEmpty();
+  });
+
+  test("should include tests when skipTests is false", async () => {
+    const result = loadChart({
+      chart: join(FIXTURE_DIR, "tests"),
+      skipTests: false
+    });
+
+    await expect(result()).resolves.not.toBeEmpty();
+  });
+
+  test("should exclude tests when skipTests is true", async () => {
+    const result = loadChart({
+      chart: join(FIXTURE_DIR, "tests"),
+      skipTests: true
+    });
+
+    await expect(result()).resolves.toBeEmpty();
+  });
+});
+
+describe("isUpgrade option", () => {
+  test("should not set is-upgrade by default", async () => {
+    const result = loadChart({
+      chart: join(FIXTURE_DIR, "upgrade")
+    });
+    const manifests = await result();
+
+    expect(manifests).toEqual([
+      new Pod({
+        metadata: {
+          name: "foo",
+          annotations: {
+            "is-upgrade": "false",
+            "is-install": "true"
+          }
+        }
+      })
+    ]);
+  });
+
+  test("should not set is-upgrade if isUpgrade is false", async () => {
+    const result = loadChart({
+      chart: join(FIXTURE_DIR, "upgrade"),
+      isUpgrade: false
+    });
+    const manifests = await result();
+
+    expect(manifests).toEqual([
+      new Pod({
+        metadata: {
+          name: "foo",
+          annotations: {
+            "is-upgrade": "false",
+            "is-install": "true"
+          }
+        }
+      })
+    ]);
+  });
+
+  test("should set is-upgrade if isUpgrade is true", async () => {
+    const result = loadChart({
+      chart: join(FIXTURE_DIR, "upgrade"),
+      isUpgrade: true
+    });
+    const manifests = await result();
+
+    expect(manifests).toEqual([
+      new Pod({
+        metadata: {
+          name: "foo",
+          annotations: {
+            "is-upgrade": "true",
+            "is-install": "false"
+          }
+        }
+      })
+    ]);
+  });
+});
+
+describe("kubeVersion is specified", () => {
+  test("should set kube-version when kubeVersion is specified", async () => {
+    const result = loadChart({
+      chart: join(FIXTURE_DIR, "kube-version"),
+      kubeVersion: "1.22.0"
+    });
+    const manifests = await result();
+
+    expect(manifests).toEqual([
+      new Pod({
+        metadata: {
+          name: "foo",
+          annotations: {
+            "kube-version": "v1.22.0"
+          }
+        }
+      })
+    ]);
+  });
+});
+
+test("insecureSkipTlsVerify is true", async () => {
+  const result = loadChart({
+    chart: NGINX_CHART,
+    insecureSkipTlsVerify: true
+  });
+
+  await result();
+  expect(mockedSpawn.mock.calls[0][1]).toContain("--insecure-skip-tls-verify");
+});
+
+test("passCredentials is true", async () => {
+  const result = loadChart({
+    chart: NGINX_CHART,
+    passCredentials: true
+  });
+
+  await result();
+  expect(mockedSpawn.mock.calls[0][1]).toContain("--pass-credentials");
+});
+
+test("postRenderer is specified", async () => {
+  const result = loadChart({
+    chart: join(FIXTURE_DIR, "upgrade"),
+    postRenderer: join(FIXTURE_DIR, "post-renderer.sh")
+  });
+
+  await expect(result()).resolves.toEqual([
+    new Pod({
+      metadata: {
+        name: "header",
+        annotations: {
+          args: ""
+        }
+      }
+    }),
+    new Pod({
+      metadata: {
+        name: "foo",
+        annotations: {
+          "is-upgrade": "false",
+          "is-install": "true"
+        }
+      }
+    })
+  ]);
+});
+
+test("postRendererArgs is specified", async () => {
+  const result = loadChart({
+    chart: join(FIXTURE_DIR, "upgrade"),
+    postRenderer: join(FIXTURE_DIR, "post-renderer.sh"),
+    postRendererArgs: ["a", "b", "c"]
+  });
+
+  await expect(result()).resolves.toEqual([
+    new Pod({
+      metadata: {
+        name: "header",
+        annotations: {
+          args: "a b c"
+        }
+      }
+    }),
+    new Pod({
+      metadata: {
+        name: "foo",
+        annotations: {
+          "is-upgrade": "false",
+          "is-install": "true"
+        }
+      }
+    })
+  ]);
 });
 
 test("spawn throws ENOENT error", async () => {
@@ -116,4 +306,116 @@ test("OCI chart", async () => {
   });
 
   await expect(result()).resolves.toMatchSnapshot();
+});
+
+describe("when cache is disabled", () => {
+  let tmpDir: tmp.DirectoryResult;
+
+  beforeEach(async () => {
+    tmpDir = await tmp.dir({ unsafeCleanup: true });
+  });
+
+  afterEach(async () => {
+    await tmpDir.cleanup();
+  });
+
+  test("should not cache chart", async () => {
+    const result = loadChart({
+      chart: "prometheus",
+      repo: "https://prometheus-community.github.io/helm-charts",
+      version: "13.6.0",
+      cache: { enabled: false, dir: tmpDir.path }
+    });
+
+    await expect(result()).toResolve();
+
+    // Cache directory should be empty
+    await expect(readdir(tmpDir.path)).resolves.toBeEmpty();
+  });
+});
+
+describe("when cache directory is specified", () => {
+  let tmpDir: tmp.DirectoryResult;
+
+  beforeEach(async () => {
+    tmpDir = await tmp.dir({ unsafeCleanup: true });
+  });
+
+  afterEach(async () => {
+    await tmpDir.cleanup();
+  });
+
+  test("should store cache in the specified directory", async () => {
+    const result = loadChart({
+      chart: "prometheus",
+      repo: "https://prometheus-community.github.io/helm-charts",
+      version: "13.6.0",
+      cache: { dir: tmpDir.path }
+    });
+
+    await expect(result()).toResolve();
+
+    // Cache directory should not be empty
+    await expect(readdir(tmpDir.path)).resolves.not.toBeEmpty();
+  });
+});
+
+describe("when KOSKO_HELM_CACHE_DIR is set", () => {
+  let tmpDir: tmp.DirectoryResult;
+  let origEnv: string | undefined;
+
+  beforeEach(async () => {
+    tmpDir = await tmp.dir({ unsafeCleanup: true });
+    origEnv = process.env.KOSKO_HELM_CACHE_DIR;
+    process.env.KOSKO_HELM_CACHE_DIR = tmpDir.path;
+  });
+
+  afterEach(async () => {
+    await tmpDir.cleanup();
+    process.env.KOSKO_HELM_CACHE_DIR = origEnv;
+  });
+
+  test("should store cache in the specified directory", async () => {
+    const result = loadChart({
+      chart: "prometheus",
+      repo: "https://prometheus-community.github.io/helm-charts",
+      version: "13.6.0"
+    });
+
+    await expect(result()).toResolve();
+
+    // Cache directory should not be empty
+    await expect(readdir(tmpDir.path)).resolves.not.toBeEmpty();
+  });
+});
+
+describe("concurrent pull", () => {
+  let tmpDir: tmp.DirectoryResult;
+
+  beforeEach(async () => {
+    tmpDir = await tmp.dir({ unsafeCleanup: true });
+  });
+
+  afterEach(async () => {
+    await tmpDir.cleanup();
+  });
+
+  test("should not throw error", async () => {
+    const promises: Promise<Manifest[]>[] = [];
+
+    for (let i = 0; i < 2; i++) {
+      promises.push(
+        loadChart({
+          chart: "prometheus",
+          repo: "https://prometheus-community.github.io/helm-charts",
+          version: "13.6.0",
+          // Set cache directory to a temporary directory because we don't want
+          // to use existing cache.
+          cache: { dir: tmpDir.path }
+        })()
+      );
+    }
+
+    await expect(Promise.all(promises)).toResolve();
+  });
 });

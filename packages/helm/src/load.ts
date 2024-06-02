@@ -12,11 +12,37 @@ import { getErrorCode } from "@kosko/common-utils";
 import getCacheDir from "cachedir";
 import { createHash } from "node:crypto";
 import { join } from "node:path";
-import { Stats } from "node:fs";
+import { env } from "node:process";
 
 const FILE_EXIST_ERROR_CODES = new Set(["EEXIST", "ENOTEMPTY"]);
 
-const cacheDir = getCacheDir("kosko-helm");
+const defaultCacheDir = getCacheDir("kosko-helm");
+
+/**
+ * @public
+ */
+export interface CacheOptions {
+  /**
+   * When cache is enabled, the chart is pulled and stored in the cache
+   * directory. Although Helm has its own cache, implementing our own cache
+   * is faster. Local charts are never cached.
+   *
+   * @defaultValue `true`
+   */
+  enabled?: boolean;
+
+  /**
+   * The path of the cache directory. You can also use `KOSKO_HELM_CACHE_DIR`
+   * environment variable to set the cache directory. This option always takes
+   * precedence over the environment variable.
+   *
+   * @defaultValue
+   * - Linux: `$XDG_CACHE_HOME/kosko-helm` or `~/.cache/kosko-helm`
+   * - macOS: `~/Library/Caches/kosko-helm`
+   * - Windows: `$LOCALAPPDATA/kosko-helm` or `~/AppData/Local/kosko-helm`
+   */
+  dir?: string;
+}
 
 /**
  * @public
@@ -44,6 +70,11 @@ export interface PullOptions {
   devel?: boolean;
 
   /**
+   * Skip tls certificate checks for the chart download.
+   */
+  insecureSkipTlsVerify?: boolean;
+
+  /**
    * Identify HTTPS client using this SSL key file.
    */
   keyFile?: string;
@@ -54,6 +85,11 @@ export interface PullOptions {
    * @defaultValue `~/.gnupg/pubring.gpg`
    */
   keyring?: string;
+
+  /**
+   * Pass credentials to all domains.
+   */
+  passCredentials?: boolean;
 
   /**
    * Chart repository password where to locate the requested chart.
@@ -80,6 +116,11 @@ export interface PullOptions {
    * latest version is used.
    */
   version?: string;
+
+  /**
+   * Cache options.
+   */
+  cache?: CacheOptions;
 }
 
 /**
@@ -112,6 +153,21 @@ export interface TemplateOptions {
   generateName?: boolean;
 
   /**
+   * Include CRDs in the templated output.
+   */
+  includeCrds?: boolean;
+
+  /**
+   * Set `.Release.IsUpgrade` instead of `.Release.IsInstall`.
+   */
+  isUpgrade?: boolean;
+
+  /**
+   * Kubernetes version used for `Capabilities.KubeVersion`.
+   */
+  kubeVersion?: string;
+
+  /**
    * Specify template used to name the release.
    */
   nameTemplate?: string;
@@ -127,9 +183,18 @@ export interface TemplateOptions {
   noHooks?: boolean;
 
   /**
-   * Include CRDs in the templated output.
+   * The path to an executable to be used for post rendering. If it exists in
+   * `$PATH`, the binary will be used, otherwise it will try to look for the
+   * executable at the given path.
    */
-  includeCrds?: boolean;
+  postRenderer?: string;
+
+  /**
+   * Arguments to the post-renderer.
+   *
+   * @defaultValue `[]`
+   */
+  postRendererArgs?: string[];
 
   /**
    * Skip tests from templated output.
@@ -149,11 +214,16 @@ export interface TemplateOptions {
   values?: unknown;
 }
 
+function removeBase64Padding(str: string): string {
+  const index = str.indexOf("=");
+  return index === -1 ? str : str.substring(0, index);
+}
+
 function hashPullOptions(options: PullOptions): string {
   const hash = createHash("sha1");
 
   hash.write(
-    JSON.stringify({
+    stringify({
       chart: options.chart,
       devel: options.devel,
       repo: options.repo,
@@ -161,7 +231,7 @@ function hashPullOptions(options: PullOptions): string {
     })
   );
 
-  return hash.digest("base64url").replace(/=+$/, "");
+  return removeBase64Padding(hash.digest("base64url"));
 }
 
 async function runHelm(args: readonly string[]) {
@@ -176,21 +246,25 @@ async function runHelm(args: readonly string[]) {
   }
 }
 
-async function maybeStat(path: string): Promise<Stats | undefined> {
+async function chartExists(chart: string): Promise<boolean> {
   try {
-    return await stat(path);
+    // Check if `Chart.yaml` exists
+    const stats = await stat(join(chart, "Chart.yaml"));
+    return stats.isFile();
   } catch (err) {
     if (getErrorCode(err) !== "ENOENT") throw err;
+    return false;
   }
 }
 
-async function chartExists(chart: string): Promise<boolean> {
-  const stats = await maybeStat(join(chart, "Chart.yaml"));
-  return stats?.isFile() ?? false;
-}
-
 async function isLocalChart(options: PullOptions): Promise<boolean> {
-  return !options.repo && (await chartExists(options.chart));
+  // If repo is set, it's a remote chart
+  if (options.repo) return false;
+
+  // OCI charts are always remote
+  if (options.chart.startsWith("oci://")) return false;
+
+  return chartExists(options.chart);
 }
 
 function getChartBaseName(chart: string): string {
@@ -205,8 +279,10 @@ function getPullArgs(options: PullOptions): string[] {
     ...stringArg("ca-file", options.caFile),
     ...stringArg("cert-file", options.certFile),
     ...booleanArg("devel", options.devel),
+    ...booleanArg("insecure-skip-tls-verify", options.insecureSkipTlsVerify),
     ...stringArg("key-file", options.keyFile),
     ...stringArg("keyring", options.keyring),
+    ...booleanArg("pass-credentials", options.passCredentials),
     ...stringArg("password", options.password),
     ...stringArg("repo", options.repo),
     ...stringArg("username", options.username),
@@ -215,17 +291,27 @@ function getPullArgs(options: PullOptions): string[] {
   ];
 }
 
-async function pullChart(options: PullOptions): Promise<string> {
+async function pullChart(
+  options: PullOptions
+): Promise<Pick<PullOptions, "repo" | "chart">> {
+  // Skip cache if disabled
+  if (options.cache?.enabled === false) {
+    return options;
+  }
+
+  // Skip cache if it's a local chart
   if (await isLocalChart(options)) {
-    return options.chart;
+    return options;
   }
 
   const hash = hashPullOptions(options);
+  const cacheDir =
+    options.cache?.dir || env.KOSKO_HELM_CACHE_DIR || defaultCacheDir;
   const cachePath = join(cacheDir, hash);
 
   // Return cache if exists
   if (await chartExists(cachePath)) {
-    return cachePath;
+    return { chart: cachePath };
   }
 
   // Create a temporary directory for the chart, because when there are multiple
@@ -244,7 +330,7 @@ async function pullChart(options: PullOptions): Promise<string> {
     ]);
 
     // Create the cache directory
-    await mkdir(cacheDir, { recursive: true });
+    await mkdir(defaultCacheDir, { recursive: true });
 
     // Move the chart to the cache directory
     try {
@@ -260,7 +346,7 @@ async function pullChart(options: PullOptions): Promise<string> {
       if (!code || !FILE_EXIST_ERROR_CODES.has(code)) throw err;
     }
 
-    return cachePath;
+    return { chart: cachePath };
   } finally {
     // Clean up the temporary directory
     await tmpDir.cleanup();
@@ -275,40 +361,30 @@ async function writeValues(values: unknown) {
   return file;
 }
 
-async function renderChart({
-  chart,
-  name,
-  apiVersions,
-  dependencyUpdate,
-  description,
-  generateName,
-  nameTemplate,
-  namespace,
-  noHooks,
-  includeCrds,
-  skipTests,
-  timeout,
-  values
-}: Omit<TemplateOptions, "transform"> & { chart: string }) {
+async function renderChart(options: ChartOptions) {
   const args: string[] = [
     "template",
-    ...(name ? [name] : []),
-    chart,
-    ...stringArrayArg("api-versions", apiVersions),
-    ...booleanArg("dependency-update", dependencyUpdate),
-    ...stringArg("description", description),
-    ...booleanArg("generate-name", generateName),
-    ...stringArg("name-template", nameTemplate),
-    ...stringArg("namespace", namespace),
-    ...booleanArg("no-hooks", noHooks),
-    ...booleanArg("include-crds", includeCrds),
-    ...booleanArg("skip-tests", skipTests),
-    ...stringArg("timeout", timeout)
+    ...(options.name ? [options.name] : []),
+    ...getPullArgs(options),
+    ...stringArrayArg("api-versions", options.apiVersions),
+    ...booleanArg("dependency-update", options.dependencyUpdate),
+    ...stringArg("description", options.description),
+    ...booleanArg("generate-name", options.generateName),
+    ...booleanArg("include-crds", options.includeCrds),
+    ...booleanArg("is-upgrade", options.isUpgrade),
+    ...stringArg("kube-version", options.kubeVersion),
+    ...stringArg("name-template", options.nameTemplate),
+    ...stringArg("namespace", options.namespace),
+    ...booleanArg("no-hooks", options.noHooks),
+    ...stringArg("post-renderer", options.postRenderer),
+    ...stringArrayArg("post-renderer-args", options.postRendererArgs),
+    ...booleanArg("skip-tests", options.skipTests),
+    ...stringArg("timeout", options.timeout)
   ];
   let valueFile: tmp.FileResult | undefined;
 
-  if (values) {
-    valueFile = await writeValues(values);
+  if (options.values) {
+    valueFile = await writeValues(options.values);
     args.push("--values", valueFile.path);
   }
 
@@ -334,8 +410,8 @@ export function loadChart(options: ChartOptions): () => Promise<Manifest[]> {
   const { transform, ...opts } = options;
 
   return async () => {
-    const chart = await pullChart(opts);
-    const { stdout } = await renderChart({ ...opts, chart });
+    const { chart, repo } = await pullChart(opts);
+    const { stdout } = await renderChart({ ...opts, chart, repo });
 
     // Find the first `---` in order to skip deprecation warnings
     const index = stdout.indexOf("---\n");
