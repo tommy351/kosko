@@ -240,6 +240,14 @@ async function runHelm(args: readonly string[]) {
   }
 }
 
+function getChartManifestPath(path: string) {
+  return join(path, "Chart.yaml");
+}
+
+function chartManifestExists(path: string) {
+  return fileExists(getChartManifestPath(path));
+}
+
 async function fileExists(path: string): Promise<boolean> {
   try {
     // Check if `Chart.yaml` exists
@@ -258,8 +266,7 @@ async function isLocalChart(options: PullOptions): Promise<boolean> {
   // OCI charts are always remote
   if (options.chart.startsWith("oci://")) return false;
 
-  // Check if `Chart.yaml` exists
-  return fileExists(join(options.chart, "Chart.yaml"));
+  return chartManifestExists(options.chart);
 }
 
 function getChartBaseName(chart: string): string {
@@ -271,7 +278,7 @@ function getChartBaseName(chart: string): string {
 async function getChartMetadata(
   chart: string
 ): Promise<Record<string, unknown>> {
-  const content = await readFile(join(chart, "Chart.yaml"), "utf8");
+  const content = await readFile(getChartManifestPath(chart), "utf8");
   const metadata = yaml.load(content);
 
   if (isRecord(metadata)) return metadata;
@@ -359,12 +366,22 @@ async function pullChart(
     try {
       await rename(chartDir, dest);
     } catch (err) {
-      // If the cache directory already exists, it probably means that another
-      // process has already pulled the chart. In this case, we can ignore the
-      // error and return the cache path.
       const code = getErrorCode(err);
 
-      if (code && FILE_EXIST_ERROR_CODES.has(code)) {
+      if (!code) throw err;
+
+      // If the target already exists, it probably means that another
+      // process has already pulled the chart. In this case, we can ignore the
+      // error and return the cache path.
+      if (FILE_EXIST_ERROR_CODES.has(code)) {
+        return { chart: dest };
+      }
+
+      // Windows throws EPERM error when the target already exists. In this case,
+      // we will try to check if the `Chart.yaml` exists in the target directory.
+      //
+      // https://github.com/nodejs/node/issues/29481
+      if (code === "EPERM" && (await chartManifestExists(dest))) {
         return { chart: dest };
       }
 
