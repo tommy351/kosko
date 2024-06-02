@@ -11,11 +11,12 @@ import stringify from "fast-safe-stringify";
 import { getErrorCode, isRecord } from "@kosko/common-utils";
 import getCacheDir from "cachedir";
 import { createHash } from "node:crypto";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import { env } from "node:process";
 import yaml from "js-yaml";
 
 const FILE_EXIST_ERROR_CODES = new Set(["EEXIST", "ENOTEMPTY"]);
+const OCI_PREFIX = "oci://";
 
 const defaultCacheDir = getCacheDir("kosko-helm");
 
@@ -220,12 +221,16 @@ function removeBase64Padding(str: string): string {
   return index === -1 ? str : str.substring(0, index);
 }
 
-function genObjectHash(value: any): string {
+function genHash(value: string): string {
   const hash = createHash("sha1");
 
-  hash.write(stringify(value));
+  hash.write(value);
 
   return removeBase64Padding(hash.digest("base64url"));
+}
+
+function genObjectHash(value: unknown): string {
+  return genHash(stringify(value));
 }
 
 async function runHelm(args: readonly string[]) {
@@ -259,12 +264,14 @@ async function fileExists(path: string): Promise<boolean> {
   }
 }
 
-async function isLocalChart(options: PullOptions): Promise<boolean> {
+async function isLocalChart(
+  options: Pick<PullOptions, "repo" | "chart">
+): Promise<boolean> {
   // If repo is set, it's a remote chart
   if (options.repo) return false;
 
   // OCI charts are always remote
-  if (options.chart.startsWith("oci://")) return false;
+  if (options.chart.startsWith(OCI_PREFIX)) return false;
 
   return chartManifestExists(options.chart);
 }
@@ -277,12 +284,15 @@ function getChartBaseName(chart: string): string {
 
 async function getChartMetadata(
   chart: string
-): Promise<Record<string, unknown>> {
-  const content = await readFile(getChartManifestPath(chart), "utf8");
-  const metadata = yaml.load(content);
+): Promise<Record<string, unknown> | undefined> {
+  try {
+    const content = await readFile(getChartManifestPath(chart), "utf8");
+    const metadata = yaml.load(content);
 
-  if (isRecord(metadata)) return metadata;
-  return {};
+    if (isRecord(metadata)) return metadata;
+  } catch (err) {
+    if (getErrorCode(err) !== "ENOENT") throw err;
+  }
 }
 
 function getPullArgs(options: PullOptions): string[] {
@@ -303,29 +313,62 @@ function getPullArgs(options: PullOptions): string[] {
   ];
 }
 
-async function pullChart(
-  options: PullOptions
-): Promise<Pick<PullOptions, "repo" | "chart">> {
+async function moveChartToCacheDir(src: string, dest: string): Promise<void> {
+  // Skip if the chart already exists in the cache directory
+  if (await chartManifestExists(dest)) return;
+
+  await mkdir(dirname(dest), { recursive: true });
+
+  try {
+    await rename(src, dest);
+  } catch (err) {
+    const code = getErrorCode(err);
+
+    if (!code) throw err;
+
+    // If the target already exists, it probably means that another
+    // process has already pulled the chart. In this case, we can ignore the
+    // error and return the cache path.
+    if (FILE_EXIST_ERROR_CODES.has(code)) {
+      return;
+    }
+
+    // Windows throws EPERM error when the target already exists. In this case,
+    // we will try to check if the `Chart.yaml` exists in the target directory.
+    //
+    // https://github.com/nodejs/node/issues/29481
+    if (code === "EPERM" && (await chartManifestExists(dest))) {
+      return;
+    }
+
+    throw err;
+  }
+}
+
+async function pullChart(options: PullOptions): Promise<string | undefined> {
   // Skip cache if disabled
-  if (options.cache?.enabled === false) return options;
+  if (options.cache?.enabled === false) return;
+
+  // Skip cache if version is not set
+  if (!options.version) return;
 
   // Skip cache if it's a local chart
-  if (await isLocalChart(options)) return options;
+  if (await isLocalChart(options)) return;
 
   const cacheDir =
     options.cache?.dir || env.KOSKO_HELM_CACHE_DIR || defaultCacheDir;
-  const lockHash = genObjectHash({
-    chart: options.chart,
-    devel: options.devel,
-    repo: options.repo,
-    version: options.version
+  const indexHash = genObjectHash({
+    c: options.chart,
+    d: options.devel,
+    r: options.repo,
+    v: options.version
   });
-  const lockPath = join(cacheDir, lockHash + ".lock");
+  const indexPath = join(cacheDir, "index-" + indexHash);
 
-  // Read the lock file to get the cache path
+  // Read the index file to get the cache path
   try {
-    const lockContent = await readFile(lockPath, "utf8");
-    return { chart: join(cacheDir, lockContent) };
+    const content = await readFile(indexPath, "utf8");
+    return join(cacheDir, content);
   } catch (err) {
     if (getErrorCode(err) !== "ENOENT") throw err;
   }
@@ -349,51 +392,25 @@ async function pullChart(
 
     // Get chart version
     const chartMeta = await getChartMetadata(chartDir);
-    const chartVersion = chartMeta.version;
+    const chartVersion = chartMeta?.version;
 
-    if (typeof chartVersion !== "string") return options;
+    if (typeof chartVersion !== "string") return;
 
     const chartHash = genObjectHash({
-      chart: options.chart,
-      repo: options.repo,
-      version: chartVersion
+      c: options.chart,
+      r: options.repo,
+      v: chartVersion
     });
     const dest = join(cacheDir, chartHash);
 
-    await mkdir(cacheDir, { recursive: true });
-
     // Move the chart to the cache directory
-    try {
-      await rename(chartDir, dest);
-    } catch (err) {
-      const code = getErrorCode(err);
+    await moveChartToCacheDir(chartDir, dest);
 
-      if (!code) throw err;
+    // Write index file
+    await writeFile(indexPath, chartHash);
 
-      // If the target already exists, it probably means that another
-      // process has already pulled the chart. In this case, we can ignore the
-      // error and return the cache path.
-      if (FILE_EXIST_ERROR_CODES.has(code)) {
-        return { chart: dest };
-      }
-
-      // Windows throws EPERM error when the target already exists. In this case,
-      // we will try to check if the `Chart.yaml` exists in the target directory.
-      //
-      // https://github.com/nodejs/node/issues/29481
-      if (code === "EPERM" && (await chartManifestExists(dest))) {
-        return { chart: dest };
-      }
-
-      throw err;
-    }
-
-    // Write lock file
-    await writeFile(lockPath, chartHash);
-
-    return { chart: dest };
+    return dest;
   } finally {
-    // Clean up the temporary directory
     await tmpDir.cleanup();
   }
 }
@@ -455,12 +472,12 @@ export function loadChart(options: ChartOptions): () => Promise<Manifest[]> {
   const { transform, ...opts } = options;
 
   return async () => {
-    const { chart, repo } = await pullChart(opts);
-    const { stdout } = await renderChart({ ...opts, chart, repo });
+    const cachedChart = await pullChart(opts);
+    const { stdout } = await renderChart({
+      ...opts,
+      ...(cachedChart && { chart: cachedChart, repo: undefined })
+    });
 
-    // Find the first `---` in order to skip deprecation warnings
-    const index = stdout.indexOf("---\n");
-
-    return loadString(stdout.substring(index), { transform });
+    return loadString(stdout, { transform });
   };
 }
