@@ -7,8 +7,6 @@ import { readdir } from "node:fs/promises";
 import { Pod } from "kubernetes-models/v1/Pod";
 import { Manifest } from "@kosko/yaml";
 
-const testNonWindows = process.platform === "win32" ? test.skip : test;
-
 jest.mock("@kosko/exec-utils", () => {
   const actual = jest.requireActual("@kosko/exec-utils");
 
@@ -254,49 +252,17 @@ test("passCredentials is true", async () => {
   expect(mockedSpawn.mock.calls[0][1]).toContain("--pass-credentials");
 });
 
-testNonWindows("postRenderer is specified", async () => {
+test("postRenderer is specified", async () => {
   const result = loadChart({
     chart: join(FIXTURE_DIR, "upgrade"),
-    postRenderer: join(FIXTURE_DIR, "post-renderer.sh")
+    postRenderer: "node",
+    postRendererArgs: [join(FIXTURE_DIR, "post-renderer.js")]
   });
 
-  // eslint-disable-next-line jest/no-standalone-expect
   await expect(result()).resolves.toEqual([
     new Pod({
       metadata: {
-        name: "header",
-        annotations: {
-          args: ""
-        }
-      }
-    }),
-    new Pod({
-      metadata: {
-        name: "foo",
-        annotations: {
-          "is-upgrade": "false",
-          "is-install": "true"
-        }
-      }
-    })
-  ]);
-});
-
-testNonWindows("postRendererArgs is specified", async () => {
-  const result = loadChart({
-    chart: join(FIXTURE_DIR, "upgrade"),
-    postRenderer: join(FIXTURE_DIR, "post-renderer.sh"),
-    postRendererArgs: ["a", "b", "c"]
-  });
-
-  // eslint-disable-next-line jest/no-standalone-expect
-  await expect(result()).resolves.toEqual([
-    new Pod({
-      metadata: {
-        name: "header",
-        annotations: {
-          args: "a b c"
-        }
+        name: "header"
       }
     }),
     new Pod({
