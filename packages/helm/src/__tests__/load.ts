@@ -439,3 +439,48 @@ describe("concurrent pull", () => {
     );
   });
 });
+
+describe("cache reuse", () => {
+  let tmpDir: tmp.DirectoryResult;
+
+  async function load(version: string) {
+    return loadChart({
+      chart: "prometheus",
+      repo: "https://prometheus-community.github.io/helm-charts",
+      version,
+      cache: { dir: tmpDir.path }
+    })();
+  }
+
+  function getPullCalls() {
+    return mockedSpawn.mock.calls.filter((call) => call[1]?.[0] === "pull");
+  }
+
+  beforeEach(async () => {
+    tmpDir = await tmp.dir({ unsafeCleanup: true });
+  });
+
+  afterEach(async () => {
+    await tmpDir.cleanup();
+  });
+
+  test("should use cache if hit", async () => {
+    const first = await load("13.6.0");
+    const second = await load("13.6.0");
+
+    expect(second).toEqual(first);
+
+    // `helm pull` should only be called in the first run
+    expect(getPullCalls()).toHaveLength(1);
+  });
+
+  test("should not use cache if miss", async () => {
+    const first = await load("13.6.0");
+    const second = await load("13.8.0");
+
+    expect(second).not.toEqual(first);
+
+    // `helm pull` should be called twice
+    expect(getPullCalls()).toHaveLength(2);
+  });
+});
