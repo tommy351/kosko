@@ -1,6 +1,6 @@
 import { LoadOptions, loadString, Manifest } from "@kosko/yaml";
 import tmp from "tmp-promise";
-import { writeFile, stat, rename, mkdir } from "node:fs/promises";
+import { writeFile, stat, rename, readFile, mkdir } from "node:fs/promises";
 import {
   spawn,
   booleanArg,
@@ -8,11 +8,12 @@ import {
   stringArrayArg
 } from "@kosko/exec-utils";
 import stringify from "fast-safe-stringify";
-import { getErrorCode } from "@kosko/common-utils";
+import { getErrorCode, isRecord } from "@kosko/common-utils";
 import getCacheDir from "cachedir";
 import { createHash } from "node:crypto";
 import { join } from "node:path";
 import { env } from "node:process";
+import yaml from "js-yaml";
 
 const FILE_EXIST_ERROR_CODES = new Set(["EEXIST", "ENOTEMPTY"]);
 
@@ -219,17 +220,10 @@ function removeBase64Padding(str: string): string {
   return index === -1 ? str : str.substring(0, index);
 }
 
-function hashPullOptions(options: PullOptions): string {
+function genObjectHash(value: any): string {
   const hash = createHash("sha1");
 
-  hash.write(
-    stringify({
-      chart: options.chart,
-      devel: options.devel,
-      repo: options.repo,
-      version: options.version
-    })
-  );
+  hash.write(stringify(value));
 
   return removeBase64Padding(hash.digest("base64url"));
 }
@@ -246,10 +240,10 @@ async function runHelm(args: readonly string[]) {
   }
 }
 
-async function chartExists(chart: string): Promise<boolean> {
+async function fileExists(path: string): Promise<boolean> {
   try {
     // Check if `Chart.yaml` exists
-    const stats = await stat(join(chart, "Chart.yaml"));
+    const stats = await stat(path);
     return stats.isFile();
   } catch (err) {
     if (getErrorCode(err) !== "ENOENT") throw err;
@@ -264,13 +258,24 @@ async function isLocalChart(options: PullOptions): Promise<boolean> {
   // OCI charts are always remote
   if (options.chart.startsWith("oci://")) return false;
 
-  return chartExists(options.chart);
+  // Check if `Chart.yaml` exists
+  return fileExists(join(options.chart, "Chart.yaml"));
 }
 
 function getChartBaseName(chart: string): string {
   const index = chart.lastIndexOf("/");
 
   return index === -1 ? chart : chart.substring(index + 1);
+}
+
+async function getChartMetadata(
+  chart: string
+): Promise<Record<string, unknown>> {
+  const content = await readFile(join(chart, "Chart.yaml"), "utf8");
+  const metadata = yaml.load(content);
+
+  if (isRecord(metadata)) return metadata;
+  return {};
 }
 
 function getPullArgs(options: PullOptions): string[] {
@@ -295,23 +300,27 @@ async function pullChart(
   options: PullOptions
 ): Promise<Pick<PullOptions, "repo" | "chart">> {
   // Skip cache if disabled
-  if (options.cache?.enabled === false) {
-    return options;
-  }
+  if (options.cache?.enabled === false) return options;
 
   // Skip cache if it's a local chart
-  if (await isLocalChart(options)) {
-    return options;
-  }
+  if (await isLocalChart(options)) return options;
 
-  const hash = hashPullOptions(options);
   const cacheDir =
     options.cache?.dir || env.KOSKO_HELM_CACHE_DIR || defaultCacheDir;
-  const cachePath = join(cacheDir, hash);
+  const lockHash = genObjectHash({
+    chart: options.chart,
+    devel: options.devel,
+    repo: options.repo,
+    version: options.version
+  });
+  const lockPath = join(cacheDir, lockHash + ".lock");
 
-  // Return cache if exists
-  if (await chartExists(cachePath)) {
-    return { chart: cachePath };
+  // Read the lock file to get the cache path
+  try {
+    const lockContent = await readFile(lockPath, "utf8");
+    return { chart: join(cacheDir, lockContent) };
+  } catch (err) {
+    if (getErrorCode(err) !== "ENOENT") throw err;
   }
 
   // Create a temporary directory for the chart, because when there are multiple
@@ -329,24 +338,43 @@ async function pullChart(
       tmpDir.path
     ]);
 
-    // Create the cache directory
-    await mkdir(defaultCacheDir, { recursive: true });
+    const chartDir = join(tmpDir.path, getChartBaseName(options.chart));
+
+    // Get chart version
+    const chartMeta = await getChartMetadata(chartDir);
+    const chartVersion = chartMeta.version;
+
+    if (typeof chartVersion !== "string") return options;
+
+    const chartHash = genObjectHash({
+      chart: options.chart,
+      repo: options.repo,
+      version: chartVersion
+    });
+    const dest = join(cacheDir, chartHash);
+
+    await mkdir(cacheDir, { recursive: true });
 
     // Move the chart to the cache directory
     try {
-      await rename(
-        join(tmpDir.path, getChartBaseName(options.chart)),
-        cachePath
-      );
+      await rename(chartDir, dest);
     } catch (err) {
       // If the cache directory already exists, it probably means that another
       // process has already pulled the chart. In this case, we can ignore the
       // error and return the cache path.
       const code = getErrorCode(err);
-      if (!code || !FILE_EXIST_ERROR_CODES.has(code)) throw err;
+
+      if (code && FILE_EXIST_ERROR_CODES.has(code)) {
+        return { chart: dest };
+      }
+
+      throw err;
     }
 
-    return { chart: cachePath };
+    // Write lock file
+    await writeFile(lockPath, chartHash);
+
+    return { chart: dest };
   } finally {
     // Clean up the temporary directory
     await tmpDir.cleanup();

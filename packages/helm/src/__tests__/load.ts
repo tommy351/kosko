@@ -75,6 +75,27 @@ test("values are specified", async () => {
   await expect(result()).resolves.toMatchSnapshot();
 });
 
+describe("version option", () => {
+  test("version is not specified", async () => {
+    const result = loadChart({
+      chart: "prometheus",
+      repo: "https://prometheus-community.github.io/helm-charts"
+    });
+
+    await expect(result()).resolves.not.toBeEmpty();
+  });
+
+  test("version is a semver range", async () => {
+    const result = loadChart({
+      chart: "prometheus",
+      repo: "https://prometheus-community.github.io/helm-charts",
+      version: "^23.0.0"
+    });
+
+    await expect(result()).resolves.not.toBeEmpty();
+  });
+});
+
 describe("includeCrds option", () => {
   test("should not include CRDs when includeCrds is not set", async () => {
     const result = loadChart({
@@ -331,7 +352,7 @@ describe("when cache is disabled", () => {
       cache: { enabled: false, dir: tmpDir.path }
     });
 
-    await expect(result()).toResolve();
+    await expect(result()).resolves.not.toBeEmpty();
 
     // Cache directory should be empty
     await expect(readdir(tmpDir.path)).resolves.toBeEmpty();
@@ -357,7 +378,7 @@ describe("when cache directory is specified", () => {
       cache: { dir: tmpDir.path }
     });
 
-    await expect(result()).toResolve();
+    await expect(result()).resolves.not.toBeEmpty();
 
     // Cache directory should not be empty
     await expect(readdir(tmpDir.path)).resolves.not.toBeEmpty();
@@ -386,10 +407,37 @@ describe("when KOSKO_HELM_CACHE_DIR is set", () => {
       version: "13.6.0"
     });
 
-    await expect(result()).toResolve();
+    await expect(result()).resolves.not.toBeEmpty();
 
     // Cache directory should not be empty
     await expect(readdir(tmpDir.path)).resolves.not.toBeEmpty();
+  });
+});
+
+describe("when cache directory does not exist", () => {
+  let tmpDir: tmp.DirectoryResult;
+
+  beforeEach(async () => {
+    tmpDir = await tmp.dir({ unsafeCleanup: true });
+  });
+
+  afterEach(async () => {
+    await tmpDir.cleanup();
+  });
+
+  test("should create cache directory", async () => {
+    const cacheDir = join(tmpDir.path, "cache");
+    const result = loadChart({
+      chart: "prometheus",
+      repo: "https://prometheus-community.github.io/helm-charts",
+      version: "13.6.0",
+      cache: { dir: cacheDir }
+    });
+
+    await expect(result()).resolves.not.toBeEmpty();
+
+    // Cache directory should not be empty
+    await expect(readdir(cacheDir)).resolves.not.toBeEmpty();
   });
 });
 
@@ -420,6 +468,8 @@ describe("concurrent pull", () => {
       );
     }
 
-    await expect(Promise.all(promises)).toResolve();
+    await expect(Promise.all(promises)).resolves.toSatisfyAll(
+      (result) => result.length > 0
+    );
   });
 });
