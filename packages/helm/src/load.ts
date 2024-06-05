@@ -1,6 +1,6 @@
 import { LoadOptions, loadString, Manifest } from "@kosko/yaml";
 import tmp from "tmp-promise";
-import { writeFile, stat, rename, readFile, mkdir } from "node:fs/promises";
+import { writeFile, readFile, mkdir } from "node:fs/promises";
 import {
   spawn,
   booleanArg,
@@ -14,6 +14,7 @@ import { createHash } from "node:crypto";
 import { dirname, join } from "node:path";
 import { env } from "node:process";
 import yaml from "js-yaml";
+import { fileExists, move } from "./fs";
 
 const FILE_EXIST_ERROR_CODES = new Set(["EEXIST", "ENOTEMPTY"]);
 const OCI_PREFIX = "oci://";
@@ -253,17 +254,6 @@ function chartManifestExists(path: string) {
   return fileExists(getChartManifestPath(path));
 }
 
-async function fileExists(path: string): Promise<boolean> {
-  try {
-    // Check if `Chart.yaml` exists
-    const stats = await stat(path);
-    return stats.isFile();
-  } catch (err) {
-    if (getErrorCode(err) !== "ENOENT") throw err;
-    return false;
-  }
-}
-
 async function isLocalChart(
   options: Pick<PullOptions, "repo" | "chart">
 ): Promise<boolean> {
@@ -320,7 +310,7 @@ async function moveChartToCacheDir(src: string, dest: string): Promise<void> {
   await mkdir(dirname(dest), { recursive: true });
 
   try {
-    await rename(src, dest);
+    await move(src, dest);
   } catch (err) {
     const code = getErrorCode(err);
 
