@@ -49,8 +49,6 @@ async function importEnvNode(cwd: string): Promise<Environment[]> {
   if (BUILD_FORMAT === "cjs") {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     envs.push(require(envPath));
-  } else {
-    // TODO: Import CommonJS @kosko/env in ESM environment
   }
 
   // Why `@kosko/env` package has to be imported twice? Because the cache on
