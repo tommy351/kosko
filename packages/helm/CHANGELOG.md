@@ -1,5 +1,13 @@
 # @kosko/helm
 
+## 5.1.0
+
+### Minor Changes
+
+- [#135](https://github.com/tommy351/kosko/pull/135) [`95780a9`](https://github.com/tommy351/kosko/commit/95780a975e72a7feebc03ec7ea0248c8246f4151) Thanks [@tommy351](https://github.com/tommy351)! - Add options: `insecureSkipTlsVerify`, `passCredentials`, `isUpgrade`, `kubeVersion`, `postRenderer`, `postRendererArgs`.
+
+- [#135](https://github.com/tommy351/kosko/pull/135) [`040af63`](https://github.com/tommy351/kosko/commit/040af63d46358c60d56ef823433b97af012090a0) Thanks [@tommy351](https://github.com/tommy351)! - Implement Helm chart cache. Cache is enabled by default. You can disable it by setting `cache.enabled` to `false`.
+
 ## 5.0.0
 
 ### Major Changes
