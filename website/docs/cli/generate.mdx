@@ -45,6 +45,17 @@ Config path. Default to `kosko.toml` in current folder.
 
 Environment name.
 
+### `--import`
+
+<AvailabilityInfo availability={{ kosko: "4.2.0" }} />
+
+Preload ES modules at startup. This option only works when ECMAScript modules (ESM) is enabled.
+
+```shell
+# Using SWC
+kosko generate --import @swc-node/register/esm-register
+```
+
 ### `--loader`
 
 <AvailabilityInfo availability={{ kosko: "3.0.0" }} />

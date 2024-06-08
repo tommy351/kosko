@@ -54,6 +54,19 @@ Extension names of components. It's unnecessary to manually set this option. It 
 extensions = ["js", "json"]
 ```
 
+### `import`
+
+<AvailabilityInfo availability={{ kosko: "4.2.0" }} />
+
+Preload ES modules at startup. This option only works when ECMAScript modules (ESM) is enabled.
+
+#### Examples {#global-import-examples}
+
+```toml
+# Using SWC
+import = ["@swc-node/register/esm-register"]
+```
+
 ### `loaders`
 
 <AvailabilityInfo availability={{ kosko: "3.0.0" }} />
@@ -69,7 +82,7 @@ loaders = ["ts-node/esm"]
 
 ### `require`
 
-Require external modules.
+Require CommonJS modules.
 
 #### Examples {#global-require-examples}
 
