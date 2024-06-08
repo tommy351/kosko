@@ -48,8 +48,8 @@
   "devDependencies": {
     "@kosko/build-scripts": "workspace:^",
     "@kosko/jest-preset": "workspace:^",
-    "@kubernetes-models/apimachinery": "^1.2.1",
-    "kubernetes-models": "^4.1.0",
+    "@kubernetes-models/apimachinery": "^1.2.2",
+    "kubernetes-models": "^4.3.2",
     "type-fest": "^4.10.2"
   },
   "jest": {

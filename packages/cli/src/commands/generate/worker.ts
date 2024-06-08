@@ -11,7 +11,7 @@ import { fileURLToPath } from "node:url";
 import { stdout, execPath, execArgv } from "node:process";
 import { createRequire } from "node:module";
 import { loadPlugins } from "./plugin";
-import { BUILD_TARGET, TARGET_SUFFIX } from "@kosko/build-scripts";
+import { BUILD_TARGET } from "@kosko/build-scripts";
 
 export interface WorkerOptions {
   printFormat?: PrintFormat;
@@ -23,7 +23,11 @@ export interface WorkerOptions {
 export async function handler(options: WorkerOptions) {
   const { printFormat, args, config, ignoreLoaders } = options;
 
-  if (BUILD_TARGET === "node" && !ignoreLoaders && config.loaders.length) {
+  if (
+    BUILD_TARGET === "node" &&
+    !ignoreLoaders &&
+    (config.loaders.length || config.import.length)
+  ) {
     await runWithLoaders(options);
     return;
   }
@@ -90,8 +94,10 @@ async function runWithLoaders(options: WorkerOptions) {
         ...execArgv,
         // ESM loaders
         ...options.config.loaders.flatMap((loader) => ["--loader", loader]),
-        // Entry file
-        join(fileURLToPath(import.meta.url), "../worker-bin." + TARGET_SUFFIX)
+        // ESM import
+        ...options.config.import.flatMap((imp) => ["--import", imp]),
+        // Entry file. Always use ESM entry file.
+        join(fileURLToPath(import.meta.url), "../worker-bin.node.mjs")
       ],
       {
         stdio: ["pipe", "inherit", "inherit"],

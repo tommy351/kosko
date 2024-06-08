@@ -1,0 +1,3 @@
+components = ["*"]
+import = ["@swc-node/register/esm-register"]
+extensions = ["ts"]

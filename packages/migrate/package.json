@@ -48,7 +48,7 @@
     "@kosko/jest-preset": "workspace:^",
     "@kosko/yaml": "workspace:^",
     "is-plain-object": "^5.0.0",
-    "kubernetes-models": "^4.1.0"
+    "kubernetes-models": "^4.3.2"
   },
   "peerDependencies": {
     "@kosko/yaml": "workspace:^",

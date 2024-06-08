@@ -1,3 +1,4 @@
+/// <reference types="jest-extended" />
 import toml from "@iarna/toml";
 import { Config } from "@kosko/config";
 import { Environment } from "@kosko/env";

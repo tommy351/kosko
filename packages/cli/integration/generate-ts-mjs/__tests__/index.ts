@@ -13,9 +13,23 @@ test("should load loaders specified in args", async () => {
 test("should load loaders specified in config", async () => {
   const result = await runNodeCLI(
     ["generate", "--config", "kosko-loader.toml"],
-    {
-      cwd: testDir
-    }
+    { cwd: testDir }
+  );
+  expect(result.stdout).toMatchSnapshot();
+});
+
+test("should use import specified in args", async () => {
+  const result = await runNodeCLI(
+    ["generate", "--import", "@swc-node/register/esm-register"],
+    { cwd: testDir, stderr: "inherit" }
+  );
+  expect(result.stdout).toMatchSnapshot();
+});
+
+test("should use import specified in config", async () => {
+  const result = await runNodeCLI(
+    ["generate", "--config", "kosko-import.toml"],
+    { cwd: testDir, stderr: "inherit" }
   );
   expect(result.stdout).toMatchSnapshot();
 });

@@ -15,7 +15,7 @@
     "@rollup/plugin-replace": "^5.0.5",
     "@rollup/plugin-swc": "^0.3.0",
     "@rollup/plugin-virtual": "^3.0.2",
-    "@swc/core": "^1.4.8",
+    "@swc/core": "^1.5.25",
     "@swc/helpers": "^0.5.6",
     "execa": "^5.1.1",
     "globby": "^11.0.2",

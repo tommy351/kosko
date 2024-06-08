@@ -11,6 +11,7 @@ export interface BaseGenerateArguments extends GlobalArguments {
   loader?: string[];
   config?: string;
   bail?: boolean;
+  import?: string[];
 }
 
 export interface GenerateArguments extends BaseGenerateArguments {
