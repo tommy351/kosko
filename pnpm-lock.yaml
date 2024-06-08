@@ -581,9 +581,15 @@ importers:
       '@kosko/exec-utils':
         specifier: workspace:^
         version: link:../exec-utils
+      cachedir:
+        specifier: ^2.4.0
+        version: 2.4.0
       fast-safe-stringify:
         specifier: ^2.1.1
         version: 2.1.1
+      js-yaml:
+        specifier: ^4.1.0
+        version: 4.1.0
       tmp-promise:
         specifier: ^3.0.3
         version: 3.0.3
@@ -597,6 +603,9 @@ importers:
       '@kosko/yaml':
         specifier: workspace:^
         version: link:../yaml
+      '@types/js-yaml':
+        specifier: ^4.0.5
+        version: 4.0.5
       kubernetes-models:
         specifier: ^4.1.0
         version: 4.1.0
@@ -3544,6 +3553,10 @@ packages:
   cacheable-request@10.2.14:
     resolution: {integrity: sha512-zkDT5WAF4hSSoUgyfg5tFIxz8XQK+25W/TLVojJTMKBaxevLBBtLxgqguAuVQB8PVW79FVjHcU+GJ9tVbDZ9mQ==}
     engines: {node: '>=14.16'}
+
+  cachedir@2.4.0:
+    resolution: {integrity: sha512-9EtFOZR8g22CL7BWjJ9BUx1+A/djkofnyW3aOXZORNW2kxoUpx2h+uN2cOqwPmFhnpVmxg+KW2OjOSgChTEvsQ==}
+    engines: {node: '>=6'}
 
   call-bind@1.0.6:
     resolution: {integrity: sha512-Mj50FLHtlsoVfRfnHaZvyrooHcrlceNZdL/QBvJJVd9Ta55qCQK0gs4ss2oZDeV9zFCs6ewzYgVE5yfVmfFpVg==}
@@ -12696,6 +12709,8 @@ snapshots:
       mimic-response: 4.0.0
       normalize-url: 8.0.1
       responselike: 3.0.0
+
+  cachedir@2.4.0: {}
 
   call-bind@1.0.6:
     dependencies:

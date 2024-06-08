@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: foo
+  annotations:
+    is-install: "{{ .Release.IsInstall }}"
+    is-upgrade: "{{ .Release.IsUpgrade }}"
