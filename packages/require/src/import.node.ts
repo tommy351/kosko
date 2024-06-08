@@ -1,10 +1,7 @@
 import { BUILD_FORMAT } from "@kosko/build-scripts";
 import { getErrorCode } from "@kosko/common-utils";
 import { createRequire } from "node:module";
-import { env } from "node:process";
 import { pathToFileURL } from "node:url";
-
-const ESM_IMPORT_DISABLED = env.ESM_IMPORT_DISABLED === "1";
 
 const req = BUILD_FORMAT === "cjs" ? require : createRequire(import.meta.url);
 
@@ -14,10 +11,6 @@ function requireModule(path: string) {
 }
 
 export async function importPath(path: string) {
-  if (ESM_IMPORT_DISABLED) {
-    return requireModule(path);
-  }
-
   const url = pathToFileURL(path).toString();
 
   if (path.endsWith(".json")) {
@@ -27,17 +20,23 @@ export async function importPath(path: string) {
       return requireModule(path);
     }
 
-    return import(url, { assert: { type: "json" } });
+    return import(url, { assert: { type: "json" }, with: { type: "json" } });
   }
 
   try {
     return await import(url);
   } catch (err) {
-    // This might happen when importing `.ts` files.
-    if (getErrorCode(err) !== "ERR_UNKNOWN_FILE_EXTENSION") {
-      throw err;
+    const code = getErrorCode(err);
+
+    if (
+      // This might happen when importing `.ts` files.
+      code === "ERR_UNKNOWN_FILE_EXTENSION" ||
+      // This might happen when importing ESM files in CJS mode.
+      code === "ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING_FLAG"
+    ) {
+      return requireModule(path);
     }
 
-    return requireModule(path);
+    throw err;
   }
 }

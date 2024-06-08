@@ -49,7 +49,7 @@
     "@kosko/build-scripts": "workspace:^",
     "@kosko/jest-preset": "workspace:^",
     "@kosko/yaml": "workspace:^",
-    "kubernetes-models": "^4.1.0"
+    "kubernetes-models": "^4.4.0"
   },
   "peerDependencies": {
     "@kosko/yaml": "workspace:^",

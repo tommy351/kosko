@@ -46,7 +46,7 @@ const typesPath = args.types ? join(cwd, args.types) : fullDistPath;
  * @param {{
  *   suffixes?: readonly string[];
  *   output: string;
- *   format: import("rollup").ModuleFormat;
+ *   format: 'cjs' | 'esm';
  *   importMetaUrlShim?: boolean;
  *   target: 'browser' | 'node';
  *   reuse?: string;
@@ -87,6 +87,7 @@ export const BUILD_PROD = true;
 export const BUILD_TARGET = ${JSON.stringify(options.target)};
 export const BUILD_FORMAT = ${JSON.stringify(options.format)};
 export const TARGET_SUFFIX = ${JSON.stringify(options.output)};
+export const ESM_IMPORT_DISABLED = false;
 `
       }),
       replace({

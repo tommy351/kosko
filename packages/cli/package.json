@@ -73,6 +73,8 @@
     "@kosko/jest-preset": "workspace:^",
     "@kosko/plugin": "workspace:^",
     "@kosko/test-utils": "workspace:^",
+    "@swc-node/register": "^1.9.2",
+    "@swc/core": "^1.5.25",
     "@types/bl": "^5.0.2",
     "@types/exit": "^0.1.31",
     "@types/jsonpath": "^0.2.0",
@@ -80,9 +82,10 @@
     "bl": "^5.0.0",
     "execa": "^5.1.1",
     "fast-glob": "^3.2.12",
-    "kubernetes-models": "^4.1.0",
+    "kubernetes-models": "^4.4.0",
     "pkg-dir": "^5.0.0",
-    "replace-string": "^3.1.0"
+    "replace-string": "^3.1.0",
+    "ts-node": "^10.9.2"
   },
   "jest": {
     "preset": "@kosko/jest-preset"
