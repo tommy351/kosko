@@ -96,8 +96,18 @@ async function runWithLoaders(options: WorkerOptions) {
         ...options.config.loaders.flatMap((loader) => ["--loader", loader]),
         // ESM import
         ...options.config.import.flatMap((imp) => ["--import", imp]),
-        // Entry file. Always use ESM entry file.
-        join(fileURLToPath(import.meta.url), "../worker-bin.node.mjs")
+        // Entry file. Always use ESM entry file when `import` is provided
+        // because of the following error, which seems to happen only when using
+        // `@swc-node/register/esm-register`.
+        //
+        // ReferenceError: require is not defined in ES module scope, you can use import instead
+        //
+        // Otherwise, use CJS entry file because it supports both `require` and
+        // `import`.
+        join(
+          fileURLToPath(import.meta.url),
+          "../worker-bin.node." + (options.config.import.length ? "mjs" : "cjs")
+        )
       ],
       {
         stdio: ["pipe", "inherit", "inherit"],

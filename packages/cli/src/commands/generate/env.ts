@@ -46,6 +46,9 @@ async function importEnvNode(cwd: string): Promise<Environment[]> {
 
   const envs: Environment[] = [];
 
+  // Global `require` is only available in CommonJS environment. We don't use
+  // `createRequire` here because it will create a new instance of `require`,
+  // which doesn't share the same cache with the global `require`.
   if (BUILD_FORMAT === "cjs") {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     envs.push(require(envPath));
