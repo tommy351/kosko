@@ -20,7 +20,7 @@ export async function importPath(path: string) {
       return requireModule(path);
     }
 
-    return import(url, { assert: { type: "json" }, with: { type: "json" } });
+    return import(url, { with: { type: "json" } });
   }
 
   try {

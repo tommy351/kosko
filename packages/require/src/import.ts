@@ -10,7 +10,7 @@ export async function importPath(path: string) {
   const url = pathToFileURL(path).toString();
 
   if (path.endsWith(".json")) {
-    return import(url, { assert: { type: "json" } });
+    return import(url, { with: { type: "json" } });
   }
 
   return import(url);

@@ -37,7 +37,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=18"
+    "node": "^18.20.0 || ^20.10.0 || >= 21"
   },
   "dependencies": {
     "camelcase": "^6.2.1",
