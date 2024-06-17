@@ -358,7 +358,10 @@ async function pullChart(options: PullOptions): Promise<string | undefined> {
   // Read the index file to get the cache path
   try {
     const content = await readFile(indexPath, "utf8");
-    return join(cacheDir, content);
+    if (content) {
+      // The content read by current process might be empty due to race condition.
+      return join(cacheDir, content);
+    }
   } catch (err) {
     if (getErrorCode(err) !== "ENOENT") throw err;
   }
