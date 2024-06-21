@@ -32,6 +32,23 @@ test("chart is a local path", async () => {
   await expect(result()).resolves.toMatchSnapshot();
 });
 
+test("invalid local chart path", async () => {
+  const result = loadChart({ chart: FIXTURE_DIR });
+  await expect(result()).rejects.toThrow();
+});
+
+test("chart is a local tarball", async () => {
+  const result = loadChart({
+    chart: join(FIXTURE_DIR, "tar", "prometheus-25.22.0.tgz")
+  });
+  await expect(result()).resolves.toMatchSnapshot();
+});
+
+test("invalid local tarball", async () => {
+  const result = loadChart({ chart: join(FIXTURE_DIR, "tar", "bad-tar.tgz") });
+  await expect(result()).rejects.toThrow();
+});
+
 test("chart is remote", async () => {
   const result = loadChart({
     chart: "prometheus",

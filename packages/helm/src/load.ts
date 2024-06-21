@@ -247,12 +247,13 @@ async function runHelm(args: readonly string[]) {
   }
 }
 
-function getChartManifestPath(path: string) {
-  return join(path, "Chart.yaml");
-}
-
-function chartManifestExists(path: string) {
-  return fileExists(getChartManifestPath(path));
+async function chartManifestExists(path: string) {
+  try {
+    return isRecord(await getChartMetadata(path));
+  } catch {
+    //
+  }
+  return false;
 }
 
 async function isLocalChart(
@@ -270,14 +271,10 @@ async function isLocalChart(
 async function getChartMetadata(
   chart: string
 ): Promise<Record<string, unknown> | undefined> {
-  try {
-    const { stdout: content } = await runHelm(["show", "chart", chart]);
-    const metadata = yaml.load(content);
+  const { stdout: content } = await runHelm(["show", "chart", chart]);
+  const metadata = yaml.load(content);
 
-    if (isRecord(metadata)) return metadata;
-  } catch (err) {
-    if (getErrorCode(err) !== "ENOENT") throw err;
-  }
+  if (isRecord(metadata)) return metadata;
 }
 
 function getPullArgs(options: PullOptions): string[] {
