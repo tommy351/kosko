@@ -18,6 +18,7 @@ jest.mock("@kosko/exec-utils", () => {
 
 const FIXTURE_DIR = join(__dirname, "../__fixtures__");
 const NGINX_CHART = join(FIXTURE_DIR, "nginx");
+const TAR_CHART = join(FIXTURE_DIR, "tar", "prometheus-25.22.0.tgz");
 
 const mockedSpawn = jest.mocked(spawn);
 
@@ -29,6 +30,11 @@ beforeEach(() => {
 
 test("chart is a local path", async () => {
   const result = loadChart({ chart: NGINX_CHART });
+  await expect(result()).resolves.toMatchSnapshot();
+});
+
+test("chart is a local tarball", async () => {
+  const result = loadChart({ chart: TAR_CHART });
   await expect(result()).resolves.toMatchSnapshot();
 });
 
