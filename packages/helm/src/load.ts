@@ -13,6 +13,7 @@ import getCacheDir from "cachedir";
 import { createHash } from "node:crypto";
 import { dirname, join } from "node:path";
 import { env } from "node:process";
+import { readdir } from "node:fs/promises";
 import yaml from "js-yaml";
 import { fileExists, move } from "./fs";
 
@@ -266,17 +267,11 @@ async function isLocalChart(
   return chartManifestExists(options.chart);
 }
 
-function getChartBaseName(chart: string): string {
-  const index = chart.lastIndexOf("/");
-
-  return index === -1 ? chart : chart.substring(index + 1);
-}
-
 async function getChartMetadata(
   chart: string
 ): Promise<Record<string, unknown> | undefined> {
   try {
-    const content = await readFile(getChartManifestPath(chart), "utf8");
+    const { stdout: content } = await runHelm(["show", "chart", chart]);
     const metadata = yaml.load(content);
 
     if (isRecord(metadata)) return metadata;
@@ -305,7 +300,7 @@ function getPullArgs(options: PullOptions): string[] {
 
 async function moveChartToCacheDir(src: string, dest: string): Promise<void> {
   // Skip if the chart already exists in the cache directory
-  if (await chartManifestExists(dest)) return;
+  if (await fileExists(dest)) return;
 
   await mkdir(dirname(dest), { recursive: true });
 
@@ -323,11 +318,10 @@ async function moveChartToCacheDir(src: string, dest: string): Promise<void> {
       return;
     }
 
-    // Windows throws EPERM error when the target already exists. In this case,
-    // we will try to check if the `Chart.yaml` exists in the target directory.
+    // Windows throws EPERM error when the target already exists.
     //
     // https://github.com/nodejs/node/issues/29481
-    if (code === "EPERM" && (await chartManifestExists(dest))) {
+    if (code === "EPERM") {
       return;
     }
 
@@ -373,15 +367,17 @@ async function pullChart(options: PullOptions): Promise<string | undefined> {
     await runHelm([
       "pull",
       ...getPullArgs(options),
-      "--untar",
-      "--untardir",
+      "--destination",
       tmpDir.path
     ]);
 
-    const chartDir = join(tmpDir.path, getChartBaseName(options.chart));
+    // Get the chart path
+    const files = await readdir(tmpDir.path);
+    if (files.length === 0) return;
+    const chartPath = join(tmpDir.path, files[0]);
 
     // Get chart version
-    const chartMeta = await getChartMetadata(chartDir);
+    const chartMeta = await getChartMetadata(chartPath);
     const chartVersion = chartMeta?.version;
 
     if (typeof chartVersion !== "string") return;
@@ -394,7 +390,7 @@ async function pullChart(options: PullOptions): Promise<string | undefined> {
     const dest = join(cacheDir, chartHash);
 
     // Move the chart to the cache directory
-    await moveChartToCacheDir(chartDir, dest);
+    await moveChartToCacheDir(chartPath, dest);
 
     // Write index file
     await writeFile(indexPath, chartHash);
