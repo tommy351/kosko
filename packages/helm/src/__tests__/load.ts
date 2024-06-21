@@ -3,7 +3,7 @@ import { loadChart } from "../load";
 import { join } from "node:path";
 import { spawn } from "@kosko/exec-utils";
 import tmp from "tmp-promise";
-import { readdir } from "node:fs/promises";
+import { readdir, writeFile } from "node:fs/promises";
 import { Pod } from "kubernetes-models/v1/Pod";
 import { Manifest } from "@kosko/yaml";
 
@@ -482,5 +482,40 @@ describe("cache reuse", () => {
 
     // `helm pull` should be called twice
     expect(getPullCalls()).toHaveLength(2);
+  });
+});
+
+describe("when index file is empty", () => {
+  let tmpDir: tmp.DirectoryResult;
+
+  beforeEach(async () => {
+    tmpDir = await tmp.dir({ unsafeCleanup: true });
+  });
+
+  afterEach(async () => {
+    await tmpDir.cleanup();
+  });
+
+  test("should not use cache", async () => {
+    const run = async () => {
+      const result = loadChart({
+        chart: "prometheus",
+        repo: "https://prometheus-community.github.io/helm-charts",
+        version: "13.6.0",
+        cache: { dir: tmpDir.path }
+      });
+
+      await expect(result()).resolves.not.toBeEmpty();
+    };
+
+    await run();
+
+    const filenames = await readdir(tmpDir.path);
+    const indexFilename = filenames.find((filename) =>
+      filename.startsWith("index")
+    );
+    await writeFile(join(tmpDir.path, indexFilename!), "");
+
+    await run();
   });
 });
