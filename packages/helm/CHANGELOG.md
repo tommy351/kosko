@@ -1,5 +1,15 @@
 # @kosko/helm
 
+## 5.1.1
+
+### Patch Changes
+
+- [#146](https://github.com/tommy351/kosko/pull/146) [`2292a30`](https://github.com/tommy351/kosko/commit/2292a303f96f4576a1d368c111fe95fcf585c181) Thanks [@yz89122](https://github.com/yz89122)! - Fix loadHelm might read empty index file in case of race condition
+
+- [#148](https://github.com/tommy351/kosko/pull/148) [`caea4f7`](https://github.com/tommy351/kosko/commit/caea4f7ae4fba92c2e297a6dfd9b1128a56a93d6) Thanks [@yz89122](https://github.com/yz89122)! - adjust check logic of chart exists
+
+- [#145](https://github.com/tommy351/kosko/pull/145) [`0056c22`](https://github.com/tommy351/kosko/commit/0056c22f4daa7f8b8a8a1dae477db9443e058951) Thanks [@yz89122](https://github.com/yz89122)! - Cache tar file instead of extracted
+
 ## 5.1.0
 
 ### Minor Changes
