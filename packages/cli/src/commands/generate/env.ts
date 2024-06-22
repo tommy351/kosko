@@ -6,10 +6,13 @@ import pkgUp from "pkg-up";
 import { dirname, join } from "node:path";
 import { readFile } from "node:fs/promises";
 import { pathToFileURL } from "node:url";
-import { env } from "node:process";
 import { excludeFalsyInArray } from "../../utils";
 import { resolveModule } from "@kosko/require";
-import { BUILD_TARGET } from "@kosko/build-scripts";
+import {
+  BUILD_FORMAT,
+  BUILD_TARGET,
+  ESM_IMPORT_DISABLED
+} from "@kosko/build-scripts";
 
 const KOSKO_ENV = "@kosko/env";
 
@@ -43,15 +46,20 @@ async function importEnvNode(cwd: string): Promise<Environment[]> {
 
   const envs: Environment[] = [];
 
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  envs.push(require(envPath));
+  // Global `require` is only available in CommonJS environment. We don't use
+  // `createRequire` here because it will create a new instance of `require`,
+  // which doesn't share the same cache with the global `require`.
+  if (BUILD_FORMAT === "cjs") {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    envs.push(require(envPath));
+  }
 
   // Why `@kosko/env` package has to be imported twice? Because the cache on
   // CommonJS and ESM are separated, which means we have two isolated
   // instances of `Environment`, and each of them must be initialized
   // in order to make sure users can access the environment in both CommonJS
   // and ESM environment.
-  if (env.ESM_IMPORT_DISABLED !== "1") {
+  if (!ESM_IMPORT_DISABLED) {
     const envModUrl = await getESMEntry(dirname(envPath));
 
     if (envModUrl) {

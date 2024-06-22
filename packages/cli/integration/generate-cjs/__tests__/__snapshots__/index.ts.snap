@@ -75,10 +75,12 @@ Options:
       --bail      Stop immediately when an error occurred.             [boolean]
   -s, --set       Set values on the command line KEY=VAL (can be used multiple
                   times)                                   [array] [default: []]
-  -r, --require   Require modules. Modules set in config file will also be
+  -r, --require   Require CommonJS modules. Modules set in config file are also
                   required.                                              [array]
-      --loader    Module loader. Loaders set in config file will also be loaded.
+      --loader    Module loader. Loaders set in config file are also loaded.
                                                                          [array]
+      --import    Preload ES modules at startup. Modules set in config file are
+                  also imported.                                         [array]
   -o, --output    Output format
                             [string] [choices: "yaml", "json"] [default: "yaml"]
       --validate  Validate components                  [boolean] [default: true]
@@ -240,10 +242,12 @@ Options:
       --bail      Stop immediately when an error occurred.             [boolean]
   -s, --set       Set values on the command line KEY=VAL (can be used multiple
                   times)                                   [array] [default: []]
-  -r, --require   Require modules. Modules set in config file will also be
+  -r, --require   Require CommonJS modules. Modules set in config file are also
                   required.                                              [array]
-      --loader    Module loader. Loaders set in config file will also be loaded.
+      --loader    Module loader. Loaders set in config file are also loaded.
                                                                          [array]
+      --import    Preload ES modules at startup. Modules set in config file are
+                  also imported.                                         [array]
   -o, --output    Output format
                             [string] [choices: "yaml", "json"] [default: "yaml"]
       --validate  Validate components                  [boolean] [default: true]
@@ -327,10 +331,12 @@ Options:
       --bail      Stop immediately when an error occurred.             [boolean]
   -s, --set       Set values on the command line KEY=VAL (can be used multiple
                   times)                                   [array] [default: []]
-  -r, --require   Require modules. Modules set in config file will also be
+  -r, --require   Require CommonJS modules. Modules set in config file are also
                   required.                                              [array]
-      --loader    Module loader. Loaders set in config file will also be loaded.
+      --loader    Module loader. Loaders set in config file are also loaded.
                                                                          [array]
+      --import    Preload ES modules at startup. Modules set in config file are
+                  also imported.                                         [array]
   -o, --output    Output format
                             [string] [choices: "yaml", "json"] [default: "yaml"]
       --validate  Validate components                  [boolean] [default: true]

@@ -40,7 +40,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=18"
+    "node": "^18.20.0 || ^20.10.0 || >= 21"
   },
   "dependencies": {
     "@kosko/common-utils": "workspace:^",
@@ -55,7 +55,7 @@
     "@kosko/jest-preset": "workspace:^",
     "@kosko/yaml": "workspace:^",
     "@types/js-yaml": "^4.0.5",
-    "kubernetes-models": "^4.1.0"
+    "kubernetes-models": "^4.4.0"
   },
   "peerDependencies": {
     "@kosko/yaml": "workspace:^",

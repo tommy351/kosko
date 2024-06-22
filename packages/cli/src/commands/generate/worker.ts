@@ -11,7 +11,7 @@ import { fileURLToPath } from "node:url";
 import { stdout, execPath, execArgv } from "node:process";
 import { createRequire } from "node:module";
 import { loadPlugins } from "./plugin";
-import { BUILD_TARGET, TARGET_SUFFIX } from "@kosko/build-scripts";
+import { BUILD_TARGET } from "@kosko/build-scripts";
 
 export interface WorkerOptions {
   printFormat?: PrintFormat;
@@ -23,7 +23,11 @@ export interface WorkerOptions {
 export async function handler(options: WorkerOptions) {
   const { printFormat, args, config, ignoreLoaders } = options;
 
-  if (BUILD_TARGET === "node" && !ignoreLoaders && config.loaders.length) {
+  if (
+    BUILD_TARGET === "node" &&
+    !ignoreLoaders &&
+    (config.loaders.length || config.import.length)
+  ) {
     await runWithLoaders(options);
     return;
   }
@@ -90,8 +94,20 @@ async function runWithLoaders(options: WorkerOptions) {
         ...execArgv,
         // ESM loaders
         ...options.config.loaders.flatMap((loader) => ["--loader", loader]),
-        // Entry file
-        join(fileURLToPath(import.meta.url), "../worker-bin." + TARGET_SUFFIX)
+        // ESM import
+        ...options.config.import.flatMap((imp) => ["--import", imp]),
+        // Entry file. Always use ESM entry file when `import` is provided
+        // because of the following error, which seems to happen only when using
+        // `@swc-node/register/esm-register`.
+        //
+        // ReferenceError: require is not defined in ES module scope, you can use import instead
+        //
+        // Otherwise, use CJS entry file because it supports both `require` and
+        // `import`.
+        join(
+          fileURLToPath(import.meta.url),
+          "../worker-bin.node." + (options.config.import.length ? "mjs" : "cjs")
+        )
       ],
       {
         stdio: ["pipe", "inherit", "inherit"],

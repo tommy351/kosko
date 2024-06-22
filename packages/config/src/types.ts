@@ -36,13 +36,15 @@ export interface EnvironmentConfig {
   components?: string[];
   loaders?: string[];
   plugins?: PluginConfig[];
+  import?: string[];
 }
 
 export const environmentConfigSchema = object({
   require: optional(array(string())),
   components: optional(array(string())),
   loaders: optional(array(string())),
-  plugins: optional(array(pluginConfigSchema))
+  plugins: optional(array(pluginConfigSchema)),
+  import: optional(array(string()))
 });
 
 /**

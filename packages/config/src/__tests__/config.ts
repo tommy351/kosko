@@ -52,7 +52,8 @@ describe("getConfig", () => {
       components: [],
       require: [],
       loaders: [],
-      plugins: []
+      plugins: [],
+      import: []
     });
   });
 
@@ -61,7 +62,8 @@ describe("getConfig", () => {
       components: ["foo"],
       require: ["bar"],
       loaders: ["baz"],
-      plugins: [{ name: "a" }]
+      plugins: [{ name: "a" }],
+      import: ["qux"]
     };
 
     expect(getConfig(input, "dev")).toEqual(input);
@@ -72,7 +74,8 @@ describe("getConfig", () => {
       components: ["foo"],
       require: ["bar"],
       loaders: ["baz"],
-      plugins: [{ name: "a" }]
+      plugins: [{ name: "a" }],
+      import: ["qux"]
     };
     const input = {
       ...globalConf,
@@ -81,7 +84,8 @@ describe("getConfig", () => {
           components: ["aaa"],
           require: ["bbb"],
           loaders: ["ccc"],
-          plugins: [{ name: "b" }]
+          plugins: [{ name: "b" }],
+          import: ["ddd"]
         }
       }
     };
@@ -95,12 +99,14 @@ describe("getConfig", () => {
       require: ["bar"],
       loaders: ["baz"],
       plugins: [{ name: "a" }],
+      import: ["qux"],
       environments: {
         dev: {
           components: ["aaa"],
           require: ["bbb"],
           loaders: ["ccc"],
-          plugins: [{ name: "b" }]
+          plugins: [{ name: "b" }],
+          import: ["ddd"]
         }
       }
     };
@@ -109,7 +115,8 @@ describe("getConfig", () => {
       components: ["foo", "aaa"],
       require: ["bar", "bbb"],
       loaders: ["baz", "ccc"],
-      plugins: [{ name: "a" }, { name: "b" }]
+      plugins: [{ name: "a" }, { name: "b" }],
+      import: ["qux", "ddd"]
     });
   });
 
@@ -119,18 +126,21 @@ describe("getConfig", () => {
       require: ["bar"],
       loaders: ["baz"],
       plugins: [{ name: "a" }],
+      import: ["qux"],
       environments: {
         a: {
           components: ["aa"],
           require: ["ab"],
           loaders: ["ac"],
-          plugins: [{ name: "ad" }]
+          plugins: [{ name: "ad" }],
+          import: ["ae"]
         },
         c: {
           components: ["ca"],
           require: ["cb"],
           loaders: ["cc"],
-          plugins: [{ name: "cd" }]
+          plugins: [{ name: "cd" }],
+          import: ["ce"]
         }
       }
     };
@@ -139,21 +149,24 @@ describe("getConfig", () => {
       components: ["foo", "aa", "ca"],
       require: ["bar", "ab", "cb"],
       loaders: ["baz", "ac", "cc"],
-      plugins: [{ name: "a" }, { name: "ad" }, { name: "cd" }]
+      plugins: [{ name: "a" }, { name: "ad" }, { name: "cd" }],
+      import: ["qux", "ae", "ce"]
     });
   });
 
   test("should allow plugin configs", () => {
     const input = {
       components: ["foo"],
-      plugins: [{ name: "a", config: { foo: "bar" } }]
+      plugins: [{ name: "a", config: { foo: "bar" } }],
+      import: ["qux"]
     };
 
     expect(getConfig(input, "")).toEqual({
       components: ["foo"],
       loaders: [],
       require: [],
-      plugins: [{ name: "a", config: { foo: "bar" } }]
+      plugins: [{ name: "a", config: { foo: "bar" } }],
+      import: ["qux"]
     });
   });
 
@@ -170,6 +183,7 @@ describe("getConfig", () => {
       components: ["foo"],
       loaders: [],
       require: [],
+      import: [],
       plugins: [
         { name: "a", config: { a: 1 } },
         { name: "a", config: { a: 2 } }

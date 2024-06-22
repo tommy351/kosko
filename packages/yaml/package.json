@@ -39,7 +39,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=18"
+    "node": "^18.20.0 || ^20.10.0 || >= 21"
   },
   "dependencies": {
     "@kosko/common-utils": "workspace:^",
@@ -55,7 +55,7 @@
     "cross-fetch": "^3.1.5",
     "execa": "^5.1.1",
     "fetch-mock": "^9.11.0",
-    "kubernetes-models": "^4.1.0"
+    "kubernetes-models": "^4.4.0"
   },
   "peerDependencies": {
     "kubernetes-models": ">=1.0.3"

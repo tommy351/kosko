@@ -1,5 +1,5 @@
 import { stat } from "node:fs/promises";
-import { join, resolve } from "node:path";
+import { join, resolve, isAbsolute } from "node:path";
 import { cwd } from "node:process";
 import { getRequireExtensions } from "./extensions";
 import { getErrorCode } from "@kosko/common-utils";
@@ -93,7 +93,7 @@ export async function resolvePath(
 }
 
 function isFilePath(id: string): boolean {
-  return id.startsWith("/") || id.startsWith("./") || id.startsWith("../");
+  return isAbsolute(id) || id.startsWith("./") || id.startsWith("../");
 }
 
 /**

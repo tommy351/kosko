@@ -68,6 +68,7 @@ export function getConfig(
       ...envConfigs.map((e) => e.components)
     ),
     loaders: flatten(config.loaders, ...envConfigs.map((e) => e.loaders)),
-    plugins: flatten(config.plugins, ...envConfigs.map((e) => e.plugins))
+    plugins: flatten(config.plugins, ...envConfigs.map((e) => e.plugins)),
+    import: flatten(config.import, ...envConfigs.map((e) => e.import))
   };
 }
