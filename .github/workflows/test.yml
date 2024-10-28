@@ -22,7 +22,7 @@ jobs:
       - lint
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 21.x]
+        node-version: [18.x, 20.x, 22.x, 23.x]
         os: [ubuntu-latest, windows-latest]
     steps:
       - uses: actions/checkout@v4
