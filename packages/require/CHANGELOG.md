@@ -1,5 +1,11 @@
 # @kosko/require
 
+## 7.0.2
+
+### Patch Changes
+
+- [`bad060f`](https://github.com/tommy351/kosko/commit/bad060f4ad7430ce00e287b0cfe4ee2d9ca678a1) Thanks [@tommy351](https://github.com/tommy351)! - Fix `ERR_IMPORT_ATTRIBUTE_MISSING` error on Node.js 22+.
+
 ## 7.0.1
 
 ### Patch Changes
