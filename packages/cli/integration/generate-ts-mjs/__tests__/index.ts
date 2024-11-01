@@ -19,3 +19,23 @@ test("should load loaders specified in config", async () => {
   );
   expect(result.stdout).toMatchSnapshot();
 });
+
+test("should load ES modules specified in args", async () => {
+  const result = await runNodeCLI(
+    [
+      "generate",
+      "--import",
+      `data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));`
+    ],
+    { cwd: testDir }
+  );
+  expect(result.stdout).toMatchSnapshot();
+});
+
+test("should load ES modules specified in config", async () => {
+  const result = await runNodeCLI(
+    ["generate", "--config", "kosko-import.toml"],
+    { cwd: testDir }
+  );
+  expect(result.stdout).toMatchSnapshot();
+});

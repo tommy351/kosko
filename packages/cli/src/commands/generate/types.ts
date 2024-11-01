@@ -9,6 +9,7 @@ export interface BaseGenerateArguments extends GlobalArguments {
   validate?: boolean;
   set?: SetOption[];
   loader?: string[];
+  import?: string[];
   config?: string;
   bail?: boolean;
 }

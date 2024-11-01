@@ -14,13 +14,16 @@ export async function loadConfig(args: BaseGenerateArguments) {
   const envs = [base.baseEnvironment, args.env].filter(
     (env): env is string => typeof env === "string"
   );
-  const { components, require, loaders, plugins } = getConfig(base, envs);
+  const envConfig = getConfig(base, envs);
   const config = {
     ...base,
-    plugins,
-    components: args.components?.length ? args.components : components,
-    require: [...require, ...(args.require || [])],
-    loaders: [...loaders, ...(args.loader || [])],
+    plugins: envConfig.plugins,
+    components: args.components?.length
+      ? args.components
+      : envConfig.components,
+    require: [...envConfig.require, ...(args.require || [])],
+    loaders: [...envConfig.loaders, ...(args.loader || [])],
+    import: [...envConfig.import, ...(args.import || [])],
     bail: args.bail ?? base.bail
   };
 

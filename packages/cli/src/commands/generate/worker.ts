@@ -23,7 +23,11 @@ export interface WorkerOptions {
 export async function handler(options: WorkerOptions) {
   const { printFormat, args, config, ignoreLoaders } = options;
 
-  if (BUILD_TARGET === "node" && !ignoreLoaders && config.loaders.length) {
+  if (
+    BUILD_TARGET === "node" &&
+    !ignoreLoaders &&
+    (config.loaders.length || config.import.length)
+  ) {
     await runWithLoaders(options);
     return;
   }
@@ -90,6 +94,8 @@ async function runWithLoaders(options: WorkerOptions) {
         ...execArgv,
         // ESM loaders
         ...options.config.loaders.flatMap((loader) => ["--loader", loader]),
+        // ESM import
+        ...options.config.import.flatMap((imp) => ["--import", imp]),
         // Entry file
         join(fileURLToPath(import.meta.url), "../worker-bin." + TARGET_SUFFIX)
       ],
