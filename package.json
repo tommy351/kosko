@@ -17,7 +17,7 @@
     "clean": "rm -rf internal/*/dist packages/*/dist plugins/*/dist",
     "watch": "npm run build -- --watch",
     "test": "npm-run-all test:*",
-    "test:unit": "cross-env BUILD_TARGET=node ESM_IMPORT_DISABLED=1 jest",
+    "test:unit": "cross-env ESM_IMPORT_DISABLED=1 jest",
     "test:integration": "jest --config jest.integration.config.ts",
     "test:browser": "jest --config integration/browser/jest.config.js",
     "preinstall": "npx only-allow pnpm",
