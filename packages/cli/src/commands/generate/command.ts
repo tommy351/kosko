@@ -48,7 +48,7 @@ export function generateBuilder(
         type: "string",
         array: true,
         describe:
-          "Require modules. Modules set in config file will also be required.",
+          "Require CommonJS modules. Modules set in config file will also be required.",
         alias: "r"
       })
       .option("loader", {
@@ -56,6 +56,12 @@ export function generateBuilder(
         array: true,
         describe:
           "Module loader. Loaders set in config file will also be loaded."
+      })
+      .option("import", {
+        type: "string",
+        array: true,
+        describe:
+          "Preload ES modules at startup. Modules set in config file are also imported."
       });
   }
 
