@@ -1,10 +1,12 @@
 import { stat } from "node:fs/promises";
-import { join, resolve } from "node:path";
+import { isAbsolute, join, resolve } from "node:path";
 import { cwd } from "node:process";
 import { getRequireExtensions } from "./extensions";
 import { getErrorCode } from "@kosko/common-utils";
 import resolveFrom from "resolve-from";
 import { BUILD_TARGET } from "@kosko/build-scripts";
+
+const rRelativePath = /^\.{1,2}[/\\]/;
 
 /**
  * @public
@@ -93,7 +95,7 @@ export async function resolvePath(
 }
 
 function isFilePath(id: string): boolean {
-  return id.startsWith("/") || id.startsWith("./") || id.startsWith("../");
+  return isAbsolute(id) || rRelativePath.test(id);
 }
 
 /**
