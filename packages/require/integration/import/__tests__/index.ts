@@ -3,6 +3,17 @@ import { dirname, join } from "node:path";
 
 const testDir = dirname(__dirname);
 
+function parseResult(s: string) {
+  const data = JSON.parse(s);
+
+  // Node.js 23 adds `module.exports` export on ESM CJS wrapper. Omit it for
+  // consistent snapshots.
+  // https://github.com/nodejs/node/pull/53848
+  delete data["module.exports"];
+
+  return data;
+}
+
 describe("Node.js CJS", () => {
   async function execute(options: NodeOptions) {
     return execa.node(join(testDir, "entry-node.cjs"), [], {
@@ -16,7 +27,7 @@ describe("Node.js CJS", () => {
       env: { IMPORT_PATH: "file-mjs.mjs" }
     });
 
-    expect(result.stdout).toMatchSnapshot();
+    expect(parseResult(result.stdout)).toMatchSnapshot();
   });
 
   test("should import CJS file", async () => {
@@ -24,7 +35,7 @@ describe("Node.js CJS", () => {
       env: { IMPORT_PATH: "file-cjs.cjs" }
     });
 
-    expect(result.stdout).toMatchSnapshot();
+    expect(parseResult(result.stdout)).toMatchSnapshot();
   });
 
   test("should import JSON file", async () => {
@@ -32,7 +43,7 @@ describe("Node.js CJS", () => {
       env: { IMPORT_PATH: "file-json.json" }
     });
 
-    expect(result.stdout).toMatchSnapshot();
+    expect(parseResult(result.stdout)).toMatchSnapshot();
   });
 
   test("should import MTS file", async () => {
@@ -41,7 +52,7 @@ describe("Node.js CJS", () => {
       nodeOptions: ["--loader", "ts-node/esm"]
     });
 
-    expect(result.stdout).toMatchSnapshot();
+    expect(parseResult(result.stdout)).toMatchSnapshot();
   });
 
   test("should import JS file in package whose type = commonjs", async () => {
@@ -49,7 +60,7 @@ describe("Node.js CJS", () => {
       env: { IMPORT_PATH: "pkg-commonjs/file-js.js" }
     });
 
-    expect(result.stdout).toMatchSnapshot();
+    expect(parseResult(result.stdout)).toMatchSnapshot();
   });
 
   test("should import JS file in package whose type = module", async () => {
@@ -57,7 +68,7 @@ describe("Node.js CJS", () => {
       env: { IMPORT_PATH: "pkg-module/file-js.js" }
     });
 
-    expect(result.stdout).toMatchSnapshot();
+    expect(parseResult(result.stdout)).toMatchSnapshot();
   });
 
   test("should import TS file in package whose type = module", async () => {
@@ -66,7 +77,7 @@ describe("Node.js CJS", () => {
       nodeOptions: ["--loader", "ts-node/esm"]
     });
 
-    expect(result.stdout).toMatchSnapshot();
+    expect(parseResult(result.stdout)).toMatchSnapshot();
   });
 });
 
@@ -83,7 +94,7 @@ describe("Node.js ESM", () => {
       env: { IMPORT_PATH: "file-mjs.mjs" }
     });
 
-    expect(result.stdout).toMatchSnapshot();
+    expect(parseResult(result.stdout)).toMatchSnapshot();
   });
 
   test("should import CJS file", async () => {
@@ -91,7 +102,7 @@ describe("Node.js ESM", () => {
       env: { IMPORT_PATH: "file-cjs.cjs" }
     });
 
-    expect(result.stdout).toMatchSnapshot();
+    expect(parseResult(result.stdout)).toMatchSnapshot();
   });
 
   test("should import JSON file", async () => {
@@ -99,7 +110,7 @@ describe("Node.js ESM", () => {
       env: { IMPORT_PATH: "file-json.json" }
     });
 
-    expect(result.stdout).toMatchSnapshot();
+    expect(parseResult(result.stdout)).toMatchSnapshot();
   });
 
   test("should import MTS file", async () => {
@@ -108,7 +119,7 @@ describe("Node.js ESM", () => {
       nodeOptions: ["--loader", "ts-node/esm"]
     });
 
-    expect(result.stdout).toMatchSnapshot();
+    expect(parseResult(result.stdout)).toMatchSnapshot();
   });
 
   test("should import JS file in package whose type = commonjs", async () => {
@@ -116,7 +127,7 @@ describe("Node.js ESM", () => {
       env: { IMPORT_PATH: "pkg-commonjs/file-js.js" }
     });
 
-    expect(result.stdout).toMatchSnapshot();
+    expect(parseResult(result.stdout)).toMatchSnapshot();
   });
 
   test("should import JS file in package whose type = module", async () => {
@@ -124,7 +135,7 @@ describe("Node.js ESM", () => {
       env: { IMPORT_PATH: "pkg-module/file-js.js" }
     });
 
-    expect(result.stdout).toMatchSnapshot();
+    expect(parseResult(result.stdout)).toMatchSnapshot();
   });
 
   test("should import TS file in package whose type = module", async () => {
@@ -133,6 +144,6 @@ describe("Node.js ESM", () => {
       nodeOptions: ["--loader", "ts-node/esm"]
     });
 
-    expect(result.stdout).toMatchSnapshot();
+    expect(parseResult(result.stdout)).toMatchSnapshot();
   });
 });
