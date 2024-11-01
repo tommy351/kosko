@@ -1,5 +1,11 @@
 # @kosko/config
 
+## 4.1.0
+
+### Minor Changes
+
+- [#151](https://github.com/tommy351/kosko/pull/151) [`039ecef`](https://github.com/tommy351/kosko/commit/039ecef883e99896332391727dcfd4f9c111c95a) Thanks [@tommy351](https://github.com/tommy351)! - Add `import` option.
+
 ## 4.0.2
 
 ### Patch Changes

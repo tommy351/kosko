@@ -1,5 +1,12 @@
 # kosko
 
+## 4.2.0
+
+### Patch Changes
+
+- Updated dependencies [[`096411e`](https://github.com/tommy351/kosko/commit/096411e2b1279e4cd288ccbb5fea208477b39539)]:
+  - @kosko/cli@4.2.0
+
 ## 4.1.3
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # @kosko/plugin
 
+## 0.2.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @kosko/generate@5.1.1
+
 ## 0.2.1
 
 ### Patch Changes

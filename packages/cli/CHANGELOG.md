@@ -1,5 +1,18 @@
 # @kosko/cli
 
+## 4.2.0
+
+### Minor Changes
+
+- [#151](https://github.com/tommy351/kosko/pull/151) [`096411e`](https://github.com/tommy351/kosko/commit/096411e2b1279e4cd288ccbb5fea208477b39539) Thanks [@tommy351](https://github.com/tommy351)! - Add `--import` option to `generate` and `validate` command.
+
+### Patch Changes
+
+- Updated dependencies [[`bad060f`](https://github.com/tommy351/kosko/commit/bad060f4ad7430ce00e287b0cfe4ee2d9ca678a1), [`039ecef`](https://github.com/tommy351/kosko/commit/039ecef883e99896332391727dcfd4f9c111c95a)]:
+  - @kosko/require@7.0.2
+  - @kosko/config@4.1.0
+  - @kosko/generate@5.1.1
+
 ## 4.1.3
 
 ### Patch Changes

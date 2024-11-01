@@ -1,5 +1,13 @@
 # @kosko/plugin-lint
 
+## 0.5.1
+
+### Patch Changes
+
+- Updated dependencies [[`bad060f`](https://github.com/tommy351/kosko/commit/bad060f4ad7430ce00e287b0cfe4ee2d9ca678a1)]:
+  - @kosko/require@7.0.2
+  - @kosko/plugin@0.2.2
+
 ## 0.5.0
 
 ### Minor Changes
