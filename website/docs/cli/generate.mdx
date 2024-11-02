@@ -45,6 +45,17 @@ Config path. Default to `kosko.toml` in current folder.
 
 Environment name.
 
+### `--import`
+
+<AvailabilityInfo availability={{ kosko: "4.2.0" }} />
+
+Preload ES modules at startup. Modules set in config file are also imported. This option only works when ECMAScript modules (ESM) is enabled.
+
+```shell
+# Using TypeScript
+kosko generate --import tsx
+```
+
 ### `--loader`
 
 <AvailabilityInfo availability={{ kosko: "3.0.0" }} />
@@ -58,7 +69,7 @@ kosko generate --loader ts-node/esm
 
 ### `--require, -r`
 
-Require external modules. Modules set in the config file will also be required.
+Require CommonJS modules. Modules set in the config file will also be required.
 
 ```shell
 # Using TypeScript
