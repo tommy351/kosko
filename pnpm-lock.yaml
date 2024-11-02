@@ -1079,8 +1079,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       rollup:
-        specifier: ^2.79.0
-        version: 2.79.0
+        specifier: ^2.79.2
+        version: 2.79.2
       sass:
         specifier: ^1.72.0
         version: 1.72.0
@@ -7467,8 +7467,8 @@ packages:
       rollup: ^3.29.4 || ^4
       typescript: ^4.5 || ^5.0
 
-  rollup@2.79.0:
-    resolution: {integrity: sha512-x4KsrCgwQ7ZJPcFA/SUu6QVcYlO7uRLfLAy0DSA4NS2eG8japdbpM50ToH7z4iObodRYOJ0soneF0iaQRJ6zhA==}
+  rollup@2.79.2:
+    resolution: {integrity: sha512-fS6iqSPZDs3dr/y7Od6y5nha8dW1YnbgtsyotCVvoFGKbERG++CVRFv1meyGDE1SNItQA8BrnCw7ScdAhRJ3XQ==}
     engines: {node: '>=10.0.0'}
     hasBin: true
 
@@ -17122,7 +17122,7 @@ snapshots:
     optionalDependencies:
       '@babel/code-frame': 7.24.2
 
-  rollup@2.79.0:
+  rollup@2.79.2:
     optionalDependencies:
       fsevents: 2.3.3
 
