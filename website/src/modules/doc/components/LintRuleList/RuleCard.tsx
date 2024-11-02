@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { useDocById } from "@docusaurus/theme-common/internal";
+import { useDocById } from "@docusaurus/plugin-content-docs/client";
 import styles from "./styles.module.scss";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";

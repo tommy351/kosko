@@ -6,6 +6,8 @@ Kosko now supports Kustomize files. With the new `@kosko/kustomize` package, you
 
 `@kosko/kustomize` uses the `kustomize build` or `kubectl kustomize` command to generate Kubernetes manifests and the `@kosko/yaml` package to load Kubernetes YAML.
 
+<!-- truncate -->
+
 First, you have to install either [`kustomize`](https://kubectl.docs.kubernetes.io/installation/kustomize/) or [`kubectl`](https://kubectl.docs.kubernetes.io/installation/kubectl/) CLI, then install the `@kosko/kustomize` package.
 
 ```shell

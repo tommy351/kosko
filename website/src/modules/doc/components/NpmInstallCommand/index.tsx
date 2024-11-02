@@ -4,28 +4,28 @@ import CodeBlock from "@theme/CodeBlock";
 
 export default function NpmInstallCommand({
   dev,
-  children
+  package: pkg
 }: {
   dev?: boolean;
-  children: string;
+  package: string;
 }) {
   return (
     <Tabs groupId="packageManager">
       <TabItem value="npm" label="NPM">
         <CodeBlock language="shell">
-          npm install {children}
+          npm install {pkg}
           {dev ? " --save-dev" : ""}
         </CodeBlock>
       </TabItem>
       <TabItem value="yarn" label="Yarn">
         <CodeBlock language="shell">
-          yarn add {children}
+          yarn add {pkg}
           {dev ? " --dev" : ""}
         </CodeBlock>
       </TabItem>
       <TabItem value="pnpm" label="PNPM">
         <CodeBlock language="shell">
-          pnpm install {children}
+          pnpm install {pkg}
           {dev ? " --save-dev" : ""}
         </CodeBlock>
       </TabItem>

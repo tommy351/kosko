@@ -1,4 +1,4 @@
-import { useDoc } from "@docusaurus/theme-common/internal";
+import { useDoc } from "@docusaurus/plugin-content-docs/client";
 import type { DocFrontMatter } from "@docusaurus/plugin-content-docs";
 
 interface FrontMatter extends DocFrontMatter {

@@ -1,4 +1,4 @@
-import { useDoc } from "@docusaurus/theme-common/internal";
+import { useDoc } from "@docusaurus/plugin-content-docs/client";
 import BadgeList from "../LintRuleBadges";
 import {
   includesDocId,
