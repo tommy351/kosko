@@ -68,7 +68,7 @@
         ".json",
         ".node"
       ],
-      "allowModules": ["type-fest", "@kosko/build-scripts"]
+      "allowModules": ["type-fest", "@kosko/build-scripts", "picocolors"]
     }
   },
   "overrides": [
