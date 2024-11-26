@@ -1,6 +1,6 @@
 {
   "name": "@kosko/migrate",
-  "version": "6.0.0",
+  "version": "7.0.0",
   "description": "Migrate Kubernetes YAML into kosko components.",
   "homepage": "https://kosko.dev",
   "repository": {

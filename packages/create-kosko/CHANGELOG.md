@@ -1,5 +1,20 @@
 # create-kosko
 
+## 0.2.0
+
+### Minor Changes
+
+- [`9af1462`](https://github.com/tommy351/kosko/commit/9af14624bd8b845f4d343a0510482dbbc8dfc164) Thanks [@tommy351](https://github.com/tommy351)! - Generate ESM declaration files.
+
+### Patch Changes
+
+- Updated dependencies [[`9af1462`](https://github.com/tommy351/kosko/commit/9af14624bd8b845f4d343a0510482dbbc8dfc164)]:
+  - @kosko/common-utils@1.2.0
+  - @kosko/exec-utils@2.1.0
+  - @kosko/cli-utils@0.2.0
+  - @kosko/require@7.1.0
+  - @kosko/log@2.1.0
+
 ## 0.1.3
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @kosko/common-utils
 
+## 1.2.0
+
+### Minor Changes
+
+- [`9af1462`](https://github.com/tommy351/kosko/commit/9af14624bd8b845f4d343a0510482dbbc8dfc164) Thanks [@tommy351](https://github.com/tommy351)! - Generate ESM declaration files.
+
 ## 1.1.1
 
 ### Patch Changes

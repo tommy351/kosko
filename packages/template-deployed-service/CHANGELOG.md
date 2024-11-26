@@ -1,5 +1,16 @@
 # @kosko/template-deployed-service
 
+## 4.1.0
+
+### Minor Changes
+
+- [`9af1462`](https://github.com/tommy351/kosko/commit/9af14624bd8b845f4d343a0510482dbbc8dfc164) Thanks [@tommy351](https://github.com/tommy351)! - Generate ESM declaration files.
+
+### Patch Changes
+
+- Updated dependencies [[`9af1462`](https://github.com/tommy351/kosko/commit/9af14624bd8b845f4d343a0510482dbbc8dfc164)]:
+  - @kosko/template@4.1.0
+
 ## 4.0.2
 
 ### Patch Changes

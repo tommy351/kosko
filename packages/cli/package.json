@@ -1,6 +1,6 @@
 {
   "name": "@kosko/cli",
-  "version": "4.2.0",
+  "version": "4.3.0",
   "description": "Organize Kubernetes manifests in TypeScript.",
   "homepage": "https://kosko.dev",
   "repository": {

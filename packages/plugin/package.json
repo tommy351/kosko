@@ -1,6 +1,6 @@
 {
   "name": "@kosko/plugin",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Plugin types for Kosko.",
   "homepage": "https://kosko.dev",
   "repository": {
