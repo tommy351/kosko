@@ -4,7 +4,6 @@
 "@kosko/common-utils": minor
 "create-kosko": minor
 "@kosko/plugin-set-metadata": minor
-"@kosko/test-utils": minor
 "@kosko/exec-utils": minor
 "@kosko/cli-utils": minor
 "@kosko/kustomize": minor
