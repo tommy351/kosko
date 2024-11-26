@@ -16,7 +16,7 @@
   "types": "dist/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "build": "build-scripts && cp dist/index.d.ts dist/index.d.mts"
+    "build": "build-scripts"
   },
   "exports": {
     "node": {
@@ -27,12 +27,8 @@
       "types": "./dist/index.d.ts",
       "require": "./index.node.cjs"
     },
-    "import": {
-      "types": "./dist/index.d.mts",
-      "default": "./dist/index.node.mjs"
-    },
-    "types": "./dist/index.d.ts",
-    "require": "./index.node.cjs"
+    "types": "./dist/index.d.mts",
+    "default": "./dist/index.base.mjs"
   },
   "files": [
     "/dist/"

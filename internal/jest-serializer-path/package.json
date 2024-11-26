@@ -14,13 +14,17 @@
   },
   "exports": {
     "node": {
-      "import": "./dist/index.node.mjs",
-      "types": "./dist/index.d.ts",
-      "require": "./dist/index.node.cjs"
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.node.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.node.cjs"
+      }
     },
-    "import": "./dist/index.base.mjs",
-    "types": "./dist/index.d.ts",
-    "require": "./dist/index.node.cjs"
+    "types": "./dist/index.d.mts",
+    "default": "./dist/index.base.mjs"
   },
   "dependencies": {
     "@kosko/test-utils": "workspace:^",
