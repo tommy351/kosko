@@ -3,7 +3,6 @@ title: Loading Kustomize
 ---
 
 import DocCardList from "@theme/DocCardList";
-import NpmInstallCommand from "@site/src/modules/doc/components/NpmInstallCommand";
 
 Kosko supports loading manifests from Kustomize files. You have to install either [`kustomize`](https://kubectl.docs.kubernetes.io/installation/kustomize/) or [`kubectl`](https://kubectl.docs.kubernetes.io/installation/kubectl/) CLI before using this package.
 
@@ -13,7 +12,9 @@ Under the hood, `@kosko/kustomize` uses `@kosko/yaml` to load YAML, which means 
 
 ## Install
 
-<NpmInstallCommand package="@kosko/kustomize @kosko/yaml" />
+```shell npm2yarn
+npm install @kosko/kustomize @kosko/yaml
+```
 
 ## Load from a local directory
 

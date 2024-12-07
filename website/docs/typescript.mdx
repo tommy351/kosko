@@ -2,7 +2,6 @@
 title: TypeScript
 ---
 
-import NpmInstallCommand from "@site/src/modules/doc/components/NpmInstallCommand";
 import DocCardList from "@theme/DocCardList";
 
 Kosko and [kubernetes-models](https://github.com/tommy351/kubernetes-models-ts) are written in TypeScript, so you don't have to install any additional type declaration files.
@@ -17,7 +16,9 @@ Kosko and [kubernetes-models](https://github.com/tommy351/kubernetes-models-ts) 
 
 Install `typescript`, `ts-node` and `@tsconfig/recommended`. `@tsconfig/recommended` is optional, you can change it to any tsconfig you prefer.
 
-<NpmInstallCommand dev package="typescript ts-node @tsconfig/recommended" />
+```shell npm2yarn
+npm install typescript ts-node @tsconfig/recommended --save-dev
+```
 
 ## Configuration
 

@@ -3,7 +3,6 @@ title: Getting Started
 slug: /
 ---
 
-import NpmInstallCommand from "@site/src/modules/doc/components/NpmInstallCommand";
 import DocCardList from "@theme/DocCardList";
 
 Welcome to the Kosko documentation! Before we start, make sure your computer meets the following system requirements.
@@ -14,8 +13,8 @@ Welcome to the Kosko documentation! Before we start, make sure your computer mee
 
 It's recommended to setup a Kosko project with [`create-kosko`](./cli/create-kosko.md) command, which sets up basic folder structure and installs everything you need automatically.
 
-```shell
-npm create kosko@latest example
+```shell npm2yarn
+npm init kosko@latest example
 ```
 
 After installation complete, the command will generate following files in `example` folder.
@@ -38,11 +37,13 @@ After installation complete, the command will generate following files in `examp
 
 Install `kosko`, `@kosko/env` and `kubernetes-models`.
 
-<NpmInstallCommand package="kosko @kosko/env kubernetes-models" />
+```shell npm2yarn
+npm install kosko @kosko/env kubernetes-models
+```
 
 Create a new component with `@kosko/template-deployed-service` template.
 
-```shell
+```shell npm2yarn
 npx @kosko/template-deployed-service --name nginx --image nginx
 ```
 
@@ -50,19 +51,19 @@ npx @kosko/template-deployed-service --name nginx --image nginx
 
 Run [`kosko generate`](./cli/generate.mdx) to print Kubernetes manifests in the console.
 
-```shell
+```shell npm2yarn
 npx kosko generate
 ```
 
 Pipe the output to kubectl to apply to a cluster.
 
-```shell
+```shell npm2yarn
 npx kosko generate | kubectl apply -f -
 ```
 
 If you don't want to print manifests to console, run [`kosko validate`](./cli/validate.md).
 
-```shell
+```shell npm2yarn
 npx kosko validate
 ```
 

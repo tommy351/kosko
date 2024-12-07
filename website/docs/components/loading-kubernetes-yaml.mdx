@@ -2,7 +2,6 @@
 title: Loading Kubernetes YAML
 ---
 
-import NpmInstallCommand from "@site/src/modules/doc/components/NpmInstallCommand";
 import DocCardList from "@theme/DocCardList";
 
 If you already have lots of existing Kubernetes YAML files, you don't have to rewrite all of them in JavaScript. Kosko provides two ways for you to load Kubernetes YAML files.
@@ -13,7 +12,9 @@ This is the easiest way to import your existing Kubernetes YAML files. It's reco
 
 ### Install
 
-<NpmInstallCommand package="@kosko/yaml" />
+```shell npm2yarn
+npm install @kosko/yaml
+```
 
 ### Load from a File
 

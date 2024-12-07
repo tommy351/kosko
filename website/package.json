@@ -37,6 +37,7 @@
     "@docusaurus/plugin-content-docs": "3.6.3",
     "@docusaurus/plugin-ideal-image": "3.6.3",
     "@docusaurus/preset-classic": "3.6.3",
+    "@docusaurus/remark-plugin-npm2yarn": "3.6.3",
     "@docusaurus/theme-classic": "3.6.3",
     "@docusaurus/theme-common": "3.6.3",
     "@mdx-js/react": "^3.0.1",
