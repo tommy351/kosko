@@ -1,5 +1,4 @@
 import { Draft } from "immer";
-import { noop } from "lodash";
 import React, { createContext, ReactNode, useContext, useMemo } from "react";
 import { useImmer } from "use-immer";
 
@@ -20,7 +19,7 @@ export const PreviewContext = createContext<{
     warnings: [],
     errors: []
   },
-  updateValue: noop
+  updateValue() {}
 });
 
 export function usePreviewContext() {

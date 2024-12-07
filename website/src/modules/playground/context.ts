@@ -1,6 +1,5 @@
 import { Draft } from "immer";
 import { createContext } from "react";
-import { noop } from "lodash";
 
 export interface PlaygroundContextValue {
   activePath?: string;
@@ -18,5 +17,5 @@ export const PlaygroundContext = createContext<{
     component: "",
     environment: ""
   },
-  updateValue: noop
+  updateValue() {}
 });

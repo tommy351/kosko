@@ -1,13 +1,16 @@
-import { groupBy } from "lodash";
 import { sep } from "@site/src/utils/path";
 import { Entry, EntryType, File, Directory } from "./types";
 import { DIRECTORY_PLACEHOLDER } from "../../constants";
 
 function doGenerateEntries(paths: readonly string[], prefix: string): Entry[] {
-  const { "": files = [], ...dirs } = groupBy(paths, (path) => {
-    const index = path.indexOf(sep);
-    return index === -1 ? "" : path.substring(0, index);
-  });
+  const { "": files = [], ...dirs } = paths.reduce(
+    (acc, path) => {
+      const index = path.indexOf(sep);
+      const key = index === -1 ? "" : path.substring(0, index);
+      return { ...acc, [key]: [...(acc[key] || []), path] };
+    },
+    {} as Record<string, string[]>
+  );
 
   return [
     ...Object.entries(dirs).map(([name, children]): Directory => {

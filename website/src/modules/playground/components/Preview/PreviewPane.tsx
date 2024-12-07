@@ -5,7 +5,6 @@ import EnvironmentSelect from "./EnvironmentSelect";
 import ProgressBar from "./ProgressBar";
 import styles from "./styles.module.scss";
 import CodeMirrorEditor from "../CodeMirrorEditor";
-import { noop } from "lodash";
 import { EditorConfiguration } from "codemirror";
 
 try {
@@ -36,7 +35,7 @@ export default function PreviewPane() {
           className={styles.previewPaneEditor}
           value={content}
           options={EDITOR_OPTIONS}
-          onBeforeChange={noop}
+          onBeforeChange={() => {}}
         />
         {updating && (
           <div className={styles.previewPaneProgressBar}>

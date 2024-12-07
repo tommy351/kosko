@@ -110,7 +110,9 @@ export default {
         gitRefName: commitRef
       }
     ],
-    "./plugins/lodash-webpack-plugin",
     "./plugins/lint-rules-metadata-plugin"
-  ]
+  ],
+  future: {
+    experimental_faster: true
+  }
 } satisfies Config;
