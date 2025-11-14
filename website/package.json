@@ -79,7 +79,7 @@
     "@types/unist": "^3.0.2",
     "@types/webpack-env": "^1.18.0",
     "docusaurus-plugin-typedoc-api": "^4.4.0",
-    "js-yaml": "^4.1.0",
+    "js-yaml": "^4.1.1",
     "raw-loader": "^4.0.2",
     "read-pkg": "^5.2.0",
     "resolve-pkg": "^2.0.0",
